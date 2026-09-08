@@ -5,9 +5,10 @@ Single screen. Update it at the end of every work package.
 | | |
 | --- | --- |
 | **Current milestone** | M0 --- reproducible project foundation |
-| **Active task** | M0-WP1 (repository foundation, data placement, Sophia runbook) |
-| **Latest accepted commit** | none yet --- M0 gate not passed; six commits pending push |
-| **Next review event** | M0 gate, after Sophia evidence returns |
+| **Active task** | M0-WP1 --- **complete**, awaiting gate review |
+| **Latest accepted commit** | the M0-WP1 close commit --- SHA recorded in the follow-up commit below |
+| **Next review event** | **M0 gate review by GUIDANCE** |
+| **Proposed gate status** | **PASS** --- see report section 14 |
 
 ## Completed outputs
 
@@ -20,16 +21,25 @@ Single screen. Update it at the end of every work package.
   **untracked** by decision D-005 and moves out of band. The `data/metadata/`
   data dictionary is tracked and hashed.
 - Sophia bootstrap / pinned-pull scripts and `docs/SOPHIA_RUNBOOK.md`.
-- `reports/milestones/M0_SETUP_REPORT.md`.
+- **Sophia evidence returned and committed**: at commit `586f5fd` on
+  `sophia-login-02`, the same SHA-256 `e87ac2cd...3bf43e` and 296,407,423 bytes
+  were reproduced, with 31 tests passing, the smoke test PASS, the push URL
+  `DISABLED`, and a clean tracked working tree.
+  (`reports/runs/20260908T191426Z_sophia_smoke_test.json`)
+- `reports/milestones/M0_SETUP_REPORT.md` --- all 15 fields complete, nothing
+  PENDING.
 
 ## Blockers
 
-- **Push to `origin main` not yet done.** Six commits are ready locally; the
-  EXECUTOR's push was blocked by the local permission layer, and Kaiyuan will
-  push manually. Sophia cannot clone until this lands.
-- Sophia evidence (byte-identity of the pulled data file, clean working tree)
-  is **PENDING** --- requires Kaiyuan to run `docs/SOPHIA_RUNBOOK.md`; the
-  EXECUTOR cannot reach Sophia because it requires MFA.
+None blocking. Residual items carried into the gate review:
+
+- **Push to `origin main` not yet done.** Commits are ready locally; Kaiyuan
+  pushes manually. Not blocking --- Sophia has already run.
+- **GUIDANCE to confirm** that D-005's out-of-band data policy satisfies gate
+  criteria 1 and 4 in spirit.
+- **Python version skew**: local 3.11.16 vs Sophia 3.13.13, different
+  `pip freeze` fingerprints. A known limitation of D-004, immaterial to M0
+  where every check is a checksum or a count. Revisit pinning at M2.
 
 ## Resolved since last update
 
@@ -39,6 +49,15 @@ Single screen. Update it at the end of every work package.
 - **D-002 decided**: the ClimRR data dictionary is tracked under
   `data/metadata/` as authoritative metadata, not literature. M1 may cite it as
   evidence for column semantics.
+- **Sophia byte identity confirmed** across two architectures --- the gap that
+  D-005 opened by moving the data pin off the commit is now closed by evidence.
+- **Blueprint size discrepancy resolved**: the ~48 MB figure was a
+  compressed-upload artifact; row and column counts matched exactly.
+- **`git_dirty` semantics fixed** in `src/climrr/runrecord.py`: it now reports
+  tracked changes only, with untracked files counted separately. The Sophia
+  record's `dirty=True` came from an untracked stray `.log` file, since deleted
+  on Sophia; the record is committed verbatim and the report carries the
+  explanation.
 
 ## Links
 

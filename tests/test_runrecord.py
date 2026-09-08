@@ -4,7 +4,15 @@ from __future__ import annotations
 
 import json
 
-from climrr.runrecord import RUN_RECORD_SCHEMA, detect_location, write_run_record
+import subprocess
+
+from climrr.runrecord import (
+    RUN_RECORD_SCHEMA,
+    detect_location,
+    git_dirty,
+    untracked_file_count,
+    write_run_record,
+)
 
 
 def _write(tmp_path, **kwargs):
@@ -28,6 +36,41 @@ def test_json_and_markdown_siblings_are_written(tmp_path):
     body = md.read_text(encoding="utf-8")
     assert "PASS" in body
     assert "pip freeze SHA-256" in body
+    assert "Working tree dirty (tracked files)" in body
+    assert "Untracked files present" in body
+
+
+def test_dirty_flag_ignores_untracked_files(tmp_path):
+    """An untracked stray file must not make a run record read as dirty.
+
+    Regression: a stray .log beside the Sophia checkout reported dirty=True on
+    an otherwise pristine pinned checkout, which is exactly the false alarm the
+    flag exists to avoid.
+    """
+    out = subprocess.run(
+        ["git", "status", "--porcelain", "--untracked-files=no"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert git_dirty() is bool(out.stdout.strip())
+
+
+def test_untracked_count_matches_git(tmp_path):
+    out = subprocess.run(
+        ["git", "status", "--porcelain", "--untracked-files=all"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    expected = sum(1 for line in out.stdout.splitlines() if line.startswith("??"))
+    assert untracked_file_count() == expected
+
+
+def test_untracked_count_is_recorded_as_an_integer(tmp_path):
+    record = json.loads(_write(tmp_path).read_text(encoding="utf-8"))
+    assert isinstance(record["untracked_files"], int)
+    assert record["untracked_files"] >= 0
 
 
 def test_filename_encodes_timestamp_location_and_name(tmp_path):

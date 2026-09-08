@@ -8,6 +8,9 @@
 
 2026-09-08. EXECUTOR (Claude Code, local authoring clone), for Kaiyuan Liao.
 
+Revised the same day after the Sophia evidence returned: sections 5, 9, 10 and
+14 now carry that evidence, and no field remains PENDING.
+
 ## 3. Objective
 
 Stand up a repository that a future session with no memory of this one can pick
@@ -39,7 +42,27 @@ column names, confirm it opens read-only. Nothing else.
 | Source data dictionary | `ClimRR Metadata and Data Dictionary.pdf`; 667,097 bytes |
 | Decisions in force | D-002, D-003, D-004, D-005 (decided); D-001 (superseded by D-005) |
 | Sophia pre-check | git 2.52.0; **git-lfs NOT available**; `ssh -T git@github.com` authenticates as Kaiyuan-Liao |
-| Local environment | conda env `climrr`, Python 3.11.16 |
+| Sophia evidence | Returned 2026-09-08 by Kaiyuan; run at commit `586f5fd` on `sophia-login-02` |
+
+### Environments (both recorded, D-004)
+
+| | Local (authoring) | Sophia (execution) |
+| --- | --- | --- |
+| Kind | conda env `climrr` | venv `.venv-sophia` over the ALCF conda base module |
+| Python | **3.11.16** | **3.13.13** |
+| Platform | macOS-15.3-arm64 | Linux-5.14.0-611.54.1.el9_7.x86_64, glibc 2.34 |
+| `pip freeze` SHA-256 | `03f80e726bdca4a3b061fc444d8d7b4282c114886be48f40b05baef708b6e470` | `92a14aed5911b8f1d85b13d397e22328f2546379e17d941c15ef7a398aac13ac` |
+| Dependency source | `requirements.txt` | `requirements.txt` (same file) |
+
+**Known limitation, not a blocker: the two environments run different Python
+minor versions (3.11 vs 3.13), and their `pip freeze` fingerprints therefore
+differ.** This is a consequence of D-004 as designed --- the Sophia venv is
+built with `--system-site-packages` over whatever the ALCF base module provides,
+which is deliberate (it inherits the site's tuned builds) and not pinned. It
+does not affect the M0 result: every M0 check is a checksum, a row count, or a
+file read, and all of them produced identical values on both hosts. It becomes
+worth revisiting only when numerical output enters the picture --- from M2
+onward --- at which point pinning (deferred in D-004) should be reconsidered.
 
 ## 6. Method
 
@@ -212,15 +235,18 @@ PASS
 
 | Check | Result |
 | --- | --- |
-| `pytest` | **PASS** --- 31 passed |
+| `pytest` (local) | **PASS** --- 34 passed |
+| `pytest` (Sophia) | **PASS** --- 31 passed at commit `586f5fd` |
 | `scripts/verify_no_secrets_or_paths.py` | **PASS** --- 0 hits |
 | `scripts/smoke_test.py` (local) | **PASS** --- all four manifest fields match |
 | Source-to-copy byte identity | **PASS** --- hashes identical |
 | Row / column counts vs. blueprint | **PASS** --- 62,834 x 275 |
 | CSV blob absent from all Git history | **PASS** --- appears in no commit; largest object is the 667 KiB PDF |
 | Missing-data behaviour fails loudly | **PASS** --- verified by renaming the file |
-| `scripts/smoke_test.py` (Sophia) | **PENDING --- awaiting Kaiyuan's Sophia run** |
-| Sophia clean working tree | **PENDING --- awaiting Kaiyuan's Sophia run** |
+| `scripts/smoke_test.py` (Sophia) | **PASS** --- all four manifest fields match on `sophia-login-02` |
+| Sophia byte identity | **PASS** --- `e87ac2cd...3bf43e`, 296,407,423 bytes, identical to local and to source |
+| Sophia clean working tree | **PASS** --- `git status --porcelain --untracked-files=no` empty |
+| Sophia push URL disabled | **PASS** --- `DISABLED` |
 
 ## 10. Run records
 
@@ -229,14 +255,61 @@ PASS
   the D-005 changes, confirming the file was restored intact after the
   missing-data behaviour test
 
-Both show `git_dirty: true`, because the report and the run records themselves
-were still uncommitted when the smoke test ran. The data hash recorded in each
-is identical to the manifest and to the source.
+- `reports/runs/20260908T191426Z_sophia_smoke_test.{json,md}` --- **the Sophia
+  evidence run.** Committed verbatim; not edited.
 
-Sophia run record: **PENDING --- awaiting Kaiyuan's Sophia run.** Expected
-evidence: `reports/runs/<timestamp>_sophia_smoke_test.json` and `.md`, showing
-`location: sophia`, `passed: true`, and
-`data_sha256: e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e`.
+The two local records show `git_dirty: true` because the report and the run
+records themselves were still uncommitted when the smoke test ran. The data
+hash recorded in each is identical to the manifest and to the source.
+
+### The Sophia record's `git_dirty: true`
+
+The Sophia record also reads `"git_dirty": true`, on a pinned detached-HEAD
+checkout that had no tracked modifications. The cause was an **untracked stray
+`.log` file** in the working tree, since deleted on Sophia. The record has been
+committed **verbatim and unaltered** --- evidence is not edited after the fact
+--- so this note is the correction, not a rewrite of the file.
+
+The flag was measuring the wrong thing. `git_dirty()` called
+`git status --porcelain`, which reports untracked files as well as tracked
+modifications, so any stray log or scratch file beside a checkout made the run
+look dirty. The question the field exists to answer is "did the code that ran
+differ from the commit?", and an untracked file does not change that answer.
+
+Fixed in `src/climrr/runrecord.py`: `git_dirty()` now passes
+`--untracked-files=no` and reports **tracked changes only**, and a new
+`untracked_files` integer field counts untracked files separately, so the
+information is kept rather than conflated. Both are covered by tests, which
+assert the helpers against `git status` directly. Run records written from this
+commit onward carry the corrected semantics; the three earlier records do not,
+and should be read with that in mind.
+
+### Confirmed Sophia evidence
+
+```
+run_id            20260908T191426Z_sophia_smoke_test
+git_commit        586f5fdefc433bf08a2dff6e7f1427c3c48801fa
+hostname          sophia-login-02
+location          sophia
+python_version    3.13.13
+pip_freeze_sha256 92a14aed5911b8f1d85b13d397e22328f2546379e17d941c15ef7a398aac13ac
+data_sha256       e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e
+observed_bytes    296407423
+observed_row_count    62834
+observed_column_count 275
+manifest_checks   sha256=ok; bytes=ok; row_count=ok; column_count=ok
+passed            true
+```
+
+Plus, from the bootstrap output: `pytest` **31 passed**; smoke test **PASS**;
+push URL **`DISABLED`**; `git status --porcelain --untracked-files=no` **empty**.
+
+The decisive line is `data_sha256`. The same 64 hex characters were produced by
+three independent computations --- on the source file before copying, on the
+repository copy locally, and on the file after an `scp` to a different
+architecture and operating system. Under D-005 the bytes no longer travel with
+the commit, so this is precisely the check that replaces that guarantee, and it
+holds.
 
 ## 11. Decisions made or invoked
 
@@ -310,14 +383,16 @@ evidence: `reports/runs/<timestamp>_sophia_smoke_test.json` and `.md`, showing
 
 | Item | Owner | Blocks |
 | --- | --- | --- |
-| **Blueprint size discrepancy** --- the blueprint says ~48 MB, the file is 296,407,423 bytes (~6x). Row and column counts match exactly (62,834 x 275), so the table is the expected one. Did the 48 MB figure refer to a compressed or different export? | Kaiyuan | Provenance completeness; nothing technical |
-| **Push** of the six commits to `origin main` --- to be done manually by Kaiyuan | Kaiyuan | Sophia cannot clone until pushed |
-| **Sophia evidence** --- transfer the CSV by `scp`, verify the hash, run the bootstrap, return the run records | Kaiyuan | The M0 gate |
+| **Python version skew** --- local 3.11.16 vs Sophia 3.13.13, different `pip freeze` fingerprints. Immaterial to M0; revisit pinning when numerical output starts in M2. | COORDINATOR | Nothing in M0 |
+| **GUIDANCE confirmation** that D-005's out-of-band policy satisfies gate criteria 1 and 4 in spirit | GUIDANCE | Formal gate sign-off |
+| **Push** to `origin main` --- to be done manually by Kaiyuan | Kaiyuan | Nothing further; Sophia has already run |
 | Acquisition date of the ClimRR export is unknown | Kaiyuan | Provenance completeness |
 
-**D-002 is closed** (decided: the data dictionary is authoritative metadata,
-not literature; M1 may cite it as evidence). **D-005 is closed** (decided:
-untracked, out-of-band, hash-pinned). Neither blocks.
+**Closed since the last revision:** D-002 (data dictionary is authoritative
+metadata, not literature; M1 may cite it as evidence). D-005 (untracked,
+out-of-band, hash-pinned). The Sophia evidence gap. The blueprint size
+discrepancy --- the ~48 MB figure was a compressed-upload artifact, and the
+row and column counts matched exactly.
 
 ## 14. Gate criteria assessment
 
@@ -343,7 +418,9 @@ enforced by a check that fails rather than skips when the file is absent.
 
 > `pytest` passes and the secrets/paths scan reports zero hits.
 
-**MET.** 31 passed; 0 hits.
+**MET.** Locally 34 passed, 0 hits; on Sophia 31 passed at commit `586f5fd`.
+(The local suite gained three tests covering the `git_dirty` fix made after
+that commit.)
 
 > `scripts/smoke_test.py` runs locally and produces a run record.
 
@@ -353,22 +430,54 @@ enforced by a check that fails rather than skips when the file is absent.
 > Sophia can clone the pinned commit, build its environment, and reproduce the
 > same SHA-256 for the data file, with a clean working tree.
 
-**PENDING --- awaiting Kaiyuan's Sophia run.** Expected evidence: the Sophia
-run record showing `location: sophia`, `passed: true`, and
-`data_sha256: e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e`;
-plus empty `git status --porcelain` output and a push URL of `DISABLED`. Under
-D-005 the clone no longer carries the data, so the runbook's `scp` step (step 3)
-must precede the bootstrap; `scripts/sophia_bootstrap.sh` exits 3 if the file is
-absent and exits 4 on a hash mismatch, printing both hashes.
+**MET.** Sophia cloned commit `586f5fd`, built the venv over the ALCF conda
+base module, received the CSV by `scp` per runbook step 3, and reproduced
+`data_sha256: e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e`
+with 296,407,423 bytes and 62,834 x 275 --- identical to local and to source.
+`pytest` 31 passed; smoke test PASS; push URL `DISABLED`;
+`git status --porcelain --untracked-files=no` empty. Evidence:
+`reports/runs/20260908T191426Z_sophia_smoke_test.json`.
+
+The word "clone" in this criterion is now satisfied in two parts under D-005 ---
+the repository by `git clone`, the data by `scp` --- with the hash check
+carrying the guarantee across both.
+
+---
+
+### Proposed gate status: **PASS**
+
+All five criteria are MET (criterion 2 as amended by D-005; criterion 1's push
+is Kaiyuan's to execute and is the only mechanical step outstanding). Residual
+items, none of which the EXECUTOR considers blocking:
+
+**(a) GUIDANCE to confirm the D-005 out-of-band data policy satisfies criteria
+1 and 4 in spirit.** D-005 moved the data pin from the commit SHA to the
+manifest SHA-256 because a 283 MiB file cannot be pushed to GitHub at all. The
+EXECUTOR's position is that the guarantee both criteria were written to secure
+--- that every host provably holds the same bytes --- is preserved and was
+demonstrated across two architectures. But the mechanism is not the one the
+blueprint specified, so the judgement belongs to GUIDANCE, not to the EXECUTOR.
+
+**(b) Python version skew between environments.** Local 3.11.16, Sophia
+3.13.13, with different `pip freeze` fingerprints. A consequence of D-004's
+deliberate choice to build the Sophia venv with `--system-site-packages` over
+the ALCF base module. Immaterial to M0, where every check is a checksum or a
+count and all values matched exactly. Worth revisiting when numerical output
+begins in M2, at which point the pinning deferred in D-004 should be
+reconsidered.
+
+**(c) The blueprint's ~48 MB figure was a compressed-upload artifact.** The
+uncompressed file is 296,407,423 bytes. This is resolved, not open: the row and
+column counts matched the blueprint **exactly** (62,834 x 275), confirming the
+table is the expected one. Nothing was filtered, dropped, or altered to
+reconcile the difference. It is recorded because it is what made D-001
+unexecutable and forced D-005.
 
 ## 15. Next actions
 
 | Action | Owner |
 | --- | --- |
 | Push the commits to `origin main` manually | Kaiyuan |
-| Resolve the blueprint's ~48 MB vs. 283 MiB size discrepancy | Kaiyuan |
-| `scp` the CSV to Sophia and verify `sha256sum` against the manifest (runbook step 3) | Kaiyuan |
-| Run the bootstrap on `sophia-login-02` inside `screen -S climrr`; paste back the output and the Sophia run records | Kaiyuan |
-| Confirm the D-005 amendment satisfies gate criterion 2's intent | GUIDANCE |
-| Fill the two PENDING fields; commit the returned Sophia run records | EXECUTOR |
+| Review the M0 gate; confirm D-005's out-of-band policy satisfies criteria 1, 2 and 4 in spirit | GUIDANCE |
+| Reconsider dependency pinning (deferred in D-004) before numerical output begins | COORDINATOR, at M2 |
 | Tag `m0-setup` **only after** GUIDANCE accepts the gate | EXECUTOR |

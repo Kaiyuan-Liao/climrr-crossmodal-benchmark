@@ -29,6 +29,7 @@ RUN_RECORD_SCHEMA = (
     "utc_timestamp",
     "git_commit",
     "git_dirty",
+    "untracked_files",
     "hostname",
     "location",
     "python_version",
@@ -64,10 +65,30 @@ def git_commit() -> str:
 
 
 def git_dirty() -> bool | None:
-    status = _git("status", "--porcelain")
+    """True when **tracked** files have uncommitted changes.
+
+    Untracked files are deliberately excluded. The question a run record has to
+    answer is "did the code that ran differ from the commit?", and a stray log
+    or scratch file sitting beside the checkout does not change that. Counting
+    it as dirty makes the flag fire so often that it stops meaning anything.
+    Untracked files are reported separately by untracked_file_count().
+    """
+    status = _git("status", "--porcelain", "--untracked-files=no")
     if status is None:
         return None
     return bool(status.strip())
+
+
+def untracked_file_count() -> int | None:
+    """How many untracked files sit in the working tree.
+
+    Informational, not a cleanliness verdict: data/raw/FullData.csv is
+    gitignored by design (D-005) and so is not counted here.
+    """
+    status = _git("status", "--porcelain", "--untracked-files=all")
+    if status is None:
+        return None
+    return sum(1 for line in status.splitlines() if line.startswith("??"))
 
 
 def pip_freeze_sha256() -> str:
@@ -122,6 +143,7 @@ def write_run_record(
         "utc_timestamp": now.isoformat(),
         "git_commit": git_commit(),
         "git_dirty": git_dirty(),
+        "untracked_files": untracked_file_count(),
         "hostname": socket.gethostname(),
         "location": loc,
         "user": getpass.getuser(),
@@ -156,7 +178,8 @@ def _write_markdown(path: Path, record: dict) -> None:
         f"- **Result**: {'PASS' if record['passed'] else 'FAIL'}",
         f"- **UTC timestamp**: {record['utc_timestamp']}",
         f"- **Git commit**: `{record['git_commit']}`",
-        f"- **Working tree dirty**: {record['git_dirty']}",
+        f"- **Working tree dirty (tracked files)**: {record['git_dirty']}",
+        f"- **Untracked files present**: {record['untracked_files']}",
         f"- **Hostname**: {record['hostname']}",
         f"- **Location**: {record['location']}",
         f"- **Python**: {record['python_version']} ({record['platform']})",
