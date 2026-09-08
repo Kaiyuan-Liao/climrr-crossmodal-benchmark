@@ -6,7 +6,7 @@ Single screen. Update it at the end of every work package.
 | --- | --- |
 | **Current milestone** | M0 --- reproducible project foundation |
 | **Active task** | M0-WP1 --- **complete**, awaiting gate review |
-| **Latest accepted commit** | `685c2b1` --- M0-WP1 close |
+| **Latest accepted commit** | `685c2b1` --- M0-WP1 close (followed by two bookkeeping commits: this SHA pointer, and a push-status correction) |
 | **Next review event** | **M0 gate review by GUIDANCE** |
 | **Proposed gate status** | **PASS** --- see report section 14 |
 
@@ -33,8 +33,9 @@ Single screen. Update it at the end of every work package.
 
 None blocking. Residual items carried into the gate review:
 
-- **Push to `origin main` not yet done.** Commits are ready locally; Kaiyuan
-  pushes manually. Not blocking --- Sophia has already run.
+- **Two commits unpushed** (`685c2b1`, `a0dc4db`). `origin/main` is at
+  `586f5fd`, which is the commit Sophia cloned and verified, so the gate
+  evidence is already on the remote. Kaiyuan pushes the remainder manually.
 - **GUIDANCE to confirm** that D-005's out-of-band data policy satisfies gate
   criteria 1 and 4 in spirit.
 - **Python version skew**: local 3.11.16 vs Sophia 3.13.13, different

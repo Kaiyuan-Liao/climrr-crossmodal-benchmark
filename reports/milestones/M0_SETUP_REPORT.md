@@ -367,9 +367,10 @@ holds.
 6. **`.gitattributes` also marks `*.pdf` as binary**, not only `*.csv`. Same
    rationale, applied to the other byte-frozen file.
 
-7. **No push was performed.** The EXECUTOR's push was blocked by the local
-   permission layer, and the COORDINATOR then directed that Kaiyuan push
-   manually. All commits exist locally and are ready.
+7. **No push was performed by the EXECUTOR.** Its push was blocked by the
+   local permission layer, and the COORDINATOR then directed that Kaiyuan push
+   manually. Kaiyuan did so: `origin/main` is at `586f5fd`. The two commits
+   made after the Sophia run remain local by instruction.
 
 8. **Absolute paths in the runbook's `scp` command are placeholders.** The
    COORDINATOR supplied the transfer command with literal machine paths and a
@@ -385,7 +386,7 @@ holds.
 | --- | --- | --- |
 | **Python version skew** --- local 3.11.16 vs Sophia 3.13.13, different `pip freeze` fingerprints. Immaterial to M0; revisit pinning when numerical output starts in M2. | COORDINATOR | Nothing in M0 |
 | **GUIDANCE confirmation** that D-005's out-of-band policy satisfies gate criteria 1 and 4 in spirit | GUIDANCE | Formal gate sign-off |
-| **Push** to `origin main` --- to be done manually by Kaiyuan | Kaiyuan | Nothing further; Sophia has already run |
+| **Push** of `685c2b1` and `a0dc4db` --- everything through `586f5fd` is already on `origin/main` | Kaiyuan | Nothing; the gate evidence is all in `586f5fd` |
 | Acquisition date of the ClimRR export is unknown | Kaiyuan | Provenance completeness |
 
 **Closed since the last revision:** D-002 (data dictionary is authoritative
@@ -399,8 +400,14 @@ row and column counts matched exactly.
 > The repository structure, documentation set, and decision log exist and are
 > pushed to the private remote.
 
-**PARTIALLY MET.** All of it exists and is committed. The push has not been
-performed: it is Kaiyuan's to run manually (deviation 7).
+**MET.** All of it exists, is committed, and is pushed: `origin/main` is at
+`586f5fd`. Independently corroborated --- Sophia cloned `586f5fd` from the
+remote, which it could only do if that commit had landed.
+
+The two commits made after the Sophia run (`685c2b1`, the M0-WP1 close, and
+`a0dc4db`, its state pointer) are not yet pushed; per the closing work package
+the EXECUTOR does not push, and they contain no code the Sophia evidence
+depended on.
 
 > `data/raw/FullData.csv` is committed, and its SHA-256 matches the value
 > recorded in `data/manifest.json`; the copied file is byte-identical to the
@@ -446,9 +453,8 @@ carrying the guarantee across both.
 
 ### Proposed gate status: **PASS**
 
-All five criteria are MET (criterion 2 as amended by D-005; criterion 1's push
-is Kaiyuan's to execute and is the only mechanical step outstanding). Residual
-items, none of which the EXECUTOR considers blocking:
+All five criteria are MET (criterion 2 as amended by D-005). Residual items,
+none of which the EXECUTOR considers blocking:
 
 **(a) GUIDANCE to confirm the D-005 out-of-band data policy satisfies criteria
 1 and 4 in spirit.** D-005 moved the data pin from the commit SHA to the
@@ -477,7 +483,7 @@ unexecutable and forced D-005.
 
 | Action | Owner |
 | --- | --- |
-| Push the commits to `origin main` manually | Kaiyuan |
+| Push `685c2b1` and `a0dc4db` (everything through `586f5fd` is already pushed) | Kaiyuan |
 | Review the M0 gate; confirm D-005's out-of-band policy satisfies criteria 1, 2 and 4 in spirit | GUIDANCE |
 | Reconsider dependency pinning (deferred in D-004) before numerical output begins | COORDINATOR, at M2 |
 | Tag `m0-setup` **only after** GUIDANCE accepts the gate | EXECUTOR |
