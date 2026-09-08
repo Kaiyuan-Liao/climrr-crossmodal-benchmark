@@ -1,12 +1,19 @@
 """Manifest comparison, plus the real-data immutability assertion.
 
 The immutability test is the M0 byte-identity gate in executable form: if the
-tracked CSV ever stops matching data/manifest.json, this fails.
+CSV on this host ever stops matching data/manifest.json, this fails.
+
+Since decision D-005 the CSV is not tracked by Git -- it arrives out of band --
+so a clone can legitimately lack it. That is *not* a reason to pass silently:
+a missing file fails, and skipping requires the operator to say so explicitly
+by setting CLIMRR_ALLOW_MISSING_RAW=1. Otherwise a CI run on a bare clone
+would report green while verifying nothing.
 """
 
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -86,10 +93,26 @@ def test_count_handles_utf8_bom(tmp_path):
 
 # --- the real data file: immutability gate --------------------------------
 
-@pytest.mark.skipif(not RAW_CSV.is_file(), reason="data/raw/FullData.csv not present in this clone")
-def test_tracked_csv_matches_manifest_hash():
+def _allow_missing_raw() -> bool:
+    return os.environ.get("CLIMRR_ALLOW_MISSING_RAW") == "1"
+
+
+def test_raw_csv_matches_manifest_hash():
     entry = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))["files"][0]
     assert entry["filename"] == "FullData.csv"
+
+    if not RAW_CSV.is_file():
+        if _allow_missing_raw():
+            pytest.skip(
+                "data/raw/FullData.csv absent and CLIMRR_ALLOW_MISSING_RAW=1 is set"
+            )
+        pytest.fail(
+            "data/raw/FullData.csv is missing. Since D-005 it is not tracked by Git "
+            "and must be transferred out of band (see data/raw/README.md). "
+            "If you are deliberately running without it, set "
+            "CLIMRR_ALLOW_MISSING_RAW=1 to skip this check."
+        )
+
     assert sha256_file(RAW_CSV) == entry["sha256"], (
         "data/raw/FullData.csv no longer matches data/manifest.json. "
         "The raw data is immutable: escalate, do not update the manifest."

@@ -24,8 +24,11 @@ not yet in force and must not be relied on by downstream work.
 - **Owner:** COORDINATOR, approved by Kaiyuan Liao.
 - **Affected files:** `data/raw/FullData.csv`, `.gitattributes`,
   `data/manifest.json`, `data/README.md`, `tests/test_manifest.py`.
-- **Status:** decided --- but see **D-005**, which blocks its execution against
-  GitHub.
+- **Status:** **superseded by D-005.** The no-LFS half of this decision stands
+  and its rationale is unchanged. The "ordinary Git, single immutable commit"
+  half was not executable against GitHub: the file exceeds the 100 MiB
+  per-file limit. D-005 replaces it with an out-of-band transfer pinned by the
+  same SHA-256.
 
 ---
 
@@ -107,41 +110,45 @@ not yet in force and must not be relied on by downstream work.
 
 ---
 
-## D-005 --- Raw CSV exceeds the GitHub per-file size limit (escalated)
+## D-005 --- Raw CSV is untracked and transferred out of band (supersedes D-001)
 
 - **Date:** 2026-09-08
-- **Decision:** **None yet --- escalated to Kaiyuan Liao.**
-- **Situation:** `data/raw/FullData.csv` is **296,407,423 bytes (~282.7 MiB)**.
-  GitHub hard-rejects any single file over **100 MiB (104,857,600 bytes)** on
-  push, independent of repository size. D-001 as written therefore cannot be
-  executed against this remote: the CSV commit will be rejected. This is the
-  escalation condition named in the work package ("the push of the CSV commit
-  to GitHub fails or is rejected"), detected before the push rather than after.
-- **Rationale for escalating rather than choosing:** every available option
-  changes either the storage policy (D-001), the byte-identity gate, or the
-  single-source-of-truth model. Each is a scope or scientific-reproducibility
-  decision the EXECUTOR is not authorised to make.
-- **Alternatives to be decided between:**
-  - (a) **Git LFS on GitHub anyway.** Restores the push, but git-lfs is absent
-    on Sophia, so the execution clone would receive a pointer stub and could
-    not reproduce the SHA-256 --- this is exactly what D-001 rejected. Would
-    require installing git-lfs on Sophia (user-local binary is feasible) or
-    accepting a manual byte transfer.
-  - (b) **Keep the CSV out of Git; transport it out of band** (Globus / `scp`
-    to Eagle) and gate on the manifest SHA-256 at both ends. Preserves byte
-    identity and keeps the repo small; costs the "bytes travel with the commit"
-    property, so the data is no longer pinned by the commit SHA alone.
-  - (c) **Split the CSV into <100 MiB parts, commit the parts, reassemble on
-    read**, with the manifest hashing both the parts and the reassembled whole.
-    Keeps everything in ordinary Git and reproducible on Sophia; costs a
-    reassembly step and stores ~283 MiB in history permanently.
-  - (d) **Commit a documented subset or column-pruned extract.** Rejected by
-    the EXECUTOR as out of scope --- it would mean filtering columns, which
-    M0 explicitly forbids. Listed only for completeness.
-- **Consequences:** M0 cannot close until this is decided. The file is staged
-  locally and hash-verified; everything except the CSV commit has been pushed.
-- **Owner:** Kaiyuan Liao, with COORDINATOR.
-- **Affected files:** `data/raw/FullData.csv`, `.gitattributes`,
-  `data/manifest.json`, `data/README.md`, `tests/test_manifest.py`,
-  `docs/SOPHIA_RUNBOOK.md`, D-001.
-- **Status:** **escalated --- blocking the M0 gate.**
+- **Decision:** `data/raw/FullData.csv` is **not tracked in Git**. It is
+  transferred to Sophia manually by `scp` and pinned by its SHA-256 in
+  `data/manifest.json`. `data/raw/*.csv` is gitignored; `data/raw/.gitkeep` and
+  `data/raw/README.md` are tracked in its place. The data-dictionary PDF remains
+  tracked (D-002).
+- **Rationale:** the file is **296,407,423 bytes (~282.7 MiB)**. GitHub
+  hard-rejects any single file over **100 MiB (104,857,600 bytes)** on push,
+  independent of repository size, so D-001's "ordinary Git, single immutable
+  commit" could never have been pushed. Git LFS was rejected for the reason
+  D-001 already gave: git-lfs is unavailable on Sophia, so the execution clone
+  would receive a pointer stub and could not reproduce the hash. An out-of-band
+  transfer keeps the byte-identity guarantee --- it simply moves the pin from
+  the commit SHA to the manifest hash --- while keeping the repository small
+  and clonable.
+- **Size discrepancy (logged):** the blueprint stated the CSV was **~48 MB**.
+  The actual file is **296,407,423 bytes (~282.7 MiB)**, roughly 6x larger.
+  The blueprint's row and column counts, by contrast, were exact: 62,834 x 275
+  observed, 62,834 x 275 stated. The discrepancy is therefore in the recorded
+  file size only, not in the shape of the table, and no data was filtered or
+  altered to reconcile it. Whether the blueprint figure referred to a different
+  export is an open question for Kaiyuan.
+- **Alternatives considered:** (a) **Git LFS with a user-local git-lfs binary on
+  Sophia** --- rejected, reintroduces the dependency D-001 removed and blocks
+  M0 on a second host-configuration task. (b) **Split into <100 MiB parts and
+  reassemble on read** --- rejected, keeps the bytes pinned to the commit but
+  puts ~283 MiB in history permanently and adds a reassembly step to every
+  read. (c) **Commit a subset or column-pruned extract** --- rejected outright:
+  it would mean filtering columns, which M0 forbids.
+- **Consequences:** the bytes no longer travel with the commit, so a pinned
+  commit SHA alone no longer determines the data. **Every host must verify the
+  hash before the data is used** --- this is why `scripts/smoke_test.py` and
+  `tests/test_manifest.py` now *fail* rather than skip when the file is absent,
+  unless `CLIMRR_ALLOW_MISSING_RAW=1` is set deliberately. Adding a host to the
+  project now requires a manual transfer step, documented in the runbook.
+- **Owner:** COORDINATOR, approved by Kaiyuan Liao.
+- **Affected files:** `.gitignore`, `data/raw/README.md`, `data/README.md`,
+  `data/MANIFEST.md`, `data/manifest.json`, `tests/test_manifest.py`,
+  `scripts/sophia_bootstrap.sh`, `docs/SOPHIA_RUNBOOK.md`, D-001.
+- **Status:** **decided.**

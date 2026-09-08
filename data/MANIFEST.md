@@ -19,7 +19,8 @@ Row counts exclude the header line.
 | Column count | 275 |
 | Source description | ClimRR FullData export, provided by Kaiyuan Liao |
 | Acquisition date | unknown |
-| Storage policy | immutable ordinary Git (single commit); not Git LFS -- see DECISION_LOG D-001 |
+| Tracked in Git | **no** (gitignored) |
+| Storage policy | untracked; transferred out of band (scp) and pinned by the SHA-256 above -- see DECISION_LOG **D-005**, which supersedes D-001 |
 | Interpretation notes | no interpretation assigned; see docs/DATA_NOTES.md (M1) |
 ### `ClimRR_Metadata_and_Data_Dictionary.pdf`
 
@@ -33,14 +34,21 @@ Row counts exclude the header line.
 | Column count | n/a (not tabular) |
 | Source description | ClimRR FullData export, provided by Kaiyuan Liao |
 | Acquisition date | unknown |
-| Storage policy | immutable ordinary Git (single commit) |
+| Tracked in Git | yes |
+| Storage policy | tracked in ordinary Git as an immutable object (D-002) |
 | Interpretation notes | no interpretation assigned; see docs/DATA_NOTES.md (M1) |
 
 ## Immutability
+
+`FullData.csv` is **not tracked by Git** (D-005). It arrives out of band and its
+bytes are pinned solely by the SHA-256 above, so every host must verify it
+before use: run `python scripts/smoke_test.py` and require `PASS`. See
+[`raw/README.md`](raw/README.md).
 
 Both files are byte-immutable. They are committed once and never rewritten. If
 a recomputed SHA-256 ever differs from the value above, that is a defect to be
 escalated -- not a manifest to be updated.
 
-`.gitattributes` marks `*.csv` and `*.pdf` as `-text` (binary) so that Git can
-never apply line-ending normalisation to these bytes.
+`.gitattributes` marks `*.csv` and `*.pdf` as `-text` (binary). The PDF is
+tracked, so this actively protects it; the rule is kept for `*.csv` so that any
+CSV that ever does enter the repository cannot be normalised.

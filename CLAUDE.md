@@ -23,8 +23,17 @@ Kaiyuan. Do not improvise and note it later.
 
 ## Raw data is immutable
 
-`data/raw/` is write-once. Committed data files are byte-frozen and their
-SHA-256 values are recorded in `data/manifest.json`.
+`data/raw/` is write-once. Data files are byte-frozen and their SHA-256 values
+are recorded in `data/manifest.json`.
+
+`data/raw/FullData.csv` is **not tracked by Git** (decision D-005): at ~283 MiB
+it exceeds GitHub's 100 MiB per-file limit, so it is transferred out of band and
+pinned by its manifest hash instead of by a commit. A fresh clone will not have
+it, and that is correct. Because the bytes no longer travel with the commit,
+**verifying the hash before use is mandatory, not optional** --- `pytest` and
+`scripts/smoke_test.py` fail rather than skip when the file is absent, unless
+`CLIMRR_ALLOW_MISSING_RAW=1` is set deliberately for code-only work. Never set
+that flag during a milestone gate run.
 
 - Never modify a file under `data/raw/` in place.
 - Never write a "cleaned", "fixed", or "normalised" copy back into `data/`.
@@ -79,6 +88,7 @@ Never commit:
   metadata data dictionary under `data/metadata/` is *not* literature);
 - large or regenerable outputs (`*.npy`, `*.npz`, `*.parquet`, `*.pkl`,
   `outputs/`, `artifacts/**/large/`);
+- `data/raw/*.csv` --- gitignored under D-005; the raw table moves out of band;
 - environment directories (`.venv*`, `__pycache__`).
 
 ## Sync policy: local authoring, Sophia execution

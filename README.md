@@ -21,7 +21,7 @@ If you are an agent or a new collaborator, read in this order:
 
 ```
 config/     project constants; local_paths.example.yaml (real paths are untracked)
-data/       immutable raw data + metadata + manifest (write-once)
+data/       metadata + manifest (write-once); raw/ CSV is untracked (D-005)
 docs/       plan, state, decisions, data notes, report template, Sophia runbook
 src/climrr/ paths, checksums, run records
 scripts/    smoke test, secrets/paths scan, Sophia bootstrap and pinned pull
@@ -38,6 +38,12 @@ conda activate climrr
 pip install -r requirements.txt
 cp config/local_paths.example.yaml config/local_paths.yaml   # then edit
 ```
+
+`data/raw/FullData.csv` is **not in this repository** --- at ~283 MiB it exceeds
+GitHub's per-file limit, so it is transferred out of band and pinned by its
+SHA-256 in `data/manifest.json` (decision D-005). Put it at
+`data/raw/FullData.csv`, then run `python scripts/smoke_test.py` and require
+`PASS`. See [`data/raw/README.md`](data/raw/README.md).
 
 On Sophia, follow [`docs/SOPHIA_RUNBOOK.md`](docs/SOPHIA_RUNBOOK.md) instead.
 

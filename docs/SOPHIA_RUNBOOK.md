@@ -54,7 +54,46 @@ Use the Eagle project path agreed with the COORDINATOR for `CLIMRR_REPO_ROOT`.
 
 ---
 
-## 3. Bootstrap (first time only)
+## 3. Transfer the raw CSV (out of band --- decision D-005)
+
+`data/raw/FullData.csv` is **not in the repository**. At ~283 MiB it exceeds
+GitHub's 100 MiB per-file limit, so it is copied directly, host to host, and
+verified by hash. Cloning alone will not give you the data.
+
+From the **local authoring machine** (not from Sophia):
+
+```bash
+scp "$LOCAL_REPO_ROOT/data/raw/FullData.csv" \
+    <user>@sophia.alcf.anl.gov:"$CLIMRR_REPO_ROOT/data/raw/"
+```
+
+Substitute your own absolute paths and username; they are deliberately not
+recorded in this repository. `$CLIMRR_REPO_ROOT` is the execution-clone path
+from step 2, and the destination directory exists only after step 4 has cloned
+the repo --- so either run the bootstrap first, or `mkdir -p` the directory.
+
+Then, **on Sophia**, verify the bytes survived the transfer:
+
+```bash
+sha256sum "$CLIMRR_REPO_ROOT/data/raw/FullData.csv"
+```
+
+Expected, exactly:
+
+```
+e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e
+```
+
+and a size of `296407423` bytes (`stat -c %s`). Compare against the
+`FullData.csv` entry in `data/manifest.json`.
+
+**If the hash differs, stop.** Do not re-run anything downstream. Report the
+hash you got. A truncated or corrupted transfer that goes unnoticed would
+silently invalidate every result built on it.
+
+---
+
+## 4. Bootstrap (first time only)
 
 ```bash
 bash scripts/sophia_bootstrap.sh "$CLIMRR_COMMIT"
@@ -80,7 +119,7 @@ The script will:
 
 ---
 
-## 4. Subsequent runs --- move to a new pinned commit
+## 5. Subsequent runs --- move to a new pinned commit
 
 ```bash
 export CLIMRR_COMMIT=<new-pinned-commit-sha>
@@ -97,7 +136,7 @@ have local changes. Report it rather than forcing past it.
 
 ---
 
-## 5. What to check before pasting results back
+## 6. What to check before pasting results back
 
 The M0 gate turns on four things:
 
@@ -106,6 +145,7 @@ The M0 gate turns on four things:
 | Push URL | `DISABLED` |
 | `git status --porcelain` | **empty** (clean working tree) |
 | `pytest` | all tests pass |
+| Raw CSV present | `data/raw/FullData.csv` exists (it is **not** cloned --- step 3 puts it there) |
 | `scripts/smoke_test.py` | prints `PASS`, and the SHA-256 it reports for `data/raw/FullData.csv` equals the value in `data/manifest.json` |
 
 The decisive one is the **SHA-256 byte-identity check**: the hash computed on
@@ -115,7 +155,7 @@ or "fix" anything.
 
 ---
 
-## 6. What to copy back
+## 7. What to copy back
 
 Copy back **only** the run records, and only the Sophia ones:
 
@@ -132,11 +172,11 @@ are committed from there, never pushed from Sophia --- decision D-003).
 
 ---
 
-## 7. Where to paste the output
+## 8. Where to paste the output
 
 Paste into the COORDINATOR chat:
 
-1. the full terminal output of `scripts/sophia_bootstrap.sh` (or of step 4);
+1. the full terminal output of `scripts/sophia_bootstrap.sh` (or of step 5);
 2. the contents of the Sophia run-record `.md` file;
 3. the exact `git status --porcelain` output (state explicitly if it was empty);
 4. the pinned commit SHA you checked out.
@@ -155,5 +195,11 @@ clean pull --- and commits the returned run records from the local clone.
   you are inside `screen`.
 - **The smoke test reports a hash mismatch** --- stop. This is the escalation
   condition. Paste the reported hash and the expected one; change nothing.
+- **The bootstrap stops with "raw CSV not found" or a hash mismatch** ---
+  expected if step 3 was skipped or the transfer was incomplete. Re-run the
+  `scp` and re-check `sha256sum` before anything else. Never set
+  `CLIMRR_ALLOW_MISSING_RAW=1` to get past it during a gate run: that flag
+  exists for deliberate code-only work, and using it here would produce a green
+  run that verified nothing.
 - **`git checkout` fails on the data file** --- report the error verbatim. Do
   not run `git checkout --force`.

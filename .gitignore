@@ -24,6 +24,10 @@ outputs/
 *.parquet
 *.pkl
 
+# raw data is transferred out of band, never tracked (decision D-005).
+# Its bytes are pinned by SHA-256 in data/manifest.json instead of by a commit.
+data/raw/*.csv
+
 # external literature corpus must never enter this repo
 literature/
 

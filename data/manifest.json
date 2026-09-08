@@ -2,7 +2,7 @@
   "manifest_version": 1,
   "generated_utc": "2026-09-08T18:39:29Z",
   "milestone": "M0",
-  "notes": "Hashes are of the bytes as committed. data/raw/ is immutable: any change to these values is a defect, not an update.",
+  "notes": "Hashes are of the bytes as delivered. data/raw/ is immutable: any change to these values is a defect, not an update. Since decision D-005 the CSV is NOT tracked by Git; the SHA-256 below is the sole pin on its bytes and must be verified on every host before the file is used.",
   "files": [
     {
       "filename": "FullData.csv",
@@ -16,8 +16,9 @@
       "encoding_note": "UTF-8 with a leading byte-order mark on the header line; read with utf-8-sig. The BOM is part of the hashed bytes and must not be stripped on disk.",
       "source_description": "ClimRR FullData export, provided by Kaiyuan Liao",
       "acquisition_date": "unknown",
-      "storage_policy": "immutable ordinary Git (single commit); not Git LFS -- see DECISION_LOG D-001",
-      "interpretation_notes": "no interpretation assigned; see docs/DATA_NOTES.md (M1)"
+      "storage_policy": "untracked; transferred out of band (scp) and pinned by the SHA-256 below -- see DECISION_LOG D-005, which supersedes D-001. Not Git LFS, and not an ordinary Git object: 296,407,423 bytes exceeds GitHub's 100 MiB per-file limit.",
+      "interpretation_notes": "no interpretation assigned; see docs/DATA_NOTES.md (M1)",
+      "tracked_in_git": false
     },
     {
       "filename": "ClimRR_Metadata_and_Data_Dictionary.pdf",
@@ -31,8 +32,9 @@
       "renamed_for": "filesystem safety (spaces replaced with underscores); bytes unchanged",
       "source_description": "ClimRR FullData export, provided by Kaiyuan Liao",
       "acquisition_date": "unknown",
-      "storage_policy": "immutable ordinary Git (single commit)",
-      "interpretation_notes": "no interpretation assigned; see docs/DATA_NOTES.md (M1)"
+      "storage_policy": "tracked in ordinary Git as an immutable object (D-002)",
+      "interpretation_notes": "no interpretation assigned; see docs/DATA_NOTES.md (M1)",
+      "tracked_in_git": true
     }
   ]
 }

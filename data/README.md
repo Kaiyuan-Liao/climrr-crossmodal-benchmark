@@ -4,7 +4,7 @@
 
 | Path | What it is |
 | --- | --- |
-| `raw/FullData.csv` | The ClimRR FullData export. Primary data. |
+| `raw/FullData.csv` | The ClimRR FullData export. Primary data. **Untracked** --- obtained out of band, verified by manifest hash (D-005). See [`raw/README.md`](raw/README.md). |
 | `metadata/ClimRR_Metadata_and_Data_Dictionary.pdf` | Authoritative ClimRR data dictionary. Provenance, **not** literature corpus (see decision D-002). |
 | `manifest.json` | Machine-readable manifest. Source of truth for hashes and counts. |
 | `MANIFEST.md` | Human-readable mirror of the manifest. |
@@ -25,21 +25,24 @@ once and never rewritten.
 `.gitattributes` marks `*.csv` and `*.pdf` as `-text` (binary), so Git cannot
 apply line-ending normalisation and silently change the bytes.
 
-`tests/test_manifest.py` asserts that the SHA-256 of the tracked
-`data/raw/FullData.csv` equals the value in `manifest.json`. If that test ever
-fails, the file has been altered: **escalate**. Do not update the manifest to
-match.
+`tests/test_manifest.py` asserts that the SHA-256 of `data/raw/FullData.csv`
+equals the value in `manifest.json`. If that test ever fails, the file has been
+altered: **escalate**. Do not update the manifest to match.
 
 ## Storage policy
 
-Per decision **D-001**: the CSV is committed as an ordinary Git object in a
-single dedicated commit, **not** via Git LFS. git-lfs is unavailable on Sophia,
-and an LFS pointer would prevent the execution clone from reproducing the
-SHA-256.
+Per decision **D-005**, which supersedes D-001: the CSV is **not tracked in
+Git**. At 296,407,423 bytes it exceeds GitHub's 100 MiB per-file limit, and Git
+LFS is unavailable on Sophia. It is transferred out of band by `scp` and pinned
+by its SHA-256 in `manifest.json`.
 
-Note decision **D-005**: at 296,407,423 bytes the file exceeds GitHub's 100 MiB
-per-file limit, so D-001 cannot be executed against the remote as written. That
-decision is open and blocks the M0 gate.
+Because the bytes no longer travel with the commit, verification is not
+optional. `scripts/smoke_test.py` and `tests/test_manifest.py` **fail** when the
+file is missing --- they do not quietly skip --- unless
+`CLIMRR_ALLOW_MISSING_RAW=1` is set deliberately. A green test run on a clone
+that never saw the data would be worse than a red one.
+
+The data-dictionary PDF remains tracked in ordinary Git (D-002).
 
 ## No interpretation
 
