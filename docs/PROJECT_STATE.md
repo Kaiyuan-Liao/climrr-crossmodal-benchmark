@@ -8,7 +8,7 @@ session reasoning correctly from out-of-date facts and repeating them.
 | --- | --- |
 | **Current milestone** | M0 --- reproducible project foundation |
 | **Active task** | M0-WP1 --- complete, awaiting gate review |
-| **Latest work-package commit** | `__COMMIT_SHA__` (this file's pointer is written in the bookkeeping commit that follows it, since a commit cannot contain its own hash) |
+| **Latest work-package commit** | `c91e30d` (this file's pointer is written in the bookkeeping commit that follows it, since a commit cannot contain its own hash) |
 | **Proposed gate status** | **PASS** --- all five criteria MET on evidence |
 | **Next review event** | **M0 gate review by GUIDANCE** |
 | **Blockers** | **none** |
