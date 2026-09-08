@@ -8,7 +8,7 @@ session reasoning correctly from out-of-date facts and repeating them.
 | --- | --- |
 | **Current milestone** | **M1 --- data grounding and metadata audit** |
 | **Active task** | **M1-WP1** --- work package pending from COORDINATOR |
-| **Latest accepted commit** | `__COMMIT_SHA__` --- M0 closure (this file's pointer is written in the bookkeeping commit that follows it, since a commit cannot contain its own hash) |
+| **Latest accepted commit** | `c08de42` --- M0 closure (this file's pointer is written in the bookkeeping commit that follows it, since a commit cannot contain its own hash) |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
 | **Tag `m0-setup`** | to be applied by Kaiyuan --- **not present in this clone or on the remote** as of this commit |
 | **Next review event** | M1 gate review by GUIDANCE, after M1-WP1 |
