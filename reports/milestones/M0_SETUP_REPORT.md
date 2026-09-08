@@ -23,10 +23,11 @@ mechanism, a smoke test, and a verified local/Sophia sync path.
 | Excluded | Owner |
 | --- | --- |
 | Interpretation of any column | M1 |
-| Aggregation or phenomenon profiles | M2 |
-| Literature ingestion or claim extraction | M3 |
-| Embeddings, matching, bridging | M4 |
-| QA construction | M5 |
+| Canonical semantic representation | M2 |
+| Table-derived phenomenon discovery and geographic aggregation | M3 |
+| Literature ingestion and claim extraction | M4 |
+| Semantic bridge discovery and validation, including embeddings and matching | M5 |
+| QA construction | **not in current scope** --- deferred until after M5 passes |
 
 Contact with the CSV was limited to: copy, hash, count rows and columns, list
 column names, confirm it opens read-only. Nothing else. No literature-corpus
@@ -211,7 +212,7 @@ leading zeros.
 | --- | --- | --- | --- |
 | Data rows (header excluded) | 62,834 | **62,834** | yes |
 | Columns | 275 | **275** | yes |
-| File size | ~48 MB | **296,407,423 bytes** | no --- see field 11 |
+| File size | figure in the charter is a compressed-upload artifact, not the file size | **296,407,423 bytes** | n/a --- resolved, see field 12 |
 
 ```
 first column : OID_
@@ -399,11 +400,11 @@ that in mind.
    entered any commit. The COORDINATOR, with Kaiyuan's approval, then decided
    D-005: untracked, transferred out of band, pinned by SHA-256.
 
-2. **File size differed from the blueprint by ~6x.** Stated ~48 MB; actual
-   296,407,423 bytes. Resolved: Kaiyuan's explanation is that the blueprint
-   figure came from a compressed chat upload. Row and column counts matched
-   exactly, confirming the table is the expected one; nothing was filtered or
-   altered to reconcile the difference.
+2. **File size differed from the figure recorded in the charter.** The file is
+   **296,407,423 bytes**. Resolved: Kaiyuan's explanation is that the charter's
+   figure came from a compressed chat upload and never described the file on
+   disk. Row and column counts matched exactly, confirming the table is the
+   expected one; nothing was filtered or altered to reconcile the difference.
 
 3. **Missing-data handling is fail-by-default, not skip-by-default.** Added
    because D-005 makes an absent CSV a legitimate clone state, and a silent
@@ -518,6 +519,17 @@ file's own header.
 All five criteria are MET, each on evidence rather than assertion --- including
 criterion 5, which was the last to rest on self-assessment and has now been
 tested by an independent cold session.
+
+**GUIDANCE decision: PASS WITH ACTIONS** (`docs/M0_GUIDANCE_GATE_REVIEW.md`);
+closure actions completed in this commit. Reviewed at commit `b87564b`.
+Recorded as D-006, with D-007 amending D-004 on dependency pinning.
+
+> **Note --- `docs/M0_GUIDANCE_GATE_REVIEW.md` is not yet in the repository.**
+> The citation above is to a file Kaiyuan has still to place. It is therefore
+> also absent from field 7, and this report is **not frozen**, because adding
+> the deliverable and the freeze line is one edit still outstanding. Listing a
+> file that is not there would make this report assert evidence that does not
+> exist, which is the failure this project is built to prevent.
 
 ---
 

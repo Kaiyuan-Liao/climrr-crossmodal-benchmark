@@ -6,43 +6,47 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 | | |
 | --- | --- |
-| **Current milestone** | M0 --- reproducible project foundation |
-| **Active task** | M0-WP1 --- complete, awaiting gate review |
-| **Latest work-package commit** | `c91e30d` (this file's pointer is written in the bookkeeping commit that follows it, since a commit cannot contain its own hash) |
-| **Proposed gate status** | **PASS** --- all five criteria MET on evidence |
-| **Next review event** | **M0 gate review by GUIDANCE** |
+| **Current milestone** | **M1 --- data grounding and metadata audit** |
+| **Active task** | **M1-WP1** --- work package pending from COORDINATOR |
+| **Latest accepted commit** | `__COMMIT_SHA__` --- M0 closure (this file's pointer is written in the bookkeeping commit that follows it, since a commit cannot contain its own hash) |
+| **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
+| **Tag `m0-setup`** | to be applied by Kaiyuan --- **not present in this clone or on the remote** as of this commit |
+| **Next review event** | M1 gate review by GUIDANCE, after M1-WP1 |
 | **Blockers** | **none** |
 
 ## Where things stand
 
-- [`docs/BLUEPRINT.md`](BLUEPRINT.md) is in the repository and is the project
-  charter. [`PROJECT_PLAN.md`](PROJECT_PLAN.md) carries all six milestone
-  objectives and gate-criteria sets verbatim from it (verified byte-identical);
-  [`REPORT_TEMPLATE.md`](REPORT_TEMPLATE.md) matches blueprint section 9. The
-  M1--M5 criteria gap is **resolved**.
-- Raw data verified byte-identical on both hosts:
-  `e87ac2cd…3bf43e`, 296,407,423 bytes, 62,834 x 275. Untracked by D-005 and
-  transferred out of band; pinned by `data/manifest.json`.
-- All five M0 gate criteria MET, including criterion 5, tested 2026-09-08 by an
-  independent cold session.
-- `origin/main` is at `586f5fd`. Later commits are local; the EXECUTOR does not
-  push (D-003), and every piece of gate evidence is already on the remote.
-- Decisions D-002, D-003, D-004, D-005 decided; D-001 superseded by D-005.
+- **M0 is closed.** All five charter gate criteria met on evidence, including
+  criterion 5, tested by an independent cold session rather than asserted.
+  GUIDANCE accepted the gate as PASS WITH ACTIONS; closure actions are done.
+  See [`../reports/milestones/M0_SETUP_REPORT.md`](../reports/milestones/M0_SETUP_REPORT.md).
+- **D-005 is permanent** (D-006), not a workaround: the raw CSV stays
+  untracked, moves out of band, and is pinned by SHA-256 in
+  `data/manifest.json`. **Fail-closed verification before any data use is
+  mandatory** --- the checks must fail rather than skip when the file is
+  absent, and `CLIMRR_ALLOW_MISSING_RAW=1` must never be set during a gate run.
+- Raw data verified byte-identical on both hosts: `e87ac2cd…3bf43e`,
+  296,407,423 bytes, 62,834 x 275.
+- [`BLUEPRINT.md`](BLUEPRINT.md) is the charter; [`PROJECT_PLAN.md`](PROJECT_PLAN.md)
+  carries all six objectives and gate-criteria sets verbatim from it.
+- `origin/main` is at `586f5fd`; later commits are local. The EXECUTOR does not
+  push (D-003).
+- Decisions D-002 .. D-007 decided; D-001 superseded by D-005; D-004 amended by
+  D-007.
 
 ## Residual items (none blocking)
 
-- **GUIDANCE to confirm** that D-005's out-of-band transfer is an acceptable
-  mechanism for pinning the raw data. Byte identity is met and proven across
-  two architectures; the mechanism is the open question.
-- **Python version skew**: local 3.11.16 vs Sophia 3.13.13, different
-  `pip freeze` fingerprints. Immaterial to M0, where every check is a checksum
-  or a count. Revisit pinning at M2, when numerical output begins.
+- **Pin the parsing and profiling libraries during M1-WP1** (D-007), in
+  `requirements.txt` and in run records, **before** the schema/profile artifact
+  is frozen. The two hosts need not share a Python minor version.
 - **Acquisition date** of the ClimRR export is unknown and was not guessed.
 
 ## Next
 
-M0 gate review by GUIDANCE. Do **not** tag `m0-setup` until the gate passes.
-Proposed next objective is in field 15 of the M0 report.
+M1-WP1: reproducible schema and quality profile of `FullData.csv` --- a
+machine-readable per-column profile with identifiers read as strings and **no
+interpretation**, plus an inventory of metadata questions checked against the
+tracked data dictionary. Awaiting the work package from COORDINATOR.
 
 ## Links
 
@@ -51,5 +55,5 @@ Proposed next objective is in field 15 of the M0 report.
 - Decisions: [DECISION_LOG.md](DECISION_LOG.md)
 - Data facts and column inventory: [DATA_NOTES.md](DATA_NOTES.md)
 - Sophia procedure: [SOPHIA_RUNBOOK.md](SOPHIA_RUNBOOK.md)
-- Active milestone report: [../reports/milestones/M0_SETUP_REPORT.md](../reports/milestones/M0_SETUP_REPORT.md)
+- M0 report (accepted): [../reports/milestones/M0_SETUP_REPORT.md](../reports/milestones/M0_SETUP_REPORT.md)
 - Operating rules: [../CLAUDE.md](../CLAUDE.md)

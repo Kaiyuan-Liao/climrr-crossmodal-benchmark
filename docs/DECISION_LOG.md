@@ -108,7 +108,8 @@ not yet in force and must not be relied on by downstream work.
 - **Affected files:** `requirements.txt`, `pyproject.toml`,
   `scripts/sophia_bootstrap.sh`, `src/climrr/runrecord.py`,
   `config/project.yaml`.
-- **Status:** decided.
+- **Status:** decided, **amended by D-007** (parsing and profiling libraries are
+  pinned during M1-WP1; the Python minor version stays free). The rest stands.
 
 ---
 
@@ -159,3 +160,71 @@ not yet in force and must not be relied on by downstream work.
   `data/MANIFEST.md`, `data/manifest.json`, `tests/test_manifest.py`,
   `scripts/sophia_bootstrap.sh`, `docs/SOPHIA_RUNBOOK.md`, D-001.
 - **Status:** **decided.**
+
+---
+
+## D-006 --- M0 gate accepted by GUIDANCE
+
+- **Date:** 2026-09-08
+- **Decision:** GUIDANCE reviewed the M0 gate at commit `b87564b` and accepted
+  it as **PASS WITH ACTIONS**. D-005 is accepted as the **permanent** mechanism
+  for handling the raw data --- untracked, transferred out of band, pinned by
+  SHA-256 --- not as a temporary workaround. **Fail-closed SHA-256 verification
+  remains mandatory before any use of the data.**
+- **Rationale:** all five charter gate criteria were met on evidence, including
+  criterion 5, which an independent cold session tested rather than the
+  EXECUTOR asserting. The open question at the gate was whether moving the data
+  pin from the commit SHA to the manifest hash was an acceptable mechanism or
+  merely an expedient; GUIDANCE settled it as acceptable and permanent. The
+  guarantee the criterion protects --- that every host provably holds the same
+  bytes --- was demonstrated across two architectures.
+- **Alternatives considered:** (a) accept M0 conditionally and revisit the data
+  mechanism at M1 --- rejected, it would leave the project's foundational
+  storage decision unsettled while work built on top of it. (b) require the
+  data back into Git by some route before passing --- rejected, no route
+  exists that both fits GitHub's per-file limit and reproduces on Sophia.
+- **Consequences:** the fail-closed checks are now a permanent contract, not an
+  implementation detail: `scripts/smoke_test.py` and `tests/test_manifest.py`
+  must continue to **fail** rather than skip when the file is absent, and
+  `CLIMRR_ALLOW_MISSING_RAW=1` must never be set during a gate run. Weakening
+  either would void the basis on which this gate passed. Closure actions from
+  the review are recorded in `docs/M0_GUIDANCE_GATE_REVIEW.md`.
+- **Owner:** GUIDANCE, approved by Kaiyuan Liao.
+- **Affected files:** `docs/M0_GUIDANCE_GATE_REVIEW.md`,
+  `reports/milestones/M0_SETUP_REPORT.md`, `docs/PROJECT_STATE.md`,
+  `scripts/smoke_test.py`, `tests/test_manifest.py`, D-005.
+- **Status:** **decided.**
+
+---
+
+## D-007 --- Amendment to D-004: pin parsing and profiling libraries during M1-WP1
+
+- **Date:** 2026-09-08
+- **Decision:** the library versions that govern CSV parsing and profiling are
+  **pinned in `requirements.txt` and recorded in run records during M1-WP1**,
+  before the schema/profile artifact is frozen. **The two hosts need not share
+  a Python minor version.**
+- **Rationale:** D-004 deferred pinning as premature at three dependencies, and
+  that held for M0, where every check was a checksum or a count and the two
+  hosts agreed exactly despite running Python 3.11 and 3.13. M1 changes the
+  stakes: a schema and quality profile depends on how a parser infers types,
+  handles nulls and sentinels, and orders distinct values, and those behaviours
+  do move between library versions. Pinning the parsing layer before the
+  artifact is frozen keeps the profile reproducible. The Python minor version
+  is deliberately left free --- forcing it would mean fighting the ALCF base
+  module for no demonstrated benefit, and the run-record fingerprint already
+  makes any divergence visible.
+- **Alternatives considered:** (a) pin nothing until a discrepancy appears ---
+  rejected, the discrepancy would surface as an unreproducible artifact after
+  it had been built on. (b) force both hosts onto the same Python minor version
+  --- rejected, costly on the shared filesystem, discards the site's tuned
+  base, and addresses a risk that has not materialised. (c) pin everything
+  including transitive dependencies via a lockfile --- deferred, heavier than
+  the risk warrants; revisit if the pinned set proves insufficient.
+- **Consequences:** M1-WP1 must pin before it freezes its artifact, not after.
+  Run records must carry the pinned versions, so `pip freeze` fingerprinting
+  stays load-bearing. The known Python skew recorded in the M0 report is
+  formally accepted rather than merely tolerated.
+- **Owner:** GUIDANCE, approved by Kaiyuan Liao.
+- **Affected files:** `requirements.txt`, `src/climrr/runrecord.py`, M1-WP1.
+- **Status:** **decided.** Amends D-004, which otherwise stands.
