@@ -6,7 +6,7 @@ Single screen. Update it at the end of every work package.
 | --- | --- |
 | **Current milestone** | M0 --- reproducible project foundation |
 | **Active task** | M0-WP1 --- **complete**, awaiting gate review |
-| **Latest accepted commit** | the M0-WP1 close commit --- SHA recorded in the follow-up commit below |
+| **Latest accepted commit** | `685c2b1` --- M0-WP1 close |
 | **Next review event** | **M0 gate review by GUIDANCE** |
 | **Proposed gate status** | **PASS** --- see report section 14 |
 
