@@ -129,13 +129,12 @@ not yet in force and must not be relied on by downstream work.
   transfer keeps the byte-identity guarantee --- it simply moves the pin from
   the commit SHA to the manifest hash --- while keeping the repository small
   and clonable.
-- **Size discrepancy (logged):** the blueprint stated the CSV was **~48 MB**.
-  The actual file is **296,407,423 bytes (~282.7 MiB)**, roughly 6x larger.
-  The blueprint's row and column counts, by contrast, were exact: 62,834 x 275
-  observed, 62,834 x 275 stated. The discrepancy is therefore in the recorded
-  file size only, not in the shape of the table, and no data was filtered or
-  altered to reconcile it. Whether the blueprint figure referred to a different
-  export is an open question for Kaiyuan.
+- **Size discrepancy (resolved):** the blueprint stated the CSV was **~48 MB**;
+  the actual file is **296,407,423 bytes (~282.7 MiB)**. Kaiyuan's explanation:
+  the blueprint figure came from a compressed chat upload of the file. Verified
+  fact: row and column counts match the blueprint exactly (62,834 x 275).
+  Treated as resolved on that basis; the original acquisition date remains
+  unknown.
 - **Alternatives considered:** (a) **Git LFS with a user-local git-lfs binary on
   Sophia** --- rejected, reintroduces the dependency D-001 removed and blocks
   M0 on a second host-configuration task. (b) **Split into <100 MiB parts and
@@ -149,6 +148,12 @@ not yet in force and must not be relied on by downstream work.
   `tests/test_manifest.py` now *fail* rather than skip when the file is absent,
   unless `CLIMRR_ALLOW_MISSING_RAW=1` is set deliberately. Adding a host to the
   project now requires a manual transfer step, documented in the runbook.
+  **Plan correction (2026-09-08):** while assessing this decision against the
+  M0 gate it emerged that `docs/PROJECT_PLAN.md` did not carry the blueprint's
+  M0 gate criteria; its M0 criteria were corrected to the blueprint text on
+  this date. The M1--M5 criteria could not be corrected --- the blueprint's
+  text for them was never supplied to the EXECUTOR --- and are now flagged in
+  the plan as EXECUTOR-drafted and not authoritative.
 - **Owner:** COORDINATOR, approved by Kaiyuan Liao.
 - **Affected files:** `.gitignore`, `data/raw/README.md`, `data/README.md`,
   `data/MANIFEST.md`, `data/manifest.json`, `tests/test_manifest.py`,

@@ -36,8 +36,15 @@ None blocking. Residual items carried into the gate review:
 - **Two commits unpushed** (`685c2b1`, `a0dc4db`). `origin/main` is at
   `586f5fd`, which is the commit Sophia cloned and verified, so the gate
   evidence is already on the remote. Kaiyuan pushes the remainder manually.
-- **GUIDANCE to confirm** that D-005's out-of-band data policy satisfies gate
-  criteria 1 and 4 in spirit.
+- **GUIDANCE to confirm** that D-005's out-of-band transfer is an acceptable
+  mechanism for pinning the raw data. Byte identity itself is met and proven
+  across two architectures; the mechanism is the open question.
+- **Blueprint M1--M5 gate criteria were never supplied to the EXECUTOR.** Those
+  in `PROJECT_PLAN.md` are EXECUTOR-drafted and flagged as not authoritative.
+  Supply the blueprint text before M1 opens.
+- **Gate criterion 5 is self-assessed**, not independently tested. Handing a
+  fresh session only this repository, to see whether it reaches the right next
+  action cold, is recommended before the `m0-setup` tag.
 - **Python version skew**: local 3.11.16 vs Sophia 3.13.13, different
   `pip freeze` fingerprints. A known limitation of D-004, immaterial to M0
   where every check is a checksum or a count. Revisit pinning at M2.
@@ -54,6 +61,11 @@ None blocking. Residual items carried into the gate review:
   D-005 opened by moving the data pin off the commit is now closed by evidence.
 - **Blueprint size discrepancy resolved**: the ~48 MB figure was a
   compressed-upload artifact; row and column counts matched exactly.
+- **Report restructured** onto the blueprint's 15 fields, and the M0 gate
+  assessed against the blueprint's five criteria (quoted verbatim). All five
+  MET; proposed status **PASS**.
+- **`PROJECT_PLAN.md` M0 criteria corrected** to the blueprint text;
+  `REPORT_TEMPLATE.md` corrected to the blueprint's 15 field names.
 - **`git_dirty` semantics fixed** in `src/climrr/runrecord.py`: it now reports
   tracked changes only, with untracked files counted separately. The Sophia
   record's `dirty=True` came from an untracked stray `.log` file, since deleted

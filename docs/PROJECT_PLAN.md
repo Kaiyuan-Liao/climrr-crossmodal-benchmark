@@ -1,10 +1,23 @@
 # Project plan --- M0 through M5
 
-Six milestones. Each has an objective (summarised) and **gate criteria
-(verbatim from the blueprint)**. A milestone is not complete until GUIDANCE
-accepts its gate criteria against a report in `reports/milestones/`.
+Six milestones. Each has an objective (summarised) and **gate criteria**. A
+milestone is not complete until GUIDANCE accepts its gate criteria against a
+report in `reports/milestones/`.
 
 Active milestone: **M0**.
+
+> **Provenance warning --- read before relying on M1--M5 criteria.**
+>
+> **M0's gate criteria below are the blueprint text, verbatim** (corrected
+> 2026-09-08; see decision D-005).
+>
+> **M1--M5's are not.** The blueprint's M1--M5 text was never supplied to the
+> EXECUTOR, which drafted those criteria from the work package's summary of the
+> milestone objectives. They are a reasonable reading, not a transcription, and
+> they have not been checked against the blueprint by anyone. **Replace each
+> with the blueprint text before the corresponding milestone opens**, and do
+> not treat them as authoritative in the meantime. Tracked as an open item in
+> `reports/milestones/M0_SETUP_REPORT.md` field 13.
 
 ---
 
@@ -16,16 +29,14 @@ persistent documentation, pinned environment, immutable raw data with recorded
 checksums, a run-record mechanism, a smoke test, and a verified local/Sophia
 sync path.
 
-**Gate criteria.**
-- The repository structure, documentation set, and decision log exist and are
-  pushed to the private remote.
-- `data/raw/FullData.csv` is committed, and its SHA-256 matches the value
-  recorded in `data/manifest.json`; the copied file is byte-identical to the
-  source.
-- `pytest` passes and the secrets/paths scan reports zero hits.
-- `scripts/smoke_test.py` runs locally and produces a run record.
-- Sophia can clone the pinned commit, build its environment, and reproduce the
-  same SHA-256 for the data file, with a clean working tree.
+**Gate criteria** (blueprint text, verbatim).
+1. the raw CSV is byte-identical locally and on Sophia
+2. the repository can be cleanly cloned or pulled in both environments
+3. no secrets or machine-specific paths are tracked
+4. a run can be tied to a precise commit, configuration, environment, and data
+   checksum
+5. project state and role instructions are sufficient for a new coding-agent
+   session to resume safely
 
 ---
 
@@ -37,7 +48,8 @@ window, and identifier semantics. Separate verified facts from provisional
 interpretation in `docs/DATA_NOTES.md`. This is the milestone in which the
 column inventory acquires meaning.
 
-**Gate criteria.**
+**Gate criteria** (EXECUTOR-drafted, NOT blueprint-verbatim --- see the
+provenance warning above).
 - Every column is classified as identifier, geometry, or climate variable, with
   its scenario and time window resolved, or explicitly listed as unresolved.
 - Units and the modeled-baseline status of historical fields are documented.
@@ -55,7 +67,8 @@ column inventory acquires meaning.
 climate phenomena at chosen spatial and scenario granularities, producing
 structured profiles under `artifacts/profiles/` and `artifacts/phenomena/`.
 
-**Gate criteria.**
+**Gate criteria** (EXECUTOR-drafted, NOT blueprint-verbatim --- see the
+provenance warning above).
 - Every aggregation is reproducible from a script with a run record.
 - Aggregation choices (spatial unit, scenario pairing, statistic) are recorded
   in the decision log with rationale.
@@ -70,7 +83,8 @@ structured profiles under `artifacts/profiles/` and `artifacts/phenomena/`.
 and extract structured claims into `artifacts/claims/`, with citation
 provenance. The corpus itself never enters this repository.
 
-**Gate criteria.**
+**Gate criteria** (EXECUTOR-drafted, NOT blueprint-verbatim --- see the
+provenance warning above).
 - Claims are traceable to a specific source document and location within it.
 - The literature corpus remains outside the repository; only derived,
   small artifacts are tracked.
@@ -85,7 +99,8 @@ provenance. The corpus itself never enters this repository.
 producing scored bridges under `artifacts/bridges/` that identify where a
 textual claim and a tabular pattern speak about the same thing.
 
-**Gate criteria.**
+**Gate criteria** (EXECUTOR-drafted, NOT blueprint-verbatim --- see the
+provenance warning above).
 - The matching method, its scoring, and its thresholds are documented and
   reproducible.
 - A sample of bridges is manually validated and the validation is recorded.
@@ -100,7 +115,8 @@ textual claim and a tabular pattern speak about the same thing.
 with answers verifiable against both modalities, and release it with full
 provenance and documentation.
 
-**Gate criteria.**
+**Gate criteria** (EXECUTOR-drafted, NOT blueprint-verbatim --- see the
+provenance warning above).
 - Every question's answer is verifiable against the data, the literature, or
   both, with the evidence recorded.
 - The benchmark ships with documented construction provenance and known
