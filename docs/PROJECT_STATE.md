@@ -1,79 +1,52 @@
 # Project state
 
-Single screen. Update it at the end of every work package.
+One screen. **Refresh this file at the end of every work package.** A stale
+state file is worse than a thin one: the M0 cold-resume trial showed a fresh
+session reasoning correctly from out-of-date facts and repeating them.
 
 | | |
 | --- | --- |
 | **Current milestone** | M0 --- reproducible project foundation |
-| **Active task** | M0-WP1 --- **complete**, awaiting gate review |
-| **Latest accepted commit** | `685c2b1` --- M0-WP1 close (followed by two bookkeeping commits: this SHA pointer, and a push-status correction) |
+| **Active task** | M0-WP1 --- complete, awaiting gate review |
+| **Latest work-package commit** | `__COMMIT_SHA__` (this file's pointer is written in the bookkeeping commit that follows it, since a commit cannot contain its own hash) |
+| **Proposed gate status** | **PASS** --- all five criteria MET on evidence |
 | **Next review event** | **M0 gate review by GUIDANCE** |
-| **Proposed gate status** | **PASS** --- see report section 14 |
+| **Blockers** | **none** |
 
-## Completed outputs
+## Where things stand
 
-- Repository skeleton, `CLAUDE.md`, plan / state / decision log / data notes /
-  report template.
-- `src/climrr/` (paths, checksums, run records), `scripts/smoke_test.py`,
-  `scripts/verify_no_secrets_or_paths.py`, `tests/`.
-- `data/raw/FullData.csv` copied byte-identically from source
-  (62,834 rows x 275 columns) and hash-pinned in `data/manifest.json`. It is
-  **untracked** by decision D-005 and moves out of band. The `data/metadata/`
-  data dictionary is tracked and hashed.
-- Sophia bootstrap / pinned-pull scripts and `docs/SOPHIA_RUNBOOK.md`.
-- **Sophia evidence returned and committed**: at commit `586f5fd` on
-  `sophia-login-02`, the same SHA-256 `e87ac2cd...3bf43e` and 296,407,423 bytes
-  were reproduced, with 31 tests passing, the smoke test PASS, the push URL
-  `DISABLED`, and a clean tracked working tree.
-  (`reports/runs/20260908T191426Z_sophia_smoke_test.json`)
-- `reports/milestones/M0_SETUP_REPORT.md` --- all 15 fields complete, nothing
-  PENDING.
+- [`docs/BLUEPRINT.md`](BLUEPRINT.md) is in the repository and is the project
+  charter. [`PROJECT_PLAN.md`](PROJECT_PLAN.md) carries all six milestone
+  objectives and gate-criteria sets verbatim from it (verified byte-identical);
+  [`REPORT_TEMPLATE.md`](REPORT_TEMPLATE.md) matches blueprint section 9. The
+  M1--M5 criteria gap is **resolved**.
+- Raw data verified byte-identical on both hosts:
+  `e87ac2cd…3bf43e`, 296,407,423 bytes, 62,834 x 275. Untracked by D-005 and
+  transferred out of band; pinned by `data/manifest.json`.
+- All five M0 gate criteria MET, including criterion 5, tested 2026-09-08 by an
+  independent cold session.
+- `origin/main` is at `586f5fd`. Later commits are local; the EXECUTOR does not
+  push (D-003), and every piece of gate evidence is already on the remote.
+- Decisions D-002, D-003, D-004, D-005 decided; D-001 superseded by D-005.
 
-## Blockers
+## Residual items (none blocking)
 
-None blocking. Residual items carried into the gate review:
-
-- **Two commits unpushed** (`685c2b1`, `a0dc4db`). `origin/main` is at
-  `586f5fd`, which is the commit Sophia cloned and verified, so the gate
-  evidence is already on the remote. Kaiyuan pushes the remainder manually.
 - **GUIDANCE to confirm** that D-005's out-of-band transfer is an acceptable
-  mechanism for pinning the raw data. Byte identity itself is met and proven
-  across two architectures; the mechanism is the open question.
-- **Blueprint M1--M5 gate criteria were never supplied to the EXECUTOR.** Those
-  in `PROJECT_PLAN.md` are EXECUTOR-drafted and flagged as not authoritative.
-  Supply the blueprint text before M1 opens.
-- **Gate criterion 5 is self-assessed**, not independently tested. Handing a
-  fresh session only this repository, to see whether it reaches the right next
-  action cold, is recommended before the `m0-setup` tag.
+  mechanism for pinning the raw data. Byte identity is met and proven across
+  two architectures; the mechanism is the open question.
 - **Python version skew**: local 3.11.16 vs Sophia 3.13.13, different
-  `pip freeze` fingerprints. A known limitation of D-004, immaterial to M0
-  where every check is a checksum or a count. Revisit pinning at M2.
+  `pip freeze` fingerprints. Immaterial to M0, where every check is a checksum
+  or a count. Revisit pinning at M2, when numerical output begins.
+- **Acquisition date** of the ClimRR export is unknown and was not guessed.
 
-## Resolved since last update
+## Next
 
-- **D-005 decided** (supersedes D-001): the raw CSV is untracked and
-  transferred out of band, pinned by SHA-256. History verified never to have
-  contained the blob; repository is 643 KiB packed.
-- **D-002 decided**: the ClimRR data dictionary is tracked under
-  `data/metadata/` as authoritative metadata, not literature. M1 may cite it as
-  evidence for column semantics.
-- **Sophia byte identity confirmed** across two architectures --- the gap that
-  D-005 opened by moving the data pin off the commit is now closed by evidence.
-- **Blueprint size discrepancy resolved**: the ~48 MB figure was a
-  compressed-upload artifact; row and column counts matched exactly.
-- **Report restructured** onto the blueprint's 15 fields, and the M0 gate
-  assessed against the blueprint's five criteria (quoted verbatim). All five
-  MET; proposed status **PASS**.
-- **`PROJECT_PLAN.md` M0 criteria corrected** to the blueprint text;
-  `REPORT_TEMPLATE.md` corrected to the blueprint's 15 field names.
-- **`git_dirty` semantics fixed** in `src/climrr/runrecord.py`: it now reports
-  tracked changes only, with untracked files counted separately. The Sophia
-  record's `dirty=True` came from an untracked stray `.log` file, since deleted
-  on Sophia; the record is committed verbatim and the report carries the
-  explanation.
+M0 gate review by GUIDANCE. Do **not** tag `m0-setup` until the gate passes.
+Proposed next objective is in field 15 of the M0 report.
 
 ## Links
 
+- Charter: [BLUEPRINT.md](BLUEPRINT.md)
 - Plan and gate criteria: [PROJECT_PLAN.md](PROJECT_PLAN.md)
 - Decisions: [DECISION_LOG.md](DECISION_LOG.md)
 - Data facts and column inventory: [DATA_NOTES.md](DATA_NOTES.md)

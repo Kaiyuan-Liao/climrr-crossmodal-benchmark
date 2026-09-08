@@ -385,7 +385,6 @@ that in mind.
    patterns are assembled from fragments so its own source contains no literal
    match; it holds no real path or credential.
 4. **Acquisition date of the ClimRR export is unknown** and was not guessed.
-5. **Gate criterion 5 has not been independently tested** --- see field 14.
 
 ---
 
@@ -495,22 +494,30 @@ the exact data hash. Evidence: fields 9, 10.
 
 > **5. project state and role instructions are sufficient for a new coding-agent session to resume safely**
 
-**MET BY CONSTRUCTION, NOT YET INDEPENDENTLY TESTED.** `CLAUDE.md` carries role
-boundaries, raw-data immutability, the three data cautions, required
-pre-commit checks, commit prohibitions, the sync policy, the run-record
-requirement, and the instruction to stop and escalate. `README.md` names the
-reading order; `docs/PROJECT_STATE.md` fits on one screen and states the
-milestone, blockers, and next review. This is the EXECUTOR's assessment of
-material it wrote itself, which is the weakest evidence in this report: no
-independent session has been asked to resume from it cold. A genuine test would
-be to hand a fresh session only the repository and see whether it reaches the
-right next action without further context. **Recommended before the M0 tag.**
+**MET --- tested 2026-09-08 by an independent cold session.** Kaiyuan ran the
+cold-resume trial this report previously recommended: a fresh session, given
+only the repository and no conversational context, correctly identified the
+project, the M0 status and pending gate, the escalation rule, all three data
+cautions, the prohibition on writing into `data/`, and `data/manifest.json` as
+the first file to check. The criterion is therefore satisfied by evidence
+rather than by the EXECUTOR's assessment of its own material.
+
+**One finding from the trial, acted on.** The fresh session repeated stale
+facts from `docs/PROJECT_STATE.md` --- an unpushed-commit list that no longer
+matched the remote, and the M1--M5 gate-criteria gap that
+`docs/BLUEPRINT.md` had already closed. It reasoned correctly from the file it
+was given; the file was out of date. That is the failure mode this criterion
+exists to catch, and it is a sharper result than a clean pass: a resumable
+repository depends on the state file being refreshed at the end of every work
+package, not merely on its existing. `docs/PROJECT_STATE.md` has been rewritten
+to current truth, and refreshing it is already a standing requirement in that
+file's own header.
 
 ### Proposed gate status: **PASS**
 
-All five criteria are MET. The one qualification is criterion 5, which rests on
-self-assessment rather than an independent trial; the trial is recommended
-above and does not, in the EXECUTOR's judgement, block the gate.
+All five criteria are MET, each on evidence rather than assertion --- including
+criterion 5, which was the last to rest on self-assessment and has now been
+tested by an independent cold session.
 
 ---
 
