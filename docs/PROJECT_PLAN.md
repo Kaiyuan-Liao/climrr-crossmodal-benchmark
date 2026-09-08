@@ -1,0 +1,111 @@
+# Project plan --- M0 through M5
+
+Six milestones. Each has an objective (summarised) and **gate criteria
+(verbatim from the blueprint)**. A milestone is not complete until GUIDANCE
+accepts its gate criteria against a report in `reports/milestones/`.
+
+Active milestone: **M0**.
+
+---
+
+## M0 --- Reproducible project foundation *(ACTIVE)*
+
+**Objective.** Stand up a repository that any collaborator, or a future
+session with no memory of this one, can pick up and reproduce: fixed structure,
+persistent documentation, pinned environment, immutable raw data with recorded
+checksums, a run-record mechanism, a smoke test, and a verified local/Sophia
+sync path.
+
+**Gate criteria.**
+- The repository structure, documentation set, and decision log exist and are
+  pushed to the private remote.
+- `data/raw/FullData.csv` is committed, and its SHA-256 matches the value
+  recorded in `data/manifest.json`; the copied file is byte-identical to the
+  source.
+- `pytest` passes and the secrets/paths scan reports zero hits.
+- `scripts/smoke_test.py` runs locally and produces a run record.
+- Sophia can clone the pinned commit, build its environment, and reproduce the
+  same SHA-256 for the data file, with a clean working tree.
+
+---
+
+## M1 --- Data understanding and column semantics
+
+**Objective.** Establish, with the ClimRR data dictionary as evidence, what
+each of the 275 columns actually is: physical variable, units, scenario, time
+window, and identifier semantics. Separate verified facts from provisional
+interpretation in `docs/DATA_NOTES.md`. This is the milestone in which the
+column inventory acquires meaning.
+
+**Gate criteria.**
+- Every column is classified as identifier, geometry, or climate variable, with
+  its scenario and time window resolved, or explicitly listed as unresolved.
+- Units and the modeled-baseline status of historical fields are documented.
+- The Fire Weather Index semantics of the `wildfire*` columns are stated
+  explicitly, with the misreading as wildfire occurrence called out.
+- Census identifier columns are documented as strings with leading zeros.
+- No interpretation is recorded without a citation to the data dictionary or an
+  entry in the decision log.
+
+---
+
+## M2 --- Climate phenomenon profiles
+
+**Objective.** Aggregate the row-level table into defensible descriptions of
+climate phenomena at chosen spatial and scenario granularities, producing
+structured profiles under `artifacts/profiles/` and `artifacts/phenomena/`.
+
+**Gate criteria.**
+- Every aggregation is reproducible from a script with a run record.
+- Aggregation choices (spatial unit, scenario pairing, statistic) are recorded
+  in the decision log with rationale.
+- Profiles carry provenance back to the source columns and rows.
+- No profile asserts a phenomenon that the underlying columns cannot support.
+
+---
+
+## M3 --- Literature corpus and claim extraction
+
+**Objective.** Ingest the independently collected scientific-literature corpus
+and extract structured claims into `artifacts/claims/`, with citation
+provenance. The corpus itself never enters this repository.
+
+**Gate criteria.**
+- Claims are traceable to a specific source document and location within it.
+- The literature corpus remains outside the repository; only derived,
+  small artifacts are tracked.
+- Extraction is reproducible and run-recorded.
+- Claim structure is fixed and documented before matching begins.
+
+---
+
+## M4 --- Cross-modal bridging
+
+**Objective.** Match literature claims to data-derived phenomenon profiles,
+producing scored bridges under `artifacts/bridges/` that identify where a
+textual claim and a tabular pattern speak about the same thing.
+
+**Gate criteria.**
+- The matching method, its scoring, and its thresholds are documented and
+  reproducible.
+- A sample of bridges is manually validated and the validation is recorded.
+- False-positive modes are characterised, not just counted.
+- No bridge relies on a column interpretation that M1 left unresolved.
+
+---
+
+## M5 --- Benchmark QA construction and release
+
+**Objective.** Construct the cross-modal QA benchmark from validated bridges,
+with answers verifiable against both modalities, and release it with full
+provenance and documentation.
+
+**Gate criteria.**
+- Every question's answer is verifiable against the data, the literature, or
+  both, with the evidence recorded.
+- The benchmark ships with documented construction provenance and known
+  limitations.
+- The full pipeline reruns end to end from the pinned commit and reproduces the
+  released benchmark.
+- No question depends on the three prohibited misreadings (observed history,
+  FWI as wildfire occurrence, numeric Census identifiers).

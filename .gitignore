@@ -1,23 +1,31 @@
 # machine-specific config (real paths live here, never tracked)
 config/local_paths.yaml
+
 # environments
+.venv*
 .venv*/
 .env
+
 # python
 __pycache__/
 *.pyc
 .pytest_cache/
 .ipynb_checkpoints/
-# secrets
+
+# secrets / credentials
 *.pem
 *.key
+
 # large / regenerable outputs
+artifacts/**/large/
 outputs/
 *.npy
 *.npz
 *.parquet
 *.pkl
+
 # external literature corpus must never enter this repo
 literature/
+
 # os
 .DS_Store

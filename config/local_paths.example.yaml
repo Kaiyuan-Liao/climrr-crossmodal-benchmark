@@ -1,0 +1,26 @@
+# Template for config/local_paths.yaml (which is gitignored and must never be
+# committed). Copy this file, then replace every <PLACEHOLDER> with a real
+# absolute path for the machine you are on.
+#
+#     cp config/local_paths.example.yaml config/local_paths.yaml
+#
+# On Sophia, scripts/sophia_bootstrap.sh generates the file from environment
+# variables at run time; do not hand-edit it there.
+
+# Where this repository is checked out on this machine.
+repo_root: <LOCAL_REPO_ROOT>
+
+# Execution-location label recorded in every run record: "local" or "sophia".
+location: <LOCATION_LABEL>
+
+# Original, external location of the ClimRR export. Used only to re-verify the
+# provenance of data/raw/FullData.csv; the repo copy is the working file.
+# Leave as the placeholder on machines where the original is not present.
+source_csv: <SOURCE_CSV_ABSOLUTE_PATH>
+
+# Original, external location of the ClimRR metadata / data dictionary PDF.
+source_metadata_pdf: <SOURCE_METADATA_PDF_ABSOLUTE_PATH>
+
+# Scratch space for large intermediate outputs that must stay out of Git.
+# On Sophia this belongs on Eagle, not in the repository.
+scratch_dir: <SCRATCH_DIR>

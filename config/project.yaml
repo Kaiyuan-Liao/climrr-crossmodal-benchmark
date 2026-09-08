@@ -1,0 +1,40 @@
+# Project-level constants. Machine-specific absolute paths never appear here;
+# they live in the untracked config/local_paths.yaml.
+project:
+  name: climrr-crossmodal-benchmark
+  description: >-
+    Cross-modal QA benchmark over a ClimRR climate-projection table and an
+    independently collected scientific-literature corpus.
+  owner: Kaiyuan Liao
+  git_remote_repo: Kaiyuan-Liao/climrr-crossmodal-benchmark
+
+milestones:
+  active: M0
+  ordered: [M0, M1, M2, M3, M4, M5]
+
+data:
+  raw_csv: data/raw/FullData.csv
+  metadata_pdf: data/metadata/ClimRR_Metadata_and_Data_Dictionary.pdf
+  manifest: data/manifest.json
+  # Raw data is immutable. Nothing in this repo may write under data/raw/.
+  immutable: true
+
+paths:
+  # All repo-relative. Absolute roots come from config/local_paths.yaml.
+  reports_runs: reports/runs
+  reports_milestones: reports/milestones
+  artifacts: artifacts
+
+environment:
+  python: "3.11"
+  requirements: requirements.txt
+  local_env_kind: conda
+  local_env_name: climrr
+  sophia_env_kind: venv
+  sophia_env_dir: .venv-sophia
+
+sync:
+  model: single-writer
+  authoring_clone: local
+  execution_clone: sophia
+  execution_clone_push: disabled
