@@ -37,7 +37,7 @@ column names, confirm it opens read-only. Nothing else.
 | Bootstrap commit | `58cb36a` (README + .gitignore), already pushed |
 | Source CSV | ClimRR FullData export, provided by Kaiyuan Liao; 296,407,423 bytes |
 | Source data dictionary | `ClimRR Metadata and Data Dictionary.pdf`; 667,097 bytes |
-| Decisions in force | D-002 (proposed); D-003, D-004, D-005 (decided); D-001 (superseded by D-005) |
+| Decisions in force | D-002, D-003, D-004, D-005 (decided); D-001 (superseded by D-005) |
 | Sophia pre-check | git 2.52.0; **git-lfs NOT available**; `ssh -T git@github.com` authenticates as Kaiyuan-Liao |
 | Local environment | conda env `climrr`, Python 3.11.16 |
 
@@ -243,7 +243,7 @@ evidence: `reports/runs/<timestamp>_sophia_smoke_test.json` and `.md`, showing
 | ID | Subject | Status |
 | --- | --- | --- |
 | D-001 | CSV storage: ordinary Git, single immutable commit, no LFS | **superseded by D-005** (the no-LFS rationale stands) |
-| D-002 | Track the data dictionary PDF as authoritative metadata | **proposed --- awaiting Kaiyuan** |
+| D-002 | Track the data dictionary PDF as authoritative metadata | **decided** --- approved by Kaiyuan 2026-09-08 |
 | D-003 | Single-writer sync; Sophia pull-only with push URL disabled | decided |
 | D-004 | `requirements.txt` as single source of truth; conda local, venv on Sophia | decided |
 | D-005 | CSV is untracked, transferred out of band, pinned by SHA-256 | **decided** --- COORDINATOR, approved by Kaiyuan |
@@ -310,14 +310,14 @@ evidence: `reports/runs/<timestamp>_sophia_smoke_test.json` and `.md`, showing
 
 | Item | Owner | Blocks |
 | --- | --- | --- |
-| **D-002** --- confirm the data dictionary PDF is tracked as authoritative metadata rather than literature | Kaiyuan | Nothing yet; M1 depends on it |
 | **Blueprint size discrepancy** --- the blueprint says ~48 MB, the file is 296,407,423 bytes (~6x). Row and column counts match exactly (62,834 x 275), so the table is the expected one. Did the 48 MB figure refer to a compressed or different export? | Kaiyuan | Provenance completeness; nothing technical |
 | **Push** of the six commits to `origin main` --- to be done manually by Kaiyuan | Kaiyuan | Sophia cannot clone until pushed |
 | **Sophia evidence** --- transfer the CSV by `scp`, verify the hash, run the bootstrap, return the run records | Kaiyuan | The M0 gate |
 | Acquisition date of the ClimRR export is unknown | Kaiyuan | Provenance completeness |
 
-**D-005 is closed** (decided: untracked, out-of-band, hash-pinned) and no longer
-blocks.
+**D-002 is closed** (decided: the data dictionary is authoritative metadata,
+not literature; M1 may cite it as evidence). **D-005 is closed** (decided:
+untracked, out-of-band, hash-pinned). Neither blocks.
 
 ## 14. Gate criteria assessment
 
@@ -366,7 +366,6 @@ absent and exits 4 on a hash mismatch, printing both hashes.
 | Action | Owner |
 | --- | --- |
 | Push the commits to `origin main` manually | Kaiyuan |
-| Confirm or reject **D-002** | Kaiyuan |
 | Resolve the blueprint's ~48 MB vs. 283 MiB size discrepancy | Kaiyuan |
 | `scp` the CSV to Sophia and verify `sha256sum` against the manifest (runbook step 3) | Kaiyuan |
 | Run the bootstrap on `sophia-login-02` inside `screen -S climrr`; paste back the output and the Sophia run records | Kaiyuan |

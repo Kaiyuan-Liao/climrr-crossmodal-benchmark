@@ -27,8 +27,6 @@ Single screen. Update it at the end of every work package.
 - **Push to `origin main` not yet done.** Six commits are ready locally; the
   EXECUTOR's push was blocked by the local permission layer, and Kaiyuan will
   push manually. Sophia cannot clone until this lands.
-- **D-002 --- pending Kaiyuan's confirmation** that the ClimRR data dictionary
-  PDF is tracked under `data/metadata/` as authoritative metadata.
 - Sophia evidence (byte-identity of the pulled data file, clean working tree)
   is **PENDING** --- requires Kaiyuan to run `docs/SOPHIA_RUNBOOK.md`; the
   EXECUTOR cannot reach Sophia because it requires MFA.
@@ -37,7 +35,10 @@ Single screen. Update it at the end of every work package.
 
 - **D-005 decided** (supersedes D-001): the raw CSV is untracked and
   transferred out of band, pinned by SHA-256. History verified never to have
-  contained the blob; repository is 629 KiB packed.
+  contained the blob; repository is 643 KiB packed.
+- **D-002 decided**: the ClimRR data dictionary is tracked under
+  `data/metadata/` as authoritative metadata, not literature. M1 may cite it as
+  evidence for column semantics.
 
 ## Links
 

@@ -52,10 +52,12 @@ not yet in force and must not be relied on by downstream work.
 - **Consequences:** ~651 KiB tracked permanently. The literature-PDF
   prohibition must be stated in `CLAUDE.md` with this explicit exception, or a
   future session will delete the file for policy reasons.
-- **Owner:** Kaiyuan Liao (proposed by COORDINATOR).
+- **Owner:** Kaiyuan Liao (proposed by COORDINATOR, approved by Kaiyuan
+  2026-09-08).
 - **Affected files:** `data/metadata/ClimRR_Metadata_and_Data_Dictionary.pdf`,
   `data/manifest.json`, `data/README.md`, `CLAUDE.md`.
-- **Status:** **proposed** --- awaiting Kaiyuan's confirmation.
+- **Status:** **decided.** M1 may treat this PDF as authoritative evidence for
+  column semantics.
 
 ---
 
