@@ -120,3 +120,63 @@ def test_config_snapshot_round_trips(tmp_path):
 
 def test_detect_location_returns_a_known_label():
     assert detect_location() in {"local", "sophia"}
+
+
+# --- D-007: pinned parsing/profiling libraries -------------------------------
+
+
+def test_pins_are_parsed_from_requirements(tmp_path):
+    from climrr.runrecord import read_pins
+
+    req = tmp_path / "requirements.txt"
+    req.write_text(
+        "# a comment\n"
+        "pandas==3.0.5\n"
+        "\n"
+        "  numpy==2.4.6  # trailing comment\n"
+        "unpinned-package\n"
+        "ranged>=1.0\n",
+        encoding="utf-8",
+    )
+    assert read_pins(req) == [("pandas", "3.0.5"), ("numpy", "2.4.6")]
+
+
+def test_pinned_libraries_reports_match_and_mismatch(tmp_path):
+    from climrr.runrecord import pinned_libraries
+
+    req = tmp_path / "requirements.txt"
+    req.write_text("pytest==0.0.0-not-a-real-version\nabsent-distribution==1.2.3\n", encoding="utf-8")
+    entries = {e["name"]: e for e in pinned_libraries(req)}
+    assert entries["pytest"]["matches_pin"] is False
+    assert entries["pytest"]["imported_version"] not in ("", None)
+    assert entries["absent-distribution"]["imported_version"] == "not installed"
+    assert entries["absent-distribution"]["matches_pin"] is False
+
+
+def test_pyyaml_pin_resolves_through_its_import_name(tmp_path):
+    """pyyaml imports as `yaml`; the mapping is what makes its version readable."""
+    from climrr.runrecord import pinned_libraries
+
+    req = tmp_path / "requirements.txt"
+    req.write_text("pyyaml==0.0.0\n", encoding="utf-8")
+    entry = pinned_libraries(req)[0]
+    assert entry["imported_version"] != "not installed"
+
+
+def test_repo_requirements_pins_are_all_satisfied():
+    """The environment this test runs in must match the D-007 pin set exactly."""
+    from climrr.runrecord import pinned_libraries
+
+    drift = [e for e in pinned_libraries() if not e["matches_pin"]]
+    assert not drift, f"environment drifted from requirements.txt pins: {drift}"
+
+
+def test_pinned_libraries_are_recorded_in_the_run_record(tmp_path):
+    record = json.loads(_write(tmp_path).read_text(encoding="utf-8"))
+    assert isinstance(record["pinned_libraries"], list)
+    assert {"name", "pinned_version", "imported_version", "matches_pin"} <= set(
+        record["pinned_libraries"][0]
+    )
+    assert "Pinned libraries (D-007)" in _write(tmp_path).with_suffix(".md").read_text(
+        encoding="utf-8"
+    )

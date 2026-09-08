@@ -263,5 +263,26 @@ not yet in force and must not be relied on by downstream work.
   behaviour and the relevant dependency versions be controlled and
   reproducible.
 - **Affected files:** `requirements.txt`, `src/climrr/runrecord.py`,
-  `docs/M0_GUIDANCE_GATE_REVIEW.md`, M1-WP1.
+  `pyproject.toml`, `docs/M0_GUIDANCE_GATE_REVIEW.md`, M1-WP1.
+
+  **Pin set applied 2026-09-08 (M1-WP1 Phase A).** Not a new decision --- this
+  is the execution of the one above, recorded here so the frozen profile can be
+  traced to an exact stack:
+
+  | Distribution | Pinned version | Why it is in the pin set |
+  | --- | --- | --- |
+  | `pandas` | `3.0.5` | cross-check reader (Phase C) |
+  | `numpy` | `2.4.6` | pandas' array layer; pinned so pandas' behaviour is determined |
+  | `pypdf` | `6.18.0` | data-dictionary text extraction (Phase D) |
+  | `pyyaml` | `6.0.3` | config loading in `climrr.paths` |
+  | `pytest` | `9.1.1` | the check that gates every commit |
+
+  `pypdf` was chosen over `pdfplumber` because it is pure Python with no
+  compiled or system dependencies (`pdfplumber` pulls in `pdfminer.six` and
+  Pillow), so the same wheel installs on both hosts. Every pinned version
+  publishes cp311 and cp313 wheels for macOS arm64 and manylinux_2_28 x86_64;
+  Sophia is glibc 2.34, above that floor. Run records now carry a
+  `pinned_libraries` field --- name, pinned version, imported `__version__`,
+  and a `matches_pin` flag --- and `tests/test_runrecord.py` fails when the
+  running environment drifts from this file.
 - **Status:** **decided.** Amends D-004, which otherwise stands.
