@@ -1,5 +1,10 @@
 # M0 setup report
 
+> **FROZEN --- accepted M0 state; do not edit.**
+> Accepted by GUIDANCE as PASS WITH ACTIONS at commit `b87564b`
+> (`docs/M0_GUIDANCE_GATE_REVIEW.md`, D-006). Closure actions are complete.
+> Later work belongs in the M1 report, not here.
+
 ## 1. Milestone ID and title
 
 **M0 --- Reproducible project foundation.** Work package M0-WP1.
@@ -150,6 +155,7 @@ The Python version difference is a known limitation, recorded in field 11.
 | `data/raw/FullData.csv` | Present, hash-verified, **untracked by design** |
 | `data/metadata/ClimRR_Metadata_and_Data_Dictionary.pdf` | Authoritative metadata (D-002) |
 | `docs/BLUEPRINT.md` | **Project charter** --- authoritative source for milestones, roles, and report structure (placed by Kaiyuan) |
+| `docs/M0_GUIDANCE_GATE_REVIEW.md` | **GUIDANCE M0 gate review** --- PASS WITH ACTIONS decision, required closure actions, and Kaiyuan's written approval of the D-004 amendment |
 | `docs/PROJECT_PLAN.md` | M0--M5 objectives and gate criteria, verbatim from the blueprint |
 | `docs/PROJECT_STATE.md` | One-screen state |
 | `docs/DECISION_LOG.md` | D-001 .. D-005 |
@@ -524,12 +530,6 @@ tested by an independent cold session.
 closure actions completed in this commit. Reviewed at commit `b87564b`.
 Recorded as D-006, with D-007 amending D-004 on dependency pinning.
 
-> **Note --- `docs/M0_GUIDANCE_GATE_REVIEW.md` is not yet in the repository.**
-> The citation above is to a file Kaiyuan has still to place. It is therefore
-> also absent from field 7, and this report is **not frozen**, because adding
-> the deliverable and the freeze line is one edit still outstanding. Listing a
-> file that is not there would make this report assert evidence that does not
-> exist, which is the failure this project is built to prevent.
 
 ---
 

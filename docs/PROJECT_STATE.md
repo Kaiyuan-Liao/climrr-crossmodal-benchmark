@@ -10,7 +10,7 @@ session reasoning correctly from out-of-date facts and repeating them.
 | **Active task** | **M1-WP1** --- work package pending from COORDINATOR |
 | **Latest accepted commit** | `c08de42` --- M0 closure (this file's pointer is written in the bookkeeping commit that follows it, since a commit cannot contain its own hash) |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
-| **Tag `m0-setup`** | to be applied by Kaiyuan --- **not present in this clone or on the remote** as of this commit |
+| **Tag `m0-setup`** | to be applied by Kaiyuan after this commit is pushed |
 | **Next review event** | M1 gate review by GUIDANCE, after M1-WP1 |
 | **Blockers** | **none** |
 

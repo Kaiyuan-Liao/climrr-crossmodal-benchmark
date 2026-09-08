@@ -4,16 +4,32 @@ may enter tracked files.
 
 Scans every file Git tracks (plus, with --staged, anything staged) for the
 forbidden patterns. Absolute paths belong only in the untracked
-`config/local_paths.yaml`; the tracked example file uses <PLACEHOLDER> tokens.
+`config/local_paths.yaml`; the tracked example file uses <PLACEHOLDER> markers.
 
 This script is excluded from its own scan: it necessarily contains the literal
 patterns it searches for. It is the only self-exempt file, and it contains no
 real path or credential -- read it to confirm.
+
+Matching rules
+--------------
+Absolute paths are matched **case-sensitively, as literal substrings**, because
+that is how they are actually spelled on disk.
+
+Credential-shaped strings are matched **case-insensitively with boundaries**,
+so that ordinary prose does not trip the guard:
+
+- key prefixes must start a token, so "Task-specific" is not an API key;
+- credential words must appear whole, so "API keys, tokens, credentials" is
+  not a leaked credential but a standalone "token" still is.
+
+A guard that cries wolf gets switched off, which is a worse outcome than the
+false positives it was avoiding.
 """
 
 from __future__ import annotations
 
 import argparse
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -21,16 +37,22 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SELF = Path(__file__).resolve()
 
-# Patterns are assembled from fragments so that this file's own source does not
-# contain a literal match, keeping the exemption below narrow and auditable.
-FORBIDDEN = [
-    ("absolute macOS/Linux user path", "/Users" + "/"),
-    ("absolute ALCF Eagle path", "/eagle" + "/"),
-    ("absolute Linux home path", "/home" + "/"),
-    ("OpenAI-style API key", "sk" + "-"),
-    ("GitHub personal access credential", "ghp" + "_"),
-    ("credential-bearing word", "tok" + "en"),
-    ("credential-bearing word", "pass" + "word"),
+# Absolute machine paths: literal, case-sensitive substrings.
+# Assembled from fragments so this file's own source holds no literal match.
+FORBIDDEN_PATHS = [
+    ("absolute macOS/Linux user path", "/User" + "s/"),
+    ("absolute ALCF Eagle path", "/eagl" + "e/"),
+    ("absolute Linux home path", "/hom" + "e/"),
+]
+
+# Credential-shaped strings: case-insensitive, boundary-anchored regexes.
+# A key prefix must begin a token and be followed by key material; a credential
+# word must stand alone rather than sit inside a longer word.
+FORBIDDEN_PATTERNS = [
+    ("OpenAI-style API key", re.compile(r"(?<![A-Za-z0-9])" + "sk" + r"-[A-Za-z0-9]", re.IGNORECASE)),
+    ("GitHub personal access credential", re.compile(r"(?<![A-Za-z0-9])" + "ghp" + r"_[A-Za-z0-9]", re.IGNORECASE)),
+    ("credential-bearing word", re.compile(r"\b" + "tok" + r"en\b", re.IGNORECASE)),
+    ("credential-bearing word", re.compile(r"\b" + "pass" + r"word\b", re.IGNORECASE)),
 ]
 
 # Binary / data files that are tracked on purpose and are not text to scan.
@@ -43,18 +65,32 @@ def tracked_files(staged: bool) -> list[Path]:
     return [REPO_ROOT / line for line in out.stdout.splitlines() if line.strip()]
 
 
-def scan_file(path: Path) -> list[tuple[int, str, str]]:
+def scan_line(line: str) -> list[str]:
+    """Return the labels of every forbidden pattern present in one line."""
+    labels = []
+    for label, literal in FORBIDDEN_PATHS:
+        if literal in line:
+            labels.append(label)
+    for label, pattern in FORBIDDEN_PATTERNS:
+        if pattern.search(line):
+            labels.append(label)
+    return labels
+
+
+def scan_text(text: str) -> list[tuple[int, str, str]]:
     hits: list[tuple[int, str, str]] = []
+    for lineno, line in enumerate(text.splitlines(), start=1):
+        for label in scan_line(line):
+            hits.append((lineno, label, line.strip()[:160]))
+    return hits
+
+
+def scan_file(path: Path) -> list[tuple[int, str, str]]:
     try:
         text = path.read_text(encoding="utf-8")
     except (UnicodeDecodeError, OSError):
-        return hits
-    for lineno, line in enumerate(text.splitlines(), start=1):
-        lowered = line.lower()
-        for label, pattern in FORBIDDEN:
-            if pattern in lowered:
-                hits.append((lineno, label, line.strip()[:160]))
-    return hits
+        return []
+    return scan_text(text)
 
 
 def main() -> int:

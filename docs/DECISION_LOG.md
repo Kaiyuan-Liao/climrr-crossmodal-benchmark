@@ -189,10 +189,40 @@ not yet in force and must not be relied on by downstream work.
   `CLIMRR_ALLOW_MISSING_RAW=1` must never be set during a gate run. Weakening
   either would void the basis on which this gate passed. Closure actions from
   the review are recorded in `docs/M0_GUIDANCE_GATE_REVIEW.md`.
+- **Incidental fix during closure (not a data-handling change).** The
+  secrets/paths scanner matched bare substrings, which produced two false
+  positives in the charter: the phrase "Task-specific" contains the
+  OpenAI-style key prefix, and the charter's own prohibition line listing API
+  keys and credentials contains the first credential word as a plural. That
+  left the mandatory pre-commit gate red for three consecutive commits.
+  Credential patterns now match with boundaries --- a key prefix must begin a
+  word and be followed by key material, and a credential word must stand alone
+  rather than sit inside a longer one --- case-insensitively. Absolute-path
+  patterns are unchanged. The scan passes on the full tracked tree with
+  **0 hits and no exemption for `docs/BLUEPRINT.md`**, and the behaviour is
+  covered by tests in `tests/test_secrets_scan.py`.
+
+  Fixing this exposed a genuine hole. Each line was lowercased before
+  comparison, while the macOS user-path pattern kept its capitalised spelling
+  --- so **that pattern could never match**, and the guard's most relevant path
+  check for the authoring machine had been dead since it was written. Paths
+  are now matched case-sensitively, as they are spelled on disk, and a
+  regression test covers it. Re-scanning the full tree after the fix found no
+  tracked file that had ever carried such a path, so nothing leaked; the guard
+  was simply not guarding.
+
+  Worth recording for whoever maintains this: writing the fix into this log
+  tripped the repaired scanner three times, once on the very pattern that had
+  been dead. That is the guard behaving correctly, and the prose was reworded
+  rather than the guard loosened.
+
+  Per the gate review, this is a scanner change rather than an execution,
+  manifest, or data-handling change, so **no Sophia re-run is required**.
 - **Owner:** GUIDANCE, approved by Kaiyuan Liao.
 - **Affected files:** `docs/M0_GUIDANCE_GATE_REVIEW.md`,
   `reports/milestones/M0_SETUP_REPORT.md`, `docs/PROJECT_STATE.md`,
-  `scripts/smoke_test.py`, `tests/test_manifest.py`, D-005.
+  `scripts/smoke_test.py`, `tests/test_manifest.py`,
+  `scripts/verify_no_secrets_or_paths.py`, `tests/test_secrets_scan.py`, D-005.
 - **Status:** **decided.**
 
 ---
@@ -225,6 +255,13 @@ not yet in force and must not be relied on by downstream work.
   Run records must carry the pinned versions, so `pip freeze` fingerprinting
   stays load-bearing. The known Python skew recorded in the M0 report is
   formally accepted rather than merely tolerated.
-- **Owner:** GUIDANCE, approved by Kaiyuan Liao.
-- **Affected files:** `requirements.txt`, `src/climrr/runrecord.py`, M1-WP1.
+- **Owner:** GUIDANCE, approved by Kaiyuan Liao. His written approval is
+  recorded in `docs/M0_GUIDANCE_GATE_REVIEW.md`, which confirms that
+  environment stabilisation moves into M1-WP1, must be completed before the
+  schema/quality profile is frozen as authoritative, and does not require the
+  two hosts to share an environment manager --- only that parsing and profiling
+  behaviour and the relevant dependency versions be controlled and
+  reproducible.
+- **Affected files:** `requirements.txt`, `src/climrr/runrecord.py`,
+  `docs/M0_GUIDANCE_GATE_REVIEW.md`, M1-WP1.
 - **Status:** **decided.** Amends D-004, which otherwise stands.
