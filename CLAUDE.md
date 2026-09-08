@@ -1,5 +1,10 @@
 # CLAUDE.md --- operating rules for this repository
 
+**[`docs/BLUEPRINT.md`](docs/BLUEPRINT.md) is the project charter.**
+`docs/PROJECT_PLAN.md` must not diverge from it without a logged decision in
+`docs/DECISION_LOG.md`; where the two disagree, the blueprint governs and the
+plan is the defect.
+
 Read this file, then `docs/PROJECT_STATE.md`, then the active milestone report
 in `reports/milestones/`, **before doing any work.** `PROJECT_STATE.md` tells
 you which milestone is active and what is blocked; the milestone report tells

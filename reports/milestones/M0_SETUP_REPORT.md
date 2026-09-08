@@ -148,7 +148,8 @@ The Python version difference is a known limitation, recorded in field 11.
 | `data/raw/README.md` | How the untracked CSV is obtained and verified |
 | `data/raw/FullData.csv` | Present, hash-verified, **untracked by design** |
 | `data/metadata/ClimRR_Metadata_and_Data_Dictionary.pdf` | Authoritative metadata (D-002) |
-| `docs/PROJECT_PLAN.md` | M0--M5; M0 criteria blueprint-verbatim |
+| `docs/BLUEPRINT.md` | **Project charter** --- authoritative source for milestones, roles, and report structure (placed by Kaiyuan) |
+| `docs/PROJECT_PLAN.md` | M0--M5 objectives and gate criteria, verbatim from the blueprint |
 | `docs/PROJECT_STATE.md` | One-screen state |
 | `docs/DECISION_LOG.md` | D-001 .. D-005 |
 | `docs/DATA_NOTES.md` | Three header sections + 275-name inventory |
@@ -379,17 +380,12 @@ that in mind.
 2. **Dependencies are unpinned.** D-004 deferred a lockfile at three
    dependencies; the `pip freeze` fingerprint in each run record is the drift
    detector, not a preventer.
-3. **The blueprint's M1--M5 gate criteria were never supplied to the
-   EXECUTOR.** Those in `docs/PROJECT_PLAN.md` are EXECUTOR-drafted from the
-   work package's summary and are now flagged in the plan as not
-   authoritative. M0's criteria were corrected to the blueprint text on
-   2026-09-08.
-4. **The secrets scanner exempts itself** from its own scan, since it
+3. **The secrets scanner exempts itself** from its own scan, since it
    necessarily contains the patterns it searches for. Exactly one file; its
    patterns are assembled from fragments so its own source contains no literal
    match; it holds no real path or credential.
-5. **Acquisition date of the ClimRR export is unknown** and was not guessed.
-6. **Gate criterion 5 has not been independently tested** --- see field 14.
+4. **Acquisition date of the ClimRR export is unknown** and was not guessed.
+5. **Gate criterion 5 has not been independently tested** --- see field 14.
 
 ---
 
@@ -428,14 +424,18 @@ that in mind.
    those without failing the secrets scan. The command's shape is unchanged and
    the literal version was given to Kaiyuan outside the repository.
 
-8. **`docs/PROJECT_PLAN.md` did not carry the blueprint's M0 gate criteria.**
-   Phase A.3 required them verbatim, but the blueprint text was never supplied
-   to the EXECUTOR, which drafted from the work package's summary. M0's are now
-   corrected to the blueprint text; M1--M5 remain EXECUTOR-drafted and are
-   flagged as such (field 11, item 3; field 13).
+8. **`docs/PROJECT_PLAN.md` did not carry the blueprint's objectives and gate
+   criteria.** Phase A.3 required them verbatim, but the blueprint was not
+   available to the EXECUTOR at the time, which drafted from the work package's
+   summary. Kaiyuan has since placed the charter at `docs/BLUEPRINT.md`, and
+   **all six objectives and all six gate-criteria sets were corrected from
+   `docs/BLUEPRINT.md` (section 8) and verified byte-identical to it.** The plan
+   now states that it must not diverge from the blueprint without a logged
+   decision; `CLAUDE.md` carries the same rule.
 
 9. **`docs/REPORT_TEMPLATE.md` did not carry the blueprint's 15 field names**,
-   for the same reason. Corrected, and this report restructured onto it.
+   for the same reason. **Corrected from `docs/BLUEPRINT.md` (section 9) and
+   verified to match exactly**, and this report restructured onto it.
 
 ---
 
@@ -444,7 +444,6 @@ that in mind.
 | Item | Owner | Blocks |
 | --- | --- | --- |
 | **GUIDANCE to confirm that D-005's out-of-band data policy is an acceptable mechanism** for keeping the raw data pinned. The gate criteria concern byte identity, which is met and demonstrated across two architectures; but the mechanism is not the one the blueprint envisaged, and that judgement is GUIDANCE's, not the EXECUTOR's. | GUIDANCE | Formal gate sign-off |
-| **Blueprint M1--M5 gate criteria** were never supplied to the EXECUTOR. Those in the plan are EXECUTOR-drafted and not authoritative. Supply the blueprint text before M1 opens. | COORDINATOR | M1 gate definition |
 | **Push** of `685c2b1`, `a0dc4db`, `fc12eba` and this revision. Everything the gate evidence depends on is already on `origin/main` at `586f5fd`. | Kaiyuan | Nothing |
 | **Tag `m0-setup`** --- only after GUIDANCE accepts the gate. | EXECUTOR | Nothing |
 | **Dependency pinning** (deferred in D-004) should be reconsidered before numerical output begins. | COORDINATOR | Nothing until M2 |

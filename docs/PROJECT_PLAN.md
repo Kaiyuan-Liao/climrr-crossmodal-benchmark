@@ -1,127 +1,135 @@
 # Project plan --- M0 through M5
 
-Six milestones. Each has an objective (summarised) and **gate criteria**. A
-milestone is not complete until GUIDANCE accepts its gate criteria against a
-report in `reports/milestones/`.
+Six milestones. Each milestone must pass its gate before the next scientific
+stage begins. A milestone is not complete until GUIDANCE accepts its gate
+criteria against a report in `reports/milestones/`.
 
 Active milestone: **M0**.
 
-> **Provenance warning --- read before relying on M1--M5 criteria.**
->
-> **M0's gate criteria below are the blueprint text, verbatim** (corrected
-> 2026-09-08; see decision D-005).
->
-> **M1--M5's are not.** The blueprint's M1--M5 text was never supplied to the
-> EXECUTOR, which drafted those criteria from the work package's summary of the
-> milestone objectives. They are a reasonable reading, not a transcription, and
-> they have not been checked against the blueprint by anyone. **Replace each
-> with the blueprint text before the corresponding milestone opens**, and do
-> not treat them as authoritative in the meantime. Tracked as an open item in
-> `reports/milestones/M0_SETUP_REPORT.md` field 13.
+> **[`docs/BLUEPRINT.md`](BLUEPRINT.md) is the project charter.** This file must
+> not diverge from it without a logged decision in
+> [`DECISION_LOG.md`](DECISION_LOG.md). Where the two disagree, the blueprint
+> governs and this file is the defect. Objectives and gate criteria below are
+> the blueprint's text, verbatim (blueprint section 8).
 
 ---
 
-## M0 --- Reproducible project foundation *(ACTIVE)*
+## M0. Reproducible project foundation *(ACTIVE)*
 
-**Objective.** Stand up a repository that any collaborator, or a future
-session with no memory of this one, can pick up and reproduce: fixed structure,
-persistent documentation, pinned environment, immutable raw data with recorded
-checksums, a run-record mechanism, a smoke test, and a verified local/Sophia
-sync path.
+### Objective
 
-**Gate criteria** (blueprint text, verbatim).
-1. the raw CSV is byte-identical locally and on Sophia
-2. the repository can be cleanly cloned or pulled in both environments
-3. no secrets or machine-specific paths are tracked
-4. a run can be tied to a precise commit, configuration, environment, and data
-   checksum
-5. project state and role instructions are sufficient for a new coding-agent
-   session to resume safely
+Create a safe, synchronized, and documented local/GitHub/Sophia workspace.
 
----
+### Gate criteria
 
-## M1 --- Data understanding and column semantics
+M0 passes only if:
 
-**Objective.** Establish, with the ClimRR data dictionary as evidence, what
-each of the 275 columns actually is: physical variable, units, scenario, time
-window, and identifier semantics. Separate verified facts from provisional
-interpretation in `docs/DATA_NOTES.md`. This is the milestone in which the
-column inventory acquires meaning.
+1. The raw CSV is byte-identical locally and on Sophia.
+2. The repository can be cleanly cloned or pulled in both environments.
+3. No secrets or machine-specific paths are tracked.
+4. A run can be tied to a precise commit, configuration, environment, and data checksum.
+5. Project state and role instructions are sufficient for a new coding-agent session to resume safely.
 
-**Gate criteria** (EXECUTOR-drafted, NOT blueprint-verbatim --- see the
-provenance warning above).
-- Every column is classified as identifier, geometry, or climate variable, with
-  its scenario and time window resolved, or explicitly listed as unresolved.
-- Units and the modeled-baseline status of historical fields are documented.
-- The Fire Weather Index semantics of the `wildfire*` columns are stated
-  explicitly, with the misreading as wildfire occurrence called out.
-- Census identifier columns are documented as strings with leading zeros.
-- No interpretation is recorded without a citation to the data dictionary or an
-  entry in the decision log.
+### Explicit non-goals
+
+No climate-variable interpretation, aggregation, literature processing, embedding generation, or QA construction.
 
 ---
 
-## M2 --- Climate phenomenon profiles
+## M1. Data grounding and metadata audit
 
-**Objective.** Aggregate the row-level table into defensible descriptions of
-climate phenomena at chosen spatial and scenario granularities, producing
-structured profiles under `artifacts/profiles/` and `artifacts/phenomena/`.
+### Objective
 
-**Gate criteria** (EXECUTOR-drafted, NOT blueprint-verbatim --- see the
-provenance warning above).
-- Every aggregation is reproducible from a script with a run record.
-- Aggregation choices (spatial unit, scenario pairing, statistic) are recorded
-  in the decision log with rationale.
-- Profiles carry provenance back to the source columns and rows.
-- No profile asserts a phenomenon that the underlying columns cannot support.
+Determine what the CSV actually contains and which fields can be interpreted safely.
 
----
+### Gate criteria
 
-## M3 --- Literature corpus and claim extraction
+M1 passes only if:
 
-**Objective.** Ingest the independently collected scientific-literature corpus
-and extract structured claims into `artifacts/claims/`, with citation
-provenance. The corpus itself never enters this repository.
+1. Every field selected for the pilot has a documented meaning, unit, time horizon, scenario, missing-value policy, and provenance status.
+2. No unresolved identifier or sentinel-value issue can silently corrupt the pilot.
+3. The report clearly distinguishes verified facts from hypotheses.
+4. The mentor-facing metadata questions are specific and actionable.
 
-**Gate criteria** (EXECUTOR-drafted, NOT blueprint-verbatim --- see the
-provenance warning above).
-- Claims are traceable to a specific source document and location within it.
-- The literature corpus remains outside the repository; only derived,
-  small artifacts are tracked.
-- Extraction is reproducible and run-recorded.
-- Claim structure is fixed and documented before matching begins.
+### Explicit non-goals
+
+No full phenomenon extraction and no literature matching.
 
 ---
 
-## M4 --- Cross-modal bridging
+## M2. Canonical semantic representation
 
-**Objective.** Match literature claims to data-derived phenomenon profiles,
-producing scored bridges under `artifacts/bridges/` that identify where a
-textual claim and a tabular pattern speak about the same thing.
+### Objective
 
-**Gate criteria** (EXECUTOR-drafted, NOT blueprint-verbatim --- see the
-provenance warning above).
-- The matching method, its scoring, and its thresholds are documented and
-  reproducible.
-- A sample of bridges is manually validated and the validation is recorded.
-- False-positive modes are characterised, not just counted.
-- No bridge relies on a column interpretation that M1 left unresolved.
+Define a shared representation that allows numerical ClimRR patterns and scientific literature claims to be compared without pretending they are directly aligned.
+
+### Gate criteria
+
+M2 passes only if:
+
+1. The representation preserves provenance back to exact tabular cells or literature spans.
+2. Structured fields can express the planned humid-heat and fire-weather pilots without unsupported inference.
+3. Geography, time, scenario, and concept compatibility can be evaluated explicitly.
+4. Natural-language descriptions are generated from structured facts rather than used as the factual source.
 
 ---
 
-## M5 --- Benchmark QA construction and release
+## M3. Table-derived phenomenon discovery pilot
 
-**Objective.** Construct the cross-modal QA benchmark from validated bridges,
-with answers verifiable against both modalities, and release it with full
-provenance and documentation.
+### Objective
 
-**Gate criteria** (EXECUTOR-drafted, NOT blueprint-verbatim --- see the
-provenance warning above).
-- Every question's answer is verifiable against the data, the literature, or
-  both, with the evidence recorded.
-- The benchmark ships with documented construction provenance and known
-  limitations.
-- The full pipeline reruns end to end from the pinned commit and reproduces the
-  released benchmark.
-- No question depends on the three prohibited misreadings (observed history,
-  FWI as wildfire occurrence, numeric Census identifiers).
+Produce a small, auditable collection of meaningful ClimRR phenomena at spatial scales that scientific literature can plausibly discuss.
+
+### Gate criteria
+
+M3 passes only if:
+
+1. A reviewer can reproduce each phenomenon from the cited table evidence.
+2. Descriptions remain within what the metrics support.
+3. Geographic aggregation is documented and coverage-aware.
+4. The pilot yields enough scientifically useful variation for literature matching.
+5. Known failure modes and rejection rules are documented.
+
+---
+
+## M4. Literature ingestion and structured claim extraction pilot
+
+### Objective
+
+Turn a small, traceable subset of the external literature corpus into structured claims compatible with the table phenomenon schema.
+
+### Gate criteria
+
+M4 passes only if:
+
+1. Every retained claim has an exact evidence span.
+2. Geography, phenomenon, direction, time, scenario, mechanism, and claim type are explicit or marked missing rather than guessed.
+3. The extraction process distinguishes relevance from evidentiary support.
+4. Human review shows an acceptable level of factual faithfulness for bridge discovery.
+
+---
+
+## M5. Semantic bridge discovery and validation
+
+### Objective
+
+Create a validated bridge dataset linking table-derived phenomena to compatible literature claims.
+
+### Gate criteria
+
+M5 passes only if:
+
+1. Accepted bridges are scientifically defensible and traceable to both sources.
+2. Structured compatibility and semantic similarity are separately visible.
+3. The validation sample includes hard negatives and disagreement cases.
+4. The report estimates bridge precision and documents limitations.
+5. At least some accepted bridges support a clear division of evidentiary roles: the table identifies or quantifies a pattern, while the paper explains, contextualizes, qualifies, or provides criteria for interpreting it.
+
+### Stop point
+
+After M5, pause for mentor review before designing or generating the final QA benchmark.
+
+---
+
+For each milestone's required work, deliverables, and schemas, see blueprint
+section 8. Those are not duplicated here, to keep a single source of truth.
