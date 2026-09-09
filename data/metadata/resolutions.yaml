@@ -1,0 +1,72 @@
+# Resolution records --- the audit trail for every metadata status change after
+# M1-WP1 (D-009).
+#
+# A resolution record is one dated, sourced, verbatim answer, and the column
+# statuses it changes. Nothing else may change a status. The WP1 baseline stays
+# frozen in each column's `status_baseline_wp1`, so
+# `scripts/status_diff.py` can show every movement since, with the record and
+# the decision that caused it.
+#
+# THIS FILE IS EMPTY ON PURPOSE. M1-WP2a built the machinery; no answer has
+# arrived yet. The first records are expected from the mentor meeting on
+# 2026-09-10 --- see docs/MENTOR_BRIEF.md for the questions being asked.
+#
+# Field by field
+# --------------
+#   id             R-001, R-002, ... Assigned in order, never reused.
+#   date           ISO YYYY-MM-DD. The date of the answer, not of writing it down.
+#   source         mentor | climrr_authors | authoritative_artifact | kaiyuan_statement
+#   source_detail  Who or what exactly: the meeting date, the document name and
+#                  its SHA-256, or the speaker. Never blank.
+#   question_ids   The Q-numbers from docs/METADATA_QUESTIONS.md this answers.
+#                  Documentation only --- it reaches no column by itself.
+#   columns        Column indices this answer applies to. One of the two ways a
+#                  record can reach a column.
+#   stem_section_map  (optional) CSV column-name stem -> dictionary section
+#                  title. The other way. It reaches exactly the columns whose
+#                  parsed stem is a key here.
+#   statement      The answer verbatim as relayed. Not a paraphrase.
+#   effect         field: status, and `to:` the status to assign.
+#   decision_ref   The D-number that records the decision to accept this answer.
+#   confidence     confirmed | stated_not_verified
+#   notes          (optional) EXECUTOR commentary. Affects nothing.
+#
+# Three rules the code enforces, not conventions
+# ----------------------------------------------
+#   1. `effect.to` may NEVER be `verified_from_dictionary`. That status is
+#      reserved for what the tracked dictionary states in its own words. A
+#      person's answer, however authoritative, is `owner_confirmed`.
+#   2. A record reaches a column ONLY by naming its index or by naming a stem
+#      it carries. Matching the text of an answer against column names is
+#      refused --- that is the pattern-guessing D-009 forbids.
+#   3. A record naming neither columns nor a stem map changes nothing. That is
+#      a valid record --- an answer can be worth recording without moving a
+#      status --- not an error.
+#
+# An unknown key, a bad id, a blank statement, a column index past the end of
+# the table, or a stem no column carries all raise rather than being ignored.
+# A record that silently does nothing is the one failure mode this file cannot
+# afford.
+#
+# Template (copy below `resolutions:`, remove the leading `# `):
+#
+#   - id: R-001
+#     date: 2026-09-10
+#     source: mentor
+#     source_detail: "Weekly one-on-one, 2026-09-10, answer relayed by Kaiyuan Liao"
+#     question_ids: [Q1]
+#     columns: []
+#     stem_section_map:
+#       tempmaxann: "Temperature Maximum - Annual"
+#     statement: >-
+#       <the mentor's answer, verbatim as relayed>
+#     effect:
+#       field: status
+#       to: owner_confirmed
+#     decision_ref: D-010
+#     confidence: confirmed
+#     notes: "<optional>"
+
+schema_version: 1
+
+resolutions: []

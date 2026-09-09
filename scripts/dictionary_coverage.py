@@ -13,8 +13,19 @@ stem-based match can never reach `verified_from_dictionary`: the dictionary
 names its fields by suffix within a per-variable section and never states that a
 CSV name's stem denotes that section.
 
+Since M1-WP2 (D-009) a status has a second possible source: a **resolution
+record** in `data/metadata/resolutions.yaml`, carrying a dated, sourced,
+verbatim answer from the mentor, the ClimRR authors, an authoritative artifact
+or Kaiyuan. Those are applied on top of the dictionary rules and can raise a
+column to `owner_confirmed` --- never to `verified_from_dictionary`, which stays
+reserved for what the dictionary states itself. Every column keeps the status
+the dictionary rules alone gave it in `status_baseline_wp1` and lists the record
+ids that moved it in `resolution_refs`, so `scripts/status_diff.py` can show
+every change since WP1 mechanically.
+
 This script assigns no meaning of its own. Every status it writes is backed by a
-span, and every span is a verbatim line of the extracted text.
+span or by a cited resolution record, and every span is a verbatim line of the
+extracted text.
 """
 
 from __future__ import annotations
@@ -32,7 +43,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from climrr.checksums import sha256_file  # noqa: E402
-from climrr.dictionary import build_coverage  # noqa: E402
+from climrr.dictionary import ResolutionError, build_coverage, load_resolutions  # noqa: E402
 from climrr.manifest import ManifestMismatchError, verify_file  # noqa: E402
 from climrr.paths import repo_relative  # noqa: E402
 from climrr.profile import read_header  # noqa: E402
@@ -47,11 +58,13 @@ from climrr.runrecord import (  # noqa: E402
 DATA_PATH = REPO_ROOT / "data" / "raw" / "FullData.csv"
 PDF_PATH = REPO_ROOT / "data" / "metadata" / "ClimRR_Metadata_and_Data_Dictionary.pdf"
 TEXT_PATH = REPO_ROOT / "data" / "metadata" / "dictionary_extracted.txt"
+RESOLUTIONS_PATH = REPO_ROOT / "data" / "metadata" / "resolutions.yaml"
 MANIFEST_PATH = REPO_ROOT / "data" / "manifest.json"
 OUT_PATH = REPO_ROOT / "artifacts" / "profiles" / "dictionary_coverage.json"
 
 STATUS_ORDER = (
     "verified_from_dictionary",
+    "owner_confirmed",
     "partially_resolved",
     "unresolved",
     "structurally_observed_only",
@@ -77,6 +90,7 @@ def main() -> int:
     parser.add_argument("--data", type=Path, default=DATA_PATH)
     parser.add_argument("--pdf", type=Path, default=PDF_PATH)
     parser.add_argument("--text", type=Path, default=TEXT_PATH)
+    parser.add_argument("--resolutions", type=Path, default=RESOLUTIONS_PATH)
     parser.add_argument("--manifest", type=Path, default=MANIFEST_PATH)
     parser.add_argument("--out", type=Path, default=OUT_PATH)
     args = parser.parse_args()
@@ -112,8 +126,24 @@ def main() -> int:
         )
         return 2
 
+    # The resolutions file is required, not optional. An absent one would look
+    # exactly like "no answers have arrived yet" while actually meaning "the
+    # audit trail was not read", and those must never be confusable.
+    if not args.resolutions.is_file():
+        print(f"FAIL: resolutions file not found: {args.resolutions}", file=sys.stderr)
+        return 2
+    try:
+        resolutions = load_resolutions(args.resolutions.read_text(encoding="utf-8"))
+    except ResolutionError as exc:
+        print(f"FAIL: {exc}", file=sys.stderr)
+        return 2
+
     columns = read_header(args.data)
-    coverage = build_coverage(columns, lines)
+    try:
+        coverage = build_coverage(columns, lines, resolutions)
+    except ResolutionError as exc:
+        print(f"FAIL: {exc}", file=sys.stderr)
+        return 2
 
     without_span = [
         record["index"]
@@ -130,11 +160,17 @@ def main() -> int:
         "source_pdf_sha256": verified_pdf["sha256"],
         "extracted_text_path": repo_relative(args.text),
         "extracted_text_sha256": sha256_file(args.text),
+        "resolutions_path": repo_relative(args.resolutions),
+        "resolutions_sha256": sha256_file(args.resolutions),
         "extractor": extraction.get("extractor"),
         "note": (
             "Line numbers refer to the extracted text file. A stem or narrative match is an "
             "EXECUTOR-proposed candidate and is never verified: the dictionary does not state "
-            "which section a CSV column-name stem belongs to."
+            "which section a CSV column-name stem belongs to. `status_baseline_wp1` is what the "
+            "dictionary rules alone concluded and never changes; `status` is that baseline after "
+            "the resolution records in `resolutions_path` are applied; `resolution_refs` names "
+            "the records responsible. No resolution record can produce "
+            "`verified_from_dictionary` (D-009)."
         ),
         "environment": {
             "generated_utc": datetime.now(timezone.utc).isoformat(),
@@ -153,10 +189,18 @@ def main() -> int:
     args.out.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     counts = coverage["status_counts"]
+    baseline = coverage["status_counts_baseline_wp1"]
     print(f"  dictionary sections parsed: {len(coverage['sections'])}")
+    print(f"  resolution records applied: {coverage['n_resolutions']}")
     print(f"  columns classified        : {coverage['n_columns']}")
+    print(f"    {'status':<28}  {'WP1 baseline':>12}  {'now':>5}")
     for status in STATUS_ORDER:
-        print(f"    {status:<28}: {counts.get(status, 0)}")
+        print(f"    {status:<28}: {baseline.get(status, 0):>12}  {counts.get(status, 0):>5}")
+    for applied in coverage["resolutions_applied"]:
+        print(
+            f"    {applied['id']} ({applied['decision_ref']}, {applied['source']}): "
+            f"{applied['n_columns_changed']} column(s) -> {applied['status_to']}"
+        )
     print(f"  match rules               : {coverage['match_rule_counts']}")
     print(f"  report                    : {repo_relative(args.out)}")
 
@@ -172,7 +216,10 @@ def main() -> int:
             "extracted_text_sha256": sha256_file(args.text),
             "extractor": extraction.get("extractor"),
             "dictionary_sections_parsed": len(coverage["sections"]),
+            "resolutions_sha256": sha256_file(args.resolutions),
+            "resolutions_applied": coverage["n_resolutions"],
             **{f"status_{status}": counts.get(status, 0) for status in STATUS_ORDER},
+            **{f"baseline_status_{status}": baseline.get(status, 0) for status in STATUS_ORDER},
             "match_rule_counts": coverage["match_rule_counts"],
             "statuses_without_span": without_span or "none",
         },
@@ -184,6 +231,7 @@ def main() -> int:
             "data_path": repo_relative(args.data),
             "pdf_path": repo_relative(args.pdf),
             "extracted_text_path": repo_relative(args.text),
+            "resolutions_path": repo_relative(args.resolutions),
         },
     )
     print(f"Run record: {repo_relative(record_path)}")

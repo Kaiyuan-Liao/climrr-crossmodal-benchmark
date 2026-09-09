@@ -63,12 +63,22 @@ Status rules
   and a scenario/horizon. An entry the dictionary calls a "Text ID" satisfies
   the scenario/horizon requirement by being an identifier rather than a
   measurement.
+* `owner_confirmed` --- added in M1-WP2 under D-009. The meaning was confirmed
+  by the mentor, the data owner or the ClimRR authors, and the confirmation is
+  written down as a resolution record in `data/metadata/resolutions.yaml`. It
+  is **never** produced by the rules above, and the rules above never produce
+  it; the two statuses carry comparable confidence and different evidence, and
+  keeping them apart is the point.
 
-Every status cites at least one span; a status without one is `unresolved`.
+Every status cites at least one span; a status without one is `unresolved`. A
+column at `owner_confirmed` cites its resolution record ids in
+`resolution_refs` instead, and keeps the status the dictionary rules alone gave
+it in `status_baseline_wp1` so the WP1 diff stays mechanical.
 """
 
 from __future__ import annotations
 
+import datetime as dt
 import difflib
 import re
 
@@ -348,14 +358,18 @@ def _descriptions_agree(matches: list) -> bool:
     return len({entry["description"] for _section, entry in matches}) == 1
 
 
-def classify_column(
+def _classify_from_dictionary(
     index: int,
     column: str,
     sections: list[dict],
     entry_index: dict,
     lines: list[str],
 ) -> dict:
-    """Return the coverage record for one column: rule, evidence, status, question."""
+    """The dictionary-only classification: rule, evidence, status, question.
+
+    This is the WP1 behaviour, unchanged. Resolution records are applied on top
+    of what it returns, never inside it.
+    """
     record = {
         "index": index,
         "column": column,
@@ -529,8 +543,44 @@ def classify_column(
     return record
 
 
-def build_coverage(columns: list[str], lines: list[str]) -> dict:
-    """Coverage record for every column, plus the status summary."""
+def classify_column(
+    index: int,
+    column: str,
+    sections: list[dict],
+    entry_index: dict,
+    lines: list[str],
+) -> dict:
+    """The coverage record for one column, before any resolution is applied.
+
+    `status_baseline_wp1` is frozen here at whatever the dictionary rules alone
+    concluded, and nothing downstream writes to it again --- it is the fixed
+    point every WP2 diff is measured against.
+    """
+    record = _classify_from_dictionary(index, column, sections, entry_index, lines)
+    record["status_baseline_wp1"] = record["status"]
+    record["resolution_refs"] = []
+    # Set only by a resolution carrying an explicit stem-to-section map. Kept
+    # separate from `candidate_section`, which stays EXECUTOR-proposed forever.
+    record["resolved_section"] = None
+    record["resolved_section_source"] = None
+    return record
+
+
+def _count_by(records: list[dict], field: str) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for record in records:
+        counts[record[field]] = counts.get(record[field], 0) + 1
+    return counts
+
+
+def build_coverage(
+    columns: list[str], lines: list[str], resolutions: list[dict] | None = None
+) -> dict:
+    """Coverage record for every column, plus the status summary.
+
+    With no resolutions this reproduces the WP1 result exactly, and the two
+    status summaries are equal. That equality is the WP2a acceptance check.
+    """
     sections = parse_dictionary(lines)
     entry_index = index_entries(sections)
     records = [
@@ -538,12 +588,10 @@ def build_coverage(columns: list[str], lines: list[str]) -> dict:
         for index, column in enumerate(columns)
     ]
 
-    summary: dict[str, int] = {}
-    for record in records:
-        summary[record["status"]] = summary.get(record["status"], 0) + 1
-    rules: dict[str, int] = {}
-    for record in records:
-        rules[record["match_rule"]] = rules.get(record["match_rule"], 0) + 1
+    baseline = _count_by(records, "status_baseline_wp1")
+    applied = apply_resolutions(records, resolutions or [])
+    summary = _count_by(records, "status")
+    rules = _count_by(records, "match_rule")
 
     return {
         "n_columns": len(columns),
@@ -557,6 +605,343 @@ def build_coverage(columns: list[str], lines: list[str]) -> dict:
             for section in sections
         ],
         "status_counts": summary,
+        "status_counts_baseline_wp1": baseline,
         "match_rule_counts": rules,
+        "n_resolutions": len(resolutions or []),
+        "resolutions_applied": applied,
         "columns": records,
     }
+
+
+# --- Resolution records (M1-WP2, D-009) --------------------------------------
+#
+# A status in this module comes from two places and only two: the tracked data
+# dictionary, and a **resolution record** --- a dated, sourced, verbatim answer
+# from the mentor, the ClimRR authors, an authoritative artifact, or Kaiyuan,
+# written down in `data/metadata/resolutions.yaml`.
+#
+# Three rules give the mechanism its whole value, and each is enforced in code
+# rather than by convention:
+#
+# 1. **A resolution can never produce `verified_from_dictionary`.** That status
+#    means "the tracked dictionary says this, in its own words". An answer from
+#    a person, however authoritative, is a different kind of evidence and gets
+#    a different name: `owner_confirmed`. D-009 confirms the strict bar.
+# 2. **A resolution reaches a column only by naming it.** Either it lists the
+#    column indices, or it gives an explicit stem-to-section map and the column
+#    carries that stem. There is no third route --- in particular, nothing here
+#    matches the *text* of an answer against column names, because that would
+#    reintroduce exactly the pattern-guessing D-009 forbids. A record that names
+#    neither changes nothing, and that is a supported outcome, not an error.
+# 3. **Every changed column carries the record ids that changed it**, in
+#    `resolution_refs`, next to the untouched `status_baseline_wp1`. The diff
+#    against WP1 is therefore mechanical rather than remembered.
+
+#: Semantics confirmed by the mentor or the data owner. Deliberately distinct
+#: from `verified_from_dictionary`: same confidence in practice, different
+#: evidence, and the difference must stay visible downstream.
+OWNER_CONFIRMED = "owner_confirmed"
+
+#: Reserved for the tracked dictionary. No resolution record may ever set it.
+VERIFIED_FROM_DICTIONARY = "verified_from_dictionary"
+
+#: Who the answer came from. Not free text: an answer whose source does not fit
+#: one of these is an answer whose standing nobody has decided.
+RESOLUTION_SOURCES = frozenset(
+    {"mentor", "climrr_authors", "authoritative_artifact", "kaiyuan_statement"}
+)
+
+#: `confirmed` --- the source is authoritative for this fact and stated it
+#: directly. `stated_not_verified` --- recorded as relayed, standing of D-008.
+RESOLUTION_CONFIDENCE = frozenset({"confirmed", "stated_not_verified"})
+
+#: The statuses a resolution may assign. `verified_from_dictionary` is absent
+#: from this set on purpose and the validator says so by name.
+RESOLUTION_TARGET_STATUSES = frozenset(
+    {OWNER_CONFIRMED, "partially_resolved", "unresolved", "structurally_observed_only"}
+)
+
+RESOLUTION_REQUIRED_KEYS = frozenset(
+    {
+        "id",
+        "date",
+        "source",
+        "source_detail",
+        "question_ids",
+        "columns",
+        "statement",
+        "effect",
+        "decision_ref",
+        "confidence",
+    }
+)
+
+#: `stem_section_map` is the second and only other way to reach a column.
+#: `notes` is EXECUTOR commentary and never affects anything.
+RESOLUTION_OPTIONAL_KEYS = frozenset({"stem_section_map", "notes"})
+
+RESOLUTION_ID_RE = re.compile(r"^R-\d{3}$")
+QUESTION_ID_RE = re.compile(r"^Q\d{1,2}$")
+DECISION_ID_RE = re.compile(r"^D-\d{3}$")
+ISO_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+RESOLUTIONS_SCHEMA_VERSION = 1
+
+
+class ResolutionError(ValueError):
+    """A resolution record is malformed, or would do something it may not do."""
+
+
+def _require(condition: bool, where: str, message: str) -> None:
+    if not condition:
+        raise ResolutionError(f"{where}: {message}")
+
+
+def validate_resolution(record: object, *, where: str = "resolution") -> dict:
+    """Check one resolution record and return it. Raises on any fault.
+
+    Strict by design: an unknown key is an error rather than something ignored,
+    because a misspelled `columns` that silently does nothing is the worst
+    possible failure mode for this file --- it would look applied and not be.
+
+    The one normalisation performed is on `date`: YAML resolves an unquoted
+    `2026-09-10` to a `datetime.date`, and requiring authors to quote every date
+    to avoid a validation error would be a trap rather than a safeguard. A date
+    object becomes its ISO string; a *timestamp* still fails, because a
+    resolution is dated to a day.
+    """
+    _require(isinstance(record, dict), where, f"expected a mapping, got {type(record).__name__}")
+    assert isinstance(record, dict)
+
+    identifier = record.get("id")
+    if isinstance(identifier, str) and RESOLUTION_ID_RE.match(identifier):
+        where = f"resolution {identifier}"
+    keys = set(record)
+    missing = RESOLUTION_REQUIRED_KEYS - keys
+    _require(not missing, where, f"missing required key(s): {', '.join(sorted(missing))}")
+    unknown = keys - RESOLUTION_REQUIRED_KEYS - RESOLUTION_OPTIONAL_KEYS
+    _require(not unknown, where, f"unknown key(s): {', '.join(sorted(unknown))}")
+
+    _require(
+        isinstance(identifier, str) and bool(RESOLUTION_ID_RE.match(identifier)),
+        where,
+        f"`id` must look like R-001, got {identifier!r}",
+    )
+    date = record["date"]
+    if isinstance(date, dt.date) and not isinstance(date, dt.datetime):
+        date = date.isoformat()
+        record = {**record, "date": date}
+    _require(
+        isinstance(date, str) and bool(ISO_DATE_RE.match(date)),
+        where,
+        f"`date` must be an ISO date YYYY-MM-DD, got {record['date']!r}",
+    )
+    _require(
+        record["source"] in RESOLUTION_SOURCES,
+        where,
+        f"`source` must be one of {sorted(RESOLUTION_SOURCES)}, got {record['source']!r}",
+    )
+    _require(
+        isinstance(record["source_detail"], str) and record["source_detail"].strip() != "",
+        where,
+        "`source_detail` must name the meeting date, document, or speaker; it may not be blank",
+    )
+    _require(
+        isinstance(record["statement"], str) and record["statement"].strip() != "",
+        where,
+        "`statement` must carry the answer verbatim as relayed; it may not be blank",
+    )
+    _require(
+        record["confidence"] in RESOLUTION_CONFIDENCE,
+        where,
+        f"`confidence` must be one of {sorted(RESOLUTION_CONFIDENCE)}, "
+        f"got {record['confidence']!r}",
+    )
+    _require(
+        isinstance(record["decision_ref"], str)
+        and bool(DECISION_ID_RE.match(record["decision_ref"])),
+        where,
+        f"`decision_ref` must look like D-009, got {record['decision_ref']!r}",
+    )
+
+    question_ids = record["question_ids"]
+    _require(isinstance(question_ids, list), where, "`question_ids` must be a list")
+    for question in question_ids:
+        _require(
+            isinstance(question, str) and bool(QUESTION_ID_RE.match(question)),
+            where,
+            f"`question_ids` entries must look like Q1, got {question!r}",
+        )
+
+    columns = record["columns"]
+    _require(isinstance(columns, list), where, "`columns` must be a list of column indices")
+    for value in columns:
+        _require(
+            isinstance(value, int) and not isinstance(value, bool) and value >= 0,
+            where,
+            f"`columns` entries must be non-negative integer indices, got {value!r}",
+        )
+    _require(len(set(columns)) == len(columns), where, "`columns` lists an index twice")
+
+    stem_map = record.get("stem_section_map")
+    if stem_map is not None:
+        _require(isinstance(stem_map, dict), where, "`stem_section_map` must be a mapping")
+        for stem, title in stem_map.items():
+            _require(
+                isinstance(stem, str) and stem.strip() != "",
+                where,
+                f"`stem_section_map` keys must be CSV column-name stems, got {stem!r}",
+            )
+            _require(
+                isinstance(title, str) and title.strip() != "",
+                where,
+                f"`stem_section_map[{stem!r}]` must name a dictionary section",
+            )
+
+    effect = record["effect"]
+    _require(isinstance(effect, dict), where, "`effect` must be a mapping")
+    _require(
+        set(effect) == {"field", "to"},
+        where,
+        f"`effect` must have exactly the keys field and to, got {sorted(effect)}",
+    )
+    _require(
+        effect["field"] == "status",
+        where,
+        f"`effect.field` must be `status` --- status is the only field a resolution may "
+        f"change --- got {effect['field']!r}",
+    )
+    _require(
+        effect["to"] != VERIFIED_FROM_DICTIONARY,
+        where,
+        "`effect.to` may never be `verified_from_dictionary`. That status means the tracked "
+        "dictionary states the fact in its own words; an answer from a person is "
+        f"`{OWNER_CONFIRMED}` instead (D-009)",
+    )
+    _require(
+        effect["to"] in RESOLUTION_TARGET_STATUSES,
+        where,
+        f"`effect.to` must be one of {sorted(RESOLUTION_TARGET_STATUSES)}, got {effect['to']!r}",
+    )
+    return record
+
+
+def load_resolutions(path_or_text: str) -> list[dict]:
+    """Parse and validate the resolutions file's text. Returns records in file order.
+
+    An absent `resolutions:` key, or an empty one, is the normal state before
+    any answer arrives and yields an empty list.
+    """
+    import yaml
+
+    document = yaml.safe_load(path_or_text)
+    if document is None:
+        return []
+    _require(
+        isinstance(document, dict),
+        "resolutions file",
+        f"expected a mapping at the top level, got {type(document).__name__}",
+    )
+    version = document.get("schema_version")
+    _require(
+        version == RESOLUTIONS_SCHEMA_VERSION,
+        "resolutions file",
+        f"`schema_version` must be {RESOLUTIONS_SCHEMA_VERSION}, got {version!r}",
+    )
+    records = document.get("resolutions") or []
+    _require(
+        isinstance(records, list),
+        "resolutions file",
+        f"`resolutions` must be a list, got {type(records).__name__}",
+    )
+    validated = [
+        validate_resolution(record, where=f"resolutions[{position}]")
+        for position, record in enumerate(records)
+    ]
+    seen: set[str] = set()
+    for record in validated:
+        _require(
+            record["id"] not in seen,
+            "resolutions file",
+            f"duplicate resolution id {record['id']}",
+        )
+        seen.add(record["id"])
+    return validated
+
+
+def resolution_targets(record: dict, coverage_records: list[dict]) -> list[int]:
+    """The column indices one resolution reaches, by explicit naming only.
+
+    Two routes, both explicit:
+
+    * `columns` lists indices outright;
+    * `stem_section_map` names a CSV stem, and the columns whose dictionary
+      match already yielded that stem are reached.
+
+    The stem route is mechanical, not interpretive: the stem is the part of the
+    CSV name left over after the dictionary's own field name was matched off, so
+    "which columns have stem `tempmaxann`?" is answered by the parse, not by
+    reading the answer's prose.
+
+    A named index outside the table, or a stem no column carries, raises. Both
+    mean the record and the table disagree about what exists, and the fix is to
+    correct the record --- never to quietly drop the part that did not land.
+    """
+    n_columns = len(coverage_records)
+    targets: set[int] = set()
+
+    for index in record["columns"]:
+        _require(
+            index < n_columns,
+            f"resolution {record['id']}",
+            f"names column index {index}, but the table has {n_columns} columns (0..{n_columns - 1})",
+        )
+        targets.add(index)
+
+    for stem in record.get("stem_section_map") or {}:
+        matched = [entry["index"] for entry in coverage_records if entry.get("stem") == stem]
+        _require(
+            bool(matched),
+            f"resolution {record['id']}",
+            f"`stem_section_map` names the stem {stem!r}, which no column in this table carries. "
+            "Correct the record; do not drop the stem silently",
+        )
+        targets.update(matched)
+
+    return sorted(targets)
+
+
+def apply_resolutions(coverage_records: list[dict], resolutions: list[dict]) -> list[dict]:
+    """Apply resolutions to coverage records in file order. Returns what each did.
+
+    Mutates `status`, `resolution_refs` and --- where a stem map applies ---
+    `resolved_section` and `resolved_section_source`. It never touches
+    `status_baseline_wp1`, `dictionary_evidence`, or the EXECUTOR-authored
+    `candidate_section`, which stays visibly a candidate.
+    """
+    applied = []
+    for record in resolutions:
+        targets = resolution_targets(record, coverage_records)
+        stem_map = record.get("stem_section_map") or {}
+        for index in targets:
+            column = coverage_records[index]
+            column["status"] = record["effect"]["to"]
+            column["resolution_refs"] = [*column["resolution_refs"], record["id"]]
+            stem = column.get("stem")
+            if stem in stem_map:
+                column["resolved_section"] = stem_map[stem]
+                column["resolved_section_source"] = record["id"]
+        applied.append(
+            {
+                "id": record["id"],
+                "date": record["date"],
+                "source": record["source"],
+                "decision_ref": record["decision_ref"],
+                "confidence": record["confidence"],
+                "question_ids": list(record["question_ids"]),
+                "status_to": record["effect"]["to"],
+                "columns_changed": targets,
+                "n_columns_changed": len(targets),
+            }
+        )
+    return applied
