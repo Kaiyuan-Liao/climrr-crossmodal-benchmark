@@ -1,5 +1,11 @@
 # M1 — Data grounding and metadata audit
 
+**WP1 STAGE — accepted by GUIDANCE; superseded by the WP2 report for current
+status.** This file is frozen as the WP1-stage record and is not updated again.
+Current M1 status lives in
+[`M1_WP2_REPORT.md`](M1_WP2_REPORT.md); the acceptance is D-009 and
+[`../../docs/M1_WP1_GUIDANCE_REVIEW.md`](../../docs/M1_WP1_GUIDANCE_REVIEW.md).
+
 > **WP1 stage — M1 not yet complete.** This report covers work package M1-WP1
 > only. The M1 milestone gate is not proposed here; field 14 proposes readiness
 > for the **GUIDANCE M1-WP1 review** against the nine acceptance criteria in

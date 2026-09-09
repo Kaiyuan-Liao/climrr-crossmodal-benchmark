@@ -17,3 +17,20 @@ numpy==2.4.6
 pypdf==6.18.0
 pyyaml==6.0.3
 pytest==9.1.1
+
+# Added in M1-WP2 Phase B to discharge the GUIDANCE review's PDF-extraction
+# completeness action: page 3 of the dictionary PDF yielded no text, and the
+# only way to say whether it carries metadata is to look at it. pypdfium2
+# rasterises a page to PNG; pypdf cannot. It ships a self-contained pdfium
+# binary in the wheel -- py3-none-macosx_13_0_arm64 and
+# py3-none-manylinux_2_17_x86_64 both exist at this version, so both hosts
+# install without a compiler or a system poppler.
+#
+# `pdftoppm` was checked for first, as the work package allows, and is not
+# present on the local host.
+#
+# NOTE for Sophia: this pin joins the D-007 set, so `pip install -r
+# requirements.txt` must be re-run in the execution venv before the next pinned
+# checkout. Until it is, run records will carry `matches_pin: false` for
+# pypdfium2 and tests/test_runrecord.py will fail -- by design.
+pypdfium2==5.13.0

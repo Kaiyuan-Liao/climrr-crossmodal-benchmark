@@ -161,6 +161,31 @@ numpy 2.4.6 reading the same bytes with
 (`n_rows`, `n_columns`, `name`, `n_empty`, `n_distinct`, `n_with_leading_zero_any`), with
 0 disagreements. Row and column counts agree.
 
+### Dictionary PDF page completeness — page 3 is blank
+
+The GUIDANCE M1-WP1 review recorded, as risk 4, that one page of the 19-page
+metadata PDF yielded **no extracted text**, and required the project to confirm
+before the M1 gate that it carries no metadata bearing on the 275 columns. That
+page is page 3. `scripts/rasterize_dictionary_pages.py` renders it at 200 dpi
+from the manifest-verified PDF with the pinned `pypdfium2==5.13.0`.
+
+| Page | Rendered | Bytes | Channel min/max | What it is |
+| --- | --- | --- | --- | --- |
+| 2 | 1700x2200 | 199,691 | 0 / 255 | table of contents |
+| **3** | **1700x2200** | **15,888** | **255 / 255** | **blank — no marks of any kind** |
+| 4 | 1700x2200 | 477,998 | 0 / 255 | opening of the "Metadata" narrative |
+
+Page 3's rendered pixels are a single uniform value across all three channels,
+which is the pixel-level statement that the page bears no marks. Read as an
+image it is a white page: no table, no field name, no figure, no scanned
+content. Its extracted text is two space characters, and that is the whole of
+it. Pages 2 and 4 render fully at the same settings and are the control that
+the renderer, not the page, is not at fault.
+
+**Consequence: no status changes, and no manual transcription file was created.**
+The gap between the contents (page 2) and the narrative (page 4) is a blank
+separator, not lost metadata. Recorded under D-009.
+
 ### Environment (non-pinned facts)
 
 The two hosts run different Python minor versions, and D-007 leaves that free
@@ -172,7 +197,8 @@ deliberately. What is pinned is the parsing and profiling stack.
 | Sophia (`sophia-login-02`) | **3.13.13** | venv `.venv-sophia` over the ALCF conda base |
 
 Pinned under D-007 in `requirements.txt`, and recorded in every run record's
-`pinned_libraries` field: `pandas==3.0.5`, `numpy==2.4.6`, `pypdf==6.18.0`, `pyyaml==6.0.3`, `pytest==9.1.1`.
+`pinned_libraries` field: `pandas==3.0.5`, `numpy==2.4.6`, `pypdf==6.18.0`, `pyyaml==6.0.3`, `pytest==9.1.1`,
+and, added in M1-WP2 for the page-3 check above, `pypdfium2==5.13.0`.
 
 ---
 

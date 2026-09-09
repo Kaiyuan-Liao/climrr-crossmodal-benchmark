@@ -349,3 +349,92 @@ not yet in force and must not be relied on by downstream work.
   `reports/milestones/M1_DATA_GROUNDING_REPORT.md`.
 - **Status:** **recorded.** Not a decision that constrains implementation ---
   a provenance fact of stated, unverified standing.
+
+---
+
+## D-009 --- GUIDANCE accepts M1-WP1 and authorises M1-WP2
+
+- **Date:** 2026-09-09
+- **Decision:** GUIDANCE records **PASS** on work package M1-WP1 at reviewed
+  head `fceee7f06883c18b45fccda7da350fd4c6966ee8`, merged to `main` as
+  `62c9137`. This is a **work-package pass, not the M1 milestone gate**; M1
+  stays open. The review is tracked at
+  [`M1_WP1_GUIDANCE_REVIEW.md`](M1_WP1_GUIDANCE_REVIEW.md).
+
+  Four rulings are in force from this date, each answering a question the WP1
+  report raised in its field 13:
+
+  1. **The strict `verified_from_dictionary` bar is confirmed and must not be
+     loosened.** A column may not reach that status because a stem/suffix
+     pattern looks convincing. Only three kinds of evidence can promote a
+     stem-to-section mapping: explicit confirmation from the mentor, the data
+     owner or the ClimRR authors; an authoritative export/source-generation
+     specification; or another authoritative ClimRR artifact that maps full CSV
+     names to dictionary sections. GUIDANCE states its preference plainly:
+     retain 21 conservative verified columns rather than inflate the set on an
+     unconfirmed inference about how the export was built.
+  2. **The two EXECUTOR-authored candidate maps are approved as navigation
+     only** --- `STEM_SECTION_CANDIDATES` and `NARRATIVE_CANDIDATES` in
+     `src/climrr/dictionary.py`. Their permitted role is to make questions
+     specific and to guide inspection. They may not serve as evidence, may not
+     promote a column, and may not propagate silently into later phenomenon
+     extraction or bridge scoring.
+  3. **Index 117 `Aggregate_Resilience_Indicator_` stays in the grounded
+     inventory and its `-9` stays unlabelled.** The authorised structural
+     conclusion is only that the field has zero variation and so cannot carry
+     discriminative information in this file. Calling `-9` missing, no-data,
+     invalid or suppressed is not authorised without source confirmation, and
+     the column is not to be used in later pilot work until its meaning is
+     clarified.
+  4. **D-008 stays a user-provided provenance statement** and is not upgraded
+     into independently verified source provenance.
+
+  **M1-WP2 --- metadata resolution and citable column dictionary --- is
+  authorised**, with the nine acceptance criteria quoted in
+  `reports/milestones/M1_WP2_REPORT.md` field 14. M2 semantic-schema design and
+  M3 phenomenon extraction remain prohibited, along with aggregation, thresholds,
+  literature ingestion, retrieval, embeddings, bridges and QA.
+- **Rationale:** the review judges the WP1 status distribution --- 21 / 143 / 28
+  / 83 --- an honest measurement of the available evidence rather than a
+  weakness of the method, and identifies the primary scientific risk as **false
+  metadata closure**: promoting plausible structural correspondence into
+  authoritative semantics. Every ruling above exists to keep that promotion
+  gated behind a named external source.
+- **Alternatives considered:** (a) loosen the verified bar so the nine stem
+  families inherit their candidate sections --- rejected by GUIDANCE, this is
+  exactly the false-closure risk. (b) Drop index 117 as a constant --- rejected,
+  removing it would encode an unproven reading of `-9`.
+- **Consequences:**
+  - A **new status, `owner_confirmed`**, is introduced in WP2 for semantics
+    confirmed by the mentor or the data owner. It is kept **distinct from**
+    `verified_from_dictionary`, which remains reserved for what the tracked
+    dictionary states in its own words. No resolution record can ever produce
+    `verified_from_dictionary`; the machinery refuses it.
+  - Every WP2 status change must cite a resolution record in
+    `data/metadata/resolutions.yaml` and a decision number, and must be visible
+    in `scripts/status_diff.py` output against the WP1 baseline.
+  - `reports/milestones/M1_DATA_GROUNDING_REPORT.md` is **frozen as the WP1-stage
+    record**; current M1 status moves to
+    `reports/milestones/M1_WP2_REPORT.md`.
+  - The review's risk 4 --- PDF extraction completeness --- is discharged in
+    WP2 Phase B. **Finding: page 3 of the 19-page dictionary PDF is blank.**
+    Rendered at 200 dpi from the manifest-verified PDF, its pixels are a single
+    uniform value across all three channels, and read as an image it is a white
+    page: no field table, no field names, no figure, no scanned content, nothing
+    bearing on the 275 columns. Its extracted text is two space characters, which
+    is the whole of its content. Pages 2 and 4 render fully at the same settings
+    and are the control that the renderer is not at fault. No status changes from
+    it, and no manual transcription file was needed.
+  - The mentor-facing question inventory is restated for a non-specialist reader
+    in `docs/MENTOR_BRIEF.md`, in the priority GUIDANCE set: Q1, Q7, Q8, the
+    geographic/join-key questions Q10--Q12, the sentinel questions Q17 and Q9,
+    export provenance Q18, then Q2--Q6 and Q13--Q16.
+- **Owner:** GUIDANCE, approved by Kaiyuan Liao.
+- **Affected files:** `docs/M1_WP1_GUIDANCE_REVIEW.md`,
+  `docs/DECISION_LOG.md`, `docs/PROJECT_STATE.md`, `docs/DATA_NOTES.md`,
+  `docs/MENTOR_BRIEF.md`, `data/metadata/resolutions.yaml`,
+  `src/climrr/dictionary.py`, `scripts/dictionary_coverage.py`,
+  `scripts/status_diff.py`, `scripts/rasterize_dictionary_pages.py`,
+  `reports/milestones/M1_DATA_GROUNDING_REPORT.md`,
+  `reports/milestones/M1_WP2_REPORT.md`.
+- **Status:** **decided.**
