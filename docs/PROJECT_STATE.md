@@ -19,7 +19,8 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 - **M1-WP1 is complete and reported.** See
   [`../reports/milestones/M1_DATA_GROUNDING_REPORT.md`](../reports/milestones/M1_DATA_GROUNDING_REPORT.md).
-  Eight in-repo runs, all PASS; `pytest` 193 passed; secrets/paths scan 0 hits.
+  Fourteen in-repo run records, all PASS; `pytest` 193 passed; secrets/paths
+  scan 0 hits.
 - **Profile content hash:**
   `772991c7c9adf475c2ca51806998494595d445725d6d3b7d5046752074fcba9c`.
   This is the value Sophia must reproduce. It covers every computed fact and
@@ -43,9 +44,9 @@ session reasoning correctly from out-of-date facts and repeating them.
   every run record's new `pinned_libraries` field, and a test fails if the
   running environment drifts. Local Python 3.11.16, Sophia 3.13.13 --- the skew
   stays, deliberately.
-- **D-005/D-006 hold.** Every one of the eight runs verified the CSV SHA-256
-  against the manifest before reading, fail-closed, and the Phase D runs also
-  verified the PDF. `CLIMRR_ALLOW_MISSING_RAW=1` was never set.
+- **D-005/D-006 hold.** Every run verified the manifest SHA-256 before reading,
+  fail-closed --- eleven runs for the CSV and six for the PDF.
+  `CLIMRR_ALLOW_MISSING_RAW=1` was never set.
 - Decisions D-002 .. D-007 decided; D-001 superseded by D-005; D-004 amended by
   D-007. **No new decision was made in M1-WP1** --- the pin set is a dated note
   under D-007, not a new entry.
