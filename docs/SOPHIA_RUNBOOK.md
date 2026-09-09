@@ -306,6 +306,38 @@ are committed from there, never pushed from Sophia --- decision D-003).
 **Do not copy back:** data files, environment directories, `pip freeze` output,
 `config/local_paths.yaml`, or anything large. Large outputs stay on Eagle.
 
+### Then delete the Sophia copies --- this step is not optional
+
+**After** you have confirmed the records arrived on the authoring machine, delete
+them here:
+
+```bash
+rm -f "$CLIMRR_REPO_ROOT"/reports/runs/*sophia*.json \
+      "$CLIMRR_REPO_ROOT"/reports/runs/*sophia*.md
+```
+
+Leaving them causes a failure one step later, and it is not obvious when it
+happens. A run record generated here is **untracked** in this clone. Once it has
+been committed from the authoring clone it becomes **tracked** in the next pinned
+commit --- so the next `sophia_pull_pinned.sh` would have to overwrite an
+untracked file, and git refuses:
+
+```text
+error: The following untracked working tree files would be overwritten by checkout:
+        reports/runs/20260909T015712Z_sophia_profile_fulldata.json
+```
+
+That refusal is correct and the script does not override it. It does explain it:
+it names each colliding file, says whether the pinned commit already carries the
+identical bytes --- which it does if the file is one you copied back unchanged ---
+and prints the exact `rm` command. **It never deletes anything itself.** If it
+reports a file as *differing* rather than identical, do not delete that file:
+copy it somewhere safe and report the difference, because it means this clone
+holds a record that is not the one that was committed.
+
+Deleting the copies loses nothing. The bytes live in the repository from the
+commit onward, and the checkout restores them.
+
 ---
 
 ## 8. Where to paste the output
