@@ -35,6 +35,7 @@ import numpy  # noqa: E402
 import pandas  # noqa: E402
 
 from climrr.manifest import ManifestMismatchError, verify_file  # noqa: E402
+from climrr.paths import repo_relative  # noqa: E402
 from climrr.profile import ENCODING, LEADING_ZERO_PATTERN, profile_content_hash  # noqa: E402
 from climrr.runrecord import (  # noqa: E402
     detect_location,
@@ -158,10 +159,10 @@ def main() -> int:
 
     report = {
         "crosscheck_version": 1,
-        "data_path": str(args.data.relative_to(REPO_ROOT)),
+        "data_path": repo_relative(args.data),
         "data_sha256": verified["sha256"],
         "data_bytes": verified["bytes"],
-        "stdlib_profile_path": str(args.profile.relative_to(REPO_ROOT)),
+        "stdlib_profile_path": repo_relative(args.profile),
         "stdlib_profile_content_hash": content_hash,
         "pandas_version": pandas.__version__,
         "numpy_version": numpy.__version__,
@@ -202,7 +203,7 @@ def main() -> int:
         print(f"    DISAGREEMENT index {disagreement['index']} ({disagreement['name']}): "
               f"{disagreement['fields']}")
     print(f"  pandas / numpy            : {pandas.__version__} / {numpy.__version__}")
-    print(f"  report                    : {args.out.relative_to(REPO_ROOT)}")
+    print(f"  report                    : {repo_relative(args.out)}")
 
     passed = table_ok and body["n_columns_disagree"] == 0
     record_path = write_run_record(
@@ -224,12 +225,12 @@ def main() -> int:
         data_sha256=verified["sha256"],
         output_path=args.out,
         config_snapshot={
-            "data_path": str(args.data.relative_to(REPO_ROOT)),
-            "manifest_path": str(args.manifest.relative_to(REPO_ROOT)),
+            "data_path": repo_relative(args.data),
+            "manifest_path": repo_relative(args.manifest),
             "pandas_read_options": READ_OPTIONS,
         },
     )
-    print(f"Run record: {record_path.relative_to(REPO_ROOT)}")
+    print(f"Run record: {repo_relative(record_path)}")
     print("PASS" if passed else "FAIL (disagreement reported, not resolved)")
     return 0 if passed else 1
 

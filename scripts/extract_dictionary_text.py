@@ -28,6 +28,7 @@ import pypdf  # noqa: E402
 
 from climrr.checksums import sha256_file  # noqa: E402
 from climrr.manifest import ManifestMismatchError, verify_file  # noqa: E402
+from climrr.paths import repo_relative  # noqa: E402
 from climrr.runrecord import write_run_record  # noqa: E402
 
 PDF_PATH = REPO_ROOT / "data" / "metadata" / "ClimRR_Metadata_and_Data_Dictionary.pdf"
@@ -47,7 +48,7 @@ def render(pages: list[str], *, pdf_path: Path, pdf_sha256: str, pdf_bytes: int)
     header = [
         "# ClimRR Metadata and Data Dictionary --- machine-extracted text",
         "#",
-        f"# source_pdf          : {pdf_path.relative_to(REPO_ROOT)}",
+        f"# source_pdf          : {repo_relative(pdf_path)}",
         f"# source_pdf_sha256   : {pdf_sha256}",
         f"# source_pdf_bytes    : {pdf_bytes}",
         f"# extractor           : pypdf {pypdf.__version__}",
@@ -97,7 +98,7 @@ def main() -> int:
     print(f"  pages with no text        : {n_empty_pages}")
     print(f"  extracted characters      : {n_chars}")
     print(f"  output lines              : {n_lines}")
-    print(f"  output                    : {args.out.relative_to(REPO_ROOT)}")
+    print(f"  output                    : {repo_relative(args.out)}")
     print(f"  output sha256             : {sha256_file(args.out)}")
 
     # Usability gate. An extraction that is mostly empty is not evidence, and
@@ -118,11 +119,11 @@ def main() -> int:
         data_sha256=verified["sha256"],
         output_path=args.out,
         config_snapshot={
-            "pdf_path": str(args.pdf.relative_to(REPO_ROOT)),
+            "pdf_path": repo_relative(args.pdf),
             "extractor": f"pypdf {pypdf.__version__}",
         },
     )
-    print(f"Run record: {record_path.relative_to(REPO_ROOT)}")
+    print(f"Run record: {repo_relative(record_path)}")
     print("PASS" if passed else "FAIL: extraction is unusable; stop Phase D and report")
     return 0 if passed else 1
 

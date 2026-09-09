@@ -34,6 +34,7 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 from climrr.checksums import sha256_file  # noqa: E402
 from climrr.dictionary import build_coverage  # noqa: E402
 from climrr.manifest import ManifestMismatchError, verify_file  # noqa: E402
+from climrr.paths import repo_relative  # noqa: E402
 from climrr.profile import read_header  # noqa: E402
 from climrr.runrecord import (  # noqa: E402
     detect_location,
@@ -123,11 +124,11 @@ def main() -> int:
 
     report = {
         "coverage_version": 1,
-        "data_path": str(args.data.relative_to(REPO_ROOT)),
+        "data_path": repo_relative(args.data),
         "data_sha256": verified_csv["sha256"],
-        "source_pdf_path": str(args.pdf.relative_to(REPO_ROOT)),
+        "source_pdf_path": repo_relative(args.pdf),
         "source_pdf_sha256": verified_pdf["sha256"],
-        "extracted_text_path": str(args.text.relative_to(REPO_ROOT)),
+        "extracted_text_path": repo_relative(args.text),
         "extracted_text_sha256": sha256_file(args.text),
         "extractor": extraction.get("extractor"),
         "note": (
@@ -157,7 +158,7 @@ def main() -> int:
     for status in STATUS_ORDER:
         print(f"    {status:<28}: {counts.get(status, 0)}")
     print(f"  match rules               : {coverage['match_rule_counts']}")
-    print(f"  report                    : {args.out.relative_to(REPO_ROOT)}")
+    print(f"  report                    : {repo_relative(args.out)}")
 
     passed = coverage["n_columns"] == len(columns) and not without_span
     if without_span:
@@ -180,12 +181,12 @@ def main() -> int:
         data_sha256=verified_pdf["sha256"],
         output_path=args.out,
         config_snapshot={
-            "data_path": str(args.data.relative_to(REPO_ROOT)),
-            "pdf_path": str(args.pdf.relative_to(REPO_ROOT)),
-            "extracted_text_path": str(args.text.relative_to(REPO_ROOT)),
+            "data_path": repo_relative(args.data),
+            "pdf_path": repo_relative(args.pdf),
+            "extracted_text_path": repo_relative(args.text),
         },
     )
-    print(f"Run record: {record_path.relative_to(REPO_ROOT)}")
+    print(f"Run record: {repo_relative(record_path)}")
     print("PASS" if passed else "FAIL")
     return 0 if passed else 1
 

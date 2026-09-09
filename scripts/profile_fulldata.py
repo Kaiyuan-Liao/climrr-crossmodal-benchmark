@@ -29,6 +29,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from climrr.manifest import ManifestMismatchError, verify_file  # noqa: E402
+from climrr.paths import repo_relative  # noqa: E402
 from climrr.profile import (  # noqa: E402
     SENTINEL_MIN_RATE,
     build_profile,
@@ -90,7 +91,7 @@ def main() -> int:
         args.data,
         data_sha256=verified["sha256"],
         data_bytes=verified["bytes"],
-        data_path_label=str(args.data.relative_to(REPO_ROOT)),
+        data_path_label=repo_relative(args.data),
         environment=environment,
         sentinel_min_rate=args.sentinel_min_rate,
     )
@@ -123,8 +124,8 @@ def main() -> int:
     print(f"  looks-unique columns      : {n_unique}")
     print(f"  columns with any empty    : {n_any_empty}")
     print(f"  columns w/ sentinel cands : {n_sentinel_cols}")
-    print(f"  JSON                      : {json_path.relative_to(REPO_ROOT)}")
-    print(f"  CSV                       : {csv_path.relative_to(REPO_ROOT)}")
+    print(f"  JSON                      : {repo_relative(json_path)}")
+    print(f"  CSV                       : {repo_relative(csv_path)}")
     print(f"PROFILE CONTENT HASH: {content_hash}")
 
     passed = profile["n_columns"] > 0 and profile["n_rows"] > 0 and not drift
@@ -153,14 +154,14 @@ def main() -> int:
         data_sha256=verified["sha256"],
         output_path=json_path,
         config_snapshot={
-            "data_path": str(args.data.relative_to(REPO_ROOT)),
-            "manifest_path": str(args.manifest.relative_to(REPO_ROOT)),
+            "data_path": repo_relative(args.data),
+            "manifest_path": repo_relative(args.manifest),
             "sentinel_min_rate": args.sentinel_min_rate,
             "decimal_regex": profile["decimal_regex"],
             "profile_version": profile["profile_version"],
         },
     )
-    print(f"Run record: {record_path.relative_to(REPO_ROOT)}")
+    print(f"Run record: {repo_relative(record_path)}")
     print("PASS" if passed else "FAIL")
     return 0 if passed else 1
 
