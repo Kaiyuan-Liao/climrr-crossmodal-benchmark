@@ -103,7 +103,7 @@ records its hash. `scripts/status_diff.py` reports every movement from the WP1
 baseline with the record and decision responsible.
 
 **Phase D — `docs/MENTOR_BRIEF.md`**, the meeting document: plain language, the
-18 questions in the GUIDANCE priority order, an empty answers table, and a
+19 questions in the GUIDANCE priority order, an empty answers table, and a
 meeting log.
 
 **Phase E — this report.**
@@ -277,10 +277,22 @@ resolved by picking a plausible answer.
 ## 13. Open decisions and mentor questions
 
 **Everything material in WP2 is open, and all of it belongs to the mentor or the
-ClimRR authors.** The 18 questions are in `docs/METADATA_QUESTIONS.md` with
+ClimRR authors.** The 19 questions are in `docs/METADATA_QUESTIONS.md` with
 column indices and PDF line numbers, and restated for a non-specialist reader in
-`docs/MENTOR_BRIEF.md` in GUIDANCE's priority order: **Q1, Q7, Q8, Q10–Q12,
+`docs/MENTOR_BRIEF.md` in GUIDANCE's priority order: **Q0, Q1, Q7, Q8, Q10–Q12,
 Q17, Q9, Q18, then Q2–Q6 and Q13–Q16.**
+
+**Q0 was added by the COORDINATOR ahead of the meeting** and is asked first: is
+there any other authoritative material — a newer or fuller data dictionary, a
+document or script describing how `FullData.csv` was assembled, a release note
+naming the version and export date? It is asked first because it is the one
+question whose answer could resolve a family of the others at once, and because
+an export specification or another authoritative ClimRR artifact is exactly the
+evidence GUIDANCE accepts for promoting a mapping (review §1). Any artifact
+received is manifest-pinned and text-extracted before a word of it is cited,
+following the D-002 precedent set for the data dictionary; receiving one changes
+no status by itself, it becomes a resolution record with
+`source: authoritative_artifact` that must still name its columns.
 
 Per GUIDANCE, Q1 must be answered as the **actual mapping** — which prefix is
 which variable — not as agreement that the candidate map looks right. The brief

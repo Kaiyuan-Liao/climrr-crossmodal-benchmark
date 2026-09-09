@@ -13,8 +13,10 @@ Computed properties referenced here come from
 [`../artifacts/profiles/fulldata_profile.json`](../artifacts/profiles/fulldata_profile.json)
 and are facts about characters, not about climate.
 
-**Who answers.** Q1 is for Kaiyuan and the mentor and it unblocks the largest
-number of columns; everything else is grouped by owner in the closing table.
+**Who answers.** Every question is for the mentor or the ClimRR authors; they are
+grouped by owner in the closing table. **Q0 is asked first** because a second
+source document could answer several of the others outright; Q1 unblocks the
+largest number of columns.
 
 **This file is the detail; [`MENTOR_BRIEF.md`](MENTOR_BRIEF.md) is what goes to
 the meeting.** The brief restates these questions in plain language and in the
@@ -29,6 +31,58 @@ answer first lands before becoming a record in
 | `unresolved` | 28 |
 | `structurally_observed_only` | 83 |
 | **Total** | **275** |
+
+---
+
+## Q0 — Is there any other authoritative material about this file?
+
+**Affects potentially all 275 columns**, by way of Q1–Q18 rather than directly.
+
+Every question below is asked because the tracked 19-page dictionary does not
+answer it. A second source document could answer many of them at once, and
+GUIDANCE has already named that class of evidence as sufficient to promote a
+mapping: alongside explicit confirmation from the mentor or the ClimRR authors,
+it accepts "an authoritative export/source-generation specification" and
+"another authoritative ClimRR artifact explicitly mapping full CSV names to
+dictionary sections" (`M1_WP1_GUIDANCE_REVIEW.md` §1). So this question is worth
+asking before the rest: an answer in conversation settles one question, a
+specification settles a family of them.
+
+**Question, for the mentor / ClimRR authors.** Is there any other authoritative
+material about this file that we should have?
+
+1. **A newer or more complete data dictionary** than the 19-page PDF tracked at
+   `data/metadata/ClimRR_Metadata_and_Data_Dictionary.pdf`. Ours is dated
+   September 14, 2023 (line 38), says its field names were last updated
+   8/25/2023 (line 81), and describes itself as covering the **alpha release**
+   of the ClimRR portal. It also has no field table for the FWI classes (Q8) or
+   the `precipdaily_*` family (Q7), and the defects in Q2–Q4 may already be
+   fixed in a later revision.
+2. **A document, script, or ArcGIS project describing how `FullData.csv` was
+   assembled** from the ClimRR layers and the Census and socioeconomic sources.
+   Per D-008 the join happened before the file reached this project, so this is
+   the only thing that could answer Q1, Q10, Q11 and Q12 by evidence rather than
+   by recollection. An ArcGIS model, a toolbox, a Python or R script, or even
+   the field-mapping table from the join would each do.
+3. **A ClimRR web page or release note naming the data version and export
+   date** — Q18. The portal's own documentation may date the release this export
+   came from even if the file itself does not.
+
+**If any such artifact arrives, it is handled like the data dictionary was, and
+for the same reason (D-002, D-005).** Before a single sentence of it is cited:
+the file is placed under `data/metadata/`, its SHA-256 and byte size are
+recorded in `data/manifest.json`, and — if it is a PDF — its text is extracted
+by a pinned extractor into a tracked, never-hand-edited file so that every
+citation carries a line number traceable to those bytes. An artifact that is
+quoted before it is pinned is an artifact whose provenance cannot be
+reconstructed later, and this project has already decided not to do that. A
+script or a project file that cannot be text-extracted is still pinned by hash
+and cited by path and line.
+
+Receiving such an artifact does **not** by itself change any column status. It
+becomes a resolution record in `../data/metadata/resolutions.yaml` with
+`source: authoritative_artifact` and a `source_detail` naming the document and
+its hash, and the record must still name the columns or the stems it settles.
 
 ---
 
@@ -423,13 +477,14 @@ which ClimRR release? The download date is known; the export date is not.
 
 | Owner | Questions |
 | --- | --- |
+| **Mentor / ClimRR authors** (is there better source material?) | Q0 — ask first; it may answer several of the rest |
 | **Mentor / ClimRR authors** (how the table was assembled) | Q1, Q11, Q18 — re-aimed by D-008 |
 | **Mentor / ClimRR authors** (source-document defects) | Q2, Q3, Q4, Q5, Q6 |
 | **Mentor / ClimRR authors** (undocumented families) | Q7, Q8, Q13, Q14, Q15 |
 | **Mentor** (non-ClimRR columns joined into the table) | Q9, Q10, Q12 |
 | **Kaiyuan + mentor** (fitness for use) | Q16, Q17 |
 
-**Every question is now for the mentor or the ClimRR authors.** D-008 closed the
+**All nineteen questions are now for the mentor or the ClimRR authors.** D-008 closed the
 Kaiyuan-side half of Q1, Q10, Q11 and Q18: he received one file and changed
 nothing, so nothing about this table's shape can be explained by handling on this
 side.

@@ -73,11 +73,14 @@ session reasoning correctly from out-of-date facts and repeating them.
   thing standing between WP2a and WP2b.
 - **For Sophia, before the next pinned checkout:** re-run
   `pip install -r requirements.txt` so `pypdfium2==5.13.0` is present.
-- **18 metadata questions** in [`METADATA_QUESTIONS.md`](METADATA_QUESTIONS.md),
-  all for the mentor or the ClimRR authors. GUIDANCE's priority order is Q1, Q7,
-  Q8, the geographic/join-key questions Q10--Q12, the sentinel questions Q17 and
-  Q9, export provenance Q18, then Q2--Q6 and Q13--Q16. Q1, Q7, Q8 and Q17 block
-  downstream *use* of the columns they name.
+- **19 metadata questions** in [`METADATA_QUESTIONS.md`](METADATA_QUESTIONS.md),
+  all for the mentor or the ClimRR authors. **Q0 --- added by the COORDINATOR ---
+  is asked first**: is there a fuller data dictionary, an assembly
+  document or script, or a release note naming the version and export date?
+  It could resolve several of the others at once. Then GUIDANCE's priority order:
+  Q1, Q7, Q8, the geographic/join-key questions Q10--Q12, the sentinel questions
+  Q17 and Q9, export provenance Q18, then Q2--Q6 and Q13--Q16. Q1, Q7, Q8 and
+  Q17 block downstream *use* of the columns they name.
 - **Export date** of the ClimRR file remains unknown and was not guessed (Q18).
 
 ## Next
