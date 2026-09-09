@@ -263,5 +263,89 @@ not yet in force and must not be relied on by downstream work.
   behaviour and the relevant dependency versions be controlled and
   reproducible.
 - **Affected files:** `requirements.txt`, `src/climrr/runrecord.py`,
-  `docs/M0_GUIDANCE_GATE_REVIEW.md`, M1-WP1.
+  `pyproject.toml`, `docs/M0_GUIDANCE_GATE_REVIEW.md`, M1-WP1.
+
+  **Pin set applied 2026-09-08 (M1-WP1 Phase A).** Not a new decision --- this
+  is the execution of the one above, recorded here so the frozen profile can be
+  traced to an exact stack:
+
+  | Distribution | Pinned version | Why it is in the pin set |
+  | --- | --- | --- |
+  | `pandas` | `3.0.5` | cross-check reader (Phase C) |
+  | `numpy` | `2.4.6` | pandas' array layer; pinned so pandas' behaviour is determined |
+  | `pypdf` | `6.18.0` | data-dictionary text extraction (Phase D) |
+  | `pyyaml` | `6.0.3` | config loading in `climrr.paths` |
+  | `pytest` | `9.1.1` | the check that gates every commit |
+
+  `pypdf` was chosen over `pdfplumber` because it is pure Python with no
+  compiled or system dependencies (`pdfplumber` pulls in `pdfminer.six` and
+  Pillow), so the same wheel installs on both hosts. Every pinned version
+  publishes cp311 and cp313 wheels for macOS arm64 and manylinux_2_28 x86_64;
+  Sophia is glibc 2.34, above that floor. Run records now carry a
+  `pinned_libraries` field --- name, pinned version, imported `__version__`,
+  and a `matches_pin` flag --- and `tests/test_runrecord.py` fails when the
+  running environment drifts from this file.
 - **Status:** **decided.** Amends D-004, which otherwise stands.
+
+---
+
+## D-008 --- Data provenance of `FullData.csv`, as stated by Kaiyuan
+
+- **Date:** 2026-09-08
+- **Decision:** the provenance of `data/raw/FullData.csv` is recorded as
+  Kaiyuan's statement below. It is **stated by Kaiyuan, not independently
+  verified**, and every use of it downstream must carry that qualification.
+
+  Statement, verbatim as given:
+
+  > For how I get the .csv file, it is shared by my mentor from ALCF through
+  > Box, I downloaded it directly as one file. I downloaded it one week ago but
+  > it is definitely not the time it was created. I did not do any extra
+  > operation over the .csv file, what you see is what it is to me at the first
+  > time
+
+- **What this settles.** Three things, all about *handling* rather than about
+  content:
+  1. **The chain of custody is short and unbroken on this side.** One file, one
+     download, no intermediate tooling on Kaiyuan's part. The bytes pinned in
+     `data/manifest.json` are the bytes as delivered.
+  2. **No transformation was applied downstream of ALCF.** Whatever produced the
+     275-column layout --- the join of the eleven dictionary layers, the stem
+     prefixes, the truncated names, the duplicated identifier columns --- was
+     done **before** the file reached this project. It is therefore a question
+     for the mentor and the ClimRR authors, not something recoverable from
+     Kaiyuan's steps. This is the standing answer to the *"did you do this?"*
+     half of `METADATA_QUESTIONS.md` Q1, Q10 and Q11; the *"who did, and how?"*
+     half remains open.
+  3. **The download date is not the creation date**, stated explicitly. The
+     acquisition date is now approximately known; the export date is not.
+- **EXECUTOR annotation, derived and not stated:** "one week ago" relative to
+  2026-09-08 puts the download at approximately **2026-09-01**. That is an
+  arithmetic reading of a relative phrase, not a date Kaiyuan gave; the exact
+  day is still unknown, and `data/manifest.json` therefore keeps
+  `acquisition_date: "unknown"` rather than recording a computed guess. If an
+  exact date is wanted, Box records it.
+- **What this does not settle, and why no column status changed.** The statement
+  names no dictionary section for any CSV column-name stem, so it cannot promote
+  any column to `verified_from_dictionary`. Metadata status counts are unchanged
+  at 21 / 143 / 28 / 83. Establishing that nobody here modified the file is
+  evidence about custody; it says nothing about what a column means. Q1's
+  substance --- whether the CSV is the eleven dictionary layers joined side by
+  side --- is now unambiguously a question for the mentor and the ClimRR authors.
+- **Alternatives considered:** (a) treat the statement as verification of
+  provenance --- rejected, an unverified recollection is evidence of a kind but
+  not verification, and labelling it as such would let a downstream reader
+  inherit more confidence than exists. (b) Write the derived date into the
+  manifest --- rejected, D-005 and the M0 gate both record the acquisition date
+  as unknown deliberately, and a computed approximation is exactly the kind of
+  quiet filling-in the charter forbids.
+- **Consequences:** Q18 is answered as far as Kaiyuan can answer it and now asks
+  the mentor for the export date instead. Q1, Q10 and Q11 keep their substance
+  but are re-aimed at the mentor. Any future claim about how this table was
+  assembled must cite the mentor or the ClimRR authors, never this entry.
+- **Owner:** Kaiyuan Liao (statement); recorded by the EXECUTOR.
+- **Affected files:** `docs/DECISION_LOG.md`, `docs/METADATA_QUESTIONS.md`,
+  `data/manifest.json` (unchanged, deliberately),
+  `reports/milestones/M1_DATA_GROUNDING_REPORT.md`.
+- **Status:** **recorded.** Not a decision that constrains implementation ---
+  a provenance fact of stated, unverified standing.

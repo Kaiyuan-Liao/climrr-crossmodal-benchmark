@@ -1,3 +1,19 @@
-pandas
-pyyaml
-pytest
+# Pinned under D-007 (amendment to D-004): the libraries that govern CSV
+# parsing, profiling, and PDF text extraction are pinned exactly, before the
+# M1-WP1 schema/quality profile is frozen as authoritative. The Python minor
+# version is deliberately NOT pinned -- D-007 leaves it free, and the two hosts
+# run 3.11 (local) and 3.13 (Sophia).
+#
+# Every version below publishes cp311 and cp313 wheels for macOS arm64 and
+# manylinux_2_28 x86_64, so both hosts install from wheels. Sophia is
+# glibc 2.34, above the manylinux_2_28 floor that pandas and numpy require.
+#
+# Run records carry the imported __version__ of each of these in the
+# `pinned_libraries` field; a mismatch between this file and a run record is a
+# defect to escalate, not a file to edit.
+
+pandas==3.0.5
+numpy==2.4.6
+pypdf==6.18.0
+pyyaml==6.0.3
+pytest==9.1.1
