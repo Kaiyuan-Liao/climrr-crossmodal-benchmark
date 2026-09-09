@@ -41,8 +41,19 @@ field table, and inside a table it names fields by suffix only — `HIST`,
 The dictionary never states that a CSV stem denotes a section, so the
 correspondence is an inference about how the export was produced.
 
-**Question.** Was `FullData.csv` produced by joining the eleven layers and
-prefixing each layer's field names with a stem identifying that layer? If so,
+**Partly answered (D-008, stated by Kaiyuan, not independently verified).** The
+file was shared by his mentor from ALCF through Box, downloaded as a single file,
+and **no operation of any kind was applied to it afterwards**. So whatever
+produced this layout happened before the file reached this project. That removes
+one possibility --- that the stems were added during handling here --- and makes
+this a question for the mentor and the ClimRR authors rather than one recoverable
+from Kaiyuan's steps. It does not answer the question itself, and **no column's
+status changed on the strength of it**: the statement names no dictionary section
+for any stem.
+
+**Question, now for the mentor / ClimRR authors.** Was `FullData.csv` produced by
+joining the eleven layers and prefixing each layer's field names with a stem
+identifying that layer? If so,
 please confirm this stem-to-section map, which is currently EXECUTOR-proposed
 and recorded as such in `src/climrr/dictionary.py`:
 
@@ -224,7 +235,12 @@ characters (`Percentage_of_the_population_65`,
 
 **Affects indices 2–4 and 106–111.** None appears in the dictionary.
 
-**Questions.**
+These columns are not ClimRR climate variables; they were joined in from
+somewhere else before the file reached this project (D-008). Kaiyuan applied no
+transformation, so the join happened upstream and only the mentor can say from
+which source and vintage.
+
+**Questions, for the mentor / ClimRR authors.**
 1. Index 109 `GEOID` is 11 characters on every non-empty row, 12,941 distinct,
    19,074 of them beginning with a zero. Is this a Census **tract** GEOID
    (state + county + tract), and from which vintage? The tract vintage decides
@@ -249,6 +265,11 @@ characters (`Percentage_of_the_population_65`,
 The dictionary describes `Crossmodel` as a "Text ID for each cell in the polygon
 grid" (line 455) and repeats that description identically in all eleven
 sections. It says nothing about the CSV's suffixed copies.
+
+The `_1` and `_12` suffixes are the spelling a join produces when a column name
+collides. Per D-008 that join was not performed here --- the file arrived in this
+shape --- so the question is for the mentor, not a matter of reconstructing local
+steps.
 
 Computed facts:
 
@@ -373,13 +394,22 @@ or a fill code? A per-column answer is needed; a general rule is not enough.
 
 ### Q18 — When was this export produced?
 
-The acquisition date of the ClimRR export is **unknown** and has not been
-guessed (`data/manifest.json`, `acquisition_date: "unknown"`). Indices 270 and
-272 carry the constant `9/13/2023 0:00:00`, and the dictionary is dated
-September 14, 2023 (line 38) and says field names were last updated 8/25/2023
-(line 81) — but none of that establishes when the CSV was exported.
+**Answered as far as Kaiyuan can answer it (D-008, stated, not independently
+verified).** The file was shared by his mentor from ALCF through Box and
+downloaded as a single file about a week before 2026-09-08 — so approximately
+2026-09-01, which is an arithmetic reading of "one week ago" rather than a date
+he gave. He states explicitly that this is **not** when the file was created.
 
-**Question.** When was `FullData.csv` downloaded, and from which ClimRR release?
+`data/manifest.json` therefore still records `acquisition_date: "unknown"`: a
+computed approximation is not a date, and Box holds the exact one if it is
+wanted.
+
+Indices 270 and 272 carry the constant `9/13/2023 0:00:00`, and the dictionary is
+dated September 14, 2023 (line 38) and says field names were last updated
+8/25/2023 (line 81) — none of which establishes when the CSV was exported.
+
+**Question, now for the mentor.** When was `FullData.csv` exported, and from
+which ClimRR release? The download date is known; the export date is not.
 
 ---
 
@@ -387,11 +417,16 @@ September 14, 2023 (line 38) and says field names were last updated 8/25/2023
 
 | Owner | Questions |
 | --- | --- |
-| **Kaiyuan** (data provenance) | Q1, Q11, Q18 |
+| **Mentor / ClimRR authors** (how the table was assembled) | Q1, Q11, Q18 — re-aimed by D-008 |
 | **Mentor / ClimRR authors** (source-document defects) | Q2, Q3, Q4, Q5, Q6 |
 | **Mentor / ClimRR authors** (undocumented families) | Q7, Q8, Q13, Q14, Q15 |
 | **Mentor** (non-ClimRR columns joined into the table) | Q9, Q10, Q12 |
 | **Kaiyuan + mentor** (fitness for use) | Q16, Q17 |
+
+**Every question is now for the mentor or the ClimRR authors.** D-008 closed the
+Kaiyuan-side half of Q1, Q10, Q11 and Q18: he received one file and changed
+nothing, so nothing about this table's shape can be explained by handling on this
+side.
 
 None of these blocks the M1-WP1 deliverables, which are the profile and this
 inventory. Q1, Q7, Q8 and Q17 block any downstream use of the columns they name.
