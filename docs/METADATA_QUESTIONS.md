@@ -16,6 +16,12 @@ and are facts about characters, not about climate.
 **Who answers.** Q1 is for Kaiyuan and the mentor and it unblocks the largest
 number of columns; everything else is grouped by owner in the closing table.
 
+**This file is the detail; [`MENTOR_BRIEF.md`](MENTOR_BRIEF.md) is what goes to
+the meeting.** The brief restates these questions in plain language and in the
+priority order GUIDANCE set, and its *Answers received* table is where each
+answer first lands before becoming a record in
+[`../data/metadata/resolutions.yaml`](../data/metadata/resolutions.yaml).
+
 | Status | Columns |
 | --- | --- |
 | `verified_from_dictionary` | 21 |
