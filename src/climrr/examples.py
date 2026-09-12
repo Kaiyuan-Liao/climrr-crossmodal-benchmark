@@ -294,7 +294,7 @@ def _semantics_from_dictionary(column: dict) -> dict:
     span = entries[0] if entries else spans[0]
     description = span["text"]
     # The extracted line is "<field name> <description>"; the field name is the
-    # first token and is not part of the meaning.
+    # first word on it and is not part of the meaning.
     meaning = description.split(" ", 1)[1].strip() if " " in description else description
     return {
         "meaning": _attribute(meaning, FROM_DICTIONARY),

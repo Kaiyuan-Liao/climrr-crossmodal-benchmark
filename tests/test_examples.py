@@ -507,3 +507,94 @@ def test_a_short_row_is_an_error_not_a_silent_pad(tmp_path):
 
     with pytest.raises(ExampleError, match="fewer than the"):
         select_rows(path)
+
+
+# --- the mentor document must not drift from the records ----------------------
+#
+# `docs/MENTOR_EXAMPLES.md` is what actually goes in front of the data owner.
+# Its raw tables and generated prose are assembled from the JSON records, and
+# its identifying facts are written by hand. A hand-written fact that has gone
+# stale would be worse here than anywhere else in the repository: it would put a
+# wrong number in front of the one person who could correct it.
+
+MENTOR_DOC = REPO_ROOT / "docs" / "MENTOR_EXAMPLES.md"
+
+
+@pytest.fixture(scope="module")
+def mentor_doc() -> str:
+    if not MENTOR_DOC.is_file():
+        pytest.skip("docs/MENTOR_EXAMPLES.md not present")
+    return MENTOR_DOC.read_text(encoding="utf-8")
+
+
+def test_the_mentor_document_names_each_row_correctly(mentor_doc, built):
+    for record in built:
+        provenance = record["provenance"]
+        assert f"`OID_` {provenance['OID_']}" in mentor_doc
+        assert f"`{provenance['Crossmodel']}`" in mentor_doc
+        assert f"Row ordinal {provenance['row_ordinal']}" in mentor_doc
+        assert f"**rule {provenance['selection_rule']['id']}**" in mentor_doc
+
+
+def test_the_mentor_document_quotes_the_location_of_each_row(mentor_doc, built):
+    """The hand-written "Where it is" lines, against the bytes they describe."""
+    for record in built:
+        values = {item["column"]: item["value"] for item in record["raw"]}
+        where = (
+            f"Where it is: `NAME` `{values['NAME']}`, `State` `{values['State']}`, "
+            f"`GEOID` `{values['GEOID']}`, `TRACTCE` `{values['TRACTCE']}`."
+        )
+        assert where in mentor_doc, where
+
+
+def test_the_mentor_document_carries_every_raw_value(mentor_doc, built):
+    for record in built:
+        for item in record["raw"]:
+            cell = (
+                "*(no value in this file)*"
+                if item["value"] == ""
+                else f"`{item['value']}`"
+            )
+            row = f"| {item['index']} | `{item['column']}` | {cell} |"
+            assert row in mentor_doc, row
+
+
+def test_the_mentor_document_carries_each_generated_presentation(mentor_doc, built):
+    for record in built:
+        assert record["presentation"]["text"].rstrip() in mentor_doc
+
+
+def test_the_mentor_document_reports_the_blank_count_it_claims(mentor_doc, built):
+    blanks = {
+        record["provenance"]["selection_rule"]["id"]: sum(
+            1 for item in record["raw"] if item["value"] == ""
+        )
+        for record in built
+    }
+    assert f"All **{blanks['R-C']}** heat-index columns are empty" in mentor_doc
+    assert blanks["R-A"] == 0 and blanks["R-B"] == 0
+
+
+def test_the_mentor_document_asks_the_row_grain_question_on_every_page(mentor_doc):
+    """A1 is line 1 of every checklist; the ruling requires it there."""
+    checklists = mentor_doc.count("### Checklist")
+    assert checklists == 3
+    assert mentor_doc.count('**One row of this file is one "event".**') == 3
+
+
+def test_the_mentor_document_quotes_the_rulings_four_questions(mentor_doc):
+    from_ruling = (REPO_ROOT / "docs" / "M1_D010_GUIDANCE_RULING.md").read_text(
+        encoding="utf-8"
+    )
+    section = from_ruling.split("### Mentor", 1)[1].split("---", 1)[0]
+    asked = re.findall(r"^\d\. \*\*(.+?)\*\*$", section, re.M)
+
+    assert len(asked) == 4, asked
+    for question in asked:
+        assert question in mentor_doc, question
+
+
+def test_the_mentor_document_uses_no_magnitude_adjective(mentor_doc):
+    lowered = mentor_doc.lower()
+    found = [word for word in MAGNITUDE_WORDS if re.search(rf"\b{word}\b", lowered)]
+    assert found == [], found

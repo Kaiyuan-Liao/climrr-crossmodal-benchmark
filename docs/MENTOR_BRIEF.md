@@ -1,14 +1,50 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-09-12   Next meeting: the next Thursday one-on-one after 2026-09-10; group meeting Mondays
+Last updated: 2026-09-13   Next meetings: group 2026-09-14; one-on-one 2026-09-17
 
 ## Status in five lines
 
 1. The ClimRR table is in the project, unchanged and checksum-pinned — 62,834 rows, 275 columns, every value read as text so identifiers keep their leading zeros.
-2. Every column is catalogued against the data dictionary PDF: **21 fully described, 143 partly, 28 named but unclear, 83 not in the PDF at all** — and that is still true after the 2026-09-10 meeting, because no per-column answer was given.
-3. **The 2026-09-10 meeting settled the big question negatively: there is no further documentation.** No newer dictionary, no assembly document or script, no release note. What we have is all there is.
-4. **The direction changed instead of the evidence.** Rather than documenting all 275 columns, use the subset that is reliable or reasonably explainable, treat each row as one event, and show examples. That is written up as a proposed way of working (D-010) and is **waiting on a review decision** before any of it is built.
-5. Next: get that decision, then build 2–3 example event records from real rows with every assumption listed, and bring them to you — your sign-off on an example is what would make the columns it uses confirmed.
+2. **The 2026-09-10 meeting settled the big question negatively: there is no further documentation.** No newer dictionary, no assembly document or script, no release note. What we have is all there is, and no per-column answer was given.
+3. **The direction changed instead of the evidence**, and it is now approved and built. Rather than documenting all 275 columns: interpret a deliberately small subset, write down the reasoning column by column, and bring worked examples back for confirmation.
+4. **41 of the 275 columns are now interpreted — 21 the dictionary states outright, 20 reasoned and marked as reasoned.** The other 234 are untouched and explicitly unresolved. Nothing reasoned is recorded as verified; the two are different statuses and stay visibly different.
+5. **Three example records are built from real rows and are ready for you.** They are in [`MENTOR_EXAMPLES.md`](MENTOR_EXAMPLES.md), and your answers to the numbered lines there are what would promote any of the 20 reasoned readings to confirmed.
+
+## What I need from this meeting
+
+> ### **Please review the three example records in [`MENTOR_EXAMPLES.md`](MENTOR_EXAMPLES.md).**
+>
+> That is the whole ask. Each has a short numbered checklist; each line is a
+> reading I could not confirm from the dictionary and had to reason out.
+> **Confirm / correct / "don't know"** on each line — ten minutes is enough, and
+> "don't know" is a genuinely useful answer.
+>
+> Four lines matter more than the rest:
+>
+> 1. **Is one row of the CSV one "event"?** Everything rests on this, and it is
+>    my reading of what you said on 2026-09-10 rather than your words.
+> 2. **Does the name stem `tempmaxann` denote the dictionary section
+>    "Temperature Maximum - Annual"?** 101 columns stand or fall with that one
+>    link, and the dictionary never states it.
+> 3. **Which Census vintage are `GEOID` and `TRACTCE` from?** It decides every
+>    join this project could make.
+> 4. **Are these the kinds of table-side records you expect to connect to the
+>    literature?** If the shape is wrong, that matters more than any field.
+
+Whatever you confirm is recorded as naming **exactly those columns and exactly
+what was confirmed**. A general "yes, this is the kind of thing I want" will be
+recorded as approval of the approach and will not be taken as confirming any
+field reading.
+
+## Background: the full question inventory
+
+**Demoted below the examples on purpose.** Q0 was answered on 2026-09-10 and is
+closed; Q1–Q18 were put and not answered per column, and the ruling of
+2026-09-13 asks that the next conversation go **through the examples** rather
+than re-presenting these in the abstract. The table is kept because several
+checklist lines in `MENTOR_EXAMPLES.md` are these questions made concrete — the
+"Affects" column there names the Q-number — and because the ones no example
+touches are still open.
 
 ## Questions for this meeting (priority order)
 
@@ -46,7 +82,7 @@ Full detail for any question, including the exact columns and the PDF line numbe
 | Date | Q-ID | Answer as relayed by Kaiyuan | Recorded as |
 | --- | --- | --- | --- |
 | 2026-09-10 | Q0 | There is no additional metadata for the table — no newer data dictionary, no assembly document or script, no release note. | R-001, D-010. **Q0 closed, answered negative.** Paraphrase, not verbatim. |
-| 2026-09-10 | Q1–Q18 | "We do not need to use all the fields. We could let an AI reason out what the columns mean and use the fields that are reliable or can be reasonably explained. Each row stands for one event, so those fields can be used to construct the event and then build the connection to the literature. She wants to see examples." | R-002, D-010 (**proposed, not yet approved**). A direction, not a column meaning: **no per-column answer was given for any of Q1–Q18**, and none was recorded. "Each row stands for one event" is Kaiyuan's reading and is **still to be confirmed with you**. Paraphrase, not verbatim. |
+| 2026-09-10 | Q1–Q18 | "We do not need to use all the fields. We could let an AI reason out what the columns mean and use the fields that are reliable or can be reasonably explained. Each row stands for one event, so those fields can be used to construct the event and then build the connection to the literature. She wants to see examples." | R-002, D-010 (**approved 2026-09-13, with the GUIDANCE ruling incorporated as D-011**). A direction, not a column meaning: **no per-column answer was given for any of Q1–Q18**, and none was recorded. "Each row stands for one event" is Kaiyuan's reading and is **still to be confirmed with you** — it is line 1 of every checklist in `MENTOR_EXAMPLES.md`. Paraphrase, not verbatim. |
 
 ## Meeting log
 
@@ -57,6 +93,20 @@ Full detail for any question, including the exact columns and the PDF line numbe
 **Answered:** Q0, in the negative — there is no other documentation of any kind. No per-column answer to any of Q1–Q18. Instead a direction: use a reliable subset, let reasoning fill in what can be reasonably explained, treat each row as one event, connect those events to the literature, and come back with examples.
 
 **Newly asked:** confirm with the mentor that **one row = one event** is the right grain, by presenting 2–3 worked example records rather than asking in the abstract.
+
+### 2026-09-13 — no meeting; the work between them
+
+Not a meeting entry, kept here so the meeting log reads continuously. GUIDANCE
+ruled on D-010 (**PASS WITH ACTIONS**) and Kaiyuan approved it with the ruling
+incorporated (D-011). A fifth column status, `inferred_candidate`, now carries
+readings reached by recorded reasoning — strictly below both
+`verified_from_dictionary` and what the mentor confirms, and settable only by a
+column-specific record that quotes the dictionary and states what it could not
+rule out. Twenty columns hold it. Three example records were built from rows
+0, 13 and 147 of the file, picked by rules that look only at whether a cell is
+populated and never at how large a value is.
+
+**To bring to the next meeting:** [`MENTOR_EXAMPLES.md`](MENTOR_EXAMPLES.md).
 
 ---
 
