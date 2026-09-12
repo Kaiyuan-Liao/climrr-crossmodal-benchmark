@@ -23,9 +23,17 @@ the dictionary rules alone gave it in `status_baseline_wp1` and lists the record
 ids that moved it in `resolution_refs`, so `scripts/status_diff.py` can show
 every change since WP1 mechanically.
 
+Since M1-WP3 (D-011) there is a third and weakest source: an
+**inferred-candidate record** in `data/metadata/inferred_candidates.yaml`. Those
+are applied last, after the resolutions, and they never overwrite
+`verified_from_dictionary` or `owner_confirmed` --- a record aimed at such a
+column is reported as blocked rather than applied or dropped. Each column they
+do reach cites the record ids in `inferred_candidate_refs`.
+
 This script assigns no meaning of its own. Every status it writes is backed by a
-span or by a cited resolution record, and every span is a verbatim line of the
-extracted text.
+span, by a cited resolution record, or by a cited inferred-candidate record
+whose own reasoning and spans are tracked alongside it --- and every span is a
+verbatim line of the extracted text.
 """
 
 from __future__ import annotations
@@ -43,7 +51,13 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from climrr.checksums import sha256_file  # noqa: E402
-from climrr.dictionary import ResolutionError, build_coverage, load_resolutions  # noqa: E402
+from climrr.dictionary import (  # noqa: E402
+    InferredCandidateError,
+    ResolutionError,
+    build_coverage,
+    load_inferred_candidates,
+    load_resolutions,
+)
 from climrr.manifest import ManifestMismatchError, verify_file  # noqa: E402
 from climrr.paths import repo_relative  # noqa: E402
 from climrr.profile import read_header  # noqa: E402
@@ -59,12 +73,14 @@ DATA_PATH = REPO_ROOT / "data" / "raw" / "FullData.csv"
 PDF_PATH = REPO_ROOT / "data" / "metadata" / "ClimRR_Metadata_and_Data_Dictionary.pdf"
 TEXT_PATH = REPO_ROOT / "data" / "metadata" / "dictionary_extracted.txt"
 RESOLUTIONS_PATH = REPO_ROOT / "data" / "metadata" / "resolutions.yaml"
+INFERRED_PATH = REPO_ROOT / "data" / "metadata" / "inferred_candidates.yaml"
 MANIFEST_PATH = REPO_ROOT / "data" / "manifest.json"
 OUT_PATH = REPO_ROOT / "artifacts" / "profiles" / "dictionary_coverage.json"
 
 STATUS_ORDER = (
     "verified_from_dictionary",
     "owner_confirmed",
+    "inferred_candidate",
     "partially_resolved",
     "unresolved",
     "structurally_observed_only",
@@ -91,6 +107,7 @@ def main() -> int:
     parser.add_argument("--pdf", type=Path, default=PDF_PATH)
     parser.add_argument("--text", type=Path, default=TEXT_PATH)
     parser.add_argument("--resolutions", type=Path, default=RESOLUTIONS_PATH)
+    parser.add_argument("--inferred-candidates", type=Path, default=INFERRED_PATH)
     parser.add_argument("--manifest", type=Path, default=MANIFEST_PATH)
     parser.add_argument("--out", type=Path, default=OUT_PATH)
     args = parser.parse_args()
@@ -138,10 +155,27 @@ def main() -> int:
         print(f"FAIL: {exc}", file=sys.stderr)
         return 2
 
+    # Required for exactly the reason the resolutions file is: an absent one
+    # would look like "no column has been reasoned about" while actually meaning
+    # "the reasoning was not read", and those must never be confusable.
+    if not args.inferred_candidates.is_file():
+        print(
+            f"FAIL: inferred-candidates file not found: {args.inferred_candidates}",
+            file=sys.stderr,
+        )
+        return 2
+    try:
+        inferred = load_inferred_candidates(
+            args.inferred_candidates.read_text(encoding="utf-8")
+        )
+    except InferredCandidateError as exc:
+        print(f"FAIL: {exc}", file=sys.stderr)
+        return 2
+
     columns = read_header(args.data)
     try:
-        coverage = build_coverage(columns, lines, resolutions)
-    except ResolutionError as exc:
+        coverage = build_coverage(columns, lines, resolutions, inferred)
+    except (ResolutionError, InferredCandidateError) as exc:
         print(f"FAIL: {exc}", file=sys.stderr)
         return 2
 
@@ -162,15 +196,19 @@ def main() -> int:
         "extracted_text_sha256": sha256_file(args.text),
         "resolutions_path": repo_relative(args.resolutions),
         "resolutions_sha256": sha256_file(args.resolutions),
+        "inferred_candidates_path": repo_relative(args.inferred_candidates),
+        "inferred_candidates_sha256": sha256_file(args.inferred_candidates),
         "extractor": extraction.get("extractor"),
         "note": (
             "Line numbers refer to the extracted text file. A stem or narrative match is an "
             "EXECUTOR-proposed candidate and is never verified: the dictionary does not state "
             "which section a CSV column-name stem belongs to. `status_baseline_wp1` is what the "
             "dictionary rules alone concluded and never changes; `status` is that baseline after "
-            "the resolution records in `resolutions_path` are applied; `resolution_refs` names "
-            "the records responsible. No resolution record can produce "
-            "`verified_from_dictionary` (D-009)."
+            "the resolution records in `resolutions_path` and then the inferred-candidate "
+            "records in `inferred_candidates_path` are applied; `resolution_refs` and "
+            "`inferred_candidate_refs` name the records responsible. No resolution record can "
+            "produce `verified_from_dictionary` (D-009), and no inferred-candidate record can "
+            "produce anything but `inferred_candidate` or overwrite a stronger status (D-011)."
         ),
         "environment": {
             "generated_utc": datetime.now(timezone.utc).isoformat(),
@@ -192,6 +230,7 @@ def main() -> int:
     baseline = coverage["status_counts_baseline_wp1"]
     print(f"  dictionary sections parsed: {len(coverage['sections'])}")
     print(f"  resolution records applied: {coverage['n_resolutions']}")
+    print(f"  IC records applied        : {coverage['n_inferred_candidates']}")
     print(f"  columns classified        : {coverage['n_columns']}")
     print(f"    {'status':<28}  {'WP1 baseline':>12}  {'now':>5}")
     for status in STATUS_ORDER:
@@ -203,6 +242,19 @@ def main() -> int:
             else f"{applied['n_columns_changed']} column(s) -> {applied['status_to']}"
         )
         print(f"    {applied['id']} ({applied['decision_ref']}, {applied['source']}): {effect}")
+    blocked = [
+        applied for applied in coverage["inferred_candidates_applied"] if not applied["applied"]
+    ]
+    print(
+        f"    IC records: {coverage['n_inferred_candidates']} read, "
+        f"{coverage['n_inferred_candidates'] - len(blocked)} applied, "
+        f"{len(blocked)} blocked by a stronger status"
+    )
+    for applied in blocked:
+        print(
+            f"      {applied['id']} [{applied['column_index']}] {applied['column_name']}: "
+            f"blocked by {applied['blocked_by_status']}"
+        )
     print(f"  match rules               : {coverage['match_rule_counts']}")
     print(f"  report                    : {repo_relative(args.out)}")
 
@@ -220,6 +272,14 @@ def main() -> int:
             "dictionary_sections_parsed": len(coverage["sections"]),
             "resolutions_sha256": sha256_file(args.resolutions),
             "resolutions_applied": coverage["n_resolutions"],
+            "inferred_candidates_sha256": sha256_file(args.inferred_candidates),
+            "inferred_candidates_read": coverage["n_inferred_candidates"],
+            "inferred_candidates_blocked": [
+                applied["id"]
+                for applied in coverage["inferred_candidates_applied"]
+                if not applied["applied"]
+            ]
+            or "none",
             **{f"status_{status}": counts.get(status, 0) for status in STATUS_ORDER},
             **{f"baseline_status_{status}": baseline.get(status, 0) for status in STATUS_ORDER},
             "match_rule_counts": coverage["match_rule_counts"],
@@ -234,6 +294,7 @@ def main() -> int:
             "pdf_path": repo_relative(args.pdf),
             "extracted_text_path": repo_relative(args.text),
             "resolutions_path": repo_relative(args.resolutions),
+            "inferred_candidates_path": repo_relative(args.inferred_candidates),
         },
     )
     print(f"Run record: {repo_relative(record_path)}")

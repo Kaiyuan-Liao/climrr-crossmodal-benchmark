@@ -1,0 +1,1409 @@
+# Inferred-candidate records --- the reasoning behind every column the M1-WP3
+# pilot interprets without the dictionary having said it (D-010, D-011).
+#
+# An `inferred_candidate` is, in the GUIDANCE ruling's words:
+#
+#     A reasoned interpretation judged plausible enough to test in an example,
+#     but not established as source truth.
+#
+# It is the weakest of the three statuses a pilot column may hold, and the
+# whole point of writing these records down is that it stays visibly weaker:
+#
+#     verified_from_dictionary  !=  owner_confirmed  !=  inferred_candidate
+#
+# What a record must do
+# ---------------------
+# One record, one column. Membership in a family, in `STEM_SECTION_CANDIDATES`,
+# or in any other EXECUTOR-authored map is **not** a reason --- those stay
+# navigation aids exactly as D-009 left them. Each record has to quote the
+# dictionary text it reasons from, say what the column *name* contributes, say
+# what the *values* contribute (from the WP1 profile, which records facts about
+# characters and none about climate), give the reasoning for this column, and
+# then list what it still does not know.
+#
+# `alternatives_unresolved` is not a formality. It is where a record admits the
+# readings it cannot rule out, and it is the field the mentor should read first.
+#
+# Field by field
+# --------------
+#   id                  IC-001, IC-002, ... Assigned in order, never reused.
+#   column_index        0-based ordinal in data/raw/FullData.csv. The key.
+#   column_name         The exact header text. Checked against the table on
+#                       every run; a mismatch raises rather than being ignored.
+#   proposed_meaning    What this column is proposed to hold.
+#   proposed_unit       } each null, or {value, provenance}. `provenance` is
+#   proposed_scenario   } `from_dictionary` when a cited span states it, and
+#   proposed_horizon    } `inferred` when the EXECUTOR reasoned it. A null is a
+#   proposed_season     } deliberate "this record does not claim to know".
+#   dictionary_spans    Line-numbered verbatim quotes of
+#                       data/metadata/dictionary_extracted.txt. Required and
+#                       non-empty --- including where the quoted text is exactly
+#                       what fails to state the attribute being inferred.
+#   name_evidence       What the column name itself contributes.
+#   value_evidence      range / emptiness / distinct, quoted from
+#                       artifacts/profiles/fulldata_profile.json.
+#   reasoning           Why, for this column. Required and non-empty.
+#   alternatives_unresolved  Readings this record cannot rule out.
+#   assumptions         What the record leans on that is not established.
+#   question_ids        The open questions in docs/METADATA_QUESTIONS.md.
+#   status              Always the literal `inferred_candidate`.
+#   disclaimer          Always "not verified, not owner-confirmed".
+#
+# Three rules the code enforces, not conventions
+# ----------------------------------------------
+#   1. A record with no `dictionary_spans`, or with no `reasoning`, is refused.
+#      Between them they are what separates a recorded inference from a guess.
+#   2. A record never overrides `verified_from_dictionary` or `owner_confirmed`.
+#      Aimed at such a column it is reported as blocked and changes nothing.
+#   3. No resolution record may assign `inferred_candidate`, and no record here
+#      may assign anything else. Promotion to `owner_confirmed` happens only in
+#      data/metadata/resolutions.yaml, by a record naming the column and saying
+#      exactly what the mentor confirmed.
+#
+# Two cautions that apply to every record below
+# ---------------------------------------------
+#   * `Historical` everywhere in this file means a **modeled historical
+#     baseline** --- the dictionary's own historical period, 1995-2004, run
+#     through the same models (lines 101-102, 149). It is never an observation,
+#     a measurement, or a record of what happened.
+#   * The `wildfire_*` columns hold a **Fire Weather Index** --- a
+#     meteorological fire-danger index. No record here, and no text generated
+#     from one, may read an FWI value as a fire, an ignition, a burned area, or
+#     a probability of any of those.
+
+schema_version: 1
+
+inferred_candidates:
+
+  # --- Heat Index - Summer: the three DayMax columns and two change columns ---
+  #
+  # The twelve day-count columns of this family are already
+  # `verified_from_dictionary` and appear in no record here. What is missing for
+  # the rest of the family is one thing only: the unit (Q14). The dictionary
+  # names the quantity, the season, the scenario and the horizon in its own
+  # words for each of these columns, and states no unit for any of them.
+
+  - id: IC-001
+    column_index: 238
+    column_name: heatindex_HIS_DayMax
+    proposed_meaning: >-
+      The ensemble-mean summer daily maximum heat index for the modeled
+      historical period --- that is, the average over the summer's roughly 90
+      days of each day's maximum heat index, averaged across the three climate
+      models. Not the single hottest reading of the summer; the dictionary gives
+      that a separate field, `heatindex_HIS_SeaMax`.
+    proposed_unit:
+      value: degrees Fahrenheit, on the extended heat index scale of Lu and Romps (2022)
+      provenance: inferred
+    proposed_scenario:
+      value: Historical --- a modeled baseline, not an observation
+      provenance: from_dictionary
+    proposed_horizon:
+      value: the modeled historical decade, 1995-2004
+      provenance: from_dictionary
+    proposed_season:
+      value: Summer
+      provenance: from_dictionary
+    dictionary_spans:
+      - line: 677
+        quote: >-
+          heatindex_HIS_DayMax Summer daily max heat index (daily high) --
+          Historical
+      - line: 406
+        quote: >-
+          1. Summer daily maximum heat index: this output is calculated by
+          taking the average of every
+      - line: 407
+        quote: >-
+          day’s maximum heat index for the summer months, i.e., about 90
+          readings per summer. We
+      - line: 417
+        quote: >-
+          5 Lu, Yi-Chuan, and David M. Romps. “Extending the Heat Index.”
+          Journal of Applied Meteorology and
+      - line: 679
+        quote: >-
+          heatindex_HIS_Day95 Number of Summer days with daily max heat index
+          above 95 F -- Historical
+      - line: 102
+        quote: >-
+          2094). A historical period (1995 to 2004) is also modeled using GHG
+          concentrations during this period.
+    name_evidence: >-
+      The name matched a dictionary field entry **exactly** --- `exact_name`, not
+      a stem match --- so nothing about which section this column belongs to is
+      being inferred. `HIS` and `DayMax` are the dictionary's own spellings in
+      that entry.
+    value_evidence:
+      range: >-
+        26.541812900000000 to 107.121579490000002 across 62,751 populated rows;
+        no negative value and no zero.
+      emptiness: 83 empty rows of 62,834 --- the same 83 as every column from index 235 on.
+      distinct: 62,610 distinct non-empty values; 18 or 19 characters each, all decimal.
+    reasoning: >-
+      Everything except the unit is stated at line 677 in the dictionary's own
+      words, and the entry matched this column's full name exactly, so no
+      stem-to-section inference is involved. The unit is the single gap, and two
+      spans close it to one candidate. First, the four *verified* sibling
+      columns in the same table define their thresholds in Fahrenheit --- line
+      679 reads "above 95 F" --- and a count of days above a Fahrenheit
+      threshold and the value being thresholded must be on the same scale.
+      Second, the document's own heat-index reference is Lu and Romps' extended
+      heat index (line 417) rather than the classic tabulated one, which is what
+      allows values outside the classic table's domain. The observed range,
+      26.54 to 107.12, is consistent with a Fahrenheit reading and not with a
+      Celsius one at the low end. Line 406-407 is cited because it corrects the
+      reading the name invites: `DayMax` is the summer *average* of daily maxima,
+      not the summer's single maximum.
+    alternatives_unresolved:
+      - >-
+        The unit could be Fahrenheit on some other heat-index formulation; the
+        dictionary cites Lu and Romps but never says that this column was
+        computed with it.
+      - >-
+        Whether the ensemble mean is taken over models then years, or years then
+        models, is not stated and would change the value slightly.
+    assumptions:
+      - >-
+        That the day-count columns' Fahrenheit thresholds (line 679) apply to
+        the same scale as this column's values. The dictionary does not say so
+        in one sentence; it is read across two entries in one table.
+    question_ids: [Q14]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-002
+    column_index: 244
+    column_name: heatindex_M85_DayMax
+    proposed_meaning: >-
+      The same quantity as IC-001 --- the ensemble-mean summer daily maximum heat
+      index --- for the mid-century RCP8.5 projection.
+    proposed_unit:
+      value: degrees Fahrenheit, on the extended heat index scale of Lu and Romps (2022)
+      provenance: inferred
+    proposed_scenario:
+      value: RCP8.5
+      provenance: from_dictionary
+    proposed_horizon:
+      value: Mid-Century, the modeled decade 2045-2054
+      provenance: from_dictionary
+    proposed_season:
+      value: Summer
+      provenance: from_dictionary
+    dictionary_spans:
+      - line: 683
+        quote: >-
+          heatindex_M85_DayMax Summer daily max heat index (daily high) --
+          Mid-Century RCP8.5
+      - line: 101
+        quote: >-
+          Each RCP is modeled over a mid-century period (2045 to 2054) and
+          end-of-century period (2085 to
+      - line: 685
+        quote: >-
+          heatindex_M85_Day95 Number of Summer days with daily max heat index
+          above 95 F -- Mid-Century RCP8.5
+    name_evidence: >-
+      Exact-name match. `M85` is the dictionary's own abbreviation, and line 683
+      expands it to "Mid-Century RCP8.5" without leaving it to be inferred.
+    value_evidence:
+      range: >-
+        29.891907369999998 to 117.152496339999999 across 62,751 populated rows;
+        no negative value and no zero.
+      emptiness: 83 empty rows of 62,834 --- the same rows as index 238.
+      distinct: 62,651 distinct non-empty values; 18 or 19 characters each, all decimal.
+    reasoning: >-
+      Identical to IC-001 for meaning, season and unit, and the scenario and
+      horizon are stated outright at line 683 and dated at line 101. The unit is
+      again the only gap, closed the same way: the verified `heatindex_M85_Day95`
+      in the same table thresholds this scenario's values "above 95 F" (line
+      685). One value-level check supports treating this as the same quantity as
+      index 238 on the same scale rather than a differently-defined one: the
+      observed minimum and maximum are both higher than index 238's by a similar
+      amount at each end, which is what a same-unit shift looks like and not what
+      a change of scale would look like. That is an observation about the two
+      columns' recorded extremes, not a claim about any row or about climate.
+    alternatives_unresolved:
+      - >-
+        Same as IC-001 --- the exact heat-index formulation is cited but never
+        tied to this column.
+    assumptions:
+      - >-
+        That `M85` denotes mid-century RCP8.5 for this column as line 683 says,
+        and that the mid-century decade is the 2045-2054 the front matter
+        defines at line 101 --- the field entry itself gives no years.
+    question_ids: [Q14]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-003
+    column_index: 250
+    column_name: heatindex_E85_DayMax
+    proposed_meaning: >-
+      The same quantity as IC-001 --- the ensemble-mean summer daily maximum heat
+      index --- for the end-of-century RCP8.5 projection.
+    proposed_unit:
+      value: degrees Fahrenheit, on the extended heat index scale of Lu and Romps (2022)
+      provenance: inferred
+    proposed_scenario:
+      value: RCP8.5
+      provenance: from_dictionary
+    proposed_horizon:
+      value: End-Century, the modeled decade 2085-2094
+      provenance: from_dictionary
+    proposed_season:
+      value: Summer
+      provenance: from_dictionary
+    dictionary_spans:
+      - line: 689
+        quote: >-
+          heatindex_E85_DayMax Summer daily max heat index (daily high) --
+          End-Century RCP8.5
+      - line: 101
+        quote: >-
+          Each RCP is modeled over a mid-century period (2045 to 2054) and
+          end-of-century period (2085 to
+      - line: 417
+        quote: >-
+          5 Lu, Yi-Chuan, and David M. Romps. “Extending the Heat Index.”
+          Journal of Applied Meteorology and
+    name_evidence: >-
+      Exact-name match. `E85` is expanded to "End-Century RCP8.5" at line 689 by
+      the dictionary itself.
+    value_evidence:
+      range: >-
+        33.497118630000003 to 135.198733010000012 across 62,751 populated rows;
+        no negative value and no zero.
+      emptiness: 83 empty rows of 62,834 --- the same rows as index 238.
+      distinct: 62,649 distinct non-empty values; 18 or 19 characters each, all decimal.
+    reasoning: >-
+      Meaning, season, scenario and horizon are the dictionary's own at line 689;
+      only the unit is inferred, on the same grounds as IC-001. This column is
+      the one where the choice of formulation is most load-bearing: its recorded
+      maximum, 135.198733010000012, lies beyond the range the classic tabulated
+      heat index covers, and the document's citation of Lu and Romps' *extended*
+      heat index at line 417 is what makes such a value well-defined at all. That
+      is the reason this record proposes the extended scale by name rather than
+      "degrees Fahrenheit" alone --- and the reason the mentor should be asked
+      about this column specifically.
+    alternatives_unresolved:
+      - >-
+        The dictionary cites Lu and Romps in a footnote to the narrative, not in
+        the field table. Whether this column was computed with that formulation
+        is exactly what is unverified.
+      - >-
+        If a different formulation was used, values in this column's upper range
+        may not be comparable with the historical column's.
+    assumptions:
+      - >-
+        That the footnote at line 417 describes the method behind this column,
+        and not merely a work the narrative mentions.
+    question_ids: [Q14]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-004
+    column_index: 256
+    column_name: heatindex_C_M85_DMax
+    proposed_meaning: >-
+      The change in the ensemble-mean summer daily maximum heat index between
+      the modeled historical baseline and mid-century RCP8.5 --- that is, between
+      the quantities in index 238 and index 244.
+    proposed_unit:
+      value: >-
+        degrees Fahrenheit on the same extended heat index scale as indices 238
+        and 244, expressed as a difference
+      provenance: inferred
+    proposed_scenario:
+      value: Historical compared with RCP8.5
+      provenance: from_dictionary
+    proposed_horizon:
+      value: Historical (1995-2004) to Mid-Century (2045-2054)
+      provenance: from_dictionary
+    proposed_season:
+      value: Summer
+      provenance: from_dictionary
+    dictionary_spans:
+      - line: 698
+        quote: >-
+          heatindex_C_M85_DMax Change in summer daily max heat index --
+          Historical to Mid-Century RCP8.5
+      - line: 677
+        quote: >-
+          heatindex_HIS_DayMax Summer daily max heat index (daily high) --
+          Historical
+      - line: 683
+        quote: >-
+          heatindex_M85_DayMax Summer daily max heat index (daily high) --
+          Mid-Century RCP8.5
+    name_evidence: >-
+      Exact-name match. The `C_` prefix and the `DMax` suffix line up with the
+      `DayMax` pair this column is described as the change between, and the
+      dictionary spells that relationship out in words at line 698 rather than
+      leaving it to the name.
+    value_evidence:
+      range: >-
+        1.113239290000000 to 16.019785559999999 across 62,751 populated rows.
+        The profile records 0 negative values and 0 zeros. **This record draws
+        no conclusion from that sign pattern**; it is a fact about characters,
+        recorded because the direction of the subtraction is unresolved below.
+      emptiness: 83 empty rows of 62,834 --- the same rows as indices 238 and 244.
+      distinct: 61,774 distinct non-empty values; 17 or 18 characters each, all decimal.
+    reasoning: >-
+      The dictionary names the quantity, both endpoints and the season at line
+      698, so meaning, scenario, horizon and season are quoted rather than
+      reasoned. The unit is not stated for this column and is not stated for
+      either endpoint. If this column is the difference of two quantities that
+      IC-001 and IC-002 propose are in degrees Fahrenheit, it is in the same
+      units by construction --- so the unit here is inferred no more and no less
+      strongly than the unit there, and confirming or correcting IC-001 settles
+      this record too. The narrower thing that is genuinely open here is the
+      *direction* of the subtraction, which the phrase "Historical to
+      Mid-Century" suggests but does not define.
+    alternatives_unresolved:
+      - >-
+        The dictionary nowhere states the order of the subtraction. "Historical
+        to Mid-Century" reads as (Mid-Century minus Historical), but the
+        document does not define it, and no record here establishes it from the
+        values.
+      - >-
+        Whether this column was computed from the two stored columns or
+        recomputed from the underlying model output is not stated; the two could
+        differ in rounding.
+    assumptions:
+      - >-
+        That "the change" at line 698 is an arithmetic difference rather than a
+        ratio or a percent change. The same table names its percent-change
+        fields explicitly elsewhere, but this entry says only "Change".
+    question_ids: [Q14]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-005
+    column_index: 262
+    column_name: heatindex_C_E85_DMax
+    proposed_meaning: >-
+      The change in the ensemble-mean summer daily maximum heat index between
+      the modeled historical baseline and end-of-century RCP8.5 --- that is,
+      between the quantities in index 238 and index 250.
+    proposed_unit:
+      value: >-
+        degrees Fahrenheit on the same extended heat index scale as indices 238
+        and 250, expressed as a difference
+      provenance: inferred
+    proposed_scenario:
+      value: Historical compared with RCP8.5
+      provenance: from_dictionary
+    proposed_horizon:
+      value: Historical (1995-2004) to End-Century (2085-2094)
+      provenance: from_dictionary
+    proposed_season:
+      value: Summer
+      provenance: from_dictionary
+    dictionary_spans:
+      - line: 704
+        quote: >-
+          heatindex_C_E85_DMax Change in summer daily max heat index --
+          Historical to End-Century RCP8.5
+      - line: 689
+        quote: >-
+          heatindex_E85_DayMax Summer daily max heat index (daily high) --
+          End-Century RCP8.5
+    name_evidence: >-
+      Exact-name match; `C_E85_DMax` pairs with `E85_DayMax` the way
+      `C_M85_DMax` pairs with `M85_DayMax`, and line 704 states the pairing in
+      words.
+    value_evidence:
+      range: >-
+        2.595638280000000 to 40.637987770000002 across 62,751 populated rows.
+        The profile records 0 negative values and 0 zeros; **no conclusion is
+        drawn from that here.**
+      emptiness: 83 empty rows of 62,834 --- the same rows as indices 238 and 250.
+      distinct: 62,234 distinct non-empty values; 17 or 18 characters each, all decimal.
+    reasoning: >-
+      As IC-004, with the end-of-century endpoint. It is kept as a separate
+      record rather than folded into IC-004 because its second endpoint is index
+      250, whose unit inference (IC-003) is the weaker of the two --- the
+      end-of-century column is the one whose values reach past the classic heat
+      index table. A correction to IC-003 would land on this record and not on
+      IC-004, which is precisely the kind of distinction a per-column record
+      exists to keep visible.
+    alternatives_unresolved:
+      - The direction of the subtraction, as in IC-004.
+      - >-
+        If index 250 turns out to be on a different scale from index 238, this
+        difference would not be well defined at all, and that is unresolved
+        until IC-003 is confirmed or corrected.
+    assumptions:
+      - As IC-004 --- that "Change" at line 704 denotes an arithmetic difference.
+    question_ids: [Q14]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  # --- Fire Weather Index - Averages: the summer season's five value and
+  # --- difference columns.
+  #
+  # The eight `Pmid`/`Pend` percent-change columns of this family are already
+  # `verified_from_dictionary` and appear in no record here. Every record below
+  # concerns a **Fire Weather Index** --- a meteorological fire-danger index.
+  # None of them says, or may be read as saying, that a fire occurred.
+
+  - id: IC-006
+    column_index: 189
+    column_name: wildfire_summer_Hist
+    proposed_meaning: >-
+      The multi-model ensemble mean of the summer seasonal average daily Fire
+      Weather Index for the modeled historical period. The FWI is a
+      meteorological fire-danger index: it describes weather conditions, not
+      fire occurrence, ignition, or burned area.
+    proposed_unit:
+      value: dimensionless index value
+      provenance: inferred
+    proposed_scenario:
+      value: Historical --- a modeled baseline, not an observation
+      provenance: from_dictionary
+    proposed_horizon:
+      value: the modeled historical decade, 1995-2004
+      provenance: from_dictionary
+    proposed_season:
+      value: summer, defined by the dictionary as June, July and August
+      provenance: from_dictionary
+    dictionary_spans:
+      - line: 661
+        quote: "Wildfire_summer_hist Seasonal value – Historical"
+      - line: 637
+        quote: Fire Weather Index - Averages
+      - line: 346
+        quote: >-
+          Argonne calculated the average daily FWI value by season for each year
+          within a given scenario (e.g.,
+      - line: 347
+        quote: >-
+          mid-century RCP4.5) and climate model (e.g., CCSM). The seasons are
+          segmented as winter (Dec, Jan,
+      - line: 352
+        quote: >-
+          model ensemble mean of each scenario’s seasonal average daily FWI
+          value.
+    name_evidence: >-
+      The name matched the dictionary field `Wildfire_summer_hist`
+      case-insensitively and in full --- the CSV writes `Hist` where the
+      dictionary writes `hist`, and nothing else differs. The section title
+      above that entry is "Fire Weather Index - Averages" (line 637), which is
+      what establishes that `wildfire` here names an index and not an event.
+    value_evidence:
+      range: >-
+        0.000051130000000 to 70.955902100000003 across all 62,834 rows; no
+        negative values, no zeros.
+      emptiness: no empty rows --- this column is populated on every row of the file.
+      distinct: 60,072 distinct values; 17 or 18 characters each, all decimal.
+    reasoning: >-
+      The field entry at line 661 says what period this is ("Historical") but
+      names the quantity only as "Seasonal value". The section title (line 637)
+      supplies the variable, and the narrative at lines 346-352 supplies the
+      definition in full: the average daily FWI by season, for each year and
+      each of three climate models, then the multi-model ensemble mean of those
+      seasonal averages --- which is exactly what a column called "seasonal
+      value" under that section would hold. The same passage defines summer as
+      June-August, so the season comes from the document rather than from the
+      name. The unit remains unstated anywhere in the document, and "dimensionless"
+      is an inference from what the Fire Weather Index is rather than from
+      anything written here; the observed range, strictly positive and under 71,
+      is consistent with an index value and rules nothing else out on its own.
+    alternatives_unresolved:
+      - >-
+        "Seasonal value" could denote the seasonal average as the narrative
+        describes, or the seasonal 95th percentile that the *FWI Classes*
+        narrative describes at line 357 onward. The two are different
+        quantities. This record proposes the former because this column sits
+        under "Fire Weather Index - **Averages**", but the field entry does not
+        say.
+      - >-
+        Whether this column is the FWI itself or one of the FWI's components
+        (the document's Figure 2 lists several) is not stated in the entry.
+    assumptions:
+      - >-
+        That the "Seasonal value" of line 661 is the quantity the narrative at
+        lines 346-352 defines. The two passages are in different parts of the
+        document and neither cross-references the other.
+      - >-
+        That the CSV stem `wildfire` corresponds to the dictionary's
+        `Wildfire_` field prefix under the FWI Averages section --- here the
+        whole field name matched, so this is a case difference rather than the
+        stem-to-section inference of Q1.
+    question_ids: [Q13]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-007
+    column_index: 190
+    column_name: wildfire_summer_Midc
+    proposed_meaning: >-
+      The same Fire Weather Index quantity as IC-006 --- the ensemble-mean summer
+      seasonal average daily FWI --- for the mid-century RCP8.5 projection.
+    proposed_unit:
+      value: dimensionless index value
+      provenance: inferred
+    proposed_scenario:
+      value: RCP8.5
+      provenance: from_dictionary
+    proposed_horizon:
+      value: Mid-Century, the modeled decade 2045-2054
+      provenance: from_dictionary
+    proposed_season:
+      value: summer, defined by the dictionary as June, July and August
+      provenance: from_dictionary
+    dictionary_spans:
+      - line: 662
+        quote: "Wildfire_summer_midc Seasonal value – Mid-Century RCP 8.5"
+      - line: 101
+        quote: >-
+          Each RCP is modeled over a mid-century period (2045 to 2054) and
+          end-of-century period (2085 to
+    name_evidence: >-
+      Case-insensitive full-name match on `Wildfire_summer_midc`. Note that this
+      family's scenario is stated in the entry, not encoded in the stem: line
+      662 writes "Mid-Century RCP 8.5" out.
+    value_evidence:
+      range: >-
+        0.000014610000000 to 75.703002929999997 across all 62,834 rows; no
+        negative values, no zeros.
+      emptiness: no empty rows.
+      distinct: 60,364 distinct values; 17 or 18 characters each, all decimal.
+    reasoning: >-
+      Scenario and horizon are quoted from line 662 and dated from line 101; the
+      quantity and season carry over from IC-006, which cites the narrative that
+      defines both. Only the unit is inferred, and it is inferred for the same
+      reason and with the same weakness as in IC-006 --- the document never gives
+      one. This column is kept as its own record rather than covered by IC-006
+      because its "Seasonal value" ambiguity has to be resolved the same way for
+      every member of the family or not at all, and a per-column record is what
+      makes a partial answer from the mentor recordable as a partial answer.
+    alternatives_unresolved:
+      - The "average versus 95th percentile" ambiguity of IC-006 applies unchanged.
+      - >-
+        The dictionary writes "RCP 8.5" here with a space and "RCP8.5" in the
+        heat-index table without one. Nothing suggests they differ, but no
+        passage states that they are the same.
+    assumptions:
+      - >-
+        That mid-century means the 2045-2054 decade of line 101; the field entry
+        gives no years.
+    question_ids: [Q13]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-008
+    column_index: 191
+    column_name: wildfire_summer_Endc
+    proposed_meaning: >-
+      The same Fire Weather Index quantity as IC-006 --- the ensemble-mean summer
+      seasonal average daily FWI --- for the end-of-century RCP8.5 projection.
+    proposed_unit:
+      value: dimensionless index value
+      provenance: inferred
+    proposed_scenario:
+      value: RCP8.5
+      provenance: from_dictionary
+    proposed_horizon:
+      value: End-Century, the modeled decade 2085-2094
+      provenance: from_dictionary
+    proposed_season:
+      value: summer, defined by the dictionary as June, July and August
+      provenance: from_dictionary
+    dictionary_spans:
+      - line: 663
+        quote: "Wildfire_summer_endc Seasonal value – End-Century RCP 8.5"
+      - line: 101
+        quote: >-
+          Each RCP is modeled over a mid-century period (2045 to 2054) and
+          end-of-century period (2085 to
+    name_evidence: Case-insensitive full-name match on `Wildfire_summer_endc`.
+    value_evidence:
+      range: >-
+        0.000000000000000 to 78.795402530000004 across all 62,834 rows; no
+        negative values, and exactly 2 rows recorded as
+        `0.000000000000000`.
+      emptiness: no empty rows.
+      distinct: 60,197 distinct values; 17 or 18 characters each, all decimal.
+    reasoning: >-
+      As IC-007, with the end-of-century endpoint quoted from line 663. One
+      value-level fact is specific to this column and is why it gets its own
+      note: it is the only one of the three summer value columns whose recorded
+      minimum is exactly `0.000000000000000`, on 2 rows. Whether those two
+      values are a real index value of zero or a fill is **not** established
+      here --- that is Q17, and this record makes no assumption either way. The
+      other two columns' minima are small but non-zero, which is why the question
+      arises for this column and not for them.
+    alternatives_unresolved:
+      - The "average versus 95th percentile" ambiguity of IC-006 applies unchanged.
+      - >-
+        Whether `0.000000000000000` on 2 rows of this column is a value or a
+        fill code is open (Q17). No example in this pilot selects a row on the
+        basis of that value.
+    assumptions:
+      - >-
+        That end-of-century means the 2085-2094 decade of line 101; the field
+        entry gives no years.
+    question_ids: [Q13, Q17]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-009
+    column_index: 192
+    column_name: wildfire_summer_Dmid
+    proposed_meaning: >-
+      The difference between the mid-century RCP8.5 and modeled historical
+      summer Fire Weather Index values --- that is, between index 190 and index
+      189.
+    proposed_unit:
+      value: dimensionless index value, expressed as a difference
+      provenance: inferred
+    proposed_scenario:
+      value: Historical compared with RCP8.5
+      provenance: from_dictionary
+    proposed_horizon:
+      value: Historical (1995-2004) to Mid-Century (2045-2054)
+      provenance: from_dictionary
+    proposed_season:
+      value: summer, defined by the dictionary as June, July and August
+      provenance: from_dictionary
+    dictionary_spans:
+      - line: 664
+        quote: "Wildfire_summer_Dmid Difference between Mid-Century and Historical"
+      - line: 666
+        quote: "Wildfire_summer_Pmid Percent Change between Mid-Century and Historical"
+    name_evidence: >-
+      Case-insensitive full-name match. The `D`/`P` prefixes distinguish this
+      column from `wildfire_summer_Pmid`, which is `verified_from_dictionary`
+      because its entry states "Percent Change" --- a unit the classifier
+      recognises. This entry says only "Difference", which states an operation
+      and no unit.
+    value_evidence:
+      range: >-
+        -7.466290000000000 to 7.484570030000000 across all 62,834 rows; 30,956
+        rows hold a negative value.
+      emptiness: no empty rows.
+      distinct: 62,021 distinct values; 17 or 18 characters each, all decimal.
+    reasoning: >-
+      The pairing at lines 664 and 666 is the evidence: the same table gives
+      this column "Difference between Mid-Century and Historical" and its
+      neighbour "Percent Change between Mid-Century and Historical", over the
+      same two endpoints. The neighbour is already verified as a percent change,
+      so the distinction the table is drawing is between an absolute difference
+      and a relative one --- which places this column in the units of the
+      quantity itself, whatever those are, and makes its unit exactly as
+      inferred as IC-006's. That the column takes both signs on roughly half the
+      rows is consistent with a difference rather than a magnitude; the record
+      reads nothing further into the sign.
+    alternatives_unresolved:
+      - >-
+        The direction of the subtraction is not stated. "Difference between
+        Mid-Century and Historical" reads as (Mid-Century minus Historical) but
+        the document does not define it.
+      - The "average versus 95th percentile" ambiguity of IC-006 applies unchanged.
+    assumptions:
+      - >-
+        That this column's endpoints are the quantities stored in indices 189
+        and 190 rather than separately computed ones.
+    question_ids: [Q13]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-010
+    column_index: 193
+    column_name: wildfire_summer_Dend
+    proposed_meaning: >-
+      The difference between the end-of-century RCP8.5 and modeled historical
+      summer Fire Weather Index values --- that is, between index 191 and index
+      189.
+    proposed_unit:
+      value: dimensionless index value, expressed as a difference
+      provenance: inferred
+    proposed_scenario:
+      value: Historical compared with RCP8.5
+      provenance: from_dictionary
+    proposed_horizon:
+      value: Historical (1995-2004) to End-Century (2085-2094)
+      provenance: from_dictionary
+    proposed_season:
+      value: summer, defined by the dictionary as June, July and August
+      provenance: from_dictionary
+    dictionary_spans:
+      - line: 665
+        quote: "Wildfire_summer_Dend Difference between End-Century and Historical"
+      - line: 667
+        quote: "Wildfire_summer_Pend Percent Change between End-Century and Historical"
+    name_evidence: >-
+      Case-insensitive full-name match; the `Dend`/`Pend` pairing mirrors the
+      `Dmid`/`Pmid` pairing of IC-009.
+    value_evidence:
+      range: >-
+        -3.122390030000000 to 15.155200000000001 across all 62,834 rows; 6,302
+        rows hold a negative value.
+      emptiness: no empty rows.
+      distinct: 61,302 distinct values; 17 or 18 characters each, all decimal.
+    reasoning: >-
+      As IC-009, against the end-of-century endpoint quoted at line 665 and
+      paired with the verified percent-change column at line 667. Kept separate
+      from IC-009 because its second endpoint is index 191, whose own record
+      (IC-008) carries an open question about two zero values that IC-007 does
+      not --- so a correction to IC-008 reaches this record and not IC-009.
+    alternatives_unresolved:
+      - The direction of the subtraction, as in IC-009.
+      - The "average versus 95th percentile" ambiguity of IC-006 applies unchanged.
+    assumptions:
+      - >-
+        That this column's endpoints are the quantities stored in indices 189
+        and 191 rather than separately computed ones.
+    question_ids: [Q13]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  # --- Location anchor: the minimum needed to say where a row is.
+  #
+  # `Crossmodel` (index 1) is `verified_from_dictionary` and appears in no
+  # record here. The seven columns below appear **nowhere** in the data
+  # dictionary --- not as field names, not in the narrative. Every one of them
+  # therefore cites, as its dictionary evidence, the two passages that together
+  # establish *why* it is absent: the document's own statement of scope (line
+  # 79), and the `Crossmodel` entry (line 455) which shows that the unit of
+  # record throughout the dictionary is a **grid cell**, not a Census geography.
+  # These columns were joined in from elsewhere before the file reached this
+  # project (D-008), and only the mentor can say from which source and vintage.
+  #
+  # **The Census vintage is unknown and the coordinate reference system is
+  # unknown.** No record below claims either, and nothing in this pilot
+  # aggregates by any of these columns.
+
+  - id: IC-011
+    column_index: 2
+    column_name: NAME
+    proposed_meaning: >-
+      A county or county-equivalent name for the area the row's grid cell falls
+      in, joined in from a Census or similar source.
+    proposed_unit: null
+    proposed_scenario: null
+    proposed_horizon: null
+    proposed_season: null
+    dictionary_spans:
+      - line: 79
+        quote: >-
+          This document contains metadata for all of the climate variables
+          available at launch of the alpha release
+      - line: 455
+        quote: >-
+          Crossmodel Truncated name for "Crossmodel_CellName". Text ID for each
+          cell in the polygon grid.
+    name_evidence: >-
+      The bare name `NAME` is the spelling the US Census TIGER/Line products use
+      for the short name of a geography. It contributes little on its own, which
+      is why the reasoning below rests on the values.
+    value_evidence:
+      range: >-
+        Text, 3 to 21 characters. Most frequent values `Yukon-Koyukuk` (2,865
+        rows), `Bethel` (868), `Lincoln` (714).
+      emptiness: no empty rows.
+      distinct: 1,770 distinct values.
+    reasoning: >-
+      Two value facts do the work. First, the most frequent values are the names
+      of US county-equivalents --- `Yukon-Koyukuk` and `Bethel` are Alaska census
+      areas, and the row counts follow: index 3 records `Alaska` on 10,117 rows,
+      the largest state block in the file, which is what a grid over land area
+      rather than population would produce. Second, 1,770 distinct values is
+      **fewer** than the roughly 3,100 counties in the United States, which is
+      what a column of county *names* looks like and not what a column of county
+      *identifiers* looks like: names repeat across states, and `Lincoln` on 714
+      rows is an instance of exactly that. A column of identifiers could not have
+      fewer distinct values than there are counties covered.
+    alternatives_unresolved:
+      - >-
+        Which Census vintage and which product this came from is unknown, and
+        county boundaries and names do change between vintages.
+      - >-
+        Whether the name is of a county, a county-equivalent, or some other
+        geography entirely is not established; Alaska's census areas and
+        Louisiana's parishes are county-equivalents under different words.
+      - >-
+        Whether the join is by containment of the cell centroid, by overlap, or
+        by something else is unknown --- a grid cell need not lie inside one
+        county.
+    assumptions:
+      - >-
+        That this column describes the same grid cell as the rest of the row.
+        The dictionary's unit of record is a grid cell (line 455); this column
+        is not in the dictionary at all, so that correspondence is assumed.
+    question_ids: [Q10]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-012
+    column_index: 3
+    column_name: State
+    proposed_meaning: >-
+      The full name of the US state or state-equivalent the row's grid cell
+      falls in, joined in from the same source as index 2.
+    proposed_unit: null
+    proposed_scenario: null
+    proposed_horizon: null
+    proposed_season: null
+    dictionary_spans:
+      - line: 79
+        quote: >-
+          This document contains metadata for all of the climate variables
+          available at launch of the alpha release
+      - line: 455
+        quote: >-
+          Crossmodel Truncated name for "Crossmodel_CellName". Text ID for each
+          cell in the polygon grid.
+    name_evidence: The name states the geography level outright and is not abbreviated.
+    value_evidence:
+      range: >-
+        Text, 4 to 14 characters. Most frequent values `Alaska` (10,117 rows),
+        `Texas` (4,848), `California` (2,831).
+      emptiness: >-
+        7 empty rows of 62,834 --- the smallest emptiness group in the file, and
+        shared only with index 4.
+      distinct: >-
+        49 distinct non-empty values. (The WP1 inventory records 50 distinct
+        values for this column; that figure counts the empty string as one of
+        them.)
+    reasoning: >-
+      The observed values are US state names and the three most frequent are
+      states with large land areas, in the order land area would predict for a
+      grid --- which is the check that distinguishes a per-cell geographic label
+      from a per-population one. The distinct count is the finding that matters
+      and is why this record exists rather than being folded in with index 4:
+      **49 non-empty values, not 50.** At least one state or state-equivalent
+      present in a national grid is therefore absent from this column, or the
+      set is not the 50 states. This record does not guess which; it records the
+      count and asks.
+    alternatives_unresolved:
+      - >-
+        Which state or state-equivalent accounts for the 49th-versus-50th
+        discrepancy, and whether the District of Columbia, Puerto Rico or other
+        territories are in or out of this column's value set.
+      - >-
+        What the 7 rows with no state are. They are also the only rows where
+        index 4 is empty, so the two columns fail together, but no record here
+        establishes why.
+    assumptions:
+      - >-
+        That this column describes the same grid cell as the rest of the row
+        (as IC-011).
+    question_ids: [Q10, Q16]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-013
+    column_index: 4
+    column_name: State_Abbr
+    proposed_meaning: >-
+      The two-letter postal abbreviation of the state named in index 3.
+    proposed_unit: null
+    proposed_scenario: null
+    proposed_horizon: null
+    proposed_season: null
+    dictionary_spans:
+      - line: 79
+        quote: >-
+          This document contains metadata for all of the climate variables
+          available at launch of the alpha release
+      - line: 455
+        quote: >-
+          Crossmodel Truncated name for "Crossmodel_CellName". Text ID for each
+          cell in the polygon grid.
+    name_evidence: >-
+      `_Abbr` names the relationship to index 3 directly. This is one of the few
+      records in this file where the name carries real weight, and the values
+      corroborate it rather than the other way round.
+    value_evidence:
+      range: >-
+        Text, exactly 2 characters on every non-empty row. Most frequent values
+        `AK` (10,117 rows), `TX` (4,848), `CA` (2,831).
+      emptiness: 7 empty rows of 62,834 --- the same count as index 3.
+      distinct: 49 distinct non-empty values --- the same count as index 3.
+    reasoning: >-
+      Three facts line up rather than one: the values are exactly two characters
+      wide on every populated row, the distinct count is identical to index 3's,
+      and the row counts of the three most frequent values are identical to index
+      3's three most frequent, pair for pair --- `AK` with 10,117 and `Alaska`
+      with 10,117, `TX` with 4,848 and `Texas` with 4,848, `CA` with 2,831 and
+      `California` with 2,831. Those are the recorded frequencies of two columns,
+      and they are consistent with this column being a one-to-one encoding of
+      index 3. They do not *prove* a row-by-row correspondence --- this pilot
+      runs no such check --- and the record claims no more than the frequencies
+      support.
+    alternatives_unresolved:
+      - >-
+        The frequency agreement above is a fact about the two columns' value
+        counts, not a row-level verification. Nothing here establishes that the
+        two columns agree on every row.
+      - The 49-versus-50 question of IC-012 applies unchanged.
+    assumptions:
+      - That the two-letter codes are the USPS state abbreviations rather than another scheme.
+    question_ids: [Q10, Q16]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-014
+    column_index: 106
+    column_name: X
+    proposed_meaning: >-
+      A longitude coordinate, in decimal degrees, for the row's grid cell.
+    proposed_unit:
+      value: decimal degrees of longitude, in an unknown coordinate reference system
+      provenance: inferred
+    proposed_scenario: null
+    proposed_horizon: null
+    proposed_season: null
+    dictionary_spans:
+      - line: 79
+        quote: >-
+          This document contains metadata for all of the climate variables
+          available at launch of the alpha release
+      - line: 455
+        quote: >-
+          Crossmodel Truncated name for "Crossmodel_CellName". Text ID for each
+          cell in the polygon grid.
+    name_evidence: >-
+      A bare `X` says only that this is one axis of a coordinate pair with index
+      107. It does not say which axis, which units, or in which reference system
+      --- all three come from the values or from nowhere.
+    value_evidence:
+      range: >-
+        -172.955380810000008 to -67.034262240000004. Every one of the 62,834
+        rows holds a negative value.
+      emptiness: no empty rows.
+      distinct: 62,834 distinct values --- one per row, none repeated.
+    reasoning: >-
+      The range is the evidence. Values confined to (-173, -67) are within the
+      valid domain of longitude and outside the valid domain of latitude, which
+      fixes this as the longitude axis of the pair even though the name does not
+      say so; the companion column at index 107 falls in (24.9, 70.2), which is
+      valid as latitude and pins the assignment from the other side. The interval
+      also spans west to east across the United States including Alaska, which is
+      consistent with the coverage the rest of the file shows. Every value is
+      distinct across all 62,834 rows, which is consistent with one point per
+      grid cell. The coordinate reference system is **not** determined by any of
+      this: at this precision the common geographic systems are not
+      distinguishable from a coordinate range, and the dictionary names none.
+    alternatives_unresolved:
+      - >-
+        **The coordinate reference system is unknown.** NAD83 and WGS84 are both
+        consistent with everything observed here and differ by amounts this
+        evidence cannot resolve.
+      - >-
+        Whether the point is the grid cell's centroid, a corner, or a
+        representative point inside it is unknown.
+      - >-
+        Whether these coordinates locate the ClimRR grid cell or the joined
+        Census geography is not established.
+    assumptions:
+      - >-
+        That index 106 and index 107 are the two axes of one coordinate pair.
+        They are separate columns and nothing in the file states that they are
+        paired.
+    question_ids: [Q10]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-015
+    column_index: 107
+    column_name: Y
+    proposed_meaning: >-
+      A latitude coordinate, in decimal degrees, for the row's grid cell.
+    proposed_unit:
+      value: decimal degrees of latitude, in an unknown coordinate reference system
+      provenance: inferred
+    proposed_scenario: null
+    proposed_horizon: null
+    proposed_season: null
+    dictionary_spans:
+      - line: 79
+        quote: >-
+          This document contains metadata for all of the climate variables
+          available at launch of the alpha release
+      - line: 455
+        quote: >-
+          Crossmodel Truncated name for "Crossmodel_CellName". Text ID for each
+          cell in the polygon grid.
+    name_evidence: >-
+      A bare `Y`, contributing the same as `X` does --- that this is one axis of
+      a pair, and nothing more.
+    value_evidence:
+      range: 24.973584720000002 to 70.175165050000004; no negative values.
+      emptiness: no empty rows.
+      distinct: 62,834 distinct values --- one per row, none repeated.
+    reasoning: >-
+      The observed interval lies inside (-90, 90) and so is admissible as
+      latitude; index 106's interval is not, which is what assigns the two axes
+      to each other's roles. The span reaches 70.18 at its northern end, north of
+      the Arctic Circle, which is consistent with the Alaska coverage indices 2
+      and 3 show and is the reason this column's upper bound is worth recording
+      rather than treating as a rounding artifact. As with IC-014, the reference
+      system is not determined by any of this.
+    alternatives_unresolved:
+      - The coordinate reference system is unknown, exactly as in IC-014.
+      - Whether the point is a centroid, a corner, or a representative point is unknown.
+    assumptions:
+      - >-
+        That index 106 and index 107 are the two axes of one coordinate pair
+        (as IC-014).
+    question_ids: [Q10]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-016
+    column_index: 108
+    column_name: TRACTCE
+    proposed_meaning: >-
+      A US Census tract code --- the six-digit, zero-padded tract portion of a
+      tract identifier, unique only within its county.
+    proposed_unit: null
+    proposed_scenario: null
+    proposed_horizon: null
+    proposed_season: null
+    dictionary_spans:
+      - line: 79
+        quote: >-
+          This document contains metadata for all of the climate variables
+          available at launch of the alpha release
+      - line: 455
+        quote: >-
+          Crossmodel Truncated name for "Crossmodel_CellName". Text ID for each
+          cell in the polygon grid.
+    name_evidence: >-
+      `TRACTCE` is the field name the US Census TIGER/Line shapefiles use for
+      the tract code --- `CE` for census. On its own this would be name evidence
+      only, which is why the width and padding facts below carry the record.
+    value_evidence:
+      range: >-
+        Text, exactly 6 characters on every non-empty row, all digits;
+        lexicographic minimum `000100`, maximum `990300`. Most frequent values
+        `000100` (6,618 rows), `000200` (2,385), `950100` (2,091).
+      emptiness: 8 empty rows of 62,834 --- the same 8 as indices 109, 110 and 111.
+      distinct: 4,688 distinct non-empty values.
+    reasoning: >-
+      The values are fixed-width zero-padded numeric strings: exactly six
+      characters on every populated row, with 29,467 rows carrying a leading
+      zero. Fixed width plus zero padding is the signature of a code rather than
+      a number --- a numeric field would not pad, and the padding is the reason
+      this column must be read and kept as text. The distinct count, 4,688, is
+      far below the number of Census tracts in the United States and is
+      consistent with a code that repeats across counties: `000100` occurs on
+      6,618 rows because very many counties have a tract `0001.00`. That is the
+      same repeat-across-parent pattern IC-011 observes for county names, and it
+      is what a within-county code looks like. Index 109's values are 11
+      characters, and 11 is 2 + 3 + 6 --- the widths of a state code, a county
+      code and this column --- which is the arithmetic that makes this column the
+      tract part of that identifier rather than something unrelated.
+    alternatives_unresolved:
+      - >-
+        **The Census vintage is unknown**, and tract codes are re-cut between
+        decennial vintages. A join made on this column against the wrong vintage
+        would be wrong in ways that do not announce themselves.
+      - >-
+        That index 109 ends with this column's value on any given row is **not**
+        checked by this pilot. The 2 + 3 + 6 argument is about widths, not about
+        rows.
+      - What the 8 empty rows are is unknown (Q16).
+    assumptions:
+      - >-
+        That the CSV preserves the leading zeros as stored --- the profile
+        records them, and every read in this project is `dtype=str`, so this
+        holds here; it may not hold for a consumer that reads the file as
+        numbers.
+    question_ids: [Q10, Q16]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-017
+    column_index: 109
+    column_name: GEOID
+    proposed_meaning: >-
+      A US Census tract identifier: an 11-character string composed of a
+      2-character state FIPS code, a 3-character county FIPS code and the
+      6-character tract code of index 108.
+    proposed_unit: null
+    proposed_scenario: null
+    proposed_horizon: null
+    proposed_season: null
+    dictionary_spans:
+      - line: 79
+        quote: >-
+          This document contains metadata for all of the climate variables
+          available at launch of the alpha release
+      - line: 455
+        quote: >-
+          Crossmodel Truncated name for "Crossmodel_CellName". Text ID for each
+          cell in the polygon grid.
+    name_evidence: >-
+      `GEOID` is the US Census name for a concatenated geographic identifier.
+      The name says nothing about which geography level, which is what the
+      character width below settles.
+    value_evidence:
+      range: >-
+        Text, exactly 11 characters on every non-empty row, all digits;
+        lexicographic minimum `01001020300`, maximum `56045951100`. Most
+        frequent values `02290000100` (877 rows), `02290000200` (822),
+        `02185000200` (697).
+      emptiness: 8 empty rows of 62,834 --- the same 8 as index 108.
+      distinct: 12,940 distinct non-empty values.
+    reasoning: >-
+      Three recorded facts converge. (1) Width: every populated value is exactly
+      11 characters, and 11 is 2 + 3 + 6 --- the widths of a Census state code, a
+      county code and a tract code. (2) Padding: 19,074 rows carry a leading
+      zero, so these are codes and not numbers, and the minimum `01001020300`
+      begins `01` while the maximum `56045951100` begins `56` --- the two ends of
+      the range of Census state FIPS codes for the fifty states. (3) Consistency
+      with the other joined columns: the most frequent value `02290000100`
+      decomposes as state `02`, county `290`, tract `000100`, and the rows where
+      index 2 reads `Yukon-Koyukuk` are the largest block in the file at 2,865
+      --- Alaska is state `02`. That is three independent structural readings
+      agreeing, which is what raises this above a name-based guess. It is still
+      not verification: **the vintage is unknown**, and the decomposition has not
+      been checked row by row.
+    alternatives_unresolved:
+      - >-
+        **The Census vintage is unknown.** Tract GEOIDs are not stable across
+        decennial vintages, and the tract vintage decides every join this
+        project could later make.
+      - >-
+        Whether the trailing 6 characters equal index 108 on every row is not
+        checked by this pilot.
+      - >-
+        Whether this identifies the tract the grid cell's centroid falls in, or
+        the tract with the greatest overlap, or something else, is unknown.
+      - What the 8 empty rows are is unknown (Q16).
+    assumptions:
+      - >-
+        That the 2 + 3 + 6 decomposition is the Census one. The widths are
+        observed; the meaning assigned to each part is not.
+      - >-
+        That this column must be read and kept as text. Coercing it to an
+        integer would delete the leading zeros of 19,074 rows and silently
+        corrupt every join.
+    question_ids: [Q10, Q16]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  # --- Stem-assumption probe: three `tempmaxann` columns.
+  #
+  # These three records exist for one purpose: to put the **Q1 stem-to-section
+  # assumption** in front of the mentor on a concrete case rather than in the
+  # abstract. Every one of the 101 columns at indices 5-105 depends on it.
+  #
+  # The dictionary names its fields by suffix inside a per-variable section ---
+  # `HIST`, `RCP85_ENDC`, `END85_HIST` --- and the CSV writes a stem plus that
+  # suffix. **The dictionary never states that a CSV stem denotes a section**,
+  # so reaching the section's description requires an inference about how the
+  # export was built, which D-009 reserves for the data owner. R-001 established
+  # that no export specification exists to settle it.
+  #
+  # So these records infer *the link*, not the wording. The unit these columns
+  # carry is printed in the dictionary in plain sight --- and is tagged
+  # `inferred` here anyway, because a quoted unit reached through an unconfirmed
+  # link is an inference, not a quotation.
+
+  - id: IC-018
+    column_index: 44
+    column_name: tempmaxann_hist
+    proposed_meaning: >-
+      The ensemble-mean annual average of daily maximum temperature for the
+      modeled historical period --- if, and only if, the CSV stem `tempmaxann`
+      denotes the dictionary section "Temperature Maximum - Annual".
+    proposed_unit:
+      value: degrees Fahrenheit
+      provenance: inferred
+    proposed_scenario:
+      value: Historical --- a modeled baseline, not an observation
+      provenance: inferred
+    proposed_horizon:
+      value: the modeled historical decade, 1995-2004
+      provenance: inferred
+    proposed_season:
+      value: none --- an annual average, not a seasonal one
+      provenance: inferred
+    dictionary_spans:
+      - line: 513
+        quote: Temperature Maximum - Annual
+      - line: 518
+        quote: "HIST Max Daily Temperature (°F) – Annual Average – Historical"
+      - line: 149
+        quote: >-
+          historical (1995 – 2004), the mid-century (2045 – 2054), or the
+          end-of-century (2085 – 2094). For each
+    name_evidence: >-
+      The column name splits into a stem `tempmaxann` and the dictionary field
+      name `hist`. The suffix `hist` matches a field in **eleven** sections ---
+      every section has one --- so the suffix alone identifies nothing. The stem
+      is what would select a section, and the stem appears nowhere in the
+      dictionary.
+    value_evidence:
+      range: >-
+        9.471329689999999 to 85.500000000000000 across all 62,834 rows; no
+        negative values.
+      emptiness: no empty rows.
+      distinct: 58,542 distinct values; 17 or 18 characters each, all decimal.
+    reasoning: >-
+      The whole of this record is one inference stated plainly: that
+      `tempmaxann` names the section at line 513. Two things support it and
+      neither establishes it. The stem decomposes into `tempmax` and `ann`,
+      which are the two elements of that section's title; and the observed range,
+      9.47 to 85.50, is admissible as an annual average of daily maxima in
+      degrees Fahrenheit across a domain that includes Alaska, and would not be
+      admissible in Celsius for the same domain. **What is missing is any
+      statement, anywhere in the tracked documentation, that the export prefixes
+      each layer's fields with a stem naming that layer.** R-001 (2026-09-10)
+      established that no such statement exists to be found. This record is
+      therefore the Q1 assumption made concrete on one column so the mentor can
+      confirm or reject it on a case rather than on a principle --- if she rejects
+      it here, 101 columns fall with it.
+    alternatives_unresolved:
+      - >-
+        `tempmaxann` could denote a different layer, or a differently-computed
+        variant of the same one that was not in the alpha release the dictionary
+        documents (line 79).
+      - >-
+        Even granting the section, the dictionary's "Temperature Maximum -
+        Annual" table has known defects: Q3 records that `MID85_45` and
+        `END85_45` appear twice in it, the second pair describing *Minimum*
+        temperature. That does not touch this column's `HIST` row, but it is
+        evidence that the table was edited carelessly.
+    assumptions:
+      - "stem `tempmaxann` = section \"Temperature Maximum - Annual\" (line 513) --- Q1, unconfirmed"
+      - >-
+        That `HIST` in that section denotes the same modeled historical decade
+        the front matter defines at line 149.
+    question_ids: [Q1]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-019
+    column_index: 48
+    column_name: tempmaxann_rcp85_endc
+    proposed_meaning: >-
+      The ensemble-mean annual average of daily maximum temperature for
+      end-of-century RCP8.5 --- under the same unconfirmed stem-to-section link
+      as IC-018.
+    proposed_unit:
+      value: degrees Fahrenheit
+      provenance: inferred
+    proposed_scenario:
+      value: RCP8.5
+      provenance: inferred
+    proposed_horizon:
+      value: End-Century, the modeled decade 2085-2094
+      provenance: inferred
+    proposed_season:
+      value: none --- an annual average, not a seasonal one
+      provenance: inferred
+    dictionary_spans:
+      - line: 513
+        quote: Temperature Maximum - Annual
+      - line: 522
+        quote: >-
+          RCP85_ENDC Max Daily Temperature (°F) – Annual Average –
+          End-Century RCP8.5
+      - line: 101
+        quote: >-
+          Each RCP is modeled over a mid-century period (2045 to 2054) and
+          end-of-century period (2085 to
+    name_evidence: >-
+      Stem `tempmaxann` plus the dictionary field name `rcp85_endc`. Unlike
+      `hist`, this suffix is not present in all eleven sections, but it is
+      present in several, so it still does not select one on its own.
+    value_evidence:
+      range: >-
+        17.606500629999999 to 93.941596980000000 across all 62,834 rows; no
+        negative values.
+      emptiness: no empty rows.
+      distinct: 58,292 distinct values; 18 characters each, all decimal.
+    reasoning: >-
+      The same single inference as IC-018, on the column where the scenario is
+      most explicit in the name. One additional observation is specific to this
+      column: its recorded minimum and maximum are both higher than index 44's,
+      by 8.14 at the low end and 8.44 at the high end. Those are the two columns'
+      recorded extremes over the whole file and nothing more --- **no row-level
+      or climate claim is made from them** --- but a same-unit relationship
+      between the two columns is consistent with them, and a change of unit
+      between them would not be.
+    alternatives_unresolved:
+      - Every alternative in IC-018 applies unchanged; the link is the same link.
+      - >-
+        The dictionary writes `RCP85_ENDC` here and `RCP 8.5` in the FWI table
+        (line 663). Nothing suggests the scenarios differ, but the document
+        never states they are the same.
+    assumptions:
+      - "stem `tempmaxann` = section \"Temperature Maximum - Annual\" (line 513) --- Q1, unconfirmed"
+      - >-
+        That end-of-century means the 2085-2094 decade of line 101; the field
+        entry gives no years.
+    question_ids: [Q1]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed
+
+  - id: IC-020
+    column_index: 52
+    column_name: tempmaxann_end85_hist
+    proposed_meaning: >-
+      The change in the ensemble-mean annual average of daily maximum
+      temperature between the modeled historical baseline and end-of-century
+      RCP8.5 --- under the same unconfirmed stem-to-section link as IC-018.
+    proposed_unit:
+      value: degrees Fahrenheit, expressed as a difference
+      provenance: inferred
+    proposed_scenario:
+      value: Historical compared with RCP8.5
+      provenance: inferred
+    proposed_horizon:
+      value: Historical (1995-2004) to End-Century (2085-2094)
+      provenance: inferred
+    proposed_season:
+      value: none --- an annual average, not a seasonal one
+      provenance: inferred
+    dictionary_spans:
+      - line: 513
+        quote: Temperature Maximum - Annual
+      - line: 526
+        quote: >-
+          END85_HIST Max Daily Temperature (°F) – Change in Annual Average –
+          Historical and End-Century RCP8.5
+    name_evidence: >-
+      Stem `tempmaxann` plus the dictionary field name `end85_hist`. The suffix
+      names both endpoints, which is why this column is in the pilot: it is the
+      one of the three where the dictionary's own wording, "Change in Annual
+      Average", is doing the most work.
+    value_evidence:
+      range: >-
+        3.466300010000000 to 17.418399810000000 across all 62,834 rows. The
+        profile records 0 negative values and 0 zeros; **this record draws no
+        conclusion from that sign pattern.**
+      emptiness: no empty rows.
+      distinct: 46,781 distinct values; 17 or 18 characters each, all decimal.
+    reasoning: >-
+      The same single inference as IC-018. Two things make this column worth
+      including as the third probe. First, its entry at line 526 states the
+      operation ("Change in Annual Average") and both endpoints, so if the stem
+      link is confirmed this column needs nothing further --- it is the cleanest
+      test of whether confirming Q1 actually resolves a column or merely moves
+      the question. Second, the dictionary's ordering of the endpoints,
+      "Historical and End-Century RCP8.5", states neither the direction of the
+      subtraction nor which is subtracted from which, so even a confirmed link
+      leaves that open.
+    alternatives_unresolved:
+      - Every alternative in IC-018 applies unchanged; the link is the same link.
+      - >-
+        The direction of the subtraction is not stated. "Historical and
+        End-Century RCP8.5" names the endpoints in the opposite order to the
+        heat-index table's "Historical to Mid-Century" phrasing, and neither
+        defines an operation.
+    assumptions:
+      - "stem `tempmaxann` = section \"Temperature Maximum - Annual\" (line 513) --- Q1, unconfirmed"
+      - >-
+        That "Change" at line 526 denotes an arithmetic difference rather than a
+        ratio or a percent change.
+    question_ids: [Q1]
+    status: inferred_candidate
+    disclaimer: not verified, not owner-confirmed

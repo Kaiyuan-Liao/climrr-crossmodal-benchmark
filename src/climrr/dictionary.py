@@ -69,11 +69,18 @@ Status rules
   is **never** produced by the rules above, and the rules above never produce
   it; the two statuses carry comparable confidence and different evidence, and
   keeping them apart is the point.
+* `inferred_candidate` --- added in M1-WP3 under D-011. A reasoned
+  interpretation, judged plausible enough to test in an example but not
+  established as source truth. It comes only from a column-specific record in
+  `data/metadata/inferred_candidates.yaml`, it is **strictly below** the two
+  statuses above, and it never overrides either. The rules in this module never
+  produce it and no resolution record may assign it.
 
 Every status cites at least one span; a status without one is `unresolved`. A
 column at `owner_confirmed` cites its resolution record ids in
-`resolution_refs` instead, and keeps the status the dictionary rules alone gave
-it in `status_baseline_wp1` so the WP1 diff stays mechanical.
+`resolution_refs`, a column at `inferred_candidate` cites its record ids in
+`inferred_candidate_refs`, and both keep the status the dictionary rules alone
+gave them in `status_baseline_wp1` so the WP1 diff stays mechanical.
 """
 
 from __future__ import annotations
@@ -559,6 +566,9 @@ def classify_column(
     record = _classify_from_dictionary(index, column, sections, entry_index, lines)
     record["status_baseline_wp1"] = record["status"]
     record["resolution_refs"] = []
+    # Set only by a record in data/metadata/inferred_candidates.yaml (D-011),
+    # and only where that record did not run into a higher status.
+    record["inferred_candidate_refs"] = []
     # Set only by a resolution carrying an explicit stem-to-section map. Kept
     # separate from `candidate_section`, which stays EXECUTOR-proposed forever.
     record["resolved_section"] = None
@@ -574,12 +584,21 @@ def _count_by(records: list[dict], field: str) -> dict[str, int]:
 
 
 def build_coverage(
-    columns: list[str], lines: list[str], resolutions: list[dict] | None = None
+    columns: list[str],
+    lines: list[str],
+    resolutions: list[dict] | None = None,
+    inferred_candidates: list[dict] | None = None,
 ) -> dict:
     """Coverage record for every column, plus the status summary.
 
-    With no resolutions this reproduces the WP1 result exactly, and the two
-    status summaries are equal. That equality is the WP2a acceptance check.
+    With neither resolutions nor inferred candidates this reproduces the WP1
+    result exactly, and the two status summaries are equal. That equality is the
+    WP2a acceptance check and it still holds.
+
+    Order matters and is fixed: dictionary rules, then resolution records, then
+    inferred-candidate records. An inferred candidate is applied last precisely
+    so that it can never step on a status a person confirmed --- and, arriving
+    last, it still refuses to overwrite one.
     """
     sections = parse_dictionary(lines)
     entry_index = index_entries(sections)
@@ -590,6 +609,7 @@ def build_coverage(
 
     baseline = _count_by(records, "status_baseline_wp1")
     applied = apply_resolutions(records, resolutions or [])
+    inferred_applied = apply_inferred_candidates(records, inferred_candidates or [])
     summary = _count_by(records, "status")
     rules = _count_by(records, "match_rule")
 
@@ -609,6 +629,8 @@ def build_coverage(
         "match_rule_counts": rules,
         "n_resolutions": len(resolutions or []),
         "resolutions_applied": applied,
+        "n_inferred_candidates": len(inferred_candidates or []),
+        "inferred_candidates_applied": inferred_applied,
         "columns": records,
     }
 
@@ -853,6 +875,14 @@ def validate_resolution(record: object, *, where: str = "resolution") -> dict:
         f"`{OWNER_CONFIRMED}` instead (D-009)",
     )
     _require(
+        effect["to"] != INFERRED_CANDIDATE,
+        where,
+        f"`effect.to` may never be `{INFERRED_CANDIDATE}`. That status means the EXECUTOR "
+        "reasoned the meaning out and wrote the reasoning down; an answer from a person is "
+        f"stronger evidence, not weaker, and belongs at `{OWNER_CONFIRMED}`. Inferred "
+        "candidates are set only by data/metadata/inferred_candidates.yaml (D-011)",
+    )
+    _require(
         effect["to"] in RESOLUTION_TARGET_STATUSES,
         where,
         f"`effect.to` must be one of {sorted(RESOLUTION_TARGET_STATUSES)}, got {effect['to']!r}",
@@ -992,6 +1022,400 @@ def apply_resolutions(coverage_records: list[dict], resolutions: list[dict]) -> 
                 "status_to": record["effect"]["to"],
                 "columns_changed": targets,
                 "n_columns_changed": len(targets),
+            }
+        )
+    return applied
+
+
+# --- Inferred-candidate records (M1-WP3, D-010 / D-011) ----------------------
+#
+# `inferred_candidate` is the third and weakest way a column can acquire a
+# status, added by D-011 after the GUIDANCE ruling on D-010. It means exactly
+# what the ruling says it means:
+#
+#     A reasoned interpretation judged plausible enough to test in an example,
+#     but not established as source truth.
+#
+# The whole value of the status is that it is *visibly* weaker than the other
+# two, so the mechanism is built to make it impossible to reach by accident:
+#
+# 1. **Only a record in `data/metadata/inferred_candidates.yaml` can set it.**
+#    Not the dictionary rules above --- they never emit it. Not the
+#    EXECUTOR-authored `STEM_SECTION_CANDIDATES` or `NARRATIVE_CANDIDATES` maps,
+#    which stay navigation aids exactly as D-009 left them. Not a resolution
+#    record: `inferred_candidate` is absent from `RESOLUTION_TARGET_STATUSES`
+#    and `validate_resolution` refuses it by name, because an answer from a
+#    person is evidence of a different kind and belongs at `owner_confirmed`.
+# 2. **It never overrides a higher status.** A column already at
+#    `verified_from_dictionary` or `owner_confirmed` keeps it, and the record is
+#    reported as blocked rather than silently applied or silently dropped.
+# 3. **Every record is column-specific.** Membership in a family, or in a
+#    candidate map, is not a reason; the record must quote dictionary spans and
+#    give reasoning for that one column, and a record missing either is refused.
+#
+# The record schema is deliberately verbose. Each of `proposed_unit`,
+# `proposed_scenario`, `proposed_horizon` and `proposed_season` is either null
+# or a `{value, provenance}` pair whose provenance says whether the dictionary
+# stated it (`from_dictionary`) or the EXECUTOR reasoned it (`inferred`) --- so a
+# record that leans entirely on inference cannot be mistaken for one that mostly
+# quotes. `alternatives_unresolved` and `assumptions` are required and may be
+# empty lists, but writing them out is the point of the exercise.
+
+#: A reasoned, recorded, column-specific interpretation. Below both
+#: `owner_confirmed` and `verified_from_dictionary`, and never promoted to
+#: either except by a resolution record that names the column.
+INFERRED_CANDIDATE = "inferred_candidate"
+
+#: Statuses an inferred-candidate record may not overwrite.
+IC_BLOCKING_STATUSES = frozenset({VERIFIED_FROM_DICTIONARY, OWNER_CONFIRMED})
+
+#: The exact words every record must carry, so the caveat travels with the data
+#: rather than living only in the documentation around it.
+IC_DISCLAIMER = "not verified, not owner-confirmed"
+
+#: `from_dictionary` --- the dictionary states this in a span the record cites.
+#: `inferred` --- the EXECUTOR reasoned it and the dictionary does not say it.
+IC_PROVENANCE = frozenset({"inferred", "from_dictionary"})
+
+#: The four semantic attributes a record may propose. Each is nullable; a null
+#: is a deliberate "this record does not claim to know", which is a stronger
+#: statement than a guess and is rendered downstream as `unknown`.
+IC_TAGGED_FIELDS = (
+    "proposed_unit",
+    "proposed_scenario",
+    "proposed_horizon",
+    "proposed_season",
+)
+
+IC_REQUIRED_KEYS = frozenset(
+    {
+        "id",
+        "column_index",
+        "column_name",
+        "proposed_meaning",
+        *IC_TAGGED_FIELDS,
+        "dictionary_spans",
+        "name_evidence",
+        "value_evidence",
+        "reasoning",
+        "alternatives_unresolved",
+        "assumptions",
+        "question_ids",
+        "status",
+        "disclaimer",
+    }
+)
+
+#: `notes` is EXECUTOR commentary and affects nothing.
+IC_OPTIONAL_KEYS = frozenset({"notes"})
+
+#: Keys of `value_evidence`. All three are required and all three come from
+#: `artifacts/profiles/fulldata_profile.json` --- facts about characters, not
+#: about climate. They are what stops a record's reasoning from being "the name
+#: suggests it".
+IC_VALUE_EVIDENCE_KEYS = frozenset({"range", "emptiness", "distinct"})
+
+IC_ID_RE = re.compile(r"^IC-\d{3}$")
+
+INFERRED_CANDIDATES_SCHEMA_VERSION = 1
+
+
+class InferredCandidateError(ValueError):
+    """An inferred-candidate record is malformed, or would do what it may not."""
+
+
+def _require_ic(condition: bool, where: str, message: str) -> None:
+    if not condition:
+        raise InferredCandidateError(f"{where}: {message}")
+
+
+def _validate_ic_tagged_field(record: dict, key: str, where: str) -> None:
+    """One nullable `{value, provenance}` attribute.
+
+    Null is allowed and means "not claimed". A present value must say which of
+    the two kinds of evidence it rests on, because that distinction is the
+    entire reason this status exists.
+    """
+    field = record[key]
+    if field is None:
+        return
+    _require_ic(
+        isinstance(field, dict),
+        where,
+        f"`{key}` must be null or a mapping with keys value and provenance, "
+        f"got {type(field).__name__}",
+    )
+    _require_ic(
+        set(field) == {"value", "provenance"},
+        where,
+        f"`{key}` must have exactly the keys value and provenance, got {sorted(field)}",
+    )
+    _require_ic(
+        isinstance(field["value"], str) and field["value"].strip() != "",
+        where,
+        f"`{key}.value` must be a non-empty string; use null for the whole field "
+        "to say the record does not claim to know",
+    )
+    _require_ic(
+        field["provenance"] in IC_PROVENANCE,
+        where,
+        f"`{key}.provenance` must be one of {sorted(IC_PROVENANCE)}, "
+        f"got {field['provenance']!r}",
+    )
+
+
+def validate_inferred_candidate(record: object, *, where: str = "inferred candidate") -> dict:
+    """Check one inferred-candidate record and return it. Raises on any fault.
+
+    Strict in the same way and for the same reason as `validate_resolution`: an
+    unknown key is an error rather than something ignored, because a misspelled
+    field that silently does nothing would look applied and not be.
+
+    Two refusals carry the ruling rather than the schema, and both are tested:
+
+    * a record with **no dictionary spans** is refused, and so is one with **no
+      reasoning**. Between them they are what separates a recorded inference
+      from a guess, and a record missing either is a guess with a form around
+      it. GUIDANCE's §1 list requires both, so both are required here.
+    * `status` must be the literal `inferred_candidate`. A record cannot promote
+      itself to anything; only a resolution record naming the column can.
+    """
+    _require_ic(
+        isinstance(record, dict), where, f"expected a mapping, got {type(record).__name__}"
+    )
+    assert isinstance(record, dict)
+
+    identifier = record.get("id")
+    if isinstance(identifier, str) and IC_ID_RE.match(identifier):
+        where = f"inferred candidate {identifier}"
+    keys = set(record)
+    missing = IC_REQUIRED_KEYS - keys
+    _require_ic(not missing, where, f"missing required key(s): {', '.join(sorted(missing))}")
+    unknown = keys - IC_REQUIRED_KEYS - IC_OPTIONAL_KEYS
+    _require_ic(not unknown, where, f"unknown key(s): {', '.join(sorted(unknown))}")
+
+    _require_ic(
+        isinstance(identifier, str) and bool(IC_ID_RE.match(identifier)),
+        where,
+        f"`id` must look like IC-001, got {identifier!r}",
+    )
+    index = record["column_index"]
+    _require_ic(
+        isinstance(index, int) and not isinstance(index, bool) and index >= 0,
+        where,
+        f"`column_index` must be a non-negative integer index, got {index!r}",
+    )
+    _require_ic(
+        isinstance(record["column_name"], str) and record["column_name"].strip() != "",
+        where,
+        "`column_name` must carry the column's exact name, so the record and the table can "
+        "be checked against each other",
+    )
+    _require_ic(
+        isinstance(record["proposed_meaning"], str) and record["proposed_meaning"].strip() != "",
+        where,
+        "`proposed_meaning` must say what this column is proposed to hold",
+    )
+
+    for key in IC_TAGGED_FIELDS:
+        _validate_ic_tagged_field(record, key, where)
+
+    spans = record["dictionary_spans"]
+    _require_ic(isinstance(spans, list), where, "`dictionary_spans` must be a list")
+    _require_ic(
+        bool(spans),
+        where,
+        "`dictionary_spans` is empty. An inferred candidate must cite the dictionary text it "
+        "reasons from, with line numbers, even when that text is what fails to state the "
+        "attribute being inferred. A record with no span is a guess (GUIDANCE ruling, §1)",
+    )
+    for position, span in enumerate(spans):
+        span_where = f"{where}: dictionary_spans[{position}]"
+        _require_ic(isinstance(span, dict), span_where, "each span must be a mapping")
+        _require_ic(
+            set(span) == {"line", "quote"},
+            span_where,
+            f"each span must have exactly the keys line and quote, got {sorted(span)}",
+        )
+        _require_ic(
+            isinstance(span["line"], int)
+            and not isinstance(span["line"], bool)
+            and span["line"] >= 1,
+            span_where,
+            f"`line` must be a 1-based line number in the extracted text, got {span['line']!r}",
+        )
+        _require_ic(
+            isinstance(span["quote"], str) and span["quote"].strip() != "",
+            span_where,
+            "`quote` must carry the cited text verbatim",
+        )
+
+    _require_ic(
+        isinstance(record["name_evidence"], str) and record["name_evidence"].strip() != "",
+        where,
+        "`name_evidence` must say what the column name itself contributes",
+    )
+
+    evidence = record["value_evidence"]
+    _require_ic(isinstance(evidence, dict), where, "`value_evidence` must be a mapping")
+    _require_ic(
+        set(evidence) == set(IC_VALUE_EVIDENCE_KEYS),
+        where,
+        f"`value_evidence` must have exactly the keys {sorted(IC_VALUE_EVIDENCE_KEYS)}, "
+        f"got {sorted(evidence)}",
+    )
+    for key, value in evidence.items():
+        _require_ic(
+            isinstance(value, str) and value.strip() != "",
+            where,
+            f"`value_evidence.{key}` must be a non-empty string quoting the profile",
+        )
+
+    reasoning = record["reasoning"]
+    _require_ic(
+        isinstance(reasoning, str) and reasoning.strip() != "",
+        where,
+        "`reasoning` is empty. An inferred candidate must say why, for this column "
+        "specifically. Membership in a family or in a candidate map is not a reason "
+        "(GUIDANCE ruling, §1)",
+    )
+
+    for key in ("alternatives_unresolved", "assumptions"):
+        value = record[key]
+        _require_ic(isinstance(value, list), where, f"`{key}` must be a list")
+        for position, item in enumerate(value):
+            _require_ic(
+                isinstance(item, str) and item.strip() != "",
+                where,
+                f"`{key}[{position}]` must be a non-empty string",
+            )
+
+    question_ids = record["question_ids"]
+    _require_ic(isinstance(question_ids, list), where, "`question_ids` must be a list")
+    for question in question_ids:
+        _require_ic(
+            isinstance(question, str) and bool(QUESTION_ID_RE.match(question)),
+            where,
+            f"`question_ids` entries must look like Q1, got {question!r}",
+        )
+
+    _require_ic(
+        record["status"] == INFERRED_CANDIDATE,
+        where,
+        f"`status` must be the literal {INFERRED_CANDIDATE!r}. A record cannot assign itself "
+        "any other status; promotion to `owner_confirmed` is done by a resolution record "
+        f"naming the column, and `{VERIFIED_FROM_DICTIONARY}` is unreachable from here (D-009)",
+    )
+    _require_ic(
+        record["disclaimer"] == IC_DISCLAIMER,
+        where,
+        f"`disclaimer` must read exactly {IC_DISCLAIMER!r} so the caveat travels with the "
+        f"record, got {record['disclaimer']!r}",
+    )
+    return record
+
+
+def load_inferred_candidates(path_or_text: str) -> list[dict]:
+    """Parse and validate the inferred-candidates file's text, in file order.
+
+    An absent or empty `inferred_candidates:` key yields an empty list --- the
+    correct state before any column has been reasoned about.
+    """
+    import yaml
+
+    document = yaml.safe_load(path_or_text)
+    if document is None:
+        return []
+    _require_ic(
+        isinstance(document, dict),
+        "inferred candidates file",
+        f"expected a mapping at the top level, got {type(document).__name__}",
+    )
+    version = document.get("schema_version")
+    _require_ic(
+        version == INFERRED_CANDIDATES_SCHEMA_VERSION,
+        "inferred candidates file",
+        f"`schema_version` must be {INFERRED_CANDIDATES_SCHEMA_VERSION}, got {version!r}",
+    )
+    records = document.get("inferred_candidates") or []
+    _require_ic(
+        isinstance(records, list),
+        "inferred candidates file",
+        f"`inferred_candidates` must be a list, got {type(records).__name__}",
+    )
+    validated = [
+        validate_inferred_candidate(record, where=f"inferred_candidates[{position}]")
+        for position, record in enumerate(records)
+    ]
+    seen_ids: set[str] = set()
+    seen_columns: dict[int, str] = {}
+    for record in validated:
+        _require_ic(
+            record["id"] not in seen_ids,
+            "inferred candidates file",
+            f"duplicate inferred-candidate id {record['id']}",
+        )
+        seen_ids.add(record["id"])
+        index = record["column_index"]
+        _require_ic(
+            index not in seen_columns,
+            "inferred candidates file",
+            f"{record['id']} and {seen_columns.get(index)} both reason about column index "
+            f"{index}. One column, one record --- two would leave it ambiguous which "
+            "reasoning an example rests on",
+        )
+        seen_columns[index] = record["id"]
+    return validated
+
+
+def apply_inferred_candidates(
+    coverage_records: list[dict], inferred_candidates: list[dict]
+) -> list[dict]:
+    """Apply inferred-candidate records in file order. Returns what each did.
+
+    Applied **after** the resolution records, so a record can never step on a
+    status a person confirmed. A record aimed at a column already at
+    `verified_from_dictionary` or `owner_confirmed` is reported as blocked and
+    changes nothing --- neither applied silently nor dropped silently.
+
+    A record whose `column_name` disagrees with the table raises: the record and
+    the table then disagree about what exists, and the fix is to correct the
+    record.
+    """
+    n_columns = len(coverage_records)
+    applied = []
+    for record in inferred_candidates:
+        index = record["column_index"]
+        where = f"inferred candidate {record['id']}"
+        _require_ic(
+            index < n_columns,
+            where,
+            f"names column index {index}, but the table has {n_columns} columns "
+            f"(0..{n_columns - 1})",
+        )
+        column = coverage_records[index]
+        _require_ic(
+            column["column"] == record["column_name"],
+            where,
+            f"names column index {index} as {record['column_name']!r}, but the table has "
+            f"{column['column']!r} at that index. Correct the record",
+        )
+        blocked_by = column["status"] if column["status"] in IC_BLOCKING_STATUSES else None
+        if blocked_by is None:
+            column["status"] = INFERRED_CANDIDATE
+            column["inferred_candidate_refs"] = [
+                *column["inferred_candidate_refs"],
+                record["id"],
+            ]
+        applied.append(
+            {
+                "id": record["id"],
+                "column_index": index,
+                "column_name": record["column_name"],
+                "question_ids": list(record["question_ids"]),
+                "applied": blocked_by is None,
+                "blocked_by_status": blocked_by,
+                "status_before": column["status_baseline_wp1"],
             }
         )
     return applied

@@ -12,13 +12,26 @@ Its output is what the WP2 report cites. With an empty
 `data/metadata/resolutions.yaml` it prints no rows, which is the correct and
 expected result until mentor answers arrive.
 
-Three invariants are checked, and a violation fails the run:
+Since M1-WP3 (D-011) a status has a third possible source, weaker than both
+others: an **inferred-candidate record** in
+`data/metadata/inferred_candidates.yaml`, carrying column-specific reasoning and
+dictionary spans for a meaning the dictionary never stated. Those columns appear
+in the diff too, citing their IC-record rather than a resolution record, and the
+per-column table says which of the two moved each column.
 
-1. no column changed status without naming at least one resolution record;
+Five invariants are checked, and a violation fails the run:
+
+1. no column changed status without naming at least one resolution record or
+   inferred-candidate record;
 2. no resolution record produced `verified_from_dictionary` --- that status is
    reserved for what the tracked dictionary states in its own words (D-009);
 3. every resolution record cited by a column is one the coverage run actually
-   applied.
+   applied;
+4. no column at `inferred_candidate` reached it without citing an IC-record,
+   and no column citing an IC-record holds any other status;
+5. no column fell from `verified_from_dictionary` or `owner_confirmed` to
+   `inferred_candidate` --- the weaker status never overrides a stronger one
+   (D-011).
 
 This script assigns no meaning. It compares two recorded statuses.
 """
@@ -34,7 +47,11 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from climrr.checksums import sha256_file  # noqa: E402
-from climrr.dictionary import VERIFIED_FROM_DICTIONARY  # noqa: E402
+from climrr.dictionary import (  # noqa: E402
+    IC_BLOCKING_STATUSES,
+    INFERRED_CANDIDATE,
+    VERIFIED_FROM_DICTIONARY,
+)
 from climrr.paths import repo_relative  # noqa: E402
 from climrr.runrecord import write_run_record  # noqa: E402
 
@@ -52,6 +69,11 @@ def collect_changes(coverage: dict) -> list[dict]:
         if column["status"] == column["status_baseline_wp1"]:
             continue
         refs = column["resolution_refs"]
+        # A column that gained `inferred_candidate` cites an IC-record instead
+        # of a resolution record. Both routes are shown in one table so the
+        # question "what moved this column, and on whose evidence?" has one
+        # place to look.
+        inferred_refs = column.get("inferred_candidate_refs") or []
         changes.append(
             {
                 "index": column["index"],
@@ -59,7 +81,9 @@ def collect_changes(coverage: dict) -> list[dict]:
                 "from": column["status_baseline_wp1"],
                 "to": column["status"],
                 "resolution_refs": refs,
-                "decision_refs": [decision_by_record.get(ref, "UNKNOWN") for ref in refs],
+                "inferred_candidate_refs": inferred_refs,
+                "decision_refs": [decision_by_record.get(ref, "UNKNOWN") for ref in refs]
+                or (["D-011"] if inferred_refs else []),
                 "resolved_section": column.get("resolved_section"),
             }
         )
@@ -71,10 +95,15 @@ def check_invariants(coverage: dict, changes: list[dict]) -> list[str]:
     applied_ids = {applied["id"] for applied in coverage["resolutions_applied"]}
     violations = []
 
-    unattributed = [change["index"] for change in changes if not change["resolution_refs"]]
+    unattributed = [
+        change["index"]
+        for change in changes
+        if not change["resolution_refs"] and not change["inferred_candidate_refs"]
+    ]
     if unattributed:
         violations.append(
-            f"columns changed status with no resolution record cited: {unattributed}"
+            "columns changed status with neither a resolution record nor an "
+            f"inferred-candidate record cited: {unattributed}"
         )
 
     invented = [
@@ -99,6 +128,39 @@ def check_invariants(coverage: dict, changes: list[dict]) -> list[str]:
     if unknown:
         violations.append(f"columns cite resolution records the coverage run did not apply: {unknown}")
 
+    # D-011: `inferred_candidate` and an IC-record imply each other exactly.
+    # A column at that status with no record would be an inference nobody wrote
+    # down; a column citing a record while holding some other status would mean
+    # the record had been applied and then quietly overwritten.
+    uncited = [
+        column["index"]
+        for column in coverage["columns"]
+        if column["status"] == INFERRED_CANDIDATE and not column.get("inferred_candidate_refs")
+    ]
+    if uncited:
+        violations.append(
+            f"columns hold {INFERRED_CANDIDATE} without citing an IC-record: {uncited}"
+        )
+    mismatched = [
+        column["index"]
+        for column in coverage["columns"]
+        if column.get("inferred_candidate_refs") and column["status"] != INFERRED_CANDIDATE
+    ]
+    if mismatched:
+        violations.append(
+            f"columns cite an IC-record but do not hold {INFERRED_CANDIDATE}: {mismatched}"
+        )
+    demoted = [
+        change["index"]
+        for change in changes
+        if change["to"] == INFERRED_CANDIDATE and change["from"] in IC_BLOCKING_STATUSES
+    ]
+    if demoted:
+        violations.append(
+            f"columns fell from a stronger status to {INFERRED_CANDIDATE}, which D-011 forbids: "
+            f"{demoted}"
+        )
+
     return violations
 
 
@@ -115,6 +177,9 @@ def render_markdown(coverage: dict, changes: list[dict]) -> str:
         f"- Coverage source: `{repo_relative(COVERAGE_PATH)}`",
         f"- Resolutions applied: **{coverage['n_resolutions']}**"
         f" (`{coverage.get('resolutions_path')}`, sha256 `{coverage.get('resolutions_sha256')}`)",
+        f"- Inferred-candidate records applied: **{coverage.get('n_inferred_candidates', 0)}**"
+        f" (`{coverage.get('inferred_candidates_path')}`, sha256"
+        f" `{coverage.get('inferred_candidates_sha256')}`)",
         f"- Columns changed: **{len(changes)}** of {coverage['n_columns']}",
         "",
         "## Status counts",
@@ -150,6 +215,34 @@ def render_markdown(coverage: dict, changes: list[dict]) -> str:
             "None. `data/metadata/resolutions.yaml` is empty --- no answer has arrived yet. "
             "The machinery is in place and inert, which is the intended M1-WP2a state."
         )
+    lines += ["", "## Inferred-candidate records applied", ""]
+    inferred = coverage.get("inferred_candidates_applied") or []
+    if inferred:
+        lines += [
+            "Reasoned, column-specific interpretations (D-011). **Not verified and not "
+            "owner-confirmed** --- each cites its own dictionary spans, reasoning and "
+            "unresolved alternatives in `data/metadata/inferred_candidates.yaml`.",
+            "",
+            "| Record | Index | Column | Questions | Baseline status | Applied |",
+            "| --- | ---: | --- | --- | --- | --- |",
+        ]
+        for applied in inferred:
+            outcome = (
+                "yes"
+                if applied["applied"]
+                else f"**no** --- blocked by `{applied['blocked_by_status']}`"
+            )
+            lines.append(
+                f"| `{applied['id']}` | {applied['column_index']} | "
+                f"`{applied['column_name']}` | "
+                f"{', '.join(applied['question_ids']) or '—'} | "
+                f"`{applied['status_before']}` | {outcome} |"
+            )
+    else:
+        lines.append(
+            "None. `data/metadata/inferred_candidates.yaml` holds no record --- no column "
+            "has been interpreted by reasoning."
+        )
     lines += ["", "## Per-column changes", ""]
     if changes:
         lines += [
@@ -157,9 +250,10 @@ def render_markdown(coverage: dict, changes: list[dict]) -> str:
             "| ---: | --- | --- | --- | --- | --- | --- |",
         ]
         for change in changes:
+            record = ", ".join(change["resolution_refs"] + change["inferred_candidate_refs"])
             lines.append(
                 f"| {change['index']} | `{change['column']}` | `{change['from']}` | "
-                f"`{change['to']}` | {', '.join(change['resolution_refs'])} | "
+                f"`{change['to']}` | {record} | "
                 f"{', '.join(change['decision_refs'])} | {change['resolved_section'] or '—'} |"
             )
     else:
@@ -206,15 +300,16 @@ def main() -> int:
     current = coverage["status_counts"]
     print(f"  coverage report           : {repo_relative(args.coverage)}")
     print(f"  resolution records applied: {coverage['n_resolutions']}")
+    print(f"  IC records applied        : {coverage.get('n_inferred_candidates', 0)}")
     print(f"  columns changed           : {len(changes)} of {coverage['n_columns']}")
     for status in sorted(set(baseline) | set(current)):
         before, after = baseline.get(status, 0), current.get(status, 0)
         print(f"    {status:<28}: {before:>4} -> {after:>4} ({after - before:+d})")
     for change in changes:
+        record = ", ".join(change["resolution_refs"] + change["inferred_candidate_refs"])
         print(
             f"    [{change['index']:>3}] {change['column']}: {change['from']} -> {change['to']} "
-            f"({', '.join(change['resolution_refs'])}; "
-            f"{', '.join(change['decision_refs'])})"
+            f"({record}; {', '.join(change['decision_refs'])})"
         )
     if not changes:
         print("    no column has moved from its WP1 baseline status")
@@ -237,6 +332,8 @@ def main() -> int:
             "coverage_sha256": sha256_file(args.coverage),
             "resolutions_sha256": coverage.get("resolutions_sha256"),
             "resolutions_applied": coverage["n_resolutions"],
+            "inferred_candidates_sha256": coverage.get("inferred_candidates_sha256"),
+            "inferred_candidates_applied": coverage.get("n_inferred_candidates", 0),
             "columns_changed": len(changes),
             "changes": changes or "none",
             "baseline_status_counts": baseline,

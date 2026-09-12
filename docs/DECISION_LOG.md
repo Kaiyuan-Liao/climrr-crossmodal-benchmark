@@ -444,12 +444,11 @@ not yet in force and must not be relied on by downstream work.
 ## D-010 --- Pilot-subset path with mentor sign-off
 
 - **Date:** 2026-09-12
-- **Status:** **PROPOSED.** Not in force. It awaits a **GUIDANCE ruling** and
-  **Kaiyuan's approval**, and **nothing in it is implemented**: no
-  `inferred_candidate` status exists in the code, no column has been
-  interpreted, no pilot subset has been chosen, and no example record has been
-  built. M1-WP2b recorded the meeting and ran one deterministic check; it did
-  not act on this entry.
+- **Status:** **decided.** GUIDANCE ruled **PASS WITH ACTIONS** on 2026-09-13
+  (`docs/M1_D010_GUIDANCE_RULING.md`) and **Kaiyuan approved it with the ruling
+  incorporated**. The ruling's boundaries, which are part of the decision and
+  not commentary on it, are recorded separately as **D-011**; read the two
+  together, and where they differ the ruling governs. Implemented in M1-WP3.
 - **Decision proposed:**
   1. Introduce a status **`inferred_candidate`** for semantics produced by
      reasoning from column names, value patterns and dictionary spans, always
@@ -508,9 +507,81 @@ not yet in force and must not be relied on by downstream work.
   statement she made in those terms. It is the grain of the whole proposed
   pilot, and it is to be **confirmed with her by presenting examples** --- it is
   not assumed in the meantime, and no work here depends on it.
-- **Owner:** COORDINATOR (drafted). **Approval required from Kaiyuan Liao;
-  ruling required from GUIDANCE.**
-- **Affected files if adopted:** `src/climrr/dictionary.py`,
-  `data/metadata/resolutions.yaml`, `scripts/dictionary_coverage.py`,
-  `scripts/status_diff.py`, `docs/PROJECT_PLAN.md`,
-  `reports/milestones/M1_WP2_REPORT.md`.
+- **Owner:** COORDINATOR (drafted). **Approved by Kaiyuan Liao 2026-09-13, with
+  the GUIDANCE ruling incorporated; GUIDANCE ruled PASS WITH ACTIONS.**
+- **Affected files:** `src/climrr/dictionary.py`,
+  `data/metadata/inferred_candidates.yaml`, `scripts/dictionary_coverage.py`,
+  `scripts/status_diff.py`, `docs/PILOT_SUBSET.md`,
+  `reports/milestones/M1_WP3_REPORT.md`. Note what is **not** in that list:
+  `data/metadata/resolutions.yaml` is untouched by this decision, because the
+  status it introduces may not be reached through a resolution record.
+
+---
+
+## D-011 --- The GUIDANCE ruling on D-010, and the boundaries it sets
+
+- **Date:** 2026-09-13
+- **Status:** **decided.** This entry records the ruling itself
+  (`docs/M1_D010_GUIDANCE_RULING.md`, gate status **PASS WITH ACTIONS**), placed
+  by Kaiyuan and approved by him as project owner. D-010 says what the project
+  will do; **D-011 says what it may not do while doing it**, and the limits are
+  the substance of the approval rather than caveats attached to it.
+- **Decision:**
+  1. **`inferred_candidate` is approved, with boundaries.** It means "a reasoned
+     interpretation judged plausible enough to test in an example, but not
+     established as source truth". Every record carries the column index and
+     name, the proposed meaning, any proposed unit/scenario/horizon/season,
+     dictionary spans, name evidence, value evidence, explicit reasoning,
+     unresolved alternatives, and a statement that it is neither verified nor
+     owner-confirmed. **It may not be presented as verified.** A record is
+     required per column: membership in an EXECUTOR-authored candidate map is
+     not a reason, and the candidate maps remain navigation aids.
+  2. **`verified_from_dictionary` is unchanged.** D-009's strict bar is not
+     reopened, narrowed or widened by any part of this entry.
+  3. **Mentor sign-off promotes only what was explicitly confirmed.** Sign-off
+     on an example is a valid route to `owner_confirmed`, but a broad "yes, this
+     is the kind of example I want" confirms **nothing** about the field
+     semantics embedded in it. A resolution record must distinguish confirmed
+     from unconfirmed semantics field by field.
+  4. **M1 gate criterion 1 is evaluated on the pilot subset**, not on all 275
+     columns. M1 may pass with a small subset whose fields meet the metadata
+     requirements while every other column stays explicitly unresolved,
+     undocumented and unused. **The scope narrows; the rigour does not.**
+  5. **M1-WP3 is authorised**: 2--3 row-centered candidate examples built from
+     real rows, ahead of M2 and deliberately out of milestone order, because
+     examples are now the instrument required to resolve M1 metadata with the
+     data owner. They are **not** canonical M2 phenomenon records.
+  6. **"Row = event" remains an assumption under review.** It is Kaiyuan's
+     reading of the mentor's direction, not her words, and it is to be confirmed
+     by showing her examples. Until then no wording may present a row as an
+     observed climate event.
+- **Rationale.** The ruling's own: fact, inference and owner confirmation must
+  remain explicitly separated, and the five named scientific risks --- AI
+  reasoning becoming de facto ground truth, confirmation by impression rather
+  than by semantics, a conceptually wrong row grain, cherry-picking
+  easy-to-narrate fields, and example construction drifting into M3 --- are each
+  answered by one of the boundaries above rather than by intent.
+- **Consequences, all of them in force now:**
+  - A fifth status exists in `src/climrr/dictionary.py`, settable **only** by a
+    record in the new tracked `data/metadata/inferred_candidates.yaml` --- never
+    by the dictionary rules, never by the candidate maps, and never by a
+    resolution record, which the validator refuses by name.
+  - `scripts/status_diff.py` shows every column that gains it, citing the
+    IC-record, and fails the run if a column holds the status without one or
+    falls into it from a stronger one.
+  - Examples are built under `artifacts/examples/`, and their mentor-readable
+    prose is **generated from the structured record by template**, so that no
+    clause resting on an inferred field can appear without a `[provisional: …]`
+    label.
+- **What this entry does not authorise**, restated from the ruling because the
+  temptation runs the other way: no broad AI labelling of the table, no
+  inference for all 275 columns, no promotion on model confidence or naming
+  plausibility, no phenomenon extraction, geographic aggregation, salience or
+  magnitude criteria, literature ingestion, claim extraction, semantic matching,
+  bridge validation or QA generation.
+- **Owner:** GUIDANCE. **Approved by Kaiyuan Liao, 2026-09-13.**
+- **Affected files:** `docs/M1_D010_GUIDANCE_RULING.md` (the ruling as placed),
+  `src/climrr/dictionary.py`, `data/metadata/inferred_candidates.yaml`,
+  `scripts/dictionary_coverage.py`, `scripts/status_diff.py`,
+  `src/climrr/examples.py`, `scripts/build_examples.py`,
+  `docs/PILOT_SUBSET.md`, `docs/MENTOR_EXAMPLES.md`.

@@ -8,11 +8,13 @@
   "extracted_text_sha256": "1d0fae06c6a5a9714fe890936d002cd0ac84829262465d4930d04acb400553da",
   "resolutions_path": "data/metadata/resolutions.yaml",
   "resolutions_sha256": "8d8d194638d1e2ac5264ddffbc296b908a1aa406c77467939c9f5c4ed6294ac9",
+  "inferred_candidates_path": "data/metadata/inferred_candidates.yaml",
+  "inferred_candidates_sha256": "7a1e04147b549a46e59c1c6c1309b4bc71ebc9294f034ce76551ea70051a49d4",
   "extractor": "pypdf 6.18.0",
-  "note": "Line numbers refer to the extracted text file. A stem or narrative match is an EXECUTOR-proposed candidate and is never verified: the dictionary does not state which section a CSV column-name stem belongs to. `status_baseline_wp1` is what the dictionary rules alone concluded and never changes; `status` is that baseline after the resolution records in `resolutions_path` are applied; `resolution_refs` names the records responsible. No resolution record can produce `verified_from_dictionary` (D-009).",
+  "note": "Line numbers refer to the extracted text file. A stem or narrative match is an EXECUTOR-proposed candidate and is never verified: the dictionary does not state which section a CSV column-name stem belongs to. `status_baseline_wp1` is what the dictionary rules alone concluded and never changes; `status` is that baseline after the resolution records in `resolutions_path` and then the inferred-candidate records in `inferred_candidates_path` are applied; `resolution_refs` and `inferred_candidate_refs` name the records responsible. No resolution record can produce `verified_from_dictionary` (D-009), and no inferred-candidate record can produce anything but `inferred_candidate` or overwrite a stronger status (D-011).",
   "environment": {
-    "generated_utc": "2026-09-12T23:12:21.017309+00:00",
-    "git_commit": "53421f00668c26130e1b33828f87b4a0190815b4",
+    "generated_utc": "2026-09-12T23:43:42.503032+00:00",
+    "git_commit": "391b442120081824bdde0517baf3c3f41b96a6b9",
     "git_dirty": true,
     "hostname": "ryous-MacBook-Pro-2.local",
     "location": "local",
@@ -127,9 +129,10 @@
     }
   ],
   "status_counts": {
-    "structurally_observed_only": 83,
+    "structurally_observed_only": 76,
     "verified_from_dictionary": 21,
-    "partially_resolved": 143,
+    "inferred_candidate": 20,
+    "partially_resolved": 130,
     "unresolved": 28
   },
   "status_counts_baseline_wp1": {
@@ -191,6 +194,234 @@
       "n_columns_changed": 0
     }
   ],
+  "n_inferred_candidates": 20,
+  "inferred_candidates_applied": [
+    {
+      "id": "IC-001",
+      "column_index": 238,
+      "column_name": "heatindex_HIS_DayMax",
+      "question_ids": [
+        "Q14"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "partially_resolved"
+    },
+    {
+      "id": "IC-002",
+      "column_index": 244,
+      "column_name": "heatindex_M85_DayMax",
+      "question_ids": [
+        "Q14"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "partially_resolved"
+    },
+    {
+      "id": "IC-003",
+      "column_index": 250,
+      "column_name": "heatindex_E85_DayMax",
+      "question_ids": [
+        "Q14"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "partially_resolved"
+    },
+    {
+      "id": "IC-004",
+      "column_index": 256,
+      "column_name": "heatindex_C_M85_DMax",
+      "question_ids": [
+        "Q14"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "partially_resolved"
+    },
+    {
+      "id": "IC-005",
+      "column_index": 262,
+      "column_name": "heatindex_C_E85_DMax",
+      "question_ids": [
+        "Q14"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "partially_resolved"
+    },
+    {
+      "id": "IC-006",
+      "column_index": 189,
+      "column_name": "wildfire_summer_Hist",
+      "question_ids": [
+        "Q13"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "partially_resolved"
+    },
+    {
+      "id": "IC-007",
+      "column_index": 190,
+      "column_name": "wildfire_summer_Midc",
+      "question_ids": [
+        "Q13"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "partially_resolved"
+    },
+    {
+      "id": "IC-008",
+      "column_index": 191,
+      "column_name": "wildfire_summer_Endc",
+      "question_ids": [
+        "Q13",
+        "Q17"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "partially_resolved"
+    },
+    {
+      "id": "IC-009",
+      "column_index": 192,
+      "column_name": "wildfire_summer_Dmid",
+      "question_ids": [
+        "Q13"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "partially_resolved"
+    },
+    {
+      "id": "IC-010",
+      "column_index": 193,
+      "column_name": "wildfire_summer_Dend",
+      "question_ids": [
+        "Q13"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "partially_resolved"
+    },
+    {
+      "id": "IC-011",
+      "column_index": 2,
+      "column_name": "NAME",
+      "question_ids": [
+        "Q10"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "structurally_observed_only"
+    },
+    {
+      "id": "IC-012",
+      "column_index": 3,
+      "column_name": "State",
+      "question_ids": [
+        "Q10",
+        "Q16"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "structurally_observed_only"
+    },
+    {
+      "id": "IC-013",
+      "column_index": 4,
+      "column_name": "State_Abbr",
+      "question_ids": [
+        "Q10",
+        "Q16"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "structurally_observed_only"
+    },
+    {
+      "id": "IC-014",
+      "column_index": 106,
+      "column_name": "X",
+      "question_ids": [
+        "Q10"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "structurally_observed_only"
+    },
+    {
+      "id": "IC-015",
+      "column_index": 107,
+      "column_name": "Y",
+      "question_ids": [
+        "Q10"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "structurally_observed_only"
+    },
+    {
+      "id": "IC-016",
+      "column_index": 108,
+      "column_name": "TRACTCE",
+      "question_ids": [
+        "Q10",
+        "Q16"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "structurally_observed_only"
+    },
+    {
+      "id": "IC-017",
+      "column_index": 109,
+      "column_name": "GEOID",
+      "question_ids": [
+        "Q10",
+        "Q16"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "structurally_observed_only"
+    },
+    {
+      "id": "IC-018",
+      "column_index": 44,
+      "column_name": "tempmaxann_hist",
+      "question_ids": [
+        "Q1"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "partially_resolved"
+    },
+    {
+      "id": "IC-019",
+      "column_index": 48,
+      "column_name": "tempmaxann_rcp85_endc",
+      "question_ids": [
+        "Q1"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "partially_resolved"
+    },
+    {
+      "id": "IC-020",
+      "column_index": 52,
+      "column_name": "tempmaxann_end85_hist",
+      "question_ids": [
+        "Q1"
+      ],
+      "applied": true,
+      "blocked_by_status": null,
+      "status_before": "partially_resolved"
+    }
+  ],
   "columns": [
     {
       "index": 0,
@@ -204,6 +435,7 @@
       "open_question": "Column index 0 `OID_` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -297,6 +529,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -308,10 +541,13 @@
       "candidate_section": null,
       "candidate_section_source": null,
       "dictionary_evidence": [],
-      "status": "structurally_observed_only",
+      "status": "inferred_candidate",
       "open_question": "Column index 2 `NAME` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-011"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -323,10 +559,13 @@
       "candidate_section": null,
       "candidate_section_source": null,
       "dictionary_evidence": [],
-      "status": "structurally_observed_only",
+      "status": "inferred_candidate",
       "open_question": "Column index 3 `State` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-012"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -338,10 +577,13 @@
       "candidate_section": null,
       "candidate_section_source": null,
       "dictionary_evidence": [],
-      "status": "structurally_observed_only",
+      "status": "inferred_candidate",
       "open_question": "Column index 4 `State_Abbr` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-013"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -370,6 +612,7 @@
       "open_question": "Does column index 5 `hdd_hist` correspond to the dictionary field `hist` in section \"Heating Degree Days – Annual Total\" (line 642), described as \"Heating Degree Days – Annual Total – Historical\"? The dictionary does not state that the CSV stem `hdd` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -398,6 +641,7 @@
       "open_question": "Does column index 6 `hdd_rcp85_midc` correspond to the dictionary field `rcp85_midc` in section \"Heating Degree Days – Annual Total\" (line 643), described as \"Heating Degree Days – Annual Total – Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `hdd` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -426,6 +670,7 @@
       "open_question": "Does column index 7 `hdd_mid85_hist` correspond to the dictionary field `mid85_hist` in section \"Heating Degree Days – Annual Total\" (line 644), described as \"Heating Degree Days – Change in Annual Total – Historical and Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `hdd` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -454,6 +699,7 @@
       "open_question": "Does column index 8 `cdd_hist` correspond to the dictionary field `hist` in section \"Cooling Degree Days – Annual Total\" (line 629), described as \"Cooling Degree Days – Annual Total – Historical\"? The dictionary does not state that the CSV stem `cdd` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -482,6 +728,7 @@
       "open_question": "Does column index 9 `cdd_rcp85_midc` correspond to the dictionary field `rcp85_midc` in section \"Cooling Degree Days – Annual Total\" (line 630), described as \"Cooling Degree Days – Annual Total – Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `cdd` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -510,6 +757,7 @@
       "open_question": "Does column index 10 `cdd_mid85_hist` correspond to the dictionary field `mid85_hist` in section \"Cooling Degree Days – Annual Total\" (line 631), described as \"Cooling Degree Days – Change in Annual Total – Historical and Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `cdd` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -538,6 +786,7 @@
       "open_question": "Does column index 11 `noprecip_hist` correspond to the dictionary field `hist` in section \"Precipitation None - Annual Average\" (line 603), described as \"Consecutive Days with No Precipitation – Annual Ensemble Mean – Historical\"? The dictionary does not state that the CSV stem `noprecip` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -566,6 +815,7 @@
       "open_question": "Does column index 12 `noprecip_rcp45_midc` correspond to the dictionary field `rcp45_midc` in section \"Precipitation None - Annual Average\" (line 604), described as \"Consecutive Days with No Precipitation – Annual Ensemble Mean – Mid-Century RCP4.5\"? The dictionary does not state that the CSV stem `noprecip` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -594,6 +844,7 @@
       "open_question": "Does column index 13 `noprecip_rcp45_endc` correspond to the dictionary field `rcp45_endc` in section \"Precipitation None - Annual Average\" (line 605), described as \"Consecutive Days with No Precipitation – Annual Ensemble Mean – End-Century RCP4.5\"? The dictionary does not state that the CSV stem `noprecip` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -622,6 +873,7 @@
       "open_question": "Does column index 14 `noprecip_rcp85_midc` correspond to the dictionary field `rcp85_midc` in section \"Precipitation None - Annual Average\" (line 606), described as \"Consecutive Days with No Precipitation – Annual Ensemble Mean – Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `noprecip` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -650,6 +902,7 @@
       "open_question": "Does column index 15 `noprecip_rcp85_endc` correspond to the dictionary field `rcp85_endc` in section \"Precipitation None - Annual Average\" (line 607), described as \"Consecutive Days with No Precipitation – Annual Ensemble Mean – End-Century RCP8.5\"? The dictionary does not state that the CSV stem `noprecip` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -678,6 +931,7 @@
       "open_question": "Under the candidate section \"Precipitation None - Annual Average\" the dictionary lists the field matching column index 16 `noprecip_mid45_hist` at line 608 with no description. What does this column hold, and in what unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -706,6 +960,7 @@
       "open_question": "Under the candidate section \"Precipitation None - Annual Average\" the dictionary lists the field matching column index 17 `noprecip_end45_hist` at line 609 with no description. What does this column hold, and in what unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -734,6 +989,7 @@
       "open_question": "Under the candidate section \"Precipitation None - Annual Average\" the dictionary lists the field matching column index 18 `noprecip_mid85_hist` at line 610 with no description. What does this column hold, and in what unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -762,6 +1018,7 @@
       "open_question": "Under the candidate section \"Precipitation None - Annual Average\" the dictionary lists the field matching column index 19 `noprecip_end85_hist` at line 611 with no description. What does this column hold, and in what unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -790,6 +1047,7 @@
       "open_question": "Under the candidate section \"Precipitation None - Annual Average\" the dictionary lists the field matching column index 20 `noprecip_mid85_45` at line 612 with no description. What does this column hold, and in what unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -818,6 +1076,7 @@
       "open_question": "Under the candidate section \"Precipitation None - Annual Average\" the dictionary lists the field matching column index 21 `noprecip_end85_45` at line 613 with no description. What does this column hold, and in what unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -846,6 +1105,7 @@
       "open_question": "Does column index 22 `precipann_hist` correspond to the dictionary field `HIST` in section \"Precipitation – Annual Total\" (line 590), described as \"Precipitation (in) – Annual Total – Historical\"? The dictionary does not state that the CSV stem `precipann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -874,6 +1134,7 @@
       "open_question": "Does column index 23 `precipann_rcp45_midc` correspond to the dictionary field `RCP45_MIDC` in section \"Precipitation – Annual Total\" (line 591), described as \"Precipitation (in) – Annual Total – Mid-Century RCP4.5\"? The dictionary does not state that the CSV stem `precipann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -902,6 +1163,7 @@
       "open_question": "Does column index 24 `precipann_rcp45_endc` correspond to the dictionary field `RCP45_ENDC` in section \"Precipitation – Annual Total\" (line 592), described as \"Precipitation (in) – Annual Total – End-Century RCP4.5\"? The dictionary does not state that the CSV stem `precipann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -930,6 +1192,7 @@
       "open_question": "Does column index 25 `precipann_rcp85_midc` correspond to the dictionary field `RCP85_MIDC` in section \"Precipitation – Annual Total\" (line 593), described as \"Precipitation (in) – Annual Total – Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `precipann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -958,6 +1221,7 @@
       "open_question": "Does column index 26 `precipann_rcp85_endc` correspond to the dictionary field `RCP85_ENDC` in section \"Precipitation – Annual Total\" (line 594), described as \"Precipitation (in) – Annual Total – End-Century RCP8.5\"? The dictionary does not state that the CSV stem `precipann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -986,6 +1250,7 @@
       "open_question": "Does column index 27 `precipann_mid45_hist` correspond to the dictionary field `MID45_HIST` in section \"Precipitation – Annual Total\" (line 595), described as \"Precipitation (in) – Change in Annual Total – Historical and Mid-Century RCP4.5\"? The dictionary does not state that the CSV stem `precipann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1014,6 +1279,7 @@
       "open_question": "Does column index 28 `precipann_end45_hist` correspond to the dictionary field `END45_HIST` in section \"Precipitation – Annual Total\" (line 596), described as \"Precipitation (in) – Change in Annual Total – Historical and End-Century RCP4.5\"? The dictionary does not state that the CSV stem `precipann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1042,6 +1308,7 @@
       "open_question": "Does column index 29 `precipann_mid85_hist` correspond to the dictionary field `MID85_HIST` in section \"Precipitation – Annual Total\" (line 597), described as \"Precipitation (in) – Change in Annual Total – Historical and Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `precipann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1070,6 +1337,7 @@
       "open_question": "Does column index 30 `precipann_end85_hist` correspond to the dictionary field `END85_HIST` in section \"Precipitation – Annual Total\" (line 598), described as \"Precipitation (in) – Change in Annual Total – Historical and End-Century RCP8.5\"? The dictionary does not state that the CSV stem `precipann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1098,6 +1366,7 @@
       "open_question": "Does column index 31 `precipann_mid85_45` correspond to the dictionary field `MID85_45` in section \"Precipitation – Annual Total\" (line 599), described as \"Precipitation (in) – Difference in Annual Total – Mid-Century RCP4.5 and Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `precipann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1126,6 +1395,7 @@
       "open_question": "Does column index 32 `precipann_end85_45` correspond to the dictionary field `END85_45` in section \"Precipitation – Annual Total\" (line 600), described as \"Precipitation (in) – Difference in Annual Total – End-Century RCP4.5 and End-Century RCP8.5\"? The dictionary does not state that the CSV stem `precipann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1154,6 +1424,7 @@
       "open_question": "Does column index 33 `windspeed_hist` correspond to the dictionary field `hist` in section \"Wind Speed – Annual Average\" (line 616), described as \"Wind Speed (mph) – Annual Average – Historical\"? The dictionary does not state that the CSV stem `windspeed` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1182,6 +1453,7 @@
       "open_question": "Does column index 34 `windspeed_rcp45_midc` correspond to the dictionary field `rcp45_midc` in section \"Wind Speed – Annual Average\" (line 617), described as \"Wind Speed (mph) – Annual Average – Mid-Century RCP4.5\"? The dictionary does not state that the CSV stem `windspeed` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1210,6 +1482,7 @@
       "open_question": "Does column index 35 `windspeed_rcp45_endc` correspond to the dictionary field `rcp45_endc` in section \"Wind Speed – Annual Average\" (line 618), described as \"Wind Speed (mph) – Annual Average – End-Century RCP4.5\"? The dictionary does not state that the CSV stem `windspeed` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1238,6 +1511,7 @@
       "open_question": "Does column index 36 `windspeed_rcp85_midc` correspond to the dictionary field `rcp85_midc` in section \"Wind Speed – Annual Average\" (line 619), described as \"Wind Speed (mph) – Annual Average – Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `windspeed` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1266,6 +1540,7 @@
       "open_question": "Does column index 37 `windspeed_rcp85_endc` correspond to the dictionary field `rcp85_endc` in section \"Wind Speed – Annual Average\" (line 620), described as \"Wind Speed (mph) – Annual Average – End-Century RCP8.5\"? The dictionary does not state that the CSV stem `windspeed` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1294,6 +1569,7 @@
       "open_question": "Does column index 38 `windspeed_mid45_hist` correspond to the dictionary field `mid45_hist` in section \"Wind Speed – Annual Average\" (line 621), described as \"Wind Speed (mph) – Change in Annual Average – Historical and Mid-Century RCP4.5\"? The dictionary does not state that the CSV stem `windspeed` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1322,6 +1598,7 @@
       "open_question": "Does column index 39 `windspeed_end45_hist` correspond to the dictionary field `end45_hist` in section \"Wind Speed – Annual Average\" (line 622), described as \"Wind Speed (mph) – Change in Annual Average – Historical and End-Century RCP4.5\"? The dictionary does not state that the CSV stem `windspeed` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1350,6 +1627,7 @@
       "open_question": "Does column index 40 `windspeed_mid85_hist` correspond to the dictionary field `mid85_hist` in section \"Wind Speed – Annual Average\" (line 623), described as \"Wind Speed (mph) – Change in Annual Average – Historical and Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `windspeed` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1378,6 +1656,7 @@
       "open_question": "Does column index 41 `windspeed_end85_hist` correspond to the dictionary field `end85_hist` in section \"Wind Speed – Annual Average\" (line 624), described as \"Wind Speed (mph) – Change in Annual Average – Historical and End-Century RCP8.5\"? The dictionary does not state that the CSV stem `windspeed` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1406,6 +1685,7 @@
       "open_question": "Does column index 42 `windspeed_mid85_45` correspond to the dictionary field `mid85_45` in section \"Wind Speed – Annual Average\" (line 625), described as \"Wind Speed (mph) – Difference in Annual Average – Mid-Century RCP4.5 and Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `windspeed` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1434,6 +1714,7 @@
       "open_question": "Does column index 43 `windspeed_end85_45` correspond to the dictionary field `end85_45` in section \"Wind Speed – Annual Average\" (line 626), described as \"Wind Speed (mph) – Difference in Annual Average – End-Century RCP4.5 and End-Century RCP8.5\"? The dictionary does not state that the CSV stem `windspeed` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1458,10 +1739,13 @@
           "section_title_line": 513
         }
       ],
-      "status": "partially_resolved",
+      "status": "inferred_candidate",
       "open_question": "Does column index 44 `tempmaxann_hist` correspond to the dictionary field `HIST` in section \"Temperature Maximum - Annual\" (line 518), described as \"Max Daily Temperature (°F) – Annual Average – Historical\"? The dictionary does not state that the CSV stem `tempmaxann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-018"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1490,6 +1774,7 @@
       "open_question": "Does column index 45 `tempmaxann_rcp45_midc` correspond to the dictionary field `RCP45_MIDC` in section \"Temperature Maximum - Annual\" (line 519), described as \"Max Daily Temperature (°F) – Annual Average – Mid-Century RCP4.5\"? The dictionary does not state that the CSV stem `tempmaxann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1518,6 +1803,7 @@
       "open_question": "Does column index 46 `tempmaxann_rcp45_endc` correspond to the dictionary field `RCP45_ENDC` in section \"Temperature Maximum - Annual\" (line 520), described as \"Max Daily Temperature (°F) – Annual Average – End-Century RCP4.5\"? The dictionary does not state that the CSV stem `tempmaxann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1546,6 +1832,7 @@
       "open_question": "Does column index 47 `tempmaxann_rcp85_midc` correspond to the dictionary field `RCP85_MIDC` in section \"Temperature Maximum - Annual\" (line 521), described as \"Max Daily Temperature (°F) – Annual Average – Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmaxann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1570,10 +1857,13 @@
           "section_title_line": 513
         }
       ],
-      "status": "partially_resolved",
+      "status": "inferred_candidate",
       "open_question": "Does column index 48 `tempmaxann_rcp85_endc` correspond to the dictionary field `RCP85_ENDC` in section \"Temperature Maximum - Annual\" (line 522), described as \"Max Daily Temperature (°F) – Annual Average – End-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmaxann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-019"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1602,6 +1892,7 @@
       "open_question": "Does column index 49 `tempmaxann_mid45_hist` correspond to the dictionary field `MID45_HIST` in section \"Temperature Maximum - Annual\" (line 523), described as \"Max Daily Temperature (°F) – Change in Annual Average – Historical and Mid-Century RCP4.5\"? The dictionary does not state that the CSV stem `tempmaxann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1630,6 +1921,7 @@
       "open_question": "Does column index 50 `tempmaxann_end45_hist` correspond to the dictionary field `END45_HIST` in section \"Temperature Maximum - Annual\" (line 524), described as \"Max Daily Temperature (°F) – Change in Annual Average – Historical and End-Century RCP4.5\"? The dictionary does not state that the CSV stem `tempmaxann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1658,6 +1950,7 @@
       "open_question": "Does column index 51 `tempmaxann_mid85_hist` correspond to the dictionary field `MID85_HIST` in section \"Temperature Maximum - Annual\" (line 525), described as \"Max Daily Temperature (°F) – Change in Annual Average – Historical and Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmaxann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1682,10 +1975,13 @@
           "section_title_line": 513
         }
       ],
-      "status": "partially_resolved",
+      "status": "inferred_candidate",
       "open_question": "Does column index 52 `tempmaxann_end85_hist` correspond to the dictionary field `END85_HIST` in section \"Temperature Maximum - Annual\" (line 526), described as \"Max Daily Temperature (°F) – Change in Annual Average – Historical and End-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmaxann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-020"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1714,6 +2010,7 @@
       "open_question": "Does column index 53 `tempmaxann_mid85_45` correspond to the dictionary field `MID85_45` in section \"Temperature Maximum - Annual\" (line 527), described as \"Max Daily Temperature (°F) – Difference in Annual Average – Mid-Century RCP4.5 and Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmaxann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1742,6 +2039,7 @@
       "open_question": "Does column index 54 `tempmaxann_end85_45` correspond to the dictionary field `END85_45` in section \"Temperature Maximum - Annual\" (line 528), described as \"Max Daily Temperature (°F) – Difference in Annual Average – End-Century RCP4.5 and End-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmaxann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1770,6 +2068,7 @@
       "open_question": "Does column index 55 `tempmax_seas_hist_winter` correspond to the dictionary field `HIST_WINTER` in section \"Temperature Maximum – Seasonal\" (line 539), described as \"Winter - Max Daily Temperature (°F) – Annual Average – Historical\"? The dictionary does not state that the CSV stem `tempmax_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1798,6 +2097,7 @@
       "open_question": "Does column index 56 `tempmax_seas_rcp85_midc_winter` correspond to the dictionary field `RCP85_MIDC_WINTER` in section \"Temperature Maximum – Seasonal\" (line 542), described as \"Winter - Max Daily Temperature (°F) – Annual Average – Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmax_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1826,6 +2126,7 @@
       "open_question": "Does column index 57 `tempmax_seas_rcp85_endc_winter` correspond to the dictionary field `RCP85_ENDC_WINTER` in section \"Temperature Maximum – Seasonal\" (line 543), described as \"Winter - Max Daily Temperature (°F) – Annual Average – End-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmax_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1854,6 +2155,7 @@
       "open_question": "Does column index 58 `tempmax_seas_mid85_hist_winter` correspond to the dictionary field `MID85_HIST_WINTER` in section \"Temperature Maximum – Seasonal\" (line 546), described as \"Winter - Max Daily Temperature (°F) – Change in Annual Average – Historical and Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmax_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1882,6 +2184,7 @@
       "open_question": "Does column index 59 `tempmax_seas_end85_hist_winter` correspond to the dictionary field `END85_HIST_WINTER` in section \"Temperature Maximum – Seasonal\" (line 547), described as \"Winter - Max Daily Temperature (°F) – Change in Annual Average – Historical and End-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmax_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1910,6 +2213,7 @@
       "open_question": "Does column index 60 `tempmax_seas_hist_summer` correspond to the dictionary field `HIST_SUMMER` in section \"Temperature Maximum – Seasonal\" (line 557), described as \"Summer - Max Daily Temperature (°F) – Annual Average – Historical\"? The dictionary does not state that the CSV stem `tempmax_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1938,6 +2242,7 @@
       "open_question": "Column index 61 `tempmax_seas_rcp85_mid_summer` matches no dictionary field name. Under the candidate section \"Temperature Maximum – Seasonal\" the closest field is `RCP85_MIDC_SUMMER` (line 560), described as \"Summer - Max Daily Temperature (°F) – Annual Average – Mid-Century RCP8.5\". Is `rcp85_mid_summer` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1966,6 +2271,7 @@
       "open_question": "Column index 62 `tempmax_seas_rcp85_end_summer` matches no dictionary field name. Under the candidate section \"Temperature Maximum – Seasonal\" the closest field is `RCP85_ENDC_SUMMER` (line 561), described as \"Summer - Max Daily Temperature (°F) – Annual Average – End-Century RCP8.5\". Is `rcp85_end_summer` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -1994,6 +2300,7 @@
       "open_question": "Does column index 63 `tempmax_seas_mid85_hist_summer` correspond to the dictionary field `MID85_HIST_SUMMER` in section \"Temperature Maximum – Seasonal\" (line 564), described as \"Summer - Max Daily Temperature (°F) – Change in Annual Average – Historical and Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmax_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2022,6 +2329,7 @@
       "open_question": "Does column index 64 `tempmax_seas_end85_hist_summer` correspond to the dictionary field `END85_HIST_SUMMER` in section \"Temperature Maximum – Seasonal\" (line 565), described as \"Summer - Max Daily Temperature (°F) – Change in Annual Average – Historical and End-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmax_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2050,6 +2358,7 @@
       "open_question": "Does column index 65 `tempmax_seas_hist_spring` correspond to the dictionary field `HIST_SPRING` in section \"Temperature Maximum – Seasonal\" (line 548), described as \"Spring - Max Daily Temperature (°F) – Annual Average – Historical\"? The dictionary does not state that the CSV stem `tempmax_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2078,6 +2387,7 @@
       "open_question": "Column index 66 `tempmax_seas_rcp85_mid_spring` matches no dictionary field name. Under the candidate section \"Temperature Maximum – Seasonal\" the closest field is `RCP85_MIDC_SPRING` (line 551), described as \"Spring - Max Daily Temperature (°F) – Annual Average – Mid-Century RCP8.5\". Is `rcp85_mid_spring` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2106,6 +2416,7 @@
       "open_question": "Column index 67 `tempmax_seas_rcp85_end_spring` matches no dictionary field name. Under the candidate section \"Temperature Maximum – Seasonal\" the closest field is `RCP85_ENDC_SPRING` (line 552), described as \"Spring - Max Daily Temperature (°F) – Annual Average – End-Century RCP8.5\". Is `rcp85_end_spring` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2134,6 +2445,7 @@
       "open_question": "Column index 68 `tempmax_seas_mid85_hist_sprin` matches no dictionary field name. Under the candidate section \"Temperature Maximum – Seasonal\" the closest field is `MID85_HIST_SPRING` (line 555), described as \"Spring - Max Daily Temperature (°F) – Change in Annual Average – Historical and Mid-Century RCP8.5\". Is `mid85_hist_sprin` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2162,6 +2474,7 @@
       "open_question": "Column index 69 `tempmax_seas_end85_hist_sprin` matches no dictionary field name. Under the candidate section \"Temperature Maximum – Seasonal\" the closest field is `END85_HIST_SPRING` (line 556), described as \"Spring - Max Daily Temperature (°F) – Change in Annual Average – Historical and End-Century RCP8.5\". Is `end85_hist_sprin` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2190,6 +2503,7 @@
       "open_question": "Column index 70 `tempmax_seas_hist_autum` matches no dictionary field name. Under the candidate section \"Temperature Maximum – Seasonal\" the closest field is `HIST_AUTUMN` (line 566), described as \"Autumn - Max Daily Temperature (°F) – Annual Average – Historical\". Is `hist_autum` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2218,6 +2532,7 @@
       "open_question": "Column index 71 `tempmax_seas_rcp85_mid_autumn` matches no dictionary field name. Under the candidate section \"Temperature Maximum – Seasonal\" the closest field is `RCP85_MIDC_AUTUMN` (line 569), described as \"Autumn - Max Daily Temperature (°F) – Annual Average – Mid-Century RCP8.5\". Is `rcp85_mid_autumn` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2246,6 +2561,7 @@
       "open_question": "Column index 72 `tempmax_seas_rcp85_end_autumn` matches no dictionary field name. Under the candidate section \"Temperature Maximum – Seasonal\" the closest field is `RCP85_ENDC_AUTUMN` (line 570), described as \"Autumn - Max Daily Temperature (°F) – Annual Average – End-Century RCP8.5\". Is `rcp85_end_autumn` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2274,6 +2590,7 @@
       "open_question": "Does column index 73 `tempmax_seas_mid85_hist_autumn` correspond to the dictionary field `MID85_HIST_AUTUMN` in section \"Temperature Maximum – Seasonal\" (line 573), described as \"Autumn - Max Daily Temperature (°F) – Change in Annual Average – Historical and Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmax_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2302,6 +2619,7 @@
       "open_question": "Does column index 74 `tempmax_seas_end85_hist_autumn` correspond to the dictionary field `END85_HIST_AUTUMN` in section \"Temperature Maximum – Seasonal\" (line 574), described as \"Autumn - Max Daily Temperature (°F) – Change in Annual Average – Historical and End-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmax_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2330,6 +2648,7 @@
       "open_question": "Does column index 75 `tempminann_hist` correspond to the dictionary field `hist` in section \"Temperature Minimum – Annual\" (line 456), described as \"Min Daily Temperature (°F) – Annual Average – Historical\"? The dictionary does not state that the CSV stem `tempminann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2358,6 +2677,7 @@
       "open_question": "Does column index 76 `tempminann_rcp45_midc` correspond to the dictionary field `rcp45_midc` in section \"Temperature Minimum – Annual\" (line 457), described as \"Min Daily Temperature (°F) – Annual Average – Mid-Century RCP4.5\"? The dictionary does not state that the CSV stem `tempminann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2386,6 +2706,7 @@
       "open_question": "Does column index 77 `tempminann_rcp45_endc` correspond to the dictionary field `rcp45_endc` in section \"Temperature Minimum – Annual\" (line 458), described as \"Min Daily Temperature (°F) – Annual Average – End-Century RCP4.5\"? The dictionary does not state that the CSV stem `tempminann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2414,6 +2735,7 @@
       "open_question": "Does column index 78 `tempminann_rcp85_midc` correspond to the dictionary field `rcp85_midc` in section \"Temperature Minimum – Annual\" (line 459), described as \"Min Daily Temperature (°F) – Annual Average – Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempminann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2442,6 +2764,7 @@
       "open_question": "Does column index 79 `tempminann_rcp85_endc` correspond to the dictionary field `rcp85_endc` in section \"Temperature Minimum – Annual\" (line 460), described as \"Min Daily Temperature (°F) – Annual Average – End-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempminann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2470,6 +2793,7 @@
       "open_question": "Does column index 80 `tempminann_mid45_hist` correspond to the dictionary field `mid45_hist` in section \"Temperature Minimum – Annual\" (line 461), described as \"Min Daily Temperature (°F) – Change in Annual Average – Historical and Mid-Century RCP4.5\"? The dictionary does not state that the CSV stem `tempminann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2498,6 +2822,7 @@
       "open_question": "Does column index 81 `tempminann_end45_hist` correspond to the dictionary field `end45_hist` in section \"Temperature Minimum – Annual\" (line 462), described as \"Min Daily Temperature (°F) – Change in Annual Average – Historical and End-Century RCP4.5\"? The dictionary does not state that the CSV stem `tempminann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2526,6 +2851,7 @@
       "open_question": "Does column index 82 `tempminann_mid85_hist` correspond to the dictionary field `mid85_hist` in section \"Temperature Minimum – Annual\" (line 463), described as \"Min Daily Temperature (°F) – Change in Annual Average – Historical and Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempminann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2554,6 +2880,7 @@
       "open_question": "Does column index 83 `tempminann_end85_hist` correspond to the dictionary field `end85_hist` in section \"Temperature Minimum – Annual\" (line 464), described as \"Min Daily Temperature (°F) – Change in Annual Average – Historical and End-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempminann` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2605,6 +2932,7 @@
       "open_question": "Column index 84 `tempminann_mid85_45` matches the dictionary field `mid85_45` in 5 section(s): \"Temperature Maximum - Annual\" (line 527); \"Temperature Maximum - Annual\" (line 529); \"Precipitation – Annual Total\" (line 599); \"Precipitation None - Annual Average\" (line 612); \"Wind Speed – Annual Average\" (line 625). Which section describes this column, and what is the meaning of the remaining name part `tempminann`?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2656,6 +2984,7 @@
       "open_question": "Column index 85 `tempminann_end85_45` matches the dictionary field `end85_45` in 5 section(s): \"Temperature Maximum - Annual\" (line 528); \"Temperature Maximum - Annual\" (line 530); \"Precipitation – Annual Total\" (line 600); \"Precipitation None - Annual Average\" (line 613); \"Wind Speed – Annual Average\" (line 626). Which section describes this column, and what is the meaning of the remaining name part `tempminann`?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2684,6 +3013,7 @@
       "open_question": "Does column index 86 `tempmin_seas_hist_winter` correspond to the dictionary field `hist_Winter` in section \"Temperature Minimum – Seasonal\" (line 474), described as \"Winter - Min Daily Temperature (°F) – Annual Average – Historical\"? The dictionary does not state that the CSV stem `tempmin_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2712,6 +3042,7 @@
       "open_question": "Does column index 87 `tempmin_seas_rcp85_midc_winter` correspond to the dictionary field `rcp85_midc_winter` in section \"Temperature Minimum – Seasonal\" (line 477), described as \"Winter - Min Daily Temperature (°F) – Annual Average – Historical\"? The dictionary does not state that the CSV stem `tempmin_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2740,6 +3071,7 @@
       "open_question": "Does column index 88 `tempmin_seas_rcp85_endc_winter` correspond to the dictionary field `rcp85_endc_winter` in section \"Temperature Minimum – Seasonal\" (line 478), described as \"Winter - Min Daily Temperature (°F) – Annual Average – Historical\"? The dictionary does not state that the CSV stem `tempmin_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2768,6 +3100,7 @@
       "open_question": "Does column index 89 `tempmin_seas_mid85_hist_winter` correspond to the dictionary field `mid85_hist_winter` in section \"Temperature Minimum – Seasonal\" (line 481), described as \"Winter - Min Daily Temperature (°F) – Annual Average – Historical\"? The dictionary does not state that the CSV stem `tempmin_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2796,6 +3129,7 @@
       "open_question": "Does column index 90 `tempmin_seas_end85_hist_winter` correspond to the dictionary field `end85_hist_winter` in section \"Temperature Minimum – Seasonal\" (line 482), described as \"Winter - Min Daily Temperature (°F) – Annual Average – Historical\"? The dictionary does not state that the CSV stem `tempmin_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2824,6 +3158,7 @@
       "open_question": "Does column index 91 `tempmin_seas_hist_summer` correspond to the dictionary field `hist_Summer` in section \"Temperature Minimum – Seasonal\" (line 492), described as \"Summer - Min Daily Temperature (°F) – Annual Average – Historical\"? The dictionary does not state that the CSV stem `tempmin_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2852,6 +3187,7 @@
       "open_question": "Column index 92 `tempmin_seas_rcp85_mid_summer` matches no dictionary field name. Under the candidate section \"Temperature Minimum – Seasonal\" the closest field is `rcp85_midc_Summer` (line 495), described as \"Summer - Min Daily Temperature (°F) – Annual Average – Mid-Century RCP8.5\". Is `rcp85_mid_summer` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2880,6 +3216,7 @@
       "open_question": "Column index 93 `tempmin_seas_rcp85_end_summer` matches no dictionary field name. Under the candidate section \"Temperature Minimum – Seasonal\" the closest field is `rcp85_endc_Summer` (line 496), described as \"Summer - Min Daily Temperature (°F) – Annual Average – End-Century RCP8.5\". Is `rcp85_end_summer` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2908,6 +3245,7 @@
       "open_question": "Does column index 94 `tempmin_seas_mid85_hist_summer` correspond to the dictionary field `mid85_hist_Summer` in section \"Temperature Minimum – Seasonal\" (line 499), described as \"Summer - Min Daily Temperature (°F) – Change in Annual Average – Historical and Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmin_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2936,6 +3274,7 @@
       "open_question": "Does column index 95 `tempmin_seas_end85_hist_summer` correspond to the dictionary field `end85_hist_Summer` in section \"Temperature Minimum – Seasonal\" (line 500), described as \"Summer - Min Daily Temperature (°F) – Change in Annual Average – Historical and End-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmin_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2964,6 +3303,7 @@
       "open_question": "Does column index 96 `tempmin_seas_hist_spring` correspond to the dictionary field `hist_Spring` in section \"Temperature Minimum – Seasonal\" (line 483), described as \"Spring - Min Daily Temperature (°F) – Annual Average – Historical\"? The dictionary does not state that the CSV stem `tempmin_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -2992,6 +3332,7 @@
       "open_question": "Column index 97 `tempmin_seas_rcp85_mid_spring` matches no dictionary field name. Under the candidate section \"Temperature Minimum – Seasonal\" the closest field is `rcp85_midc_Spring` (line 486), described as \"Spring - Min Daily Temperature (°F) – Annual Average – Mid-Century RCP8.5\". Is `rcp85_mid_spring` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3020,6 +3361,7 @@
       "open_question": "Column index 98 `tempmin_seas_rcp85_end_spring` matches no dictionary field name. Under the candidate section \"Temperature Minimum – Seasonal\" the closest field is `rcp85_endc_Spring` (line 487), described as \"Spring - Min Daily Temperature (°F) – Annual Average – End-Century RCP8.5\". Is `rcp85_end_spring` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3048,6 +3390,7 @@
       "open_question": "Column index 99 `tempmin_seas_mid85_hist_sprin` matches no dictionary field name. Under the candidate section \"Temperature Minimum – Seasonal\" the closest field is `mid85_hist_Spring` (line 490), described as \"Spring - Min Daily Temperature (°F) – Change in Annual Average – Historical and Mid-Century RCP8.5\". Is `mid85_hist_sprin` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3076,6 +3419,7 @@
       "open_question": "Column index 100 `tempmin_seas_end85_hist_sprin` matches no dictionary field name. Under the candidate section \"Temperature Minimum – Seasonal\" the closest field is `end85_hist_Spring` (line 491), described as \"Spring - Min Daily Temperature (°F) – Change in Annual Average – Historical and End-Century RCP8.5\". Is `end85_hist_sprin` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3104,6 +3448,7 @@
       "open_question": "Column index 101 `tempmin_seas_hist_autum` matches no dictionary field name. Under the candidate section \"Temperature Minimum – Seasonal\" the closest field is `hist_Autumn` (line 501), described as \"Autumn - Min Daily Temperature (°F) – Annual Average – Historical\". Is `hist_autum` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3132,6 +3477,7 @@
       "open_question": "Column index 102 `tempmin_seas_rcp85_mid_autumn` matches no dictionary field name. Under the candidate section \"Temperature Minimum – Seasonal\" the closest field is `rcp85_midc_Autumn` (line 504), described as \"Autumn - Min Daily Temperature (°F) – Annual Average – Mid-Century RCP8.5\". Is `rcp85_mid_autumn` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3160,6 +3506,7 @@
       "open_question": "Column index 103 `tempmin_seas_rcp85_end_autumn` matches no dictionary field name. Under the candidate section \"Temperature Minimum – Seasonal\" the closest field is `rcp85_endc_Autumn` (line 505), described as \"Autumn - Min Daily Temperature (°F) – Annual Average – End-Century RCP8.5\". Is `rcp85_end_autumn` the same field under a different spelling, and if so what is this column's unit?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3188,6 +3535,7 @@
       "open_question": "Does column index 104 `tempmin_seas_mid85_hist_autumn` correspond to the dictionary field `mid85_hist_Autumn` in section \"Temperature Minimum – Seasonal\" (line 508), described as \"Autumn - Min Daily Temperature (°F) – Change in Annual Average – Historical and Mid-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmin_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3216,6 +3564,7 @@
       "open_question": "Does column index 105 `tempmin_seas_end85_hist_autumn` correspond to the dictionary field `end85_hist_Autumn` in section \"Temperature Minimum – Seasonal\" (line 509), described as \"Autumn - Min Daily Temperature (°F) – Change in Annual Average – Historical and End-Century RCP8.5\"? The dictionary does not state that the CSV stem `tempmin_seas` denotes that section, so the correspondence and the unit both need confirmation.",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3227,10 +3576,13 @@
       "candidate_section": null,
       "candidate_section_source": null,
       "dictionary_evidence": [],
-      "status": "structurally_observed_only",
+      "status": "inferred_candidate",
       "open_question": "Column index 106 `X` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-014"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3242,10 +3594,13 @@
       "candidate_section": null,
       "candidate_section_source": null,
       "dictionary_evidence": [],
-      "status": "structurally_observed_only",
+      "status": "inferred_candidate",
       "open_question": "Column index 107 `Y` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-015"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3257,10 +3612,13 @@
       "candidate_section": null,
       "candidate_section_source": null,
       "dictionary_evidence": [],
-      "status": "structurally_observed_only",
+      "status": "inferred_candidate",
       "open_question": "Column index 108 `TRACTCE` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-016"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3272,10 +3630,13 @@
       "candidate_section": null,
       "candidate_section_source": null,
       "dictionary_evidence": [],
-      "status": "structurally_observed_only",
+      "status": "inferred_candidate",
       "open_question": "Column index 109 `GEOID` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-017"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3291,6 +3652,7 @@
       "open_question": "Column index 110 `NAME_1` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3306,6 +3668,7 @@
       "open_question": "Column index 111 `NAMELSAD` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3321,6 +3684,7 @@
       "open_question": "Column index 112 `Percentage_of_the_population_65` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3336,6 +3700,7 @@
       "open_question": "Column index 113 `Gini_Index_of_income_inequality` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3351,6 +3716,7 @@
       "open_question": "Column index 114 `Pop_below_U_S__Census_poverty_l` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3366,6 +3732,7 @@
       "open_question": "Column index 115 `Percentage_of_housing_units_tha` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3381,6 +3748,7 @@
       "open_question": "Column index 116 `Aggregate_Resilience_Indicator` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3396,6 +3764,7 @@
       "open_question": "Column index 117 `Aggregate_Resilience_Indicator_` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3411,6 +3780,7 @@
       "open_question": "Column index 118 `The_net_migration__internationa` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3426,6 +3796,7 @@
       "open_question": "Column index 119 `precipdaily_histmean_winter` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3441,6 +3812,7 @@
       "open_question": "Column index 120 `precipdaily_mid85mean_winter` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3456,6 +3828,7 @@
       "open_question": "Column index 121 `precipdaily_end85mean_winter` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3471,6 +3844,7 @@
       "open_question": "Column index 122 `precipdaily_Dmid_mean_winter` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3486,6 +3860,7 @@
       "open_question": "Column index 123 `precipdaily_Dend_mean_winter` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3501,6 +3876,7 @@
       "open_question": "Column index 124 `precipdaily_Pmid_mean_winter` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3516,6 +3892,7 @@
       "open_question": "Column index 125 `precipdaily_Pend_mean_winter` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3531,6 +3908,7 @@
       "open_question": "Column index 126 `precipdaily_histmax_winter` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3546,6 +3924,7 @@
       "open_question": "Column index 127 `precipdaily_mid85max_winter` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3561,6 +3940,7 @@
       "open_question": "Column index 128 `precipdaily_end85max_winter` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3576,6 +3956,7 @@
       "open_question": "Column index 129 `precipdaily_Dmid_max_winter` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3591,6 +3972,7 @@
       "open_question": "Column index 130 `precipdaily_Dend_max_winter` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3606,6 +3988,7 @@
       "open_question": "Column index 131 `precipdaily_Pmid_max_winter` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3621,6 +4004,7 @@
       "open_question": "Column index 132 `precipdaily_Pend_max_winter` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3636,6 +4020,7 @@
       "open_question": "Column index 133 `precipdaily_histmean_spring` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3651,6 +4036,7 @@
       "open_question": "Column index 134 `precipdaily_mid85mean_spring` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3666,6 +4052,7 @@
       "open_question": "Column index 135 `precipdaily_end85mean_spring` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3681,6 +4068,7 @@
       "open_question": "Column index 136 `precipdaily_Dmid_mean_spring` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3696,6 +4084,7 @@
       "open_question": "Column index 137 `precipdaily_Dend_mean_spring` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3711,6 +4100,7 @@
       "open_question": "Column index 138 `precipdaily_Pmid_mean_spring` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3726,6 +4116,7 @@
       "open_question": "Column index 139 `precipdaily_Pend_mean_spring` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3741,6 +4132,7 @@
       "open_question": "Column index 140 `precipdaily_histmax_spring` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3756,6 +4148,7 @@
       "open_question": "Column index 141 `precipdaily_mid85max_spring` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3771,6 +4164,7 @@
       "open_question": "Column index 142 `precipdaily_end85max_spring` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3786,6 +4180,7 @@
       "open_question": "Column index 143 `precipdaily_Dmid_max_spring` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3801,6 +4196,7 @@
       "open_question": "Column index 144 `precipdaily_Dend_max_spring` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3816,6 +4212,7 @@
       "open_question": "Column index 145 `precipdaily_Pmid_max_spring` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3831,6 +4228,7 @@
       "open_question": "Column index 146 `precipdaily_Pend_max_spring` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3846,6 +4244,7 @@
       "open_question": "Column index 147 `precipdaily_histmean_summer` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3861,6 +4260,7 @@
       "open_question": "Column index 148 `precipdaily_mid85mea_summer` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3876,6 +4276,7 @@
       "open_question": "Column index 149 `precipdaily_end85mea_summer` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3891,6 +4292,7 @@
       "open_question": "Column index 150 `precipdaily_Dmid_mea_summer` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3906,6 +4308,7 @@
       "open_question": "Column index 151 `precipdaily_Dend_mea_summer` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3921,6 +4324,7 @@
       "open_question": "Column index 152 `precipdaily_Pmid_mea_summer` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3936,6 +4340,7 @@
       "open_question": "Column index 153 `precipdaily_Pend_mea_summer` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3951,6 +4356,7 @@
       "open_question": "Column index 154 `precipdaily_histmax_summer` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3966,6 +4372,7 @@
       "open_question": "Column index 155 `precipdaily_mid85max_summer` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3981,6 +4388,7 @@
       "open_question": "Column index 156 `precipdaily_end85max_summer` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -3996,6 +4404,7 @@
       "open_question": "Column index 157 `precipdaily_Dmid_max_summer` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4011,6 +4420,7 @@
       "open_question": "Column index 158 `precipdaily_Dend_max_summer` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4026,6 +4436,7 @@
       "open_question": "Column index 159 `precipdaily_Pmid_max_summer` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4041,6 +4452,7 @@
       "open_question": "Column index 160 `precipdaily_Pend_max_summer` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4056,6 +4468,7 @@
       "open_question": "Column index 161 `precipdaily_histmean_autumn` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4071,6 +4484,7 @@
       "open_question": "Column index 162 `precipdaily_mid85mea_autumn` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4086,6 +4500,7 @@
       "open_question": "Column index 163 `precipdaily_end85mea_autumn` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4101,6 +4516,7 @@
       "open_question": "Column index 164 `precipdaily_Dmid_mea_autumn` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4116,6 +4532,7 @@
       "open_question": "Column index 165 `precipdaily_Dend_mea_autumn` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4131,6 +4548,7 @@
       "open_question": "Column index 166 `precipdaily_Pmid_mea_autumn` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4146,6 +4564,7 @@
       "open_question": "Column index 167 `precipdaily_Pend_mea_autumn` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4161,6 +4580,7 @@
       "open_question": "Column index 168 `precipdaily_histmax_autumn` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4176,6 +4596,7 @@
       "open_question": "Column index 169 `precipdaily_mid85max_autumn` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4191,6 +4612,7 @@
       "open_question": "Column index 170 `precipdaily_end85max_autumn` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4206,6 +4628,7 @@
       "open_question": "Column index 171 `precipdaily_Dmid_max_autumn` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4221,6 +4644,7 @@
       "open_question": "Column index 172 `precipdaily_Dend_max_autumn` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4236,6 +4660,7 @@
       "open_question": "Column index 173 `precipdaily_Pmid_max_autumn` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4251,6 +4676,7 @@
       "open_question": "Column index 174 `precipdaily_Pend_max_autumn` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4274,6 +4700,7 @@
       "open_question": "The dictionary describes `wildfire_autumn_Hist` (line 647) as \"Seasonal value – Historical\", which does not state a unit. What is a unit for column index 175?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4297,6 +4724,7 @@
       "open_question": "The dictionary describes `wildfire_autumn_Midc` (line 648) as \"Seasonal value – Mid-Century RCP 8.5\", which does not state a unit. What is a unit for column index 176?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4320,6 +4748,7 @@
       "open_question": "The dictionary describes `wildfire_autumn_Endc` (line 649) as \"Seasonal value – End-Century RCP 8.5\", which does not state a unit. What is a unit for column index 177?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4343,6 +4772,7 @@
       "open_question": "The dictionary describes `wildfire_autumn_Dmid` (line 650) as \"Difference between Mid-Century and Historical\", which does not state a unit. What is a unit for column index 178?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4366,6 +4796,7 @@
       "open_question": "The dictionary describes `wildfire_autumn_Dend` (line 651) as \"Difference between End-Century and Historical\", which does not state a unit. What is a unit for column index 179?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4389,6 +4820,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4412,6 +4844,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4435,6 +4868,7 @@
       "open_question": "The dictionary describes `wildfire_spring_Hist` (line 654) as \"Seasonal value – Historical\", which does not state a unit. What is a unit for column index 182?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4458,6 +4892,7 @@
       "open_question": "The dictionary describes `wildfire_spring_Midc` (line 655) as \"Seasonal value – Mid-Century RCP 8.5\", which does not state a unit. What is a unit for column index 183?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4481,6 +4916,7 @@
       "open_question": "The dictionary describes `wildfire_spring_Endc` (line 656) as \"Seasonal value – End-Century RCP 8.5\", which does not state a unit. What is a unit for column index 184?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4504,6 +4940,7 @@
       "open_question": "The dictionary describes `wildfire_spring_Dmid` (line 657) as \"Difference between Mid-Century and Historical\", which does not state a unit. What is a unit for column index 185?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4527,6 +4964,7 @@
       "open_question": "The dictionary describes `wildfire_spring_Dend` (line 658) as \"Difference between End-Century and Historical\", which does not state a unit. What is a unit for column index 186?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4550,6 +4988,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4573,6 +5012,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4592,10 +5032,13 @@
           "section_title_line": 637
         }
       ],
-      "status": "partially_resolved",
+      "status": "inferred_candidate",
       "open_question": "The dictionary describes `wildfire_summer_Hist` (line 661) as \"Seasonal value – Historical\", which does not state a unit. What is a unit for column index 189?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-006"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4615,10 +5058,13 @@
           "section_title_line": 637
         }
       ],
-      "status": "partially_resolved",
+      "status": "inferred_candidate",
       "open_question": "The dictionary describes `wildfire_summer_Midc` (line 662) as \"Seasonal value – Mid-Century RCP 8.5\", which does not state a unit. What is a unit for column index 190?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-007"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4638,10 +5084,13 @@
           "section_title_line": 637
         }
       ],
-      "status": "partially_resolved",
+      "status": "inferred_candidate",
       "open_question": "The dictionary describes `wildfire_summer_Endc` (line 663) as \"Seasonal value – End-Century RCP 8.5\", which does not state a unit. What is a unit for column index 191?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-008"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4661,10 +5110,13 @@
           "section_title_line": 637
         }
       ],
-      "status": "partially_resolved",
+      "status": "inferred_candidate",
       "open_question": "The dictionary describes `wildfire_summer_Dmid` (line 664) as \"Difference between Mid-Century and Historical\", which does not state a unit. What is a unit for column index 192?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-009"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4684,10 +5136,13 @@
           "section_title_line": 637
         }
       ],
-      "status": "partially_resolved",
+      "status": "inferred_candidate",
       "open_question": "The dictionary describes `wildfire_summer_Dend` (line 665) as \"Difference between End-Century and Historical\", which does not state a unit. What is a unit for column index 193?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-010"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4711,6 +5166,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4734,6 +5190,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4757,6 +5214,7 @@
       "open_question": "The dictionary describes `wildfire_winter_Hist` (line 668) as \"Seasonal value – Historical\", which does not state a unit. What is a unit for column index 196?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4780,6 +5238,7 @@
       "open_question": "The dictionary describes `wildfire_winter_Midc` (line 669) as \"Seasonal value – Mid-Century RCP 8.5\", which does not state a unit. What is a unit for column index 197?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4803,6 +5262,7 @@
       "open_question": "The dictionary describes `wildfire_winter_Endc` (line 670) as \"Seasonal value – End-Century RCP 8.5\", which does not state a unit. What is a unit for column index 198?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4826,6 +5286,7 @@
       "open_question": "The dictionary describes `wildfire_winter_Dmid` (line 671) as \"Difference between Mid-Century and Historical\", which does not state a unit. What is a unit for column index 199?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4849,6 +5310,7 @@
       "open_question": "The dictionary describes `wildfire_winter_Dend` (line 672) as \"Difference between End-Century and Historical\", which does not state a unit. What is a unit for column index 200?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4872,6 +5334,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4895,6 +5358,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -4910,6 +5374,7 @@
       "open_question": "Column index 203 `OBJECTID_1` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5003,6 +5468,7 @@
       "open_question": "Column index 204 `Crossmodel_1` matches the dictionary field `Crossmodel` in 11 section(s): \"Temperature Minimum – Annual\" (line 455); \"Temperature Minimum – Seasonal\" (line 473); \"Temperature Maximum - Annual\" (line 517); \"Temperature Maximum – Seasonal\" (line 538); \"Precipitation – Annual Total\" (line 589); \"Precipitation None - Annual Average\" (line 602); \"Wind Speed – Annual Average\" (line 615); \"Cooling Degree Days – Annual Total\" (line 628); \"Heating Degree Days – Annual Total\" (line 641); \"Fire Weather Index - Averages\" (line 646); \"Heat Index – Summer\" (line 676). Which section describes this column, and what is the meaning of the remaining name part `1`?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5029,6 +5495,7 @@
       "open_question": "Column index 205 `FWI_Bins_Hist_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5055,6 +5522,7 @@
       "open_question": "Column index 206 `FWI_Bins_Hist_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5081,6 +5549,7 @@
       "open_question": "Column index 207 `FWI_Bins_MidC_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5107,6 +5576,7 @@
       "open_question": "Column index 208 `FWI_Bins_MidC_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5133,6 +5603,7 @@
       "open_question": "Column index 209 `FWI_Bins_EndC_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5159,6 +5630,7 @@
       "open_question": "Column index 210 `FWI_Bins_EndC_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5185,6 +5657,7 @@
       "open_question": "Column index 211 `FWIBins_HistSpr_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5211,6 +5684,7 @@
       "open_question": "Column index 212 `FWIBins_HistSpr_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5237,6 +5711,7 @@
       "open_question": "Column index 213 `FWIBins_HistSum_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5263,6 +5738,7 @@
       "open_question": "Column index 214 `FWIBins_HistSum_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5289,6 +5765,7 @@
       "open_question": "Column index 215 `FWIBins_HistAut_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5315,6 +5792,7 @@
       "open_question": "Column index 216 `FWIBins_HistAut_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5341,6 +5819,7 @@
       "open_question": "Column index 217 `FWIBins_HistWin_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5367,6 +5846,7 @@
       "open_question": "Column index 218 `FWIBins_HistWin_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5393,6 +5873,7 @@
       "open_question": "Column index 219 `FWIBins_MidSpr_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5419,6 +5900,7 @@
       "open_question": "Column index 220 `FWIBins_MidSpr_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5445,6 +5927,7 @@
       "open_question": "Column index 221 `FWIBins_MidSum_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5471,6 +5954,7 @@
       "open_question": "Column index 222 `FWIBins_MidSum_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5497,6 +5981,7 @@
       "open_question": "Column index 223 `FWIBins_MidAut_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5523,6 +6008,7 @@
       "open_question": "Column index 224 `FWIBins_MidAut_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5549,6 +6035,7 @@
       "open_question": "Column index 225 `FWIBins_MidWin_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5575,6 +6062,7 @@
       "open_question": "Column index 226 `FWIBins_MidWin_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5601,6 +6089,7 @@
       "open_question": "Column index 227 `FWIBins_EndSpr_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5627,6 +6116,7 @@
       "open_question": "Column index 228 `FWIBins_EndSpr_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5653,6 +6143,7 @@
       "open_question": "Column index 229 `FWIBins_EndSum_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5679,6 +6170,7 @@
       "open_question": "Column index 230 `FWIBins_EndSum_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5705,6 +6197,7 @@
       "open_question": "Column index 231 `FWIBins_EndAut_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5731,6 +6224,7 @@
       "open_question": "Column index 232 `FWIBins_EndAut_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5757,6 +6251,7 @@
       "open_question": "Column index 233 `FWIBins_EndWin_95` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5783,6 +6278,7 @@
       "open_question": "Column index 234 `FWIBins_EndWin_NC` appears in no field table. The narrative section \"Calculating FWI Classes\" (line 357) is the only related passage. Does this column carry the values that passage defines, and what do the remaining parts of its name denote?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5798,6 +6294,7 @@
       "open_question": "Column index 235 `OBJECTID_12` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5813,6 +6310,7 @@
       "open_question": "Column index 236 `OBJECTID_12_13` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5906,6 +6404,7 @@
       "open_question": "Column index 237 `Crossmodel_12` matches the dictionary field `Crossmodel` in 11 section(s): \"Temperature Minimum – Annual\" (line 455); \"Temperature Minimum – Seasonal\" (line 473); \"Temperature Maximum - Annual\" (line 517); \"Temperature Maximum – Seasonal\" (line 538); \"Precipitation – Annual Total\" (line 589); \"Precipitation None - Annual Average\" (line 602); \"Wind Speed – Annual Average\" (line 615); \"Cooling Degree Days – Annual Total\" (line 628); \"Heating Degree Days – Annual Total\" (line 641); \"Fire Weather Index - Averages\" (line 646); \"Heat Index – Summer\" (line 676). Which section describes this column, and what is the meaning of the remaining name part `12`?",
       "status_baseline_wp1": "unresolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5925,10 +6424,13 @@
           "section_title_line": 639
         }
       ],
-      "status": "partially_resolved",
+      "status": "inferred_candidate",
       "open_question": "The dictionary describes `heatindex_HIS_DayMax` (line 677) as \"Summer daily max heat index (daily high) -- Historical\", which does not state a unit. What is a unit for column index 238?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-001"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5952,6 +6454,7 @@
       "open_question": "The dictionary describes `heatindex_HIS_SeaMax` (line 678) as \"Summer seasonal max heat index (seasonal high) -- Historical\", which does not state a unit. What is a unit for column index 239?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5975,6 +6478,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -5998,6 +6502,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6021,6 +6526,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6044,6 +6550,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6063,10 +6570,13 @@
           "section_title_line": 639
         }
       ],
-      "status": "partially_resolved",
+      "status": "inferred_candidate",
       "open_question": "The dictionary describes `heatindex_M85_DayMax` (line 683) as \"Summer daily max heat index (daily high) -- Mid-Century RCP8.5\", which does not state a unit. What is a unit for column index 244?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-002"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6090,6 +6600,7 @@
       "open_question": "The dictionary describes `heatindex_M85_SeaMax` (line 684) as \"Summer seasonal max heat index (seasonal high) -- Mid-Century RCP8.5\", which does not state a unit. What is a unit for column index 245?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6113,6 +6624,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6136,6 +6648,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6159,6 +6672,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6182,6 +6696,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6201,10 +6716,13 @@
           "section_title_line": 639
         }
       ],
-      "status": "partially_resolved",
+      "status": "inferred_candidate",
       "open_question": "The dictionary describes `heatindex_E85_DayMax` (line 689) as \"Summer daily max heat index (daily high) -- End-Century RCP8.5\", which does not state a unit. What is a unit for column index 250?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-003"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6228,6 +6746,7 @@
       "open_question": "The dictionary describes `heatindex_E85_SeaMax` (line 693) as \"Summer seasonal max heat index (seasonal high) -- End-Century RCP8.5\", which does not state a unit. What is a unit for column index 251?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6251,6 +6770,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6274,6 +6794,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6297,6 +6818,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6320,6 +6842,7 @@
       "open_question": null,
       "status_baseline_wp1": "verified_from_dictionary",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6339,10 +6862,13 @@
           "section_title_line": 639
         }
       ],
-      "status": "partially_resolved",
+      "status": "inferred_candidate",
       "open_question": "The dictionary describes `heatindex_C_M85_DMax` (line 698) as \"Change in summer daily max heat index -- Historical to Mid-Century RCP8.5\", which does not state a unit. What is a unit for column index 256?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-004"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6366,6 +6892,7 @@
       "open_question": "The dictionary describes `heatindex_C_M85_SMax` (line 699) as \"Change in summer seasonal max heat index -- Historical to Mid-Century RCP8.5\", which does not state a unit. What is a unit for column index 257?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6389,6 +6916,7 @@
       "open_question": "The dictionary describes `heatindex_C_M85_D95` (line 700) as \"Change in number of summer days with daily max heat index above 95 F -- Historical to Mid-Century RCP8.5\", which does not state a unit. What is a unit for column index 258?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6412,6 +6940,7 @@
       "open_question": "The dictionary describes `heatindex_C_M85_D105` (line 701) as \"Change in number of summer days with daily max heat index above 105 F -- Historical to Mid-Century RCP8.5\", which does not state a unit. What is a unit for column index 259?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6435,6 +6964,7 @@
       "open_question": "The dictionary describes `heatindex_C_M85_D115` (line 702) as \"Change in number of summer days with daily max heat index above 115 F -- Historical to Mid-Century RCP8.5\", which does not state a unit. What is a unit for column index 260?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6458,6 +6988,7 @@
       "open_question": "The dictionary describes `heatindex_C_M85_D125` (line 703) as \"Change in number of summer days with daily max heat index above 125 F -- Historical to Mid-Century RCP8.5\", which does not state a unit. What is a unit for column index 261?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6477,10 +7008,13 @@
           "section_title_line": 639
         }
       ],
-      "status": "partially_resolved",
+      "status": "inferred_candidate",
       "open_question": "The dictionary describes `heatindex_C_E85_DMax` (line 704) as \"Change in summer daily max heat index -- Historical to End-Century RCP8.5\", which does not state a unit. What is a unit for column index 262?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [
+        "IC-005"
+      ],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6504,6 +7038,7 @@
       "open_question": "The dictionary describes `heatindex_C_E85_SMax` (line 705) as \"Change in summer seasonal max heat index -- Historical to End-Century RCP8.5\", which does not state a unit. What is a unit for column index 263?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6527,6 +7062,7 @@
       "open_question": "The dictionary describes `heatindex_C_E85_D95` (line 706) as \"Change in number of summer days with daily max heat index above 95 F -- Historical to End-Century RCP8.5\", which does not state a unit. What is a unit for column index 264?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6550,6 +7086,7 @@
       "open_question": "The dictionary describes `heatindex_C_E85_D105` (line 707) as \"Change in number of summer days with daily max heat index above 105 F -- Historical to End-Century RCP8.5\", which does not state a unit. What is a unit for column index 265?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6573,6 +7110,7 @@
       "open_question": "The dictionary describes `heatindex_C_E85_D115` (line 708) as \"Change in number of summer days with daily max heat index above 115 F -- Historical to End-Century RCP8.5\", which does not state a unit. What is a unit for column index 266?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6596,6 +7134,7 @@
       "open_question": "The dictionary describes `heatindex_C_E85_D125` (line 709) as \"Change in number of summer days with daily max heat index above 125 F -- Historical to End-Century RCP8.5\", which does not state a unit. What is a unit for column index 267?",
       "status_baseline_wp1": "partially_resolved",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6611,6 +7150,7 @@
       "open_question": "Column index 268 `GlobalID` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6626,6 +7166,7 @@
       "open_question": "Column index 269 `created_us` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6641,6 +7182,7 @@
       "open_question": "Column index 270 `created_da` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6656,6 +7198,7 @@
       "open_question": "Column index 271 `last_edite` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6671,6 +7214,7 @@
       "open_question": "Column index 272 `last_edi_1` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6686,6 +7230,7 @@
       "open_question": "Column index 273 `Shape_STAr` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     },
@@ -6701,6 +7246,7 @@
       "open_question": "Column index 274 `Shape_STLe` appears nowhere in the data dictionary --- neither as a field name nor in the narrative. What is its source, its meaning, and its unit?",
       "status_baseline_wp1": "structurally_observed_only",
       "resolution_refs": [],
+      "inferred_candidate_refs": [],
       "resolved_section": null,
       "resolved_section_source": null
     }

@@ -41,13 +41,21 @@ def coverage(columns: list[dict], applied: list[dict] | None = None) -> dict:
     }
 
 
-def column(index: int, name: str, baseline: str, now: str, refs: list[str] | None = None) -> dict:
+def column(
+    index: int,
+    name: str,
+    baseline: str,
+    now: str,
+    refs: list[str] | None = None,
+    inferred_refs: list[str] | None = None,
+) -> dict:
     return {
         "index": index,
         "column": name,
         "status_baseline_wp1": baseline,
         "status": now,
         "resolution_refs": refs or [],
+        "inferred_candidate_refs": inferred_refs or [],
         "resolved_section": None,
     }
 
@@ -92,7 +100,7 @@ def test_a_change_with_no_record_cited_is_a_violation():
     report = coverage([column(0, "a", "unresolved", "owner_confirmed")])
     changes = status_diff.collect_changes(report)
     (violation,) = status_diff.check_invariants(report, changes)
-    assert "no resolution record cited" in violation
+    assert "neither a resolution record nor an inferred-candidate record cited" in violation
 
 
 def test_a_change_into_verified_from_dictionary_is_a_violation():
@@ -153,4 +161,104 @@ def test_the_tracked_coverage_report_shows_no_unattributed_change():
     report = json.loads(path.read_text(encoding="utf-8"))
     changes = status_diff.collect_changes(report)
 
+    assert status_diff.check_invariants(report, changes) == []
+
+
+# --- inferred candidates (M1-WP3, D-011) --------------------------------------
+#
+# The diff has to show the weakest status as clearly as the strongest, and has
+# to refuse the two ways it could be laundered into looking stronger: a column
+# holding it with nothing written down, and a column falling into it from above.
+
+
+def test_a_column_that_gained_inferred_candidate_cites_its_ic_record():
+    report = coverage(
+        [column(0, "a", "structurally_observed_only", "inferred_candidate", inferred_refs=["IC-001"])]
+    )
+
+    (change,) = status_diff.collect_changes(report)
+    assert change["inferred_candidate_refs"] == ["IC-001"]
+    assert change["decision_refs"] == ["D-011"]
+    assert status_diff.check_invariants(report, [change]) == []
+
+
+def test_inferred_candidate_with_no_record_cited_is_a_violation():
+    report = coverage([column(0, "a", "unresolved", "inferred_candidate")])
+
+    violations = status_diff.check_invariants(report, status_diff.collect_changes(report))
+    assert any("without citing an IC-record" in violation for violation in violations)
+
+
+def test_citing_an_ic_record_while_holding_another_status_is_a_violation():
+    report = coverage(
+        [column(0, "a", "unresolved", "partially_resolved", inferred_refs=["IC-001"])]
+    )
+
+    violations = status_diff.check_invariants(report, status_diff.collect_changes(report))
+    assert any("do not hold inferred_candidate" in violation for violation in violations)
+
+
+@pytest.mark.parametrize("stronger", ["verified_from_dictionary", "owner_confirmed"])
+def test_falling_from_a_stronger_status_into_inferred_candidate_is_a_violation(stronger):
+    report = coverage(
+        [column(0, "a", stronger, "inferred_candidate", inferred_refs=["IC-001"])]
+    )
+
+    violations = status_diff.check_invariants(report, status_diff.collect_changes(report))
+    assert any("D-011 forbids" in violation for violation in violations)
+
+
+def test_the_markdown_names_the_ic_records_it_applied():
+    report = coverage(
+        [column(0, "a", "unresolved", "inferred_candidate", inferred_refs=["IC-001"])]
+    )
+    report["n_inferred_candidates"] = 1
+    report["inferred_candidates_applied"] = [
+        {
+            "id": "IC-001",
+            "column_index": 0,
+            "column_name": "a",
+            "question_ids": ["Q14"],
+            "applied": True,
+            "blocked_by_status": None,
+            "status_before": "unresolved",
+        }
+    ]
+
+    text = status_diff.render_markdown(report, status_diff.collect_changes(report))
+    assert "`IC-001`" in text
+    assert "Not verified and not owner-confirmed" in text
+
+
+def test_the_markdown_says_so_when_a_record_was_blocked():
+    report = coverage([column(0, "a", "verified_from_dictionary", "verified_from_dictionary")])
+    report["n_inferred_candidates"] = 1
+    report["inferred_candidates_applied"] = [
+        {
+            "id": "IC-001",
+            "column_index": 0,
+            "column_name": "a",
+            "question_ids": ["Q14"],
+            "applied": False,
+            "blocked_by_status": "verified_from_dictionary",
+            "status_before": "verified_from_dictionary",
+        }
+    ]
+
+    text = status_diff.render_markdown(report, status_diff.collect_changes(report))
+    assert "blocked by `verified_from_dictionary`" in text
+
+
+def test_the_tracked_coverage_report_moves_only_inferred_candidates():
+    """As committed: 20 columns moved, every one of them by an IC-record."""
+    import json
+
+    path = REPO_ROOT / "artifacts" / "profiles" / "dictionary_coverage.json"
+    report = json.loads(path.read_text(encoding="utf-8"))
+    changes = status_diff.collect_changes(report)
+
+    assert len(changes) == 20
+    assert all(change["to"] == "inferred_candidate" for change in changes)
+    assert all(change["inferred_candidate_refs"] for change in changes)
+    assert all(not change["resolution_refs"] for change in changes)
     assert status_diff.check_invariants(report, changes) == []
