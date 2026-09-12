@@ -161,6 +161,36 @@ numpy 2.4.6 reading the same bytes with
 (`n_rows`, `n_columns`, `name`, `n_empty`, `n_distinct`, `n_with_leading_zero_any`), with
 0 disagreements. Row and column counts agree.
 
+### Indices 235 and 236 are not the same column
+
+`OBJECTID_12` (index 235) and `OBJECTID_12_13` (index 236) look like the
+spelling a join produces when a name collides twice, and the WP1 profile gave
+them identical distinct counts (62,752), identical ranges (1 … 63,458) and the
+same 83 empty rows. `scripts/check_objectid_pair.py` compares them row by row as
+raw text — nothing stripped, nothing parsed as a number.
+
+| Comparison | Result |
+| --- | --- |
+| Rows compared | 62,834 |
+| Identical as text | **83** |
+| Differing | **62,751** |
+| Rows where both are empty | 83 |
+| Rows where only one is empty | 0 |
+| Empty-row sets identical | **yes** |
+| Distinct values (235 / 236) | 62,752 / 62,752 |
+| Value sets identical | **no** |
+| Values in one column only | 703 in 235, 703 in 236 |
+
+Every row on which the two agree is a row on which both are empty. They are
+therefore **not the same column duplicated**, and — since 703 values occur in one
+and not the other — **not the same identifiers in a different row order** either.
+They are two different identifier columns drawn from overlapping ranges, blank on
+the same 83 rows.
+
+**No meaning is assigned here.** This says nothing about what either column is,
+which source layer it came from, or whether either can serve as a join key; that
+is Q11, still open. Recorded against `METADATA_QUESTIONS.md` Q11.4.
+
 ### Dictionary PDF page completeness — page 3 is blank
 
 The GUIDANCE M1-WP1 review recorded, as risk 4, that one page of the 19-page

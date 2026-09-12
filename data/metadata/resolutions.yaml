@@ -7,9 +7,12 @@
 # `scripts/status_diff.py` can show every movement since, with the record and
 # the decision that caused it.
 #
-# THIS FILE IS EMPTY ON PURPOSE. M1-WP2a built the machinery; no answer has
-# arrived yet. The first records are expected from the mentor meeting on
-# 2026-09-10 --- see docs/MENTOR_BRIEF.md for the questions being asked.
+# M1-WP2a built the machinery; M1-WP2b recorded the first two records, from the
+# mentor meeting of 2026-09-10. **Neither changes any column status**, and no
+# package has authorised one to. Both are `effect: null`: one says the extra
+# metadata this project was hoping for does not exist, the other gives a
+# direction rather than a column meaning. What follows from them is D-010,
+# which is PROPOSED and awaits a GUIDANCE ruling.
 #
 # Field by field
 # --------------
@@ -25,8 +28,12 @@
 #   stem_section_map  (optional) CSV column-name stem -> dictionary section
 #                  title. The other way. It reaches exactly the columns whose
 #                  parsed stem is a key here.
-#   statement      The answer verbatim as relayed. Not a paraphrase.
-#   effect         field: status, and `to:` the status to assign.
+#   statement      The answer as relayed. `statement_fidelity` says whether it
+#                  is the source's own words or someone else's summary of them.
+#   statement_fidelity  (optional) verbatim | paraphrase. Absent means verbatim.
+#   effect         field: status, and `to:` the status to assign --- or `null`
+#                  for an answer that changes no column, which may then name
+#                  no columns and no stem map.
 #   decision_ref   The D-number that records the decision to accept this answer.
 #   confidence     confirmed | stated_not_verified
 #   notes          (optional) EXECUTOR commentary. Affects nothing.
@@ -69,4 +76,71 @@
 
 schema_version: 1
 
-resolutions: []
+resolutions:
+  - id: R-001
+    date: 2026-09-10
+    source: mentor
+    source_detail: >-
+      Weekly mentor one-on-one, 2026-09-10. Relayed to the COORDINATOR by
+      Kaiyuan Liao on 2026-09-12.
+    question_ids: [Q0]
+    columns: []
+    statement: >-
+      The mentor has no additional metadata for the table --- no newer data
+      dictionary, no assembly document or script, no release note.
+    statement_fidelity: paraphrase
+    effect: null
+    decision_ref: D-010
+    confidence: confirmed
+    notes: >-
+      Q0 is closed, answered in the negative. This is the answer with the
+      widest consequence in the meeting and it is a negative one: the
+      19-page alpha-release PDF already tracked in data/metadata/ is the whole
+      of the authoritative documentation that exists for this file. Two of the
+      three evidence types D-009 accepts for promoting a stem-to-section
+      mapping --- an authoritative export/source-generation specification, and
+      another authoritative ClimRR artifact mapping CSV names to dictionary
+      sections --- are therefore unavailable, not merely unobtained. Recorded as
+      `confirmed` because the mentor is authoritative about what she holds;
+      marked `paraphrase` because the words are Kaiyuan's summary, not hers.
+
+  - id: R-002
+    date: 2026-09-10
+    source: mentor
+    source_detail: >-
+      Weekly mentor one-on-one, 2026-09-10. Relayed to the COORDINATOR by
+      Kaiyuan Liao on 2026-09-12.
+    question_ids:
+      [Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, Q10, Q11, Q12, Q13, Q14, Q15, Q16, Q17, Q18]
+    columns: []
+    statement: >-
+      We do not need to use all the fields. We could let an AI reason out what
+      the columns mean and use the fields that are reliable or can be reasonably
+      explained. Each row stands for one event, so those fields can be used to
+      construct the event and then build the connection to the literature. She
+      wants to see examples.
+    statement_fidelity: paraphrase
+    effect: null
+    decision_ref: D-010
+    confidence: stated_not_verified
+    notes: >-
+      A direction for the project, not a semantic for any column. **No
+      per-column answer was given for any of Q1--Q18**, and none is recorded:
+      this statement names no column, no stem, no unit and no section, so it
+      moves nothing and by the rules of this file it could not.
+
+      Two things in it need care. First, "each row stands for one event" is
+      **Kaiyuan's reading of what the mentor meant**, not a statement the
+      mentor made in those terms; it is an assumption about the grain of the
+      table and is to be confirmed with her by presenting examples, not assumed
+      in the meantime. Second, "let an AI reason out what the columns mean"
+      describes inference from names, value patterns and dictionary spans ---
+      which is precisely what D-009 forbids being called verified. The proposed
+      way to hold both --- a distinct `inferred_candidate` status, a pilot
+      subset, and mentor sign-off on worked examples as the thing that promotes
+      a column --- is D-010, **proposed and not in force**. Nothing in this
+      record authorises any of it.
+
+      Confidence is recorded as `stated_not_verified`, the vocabulary's term
+      for "said, not independently established"; the COORDINATOR's word for it
+      was "stated".

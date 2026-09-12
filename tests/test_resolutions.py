@@ -364,16 +364,70 @@ def test_an_empty_or_absent_list_loads_as_no_resolutions():
     assert load_resolutions("") == []
 
 
+# --- a record that deliberately changes nothing ------------------------------
+
+
+def test_a_null_effect_records_the_answer_and_moves_no_column(lines, baseline):
+    """"There is no such document" is worth recording and settles no column."""
+    coverage = build_coverage(
+        COLUMNS,
+        lines,
+        [record(columns=[], effect=None, statement="There is no other metadata for the table.")],
+    )
+
+    assert statuses(coverage) == statuses(baseline)
+    assert all(column["resolution_refs"] == [] for column in coverage["columns"])
+    applied = coverage["resolutions_applied"][0]
+    assert applied["status_to"] is None
+    assert applied["columns_changed"] == []
+    assert coverage["n_resolutions"] == 1
+
+
+def test_a_null_effect_may_not_also_name_columns():
+    with pytest.raises(ResolutionError, match="may not also name"):
+        validate_resolution(record(columns=[2], effect=None))
+
+
+def test_a_null_effect_may_not_also_name_a_stem_map():
+    with pytest.raises(ResolutionError, match="may not also name"):
+        validate_resolution(record(columns=[], effect=None, stem_section_map={"alpha": "Alpha"}))
+
+
+# --- verbatim or paraphrase --------------------------------------------------
+
+
+def test_a_paraphrased_statement_can_be_marked_as_one():
+    assert validate_resolution(record(statement_fidelity="paraphrase"))["statement_fidelity"] == (
+        "paraphrase"
+    )
+
+
+def test_an_unrecognised_fidelity_is_refused():
+    with pytest.raises(ResolutionError, match="`statement_fidelity` must be one of"):
+        validate_resolution(record(statement_fidelity="roughly"))
+
+
 # --- the tracked file itself -------------------------------------------------
 
 
-def test_the_repository_resolutions_file_is_valid_and_currently_empty():
-    """M1-WP2a ships the machinery inert. WP2b is what fills this file."""
+def test_the_repository_resolutions_file_is_valid():
+    """Whatever it holds, the tracked audit trail must parse and validate."""
     from climrr.paths import REPO_ROOT
 
     path = REPO_ROOT / "data" / "metadata" / "resolutions.yaml"
     assert path.is_file(), "the resolutions audit trail must be tracked, even when empty"
-    assert load_resolutions(path.read_text(encoding="utf-8")) == []
+    load_resolutions(path.read_text(encoding="utf-8"))
+
+
+def test_the_repository_records_change_no_column_yet():
+    """M1-WP2b records the 2026-09-10 meeting; no answer moved a column (D-010 pending)."""
+    from climrr.paths import REPO_ROOT
+
+    path = REPO_ROOT / "data" / "metadata" / "resolutions.yaml"
+    records = load_resolutions(path.read_text(encoding="utf-8"))
+    for entry in records:
+        assert entry["columns"] == [], f"{entry['id']} names columns; no package has authorised that"
+        assert not entry.get("stem_section_map"), f"{entry['id']} names a stem map"
 
 
 # --- application order -------------------------------------------------------

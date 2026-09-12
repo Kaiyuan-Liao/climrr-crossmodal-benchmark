@@ -197,10 +197,12 @@ def main() -> int:
     for status in STATUS_ORDER:
         print(f"    {status:<28}: {baseline.get(status, 0):>12}  {counts.get(status, 0):>5}")
     for applied in coverage["resolutions_applied"]:
-        print(
-            f"    {applied['id']} ({applied['decision_ref']}, {applied['source']}): "
-            f"{applied['n_columns_changed']} column(s) -> {applied['status_to']}"
+        effect = (
+            "records an answer; changes no column"
+            if applied["status_to"] is None
+            else f"{applied['n_columns_changed']} column(s) -> {applied['status_to']}"
         )
+        print(f"    {applied['id']} ({applied['decision_ref']}, {applied['source']}): {effect}")
     print(f"  match rules               : {coverage['match_rule_counts']}")
     print(f"  report                    : {repo_relative(args.out)}")
 

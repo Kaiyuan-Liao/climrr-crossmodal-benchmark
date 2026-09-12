@@ -1,5 +1,13 @@
 # Metadata questions — M1-WP1 inventory
 
+> **Status after the 2026-09-10 mentor meeting (M1-WP2b).** **Q0 is closed,
+> answered in the negative** — there is no further documentation of any kind
+> (R-001). **Q1–Q18 were put to the mentor and none was answered per column**
+> (R-002); they stand exactly as written below. The mentor's direction was to
+> use a reliable subset and reason out the rest, which is proposed as D-010 and
+> **awaits a GUIDANCE ruling** — no column status has changed. One sub-question,
+> **Q11.4, has since been answered deterministically from the bytes**; see below.
+
 Everything the tracked ClimRR data dictionary does **not** settle about the 275
 columns of `data/raw/FullData.csv`, grouped by column family, each item naming
 the column indices it affects and the line of
@@ -48,8 +56,23 @@ dictionary sections" (`M1_WP1_GUIDANCE_REVIEW.md` §1). So this question is wort
 asking before the rest: an answer in conversation settles one question, a
 specification settles a family of them.
 
-**Question, for the mentor / ClimRR authors.** Is there any other authoritative
-material about this file that we should have?
+**ANSWERED 2026-09-10 — no.** The mentor has no additional metadata for the
+table: no newer data dictionary, no assembly document or script, no release
+note. Recorded as **R-001** in
+[`../data/metadata/resolutions.yaml`](../data/metadata/resolutions.yaml),
+`confidence: confirmed`, marked a paraphrase rather than verbatim.
+
+**This is the answer with the widest consequence in the meeting, and it is a
+negative one.** The 19-page alpha-release PDF already tracked in
+`data/metadata/` is the whole of the authoritative documentation that exists.
+Two of the three evidence types D-009 accepts for promoting a stem-to-section
+mapping — an authoritative export specification, and another authoritative
+ClimRR artifact mapping CSV names to dictionary sections — are **unavailable,
+not merely unobtained.** The three sub-items below are kept as the record of
+what was asked.
+
+**Question as put, for the mentor / ClimRR authors.** Is there any other
+authoritative material about this file that we should have?
 
 1. **A newer or more complete data dictionary** than the 19-page PDF tracked at
    `data/metadata/ClimRR_Metadata_and_Data_Dictionary.pdf`. Ours is dated
@@ -68,8 +91,9 @@ material about this file that we should have?
    date** — Q18. The portal's own documentation may date the release this export
    came from even if the file itself does not.
 
-**If any such artifact arrives, it is handled like the data dictionary was, and
-for the same reason (D-002, D-005).** Before a single sentence of it is cited:
+**If any such artifact ever does arrive** — it will not from this source, but
+the rule stands for any future one — **it is handled like the data dictionary
+was, and for the same reason (D-002, D-005).** Before a single sentence of it is cited:
 the file is placed under `data/metadata/`, its SHA-256 and byte size are
 recorded in `data/manifest.json`, and — if it is a PDF — its text is extracted
 by a pinned extractor into a tracked, never-hand-edited file so that every
@@ -352,6 +376,19 @@ Computed facts:
 3. `OBJECTID_1` reaches 63,557 while holding 62,813 distinct values, so its
    source layer had more rows than this table. What was dropped, and why?
 4. Are `OBJECTID_12` and `OBJECTID_12_13` duplicates of one another?
+   **ANSWERED DETERMINISTICALLY — no, and not a reordering either.**
+   `scripts/check_objectid_pair.py` compared the two columns row by row as raw
+   text. They are **equal in 83 of 62,834 rows, and those 83 are exactly the
+   rows where both are empty**; in all 62,751 rows where either holds a value,
+   **the values differ**. Their empty-row sets are identical. Each holds 62,752
+   distinct values, but the two **value sets are not the same**: 703 values
+   appear in one and not the other. So they are neither the same column twice
+   nor the same identifiers in a different row order --- they are two different
+   identifier columns drawn from overlapping ranges, empty on the same 83 rows.
+   *This is a fact about characters.* It does not say what either column means,
+   which layer each came from, or whether either is usable as a key --- **those
+   parts of Q11 stay open for the mentor**, and this result makes sub-question 2
+   sharper rather than answering it.
 
 ### Q12 — Are indices 269–274 ArcGIS bookkeeping, and do they carry any climate content?
 
@@ -484,10 +521,23 @@ which ClimRR release? The download date is known; the export date is not.
 | **Mentor** (non-ClimRR columns joined into the table) | Q9, Q10, Q12 |
 | **Kaiyuan + mentor** (fitness for use) | Q16, Q17 |
 
-**All nineteen questions are now for the mentor or the ClimRR authors.** D-008 closed the
+**All nineteen questions were for the mentor or the ClimRR authors.** D-008 closed the
 Kaiyuan-side half of Q1, Q10, Q11 and Q18: he received one file and changed
 nothing, so nothing about this table's shape can be explained by handling on this
 side.
 
-None of these blocks the M1-WP1 deliverables, which are the profile and this
-inventory. Q1, Q7, Q8 and Q17 block any downstream use of the columns they name.
+## Where each question now stands (after the 2026-09-10 meeting)
+
+| Question | Standing |
+| --- | --- |
+| **Q0** | **Closed, answered negative** (R-001). No further documentation exists. |
+| **Q11.4** | **Answered deterministically** from the bytes, not by the mentor. The two columns are neither duplicates nor a reordering. |
+| **Q1–Q18** (all the rest, including the other parts of Q11) | **Mentor: no answer available.** They were put; none was answered per column (R-002). **Resolution path per D-010 pending** a GUIDANCE ruling and Kaiyuan's approval. |
+
+"No answer available" is not "unanswerable". It means the one source that could
+have answered these has said it holds nothing further, and the person who could
+still answer them from knowledge gave a direction instead. D-010 proposes what to
+do about that; until it is ruled on, **every column status stays exactly where
+M1-WP1 left it**, and this file stays the record of what is not known.
+
+Q1, Q7, Q8 and Q17 continue to block any downstream use of the columns they name.

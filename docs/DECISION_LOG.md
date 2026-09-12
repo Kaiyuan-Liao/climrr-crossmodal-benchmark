@@ -438,3 +438,79 @@ not yet in force and must not be relied on by downstream work.
   `reports/milestones/M1_DATA_GROUNDING_REPORT.md`,
   `reports/milestones/M1_WP2_REPORT.md`.
 - **Status:** **decided.**
+
+---
+
+## D-010 --- Pilot-subset path with mentor sign-off
+
+- **Date:** 2026-09-12
+- **Status:** **PROPOSED.** Not in force. It awaits a **GUIDANCE ruling** and
+  **Kaiyuan's approval**, and **nothing in it is implemented**: no
+  `inferred_candidate` status exists in the code, no column has been
+  interpreted, no pilot subset has been chosen, and no example record has been
+  built. M1-WP2b recorded the meeting and ran one deterministic check; it did
+  not act on this entry.
+- **Decision proposed:**
+  1. Introduce a status **`inferred_candidate`** for semantics produced by
+     reasoning from column names, value patterns and dictionary spans, always
+     with **the reasoning and the spans recorded on the column**. It is a fifth
+     status, below `owner_confirmed` and `verified_from_dictionary` and
+     distinct from both, and it never silently becomes either.
+  2. Interpret **only a pilot subset** of columns that way --- not all 275.
+  3. Build **2--3 example event records from real rows** for mentor review, with
+     **every assumption listed on the record** it depends on.
+  4. **Mentor sign-off on an example promotes the columns that example uses to
+     `owner_confirmed`**, through an ordinary resolution record naming those
+     columns.
+  5. **All other columns remain `unresolved`, explicitly and permanently**,
+     unless new evidence appears.
+- **Rationale.** Two answers from the 2026-09-10 meeting, recorded as R-001 and
+  R-002 in `data/metadata/resolutions.yaml`:
+  - **R-001: there is no further metadata.** No newer data dictionary, no
+    assembly document or script, no release note. Two of the three evidence
+    types D-009 accepts for promoting a stem-to-section mapping --- an
+    authoritative export specification, and another authoritative ClimRR
+    artifact mapping CSV names to dictionary sections --- are therefore
+    **unavailable, not merely unobtained**.
+  - **R-002: use a reliable subset, reason out the rest, and show examples.**
+    A direction for the project, not a semantic for any column.
+
+  D-009's strict bar was set on the premise that authoritative answers would
+  arrive and could be waited for. R-001 removes that premise for two of the
+  three routes, and the meeting produced **no per-column answer for any of
+  Q1--Q18** on the third. Held unchanged, the project's reachable end state is
+  21 dictionary-verified columns and no pilot --- which is not what the data
+  owner asked for. This entry proposes the narrowest change that respects both:
+  inference is permitted, is **named as inference**, is **confined to a subset**,
+  and is **promoted only by a human who can actually confirm it**.
+- **Alternatives considered:**
+  - **(a) Stop M1 with 21 verified columns and no pilot.** Rejected: it
+    contradicts the mentor's direction, and it treats the absence of
+    documentation as a reason to abandon the dataset rather than to be explicit
+    about what is known.
+  - **(b) Promote the EXECUTOR candidate maps to `verified_from_dictionary`.**
+    **Prohibited by D-009** and not reopened here. The candidate maps stay
+    navigation aids. Note what this proposal does *not* do: `inferred_candidate`
+    is a new, weaker status, not a relabelling of the candidate maps as
+    evidence.
+- **Consequences if adopted:**
+  - **M1 gate criterion 1 would be evaluated on the pilot subset**, not on all
+    275 columns, and the gate would have to say so explicitly.
+  - **GUIDANCE must authorise hand-worked example construction ahead of M2.**
+    Building event records from real rows is an M2 deliverable; doing it during
+    M1 is a deliberate reordering and needs a ruling, not an assumption.
+  - A fifth status, its reasoning field, and its promotion path would need to be
+    built into `climrr.dictionary` and the resolution schema.
+- **Consequence already in force, independent of this entry:** Q0 is closed,
+  answered in the negative (R-001). No authoritative artifact is coming.
+- **An assumption inside R-002 that is not yet established:** "each row stands
+  for one event" is **Kaiyuan's reading** of the mentor's direction, not a
+  statement she made in those terms. It is the grain of the whole proposed
+  pilot, and it is to be **confirmed with her by presenting examples** --- it is
+  not assumed in the meantime, and no work here depends on it.
+- **Owner:** COORDINATOR (drafted). **Approval required from Kaiyuan Liao;
+  ruling required from GUIDANCE.**
+- **Affected files if adopted:** `src/climrr/dictionary.py`,
+  `data/metadata/resolutions.yaml`, `scripts/dictionary_coverage.py`,
+  `scripts/status_diff.py`, `docs/PROJECT_PLAN.md`,
+  `reports/milestones/M1_WP2_REPORT.md`.

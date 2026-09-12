@@ -7,92 +7,103 @@ session reasoning correctly from out-of-date facts and repeating them.
 | | |
 | --- | --- |
 | **Current milestone** | **M1 --- data grounding and metadata audit** |
-| **Active task** | **M1-WP2 --- metadata resolution and citable column dictionary.** WP2a (machinery, page-3 check, mentor brief) in progress; **WP2b awaits mentor answers** |
+| **Active task** | **M1-WP2 complete as issued.** WP2a built the machinery; WP2b recorded the 2026-09-10 meeting. **Nothing is in progress** --- the project is waiting on a decision |
 | **Latest accepted commit** | `62c9137` --- the merge of M1-WP1 into `main`, accepted by GUIDANCE at reviewed head `fceee7f` (D-009) |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at |
-| **Branch** | `work/m1-wp2`, local only and **not pushed**; `main` carries the WP1 merge |
+| **Branch** | `work/m1-wp2`. **Pushed by Kaiyuan**; `origin/work/m1-wp2` is at `53421f0`, and the WP2b commit is local until he pushes it. `main` carries the WP1 merge. The EXECUTOR does not push (D-003) |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
 | **M1-WP1 review** | **PASS**, GUIDANCE, at reviewed head `fceee7f` (D-009). A work-package pass, **not** the M1 milestone gate |
 | **Tag `m0-setup`** | to be applied by Kaiyuan |
-| **Next review event** | **GUIDANCE review of M1-WP2** against the nine acceptance criteria in `M1_WP1_GUIDANCE_REVIEW.md` |
-| **Blockers** | **M1-WP2b is blocked on mentor answers.** Nothing else. The questions are in `MENTOR_BRIEF.md` for the meeting on **2026-09-10** |
+| **Next review event** | **GUIDANCE ruling on D-010**, and with it the review of M1-WP2 against the nine acceptance criteria in `M1_WP1_GUIDANCE_REVIEW.md` |
+| **Blockers** | **M1 is blocked on the GUIDANCE ruling on D-010.** The mentor answers M1 was waiting for **are not coming** (R-001, 2026-09-10), and no further EXECUTOR work is authorised until D-010 is ruled on |
 
 ## Where things stand
 
-- **M1-WP1 is accepted and merged.** GUIDANCE recorded PASS at reviewed head
-  `fceee7f`; the merge commit on `main` is `62c9137`. The acceptance and its
-  four standing rulings are D-009. The WP1 report
-  [`../reports/milestones/M1_DATA_GROUNDING_REPORT.md`](../reports/milestones/M1_DATA_GROUNDING_REPORT.md)
-  is **frozen as the WP1-stage record**; current M1 status is in
-  [`../reports/milestones/M1_WP2_REPORT.md`](../reports/milestones/M1_WP2_REPORT.md).
-- **Four GUIDANCE rulings are in force (D-009).** The strict
-  `verified_from_dictionary` bar is confirmed and must not be loosened; the two
-  EXECUTOR candidate maps are approved for navigation and question-writing only
-  and can never promote a column; index 117 stays in the inventory with its `-9`
-  unlabelled; D-008 stays a stated, unverified provenance statement.
-- **M1-WP2 is split.** **WP2a --- this package --- builds the machinery and the
-  documents and changes no column status**, because no answer exists yet.
-  **WP2b applies mentor answers as they arrive**, one commit per meeting.
-- **The resolution machinery exists and is inert.**
-  `data/metadata/resolutions.yaml` is tracked and empty;
-  `src/climrr/dictionary.py` applies resolution records on top of the dictionary
-  rules; `scripts/status_diff.py` prints every change against the WP1 baseline
-  with the R-record and D-number responsible. A **new status `owner_confirmed`**
-  exists for mentor/owner-confirmed semantics, deliberately distinct from
-  `verified_from_dictionary`, **which no resolution record can ever produce.**
-  A record promotes a column only if it names the column indices or a stem-to-section
-  map explicitly; matching an answer to columns by pattern is refused.
-- **Metadata status is unchanged at 21 / 143 / 28 / 83** ---
-  `verified_from_dictionary` / `partially_resolved` / `unresolved` /
-  `structurally_observed_only` --- and `resolution_refs` is empty on all 275
-  columns. That is the intended WP2a outcome, not a shortfall.
-- **The PDF-completeness action is discharged. Page 3 is blank.** Rendered at
-  200 dpi it is a uniform white page --- no table, no field names, no figure ---
-  between the contents on page 2 and the narrative on page 4, which both render
-  fully as a control. See `DATA_NOTES.md` §1 and D-009.
-- **`pypdfium2==5.13.0` joins the D-007 pin set** for that rendering. **Sophia
-  must re-run `pip install -r requirements.txt`** before its next pinned
-  checkout, or run records will carry `matches_pin: false` and
-  `tests/test_runrecord.py` will fail --- by design.
-- **`docs/MENTOR_BRIEF.md` is the meeting document.** Plain language, under two
-  screens, questions in the GUIDANCE priority order, with an empty answers table
-  and meeting log that WP2b fills in.
-- **All 275 columns are profiled** and the cross-host reproduction stands: the
+- **The 2026-09-10 mentor meeting changed the problem, not the data.** Two
+  answers, both recorded in `data/metadata/resolutions.yaml`, both changing no
+  column:
+  - **R-001 --- there is no further documentation.** No newer data dictionary,
+    no assembly document or script, no release note. **Q0 is closed, answered in
+    the negative.** Two of the three evidence types D-009 accepts for promoting
+    a stem-to-section mapping are therefore **unavailable, not merely
+    unobtained**.
+  - **R-002 --- a direction, not a semantic.** Use the fields that are reliable
+    or reasonably explainable, let reasoning fill in the rest, treat each row as
+    one event, connect events to the literature, show examples. **No per-column
+    answer was given for any of Q1--Q18.**
+
+  Both statements are Kaiyuan's paraphrase relayed 2026-09-12 and are marked as
+  paraphrase, not verbatim.
+- **D-010 is PROPOSED and nothing in it is implemented.** It would add a fifth
+  status `inferred_candidate` for semantics reached by recorded reasoning,
+  confine interpretation to a pilot subset, build 2--3 example event records from
+  real rows with every assumption listed, and make **mentor sign-off on an
+  example** the thing that promotes the columns it uses. **It awaits a GUIDANCE
+  ruling and Kaiyuan's approval.** No `inferred_candidate` status exists in the
+  code, no column was interpreted, no subset was chosen, no example was built.
+- **"Each row = one event" is Kaiyuan's reading, not the mentor's words.** It is
+  the grain the whole proposed pilot rests on and it is **still to be confirmed
+  with her, by showing examples**. Nothing depends on it yet.
+- **Metadata status is unchanged at 21 / 143 / 28 / 83** and `resolution_refs`
+  is empty on all 275 columns. Two resolution records are applied and move
+  nothing; `status_diff.py` reports 0 changes and 0 invariant violations.
+- **One question was answered without the mentor. Q11.4: indices 235 and 236 are
+  not the same column.** `OBJECTID_12` and `OBJECTID_12_13` are equal in 83 of
+  62,834 rows, and those 83 are exactly the rows where both are empty; they
+  differ in all 62,751 populated rows. Their empty-row sets are identical, each
+  holds 62,752 distinct values, and **703 values occur in one and not the
+  other** --- so not a duplicate and not a reordering. It removes a candidate
+  explanation rather than supplying one; the rest of Q11 stays open.
+- **Four GUIDANCE rulings from D-009 remain in force.** Strict
+  `verified_from_dictionary` bar; candidate maps for navigation only; index 117
+  kept with `-9` unlabelled; D-008 stated, not verified. D-010 would loosen the
+  premise of the first, which is exactly why it needs a ruling rather than an
+  assumption.
+- **The resolution machinery works and stays inert.** `resolutions.yaml` holds
+  R-001 and R-002; `status_baseline_wp1` and `resolution_refs` carry the audit
+  trail; `owner_confirmed` exists and **no record can ever produce
+  `verified_from_dictionary`**. WP2b added `effect: null` for an answer that
+  changes nothing and `statement_fidelity` to mark a paraphrase as one.
+- **Page 3 of the dictionary PDF is blank** (WP2a) --- no table, no field names,
+  nothing bearing on the 275 columns.
+- **`pypdfium2==5.13.0` is in the D-007 pin set.** **Sophia must re-run
+  `pip install -r requirements.txt`** before its next pinned checkout.
+- **All 275 columns are profiled** and the WP1 cross-host reproduction stands:
   profile content hash
-  `772991c7c9adf475c2ca51806998494595d445725d6d3b7d5046752074fcba9c` was produced
-  identically on local Python 3.11.16 / macOS arm64 and Sophia Python 3.13.13 /
-  x86_64, with 275/275 agreement on the pandas cross-check.
-- **D-005/D-006/D-007 hold.** Every run verifies the manifest SHA-256 before
+  `772991c7c9adf475c2ca51806998494595d445725d6d3b7d5046752074fcba9c` on both
+  hosts, 275/275 agreement on the pandas cross-check.
+- **D-005/D-006/D-007 hold.** Every run verified the manifest SHA-256 before
   reading, fail-closed. `CLIMRR_ALLOW_MISSING_RAW=1` was never set.
-- The EXECUTOR still does not push (D-003).
 
 ## Outstanding
 
-- **For Kaiyuan: bring `MENTOR_BRIEF.md` to the mentor meeting on 2026-09-10**
-  and paste the answers back to the COORDINATOR afterwards. That is the only
-  thing standing between WP2a and WP2b.
-- **For Sophia, before the next pinned checkout:** re-run
-  `pip install -r requirements.txt` so `pypdfium2==5.13.0` is present.
-- **19 metadata questions** in [`METADATA_QUESTIONS.md`](METADATA_QUESTIONS.md),
-  all for the mentor or the ClimRR authors. **Q0 --- added by the COORDINATOR ---
-  is asked first**: is there a fuller data dictionary, an assembly
-  document or script, or a release note naming the version and export date?
-  It could resolve several of the others at once. Then GUIDANCE's priority order:
-  Q1, Q7, Q8, the geographic/join-key questions Q10--Q12, the sentinel questions
-  Q17 and Q9, export provenance Q18, then Q2--Q6 and Q13--Q16. Q1, Q7, Q8 and
-  Q17 block downstream *use* of the columns they name.
-- **Export date** of the ClimRR file remains unknown and was not guessed (Q18).
+- **For GUIDANCE: rule on D-010.** Two authorisations are needed, not one --- the
+  `inferred_candidate` status itself, and **hand-worked example construction
+  ahead of M2**, since building event records from real rows is an M2
+  deliverable and doing it during M1 is a deliberate reordering. **Everything
+  else in M1 is waiting on this.**
+- **For Kaiyuan:** approve or reject D-010 as project owner; and, once examples
+  exist, **confirm with the mentor that one row = one event**. Also the Sophia
+  reinstall above.
+- **Q1--Q18 are marked "mentor: no answer available"** in
+  [`METADATA_QUESTIONS.md`](METADATA_QUESTIONS.md), with the resolution path
+  pending D-010. Q0 is closed; Q11.4 is answered from the bytes. Q1, Q7, Q8 and
+  Q17 still block downstream *use* of the columns they name.
+- **Export date** of the ClimRR file remains unknown and was not guessed (Q18) ---
+  and R-001 means no release note exists to settle it.
 
 ## Next
 
-**M1-WP2b --- apply the mentor answers from the 2026-09-10 meeting.** For each
-answer: one R-record in `data/metadata/resolutions.yaml`, one decision-log entry,
-a regenerated `dictionary_coverage.json`, and a `status_diff.py` run showing
-exactly which columns moved and on whose authority. Answers that name no columns
-and no stem map change nothing, by construction.
+**Nothing until GUIDANCE rules on D-010.** If it is granted: build 2--3 example
+event records from real rows, each listing every assumption and naming the
+columns it uses, for Kaiyuan to put in front of the mentor; her sign-off becomes
+an ordinary resolution record naming those columns. If it is refused: close M1
+with the 21 dictionary-verified columns and an explicit, permanent record of the
+other 254 as undocumented.
 
 Still not authorised: phenomenon extraction, aggregation for scientific claims,
-thresholds, literature work, embeddings, bridges, QA.
+thresholds, literature work, embeddings, bridges, QA --- **and, until D-010 is
+ruled on, any interpretation of a column.**
 
 ## Links
 

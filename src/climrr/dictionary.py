@@ -636,6 +636,13 @@ def build_coverage(
 # 3. **Every changed column carries the record ids that changed it**, in
 #    `resolution_refs`, next to the untouched `status_baseline_wp1`. The diff
 #    against WP1 is therefore mechanical rather than remembered.
+#
+# A record may also carry `effect: null`, which records an answer that changes
+# no column at all --- a "no, there is no such document", or a direction about
+# how to proceed. Those are worth keeping for exactly the same reason the rest
+# are: months later the question "why did this project take that turn?" has a
+# dated, sourced answer. A null effect may not name columns; that combination
+# would be a contradiction rather than a shorthand.
 
 #: Semantics confirmed by the mentor or the data owner. Deliberately distinct
 #: from `verified_from_dictionary`: same confidence in practice, different
@@ -677,8 +684,14 @@ RESOLUTION_REQUIRED_KEYS = frozenset(
 )
 
 #: `stem_section_map` is the second and only other way to reach a column.
-#: `notes` is EXECUTOR commentary and never affects anything.
-RESOLUTION_OPTIONAL_KEYS = frozenset({"stem_section_map", "notes"})
+#: `statement_fidelity` says whether `statement` is the source's own words or a
+#: relayed paraphrase; absent means verbatim, which is what `statement` is
+#: defined to hold. `notes` is EXECUTOR commentary and never affects anything.
+RESOLUTION_OPTIONAL_KEYS = frozenset({"stem_section_map", "statement_fidelity", "notes"})
+
+#: `verbatim` --- the source's own words. `paraphrase` --- relayed in someone
+#: else's words, which is weaker evidence and must stay visible as such.
+RESOLUTION_FIDELITY = frozenset({"verbatim", "paraphrase"})
 
 RESOLUTION_ID_RE = re.compile(r"^R-\d{3}$")
 QUESTION_ID_RE = re.compile(r"^Q\d{1,2}$")
@@ -798,8 +811,29 @@ def validate_resolution(record: object, *, where: str = "resolution") -> dict:
                 f"`stem_section_map[{stem!r}]` must name a dictionary section",
             )
 
+    fidelity = record.get("statement_fidelity")
+    if fidelity is not None:
+        _require(
+            fidelity in RESOLUTION_FIDELITY,
+            where,
+            f"`statement_fidelity` must be one of {sorted(RESOLUTION_FIDELITY)}, got {fidelity!r}",
+        )
+
     effect = record["effect"]
-    _require(isinstance(effect, dict), where, "`effect` must be a mapping")
+    if effect is None:
+        # A recorded answer that moves nothing: the mentor said something worth
+        # keeping that settles no column's meaning. Naming columns alongside a
+        # null effect would be a contradiction rather than a shorthand, so it is
+        # refused instead of silently resolved one way or the other.
+        _require(
+            not record["columns"] and not (record.get("stem_section_map") or {}),
+            where,
+            "`effect: null` records an answer that changes nothing, so it may not also name "
+            "columns or a stem map. Give it an effect, or drop the targets",
+        )
+        return record
+
+    _require(isinstance(effect, dict), where, "`effect` must be a mapping or null")
     _require(
         set(effect) == {"field", "to"},
         where,
@@ -921,6 +955,22 @@ def apply_resolutions(coverage_records: list[dict], resolutions: list[dict]) -> 
     """
     applied = []
     for record in resolutions:
+        effect = record["effect"]
+        if effect is None:
+            applied.append(
+                {
+                    "id": record["id"],
+                    "date": record["date"],
+                    "source": record["source"],
+                    "decision_ref": record["decision_ref"],
+                    "confidence": record["confidence"],
+                    "question_ids": list(record["question_ids"]),
+                    "status_to": None,
+                    "columns_changed": [],
+                    "n_columns_changed": 0,
+                }
+            )
+            continue
         targets = resolution_targets(record, coverage_records)
         stem_map = record.get("stem_section_map") or {}
         for index in targets:

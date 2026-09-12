@@ -141,7 +141,8 @@ def render_markdown(coverage: dict, changes: list[dict]) -> str:
             lines.append(
                 f"| `{applied['id']}` | {applied['date']} | {applied['source']} | "
                 f"{', '.join(applied['question_ids']) or '—'} | {applied['decision_ref']} | "
-                f"{applied['confidence']} | `{applied['status_to']}` | "
+                f"{applied['confidence']} | "
+                f"{'— (records only)' if applied['status_to'] is None else '`' + applied['status_to'] + '`'} | "
                 f"{applied['n_columns_changed']} |"
             )
     else:
