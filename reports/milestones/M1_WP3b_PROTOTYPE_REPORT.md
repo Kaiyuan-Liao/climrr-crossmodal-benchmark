@@ -60,9 +60,9 @@ Artifacts produced, by SHA-256:
 | File | SHA-256 | Bytes |
 | --- | --- | ---: |
 | `artifacts/profiles/hierarchy_checks.json` | `90b7e812fcdc86a089624afd0e7edafacdb2ef256122c5ad7e5145c6c79e4665` | 9,708 |
-| `artifacts/phenomena/prototypes/P-CELL-1.json` | `dbd03b558d3901c851954ef74b60f30c96e374261e1be494fa06dd8d585f7014` | 26,517 |
-| `artifacts/phenomena/prototypes/P-COUNTY-1.json` | `1a04f4267e5be7d0d6e590afcb4925810c5fc139022c84f8faff29c69a08af8e` | 33,776 |
-| `artifacts/phenomena/prototypes/P-STATE-1.json` | `0e162651c4286053f2a71ef68ae6a35aa5bad92432417419f34bdf06211c8459` | 333,234 |
+| `artifacts/phenomena/prototypes/P-CELL-1.json` | `7aae29aac2ebd079e14de842680618f2c76053ea51eea6f028b069eefb7fe6f6` | 27,376 |
+| `artifacts/phenomena/prototypes/P-COUNTY-1.json` | `ca7c9904c21a77f2c816454831da65ed74f7e0cbaec536dc2b6a5576593492e9` | 35,038 |
+| `artifacts/phenomena/prototypes/P-STATE-1.json` | `898af41046b4edcaef19396913099fbb261b69a29ebd926b7a9b42c0468dcfb0` | 334,352 |
 
 **The three prototype records were rebuilt by the post-ruling fixes** and their
 hashes differ from those reported before D-013. `hierarchy_checks.json` was not
@@ -92,7 +92,7 @@ Run records:
 | Run | Result | Record |
 | --- | --- | --- |
 | `hierarchy_checks` | PASS | `reports/runs/20260913T191302Z_local_hierarchy_checks.json` |
-| `build_phenomenon_prototypes` (post-ruling rebuild) | PASS | `reports/runs/20260913T200830Z_local_build_phenomenon_prototypes.json` |
+| `build_phenomenon_prototypes` (post-ruling rebuild) | PASS | `reports/runs/20260913T202523Z_local_build_phenomenon_prototypes.json` |
 
 The pre-ruling `build_phenomenon_prototypes` run record was superseded by the
 rebuild and removed rather than left beside it; the records it produced no longer
@@ -231,9 +231,13 @@ magnitude, and the distinction is not cosmetic --- a unit in the lower third may
 be one with a **large decrease** rather than one where little changed. Every `M`
 field states that, and states the **exact reference population**: which key
 forms a unit, how many such keys exist, the inclusion test and how many units it
-includes and excludes, how a unit's change value is computed, and that units
-whose label is the empty string are counted. Both facts are inside the generated
-magnitude clause as well as the JSON, so they travel with the sentence.
+includes and excludes, and how a unit's change value is computed. **Wherever a
+percentile is reported the population's composition is stated with it** --- "of
+50 `State`-label groups: 49 named labels plus one empty-label group (7 rows with
+a value)" --- rather than a bare count, because a bare "of 50" hides whether the
+50 are places. **PR-1 currently counts empty-label groups**, and whether to
+exclude them is a pending choice recorded as **A-M2**. All of it is inside the
+generated magnitude clause as well as the JSON, so it travels with the sentence.
 
 **7. Rounding.** Every derived value is quantised once, to the 15 decimal places
 the CSV itself stores, half-to-even. Raw values are never rounded. The rounding
@@ -330,9 +334,11 @@ register.
 
 ### The assumptions register
 
-Twelve entries: **two `computed`** (A-G0's uniqueness half, A-G3), **ten
+Thirteen entries: **two `computed`** (A-G0's uniqueness half, A-G3), **eleven
 `unverified`**, **none `owner_confirmed`** --- and none will be until the mentor
-answers. Nine are flagged as worth putting to her on 2026-09-17.
+answers. Ten are flagged as worth putting to her on 2026-09-17. Each carries a
+**rationale** and a **failure mode** as columns of their own, per the ruling's
+required action 11.
 
 ### The literature probe
 
@@ -346,8 +352,8 @@ place names is itself inferred.
 
 | Check | Result |
 | --- | --- |
-| `pytest` | **463 passed**, 0 failed |
-| New tests in this package | 89 --- 11 hierarchy, 56 phenomenon, 22 generated documents |
+| `pytest` | **471 passed**, 0 failed |
+| New tests in this package | 97 --- 11 hierarchy, 60 phenomenon, 26 generated documents |
 | `python scripts/verify_no_secrets_or_paths.py` | **0 hits**, every tracked text file |
 | Manifest verification | performed before every read, fail-closed, in both runs |
 | Run records | 2, both `passed: true`, both with all six D-007 pins matching |
@@ -513,6 +519,7 @@ are unchanged and their caution remains true of them.**
 | --- | --- | --- | --- |
 | 1 | **Is the unit of a phenomenon a cell, a county-shaped row set, or a state-shaped one?** A cell has no place term at all | the group, then the mentor | the whole shape of the phenomenon schema, and what the literature side must deliver |
 | 2 | **What replaces PR-1?** A physical threshold, a distributional one, or a criterion taken from the literature | GUIDANCE and the mentor | field `M` in every record |
+| 2a | **Should PR-1's reference population include empty-label groups?** It currently does: the 7 rows with no `State` form one group of the 50 ranked at state level and one of the 3,019 at county level (**A-M2**). At state level that is 2% of the population, enough to move a tercile boundary | COORDINATOR and GUIDANCE, after the mentor says what the 7 rows are | the percentile in every record |
 | 3 | **Should cells be weighted?** By area, by population, or not at all --- and is an unweighted mean of a fire-danger index meaningful | the mentor | every aggregate (A-AGG1, A-G2) |
 | 4 | **Which change column carries the fire-weather direction** --- the absolute difference or the verified percent change (A-DIR2) | COORDINATOR | fields `D` and `M` in the fire-weather records |
 | 5 | **Do the letters S, T and C mean season, time and scenario?** | COORDINATOR | three labels, no numbers |

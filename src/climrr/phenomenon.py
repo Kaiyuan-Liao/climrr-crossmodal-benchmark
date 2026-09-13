@@ -1093,6 +1093,10 @@ def build_record(
             "reference_population",
             "not supplied by the caller --- this is a defect, not an empty field",
         ),
+        "population_composition": distribution_membership.get(
+            "population_composition",
+            "not supplied by the caller --- this is a defect, not an empty field",
+        ),
         "distribution_membership": distribution_membership,
         "rests_on_assumptions": ["A-M1"] + d_block["rests_on_assumptions"],
     }
@@ -1264,10 +1268,10 @@ def render_description(record: dict) -> dict:
     change = clauses.add("D.change_value", d["change_value"], d["provenance_status"])
     magnitude = clauses.add(
         "M.tercile",
-        f"{m['tercile']}, at percentile {m['percentile']} of {m['n_units_at_this_level']} "
-        f"{g['level']}-level units. Ranking is on the signed change value, not on its "
-        f"absolute size, so a unit in the lower third may be one with a large decrease "
-        f"rather than one where little changed. The reference population is "
+        f"{m['tercile']}, at percentile {m['percentile']} of "
+        f"{m['population_composition']}. Ranking is on the signed change value, not on "
+        f"its absolute size, so a unit in the lower third may be one with a large "
+        f"decrease rather than one where little changed. The reference population is "
         f"{m['reference_population']}. {m['rule']} is a placeholder and not a scientific "
         f"threshold",
         PROVISIONAL_RULE,
@@ -1853,6 +1857,46 @@ ASSUMPTIONS = (
         "maps_to": "a new question for the group; blueprint M3 'define and justify salience'",
         "mentor_checkable": True,
     },
+    {
+        "id": "A-M2",
+        "statement": (
+            "**PR-1's reference population includes empty-label groups.** At "
+            "state level the 7 rows with no `State` form one group of the 50 "
+            "ranked against; at county level the same 7 rows form one group of "
+            "the 3,019. They are counted like any other group. **Excluding them "
+            "is a pending choice and has not been made.**"
+        ),
+        "rationale": (
+            "Dropping a group because its label is the empty string would be a "
+            "judgement about what an empty label *means*, and this project does "
+            "not have one --- what those rows are is Q16, open. Counting them "
+            "asserts nothing; excluding them would assert that they are not a "
+            "place."
+        ),
+        "failure_mode": (
+            "**Every percentile shifts slightly, and one reported group is not "
+            "a place.** If the empty-label group should be excluded, each unit "
+            "is ranked against a population one larger than it should be, and "
+            "the empty-label group itself appears in the distribution as though "
+            "it were a state or a county. At 50 state groups one unit is 2% of "
+            "the population, so the effect on a tercile boundary is small but "
+            "not nil; at 3,019 county groups it is negligible arithmetically "
+            "and still wrong in principle."
+        ),
+        "affects": (
+            "`M` in every record --- the percentile and, at the boundaries, the "
+            "tercile"
+        ),
+        "how_verified": (
+            "a choice for the COORDINATOR and GUIDANCE, informed by the "
+            "mentor's answer on what the 7 rows are (checklist line 15)"
+        ),
+        "status": UNVERIFIED,
+        "maps_to": (
+            "MENTOR_EXAMPLES line 15; Q16; M1-WP3b ruling, required action 6"
+        ),
+        "mentor_checkable": True,
+    },
 )
 
 #: Assumptions that no record uses because the columns they would cover are
@@ -1888,6 +1932,7 @@ def assumptions_for(*, level: str, variable: dict, ic_ids) -> list[str]:
             )
         ids.append(mapped)
     ids.append("A-M1")
+    ids.append("A-M2")
     for item in ids:
         assumption(item)
     return ids

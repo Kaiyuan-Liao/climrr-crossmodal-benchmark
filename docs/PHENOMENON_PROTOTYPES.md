@@ -10,7 +10,7 @@ WITH ACTIONS** and is recorded as D-013, which admits this package as an explici
 open. **Nothing here is evidence for a milestone gate**, and nothing is merged.
 
 - Schema version `p0-prototype` --- `src/climrr/phenomenon.py`
-- Built from commit `248ec9081e9998b246d3648b0be473c4a9f79d13`, CSV SHA-256 `e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e`
+- Built from commit `56eb10d66fc5953242859ea9838b578e53b753da`, CSV SHA-256 `e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e`
 - Assumptions, in full: [`PHENOMENON_ASSUMPTIONS.md`](PHENOMENON_ASSUMPTIONS.md)
 - Structural facts the units rest on: [`../artifacts/profiles/hierarchy_checks.md`](../artifacts/profiles/hierarchy_checks.md)
 
@@ -34,7 +34,7 @@ the pair for the next GUIDANCE packet. **No number depends on the choice.**
 | `H` columns | 189 `wildfire_summer_Hist` (baseline), 191 `wildfire_summer_Endc` (future), 193 `wildfire_summer_Dend` (change), 195 `wildfire_summer_Pend` (corroborating_change) | per column, below |
 | `V` change value | `6.109189990000000` | `derived_from_inferred` |
 | `D` direction | **increase** | `derived_from_inferred` |
-| `M` category | upper_third, percentile 88.5253 of 62834 units, ranked on the **signed** change value | `provisional_rule` PR-1 |
+| `M` category | upper_third, percentile 88.5253 of 62,834 `Crossmodel`-key groups: all 62,834 named, no empty-label group, ranked on the **signed** change value | `provisional_rule` PR-1 |
 | `P` provenance | a status for every field above | see the record |
 | `V` aggregation | none --- one cell, raw values, nothing aggregated | see the record |
 
@@ -58,15 +58,15 @@ Chosen by: the row `OID_` 1, which is M1-WP3's Example 1 --- itself selected by 
 
 **Direction.** [provisional: increase], from the sign of the change value [provisional: 6.109189990000000], computed by `change_column_value` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` is positive on 1 of 1 member cell. It is a percent change and is never averaged here.
 
-**Magnitude.** [provisional rule PR-1: upper_third, at percentile 88.5253 of 62834 cell-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `Crossmodel` value in the file, each forming one cell-level unit (62834 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (62834 included, 0 excluded); its change value is the change value of its one cell; units whose label is the empty string are included (0 here). PR-1 is a placeholder and not a scientific threshold].
+**Magnitude.** [provisional rule PR-1: upper_third, at percentile 88.5253 of 62,834 `Crossmodel`-key groups: all 62,834 named, no empty-label group. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `Crossmodel` value in the file, each forming one cell-level unit (62834 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (62834 included, 0 excluded); its change value is the change value of its one cell. The population is 62,834 `Crossmodel`-key groups: all 62,834 named, no empty-label group --- **empty-label groups are included** (A-M2), and excluding them is a pending choice. PR-1 is a placeholder and not a scientific threshold].
 
 Every clause marked [provisional:...] rests on an inferred-candidate record or on a field derived from one: reasoned and written down, **not verified and not owner-confirmed**. The clause marked [provisional rule PR-1:...] rests on a placeholder rule, not on science.
 
 ### What it depends on
 
-Assumptions: `A1`, `A-G0`, `A-DIR1`, `A-DIR2`, `A-H1`, `A-H3`, `A-H5`, `A-M1`.
+Assumptions: `A1`, `A-G0`, `A-DIR1`, `A-DIR2`, `A-H1`, `A-H3`, `A-H5`, `A-M1`, `A-M2`.
 
-PR-1 reference population: every distinct `Crossmodel` value in the file, each forming one cell-level unit (62834 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (62834 included, 0 excluded); its change value is the change value of its one cell; units whose label is the empty string are included (0 here).
+PR-1 reference population: every distinct `Crossmodel` value in the file, each forming one cell-level unit (62834 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (62834 included, 0 excluded); its change value is the change value of its one cell. The population is 62,834 `Crossmodel`-key groups: all 62,834 named, no empty-label group --- **empty-label groups are included** (A-M2), and excluding them is a pending choice.
 
 ### Literature probe --- design stub, nothing sent
 
@@ -94,7 +94,7 @@ Full record: [`../artifacts/phenomena/prototypes/P-CELL-1.json`](../artifacts/ph
 | `H` columns | 189 `wildfire_summer_Hist` (baseline), 191 `wildfire_summer_Endc` (future), 193 `wildfire_summer_Dend` (change), 195 `wildfire_summer_Pend` (corroborating_change) | per column, below |
 | `V` change value | `6.083151960000000` | `derived_from_inferred` |
 | `D` direction | **increase** | `derived_from_inferred` |
-| `M` category | upper_third, percentile 90.6260 of 3019 units, ranked on the **signed** change value | `provisional_rule` PR-1 |
+| `M` category | upper_third, percentile 90.6260 of 3,019 `(State, NAME)` label groups: 3,018 named labels plus one empty-label group (7 rows with a value), ranked on the **signed** change value | `provisional_rule` PR-1 |
 | `P` provenance | a status for every field above | see the record |
 | `V` aggregation | `unweighted_mean` over 10 member cell(s), a **provisional aggregation rule for representation validation** --- the ruling's words | see the record |
 
@@ -120,15 +120,15 @@ Chosen by: the `(State, NAME)` label carried by the row `OID_` 1. No value was c
 
 **Direction.** [provisional: increase], from the sign of the change value [provisional: 6.083151960000000], computed by `change_column_value per cell, then unweighted_mean (provisional aggregation rule for representation validation)` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` is [provisional: positive on 10 of 10 member cells]. It is a percent change and is never averaged here.
 
-**Magnitude.** [provisional rule PR-1: upper_third, at percentile 90.6260 of 3019 county-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].
+**Magnitude.** [provisional rule PR-1: upper_third, at percentile 90.6260 of 3,019 `(State, NAME)` label groups: 3,018 named labels plus one empty-label group (7 rows with a value). Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation. The population is 3,019 `(State, NAME)` label groups: 3,018 named labels plus one empty-label group (7 rows with a value) --- **empty-label groups are included** (A-M2), and excluding them is a pending choice. PR-1 is a placeholder and not a scientific threshold].
 
 Every clause marked [provisional:...] rests on an inferred-candidate record or on a field derived from one: reasoned and written down, **not verified and not owner-confirmed**. The clause marked [provisional rule PR-1:...] rests on a placeholder rule, not on science.
 
 ### What it depends on
 
-Assumptions: `A1`, `A-G0`, `A-G1`, `A-G2`, `A-G3`, `A-AGG1`, `A-DIR1`, `A-DIR2`, `A-H1`, `A-H3`, `A-H5`, `A-M1`.
+Assumptions: `A1`, `A-G0`, `A-G1`, `A-G2`, `A-G3`, `A-AGG1`, `A-DIR1`, `A-DIR2`, `A-H1`, `A-H3`, `A-H5`, `A-M1`, `A-M2`.
 
-PR-1 reference population: every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation; units whose label is the empty string are included (1 here).
+PR-1 reference population: every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation. The population is 3,019 `(State, NAME)` label groups: 3,018 named labels plus one empty-label group (7 rows with a value) --- **empty-label groups are included** (A-M2), and excluding them is a pending choice.
 
 ### Literature probe --- design stub, nothing sent
 
@@ -156,7 +156,7 @@ Full record: [`../artifacts/phenomena/prototypes/P-COUNTY-1.json`](../artifacts/
 | `H` columns | 241 `heatindex_HIS_Day105` (baseline), 253 `heatindex_E85_Day105` (future) | per column, below |
 | `V` change value | `13.209951652865228` | `derived_from_inferred` |
 | `D` direction | **increase** | `derived_from_inferred` |
-| `M` category | middle_third, percentile 54.0000 of 50 units, ranked on the **signed** change value | `provisional_rule` PR-1 |
+| `M` category | middle_third, percentile 54.0000 of 50 `State`-label groups: 49 named labels plus one empty-label group (7 rows with a value), ranked on the **signed** change value | `provisional_rule` PR-1 |
 | `P` provenance | a status for every field above | see the record |
 | `V` aggregation | `unweighted_mean` over 2827 member cell(s), a **provisional aggregation rule for representation validation** --- the ruling's words | see the record |
 
@@ -182,15 +182,15 @@ Chosen by: the `State` label carried by the row `OID_` 14, M1-WP3's Example 2. N
 
 **Direction.** [provisional: increase], from the sign of the change value [provisional: 13.209951652865228], computed by `difference_of_horizon_values per cell, then unweighted_mean (provisional aggregation rule for representation validation)` over `heatindex_HIS_Day105`, `heatindex_E85_Day105`.
 
-**Magnitude.** [provisional rule PR-1: middle_third, at percentile 54.0000 of 50 state-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].
+**Magnitude.** [provisional rule PR-1: middle_third, at percentile 54.0000 of 50 `State`-label groups: 49 named labels plus one empty-label group (7 rows with a value). Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation. The population is 50 `State`-label groups: 49 named labels plus one empty-label group (7 rows with a value) --- **empty-label groups are included** (A-M2), and excluding them is a pending choice. PR-1 is a placeholder and not a scientific threshold].
 
 Every clause marked [provisional:...] rests on an inferred-candidate record or on a field derived from one: reasoned and written down, **not verified and not owner-confirmed**. The clause marked [provisional rule PR-1:...] rests on a placeholder rule, not on science.
 
 ### What it depends on
 
-Assumptions: `A1`, `A-G0`, `A-G1`, `A-G2`, `A-G3`, `A-AGG1`, `A-DIR1`, `A-M1`.
+Assumptions: `A1`, `A-G0`, `A-G1`, `A-G2`, `A-G3`, `A-AGG1`, `A-DIR1`, `A-M1`, `A-M2`.
 
-PR-1 reference population: every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation; units whose label is the empty string are included (1 here).
+PR-1 reference population: every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation. The population is 50 `State`-label groups: 49 named labels plus one empty-label group (7 rows with a value) --- **empty-label groups are included** (A-M2), and excluding them is a pending choice.
 
 ### Literature probe --- design stub, nothing sent
 

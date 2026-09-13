@@ -1,8 +1,8 @@
-# Run record: 20260913T200830Z_local_build_phenomenon_prototypes
+# Run record: 20260913T202523Z_local_build_phenomenon_prototypes
 
 - **Result**: PASS
-- **UTC timestamp**: 2026-09-13T20:08:30.754281+00:00
-- **Git commit**: `248ec9081e9998b246d3648b0be473c4a9f79d13`
+- **UTC timestamp**: 2026-09-13T20:25:23.695387+00:00
+- **Git commit**: `56eb10d66fc5953242859ea9838b578e53b753da`
 - **Working tree dirty (tracked files)**: True
 - **Untracked files present**: 0
 - **Hostname**: ryous-MacBook-Pro-2.local
@@ -43,6 +43,6 @@
 ## Result summary
 
 - `schema_version`: p0-prototype
-- `prototypes`: [{'record_id': 'P-CELL-1', 'level': 'cell', 'identifier': {'Crossmodel': 'R106C361'}, 'variable': 'fwi_summer_hist_to_end85', 'n_cells': '1', 'n_cells_with_value': '1', 'change_value': '6.109189990000000', 'direction': 'increase', 'percentile': '88.5253', 'tercile': 'upper_third', 'assumptions': ['A1', 'A-G0', 'A-DIR1', 'A-DIR2', 'A-H1', 'A-H3', 'A-H5', 'A-M1']}, {'record_id': 'P-COUNTY-1', 'level': 'county', 'identifier': {'State': 'Oklahoma', 'NAME': 'Stephens'}, 'variable': 'fwi_summer_hist_to_end85', 'n_cells': '10', 'n_cells_with_value': '10', 'change_value': '6.083151960000000', 'direction': 'increase', 'percentile': '90.6260', 'tercile': 'upper_third', 'assumptions': ['A1', 'A-G0', 'A-G1', 'A-G2', 'A-G3', 'A-AGG1', 'A-DIR1', 'A-DIR2', 'A-H1', 'A-H3', 'A-H5', 'A-M1']}, {'record_id': 'P-STATE-1', 'level': 'state', 'identifier': {'State': 'California'}, 'variable': 'heatindex_day105_summer_hist_to_end85', 'n_cells': '2831', 'n_cells_with_value': '2827', 'change_value': '13.209951652865228', 'direction': 'increase', 'percentile': '54.0000', 'tercile': 'middle_third', 'assumptions': ['A1', 'A-G0', 'A-G1', 'A-G2', 'A-G3', 'A-AGG1', 'A-DIR1', 'A-M1']}]
+- `prototypes`: [{'record_id': 'P-CELL-1', 'level': 'cell', 'identifier': {'Crossmodel': 'R106C361'}, 'variable': 'fwi_summer_hist_to_end85', 'n_cells': '1', 'n_cells_with_value': '1', 'change_value': '6.109189990000000', 'direction': 'increase', 'percentile': '88.5253', 'tercile': 'upper_third', 'assumptions': ['A1', 'A-G0', 'A-DIR1', 'A-DIR2', 'A-H1', 'A-H3', 'A-H5', 'A-M1', 'A-M2']}, {'record_id': 'P-COUNTY-1', 'level': 'county', 'identifier': {'State': 'Oklahoma', 'NAME': 'Stephens'}, 'variable': 'fwi_summer_hist_to_end85', 'n_cells': '10', 'n_cells_with_value': '10', 'change_value': '6.083151960000000', 'direction': 'increase', 'percentile': '90.6260', 'tercile': 'upper_third', 'assumptions': ['A1', 'A-G0', 'A-G1', 'A-G2', 'A-G3', 'A-AGG1', 'A-DIR1', 'A-DIR2', 'A-H1', 'A-H3', 'A-H5', 'A-M1', 'A-M2']}, {'record_id': 'P-STATE-1', 'level': 'state', 'identifier': {'State': 'California'}, 'variable': 'heatindex_day105_summer_hist_to_end85', 'n_cells': '2831', 'n_cells_with_value': '2827', 'change_value': '13.209951652865228', 'direction': 'increase', 'percentile': '54.0000', 'tercile': 'middle_third', 'assumptions': ['A1', 'A-G0', 'A-G1', 'A-G2', 'A-G3', 'A-AGG1', 'A-DIR1', 'A-M1', 'A-M2']}]
 - `distribution_sizes`: {'cell:fwi_summer_hist_to_end85': 62834, 'cell:heatindex_day105_summer_hist_to_end85': 62751, 'county:fwi_summer_hist_to_end85': 3019, 'county:heatindex_day105_summer_hist_to_end85': 3018, 'state:fwi_summer_hist_to_end85': 50, 'state:heatindex_day105_summer_hist_to_end85': 50}
 - `unlabelled_inferred_values`: none

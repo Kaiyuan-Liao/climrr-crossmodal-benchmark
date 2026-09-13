@@ -113,6 +113,7 @@ def _build(level, identifier, members, variable, spec, distribution=None):
         distribution_membership={
             "n_units": str(len(values)),
             "reference_population": "a fixture population of " + str(len(values)) + " units",
+            "population_composition": "a fixture population of " + str(len(values)) + " units",
         },
         built_from_commit="0" * 40,
         csv_sha256="f" * 64,
@@ -487,7 +488,10 @@ def test_assumptions_for_adds_the_aggregation_entries_only_above_cell_level():
     county = assumptions_for(level="county", variable=FWI, ic_ids=["IC-006"])
     assert "A-G1" not in cell and "A-AGG1" not in cell
     assert {"A-G1", "A-G2", "A-G3", "A-AGG1"} <= set(county)
-    assert cell[0] == "A1" and cell[-1] == "A-M1"
+    assert cell[0] == "A1"
+    # The two magnitude assumptions close every list: PR-1 itself, and the
+    # empty-label groups its reference population currently includes.
+    assert cell[-2:] == ["A-M1", "A-M2"]
 
 
 def test_assumptions_for_maps_each_inferred_candidate_record_to_its_entry():
@@ -831,3 +835,49 @@ def test_a_failure_mode_says_what_goes_wrong_rather_than_restating_the_doubt():
     for item in ASSUMPTIONS:
         lowered = item["failure_mode"].lower()
         assert any(word in lowered for word in consequence_words), item["id"]
+
+
+# --- what the percentile was measured against (PR-1 population composition) ---
+
+
+def test_the_magnitude_field_carries_the_population_composition():
+    record = _county()
+    assert record["M"]["population_composition"] == "a fixture population of 4 units"
+
+
+def test_the_magnitude_clause_reports_the_percentile_against_the_composition():
+    """Never "of 50 units" on its own: a bare count hides what the 50 are."""
+    record = _county()
+    assert (
+        f"at percentile {record['M']['percentile']} of "
+        f"{record['M']['population_composition']}."
+    ) in record["description"]
+
+
+def test_a_missing_population_composition_is_named_as_a_defect():
+    record = build_record(
+        record_id="T",
+        level="cell",
+        identifier={"Crossmodel": "R1C1"},
+        members=[_fwi_member("R1C1", "25.080200200000000", "31.189300540000001",
+                             "6.109189990000000", "24.358664999999998")],
+        variable=FWI,
+        semantics_by_index=_semantics(FWI_SEMANTICS),
+        sorted_change_values=[Decimal(1)],
+        distribution_membership={},
+        built_from_commit="0" * 40,
+        csv_sha256="f" * 64,
+        assumption_ids=["A1"],
+    )
+    assert "defect" in record["M"]["population_composition"]
+
+
+def test_every_record_depends_on_the_empty_label_assumption():
+    """PR-1 includes empty-label groups, so every record that ranks names A-M2."""
+    for level, variable in (("cell", FWI), ("county", FWI), ("state", HEAT)):
+        ids = assumptions_for(level=level, variable=variable, ic_ids=[])
+        assert "A-M2" in ids, level
+    entry = assumption("A-M2")
+    assert "empty-label groups" in entry["statement"]
+    assert "pending choice" in entry["statement"]
+    assert entry["status"] == "unverified"

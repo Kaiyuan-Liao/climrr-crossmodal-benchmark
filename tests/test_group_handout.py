@@ -301,3 +301,45 @@ def test_the_register_has_one_row_per_assumption_with_every_cell_filled():
         assert len(cells) == 10, row[:60]
         # every cell but the mentor flag carries text
         assert all(cells[:-1]), row[:60]
+
+
+# --- what the percentile was measured against reaches the reader --------------
+
+
+def test_every_quoted_percentile_names_the_population_it_was_measured_against(
+    handout, records
+):
+    """A bare "of 50 units" hides whether the 50 are places. It must not appear."""
+    for record_id, record in records.items():
+        composition = record["M"]["population_composition"]
+        assert composition in handout, record_id
+        assert (
+            f"at percentile {record['M']['percentile']} of {composition}."
+        ) in handout, record_id
+
+
+def test_the_population_composition_reaches_the_generated_prototypes_page(records):
+    page = PROTOTYPES_DOC.read_text(encoding="utf-8")
+    for record in records.values():
+        assert record["M"]["population_composition"] in page
+
+
+def test_the_handout_tabulates_the_three_populations_and_owns_the_open_choice(handout):
+    section = handout.split("### About the magnitude field", 1)[1].split("## ", 1)[0]
+    assert "62,834 `Crossmodel`-key groups" in section
+    assert "3,018 named labels plus one empty-label group (7 rows with a value)" in section
+    assert "49 named labels plus one empty-label group (7 rows with a value)" in section
+    assert "**They are\ncounted.**" in section or "**They are counted.**" in (
+        " ".join(section.split())
+    )
+    assert "Whether to exclude them is still\nopen" in section or (
+        "Whether to exclude them is still open" in " ".join(section.split())
+    )
+
+
+def test_the_register_records_the_empty_label_groups_as_a_pending_choice():
+    text = ASSUMPTIONS_DOC.read_text(encoding="utf-8")
+    row = next(line for line in text.splitlines() if line.startswith("| `A-M2` |"))
+    assert "empty-label groups" in row
+    assert "pending choice" in row
+    assert "`unverified`" in row

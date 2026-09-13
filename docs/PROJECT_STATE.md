@@ -18,7 +18,7 @@ session reasoning correctly from out-of-date facts and repeating them.
 | **M1-WP3 pre-meeting review** | **REVISE --- framing only**, GUIDANCE, 2026-09-13, at reviewed head `c8f4711` (D-012). The scientific design is **accepted**: subset, rows, IC records, generated presentation, cautions and mentor protocol all approved unchanged. The required framing revision **is done** |
 | **M1-WP3b ruling** | **PASS WITH ACTIONS**, GUIDANCE, 2026-09-13, recorded as **D-013**. M1-WP3b is admitted as an explicit **milestone-order exception** --- early M3-style validation while M1 is still open. **The four required changes are applied.** Nothing in the package is milestone evidence; every record carries `validation_only` and the banner "Prototype for scientific-object validation. Not an accepted phenomenon record.", and its report proposes no gate status |
 | **The ruling as placed** | **`docs/M1_WP3B_GUIDANCE_RULING.md` is in the repository**, placed by Kaiyuan 2026-09-13 --- **after** D-013 was written from the COORDINATOR's relay. Read back against D-013: the substance agrees, and six discrepancies of attribution and coverage were found. **All eleven of the ruling's required actions are now met** --- nine as built, and actions 5 and 11 closed afterwards. The four bookkeeping items are corrected in **D-013-A1**, appended to the log; **D-013 itself was not rewritten** |
-| **Next review event** | **The mentor**, on `docs/MENTOR_EXAMPLES.md` --- the group meeting 2026-09-14 and the one-on-one **2026-09-17**, which is the one GUIDANCE names for the examples. GUIDANCE states no remaining scientific objection |
+| **Next review event** | **Two meetings, and they carry different documents.** **The group, 2026-09-14** --- `docs/GROUP_MEETING_2026-09-14.md` **only**, on whether the phenomenon unit is the right scientific object. **The mentor one-on-one, 2026-09-17** --- `docs/MENTOR_EXAMPLES.md` and its answer sheet, which is the meeting GUIDANCE names for the examples and **the only one they go to**. GUIDANCE states no remaining scientific objection |
 | **Blockers** | **M1 is blocked on mentor answers to the three examples.** M1-WP3b is blocked on nothing --- it is complete as a prototype and inert; what it *produces* is blocked on the GUIDANCE ruling and on the group's answer to what a phenomenon's unit should be |
 
 ## Where things stand
@@ -54,7 +54,8 @@ session reasoning correctly from out-of-date facts and repeating them.
   generated prose in three layers; the prose is produced **by template** from the
   semantics, and every clause resting on an inference is wrapped
   `[provisional: ...]`, with the build failing if one is not.
-- **`docs/MENTOR_EXAMPLES.md` is what goes to the meeting.** Sixteen numbered
+- **`docs/MENTOR_EXAMPLES.md` is what goes to the mentor one-on-one on
+  2026-09-17, and to nothing else.** Sixteen numbered
   lines --- fifteen answerable confirm / correct / don't know in ten minutes, and
   line 13 a stated observation with nothing to confirm --- behind a printable
   answer sheet. `MENTOR_BRIEF.md` leads with it and demotes the Q1--Q18 table
@@ -157,12 +158,15 @@ session reasoning correctly from out-of-date facts and repeating them.
   prototypes, the question types they could and could not support, and **five
   questions**, of which the first two matter most: what the unit of a phenomenon
   should be, and what replaces PR-1.
-- **For Kaiyuan:** take `docs/MENTOR_EXAMPLES.md` to the 2026-09-14 group
-  meeting and the **2026-09-17** one-on-one, and **preserve the answers
-  distinguishing
-  explicit confirmation from correction, from broad approval, and from an
-  unanswered assumption** --- WP4 cannot promote anything without that
-  distinction. Also push the branch, and the Sophia reinstall above.
+- **For Kaiyuan --- two meetings, two documents, and they do not swap.**
+  **2026-09-14, the group:** `docs/GROUP_MEETING_2026-09-14.md` **only**. The
+  examples and the answer sheet are not for this meeting; it is about whether
+  the phenomenon unit is the right object at all.
+  **2026-09-17, the mentor one-on-one:** `docs/MENTOR_EXAMPLES.md` and its
+  printable answer sheet, and **preserve the answers distinguishing explicit
+  confirmation from correction, from broad approval, and from an unanswered
+  assumption** --- WP4 cannot promote anything without that distinction.
+  Also push the branch, and the Sophia reinstall above.
 - **For GUIDANCE: nothing outstanding on M1-WP3.** Both judgements field 13 of
   the report asked for were ruled on in the pre-meeting review and are recorded
   as D-012 --- **41 columns approved, the stem probe kept, the three cautions
@@ -198,7 +202,8 @@ ahead of a ruling, which is why it is unmerged, unpushed, versioned
 - The ruling that authorised WP3: [M1_D010_GUIDANCE_RULING.md](M1_D010_GUIDANCE_RULING.md)
 - The pre-meeting review of WP3 (**REVISE**, framing only): [M1_WP3_PREMEETING_GUIDANCE_REVIEW.md](M1_WP3_PREMEETING_GUIDANCE_REVIEW.md)
 - The pilot subset, its rationale and its exclusions: [PILOT_SUBSET.md](PILOT_SUBSET.md)
-- **What goes to the mentor:** [MENTOR_EXAMPLES.md](MENTOR_EXAMPLES.md)
+- **What goes to the mentor one-on-one, 2026-09-17:** [MENTOR_EXAMPLES.md](MENTOR_EXAMPLES.md)
+- **What goes to the group, 2026-09-14:** [GROUP_MEETING_2026-09-14.md](GROUP_MEETING_2026-09-14.md)
 - **The ruling on M1-WP3b (PASS WITH ACTIONS):** [M1_WP3B_GUIDANCE_RULING.md](M1_WP3B_GUIDANCE_RULING.md)
 - **M1-WP3b, prototype and unmerged:** [PHENOMENON_PROTOTYPES.md](PHENOMENON_PROTOTYPES.md),
   [PHENOMENON_ASSUMPTIONS.md](PHENOMENON_ASSUMPTIONS.md),

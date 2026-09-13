@@ -97,6 +97,16 @@ KEY_PHRASE = {
     "state": "`State` label",
 }
 
+#: How the population reads when a percentile is reported against it. "Group" is
+#: deliberate: at county and state level a unit is a **set of rows sharing a
+#: label**, and calling it a county would assert the reading A-G1 is still asking
+#: the mentor to confirm.
+GROUP_WORD = {
+    "cell": "`Crossmodel`-key groups",
+    "county": "`(State, NAME)` label groups",
+    "state": "`State`-label groups",
+}
+
 OID_INDEX = 0
 CROSSMODEL_INDEX = 1
 NAME_INDEX = 2
@@ -236,11 +246,39 @@ def distributions(per_level: dict) -> tuple[dict, dict]:
         values = sorted(
             mean_from_total(total, count) for total, count in buckets.values() if count
         )
-        empty_labelled = sum(
-            1 for key, (_total, count) in buckets.items() if count and any(part == "" for part in key)
-        )
+        # An "empty-label group" is a unit whose key has an empty part --- the 7
+        # rows with no `State` at state level, and the same 7 at county level.
+        # Counted here rather than described, because the composition of the
+        # population PR-1 ranks against has to be checkable against the counts.
+        empty_groups = [
+            {"key": key, "n_member_cells": str(count)}
+            for key, (_total, count) in sorted(buckets.items())
+            if count and any(part == "" for part in key)
+        ]
+        empty_labelled = len(empty_groups)
         excluded = sum(1 for _total, count in buckets.values() if not count)
         key_phrase = KEY_PHRASE[level]
+        group_word = GROUP_WORD[level]
+        n_named = len(values) - empty_labelled
+        # Thousands separators here and nowhere else in a record: this string is
+        # prose, read aloud at a meeting, and it is the one place a reader has to
+        # take in what the percentile was measured against.
+        if empty_labelled:
+            rows = ", ".join(
+                f"{int(group['n_member_cells']):,} rows with a value"
+                for group in empty_groups
+            )
+            count_word = "one" if empty_labelled == 1 else f"{empty_labelled}"
+            plural = "group" if empty_labelled == 1 else "groups"
+            composition = (
+                f"{len(values):,} {group_word}: {n_named:,} named labels plus "
+                f"{count_word} empty-label {plural} ({rows})"
+            )
+        else:
+            composition = (
+                f"{len(values):,} {group_word}: all {n_named:,} named, "
+                "no empty-label group"
+            )
         change_phrase = (
             "the change value of its one cell"
             if level == "cell"
@@ -258,6 +296,10 @@ def distributions(per_level: dict) -> tuple[dict, dict]:
             "n_units": str(len(values)),
             "n_units_excluded_for_having_no_value": str(excluded),
             "n_units_whose_label_is_the_empty_string": str(empty_labelled),
+            "empty_label_groups": empty_groups,
+            "n_units_with_a_named_label": str(n_named),
+            # The one-line composition every percentile is reported against.
+            "population_composition": composition,
             # The exact definition the M1-WP3b ruling (action 10) asks every `M`
             # field to carry, assembled from the counts rather than asserted.
             "reference_population": (
@@ -265,8 +307,8 @@ def distributions(per_level: dict) -> tuple[dict, dict]:
                 f"{level}-level unit ({len(buckets)} of them); a unit is included if at "
                 f"least one member cell is non-empty on every column this variable reads "
                 f"({len(values)} included, {excluded} excluded); its change value is "
-                f"{change_phrase}; units whose label is the empty string are included "
-                f"({empty_labelled} here)"
+                f"{change_phrase}. The population is {composition} --- **empty-label "
+                f"groups are included** (A-M2), and excluding them is a pending choice"
             ),
             "empty_label_note": (
                 "A unit whose label is the empty string is counted. The 7 rows with no "
@@ -395,7 +437,7 @@ def render_prototypes_doc(records: list[dict], commit: str, csv_sha256: str) -> 
             f"| `D` direction | **{record['D']['direction']}** | "
             f"`{record['D']['provenance_status']}` |",
             f"| `M` category | {m['tercile']}, percentile {m['percentile']} of "
-            f"{m['n_units_at_this_level']} units, ranked on the **signed** change value "
+            f"{m['population_composition']}, ranked on the **signed** change value "
             f"| `provisional_rule` PR-1 |",
             f"| `P` provenance | a status for every field above | see the record |",
             (
