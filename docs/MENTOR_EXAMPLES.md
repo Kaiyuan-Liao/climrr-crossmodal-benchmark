@@ -1,3 +1,85 @@
+# Answer sheet --- ClimRR example records
+
+**For:** the ClimRR data owner.  **From:** Kaiyuan Liao.  **Date: \_\_\_\_\_\_\_\_\_\_**
+
+Each line below is a reading of a column in `FullData.csv` that the ClimRR data
+dictionary does **not** state, and that I reasoned out instead. Please tick one
+box per line. **"Don't know" is a real answer** and more useful to me than a
+guess --- a line answered that way stays marked unconfirmed and its columns stay
+out of use.
+
+This sheet is the short form. The full wording of any line, the raw values it
+refers to, and the reasoning behind it are on that example's page in the
+document that follows.
+
+## Example 1 --- row `OID_` 1 (`R106C361`), Stephens County, Oklahoma
+
+| # | The reading, in brief | Tick one | If "correct" --- to what? |
+| ---: | --- | --- | --- |
+| **1** | **One row of this file is one "event".** The grain everything else rests on. | ☐ confirm ☐ correct ☐ don't know | |
+| 2 | `heatindex_*_DayMax` (238, 244, 250) is in **°F**, on the extended heat-index scale of Lu and Romps. | ☐ confirm ☐ correct ☐ don't know | |
+| 3 | `DayMax` is the summer **average** of daily maxima --- *not* the summer's single highest reading. | ☐ confirm ☐ correct ☐ don't know | |
+| 4 | `heatindex_C_*_DMax` (256, 262) is that quantity **differenced**, same units. **Which way round?** | ☐ confirm ☐ correct ☐ don't know | |
+| 5 | `wildfire_summer_Hist/Midc/Endc` (189–191): "Seasonal value" = the **seasonal average daily FWI**, not the 95th percentile. | ☐ confirm ☐ correct ☐ don't know | |
+| 6 | FWI values are **dimensionless** index values. | ☐ confirm ☐ correct ☐ don't know | |
+| 7 | `wildfire_summer_Dmid/Dend` (192–193) are **absolute differences** in index units. **Which way round?** | ☐ confirm ☐ correct ☐ don't know | |
+| **8** | **The name stem `tempmaxann` denotes the dictionary section "Temperature Maximum - Annual".** **101 columns depend on this one link.** | ☐ confirm ☐ correct ☐ don't know | |
+| 9 | Granting line 8: columns 44, 48, 52 are annual averages of daily max temperature in **°F** --- historical, end-century RCP8.5, and the change. | ☐ confirm ☐ correct ☐ don't know | |
+| **10** | `GEOID` (109) is a **Census tract id**: state + county + tract. **Which Census vintage?** | ☐ confirm ☐ correct ☐ don't know | vintage: |
+| 11 | `TRACTCE` (108) is the **tract code alone**, unique only within its county. | ☐ confirm ☐ correct ☐ don't know | |
+| 12 | `X`, `Y` (106, 107) are **longitude / latitude in decimal degrees**. **Which coordinate system?** Is it the cell centroid? | ☐ confirm ☐ correct ☐ don't know | system: |
+| 13 | `NAME` (2) is a **county name**; `State`/`State_Abbr` (3, 4) the state. There are **49** states here, not 50, and **7 blank rows**. Which is absent? What are the 7? | ☐ confirm ☐ correct ☐ don't know | |
+| **14** | **Are these the kinds of table-side records you expect to connect to the literature?** | ☐ confirm ☐ correct ☐ don't know | |
+
+## Example 2 --- row `OID_` 14 (`R107C232`), San Bernardino County, California
+
+Lines 1 and 2–13 above apply here unchanged; please answer them once, above.
+
+| # | The reading, in brief | Tick one | If "correct" --- to what? |
+| ---: | --- | --- | --- |
+| **E2-2** | Identifiers are carried as **text with leading zeros intact** (`GEOID` `06071010300`). Is that right, and does anything downstream expect them as numbers? | ☐ confirm ☐ correct ☐ don't know | |
+
+## Example 3 --- row `OID_` 148 (`R105C198`), Ventura County, California
+
+Lines 1 and 2–13 above apply here unchanged; please answer them once, above.
+
+| # | The reading, in brief | Tick one | If "correct" --- to what? |
+| ---: | --- | --- | --- |
+| **E3-2** | An empty cell is written **"no value in this file"** --- never `0`, never "missing". Right? Or does an empty heat-index cell mean something specific? | ☐ confirm ☐ correct ☐ don't know | |
+| **E3-3** | **83 rows are empty across every column from index 235 on.** Do you know what those 83 rows are? | ☐ confirm ☐ correct ☐ don't know | |
+
+## The four questions behind all of this
+
+Quoted from the project's review ruling. Each is already covered by lines above,
+so there is nothing extra to tick --- they are here so you can see what the
+lines add up to.
+
+| | Question | Answered by |
+| ---: | --- | --- |
+| 1 | **Is one CSV row the correct unit for what she means by an “event”?** | line 1 |
+| 2 | **Are the selected field interpretations correct?** | lines 2–13, E2-2, E3-2 |
+| 3 | **Which assumptions in each example does she endorse or reject?** | every line you ticked |
+| 4 | **Are these the kinds of table-side records she expects to connect to literature?** | line 14 |
+
+## Anything else
+
+Anything I have got wrong, or any field you would want in a record like this
+that is not here:
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+*Signed / initialled:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+---
+---
+
+*Everything below this line is the supporting detail behind the sheet above.
+You do not need to read it to answer.*
+
 # Three example records, for review
 
 **What I need from you: the numbered lines.** Each one is a reading I could not
@@ -191,7 +273,7 @@ checklists ask only what is specific to them.
 | 10 | `GEOID` (109) is a **Census tract identifier**: 2-character state + 3-character county + 6-character tract. **Which Census vintage?** Every join this project could make depends on the answer. | Q10 |
 | 11 | `TRACTCE` (108) is the **tract code alone**, unique only within its county. | Q10 |
 | 12 | `X` and `Y` (106, 107) are **longitude and latitude in decimal degrees**. **Which coordinate reference system**, and is the point the grid cell's centroid? | Q10 |
-| 13 | `NAME` (2) is a **county or county-equivalent name**, and `State`/`State_Abbr` (3, 4) the state it sits in. `State` holds **49** distinct values, not 50 --- do you know which one is absent, or whether the set is not the 50 states? | Q10 |
+| 13 | `NAME` (2) is a **county or county-equivalent name**, and `State`/`State_Abbr` (3, 4) the state it sits in. `State` holds **49 distinct non-empty values plus 7 blank rows** --- so 49 states, not 50. Do you know which one is absent, or whether the set is not the 50 states; and what the 7 blank rows are? | Q10, Q16 |
 | 14 | **Are these the kinds of table-side records you expect to connect to the literature?** If the shape is wrong, that matters more than any line above. | the whole approach |
 
 ---

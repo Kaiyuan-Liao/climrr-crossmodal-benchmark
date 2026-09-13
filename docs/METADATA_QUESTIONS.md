@@ -338,8 +338,14 @@ which source and vintage.
    and 8 empty rows; `NAMELSAD`'s most frequent value is `Census Tract 1`
    and `NAME_1`'s is `1`. Is `NAME_1` the tract number and `NAMELSAD` its label?
 5. Index 2 `NAME` has 1,770 distinct values (most frequent `Yukon-Koyukuk`) and
-   no empties, while indices 3–4 `State`/`State_Abbr` have 50 distinct values
-   and 7 empty rows. Is `NAME` the county name, and what are the 7 rows with no
+   no empties, while indices 3–4 `State`/`State_Abbr` have **49 distinct
+   non-empty values plus 7 blank rows** — 50 distinct values in total, because
+   the profile's `n_distinct` counts the empty string as one of them
+   (`n_distinct_nonempty` is 49 for both columns). So the substantive finding is
+   **49, not 50**: at least one state or state-equivalent that a national grid
+   would cover is absent from these columns, or their value set is not the fifty
+   states. Is `NAME` the county name; which state accounts for the 49th-versus-
+   50th gap, or are territories in or out; and what are the 7 rows with no
    state?
 
 ### Q11 — Which column is the join key, and are the three `Crossmodel` columns the same identifier?

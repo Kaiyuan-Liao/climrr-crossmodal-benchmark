@@ -481,3 +481,35 @@ def test_no_tracked_record_reasons_about_a_column_the_dictionary_verifies():
     assert blocked == []
     assert coverage["status_counts"][INFERRED_CANDIDATE] == 20
     assert coverage["status_counts"][VERIFIED_FROM_DICTIONARY] == 21
+
+
+def test_the_coverage_report_pins_the_metadata_files_as_they_stand():
+    """The report records the SHA-256 of the files it read. Those must be these files.
+
+    Not a formality. A coverage report generated before a record was edited
+    still *looks* current --- same counts, same column list --- while pinning
+    bytes that no longer exist, so every status in it would cite reasoning that
+    had since changed. Caught exactly that way once: the Phase A report pinned
+    `inferred_candidates.yaml` as it was before a wording fix in Phase B, and
+    nothing in the artifact said so.
+    """
+    import json
+
+    from climrr.checksums import sha256_file
+    from climrr.paths import REPO_ROOT
+
+    coverage = json.loads(
+        (REPO_ROOT / "artifacts" / "profiles" / "dictionary_coverage.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    for key, relative in (
+        ("inferred_candidates", "data/metadata/inferred_candidates.yaml"),
+        ("resolutions", "data/metadata/resolutions.yaml"),
+        ("extracted_text", "data/metadata/dictionary_extracted.txt"),
+    ):
+        assert coverage[f"{key}_path"] == relative
+        assert coverage[f"{key}_sha256"] == sha256_file(REPO_ROOT / relative), (
+            f"{relative} has changed since the coverage report was generated. "
+            "Re-run scripts/dictionary_coverage.py."
+        )

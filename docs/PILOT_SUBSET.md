@@ -35,10 +35,12 @@ only the neighbouring columns needed to make those readable, and stopping.
 | 238, 244, 250 | `heatindex_{HIS,M85,E85}_DayMax` | `inferred_candidate` — IC-001, IC-002, IC-003 |
 | 256, 262 | `heatindex_C_{M85,E85}_DMax` | `inferred_candidate` — IC-004, IC-005 |
 
-**Scientific relevance.** Summer heat is the ClimRR variable with the most
-direct human exposure meaning, and the one whose literature is largest --- which
-matters because the eventual purpose of these records is to connect a table row
-to published work.
+**Scientific relevance.** Summer heat is the ClimRR variable that bears most
+directly on human exposure, and the eventual purpose of these records is to
+connect a table row to published work. **How large the literature actually is,
+here or for any other family, is not established** --- no literature work is
+authorised yet (M3), so this is a reason for the choice and not a measured
+claim.
 
 **Interpretability.** This is the only family in the file where twelve columns
 are already verified from the dictionary's own words, with a single, specific
@@ -59,11 +61,13 @@ would tie these columns to a defined scale rather than to a number.
 
 **Why the `DayMax` trio and not the `SeaMax` trio.** They carry the identical
 unit question and confirming one answers the other, so including both would have
-doubled the records without adding a question. `DayMax` was chosen because the
-dictionary's narrative defines it at lines 406–407 in a way that **corrects** the
-reading the name invites --- it is the summer *average* of daily maxima, not the
-summer's single maximum --- and that correction is worth putting in front of the
-mentor.
+doubled the records without adding a question. `DayMax` was chosen because of what IC-001 proposes about
+it: that the narrative at lines 406–407 describes this column, and so that
+`DayMax` holds the summer *average* of daily maxima rather than the summer's
+single maximum. **That is an inference, not a quotation** --- the dictionary
+never says that its narrative item and its field entry are the same
+quantity --- and it is worth putting in front of the mentor precisely because it
+contradicts the reading the name invites. Checklist line 3 asks her directly.
 
 ### Family 2 --- Fire Weather Index - Averages (13 columns: 8 verified, 5 inferred)
 
@@ -78,9 +82,11 @@ mentor.
 > either may read an FWI value as a fire. This is a standing rule of the
 > repository, not a caution specific to this pilot.
 
-**Scientific relevance.** FWI is the second family with a substantial
-literature, and its four seasons and three horizons give the table its widest
-scenario coverage.
+**Scientific relevance.** FWI is the other family this project expects to be
+able to connect to published work --- again a reason for the choice rather than
+a measured claim, for the same reason as Family 1 --- and its four seasons and
+three horizons, both of which the dictionary names in its own field entries,
+give the pilot its widest scenario coverage.
 
 **Interpretability.** The eight percent-change columns are verified because the
 dictionary writes "Percent Change" against them. Their `D` siblings say only
@@ -111,23 +117,33 @@ records that ask the same question.
 is, or the mentor cannot recognise it as a record of anything. This is the
 minimum set that does that.
 
-**Two things are stated plainly and neither is resolved by this pilot.**
+**Two things are stated plainly and neither is resolved by this pilot.** Note
+that both sentences below describe **inferred** readings: the dictionary says
+nothing about any of these four columns, so even the *kind* of thing they hold is
+an inference this pilot is asking the mentor to confirm.
 
-1. **The Census vintage is unknown.** `GEOID` and `TRACTCE` are tract
-   identifiers whose codes are re-cut between decennial vintages. The vintage
-   decides every join this project could later make, and nothing here
-   establishes it.
-2. **The coordinate reference system is unknown.** `X` and `Y` are decimal
-   degrees; at the precision stored, the common geographic systems are not
-   distinguishable from a coordinate range, and the dictionary names none.
+1. **The Census vintage is unknown.** `GEOID` and `TRACTCE` are read here as
+   Census tract identifiers --- an inference, IC-017 and IC-016 --- whose codes
+   are re-cut between decennial vintages. **If** that reading is right, the
+   vintage decides every join this project could later make, and nothing here
+   establishes it. Q10.1 and Q10.2 are the questions; the records propose
+   answers and say what they cannot rule out.
+2. **The coordinate reference system is unknown.** `X` and `Y` are read here as
+   longitude and latitude in decimal degrees --- an inference, IC-014 and
+   IC-015, resting on the observed ranges rather than on any statement in the
+   dictionary. At the precision stored, the common geographic systems are not
+   distinguishable from a coordinate range, and the dictionary names none, so
+   the system would remain unknown even if the reading is confirmed (Q10.3).
 
 **No geographic aggregation is performed anywhere in this pilot**, by these
 columns or any others. They label one row; they do not group rows.
 
 **Provenance awareness.** These seven columns appear **nowhere** in the data
-dictionary --- not as field names, not in the narrative. They were joined in
-before the file reached this project (D-008), and R-001 established that no
-assembly document exists to say from where. Each record therefore cites the two
+dictionary --- not as field names, not in the narrative. They are taken to have
+been joined in from elsewhere before the file reached this project, on the
+strength of D-008 --- which is **stated by Kaiyuan and not independently
+verified** --- and R-001 established that no assembly document exists to say
+from where. Each record therefore cites the two
 passages that establish *why* the column is absent: the document's statement of
 its own scope (line 79) and the `Crossmodel` entry (line 455), which shows that
 the dictionary's unit of record is a **grid cell**, not a Census geography.
@@ -179,7 +195,7 @@ exercises the link across all three shapes the family takes.
 | `heatindex_*_SeaMax` and the `C_*` day-count changes | 239, 245, 251, 257–261, 263–267 | Same unit question as the selected heat-index columns; confirming IC-001 answers them. |
 | The other 98 stem-family columns | 5–43, 45–47, 49–51, 53–105 | All depend on the same Q1 link the three probe columns test. Three cases is enough to ask the question; 101 is not a subset. |
 | Socioeconomic columns | 112–118 | Undocumented, on incompatible scales (index 112 ranges 0–100, index 113 ranges 0.04–0.80), from an unnamed source and vintage (Q9). Outside what an example needs. |
-| The other identifier and bookkeeping columns | 0, 110, 111, 203, 204, 235–237, 268–274 | `OID_` is used as an address only, as above. The rest are duplicate `Crossmodel`/`OBJECTID` copies (Q11) and ArcGIS editor-tracking and shape fields (Q12) with no established climate content. |
+| The other identifier and bookkeeping columns | 0, 110, 111, 203, 204, 235–237, 268–274 | `OID_` is used as an address only, as above. The rest are the suffixed `Crossmodel`/`OBJECTID` copies, whose relationship to one another is **open** (Q11 — and Q11.4 showed indices 235 and 236 are *not* duplicates, so "duplicate" is exactly what must not be assumed), and the columns Q12 asks about, which it *proposes* are ArcGIS editor-tracking and shape fields without that being established. None has any established climate content, which is why none is used. |
 
 **Every excluded column keeps the status M1-WP1 gave it.** The WP1 baseline is
 frozen per column in `status_baseline_wp1` and nothing in this work package

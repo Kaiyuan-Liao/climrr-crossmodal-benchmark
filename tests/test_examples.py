@@ -576,10 +576,15 @@ def test_the_mentor_document_reports_the_blank_count_it_claims(mentor_doc, built
 
 
 def test_the_mentor_document_asks_the_row_grain_question_on_every_page(mentor_doc):
-    """A1 is line 1 of every checklist; the ruling requires it there."""
-    checklists = mentor_doc.count("### Checklist")
-    assert checklists == 3
-    assert mentor_doc.count('**One row of this file is one "event".**') == 3
+    """A1 is line 1 of every checklist; the ruling requires it there.
+
+    Scoped to the document body: the answer sheet at the top asks it once more,
+    which is the point of the sheet and not a fourth page.
+    """
+    body = mentor_doc.split("# Three example records, for review", 1)[1]
+    assert body.count("### Checklist") == 3
+    assert body.count('**One row of this file is one "event".**') == 3
+    assert mentor_doc.count('**One row of this file is one "event".**') == 4
 
 
 def test_the_mentor_document_quotes_the_rulings_four_questions(mentor_doc):
@@ -596,5 +601,111 @@ def test_the_mentor_document_quotes_the_rulings_four_questions(mentor_doc):
 
 def test_the_mentor_document_uses_no_magnitude_adjective(mentor_doc):
     lowered = mentor_doc.lower()
+    found = [word for word in MAGNITUDE_WORDS if re.search(rf"\b{word}\b", lowered)]
+    assert found == [], found
+
+
+# --- the printable answer sheet -----------------------------------------------
+#
+# The mentor has no access to this repository and reads the document on paper or
+# over Kaiyuan's shoulder. The answer sheet at the top of it is the only part she
+# writes on, and it restates each checklist line in short form --- so there are
+# now two wordings of the same fourteen questions in one file. These tests hold
+# them to the same set of lines, and hold the sheet's row identities to the
+# records, so a line cannot be edited in one place and go stale in the other.
+
+ANSWER_SHEET_HEADING = "# Answer sheet --- ClimRR example records"
+MAIN_DOC_HEADING = "# Three example records, for review"
+
+
+def _answer_sheet(mentor_doc: str) -> str:
+    assert mentor_doc.startswith(ANSWER_SHEET_HEADING), "the sheet must come first"
+    return mentor_doc.split(MAIN_DOC_HEADING, 1)[0]
+
+
+def _row_numbers(table_text: str) -> list[str]:
+    """The first cell of every body row of every markdown table in a passage."""
+    return [
+        match.group(1).strip().strip("*").strip()
+        for match in re.finditer(r"^\| *([^|]+?) *\|", table_text, re.M)
+        if match.group(1).strip().strip("*").strip() not in {"#", "---:", ""}
+        and not set(match.group(1).strip()) <= {"-", ":", " "}
+    ]
+
+
+def test_the_answer_sheet_comes_first_and_is_short_enough_to_print(mentor_doc):
+    sheet = _answer_sheet(mentor_doc)
+
+    assert MAIN_DOC_HEADING in mentor_doc
+    # One to two printed pages. Well under the ~120 lines that would be three.
+    assert len(sheet.splitlines()) <= 110, len(sheet.splitlines())
+    assert "You do not need to read it to answer." in sheet
+
+
+def test_every_answer_sheet_row_offers_all_three_answers(mentor_doc):
+    sheet = _answer_sheet(mentor_doc)
+    ticked = re.findall(r"☐ confirm ☐ correct ☐ don't know", sheet)
+
+    # 14 from Example 1, one from Example 2, two from Example 3.
+    assert len(ticked) == 17, len(ticked)
+
+
+def test_the_answer_sheet_covers_example_1s_checklist_line_for_line(mentor_doc):
+    sheet = _answer_sheet(mentor_doc)
+    checklist = mentor_doc.split("### Checklist --- Example 1", 1)[1].split("---\n\n##", 1)[0]
+    sheet_example_1 = sheet.split("## Example 1", 1)[1].split("## Example 2", 1)[0]
+
+    on_sheet = [row for row in _row_numbers(sheet_example_1) if row.isdigit()]
+    in_checklist = [row for row in _row_numbers(checklist) if row.isdigit()]
+
+    assert in_checklist == [str(n) for n in range(1, 15)]
+    assert on_sheet == in_checklist
+
+
+@pytest.mark.parametrize(
+    ("example", "expected"),
+    [("Example 2", ["E2-2"]), ("Example 3", ["E3-2", "E3-3"])],
+)
+def test_the_answer_sheet_carries_the_row_specific_lines(mentor_doc, example, expected):
+    """Every line of pages 2 and 3 that is not A1 and not a pointer back."""
+    sheet = _answer_sheet(mentor_doc)
+    checklist = mentor_doc.split(f"### Checklist --- {example}", 1)[1].split("\n---", 1)[0]
+
+    specific = [
+        line
+        for line in checklist.splitlines()
+        if line.startswith("|")
+        and 'One row of this file is one "event"' not in line
+        and "rather than twice" not in line
+        and not line.startswith("| # |")
+        and not set(line) <= set("| -:")
+    ]
+    assert len(specific) == len(expected), specific
+    for identifier in expected:
+        assert f"| **{identifier}** |" in sheet
+
+
+def test_the_answer_sheet_names_each_row_as_the_records_do(mentor_doc, built):
+    sheet = _answer_sheet(mentor_doc)
+    for record in built:
+        provenance = record["provenance"]
+        heading = f"row `OID_` {provenance['OID_']} (`{provenance['Crossmodel']}`)"
+        assert heading in sheet, heading
+
+
+def test_the_answer_sheet_repeats_the_rulings_four_questions(mentor_doc):
+    sheet = _answer_sheet(mentor_doc)
+    section = (
+        (REPO_ROOT / "docs" / "M1_D010_GUIDANCE_RULING.md")
+        .read_text(encoding="utf-8")
+        .split("### Mentor", 1)[1]
+        .split("---", 1)[0]
+    )
+    for question in re.findall(r"^\d\. \*\*(.+?)\*\*$", section, re.M):
+        assert question in sheet, question
+
+
+def test_the_answer_sheet_uses_no_magnitude_adjective(mentor_doc):
+    lowered = _answer_sheet(mentor_doc).lower()
     found = [word for word in MAGNITUDE_WORDS if re.search(rf"\b{word}\b", lowered)]
     assert found == [], found
