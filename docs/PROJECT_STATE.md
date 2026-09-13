@@ -7,16 +7,18 @@ session reasoning correctly from out-of-date facts and repeating them.
 | | |
 | --- | --- |
 | **Current milestone** | **M1 --- data grounding and metadata audit** |
-| **Active task** | **M1-WP3 complete, pre-meeting reviewed, and revised.** Nothing is in progress --- the project is waiting on **the mentor, 2026-09-17** |
+| **Active task** | **M1-WP3 complete, pre-meeting reviewed, and revised.** **M1-WP3b --- a prototype package --- is built on the unmerged, unpushed branch `work/m1-wp3b`.** The project is waiting on **the group, 2026-09-14**, **the mentor, 2026-09-17**, and **a GUIDANCE ruling on WP3b** |
 | **Latest accepted commit** | `62c9137` --- the merge of M1-WP1 into `main`, accepted by GUIDANCE at reviewed head `fceee7f` (D-009) |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at |
 | **Branch** | `work/m1-wp3`, from `work/m1-wp2`. **Pushed by Kaiyuan, not merged.** `origin/work/m1-wp3` was at `c8f4711` when GUIDANCE took the pre-meeting review; the revision commit after it is local until he pushes again. The EXECUTOR does not push (D-003) |
+| **M1-WP3b branch** | **`work/m1-wp3b`, from `work/m1-wp3` at `ad13649`. Not merged, not pushed** --- the work package forbids both, and `origin` has no such branch. Three commits: Phase A, Phases B–D, Phase E |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
 | **M1-WP1 review** | **PASS**, GUIDANCE, at reviewed head `fceee7f` (D-009). A work-package pass, **not** the M1 milestone gate |
 | **D-010 ruling** | **PASS WITH ACTIONS**, GUIDANCE, 2026-09-13. **D-010 decided; D-011 records the ruling and its boundaries.** Both approved by Kaiyuan |
 | **M1-WP3 pre-meeting review** | **REVISE --- framing only**, GUIDANCE, 2026-09-13, at reviewed head `c8f4711` (D-012). The scientific design is **accepted**: subset, rows, IC records, generated presentation, cautions and mentor protocol all approved unchanged. The required framing revision **is done** |
+| **M1-WP3b** | **Prototype, built ahead of its ruling by Kaiyuan's decision of 2026-09-13 (R-002). D-010/D-011 forbid aggregation, county/state units and a magnitude field inside an M1-WP3 example; this package does all three deliberately.** A GUIDANCE ruling was requested in parallel and is **pending**. Nothing in it is milestone evidence and its report proposes no gate status |
 | **Next review event** | **The mentor**, on `docs/MENTOR_EXAMPLES.md` --- the group meeting 2026-09-14 and the one-on-one **2026-09-17**, which is the one GUIDANCE names for the examples. GUIDANCE states no remaining scientific objection |
-| **Blockers** | **M1 is blocked on mentor answers to the three examples.** Nothing else is; the machinery to record her answers is built and inert |
+| **Blockers** | **M1 is blocked on mentor answers to the three examples.** M1-WP3b is blocked on nothing --- it is complete as a prototype and inert; what it *produces* is blocked on the GUIDANCE ruling and on the group's answer to what a phenomenon's unit should be |
 
 ## Where things stand
 
@@ -69,6 +71,36 @@ session reasoning correctly from out-of-date facts and repeating them.
   the hand-authored surface and a second test feeds the rejected heading back
   through it. **The standing rule this establishes: a labelling discipline
   enforced only where output is generated is not enforced.**
+- **M1-WP3b built three prototype phenomenon units, and they are prototypes.**
+  Schema version `p0-prototype`, not `v1`. One grid cell (`R106C361`), one
+  county-shaped row set (`Oklahoma` / `Stephens`, 10 rows), one state-shaped row
+  set (`California`, 2,831 rows of which 2,827 carry a value). Every derived
+  field takes the **weakest** status of its inputs, with the consequence that
+  **no field in any of the three reaches `derived_from_verified`**. Every
+  operation, assumption and provisional rule is named in the record that uses
+  it. Nothing is merged, nothing is pushed, nothing is milestone evidence.
+- **Phase A measured two things that decide what "county-level" can mean.**
+  `Crossmodel` is **unique** --- 62,834 distinct over 62,834 rows. And **`GEOID`
+  does not determine `(State, NAME)`**: 3,234 of 12,941 values appear against
+  more than one pair. The consequence is procedural and is now a repository
+  rule: **no row set in this project may be keyed on `GEOID`**, and none is. A
+  county here is the set of rows sharing a `(State, NAME)` label (A-G3,
+  computed), and nothing else.
+- **The magnitude field is a placeholder and says so everywhere it appears.**
+  `provisional_rule PR-1` ranks a unit's change value against every unit at the
+  same level and reports a tercile. It is not a threshold, rests on no
+  literature, and is wrapped in its own distinct mark --- `[provisional rule
+  PR-1: ...]` --- so a reader can tell a provisional *value* from a placeholder
+  *rule*.
+- **The literature probe is a design stub and nothing was retrieved.** It
+  already yields one finding: **at cell level there is no usable place term.**
+  A grid-cell id is not a phrase any paper contains.
+- **One M1-WP3 sentence stopped being true and was not carried across.** The
+  location caution there ends "no part of this pilot groups rows by any of
+  them". WP3b groups rows by `State` and `NAME` deliberately, so its records
+  carry their own caution saying so, and a test refuses the old sentence in a
+  WP3b record. **The M1-WP3 records are unchanged and their caution remains
+  true of them.**
 - **"Each row = one event" is still an assumption.** It is line 1 of every
   checklist and A1 of every record. Nothing treats it as settled.
 - **Four GUIDANCE rulings from D-009 remain in force**, none of them reopened:
@@ -87,6 +119,10 @@ session reasoning correctly from out-of-date facts and repeating them.
   stem `tempmaxann` denote "Temperature Maximum - Annual" (**101 columns** turn
   on it); which Census vintage are `GEOID` and `TRACTCE`; and is this the shape
   of record she expects to connect to literature.
+- **For the group, 2026-09-14:** `docs/GROUP_MEETING_2026-09-14.md` --- the three
+  prototypes, the question types they could and could not support, and **five
+  questions**, of which the first two matter most: what the unit of a phenomenon
+  should be, and what replaces PR-1.
 - **For Kaiyuan:** take `docs/MENTOR_EXAMPLES.md` to the 2026-09-14 group
   meeting and the **2026-09-17** one-on-one, and **preserve the answers
   distinguishing
@@ -112,9 +148,13 @@ resolution records naming exactly which columns and exactly what was confirmed,
 and assemble the M1 milestone gate packet. A broad "yes, this is what I want" is
 recorded as approval of the approach and promotes nothing.
 
-Still not authorised: phenomenon extraction, aggregation for scientific claims,
-thresholds, literature work, embeddings, bridges, QA --- and any interpretation
-of a column outside the 41 in the pilot subset.
+Still not authorised by any ruling: phenomenon extraction, aggregation for
+scientific claims, thresholds, literature work, embeddings, bridges, QA --- and
+any interpretation of a column outside the 41 in the pilot subset. **M1-WP3b
+crosses the first three of those deliberately, on the owner's decision and
+ahead of a ruling, which is why it is unmerged, unpushed, versioned
+`p0-prototype`, and offered as no milestone's evidence.** Nothing outside the
+41 columns was interpreted.
 
 ## Links
 
@@ -125,6 +165,11 @@ of a column outside the 41 in the pilot subset.
 - The pre-meeting review of WP3 (**REVISE**, framing only): [M1_WP3_PREMEETING_GUIDANCE_REVIEW.md](M1_WP3_PREMEETING_GUIDANCE_REVIEW.md)
 - The pilot subset, its rationale and its exclusions: [PILOT_SUBSET.md](PILOT_SUBSET.md)
 - **What goes to the mentor:** [MENTOR_EXAMPLES.md](MENTOR_EXAMPLES.md)
+- **M1-WP3b, prototype and unmerged:** [PHENOMENON_PROTOTYPES.md](PHENOMENON_PROTOTYPES.md),
+  [PHENOMENON_ASSUMPTIONS.md](PHENOMENON_ASSUMPTIONS.md),
+  [GROUP_MEETING_2026-09-14.md](GROUP_MEETING_2026-09-14.md),
+  [../reports/milestones/M1_WP3b_PROTOTYPE_REPORT.md](../reports/milestones/M1_WP3b_PROTOTYPE_REPORT.md)
+- Structural facts the prototypes rest on: [../artifacts/profiles/hierarchy_checks.md](../artifacts/profiles/hierarchy_checks.md)
 - Data facts, dictionary-verified semantics, open questions: [DATA_NOTES.md](DATA_NOTES.md)
 - Mentor-facing question inventory: [METADATA_QUESTIONS.md](METADATA_QUESTIONS.md)
 - Per-column reasoning for every inferred candidate: [../data/metadata/inferred_candidates.yaml](../data/metadata/inferred_candidates.yaml)
