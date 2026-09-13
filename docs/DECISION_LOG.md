@@ -681,15 +681,18 @@ not yet in force and must not be relied on by downstream work.
 - **Date:** 2026-09-13
 - **Status:** **decided.** Records the M1-WP3b ruling, gate status **PASS WITH
   ACTIONS**, placed by Kaiyuan and relayed to the EXECUTOR by the COORDINATOR.
-- **A defect in this entry, stated rather than hidden:** the ruling document
-  `docs/M1_WP3B_GUIDANCE_RULING.md` **is not in the repository.** It is named by
-  the work package as placed by Kaiyuan, and it is absent from the working tree
-  and from every commit on every branch. This entry therefore records the
-  decisions **as relayed by the COORDINATOR** and quotes nothing from the ruling
-  itself. **No criterion text, action text, or numbering beyond what the
-  COORDINATOR stated has been reconstructed or inferred.** Placing the file is
-  outstanding for Kaiyuan, and until it is placed this entry is the only record
-  of the ruling in the repository.
+- **How this entry was written, and what has since been checked against it.**
+  The ruling document `docs/M1_WP3B_GUIDANCE_RULING.md` was **not yet in the
+  repository** when this entry was written, so the entry records the decisions
+  **as relayed by the COORDINATOR** and reconstructs no criterion text, action
+  text or numbering beyond what was relayed. Kaiyuan placed the document on
+  **2026-09-13**. It has since been read against this entry. **The substance
+  agrees; six discrepancies of attribution and coverage were found, none of them
+  a decision recorded here that the ruling does not make.** They are listed in
+  `reports/milestones/M1_WP3b_PROTOTYPE_REPORT.md` field 13, **and this entry was
+  deliberately not edited to match the ruling** --- an append-only log records
+  what was decided when, and a silent correction would destroy the evidence that
+  the package was built from a relay.
 
 ### 1. The milestone-order exception
 

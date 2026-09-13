@@ -3,11 +3,12 @@
 **Prototype for scientific-object validation. Not an accepted phenomenon record.**
 
 **Revised after the M1-WP3b GUIDANCE ruling (PASS WITH ACTIONS), recorded as
-D-013.** The ruling's four required changes are applied; what changed is in
-field 12. **The ruling document `docs/M1_WP3B_GUIDANCE_RULING.md` is not in the
-repository** --- it is named as placed by Kaiyuan and is absent from the working
-tree and from every commit, so D-013 records the decisions as relayed by the
-COORDINATOR and quotes nothing from the ruling itself.
+D-013.** The ruling's four relayed changes are applied; what changed is in
+field 12. The ruling document, `docs/M1_WP3B_GUIDANCE_RULING.md`, was placed by
+Kaiyuan on 2026-09-13 --- after D-013 was written from the COORDINATOR's relay
+--- and has been read against D-013. **The substance agrees. Six discrepancies
+of attribution and coverage were found and are listed in field 13**; neither
+D-013 nor the ruling was edited to hide them.
 
 ## 1. Milestone ID and title
 
@@ -148,6 +149,8 @@ python scripts/verify_no_secrets_or_paths.py
 | `docs/PHENOMENON_PROTOTYPES.md` | the three units, generated |
 | `docs/PHENOMENON_ASSUMPTIONS.md` | the register, generated |
 | `docs/GROUP_MEETING_2026-09-14.md` | the group handout |
+| `docs/M1_WP3B_GUIDANCE_RULING.md` | **the GUIDANCE ruling on this package**, PASS WITH ACTIONS, placed by Kaiyuan 2026-09-13. Not authored here |
+| `docs/DECISION_LOG.md` | D-013, which records the ruling and what it required |
 | `docs/DATA_NOTES.md` | §1 extended with the Phase A computed properties |
 | `tests/test_hierarchy_checks.py` | 11 tests |
 | `tests/test_phenomenon.py` | 38 tests |
@@ -411,12 +414,12 @@ quantile off by one; and a mean of exactly zero serialised as `0E-15`.
     lives only in a reviewer's attention is not enforced. What was missing was a
     statement of which columns admit which arithmetic; the dictionary had said
     "Percent Change" all along and no code read it.
-11. **The ruling document is not in the repository.** `docs/M1_WP3B_GUIDANCE_RULING.md`
-    is named by the work package as placed by Kaiyuan and is absent from the tree
-    and from every commit. D-013 records the decisions as relayed and quotes
-    nothing from the ruling. **Nothing about the ruling's own text, criterion
-    wording or action numbering has been reconstructed**, and the file remains
-    outstanding.
+11. **The package was built from a relay of the ruling, not from the ruling.**
+    `docs/M1_WP3B_GUIDANCE_RULING.md` was placed after D-013 was written. Reading
+    it back found the substance intact and six discrepancies of attribution and
+    coverage (field 13), two of which are real gaps against required actions that
+    the relay did not carry. **A relayed ruling is not the ruling**, and the cost
+    of the gap was paid here rather than avoided.
 
 ## 12. Deviations from the approved plan
 
@@ -461,12 +464,12 @@ label** where it previously wrote "the tract-like id column" and "county label",
 and carries the sentence the ruling asked for about the 3,234 `GEOID` values.
 See field 8, rule 6a.
 
-**One thing the ruling asked for could not be quoted.** The ruling document
-`docs/M1_WP3B_GUIDANCE_RULING.md` is not in the repository --- it is named as
-placed by Kaiyuan and is absent from the tree and from every commit on every
-branch. D-013 records the decisions **as relayed by the COORDINATOR** and
-reconstructs no criterion text, no action text and no numbering beyond what was
-relayed. Placing the file is outstanding.
+**These four changes are what the COORDINATOR relayed.** The ruling document was
+placed afterwards and carries **eleven** required actions and **eighteen**
+acceptance criteria. The other seven actions were already met by the package as
+built, with two exceptions now recorded in field 13. D-013 was written from the
+relay and has deliberately not been edited to match the ruling, so that the log
+still shows what the package was built from.
 
 What follows from that, and is honoured throughout:
 
@@ -519,9 +522,26 @@ the ruling and the mentor use different letters, both are recorded, and the next
 GUIDANCE packet chooses. **Questions 1, 2, 3 and 9 are untouched by the ruling**
 and remain the ones that decide whether any of this survives.
 
-**Outstanding for Kaiyuan:** place `docs/M1_WP3B_GUIDANCE_RULING.md` in the
-repository. D-013 is currently the only record of the ruling here, and it is a
-relay, not the document.
+### Verifying D-013 against the ruling as placed
+
+`docs/M1_WP3B_GUIDANCE_RULING.md` was placed on 2026-09-13, after D-013 was
+written from the COORDINATOR's relay. Reading it back: **every decision D-013
+records is a decision the ruling makes, and D-013 records no decision the ruling
+does not make.** Six discrepancies of *attribution and coverage* were found.
+**Neither document was edited to resolve them** --- an append-only log has to
+show what the package was built from.
+
+| # | Discrepancy | Kind | Who owns it |
+| --- | --- | --- | --- |
+| 1 | **D-013 §4 and the work package cite "action 10 / criterion 10" for the magnitude requirements.** Acceptance criterion 10 is right --- "`M` records reference population, ranking rule, provisional status, and non-use in selection". **Required action 10 is not**: it reads "Keep the literature probe as a query-field stub only." The magnitude reference population is **required action 6**, and "signed vs. absolute-change ranking" comes from **evidence check 5**, which is not a numbered action at all | misattribution; the work done is correct | COORDINATOR, for the next packet's numbering |
+| 2 | **D-013 §2 says "the ruling found a real defect".** The ruling states the general rule --- evidence check 3, "do not average identifiers, categorical labels, percentages…", and acceptance criterion 7, "means are used only for meaningfully averageable quantities" --- and **never names `P-COUNTY-1`, `wildfire_summer_Pend`, or any specific defect.** The identification of the averaged `Pend` came through the COORDINATOR, not the ruling text | misattribution; the fix is correct either way | noted here; no action |
+| 3 | **The ruling requires a verbatim label that no record carries.** Evidence check 3: an unweighted mean is acceptable "only if labeled: **provisional aggregation rule for representation validation**". The records label the operation `unweighted_mean` and hang A-AGG1 and A-G2 on it; the ruling's phrase appears nowhere | **a real gap against required action 5** | EXECUTOR, on instruction --- not fixed here because the instruction was to list rather than edit |
+| 4 | **The assumptions register is missing a column the ruling names.** Required action 11 asks for "assumption ID, affected fields, rationale, **failure mode**, verification path, and status". The register carries ID, statement, affects, how-verified, status and mentor-checkable. **There is no failure-mode column**, and rationale is folded into the statement rather than held separately | **a real gap against required action 11** | EXECUTOR, on instruction |
+| 5 | **D-013 records four of the ruling's eleven required actions**, because four is what the COORDINATOR relayed as needing action. The other seven were already satisfied by the package as built --- except items 3 and 4 above. D-013 does not say which seven, or that there were eleven | coverage | recorded here |
+| 6 | **The ruling's dimension order and its reading of `V` are not in D-013.** The ruling writes the dimensions `G, H, S, T, C, D, M, V` with **V = "supporting numeric evidence and operation"**; this schema orders them `G H S T C V D M` with V = values. D-013's letters section covers S, T, C and P and is silent on V and on the ordering. Separately, the ruling asks to preserve P "**either explicitly or per field**", which the pre-ruling per-field map already satisfied; D-013 reads it as a requirement for an explicit field | coverage; no number depends on it | COORDINATOR, with the S/T/C question |
+
+**Nothing in this table changes a number.** Items 3 and 4 are work; the rest are
+bookkeeping.
 
 ## 14. Proposed gate status
 
