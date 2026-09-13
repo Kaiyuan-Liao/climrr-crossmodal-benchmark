@@ -1,0 +1,693 @@
+{
+  "schema_version": "p0-prototype",
+  "record_id": "P-COUNTY-1",
+  "prototype_notice": "PROTOTYPE. Built for M1-WP3b on Kaiyuan's decision of 2026-09-13, ahead of the GUIDANCE ruling that would authorise county/state units, aggregation and a magnitude field. It is not evidence for any milestone gate and may be revised or discarded by that ruling.",
+  "built_from_commit": "ce8df0761dc74e498ee9ef99cdccfbc61a3f9afc",
+  "csv_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e",
+  "rounding_rule": "every derived value is rounded to 15 decimal places, half-to-even --- the precision the CSV itself stores. Raw values are never rounded: they are reported as the characters the file holds.",
+  "G": {
+    "letter": "G",
+    "label": "scope",
+    "level": "county",
+    "identifier": {
+      "State": "Oklahoma",
+      "NAME": "Stephens"
+    },
+    "identifier_columns": [
+      {
+        "index": 3,
+        "column": "State"
+      },
+      {
+        "index": 2,
+        "column": "NAME"
+      }
+    ],
+    "member_cells": [
+      "R106C361",
+      "R104C360",
+      "R105C359",
+      "R106C358",
+      "R106C359",
+      "R106C360",
+      "R105C358",
+      "R104C358",
+      "R105C360",
+      "R104C359"
+    ],
+    "member_cells_are_complete": "yes --- every row carrying the identifier, not a sample",
+    "n_cells": "10",
+    "n_cells_with_value": "10",
+    "n_cells_empty": "0",
+    "provenance_status": "inferred_candidate",
+    "rests_on": {
+      "kind": "inferred_candidate_records",
+      "ids": [
+        "IC-011",
+        "IC-012"
+      ],
+      "note": "A county here is **the set of rows sharing a `(State, NAME)` label** and nothing else (A-G3). It is not a boundary, not a geometry, and not keyed on `GEOID`."
+    }
+  },
+  "H": {
+    "letter": "H",
+    "label": "concept",
+    "family": "Fire Weather Index - Averages",
+    "family_key": "fire_weather",
+    "variable_key": "fwi_summer_hist_to_end85",
+    "variable_label": "Fire Weather Index, summer --- modeled historical to end-century RCP8.5",
+    "variable_label_is_a_heading_only": "used in tables and never in the generated description, which is built from the recorded semantics of the columns",
+    "columns": [
+      {
+        "index": 189,
+        "column": "wildfire_summer_Hist",
+        "role": "baseline",
+        "status": "inferred_candidate",
+        "meaning": "The multi-model ensemble mean of the summer seasonal average daily Fire Weather Index for the modeled historical period. The FWI is a meteorological fire-danger index: it describes weather conditions, not fire occurrence, ignition, or burned area.",
+        "meaning_status": "inferred_candidate",
+        "unit": "dimensionless index value",
+        "unit_status": "inferred_candidate",
+        "rests_on": {
+          "kind": "inferred_candidate_record",
+          "id": "IC-006",
+          "disclaimer": "not verified, not owner-confirmed",
+          "lines": [
+            661,
+            637,
+            346,
+            347,
+            352
+          ]
+        }
+      },
+      {
+        "index": 191,
+        "column": "wildfire_summer_Endc",
+        "role": "future",
+        "status": "inferred_candidate",
+        "meaning": "The same Fire Weather Index quantity as IC-006 --- the ensemble-mean summer seasonal average daily FWI --- for the end-of-century RCP8.5 projection.",
+        "meaning_status": "inferred_candidate",
+        "unit": "dimensionless index value",
+        "unit_status": "inferred_candidate",
+        "rests_on": {
+          "kind": "inferred_candidate_record",
+          "id": "IC-008",
+          "disclaimer": "not verified, not owner-confirmed",
+          "lines": [
+            663,
+            101
+          ]
+        }
+      },
+      {
+        "index": 193,
+        "column": "wildfire_summer_Dend",
+        "role": "change",
+        "status": "inferred_candidate",
+        "meaning": "The difference between the end-of-century RCP8.5 and modeled historical summer Fire Weather Index values --- that is, between index 191 and index 189.",
+        "meaning_status": "inferred_candidate",
+        "unit": "dimensionless index value, expressed as a difference",
+        "unit_status": "inferred_candidate",
+        "rests_on": {
+          "kind": "inferred_candidate_record",
+          "id": "IC-010",
+          "disclaimer": "not verified, not owner-confirmed",
+          "lines": [
+            665,
+            667
+          ]
+        }
+      },
+      {
+        "index": 195,
+        "column": "wildfire_summer_Pend",
+        "role": "corroborating_change",
+        "status": "verified_from_dictionary",
+        "meaning": "Percent Change between End-Century and Historical",
+        "meaning_status": "verified_from_dictionary",
+        "unit": "Percent Change",
+        "unit_status": "verified_from_dictionary",
+        "rests_on": {
+          "kind": "dictionary_span",
+          "line": 667,
+          "quote": "Wildfire_summer_Pend Percent Change between End-Century and Historical"
+        }
+      }
+    ],
+    "provenance_status": "inferred_candidate"
+  },
+  "S": {
+    "letter": "S",
+    "label": "season",
+    "letter_reading_is_this_modules": "S is read as season; the work package names the letter without defining it",
+    "per_role": {
+      "baseline": {
+        "index": 189,
+        "column": "wildfire_summer_Hist",
+        "value": "summer, defined by the dictionary as June, July and August",
+        "provenance": "dictionary",
+        "status": "verified_from_dictionary"
+      },
+      "future": {
+        "index": 191,
+        "column": "wildfire_summer_Endc",
+        "value": "summer, defined by the dictionary as June, July and August",
+        "provenance": "dictionary",
+        "status": "verified_from_dictionary"
+      },
+      "change": {
+        "index": 193,
+        "column": "wildfire_summer_Dend",
+        "value": "summer, defined by the dictionary as June, July and August",
+        "provenance": "dictionary",
+        "status": "verified_from_dictionary"
+      },
+      "corroborating_change": {
+        "index": 195,
+        "column": "wildfire_summer_Pend",
+        "value": "Summer",
+        "provenance": "dictionary",
+        "status": "verified_from_dictionary"
+      }
+    },
+    "status": "verified_from_dictionary"
+  },
+  "T": {
+    "letter": "T",
+    "label": "time horizon",
+    "letter_reading_is_this_modules": "T is read as time horizon",
+    "per_role": {
+      "baseline": {
+        "index": 189,
+        "column": "wildfire_summer_Hist",
+        "value": "the modeled historical decade, 1995-2004",
+        "provenance": "dictionary",
+        "status": "verified_from_dictionary"
+      },
+      "future": {
+        "index": 191,
+        "column": "wildfire_summer_Endc",
+        "value": "End-Century, the modeled decade 2085-2094",
+        "provenance": "dictionary",
+        "status": "verified_from_dictionary"
+      },
+      "change": {
+        "index": 193,
+        "column": "wildfire_summer_Dend",
+        "value": "Historical (1995-2004) to End-Century (2085-2094)",
+        "provenance": "dictionary",
+        "status": "verified_from_dictionary"
+      },
+      "corroborating_change": {
+        "index": 195,
+        "column": "wildfire_summer_Pend",
+        "value": "Historical, End-Century",
+        "provenance": "dictionary",
+        "status": "verified_from_dictionary"
+      }
+    },
+    "status": "verified_from_dictionary"
+  },
+  "C": {
+    "letter": "C",
+    "label": "climate scenario",
+    "letter_reading_is_this_modules": "C is read as climate scenario (the RCP pathway)",
+    "per_role": {
+      "baseline": {
+        "index": 189,
+        "column": "wildfire_summer_Hist",
+        "value": "Historical --- a modeled baseline, not an observation",
+        "provenance": "dictionary",
+        "status": "verified_from_dictionary"
+      },
+      "future": {
+        "index": 191,
+        "column": "wildfire_summer_Endc",
+        "value": "RCP8.5",
+        "provenance": "dictionary",
+        "status": "verified_from_dictionary"
+      },
+      "change": {
+        "index": 193,
+        "column": "wildfire_summer_Dend",
+        "value": "Historical compared with RCP8.5",
+        "provenance": "dictionary",
+        "status": "verified_from_dictionary"
+      },
+      "corroborating_change": {
+        "index": 195,
+        "column": "wildfire_summer_Pend",
+        "value": null,
+        "provenance": "unknown",
+        "status": "unknown"
+      }
+    },
+    "status": "mixed --- see per_role"
+  },
+  "V": {
+    "letter": "V",
+    "label": "values",
+    "kind": "aggregate_over_member_cells",
+    "operation": "unweighted_mean",
+    "operations_reported": [
+      "unweighted_mean",
+      "min",
+      "max",
+      "count"
+    ],
+    "n": "10",
+    "per_column": [
+      {
+        "index": 189,
+        "column": "wildfire_summer_Hist",
+        "role": "baseline",
+        "per_cell_raw_values": [
+          "25.080200200000000",
+          "25.132200240000000",
+          "25.961900709999998",
+          "26.350999829999999",
+          "25.678100590000000",
+          "25.638099669999999",
+          "26.642200469999999",
+          "26.495500560000000",
+          "25.355699540000000",
+          "25.510400770000000"
+        ],
+        "per_cell_raw_values_are_complete": "yes --- every member cell with a value, not a sample",
+        "aggregates": {
+          "unweighted_mean": "25.784530258000000",
+          "min": "25.080200200000000",
+          "max": "26.642200469999999",
+          "count": "10"
+        }
+      },
+      {
+        "index": 191,
+        "column": "wildfire_summer_Endc",
+        "role": "future",
+        "per_cell_raw_values": [
+          "31.189300540000001",
+          "31.517000199999998",
+          "31.739299769999999",
+          "32.233001710000003",
+          "31.623899460000001",
+          "31.508800510000000",
+          "32.807098390000000",
+          "32.878299710000000",
+          "31.379600520000000",
+          "31.800300600000000"
+        ],
+        "per_cell_raw_values_are_complete": "yes --- every member cell with a value, not a sample",
+        "aggregates": {
+          "unweighted_mean": "31.867660141000000",
+          "min": "31.189300540000001",
+          "max": "32.878299710000000",
+          "count": "10"
+        }
+      },
+      {
+        "index": 193,
+        "column": "wildfire_summer_Dend",
+        "role": "change",
+        "per_cell_raw_values": [
+          "6.109189990000000",
+          "6.384769920000000",
+          "5.777420040000000",
+          "5.882080080000000",
+          "5.945829870000000",
+          "5.870699880000000",
+          "6.164909840000000",
+          "6.382750030000000",
+          "6.023990150000000",
+          "6.289879800000000"
+        ],
+        "per_cell_raw_values_are_complete": "yes --- every member cell with a value, not a sample",
+        "aggregates": {
+          "unweighted_mean": "6.083151960000000",
+          "min": "5.777420040000000",
+          "max": "6.384769920000000",
+          "count": "10"
+        }
+      },
+      {
+        "index": 195,
+        "column": "wildfire_summer_Pend",
+        "role": "corroborating_change",
+        "per_cell_raw_values": [
+          "24.358664999999998",
+          "25.404743000000000",
+          "22.253444999999999",
+          "22.322073000000000",
+          "23.155256000000001",
+          "22.898291000000000",
+          "23.139610000000001",
+          "24.089912000000002",
+          "23.757984000000000",
+          "24.656148999999999"
+        ],
+        "per_cell_raw_values_are_complete": "yes --- every member cell with a value, not a sample",
+        "aggregates": {
+          "unweighted_mean": "23.603612800000000",
+          "min": "22.253444999999999",
+          "max": "25.404743000000000",
+          "count": "10"
+        }
+      }
+    ],
+    "change": {
+      "operation": "change_column_value per cell, then unweighted_mean",
+      "operation_note": "Two change columns exist for this variable and the work package allows either. `wildfire_summer_Dend` (193) is used because it is an absolute difference, and the unweighted mean of per-cell differences is the difference of the per-cell means --- an arithmetic property that the mean of per-cell **percent** changes does not have. `wildfire_summer_Pend` (195) is `verified_from_dictionary` and is reported beside it as a corroborating sign, not as the quantity. Which of the two should carry the direction is assumption A-DIR2 and is an open choice for the group.",
+      "input_columns": [
+        {
+          "index": 193,
+          "column": "wildfire_summer_Dend",
+          "role": "change"
+        }
+      ],
+      "per_cell_change_values": [
+        "6.109189990000000",
+        "6.384769920000000",
+        "5.777420040000000",
+        "5.882080080000000",
+        "5.945829870000000",
+        "5.870699880000000",
+        "6.164909840000000",
+        "6.382750030000000",
+        "6.023990150000000",
+        "6.289879800000000"
+      ],
+      "value": "6.083151960000000",
+      "n": "10",
+      "rests_on_assumptions": [
+        "A-AGG1",
+        "A-G2"
+      ]
+    },
+    "rests_on_assumptions": [
+      "A-AGG1",
+      "A-G2"
+    ]
+  },
+  "D": {
+    "letter": "D",
+    "label": "direction",
+    "direction": "increase",
+    "from": "the sign of the change value in V",
+    "change_value": "6.083151960000000",
+    "input_columns": [
+      {
+        "index": 193,
+        "column": "wildfire_summer_Dend",
+        "role": "change"
+      }
+    ],
+    "provenance_status": "derived_from_inferred",
+    "rests_on_assumptions": [
+      "A-DIR1",
+      "A-DIR2",
+      "A-G1",
+      "A-G3",
+      "A-AGG1"
+    ],
+    "corroborating": {
+      "index": 195,
+      "column": "wildfire_summer_Pend",
+      "status": "verified_from_dictionary",
+      "value": "23.603612800000000",
+      "direction": "increase",
+      "agrees_with_change_column": "True",
+      "provenance_status": "derived_from_inferred",
+      "note": "Reported as a second reading of the sign, not as the quantity. A disagreement here would be a finding to escalate."
+    }
+  },
+  "M": {
+    "letter": "M",
+    "label": "magnitude category",
+    "rule": "PR-1",
+    "rule_statement": "provisional_rule PR-1 --- rank this unit's change value against the change values of **all units at the same level for the same variable**, and report the percentile and the tercile it falls in. The percentile is 100 x (units with a strictly smaller change value) / (units with a change value). The terciles cut at the 100/3 and 200/3 percentile marks. **PR-1 is a placeholder chosen to make this field non-empty, not a scientific magnitude threshold.** It rests on no literature, no distribution assumption and no physical reasoning, and assumption A-M1 records that.",
+    "is_a_scientific_threshold": "no",
+    "change_value": "6.083151960000000",
+    "n_units_at_this_level": "3019",
+    "n_units_strictly_below": "2736",
+    "n_units_equal": "1",
+    "percentile": "90.6260",
+    "percentile_definition": "100 x (units strictly below) / (units with a change value), rounded to 4 decimal places",
+    "tercile": "upper_third",
+    "distribution": {
+      "n": "3019",
+      "min": "-2.751222521250000",
+      "q1": "0.761164221111111",
+      "median": "1.713358212608696",
+      "q3": "3.723473290833333",
+      "max": "14.384384392500000",
+      "quantile_method": "nearest-rank on the sorted values: the p-th percentile is the value at 1-based position ceil(p/100 x n), with the 0th percentile the minimum"
+    },
+    "provenance_status": "provisional_rule",
+    "ranked_against": "every county-level unit of this file with a change value for variable fwi_summer_hist_to_end85",
+    "distribution_membership": {
+      "how_units_were_formed": "every distinct label value in the file forms one county-level unit",
+      "n_units": "3019",
+      "n_units_excluded_for_having_no_value": "0",
+      "n_units_whose_label_is_the_empty_string": "1",
+      "empty_label_note": "A unit whose label is the empty string is counted. The 7 rows with no `State` form one such unit at state level and one at county level. Dropping them would be a judgement about what an empty label means, and this project does not have one (Q16)."
+    },
+    "rests_on_assumptions": [
+      "A-M1",
+      "A-DIR1",
+      "A-DIR2",
+      "A-G1",
+      "A-G3",
+      "A-AGG1"
+    ]
+  },
+  "assumptions": [
+    "A1",
+    "A-G0",
+    "A-G1",
+    "A-G2",
+    "A-G3",
+    "A-AGG1",
+    "A-DIR1",
+    "A-DIR2",
+    "A-H1",
+    "A-H3",
+    "A-H5",
+    "A-M1"
+  ],
+  "cautions": [
+    {
+      "id": "C-fire_weather",
+      "text": "Every `wildfire_*` column below holds a **Fire Weather Index** --- a meteorological fire-danger index, listed in the dictionary under the section \"Fire Weather Index - Averages\". It is not a wildfire, an ignition, a burned area, or a probability of any of those, and nothing in this record says that it is.",
+      "span": {
+        "line": 637,
+        "quote": "Fire Weather Index - Averages"
+      },
+      "triggered_by": "the family of the columns used: Fire Weather Index - Averages"
+    },
+    {
+      "id": "C-historical",
+      "text": "`Historical` here means a **modeled historical baseline** --- the dictionary's historical period, 1995 to 2004, run through the same climate models. It is not an observation, a measurement, or a record of anything that happened.",
+      "span": {
+        "line": 102,
+        "quote": "2094). A historical period (1995 to 2004) is also modeled using GHG concentrations during this period."
+      },
+      "triggered_by": "the baseline column of this variable, index 189"
+    },
+    {
+      "id": "C-location-grouping",
+      "text": "The `State` and `NAME` values used to form this unit are `inferred_candidate` readings (IC-011, IC-012): the dictionary does not mention either column, and the Census vintage and coordinate reference system behind them are unknown. **This prototype groups rows by those labels**, which M1-WP3 deliberately did not do. The group is the set of rows carrying the label --- not a boundary, not a geometry, and not keyed on `GEOID`, which Phase A measured does not determine the label (A-G3).",
+      "span": null,
+      "triggered_by": "the unit level 'county', whose identifier is a label"
+    }
+  ],
+  "description": "> Every `wildfire_*` column below holds a **Fire Weather Index** --- a meteorological fire-danger index, listed in the dictionary under the section \"Fire Weather Index - Averages\". It is not a wildfire, an ignition, a burned area, or a probability of any of those, and nothing in this record says that it is.\n\n> `Historical` here means a **modeled historical baseline** --- the dictionary's historical period, 1995 to 2004, run through the same climate models. It is not an observation, a measurement, or a record of anything that happened.\n\n> The `State` and `NAME` values used to form this unit are `inferred_candidate` readings (IC-011, IC-012): the dictionary does not mention either column, and the Census vintage and coordinate reference system behind them are unknown. **This prototype groups rows by those labels**, which M1-WP3 deliberately did not do. The group is the set of rows carrying the label --- not a boundary, not a geometry, and not keyed on `GEOID`, which Phase A measured does not determine the label (A-G3).\n\n**Scope.** The set of rows sharing a `(State, NAME)` label, identified by [provisional: `Oklahoma`, `Stephens`]. Members: 10 cell(s) --- 10 with a value on every column used, 0 without. Cells without a value are excluded from every number below and are never read as a zero.\n\n**Quantity.** [provisional: The multi-model ensemble mean of the summer seasonal average daily Fire Weather Index for the modeled historical period. The FWI is a meteorological fire-danger index: it describes weather conditions, not fire occurrence, ignition, or burned area]. Unit or type: [provisional: dimensionless index value]. Season: summer, defined by the dictionary as June, July and August.\n\n**Compared.** Baseline horizon the modeled historical decade, 1995-2004; future horizon End-Century, the modeled decade 2085-2094; future scenario RCP8.5.\n\n**Values.** Unweighted mean over n = 10 member cell(s): `wildfire_summer_Hist` [provisional: 25.784530258000000]; `wildfire_summer_Endc` [provisional: 31.867660141000000]; `wildfire_summer_Dend` [provisional: 6.083151960000000]; `wildfire_summer_Pend` [provisional: 23.603612800000000]. The complete per-cell values are in the record.\n\n**Direction.** [provisional: increase], from the sign of the change value [provisional: 6.083151960000000], computed by `change_column_value per cell, then unweighted_mean` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` gives [provisional: increase] on the same unit; the two signs agree: True.\n\n**Magnitude.** [provisional rule PR-1: upper_third, at percentile 90.6260 of 3019 county-level units, by PR-1, which is a placeholder and not a scientific threshold].\n\nEvery clause marked [provisional:...] rests on an inferred-candidate record or on a field derived from one: reasoned and written down, **not verified and not owner-confirmed**. The clause marked [provisional rule PR-1:...] rests on a placeholder rule, not on science.\n",
+  "description_clauses": [
+    {
+      "field": "G.identifier",
+      "text": "`Oklahoma`, `Stephens`",
+      "status": "inferred_candidate",
+      "wrapper": "provisional"
+    },
+    {
+      "field": "H.baseline.meaning",
+      "text": "The multi-model ensemble mean of the summer seasonal average daily Fire Weather Index for the modeled historical period. The FWI is a meteorological fire-danger index: it describes weather conditions, not fire occurrence, ignition, or burned area",
+      "status": "inferred_candidate",
+      "wrapper": "provisional"
+    },
+    {
+      "field": "H.baseline.unit",
+      "text": "dimensionless index value",
+      "status": "inferred_candidate",
+      "wrapper": "provisional"
+    },
+    {
+      "field": "S.season",
+      "text": "summer, defined by the dictionary as June, July and August",
+      "status": "verified_from_dictionary",
+      "wrapper": "none"
+    },
+    {
+      "field": "T.baseline",
+      "text": "the modeled historical decade, 1995-2004",
+      "status": "verified_from_dictionary",
+      "wrapper": "none"
+    },
+    {
+      "field": "T.future",
+      "text": "End-Century, the modeled decade 2085-2094",
+      "status": "verified_from_dictionary",
+      "wrapper": "none"
+    },
+    {
+      "field": "C.future",
+      "text": "RCP8.5",
+      "status": "verified_from_dictionary",
+      "wrapper": "none"
+    },
+    {
+      "field": "D.direction",
+      "text": "increase",
+      "status": "derived_from_inferred",
+      "wrapper": "provisional"
+    },
+    {
+      "field": "D.change_value",
+      "text": "6.083151960000000",
+      "status": "derived_from_inferred",
+      "wrapper": "provisional"
+    },
+    {
+      "field": "M.tercile",
+      "text": "upper_third, at percentile 90.6260 of 3019 county-level units, by PR-1, which is a placeholder and not a scientific threshold",
+      "status": "provisional_rule",
+      "wrapper": "provisional_rule"
+    },
+    {
+      "field": "V.baseline.unweighted_mean",
+      "text": "25.784530258000000",
+      "status": "derived_from_inferred",
+      "wrapper": "provisional"
+    },
+    {
+      "field": "V.future.unweighted_mean",
+      "text": "31.867660141000000",
+      "status": "derived_from_inferred",
+      "wrapper": "provisional"
+    },
+    {
+      "field": "V.change.unweighted_mean",
+      "text": "6.083151960000000",
+      "status": "derived_from_inferred",
+      "wrapper": "provisional"
+    },
+    {
+      "field": "V.corroborating_change.unweighted_mean",
+      "text": "23.603612800000000",
+      "status": "derived_from_inferred",
+      "wrapper": "provisional"
+    },
+    {
+      "field": "D.corroborating.direction",
+      "text": "increase",
+      "status": "derived_from_inferred",
+      "wrapper": "provisional"
+    }
+  ],
+  "description_generated_by": "template in climrr.phenomenon.render_description, from fields G through M",
+  "provenance_statuses": {
+    "G.level": "computed",
+    "G.identifier": "inferred_candidate",
+    "G.member_cells": "computed",
+    "G.n_cells": "computed",
+    "G.n_cells_with_value": "computed",
+    "H.concept": "inferred_candidate",
+    "H.columns[189].meaning": "inferred_candidate",
+    "H.columns[191].meaning": "inferred_candidate",
+    "H.columns[193].meaning": "inferred_candidate",
+    "H.columns[195].meaning": "verified_from_dictionary",
+    "H.columns[189].unit": "inferred_candidate",
+    "H.columns[191].unit": "inferred_candidate",
+    "H.columns[193].unit": "inferred_candidate",
+    "H.columns[195].unit": "verified_from_dictionary",
+    "S.season": "verified_from_dictionary",
+    "T.horizon": "verified_from_dictionary",
+    "C.scenario": "mixed --- see per_role",
+    "V.values": "computed",
+    "V.change": "derived_from_inferred",
+    "D.direction": "derived_from_inferred",
+    "M.percentile": "provisional_rule",
+    "M.tercile": "provisional_rule",
+    "description": "generated from the fields above by template",
+    "literature_probe": "design stub --- no retrieval has been performed"
+  },
+  "literature_probe": {
+    "kind": "design stub",
+    "retrieval_performed": "no",
+    "note": "This is what would be sent to retrieval. **Nothing has been sent.** No literature corpus exists in this repository, no index has been built, and no passage has been read. M3 is not authorised.",
+    "concept_terms": [
+      "fire weather index",
+      "FWI",
+      "fire weather",
+      "fire danger"
+    ],
+    "place_terms": [
+      {
+        "term": "Oklahoma",
+        "from_column": "State",
+        "status": "inferred_candidate",
+        "note": "a label read as a place name; that reading is inferred"
+      },
+      {
+        "term": "Stephens",
+        "from_column": "NAME",
+        "status": "inferred_candidate",
+        "note": "a label read as a place name; that reading is inferred"
+      }
+    ],
+    "direction_term": "increase",
+    "horizon_terms": [
+      {
+        "term": "the modeled historical decade, 1995-2004",
+        "role": "baseline",
+        "status": "verified_from_dictionary"
+      },
+      {
+        "term": "End-Century, the modeled decade 2085-2094",
+        "role": "future",
+        "status": "verified_from_dictionary"
+      },
+      {
+        "term": "Historical (1995-2004) to End-Century (2085-2094)",
+        "role": "change",
+        "status": "verified_from_dictionary"
+      },
+      {
+        "term": "Historical, End-Century",
+        "role": "corroborating_change",
+        "status": "verified_from_dictionary"
+      }
+    ],
+    "scenario_terms": [
+      {
+        "term": "Historical --- a modeled baseline, not an observation",
+        "role": "baseline",
+        "status": "verified_from_dictionary"
+      },
+      {
+        "term": "RCP8.5",
+        "role": "future",
+        "status": "verified_from_dictionary"
+      },
+      {
+        "term": "Historical compared with RCP8.5",
+        "role": "change",
+        "status": "verified_from_dictionary"
+      }
+    ],
+    "place_terms_note": "The place terms are the stored label strings. Reading them as the names of places is `inferred_candidate` (IC-011, IC-012), and a name like `Lincoln` belongs to counties in many states.",
+    "query_sentence": "increase in fire weather index in Oklahoma, Stephens under RCP8.5 by End-Century, the modeled decade 2085-2094",
+    "query_sentence_caveat": "The place terms in this sentence are inferred readings of label columns, and a Fire Weather Index term in it names an index, never a fire."
+  },
+  "chosen_by": "the `(State, NAME)` label carried by the row `OID_` 1",
+  "chosen_without_consulting_any_value": "yes"
+}

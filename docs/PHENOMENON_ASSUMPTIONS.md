@@ -1,0 +1,37 @@
+# Phenomenon assumptions register --- M1-WP3b prototypes
+
+**Prototype.** Every row below is something the three records in
+[`PHENOMENON_PROTOTYPES.md`](PHENOMENON_PROTOTYPES.md) lean on that is **not**
+established by the data dictionary. Generated from `climrr.phenomenon.ASSUMPTIONS`;
+edit the module, not this file.
+
+`computed` means a script in this repository measured it from the bytes.
+`unverified` means it is reasoned, written down, and established by nothing.
+`owner_confirmed` means the mentor confirmed it --- **nothing holds that status**,
+and nothing will until she answers.
+
+Rows marked **T** in the last column are the ones worth putting in front of the
+mentor on Thursday, 2026-09-17.
+
+| ID | Statement | Affects | How it could be verified | Status | Maps to | Used by | T |
+| --- | --- | --- | --- | --- | --- | --- | :-: |
+| `A1` | One CSV row is treated as one "event". The grain everything else rests on. | every record, at every level | the mentor answers checklist line 1 | `unverified` | MENTOR_EXAMPLES line 1 | P-CELL-1, P-COUNTY-1, P-STATE-1 | **T** |
+| `A-G0` | One row is one grid cell, identified by `Crossmodel`. Phase A measured `Crossmodel` unique across all 62,834 rows, which is what a per-cell key would look like. **Uniqueness does not by itself establish that the key names a cell**; the dictionary's own words for the column (line 455) and checklist line 1 are what would. | the cell-level unit, and the membership of every aggregate | the uniqueness half is computed by `scripts/hierarchy_checks.py`; the "names a cell" half is the mentor | `computed` | MENTOR_EXAMPLES line 1; dictionary line 455 | P-CELL-1, P-COUNTY-1, P-STATE-1 | **T** |
+| `A-G1` | `NAME` holds a county or county-equivalent name and `State` holds a US state name, so a `(State, NAME)` label identifies a county and a `State` label identifies a state. | P-COUNTY-1 and P-STATE-1 entirely --- what the unit *is* | the mentor answers checklist line 14 | `unverified` | MENTOR_EXAMPLES line 14; IC-011, IC-012 | P-COUNTY-1, P-STATE-1 | **T** |
+| `A-G2` | Every grid cell covers the same area, and therefore deserves the same weight in a mean over cells. **Nothing in this file states a cell area.** | every aggregate value, and through it D and M at county and state level | the grid's definition --- cell size and projection --- from the data owner. The dictionary describes a polygon grid (line 455) and gives no geometry. | `unverified` | a new question for the mentor; related to checklist line 12 (the CRS) | P-COUNTY-1, P-STATE-1 | **T** |
+| `A-G3` | A county or state in these records is **the set of rows sharing its label** --- not a boundary and not a geometry. Phase A computed those row sets, and computed that `GEOID` cannot key them: 3,234 `GEOID` values appear against more than one `(State, NAME)` pair. | the membership of every aggregate | computed by `scripts/hierarchy_checks.py`, checks 2 and 3 | `computed` | artifacts/profiles/hierarchy_checks.json | P-COUNTY-1, P-STATE-1 |  |
+| `A-AGG1` | The unweighted mean over member cells is a meaningful summary of the unit. It is the operation these prototypes use; no alternative (area weighting, population weighting, a median, a quantile) was evaluated. | V, D and M at county and state level | a scientific judgement --- GUIDANCE and the mentor, not a computation | `unverified` | a new question for the group and the mentor | P-COUNTY-1, P-STATE-1 | **T** |
+| `A-DIR1` | A change is the later horizon **minus** the historical baseline, so that a positive value is an increase. The dictionary writes "Difference between End-Century and Historical" and never defines the direction of the subtraction. | D in every record, and the sign PR-1 ranks in M | the mentor answers checklist line 7 (and line 4 for heat index) | `unverified` | MENTOR_EXAMPLES line 7 | P-CELL-1, P-COUNTY-1, P-STATE-1 | **T** |
+| `A-DIR2` | For the fire-weather variable the **absolute difference** column `wildfire_summer_Dend` (193) carries the change, with the `verified_from_dictionary` percent-change column `wildfire_summer_Pend` (195) reported beside it as a corroborating sign. The reason is arithmetic --- a mean of per-cell differences is the difference of the per-cell means, and a mean of per-cell percent changes is not --- and the choice is the EXECUTOR's, not a decided one. | D and M in P-CELL-1 and P-COUNTY-1 | a choice for the COORDINATOR and the group, not a computation | `unverified` | a new question for the group; MENTOR_EXAMPLES line 7 bears on it | P-CELL-1, P-COUNTY-1 |  |
+| `A-H1` | IC-006: `wildfire_summer_Hist` (189) holds the ensemble-mean summer seasonal average daily Fire Weather Index for the modeled historical period --- rather than the seasonal 95th percentile. The unit "dimensionless index value" is inferred; the dictionary states none. | the baseline value and the concept of both fire-weather prototypes | the mentor answers checklist lines 5 and 6 | `unverified` | MENTOR_EXAMPLES lines 5, 6; IC-006 | P-CELL-1, P-COUNTY-1 | **T** |
+| `A-H3` | IC-008: `wildfire_summer_Endc` (191) holds the same quantity for the end-of-century RCP8.5 projection. Its recorded minimum is exactly `0.000000000000000` on 2 rows of the file, and whether that is a value or a fill is open (Q17). | the future value and the concept of both fire-weather prototypes | the mentor answers checklist lines 5 and 6; Q17 separately | `unverified` | MENTOR_EXAMPLES lines 5, 6; IC-008; Q17 | P-CELL-1, P-COUNTY-1 | **T** |
+| `A-H5` | IC-010: `wildfire_summer_Dend` (193) is the absolute difference between index 191 and index 189, in whatever units the index carries, and its endpoints are those two stored columns rather than separately computed ones. | the change value, and therefore D and M, in both fire-weather prototypes | the mentor answers checklist line 7 | `unverified` | MENTOR_EXAMPLES line 7; IC-010 | P-CELL-1, P-COUNTY-1 | **T** |
+| `A-M1` | `provisional_rule PR-1` --- the tercile of the change value against all units at the same level --- is a **placeholder that makes the magnitude field non-empty**. It is not a scientific threshold, rests on no literature and on no distributional reasoning, and no part of this project treats a tercile as meaning anything. | M in every record | it cannot be verified as it stands --- it has to be replaced by a criterion GUIDANCE and the mentor accept | `unverified` | a new question for the group; blueprint M3 'define and justify salience' | P-CELL-1, P-COUNTY-1, P-STATE-1 | **T** |
+
+## Where no assumption was needed
+
+The heat-index day-count columns 241 `heatindex_HIS_Day105` and 253 `heatindex_E85_Day105` are `verified_from_dictionary`: the dictionary states the quantity, the threshold, the season, the scenario and the horizon in its own words at lines 680 and 695. No `A-H` assumption covers them, and none is needed.
+
+## The provisional rule in full
+
+> provisional_rule PR-1 --- rank this unit's change value against the change values of **all units at the same level for the same variable**, and report the percentile and the tercile it falls in. The percentile is 100 x (units with a strictly smaller change value) / (units with a change value). The terciles cut at the 100/3 and 200/3 percentile marks. **PR-1 is a placeholder chosen to make this field non-empty, not a scientific magnitude threshold.** It rests on no literature, no distribution assumption and no physical reasoning, and assumption A-M1 records that.
