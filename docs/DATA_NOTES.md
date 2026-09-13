@@ -216,6 +216,69 @@ the renderer, not the page, is not at fault.
 The gap between the contents (page 2) and the narrative (page 4) is a blank
 separator, not lost metadata. Recorded under D-009.
 
+### Row-set structure of the label columns
+
+Produced by `scripts/hierarchy_checks.py` (M1-WP3b Phase A) and recorded in
+[`../artifacts/profiles/hierarchy_checks.json`](../artifacts/profiles/hierarchy_checks.json).
+**These are statements about which rows share which label.** That a set of rows
+shares a `(State, NAME)` label is a fact about the table; that the set is a
+*county* is an `inferred_candidate` reading (IC-011, IC-012) and is not
+established by anything below.
+
+| Key | Distinct keys | Min rows | Median rows | Max rows |
+| --- | ---: | ---: | ---: | ---: |
+| `Crossmodel` (index 1) | **62,834** | 1 | 1 | **1** |
+| `(State, NAME)` (indices 3, 2) | 3,019 | 1 | 12 | 2,865 |
+| `GEOID` (index 109) | 12,941 | 1 | 2 | 877 |
+
+**`Crossmodel` is unique**: 62,834 distinct values over 62,834 rows, none empty.
+Uniqueness is a property of the column's characters; it does not by itself
+establish that one row is one grid cell.
+
+**`GEOID` does not determine `(State, NAME)`.** **3,234 of the 12,941 `GEOID`
+values appear against more than one `(State, NAME)` pair** — for example
+`01003010400` appears with both `Alabama` / `Baldwin` and `Florida` /
+`Escambia`, and `01007010001` with three Alabama pairs. One of the 3,234 keys is
+the empty string, carried by the 8 rows that have no `GEOID`; the other 3,233
+are populated values. The consequence for this repository is procedural: **no
+row set in this project may be keyed on `GEOID`**, and none is.
+
+**Indices 110 `NAME_1` and 111 `NAMELSAD` each take exactly one value per
+`GEOID`** — 0 of 12,941 keys carry more than one. This is a structural count
+only. Neither column is in the pilot subset, neither is interpreted anywhere,
+and no record uses either. It is recorded because it sits directly beside the
+previous finding: within this file `GEOID` fixes those two columns and does not
+fix `State` or `NAME`.
+
+### The 7 rows with no `State`
+
+The same 7 rows that `### Empty values` counts at indices 3–4. All seven carry
+the `NAME` value `District of Columbia` and a `GEOID` beginning `11001`.
+
+| `OID_` | `Crossmodel` | `NAME` | `GEOID` |
+| --- | --- | --- | --- |
+| 5760 | `R179C497` | `District of Columbia` | `11001009603` |
+| 6779 | `R179C495` | `District of Columbia` | `11001000300` |
+| 13685 | `R180C496` | `District of Columbia` | `11001003600` |
+| 21870 | `R180C495` | `District of Columbia` | `11001000600` |
+| 33646 | `R178C496` | `District of Columbia` | `11001010900` |
+| 38055 | `R179C496` | `District of Columbia` | `11001004001` |
+| 41681 | `R180C497` | `District of Columbia` | `11001009601` |
+
+An empty cell is "no value in this file". It is not a zero and not a claim that
+these rows lie outside any state (Q16). **What this table does not do is explain
+the 49-versus-50 distinct-value count of IC-012**: it records which rows are
+empty and what else those rows carry, and the reason they are empty is a
+question for the data owner, not an inference from the pattern.
+
+### Row counts behind the M1-WP3b prototypes
+
+| Row set | Rows | Pilot columns with any empty value |
+| --- | ---: | ---: |
+| `State` = `Oklahoma` (the state of `OID_` 1) | 1,232 | 0 of 41 |
+| `(State, NAME)` = `Oklahoma` / `Stephens` (the pair of `OID_` 1) | **10** | 0 of 41 |
+| `State` = `California` (the state of `OID_` 14) | **2,831** | not measured per column |
+
 ### Environment (non-pinned facts)
 
 The two hosts run different Python minor versions, and D-007 leaves that free
