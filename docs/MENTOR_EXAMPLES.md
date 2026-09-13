@@ -3,16 +3,19 @@
 **For:** the ClimRR data owner.  **From:** Kaiyuan Liao.  **Date: \_\_\_\_\_\_\_\_\_\_**
 
 Each line below is a reading of a column in `FullData.csv` that the ClimRR data
-dictionary does **not** state, and that I reasoned out instead. Please tick one
-box per line. **"Don't know" is a real answer** and more useful to me than a
-guess --- a line answered that way stays marked unconfirmed and its columns stay
-out of use.
+dictionary does **not** record, and that I reasoned out instead. Please tick one
+box on each line that has boxes --- line 13 is an observation with nothing to
+answer, and line 15 is an open question with a space to write in. **"Don't know"
+is a real answer** and more useful to me than a guess: a line answered that way
+stays marked unconfirmed and its columns stay out of use.
 
 This sheet is the short form. The full wording of any line, the raw values it
 refers to, and the reasoning behind it are on that example's page in the
 document that follows.
 
-## Example 1 --- row `OID_` 1 (`R106C361`), Stephens County, Oklahoma
+## Example 1 --- row `OID_` 1, `Crossmodel` `R106C361`
+
+Location-related raw fields: `NAME` = `Stephens`, `State` = `Oklahoma`, `GEOID` = `40137000902`, `TRACTCE` = `000902`.
 
 | # | The reading, in brief | Tick one | If "correct" --- to what? |
 | ---: | --- | --- | --- |
@@ -28,20 +31,26 @@ document that follows.
 | **10** | `GEOID` (109) is a **Census tract id**: state + county + tract. **Which Census vintage?** | ☐ confirm ☐ correct ☐ don't know | vintage: |
 | 11 | `TRACTCE` (108) is the **tract code alone**, unique only within its county. | ☐ confirm ☐ correct ☐ don't know | |
 | 12 | `X`, `Y` (106, 107) are **longitude / latitude in decimal degrees**. **Which coordinate system?** Is it the cell centroid? | ☐ confirm ☐ correct ☐ don't know | system: |
-| 13 | `NAME` (2) is a **county name**; `State`/`State_Abbr` (3, 4) the state. There are **49** states here, not 50, and **7 blank rows**. Which is absent? What are the 7? | ☐ confirm ☐ correct ☐ don't know | |
-| **14** | **Are these the kinds of table-side records you expect to connect to the literature?** | ☐ confirm ☐ correct ☐ don't know | |
+| 13 | **Observation --- nothing to confirm.** `State` (3) holds **49 distinct non-empty values** and **7 blank rows**; `State_Abbr` (4) has the same two counts. A count of stored strings, carrying no reading of what the column holds. | *observation, no answer needed* | |
+| 14 | `NAME` (2) is a **county or county-equivalent name**; `State` (3) is the **US state**; `State_Abbr` (4) is its **two-letter postal abbreviation**. | ☐ confirm ☐ correct ☐ don't know | |
+| 15 | **Only if line 14 is right:** what geographic coverage would explain **49** values rather than 50, and what are the **7** blank rows? | ☐ don't know | coverage / the 7 rows: |
+| **16** | **Are these the kinds of table-side records you expect to connect to the literature?** | ☐ confirm ☐ correct ☐ don't know | |
 
-## Example 2 --- row `OID_` 14 (`R107C232`), San Bernardino County, California
+## Example 2 --- row `OID_` 14, `Crossmodel` `R107C232`
 
-Lines 1 and 2–13 above apply here unchanged; please answer them once, above.
+Location-related raw fields: `NAME` = `San Bernardino`, `State` = `California`, `GEOID` = `06071010300`, `TRACTCE` = `010300`.
+
+Lines 1 and 2–15 above apply here unchanged; please answer them once, above.
 
 | # | The reading, in brief | Tick one | If "correct" --- to what? |
 | ---: | --- | --- | --- |
 | **E2-2** | Identifiers are carried as **text with leading zeros intact** (`GEOID` `06071010300`). Is that right, and does anything downstream expect them as numbers? | ☐ confirm ☐ correct ☐ don't know | |
 
-## Example 3 --- row `OID_` 148 (`R105C198`), Ventura County, California
+## Example 3 --- row `OID_` 148, `Crossmodel` `R105C198`
 
-Lines 1 and 2–13 above apply here unchanged; please answer them once, above.
+Location-related raw fields: `NAME` = `Ventura`, `State` = `California`, `GEOID` = `06111990100`, `TRACTCE` = `990100`.
+
+Lines 1 and 2–15 above apply here unchanged; please answer them once, above.
 
 | # | The reading, in brief | Tick one | If "correct" --- to what? |
 | ---: | --- | --- | --- |
@@ -57,9 +66,9 @@ lines add up to.
 | | Question | Answered by |
 | ---: | --- | --- |
 | 1 | **Is one CSV row the correct unit for what she means by an “event”?** | line 1 |
-| 2 | **Are the selected field interpretations correct?** | lines 2–13, E2-2, E3-2 |
+| 2 | **Are the selected field interpretations correct?** | lines 2, 4–12, 14, E2-2, E3-2 |
 | 3 | **Which assumptions in each example does she endorse or reject?** | every line you ticked |
-| 4 | **Are these the kinds of table-side records she expects to connect to literature?** | line 14 |
+| 4 | **Are these the kinds of table-side records she expects to connect to literature?** | line 16 |
 
 ## Anything else
 
@@ -114,7 +123,7 @@ fire-danger index, never a fire, an ignition or a burned area. Anything named
 `Historical` is a **modeled baseline** for 1995--2004, never an observation.
 
 **Scope.** 41 of the 275 columns are interpreted here --- 21 the dictionary
-states outright, 20 reasoned. The other 234 are untouched and explicitly
+records outright, 20 reasoned. The other 234 are untouched and explicitly
 unresolved. Full reasoning per column, with dictionary line numbers and the
 alternatives I could not rule out, is in
 [`../data/metadata/inferred_candidates.yaml`](../data/metadata/inferred_candidates.yaml);
@@ -131,7 +140,7 @@ Row ordinal 0, the first row of the file. Selected by **rule R-A**: the first
 row that has a value in every one of the 41 columns. Nothing about the rule
 looks at how large any value is.
 
-Where it is: `NAME` `Stephens`, `State` `Oklahoma`, `GEOID` `40137000902`, `TRACTCE` `000902`.
+Location-related raw fields: `NAME` = `Stephens`, `State` = `Oklahoma`, `GEOID` = `40137000902`, `TRACTCE` = `000902`. These are the stored strings; what the four columns *mean* is checklist lines 10 to 15, and is not settled here.
 
 <details><summary><b>Raw values (41 columns)</b></summary>
 
@@ -256,25 +265,28 @@ Every clause marked [provisional:...] rests on an inferred-candidate record: rea
 
 ### Checklist --- Example 1
 
-This is the full list. Examples 2 and 3 use the same 41 columns, so their
-checklists ask only what is specific to them.
+This is the full list --- sixteen lines, of which line 13 is an observation with
+nothing to answer. Examples 2 and 3 use the same 41 columns, so their checklists
+ask only what is specific to them.
 
 | # | Please confirm, correct, or say "don't know" | Affects |
 | ---: | --- | --- |
 | **1** | **One row of this file is one "event".** Is that the right unit for what you meant? If not --- is an event a cell across scenarios, a season, a region, something else? | everything below |
-| 2 | `heatindex_*_DayMax` (238, 244, 250) is in **degrees Fahrenheit**, on the *extended* heat index scale of Lu and Romps that the dictionary cites at line 417. The dictionary states no unit for these; I read it across from the verified day-count columns, which threshold "above 95 F". | Q14, 5 columns |
+| 2 | `heatindex_*_DayMax` (238, 244, 250) is in **degrees Fahrenheit**, on the *extended* heat index scale of Lu and Romps that the dictionary cites at line 417. The dictionary gives no unit for these; I read it across from the verified day-count columns, which threshold "above 95 F". | Q14, 5 columns |
 | 3 | `DayMax` is the summer **average** of each day's maximum heat index (about 90 readings), *not* the single highest reading of the summer --- the dictionary's narrative says so at lines 406--407, and the name suggests the opposite. Is that right? | Q14 |
 | 4 | `heatindex_C_*_DMax` (256, 262) is that same quantity **differenced**, in the same units. The dictionary calls it only "Change". **Which way round is the subtraction** --- later minus historical, or the reverse? | Q14, 2 columns |
 | 5 | `wildfire_summer_Hist/Midc/Endc` (189--191): "Seasonal value" means the **multi-model ensemble mean of the seasonal average daily FWI** described at lines 346--352 --- and *not* the seasonal 95th percentile described further down at line 357. Which is it? | Q13, 3 columns |
-| 6 | FWI values are **dimensionless index values** with no physical unit. The dictionary states no unit anywhere. | Q13, 5 columns |
+| 6 | FWI values are **dimensionless index values** with no physical unit. The dictionary gives no unit anywhere. | Q13, 5 columns |
 | 7 | `wildfire_summer_Dmid/Dend` (192--193) are **absolute differences** in those index units --- distinguished from the verified `Pmid`/`Pend`, which the dictionary calls "Percent Change". **Which way round is the subtraction?** | Q13, 2 columns |
 | 8 | **`tempmaxann` names the dictionary section "Temperature Maximum - Annual".** The dictionary never says that a CSV name's stem denotes a section; I inferred the link. **This is the one that matters most: 101 columns of the file (indices 5--105) stand or fall with it.** | Q1, 101 columns |
 | 9 | Granting that link, `tempmaxann_hist`, `_rcp85_endc` and `_end85_hist` (44, 48, 52) are annual averages of daily maximum temperature in **°F**, historical / end-century RCP8.5 / the change between them. | Q1, 3 columns |
 | 10 | `GEOID` (109) is a **Census tract identifier**: 2-character state + 3-character county + 6-character tract. **Which Census vintage?** Every join this project could make depends on the answer. | Q10 |
 | 11 | `TRACTCE` (108) is the **tract code alone**, unique only within its county. | Q10 |
 | 12 | `X` and `Y` (106, 107) are **longitude and latitude in decimal degrees**. **Which coordinate reference system**, and is the point the grid cell's centroid? | Q10 |
-| 13 | `NAME` (2) is a **county or county-equivalent name**, and `State`/`State_Abbr` (3, 4) the state it sits in. `State` holds **49 distinct non-empty values plus 7 blank rows** --- so 49 states, not 50. Do you know which one is absent, or whether the set is not the 50 states; and what the 7 blank rows are? | Q10, Q16 |
-| 14 | **Are these the kinds of table-side records you expect to connect to the literature?** If the shape is wrong, that matters more than any line above. | the whole approach |
+| 13 | **Observation, not a reading --- nothing to confirm on this line.** `State` (3) holds **49 distinct non-empty values** and **7 blank rows**, and `State_Abbr` (4) has the same two counts. That is a count of the strings stored in the file. It says nothing about what either column holds, and it is kept separate from line 14 for that reason. | — |
+| 14 | `NAME` (2) is a **county or county-equivalent name**; `State` (3) is the **US state** that area sits in; `State_Abbr` (4) is its **two-letter postal abbreviation**. None of the three appears anywhere in the ClimRR dictionary, so this is a reading of the values and nothing more. | Q10, 3 columns |
+| 15 | **This line only matters if line 14 is right.** Granting that reading: what geographic coverage would explain **49** distinct values rather than 50 --- a state or state-equivalent the grid does not reach, territories in or out, something else --- and what are the **7** rows with no value? | Q10, Q16 |
+| 16 | **Are these the kinds of table-side records you expect to connect to the literature?** If the shape is wrong, that matters more than any line above. | the whole approach |
 
 ---
 
@@ -283,7 +295,7 @@ checklists ask only what is specific to them.
 Row ordinal 13. Selected by **rule R-B**: the first fully-populated row whose
 `GEOID` begins with a zero.
 
-Where it is: `NAME` `San Bernardino`, `State` `California`, `GEOID` `06071010300`, `TRACTCE` `010300`.
+Location-related raw fields: `NAME` = `San Bernardino`, `State` = `California`, `GEOID` = `06071010300`, `TRACTCE` = `010300`. These are the stored strings; what the four columns *mean* is checklist lines 10 to 15, and is not settled here.
 
 **Why this row exists in the set.** `GEOID` here is `06071010300` and `TRACTCE`
 is `010300` --- both start with a zero. **19,074 rows of this file carry a
@@ -419,7 +431,7 @@ Every clause marked [provisional:...] rests on an inferred-candidate record: rea
 | ---: | --- | --- |
 | **1** | **One row of this file is one "event".** Same question as Example 1, line 1. | everything |
 | 2 | The identifiers above are **text, with their leading zeros intact**. Is that how they should be carried, and is there any consumer of this data that expects them as numbers? | Q10 |
-| 3 | Lines 2--13 of Example 1's checklist apply to this row unchanged --- the same 41 columns, the same readings. Please answer them there rather than twice. | — |
+| 3 | Lines 2--15 of Example 1's checklist apply to this row unchanged --- the same 41 columns, the same readings. Please answer them there rather than twice. | — |
 
 ---
 
@@ -428,7 +440,7 @@ Every clause marked [provisional:...] rests on an inferred-candidate record: rea
 Row ordinal 147. Selected by **rule R-C**: the first row that is **empty** in at
 least one of the 41 columns.
 
-Where it is: `NAME` `Ventura`, `State` `California`, `GEOID` `06111990100`, `TRACTCE` `990100`.
+Location-related raw fields: `NAME` = `Ventura`, `State` = `California`, `GEOID` = `06111990100`, `TRACTCE` = `990100`. These are the stored strings; what the four columns *mean* is checklist lines 10 to 15, and is not settled here.
 
 **Why this row exists in the set.** All **17** heat-index columns are empty on
 this row, while the fire-weather, location and temperature columns are
@@ -567,7 +579,7 @@ Every clause marked [provisional:...] rests on an inferred-candidate record: rea
 | **1** | **One row of this file is one "event".** Same question as Example 1, line 1. | everything |
 | 2 | Is **"no value in this file"** the right way to present an empty cell, or does an empty heat-index cell mean something specific --- a cell outside the layer's coverage, a computation that did not run, something else? | Q16, Q17 |
 | 3 | **83 rows of the file are empty across every column from index 235 on**, which is this group. Do you know what those 83 rows are? | Q16 |
-| 4 | Lines 2--13 of Example 1's checklist apply to this row unchanged. Please answer them there rather than twice. | — |
+| 4 | Lines 2--15 of Example 1's checklist apply to this row unchanged. Please answer them there rather than twice. | — |
 
 ---
 

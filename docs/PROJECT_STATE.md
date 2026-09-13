@@ -7,14 +7,15 @@ session reasoning correctly from out-of-date facts and repeating them.
 | | |
 | --- | --- |
 | **Current milestone** | **M1 --- data grounding and metadata audit** |
-| **Active task** | **M1-WP3 complete as issued.** Nothing is in progress --- the project is waiting on **the mentor**, and secondarily on a GUIDANCE review of WP3 |
+| **Active task** | **M1-WP3 complete, pre-meeting reviewed, and revised.** Nothing is in progress --- the project is waiting on **the mentor, 2026-09-17** |
 | **Latest accepted commit** | `62c9137` --- the merge of M1-WP1 into `main`, accepted by GUIDANCE at reviewed head `fceee7f` (D-009) |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at |
-| **Branch** | `work/m1-wp3`, from `work/m1-wp2`. **Local only --- not pushed, not merged**, as the work package requires. `origin/work/m1-wp2` is at `53421f0`; the WP2b commit and all four WP3 commits are local until Kaiyuan pushes. The EXECUTOR does not push (D-003) |
+| **Branch** | `work/m1-wp3`, from `work/m1-wp2`. **Pushed by Kaiyuan, not merged.** `origin/work/m1-wp3` was at `c8f4711` when GUIDANCE took the pre-meeting review; the revision commit after it is local until he pushes again. The EXECUTOR does not push (D-003) |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
 | **M1-WP1 review** | **PASS**, GUIDANCE, at reviewed head `fceee7f` (D-009). A work-package pass, **not** the M1 milestone gate |
 | **D-010 ruling** | **PASS WITH ACTIONS**, GUIDANCE, 2026-09-13. **D-010 decided; D-011 records the ruling and its boundaries.** Both approved by Kaiyuan |
-| **Next review event** | **The mentor**, at the group meeting 2026-09-14 and the one-on-one 2026-09-17, on `docs/MENTOR_EXAMPLES.md`. Then GUIDANCE on M1-WP3 |
+| **M1-WP3 pre-meeting review** | **REVISE --- framing only**, GUIDANCE, 2026-09-13, at reviewed head `c8f4711` (D-012). The scientific design is **accepted**: subset, rows, IC records, generated presentation, cautions and mentor protocol all approved unchanged. The required framing revision **is done** |
+| **Next review event** | **The mentor**, on `docs/MENTOR_EXAMPLES.md` --- the group meeting 2026-09-14 and the one-on-one **2026-09-17**, which is the one GUIDANCE names for the examples. GUIDANCE states no remaining scientific objection |
 | **Blockers** | **M1 is blocked on mentor answers to the three examples.** Nothing else is; the machinery to record her answers is built and inert |
 
 ## Where things stand
@@ -50,9 +51,24 @@ session reasoning correctly from out-of-date facts and repeating them.
   generated prose in three layers; the prose is produced **by template** from the
   semantics, and every clause resting on an inference is wrapped
   `[provisional: ...]`, with the build failing if one is not.
-- **`docs/MENTOR_EXAMPLES.md` is what goes to the meetings.** Fourteen numbered
-  lines, answerable confirm / correct / don't know in ten minutes.
-  `MENTOR_BRIEF.md` now leads with it and demotes the Q1--Q18 table beneath.
+- **`docs/MENTOR_EXAMPLES.md` is what goes to the meeting.** Sixteen numbered
+  lines --- fifteen answerable confirm / correct / don't know in ten minutes, and
+  line 13 a stated observation with nothing to confirm --- behind a printable
+  answer sheet. `MENTOR_BRIEF.md` leads with it and demotes the Q1--Q18 table
+  beneath.
+- **The pre-meeting review (D-012) found one real defect and it is fixed.** Some
+  **inferred location semantics were stated as fact outside the confirmation
+  surface**: headings read `Stephens County, Oklahoma` and framing read
+  `Where it is:`, while `NAME`, `State` and `State_Abbr` are themselves
+  `inferred_candidate`. The generated prose was correct throughout --- the
+  **hand-authored framing around it was not**. Titles are now neutral, the
+  location line quotes the stored strings under a label that claims nothing, and
+  the location checklist item is **split three ways** so one tick cannot confirm
+  a character count and a semantic claim together. A bounded guard,
+  `test_no_unwrapped_location_semantic_in_the_hand_authored_framing`, now checks
+  the hand-authored surface and a second test feeds the rejected heading back
+  through it. **The standing rule this establishes: a labelling discipline
+  enforced only where output is generated is not enforced.**
 - **"Each row = one event" is still an assumption.** It is line 1 of every
   checklist and A1 of every record. Nothing treats it as settled.
 - **Four GUIDANCE rulings from D-009 remain in force**, none of them reopened:
@@ -71,15 +87,18 @@ session reasoning correctly from out-of-date facts and repeating them.
   stem `tempmaxann` denote "Temperature Maximum - Annual" (**101 columns** turn
   on it); which Census vintage are `GEOID` and `TRACTCE`; and is this the shape
   of record she expects to connect to literature.
-- **For Kaiyuan:** take `docs/MENTOR_EXAMPLES.md` to the 2026-09-14 group meeting
-  and the 2026-09-17 one-on-one, and **preserve the answers distinguishing
+- **For Kaiyuan:** take `docs/MENTOR_EXAMPLES.md` to the 2026-09-14 group
+  meeting and the **2026-09-17** one-on-one, and **preserve the answers
+  distinguishing
   explicit confirmation from correction, from broad approval, and from an
   unanswered assumption** --- WP4 cannot promote anything without that
   distinction. Also push the branch, and the Sophia reinstall above.
-- **For GUIDANCE:** review M1-WP3 against the ruling's eleven criteria. Two
-  judgements are asked for by name in field 13 of the report: whether 41 columns
-  is small enough, and whether the caution mechanism in the presentation
-  template counts as template output under criterion 6.
+- **For GUIDANCE: nothing outstanding on M1-WP3.** Both judgements field 13 of
+  the report asked for were ruled on in the pre-meeting review and are recorded
+  as D-012 --- **41 columns approved, the stem probe kept, the three cautions
+  approved as repository-level rendering rules, criterion 6 met by the
+  architecture, the hash disclosure accepted with no rerun.** The next GUIDANCE
+  event is the M1 milestone gate, after WP4.
 - **Q7, Q8, Q9, Q11, Q12, Q15, Q17, Q18 are untouched by WP3** and still block
   downstream use of the columns they name. Q0 is closed; Q11.4 is answered from
   the bytes; Q1, Q10, Q13 and Q14 are now asked concretely through the examples.
@@ -101,8 +120,9 @@ of a column outside the 41 in the pilot subset.
 
 - Charter: [BLUEPRINT.md](BLUEPRINT.md)
 - Plan and gate criteria: [PROJECT_PLAN.md](PROJECT_PLAN.md)
-- Decisions, including D-010 and D-011: [DECISION_LOG.md](DECISION_LOG.md)
+- Decisions, including D-010, D-011 and D-012: [DECISION_LOG.md](DECISION_LOG.md)
 - The ruling that authorised WP3: [M1_D010_GUIDANCE_RULING.md](M1_D010_GUIDANCE_RULING.md)
+- The pre-meeting review of WP3 (**REVISE**, framing only): [M1_WP3_PREMEETING_GUIDANCE_REVIEW.md](M1_WP3_PREMEETING_GUIDANCE_REVIEW.md)
 - The pilot subset, its rationale and its exclusions: [PILOT_SUBSET.md](PILOT_SUBSET.md)
 - **What goes to the mentor:** [MENTOR_EXAMPLES.md](MENTOR_EXAMPLES.md)
 - Data facts, dictionary-verified semantics, open questions: [DATA_NOTES.md](DATA_NOTES.md)

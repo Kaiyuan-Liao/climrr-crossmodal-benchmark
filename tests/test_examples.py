@@ -536,15 +536,23 @@ def test_the_mentor_document_names_each_row_correctly(mentor_doc, built):
         assert f"**rule {provenance['selection_rule']['id']}**" in mentor_doc
 
 
-def test_the_mentor_document_quotes_the_location_of_each_row(mentor_doc, built):
-    """The hand-written "Where it is" lines, against the bytes they describe."""
+def test_the_mentor_document_quotes_the_location_fields_neutrally(mentor_doc, built):
+    """The hand-written location line, against the bytes it quotes.
+
+    Reworded from "Where it is: ..." on the pre-meeting GUIDANCE review: that
+    phrasing asserted that these columns locate the row, which is IC-011 through
+    IC-017's inference and not a documented fact. The line now quotes the four
+    stored strings under a neutral label and says the meaning is unsettled.
+    """
     for record in built:
         values = {item["column"]: item["value"] for item in record["raw"]}
-        where = (
-            f"Where it is: `NAME` `{values['NAME']}`, `State` `{values['State']}`, "
-            f"`GEOID` `{values['GEOID']}`, `TRACTCE` `{values['TRACTCE']}`."
+        fields = (
+            f"Location-related raw fields: `NAME` = `{values['NAME']}`, "
+            f"`State` = `{values['State']}`, `GEOID` = `{values['GEOID']}`, "
+            f"`TRACTCE` = `{values['TRACTCE']}`."
         )
-        assert where in mentor_doc, where
+        assert fields in mentor_doc, fields
+        assert "what the four columns *mean* is checklist lines 10 to 15" in mentor_doc
 
 
 def test_the_mentor_document_carries_every_raw_value(mentor_doc, built):
@@ -658,7 +666,7 @@ def test_the_answer_sheet_covers_example_1s_checklist_line_for_line(mentor_doc):
     on_sheet = [row for row in _row_numbers(sheet_example_1) if row.isdigit()]
     in_checklist = [row for row in _row_numbers(checklist) if row.isdigit()]
 
-    assert in_checklist == [str(n) for n in range(1, 15)]
+    assert in_checklist == [str(n) for n in range(1, 17)]
     assert on_sheet == in_checklist
 
 
@@ -686,10 +694,14 @@ def test_the_answer_sheet_carries_the_row_specific_lines(mentor_doc, example, ex
 
 
 def test_the_answer_sheet_names_each_row_as_the_records_do(mentor_doc, built):
+    """Neutrally: the two identifiers, and no geographic reading (GUIDANCE, REVISE)."""
     sheet = _answer_sheet(mentor_doc)
     for record in built:
         provenance = record["provenance"]
-        heading = f"row `OID_` {provenance['OID_']} (`{provenance['Crossmodel']}`)"
+        heading = (
+            f"row `OID_` {provenance['OID_']}, "
+            f"`Crossmodel` `{provenance['Crossmodel']}`"
+        )
         assert heading in sheet, heading
 
 
@@ -709,3 +721,172 @@ def test_the_answer_sheet_uses_no_magnitude_adjective(mentor_doc):
     lowered = _answer_sheet(mentor_doc).lower()
     found = [word for word in MAGNITUDE_WORDS if re.search(rf"\b{word}\b", lowered)]
     assert found == [], found
+
+
+# --- the location-semantics guard ---------------------------------------------
+#
+# The pre-meeting GUIDANCE review (2026-09-17 packet, REVISE) found the one place
+# the provisional-label machinery did not reach: **hand-authored headings and
+# framing**. The generated field-level prose was correct throughout, but headings
+# read "Stephens County, Oklahoma" while `NAME` and `State` were themselves
+# `inferred_candidate` fields awaiting confirmation. Asking "is `NAME` a county
+# name?" fifty lines later does not undo that anchoring.
+#
+# This guard is deliberately bounded and is not natural-language analysis. It
+# checks the hand-authored surface of the mentor document for a fixed list of
+# words that name an inferred geographic reading, and allows them only where a
+# checklist line poses them as a reading to confirm or as a question.
+
+#: Words that assert a geographic semantic none of these columns is documented to
+#: carry. Every one of them is an `inferred_candidate` reading (IC-011 … IC-017).
+LOCATION_SEMANTIC_WORDS = (
+    "county",
+    "counties",
+    "tract",
+    "longitude",
+    "latitude",
+    "centroid",
+    "state",
+    "states",
+)
+
+#: Lines allowed to use those words, identified by a distinctive substring.
+#:
+#: The first group is the checklist rows --- in the answer sheet and in the
+#: document body --- that put these readings to the mentor as something to
+#: confirm, correct, or answer. That is the confirmation surface, and naming the
+#: reading is the whole point of it.
+#:
+#: The second is the location standing caution. It currently reaches the reader
+#: only inside a generated `<details>` block, which this scan already excludes,
+#: so the entry does nothing today; it is listed so that surfacing that sentence
+#: into the framing later does not silently trip a guard it was never aimed at.
+LOCATION_ALLOWED_LINES = (
+    "| **10** | `GEOID` (109) is a **Census tract id**",
+    "| 10 | `GEOID` (109) is a **Census tract identifier**",
+    "| 11 | `TRACTCE` (108) is the **tract code alone**",
+    "| 12 | `X`, `Y` (106, 107) are **longitude / latitude",
+    "| 12 | `X` and `Y` (106, 107) are **longitude and latitude",
+    "| 14 | `NAME` (2) is a **county or county-equivalent name**",
+    "| 15 | **This line only matters if line 14 is right.**",
+    "The Census vintage and the coordinate reference system of these columns are",
+)
+
+_BACKTICKED = re.compile(r"`[^`]*`")
+
+
+def hand_authored_lines(document: str) -> list[tuple[int, str]]:
+    """Every line the EXECUTOR wrote by hand: outside `<details>`, 1-indexed.
+
+    The `<details>` blocks hold the raw-value tables and the generated
+    presentation. Both are produced from the records --- the presentation by
+    template, with its own labelling rules and its own tests --- so neither is
+    hand-authored framing and neither is this guard's business.
+    """
+    lines, inside = [], False
+    for number, line in enumerate(document.splitlines(), start=1):
+        if line.startswith("<details>"):
+            inside = True
+            continue
+        if line.startswith("</details>"):
+            inside = False
+            continue
+        if not inside:
+            lines.append((number, line))
+    return lines
+
+
+def test_no_unwrapped_location_semantic_in_the_hand_authored_framing(mentor_doc):
+    """No heading or framing sentence may assert a geographic reading as fact.
+
+    Three things are stripped before the check, each for a reason:
+
+    * `[provisional: ...]` spans --- a wrapped clause is exactly what the
+      machinery asks for, so it is allowed to say anything;
+    * backticked spans --- `` `State` `` is the column's literal header text and
+      `` `Oklahoma` `` is a stored value. Quoting the file is not interpreting
+      it, and the revised framing deliberately quotes rather than interprets;
+    * allow-listed lines --- the checklist rows that pose these readings as
+      questions.
+    """
+    offences = []
+    for number, line in hand_authored_lines(mentor_doc):
+        if any(allowed in line for allowed in LOCATION_ALLOWED_LINES):
+            continue
+        bare = _BACKTICKED.sub("", PROVISIONAL_RE.sub("", line))
+        found = [
+            word
+            for word in LOCATION_SEMANTIC_WORDS
+            if re.search(rf"\b{word}\b", bare, re.I)
+        ]
+        if found:
+            offences.append((number, sorted(set(found)), line.strip()[:90]))
+
+    assert offences == [], offences
+
+
+def test_the_guard_would_catch_the_framing_the_review_rejected(mentor_doc):
+    """The heading GUIDANCE objected to, fed back through the guard.
+
+    A guard that passes because it checks nothing is worse than none, so the
+    exact string the review quoted is run against it here.
+    """
+    rejected = mentor_doc.replace(
+        "## Example 1 --- row `OID_` 1, `Crossmodel` `R106C361`",
+        "## Example 1 --- row `OID_` 1 (`R106C361`), Stephens County, Oklahoma",
+    )
+    with pytest.raises(AssertionError):
+        test_no_unwrapped_location_semantic_in_the_hand_authored_framing(rejected)
+
+
+def test_the_revised_framing_still_shows_the_raw_location_fields(mentor_doc, built):
+    """Neutral framing must not mean the mentor cannot tell the rows apart."""
+    for record in built:
+        values = {item["column"]: item["value"] for item in record["raw"]}
+        fields = (
+            f"Location-related raw fields: `NAME` = `{values['NAME']}`, "
+            f"`State` = `{values['State']}`, `GEOID` = `{values['GEOID']}`, "
+            f"`TRACTCE` = `{values['TRACTCE']}`."
+        )
+        # Once in the answer sheet, once on the example's own page.
+        assert mentor_doc.count(fields) == 2, fields
+    assert "Where it is:" not in mentor_doc
+
+
+def test_the_location_item_is_split_into_observation_reading_and_question(mentor_doc):
+    """GUIDANCE required the distinct-count observation kept out of the semantic claim.
+
+    Line 13 is a count of stored strings and asks nothing. Line 14 is the
+    reading, and is the only one of the three that can be confirmed. Line 15 is
+    a question that only arises if 14 holds. Bundling them would let one tick
+    confirm a structural fact and a semantic claim together, which is the
+    "compound confirmation" risk the review named.
+    """
+    for scope in (_answer_sheet(mentor_doc), mentor_doc.split(MAIN_DOC_HEADING, 1)[1]):
+        thirteen = next(line for line in scope.splitlines() if line.startswith("| 13 |"))
+        fourteen = next(line for line in scope.splitlines() if line.startswith("| 14 |"))
+        fifteen = next(line for line in scope.splitlines() if line.startswith("| 15 |"))
+
+        # 13 is an observation: it carries the counts and offers no confirmation.
+        assert "49 distinct non-empty values" in thirteen
+        assert "7 blank rows" in thirteen
+        assert "☐ confirm" not in thirteen
+        assert "nothing to" in thirteen.lower()
+
+        # 14 is the reading, and the only confirmable one of the three.
+        assert "county or county-equivalent name" in fourteen
+        assert "49" not in fourteen and "blank rows" not in fourteen
+
+        # 15 is conditional on 14 by its own words.
+        assert "line 14" in fifteen
+        assert "49" in fifteen
+
+
+def test_every_cross_reference_to_example_1s_checklist_points_past_the_split(mentor_doc):
+    """Renumbering is only done when nothing still points at the old numbers."""
+    assert "2--13" not in mentor_doc and "2–13" not in mentor_doc
+    assert mentor_doc.count("Lines 1 and 2–15 above apply here unchanged") == 2
+    assert mentor_doc.count("Lines 2--15 of Example 1's checklist") == 2
+    # The ruling-question table points at the confirmable readings and at line 16.
+    assert "| lines 2, 4–12, 14, E2-2, E3-2 |" in mentor_doc
+    assert "| line 16 |" in mentor_doc

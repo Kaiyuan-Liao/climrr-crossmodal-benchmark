@@ -34,9 +34,11 @@ as an observation. No interpretation of any column outside the 41 selected.
 | | |
 | --- | --- |
 | Branch | `work/m1-wp3`, created from `work/m1-wp2` |
-| Head at report time | `b2f63ac59eb056057622a1d228265f3daa6c54ff` |
-| Remote | **Not pushed.** The work package says do not merge or push; `origin/work/m1-wp2` stands at `53421f0` and `main` carries the WP1 merge |
-| Commits in this package | 4, one per phase group: Phase A, Phases B–D, Phase E, Phase F |
+| **Reviewed head** | **`c8f47117b54be3a83c8d79313c3dbad3a86fdc7f`** --- the state GUIDANCE reviewed in the pre-meeting packet of 2026-09-13 (`docs/M1_WP3_PREMEETING_GUIDANCE_REVIEW.md`), and the head this report described before the present revision |
+| Remote | **Pushed by Kaiyuan.** `origin/work/m1-wp3` was at `c8f4711` when the review was taken. The EXECUTOR does not push (D-003), and has not merged |
+| **This revision** | The bounded pre-meeting framing revision required by that review (D-012). It is the unique child of `c8f4711` on `work/m1-wp3`; its SHA is the branch head after it and is reported with this packet rather than written here, since a commit cannot contain its own hash |
+| Commits in this package | 6: Phase A, Phases B–D, Phase E, Phase F, the COORDINATOR fix-ups, and this pre-meeting revision |
+| `main` | unchanged, carrying the WP1 merge at `62c9137` |
 
 ## 4. Data version and checksums
 
@@ -129,6 +131,7 @@ assumption. `docs/MENTOR_BRIEF.md` rewritten to lead with the examples.
 | `docs/MENTOR_BRIEF.md` | Rewritten to lead with the examples |
 | `docs/DECISION_LOG.md` | D-010 → decided; **D-011** appended |
 | `docs/M1_D010_GUIDANCE_RULING.md` | The ruling as placed by Kaiyuan, now tracked |
+| `docs/M1_WP3_PREMEETING_GUIDANCE_REVIEW.md` | **New.** The pre-meeting GUIDANCE review of this package (**REVISE**, framing only), placed by Kaiyuan and reviewed at `c8f4711` |
 | `docs/PROJECT_STATE.md` | Refreshed |
 | `tests/test_inferred_candidates.py` | **New.** 54 tests |
 | `tests/test_examples.py` | **New.** 37 tests |
@@ -197,6 +200,22 @@ Four rules that do bear on scientific meaning, stated plainly:
 | **R-B** | `14` | `R107C232` | 13 | `San Bernardino`, California, `GEOID` `06071010300` | 0 | first such row whose `GEOID` begins with `0` |
 | **R-C** | `148` | `R105C198` | 147 | `Ventura`, California, `GEOID` `06111990100` | **17** | first row empty on at least one selected pilot column |
 
+### The location checklist item, split three ways
+
+Required by the pre-meeting review, which named "compound confirmation" as a
+risk: one tick must not confirm a count of characters and a semantic claim
+together. Lines 13 to 15 of Example 1's checklist now read:
+
+| Line | Kind | What it says | Answerable? |
+| --- | --- | --- | --- |
+| 13 | **Structural observation** | `State` holds 49 distinct non-empty values and 7 blank rows; `State_Abbr` has the same two counts | **No** --- stated, nothing to confirm |
+| 14 | **Proposed interpretation** | `NAME` is a county or county-equivalent name; `State` is the US state; `State_Abbr` its two-letter postal abbreviation | confirm / correct / don't know |
+| 15 | **Question, conditional on 14** | Granting that reading, what geographic coverage explains 49 values rather than 50, and what are the 7 blank rows? | write in, or don't know |
+
+Line 16 is the former line 14, "are these the kinds of table-side records you
+expect to connect to the literature?". Examples 2 and 3 now point back to
+"lines 2--15", and the ruling-question cross-references were renumbered with it.
+
 **IC-record count: 20** (IC-001 … IC-020), carrying **52 dictionary spans**,
 every one of which is checked against the tracked extracted text verbatim by
 `test_every_tracked_span_quotes_the_extracted_text_verbatim`. Distribution:
@@ -225,7 +244,7 @@ already speaks. 0 invariant violations.
 
 | Check | Result |
 | --- | --- |
-| `pytest` | **360 passed**, 0 failed. 91 of them new in this package |
+| `pytest` | **374 passed**, 0 failed. 105 of them new in this package --- 91 in the phases, 9 in the COORDINATOR fix-ups, 5 in this pre-meeting revision |
 | `python scripts/verify_no_secrets_or_paths.py` | **152 tracked files scanned, 0 hits** |
 | `python scripts/dictionary_coverage.py` | PASS. 275 columns, 20 IC records applied, 0 blocked, 0 statuses without a span |
 | `python scripts/status_diff.py` | PASS. 20 changes, 0 invariant violations |
@@ -251,6 +270,27 @@ code:
   "ignition" may appear in a record only within a sentence that denies them.
 - **`test_the_presentation_uses_no_magnitude_adjective`** --- 19 words banned.
 - Eight tests holding `docs/MENTOR_EXAMPLES.md` to the JSON records.
+- **`test_no_unwrapped_location_semantic_in_the_hand_authored_framing`** --- the
+  guard the pre-meeting review required. It scans the **hand-authored** surface
+  of the mentor document, meaning everything outside the `<details>` blocks, for
+  the words `county`, `counties`, `tract`, `longitude`, `latitude`, `centroid`,
+  `state` and `states`, and fails if one appears unwrapped. Three things are
+  stripped first, each for a reason: `[provisional: ...]` spans, because a
+  wrapped clause is exactly what is wanted; backticked spans, because
+  `` `State` `` is the column's literal header text and `` `Oklahoma` `` a stored
+  value, and quoting the file is not interpreting it; and an allow-list of the
+  checklist rows that pose these readings as questions, which is the
+  confirmation surface. **It is a bounded word check, not language analysis**, as
+  the review allowed. Two prose usages of "state" as a verb were reworded to
+  "record" and "give" so the guard needs no part-of-speech judgement.
+- **`test_the_guard_would_catch_the_framing_the_review_rejected`** --- feeds the
+  exact heading GUIDANCE quoted, `Stephens County, Oklahoma`, back through the
+  guard and asserts it fails. A guard that passes because it checks nothing is
+  worse than none.
+- **`test_the_location_item_is_split_into_observation_reading_and_question`** and
+  **`test_every_cross_reference_to_example_1s_checklist_points_past_the_split`**
+  --- the split holds in both documents, and no cross-reference still points at
+  the old numbering.
 
 ## 11. Failures, rejected cases, and known limitations
 
@@ -297,6 +337,52 @@ code:
 
 ## 12. Deviations from the approved plan
 
+### Pre-meeting GUIDANCE revision (D-012) --- not a deviation, a required correction
+
+The package as first delivered was reviewed **REVISE** on 2026-09-13, at head
+`c8f4711`, on one ground: **some inferred location semantics were presented as
+established facts outside the explicit confirmation surface.** The generated
+field-level prose was correct throughout --- every inferred clause was wrapped
+`[provisional: ...]` and the build enforced it --- but the **hand-authored
+headings and framing bypassed that machinery**, reading
+
+```text
+## Example 1 --- row `OID_` 1 (`R106C361`), Stephens County, Oklahoma
+Where it is: `NAME` `Stephens`, `State` `Oklahoma`, ...
+```
+
+while `NAME`, `State` and `State_Abbr` are themselves `inferred_candidate` fields
+whose readings were being submitted for confirmation. As the review put it,
+asking "is `NAME` a county name?" fifty lines later does not undo that anchoring.
+This was a real defect and the criticism is accepted without qualification: the
+provisional-label discipline was enforced everywhere it was automated and nowhere
+it was not.
+
+What changed, and nothing else did:
+
+1. **Example titles are now neutral** --- `row OID_ 1, Crossmodel R106C361` ---
+   in the answer sheet and in the body.
+2. **"Where it is: ..." is now "Location-related raw fields: `NAME` =
+   `Stephens`, `State` = `Oklahoma`, ..."**, quoting the stored strings under a
+   label that claims nothing, and saying outright that what the four columns mean
+   is checklist lines 10 to 15 and is not settled there.
+3. **The location checklist item was split three ways** (field 9), separating a
+   count of characters from a semantic claim from a question conditional on it.
+4. **A bounded guard was added**, described in field 10, so the framing cannot
+   regress.
+5. **Field 3 of this report now records the actual reviewed branch, head and
+   push state**, which the review asked for.
+
+**Nothing in the approved design was touched**: the 41-column subset, the three
+selection rules, the three rows, the 20 IC-records, the generated field-level
+presentation, the three standing cautions and the mentor-confirmation protocol
+are all exactly as reviewed. No artifact under `artifacts/` was regenerated ---
+the coverage report and the three example records are byte-identical to the
+reviewed state, which is the expected result of a change that touched only
+hand-authored documentation and tests.
+
+### The original deviation: document layout
+
 **One, minor, and it concerns layout rather than content.**
 
 The work package asks that `docs/MENTOR_EXAMPLES.md` carry, per page, "the
@@ -312,7 +398,7 @@ complete; **169 of the document's 522 lines are visible when folded**, which is
 about two screens, and the checklists --- the part the mentor actually answers
 --- are never folded. The checklists on pages 2 and 3 carry only the lines
 specific to those rows plus the mandatory A1, and point back to page 1's
-fourteen lines rather than asking the same questions three times.
+sixteen lines rather than asking the same questions three times.
 
 Nothing else departs from the work package. The optional single stem-family
 column was taken up, as the package permits, at its suggested three columns
@@ -320,7 +406,25 @@ column was taken up, as the package permits, at its suggested three columns
 
 ## 13. Open decisions and mentor questions
 
-### For GUIDANCE
+### Answered by GUIDANCE in the pre-meeting review of 2026-09-13
+
+Both judgements this field asked for were ruled on, and both are recorded as
+**D-012**. They are kept below as asked rather than deleted, with the answer
+against each.
+
+| Item | GUIDANCE decision |
+| --- | --- |
+| 41-column subset | **Approved.** "Small" is not a percentage threshold; what matters is that every added field has a bounded role. 21 verified, 20 adjacent fields with a specific job, 234 untouched |
+| The three-column stem probe | **Keep.** It is the smallest set testing a historical, a projected and a change value under one stem assumption, and one mentor decision on that link clarifies 101 columns. Removing it "would make the subset numerically smaller but scientifically less useful" |
+| Standing FWI caution | **Approved** |
+| Standing modeled-baseline caution | **Approved** |
+| Empty-cell rendering as "no value in this file" | **Approved** |
+| Raw / semantics / presentation architecture | **Approved in principle.** Criterion 6 "is satisfied by the architecture" --- the cautions are repository-level rendering rules, not hidden semantic interpretations |
+| Current location framing | **Revise before the mentor meeting** --- done, field 12 |
+| Stale metadata-hash disclosure | **Accepted; no scientific rerun required.** The remediation --- regenerate, add a regression test, verify the old artifact fails it --- was "the correct remediation" |
+| Example rows, IC records | **Keep unchanged** |
+
+### The two judgements as originally put to GUIDANCE
 
 1. **Is the subset small enough?** 41 of 275 columns --- 15% --- in four
    families, with 20 IC-records. The judgement asked for is whether that is
@@ -332,6 +436,7 @@ column was taken up, as the package permits, at its suggested three columns
    literature-compatibility rather than for ease of narration, and
    `PILOT_SUBSET.md` argues each. The stem-probe family is the one that could be
    cut: it exists only to make Q1 concrete and adds no columns an example needs.
+   **Ruled: keep all 41, including the probe.**
 
 2. **Does the presentation templating meet criterion 6** --- "raw facts,
    interpreted semantics, and natural-language presentation are clearly
@@ -345,14 +450,18 @@ column was taken up, as the package permits, at its suggested three columns
    which entries did. They are the only sentences in the output not derived from
    a single column's semantics entry, and they exist because the repository's
    rules require the FWI wording on every mention. Whether that counts as
-   template output or as authored prose is the open question.
+   template output or as authored prose is the open question. **Ruled: they are
+   legitimate repository-level rendering rules and do not violate the raw /
+   semantics / presentation separation. Criterion 6 is met by the architecture;
+   the mentor-facing framing was the part that needed revising, and has been.**
 
 ### For the mentor (through the examples, per the ruling)
 
-The fourteen checklist lines of `docs/MENTOR_EXAMPLES.md`, of which four matter
-most: is one row one "event"; does `tempmaxann` denote "Temperature Maximum -
-Annual" (101 columns); which Census vintage; and is this the shape of record she
-expects to connect to literature.
+The sixteen checklist lines of `docs/MENTOR_EXAMPLES.md` --- fifteen answerable,
+line 13 being a stated observation --- of which four matter most: is one row one
+"event"; does `tempmaxann` denote "Temperature Maximum - Annual" (101 columns);
+which Census vintage; and is this the shape of record she expects to connect to
+literature. The meeting is **2026-09-17**.
 
 ### For Kaiyuan
 

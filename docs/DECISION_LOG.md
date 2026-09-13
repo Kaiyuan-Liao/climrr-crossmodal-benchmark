@@ -585,3 +585,91 @@ not yet in force and must not be relied on by downstream work.
   `scripts/dictionary_coverage.py`, `scripts/status_diff.py`,
   `src/climrr/examples.py`, `scripts/build_examples.py`,
   `docs/PILOT_SUBSET.md`, `docs/MENTOR_EXAMPLES.md`.
+
+---
+
+## D-012 --- The M1-WP3 pre-meeting GUIDANCE review, and the framing it required
+
+- **Date:** 2026-09-13
+- **Status:** **decided.** Records the pre-meeting review
+  (`docs/M1_WP3_PREMEETING_GUIDANCE_REVIEW.md`, gate status **REVISE**), placed
+  by Kaiyuan and taken at reviewed head `c8f4711` on `work/m1-wp3`. The review is
+  deliberately bounded: **the scientific design is accepted and the required
+  change is to mentor-facing framing and report bookkeeping only.**
+- **What GUIDANCE decided, and it is now settled:**
+  1. **The 41-column subset is approved.** "Small" is not a percentage
+     threshold; what matters is that every added field has a bounded role and
+     that the subset does not sprawl across the table. 21 verified, 20 adjacent
+     fields with a specific job, 234 untouched, the undocumented families still
+     excluded.
+  2. **The three-column stem probe stays.** It is the smallest set that tests a
+     historical, a projected and a change value under one stem-to-section
+     assumption, and one mentor decision on that link clarifies the assumption
+     under 101 columns. Removing it "would make the subset numerically smaller
+     but scientifically less useful". **Do not shrink the subset to improve the
+     percentage.**
+  3. **All three standing cautions are approved** --- Fire Weather Index,
+     modeled historical baseline, and rendering an empty cell as "no value in
+     this file". They are **repository-level rendering rules, not hidden
+     semantic interpretations**, and inserting them conditionally does not
+     violate the raw / semantics / presentation separation. This answers the
+     question M1-WP3's report put to GUIDANCE under criterion 6.
+  4. **Criterion 6 is satisfied by the architecture**, and was not satisfied by
+     the mentor-facing document as delivered --- see the required action below.
+  5. **The stale metadata-hash disclosure is accepted with no scientific rerun.**
+     Counts, selected columns and the three examples were unaffected, the
+     artifact was regenerated, a regression test now rejects a tracked-metadata
+     hash mismatch, and the old artifact was verified to fail it. GUIDANCE calls
+     that "the correct remediation".
+  6. **The example rows and the IC records are unchanged.**
+- **The one required action, and why it was required.** Some **inferred location
+  semantics were presented as established fact outside the explicit confirmation
+  surface.** `docs/MENTOR_EXAMPLES.md` carried headings reading
+  `Stephens County, Oklahoma` and framing reading `Where it is:` while `NAME`,
+  `State` and `State_Abbr` are `inferred_candidate` fields whose readings were
+  being submitted for confirmation on that very page. The generated field-level
+  prose was correct throughout --- every inferred clause wrapped
+  `[provisional: ...]`, enforced by the build --- so the defect was precisely
+  that **the hand-authored surface bypassed machinery the generated surface
+  obeyed**. Asking "is `NAME` a county name?" further down the page does not
+  undo the anchoring, and the anchoring matters here because these columns appear
+  nowhere in the dictionary, the Census vintage is unknown, and the coordinate
+  reference system is unknown.
+- **What was changed, in full:**
+  - example titles are neutral --- `row OID_ 1, Crossmodel R106C361`;
+  - `Where it is:` became `Location-related raw fields: NAME = Stephens, State =
+    Oklahoma, ...`, quoting stored strings under a label that claims nothing and
+    saying that the four columns' meaning is checklist lines 10--15, unsettled;
+  - the location checklist item was **split three ways** --- a structural
+    observation (49 distinct non-empty values, 7 blank rows) with nothing to
+    confirm, the proposed interpretation, and a question conditional on that
+    interpretation --- so that one tick cannot confirm a character count and a
+    semantic claim together. This answers the review's "compound confirmation"
+    risk. Line numbering moved from 14 lines to 16, and every cross-reference
+    with it;
+  - a **bounded guard** was added,
+    `test_no_unwrapped_location_semantic_in_the_hand_authored_framing`, checking
+    the hand-authored surface for a fixed list of geographic words outside
+    `[provisional: ...]` wrappers and outside backticked file content, with an
+    allow-list for the checklist rows that pose them as questions. A second test
+    feeds the rejected heading back through it. As the review allows, this is a
+    bounded word check and not natural-language analysis;
+  - the WP3 report's branch, head and push state now match the reviewed packet.
+- **What was deliberately not changed:** the 41-column subset, the three
+  structural selection rules, the three selected rows, the 20 IC records, the
+  generated field-level presentation, the three standing cautions, and the
+  mentor-confirmation protocol. **No artifact under `artifacts/` was
+  regenerated**, and the coverage report and three example records remain
+  byte-identical to the reviewed state.
+- **Consequence.** The three examples go to the mentor meeting of
+  **2026-09-17**. GUIDANCE states no remaining scientific objection once the
+  framing is corrected.
+- **A standing rule this decision establishes**, beyond the immediate fix: **a
+  provisional-labelling discipline enforced only where output is generated is not
+  enforced.** Hand-authored framing around generated content is part of the
+  mentor-facing surface and is held to the same standard, by a test where a test
+  is practical.
+- **Owner:** GUIDANCE. **Placed and approved by Kaiyuan Liao, 2026-09-13.**
+- **Affected files:** `docs/M1_WP3_PREMEETING_GUIDANCE_REVIEW.md` (the review as
+  placed), `docs/MENTOR_EXAMPLES.md`, `reports/milestones/M1_WP3_REPORT.md`,
+  `tests/test_examples.py`, `docs/PROJECT_STATE.md`.
