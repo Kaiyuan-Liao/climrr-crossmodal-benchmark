@@ -1,8 +1,10 @@
 {
   "schema_version": "p0-prototype",
   "record_id": "P-STATE-1",
+  "validation_only": true,
+  "validation_banner": "**Prototype for scientific-object validation. Not an accepted phenomenon record.**",
   "prototype_notice": "PROTOTYPE. Built for M1-WP3b on Kaiyuan's decision of 2026-09-13, ahead of the GUIDANCE ruling that would authorise county/state units, aggregation and a magnitude field. It is not evidence for any milestone gate and may be revised or discarded by that ruling.",
-  "built_from_commit": "ce8df0761dc74e498ee9ef99cdccfbc61a3f9afc",
+  "built_from_commit": "b537c2e12235f0635b8b2efbd769d3d69be65b33",
   "csv_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e",
   "rounding_rule": "every derived value is rounded to 15 decimal places, half-to-even --- the precision the CSV itself stores. Raw values are never rounded: they are reported as the characters the file holds.",
   "G": {
@@ -5824,7 +5826,8 @@
           "min": "0.000000000000000",
           "max": "42.866665519999998",
           "count": "2827"
-        }
+        },
+        "not_averaged": null
       },
       {
         "index": 253,
@@ -8665,9 +8668,11 @@
           "min": "0.000000000000000",
           "max": "79.066668190000001",
           "count": "2827"
-        }
+        },
+        "not_averaged": null
       }
     ],
+    "columns_not_averaged": [],
     "change": {
       "operation": "difference_of_horizon_values per cell, then unweighted_mean",
       "operation_note": "No change column for this variable is in the pilot subset, so the change is computed as index 253 minus index 241. Both inputs are `verified_from_dictionary`; the **direction of the subtraction** is assumption A-DIR1.",
@@ -11561,6 +11566,7 @@
     "n_units_at_this_level": "50",
     "n_units_strictly_below": "27",
     "n_units_equal": "1",
+    "ranked_on": "the **signed** change value. The sign is kept, so a decrease ranks below a no-change and a no-change below an increase. PR-1 does **not** rank on absolute magnitude, and a unit in the lower third may be one with a large decrease rather than one where little changed.",
     "percentile": "54.0000",
     "percentile_definition": "100 x (units strictly below) / (units with a change value), rounded to 4 decimal places",
     "tercile": "middle_third",
@@ -11575,11 +11581,14 @@
     },
     "provenance_status": "provisional_rule",
     "ranked_against": "every state-level unit of this file with a change value for variable heatindex_day105_summer_hist_to_end85",
+    "reference_population": "every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here)",
     "distribution_membership": {
-      "how_units_were_formed": "every distinct label value in the file forms one state-level unit",
+      "how_units_were_formed": "every distinct `State` label in the file forms one state-level unit",
+      "n_keys": "50",
       "n_units": "50",
       "n_units_excluded_for_having_no_value": "0",
       "n_units_whose_label_is_the_empty_string": "1",
+      "reference_population": "every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here)",
       "empty_label_note": "A unit whose label is the empty string is counted. The 7 rows with no `State` form one such unit at state level and one at county level. Dropping them would be a judgement about what an empty label means, and this project does not have one (Q16)."
     },
     "rests_on_assumptions": [
@@ -11623,7 +11632,7 @@
       "triggered_by": "4 member cell(s) with no value on at least one column used"
     }
   ],
-  "description": "> `Historical` here means a **modeled historical baseline** --- the dictionary's historical period, 1995 to 2004, run through the same climate models. It is not an observation, a measurement, or a record of anything that happened.\n\n> The `State` and `NAME` values used to form this unit are `inferred_candidate` readings (IC-011, IC-012): the dictionary does not mention either column, and the Census vintage and coordinate reference system behind them are unknown. **This prototype groups rows by those labels**, which M1-WP3 deliberately did not do. The group is the set of rows carrying the label --- not a boundary, not a geometry, and not keyed on `GEOID`, which Phase A measured does not determine the label (A-G3).\n\n> A cell with no value is written \"no value in this file\". It is **not** a zero, it is not counted in any mean, and this record does not claim it means anything else (Q16).\n\n**Scope.** The set of rows sharing a `State` label, identified by [provisional: `California`]. Members: 2831 cell(s) --- 2827 with a value on every column used, 4 without. Cells without a value are excluded from every number below and are never read as a zero.\n\n**Quantity.** Number of Summer days with daily max heat index above 105 F -- Historical. Unit or type: Number of. Season: Summer.\n\n**Compared.** Baseline horizon Historical; future horizon End-Century; future scenario RCP8.5.\n\n**Values.** Unweighted mean over n = 2827 member cell(s): `heatindex_HIS_Day105` [provisional: 2.152729629062611]; `heatindex_E85_Day105` [provisional: 15.362681281927839]. The complete per-cell values are in the record.\n\n**Direction.** [provisional: increase], from the sign of the change value [provisional: 13.209951652865228], computed by `difference_of_horizon_values per cell, then unweighted_mean` over `heatindex_HIS_Day105`, `heatindex_E85_Day105`.\n\n**Magnitude.** [provisional rule PR-1: middle_third, at percentile 54.0000 of 50 state-level units, by PR-1, which is a placeholder and not a scientific threshold].\n\nEvery clause marked [provisional:...] rests on an inferred-candidate record or on a field derived from one: reasoned and written down, **not verified and not owner-confirmed**. The clause marked [provisional rule PR-1:...] rests on a placeholder rule, not on science.\n",
+  "description": "**Prototype for scientific-object validation. Not an accepted phenomenon record.**\n\n> `Historical` here means a **modeled historical baseline** --- the dictionary's historical period, 1995 to 2004, run through the same climate models. It is not an observation, a measurement, or a record of anything that happened.\n\n> The `State` and `NAME` values used to form this unit are `inferred_candidate` readings (IC-011, IC-012): the dictionary does not mention either column, and the Census vintage and coordinate reference system behind them are unknown. **This prototype groups rows by those labels**, which M1-WP3 deliberately did not do. The group is the set of rows carrying the label --- not a boundary, not a geometry, and not keyed on `GEOID`, which Phase A measured does not determine the label (A-G3).\n\n> A cell with no value is written \"no value in this file\". It is **not** a zero, it is not counted in any mean, and this record does not claim it means anything else (Q16).\n\n**Scope.** The set of rows sharing a `State` label, identified by [provisional: `California`]. Members: 2831 cell(s) --- 2827 with a value on every column used, 4 without. Cells without a value are excluded from every number below and are never read as a zero.\n\n**Quantity.** Number of Summer days with daily max heat index above 105 F -- Historical. Unit or type: Number of. Season: Summer.\n\n**Compared.** Baseline horizon Historical; future horizon End-Century; future scenario RCP8.5.\n\n**Values.** Unweighted mean over n = 2827 member cell(s): `heatindex_HIS_Day105` [provisional: 2.152729629062611]; `heatindex_E85_Day105` [provisional: 15.362681281927839]. Every per-cell value, averaged or not, is in the record.\n\n**Direction.** [provisional: increase], from the sign of the change value [provisional: 13.209951652865228], computed by `difference_of_horizon_values per cell, then unweighted_mean` over `heatindex_HIS_Day105`, `heatindex_E85_Day105`.\n\n**Magnitude.** [provisional rule PR-1: middle_third, at percentile 54.0000 of 50 state-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].\n\nEvery clause marked [provisional:...] rests on an inferred-candidate record or on a field derived from one: reasoned and written down, **not verified and not owner-confirmed**. The clause marked [provisional rule PR-1:...] rests on a placeholder rule, not on science.\n",
   "description_clauses": [
     {
       "field": "G.identifier",
@@ -11681,7 +11690,7 @@
     },
     {
       "field": "M.tercile",
-      "text": "middle_third, at percentile 54.0000 of 50 state-level units, by PR-1, which is a placeholder and not a scientific threshold",
+      "text": "middle_third, at percentile 54.0000 of 50 state-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold",
       "status": "provisional_rule",
       "wrapper": "provisional_rule"
     },
@@ -11699,27 +11708,32 @@
     }
   ],
   "description_generated_by": "template in climrr.phenomenon.render_description, from fields G through M",
-  "provenance_statuses": {
-    "G.level": "computed",
-    "G.identifier": "inferred_candidate",
-    "G.member_cells": "computed",
-    "G.n_cells": "computed",
-    "G.n_cells_with_value": "computed",
-    "H.concept": "verified_from_dictionary",
-    "H.columns[241].meaning": "verified_from_dictionary",
-    "H.columns[253].meaning": "verified_from_dictionary",
-    "H.columns[241].unit": "verified_from_dictionary",
-    "H.columns[253].unit": "verified_from_dictionary",
-    "S.season": "verified_from_dictionary",
-    "T.horizon": "verified_from_dictionary",
-    "C.scenario": "mixed --- see per_role",
-    "V.values": "computed",
-    "V.change": "derived_from_inferred",
-    "D.direction": "derived_from_inferred",
-    "M.percentile": "provisional_rule",
-    "M.tercile": "provisional_rule",
-    "description": "generated from the fields above by template",
-    "literature_probe": "design stub --- no retrieval has been performed"
+  "P": {
+    "letter": "P",
+    "label": "provenance",
+    "letter_reading_note": "Two conventions exist and neither is settled. This record uses the mentor's and Kaiyuan's: S = season, T = time horizon, C = climate scenario, P = provenance. The M1-WP3b GUIDANCE ruling uses S = scenario, T = temporal horizon, C = compared quantity, P = provenance. They agree on P and on what is carried, and differ on which letter names the scenario. The mentor's letters are emitted because they are the ones she has seen. D-013 records both for the next GUIDANCE packet to settle. No number depends on the choice.",
+    "per_field": {
+      "G.level": "computed",
+      "G.identifier": "inferred_candidate",
+      "G.member_cells": "computed",
+      "G.n_cells": "computed",
+      "G.n_cells_with_value": "computed",
+      "H.concept": "verified_from_dictionary",
+      "H.columns[241].meaning": "verified_from_dictionary",
+      "H.columns[253].meaning": "verified_from_dictionary",
+      "H.columns[241].unit": "verified_from_dictionary",
+      "H.columns[253].unit": "verified_from_dictionary",
+      "S.season": "verified_from_dictionary",
+      "T.horizon": "verified_from_dictionary",
+      "C.scenario": "mixed --- see per_role",
+      "V.values": "computed",
+      "V.change": "derived_from_inferred",
+      "D.direction": "derived_from_inferred",
+      "M.percentile": "provisional_rule",
+      "M.tercile": "provisional_rule",
+      "description": "generated from the fields above by template",
+      "literature_probe": "design stub --- no retrieval has been performed"
+    }
   },
   "literature_probe": {
     "kind": "design stub",

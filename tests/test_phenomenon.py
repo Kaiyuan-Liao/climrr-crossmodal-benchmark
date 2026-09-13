@@ -26,7 +26,9 @@ from climrr.phenomenon import (
     LEVELS,
     PROVISIONAL_RULE,
     UNKNOWN,
+    VALIDATION_BANNER,
     PhenomenonError,
+    aggregate_column,
     apply_pr1,
     assumption,
     assumptions_for,
@@ -38,6 +40,7 @@ from climrr.phenomenon import (
     dstr,
     mean_from_total,
     quantise_derived,
+    refuse_to_mean,
     role_of,
     tercile_of,
     unlabelled_inferred_text,
@@ -106,7 +109,10 @@ def _build(level, identifier, members, variable, spec, distribution=None):
         variable=variable,
         semantics_by_index=_semantics(spec),
         sorted_change_values=sorted(values),
-        distribution_membership={"n_units": str(len(values))},
+        distribution_membership={
+            "n_units": str(len(values)),
+            "reference_population": "a fixture population of " + str(len(values)) + " units",
+        },
         built_from_commit="0" * 40,
         csv_sha256="f" * 64,
         assumption_ids=["A1", "A-G0"],
@@ -225,9 +231,15 @@ def test_a_cell_record_carries_the_raw_values_and_no_aggregate():
     # The change column is inferred, so the direction is derived from an
     # inference even though the cell identifier is verified.
     assert record["D"]["provenance_status"] == DERIVED_FROM_INFERRED
-    # The verified percent-change column corroborates and says so.
-    assert record["D"]["corroborating"]["provenance_status"] == DERIVED_FROM_VERIFIED
-    assert record["D"]["corroborating"]["agrees_with_change_column"] == "True"
+    # The verified percent-change column corroborates with a **count of signs**,
+    # never a mean: it is a percent change and the aggregator refuses it.
+    corroborating = record["D"]["corroborating"]
+    assert corroborating["provenance_status"] == DERIVED_FROM_VERIFIED
+    assert corroborating["sign_word"] == "positive"
+    assert corroborating["n_member_cells_with_that_sign"] == "1"
+    assert corroborating["of_n_member_cells"] == "1"
+    assert corroborating["agrees_on_every_member_cell"] == "True"
+    assert "value" not in corroborating and "direction" not in corroborating
 
 
 def test_a_county_record_lists_every_member_and_aggregates_over_them():
@@ -534,3 +546,189 @@ def test_an_identifier_that_is_entirely_code_is_still_required_to_be_labelled():
         "[provisional: `California`]", "`California`"
     )
     assert [field for field, _text in unlabelled_inferred_text(record)] == ["G.identifier"]
+
+
+# --- what may not be averaged (M1-WP3b ruling, criterion 7) -------------------
+
+
+def test_a_percent_change_column_is_refused_by_the_aggregator():
+    """The defect the ruling found: `wildfire_summer_Pend` was being meaned."""
+    entry = _semantics(FWI_SEMANTICS)[195]
+    entry["unit"] = {"value": "Percent Change", "provenance": FROM_DICTIONARY}
+    assert "Percent Change" in refuse_to_mean(entry)
+    with pytest.raises(PhenomenonError, match="may not be averaged"):
+        aggregate_column(entry, [Decimal("20"), Decimal("30")])
+
+
+def test_an_identifier_column_is_refused_by_the_aggregator():
+    entry = _semantics(FWI_SEMANTICS)[189]
+    entry["unit"] = {"value": "Text ID", "provenance": FROM_DICTIONARY}
+    assert "Text ID" in refuse_to_mean(entry)
+    with pytest.raises(PhenomenonError, match="may not be averaged"):
+        aggregate_column(entry, [Decimal("1")])
+
+
+def test_every_column_of_the_location_family_is_refused():
+    """`X` and `Y` parse as decimals; their mean would be an undefined centroid."""
+    from climrr.examples import PILOT_FAMILIES
+
+    location = next(f for f in PILOT_FAMILIES if f["key"] == "location")
+    for index in location["indices"]:
+        entry = {
+            "index": index,
+            "column": f"c{index}",
+            "unit": {"value": None, "provenance": FROM_NOWHERE},
+        }
+        assert refuse_to_mean(entry) is not None, index
+        with pytest.raises(PhenomenonError, match="may not be averaged"):
+            aggregate_column(entry, [Decimal("1")])
+
+
+def test_an_ordinary_quantity_column_is_not_refused():
+    """A guard that refuses everything would be worse than none."""
+    entry = _semantics(FWI_SEMANTICS)[189]
+    assert refuse_to_mean(entry) is None
+    assert aggregate_column(entry, [Decimal("1"), Decimal("3")])["unweighted_mean"] == (
+        "2." + "0" * DERIVED_DECIMAL_PLACES
+    )
+
+
+def test_an_aggregate_record_reports_counts_for_the_refused_column_and_no_mean():
+    members = [
+        _fwi_member("R1C1", "10.000000000000000", "12.000000000000000",
+                    "2.000000000000000", "20.000000000000000"),
+        _fwi_member("R1C2", "20.000000000000000", "26.000000000000000",
+                    "6.000000000000000", "30.000000000000000"),
+    ]
+    spec = dict(FWI_SEMANTICS)
+    semantics = _semantics(spec)
+    semantics[195]["unit"] = {"value": "Percent Change", "provenance": FROM_DICTIONARY}
+    record = build_record(
+        record_id="T-COUNTY",
+        level="county",
+        identifier={"State": "Oklahoma", "NAME": "Stephens"},
+        members=members,
+        variable=FWI,
+        semantics_by_index=semantics,
+        sorted_change_values=[Decimal("1"), Decimal("4"), Decimal("9")],
+        distribution_membership={"n_units": "3", "reference_population": "a test fixture"},
+        built_from_commit="0" * 40,
+        csv_sha256="f" * 64,
+        assumption_ids=["A1"],
+    )
+    by_index = {column["index"]: column for column in record["V"]["per_column"]}
+    assert by_index[195]["aggregates"] is None
+    assert by_index[195]["not_averaged"]["n_positive"] == "2"
+    assert by_index[195]["not_averaged"]["n"] == "2"
+    assert by_index[195]["per_cell_raw_values"] == [
+        "20.000000000000000",
+        "30.000000000000000",
+    ]
+    assert by_index[189]["aggregates"]["unweighted_mean"] == "15." + "0" * 15
+    assert record["V"]["columns_not_averaged"] == [
+        {"index": 195, "column": "wildfire_summer_Pend",
+         "reason": by_index[195]["not_averaged"]["reason"]}
+    ]
+    # and the prose neither shows a mean of it nor hides that it exists
+    assert "Not averaged: `wildfire_summer_Pend`" in record["description"]
+    assert "positive on 2 of 2 member cells" in record["description"]
+
+
+# --- the M field states what it ranks and against what -----------------------
+
+
+def test_the_magnitude_field_says_it_ranks_on_the_signed_change():
+    record = _build(
+        "cell",
+        {"Crossmodel": "R1C1"},
+        [_fwi_member("R1C1", "25.080200200000000", "31.189300540000001",
+                     "6.109189990000000", "24.358664999999998")],
+        FWI,
+        FWI_SEMANTICS,
+    )
+    ranked_on = " ".join(record["M"]["ranked_on"].split())
+    assert "the **signed** change value" in ranked_on
+    assert "does **not** rank on absolute magnitude" in ranked_on
+    assert "Ranking is on the signed change value, not on its absolute size" in (
+        record["description"]
+    )
+
+
+def test_the_magnitude_field_carries_the_reference_population_definition():
+    record = _build(
+        "cell",
+        {"Crossmodel": "R1C1"},
+        [_fwi_member("R1C1", "25.080200200000000", "31.189300540000001",
+                     "6.109189990000000", "24.358664999999998")],
+        FWI,
+        FWI_SEMANTICS,
+    )
+    assert record["M"]["reference_population"] == "a fixture population of 4 units"
+    assert "The reference population is" in record["description"]
+
+
+def test_a_missing_reference_population_is_named_as_a_defect_not_left_blank():
+    record = build_record(
+        record_id="T",
+        level="cell",
+        identifier={"Crossmodel": "R1C1"},
+        members=[_fwi_member("R1C1", "25.080200200000000", "31.189300540000001",
+                             "6.109189990000000", "24.358664999999998")],
+        variable=FWI,
+        semantics_by_index=_semantics(FWI_SEMANTICS),
+        sorted_change_values=[Decimal(1)],
+        distribution_membership={},
+        built_from_commit="0" * 40,
+        csv_sha256="f" * 64,
+        assumption_ids=["A1"],
+    )
+    assert "defect" in record["M"]["reference_population"]
+
+
+# --- validation-only framing and the P field ---------------------------------
+
+
+def test_every_record_is_flagged_validation_only_and_banners_its_description():
+    for level, identifier, members, variable, spec in (
+        ("cell", {"Crossmodel": "R1C1"},
+         [_fwi_member("R1C1", "25.080200200000000", "31.189300540000001",
+                      "6.109189990000000", "24.358664999999998")], FWI, FWI_SEMANTICS),
+        ("state", {"State": "California"},
+         [_member("R1C1", {241: "1.000000000000000", 253: "36.000000000000000"})],
+         HEAT, HEAT_SEMANTICS),
+    ):
+        record = _build(level, identifier, members, variable, spec)
+        assert record["validation_only"] is True
+        assert record["validation_banner"] == VALIDATION_BANNER
+        assert record["description"].startswith(VALIDATION_BANNER)
+
+
+def test_the_provenance_map_is_carried_as_the_field_P():
+    record = _build(
+        "cell",
+        {"Crossmodel": "R1C1"},
+        [_fwi_member("R1C1", "25.080200200000000", "31.189300540000001",
+                     "6.109189990000000", "24.358664999999998")],
+        FWI,
+        FWI_SEMANTICS,
+    )
+    assert record["P"]["letter"] == "P"
+    assert record["P"]["per_field"]["D.direction"] == record["D"]["provenance_status"]
+    assert record["P"]["per_field"]["M.tercile"] == PROVISIONAL_RULE
+    assert "provenance_statuses" not in record
+
+
+def test_both_letter_conventions_travel_with_every_record():
+    """The mentor's letters are emitted; the ruling's are recorded beside them."""
+    record = _build(
+        "cell",
+        {"Crossmodel": "R1C1"},
+        [_fwi_member("R1C1", "25.080200200000000", "31.189300540000001",
+                     "6.109189990000000", "24.358664999999998")],
+        FWI,
+        FWI_SEMANTICS,
+    )
+    note = record["P"]["letter_reading_note"]
+    assert "S = season" in note and "T = time horizon" in note
+    assert "S = scenario" in note and "C = compared quantity" in note
+    assert "No number depends on the choice." in note

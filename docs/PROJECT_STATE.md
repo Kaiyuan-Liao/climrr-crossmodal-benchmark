@@ -11,12 +11,13 @@ session reasoning correctly from out-of-date facts and repeating them.
 | **Latest accepted commit** | `62c9137` --- the merge of M1-WP1 into `main`, accepted by GUIDANCE at reviewed head `fceee7f` (D-009) |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at |
 | **Branch** | `work/m1-wp3`, from `work/m1-wp2`. **Pushed by Kaiyuan, not merged.** `origin/work/m1-wp3` was at `c8f4711` when GUIDANCE took the pre-meeting review; the revision commit after it is local until he pushes again. The EXECUTOR does not push (D-003) |
-| **M1-WP3b branch** | **`work/m1-wp3b`, from `work/m1-wp3` at `ad13649`. Not merged, not pushed** --- the work package forbids both, and `origin` has no such branch. Three commits: Phase A, Phases B–D, Phase E |
+| **M1-WP3b branch** | **`work/m1-wp3b`, from `work/m1-wp3` at `ad13649`. Not merged, not pushed** --- the work package forbids both, and `origin` has no such branch. Four commits: Phase A, Phases B–D, Phase E, the post-ruling fixes (D-013) |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
 | **M1-WP1 review** | **PASS**, GUIDANCE, at reviewed head `fceee7f` (D-009). A work-package pass, **not** the M1 milestone gate |
 | **D-010 ruling** | **PASS WITH ACTIONS**, GUIDANCE, 2026-09-13. **D-010 decided; D-011 records the ruling and its boundaries.** Both approved by Kaiyuan |
 | **M1-WP3 pre-meeting review** | **REVISE --- framing only**, GUIDANCE, 2026-09-13, at reviewed head `c8f4711` (D-012). The scientific design is **accepted**: subset, rows, IC records, generated presentation, cautions and mentor protocol all approved unchanged. The required framing revision **is done** |
-| **M1-WP3b** | **Prototype, built ahead of its ruling by Kaiyuan's decision of 2026-09-13 (R-002). D-010/D-011 forbid aggregation, county/state units and a magnitude field inside an M1-WP3 example; this package does all three deliberately.** A GUIDANCE ruling was requested in parallel and is **pending**. Nothing in it is milestone evidence and its report proposes no gate status |
+| **M1-WP3b ruling** | **PASS WITH ACTIONS**, GUIDANCE, 2026-09-13, recorded as **D-013**. M1-WP3b is admitted as an explicit **milestone-order exception** --- early M3-style validation while M1 is still open. **The four required changes are applied.** Nothing in the package is milestone evidence; every record carries `validation_only` and the banner "Prototype for scientific-object validation. Not an accepted phenomenon record.", and its report proposes no gate status |
+| **Outstanding on that ruling** | **`docs/M1_WP3B_GUIDANCE_RULING.md` is not in the repository.** It is named as placed by Kaiyuan and is absent from the tree and from every commit. **D-013 records the decisions as relayed by the COORDINATOR and quotes nothing from the ruling**; no criterion or action text was reconstructed. Placing the file is for Kaiyuan |
 | **Next review event** | **The mentor**, on `docs/MENTOR_EXAMPLES.md` --- the group meeting 2026-09-14 and the one-on-one **2026-09-17**, which is the one GUIDANCE names for the examples. GUIDANCE states no remaining scientific objection |
 | **Blockers** | **M1 is blocked on mentor answers to the three examples.** M1-WP3b is blocked on nothing --- it is complete as a prototype and inert; what it *produces* is blocked on the GUIDANCE ruling and on the group's answer to what a phenomenon's unit should be |
 
@@ -71,8 +72,11 @@ session reasoning correctly from out-of-date facts and repeating them.
   the hand-authored surface and a second test feeds the rejected heading back
   through it. **The standing rule this establishes: a labelling discipline
   enforced only where output is generated is not enforced.**
-- **M1-WP3b built three prototype phenomenon units, and they are prototypes.**
-  Schema version `p0-prototype`, not `v1`. One grid cell (`R106C361`), one
+- **M1-WP3b built three prototype phenomenon units, and the ruling admitted them
+  as validation objects and nothing more.** Every record carries
+  `validation_only` and opens with **"Prototype for scientific-object
+  validation. Not an accepted phenomenon record."** Schema version
+  `p0-prototype`, not `v1`. One grid cell (`R106C361`), one
   county-shaped row set (`Oklahoma` / `Stephens`, 10 rows), one state-shaped row
   set (`California`, 2,831 rows of which 2,827 carry a value). Every derived
   field takes the **weakest** status of its inputs, with the consequence that
@@ -86,12 +90,29 @@ session reasoning correctly from out-of-date facts and repeating them.
   rule: **no row set in this project may be keyed on `GEOID`**, and none is. A
   county here is the set of rows sharing a `(State, NAME)` label (A-G3,
   computed), and nothing else.
+- **A column's dictionary type decides what arithmetic it admits.** The ruling
+  found that `P-COUNTY-1` was reporting an **unweighted mean of
+  `wildfire_summer_Pend`**, a column the dictionary itself labels "Percent
+  Change". The mean is gone; the ten per-cell values are kept; the corroboration
+  is now a count --- *positive on 10 of 10 member cells*. The fix is general:
+  `aggregate_column` **refuses** any column typed `Percent Change` or `Text ID`
+  and any location column, with tests in both directions. **The standing rule:
+  whether the characters parse as a number is not the question.**
 - **The magnitude field is a placeholder and says so everywhere it appears.**
   `provisional_rule PR-1` ranks a unit's change value against every unit at the
   same level and reports a tercile. It is not a threshold, rests on no
   literature, and is wrapped in its own distinct mark --- `[provisional rule
   PR-1: ...]` --- so a reader can tell a provisional *value* from a placeholder
-  *rule*.
+  *rule*. It ranks on the **signed** change value, not on absolute magnitude ---
+  a unit in the lower third may be one with a large **decrease** --- and every
+  `M` field now says so and carries the exact reference-population definition.
+- **Two conventions for the schema letters exist and neither is settled.** The
+  mentor and Kaiyuan use S = season, T = horizon, C = scenario; the WP3b ruling
+  uses S = scenario, T = temporal horizon, C = compared quantity. **The code
+  emits the mentor's**, because they are what she has already seen. `P`, the
+  per-field provenance map, is now an explicit field and both conventions agree
+  on it. D-013 records the pair for the next GUIDANCE packet. **No number
+  depends on the choice.**
 - **The literature probe is a design stub and nothing was retrieved.** It
   already yields one finding: **at cell level there is no usable place term.**
   A grid-cell id is not a phrase any paper contains.
@@ -160,7 +181,7 @@ ahead of a ruling, which is why it is unmerged, unpushed, versioned
 
 - Charter: [BLUEPRINT.md](BLUEPRINT.md)
 - Plan and gate criteria: [PROJECT_PLAN.md](PROJECT_PLAN.md)
-- Decisions, including D-010, D-011 and D-012: [DECISION_LOG.md](DECISION_LOG.md)
+- Decisions, including D-010, D-011, D-012 and **D-013**: [DECISION_LOG.md](DECISION_LOG.md)
 - The ruling that authorised WP3: [M1_D010_GUIDANCE_RULING.md](M1_D010_GUIDANCE_RULING.md)
 - The pre-meeting review of WP3 (**REVISE**, framing only): [M1_WP3_PREMEETING_GUIDANCE_REVIEW.md](M1_WP3_PREMEETING_GUIDANCE_REVIEW.md)
 - The pilot subset, its rationale and its exclusions: [PILOT_SUBSET.md](PILOT_SUBSET.md)

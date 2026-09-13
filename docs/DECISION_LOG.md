@@ -673,3 +673,148 @@ not yet in force and must not be relied on by downstream work.
 - **Affected files:** `docs/M1_WP3_PREMEETING_GUIDANCE_REVIEW.md` (the review as
   placed), `docs/MENTOR_EXAMPLES.md`, `reports/milestones/M1_WP3_REPORT.md`,
   `tests/test_examples.py`, `docs/PROJECT_STATE.md`.
+
+---
+
+## D-013 --- The M1-WP3b GUIDANCE ruling: a milestone-order exception, and what it required
+
+- **Date:** 2026-09-13
+- **Status:** **decided.** Records the M1-WP3b ruling, gate status **PASS WITH
+  ACTIONS**, placed by Kaiyuan and relayed to the EXECUTOR by the COORDINATOR.
+- **A defect in this entry, stated rather than hidden:** the ruling document
+  `docs/M1_WP3B_GUIDANCE_RULING.md` **is not in the repository.** It is named by
+  the work package as placed by Kaiyuan, and it is absent from the working tree
+  and from every commit on every branch. This entry therefore records the
+  decisions **as relayed by the COORDINATOR** and quotes nothing from the ruling
+  itself. **No criterion text, action text, or numbering beyond what the
+  COORDINATOR stated has been reconstructed or inferred.** Placing the file is
+  outstanding for Kaiyuan, and until it is placed this entry is the only record
+  of the ruling in the repository.
+
+### 1. The milestone-order exception
+
+**M1-WP3b is admitted as an explicit exception to the milestone order:** early
+**M3-style validation** --- phenomenon units, geographic aggregation, a magnitude
+field --- carried out **while M1 is still open**. The D-010/D-011 boundaries that
+forbid those three inside an M1-WP3 example are not repealed; the exception is
+granted to this package, for the purpose of validating the scientific object
+before the project builds on it.
+
+**What follows, and is enforced in code and in every generated page:**
+
+- every prototype record carries `"validation_only": true`;
+- every record's `description` **opens** with the banner **"Prototype for
+  scientific-object validation. Not an accepted phenomenon record."**, and so
+  does every page of `docs/PHENOMENON_PROTOTYPES.md` and of
+  `docs/GROUP_MEETING_2026-09-14.md`;
+- the schema stays versioned `p0-prototype`, so adopting it remains a visible
+  act;
+- the package stays unmerged and unpushed;
+- `reports/milestones/M1_WP3b_PROTOTYPE_REPORT.md` proposes no gate status.
+
+### 2. Criterion 7 --- a percent change may not be averaged
+
+**The ruling found a real defect and it is fixed.** `P-COUNTY-1` reported an
+**unweighted mean of `wildfire_summer_Pend`**, a column the dictionary itself
+labels "Percent Change". The mean of per-cell percent changes weights a cell
+with a near-zero baseline as heavily as one with a large baseline, and it is not
+the percent change of the aggregate. The number was reported in `V` and repeated
+in the generated description.
+
+**What changed:**
+
+- the mean of `Pend` is gone from `V` and from every generated sentence;
+- **every per-cell `Pend` value is kept** in the record, complete;
+- the corroboration line is now a **count**: "`wildfire_summer_Pend` is positive
+  on 10 of 10 member cells";
+- the rule is **general, not a patch on one column.**
+  `climrr.phenomenon.aggregate_column` **refuses** any column whose recorded
+  dictionary type contains `Percent Change` or `Text ID`, and any column in the
+  location family --- `X` and `Y` parse as decimals and their mean would be a
+  centroid this project has not defined and could not justify without the
+  coordinate reference system it does not know. A refused column reports counts
+  of sign, never a mean, and `V.columns_not_averaged` names it and says why;
+- tests pin the refusal for a percent-change column, an identifier column and
+  every location column, **and** pin that an ordinary quantity column is *not*
+  refused --- a guard that refuses everything would be worse than none.
+
+**The standing rule this establishes:** *a column's dictionary type decides what
+arithmetic it admits.* Whether the characters parse as a number is not the
+question.
+
+### 3. The schema letters --- two conventions, neither settled
+
+The ruling defines **S = scenario, T = temporal horizon, C = compared quantity**,
+and asks for a **P = provenance** field. The mentor and Kaiyuan use **S = season,
+T = horizon, C = scenario**.
+
+**Decision: the code emits the mentor's letters**, because they are the ones she
+has already seen in `docs/MENTOR_EXAMPLES.md` and in the prototypes, and
+changing them now would mean changing what she is being asked about. **`P` is
+added as an explicit field** --- the per-field status map already existed and is
+now named `P` rather than `provenance_statuses`. **Both conventions travel
+together** in every record's `P.letter_reading_note`, in the module docstring,
+in `docs/PHENOMENON_PROTOTYPES.md`, and here, **for the next GUIDANCE packet to
+settle.**
+
+The two agree on `P` and on everything a record carries. They differ on which
+letter names the scenario and on whether a letter names the season or the
+compared quantity. **No number depends on the choice**, and no code reads a
+letter as a key to a meaning.
+
+### 4. Action 10 / criterion 10 --- say what is ranked, and against what
+
+Every `M` field now states:
+
+- **what is ranked**: the **signed** change value. The sign is kept, so a
+  decrease ranks below a no-change and a no-change below an increase. PR-1 does
+  **not** rank on absolute magnitude. This matters because a unit in the lower
+  third may be one with a **large decrease** rather than one where little
+  changed, and a reader assuming the other convention would read it backwards;
+- **the exact reference population**, assembled from the counts rather than
+  asserted --- which key forms a unit, how many keys there are, the inclusion
+  test and how many it includes and excludes, how a unit's change value is
+  computed, and that units whose label is the empty string are counted.
+
+The same two facts appear inside the generated magnitude clause, so they travel
+with the sentence rather than only with the JSON.
+
+`docs/GROUP_MEETING_2026-09-14.md` now names the **`GEOID` column** and the
+**`(State, NAME)` label** where it previously wrote "the tract-like id column"
+and "county label", and carries the sentence the ruling asked for: **"The `GEOID`
+column does not determine the `(State, NAME)` label: 3,234 `GEOID` values appear
+under more than one label. What that means is an open question for the data
+owner."**
+
+### 5. What did not change
+
+No number in any record changed as a result of this ruling except by the removal
+of the `Pend` mean. The three units, the pilot subset, the assumptions register,
+the provenance discipline, PR-1's arithmetic, and the standing cautions are all
+as M1-WP3b delivered them.
+
+- **Alternatives considered on the letters:** (a) adopt the ruling's letters ---
+  rejected, it changes what the mentor has already seen two days before she sees
+  it again, for no gain in meaning. (b) emit both sets of letters in every field
+  --- rejected, it doubles the surface a reader must hold without deciding
+  anything.
+- **Alternatives considered on the refused columns:** (a) patch `P-COUNTY-1`
+  only --- rejected, the same defect would reappear on any percent-change column
+  in any future variable. (b) report min, max and median of a percent change in
+  place of the mean --- rejected as re-opening the same argument; a count of
+  signs makes no arithmetic claim about the quantity.
+- **Consequences:** `V.per_column[...].aggregates` is `None` for a refused column
+  rather than absent, so a refusal cannot be mistaken for an oversight. Any
+  future variable that reaches for a mean of a percent-change or identifier
+  column will fail the build rather than produce a number.
+- **Owner:** GUIDANCE. **Placed and approved by Kaiyuan Liao, 2026-09-13**,
+  relayed by the COORDINATOR.
+- **Affected files:** `src/climrr/phenomenon.py`,
+  `scripts/build_phenomenon_prototypes.py`,
+  `artifacts/phenomena/prototypes/P-CELL-1.json`,
+  `artifacts/phenomena/prototypes/P-COUNTY-1.json`,
+  `artifacts/phenomena/prototypes/P-STATE-1.json`,
+  `docs/PHENOMENON_PROTOTYPES.md`, `docs/GROUP_MEETING_2026-09-14.md`,
+  `reports/milestones/M1_WP3b_PROTOTYPE_REPORT.md`, `docs/PROJECT_STATE.md`,
+  `tests/test_phenomenon.py`, `tests/test_group_handout.py`.
+  **Not present and outstanding: `docs/M1_WP3B_GUIDANCE_RULING.md`.**

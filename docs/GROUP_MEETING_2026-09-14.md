@@ -1,5 +1,7 @@
 # Turning a table row into something a paper could talk about
 
+**Prototype for scientific-object validation. Not an accepted phenomenon record.**
+
 **For the group meeting, 2026-09-14.** Everything below is a first attempt. The
 point of showing it is to find out where it is wrong before it is built on.
 
@@ -44,24 +46,33 @@ this table is quoted from its documentation and some of it is our reading.
 ## How the three records were built
 
 1. **The unit was chosen first, by identity, never by size.** One row that an
-   earlier example already used; the county label that row carries; and the
-   state label of a second example row. No number was looked at in the choosing.
+   earlier example already used; the `(State, NAME)` label that row carries; and
+   the `State` label of a second example row. No number was looked at in the
+   choosing.
 2. **Members were taken as row sets.** A "county" here is *the set of rows
-   carrying the same `State` and `NAME` label* --- not a boundary. The tract-like
-   id column cannot be used for this: 3,234 of its values appear against more
-   than one county label, so it does not identify one.
+   carrying the same `State` and `NAME` label* --- not a boundary. The `GEOID`
+   column cannot be used for this. **The `GEOID` column does not determine the
+   `(State, NAME)` label: 3,234 `GEOID` values appear under more than one label.
+   What that means is an open question for the data owner.**
 3. **Every member is listed, none sampled.** The `Oklahoma` / `Stephens`
    label covers 10 rows; the `California` label covers 2,831, of which 2,827
    carry a heat-index value. Blanks are excluded from the averages and never
    read as zeros.
 4. **Aggregation is a plain unweighted average**, every cell counting once. We
    do not know that cells are equal in area; nothing in the file says.
-5. **The prose is generated from the fields**, clause by clause, and the build
+5. **Some columns are never averaged.** `wildfire_summer_Pend` is a *percent
+   change*, and the mean of per-cell percent changes is not the percent change
+   of the group --- it weights a cell with a tiny baseline as heavily as a large
+   one. It is reported as a count of signs instead, and every per-cell value is
+   kept.
+6. **The prose is generated from the fields**, clause by clause, and the build
    fails if a value we reasoned reaches the text without its mark.
 
 ## The three records
 
 ### One grid cell
+
+**Prototype for scientific-object validation. Not an accepted phenomenon record.**
 
 **Scope.** One grid cell, identified by `R106C361`. Members: 1 cell(s) --- 1 with a value on every column used, 0 without. Cells without a value are excluded from every number below and are never read as a zero.
 
@@ -71,11 +82,13 @@ this table is quoted from its documentation and some of it is our reading.
 
 **Values.** `wildfire_summer_Hist` 25.080200200000000; `wildfire_summer_Endc` 31.189300540000001; `wildfire_summer_Dend` 6.109189990000000; `wildfire_summer_Pend` 24.358664999999998 --- read from the file, exactly as stored.
 
-**Direction.** [provisional: increase], from the sign of the change value [provisional: 6.109189990000000], computed by `change_column_value` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` gives increase on the same unit; the two signs agree: True.
+**Direction.** [provisional: increase], from the sign of the change value [provisional: 6.109189990000000], computed by `change_column_value` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` is positive on 1 of 1 member cell. It is a percent change and is never averaged here.
 
-**Magnitude.** [provisional rule PR-1: upper_third, at percentile 88.5253 of 62834 cell-level units, by PR-1, which is a placeholder and not a scientific threshold].
+**Magnitude.** [provisional rule PR-1: upper_third, at percentile 88.5253 of 62834 cell-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `Crossmodel` value in the file, each forming one cell-level unit (62834 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (62834 included, 0 excluded); its change value is the change value of its one cell; units whose label is the empty string are included (0 here). PR-1 is a placeholder and not a scientific threshold].
 
 ### One county-shaped row set
+
+**Prototype for scientific-object validation. Not an accepted phenomenon record.**
 
 **Scope.** The set of rows sharing a `(State, NAME)` label, identified by [provisional: `Oklahoma`, `Stephens`]. Members: 10 cell(s) --- 10 with a value on every column used, 0 without. Cells without a value are excluded from every number below and are never read as a zero.
 
@@ -83,13 +96,15 @@ this table is quoted from its documentation and some of it is our reading.
 
 **Compared.** Baseline horizon the modeled historical decade, 1995-2004; future horizon End-Century, the modeled decade 2085-2094; future scenario RCP8.5.
 
-**Values.** Unweighted mean over n = 10 member cell(s): `wildfire_summer_Hist` [provisional: 25.784530258000000]; `wildfire_summer_Endc` [provisional: 31.867660141000000]; `wildfire_summer_Dend` [provisional: 6.083151960000000]; `wildfire_summer_Pend` [provisional: 23.603612800000000]. The complete per-cell values are in the record.
+**Values.** Unweighted mean over n = 10 member cell(s): `wildfire_summer_Hist` [provisional: 25.784530258000000]; `wildfire_summer_Endc` [provisional: 31.867660141000000]; `wildfire_summer_Dend` [provisional: 6.083151960000000]. Not averaged: `wildfire_summer_Pend`, because its recorded type is "Percent Change" --- a percent change is a ratio, the mean of per-cell ratios weights a cell with a near-zero baseline as heavily as one with a large baseline, and it is not the percent change of the aggregate. The M1-WP3b ruling forbids taking a mean of it (criterion 7). Every per-cell value, averaged or not, is in the record.
 
-**Direction.** [provisional: increase], from the sign of the change value [provisional: 6.083151960000000], computed by `change_column_value per cell, then unweighted_mean` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` gives [provisional: increase] on the same unit; the two signs agree: True.
+**Direction.** [provisional: increase], from the sign of the change value [provisional: 6.083151960000000], computed by `change_column_value per cell, then unweighted_mean` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` is [provisional: positive on 10 of 10 member cells]. It is a percent change and is never averaged here.
 
-**Magnitude.** [provisional rule PR-1: upper_third, at percentile 90.6260 of 3019 county-level units, by PR-1, which is a placeholder and not a scientific threshold].
+**Magnitude.** [provisional rule PR-1: upper_third, at percentile 90.6260 of 3019 county-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].
 
 ### One state-shaped row set
+
+**Prototype for scientific-object validation. Not an accepted phenomenon record.**
 
 **Scope.** The set of rows sharing a `State` label, identified by [provisional: `California`]. Members: 2831 cell(s) --- 2827 with a value on every column used, 4 without. Cells without a value are excluded from every number below and are never read as a zero.
 
@@ -97,11 +112,11 @@ this table is quoted from its documentation and some of it is our reading.
 
 **Compared.** Baseline horizon Historical; future horizon End-Century; future scenario RCP8.5.
 
-**Values.** Unweighted mean over n = 2827 member cell(s): `heatindex_HIS_Day105` [provisional: 2.152729629062611]; `heatindex_E85_Day105` [provisional: 15.362681281927839]. The complete per-cell values are in the record.
+**Values.** Unweighted mean over n = 2827 member cell(s): `heatindex_HIS_Day105` [provisional: 2.152729629062611]; `heatindex_E85_Day105` [provisional: 15.362681281927839]. Every per-cell value, averaged or not, is in the record.
 
 **Direction.** [provisional: increase], from the sign of the change value [provisional: 13.209951652865228], computed by `difference_of_horizon_values per cell, then unweighted_mean` over `heatindex_HIS_Day105`, `heatindex_E85_Day105`.
 
-**Magnitude.** [provisional rule PR-1: middle_third, at percentile 54.0000 of 50 state-level units, by PR-1, which is a placeholder and not a scientific threshold].
+**Magnitude.** [provisional rule PR-1: middle_third, at percentile 54.0000 of 50 state-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].
 
 ### About the magnitude field
 

@@ -1,13 +1,14 @@
 """Prototype phenomenon records, schema version `p0-prototype`.
 
-**Everything in this module is a prototype.** It was written for M1-WP3b on
-Kaiyuan's decision of 2026-09-13, following the mentor's direction R-002, while
-the GUIDANCE ruling that would authorise it is still pending. The D-010 ruling
-in force at the time of writing forbids geographic aggregation, magnitude
-categories and county/state units in M1-WP3 examples; this module does all
-three, deliberately and under the owner's authority, so that the group and the
-mentor have something concrete to react to. Nothing built here is evidence for
-any milestone gate, and the ruling may discard it.
+**Everything in this module is a prototype for scientific-object validation.
+Nothing it produces is an accepted phenomenon record.** It was written for
+M1-WP3b on Kaiyuan's decision of 2026-09-13, following the mentor's direction
+R-002, ahead of the GUIDANCE ruling that would authorise it. That ruling came
+back **PASS WITH ACTIONS** and is recorded as D-013, which admits M1-WP3b as an
+explicit **milestone-order exception**: early M3-style validation carried out
+while M1 is still open. Nothing built here is evidence for any milestone gate,
+every record carries `validation_only` and says so in its own first line, and
+the schema stays versioned `p0-prototype` so that adopting it is a visible act.
 
 What a record is
 ----------------
@@ -24,15 +25,23 @@ operations that produced every derived number. The tuple is
     V  values         the raw strings, the operation, and the result
     D  direction      the sign of the change quantity
     M  magnitude      a tercile from provisional rule PR-1
+    P  provenance     the status of every field above, one line each
 
-**The reading of the letters `S`, `T` and `C` is this module's, not a decided
-one.** The work package names them without defining them, and the blueprint's
-phenomenon-schema list runs "season; baseline period; future period; scenario",
-which is the order followed here. If the COORDINATOR meant `S` for scenario and
-`C` for something else, this is the field to rename --- it changes three labels
-and no number.
+Two conventions for the letters, and neither is settled
+-------------------------------------------------------
 
-Four rules the code enforces
+The mentor and Kaiyuan read them as **S = season, T = time horizon, C = climate
+scenario, P = provenance**. The M1-WP3b GUIDANCE ruling reads them as
+**S = scenario, T = temporal horizon, C = compared quantity, P = provenance**.
+
+The two agree on `P` and on everything a record carries; they disagree only on
+which letter names the scenario, and on whether a letter names the season or the
+compared quantity. **The code emits the mentor's letters**, because they are the
+ones she has already seen, and every record carries
+`SCHEMA_LETTER_CONVENTIONS` so that a reader meets both. D-013 records the pair
+for the next GUIDANCE packet to settle. **No number depends on the choice.**
+
+Five rules the code enforces
 ----------------------------
 
 1. **Provenance carries through.** A field derived from an `inferred_candidate`
@@ -47,6 +56,11 @@ Four rules the code enforces
 4. **The three standing cautions apply to every generated sentence.** A Fire
    Weather Index is never a fire; a `Historical` value is a modeled baseline,
    never an observation; an empty cell is "no value in this file", never a zero.
+5. **Some columns may not be averaged, and the aggregator refuses them.** A
+   column whose dictionary type is "Percent Change" or "Text ID", and any column
+   in the location family, is refused by `aggregate_column`. A record that needs
+   to say something about such a column reports **counts**, never a mean.
+   Required by the M1-WP3b ruling, criterion 7 (D-013).
 
 What this module does not do
 ----------------------------
@@ -83,6 +97,31 @@ from climrr.examples import (
 )
 
 SCHEMA_VERSION = "p0-prototype"
+
+#: **Two conventions for the letters exist and neither is settled.** Recorded
+#: side by side in every record's `P` field and in D-013 so that the next
+#: GUIDANCE packet can choose one. Renaming changes labels and no number.
+#:
+#:   * **This schema, and the mentor's**: S = season, T = time horizon,
+#:     C = climate scenario, P = provenance. These are the letters the mentor and
+#:     Kaiyuan use, and they are what she has already seen, so they are what the
+#:     code emits.
+#:   * **The M1-WP3b ruling's**: S = scenario, T = temporal horizon,
+#:     C = compared quantity, P = provenance.
+#:
+#: The two agree on P and on the *set* of things carried; they disagree on which
+#: letter names the scenario and on whether a letter names the season or the
+#: compared quantity. Nothing downstream reads a letter as a key to a meaning.
+SCHEMA_LETTER_CONVENTIONS = (
+    "Two conventions exist and neither is settled. This record uses the mentor's "
+    "and Kaiyuan's: S = season, T = time horizon, C = climate scenario, "
+    "P = provenance. The M1-WP3b GUIDANCE ruling uses S = scenario, "
+    "T = temporal horizon, C = compared quantity, P = provenance. They agree on P "
+    "and on what is carried, and differ on which letter names the scenario. The "
+    "mentor's letters are emitted because they are the ones she has seen. D-013 "
+    "records both for the next GUIDANCE packet to settle. No number depends on "
+    "the choice."
+)
 
 #: Statuses this module adds to the three the pilot columns already carry.
 #: `derived_from_inferred` is the one that matters: it is what a computed field
@@ -160,6 +199,45 @@ LEVEL_IDENTIFIER_RESTS_ON = {
 #: the derived fields use; the other three are reported beside it so a reader
 #: can see the spread the mean is hiding.
 OPERATIONS = ("unweighted_mean", "min", "max", "count")
+
+#: Dictionary type markers that forbid an average, whatever the characters look
+#: like. Required by the M1-WP3b ruling, criterion 7 (D-013).
+#:
+#: A **percent change** is a ratio. The mean of per-cell percent changes weights a
+#: cell with a near-zero baseline as heavily as one with a large baseline, and it
+#: is not the percent change of the aggregate. A **`Text ID`** is an identifier
+#: and has no arithmetic at all.
+UNMEANABLE_TYPE_MARKERS = ("Percent Change", "Text ID")
+
+#: Why each marker forbids a mean, in the words a record will print.
+UNMEANABLE_REASON = {
+    "Percent Change": (
+        "a percent change is a ratio, the mean of per-cell ratios weights a cell with a "
+        "near-zero baseline as heavily as one with a large baseline, and it is not the "
+        "percent change of the aggregate"
+    ),
+    "Text ID": "an identifier is not a quantity and has no arithmetic",
+}
+
+#: Pilot families whose columns are identifiers or categorical labels. Nothing in
+#: one may be averaged. `X` and `Y` parse as decimals and their mean would be a
+#: centroid this project has not defined, does not use, and could not justify
+#: without the coordinate reference system it does not know.
+UNMEANABLE_FAMILY_KEYS = ("location",)
+
+#: The word for a sign, and the count that carries it. Used where a mean is
+#: refused and a count has to say what the mean would have said.
+SIGN_WORD = {"increase": "positive", "decrease": "negative", "no_change": "zero"}
+SIGN_COUNT_KEY = {
+    "increase": "n_positive",
+    "decrease": "n_negative",
+    "no_change": "n_zero",
+}
+
+#: Stamped on every record and at the head of every generated page (D-013).
+VALIDATION_BANNER = (
+    "**Prototype for scientific-object validation. Not an accepted phenomenon record.**"
+)
 
 #: The operation that produces a per-cell change value.
 CHANGE_FROM_COLUMN = "change_column_value"
@@ -341,6 +419,32 @@ def unweighted_mean(values: list[Decimal]) -> Decimal:
     return mean_from_total(total, len(values))
 
 
+def refuse_to_mean(entry: dict) -> str | None:
+    """Why this column may not be averaged over cells, or `None` if it may be.
+
+    Decided from the column's **recorded semantics** --- the dictionary type it
+    carries, and the pilot family it belongs to --- and never from its name or
+    from what its characters look like. `wildfire_summer_Pend` is refused because
+    the dictionary writes "Percent Change" against it, which is the same fact that
+    made the column `verified_from_dictionary` in the first place.
+    """
+    unit = (entry.get("unit") or {}).get("value") or ""
+    for marker in UNMEANABLE_TYPE_MARKERS:
+        if marker in unit:
+            return (
+                f'its recorded type is "{marker}" --- '
+                f"{UNMEANABLE_REASON[marker]}. The M1-WP3b ruling forbids taking a mean "
+                "of it (criterion 7)"
+            )
+    family = family_of(entry["index"])
+    if family["key"] in UNMEANABLE_FAMILY_KEYS:
+        return (
+            f"it belongs to the {family['label']!r} family, whose columns are "
+            "identifiers and categorical labels rather than quantities"
+        )
+    return None
+
+
 def aggregate(values: list[Decimal]) -> dict:
     """All four reportable operations over one column's member values."""
     return {
@@ -348,6 +452,36 @@ def aggregate(values: list[Decimal]) -> dict:
         "min": dstr(min(values)),
         "max": dstr(max(values)),
         "count": str(len(values)),
+    }
+
+
+def aggregate_column(entry: dict, values: list[Decimal]) -> dict:
+    """`aggregate`, but it refuses columns that must not be averaged.
+
+    This is the aggregator's gate. A caller that wants a summary of a refused
+    column has to ask for something other than a mean --- `sign_counts` is what
+    the records use --- rather than reaching past this function.
+    """
+    reason = refuse_to_mean(entry)
+    if reason is not None:
+        raise PhenomenonError(
+            f"column {entry['index']} `{entry['column']}` may not be averaged: {reason}"
+        )
+    return aggregate(values)
+
+
+def sign_counts(values: list[Decimal]) -> dict:
+    """How many member cells are positive, negative and zero.
+
+    What a record reports where a mean is refused. A count of signs makes no
+    arithmetic claim about the quantity and is checkable against the per-cell
+    values the record also carries.
+    """
+    return {
+        "n": str(len(values)),
+        "n_positive": str(sum(1 for value in values if value > 0)),
+        "n_negative": str(sum(1 for value in values if value < 0)),
+        "n_zero": str(sum(1 for value in values if value == 0)),
     }
 
 
@@ -377,6 +511,19 @@ PR1_STATEMENT = (
 )
 
 PR1_TERCILES = ("lower_third", "middle_third", "upper_third")
+
+#: What PR-1 ranks. Required by the M1-WP3b ruling, action 10 / criterion 10.
+#:
+#: Stated in every `M` field because the two readings give different answers: a
+#: large decrease is at the **bottom** of a signed ranking and near the **top** of
+#: an absolute one, and a reader who assumes the wrong one reads "lower_third" as
+#: "little happened" when it may mean "the largest decrease in the file".
+PR1_RANKED_ON = (
+    "the **signed** change value. The sign is kept, so a decrease ranks below a "
+    "no-change and a no-change below an increase. PR-1 does **not** rank on "
+    "absolute magnitude, and a unit in the lower third may be one with a large "
+    "decrease rather than one where little changed."
+)
 
 #: Quantile method, named because a different one gives different numbers.
 QUANTILE_METHOD = (
@@ -442,6 +589,7 @@ def apply_pr1(change: Decimal, sorted_values: list[Decimal]) -> dict:
         "n_units_at_this_level": str(n),
         "n_units_strictly_below": str(below),
         "n_units_equal": str(equal),
+        "ranked_on": PR1_RANKED_ON,
         "percentile": dstr(percentile),
         "percentile_definition": (
             "100 x (units strictly below) / (units with a change value), rounded to "
@@ -636,6 +784,39 @@ def has_all_values(member: dict, variable: dict) -> bool:
     return all(member["values"][index] != "" for index in columns_used(variable))
 
 
+def _aggregate_entry(entry: dict, variable: dict, usable: list[dict]) -> dict:
+    """One column's block inside an aggregate record's `V`.
+
+    A column the aggregator refuses keeps every per-cell value and reports
+    **counts** instead of a mean. `aggregates` is `None` there rather than
+    absent, so a reader scanning the field cannot mistake a refusal for an
+    oversight.
+    """
+    index = entry["index"]
+    values = [to_decimal(member["values"][index], index=index) for member in usable]
+    block = {
+        "index": index,
+        "column": entry["column"],
+        "role": role_of(variable, index),
+        "per_cell_raw_values": [member["values"][index] for member in usable],
+        "per_cell_raw_values_are_complete": (
+            "yes --- every member cell with a value, not a sample"
+        ),
+    }
+    reason = refuse_to_mean(entry)
+    if reason is None:
+        block["aggregates"] = aggregate_column(entry, values)
+        block["not_averaged"] = None
+        return block
+    block["aggregates"] = None
+    block["not_averaged"] = {
+        "reason": reason,
+        "reported_instead": "counts of sign over the member cells, and the per-cell values",
+        **sign_counts(values),
+    }
+    return block
+
+
 def build_record(
     *,
     record_id: str,
@@ -781,19 +962,17 @@ def build_record(
             "operations_reported": list(OPERATIONS),
             "n": str(len(usable)),
             "per_column": [
+                _aggregate_entry(semantics_by_index[index], variable, usable)
+                for index in used
+            ],
+            "columns_not_averaged": [
                 {
                     "index": index,
                     "column": semantics_by_index[index]["column"],
-                    "role": role_of(variable, index),
-                    "per_cell_raw_values": [member["values"][index] for member in usable],
-                    "per_cell_raw_values_are_complete": (
-                        "yes --- every member cell with a value, not a sample"
-                    ),
-                    "aggregates": aggregate(
-                        [to_decimal(member["values"][index], index=index) for member in usable]
-                    ),
+                    "reason": refuse_to_mean(semantics_by_index[index]),
                 }
                 for index in used
+                if refuse_to_mean(semantics_by_index[index]) is not None
             ],
         }
     v_block = {
@@ -828,29 +1007,38 @@ def build_record(
         change_input_statuses.append(semantics_by_index[variable["future_index"]]["status"])
     d_status = derived_status(change_input_statuses)
 
+    # Corroboration is a **count of signs**, never an average. The corroborating
+    # column is a percent change, which `refuse_to_mean` refuses, and the
+    # M1-WP3b ruling (criterion 7) is explicit that it must not be averaged. A
+    # count says what the mean was reached for --- does the second column agree
+    # about the direction --- and says it per cell, where it is checkable.
     corroborating = None
     corroborating_index = variable["corroborating_change_index"]
     if corroborating_index is not None:
+        entry = semantics_by_index[corroborating_index]
         values = [
             to_decimal(member["values"][corroborating_index], index=corroborating_index)
             for member in usable
         ]
-        corroborating_value = values[0] if level == "cell" else unweighted_mean(values)
+        counts = sign_counts(values)
+        direction = direction_of(unit_change)
+        agreeing = counts[SIGN_COUNT_KEY[direction]]
         corroborating = {
             "index": corroborating_index,
-            "column": semantics_by_index[corroborating_index]["column"],
-            "status": semantics_by_index[corroborating_index]["status"],
-            "value": dstr(corroborating_value),
-            "direction": direction_of(corroborating_value),
-            "agrees_with_change_column": str(
-                direction_of(corroborating_value) == direction_of(unit_change)
-            ),
-            "provenance_status": derived_status(
-                [identifier_status, semantics_by_index[corroborating_index]["status"]]
-            ),
+            "column": entry["column"],
+            "status": entry["status"],
+            "not_averaged": refuse_to_mean(entry),
+            "unit_direction": direction,
+            "sign_word": SIGN_WORD[direction],
+            "n_member_cells_with_that_sign": agreeing,
+            "of_n_member_cells": counts["n"],
+            "agrees_on_every_member_cell": str(agreeing == counts["n"]),
+            **counts,
+            "provenance_status": derived_status([identifier_status, entry["status"]]),
             "note": (
-                "Reported as a second reading of the sign, not as the quantity. A "
-                "disagreement here would be a finding to escalate."
+                "A count of per-cell signs, not a quantity and not an average. A cell "
+                "disagreeing with the unit's direction is not an error; a systematic "
+                "disagreement would be a finding to escalate."
             ),
         }
 
@@ -877,6 +1065,10 @@ def build_record(
             f"every {level}-level unit of this file with a change value for variable "
             f"{variable['key']}"
         ),
+        "reference_population": distribution_membership.get(
+            "reference_population",
+            "not supplied by the caller --- this is a defect, not an empty field",
+        ),
         "distribution_membership": distribution_membership,
         "rests_on_assumptions": ["A-M1"] + d_block["rests_on_assumptions"],
     }
@@ -888,6 +1080,8 @@ def build_record(
     record = {
         "schema_version": SCHEMA_VERSION,
         "record_id": record_id,
+        "validation_only": True,
+        "validation_banner": VALIDATION_BANNER,
         "prototype_notice": (
             "PROTOTYPE. Built for M1-WP3b on Kaiyuan's decision of 2026-09-13, ahead of "
             "the GUIDANCE ruling that would authorise county/state units, aggregation "
@@ -914,7 +1108,12 @@ def build_record(
     record["description_generated_by"] = (
         "template in climrr.phenomenon.render_description, from fields G through M"
     )
-    record["provenance_statuses"] = provenance_statuses(record)
+    record["P"] = {
+        "letter": "P",
+        "label": "provenance",
+        "letter_reading_note": SCHEMA_LETTER_CONVENTIONS,
+        "per_field": provenance_statuses(record),
+    }
     record["literature_probe"] = build_probe(record, variable)
     return record
 
@@ -1042,12 +1241,15 @@ def render_description(record: dict) -> dict:
     magnitude = clauses.add(
         "M.tercile",
         f"{m['tercile']}, at percentile {m['percentile']} of {m['n_units_at_this_level']} "
-        f"{g['level']}-level units, by {m['rule']}, which is a placeholder and not a "
-        f"scientific threshold",
+        f"{g['level']}-level units. Ranking is on the signed change value, not on its "
+        f"absolute size, so a unit in the lower third may be one with a large decrease "
+        f"rather than one where little changed. The reference population is "
+        f"{m['reference_population']}. {m['rule']} is a placeholder and not a scientific "
+        f"threshold",
         PROVISIONAL_RULE,
     )
 
-    lines = []
+    lines = [VALIDATION_BANNER, ""]
     for caution in record["cautions"]:
         lines.append(f"> {caution['text']}")
         lines.append("")
@@ -1072,6 +1274,8 @@ def render_description(record: dict) -> dict:
         # An aggregate is a computed number over a row set, so it inherits the
         # membership's status as well as the column's --- at county and state
         # level that is what makes these values provisional, not the digits.
+        averaged = [column for column in v["per_column"] if column["aggregates"]]
+        refused = [column for column in v["per_column"] if not column["aggregates"]]
         summaries = "; ".join(
             "`{}` {}".format(
                 column["column"],
@@ -1081,12 +1285,19 @@ def render_description(record: dict) -> dict:
                     derived_status([g["provenance_status"], roles[column["role"]]["status"]]),
                 ),
             )
-            for column in v["per_column"]
+            for column in averaged
         )
-        lines.append(
-            f"**Values.** Unweighted mean over n = {v['n']} member cell(s): {summaries}. "
-            f"The complete per-cell values are in the record."
+        sentence = (
+            f"**Values.** Unweighted mean over n = {v['n']} member cell(s): {summaries}."
         )
+        if refused:
+            # Named rather than silently dropped: a reader who knows the column is
+            # in the record has to be told why no mean of it appears here.
+            sentence += " Not averaged: " + "; ".join(
+                f"`{column['column']}`, because {column['not_averaged']['reason']}"
+                for column in refused
+            ) + "."
+        lines.append(sentence + " Every per-cell value, averaged or not, is in the record.")
     else:
         summaries = "; ".join(
             "`{}` {}".format(
@@ -1100,15 +1311,17 @@ def render_description(record: dict) -> dict:
     corroborating = d["corroborating"]
     corroborating_sentence = ""
     if corroborating is not None:
-        corroborating_direction = clauses.add(
-            "D.corroborating.direction",
-            corroborating["direction"],
+        of_n = corroborating["of_n_member_cells"]
+        cells = "member cell" if of_n == "1" else "member cells"
+        corroborating_count = clauses.add(
+            "D.corroborating.sign_count",
+            f"{corroborating['sign_word']} on "
+            f"{corroborating['n_member_cells_with_that_sign']} of {of_n} {cells}",
             corroborating["provenance_status"],
         )
         corroborating_sentence = (
-            f" The separate column `{corroborating['column']}` gives "
-            f"{corroborating_direction} on the same unit; the two signs agree: "
-            f"{corroborating['agrees_with_change_column']}."
+            f" The separate column `{corroborating['column']}` is {corroborating_count}. "
+            f"It is a percent change and is never averaged here."
         )
     lines.append(
         f"**Direction.** {direction}, from the sign of the change value {change}, computed "
@@ -1363,7 +1576,10 @@ ASSUMPTIONS = (
         "statement": (
             "The unweighted mean over member cells is a meaningful summary of the unit. "
             "It is the operation these prototypes use; no alternative (area weighting, "
-            "population weighting, a median, a quantile) was evaluated."
+            "population weighting, a median, a quantile) was evaluated. It is applied "
+            "**only to columns the aggregator accepts**: a column typed `Percent Change` "
+            "or `Text ID`, and every location column, is refused and reported as counts "
+            "instead (D-013, ruling criterion 7)."
         ),
         "affects": "V, D and M at county and state level",
         "how_verified": (

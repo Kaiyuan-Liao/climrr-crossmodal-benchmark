@@ -1,8 +1,10 @@
 {
   "schema_version": "p0-prototype",
   "record_id": "P-CELL-1",
+  "validation_only": true,
+  "validation_banner": "**Prototype for scientific-object validation. Not an accepted phenomenon record.**",
   "prototype_notice": "PROTOTYPE. Built for M1-WP3b on Kaiyuan's decision of 2026-09-13, ahead of the GUIDANCE ruling that would authorise county/state units, aggregation and a magnitude field. It is not evidence for any milestone gate and may be revised or discarded by that ruling.",
-  "built_from_commit": "ce8df0761dc74e498ee9ef99cdccfbc61a3f9afc",
+  "built_from_commit": "b537c2e12235f0635b8b2efbd769d3d69be65b33",
   "csv_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e",
   "rounding_rule": "every derived value is rounded to 15 decimal places, half-to-even --- the precision the CSV itself stores. Raw values are never rounded: they are reported as the characters the file holds.",
   "G": {
@@ -299,11 +301,18 @@
       "index": 195,
       "column": "wildfire_summer_Pend",
       "status": "verified_from_dictionary",
-      "value": "24.358664999999998",
-      "direction": "increase",
-      "agrees_with_change_column": "True",
+      "not_averaged": "its recorded type is \"Percent Change\" --- a percent change is a ratio, the mean of per-cell ratios weights a cell with a near-zero baseline as heavily as one with a large baseline, and it is not the percent change of the aggregate. The M1-WP3b ruling forbids taking a mean of it (criterion 7)",
+      "unit_direction": "increase",
+      "sign_word": "positive",
+      "n_member_cells_with_that_sign": "1",
+      "of_n_member_cells": "1",
+      "agrees_on_every_member_cell": "True",
+      "n": "1",
+      "n_positive": "1",
+      "n_negative": "0",
+      "n_zero": "0",
       "provenance_status": "derived_from_verified",
-      "note": "Reported as a second reading of the sign, not as the quantity. A disagreement here would be a finding to escalate."
+      "note": "A count of per-cell signs, not a quantity and not an average. A cell disagreeing with the unit's direction is not an error; a systematic disagreement would be a finding to escalate."
     }
   },
   "M": {
@@ -316,6 +325,7 @@
     "n_units_at_this_level": "62834",
     "n_units_strictly_below": "55624",
     "n_units_equal": "1",
+    "ranked_on": "the **signed** change value. The sign is kept, so a decrease ranks below a no-change and a no-change below an increase. PR-1 does **not** rank on absolute magnitude, and a unit in the lower third may be one with a large decrease rather than one where little changed.",
     "percentile": "88.5253",
     "percentile_definition": "100 x (units strictly below) / (units with a change value), rounded to 4 decimal places",
     "tercile": "upper_third",
@@ -330,11 +340,14 @@
     },
     "provenance_status": "provisional_rule",
     "ranked_against": "every cell-level unit of this file with a change value for variable fwi_summer_hist_to_end85",
+    "reference_population": "every distinct `Crossmodel` value in the file, each forming one cell-level unit (62834 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (62834 included, 0 excluded); its change value is the change value of its one cell; units whose label is the empty string are included (0 here)",
     "distribution_membership": {
       "how_units_were_formed": "every distinct `Crossmodel` value in the file forms one cell-level unit",
+      "n_keys": "62834",
       "n_units": "62834",
       "n_units_excluded_for_having_no_value": "0",
       "n_units_whose_label_is_the_empty_string": "0",
+      "reference_population": "every distinct `Crossmodel` value in the file, each forming one cell-level unit (62834 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (62834 included, 0 excluded); its change value is the change value of its one cell; units whose label is the empty string are included (0 here)",
       "empty_label_note": "A unit whose label is the empty string is counted. The 7 rows with no `State` form one such unit at state level and one at county level. Dropping them would be a judgement about what an empty label means, and this project does not have one (Q16)."
     },
     "rests_on_assumptions": [
@@ -373,7 +386,7 @@
       "triggered_by": "the baseline column of this variable, index 189"
     }
   ],
-  "description": "> Every `wildfire_*` column below holds a **Fire Weather Index** --- a meteorological fire-danger index, listed in the dictionary under the section \"Fire Weather Index - Averages\". It is not a wildfire, an ignition, a burned area, or a probability of any of those, and nothing in this record says that it is.\n\n> `Historical` here means a **modeled historical baseline** --- the dictionary's historical period, 1995 to 2004, run through the same climate models. It is not an observation, a measurement, or a record of anything that happened.\n\n**Scope.** One grid cell, identified by `R106C361`. Members: 1 cell(s) --- 1 with a value on every column used, 0 without. Cells without a value are excluded from every number below and are never read as a zero.\n\n**Quantity.** [provisional: The multi-model ensemble mean of the summer seasonal average daily Fire Weather Index for the modeled historical period. The FWI is a meteorological fire-danger index: it describes weather conditions, not fire occurrence, ignition, or burned area]. Unit or type: [provisional: dimensionless index value]. Season: summer, defined by the dictionary as June, July and August.\n\n**Compared.** Baseline horizon the modeled historical decade, 1995-2004; future horizon End-Century, the modeled decade 2085-2094; future scenario RCP8.5.\n\n**Values.** `wildfire_summer_Hist` 25.080200200000000; `wildfire_summer_Endc` 31.189300540000001; `wildfire_summer_Dend` 6.109189990000000; `wildfire_summer_Pend` 24.358664999999998 --- read from the file, exactly as stored.\n\n**Direction.** [provisional: increase], from the sign of the change value [provisional: 6.109189990000000], computed by `change_column_value` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` gives increase on the same unit; the two signs agree: True.\n\n**Magnitude.** [provisional rule PR-1: upper_third, at percentile 88.5253 of 62834 cell-level units, by PR-1, which is a placeholder and not a scientific threshold].\n\nEvery clause marked [provisional:...] rests on an inferred-candidate record or on a field derived from one: reasoned and written down, **not verified and not owner-confirmed**. The clause marked [provisional rule PR-1:...] rests on a placeholder rule, not on science.\n",
+  "description": "**Prototype for scientific-object validation. Not an accepted phenomenon record.**\n\n> Every `wildfire_*` column below holds a **Fire Weather Index** --- a meteorological fire-danger index, listed in the dictionary under the section \"Fire Weather Index - Averages\". It is not a wildfire, an ignition, a burned area, or a probability of any of those, and nothing in this record says that it is.\n\n> `Historical` here means a **modeled historical baseline** --- the dictionary's historical period, 1995 to 2004, run through the same climate models. It is not an observation, a measurement, or a record of anything that happened.\n\n**Scope.** One grid cell, identified by `R106C361`. Members: 1 cell(s) --- 1 with a value on every column used, 0 without. Cells without a value are excluded from every number below and are never read as a zero.\n\n**Quantity.** [provisional: The multi-model ensemble mean of the summer seasonal average daily Fire Weather Index for the modeled historical period. The FWI is a meteorological fire-danger index: it describes weather conditions, not fire occurrence, ignition, or burned area]. Unit or type: [provisional: dimensionless index value]. Season: summer, defined by the dictionary as June, July and August.\n\n**Compared.** Baseline horizon the modeled historical decade, 1995-2004; future horizon End-Century, the modeled decade 2085-2094; future scenario RCP8.5.\n\n**Values.** `wildfire_summer_Hist` 25.080200200000000; `wildfire_summer_Endc` 31.189300540000001; `wildfire_summer_Dend` 6.109189990000000; `wildfire_summer_Pend` 24.358664999999998 --- read from the file, exactly as stored.\n\n**Direction.** [provisional: increase], from the sign of the change value [provisional: 6.109189990000000], computed by `change_column_value` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` is positive on 1 of 1 member cell. It is a percent change and is never averaged here.\n\n**Magnitude.** [provisional rule PR-1: upper_third, at percentile 88.5253 of 62834 cell-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `Crossmodel` value in the file, each forming one cell-level unit (62834 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (62834 included, 0 excluded); its change value is the change value of its one cell; units whose label is the empty string are included (0 here). PR-1 is a placeholder and not a scientific threshold].\n\nEvery clause marked [provisional:...] rests on an inferred-candidate record or on a field derived from one: reasoned and written down, **not verified and not owner-confirmed**. The clause marked [provisional rule PR-1:...] rests on a placeholder rule, not on science.\n",
   "description_clauses": [
     {
       "field": "G.identifier",
@@ -431,7 +444,7 @@
     },
     {
       "field": "M.tercile",
-      "text": "upper_third, at percentile 88.5253 of 62834 cell-level units, by PR-1, which is a placeholder and not a scientific threshold",
+      "text": "upper_third, at percentile 88.5253 of 62834 cell-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `Crossmodel` value in the file, each forming one cell-level unit (62834 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (62834 included, 0 excluded); its change value is the change value of its one cell; units whose label is the empty string are included (0 here). PR-1 is a placeholder and not a scientific threshold",
       "status": "provisional_rule",
       "wrapper": "provisional_rule"
     },
@@ -460,38 +473,43 @@
       "wrapper": "none"
     },
     {
-      "field": "D.corroborating.direction",
-      "text": "increase",
+      "field": "D.corroborating.sign_count",
+      "text": "positive on 1 of 1 member cell",
       "status": "derived_from_verified",
       "wrapper": "none"
     }
   ],
   "description_generated_by": "template in climrr.phenomenon.render_description, from fields G through M",
-  "provenance_statuses": {
-    "G.level": "computed",
-    "G.identifier": "verified_from_dictionary",
-    "G.member_cells": "computed",
-    "G.n_cells": "computed",
-    "G.n_cells_with_value": "computed",
-    "H.concept": "inferred_candidate",
-    "H.columns[189].meaning": "inferred_candidate",
-    "H.columns[191].meaning": "inferred_candidate",
-    "H.columns[193].meaning": "inferred_candidate",
-    "H.columns[195].meaning": "verified_from_dictionary",
-    "H.columns[189].unit": "inferred_candidate",
-    "H.columns[191].unit": "inferred_candidate",
-    "H.columns[193].unit": "inferred_candidate",
-    "H.columns[195].unit": "verified_from_dictionary",
-    "S.season": "verified_from_dictionary",
-    "T.horizon": "verified_from_dictionary",
-    "C.scenario": "mixed --- see per_role",
-    "V.values": "computed",
-    "V.change": "derived_from_inferred",
-    "D.direction": "derived_from_inferred",
-    "M.percentile": "provisional_rule",
-    "M.tercile": "provisional_rule",
-    "description": "generated from the fields above by template",
-    "literature_probe": "design stub --- no retrieval has been performed"
+  "P": {
+    "letter": "P",
+    "label": "provenance",
+    "letter_reading_note": "Two conventions exist and neither is settled. This record uses the mentor's and Kaiyuan's: S = season, T = time horizon, C = climate scenario, P = provenance. The M1-WP3b GUIDANCE ruling uses S = scenario, T = temporal horizon, C = compared quantity, P = provenance. They agree on P and on what is carried, and differ on which letter names the scenario. The mentor's letters are emitted because they are the ones she has seen. D-013 records both for the next GUIDANCE packet to settle. No number depends on the choice.",
+    "per_field": {
+      "G.level": "computed",
+      "G.identifier": "verified_from_dictionary",
+      "G.member_cells": "computed",
+      "G.n_cells": "computed",
+      "G.n_cells_with_value": "computed",
+      "H.concept": "inferred_candidate",
+      "H.columns[189].meaning": "inferred_candidate",
+      "H.columns[191].meaning": "inferred_candidate",
+      "H.columns[193].meaning": "inferred_candidate",
+      "H.columns[195].meaning": "verified_from_dictionary",
+      "H.columns[189].unit": "inferred_candidate",
+      "H.columns[191].unit": "inferred_candidate",
+      "H.columns[193].unit": "inferred_candidate",
+      "H.columns[195].unit": "verified_from_dictionary",
+      "S.season": "verified_from_dictionary",
+      "T.horizon": "verified_from_dictionary",
+      "C.scenario": "mixed --- see per_role",
+      "V.values": "computed",
+      "V.change": "derived_from_inferred",
+      "D.direction": "derived_from_inferred",
+      "M.percentile": "provisional_rule",
+      "M.tercile": "provisional_rule",
+      "description": "generated from the fields above by template",
+      "literature_probe": "design stub --- no retrieval has been performed"
+    }
   },
   "literature_probe": {
     "kind": "design stub",

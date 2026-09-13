@@ -44,11 +44,20 @@ def records() -> dict:
 
 
 def description_body(record: dict) -> str:
-    """The description without its caution block and without the closing legend."""
+    """The description without its caution block and without the closing legend.
+
+    The three standing cautions are stated once at the top of the handout rather
+    than three times, and the closing legend once at the bottom, so both are
+    dropped here. Removing the caution lines leaves runs of blank lines behind;
+    those are collapsed to one, and the same collapse is applied to the handout.
+    **Nothing else is altered** --- every word and every digit between the
+    banner and the magnitude clause is quoted exactly.
+    """
     lines = [
         line for line in record["description"].splitlines() if not line.startswith("> ")
     ]
-    return "\n".join(lines).split(LEGEND_MARKER)[0].strip()
+    body = "\n".join(lines).split(LEGEND_MARKER)[0].strip()
+    return re.sub(r"\n{3,}", "\n\n", body)
 
 
 def test_each_record_is_quoted_verbatim(handout, records):
@@ -168,3 +177,58 @@ def test_the_handout_carries_no_internal_process_jargon(handout):
     """It goes to the group, not to the review chain."""
     for word in ("GUIDANCE", "COORDINATOR", "EXECUTOR", "work package", "commit SHA"):
         assert word not in handout, word
+
+
+# --- validation-only framing (M1-WP3b ruling, D-013) --------------------------
+
+BANNER = "**Prototype for scientific-object validation. Not an accepted phenomenon record.**"
+
+
+def test_the_handout_leads_with_the_validation_banner(handout):
+    heading, rest = handout.split("\n", 1)
+    assert heading.startswith("# ")
+    assert rest.lstrip().startswith(BANNER)
+
+
+def test_every_record_section_of_the_handout_carries_the_banner(handout):
+    """One banner per page, so a page read on its own cannot be mistaken."""
+    for heading in (
+        "### One grid cell",
+        "### One county-shaped row set",
+        "### One state-shaped row set",
+    ):
+        section = handout.split(heading, 1)[1]
+        assert section.lstrip().startswith(BANNER), heading
+    assert handout.count(BANNER) == 4
+
+
+def test_the_handout_names_the_geoid_column_and_the_label_it_does_not_determine(handout):
+    collapsed = " ".join(handout.split())
+    assert (
+        "**The `GEOID` column does not determine the `(State, NAME)` label: 3,234 "
+        "`GEOID` values appear under more than one label. What that means is an open "
+        "question for the data owner.**"
+    ) in collapsed
+    # the vaguer phrasings the ruling replaced
+    assert "tract-like id column" not in handout
+    assert "than one county label" not in handout
+
+
+def test_the_handout_says_a_percent_change_is_never_averaged(handout):
+    collapsed = " ".join(handout.split())
+    assert "`wildfire_summer_Pend` is a *percent change*" in collapsed
+    assert "reported as a count of signs instead" in collapsed
+
+
+def test_no_mean_of_the_percent_change_column_survives_in_the_handout(handout, records):
+    """The criterion-7 defect itself: an averaged `Pend` anywhere in the handout."""
+    county = records["P-COUNTY-1"]
+    pend = next(
+        column
+        for column in county["V"]["per_column"]
+        if column["column"] == "wildfire_summer_Pend"
+    )
+    assert pend["aggregates"] is None
+    # the value the old build printed, and must not print again
+    assert "23.603612800000000" not in handout
+    assert "positive on 10 of 10 member cells" in handout

@@ -60,6 +60,7 @@ from climrr.manifest import ManifestMismatchError, verify_file  # noqa: E402
 from climrr.paths import repo_relative  # noqa: E402
 from climrr.phenomenon import (  # noqa: E402
     ASSUMPTIONS,
+    VALIDATION_BANNER,
     LEVELS,
     NO_ASSUMPTION_NEEDED,
     PR1_STATEMENT,
@@ -85,6 +86,15 @@ INFERRED_PATH = REPO_ROOT / "data" / "metadata" / "inferred_candidates.yaml"
 OUT_DIR = REPO_ROOT / "artifacts" / "phenomena" / "prototypes"
 PROTOTYPES_DOC = REPO_ROOT / "docs" / "PHENOMENON_PROTOTYPES.md"
 ASSUMPTIONS_DOC = REPO_ROOT / "docs" / "PHENOMENON_ASSUMPTIONS.md"
+
+#: How a level's key reads in the reference-population definition. Written out
+#: rather than derived from `LEVEL_KEYS`, because the definition has to name the
+#: columns a reader can go and look at.
+KEY_PHRASE = {
+    "cell": "`Crossmodel` value",
+    "county": "`(State, NAME)` label",
+    "state": "`State` label",
+}
 
 OID_INDEX = 0
 CROSSMODEL_INDEX = 1
@@ -228,17 +238,32 @@ def distributions(per_level: dict) -> tuple[dict, dict]:
         empty_labelled = sum(
             1 for key, (_total, count) in buckets.items() if count and any(part == "" for part in key)
         )
+        excluded = sum(1 for _total, count in buckets.values() if not count)
+        key_phrase = KEY_PHRASE[level]
+        change_phrase = (
+            "the change value of its one cell"
+            if level == "cell"
+            else "the unweighted mean of its member cells' change values"
+        )
         values_by_key[(level, variable_key)] = values
         membership_by_key[(level, variable_key)] = {
             "how_units_were_formed": (
-                f"every distinct {'`Crossmodel`' if level == 'cell' else 'label'} value in "
-                f"the file forms one {level}-level unit"
+                f"every distinct {key_phrase} in the file forms one {level}-level unit"
             ),
+            "n_keys": str(len(buckets)),
             "n_units": str(len(values)),
-            "n_units_excluded_for_having_no_value": str(
-                sum(1 for _total, count in buckets.values() if not count)
-            ),
+            "n_units_excluded_for_having_no_value": str(excluded),
             "n_units_whose_label_is_the_empty_string": str(empty_labelled),
+            # The exact definition the M1-WP3b ruling (action 10) asks every `M`
+            # field to carry, assembled from the counts rather than asserted.
+            "reference_population": (
+                f"every distinct {key_phrase} in the file, each forming one "
+                f"{level}-level unit ({len(buckets)} of them); a unit is included if at "
+                f"least one member cell is non-empty on every column this variable reads "
+                f"({len(values)} included, {excluded} excluded); its change value is "
+                f"{change_phrase}; units whose label is the empty string are included "
+                f"({empty_labelled} here)"
+            ),
             "empty_label_note": (
                 "A unit whose label is the empty string is counted. The 7 rows with no "
                 "`State` form one such unit at state level and one at county level. "
@@ -303,12 +328,14 @@ def render_prototypes_doc(records: list[dict], commit: str, csv_sha256: str) -> 
     lines = [
         "# Three prototype phenomenon units",
         "",
-        "**Prototype, ahead of its ruling.** Built for M1-WP3b on Kaiyuan's decision of",
-        "2026-09-13, following the mentor's direction R-002, while the GUIDANCE ruling that",
-        "would authorise county and state units, aggregation and a magnitude field is",
-        "pending. The D-010 ruling in force forbids all three inside an M1-WP3 example.",
-        "**Nothing here is evidence for a milestone gate**, nothing is merged, and the",
-        "ruling may revise or discard all of it.",
+        VALIDATION_BANNER,
+        "",
+        "Built for M1-WP3b on Kaiyuan's decision of 2026-09-13, following the mentor's",
+        "direction R-002, ahead of the GUIDANCE ruling that would authorise county and",
+        "state units, aggregation and a magnitude field. That ruling came back **PASS",
+        "WITH ACTIONS** and is recorded as D-013, which admits this package as an explicit",
+        "**milestone-order exception** --- early M3-style validation while M1 is still",
+        "open. **Nothing here is evidence for a milestone gate**, and nothing is merged.",
         "",
         f"- Schema version `{SCHEMA_VERSION}` --- `src/climrr/phenomenon.py`",
         f"- Built from commit `{commit}`, CSV SHA-256 `{csv_sha256}`",
@@ -317,10 +344,12 @@ def render_prototypes_doc(records: list[dict], commit: str, csv_sha256: str) -> 
         " [`../artifacts/profiles/hierarchy_checks.md`](../artifacts/profiles/hierarchy_checks.md)",
         "",
         "Each record's fields are `G` scope, `H` concept, `S` season, `T` time horizon,",
-        "`C` climate scenario, `V` values, `D` direction, `M` magnitude. **The reading of",
-        "`S`, `T` and `C` is the EXECUTOR's**: the work package names the letters without",
-        "defining them, and the blueprint's schema list runs \"season; baseline period;",
-        "future period; scenario\". Renaming them changes three labels and no number.",
+        "`C` climate scenario, `V` values, `D` direction, `M` magnitude, `P` provenance.",
+        "**Two conventions for the letters exist and neither is settled.** These are the",
+        "mentor's and Kaiyuan's, which is what the code emits because they are what she has",
+        "seen; the M1-WP3b ruling reads `S` as scenario, `T` as temporal horizon and `C` as",
+        "compared quantity. Both agree on `P` and on what a record carries. D-013 records",
+        "the pair for the next GUIDANCE packet. **No number depends on the choice.**",
         "",
     ]
     for record in records:
@@ -329,6 +358,8 @@ def render_prototypes_doc(records: list[dict], commit: str, csv_sha256: str) -> 
         identifier = ", ".join(f"`{value}`" for value in g["identifier"].values())
         lines += [
             f"## {record['record_id']} --- {g['level']} level",
+            "",
+            VALIDATION_BANNER,
             "",
             "| Field | Value | Status |",
             "| --- | --- | --- |",
@@ -344,7 +375,9 @@ def render_prototypes_doc(records: list[dict], commit: str, csv_sha256: str) -> 
             f"| `D` direction | **{record['D']['direction']}** | "
             f"`{record['D']['provenance_status']}` |",
             f"| `M` category | {m['tercile']}, percentile {m['percentile']} of "
-            f"{m['n_units_at_this_level']} units | `provisional_rule` PR-1 |",
+            f"{m['n_units_at_this_level']} units, ranked on the **signed** change value "
+            f"| `provisional_rule` PR-1 |",
+            f"| `P` provenance | a status for every field above | see the record |",
             "",
             f"Chosen by: {record['chosen_by']}. No value was consulted in the choice.",
             "",
@@ -356,6 +389,8 @@ def render_prototypes_doc(records: list[dict], commit: str, csv_sha256: str) -> 
             "### What it depends on",
             "",
             "Assumptions: " + ", ".join(f"`{item}`" for item in record["assumptions"]) + ".",
+            "",
+            f"PR-1 reference population: {m['reference_population']}.",
             "",
             "### Literature probe --- design stub, nothing sent",
             "",

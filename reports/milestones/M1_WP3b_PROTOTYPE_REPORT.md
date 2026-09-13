@@ -1,5 +1,14 @@
 # M1-WP3b --- Phenomenon-unit prototypes
 
+**Prototype for scientific-object validation. Not an accepted phenomenon record.**
+
+**Revised after the M1-WP3b GUIDANCE ruling (PASS WITH ACTIONS), recorded as
+D-013.** The ruling's four required changes are applied; what changed is in
+field 12. **The ruling document `docs/M1_WP3B_GUIDANCE_RULING.md` is not in the
+repository** --- it is named as placed by Kaiyuan and is absent from the working
+tree and from every commit, so D-013 records the decisions as relayed by the
+COORDINATOR and quotes nothing from the ruling itself.
+
 ## 1. Milestone ID and title
 
 **M1-WP3b --- Phenomenon-unit prototypes (bounded, assumption-recorded).** A work
@@ -23,10 +32,11 @@ any literature, retrieval or embedding work; any column outside the 41 of
 | | |
 | --- | --- |
 | Branch | `work/m1-wp3b`, created from `work/m1-wp3` at head `ad13649` |
-| Commits in this package | 3: Phase A; Phases B–D; Phase E |
+| Commits in this package | 4: Phase A; Phases B–D; Phase E; the post-ruling fixes (D-013) |
 | Phase A | `ce8df0761dc74e498ee9ef99cdccfbc61a3f9afc` |
 | Phases B–D | `140a649920f1348b4144e2fb4516e84df4e97a0f` |
-| Phase E | this report's own commit; a commit cannot contain its own hash, so its SHA travels with the package |
+| Phase E | `7cb068497a73f6c99d74613c62461e33c353a657`, then `b537c2e1…` for a SHA fix in this field |
+| Post-ruling fixes (D-013) | this report's own commit; a commit cannot contain its own hash, so its SHA travels with the package |
 | Remote | **Not pushed.** The work package says do not push and do not merge, and neither was done. `origin` has no `work/m1-wp3b` |
 | `main` | unchanged, carrying the M1-WP1 merge at `62c9137` |
 | `work/m1-wp3` | unchanged. This branch does not modify it and is not merged into it |
@@ -49,9 +59,13 @@ Artifacts produced, by SHA-256:
 | File | SHA-256 | Bytes |
 | --- | --- | ---: |
 | `artifacts/profiles/hierarchy_checks.json` | `90b7e812fcdc86a089624afd0e7edafacdb2ef256122c5ad7e5145c6c79e4665` | 9,708 |
-| `artifacts/phenomena/prototypes/P-CELL-1.json` | `b0a3f9dfaebd0ff23438d964444caa11679dbf1e61ada71019418bbebf8bfe3a` | 22,953 |
-| `artifacts/phenomena/prototypes/P-COUNTY-1.json` | `fa9fd775d14a99f0cfba2277a57a38b85b325c5f163310b66ae112447cf0bde4` | 27,794 |
-| `artifacts/phenomena/prototypes/P-STATE-1.json` | `b55e66a6db7119fecf26ce50de646014726330fcc911124997718a112af9da5e` | 329,076 |
+| `artifacts/phenomena/prototypes/P-CELL-1.json` | `c9e158235a30d73c65ee213675bba97f12cfcdb97eec71ff7f4d17317d4cf9f6` | 26,517 |
+| `artifacts/phenomena/prototypes/P-COUNTY-1.json` | `db32e5462ccb324208b7637787dce9a8aa7b5f0b43409060c34dc1e880c16c6b` | 32,508 |
+| `artifacts/phenomena/prototypes/P-STATE-1.json` | `947f4385953e69eb0484a77b52fd61926fc62a5e1f1a82ef6d1033bdf5872bd5` | 332,180 |
+
+**The three prototype records were rebuilt by the post-ruling fixes** and their
+hashes differ from those reported before D-013. `hierarchy_checks.json` was not
+rebuilt and is byte-identical to the Phase A run.
 
 Each record carries the CSV SHA-256 and the build commit in its own header
 fields, so a record can be checked against the bytes it was made from without
@@ -77,7 +91,11 @@ Run records:
 | Run | Result | Record |
 | --- | --- | --- |
 | `hierarchy_checks` | PASS | `reports/runs/20260913T191302Z_local_hierarchy_checks.json` |
-| `build_phenomenon_prototypes` | PASS | `reports/runs/20260913T192854Z_local_build_phenomenon_prototypes.json` |
+| `build_phenomenon_prototypes` (post-ruling rebuild) | PASS | `reports/runs/20260913T195401Z_local_build_phenomenon_prototypes.json` |
+
+The pre-ruling `build_phenomenon_prototypes` run record was superseded by the
+rebuild and removed rather than left beside it; the records it produced no longer
+exist in the tree, so a run record pointing at them would describe nothing.
 
 ## 6. Work completed
 
@@ -159,6 +177,19 @@ weighting is an assumption and not a measurement. Every aggregate also reports
 min, max and count beside the mean, and the complete list of per-cell values,
 so a reader can see what the mean hides.
 
+**3a. Some columns may not be averaged at all, and the aggregator refuses them
+(D-013, ruling criterion 7).** A column whose recorded dictionary type contains
+`Percent Change` or `Text ID`, and every column in the location family, is
+refused by `climrr.phenomenon.aggregate_column`, which raises rather than
+returning a number. The decision is made from the column's **recorded
+semantics**, never from its name and never from whether its characters parse as
+a decimal --- `X` and `Y` parse perfectly well and their mean would be a centroid
+this project has not defined. A refused column keeps **every** per-cell value in
+the record and reports **counts of sign** in place of a mean, and
+`V.columns_not_averaged` names it and states the reason. This replaced a real
+defect: `P-COUNTY-1` previously reported an unweighted mean of
+`wildfire_summer_Pend`, which the ruling correctly refused.
+
 **4. Coverage --- a blank is excluded, never zero.** A member cell is used only
 if it is non-empty on every column the variable reads. The record reports
 `n_cells`, `n_cells_with_value` and `n_cells_empty`, and the description says
@@ -182,6 +213,17 @@ record reports the percentile and a tercile. **PR-1 is a placeholder that makes
 the field non-empty. It is not a scientific threshold**, rests on no literature
 and on no distributional reasoning, and the record says so in its own text,
 every time, inside a distinct `[provisional rule PR-1: ...]` mark.
+
+**6a. What PR-1 ranks, and against what (D-013, ruling action 10).** Ranking is
+on the **signed** change value: the sign is kept, so a decrease ranks below a
+no-change and a no-change below an increase. PR-1 does **not** rank on absolute
+magnitude, and the distinction is not cosmetic --- a unit in the lower third may
+be one with a **large decrease** rather than one where little changed. Every `M`
+field states that, and states the **exact reference population**: which key
+forms a unit, how many such keys exist, the inclusion test and how many units it
+includes and excludes, how a unit's change value is computed, and that units
+whose label is the empty string are counted. Both facts are inside the generated
+magnitude clause as well as the JSON, so they travel with the sentence.
 
 **7. Rounding.** Every derived value is quantised once, to the 15 decimal places
 the CSV itself stores, half-to-even. Raw values are never rounded. The rounding
@@ -208,11 +250,17 @@ identity before a value was read --- the row `OID_` 1, the label that row
 carries, and the `State` label of the row `OID_` 14. PR-1 is applied to a unit
 already chosen, never to choose one.
 
-**11. The reading of the letters S, T and C.** The work package names them
-without defining them. The blueprint's phenomenon-schema list runs "season;
-baseline period; future period; scenario", and that order is followed:
-S = season, T = time horizon, C = climate scenario. Each record says the reading
-is the EXECUTOR's. Renaming them changes three labels and no number.
+**11. The reading of the letters, and a second convention beside it (D-013).**
+The ruling defines **S = scenario, T = temporal horizon, C = compared quantity**
+and asks for **P = provenance**. The mentor and Kaiyuan use **S = season,
+T = horizon, C = scenario**. **The code emits the mentor's letters**, because
+they are the ones she has already seen and changing them days before she sees
+them again would change what she is being asked about. **`P` is now an explicit
+field** --- the per-field status map, named. **Both conventions travel together**
+in every record's `P.letter_reading_note`, in the module docstring, in
+`docs/PHENOMENON_PROTOTYPES.md` and in D-013, for the next GUIDANCE packet to
+settle. The two agree on `P` and on everything a record carries. **No number
+depends on the choice.**
 
 ## 9. Results with compact tables or examples
 
@@ -250,6 +298,11 @@ is the EXECUTOR's. Renaming them changes three labels and no number.
 193, 195); `P-STATE-1` reads the heat-index day-count variable (columns 241,
 253, both `verified_from_dictionary`).
 
+**Column 195 `wildfire_summer_Pend` is never averaged.** In `P-COUNTY-1` its ten
+per-cell values are kept in full and summarised as a count: it is **positive on
+10 of 10 member cells**. Every PR-1 figure above is a rank on the **signed**
+change value.
+
 ### Per-field status, by record
 
 | Field | `P-CELL-1` | `P-COUNTY-1` | `P-STATE-1` |
@@ -283,9 +336,9 @@ place names is itself inferred.
 
 | Check | Result |
 | --- | --- |
-| `pytest` | **435 passed**, 0 failed |
-| New tests in this package | 61 --- 11 hierarchy, 38 phenomenon, 12 handout |
-| `python scripts/verify_no_secrets_or_paths.py` | **0 hits** over 169 tracked text files |
+| `pytest` | **451 passed**, 0 failed |
+| New tests in this package | 77 --- 11 hierarchy, 49 phenomenon, 17 handout |
+| `python scripts/verify_no_secrets_or_paths.py` | **0 hits**, every tracked text file |
 | Manifest verification | performed before every read, fail-closed, in both runs |
 | Run records | 2, both `passed: true`, both with all six D-007 pins matching |
 | Unlabelled-inference guard | 0 offences across the three records; the build fails the run if there is one |
@@ -303,6 +356,12 @@ Guards that fire in both directions, rather than only passing:
 - `tests/test_group_handout.py` re-runs the exact defect D-012 found --- a
   heading naming a place --- through the handout's own guard and requires it to
   fail.
+- `tests/test_phenomenon.py` asserts the aggregator **refuses** a percent-change
+  column, an identifier column and every location column, **and** asserts that an
+  ordinary quantity column is *not* refused. A guard that refuses everything
+  would be worse than none.
+- `tests/test_group_handout.py` asserts the superseded mean of
+  `wildfire_summer_Pend`, `23.603612800000000`, appears nowhere in the handout.
 
 Three findings from the guards during the build, all fixed rather than
 suppressed: the direction word and the change value were reaching the prose
@@ -317,11 +376,13 @@ quantile off by one; and a mean of exactly zero serialised as `0E-15`.
    the aggregates only if a county can be defined as a row set. It can: A-G3
    defines it that way, computed, without reference to `GEOID`. **What changed
    is that no record uses `GEOID` at all.**
-2. **No record reaches `derived_from_verified`.** The package's rule --- status
-   `derived_from_inferred` unless the change column is verified --- never
-   triggers, because at cell level the fire-weather change column is inferred
-   and at every other level the membership is. This is honest, and it also means
-   the distinction is currently untested against a positive case.
+2. **No record reaches `derived_from_verified`** in any field derived from the
+   change quantity. The package's rule --- status `derived_from_inferred` unless
+   the change column is verified --- never triggers there, because at cell level
+   the fire-weather change column is inferred and at every other level the
+   membership is. The corroboration block of `P-CELL-1` is the one field that
+   does reach it, so the distinction is no longer untested against a positive
+   case; everywhere else the observation stands.
 3. **PR-1 is not a magnitude criterion and should not be shown to anyone as
    one.** It exists to make the field non-empty. Every place it appears says so.
 4. **Unweighted averaging is unjustified, not merely unverified.** Nothing in
@@ -344,18 +405,68 @@ quantile off by one; and a mean of exactly zero serialised as `0E-15`.
    only the part of it the grid touches, is not established by anything.
 9. **Nothing was verified on a second host.** The package is small and local;
    no cross-host reproduction was attempted.
+10. **The `Pend` mean was a defect and it was in the delivered package.** The
+    ruling found it, not the tests. The general rule and its tests exist now, but
+    the lesson is the one D-012 already taught in another form: a discipline that
+    lives only in a reviewer's attention is not enforced. What was missing was a
+    statement of which columns admit which arithmetic; the dictionary had said
+    "Percent Change" all along and no code read it.
+11. **The ruling document is not in the repository.** `docs/M1_WP3B_GUIDANCE_RULING.md`
+    is named by the work package as placed by Kaiyuan and is absent from the tree
+    and from every commit. D-013 records the decisions as relayed and quotes
+    nothing from the ruling. **Nothing about the ruling's own text, criterion
+    wording or action numbering has been reconstructed**, and the file remains
+    outstanding.
 
 ## 12. Deviations from the approved plan
 
-**This package precedes the GUIDANCE ruling that would authorise it, by
-Kaiyuan's decision of 2026-09-13.**
+**This package was built ahead of the GUIDANCE ruling that would authorise it,
+by Kaiyuan's decision of 2026-09-13. That ruling has since landed: PASS WITH
+ACTIONS, recorded as D-013.**
 
-The ruling in force, D-010/D-011, states that an M1-WP3 example **may not
-contain** geographic aggregation, county/state aggregation, magnitude or
-salience thresholds, or selection of interesting changes by new quantitative
-criteria. **This package does the first three deliberately.** It was decided by
-the project owner following the mentor's direction R-002, with a GUIDANCE ruling
-requested in parallel and still pending at the time of writing.
+The ruling in force when the package was built, D-010/D-011, states that an
+M1-WP3 example **may not contain** geographic aggregation, county/state
+aggregation, magnitude or salience thresholds, or selection of interesting
+changes by new quantitative criteria. **This package does the first three
+deliberately.** D-013 admits it as an explicit **milestone-order exception** ---
+early M3-style validation carried out while M1 is still open --- and does not
+repeal those boundaries for anything else.
+
+### What the ruling required, and what changed
+
+**1. Criterion 7 --- a percent change was being averaged.** `P-COUNTY-1`
+reported an unweighted mean of `wildfire_summer_Pend`. That number is gone from
+`V` and from every generated sentence; the ten per-cell values are kept in full;
+the corroboration line is now the count "`wildfire_summer_Pend` is positive on
+10 of 10 member cells". The fix is **general**: `aggregate_column` refuses any
+column whose dictionary type contains `Percent Change` or `Text ID` and any
+column in the location family, with tests in both directions. See field 8, rule
+3a.
+
+**2. Validation-only framing.** Every record carries `"validation_only": true`
+and opens its description with **"Prototype for scientific-object validation.
+Not an accepted phenomenon record."** So does every page of
+`docs/PHENOMENON_PROTOTYPES.md`, every page of
+`docs/GROUP_MEETING_2026-09-14.md`, and the head of this report.
+
+**3. The schema letters.** The ruling's reading and the mentor's differ. The
+mentor's are emitted, `P` is added as an explicit field, and both conventions
+travel together for the next GUIDANCE packet. See field 8, rule 11. **No number
+changed.**
+
+**4. Action 10 --- what PR-1 ranks.** Every `M` field now states that ranking is
+on the **signed** change value and carries the exact reference-population
+definition. The handout names the **`GEOID` column** and the **`(State, NAME)`
+label** where it previously wrote "the tract-like id column" and "county label",
+and carries the sentence the ruling asked for about the 3,234 `GEOID` values.
+See field 8, rule 6a.
+
+**One thing the ruling asked for could not be quoted.** The ruling document
+`docs/M1_WP3B_GUIDANCE_RULING.md` is not in the repository --- it is named as
+placed by Kaiyuan and is absent from the tree and from every commit on every
+branch. D-013 records the decisions **as relayed by the COORDINATOR** and
+reconstructs no criterion text, no action text and no numbering beyond what was
+relayed. Placing the file is outstanding.
 
 What follows from that, and is honoured throughout:
 
@@ -400,17 +511,24 @@ are unchanged and their caution remains true of them.**
 | 8 | **Is one row one event** (checklist line 1) | the mentor | everything |
 | 9 | **What would a paper plausibly say about a county-level fire-weather change?** If the answer is "nothing", the unit is wrong | the group | question 1 |
 
-**For GUIDANCE specifically:** the ruling requested in parallel with this
-package. Until it lands, the three judgements this package most needs are
-whether aggregation may be performed at all inside M1, whether a magnitude field
-may exist before a criterion is agreed, and whether `p0-prototype` is an
-acceptable place to hold a schema that M2 will decide.
+**What D-013 settled, and what it did not.** Aggregation inside M1 is permitted
+for this package as a milestone-order exception; a magnitude field may exist so
+long as it is labelled a placeholder, which it is; `p0-prototype` stands as the
+place to hold the schema. **Question 5 above is now sharper rather than closed**:
+the ruling and the mentor use different letters, both are recorded, and the next
+GUIDANCE packet chooses. **Questions 1, 2, 3 and 9 are untouched by the ruling**
+and remain the ones that decide whether any of this survives.
+
+**Outstanding for Kaiyuan:** place `docs/M1_WP3B_GUIDANCE_RULING.md` in the
+repository. D-013 is currently the only record of the ruling here, and it is a
+relay, not the document.
 
 ## 14. Proposed gate status
 
-**This package proposes no gate status.** It is a prototype report, delivered
-ahead of its ruling by the owner's decision, and it is not offered as evidence
-for M1 or for any other milestone. The M1 gate criteria are quoted below for
+**This package proposes no gate status.** It is a prototype report for
+scientific-object validation, and D-013 admits it as a milestone-order exception
+rather than as milestone evidence. It is not offered as evidence for M1 or for
+any other milestone. The M1 gate criteria are quoted below for
 completeness, with the state M1-WP3 left them in; **nothing in M1-WP3b changes
 any of these judgements**, because nothing in M1-WP3b promotes a status,
 resolves a question, or interprets a column.
