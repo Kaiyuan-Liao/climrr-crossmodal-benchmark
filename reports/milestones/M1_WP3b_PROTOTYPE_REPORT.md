@@ -25,13 +25,11 @@ any literature, retrieval or embedding work; any column outside the 41 of
 | Branch | `work/m1-wp3b`, created from `work/m1-wp3` at head `ad13649` |
 | Commits in this package | 3: Phase A; Phases B–D; Phase E |
 | Phase A | `ce8df0761dc74e498ee9ef99cdccfbc61a3f9afc` |
-| Phases B–D | `140a649…` --- the parent of this report's commit |
+| Phases B–D | `140a649920f1348b4144e2fb4516e84df4e97a0f` |
+| Phase E | this report's own commit; a commit cannot contain its own hash, so its SHA travels with the package |
 | Remote | **Not pushed.** The work package says do not push and do not merge, and neither was done. `origin` has no `work/m1-wp3b` |
 | `main` | unchanged, carrying the M1-WP1 merge at `62c9137` |
 | `work/m1-wp3` | unchanged. This branch does not modify it and is not merged into it |
-
-A commit cannot contain its own hash, so the head SHA after the Phase E commit
-is reported with the package rather than written here.
 
 ## 4. Data version and checksums
 
