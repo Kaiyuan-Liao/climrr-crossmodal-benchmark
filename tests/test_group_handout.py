@@ -343,3 +343,56 @@ def test_the_register_records_the_empty_label_groups_as_a_pending_choice():
     assert "empty-label groups" in row
     assert "pending choice" in row
     assert "`unverified`" in row
+
+
+# --- the hand-written field table matches the schema --------------------------
+
+
+def test_the_field_table_lists_every_letter_the_schema_emits(handout, records):
+    """Nine fields, `P` included. The count and the rows have to agree."""
+    collapsed = " ".join(handout.split())
+    assert "and a direction. Nine fields." in collapsed
+    table = handout.split("| Field | What it holds |", 1)[1].split("\n\n", 1)[0]
+    letters = re.findall(r"^\| \*\*([A-Z])\*\* ", table, re.M)
+    assert letters == ["G", "H", "S", "T", "C", "V", "D", "M", "P"]
+    record = records["P-COUNTY-1"]
+    assert set(letters) == {key for key in record if len(key) == 1 and key.isupper()}
+
+
+def test_the_values_row_says_the_grouping_is_a_reading(handout):
+    """`V`'s aggregates are `derived_from_inferred`; the table must not say less."""
+    row = next(
+        line for line in handout.splitlines() if line.startswith("| **V** values |")
+    )
+    assert "computed over a grouping that is our reading**" in row
+    county = " ".join(
+        line for line in handout.splitlines() if line.startswith("| **G** scope |")
+    )
+    assert "our reading" in county
+
+
+def test_the_provenance_row_describes_the_P_field(handout):
+    row = next(
+        line for line in handout.splitlines() if line.startswith("| **P** provenance |")
+    )
+    assert "the status of every other field" in row
+
+
+def test_the_largest_label_group_figure_says_what_it_counts(handout):
+    """2,865 is a row count, not a count of rows carrying a value. Say so."""
+    collapsed = " ".join(handout.split())
+    assert "**2,865 in the largest**, which is `Alaska` / `Yukon-Koyukuk`" in collapsed
+    assert (
+        "**every row carrying the label, counted regardless of whether it has a value**"
+        in collapsed
+    )
+
+
+def test_the_largest_label_group_figure_matches_the_hierarchy_checks(handout):
+    """The handout's number against the artifact it came from."""
+    checks = json.loads(
+        (REPO_ROOT / "artifacts" / "profiles" / "hierarchy_checks.json").read_text("utf-8")
+    )
+    largest = int(checks["check_2_rows_per_state_name_pair"]["max"])
+    assert largest == 2865
+    assert f"{largest:,} in the largest" in handout

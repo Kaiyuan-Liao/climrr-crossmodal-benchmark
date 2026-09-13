@@ -11,7 +11,8 @@ session reasoning correctly from out-of-date facts and repeating them.
 | **Latest accepted commit** | `62c9137` --- the merge of M1-WP1 into `main`, accepted by GUIDANCE at reviewed head `fceee7f` (D-009) |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at |
 | **Branch** | `work/m1-wp3`, from `work/m1-wp2`. **Pushed by Kaiyuan, not merged.** `origin/work/m1-wp3` was at `c8f4711` when GUIDANCE took the pre-meeting review; the revision commit after it is local until he pushes again. The EXECUTOR does not push (D-003) |
-| **M1-WP3b branch** | **`work/m1-wp3b`, from `work/m1-wp3` at `ad13649`. Not merged, not pushed** --- the work package forbids both, and `origin` has no such branch. Six commits: Phase A, Phases B–D, Phase E, the post-ruling fixes (D-013), the ruling as placed, and the gaps it closed (D-013-A1) |
+| **M1-WP3b branch** | **`work/m1-wp3b`, from `work/m1-wp3` at `ad13649`. Not merged, not pushed** --- the work package forbids both, and `origin` has no such branch. **Nine commits:** Phase A; Phases B–D; Phase E, in two; the post-ruling fixes (D-013); the ruling as placed and verified; the two gaps it closed (D-013-A1); the percentile wording and the meeting split; and this state refresh |
+| **Prototypes built from** | **`56eb10d66fc5953242859ea9838b578e53b753da`** --- the `built_from_commit` stamped in all three records and in `PHENOMENON_PROTOTYPES.md`. It is the **parent** of the commit that carries them, because a record cannot contain the hash of the commit that adds it. **The records have not been rebuilt since**, and nothing after that commit changed a number --- only wording around them |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
 | **M1-WP1 review** | **PASS**, GUIDANCE, at reviewed head `fceee7f` (D-009). A work-package pass, **not** the M1 milestone gate |
 | **D-010 ruling** | **PASS WITH ACTIONS**, GUIDANCE, 2026-09-13. **D-010 decided; D-011 records the ruling and its boundaries.** Both approved by Kaiyuan |
@@ -107,6 +108,14 @@ session reasoning correctly from out-of-date facts and repeating them.
   *rule*. It ranks on the **signed** change value, not on absolute magnitude ---
   a unit in the lower third may be one with a large **decrease** --- and every
   `M` field now says so and carries the exact reference-population definition.
+  **Wherever a percentile is reported, the population's composition is stated
+  with it** --- "of 50 `State`-label groups: 49 named labels plus one
+  empty-label group (7 rows with a value)", "of 3,019 `(State, NAME)` label
+  groups: 3,018 named labels plus one empty-label group", "of 62,834
+  `Crossmodel`-key groups: all named, no empty-label group". **"Group", not
+  "county" or "state"**: at those levels a unit is a set of rows sharing a
+  label, and calling it a county would assert the reading A-G1 is still asking
+  the mentor to confirm.
 - **Every unweighted mean carries the ruling's own label for it.**
   **"Provisional aggregation rule for representation validation"** --- the
   ruling's words, quoted, not paraphrased --- travels beside the number in the
@@ -114,12 +123,18 @@ session reasoning correctly from out-of-date facts and repeating them.
   handout, with a test that a cell-level record, which averages nothing, does
   **not** carry it. The mean is acceptable for these three prototypes on that
   condition and is **not** the project's aggregation method.
-- **The assumptions register says what breaks.** Every one of the twelve
-  assumptions now carries a **rationale** and a **failure mode** --- what goes
+- **The assumptions register says what breaks.** Every one of the **thirteen**
+  assumptions carries a **rationale** and a **failure mode** --- what goes
   wrong downstream if it is false --- as columns separate from the statement.
   The sharpest: if cells are not equal in area, every aggregate is biased by an
   unknown amount in an unknown direction, **and none of the numbers would look
-  wrong**.
+  wrong**. Ten are flagged as worth putting to the mentor on 2026-09-17.
+- **A-M2 is the newest, and it is a choice nobody has made.** PR-1's reference
+  population **includes empty-label groups**: the 7 rows with no `State` form
+  one group of the 50 ranked at state level and one of the 3,019 at county
+  level. Counting them asserts nothing; excluding them would assert that those
+  rows are not a place, and what they are is Q16, open. At state level one group
+  is 2% of the population --- enough to move a tercile boundary.
 - **Two conventions for the schema letters exist and neither is settled.** The
   mentor and Kaiyuan use S = season, T = horizon, C = scenario; the WP3b ruling
   uses S = scenario, T = temporal horizon, C = compared quantity. **The code
@@ -154,6 +169,10 @@ session reasoning correctly from out-of-date facts and repeating them.
   stem `tempmaxann` denote "Temperature Maximum - Annual" (**101 columns** turn
   on it); which Census vintage are `GEOID` and `TRACTCE`; and is this the shape
   of record she expects to connect to literature.
+- **Pending choice: exclude empty-label groups from PR-1 populations (A-M2).**
+  **Decided by the COORDINATOR after the 2026-09-17 answer on Q16** --- what the
+  7 rows with no `State` are. Until then PR-1 counts them, every record says so,
+  and the percentile of every unit rests on that.
 - **For the group, 2026-09-14:** `docs/GROUP_MEETING_2026-09-14.md` --- the three
   prototypes, the question types they could and could not support, and **five
   questions**, of which the first two matter most: what the unit of a phenomenon

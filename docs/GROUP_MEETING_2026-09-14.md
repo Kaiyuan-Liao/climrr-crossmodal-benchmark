@@ -14,7 +14,7 @@ that needs both, we have to say **what a row is about** in terms a paper could
 plausibly also be about.
 
 The attempt here is a *phenomenon record*: one unit of geography, one climate
-quantity, one comparison between two time periods, and a direction. Eight
+quantity, one comparison between two time periods, and a direction. Nine
 fields. Each field carries its own status, because some of what we "know" about
 this table is quoted from its documentation and some of it is our reading.
 
@@ -25,9 +25,10 @@ this table is quoted from its documentation and some of it is our reading.
 | **S** season | summer | documented |
 | **T** time | baseline period and future period | documented |
 | **C** scenario | RCP8.5 | documented |
-| **V** values | the numbers, and the operation that made them | the raw numbers are the file's; the averages are **computed** |
+| **V** values | the numbers, and the operation that made them | the raw numbers are the file's; the averages are **computed over a grouping that is our reading** |
 | **D** direction | increase / decrease / no change | **computed, from a reading** |
 | **M** magnitude | a category | **a placeholder rule**, explained below |
+| **P** provenance | the status of every other field | one line per field, so any number can be traced without reading the code |
 
 ## Three things that are true of every line further down
 
@@ -165,8 +166,12 @@ many states.
 ## Five questions for the group
 
 1. **What should the unit of a phenomenon be?** A cell has no name a paper
-   would use. A county has a name but 10 cells here and 2,865 in the largest
-   case. A state is coarse enough that a paper might actually discuss it.
+   would use. A county has a name, but the label groups are wildly uneven: 10
+   rows for the one shown above and **2,865 in the largest**, which is
+   `Alaska` / `Yukon-Koyukuk`. That 2,865 is **every row carrying the label,
+   counted regardless of whether it has a value** --- for this group all 2,865
+   do carry one for both variables here, but the count is of rows, not of rows
+   with data. A state is coarse enough that a paper might actually discuss it.
 2. **How should magnitude be decided?** Terciles are a placeholder. What would
    make a category defensible --- a physical threshold, a distributional one, or
    something taken from the literature itself?

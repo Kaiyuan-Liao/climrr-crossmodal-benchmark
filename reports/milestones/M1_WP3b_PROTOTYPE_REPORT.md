@@ -352,8 +352,8 @@ place names is itself inferred.
 
 | Check | Result |
 | --- | --- |
-| `pytest` | **471 passed**, 0 failed |
-| New tests in this package | 97 --- 11 hierarchy, 60 phenomenon, 26 generated documents |
+| `pytest` | **476 passed**, 0 failed |
+| New tests in this package | 102 --- 11 hierarchy, 60 phenomenon, 31 generated documents |
 | `python scripts/verify_no_secrets_or_paths.py` | **0 hits**, every tracked text file |
 | Manifest verification | performed before every read, fail-closed, in both runs |
 | Run records | 2, both `passed: true`, both with all six D-007 pins matching |
