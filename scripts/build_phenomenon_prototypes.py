@@ -60,6 +60,7 @@ from climrr.manifest import ManifestMismatchError, verify_file  # noqa: E402
 from climrr.paths import repo_relative  # noqa: E402
 from climrr.phenomenon import (  # noqa: E402
     ASSUMPTIONS,
+    PROVISIONAL_AGGREGATION_LABEL,
     VALIDATION_BANNER,
     LEVELS,
     NO_ASSUMPTION_NEEDED,
@@ -243,7 +244,10 @@ def distributions(per_level: dict) -> tuple[dict, dict]:
         change_phrase = (
             "the change value of its one cell"
             if level == "cell"
-            else "the unweighted mean of its member cells' change values"
+            else (
+                "the unweighted mean of its member cells' change values, a "
+                f"{PROVISIONAL_AGGREGATION_LABEL}"
+            )
         )
         values_by_key[(level, variable_key)] = values
         membership_by_key[(level, variable_key)] = {
@@ -299,21 +303,37 @@ def render_assumptions_doc(records: list[dict]) -> str:
         "Rows marked **T** in the last column are the ones worth putting in front of the",
         "mentor on Thursday, 2026-09-17.",
         "",
-        "| ID | Statement | Affects | How it could be verified | Status | Maps to | Used by | T |",
-        "| --- | --- | --- | --- | --- | --- | --- | :-: |",
+        "The columns are the ones the M1-WP3b ruling's required action 11 names ---",
+        "assumption ID, affected fields, rationale, **failure mode**, verification path",
+        "and status --- with the statement kept as its own column beside them. The",
+        "failure-mode column answers one question: **what goes wrong downstream if this",
+        "assumption is false?**",
+        "",
+        "| ID | Statement | Rationale | Failure mode | Affects | Verification path "
+        "| Status | Maps to | Used by | T |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- | --- | :-: |",
     ]
     for item in ASSUMPTIONS:
         users = ", ".join(used.get(item["id"], [])) or "— (not used by a prototype)"
         flag = "**T**" if item["mentor_checkable"] else ""
         lines.append(
-            f"| `{item['id']}` | {item['statement']} | {item['affects']} | "
-            f"{item['how_verified']} | `{item['status']}` | {item['maps_to']} | {users} | {flag} |"
+            f"| `{item['id']}` | {item['statement']} | {item['rationale']} | "
+            f"{item['failure_mode']} | {item['affects']} | {item['how_verified']} | "
+            f"`{item['status']}` | {item['maps_to']} | {users} | {flag} |"
         )
     lines += [
         "",
         "## Where no assumption was needed",
         "",
         NO_ASSUMPTION_NEEDED,
+        "",
+        "## The aggregation label the ruling requires",
+        "",
+        "Wherever these prototypes take an unweighted mean over member cells, the",
+        f"operation is labelled **{PROVISIONAL_AGGREGATION_LABEL}** --- the M1-WP3b",
+        "ruling's own words, quoted rather than paraphrased. The mean is acceptable for",
+        "these three prototypes on that condition and is **not** adopted as the",
+        "project's aggregation method.",
         "",
         "## The provisional rule in full",
         "",
@@ -378,6 +398,16 @@ def render_prototypes_doc(records: list[dict], commit: str, csv_sha256: str) -> 
             f"{m['n_units_at_this_level']} units, ranked on the **signed** change value "
             f"| `provisional_rule` PR-1 |",
             f"| `P` provenance | a status for every field above | see the record |",
+            (
+                f"| `V` aggregation | "
+                + (
+                    f"`unweighted_mean` over {record['V']['n']} member cell(s), a "
+                    f"**{PROVISIONAL_AGGREGATION_LABEL}** --- the ruling's words"
+                    if record["V"]["kind"] == "aggregate_over_member_cells"
+                    else "none --- one cell, raw values, nothing aggregated"
+                )
+                + " | see the record |"
+            ),
             "",
             f"Chosen by: {record['chosen_by']}. No value was consulted in the choice.",
             "",

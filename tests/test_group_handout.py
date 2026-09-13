@@ -232,3 +232,72 @@ def test_no_mean_of_the_percent_change_column_survives_in_the_handout(handout, r
     # the value the old build printed, and must not print again
     assert "23.603612800000000" not in handout
     assert "positive on 10 of 10 member cells" in handout
+
+
+# --- the ruling's aggregation label reaches the reader (required action 5) ----
+
+AGGREGATION_LABEL = "provisional aggregation rule for representation validation"
+PROTOTYPES_DOC = REPO_ROOT / "docs" / "PHENOMENON_PROTOTYPES.md"
+ASSUMPTIONS_DOC = REPO_ROOT / "docs" / "PHENOMENON_ASSUMPTIONS.md"
+
+
+def test_the_handout_labels_the_average_in_the_rulings_own_words(handout):
+    collapsed = " ".join(handout.split())
+    assert f"a **{AGGREGATION_LABEL}**" in collapsed
+    assert "not a method the project has adopted" in collapsed
+
+
+def test_the_label_reaches_every_generated_page_that_shows_a_mean():
+    """`PHENOMENON_PROTOTYPES.md` and the register both show the mean, so both say it."""
+    for path in (PROTOTYPES_DOC, ASSUMPTIONS_DOC):
+        assert AGGREGATION_LABEL in path.read_text(encoding="utf-8"), path.name
+
+
+def test_no_aggregate_record_shows_a_mean_in_the_handout_without_the_label(
+    handout, records
+):
+    for record_id, record in records.items():
+        if record["V"]["kind"] != "aggregate_over_member_cells":
+            continue
+        section = handout.split(description_body(record), 1)
+        assert len(section) == 2, record_id
+        quoted = description_body(record)
+        assert "Unweighted mean over n =" in quoted, record_id
+        assert AGGREGATION_LABEL in quoted, record_id
+
+
+def test_the_assumptions_register_has_rationale_and_failure_mode_columns():
+    header = next(
+        line
+        for line in ASSUMPTIONS_DOC.read_text(encoding="utf-8").splitlines()
+        if line.startswith("| ID |")
+    )
+    columns = [cell.strip() for cell in header.strip("|").split("|")]
+    assert columns == [
+        "ID",
+        "Statement",
+        "Rationale",
+        "Failure mode",
+        "Affects",
+        "Verification path",
+        "Status",
+        "Maps to",
+        "Used by",
+        "T",
+    ]
+
+
+def test_the_register_has_one_row_per_assumption_with_every_cell_filled():
+    from climrr.phenomenon import ASSUMPTIONS
+
+    rows = [
+        line
+        for line in ASSUMPTIONS_DOC.read_text(encoding="utf-8").splitlines()
+        if line.startswith("| `A")
+    ]
+    assert len(rows) == len(ASSUMPTIONS)
+    for row in rows:
+        cells = [cell.strip() for cell in row.strip("|").split("|")]
+        assert len(cells) == 10, row[:60]
+        # every cell but the mentor flag carries text
+        assert all(cells[:-1]), row[:60]

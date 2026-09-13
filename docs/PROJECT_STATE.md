@@ -11,13 +11,13 @@ session reasoning correctly from out-of-date facts and repeating them.
 | **Latest accepted commit** | `62c9137` --- the merge of M1-WP1 into `main`, accepted by GUIDANCE at reviewed head `fceee7f` (D-009) |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at |
 | **Branch** | `work/m1-wp3`, from `work/m1-wp2`. **Pushed by Kaiyuan, not merged.** `origin/work/m1-wp3` was at `c8f4711` when GUIDANCE took the pre-meeting review; the revision commit after it is local until he pushes again. The EXECUTOR does not push (D-003) |
-| **M1-WP3b branch** | **`work/m1-wp3b`, from `work/m1-wp3` at `ad13649`. Not merged, not pushed** --- the work package forbids both, and `origin` has no such branch. Four commits: Phase A, Phases B–D, Phase E, the post-ruling fixes (D-013) |
+| **M1-WP3b branch** | **`work/m1-wp3b`, from `work/m1-wp3` at `ad13649`. Not merged, not pushed** --- the work package forbids both, and `origin` has no such branch. Six commits: Phase A, Phases B–D, Phase E, the post-ruling fixes (D-013), the ruling as placed, and the gaps it closed (D-013-A1) |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
 | **M1-WP1 review** | **PASS**, GUIDANCE, at reviewed head `fceee7f` (D-009). A work-package pass, **not** the M1 milestone gate |
 | **D-010 ruling** | **PASS WITH ACTIONS**, GUIDANCE, 2026-09-13. **D-010 decided; D-011 records the ruling and its boundaries.** Both approved by Kaiyuan |
 | **M1-WP3 pre-meeting review** | **REVISE --- framing only**, GUIDANCE, 2026-09-13, at reviewed head `c8f4711` (D-012). The scientific design is **accepted**: subset, rows, IC records, generated presentation, cautions and mentor protocol all approved unchanged. The required framing revision **is done** |
 | **M1-WP3b ruling** | **PASS WITH ACTIONS**, GUIDANCE, 2026-09-13, recorded as **D-013**. M1-WP3b is admitted as an explicit **milestone-order exception** --- early M3-style validation while M1 is still open. **The four required changes are applied.** Nothing in the package is milestone evidence; every record carries `validation_only` and the banner "Prototype for scientific-object validation. Not an accepted phenomenon record.", and its report proposes no gate status |
-| **The ruling as placed** | **`docs/M1_WP3B_GUIDANCE_RULING.md` is in the repository**, placed by Kaiyuan 2026-09-13 --- **after** D-013 was written from the COORDINATOR's relay. It has been read back against D-013: **the substance agrees, and six discrepancies of attribution and coverage were found**, two of them real gaps against required actions 5 and 11. They are listed in the WP3b report, field 13; **neither document was edited to resolve them** |
+| **The ruling as placed** | **`docs/M1_WP3B_GUIDANCE_RULING.md` is in the repository**, placed by Kaiyuan 2026-09-13 --- **after** D-013 was written from the COORDINATOR's relay. Read back against D-013: the substance agrees, and six discrepancies of attribution and coverage were found. **All eleven of the ruling's required actions are now met** --- nine as built, and actions 5 and 11 closed afterwards. The four bookkeeping items are corrected in **D-013-A1**, appended to the log; **D-013 itself was not rewritten** |
 | **Next review event** | **The mentor**, on `docs/MENTOR_EXAMPLES.md` --- the group meeting 2026-09-14 and the one-on-one **2026-09-17**, which is the one GUIDANCE names for the examples. GUIDANCE states no remaining scientific objection |
 | **Blockers** | **M1 is blocked on mentor answers to the three examples.** M1-WP3b is blocked on nothing --- it is complete as a prototype and inert; what it *produces* is blocked on the GUIDANCE ruling and on the group's answer to what a phenomenon's unit should be |
 
@@ -106,6 +106,19 @@ session reasoning correctly from out-of-date facts and repeating them.
   *rule*. It ranks on the **signed** change value, not on absolute magnitude ---
   a unit in the lower third may be one with a large **decrease** --- and every
   `M` field now says so and carries the exact reference-population definition.
+- **Every unweighted mean carries the ruling's own label for it.**
+  **"Provisional aggregation rule for representation validation"** --- the
+  ruling's words, quoted, not paraphrased --- travels beside the number in the
+  record, in the generated sentence, in both generated documents and in the
+  handout, with a test that a cell-level record, which averages nothing, does
+  **not** carry it. The mean is acceptable for these three prototypes on that
+  condition and is **not** the project's aggregation method.
+- **The assumptions register says what breaks.** Every one of the twelve
+  assumptions now carries a **rationale** and a **failure mode** --- what goes
+  wrong downstream if it is false --- as columns separate from the statement.
+  The sharpest: if cells are not equal in area, every aggregate is biased by an
+  unknown amount in an unknown direction, **and none of the numbers would look
+  wrong**.
 - **Two conventions for the schema letters exist and neither is settled.** The
   mentor and Kaiyuan use S = season, T = horizon, C = scenario; the WP3b ruling
   uses S = scenario, T = temporal horizon, C = compared quantity. **The code
@@ -140,13 +153,6 @@ session reasoning correctly from out-of-date facts and repeating them.
   stem `tempmaxann` denote "Temperature Maximum - Annual" (**101 columns** turn
   on it); which Census vintage are `GEOID` and `TRACTCE`; and is this the shape
   of record she expects to connect to literature.
-- **Two required actions of the WP3b ruling are not met**, found by reading the
-  ruling back against D-013. Action 5 asks that an unweighted mean be labelled
-  **"provisional aggregation rule for representation validation"** verbatim; the
-  records label it `unweighted_mean` with A-AGG1 and A-G2. Action 11 asks the
-  assumptions register to carry a **failure mode** per assumption; it has no such
-  column. Both are listed in the WP3b report, field 13, and **neither was fixed
-  in the verification pass** --- the instruction was to list rather than edit.
 - **For the group, 2026-09-14:** `docs/GROUP_MEETING_2026-09-14.md` --- the three
   prototypes, the question types they could and could not support, and **five
   questions**, of which the first two matter most: what the unit of a phenomenon
@@ -188,7 +194,7 @@ ahead of a ruling, which is why it is unmerged, unpushed, versioned
 
 - Charter: [BLUEPRINT.md](BLUEPRINT.md)
 - Plan and gate criteria: [PROJECT_PLAN.md](PROJECT_PLAN.md)
-- Decisions, including D-010, D-011, D-012 and **D-013**: [DECISION_LOG.md](DECISION_LOG.md)
+- Decisions, including D-010, D-011, D-012, **D-013 and its amendment D-013-A1**: [DECISION_LOG.md](DECISION_LOG.md)
 - The ruling that authorised WP3: [M1_D010_GUIDANCE_RULING.md](M1_D010_GUIDANCE_RULING.md)
 - The pre-meeting review of WP3 (**REVISE**, framing only): [M1_WP3_PREMEETING_GUIDANCE_REVIEW.md](M1_WP3_PREMEETING_GUIDANCE_REVIEW.md)
 - The pilot subset, its rationale and its exclusions: [PILOT_SUBSET.md](PILOT_SUBSET.md)

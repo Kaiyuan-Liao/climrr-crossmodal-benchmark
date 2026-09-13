@@ -26,6 +26,7 @@ from climrr.phenomenon import (
     LEVELS,
     PROVISIONAL_RULE,
     UNKNOWN,
+    PROVISIONAL_AGGREGATION_LABEL,
     VALIDATION_BANNER,
     PhenomenonError,
     aggregate_column,
@@ -732,3 +733,101 @@ def test_both_letter_conventions_travel_with_every_record():
     assert "S = season" in note and "T = time horizon" in note
     assert "S = scenario" in note and "C = compared quantity" in note
     assert "No number depends on the choice." in note
+
+
+# --- the ruling's verbatim aggregation label (required action 5) --------------
+
+
+def _county(spec=None):
+    return _build(
+        "county",
+        {"State": "Oklahoma", "NAME": "Stephens"},
+        [
+            _fwi_member("R1C1", "10.000000000000000", "12.000000000000000",
+                        "2.000000000000000", "20.000000000000000"),
+            _fwi_member("R1C2", "20.000000000000000", "26.000000000000000",
+                        "6.000000000000000", "30.000000000000000"),
+        ],
+        FWI,
+        spec or FWI_SEMANTICS,
+    )
+
+
+def test_the_label_is_the_rulings_words_and_is_not_reworded():
+    assert PROVISIONAL_AGGREGATION_LABEL == (
+        "provisional aggregation rule for representation validation"
+    )
+
+
+def test_every_aggregate_in_a_record_carries_the_label():
+    """Required action 5: the mean is acceptable *only if labelled* this way."""
+    record = _county()
+    v = record["V"]
+    assert v["operation"] == "unweighted_mean"
+    assert v["operation_label"] == PROVISIONAL_AGGREGATION_LABEL
+    assert "ruling" in v["operation_label_source"]
+    averaged = [column for column in v["per_column"] if column["aggregates"]]
+    assert averaged, "the fixture must contain at least one averaged column"
+    for column in averaged:
+        assert column["aggregates"]["unweighted_mean_label"] == (
+            PROVISIONAL_AGGREGATION_LABEL
+        )
+    assert PROVISIONAL_AGGREGATION_LABEL in v["change"]["operation"]
+
+
+def test_the_generated_description_carries_the_label_beside_the_mean():
+    record = _county()
+    assert (
+        f"Unweighted mean over n = 2 member cell(s), a "
+        f"**{PROVISIONAL_AGGREGATION_LABEL}**:"
+    ) in record["description"]
+
+
+def test_a_cell_record_claims_no_aggregation_and_so_carries_no_label():
+    """A guard that stamped the label on a record that averages nothing would lie."""
+    record = _build(
+        "cell",
+        {"Crossmodel": "R1C1"},
+        [_fwi_member("R1C1", "25.080200200000000", "31.189300540000001",
+                     "6.109189990000000", "24.358664999999998")],
+        FWI,
+        FWI_SEMANTICS,
+    )
+    assert record["V"]["kind"] == "raw_values_of_one_cell"
+    assert "operation_label" not in record["V"]
+    assert PROVISIONAL_AGGREGATION_LABEL not in record["description"]
+
+
+# --- the assumptions register (required action 11) ----------------------------
+
+
+def test_every_assumption_carries_a_rationale_and_a_failure_mode():
+    for item in ASSUMPTIONS:
+        for field in ("statement", "rationale", "failure_mode", "affects",
+                      "how_verified", "status", "maps_to"):
+            assert item.get(field), f"{item['id']} has no {field}"
+
+
+def test_rationale_statement_and_failure_mode_are_three_different_things():
+    """Action 11 lists them separately; folding one into another loses the point."""
+    for item in ASSUMPTIONS:
+        assert item["rationale"] != item["statement"], item["id"]
+        assert item["failure_mode"] != item["statement"], item["id"]
+        assert item["failure_mode"] != item["rationale"], item["id"]
+
+
+def test_a_failure_mode_says_what_goes_wrong_rather_than_restating_the_doubt():
+    """A bounded check: each failure mode has to describe a consequence.
+
+    Not natural-language analysis --- it asserts that the text contains a
+    downstream object (a record, a value, a rank, a reading) rather than only
+    repeating that the assumption is unverified.
+    """
+    consequence_words = (
+        "record", "records", "aggregate", "aggregates", "mean", "value", "values",
+        "rank", "ranking", "percentile", "direction", "reading", "count", "counts",
+        "cell", "cells", "criterion", "clause", "object",
+    )
+    for item in ASSUMPTIONS:
+        lowered = item["failure_mode"].lower()
+        assert any(word in lowered for word in consequence_words), item["id"]

@@ -234,6 +234,23 @@ SIGN_COUNT_KEY = {
     "no_change": "n_zero",
 }
 
+#: The M1-WP3b ruling's **verbatim** label for an unweighted mean, required by
+#: its evidence check 3 and required action 5: the mean is acceptable for these
+#: three prototypes *only if labelled this way*. It travels beside every
+#: `unweighted_mean` in a record, in the generated prose, and in both generated
+#: documents, so a reader cannot meet the number without meeting the label.
+#:
+#: **Do not reword it.** The phrase is the ruling's, quoted, and a test asserts
+#: it reaches the reader unchanged.
+PROVISIONAL_AGGREGATION_LABEL = (
+    "provisional aggregation rule for representation validation"
+)
+
+#: Where the label comes from, carried beside it so it is checkable.
+PROVISIONAL_AGGREGATION_LABEL_SOURCE = (
+    "M1-WP3b GUIDANCE ruling, evidence check 3 and required action 5 (D-013)"
+)
+
 #: Stamped on every record and at the head of every generated page (D-013).
 VALIDATION_BANNER = (
     "**Prototype for scientific-object validation. Not an accepted phenomenon record.**"
@@ -449,6 +466,8 @@ def aggregate(values: list[Decimal]) -> dict:
     """All four reportable operations over one column's member values."""
     return {
         "unweighted_mean": dstr(unweighted_mean(values)),
+        "unweighted_mean_label": PROVISIONAL_AGGREGATION_LABEL,
+        "unweighted_mean_label_source": PROVISIONAL_AGGREGATION_LABEL_SOURCE,
         "min": dstr(min(values)),
         "max": dstr(max(values)),
         "count": str(len(values)),
@@ -955,10 +974,15 @@ def build_record(
         }
     else:
         unit_change = unweighted_mean(per_cell_changes)
-        change_operation = f"{variable['change_operation']} per cell, then unweighted_mean"
+        change_operation = (
+            f"{variable['change_operation']} per cell, then unweighted_mean "
+            f"({PROVISIONAL_AGGREGATION_LABEL})"
+        )
         v_values = {
             "kind": "aggregate_over_member_cells",
             "operation": "unweighted_mean",
+            "operation_label": PROVISIONAL_AGGREGATION_LABEL,
+            "operation_label_source": PROVISIONAL_AGGREGATION_LABEL_SOURCE,
             "operations_reported": list(OPERATIONS),
             "n": str(len(usable)),
             "per_column": [
@@ -1288,7 +1312,8 @@ def render_description(record: dict) -> dict:
             for column in averaged
         )
         sentence = (
-            f"**Values.** Unweighted mean over n = {v['n']} member cell(s): {summaries}."
+            f"**Values.** Unweighted mean over n = {v['n']} member cell(s), a "
+            f"**{PROVISIONAL_AGGREGATION_LABEL}**: {summaries}."
         )
         if refused:
             # Named rather than silently dropped: a reader who knows the column is
@@ -1505,6 +1530,18 @@ ASSUMPTIONS = (
         "statement": (
             'One CSV row is treated as one "event". The grain everything else rests on.'
         ),
+        "rationale": (
+            "The ClimRR table is laid out one row per grid cell carrying a full "
+            "set of variables, and that is the only grain the file offers "
+            "without joining rows or splitting them. It is Kaiyuan's reading of "
+            "the 2026-09-10 direction (R-002), not the mentor's words."
+        ),
+        "failure_mode": (
+            "**Every record describes the wrong object.** If an \u201cevent\u201d is a "
+            "season, a cell-decade, or a threshold exceedance rather than a "
+            "row, then not only the contents but the *number* of records is "
+            "wrong, and nothing downstream survives unchanged."
+        ),
         "affects": "every record, at every level",
         "how_verified": "the mentor answers checklist line 1",
         "status": UNVERIFIED,
@@ -1519,6 +1556,18 @@ ASSUMPTIONS = (
             "would look like. **Uniqueness does not by itself establish that the key "
             "names a cell**; the dictionary's own words for the column (line 455) and "
             "checklist line 1 are what would."
+        ),
+        "rationale": (
+            "`Crossmodel` is unique on all 62,834 rows --- computed, not "
+            "assumed --- which is what a per-cell key looks like, and the "
+            "dictionary calls the column a \u201cText ID for each cell in the "
+            "polygon grid\u201d (line 455)."
+        ),
+        "failure_mode": (
+            "**Member counts stop being cell counts.** If rows are cell "
+            "fragments, or one cell spans several rows, every unweighted mean "
+            "is taken over the wrong population and `n` misreports how much of "
+            "the unit the number covers."
         ),
         "affects": "the cell-level unit, and the membership of every aggregate",
         "how_verified": (
@@ -1536,6 +1585,20 @@ ASSUMPTIONS = (
             "state name, so a `(State, NAME)` label identifies a county and a `State` "
             "label identifies a state."
         ),
+        "rationale": (
+            "Value-level evidence recorded in IC-011 and IC-012: the most "
+            "frequent `NAME` values are US county-equivalents, 1,770 distinct "
+            "names is fewer than the roughly 3,100 US counties (which is what a "
+            "column of *names* looks like, not one of identifiers), and the "
+            "`State` values are state names ordered by land area, as a grid "
+            "over land would produce."
+        ),
+        "failure_mode": (
+            "**`P-COUNTY-1` and `P-STATE-1` describe row sets with no "
+            "geographic meaning.** The literature probe's place terms become "
+            "noise and no paper could ever be matched to either record --- "
+            "while every aggregate still computes, and is about nothing."
+        ),
         "affects": "P-COUNTY-1 and P-STATE-1 entirely --- what the unit *is*",
         "how_verified": "the mentor answers checklist line 14",
         "status": UNVERIFIED,
@@ -1547,6 +1610,19 @@ ASSUMPTIONS = (
         "statement": (
             "Every grid cell covers the same area, and therefore deserves the same "
             "weight in a mean over cells. **Nothing in this file states a cell area.**"
+        ),
+        "rationale": (
+            "The dictionary describes a single polygon grid (line 455) and the "
+            "cell keys are a regular row/column scheme (`R106C361`), which is "
+            "what a uniform grid looks like. **No column of this file states a "
+            "cell area**, so this is inference from the naming and nothing "
+            "more."
+        ),
+        "failure_mode": (
+            "**Every aggregate is biased by an unknown amount in an unknown "
+            "direction**, toward wherever cells are smaller. Values, direction "
+            "and percentile in the county and state records would all be wrong, "
+            "and none of them would look wrong."
         ),
         "affects": "every aggregate value, and through it D and M at county and state level",
         "how_verified": (
@@ -1565,6 +1641,18 @@ ASSUMPTIONS = (
             "sets, and computed that `GEOID` cannot key them: 3,234 `GEOID` values "
             "appear against more than one `(State, NAME)` pair."
         ),
+        "rationale": (
+            "Computed rather than reasoned: `scripts/hierarchy_checks.py` "
+            "counted the row sets and measured that `GEOID` cannot key them --- "
+            "3,234 values span more than one label. The definition is "
+            "structural and needs no interpretation to hold."
+        ),
+        "failure_mode": (
+            "**A record names a county and describes a fragment of one.** If "
+            "the grid covers only part of what a label names, the arithmetic "
+            "stays correct and the reading does not. The risk is to "
+            "interpretation, not to the numbers."
+        ),
         "affects": "the membership of every aggregate",
         "how_verified": "computed by `scripts/hierarchy_checks.py`, checks 2 and 3",
         "status": COMPUTED,
@@ -1581,6 +1669,18 @@ ASSUMPTIONS = (
             "or `Text ID`, and every location column, is refused and reported as counts "
             "instead (D-013, ruling criterion 7)."
         ),
+        "rationale": (
+            "A mean is the simplest summary that uses every member once, and it "
+            "is the operation the M1-WP3b ruling permits for representation "
+            "validation --- explicitly as a provisional rule and explicitly not "
+            "as the project's method. No alternative was evaluated."
+        ),
+        "failure_mode": (
+            "**The county and state records report a number that describes no "
+            "cell and no county.** If the quantity is non-linear across space, "
+            "or the member distribution is bimodal, the mean sits where nothing "
+            "is --- and PR-1 then ranks that artefact against other artefacts."
+        ),
         "affects": "V, D and M at county and state level",
         "how_verified": (
             "a scientific judgement --- GUIDANCE and the mentor, not a computation"
@@ -1596,6 +1696,18 @@ ASSUMPTIONS = (
             "positive value is an increase. The dictionary writes "
             '"Difference between End-Century and Historical" and never defines the '
             "direction of the subtraction."
+        ),
+        "rationale": (
+            "The dictionary writes \u201cDifference between End-Century and "
+            "Historical\u201d in that order (line 665), which reads as later minus "
+            "earlier. **It never defines the subtraction**, and the same "
+            "ambiguity is checklist line 7."
+        ),
+        "failure_mode": (
+            "**Every direction in every record flips**, and PR-1's signed "
+            "ranking inverts with it: what is reported as an upper-third "
+            "increase is a lower-third decrease. No value changes; every "
+            "reading of one does."
         ),
         "affects": "D in every record, and the sign PR-1 ranks in M",
         "how_verified": "the mentor answers checklist line 7 (and line 4 for heat index)",
@@ -1614,6 +1726,19 @@ ASSUMPTIONS = (
             "per-cell means, and a mean of per-cell percent changes is not --- and the "
             "choice is the EXECUTOR's, not a decided one."
         ),
+        "rationale": (
+            "Arithmetic: the unweighted mean of per-cell differences *is* the "
+            "difference of the per-cell means, and the mean of per-cell percent "
+            "changes is not. The absolute difference therefore aggregates "
+            "consistently across levels and the percent change does not --- "
+            "which is also why the ruling forbids averaging the latter."
+        ),
+        "failure_mode": (
+            "**The fire-weather records answer a question the project did not "
+            "ask.** If the percent change is the quantity of interest, the "
+            "county-level number would have to be recomputed by a rule that "
+            "does not yet exist, since averaging it is forbidden."
+        ),
         "affects": "D and M in P-CELL-1 and P-COUNTY-1",
         "how_verified": "a choice for the COORDINATOR and the group, not a computation",
         "status": UNVERIFIED,
@@ -1627,6 +1752,19 @@ ASSUMPTIONS = (
             "seasonal average daily Fire Weather Index for the modeled historical "
             'period --- rather than the seasonal 95th percentile. The unit "dimensionless '
             'index value" is inferred; the dictionary states none.'
+        ),
+        "rationale": (
+            "The section title \u201cFire Weather Index - Averages\u201d (line 637) "
+            "supplies the variable, and the narrative at lines 346-352 defines "
+            "the ensemble mean of the seasonal average daily FWI in full. The "
+            "field entry itself says only \u201cSeasonal value\u201d (line 661)."
+        ),
+        "failure_mode": (
+            "**The concept clause is wrong while every number stays valid** --- "
+            "the most dangerous shape of error here. If \u201cSeasonal value\u201d is the "
+            "seasonal 95th percentile (the FWI-classes narrative, line 357 "
+            "onward), the baseline is a different quantity and the change is a "
+            "change in a different quantity."
         ),
         "affects": "the baseline value and the concept of both fire-weather prototypes",
         "how_verified": "the mentor answers checklist lines 5 and 6",
@@ -1642,6 +1780,16 @@ ASSUMPTIONS = (
             "`0.000000000000000` on 2 rows of the file, and whether that is a value or "
             "a fill is open (Q17)."
         ),
+        "rationale": (
+            "As A-H1, with the end-of-century endpoint quoted at line 663 and "
+            "dated from line 101."
+        ),
+        "failure_mode": (
+            "As A-H1. Additionally, **if the two exact `0.000000000000000` "
+            "values are a fill rather than a value (Q17), two cells are not "
+            "comparable to the rest** and the PR-1 percentile of every cell- "
+            "level unit shifts."
+        ),
         "affects": "the future value and the concept of both fire-weather prototypes",
         "how_verified": "the mentor answers checklist lines 5 and 6; Q17 separately",
         "status": UNVERIFIED,
@@ -1655,6 +1803,18 @@ ASSUMPTIONS = (
             "index 191 and index 189, in whatever units the index carries, and its "
             "endpoints are those two stored columns rather than separately computed "
             "ones."
+        ),
+        "rationale": (
+            "The `D`/`P` pairing at lines 665 and 667 runs over the same two "
+            "endpoints: the sibling is `verified_from_dictionary` as a percent "
+            "change, so this column is the absolute difference of the same "
+            "comparison."
+        ),
+        "failure_mode": (
+            "**The record becomes internally inconsistent while each number "
+            "stays individually correct.** If `Dend`'s endpoints are not "
+            "indices 189 and 191, the change value is not the change between "
+            "the two values the same record reports."
         ),
         "affects": "the change value, and therefore D and M, in both fire-weather prototypes",
         "how_verified": "the mentor answers checklist line 7",
@@ -1670,6 +1830,19 @@ ASSUMPTIONS = (
             "field non-empty**. It is not a scientific threshold, rests on no "
             "literature and on no distributional reasoning, and no part of this project "
             "treats a tercile as meaning anything."
+        ),
+        "rationale": (
+            "`M` had to be non-empty for the group to have something to argue "
+            "with, and a rank is the weakest claim available --- it asserts "
+            "only an ordering the data already contains, and no threshold, no "
+            "category boundary and no significance."
+        ),
+        "failure_mode": (
+            "**The project ships a magnitude criterion it never chose.** If a "
+            "tercile is read as scientific importance, PR-1 becomes the "
+            "definition by default. The label and the distinct `[provisional "
+            "rule PR-1: ...]` mark exist to prevent exactly that; the failure "
+            "is one of reading, not of arithmetic."
         ),
         "affects": "M in every record",
         "how_verified": (

@@ -58,8 +58,10 @@ this table is quoted from its documentation and some of it is our reading.
    label covers 10 rows; the `California` label covers 2,831, of which 2,827
    carry a heat-index value. Blanks are excluded from the averages and never
    read as zeros.
-4. **Aggregation is a plain unweighted average**, every cell counting once. We
-   do not know that cells are equal in area; nothing in the file says.
+4. **Aggregation is a plain unweighted average**, every cell counting once ---
+   labelled, in the reviewers' own words, a **provisional aggregation rule for representation validation**. It is what these three
+   prototypes use to be looked at, not a method the project has adopted. We do
+   not know that cells are equal in area; nothing in the file says.
 5. **Some columns are never averaged.** `wildfire_summer_Pend` is a *percent
    change*, and the mean of per-cell percent changes is not the percent change
    of the group --- it weights a cell with a tiny baseline as heavily as a large
@@ -96,11 +98,11 @@ this table is quoted from its documentation and some of it is our reading.
 
 **Compared.** Baseline horizon the modeled historical decade, 1995-2004; future horizon End-Century, the modeled decade 2085-2094; future scenario RCP8.5.
 
-**Values.** Unweighted mean over n = 10 member cell(s): `wildfire_summer_Hist` [provisional: 25.784530258000000]; `wildfire_summer_Endc` [provisional: 31.867660141000000]; `wildfire_summer_Dend` [provisional: 6.083151960000000]. Not averaged: `wildfire_summer_Pend`, because its recorded type is "Percent Change" --- a percent change is a ratio, the mean of per-cell ratios weights a cell with a near-zero baseline as heavily as one with a large baseline, and it is not the percent change of the aggregate. The M1-WP3b ruling forbids taking a mean of it (criterion 7). Every per-cell value, averaged or not, is in the record.
+**Values.** Unweighted mean over n = 10 member cell(s), a **provisional aggregation rule for representation validation**: `wildfire_summer_Hist` [provisional: 25.784530258000000]; `wildfire_summer_Endc` [provisional: 31.867660141000000]; `wildfire_summer_Dend` [provisional: 6.083151960000000]. Not averaged: `wildfire_summer_Pend`, because its recorded type is "Percent Change" --- a percent change is a ratio, the mean of per-cell ratios weights a cell with a near-zero baseline as heavily as one with a large baseline, and it is not the percent change of the aggregate. The M1-WP3b ruling forbids taking a mean of it (criterion 7). Every per-cell value, averaged or not, is in the record.
 
-**Direction.** [provisional: increase], from the sign of the change value [provisional: 6.083151960000000], computed by `change_column_value per cell, then unweighted_mean` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` is [provisional: positive on 10 of 10 member cells]. It is a percent change and is never averaged here.
+**Direction.** [provisional: increase], from the sign of the change value [provisional: 6.083151960000000], computed by `change_column_value per cell, then unweighted_mean (provisional aggregation rule for representation validation)` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` is [provisional: positive on 10 of 10 member cells]. It is a percent change and is never averaged here.
 
-**Magnitude.** [provisional rule PR-1: upper_third, at percentile 90.6260 of 3019 county-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].
+**Magnitude.** [provisional rule PR-1: upper_third, at percentile 90.6260 of 3019 county-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].
 
 ### One state-shaped row set
 
@@ -112,11 +114,11 @@ this table is quoted from its documentation and some of it is our reading.
 
 **Compared.** Baseline horizon Historical; future horizon End-Century; future scenario RCP8.5.
 
-**Values.** Unweighted mean over n = 2827 member cell(s): `heatindex_HIS_Day105` [provisional: 2.152729629062611]; `heatindex_E85_Day105` [provisional: 15.362681281927839]. Every per-cell value, averaged or not, is in the record.
+**Values.** Unweighted mean over n = 2827 member cell(s), a **provisional aggregation rule for representation validation**: `heatindex_HIS_Day105` [provisional: 2.152729629062611]; `heatindex_E85_Day105` [provisional: 15.362681281927839]. Every per-cell value, averaged or not, is in the record.
 
-**Direction.** [provisional: increase], from the sign of the change value [provisional: 13.209951652865228], computed by `difference_of_horizon_values per cell, then unweighted_mean` over `heatindex_HIS_Day105`, `heatindex_E85_Day105`.
+**Direction.** [provisional: increase], from the sign of the change value [provisional: 13.209951652865228], computed by `difference_of_horizon_values per cell, then unweighted_mean (provisional aggregation rule for representation validation)` over `heatindex_HIS_Day105`, `heatindex_E85_Day105`.
 
-**Magnitude.** [provisional rule PR-1: middle_third, at percentile 54.0000 of 50 state-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].
+**Magnitude.** [provisional rule PR-1: middle_third, at percentile 54.0000 of 50 state-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].
 
 ### About the magnitude field
 

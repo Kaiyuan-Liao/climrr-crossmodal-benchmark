@@ -4,7 +4,7 @@
   "validation_only": true,
   "validation_banner": "**Prototype for scientific-object validation. Not an accepted phenomenon record.**",
   "prototype_notice": "PROTOTYPE. Built for M1-WP3b on Kaiyuan's decision of 2026-09-13, ahead of the GUIDANCE ruling that would authorise county/state units, aggregation and a magnitude field. It is not evidence for any milestone gate and may be revised or discarded by that ruling.",
-  "built_from_commit": "b537c2e12235f0635b8b2efbd769d3d69be65b33",
+  "built_from_commit": "248ec9081e9998b246d3648b0be473c4a9f79d13",
   "csv_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e",
   "rounding_rule": "every derived value is rounded to 15 decimal places, half-to-even --- the precision the CSV itself stores. Raw values are never rounded: they are reported as the characters the file holds.",
   "G": {
@@ -251,6 +251,8 @@
     "label": "values",
     "kind": "aggregate_over_member_cells",
     "operation": "unweighted_mean",
+    "operation_label": "provisional aggregation rule for representation validation",
+    "operation_label_source": "M1-WP3b GUIDANCE ruling, evidence check 3 and required action 5 (D-013)",
     "operations_reported": [
       "unweighted_mean",
       "min",
@@ -278,6 +280,8 @@
         "per_cell_raw_values_are_complete": "yes --- every member cell with a value, not a sample",
         "aggregates": {
           "unweighted_mean": "25.784530258000000",
+          "unweighted_mean_label": "provisional aggregation rule for representation validation",
+          "unweighted_mean_label_source": "M1-WP3b GUIDANCE ruling, evidence check 3 and required action 5 (D-013)",
           "min": "25.080200200000000",
           "max": "26.642200469999999",
           "count": "10"
@@ -303,6 +307,8 @@
         "per_cell_raw_values_are_complete": "yes --- every member cell with a value, not a sample",
         "aggregates": {
           "unweighted_mean": "31.867660141000000",
+          "unweighted_mean_label": "provisional aggregation rule for representation validation",
+          "unweighted_mean_label_source": "M1-WP3b GUIDANCE ruling, evidence check 3 and required action 5 (D-013)",
           "min": "31.189300540000001",
           "max": "32.878299710000000",
           "count": "10"
@@ -328,6 +334,8 @@
         "per_cell_raw_values_are_complete": "yes --- every member cell with a value, not a sample",
         "aggregates": {
           "unweighted_mean": "6.083151960000000",
+          "unweighted_mean_label": "provisional aggregation rule for representation validation",
+          "unweighted_mean_label_source": "M1-WP3b GUIDANCE ruling, evidence check 3 and required action 5 (D-013)",
           "min": "5.777420040000000",
           "max": "6.384769920000000",
           "count": "10"
@@ -370,7 +378,7 @@
       }
     ],
     "change": {
-      "operation": "change_column_value per cell, then unweighted_mean",
+      "operation": "change_column_value per cell, then unweighted_mean (provisional aggregation rule for representation validation)",
       "operation_note": "Two change columns exist for this variable and the work package allows either. `wildfire_summer_Dend` (193) is used because it is an absolute difference, and the unweighted mean of per-cell differences is the difference of the per-cell means --- an arithmetic property that the mean of per-cell **percent** changes does not have. `wildfire_summer_Pend` (195) is `verified_from_dictionary` and is reported beside it as a corroborating sign, not as the quantity. Which of the two should carry the direction is assumption A-DIR2 and is an open choice for the group.",
       "input_columns": [
         {
@@ -467,14 +475,14 @@
     },
     "provenance_status": "provisional_rule",
     "ranked_against": "every county-level unit of this file with a change value for variable fwi_summer_hist_to_end85",
-    "reference_population": "every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here)",
+    "reference_population": "every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation; units whose label is the empty string are included (1 here)",
     "distribution_membership": {
       "how_units_were_formed": "every distinct `(State, NAME)` label in the file forms one county-level unit",
       "n_keys": "3019",
       "n_units": "3019",
       "n_units_excluded_for_having_no_value": "0",
       "n_units_whose_label_is_the_empty_string": "1",
-      "reference_population": "every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here)",
+      "reference_population": "every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation; units whose label is the empty string are included (1 here)",
       "empty_label_note": "A unit whose label is the empty string is counted. The 7 rows with no `State` form one such unit at state level and one at county level. Dropping them would be a judgement about what an empty label means, and this project does not have one (Q16)."
     },
     "rests_on_assumptions": [
@@ -526,7 +534,7 @@
       "triggered_by": "the unit level 'county', whose identifier is a label"
     }
   ],
-  "description": "**Prototype for scientific-object validation. Not an accepted phenomenon record.**\n\n> Every `wildfire_*` column below holds a **Fire Weather Index** --- a meteorological fire-danger index, listed in the dictionary under the section \"Fire Weather Index - Averages\". It is not a wildfire, an ignition, a burned area, or a probability of any of those, and nothing in this record says that it is.\n\n> `Historical` here means a **modeled historical baseline** --- the dictionary's historical period, 1995 to 2004, run through the same climate models. It is not an observation, a measurement, or a record of anything that happened.\n\n> The `State` and `NAME` values used to form this unit are `inferred_candidate` readings (IC-011, IC-012): the dictionary does not mention either column, and the Census vintage and coordinate reference system behind them are unknown. **This prototype groups rows by those labels**, which M1-WP3 deliberately did not do. The group is the set of rows carrying the label --- not a boundary, not a geometry, and not keyed on `GEOID`, which Phase A measured does not determine the label (A-G3).\n\n**Scope.** The set of rows sharing a `(State, NAME)` label, identified by [provisional: `Oklahoma`, `Stephens`]. Members: 10 cell(s) --- 10 with a value on every column used, 0 without. Cells without a value are excluded from every number below and are never read as a zero.\n\n**Quantity.** [provisional: The multi-model ensemble mean of the summer seasonal average daily Fire Weather Index for the modeled historical period. The FWI is a meteorological fire-danger index: it describes weather conditions, not fire occurrence, ignition, or burned area]. Unit or type: [provisional: dimensionless index value]. Season: summer, defined by the dictionary as June, July and August.\n\n**Compared.** Baseline horizon the modeled historical decade, 1995-2004; future horizon End-Century, the modeled decade 2085-2094; future scenario RCP8.5.\n\n**Values.** Unweighted mean over n = 10 member cell(s): `wildfire_summer_Hist` [provisional: 25.784530258000000]; `wildfire_summer_Endc` [provisional: 31.867660141000000]; `wildfire_summer_Dend` [provisional: 6.083151960000000]. Not averaged: `wildfire_summer_Pend`, because its recorded type is \"Percent Change\" --- a percent change is a ratio, the mean of per-cell ratios weights a cell with a near-zero baseline as heavily as one with a large baseline, and it is not the percent change of the aggregate. The M1-WP3b ruling forbids taking a mean of it (criterion 7). Every per-cell value, averaged or not, is in the record.\n\n**Direction.** [provisional: increase], from the sign of the change value [provisional: 6.083151960000000], computed by `change_column_value per cell, then unweighted_mean` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` is [provisional: positive on 10 of 10 member cells]. It is a percent change and is never averaged here.\n\n**Magnitude.** [provisional rule PR-1: upper_third, at percentile 90.6260 of 3019 county-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].\n\nEvery clause marked [provisional:...] rests on an inferred-candidate record or on a field derived from one: reasoned and written down, **not verified and not owner-confirmed**. The clause marked [provisional rule PR-1:...] rests on a placeholder rule, not on science.\n",
+  "description": "**Prototype for scientific-object validation. Not an accepted phenomenon record.**\n\n> Every `wildfire_*` column below holds a **Fire Weather Index** --- a meteorological fire-danger index, listed in the dictionary under the section \"Fire Weather Index - Averages\". It is not a wildfire, an ignition, a burned area, or a probability of any of those, and nothing in this record says that it is.\n\n> `Historical` here means a **modeled historical baseline** --- the dictionary's historical period, 1995 to 2004, run through the same climate models. It is not an observation, a measurement, or a record of anything that happened.\n\n> The `State` and `NAME` values used to form this unit are `inferred_candidate` readings (IC-011, IC-012): the dictionary does not mention either column, and the Census vintage and coordinate reference system behind them are unknown. **This prototype groups rows by those labels**, which M1-WP3 deliberately did not do. The group is the set of rows carrying the label --- not a boundary, not a geometry, and not keyed on `GEOID`, which Phase A measured does not determine the label (A-G3).\n\n**Scope.** The set of rows sharing a `(State, NAME)` label, identified by [provisional: `Oklahoma`, `Stephens`]. Members: 10 cell(s) --- 10 with a value on every column used, 0 without. Cells without a value are excluded from every number below and are never read as a zero.\n\n**Quantity.** [provisional: The multi-model ensemble mean of the summer seasonal average daily Fire Weather Index for the modeled historical period. The FWI is a meteorological fire-danger index: it describes weather conditions, not fire occurrence, ignition, or burned area]. Unit or type: [provisional: dimensionless index value]. Season: summer, defined by the dictionary as June, July and August.\n\n**Compared.** Baseline horizon the modeled historical decade, 1995-2004; future horizon End-Century, the modeled decade 2085-2094; future scenario RCP8.5.\n\n**Values.** Unweighted mean over n = 10 member cell(s), a **provisional aggregation rule for representation validation**: `wildfire_summer_Hist` [provisional: 25.784530258000000]; `wildfire_summer_Endc` [provisional: 31.867660141000000]; `wildfire_summer_Dend` [provisional: 6.083151960000000]. Not averaged: `wildfire_summer_Pend`, because its recorded type is \"Percent Change\" --- a percent change is a ratio, the mean of per-cell ratios weights a cell with a near-zero baseline as heavily as one with a large baseline, and it is not the percent change of the aggregate. The M1-WP3b ruling forbids taking a mean of it (criterion 7). Every per-cell value, averaged or not, is in the record.\n\n**Direction.** [provisional: increase], from the sign of the change value [provisional: 6.083151960000000], computed by `change_column_value per cell, then unweighted_mean (provisional aggregation rule for representation validation)` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` is [provisional: positive on 10 of 10 member cells]. It is a percent change and is never averaged here.\n\n**Magnitude.** [provisional rule PR-1: upper_third, at percentile 90.6260 of 3019 county-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].\n\nEvery clause marked [provisional:...] rests on an inferred-candidate record or on a field derived from one: reasoned and written down, **not verified and not owner-confirmed**. The clause marked [provisional rule PR-1:...] rests on a placeholder rule, not on science.\n",
   "description_clauses": [
     {
       "field": "G.identifier",
@@ -584,7 +592,7 @@
     },
     {
       "field": "M.tercile",
-      "text": "upper_third, at percentile 90.6260 of 3019 county-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold",
+      "text": "upper_third, at percentile 90.6260 of 3019 county-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold",
       "status": "provisional_rule",
       "wrapper": "provisional_rule"
     },

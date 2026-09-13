@@ -60,9 +60,9 @@ Artifacts produced, by SHA-256:
 | File | SHA-256 | Bytes |
 | --- | --- | ---: |
 | `artifacts/profiles/hierarchy_checks.json` | `90b7e812fcdc86a089624afd0e7edafacdb2ef256122c5ad7e5145c6c79e4665` | 9,708 |
-| `artifacts/phenomena/prototypes/P-CELL-1.json` | `c9e158235a30d73c65ee213675bba97f12cfcdb97eec71ff7f4d17317d4cf9f6` | 26,517 |
-| `artifacts/phenomena/prototypes/P-COUNTY-1.json` | `db32e5462ccb324208b7637787dce9a8aa7b5f0b43409060c34dc1e880c16c6b` | 32,508 |
-| `artifacts/phenomena/prototypes/P-STATE-1.json` | `947f4385953e69eb0484a77b52fd61926fc62a5e1f1a82ef6d1033bdf5872bd5` | 332,180 |
+| `artifacts/phenomena/prototypes/P-CELL-1.json` | `dbd03b558d3901c851954ef74b60f30c96e374261e1be494fa06dd8d585f7014` | 26,517 |
+| `artifacts/phenomena/prototypes/P-COUNTY-1.json` | `1a04f4267e5be7d0d6e590afcb4925810c5fc139022c84f8faff29c69a08af8e` | 33,776 |
+| `artifacts/phenomena/prototypes/P-STATE-1.json` | `0e162651c4286053f2a71ef68ae6a35aa5bad92432417419f34bdf06211c8459` | 333,234 |
 
 **The three prototype records were rebuilt by the post-ruling fixes** and their
 hashes differ from those reported before D-013. `hierarchy_checks.json` was not
@@ -92,7 +92,7 @@ Run records:
 | Run | Result | Record |
 | --- | --- | --- |
 | `hierarchy_checks` | PASS | `reports/runs/20260913T191302Z_local_hierarchy_checks.json` |
-| `build_phenomenon_prototypes` (post-ruling rebuild) | PASS | `reports/runs/20260913T195401Z_local_build_phenomenon_prototypes.json` |
+| `build_phenomenon_prototypes` (post-ruling rebuild) | PASS | `reports/runs/20260913T200830Z_local_build_phenomenon_prototypes.json` |
 
 The pre-ruling `build_phenomenon_prototypes` run record was superseded by the
 rebuild and removed rather than left beside it; the records it produced no longer
@@ -147,7 +147,7 @@ python scripts/verify_no_secrets_or_paths.py
 | `artifacts/phenomena/prototypes/P-COUNTY-1.json` | the county-level record |
 | `artifacts/phenomena/prototypes/P-STATE-1.json` | the state-level record |
 | `docs/PHENOMENON_PROTOTYPES.md` | the three units, generated |
-| `docs/PHENOMENON_ASSUMPTIONS.md` | the register, generated |
+| `docs/PHENOMENON_ASSUMPTIONS.md` | the register, generated --- ten columns, including separate **rationale** and **failure mode** per the ruling's required action 11 |
 | `docs/GROUP_MEETING_2026-09-14.md` | the group handout |
 | `docs/M1_WP3B_GUIDANCE_RULING.md` | **the GUIDANCE ruling on this package**, PASS WITH ACTIONS, placed by Kaiyuan 2026-09-13. Not authored here |
 | `docs/DECISION_LOG.md` | D-013, which records the ruling and what it required |
@@ -174,7 +174,14 @@ nothing, because Phase A measured that it cannot key a county here.
 county and a state is an `inferred_candidate` reading (IC-011, IC-012). Every
 field derived through them is `derived_from_inferred`.
 
-**3. Aggregation --- unweighted mean (A-AGG1, A-G2, both unverified).** Each
+**3. Aggregation --- unweighted mean, labelled in the ruling's own words
+(A-AGG1, A-G2, both unverified; ruling evidence check 3 / required action 5).**
+Every unweighted mean in these records carries the ruling's verbatim label,
+**"provisional aggregation rule for representation validation"** --- in the JSON
+beside the number, in the change operation, in the generated sentence, in
+`docs/PHENOMENON_PROTOTYPES.md`, in the assumptions register and in the handout.
+The mean is acceptable for these three prototypes *on that condition* and is
+**not** adopted as the project's aggregation method. Each
 member cell counts once. Nothing in the file states a cell area, so equal
 weighting is an assumption and not a measurement. Every aggregate also reports
 min, max and count beside the mean, and the complete list of per-cell values,
@@ -339,8 +346,8 @@ place names is itself inferred.
 
 | Check | Result |
 | --- | --- |
-| `pytest` | **451 passed**, 0 failed |
-| New tests in this package | 77 --- 11 hierarchy, 49 phenomenon, 17 handout |
+| `pytest` | **463 passed**, 0 failed |
+| New tests in this package | 89 --- 11 hierarchy, 56 phenomenon, 22 generated documents |
 | `python scripts/verify_no_secrets_or_paths.py` | **0 hits**, every tracked text file |
 | Manifest verification | performed before every read, fail-closed, in both runs |
 | Run records | 2, both `passed: true`, both with all six D-007 pins matching |
@@ -527,21 +534,30 @@ and remain the ones that decide whether any of this survives.
 `docs/M1_WP3B_GUIDANCE_RULING.md` was placed on 2026-09-13, after D-013 was
 written from the COORDINATOR's relay. Reading it back: **every decision D-013
 records is a decision the ruling makes, and D-013 records no decision the ruling
-does not make.** Six discrepancies of *attribution and coverage* were found.
-**Neither document was edited to resolve them** --- an append-only log has to
-show what the package was built from.
+does not make.** Six discrepancies of *attribution and coverage* were found, of
+which **two were real gaps against required actions. Both are now closed**, and
+the four bookkeeping items are corrected in **D-013-A1**, an amendment appended
+to the decision log. **D-013 itself was not rewritten** --- an append-only log
+has to keep showing what the package was built from.
 
 | # | Discrepancy | Kind | Who owns it |
 | --- | --- | --- | --- |
 | 1 | **D-013 §4 and the work package cite "action 10 / criterion 10" for the magnitude requirements.** Acceptance criterion 10 is right --- "`M` records reference population, ranking rule, provisional status, and non-use in selection". **Required action 10 is not**: it reads "Keep the literature probe as a query-field stub only." The magnitude reference population is **required action 6**, and "signed vs. absolute-change ranking" comes from **evidence check 5**, which is not a numbered action at all | misattribution; the work done is correct | COORDINATOR, for the next packet's numbering |
 | 2 | **D-013 §2 says "the ruling found a real defect".** The ruling states the general rule --- evidence check 3, "do not average identifiers, categorical labels, percentages…", and acceptance criterion 7, "means are used only for meaningfully averageable quantities" --- and **never names `P-COUNTY-1`, `wildfire_summer_Pend`, or any specific defect.** The identification of the averaged `Pend` came through the COORDINATOR, not the ruling text | misattribution; the fix is correct either way | noted here; no action |
-| 3 | **The ruling requires a verbatim label that no record carries.** Evidence check 3: an unweighted mean is acceptable "only if labeled: **provisional aggregation rule for representation validation**". The records label the operation `unweighted_mean` and hang A-AGG1 and A-G2 on it; the ruling's phrase appears nowhere | **a real gap against required action 5** | EXECUTOR, on instruction --- not fixed here because the instruction was to list rather than edit |
-| 4 | **The assumptions register is missing a column the ruling names.** Required action 11 asks for "assumption ID, affected fields, rationale, **failure mode**, verification path, and status". The register carries ID, statement, affects, how-verified, status and mentor-checkable. **There is no failure-mode column**, and rationale is folded into the statement rather than held separately | **a real gap against required action 11** | EXECUTOR, on instruction |
-| 5 | **D-013 records four of the ruling's eleven required actions**, because four is what the COORDINATOR relayed as needing action. The other seven were already satisfied by the package as built --- except items 3 and 4 above. D-013 does not say which seven, or that there were eleven | coverage | recorded here |
-| 6 | **The ruling's dimension order and its reading of `V` are not in D-013.** The ruling writes the dimensions `G, H, S, T, C, D, M, V` with **V = "supporting numeric evidence and operation"**; this schema orders them `G H S T C V D M` with V = values. D-013's letters section covers S, T, C and P and is silent on V and on the ordering. Separately, the ruling asks to preserve P "**either explicitly or per field**", which the pre-ruling per-field map already satisfied; D-013 reads it as a requirement for an explicit field | coverage; no number depends on it | COORDINATOR, with the S/T/C question |
+| 3 | **The ruling requires a verbatim label that no record carried.** Evidence check 3: an unweighted mean is acceptable "only if labeled: **provisional aggregation rule for representation validation**". The records labelled the operation `unweighted_mean` and hung A-AGG1 and A-G2 on it; the ruling's phrase appeared nowhere | **a real gap against required action 5** | **CLOSED.** The label now travels beside every `unweighted_mean` --- in `V.operation_label`, in every `aggregates` block, in the change operation, in the generated description, in `PHENOMENON_PROTOTYPES.md`, in the register and in the handout. Four tests, including one that a cell record --- which averages nothing --- does **not** carry it |
+| 4 | **The assumptions register was missing a column the ruling names.** Required action 11 asks for "assumption ID, affected fields, rationale, **failure mode**, verification path, and status". The register carried ID, statement, affects, how-verified, status and mentor-checkable. **There was no failure-mode column**, and rationale was folded into the statement | **a real gap against required action 11** | **CLOSED.** All twelve assumptions now carry a separate `rationale` and a separate `failure_mode` --- what goes wrong downstream if the assumption is false --- with the statement kept as its own column. Tests assert all three are present, distinct, and that each failure mode names a consequence |
+| 5 | **D-013 records four of the ruling's eleven required actions**, because four is what the COORDINATOR relayed as needing action. The other seven were already satisfied by the package as built --- except items 3 and 4 above. D-013 does not say which seven, or that there were eleven | coverage | **Corrected in D-013-A1**, which lists all eleven with met / was-not-met-now-met status |
+| 6 | **The ruling's dimension order and its reading of `V` are not in D-013.** The ruling writes the dimensions `G, H, S, T, C, D, M, V` with **V = "supporting numeric evidence and operation"**; this schema orders them `G H S T C V D M` with V = values. D-013's letters section covers S, T, C and P and is silent on V and on the ordering. Separately, the ruling asks to preserve P "**either explicitly or per field**", which the pre-ruling per-field map already satisfied; D-013 reads it as a requirement for an explicit field | coverage; no number depends on it | **Recorded in D-013-A1.** The letter disagreement itself is unresolved and still belongs to the next GUIDANCE packet |
 
-**Nothing in this table changes a number.** Items 3 and 4 are work; the rest are
-bookkeeping.
+**Nothing in this table changed a number.** Items 3 and 4 were work and are done;
+items 1, 2, 5 and 6 are corrected in **D-013-A1**, appended to the decision log
+rather than edited into D-013.
+
+### Where the ruling's eleven required actions stand
+
+**All eleven are met.** Nine were met by the package as built; actions 5 and 11
+were the gaps above and are closed. D-013-A1 carries the full table, action by
+action.
 
 ## 14. Proposed gate status
 

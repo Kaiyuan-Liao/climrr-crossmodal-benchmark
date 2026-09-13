@@ -821,3 +821,101 @@ as M1-WP3b delivered them.
   `reports/milestones/M1_WP3b_PROTOTYPE_REPORT.md`, `docs/PROJECT_STATE.md`,
   `tests/test_phenomenon.py`, `tests/test_group_handout.py`.
   **Not present and outstanding: `docs/M1_WP3B_GUIDANCE_RULING.md`.**
+
+---
+
+## D-013-A1 --- Amendment to D-013, after reading the ruling as placed
+
+- **Date:** 2026-09-13
+- **Status:** **decided.** An **amendment**, appended. **D-013 is not rewritten**
+  --- the log is append-only, and the entry as written is the evidence that the
+  package was built from the COORDINATOR's relay before
+  `docs/M1_WP3B_GUIDANCE_RULING.md` was placed. This entry corrects the
+  citations, records the ruling's full requirement set, and says which items
+  were met when, and which were closed afterwards.
+
+### 1. Citations D-013 gets wrong, corrected
+
+D-013 §4 is headed "Action 10 / criterion 10". One half is right and one is not.
+
+| D-013 says | The ruling says |
+| --- | --- |
+| "action 10 / criterion 10" for the magnitude requirements | **Acceptance criterion 10** is right: "`M` records reference population, ranking rule, provisional status, and non-use in selection." |
+| — | **Required action 10 is not about magnitude.** It reads "Keep the literature probe as a query-field stub only." |
+| — | The magnitude reference population is **required action 6**: "Define the magnitude reference population exactly." |
+| — | Signed-versus-absolute ranking comes from **evidence check 5**, which is prose and not a numbered action at all. |
+
+**Nothing built on those citations is wrong** --- the work satisfies criterion
+10, action 6 and evidence check 5. Only the pointer was wrong.
+
+### 2. Who found the averaged percent change
+
+D-013 §2 says "the ruling found a real defect". **The ruling names no defect.**
+It states the general rule twice --- evidence check 3, "Do not average
+identifiers, categorical labels, percentages, or quantities for which a mean is
+not scientifically interpretable", and acceptance criterion 7, "Means are used
+only for meaningfully averageable quantities" --- and never mentions
+`P-COUNTY-1`, `wildfire_summer_Pend`, or any specific column.
+
+**The averaged `Pend` was identified by the COORDINATOR, reading the package
+against the ruling's general rule.** The fix is unchanged and is correct either
+way; the attribution is not.
+
+### 3. The ruling's eleven required actions, and where each stands
+
+D-013 records four, because four is what the relay carried as needing action.
+There are eleven.
+
+| # | Required action | Status |
+| ---: | --- | --- |
+| 1 | Record WP3b as an explicit milestone-order exception | **met** by D-013 §1 |
+| 2 | Label every prototype `validation_only` or equivalent | **met** --- `validation_only` plus the banner on every record and page |
+| 3 | Preserve raw grouping keys separately from provisional geographic labels | **met as built** --- `G.identifier` holds the stored strings, `G.member_cells` the raw `Crossmodel` keys, and the interpretation of either is `inferred_candidate` carried in `P` |
+| 4 | Store source columns, operations, counts, and exact member-row provenance for every aggregate | **met as built** --- complete member lists and complete per-cell values, never a sample |
+| 5 | Keep unweighted mean explicitly provisional and non-generalized | **was not met; now met.** Evidence check 3 requires the verbatim label "provisional aggregation rule for representation validation". It now travels beside every `unweighted_mean` in every record, in the generated prose, in `PHENOMENON_PROTOTYPES.md`, in the register and in the handout, with tests |
+| 6 | Define the magnitude reference population exactly | **met** --- every `M` carries the definition, assembled from the counts |
+| 7 | Ensure magnitude does not drive prototype selection | **met as built** --- the three units are fixed by identity before a value is read, and the records say so |
+| 8 | Record the sign convention used for `D` | **met as built** --- A-DIR1, the named change operation, and `D` provisional throughout because the convention is unresolved |
+| 9 | Preserve per-field epistemic status through aggregation and templated descriptions | **met as built** --- `derived_status` takes the weakest input status, and the label guard fails the build if a weak value reaches the prose bare |
+| 10 | Keep the literature probe as a query-field stub only | **met as built** --- zero retrieval, and the record says so |
+| 11 | Maintain an assumptions register with assumption ID, affected fields, rationale, failure mode, verification path, and status | **was not met; now met.** The register had ID, statement, affects, verification path and status. **Rationale** and **failure mode** are now separate columns for all twelve assumptions, with the statement kept as its own column |
+
+**Two of the eleven were gaps** --- 5 and 11 --- and both were closed after the
+ruling was read back. The other nine were met by the package as built.
+
+### 4. The ruling's letter set, and what it actually asks of `P`
+
+The ruling's dimensions, verbatim:
+
+> **G** — geography / level; **H** — hazard or climate concept; **S** —
+> scenario; **T** — temporal horizon; **C** — compared quantity / change;
+> **D** — direction; **M** — magnitude; **V** — supporting numeric evidence and
+> operation.
+>
+> Also preserve **P — provenance / epistemic status**, either explicitly or per
+> field.
+
+Three things D-013's letters section does not record:
+
+1. **The ruling writes the order `G, H, S, T, C, D, M, V`**, with `V` last. This
+   schema orders them `G H S T C V D M`, with `V` in position six.
+2. **The ruling reads `V` as "supporting numeric evidence and operation".** This
+   schema reads it as values, and carries the operation inside it --- compatible
+   in content, different in emphasis.
+3. **The ruling allows `P` "either explicitly or per field".** The per-field
+   provenance map **already satisfied it** before D-013 was written. Naming it
+   `P` was therefore an improvement in legibility, **not** the closing of a gap,
+   and D-013 reads the requirement more strictly than the ruling states it.
+
+**The letter disagreement D-013 records stands and is not resolved here.** The
+ruling has no letter for season and this schema has none for the compared
+quantity, which lives in `V.change`. The mentor's letters are still what the
+code emits, and the next GUIDANCE packet still chooses.
+
+- **Owner:** EXECUTOR, on COORDINATOR instruction. Amends D-013, which stands as
+  written.
+- **Affected files:** `docs/DECISION_LOG.md`, `src/climrr/phenomenon.py`,
+  `scripts/build_phenomenon_prototypes.py`, `docs/PHENOMENON_ASSUMPTIONS.md`,
+  `docs/PHENOMENON_PROTOTYPES.md`, `docs/GROUP_MEETING_2026-09-14.md`,
+  the three prototype records, `reports/milestones/M1_WP3b_PROTOTYPE_REPORT.md`,
+  `tests/test_phenomenon.py`, `tests/test_group_handout.py`.

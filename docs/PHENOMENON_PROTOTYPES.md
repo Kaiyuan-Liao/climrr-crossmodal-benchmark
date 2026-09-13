@@ -10,7 +10,7 @@ WITH ACTIONS** and is recorded as D-013, which admits this package as an explici
 open. **Nothing here is evidence for a milestone gate**, and nothing is merged.
 
 - Schema version `p0-prototype` --- `src/climrr/phenomenon.py`
-- Built from commit `b537c2e12235f0635b8b2efbd769d3d69be65b33`, CSV SHA-256 `e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e`
+- Built from commit `248ec9081e9998b246d3648b0be473c4a9f79d13`, CSV SHA-256 `e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e`
 - Assumptions, in full: [`PHENOMENON_ASSUMPTIONS.md`](PHENOMENON_ASSUMPTIONS.md)
 - Structural facts the units rest on: [`../artifacts/profiles/hierarchy_checks.md`](../artifacts/profiles/hierarchy_checks.md)
 
@@ -36,6 +36,7 @@ the pair for the next GUIDANCE packet. **No number depends on the choice.**
 | `D` direction | **increase** | `derived_from_inferred` |
 | `M` category | upper_third, percentile 88.5253 of 62834 units, ranked on the **signed** change value | `provisional_rule` PR-1 |
 | `P` provenance | a status for every field above | see the record |
+| `V` aggregation | none --- one cell, raw values, nothing aggregated | see the record |
 
 Chosen by: the row `OID_` 1, which is M1-WP3's Example 1 --- itself selected by structural rule R-A, the first row non-empty on every pilot column. No value was consulted in the choice.
 
@@ -95,6 +96,7 @@ Full record: [`../artifacts/phenomena/prototypes/P-CELL-1.json`](../artifacts/ph
 | `D` direction | **increase** | `derived_from_inferred` |
 | `M` category | upper_third, percentile 90.6260 of 3019 units, ranked on the **signed** change value | `provisional_rule` PR-1 |
 | `P` provenance | a status for every field above | see the record |
+| `V` aggregation | `unweighted_mean` over 10 member cell(s), a **provisional aggregation rule for representation validation** --- the ruling's words | see the record |
 
 Chosen by: the `(State, NAME)` label carried by the row `OID_` 1. No value was consulted in the choice.
 
@@ -114,11 +116,11 @@ Chosen by: the `(State, NAME)` label carried by the row `OID_` 1. No value was c
 
 **Compared.** Baseline horizon the modeled historical decade, 1995-2004; future horizon End-Century, the modeled decade 2085-2094; future scenario RCP8.5.
 
-**Values.** Unweighted mean over n = 10 member cell(s): `wildfire_summer_Hist` [provisional: 25.784530258000000]; `wildfire_summer_Endc` [provisional: 31.867660141000000]; `wildfire_summer_Dend` [provisional: 6.083151960000000]. Not averaged: `wildfire_summer_Pend`, because its recorded type is "Percent Change" --- a percent change is a ratio, the mean of per-cell ratios weights a cell with a near-zero baseline as heavily as one with a large baseline, and it is not the percent change of the aggregate. The M1-WP3b ruling forbids taking a mean of it (criterion 7). Every per-cell value, averaged or not, is in the record.
+**Values.** Unweighted mean over n = 10 member cell(s), a **provisional aggregation rule for representation validation**: `wildfire_summer_Hist` [provisional: 25.784530258000000]; `wildfire_summer_Endc` [provisional: 31.867660141000000]; `wildfire_summer_Dend` [provisional: 6.083151960000000]. Not averaged: `wildfire_summer_Pend`, because its recorded type is "Percent Change" --- a percent change is a ratio, the mean of per-cell ratios weights a cell with a near-zero baseline as heavily as one with a large baseline, and it is not the percent change of the aggregate. The M1-WP3b ruling forbids taking a mean of it (criterion 7). Every per-cell value, averaged or not, is in the record.
 
-**Direction.** [provisional: increase], from the sign of the change value [provisional: 6.083151960000000], computed by `change_column_value per cell, then unweighted_mean` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` is [provisional: positive on 10 of 10 member cells]. It is a percent change and is never averaged here.
+**Direction.** [provisional: increase], from the sign of the change value [provisional: 6.083151960000000], computed by `change_column_value per cell, then unweighted_mean (provisional aggregation rule for representation validation)` over `wildfire_summer_Dend`. The separate column `wildfire_summer_Pend` is [provisional: positive on 10 of 10 member cells]. It is a percent change and is never averaged here.
 
-**Magnitude.** [provisional rule PR-1: upper_third, at percentile 90.6260 of 3019 county-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].
+**Magnitude.** [provisional rule PR-1: upper_third, at percentile 90.6260 of 3019 county-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].
 
 Every clause marked [provisional:...] rests on an inferred-candidate record or on a field derived from one: reasoned and written down, **not verified and not owner-confirmed**. The clause marked [provisional rule PR-1:...] rests on a placeholder rule, not on science.
 
@@ -126,7 +128,7 @@ Every clause marked [provisional:...] rests on an inferred-candidate record or o
 
 Assumptions: `A1`, `A-G0`, `A-G1`, `A-G2`, `A-G3`, `A-AGG1`, `A-DIR1`, `A-DIR2`, `A-H1`, `A-H3`, `A-H5`, `A-M1`.
 
-PR-1 reference population: every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here).
+PR-1 reference population: every distinct `(State, NAME)` label in the file, each forming one county-level unit (3019 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (3019 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation; units whose label is the empty string are included (1 here).
 
 ### Literature probe --- design stub, nothing sent
 
@@ -156,6 +158,7 @@ Full record: [`../artifacts/phenomena/prototypes/P-COUNTY-1.json`](../artifacts/
 | `D` direction | **increase** | `derived_from_inferred` |
 | `M` category | middle_third, percentile 54.0000 of 50 units, ranked on the **signed** change value | `provisional_rule` PR-1 |
 | `P` provenance | a status for every field above | see the record |
+| `V` aggregation | `unweighted_mean` over 2827 member cell(s), a **provisional aggregation rule for representation validation** --- the ruling's words | see the record |
 
 Chosen by: the `State` label carried by the row `OID_` 14, M1-WP3's Example 2. No value was consulted in the choice.
 
@@ -175,11 +178,11 @@ Chosen by: the `State` label carried by the row `OID_` 14, M1-WP3's Example 2. N
 
 **Compared.** Baseline horizon Historical; future horizon End-Century; future scenario RCP8.5.
 
-**Values.** Unweighted mean over n = 2827 member cell(s): `heatindex_HIS_Day105` [provisional: 2.152729629062611]; `heatindex_E85_Day105` [provisional: 15.362681281927839]. Every per-cell value, averaged or not, is in the record.
+**Values.** Unweighted mean over n = 2827 member cell(s), a **provisional aggregation rule for representation validation**: `heatindex_HIS_Day105` [provisional: 2.152729629062611]; `heatindex_E85_Day105` [provisional: 15.362681281927839]. Every per-cell value, averaged or not, is in the record.
 
-**Direction.** [provisional: increase], from the sign of the change value [provisional: 13.209951652865228], computed by `difference_of_horizon_values per cell, then unweighted_mean` over `heatindex_HIS_Day105`, `heatindex_E85_Day105`.
+**Direction.** [provisional: increase], from the sign of the change value [provisional: 13.209951652865228], computed by `difference_of_horizon_values per cell, then unweighted_mean (provisional aggregation rule for representation validation)` over `heatindex_HIS_Day105`, `heatindex_E85_Day105`.
 
-**Magnitude.** [provisional rule PR-1: middle_third, at percentile 54.0000 of 50 state-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].
+**Magnitude.** [provisional rule PR-1: middle_third, at percentile 54.0000 of 50 state-level units. Ranking is on the signed change value, not on its absolute size, so a unit in the lower third may be one with a large decrease rather than one where little changed. The reference population is every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation; units whose label is the empty string are included (1 here). PR-1 is a placeholder and not a scientific threshold].
 
 Every clause marked [provisional:...] rests on an inferred-candidate record or on a field derived from one: reasoned and written down, **not verified and not owner-confirmed**. The clause marked [provisional rule PR-1:...] rests on a placeholder rule, not on science.
 
@@ -187,7 +190,7 @@ Every clause marked [provisional:...] rests on an inferred-candidate record or o
 
 Assumptions: `A1`, `A-G0`, `A-G1`, `A-G2`, `A-G3`, `A-AGG1`, `A-DIR1`, `A-M1`.
 
-PR-1 reference population: every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values; units whose label is the empty string are included (1 here).
+PR-1 reference population: every distinct `State` label in the file, each forming one state-level unit (50 of them); a unit is included if at least one member cell is non-empty on every column this variable reads (50 included, 0 excluded); its change value is the unweighted mean of its member cells' change values, a provisional aggregation rule for representation validation; units whose label is the empty string are included (1 here).
 
 ### Literature probe --- design stub, nothing sent
 
