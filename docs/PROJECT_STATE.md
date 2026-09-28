@@ -6,23 +6,56 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 | | |
 | --- | --- |
-| **Current milestone** | **M1 --- data grounding and metadata audit** |
-| **Active task** | **M1-WP3 complete, pre-meeting reviewed, and revised.** **M1-WP3b --- a prototype package --- is built on the unmerged, unpushed branch `work/m1-wp3b`.** The project is waiting on **the group, 2026-09-14**, **the mentor, 2026-09-17**, and **a GUIDANCE ruling on WP3b** |
-| **Latest accepted commit** | `62c9137` --- the merge of M1-WP1 into `main`, accepted by GUIDANCE at reviewed head `fceee7f` (D-009) |
-| **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at |
-| **Branch** | `work/m1-wp3`, from `work/m1-wp2`. **Pushed by Kaiyuan, not merged.** `origin/work/m1-wp3` was at `c8f4711` when GUIDANCE took the pre-meeting review; the revision commit after it is local until he pushes again. The EXECUTOR does not push (D-003) |
-| **M1-WP3b branch** | **`work/m1-wp3b`, from `work/m1-wp3` at `ad13649`. Not merged, not pushed** --- the work package forbids both, and `origin` has no such branch. **Nine commits:** Phase A; Phases B–D; Phase E, in two; the post-ruling fixes (D-013); the ruling as placed and verified; the two gaps it closed (D-013-A1); the percentile wording and the meeting split; and this state refresh |
-| **Prototypes built from** | **`56eb10d66fc5953242859ea9838b578e53b753da`** --- the `built_from_commit` stamped in all three records and in `PHENOMENON_PROTOTYPES.md`. It is the **parent** of the commit that carries them, because a record cannot contain the hash of the commit that adds it. **The records have not been rebuilt since**, and nothing after that commit changed a number --- only wording around them |
+| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4 --- literature ingestion and structured claim pilot: M4-WP0 done**, awaiting GUIDANCE review |
+| **Active task** | **M4-WP0 --- Literature Corpus Provenance and Inventory: complete** on the unmerged, unpushed branch `work/m4-wp0`. Report: `reports/milestones/M4_WP0_REPORT.md`, all 18 of the ruling's criteria proposed MET. **Next: GUIDANCE review of M4-WP0, and a merge request for the branch chain below** |
+| **Latest accepted commit** | `62c9137` --- the merge of M1-WP1 into `main`, accepted by GUIDANCE at reviewed head `fceee7f` (D-009). `main` is unchanged |
+| **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at. The literature corpus is **not** on Sophia (runbook §8b) |
+| **Branch lineage (unmerged)** | `main` → `work/m1-wp2` (`391b442`) → `work/m1-wp3` (`ad13649`) → `work/m1-wp3b` (`e359b26`) → **`work/m4-wp0`**. Linear; each contains the one before. The first three are on `origin` at those heads (Kaiyuan pushed); **`work/m4-wp0` is not pushed**. The EXECUTOR does not push (D-003). **This chain is the merge request to GUIDANCE** |
+| **M4-WP0 commits** | `52a994a` (Phases A–E), then the commit carrying the report and this file |
+| **Prototypes built from** | `56eb10d` --- unchanged since M1-WP3b; no record rebuilt |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
-| **M1-WP1 review** | **PASS**, GUIDANCE, at reviewed head `fceee7f` (D-009). A work-package pass, **not** the M1 milestone gate |
-| **D-010 ruling** | **PASS WITH ACTIONS**, GUIDANCE, 2026-09-13. **D-010 decided; D-011 records the ruling and its boundaries.** Both approved by Kaiyuan |
-| **M1-WP3 pre-meeting review** | **REVISE --- framing only**, GUIDANCE, 2026-09-13, at reviewed head `c8f4711` (D-012). The scientific design is **accepted**: subset, rows, IC records, generated presentation, cautions and mentor protocol all approved unchanged. The required framing revision **is done** |
-| **M1-WP3b ruling** | **PASS WITH ACTIONS**, GUIDANCE, 2026-09-13, recorded as **D-013**. M1-WP3b is admitted as an explicit **milestone-order exception** --- early M3-style validation while M1 is still open. **The four required changes are applied.** Nothing in the package is milestone evidence; every record carries `validation_only` and the banner "Prototype for scientific-object validation. Not an accepted phenomenon record.", and its report proposes no gate status |
-| **The ruling as placed** | **`docs/M1_WP3B_GUIDANCE_RULING.md` is in the repository**, placed by Kaiyuan 2026-09-13 --- **after** D-013 was written from the COORDINATOR's relay. Read back against D-013: the substance agrees, and six discrepancies of attribution and coverage were found. **All eleven of the ruling's required actions are now met** --- nine as built, and actions 5 and 11 closed afterwards. The four bookkeeping items are corrected in **D-013-A1**, appended to the log; **D-013 itself was not rewritten** |
-| **Next review event** | **Two meetings, and they carry different documents.** **The group, 2026-09-14** --- `docs/GROUP_MEETING_2026-09-14.md` **only**, on whether the phenomenon unit is the right scientific object. **The mentor one-on-one, 2026-09-17** --- `docs/MENTOR_EXAMPLES.md` and its answer sheet, which is the meeting GUIDANCE names for the examples and **the only one they go to**. GUIDANCE states no remaining scientific objection |
-| **Blockers** | **M1 is blocked on mentor answers to the three examples.** M1-WP3b is blocked on nothing --- it is complete as a prototype and inert; what it *produces* is blocked on the GUIDANCE ruling and on the group's answer to what a phenomenon's unit should be |
+| **Rulings in force** | D-009 (M1-WP1 PASS), D-011 (D-010 ruling), D-012 (M1-WP3 pre-meeting, REVISE --- framing only, done), D-013 + D-013-A1 (M1-WP3b PASS WITH ACTIONS), **D-015 (M4-WP0 PASS WITH ACTIONS)** |
+| **Owner decisions since** | **D-014** (Kaiyuan, 2026-09-28): proceed on the "our reading" basis to test what QA could be generated; every `inferred_candidate` and `derived_from_inferred` status carried through; **promotes nothing, and does not authorise QA generation** |
+| **Meetings since the last refresh** | **Group 2026-09-14:** "No material objection to the prototype-unit design was raised." --- not validation, no semantic confirmed. **Mentor 2026-09-17 and 2026-09-24:** **no review of the answer sheet occurred** (R-003); nothing promoted |
+| **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M4-WP1**: blocked on the GUIDANCE review of M4-WP0. **QA generation: not authorised by any ruling** |
 
-## Where things stand
+## Where things stand --- M4-WP0 (2026-09-28)
+
+- **The literature corpus has arrived and is pinned, unopened.** JL supplied a
+  folder (`00`) of **1,918 `.json` files, 78,798,270 bytes**, and the Boolean
+  query it was collected with. The folder stays external, at
+  `literature_corpus_root` in the untracked config. Every file was read as raw
+  bytes for SHA-256 and size and **for nothing else** --- one `rb`-only reader,
+  with runtime and AST tests that nothing decodes or parses. **0 zero-byte files;
+  1 exact-duplicate pair** (`LIT-001483`, `LIT-001484`), identified, not removed.
+  Ids `LIT-000001`… are frozen; a re-run verifies and fails on any change.
+- **The corpus identity for later packages** is the SHA-256 of
+  `artifacts/literature/corpus_manifest.json`,
+  **`3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a`**,
+  recorded in `data/manifest.json` under `external_corpora` with a
+  timestamp-free content identity beside it.
+- **The query is pinned**: `data/metadata/literature_query.txt`, SHA-256
+  **`5a7ddf53…e1e5`**, 2,292 bytes, byte for byte as received. Platform,
+  execution date, export date and completeness are **`unknown`** --- Q19–Q21,
+  for JL, not the mentor.
+- **The query has eleven hazard groups, not ten** as the work package said ---
+  reported as found. 80 hazard terms, 22 context terms. **It carries no
+  scenario, horizon, US state, postal code, county, tract or USA term** (three
+  absence rules, 0 hits) --- verified only against those lists, and a finding
+  about the query, not about any paper.
+- **Query-scope coverage, not corpus coverage.** Each prototype's concept terms:
+  **1 exact, 0 normalized, 3 absent** (`fire weather`, `fire weather`,
+  `heat index`). All four family names absent. **9 of 11 query hazard groups
+  have no pilot counterpart.** `inferred_conceptual_relationship` is defined and
+  cannot be emitted.
+- **Kaiyuan opened one file before the inventory**; it appeared off-topic (urban
+  surface water, Wuhan). An observation from one file, not a corpus property ---
+  M4-WP1's sample should expect off-topic items.
+- **`!artifacts/literature/` was added to `.gitignore`**, because the corpus
+  rule `literature/` caught the path the work package names. The corpus rule is
+  unchanged.
+
+## Where things stand --- M1 (carried forward; unchanged by M4-WP0 except as marked)
 
 - **The M1 problem changed shape and the project followed it.** R-001 (2026-09-10)
   established that **no further documentation exists** --- no newer dictionary,
@@ -55,8 +88,9 @@ session reasoning correctly from out-of-date facts and repeating them.
   generated prose in three layers; the prose is produced **by template** from the
   semantics, and every clause resting on an inference is wrapped
   `[provisional: ...]`, with the build failing if one is not.
-- **`docs/MENTOR_EXAMPLES.md` is what goes to the mentor one-on-one on
-  2026-09-17, and to nothing else.** Sixteen numbered
+- **The answer sheet was not reviewed** at the one-on-ones of 2026-09-17 or
+  2026-09-24 (R-003, *new*). It remains outstanding. **`docs/MENTOR_EXAMPLES.md`
+  is what goes to the mentor, and to nothing else.** Sixteen numbered
   lines --- fifteen answerable confirm / correct / don't know in ten minutes, and
   line 13 a stated observation with nothing to confirm --- behind a printable
   answer sheet. `MENTOR_BRIEF.md` leads with it and demotes the Q1--Q18 table
@@ -165,59 +199,45 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 ## Outstanding
 
-- **For the mentor, through the examples:** is one row one "event"; does the
-  stem `tempmaxann` denote "Temperature Maximum - Annual" (**101 columns** turn
-  on it); which Census vintage are `GEOID` and `TRACTCE`; and is this the shape
-  of record she expects to connect to literature.
+- **For GUIDANCE:** review M4-WP0 (`reports/milestones/M4_WP0_REPORT.md`,
+  field 14 lists the 18 criteria), and the **merge request for the chain**
+  `work/m1-wp2` → `work/m1-wp3` → `work/m1-wp3b` → `work/m4-wp0`. Also still
+  open from WP3b: the S/T/C letter convention (D-013, D-013-A1), and --- at the
+  M1 gate --- whether criterion 1 may pass on declared provisional statuses
+  (D-014).
+- **For JL, the collection scientist:** Q19 (platform / database, fields
+  searched), Q20 (execution and export dates), Q21 (is the folder the complete
+  result set).
+- **For the mentor, through the examples --- still unanswered:** is one row one
+  "event"; does the stem `tempmaxann` denote "Temperature Maximum - Annual"
+  (**101 columns** turn on it); which Census vintage are `GEOID` and `TRACTCE`;
+  and is this the shape of record to connect to literature.
 - **Pending choice: exclude empty-label groups from PR-1 populations (A-M2).**
-  **Decided by the COORDINATOR after the 2026-09-17 answer on Q16** --- what the
-  7 rows with no `State` are. Until then PR-1 counts them, every record says so,
-  and the percentile of every unit rests on that.
-- **For the group, 2026-09-14:** `docs/GROUP_MEETING_2026-09-14.md` --- the three
-  prototypes, the question types they could and could not support, and **five
-  questions**, of which the first two matter most: what the unit of a phenomenon
-  should be, and what replaces PR-1.
-- **For Kaiyuan --- two meetings, two documents, and they do not swap.**
-  **2026-09-14, the group:** `docs/GROUP_MEETING_2026-09-14.md` **only**. The
-  examples and the answer sheet are not for this meeting; it is about whether
-  the phenomenon unit is the right object at all.
-  **2026-09-17, the mentor one-on-one:** `docs/MENTOR_EXAMPLES.md` and its
-  printable answer sheet, and **preserve the answers distinguishing explicit
-  confirmation from correction, from broad approval, and from an unanswered
-  assumption** --- WP4 cannot promote anything without that distinction.
-  Also push the branch, and the Sophia reinstall above.
-- **For GUIDANCE: nothing outstanding on M1-WP3.** Both judgements field 13 of
-  the report asked for were ruled on in the pre-meeting review and are recorded
-  as D-012 --- **41 columns approved, the stem probe kept, the three cautions
-  approved as repository-level rendering rules, criterion 6 met by the
-  architecture, the hash disclosure accepted with no rerun.** The next GUIDANCE
-  event is the M1 milestone gate, after WP4.
-- **Q7, Q8, Q9, Q11, Q12, Q15, Q17, Q18 are untouched by WP3** and still block
-  downstream use of the columns they name. Q0 is closed; Q11.4 is answered from
-  the bytes; Q1, Q10, Q13 and Q14 are now asked concretely through the examples.
-- **Export date** of the ClimRR file remains unknown and was not guessed (Q18).
+  It was to be decided after a mentor answer on Q16; **no answer came**. PR-1
+  still counts them and every record says so.
+- **For Kaiyuan:** push `work/m4-wp0` when ready (the EXECUTOR does not), and
+  the Sophia `pip install -r requirements.txt` reinstall (`pypdfium2` pin).
+- **Q7, Q8, Q9, Q11, Q12, Q15, Q17, Q18** still block downstream use of the
+  columns they name. **Export date** of the ClimRR file remains unknown (Q18).
 
 ## Next
 
-**Nothing until the mentor answers.** Then **M1-WP4**: apply her feedback,
-promote **only explicitly confirmed** semantics to `owner_confirmed` through
-resolution records naming exactly which columns and exactly what was confirmed,
-and assemble the M1 milestone gate packet. A broad "yes, this is what I want" is
-recorded as approval of the approach and promotes nothing.
+**GUIDANCE reviews M4-WP0.** If it passes: **M4-WP1 --- deterministic 6–12-paper
+ingestion and structured-claim pilot, sample drawn from the frozen manifest by
+rule, independent of prototype relevance.** It extracts claims with exact
+evidence locations **without** deciding whether they match any prototype;
+prototype-to-claim compatibility is M5.
 
-Still not authorised by any ruling: phenomenon extraction, aggregation for
-scientific claims, thresholds, literature work, embeddings, bridges, QA --- and
-any interpretation of a column outside the 41 in the pilot subset. **M1-WP3b
-crosses the first three of those deliberately, on the owner's decision and
-ahead of a ruling, which is why it is unmerged, unpushed, versioned
-`p0-prototype`, and offered as no milestone's evidence.** Nothing outside the
-41 columns was interpreted.
+Still not authorised by any ruling: **QA generation**; semantic bridges; any
+prototype-to-paper matching or relevance scoring; embeddings; hazard labels for
+individual papers; any interpretation of a ClimRR column outside the 41 in the
+pilot subset. **D-014 changes none of that.**
 
 ## Links
 
 - Charter: [BLUEPRINT.md](BLUEPRINT.md)
 - Plan and gate criteria: [PROJECT_PLAN.md](PROJECT_PLAN.md)
-- Decisions, including D-010, D-011, D-012, **D-013 and its amendment D-013-A1**: [DECISION_LOG.md](DECISION_LOG.md)
+- Decisions, including D-010 to D-013-A1 and **D-014, D-015**: [DECISION_LOG.md](DECISION_LOG.md)
 - The ruling that authorised WP3: [M1_D010_GUIDANCE_RULING.md](M1_D010_GUIDANCE_RULING.md)
 - The pre-meeting review of WP3 (**REVISE**, framing only): [M1_WP3_PREMEETING_GUIDANCE_REVIEW.md](M1_WP3_PREMEETING_GUIDANCE_REVIEW.md)
 - The pilot subset, its rationale and its exclusions: [PILOT_SUBSET.md](PILOT_SUBSET.md)
@@ -239,4 +259,8 @@ ahead of a ruling, which is why it is unmerged, unpushed, versioned
 - **M1-WP3 report, current M1 status:** [../reports/milestones/M1_WP3_REPORT.md](../reports/milestones/M1_WP3_REPORT.md)
 - M1-WP1 GUIDANCE review: [M1_WP1_GUIDANCE_REVIEW.md](M1_WP1_GUIDANCE_REVIEW.md)
 - Mentor meeting document: [MENTOR_BRIEF.md](MENTOR_BRIEF.md)
+- **M4-WP0 ruling (PASS WITH ACTIONS):** [M4_WP0_GUIDANCE_RULING.md](M4_WP0_GUIDANCE_RULING.md)
+- **M4-WP0 report:** [../reports/milestones/M4_WP0_REPORT.md](../reports/milestones/M4_WP0_REPORT.md)
+- **Query scope:** [LITERATURE_QUERY_SCOPE.md](LITERATURE_QUERY_SCOPE.md); **corpus inventory:** [LITERATURE_CORPUS_INVENTORY.md](LITERATURE_CORPUS_INVENTORY.md)
+- The pinned query and the corpus identity: [../data/MANIFEST.md](../data/MANIFEST.md)
 - Operating rules: [../CLAUDE.md](../CLAUDE.md)
