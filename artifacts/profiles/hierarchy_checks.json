@@ -1,0 +1,368 @@
+{
+  "data_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e",
+  "hierarchy_checks_version": "1",
+  "n_rows": "62834",
+  "focus_rows": {
+    "1": {
+      "row_ordinal": "0",
+      "Crossmodel": "R106C361",
+      "NAME": "Stephens",
+      "State": "Oklahoma",
+      "GEOID": "40137000902"
+    },
+    "14": {
+      "row_ordinal": "13",
+      "Crossmodel": "R107C232",
+      "NAME": "San Bernardino",
+      "State": "California",
+      "GEOID": "06071010300"
+    }
+  },
+  "check_1_crossmodel_uniqueness": {
+    "question": "Is `Crossmodel` unique across the rows of this file?",
+    "n_rows": "62834",
+    "n_distinct": "62834",
+    "is_unique": "True",
+    "n_duplicated_values": "0",
+    "duplicated_values": {},
+    "duplicated_values_truncated": "False",
+    "what_it_does_not_say": "Uniqueness is a property of the column's characters. It does not establish that one row is one grid cell; that is assumption A-G0."
+  },
+  "check_2_rows_per_state_name_pair": {
+    "question": "How many rows share a `(State, NAME)` label?",
+    "n_keys": "3019",
+    "min": "1",
+    "median": "12",
+    "max": "2865",
+    "total_rows": "62834",
+    "focus_pair_OID_1": {
+      "State": "Oklahoma",
+      "NAME": "Stephens",
+      "n_rows": "10"
+    },
+    "focus_pair_OID_14": {
+      "State": "California",
+      "NAME": "San Bernardino",
+      "n_rows": "330"
+    },
+    "what_it_does_not_say": "A `(State, NAME)` pair is a label shared by a set of rows. Whether that set is a county, and whether it covers a county completely, is not established here --- IC-011 and IC-012 hold both readings at `inferred_candidate`."
+  },
+  "check_3_rows_per_geoid": {
+    "question": "How many rows share a `GEOID`, and does each `GEOID` carry one `(State, NAME)`?",
+    "n_keys": "12941",
+    "min": "1",
+    "median": "2",
+    "max": "877",
+    "total_rows": "62834",
+    "n_geoid_spanning_multiple_state_name_pairs": "3234",
+    "geoid_spanning_multiple_state_name_pairs": {
+      "": [
+        "Alaska\tPetersburg",
+        "Alaska\tYakutat",
+        "Minnesota\tSt. Louis",
+        "Montana\tLiberty",
+        "North Dakota\tBottineau",
+        "Texas\tCameron",
+        "Texas\tVal Verde"
+      ],
+      "01003010400": [
+        "Alabama\tBaldwin",
+        "Florida\tEscambia"
+      ],
+      "01003010904": [
+        "Alabama\tBaldwin",
+        "Florida\tEscambia"
+      ],
+      "01003011601": [
+        "Alabama\tBaldwin",
+        "Florida\tEscambia"
+      ],
+      "01007010001": [
+        "Alabama\tBibb",
+        "Alabama\tShelby",
+        "Alabama\tTuscaloosa"
+      ],
+      "01009050103": [
+        "Alabama\tBlount",
+        "Alabama\tSt. Clair"
+      ],
+      "01009050105": [
+        "Alabama\tBlount",
+        "Alabama\tEtowah"
+      ],
+      "01009050302": [
+        "Alabama\tBlount",
+        "Alabama\tEtowah"
+      ],
+      "01009050603": [
+        "Alabama\tBlount",
+        "Alabama\tCullman"
+      ],
+      "01011952500": [
+        "Alabama\tBullock",
+        "Alabama\tMacon"
+      ],
+      "01013953000": [
+        "Alabama\tButler",
+        "Alabama\tWilcox"
+      ],
+      "01013953500": [
+        "Alabama\tConecuh",
+        "Alabama\tCovington"
+      ],
+      "01015002200": [
+        "Alabama\tCalhoun",
+        "Alabama\tEtowah"
+      ],
+      "01019955801": [
+        "Alabama\tCherokee",
+        "Alabama\tEtowah"
+      ],
+      "01019955802": [
+        "Alabama\tCherokee",
+        "Alabama\tDeKalb",
+        "Alabama\tEtowah"
+      ],
+      "01019956101": [
+        "Alabama\tCherokee",
+        "Alabama\tCleburne",
+        "Georgia\tFloyd",
+        "Georgia\tHaralson",
+        "Georgia\tPolk"
+      ],
+      "01025957500": [
+        "Alabama\tClarke",
+        "Alabama\tMonroe",
+        "Alabama\tWilcox"
+      ],
+      "01025957601": [
+        "Alabama\tChoctaw",
+        "Alabama\tClarke"
+      ],
+      "01025957800": [
+        "Alabama\tBaldwin",
+        "Alabama\tMonroe"
+      ],
+      "01027958900": [
+        "Alabama\tCalhoun",
+        "Alabama\tClay"
+      ],
+      "01029959500": [
+        "Alabama\tCleburne",
+        "Georgia\tHaralson"
+      ],
+      "01029959700": [
+        "Alabama\tCleburne",
+        "Georgia\tHaralson"
+      ],
+      "01031011204": [
+        "Alabama\tCoffee",
+        "Alabama\tDale"
+      ],
+      "01037961000": [
+        "Alabama\tClay",
+        "Alabama\tCoosa"
+      ],
+      "01037961100": [
+        "Alabama\tChilton",
+        "Alabama\tClay",
+        "Alabama\tCoosa",
+        "Alabama\tShelby"
+      ],
+      "01037961200": [
+        "Alabama\tAutauga",
+        "Alabama\tChilton",
+        "Alabama\tCoosa",
+        "Alabama\tElmore"
+      ],
+      "01039963000": [
+        "Alabama\tCovington",
+        "Florida\tWalton"
+      ],
+      "01041963400": [
+        "Alabama\tCrenshaw",
+        "Alabama\tMontgomery"
+      ],
+      "01045020300": [
+        "Alabama\tDale",
+        "Alabama\tHenry"
+      ],
+      "01045021300": [
+        "Alabama\tDale",
+        "Alabama\tHenry"
+      ],
+      "01047957000": [
+        "Alabama\tDallas",
+        "Alabama\tWilcox"
+      ],
+      "01053969801": [
+        "Alabama\tCovington",
+        "Florida\tEscambia",
+        "Florida\tSanta Rosa"
+      ],
+      "01053969802": [
+        "Alabama\tConecuh",
+        "Alabama\tEscambia",
+        "Florida\tSanta Rosa"
+      ],
+      "01053969900": [
+        "Alabama\tConecuh",
+        "Alabama\tEscambia",
+        "Florida\tEscambia"
+      ],
+      "01053970400": [
+        "Alabama\tConecuh",
+        "Alabama\tEscambia",
+        "Florida\tEscambia"
+      ],
+      "01057020100": [
+        "Alabama\tFayette",
+        "Alabama\tLamar",
+        "Alabama\tMarion"
+      ],
+      "01057020200": [
+        "Alabama\tFayette",
+        "Alabama\tLamar"
+      ],
+      "01059973500": [
+        "Alabama\tColbert",
+        "Mississippi\tTishomingo"
+      ],
+      "01059973600": [
+        "Alabama\tFranklin",
+        "Alabama\tMarion"
+      ],
+      "01059973702": [
+        "Alabama\tFranklin",
+        "Alabama\tMarion"
+      ],
+      "01061050100": [
+        "Alabama\tCovington",
+        "Alabama\tGeneva",
+        "Florida\tWalton"
+      ],
+      "01063060200": [
+        "Alabama\tGreene",
+        "Alabama\tHale"
+      ],
+      "01067030300": [
+        "Alabama\tHenry",
+        "Georgia\tRandolph"
+      ],
+      "01069041800": [
+        "Georgia\tEarly",
+        "Georgia\tSeminole"
+      ],
+      "01069042000": [
+        "Alabama\tGeneva",
+        "Alabama\tHouston",
+        "Florida\tJackson"
+      ],
+      "01071950400": [
+        "Alabama\tJackson",
+        "Alabama\tMadison"
+      ],
+      "01071950700": [
+        "Alabama\tDeKalb",
+        "Alabama\tJackson",
+        "Alabama\tMarshall"
+      ],
+      "01073011500": [
+        "Alabama\tBlount",
+        "Alabama\tJefferson"
+      ],
+      "01075030101": [
+        "Alabama\tLamar",
+        "Alabama\tPickens",
+        "Mississippi\tLowndes"
+      ],
+      "01077011300": [
+        "Alabama\tColbert",
+        "Alabama\tLauderdale",
+        "Mississippi\tTishomingo",
+        "Tennessee\tWayne"
+      ]
+    },
+    "geoid_spanning_multiple_truncated": "True",
+    "each_geoid_one_state_name_pair": "False",
+    "note_empty_geoid": "The empty string is counted as a key like any other value; `check_5` reports the rows that carry it."
+  },
+  "check_4_name1_namelsad_by_geoid": {
+    "question": "Do indices 110 `NAME_1` and 111 `NAMELSAD` take exactly one value per `GEOID`?",
+    "scope_note": "Structural only. Neither column is in the pilot subset, neither is interpreted, and no prototype record uses either.",
+    "n_geoid_keys": "12941",
+    "NAME_1_n_geoid_with_more_than_one_value": "0",
+    "NAME_1_is_function_of_geoid": "True",
+    "NAMELSAD_n_geoid_with_more_than_one_value": "0",
+    "NAMELSAD_is_function_of_geoid": "True"
+  },
+  "check_5_rows_with_empty_state": {
+    "question": "Which rows carry no `State` value?",
+    "n_rows": "7",
+    "rows": [
+      {
+        "OID_": "5760",
+        "Crossmodel": "R179C497",
+        "NAME": "District of Columbia",
+        "GEOID": "11001009603"
+      },
+      {
+        "OID_": "6779",
+        "Crossmodel": "R179C495",
+        "NAME": "District of Columbia",
+        "GEOID": "11001000300"
+      },
+      {
+        "OID_": "13685",
+        "Crossmodel": "R180C496",
+        "NAME": "District of Columbia",
+        "GEOID": "11001003600"
+      },
+      {
+        "OID_": "21870",
+        "Crossmodel": "R180C495",
+        "NAME": "District of Columbia",
+        "GEOID": "11001000600"
+      },
+      {
+        "OID_": "33646",
+        "Crossmodel": "R178C496",
+        "NAME": "District of Columbia",
+        "GEOID": "11001010900"
+      },
+      {
+        "OID_": "38055",
+        "Crossmodel": "R179C496",
+        "NAME": "District of Columbia",
+        "GEOID": "11001004001"
+      },
+      {
+        "OID_": "41681",
+        "Crossmodel": "R180C497",
+        "NAME": "District of Columbia",
+        "GEOID": "11001009601"
+      }
+    ],
+    "truncated": "False",
+    "what_it_does_not_say": "An empty cell is \"no value in this file\". It is not a zero and not a claim that the row lies outside any state (Q16)."
+  },
+  "check_6_focus_coverage": {
+    "question": "How many rows carry the `State` of `OID_` 1, the `(State, NAME)` of `OID_` 1, and the `State` of `OID_` 14 --- and how complete are the pilot columns on the first two?",
+    "state_of_OID_1": {
+      "State": "Oklahoma",
+      "n_rows": "1232",
+      "empty_pilot_columns": {}
+    },
+    "state_name_pair_of_OID_1": {
+      "State": "Oklahoma",
+      "NAME": "Stephens",
+      "n_rows": "10",
+      "empty_pilot_columns": {}
+    },
+    "state_of_OID_14": {
+      "State": "California",
+      "n_rows": "2831"
+    },
+    "n_pilot_columns": "41"
+  }
+}

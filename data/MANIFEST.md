@@ -38,6 +38,55 @@ Row counts exclude the header line.
 | Storage policy | tracked in ordinary Git as an immutable object (D-002) |
 | Interpretation notes | no interpretation assigned; see docs/DATA_NOTES.md (M1) |
 
+### `literature_query.txt`
+
+| Field | Value |
+| --- | --- |
+| Path | `data/metadata/literature_query.txt` |
+| Role | literature collection query --- provenance record for the external literature corpus (not literature, not data) |
+| SHA-256 | `5a7ddf537d343b73fa0887e5f11ffbe3965fd25811f2adfc25cacee66f0ee1e5` |
+| Byte size | 2,292 |
+| Row count | n/a (not tabular) |
+| Column count | n/a (not tabular) |
+| Source description | Boolean search query supplied by JL to Kaiyuan Liao, together with the literature corpus folder |
+| Received by the project | 2026-09-28 |
+| Stated collector | JL (stated by the supplier) |
+| Platform / database | unknown (Q19) |
+| Execution date | unknown (Q20) |
+| Export date | unknown (Q20) |
+| Folder is the complete result set | unknown (Q21) |
+| Tracked in Git | yes, pinned `-text` in `.gitattributes` |
+| Storage policy | tracked in ordinary Git as an immutable object, byte for byte as received (M4-WP0, **D-015**) |
+| Interpretation notes | none; the deterministic parse is a separate derived artifact, `artifacts/literature/query_parsed.json` |
+
+**Reported, not verified:** that JL supplied this as the query the corpus was
+collected with, and that JL collected the corpus. **Verified:** the bytes and
+their SHA-256, identical to the file as received; and that the text parses
+deterministically. **Not verified:** that this query is the one actually
+executed, where, and when; and whether the folder is the whole result set.
+
+## External corpora (not in the repository)
+
+### `LITCORPUS-00` --- the literature corpus
+
+Never tracked, never copied in. Its path lives only in the untracked
+`config/local_paths.yaml` under `literature_corpus_root`. It is pinned by the
+SHA-256 of its **inventory manifest**, which is tracked; the values below are
+mirrored from `manifest.json`'s `external_corpora` block, which is authoritative
+and is rewritten by `scripts/inventory_corpus.py`.
+
+| Field | Value |
+| --- | --- |
+| Inventory manifest | `artifacts/literature/corpus_manifest.json` (+ `.csv`) |
+| Inventory manifest SHA-256 | `3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a` |
+| Content identity SHA-256 | `e217076f0f155a12f0954313059fba14904826658676e504e8cbb4c042e71f5e` |
+| Files | 1,918 |
+| Total bytes | 78,798,270 |
+| Received by the project | 2026-09-28, from JL, with `literature_query.txt` |
+| Decision | **D-015** |
+
+See [`../docs/LITERATURE_CORPUS_INVENTORY.md`](../docs/LITERATURE_CORPUS_INVENTORY.md).
+
 ## Immutability
 
 `FullData.csv` is **not tracked by Git** (D-005). It arrives out of band and its

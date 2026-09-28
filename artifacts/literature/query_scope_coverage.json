@@ -1,0 +1,408 @@
+{
+  "artifact": "query-scope coverage",
+  "kind": "derived artifact --- regenerate with scripts/query_scope_coverage.py; never edit",
+  "scope_note": "The Boolean query explains how the candidate corpus was collected. It does not establish what any paper contains or which prototype a paper supports.",
+  "naming": "query-scope coverage, not corpus coverage (ruling §3, action 4)",
+  "inputs": [
+    {
+      "role": "collection query (pinned)",
+      "path": "data/metadata/literature_query.txt",
+      "sha256": "5a7ddf537d343b73fa0887e5f11ffbe3965fd25811f2adfc25cacee66f0ee1e5"
+    },
+    {
+      "role": "parsed query (derived)",
+      "path": "artifacts/literature/query_parsed.json",
+      "sha256": "a8347adff3e1c278616ce3886674cc9698f5180c9900fdec2eb41ca41eeb6ad8"
+    },
+    {
+      "role": "prototype P-CELL-1",
+      "path": "artifacts/phenomena/prototypes/P-CELL-1.json",
+      "sha256": "7aae29aac2ebd079e14de842680618f2c76053ea51eea6f028b069eefb7fe6f6"
+    },
+    {
+      "role": "prototype P-COUNTY-1",
+      "path": "artifacts/phenomena/prototypes/P-COUNTY-1.json",
+      "sha256": "ca7c9904c21a77f2c816454831da65ed74f7e0cbaec536dc2b6a5576593492e9"
+    },
+    {
+      "role": "prototype P-STATE-1",
+      "path": "artifacts/phenomena/prototypes/P-STATE-1.json",
+      "sha256": "898af41046b4edcaef19396913099fbb261b69a29ebd926b7a9b42c0468dcfb0"
+    },
+    {
+      "role": "pilot families",
+      "path": "docs/PILOT_SUBSET.md",
+      "sha256": "4bfa8c4220ceffc33cbf23901cc6722468563557015dc974ee3497e84635bf36"
+    }
+  ],
+  "boolean_structure": "AND( OR(hazard groups HG-01..HG-11), OR(context terms CT-01..CT-22) )",
+  "query_counts": {
+    "n_hazard_groups": 11,
+    "n_hazard_terms": 80,
+    "n_context_terms": 22,
+    "n_terms": 102,
+    "n_quoted": 64,
+    "n_bare": 38
+  },
+  "coverage": {
+    "categories_defined": [
+      "exact_query_term",
+      "normalized_lexical_match",
+      "absent_from_query",
+      "inferred_conceptual_relationship"
+    ],
+    "categories_emittable": [
+      "exact_query_term",
+      "normalized_lexical_match",
+      "absent_from_query"
+    ],
+    "per_prototype": [
+      {
+        "record_id": "P-CELL-1",
+        "rows": [
+          {
+            "term": "fire weather index",
+            "classification": "absent_from_query",
+            "matched_term_ids": []
+          },
+          {
+            "term": "FWI",
+            "classification": "absent_from_query",
+            "matched_term_ids": []
+          },
+          {
+            "term": "fire weather",
+            "classification": "exact_query_term",
+            "matched_term_ids": [
+              "HG-05.T04"
+            ]
+          },
+          {
+            "term": "fire danger",
+            "classification": "absent_from_query",
+            "matched_term_ids": []
+          }
+        ],
+        "counts": {
+          "exact_query_term": 1,
+          "normalized_lexical_match": 0,
+          "absent_from_query": 3
+        }
+      },
+      {
+        "record_id": "P-COUNTY-1",
+        "rows": [
+          {
+            "term": "fire weather index",
+            "classification": "absent_from_query",
+            "matched_term_ids": []
+          },
+          {
+            "term": "FWI",
+            "classification": "absent_from_query",
+            "matched_term_ids": []
+          },
+          {
+            "term": "fire weather",
+            "classification": "exact_query_term",
+            "matched_term_ids": [
+              "HG-05.T04"
+            ]
+          },
+          {
+            "term": "fire danger",
+            "classification": "absent_from_query",
+            "matched_term_ids": []
+          }
+        ],
+        "counts": {
+          "exact_query_term": 1,
+          "normalized_lexical_match": 0,
+          "absent_from_query": 3
+        }
+      },
+      {
+        "record_id": "P-STATE-1",
+        "rows": [
+          {
+            "term": "heat index",
+            "classification": "exact_query_term",
+            "matched_term_ids": [
+              "HG-01.T11"
+            ]
+          },
+          {
+            "term": "days above 105 F",
+            "classification": "absent_from_query",
+            "matched_term_ids": []
+          },
+          {
+            "term": "extreme heat days",
+            "classification": "absent_from_query",
+            "matched_term_ids": []
+          },
+          {
+            "term": "humid heat",
+            "classification": "absent_from_query",
+            "matched_term_ids": []
+          }
+        ],
+        "counts": {
+          "exact_query_term": 1,
+          "normalized_lexical_match": 0,
+          "absent_from_query": 3
+        }
+      }
+    ],
+    "families": [
+      {
+        "family": "Family 1",
+        "name": "Heat Index – Summer",
+        "term": "Heat Index – Summer",
+        "classification": "absent_from_query",
+        "matched_term_ids": []
+      },
+      {
+        "family": "Family 2",
+        "name": "Fire Weather Index - Averages",
+        "term": "Fire Weather Index - Averages",
+        "classification": "absent_from_query",
+        "matched_term_ids": []
+      },
+      {
+        "family": "Family 3",
+        "name": "Location anchor",
+        "term": "Location anchor",
+        "classification": "absent_from_query",
+        "matched_term_ids": []
+      },
+      {
+        "family": "Family 4",
+        "name": "Stem-assumption probe",
+        "term": "Stem-assumption probe",
+        "classification": "absent_from_query",
+        "matched_term_ids": []
+      }
+    ],
+    "family_counts": {
+      "exact_query_term": 0,
+      "normalized_lexical_match": 0,
+      "absent_from_query": 4
+    },
+    "hazard_groups": [
+      {
+        "group_id": "HG-01",
+        "first_term": "extreme heat",
+        "n_terms": 13,
+        "terms": [
+          "extreme heat",
+          "heat mortality",
+          "wet-bulb temperature",
+          "extreme temperature",
+          "heat wave",
+          "heatwave",
+          "heat stress",
+          "hot temperature",
+          "high temperature",
+          "temperature extreme",
+          "heat index",
+          "urban heat island",
+          "urban warming"
+        ],
+        "pilot_matched_term_ids": [
+          "HG-01.T11"
+        ],
+        "has_pilot_counterpart": true
+      },
+      {
+        "group_id": "HG-02",
+        "first_term": "extreme cold",
+        "n_terms": 10,
+        "terms": [
+          "extreme cold",
+          "cold wave",
+          "cold spell",
+          "freeze event",
+          "winter storm",
+          "frost",
+          "snowstorm",
+          "hard freeze",
+          "ice storm",
+          "blizzard"
+        ],
+        "pilot_matched_term_ids": [],
+        "has_pilot_counterpart": false
+      },
+      {
+        "group_id": "HG-03",
+        "first_term": "flood",
+        "n_terms": 12,
+        "terms": [
+          "flood",
+          "flash flood",
+          "river flood",
+          "urban flooding",
+          "coastal flooding",
+          "compound flooding",
+          "inundation",
+          "storm surge",
+          "heavy precipitation",
+          "pluvial flooding",
+          "riverine flooding",
+          "extreme rainfall"
+        ],
+        "pilot_matched_term_ids": [],
+        "has_pilot_counterpart": false
+      },
+      {
+        "group_id": "HG-04",
+        "first_term": "drought",
+        "n_terms": 6,
+        "terms": [
+          "drought",
+          "water scarcity",
+          "hydrologic drought",
+          "agricultural drought",
+          "meteorological drought",
+          "snow drought"
+        ],
+        "pilot_matched_term_ids": [],
+        "has_pilot_counterpart": false
+      },
+      {
+        "group_id": "HG-05",
+        "first_term": "wildfire",
+        "n_terms": 7,
+        "terms": [
+          "wildfire",
+          "forest fire",
+          "bushfire",
+          "fire weather",
+          "wildland fire",
+          "wildfire smoke",
+          "smoke exposure"
+        ],
+        "pilot_matched_term_ids": [
+          "HG-05.T04"
+        ],
+        "has_pilot_counterpart": true
+      },
+      {
+        "group_id": "HG-06",
+        "first_term": "tropical cyclone",
+        "n_terms": 4,
+        "terms": [
+          "tropical cyclone",
+          "hurricane",
+          "typhoon",
+          "cyclonic storm"
+        ],
+        "pilot_matched_term_ids": [],
+        "has_pilot_counterpart": false
+      },
+      {
+        "group_id": "HG-07",
+        "first_term": "convective storm",
+        "n_terms": 10,
+        "terms": [
+          "convective storm",
+          "severe convective storm",
+          "thunderstorm",
+          "severe thunderstorm",
+          "hail",
+          "straight-line wind",
+          "downburst",
+          "microburst",
+          "tornado",
+          "extreme wind"
+        ],
+        "pilot_matched_term_ids": [],
+        "has_pilot_counterpart": false
+      },
+      {
+        "group_id": "HG-08",
+        "first_term": "sea level rise",
+        "n_terms": 8,
+        "terms": [
+          "sea level rise",
+          "coastal erosion",
+          "salinization",
+          "saltwater intrusion",
+          "ocean warming",
+          "rising ocean temperature",
+          "marine heatwave",
+          "ocean acidification"
+        ],
+        "pilot_matched_term_ids": [],
+        "has_pilot_counterpart": false
+      },
+      {
+        "group_id": "HG-09",
+        "first_term": "sea ice loss",
+        "n_terms": 5,
+        "terms": [
+          "sea ice loss",
+          "glacial melt",
+          "permafrost thaw",
+          "snowmelt timing",
+          "arctic sea ice"
+        ],
+        "pilot_matched_term_ids": [],
+        "has_pilot_counterpart": false
+      },
+      {
+        "group_id": "HG-10",
+        "first_term": "carbon dioxide fertilization",
+        "n_terms": 2,
+        "terms": [
+          "carbon dioxide fertilization",
+          "CO2 fertilization"
+        ],
+        "pilot_matched_term_ids": [],
+        "has_pilot_counterpart": false
+      },
+      {
+        "group_id": "HG-11",
+        "first_term": "crop failure",
+        "n_terms": 3,
+        "terms": [
+          "crop failure",
+          "crop yield",
+          "ecosystem services"
+        ],
+        "pilot_matched_term_ids": [],
+        "has_pilot_counterpart": false
+      }
+    ],
+    "context_terms_matched": []
+  },
+  "absence_checks": [
+    {
+      "rule_id": "AR-1-scenario-horizon",
+      "dimension": "scenario / temporal horizon",
+      "rule": "no term's normalized form matches the regular expression /rcp|ssp|\\d{4}|century|mid-|end-|projection|scenario|baseline|historical/ (re.search, anywhere in the term)",
+      "n_terms_checked": 102,
+      "n_hits": 0,
+      "hits": [],
+      "result": "absent"
+    },
+    {
+      "rule_id": "AR-2-us-state",
+      "dimension": "geography: US state",
+      "rule": "no term's normalized form contains, as a whole word, any of the 50 US state names or 'district of columbia', and no alphanumeric word of it equals any of their 51 two-letter USPS codes (compared in lower case)",
+      "n_terms_checked": 102,
+      "n_hits": 0,
+      "hits": [],
+      "result": "absent"
+    },
+    {
+      "rule_id": "AR-3-geographic-unit",
+      "dimension": "geography: sub-national unit or country",
+      "rule": "no term's normalized form contains, as a whole word, any of: 'county', 'tract', 'united states', 'usa'",
+      "n_terms_checked": 102,
+      "n_hits": 0,
+      "hits": [],
+      "result": "absent"
+    }
+  ]
+}

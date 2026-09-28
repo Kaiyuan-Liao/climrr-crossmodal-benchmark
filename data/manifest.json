@@ -35,6 +35,90 @@
       "storage_policy": "tracked in ordinary Git as an immutable object (D-002)",
       "interpretation_notes": "no interpretation assigned; see docs/DATA_NOTES.md (M1)",
       "tracked_in_git": true
+    },
+    {
+      "filename": "literature_query.txt",
+      "path": "data/metadata/literature_query.txt",
+      "role": "literature collection query --- provenance record for the external literature corpus (not literature, not data)",
+      "sha256": "5a7ddf537d343b73fa0887e5f11ffbe3965fd25811f2adfc25cacee66f0ee1e5",
+      "bytes": 2292,
+      "row_count": null,
+      "column_count": null,
+      "encoding_note": "ASCII (valid UTF-8), LF line endings, no byte-order mark. Pinned -text in .gitattributes so Git never rewrites it.",
+      "source_description": "Boolean search query supplied by JL to Kaiyuan Liao, together with the literature corpus folder",
+      "acquisition_date": "2026-09-28",
+      "storage_policy": "tracked in ordinary Git as an immutable object, copied byte for byte from the file as received (M4-WP0, D-015)",
+      "interpretation_notes": "no interpretation assigned; the deterministic parse is a separate derived artifact, artifacts/literature/query_parsed.json",
+      "tracked_in_git": true,
+      "provenance": {
+        "supplied_by": "JL",
+        "supplied_to": "Kaiyuan Liao",
+        "received_by_project": "2026-09-28",
+        "stated_collector": "JL (stated by the supplier: the same person who supplied the query collected the corpus)",
+        "platform_or_database": "unknown",
+        "execution_date": "unknown",
+        "export_date": "unknown",
+        "folder_is_complete_result_set": "unknown",
+        "reported_facts": [
+          "JL supplied this query text to Kaiyuan Liao as the query the literature corpus was collected with.",
+          "JL states that JL collected the corpus."
+        ],
+        "independently_verified_facts": [
+          "The bytes of this file and their SHA-256 and size, as recorded above --- identical to the file as received.",
+          "The query parses deterministically into the structure in artifacts/literature/query_parsed.json."
+        ],
+        "not_verified": [
+          "That this query is the one actually executed to produce the corpus folder.",
+          "Which platform or database it was executed on, and when.",
+          "When the results were exported, and whether the folder holds the complete result set."
+        ],
+        "open_questions": [
+          "Q19",
+          "Q20",
+          "Q21"
+        ]
+      }
+    }
+  ],
+  "amendments": [
+    {
+      "date": "2026-09-28",
+      "milestone": "M4-WP0",
+      "change": "Added data/metadata/literature_query.txt, and the external_corpora block pinning the literature corpus by its inventory manifest. Existing entries unchanged.",
+      "decision_ref": "D-015"
+    }
+  ],
+  "external_corpora": [
+    {
+      "corpus_id": "LITCORPUS-00",
+      "role": "external literature corpus --- candidate papers collected by the query in data/metadata/literature_query.txt",
+      "tracked_in_git": false,
+      "config_key": "literature_corpus_root",
+      "root_basename": "00",
+      "inventory_manifest_path": "artifacts/literature/corpus_manifest.json",
+      "inventory_manifest_sha256": "3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a",
+      "inventory_manifest_bytes": 890471,
+      "inventory_manifest_csv_path": "artifacts/literature/corpus_manifest.csv",
+      "inventory_manifest_csv_sha256": "de795d7cd2ad0294dc4b8d0457a1707b7b37946b9c141b4ffe8a0d4f2e44a638",
+      "content_identity_sha256": "e217076f0f155a12f0954313059fba14904826658676e504e8cbb4c042e71f5e",
+      "n_files": 1918,
+      "total_bytes": 78798270,
+      "inventory_utc": "2026-09-28T17:55:35Z",
+      "storage_policy": "never copied into the repository (ruling action 9); pinned by the inventory manifest's SHA-256, which later packages verify against",
+      "interpretation_notes": "no interpretation assigned; no file has been opened for content",
+      "provenance": {
+        "folder_name": "00",
+        "supplied_by": "JL",
+        "supplied_to": "Kaiyuan Liao",
+        "received_by_project": "2026-09-28",
+        "received_with": "data/metadata/literature_query.txt (the collection query), from the same person",
+        "stated_collector": "JL (stated by the supplier)",
+        "location": "external to the repository; the absolute path is held only in the untracked config/local_paths.yaml under literature_corpus_root",
+        "tracked_in_git": false,
+        "on_sophia": false,
+        "complete_result_set": "unknown (Q21)"
+      },
+      "decision_ref": "D-015"
     }
   ]
 }

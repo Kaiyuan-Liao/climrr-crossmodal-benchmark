@@ -1,5 +1,13 @@
 # Metadata questions — M1-WP1 inventory
 
+> **Status after the 2026-09-10 mentor meeting (M1-WP2b).** **Q0 is closed,
+> answered in the negative** — there is no further documentation of any kind
+> (R-001). **Q1–Q18 were put to the mentor and none was answered per column**
+> (R-002); they stand exactly as written below. The mentor's direction was to
+> use a reliable subset and reason out the rest, which is proposed as D-010 and
+> **awaits a GUIDANCE ruling** — no column status has changed. One sub-question,
+> **Q11.4, has since been answered deterministically from the bytes**; see below.
+
 Everything the tracked ClimRR data dictionary does **not** settle about the 275
 columns of `data/raw/FullData.csv`, grouped by column family, each item naming
 the column indices it affects and the line of
@@ -13,8 +21,16 @@ Computed properties referenced here come from
 [`../artifacts/profiles/fulldata_profile.json`](../artifacts/profiles/fulldata_profile.json)
 and are facts about characters, not about climate.
 
-**Who answers.** Q1 is for Kaiyuan and the mentor and it unblocks the largest
-number of columns; everything else is grouped by owner in the closing table.
+**Who answers.** Every question is for the mentor or the ClimRR authors; they are
+grouped by owner in the closing table. **Q0 is asked first** because a second
+source document could answer several of the others outright; Q1 unblocks the
+largest number of columns.
+
+**This file is the detail; [`MENTOR_BRIEF.md`](MENTOR_BRIEF.md) is what goes to
+the meeting.** The brief restates these questions in plain language and in the
+priority order GUIDANCE set, and its *Answers received* table is where each
+answer first lands before becoming a record in
+[`../data/metadata/resolutions.yaml`](../data/metadata/resolutions.yaml).
 
 | Status | Columns |
 | --- | --- |
@@ -23,6 +39,74 @@ number of columns; everything else is grouped by owner in the closing table.
 | `unresolved` | 28 |
 | `structurally_observed_only` | 83 |
 | **Total** | **275** |
+
+---
+
+## Q0 — Is there any other authoritative material about this file?
+
+**Affects potentially all 275 columns**, by way of Q1–Q18 rather than directly.
+
+Every question below is asked because the tracked 19-page dictionary does not
+answer it. A second source document could answer many of them at once, and
+GUIDANCE has already named that class of evidence as sufficient to promote a
+mapping: alongside explicit confirmation from the mentor or the ClimRR authors,
+it accepts "an authoritative export/source-generation specification" and
+"another authoritative ClimRR artifact explicitly mapping full CSV names to
+dictionary sections" (`M1_WP1_GUIDANCE_REVIEW.md` §1). So this question is worth
+asking before the rest: an answer in conversation settles one question, a
+specification settles a family of them.
+
+**ANSWERED 2026-09-10 — no.** The mentor has no additional metadata for the
+table: no newer data dictionary, no assembly document or script, no release
+note. Recorded as **R-001** in
+[`../data/metadata/resolutions.yaml`](../data/metadata/resolutions.yaml),
+`confidence: confirmed`, marked a paraphrase rather than verbatim.
+
+**This is the answer with the widest consequence in the meeting, and it is a
+negative one.** The 19-page alpha-release PDF already tracked in
+`data/metadata/` is the whole of the authoritative documentation that exists.
+Two of the three evidence types D-009 accepts for promoting a stem-to-section
+mapping — an authoritative export specification, and another authoritative
+ClimRR artifact mapping CSV names to dictionary sections — are **unavailable,
+not merely unobtained.** The three sub-items below are kept as the record of
+what was asked.
+
+**Question as put, for the mentor / ClimRR authors.** Is there any other
+authoritative material about this file that we should have?
+
+1. **A newer or more complete data dictionary** than the 19-page PDF tracked at
+   `data/metadata/ClimRR_Metadata_and_Data_Dictionary.pdf`. Ours is dated
+   September 14, 2023 (line 38), says its field names were last updated
+   8/25/2023 (line 81), and describes itself as covering the **alpha release**
+   of the ClimRR portal. It also has no field table for the FWI classes (Q8) or
+   the `precipdaily_*` family (Q7), and the defects in Q2–Q4 may already be
+   fixed in a later revision.
+2. **A document, script, or ArcGIS project describing how `FullData.csv` was
+   assembled** from the ClimRR layers and the Census and socioeconomic sources.
+   Per D-008 the join happened before the file reached this project, so this is
+   the only thing that could answer Q1, Q10, Q11 and Q12 by evidence rather than
+   by recollection. An ArcGIS model, a toolbox, a Python or R script, or even
+   the field-mapping table from the join would each do.
+3. **A ClimRR web page or release note naming the data version and export
+   date** — Q18. The portal's own documentation may date the release this export
+   came from even if the file itself does not.
+
+**If any such artifact ever does arrive** — it will not from this source, but
+the rule stands for any future one — **it is handled like the data dictionary
+was, and for the same reason (D-002, D-005).** Before a single sentence of it is cited:
+the file is placed under `data/metadata/`, its SHA-256 and byte size are
+recorded in `data/manifest.json`, and — if it is a PDF — its text is extracted
+by a pinned extractor into a tracked, never-hand-edited file so that every
+citation carries a line number traceable to those bytes. An artifact that is
+quoted before it is pinned is an artifact whose provenance cannot be
+reconstructed later, and this project has already decided not to do that. A
+script or a project file that cannot be text-extracted is still pinned by hash
+and cited by path and line.
+
+Receiving such an artifact does **not** by itself change any column status. It
+becomes a resolution record in `../data/metadata/resolutions.yaml` with
+`source: authoritative_artifact` and a `source_detail` naming the document and
+its hash, and the record must still name the columns or the stems it settles.
 
 ---
 
@@ -254,8 +338,14 @@ which source and vintage.
    and 8 empty rows; `NAMELSAD`'s most frequent value is `Census Tract 1`
    and `NAME_1`'s is `1`. Is `NAME_1` the tract number and `NAMELSAD` its label?
 5. Index 2 `NAME` has 1,770 distinct values (most frequent `Yukon-Koyukuk`) and
-   no empties, while indices 3–4 `State`/`State_Abbr` have 50 distinct values
-   and 7 empty rows. Is `NAME` the county name, and what are the 7 rows with no
+   no empties, while indices 3–4 `State`/`State_Abbr` have **49 distinct
+   non-empty values plus 7 blank rows** — 50 distinct values in total, because
+   the profile's `n_distinct` counts the empty string as one of them
+   (`n_distinct_nonempty` is 49 for both columns). So the substantive finding is
+   **49, not 50**: at least one state or state-equivalent that a national grid
+   would cover is absent from these columns, or their value set is not the fifty
+   states. Is `NAME` the county name; which state accounts for the 49th-versus-
+   50th gap, or are territories in or out; and what are the 7 rows with no
    state?
 
 ### Q11 — Which column is the join key, and are the three `Crossmodel` columns the same identifier?
@@ -292,6 +382,19 @@ Computed facts:
 3. `OBJECTID_1` reaches 63,557 while holding 62,813 distinct values, so its
    source layer had more rows than this table. What was dropped, and why?
 4. Are `OBJECTID_12` and `OBJECTID_12_13` duplicates of one another?
+   **ANSWERED DETERMINISTICALLY — no, and not a reordering either.**
+   `scripts/check_objectid_pair.py` compared the two columns row by row as raw
+   text. They are **equal in 83 of 62,834 rows, and those 83 are exactly the
+   rows where both are empty**; in all 62,751 rows where either holds a value,
+   **the values differ**. Their empty-row sets are identical. Each holds 62,752
+   distinct values, but the two **value sets are not the same**: 703 values
+   appear in one and not the other. So they are neither the same column twice
+   nor the same identifiers in a different row order --- they are two different
+   identifier columns drawn from overlapping ranges, empty on the same 83 rows.
+   *This is a fact about characters.* It does not say what either column means,
+   which layer each came from, or whether either is usable as a key --- **those
+   parts of Q11 stay open for the mentor**, and this result makes sub-question 2
+   sharper rather than answering it.
 
 ### Q12 — Are indices 269–274 ArcGIS bookkeeping, and do they carry any climate content?
 
@@ -413,20 +516,71 @@ which ClimRR release? The download date is known; the export date is not.
 
 ---
 
+## Literature corpus --- for the collection scientist, not the mentor
+
+Added in M4-WP0 (D-015). These are about the external literature corpus and
+the query it was collected with, `data/metadata/literature_query.txt`. They are
+for **JL**, who supplied both on 2026-09-28 and is stated to have collected the
+corpus --- **not** for the ClimRR data owner. Each is recorded as `unknown` in
+the query's provenance block in `data/manifest.json` until answered.
+
+### Q19 --- On which platform or database was the query executed?
+
+The query text is pinned, and it parses deterministically, but where it was run
+is not recorded. Two databases execute the same Boolean text differently ---
+which fields are searched (title, abstract, full text, keywords), how phrases
+and hyphens are matched --- so the same query can return different sets.
+
+**Question.** Which search platform or database, and which fields did it search?
+
+### Q20 --- When was the query executed, and when were the results exported?
+
+**Question.** On what date was the search run, and on what date were the results
+downloaded into the folder? Both are needed to cite the corpus as a snapshot.
+
+### Q21 --- Is the folder the complete result set?
+
+The folder holds 1,918 files (`docs/LITERATURE_CORPUS_INVENTORY.md`). Nothing
+in the project establishes whether that is every result the query returned, or
+a subset --- capped, filtered, deduplicated, or limited to what could be
+downloaded.
+
+**Question.** Is the folder every result the query returned? If not, what rule
+selected the files in it?
+
+---
+
 ## Ownership
 
 | Owner | Questions |
 | --- | --- |
+| **Mentor / ClimRR authors** (is there better source material?) | Q0 — ask first; it may answer several of the rest |
 | **Mentor / ClimRR authors** (how the table was assembled) | Q1, Q11, Q18 — re-aimed by D-008 |
 | **Mentor / ClimRR authors** (source-document defects) | Q2, Q3, Q4, Q5, Q6 |
 | **Mentor / ClimRR authors** (undocumented families) | Q7, Q8, Q13, Q14, Q15 |
 | **Mentor** (non-ClimRR columns joined into the table) | Q9, Q10, Q12 |
 | **Kaiyuan + mentor** (fitness for use) | Q16, Q17 |
+| **JL, the collection scientist** (literature corpus provenance) | Q19, Q20, Q21 --- added in M4-WP0 |
 
-**Every question is now for the mentor or the ClimRR authors.** D-008 closed the
+**All nineteen questions Q0--Q18 were for the mentor or the ClimRR authors.**
+Q19--Q21, added later, are for the collection scientist. D-008 closed the
 Kaiyuan-side half of Q1, Q10, Q11 and Q18: he received one file and changed
 nothing, so nothing about this table's shape can be explained by handling on this
 side.
 
-None of these blocks the M1-WP1 deliverables, which are the profile and this
-inventory. Q1, Q7, Q8 and Q17 block any downstream use of the columns they name.
+## Where each question now stands (after the 2026-09-10 meeting)
+
+| Question | Standing |
+| --- | --- |
+| **Q0** | **Closed, answered negative** (R-001). No further documentation exists. |
+| **Q11.4** | **Answered deterministically** from the bytes, not by the mentor. The two columns are neither duplicates nor a reordering. |
+| **Q19–Q21** | **Open, added 2026-09-28** (M4-WP0). For the collection scientist, not the mentor. |
+| **Q1–Q18** (all the rest, including the other parts of Q11) | **Mentor: no answer available.** They were put; none was answered per column (R-002). **Resolution path per D-010 pending** a GUIDANCE ruling and Kaiyuan's approval. |
+
+"No answer available" is not "unanswerable". It means the one source that could
+have answered these has said it holds nothing further, and the person who could
+still answer them from knowledge gave a direction instead. D-010 proposes what to
+do about that; until it is ruled on, **every column status stays exactly where
+M1-WP1 left it**, and this file stays the record of what is not known.
+
+Q1, Q7, Q8 and Q17 continue to block any downstream use of the columns they name.

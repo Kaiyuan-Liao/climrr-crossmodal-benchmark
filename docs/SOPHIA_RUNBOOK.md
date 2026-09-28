@@ -355,6 +355,21 @@ clean pull --- and commits the returned run records from the local clone.
 
 ---
 
+## 8b. The literature corpus is not on Sophia (M4-WP0) --- do nothing yet
+
+The external literature corpus (`LITCORPUS-00`, 1,918 files, D-015) is
+inventoried **locally only**. It has **not** been transferred to Sophia, and
+**no step in this runbook transfers it.** Do not copy it now.
+
+When a later package needs it on Sophia, that package will add the steps. They
+will follow the `FullData.csv` pattern exactly (section 3, D-005): the folder is
+moved out of band to Eagle, never into the repository; its path goes into the
+generated `config/local_paths.yaml` under `literature_corpus_root`; and
+`scripts/inventory_corpus.py` runs in **verify** mode against the tracked,
+frozen `artifacts/literature/corpus_manifest.json`. **That manifest is the
+verification gate**: every relative path, size and SHA-256 must match, and a
+mismatch is a defect to escalate, not a manifest to regenerate.
+
 ## Troubleshooting
 
 - **`module: command not found`** --- you are not on a login node with the
