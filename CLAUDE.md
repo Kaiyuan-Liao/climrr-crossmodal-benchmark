@@ -119,6 +119,15 @@ evidence. The record captures the commit SHA, whether the tree was dirty, the
 host and location label, the Python version, a `pip freeze` fingerprint, the
 config snapshot, and the SHA-256 of the data actually read.
 
+## Knowledge-refresh staging
+
+`scripts/stage_knowledge.py` copies the files the COORDINATOR and GUIDANCE
+chats work from into the gitignored `refresh_knowledge/` (flat, original
+basenames, overwriting), and prints the list and the current commit.
+`--only a,b,c` stages a subset. It fails, staging nothing, if any file is
+missing. **The COORDINATOR maintains the list** --- `KNOWLEDGE_FILES` at the top
+of the script. The EXECUTOR changes it only when a work package says so.
+
 ## When to stop
 
 Stop and escalate --- do not improvise --- if:
