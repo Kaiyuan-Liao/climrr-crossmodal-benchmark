@@ -516,6 +516,40 @@ which ClimRR release? The download date is known; the export date is not.
 
 ---
 
+## Literature corpus --- for the collection scientist, not the mentor
+
+Added in M4-WP0 (D-015). These are about the external literature corpus and
+the query it was collected with, `data/metadata/literature_query.txt`. They are
+for **JL**, who supplied both on 2026-09-28 and is stated to have collected the
+corpus --- **not** for the ClimRR data owner. Each is recorded as `unknown` in
+the query's provenance block in `data/manifest.json` until answered.
+
+### Q19 --- On which platform or database was the query executed?
+
+The query text is pinned, and it parses deterministically, but where it was run
+is not recorded. Two databases execute the same Boolean text differently ---
+which fields are searched (title, abstract, full text, keywords), how phrases
+and hyphens are matched --- so the same query can return different sets.
+
+**Question.** Which search platform or database, and which fields did it search?
+
+### Q20 --- When was the query executed, and when were the results exported?
+
+**Question.** On what date was the search run, and on what date were the results
+downloaded into the folder? Both are needed to cite the corpus as a snapshot.
+
+### Q21 --- Is the folder the complete result set?
+
+The folder holds 1,918 files (`docs/LITERATURE_CORPUS_INVENTORY.md`). Nothing
+in the project establishes whether that is every result the query returned, or
+a subset --- capped, filtered, deduplicated, or limited to what could be
+downloaded.
+
+**Question.** Is the folder every result the query returned? If not, what rule
+selected the files in it?
+
+---
+
 ## Ownership
 
 | Owner | Questions |
@@ -526,8 +560,10 @@ which ClimRR release? The download date is known; the export date is not.
 | **Mentor / ClimRR authors** (undocumented families) | Q7, Q8, Q13, Q14, Q15 |
 | **Mentor** (non-ClimRR columns joined into the table) | Q9, Q10, Q12 |
 | **Kaiyuan + mentor** (fitness for use) | Q16, Q17 |
+| **JL, the collection scientist** (literature corpus provenance) | Q19, Q20, Q21 --- added in M4-WP0 |
 
-**All nineteen questions were for the mentor or the ClimRR authors.** D-008 closed the
+**All nineteen questions Q0--Q18 were for the mentor or the ClimRR authors.**
+Q19--Q21, added later, are for the collection scientist. D-008 closed the
 Kaiyuan-side half of Q1, Q10, Q11 and Q18: he received one file and changed
 nothing, so nothing about this table's shape can be explained by handling on this
 side.
@@ -538,6 +574,7 @@ side.
 | --- | --- |
 | **Q0** | **Closed, answered negative** (R-001). No further documentation exists. |
 | **Q11.4** | **Answered deterministically** from the bytes, not by the mentor. The two columns are neither duplicates nor a reordering. |
+| **Q19–Q21** | **Open, added 2026-09-28** (M4-WP0). For the collection scientist, not the mentor. |
 | **Q1–Q18** (all the rest, including the other parts of Q11) | **Mentor: no answer available.** They were put; none was answered per column (R-002). **Resolution path per D-010 pending** a GUIDANCE ruling and Kaiyuan's approval. |
 
 "No answer available" is not "unanswerable". It means the one source that could

@@ -1,0 +1,1736 @@
+{
+  "artifact": "parsed literature collection query",
+  "kind": "derived artifact --- regenerate with scripts/parse_literature_query.py; never edit",
+  "parser_version": "litquery-1",
+  "source_path": "data/metadata/literature_query.txt",
+  "source_sha256": "5a7ddf537d343b73fa0887e5f11ffbe3965fd25811f2adfc25cacee66f0ee1e5",
+  "source_bytes": 2292,
+  "source_encoding": "utf-8",
+  "offsets": "0-based character offsets into the decoded source; [start, end) half-open",
+  "normalization": "curly quotes to straight, lower case, runs of whitespace to one space, trimmed; hyphens kept; nothing else changed",
+  "group_ids": "positional only, HG-01.. in source order. No group is named: a name would be a reading of its terms",
+  "scope_note": "The Boolean query explains how the candidate corpus was collected. It does not establish what any paper contains or which prototype a paper supports.",
+  "round_trip": {
+    "rule": "render(parse(source)) equals the source after removing whitespace outside quoted phrases (whitespace inside a phrase must match exactly)",
+    "passed": true
+  },
+  "counts": {
+    "n_hazard_groups": 11,
+    "n_hazard_terms": 80,
+    "n_context_terms": 22,
+    "n_terms": 102,
+    "n_quoted": 64,
+    "n_bare": 38
+  },
+  "boolean_structure": "AND( OR(hazard groups HG-01..HG-11), OR(context terms CT-01..CT-22) )",
+  "top_level": {
+    "op": "AND",
+    "operands": [
+      {
+        "role": "first disjunction",
+        "op": "OR",
+        "of": "groups",
+        "offsets": [
+          0,
+          1950
+        ],
+        "n_groups": 11
+      },
+      {
+        "role": "second disjunction",
+        "op": "OR",
+        "of": "terms",
+        "offsets": [
+          1955,
+          2291
+        ],
+        "n_terms": 22
+      }
+    ]
+  },
+  "hazard_groups": [
+    {
+      "group_id": "HG-01",
+      "position": 1,
+      "group_offsets": [
+        4,
+        317
+      ],
+      "n_terms": 13,
+      "terms": [
+        {
+          "term_id": "HG-01.T01",
+          "position": 1,
+          "text": "extreme heat",
+          "quoted": true,
+          "lexeme_offsets": [
+            10,
+            24
+          ],
+          "text_offsets": [
+            11,
+            23
+          ],
+          "normalized": "extreme heat"
+        },
+        {
+          "term_id": "HG-01.T02",
+          "position": 2,
+          "text": "heat mortality",
+          "quoted": true,
+          "lexeme_offsets": [
+            32,
+            48
+          ],
+          "text_offsets": [
+            33,
+            47
+          ],
+          "normalized": "heat mortality"
+        },
+        {
+          "term_id": "HG-01.T03",
+          "position": 3,
+          "text": "wet-bulb temperature",
+          "quoted": true,
+          "lexeme_offsets": [
+            56,
+            78
+          ],
+          "text_offsets": [
+            57,
+            77
+          ],
+          "normalized": "wet-bulb temperature"
+        },
+        {
+          "term_id": "HG-01.T04",
+          "position": 4,
+          "text": "extreme temperature",
+          "quoted": true,
+          "lexeme_offsets": [
+            86,
+            107
+          ],
+          "text_offsets": [
+            87,
+            106
+          ],
+          "normalized": "extreme temperature"
+        },
+        {
+          "term_id": "HG-01.T05",
+          "position": 5,
+          "text": "heat wave",
+          "quoted": true,
+          "lexeme_offsets": [
+            115,
+            126
+          ],
+          "text_offsets": [
+            116,
+            125
+          ],
+          "normalized": "heat wave"
+        },
+        {
+          "term_id": "HG-01.T06",
+          "position": 6,
+          "text": "heatwave",
+          "quoted": false,
+          "lexeme_offsets": [
+            134,
+            142
+          ],
+          "text_offsets": [
+            134,
+            142
+          ],
+          "normalized": "heatwave"
+        },
+        {
+          "term_id": "HG-01.T07",
+          "position": 7,
+          "text": "heat stress",
+          "quoted": true,
+          "lexeme_offsets": [
+            150,
+            163
+          ],
+          "text_offsets": [
+            151,
+            162
+          ],
+          "normalized": "heat stress"
+        },
+        {
+          "term_id": "HG-01.T08",
+          "position": 8,
+          "text": "hot temperature",
+          "quoted": true,
+          "lexeme_offsets": [
+            171,
+            188
+          ],
+          "text_offsets": [
+            172,
+            187
+          ],
+          "normalized": "hot temperature"
+        },
+        {
+          "term_id": "HG-01.T09",
+          "position": 9,
+          "text": "high temperature",
+          "quoted": true,
+          "lexeme_offsets": [
+            196,
+            214
+          ],
+          "text_offsets": [
+            197,
+            213
+          ],
+          "normalized": "high temperature"
+        },
+        {
+          "term_id": "HG-01.T10",
+          "position": 10,
+          "text": "temperature extreme",
+          "quoted": true,
+          "lexeme_offsets": [
+            222,
+            243
+          ],
+          "text_offsets": [
+            223,
+            242
+          ],
+          "normalized": "temperature extreme"
+        },
+        {
+          "term_id": "HG-01.T11",
+          "position": 11,
+          "text": "heat index",
+          "quoted": true,
+          "lexeme_offsets": [
+            251,
+            263
+          ],
+          "text_offsets": [
+            252,
+            262
+          ],
+          "normalized": "heat index"
+        },
+        {
+          "term_id": "HG-01.T12",
+          "position": 12,
+          "text": "urban heat island",
+          "quoted": true,
+          "lexeme_offsets": [
+            271,
+            290
+          ],
+          "text_offsets": [
+            272,
+            289
+          ],
+          "normalized": "urban heat island"
+        },
+        {
+          "term_id": "HG-01.T13",
+          "position": 13,
+          "text": "urban warming",
+          "quoted": true,
+          "lexeme_offsets": [
+            298,
+            313
+          ],
+          "text_offsets": [
+            299,
+            312
+          ],
+          "normalized": "urban warming"
+        }
+      ]
+    },
+    {
+      "group_id": "HG-02",
+      "position": 2,
+      "group_offsets": [
+        325,
+        518
+      ],
+      "n_terms": 10,
+      "terms": [
+        {
+          "term_id": "HG-02.T01",
+          "position": 1,
+          "text": "extreme cold",
+          "quoted": true,
+          "lexeme_offsets": [
+            331,
+            345
+          ],
+          "text_offsets": [
+            332,
+            344
+          ],
+          "normalized": "extreme cold"
+        },
+        {
+          "term_id": "HG-02.T02",
+          "position": 2,
+          "text": "cold wave",
+          "quoted": true,
+          "lexeme_offsets": [
+            353,
+            364
+          ],
+          "text_offsets": [
+            354,
+            363
+          ],
+          "normalized": "cold wave"
+        },
+        {
+          "term_id": "HG-02.T03",
+          "position": 3,
+          "text": "cold spell",
+          "quoted": true,
+          "lexeme_offsets": [
+            372,
+            384
+          ],
+          "text_offsets": [
+            373,
+            383
+          ],
+          "normalized": "cold spell"
+        },
+        {
+          "term_id": "HG-02.T04",
+          "position": 4,
+          "text": "freeze event",
+          "quoted": true,
+          "lexeme_offsets": [
+            392,
+            406
+          ],
+          "text_offsets": [
+            393,
+            405
+          ],
+          "normalized": "freeze event"
+        },
+        {
+          "term_id": "HG-02.T05",
+          "position": 5,
+          "text": "winter storm",
+          "quoted": true,
+          "lexeme_offsets": [
+            414,
+            428
+          ],
+          "text_offsets": [
+            415,
+            427
+          ],
+          "normalized": "winter storm"
+        },
+        {
+          "term_id": "HG-02.T06",
+          "position": 6,
+          "text": "frost",
+          "quoted": false,
+          "lexeme_offsets": [
+            436,
+            441
+          ],
+          "text_offsets": [
+            436,
+            441
+          ],
+          "normalized": "frost"
+        },
+        {
+          "term_id": "HG-02.T07",
+          "position": 7,
+          "text": "snowstorm",
+          "quoted": false,
+          "lexeme_offsets": [
+            449,
+            458
+          ],
+          "text_offsets": [
+            449,
+            458
+          ],
+          "normalized": "snowstorm"
+        },
+        {
+          "term_id": "HG-02.T08",
+          "position": 8,
+          "text": "hard freeze",
+          "quoted": true,
+          "lexeme_offsets": [
+            466,
+            479
+          ],
+          "text_offsets": [
+            467,
+            478
+          ],
+          "normalized": "hard freeze"
+        },
+        {
+          "term_id": "HG-02.T09",
+          "position": 9,
+          "text": "ice storm",
+          "quoted": true,
+          "lexeme_offsets": [
+            487,
+            498
+          ],
+          "text_offsets": [
+            488,
+            497
+          ],
+          "normalized": "ice storm"
+        },
+        {
+          "term_id": "HG-02.T10",
+          "position": 10,
+          "text": "blizzard",
+          "quoted": false,
+          "lexeme_offsets": [
+            506,
+            514
+          ],
+          "text_offsets": [
+            506,
+            514
+          ],
+          "normalized": "blizzard"
+        }
+      ]
+    },
+    {
+      "group_id": "HG-03",
+      "position": 3,
+      "group_offsets": [
+        526,
+        807
+      ],
+      "n_terms": 12,
+      "terms": [
+        {
+          "term_id": "HG-03.T01",
+          "position": 1,
+          "text": "flood",
+          "quoted": false,
+          "lexeme_offsets": [
+            532,
+            537
+          ],
+          "text_offsets": [
+            532,
+            537
+          ],
+          "normalized": "flood"
+        },
+        {
+          "term_id": "HG-03.T02",
+          "position": 2,
+          "text": "flash flood",
+          "quoted": true,
+          "lexeme_offsets": [
+            545,
+            558
+          ],
+          "text_offsets": [
+            546,
+            557
+          ],
+          "normalized": "flash flood"
+        },
+        {
+          "term_id": "HG-03.T03",
+          "position": 3,
+          "text": "river flood",
+          "quoted": true,
+          "lexeme_offsets": [
+            566,
+            579
+          ],
+          "text_offsets": [
+            567,
+            578
+          ],
+          "normalized": "river flood"
+        },
+        {
+          "term_id": "HG-03.T04",
+          "position": 4,
+          "text": "urban flooding",
+          "quoted": true,
+          "lexeme_offsets": [
+            587,
+            603
+          ],
+          "text_offsets": [
+            588,
+            602
+          ],
+          "normalized": "urban flooding"
+        },
+        {
+          "term_id": "HG-03.T05",
+          "position": 5,
+          "text": "coastal flooding",
+          "quoted": true,
+          "lexeme_offsets": [
+            611,
+            629
+          ],
+          "text_offsets": [
+            612,
+            628
+          ],
+          "normalized": "coastal flooding"
+        },
+        {
+          "term_id": "HG-03.T06",
+          "position": 6,
+          "text": "compound flooding",
+          "quoted": true,
+          "lexeme_offsets": [
+            637,
+            656
+          ],
+          "text_offsets": [
+            638,
+            655
+          ],
+          "normalized": "compound flooding"
+        },
+        {
+          "term_id": "HG-03.T07",
+          "position": 7,
+          "text": "inundation",
+          "quoted": false,
+          "lexeme_offsets": [
+            664,
+            674
+          ],
+          "text_offsets": [
+            664,
+            674
+          ],
+          "normalized": "inundation"
+        },
+        {
+          "term_id": "HG-03.T08",
+          "position": 8,
+          "text": "storm surge",
+          "quoted": true,
+          "lexeme_offsets": [
+            682,
+            695
+          ],
+          "text_offsets": [
+            683,
+            694
+          ],
+          "normalized": "storm surge"
+        },
+        {
+          "term_id": "HG-03.T09",
+          "position": 9,
+          "text": "heavy precipitation",
+          "quoted": true,
+          "lexeme_offsets": [
+            703,
+            724
+          ],
+          "text_offsets": [
+            704,
+            723
+          ],
+          "normalized": "heavy precipitation"
+        },
+        {
+          "term_id": "HG-03.T10",
+          "position": 10,
+          "text": "pluvial flooding",
+          "quoted": true,
+          "lexeme_offsets": [
+            732,
+            750
+          ],
+          "text_offsets": [
+            733,
+            749
+          ],
+          "normalized": "pluvial flooding"
+        },
+        {
+          "term_id": "HG-03.T11",
+          "position": 11,
+          "text": "riverine flooding",
+          "quoted": true,
+          "lexeme_offsets": [
+            758,
+            777
+          ],
+          "text_offsets": [
+            759,
+            776
+          ],
+          "normalized": "riverine flooding"
+        },
+        {
+          "term_id": "HG-03.T12",
+          "position": 12,
+          "text": "extreme rainfall",
+          "quoted": true,
+          "lexeme_offsets": [
+            785,
+            803
+          ],
+          "text_offsets": [
+            786,
+            802
+          ],
+          "normalized": "extreme rainfall"
+        }
+      ]
+    },
+    {
+      "group_id": "HG-04",
+      "position": 4,
+      "group_offsets": [
+        815,
+        968
+      ],
+      "n_terms": 6,
+      "terms": [
+        {
+          "term_id": "HG-04.T01",
+          "position": 1,
+          "text": "drought",
+          "quoted": false,
+          "lexeme_offsets": [
+            821,
+            828
+          ],
+          "text_offsets": [
+            821,
+            828
+          ],
+          "normalized": "drought"
+        },
+        {
+          "term_id": "HG-04.T02",
+          "position": 2,
+          "text": "water scarcity",
+          "quoted": true,
+          "lexeme_offsets": [
+            836,
+            852
+          ],
+          "text_offsets": [
+            837,
+            851
+          ],
+          "normalized": "water scarcity"
+        },
+        {
+          "term_id": "HG-04.T03",
+          "position": 3,
+          "text": "hydrologic drought",
+          "quoted": true,
+          "lexeme_offsets": [
+            860,
+            880
+          ],
+          "text_offsets": [
+            861,
+            879
+          ],
+          "normalized": "hydrologic drought"
+        },
+        {
+          "term_id": "HG-04.T04",
+          "position": 4,
+          "text": "agricultural drought",
+          "quoted": true,
+          "lexeme_offsets": [
+            888,
+            910
+          ],
+          "text_offsets": [
+            889,
+            909
+          ],
+          "normalized": "agricultural drought"
+        },
+        {
+          "term_id": "HG-04.T05",
+          "position": 5,
+          "text": "meteorological drought",
+          "quoted": true,
+          "lexeme_offsets": [
+            918,
+            942
+          ],
+          "text_offsets": [
+            919,
+            941
+          ],
+          "normalized": "meteorological drought"
+        },
+        {
+          "term_id": "HG-04.T06",
+          "position": 6,
+          "text": "snow drought",
+          "quoted": true,
+          "lexeme_offsets": [
+            950,
+            964
+          ],
+          "text_offsets": [
+            951,
+            963
+          ],
+          "normalized": "snow drought"
+        }
+      ]
+    },
+    {
+      "group_id": "HG-05",
+      "position": 5,
+      "group_offsets": [
+        976,
+        1124
+      ],
+      "n_terms": 7,
+      "terms": [
+        {
+          "term_id": "HG-05.T01",
+          "position": 1,
+          "text": "wildfire",
+          "quoted": false,
+          "lexeme_offsets": [
+            982,
+            990
+          ],
+          "text_offsets": [
+            982,
+            990
+          ],
+          "normalized": "wildfire"
+        },
+        {
+          "term_id": "HG-05.T02",
+          "position": 2,
+          "text": "forest fire",
+          "quoted": true,
+          "lexeme_offsets": [
+            998,
+            1011
+          ],
+          "text_offsets": [
+            999,
+            1010
+          ],
+          "normalized": "forest fire"
+        },
+        {
+          "term_id": "HG-05.T03",
+          "position": 3,
+          "text": "bushfire",
+          "quoted": false,
+          "lexeme_offsets": [
+            1019,
+            1027
+          ],
+          "text_offsets": [
+            1019,
+            1027
+          ],
+          "normalized": "bushfire"
+        },
+        {
+          "term_id": "HG-05.T04",
+          "position": 4,
+          "text": "fire weather",
+          "quoted": true,
+          "lexeme_offsets": [
+            1035,
+            1049
+          ],
+          "text_offsets": [
+            1036,
+            1048
+          ],
+          "normalized": "fire weather"
+        },
+        {
+          "term_id": "HG-05.T05",
+          "position": 5,
+          "text": "wildland fire",
+          "quoted": true,
+          "lexeme_offsets": [
+            1057,
+            1072
+          ],
+          "text_offsets": [
+            1058,
+            1071
+          ],
+          "normalized": "wildland fire"
+        },
+        {
+          "term_id": "HG-05.T06",
+          "position": 6,
+          "text": "wildfire smoke",
+          "quoted": true,
+          "lexeme_offsets": [
+            1080,
+            1096
+          ],
+          "text_offsets": [
+            1081,
+            1095
+          ],
+          "normalized": "wildfire smoke"
+        },
+        {
+          "term_id": "HG-05.T07",
+          "position": 7,
+          "text": "smoke exposure",
+          "quoted": true,
+          "lexeme_offsets": [
+            1104,
+            1120
+          ],
+          "text_offsets": [
+            1105,
+            1119
+          ],
+          "normalized": "smoke exposure"
+        }
+      ]
+    },
+    {
+      "group_id": "HG-06",
+      "position": 6,
+      "group_offsets": [
+        1132,
+        1216
+      ],
+      "n_terms": 4,
+      "terms": [
+        {
+          "term_id": "HG-06.T01",
+          "position": 1,
+          "text": "tropical cyclone",
+          "quoted": true,
+          "lexeme_offsets": [
+            1138,
+            1156
+          ],
+          "text_offsets": [
+            1139,
+            1155
+          ],
+          "normalized": "tropical cyclone"
+        },
+        {
+          "term_id": "HG-06.T02",
+          "position": 2,
+          "text": "hurricane",
+          "quoted": false,
+          "lexeme_offsets": [
+            1164,
+            1173
+          ],
+          "text_offsets": [
+            1164,
+            1173
+          ],
+          "normalized": "hurricane"
+        },
+        {
+          "term_id": "HG-06.T03",
+          "position": 3,
+          "text": "typhoon",
+          "quoted": false,
+          "lexeme_offsets": [
+            1181,
+            1188
+          ],
+          "text_offsets": [
+            1181,
+            1188
+          ],
+          "normalized": "typhoon"
+        },
+        {
+          "term_id": "HG-06.T04",
+          "position": 4,
+          "text": "cyclonic storm",
+          "quoted": true,
+          "lexeme_offsets": [
+            1196,
+            1212
+          ],
+          "text_offsets": [
+            1197,
+            1211
+          ],
+          "normalized": "cyclonic storm"
+        }
+      ]
+    },
+    {
+      "group_id": "HG-07",
+      "position": 7,
+      "group_offsets": [
+        1224,
+        1446
+      ],
+      "n_terms": 10,
+      "terms": [
+        {
+          "term_id": "HG-07.T01",
+          "position": 1,
+          "text": "convective storm",
+          "quoted": true,
+          "lexeme_offsets": [
+            1230,
+            1248
+          ],
+          "text_offsets": [
+            1231,
+            1247
+          ],
+          "normalized": "convective storm"
+        },
+        {
+          "term_id": "HG-07.T02",
+          "position": 2,
+          "text": "severe convective storm",
+          "quoted": true,
+          "lexeme_offsets": [
+            1256,
+            1281
+          ],
+          "text_offsets": [
+            1257,
+            1280
+          ],
+          "normalized": "severe convective storm"
+        },
+        {
+          "term_id": "HG-07.T03",
+          "position": 3,
+          "text": "thunderstorm",
+          "quoted": false,
+          "lexeme_offsets": [
+            1289,
+            1301
+          ],
+          "text_offsets": [
+            1289,
+            1301
+          ],
+          "normalized": "thunderstorm"
+        },
+        {
+          "term_id": "HG-07.T04",
+          "position": 4,
+          "text": "severe thunderstorm",
+          "quoted": true,
+          "lexeme_offsets": [
+            1309,
+            1330
+          ],
+          "text_offsets": [
+            1310,
+            1329
+          ],
+          "normalized": "severe thunderstorm"
+        },
+        {
+          "term_id": "HG-07.T05",
+          "position": 5,
+          "text": "hail",
+          "quoted": false,
+          "lexeme_offsets": [
+            1338,
+            1342
+          ],
+          "text_offsets": [
+            1338,
+            1342
+          ],
+          "normalized": "hail"
+        },
+        {
+          "term_id": "HG-07.T06",
+          "position": 6,
+          "text": "straight-line wind",
+          "quoted": true,
+          "lexeme_offsets": [
+            1350,
+            1370
+          ],
+          "text_offsets": [
+            1351,
+            1369
+          ],
+          "normalized": "straight-line wind"
+        },
+        {
+          "term_id": "HG-07.T07",
+          "position": 7,
+          "text": "downburst",
+          "quoted": false,
+          "lexeme_offsets": [
+            1378,
+            1387
+          ],
+          "text_offsets": [
+            1378,
+            1387
+          ],
+          "normalized": "downburst"
+        },
+        {
+          "term_id": "HG-07.T08",
+          "position": 8,
+          "text": "microburst",
+          "quoted": false,
+          "lexeme_offsets": [
+            1395,
+            1405
+          ],
+          "text_offsets": [
+            1395,
+            1405
+          ],
+          "normalized": "microburst"
+        },
+        {
+          "term_id": "HG-07.T09",
+          "position": 9,
+          "text": "tornado",
+          "quoted": false,
+          "lexeme_offsets": [
+            1413,
+            1420
+          ],
+          "text_offsets": [
+            1413,
+            1420
+          ],
+          "normalized": "tornado"
+        },
+        {
+          "term_id": "HG-07.T10",
+          "position": 10,
+          "text": "extreme wind",
+          "quoted": true,
+          "lexeme_offsets": [
+            1428,
+            1442
+          ],
+          "text_offsets": [
+            1429,
+            1441
+          ],
+          "normalized": "extreme wind"
+        }
+      ]
+    },
+    {
+      "group_id": "HG-08",
+      "position": 8,
+      "group_offsets": [
+        1454,
+        1665
+      ],
+      "n_terms": 8,
+      "terms": [
+        {
+          "term_id": "HG-08.T01",
+          "position": 1,
+          "text": "sea level rise",
+          "quoted": true,
+          "lexeme_offsets": [
+            1460,
+            1476
+          ],
+          "text_offsets": [
+            1461,
+            1475
+          ],
+          "normalized": "sea level rise"
+        },
+        {
+          "term_id": "HG-08.T02",
+          "position": 2,
+          "text": "coastal erosion",
+          "quoted": true,
+          "lexeme_offsets": [
+            1484,
+            1501
+          ],
+          "text_offsets": [
+            1485,
+            1500
+          ],
+          "normalized": "coastal erosion"
+        },
+        {
+          "term_id": "HG-08.T03",
+          "position": 3,
+          "text": "salinization",
+          "quoted": false,
+          "lexeme_offsets": [
+            1509,
+            1521
+          ],
+          "text_offsets": [
+            1509,
+            1521
+          ],
+          "normalized": "salinization"
+        },
+        {
+          "term_id": "HG-08.T04",
+          "position": 4,
+          "text": "saltwater intrusion",
+          "quoted": true,
+          "lexeme_offsets": [
+            1529,
+            1550
+          ],
+          "text_offsets": [
+            1530,
+            1549
+          ],
+          "normalized": "saltwater intrusion"
+        },
+        {
+          "term_id": "HG-08.T05",
+          "position": 5,
+          "text": "ocean warming",
+          "quoted": true,
+          "lexeme_offsets": [
+            1558,
+            1573
+          ],
+          "text_offsets": [
+            1559,
+            1572
+          ],
+          "normalized": "ocean warming"
+        },
+        {
+          "term_id": "HG-08.T06",
+          "position": 6,
+          "text": "rising ocean temperature",
+          "quoted": true,
+          "lexeme_offsets": [
+            1581,
+            1607
+          ],
+          "text_offsets": [
+            1582,
+            1606
+          ],
+          "normalized": "rising ocean temperature"
+        },
+        {
+          "term_id": "HG-08.T07",
+          "position": 7,
+          "text": "marine heatwave",
+          "quoted": true,
+          "lexeme_offsets": [
+            1615,
+            1632
+          ],
+          "text_offsets": [
+            1616,
+            1631
+          ],
+          "normalized": "marine heatwave"
+        },
+        {
+          "term_id": "HG-08.T08",
+          "position": 8,
+          "text": "ocean acidification",
+          "quoted": true,
+          "lexeme_offsets": [
+            1640,
+            1661
+          ],
+          "text_offsets": [
+            1641,
+            1660
+          ],
+          "normalized": "ocean acidification"
+        }
+      ]
+    },
+    {
+      "group_id": "HG-09",
+      "position": 9,
+      "group_offsets": [
+        1673,
+        1793
+      ],
+      "n_terms": 5,
+      "terms": [
+        {
+          "term_id": "HG-09.T01",
+          "position": 1,
+          "text": "sea ice loss",
+          "quoted": true,
+          "lexeme_offsets": [
+            1679,
+            1693
+          ],
+          "text_offsets": [
+            1680,
+            1692
+          ],
+          "normalized": "sea ice loss"
+        },
+        {
+          "term_id": "HG-09.T02",
+          "position": 2,
+          "text": "glacial melt",
+          "quoted": true,
+          "lexeme_offsets": [
+            1701,
+            1715
+          ],
+          "text_offsets": [
+            1702,
+            1714
+          ],
+          "normalized": "glacial melt"
+        },
+        {
+          "term_id": "HG-09.T03",
+          "position": 3,
+          "text": "permafrost thaw",
+          "quoted": true,
+          "lexeme_offsets": [
+            1723,
+            1740
+          ],
+          "text_offsets": [
+            1724,
+            1739
+          ],
+          "normalized": "permafrost thaw"
+        },
+        {
+          "term_id": "HG-09.T04",
+          "position": 4,
+          "text": "snowmelt timing",
+          "quoted": true,
+          "lexeme_offsets": [
+            1748,
+            1765
+          ],
+          "text_offsets": [
+            1749,
+            1764
+          ],
+          "normalized": "snowmelt timing"
+        },
+        {
+          "term_id": "HG-09.T05",
+          "position": 5,
+          "text": "arctic sea ice",
+          "quoted": true,
+          "lexeme_offsets": [
+            1773,
+            1789
+          ],
+          "text_offsets": [
+            1774,
+            1788
+          ],
+          "normalized": "arctic sea ice"
+        }
+      ]
+    },
+    {
+      "group_id": "HG-10",
+      "position": 10,
+      "group_offsets": [
+        1801,
+        1868
+      ],
+      "n_terms": 2,
+      "terms": [
+        {
+          "term_id": "HG-10.T01",
+          "position": 1,
+          "text": "carbon dioxide fertilization",
+          "quoted": true,
+          "lexeme_offsets": [
+            1807,
+            1837
+          ],
+          "text_offsets": [
+            1808,
+            1836
+          ],
+          "normalized": "carbon dioxide fertilization"
+        },
+        {
+          "term_id": "HG-10.T02",
+          "position": 2,
+          "text": "CO2 fertilization",
+          "quoted": true,
+          "lexeme_offsets": [
+            1845,
+            1864
+          ],
+          "text_offsets": [
+            1846,
+            1863
+          ],
+          "normalized": "co2 fertilization"
+        }
+      ]
+    },
+    {
+      "group_id": "HG-11",
+      "position": 11,
+      "group_offsets": [
+        1876,
+        1948
+      ],
+      "n_terms": 3,
+      "terms": [
+        {
+          "term_id": "HG-11.T01",
+          "position": 1,
+          "text": "crop failure",
+          "quoted": true,
+          "lexeme_offsets": [
+            1882,
+            1896
+          ],
+          "text_offsets": [
+            1883,
+            1895
+          ],
+          "normalized": "crop failure"
+        },
+        {
+          "term_id": "HG-11.T02",
+          "position": 2,
+          "text": "crop yield",
+          "quoted": true,
+          "lexeme_offsets": [
+            1904,
+            1916
+          ],
+          "text_offsets": [
+            1905,
+            1915
+          ],
+          "normalized": "crop yield"
+        },
+        {
+          "term_id": "HG-11.T03",
+          "position": 3,
+          "text": "ecosystem services",
+          "quoted": true,
+          "lexeme_offsets": [
+            1924,
+            1944
+          ],
+          "text_offsets": [
+            1925,
+            1943
+          ],
+          "normalized": "ecosystem services"
+        }
+      ]
+    }
+  ],
+  "context_terms": [
+    {
+      "term_id": "CT-01",
+      "position": 1,
+      "text": "climate",
+      "quoted": false,
+      "lexeme_offsets": [
+        1959,
+        1966
+      ],
+      "text_offsets": [
+        1959,
+        1966
+      ],
+      "normalized": "climate"
+    },
+    {
+      "term_id": "CT-02",
+      "position": 2,
+      "text": "weather",
+      "quoted": false,
+      "lexeme_offsets": [
+        1972,
+        1979
+      ],
+      "text_offsets": [
+        1972,
+        1979
+      ],
+      "normalized": "weather"
+    },
+    {
+      "term_id": "CT-03",
+      "position": 3,
+      "text": "hazard",
+      "quoted": false,
+      "lexeme_offsets": [
+        1985,
+        1991
+      ],
+      "text_offsets": [
+        1985,
+        1991
+      ],
+      "normalized": "hazard"
+    },
+    {
+      "term_id": "CT-04",
+      "position": 4,
+      "text": "resilience",
+      "quoted": false,
+      "lexeme_offsets": [
+        1997,
+        2007
+      ],
+      "text_offsets": [
+        1997,
+        2007
+      ],
+      "normalized": "resilience"
+    },
+    {
+      "term_id": "CT-05",
+      "position": 5,
+      "text": "adaptation",
+      "quoted": false,
+      "lexeme_offsets": [
+        2013,
+        2023
+      ],
+      "text_offsets": [
+        2013,
+        2023
+      ],
+      "normalized": "adaptation"
+    },
+    {
+      "term_id": "CT-06",
+      "position": 6,
+      "text": "vulnerability",
+      "quoted": false,
+      "lexeme_offsets": [
+        2029,
+        2042
+      ],
+      "text_offsets": [
+        2029,
+        2042
+      ],
+      "normalized": "vulnerability"
+    },
+    {
+      "term_id": "CT-07",
+      "position": 7,
+      "text": "mitigation",
+      "quoted": false,
+      "lexeme_offsets": [
+        2048,
+        2058
+      ],
+      "text_offsets": [
+        2048,
+        2058
+      ],
+      "normalized": "mitigation"
+    },
+    {
+      "term_id": "CT-08",
+      "position": 8,
+      "text": "preparedness",
+      "quoted": false,
+      "lexeme_offsets": [
+        2064,
+        2076
+      ],
+      "text_offsets": [
+        2064,
+        2076
+      ],
+      "normalized": "preparedness"
+    },
+    {
+      "term_id": "CT-09",
+      "position": 9,
+      "text": "forecast",
+      "quoted": false,
+      "lexeme_offsets": [
+        2082,
+        2090
+      ],
+      "text_offsets": [
+        2082,
+        2090
+      ],
+      "normalized": "forecast"
+    },
+    {
+      "term_id": "CT-10",
+      "position": 10,
+      "text": "recovery",
+      "quoted": false,
+      "lexeme_offsets": [
+        2096,
+        2104
+      ],
+      "text_offsets": [
+        2096,
+        2104
+      ],
+      "normalized": "recovery"
+    },
+    {
+      "term_id": "CT-11",
+      "position": 11,
+      "text": "response",
+      "quoted": false,
+      "lexeme_offsets": [
+        2110,
+        2118
+      ],
+      "text_offsets": [
+        2110,
+        2118
+      ],
+      "normalized": "response"
+    },
+    {
+      "term_id": "CT-12",
+      "position": 12,
+      "text": "exposure",
+      "quoted": false,
+      "lexeme_offsets": [
+        2124,
+        2132
+      ],
+      "text_offsets": [
+        2124,
+        2132
+      ],
+      "normalized": "exposure"
+    },
+    {
+      "term_id": "CT-13",
+      "position": 13,
+      "text": "risk",
+      "quoted": false,
+      "lexeme_offsets": [
+        2138,
+        2142
+      ],
+      "text_offsets": [
+        2138,
+        2142
+      ],
+      "normalized": "risk"
+    },
+    {
+      "term_id": "CT-14",
+      "position": 14,
+      "text": "infrastructure",
+      "quoted": false,
+      "lexeme_offsets": [
+        2148,
+        2162
+      ],
+      "text_offsets": [
+        2148,
+        2162
+      ],
+      "normalized": "infrastructure"
+    },
+    {
+      "term_id": "CT-15",
+      "position": 15,
+      "text": "community",
+      "quoted": false,
+      "lexeme_offsets": [
+        2168,
+        2177
+      ],
+      "text_offsets": [
+        2168,
+        2177
+      ],
+      "normalized": "community"
+    },
+    {
+      "term_id": "CT-16",
+      "position": 16,
+      "text": "ecosystem",
+      "quoted": false,
+      "lexeme_offsets": [
+        2183,
+        2192
+      ],
+      "text_offsets": [
+        2183,
+        2192
+      ],
+      "normalized": "ecosystem"
+    },
+    {
+      "term_id": "CT-17",
+      "position": 17,
+      "text": "public health",
+      "quoted": true,
+      "lexeme_offsets": [
+        2198,
+        2213
+      ],
+      "text_offsets": [
+        2199,
+        2212
+      ],
+      "normalized": "public health"
+    },
+    {
+      "term_id": "CT-18",
+      "position": 18,
+      "text": "planning",
+      "quoted": false,
+      "lexeme_offsets": [
+        2219,
+        2227
+      ],
+      "text_offsets": [
+        2219,
+        2227
+      ],
+      "normalized": "planning"
+    },
+    {
+      "term_id": "CT-19",
+      "position": 19,
+      "text": "disaster",
+      "quoted": false,
+      "lexeme_offsets": [
+        2233,
+        2241
+      ],
+      "text_offsets": [
+        2233,
+        2241
+      ],
+      "normalized": "disaster"
+    },
+    {
+      "term_id": "CT-20",
+      "position": 20,
+      "text": "policy",
+      "quoted": false,
+      "lexeme_offsets": [
+        2247,
+        2253
+      ],
+      "text_offsets": [
+        2247,
+        2253
+      ],
+      "normalized": "policy"
+    },
+    {
+      "term_id": "CT-21",
+      "position": 21,
+      "text": "governance",
+      "quoted": false,
+      "lexeme_offsets": [
+        2259,
+        2269
+      ],
+      "text_offsets": [
+        2259,
+        2269
+      ],
+      "normalized": "governance"
+    },
+    {
+      "term_id": "CT-22",
+      "position": 22,
+      "text": "sustainability",
+      "quoted": false,
+      "lexeme_offsets": [
+        2275,
+        2289
+      ],
+      "text_offsets": [
+        2275,
+        2289
+      ],
+      "normalized": "sustainability"
+    }
+  ],
+  "absence_checks": [
+    {
+      "rule_id": "AR-1-scenario-horizon",
+      "dimension": "scenario / temporal horizon",
+      "rule": "no term's normalized form matches the regular expression /rcp|ssp|\\d{4}|century|mid-|end-|projection|scenario|baseline|historical/ (re.search, anywhere in the term)",
+      "n_terms_checked": 102,
+      "n_hits": 0,
+      "hits": [],
+      "result": "absent"
+    },
+    {
+      "rule_id": "AR-2-us-state",
+      "dimension": "geography: US state",
+      "rule": "no term's normalized form contains, as a whole word, any of the 50 US state names or 'district of columbia', and no alphanumeric word of it equals any of their 51 two-letter USPS codes (compared in lower case)",
+      "n_terms_checked": 102,
+      "n_hits": 0,
+      "hits": [],
+      "result": "absent"
+    },
+    {
+      "rule_id": "AR-3-geographic-unit",
+      "dimension": "geography: sub-national unit or country",
+      "rule": "no term's normalized form contains, as a whole word, any of: 'county', 'tract', 'united states', 'usa'",
+      "n_terms_checked": 102,
+      "n_hits": 0,
+      "hits": [],
+      "result": "absent"
+    }
+  ],
+  "absence_checks_scope": "Each rule is checked against the query's terms and nothing else. 'No place name' is verified only against the lists in the rules."
+}

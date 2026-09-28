@@ -1,16 +1,18 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-09-13   Next meetings: group 2026-09-14; one-on-one 2026-09-17
+Last updated: 2026-09-28   Next meeting: not yet scheduled; the answer sheet is still outstanding
 
 ## Status in five lines
 
 1. The ClimRR table is in the project, unchanged and checksum-pinned — 62,834 rows, 275 columns, every value read as text so identifiers keep their leading zeros.
-2. **The 2026-09-10 meeting settled the big question negatively: there is no further documentation.** No newer dictionary, no assembly document or script, no release note. What we have is all there is, and no per-column answer was given.
-3. **The direction changed instead of the evidence**, and it is now approved and built. Rather than documenting all 275 columns: interpret a deliberately small subset, write down the reasoning column by column, and bring worked examples back for confirmation.
-4. **41 of the 275 columns are now interpreted — 21 the dictionary states outright, 20 reasoned and marked as reasoned.** The other 234 are untouched and explicitly unresolved. Nothing reasoned is recorded as verified; the two are different statuses and stay visibly different.
-5. **Three example records are built from real rows and are ready for you.** They are in [`MENTOR_EXAMPLES.md`](MENTOR_EXAMPLES.md), and your answers to the numbered lines there are what would promote any of the 20 reasoned readings to confirmed.
+2. **41 of the 275 columns are interpreted — 21 the dictionary states outright, 20 reasoned and marked as reasoned.** Nothing reasoned has been confirmed: **the answer sheet was not reviewed at either one-on-one (2026-09-17, 2026-09-24)**, so all 20 stay `inferred_candidate`.
+3. **The group (2026-09-14) raised no material objection to the prototype-unit design.** That is recorded as exactly that — the group is not the data owner, and it confirms no column meaning.
+4. **The project now proceeds on "our reading" (D-014)**: the prototypes are used as they stand to see what questions they could support, with every reasoned status carried visibly into anything built from them. Nothing is promoted by proceeding.
+5. **A literature corpus has arrived** — 1,918 files and the search query they were collected with, from a separate collector. Both are now pinned by checksum; no paper has been opened or read. Three questions about how it was collected are for that collector, not for you.
 
 ## What I need from this meeting
+
+*Unchanged since 2026-09-13 and still outstanding: the sheet was brought to the one-on-ones of 2026-09-17 and 2026-09-24 and not reviewed at either (R-003).*
 
 > ### **Please review the three example records in [`MENTOR_EXAMPLES.md`](MENTOR_EXAMPLES.md).**
 >
@@ -77,14 +79,31 @@ bring will make several of them concrete enough to answer in passing.
 
 Full detail for any question, including the exact columns and the PDF line numbers, is in `docs/METADATA_QUESTIONS.md`.
 
+### Literature corpus
+
+**Not for the mentor.** These go to **JL**, who supplied the literature corpus and
+its collection query on 2026-09-28 and is stated to have collected it. They are
+listed here so the whole question inventory stays in one place. Each is
+`unknown` in `data/manifest.json` until answered.
+
+| # | Q-ID | Question (one sentence) | Why we need it | What it unblocks |
+| --- | --- | --- | --- | --- |
+| 1 | Q19 | On which platform or database was the query executed, and which fields did it search? | The same Boolean text returns different results on different databases. | Reproducing or citing the collection. |
+| 2 | Q20 | When was the query executed, and when were the results exported? | The corpus has to be cited as a dated snapshot. | Citability of the corpus. |
+| 3 | Q21 | Is the folder of 1,918 files the complete result set, and if not, what selected them? | A capped or filtered set changes what any sample drawn from it can represent. | How far M4-WP1's sample can be generalised. |
+
 ## Answers received
 
 | Date | Q-ID | Answer as relayed by Kaiyuan | Recorded as |
 | --- | --- | --- | --- |
 | 2026-09-10 | Q0 | There is no additional metadata for the table — no newer data dictionary, no assembly document or script, no release note. | R-001, D-010. **Q0 closed, answered negative.** Paraphrase, not verbatim. |
 | 2026-09-10 | Q1–Q18 | "We do not need to use all the fields. We could let an AI reason out what the columns mean and use the fields that are reliable or can be reasonably explained. Each row stands for one event, so those fields can be used to construct the event and then build the connection to the literature. She wants to see examples." | R-002, D-010 (**approved 2026-09-13, with the GUIDANCE ruling incorporated as D-011**). A direction, not a column meaning: **no per-column answer was given for any of Q1–Q18**, and none was recorded. "Each row stands for one event" is Kaiyuan's reading and is **still to be confirmed with you** — it is line 1 of every checklist in `MENTOR_EXAMPLES.md`. Paraphrase, not verbatim. |
+| 2026-09-17, 2026-09-24 | — | No review of the `MENTOR_EXAMPLES` answer sheet occurred. | R-003, D-014. **No line answered; no status changed.** Not an answer to any question --- recorded because the ruling requires the outcome to be recorded either way. |
 
 ## Meeting log
+
+*Entries are in date order. The three added on 2026-09-28 follow the
+2026-09-13 entry.*
 
 ### 2026-09-10 — mentor one-on-one
 
@@ -107,6 +126,61 @@ rule out. Twenty columns hold it. Three example records were built from rows
 populated and never at how large a value is.
 
 **To bring to the next meeting:** [`MENTOR_EXAMPLES.md`](MENTOR_EXAMPLES.md).
+
+### 2026-09-14 — group meeting
+
+**Presented:** the three prototype records and the handout
+[`GROUP_MEETING_2026-09-14.md`](GROUP_MEETING_2026-09-14.md) --- whether the
+phenomenon unit is the right scientific object.
+
+**Feedback, recorded as the ruling allows it to be recorded:**
+
+> **No material objection to the prototype-unit design was raised.**
+
+Feedback was light. **It is not validation, and it confirms no column
+semantic**: the group is not the data owner, and ruling action 12 of
+`docs/M4_WP0_GUIDANCE_RULING.md` forbids reading light group feedback as owner
+confirmation of field meanings. No status moved. The handout's five questions
+received no recorded answer.
+
+### 2026-09-17 and 2026-09-24 — mentor one-on-ones
+
+**Brought:** [`MENTOR_EXAMPLES.md`](MENTOR_EXAMPLES.md) and its answer sheet.
+
+**Outcome: no review occurred**, at either meeting (R-003). Recorded line by
+line, as ruling action 11 requires --- exact responses if obtained, otherwise
+`no review occurred`, with no status promotion:
+
+| Answer-sheet line | Reading | Outcome | Status change |
+| --- | --- | --- | --- |
+| 1 | One row of the file is one "event" | no review occurred | none |
+| 2 | `heatindex_*_DayMax` in °F, extended heat-index scale | no review occurred | none |
+| 3 | `DayMax` is the summer average of daily maxima | no review occurred | none |
+| 4 | `heatindex_C_*_DMax` is that quantity differenced; which way round | no review occurred | none |
+| 5 | FWI "Seasonal value" is the seasonal average daily FWI | no review occurred | none |
+| 6 | FWI values are dimensionless | no review occurred | none |
+| 7 | `wildfire_summer_Dmid/Dend` are absolute differences; which way round | no review occurred | none |
+| 8 | Stem `tempmaxann` denotes "Temperature Maximum - Annual" | no review occurred | none |
+| 9 | Columns 44, 48, 52 are annual averages of daily max temperature in °F | no review occurred | none |
+| 10 | `GEOID` is a Census tract id; which vintage | no review occurred | none |
+| 11 | `TRACTCE` is the tract code alone | no review occurred | none |
+| 12 | `X`, `Y` are longitude / latitude; which coordinate system | no review occurred | none |
+| 13 | Observation only --- nothing to confirm | no review occurred | none |
+| 14 | `NAME` / `State` / `State_Abbr` are county, state, postal code | no review occurred | none |
+| 15 | What coverage explains 49 values; what the 7 blank rows are | no review occurred | none |
+| 16 | Are these the kinds of records to connect to the literature | no review occurred | none |
+| E2-2 | Identifiers carried as text with leading zeros | no review occurred | none |
+| E3-2 | An empty cell is "no value in this file" | no review occurred | none |
+| E3-3 | What the 83 rows empty from index 235 on are | no review occurred | none |
+
+**No status promotion.** All 20 `inferred_candidate` columns stay
+`inferred_candidate`. What the project does instead is D-014.
+
+### 2026-09-28 — no meeting; literature corpus received
+
+Not a meeting entry. JL supplied the literature corpus (a folder of 1,918
+files) and the Boolean query it was collected with. Both are pinned by
+SHA-256 (M4-WP0, D-015); no paper has been opened. Q19--Q21 are for JL.
 
 ---
 

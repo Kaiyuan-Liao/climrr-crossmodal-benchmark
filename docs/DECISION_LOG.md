@@ -919,3 +919,108 @@ code emits, and the next GUIDANCE packet still chooses.
   `docs/PHENOMENON_PROTOTYPES.md`, `docs/GROUP_MEETING_2026-09-14.md`,
   the three prototype records, `reports/milestones/M1_WP3b_PROTOTYPE_REPORT.md`,
   `tests/test_phenomenon.py`, `tests/test_group_handout.py`.
+
+---
+
+## D-014 --- Proceed on the "our reading" basis, with every provisional status carried through
+
+- **Date:** 2026-09-28
+- **Status:** **decided.**
+- **Owner:** **Kaiyuan Liao.**
+- **Context.** The answer sheet in `docs/MENTOR_EXAMPLES.md` was prepared for
+  the mentor one-on-one of 2026-09-17 and carried to the one of 2026-09-24. **At
+  neither was it reviewed** (R-003). No line was answered. The group meeting of
+  2026-09-14 saw the prototypes and the handout and raised **no material
+  objection to the prototype-unit design**; the group is not the data owner and
+  its feedback confirms no column semantic (ruling action 12 of
+  `docs/M4_WP0_GUIDANCE_RULING.md`). No owner review is available on any
+  near date.
+- **Decision.** Proceed with the prototype representation **on the "our
+  reading" basis**, in order to test what question-answer material could be
+  generated from it. **Every `inferred_candidate` and `derived_from_inferred`
+  status is carried through to every downstream artifact**, and any QA that is
+  ever shown will state that it rests on those statuses.
+- **What this is not.** **It promotes nothing.** No column moves; no status is
+  upgraded, relabelled or rounded up to "assumed confirmed". It does not
+  authorise QA generation --- the M4-WP0 ruling states "QA generation is still
+  not authorized", and that stands until a ruling says otherwise.
+- **Rationale.** R-002 gave the direction --- use what can be reasonably
+  explained, build examples, connect to the literature. No owner review has
+  happened in two scheduled attempts, and the project cannot hold M1 and M4
+  both closed while waiting for one. Carrying the provisional status everywhere
+  is what makes proceeding honest rather than a quiet promotion.
+- **Consequence for the M1 gate.** **M1 gate criterion 1 will be evaluated with
+  provisional statuses explicitly declared**, not with owner-confirmed ones. The
+  gate packet will say so in its first line on that criterion. Whether GUIDANCE
+  accepts M1 on that basis is GUIDANCE's call, not this decision's.
+- **Alternatives considered.** (a) Wait for the mentor --- rejected by the owner:
+  two meetings have passed without a review, and nothing in the schedule
+  changes that. (b) Treat the group's lack of objection as confirmation ---
+  rejected, and forbidden by ruling action 12. (c) Promote the twenty
+  `inferred_candidate` columns on the owner's own authority --- rejected; D-010
+  and D-011 reserve `owner_confirmed` for the data owner's explicit answer.
+- **Affected files:** `data/metadata/resolutions.yaml` (R-003),
+  `artifacts/profiles/dictionary_coverage.json`,
+  `artifacts/profiles/status_diff.md`, `docs/MENTOR_BRIEF.md`,
+  `docs/PROJECT_STATE.md`, `reports/milestones/M4_WP0_REPORT.md`.
+
+---
+
+## D-015 --- The M4-WP0 GUIDANCE ruling: corpus provenance and inventory, and nothing more
+
+- **Date:** 2026-09-28
+- **Status:** **decided.**
+- **Owner:** **GUIDANCE**; **approved by Kaiyuan Liao**, who placed
+  `docs/M4_WP0_GUIDANCE_RULING.md` in the repository. Gate status: **PASS WITH
+  ACTIONS**. The package is named **M4-WP0 --- Literature Corpus Provenance and
+  Inventory**, not M1-WP5.
+- **What the ruling decides.**
+  1. **The collection query is pinned.** `data/metadata/literature_query.txt`,
+     byte for byte as received, SHA-256
+     `5a7ddf537d343b73fa0887e5f11ffbe3965fd25811f2adfc25cacee66f0ee1e5`, with a
+     provenance block in `data/manifest.json` that keeps what the supplier
+     reported apart from what the project verified, and writes every unknown
+     as `unknown`.
+  2. **A deterministic parser.** `climrr.litquery` decomposes the query into its
+     Boolean structure, hazard groups and context terms, with character offsets
+     back into the source. Lexical normalization only; no reinterpretation. The
+     parse is a separate derived artifact,
+     `artifacts/literature/query_parsed.json`.
+  3. **The comparison is named query-scope coverage**, never corpus coverage.
+     It distinguishes `exact_query_term`, `normalized_lexical_match` and
+     `absent_from_query`; `inferred_conceptual_relationship` is defined and
+     **not used**.
+  4. **An external inventory, by byte reads only.** The corpus stays outside the
+     repository. Every file gets a stable id, relative path, format, size,
+     SHA-256, duplicate group and accessibility status. No content parsing, text
+     extraction, rendering, metadata extraction or semantic inspection.
+  5. **QA generation is still not authorised.** Nor are paper reading, claim
+     extraction, prototype matching, semantic bridges, hazard labels for
+     individual papers, retrieval or embeddings.
+  6. **The shape of M4-WP1.** A small deterministic literature-ingestion and
+     structured-claim pilot of about 6--12 unique papers, drawn **from the
+     frozen manifest by rule, independent of prototype relevance**, extracting
+     claims **without** deciding whether they match a prototype. Prototype-to-
+     claim compatibility begins in M5.
+- **What M4-WP0 found that the work package did not anticipate.**
+  - **The query's first disjunction holds eleven hazard groups, not ten.** The
+    parse is reported as found; nothing was merged to make ten.
+  - **`artifacts/literature/` was caught by the `literature/` rule in
+    `.gitignore`**, which exists to keep the corpus out. A narrow negation,
+    `!artifacts/literature/`, admits the inventory artifacts only; the corpus
+    rule is unchanged, and `tests/test_corpus.py` checks that no tracked
+    artifact holds the corpus path.
+- **Alternatives considered.** On the ignore rule: (a) move the artifacts to a
+  directory not named `literature` --- rejected, the work package names the
+  path; (b) anchor the corpus rule to `/literature/` --- rejected as a wider
+  change than needed.
+- **Affected files:** `data/metadata/literature_query.txt`, `data/manifest.json`,
+  `data/MANIFEST.md`, `.gitattributes`, `.gitignore`,
+  `config/local_paths.example.yaml`, `src/climrr/litquery.py`,
+  `src/climrr/queryscope.py`, `src/climrr/corpus.py`,
+  `scripts/parse_literature_query.py`, `scripts/query_scope_coverage.py`,
+  `scripts/inventory_corpus.py`, `artifacts/literature/*`,
+  `docs/LITERATURE_QUERY_SCOPE.md`, `docs/LITERATURE_CORPUS_INVENTORY.md`,
+  `docs/METADATA_QUESTIONS.md`, `docs/MENTOR_BRIEF.md`,
+  `docs/SOPHIA_RUNBOOK.md`, `reports/milestones/M4_WP0_REPORT.md`,
+  `tests/test_litquery.py`, `tests/test_queryscope.py`, `tests/test_corpus.py`.
