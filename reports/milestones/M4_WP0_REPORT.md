@@ -5,6 +5,11 @@ or interpreted.** Authorised by the GUIDANCE ruling
 [`docs/M4_WP0_GUIDANCE_RULING.md`](../../docs/M4_WP0_GUIDANCE_RULING.md) (PASS
 WITH ACTIONS), recorded as **D-015**. QA generation is still not authorised.
 
+**Reviewed by GUIDANCE at head `1e2fd9f`: M4-WP0 PASS** (the ruling's overall
+status is PASS WITH ACTIONS; the actions are the pre-merge bookkeeping below),
+[`docs/M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md`](../../docs/M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md),
+recorded as **D-016**. **M1 remains open.**
+
 This report also carries the M1 bookkeeping since 2026-09-13 (Phase A), which
 changed no column status.
 
@@ -38,8 +43,10 @@ embeddings; table-to-paper pairs; claim extraction; M5 bridge scoring; QA.
 | Branch | `work/m4-wp0`, created from `work/m1-wp3b` at head `e359b26` |
 | Phases A–E | `52a994a0bb8c30f5b7af4c8bf99a685938941d73` --- code, artifacts, bookkeeping |
 | Evidence runs | re-run at `52a994a`, clean tree; all four M4-WP0 outputs reproduced byte for byte |
-| This report, `PROJECT_STATE.md`, brief status | this report's own commit; a commit cannot contain its own hash, so its SHA travels with the hand-back |
-| Remote | **Not pushed, not merged**, as the work package requires. `origin` has no `work/m4-wp0` |
+| This report, `PROJECT_STATE.md`, brief status | `1e2fd9f` |
+| **Reviewed head** | **`1e2fd9f`** --- the head GUIDANCE reviewed |
+| Pre-merge bookkeeping (D-016) | one further commit on `work/m4-wp0`, carrying this refresh; its SHA travels with the hand-back |
+| Remote | **`work/m4-wp0` pushed by Kaiyuan**; `origin/work/m4-wp0` at `1e2fd9f`. **Not merged** |
 | `main` | unchanged at `62c9137` |
 
 **The unmerged branch chain**, for the merge request to GUIDANCE --- each branch
@@ -50,7 +57,7 @@ contains the one before it, linearly:
 | `work/m1-wp2` | `391b442` | yes, same head |
 | `work/m1-wp3` | `ad13649` | yes, same head |
 | `work/m1-wp3b` | `e359b26` | yes, same head (pushed by Kaiyuan) |
-| `work/m4-wp0` | this package | no |
+| `work/m4-wp0` | `1e2fd9f` reviewed | yes, at `1e2fd9f` (pushed by Kaiyuan) |
 
 ## 4. Data version and checksums
 
@@ -130,6 +137,8 @@ third verifies the frozen manifest and fails on any difference.
 `artifacts/literature/corpus_manifest.csv`;
 `docs/LITERATURE_QUERY_SCOPE.md`, `docs/LITERATURE_CORPUS_INVENTORY.md`;
 `docs/M4_WP0_GUIDANCE_RULING.md` (tracked as placed, unedited);
+`docs/M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md` (the review, merge and WP1
+ruling; tracked as placed, unedited --- D-016);
 `tests/test_litquery.py`, `tests/test_queryscope.py`, `tests/test_corpus.py`;
 this report; run records under `reports/runs/20260928T*`.
 
@@ -320,7 +329,7 @@ brief; no status promotion. The sheet remains outstanding.
 | Q21 --- is the folder the complete result set | JL | how far an M4-WP1 sample generalises |
 | Q1–Q18 and every answer-sheet line | mentor | promotion of any `inferred_candidate` column |
 | Whether M1 criterion 1 may pass on declared provisional statuses (D-014) | GUIDANCE | the M1 gate |
-| Merge of the chain `work/m1-wp2` → `wp3` → `wp3b` → `m4-wp0` | GUIDANCE, then Kaiyuan | `main` |
+| Merge of the chain `work/m1-wp2` → `wp3` → `wp3b` → `m4-wp0` | **Authorized** (D-016): **one `--no-ff` merge of `work/m4-wp0` into `main`**, then pytest and the scanner on the merge result, then the merge SHA recorded as the authoritative integrated state. **The merge does not pass M1; M1 remains open** | --- |
 | The S/T/C letter convention (D-013, D-013-A1) | GUIDANCE | --- still open from WP3b |
 
 ## 14. Proposed gate status
@@ -351,8 +360,14 @@ The ruling's 18 acceptance criteria, one line each:
 **Proposed status: M4-WP0 ready for GUIDANCE review, all 18 criteria met.** The
 EXECUTOR proposes; GUIDANCE decides.
 
+**GUIDANCE: PASS** --- reviewed at head `1e2fd9f`
+(`docs/M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md`, D-016).
+
 ## 15. Proposed next bounded objective
 
 **M4-WP1 --- deterministic 6–12-paper ingestion and structured-claim pilot,
 sample drawn from the frozen manifest by rule, independent of prototype
 relevance.**
+
+*Since authorised by D-016 as a **10-paper** pilot: every 190th `LIT` item from
+`LIT-000001`, the later member of a duplicate group never a second item.*

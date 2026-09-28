@@ -1024,3 +1024,56 @@ code emits, and the next GUIDANCE packet still chooses.
   `docs/METADATA_QUESTIONS.md`, `docs/MENTOR_BRIEF.md`,
   `docs/SOPHIA_RUNBOOK.md`, `reports/milestones/M4_WP0_REPORT.md`,
   `tests/test_litquery.py`, `tests/test_queryscope.py`, `tests/test_corpus.py`.
+
+---
+
+## D-016 --- M4-WP0 reviewed: PASS; the chain merge authorized; M4-WP1 authorized
+
+- **Date:** 2026-09-28
+- **Status:** **decided.**
+- **Owner:** **GUIDANCE**; **approved by Kaiyuan Liao**, who placed
+  `docs/M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md` in the repository. Overall
+  gate status **PASS WITH ACTIONS**. Reviewed head: **`1e2fd9f`**, pushed to
+  `origin/work/m4-wp0`.
+- **What the ruling decides.**
+  1. **M4-WP0: PASS.** The two disclosed slips --- the scanner hit repaired
+     without weakening the scanner, and the mistyped CSV hash caught against
+     the file --- do not reopen it.
+  2. **Merge strategy.** The linear chain `work/m1-wp2` → `work/m1-wp3` →
+     `work/m1-wp3b` → `work/m4-wp0` is merged as **one `--no-ff` merge of
+     `work/m4-wp0` into `main`**, after a bookkeeping refresh of the report and
+     `PROJECT_STATE.md` to the reviewed head and the real push state. pytest and
+     the scanner run on the merge result, and the merge SHA is recorded as the
+     new authoritative integrated state.
+  3. **The merge does not pass M1.** M1 remains open. D-014 still promotes
+     nothing to `owner_confirmed` and turns no `inferred_candidate` into
+     verified truth.
+  4. **M4-WP1 authorized** as a deterministic **10-paper** ingestion and
+     structured-claim pilot:
+     - **sample rule:** every 190th stable `LIT` item beginning from
+       `LIT-000001`, while preventing the later member of an exact-byte
+       duplicate group from appearing as a second unique sample item; the
+       sample, the rule and the corpus-manifest SHA are **frozen before any
+       sampled file is opened**. The sample is **not statistically
+       representative** and must not be described as such;
+     - **evidence locations:** item id + corpus-manifest SHA + file SHA-256 +
+       JSON key or full JSON path + `char_start` / `char_end` as **zero-based,
+       half-open `[start, end)` Unicode code-point offsets against the exact
+       JSON string value after JSON decoding and before any normalization**,
+       plus the exact evidence text or its hash. No offset is computed after
+       lower-casing, whitespace compression, Markdown conversion or sentence
+       joining;
+     - **negative outcomes are valid:** `off_topic`, `no_eligible_claim`, parse
+       failure, ambiguous-only. Off-topic items stay in the result and are not
+       replaced. The JSON schema encountered is documented, not assumed;
+     - **local-only execution** is approved; no Sophia corpus transfer is
+       required now;
+     - **no prototype matching**, no prototype-guided reading, no supporting /
+       contradicting labels, no embeddings, no corpus-wide search.
+  5. **The Wuhan anecdote does not change the sample.** One file that appeared
+     off-topic is not a corpus property; changing the sample for it would
+     introduce relevance-based selection bias.
+  6. **QA generation is still not authorized.** Nor is M5.
+- **Affected files:** `docs/M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md` (tracked
+  as placed), `reports/milestones/M4_WP0_REPORT.md`, `docs/PROJECT_STATE.md`,
+  `docs/DECISION_LOG.md`.

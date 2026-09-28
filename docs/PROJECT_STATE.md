@@ -6,18 +6,18 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 | | |
 | --- | --- |
-| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4 --- literature ingestion and structured claim pilot: M4-WP0 done**, awaiting GUIDANCE review |
-| **Active task** | **M4-WP0 --- Literature Corpus Provenance and Inventory: complete** on the unmerged, unpushed branch `work/m4-wp0`. Report: `reports/milestones/M4_WP0_REPORT.md`, all 18 of the ruling's criteria proposed MET. **Next: GUIDANCE review of M4-WP0, and a merge request for the branch chain below** |
+| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4 --- literature ingestion and structured claim pilot: M4-WP0 PASS** (GUIDANCE, reviewed head `1e2fd9f`, D-016); **M4-WP1 authorized**, not started |
+| **Active task** | **Pre-merge bookkeeping for M4-WP0 (D-016), done on `work/m4-wp0`.** Next: **one `--no-ff` merge of `work/m4-wp0` into `main`**, pytest and the scanner on the merge result, and the merge SHA recorded as the new authoritative integrated state. **Then M4-WP1** |
 | **Latest accepted commit** | `62c9137` --- the merge of M1-WP1 into `main`, accepted by GUIDANCE at reviewed head `fceee7f` (D-009). `main` is unchanged |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at. The literature corpus is **not** on Sophia (runbook §8b) |
-| **Branch lineage (unmerged)** | `main` → `work/m1-wp2` (`391b442`) → `work/m1-wp3` (`ad13649`) → `work/m1-wp3b` (`e359b26`) → **`work/m4-wp0`**. Linear; each contains the one before. The first three are on `origin` at those heads (Kaiyuan pushed); **`work/m4-wp0` is not pushed**. The EXECUTOR does not push (D-003). **This chain is the merge request to GUIDANCE** |
-| **M4-WP0 commits** | `52a994a` (Phases A–E), then the commit carrying the report and this file |
+| **Branch lineage (unmerged)** | `main` → `work/m1-wp2` (`391b442`) → `work/m1-wp3` (`ad13649`) → `work/m1-wp3b` (`e359b26`) → **`work/m4-wp0`**. Linear; each contains the one before. All four are on `origin` (Kaiyuan pushed); `origin/work/m4-wp0` is at the **reviewed head `1e2fd9f`**, and the bookkeeping commit after it is local until he pushes. The EXECUTOR does not push (D-003). **Merge authorized (D-016) as one `--no-ff` merge of `work/m4-wp0` into `main`; merging does not pass M1** |
+| **M4-WP0 commits** | `52a994a` (Phases A–E); **`1e2fd9f`** (report and state --- **the reviewed head**); then the D-016 pre-merge bookkeeping commit |
 | **Prototypes built from** | `56eb10d` --- unchanged since M1-WP3b; no record rebuilt |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
-| **Rulings in force** | D-009 (M1-WP1 PASS), D-011 (D-010 ruling), D-012 (M1-WP3 pre-meeting, REVISE --- framing only, done), D-013 + D-013-A1 (M1-WP3b PASS WITH ACTIONS), **D-015 (M4-WP0 PASS WITH ACTIONS)** |
+| **Rulings in force** | D-009 (M1-WP1 PASS), D-011 (D-010 ruling), D-012 (M1-WP3 pre-meeting, REVISE --- framing only, done), D-013 + D-013-A1 (M1-WP3b PASS WITH ACTIONS), **D-015 (M4-WP0 PASS WITH ACTIONS)**, **D-016 (M4-WP0 PASS; merge authorized; M4-WP1 authorized; overall PASS WITH ACTIONS)** |
 | **Owner decisions since** | **D-014** (Kaiyuan, 2026-09-28): proceed on the "our reading" basis to test what QA could be generated; every `inferred_candidate` and `derived_from_inferred` status carried through; **promotes nothing, and does not authorise QA generation** |
 | **Meetings since the last refresh** | **Group 2026-09-14:** "No material objection to the prototype-unit design was raised." --- not validation, no semantic confirmed. **Mentor 2026-09-17 and 2026-09-24:** **no review of the answer sheet occurred** (R-003); nothing promoted |
-| **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M4-WP1**: blocked on the GUIDANCE review of M4-WP0. **QA generation: not authorised by any ruling** |
+| **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M4-WP1**: authorized (D-016); follows the merge. **QA generation: not authorised by any ruling** |
 
 ## Where things stand --- M4-WP0 (2026-09-28)
 
@@ -199,10 +199,9 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 ## Outstanding
 
-- **For GUIDANCE:** review M4-WP0 (`reports/milestones/M4_WP0_REPORT.md`,
-  field 14 lists the 18 criteria), and the **merge request for the chain**
-  `work/m1-wp2` → `work/m1-wp3` → `work/m1-wp3b` → `work/m4-wp0`. Also still
-  open from WP3b: the S/T/C letter convention (D-013, D-013-A1), and --- at the
+- **The merge (D-016):** one `--no-ff` merge of `work/m4-wp0` into `main`,
+  gates on the result, merge SHA recorded. **M1 stays open.**
+- **For GUIDANCE, still open from WP3b: the S/T/C letter convention (D-013, D-013-A1), and --- at the
   M1 gate --- whether criterion 1 may pass on declared provisional statuses
   (D-014).
 - **For JL, the collection scientist:** Q19 (platform / database, fields
@@ -215,18 +214,23 @@ session reasoning correctly from out-of-date facts and repeating them.
 - **Pending choice: exclude empty-label groups from PR-1 populations (A-M2).**
   It was to be decided after a mentor answer on Q16; **no answer came**. PR-1
   still counts them and every record says so.
-- **For Kaiyuan:** push `work/m4-wp0` when ready (the EXECUTOR does not), and
-  the Sophia `pip install -r requirements.txt` reinstall (`pypdfium2` pin).
+- **For Kaiyuan:** push the bookkeeping commit on `work/m4-wp0` (the EXECUTOR
+  does not), and the Sophia `pip install -r requirements.txt` reinstall (`pypdfium2` pin).
 - **Q7, Q8, Q9, Q11, Q12, Q15, Q17, Q18** still block downstream use of the
   columns they name. **Export date** of the ClimRR file remains unknown (Q18).
 
 ## Next
 
-**GUIDANCE reviews M4-WP0.** If it passes: **M4-WP1 --- deterministic 6–12-paper
-ingestion and structured-claim pilot, sample drawn from the frozen manifest by
-rule, independent of prototype relevance.** It extracts claims with exact
-evidence locations **without** deciding whether they match any prototype;
-prototype-to-claim compatibility is M5.
+**Merge, then M4-WP1 --- deterministic 10-paper ingestion and structured-claim
+pilot (authorized, D-016).** Sample: every 190th `LIT` item from `LIT-000001`,
+the later member of an exact-byte duplicate group never a second item, **frozen
+before any sampled file is opened**. Evidence locations: item id + file SHA-256
++ JSON path + zero-based half-open `[start,end)` Unicode code-point span
+against the decoded, **unnormalized** JSON string value. `off_topic`,
+`no_eligible_claim`, parse failure and ambiguous-only are valid outcomes;
+off-topic items are kept, not replaced. Local only. Not representative, and
+never described as such. It extracts claims **without** deciding whether they
+match any prototype; prototype-to-claim compatibility is M5.
 
 Still not authorised by any ruling: **QA generation**; semantic bridges; any
 prototype-to-paper matching or relevance scoring; embeddings; hazard labels for
@@ -237,7 +241,7 @@ pilot subset. **D-014 changes none of that.**
 
 - Charter: [BLUEPRINT.md](BLUEPRINT.md)
 - Plan and gate criteria: [PROJECT_PLAN.md](PROJECT_PLAN.md)
-- Decisions, including D-010 to D-013-A1 and **D-014, D-015**: [DECISION_LOG.md](DECISION_LOG.md)
+- Decisions, including D-010 to D-013-A1 and **D-014, D-015, D-016**: [DECISION_LOG.md](DECISION_LOG.md)
 - The ruling that authorised WP3: [M1_D010_GUIDANCE_RULING.md](M1_D010_GUIDANCE_RULING.md)
 - The pre-meeting review of WP3 (**REVISE**, framing only): [M1_WP3_PREMEETING_GUIDANCE_REVIEW.md](M1_WP3_PREMEETING_GUIDANCE_REVIEW.md)
 - The pilot subset, its rationale and its exclusions: [PILOT_SUBSET.md](PILOT_SUBSET.md)
@@ -260,6 +264,7 @@ pilot subset. **D-014 changes none of that.**
 - M1-WP1 GUIDANCE review: [M1_WP1_GUIDANCE_REVIEW.md](M1_WP1_GUIDANCE_REVIEW.md)
 - Mentor meeting document: [MENTOR_BRIEF.md](MENTOR_BRIEF.md)
 - **M4-WP0 ruling (PASS WITH ACTIONS):** [M4_WP0_GUIDANCE_RULING.md](M4_WP0_GUIDANCE_RULING.md)
+- **M4-WP0 review, merge authorization and M4-WP1 ruling (WP0 PASS):** [M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md](M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md)
 - **M4-WP0 report:** [../reports/milestones/M4_WP0_REPORT.md](../reports/milestones/M4_WP0_REPORT.md)
 - **Query scope:** [LITERATURE_QUERY_SCOPE.md](LITERATURE_QUERY_SCOPE.md); **corpus inventory:** [LITERATURE_CORPUS_INVENTORY.md](LITERATURE_CORPUS_INVENTORY.md)
 - The pinned query and the corpus identity: [../data/MANIFEST.md](../data/MANIFEST.md)
