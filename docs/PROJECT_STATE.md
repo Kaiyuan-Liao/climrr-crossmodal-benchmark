@@ -6,19 +6,46 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 | | |
 | --- | --- |
-| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4 --- literature ingestion and structured claim pilot: M4-WP0 PASS** (GUIDANCE, reviewed head `1e2fd9f`, D-016); **M4-WP1 authorized**, not started |
-| **Active task** | **M4-WP0 is merged into `main`.** Next: **M4-WP1 --- deterministic 10-paper ingestion and structured-claim pilot** (authorized, D-016), not started |
+| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4 --- literature ingestion and structured claim pilot:** M4-WP0 PASS (D-016); **M4-WP1 complete**, awaiting GUIDANCE review |
+| **Active task** | **M4-WP1 --- deterministic 10-paper ingestion and structured-claim pilot: complete** on the unmerged, unpushed branch `work/m4-wp1` (from `main` at `5ebb330`). Report: `reports/milestones/M4_WP1_REPORT.md` --- 20 criteria proposed MET, criterion 16 with a disclosed limitation. **Next: GUIDANCE review of M4-WP1** |
 | **Latest accepted commit** | **`6f24b78`** --- the `--no-ff` merge of the M4-WP0 chain (M1-WP2, M1-WP3, M1-WP3b, M4-WP0) into `main`, accepted by GUIDANCE with M4-WP0 reviewed at `1e2fd9f` (D-016); its second parent is the chain head `e4a9de0`. **The authoritative integrated state.** It does **not** pass M1. Previous: `62c9137` (M1-WP1, D-009) |
 | **Tooling on `main`** | `d68ba15` --- merge of `work/knowledge-staging` (`c13a3d4`, `scripts/stage_knowledge.py`) on top of `6f24b78`. **No scientific content**; not a GUIDANCE-accepted package, and not an accepted scientific state |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at. The literature corpus is **not** on Sophia (runbook §8b) |
-| **Branch lineage** | **Merged.** `work/m1-wp2` (`391b442`) → `work/m1-wp3` (`ad13649`) → `work/m1-wp3b` (`e359b26`) → `work/m4-wp0` (`e4a9de0`) entered `main` together at `6f24b78`; `work/knowledge-staging` (`c13a3d4`) at `d68ba15`. No unmerged work branch |
+| **Branch lineage** | M1-WP2 → M1-WP3 → M1-WP3b → M4-WP0 merged into `main` at `6f24b78`; tooling at `d68ba15`; state refresh `5ebb330`. **`work/m4-wp1`** branches from `5ebb330`: `6f9006c` (Phase A, sample frozen), `d728df6` (Phases B--D), then the report commit. **Not pushed, not merged** |
 | **M4-WP0 commits** | `52a994a` (Phases A–E); **`1e2fd9f`** (report and state --- **the reviewed head**); then `e4a9de0`, the D-016 pre-merge bookkeeping |
+| **M4-WP1 sample** | `LIT-000001, 000191, 000381, 000571, 000761, 000951, 001141, 001331, 001521, 001711` --- every 190th id; no duplicate skip; `wp1_sample.json` SHA-256 `5cb81f95…`, committed before any file was opened |
 | **Prototypes built from** | `56eb10d` --- unchanged since M1-WP3b; no record rebuilt |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
 | **Rulings in force** | D-009 (M1-WP1 PASS), D-011 (D-010 ruling), D-012 (M1-WP3 pre-meeting, REVISE --- framing only, done), D-013 + D-013-A1 (M1-WP3b PASS WITH ACTIONS), **D-015 (M4-WP0 PASS WITH ACTIONS)**, **D-016 (M4-WP0 PASS; merge authorized; M4-WP1 authorized; overall PASS WITH ACTIONS)** |
 | **Owner decisions since** | **D-014** (Kaiyuan, 2026-09-28): proceed on the "our reading" basis to test what QA could be generated; every `inferred_candidate` and `derived_from_inferred` status carried through; **promotes nothing, and does not authorise QA generation** |
 | **Meetings since the last refresh** | **Group 2026-09-14:** "No material objection to the prototype-unit design was raised." --- not validation, no semantic confirmed. **Mentor 2026-09-17 and 2026-09-24:** **no review of the answer sheet occurred** (R-003); nothing promoted |
-| **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M1 remains open**; the merge did not pass it. **M4-WP1**: authorized (D-016), unblocked. **QA generation: not authorised by any ruling** |
+| **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M1 remains open.** **M5**: blocked on the GUIDANCE review of M4-WP1. **QA generation: not authorised by any ruling** |
+
+## Where things stand --- M4-WP1 (2026-09-29)
+
+- **Ten corpus items were sampled by rule, frozen, and then read in full.** The
+  sample reads only ids and duplicate groups from the frozen manifest; it was
+  committed (`6f9006c`, 05:17:40Z) before the first file was opened (05:18:25Z).
+  **Ten items, deterministically sampled, for workflow validation; not
+  representative of the corpus.**
+- **The JSON has no shared schema.** Every file is a flat object of strings
+  whose keys are section headings; all ten key sequences differ. `title` is
+  missing once and holds a non-title twice (a journal name; a page header).
+- **Outcome:** 6 `in_scope_hazard` → `claims_extracted` (27 claims), 3
+  `off_topic`, 1 `ambiguous_only`. 3 claims carry an `inferred` dimension, each
+  with its support span. 22 rejected or ambiguous passages are kept. Scenario is
+  `unknown` in 25 of 27 claims; no claim states an emissions scenario.
+- **Every one of 96 evidence spans re-slices exactly** from the decoded source:
+  zero-based, half-open `[start, end)` code-point offsets on the unnormalized
+  string, computed by exact search, never typed. A combining macron in a place
+  name stopped the build once --- the check working.
+- **The reading is the EXECUTOR's, once**, and the EXECUTOR is a language model
+  that had built the prototypes. The code reads no prototype, family or query
+  (tested); the reader's prior exposure is disclosed, not claimed away. For
+  GUIDANCE: whether a second, independent reader is needed before M5, and
+  whether tracked verbatim excerpts (96 short quotations) are acceptable.
+- Documents: [LITERATURE_WP1_PILOT.md](LITERATURE_WP1_PILOT.md),
+  [../reports/milestones/M4_WP1_REPORT.md](../reports/milestones/M4_WP1_REPORT.md).
 
 ## Where things stand --- M4-WP0 (2026-09-28)
 
@@ -200,9 +227,9 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 ## Outstanding
 
-- **The merge (D-016) is done:** `6f24b78`, recorded above as the
-  authoritative integrated state. pytest and the scanner pass on `main`.
-  **M1 stays open.**
+- **For GUIDANCE: review M4-WP1** (`reports/milestones/M4_WP1_REPORT.md`; field 13
+  lists five decisions --- the two borderline scope calls, the claims-only-in-scope
+  rule, a second reader, tracked excerpts, and the overloaded scenario dimension).
 - **For GUIDANCE, still open from WP3b:** the S/T/C letter convention (D-013, D-013-A1), and --- at the
   M1 gate --- whether criterion 1 may pass on declared provisional statuses
   (D-014).
@@ -216,28 +243,21 @@ session reasoning correctly from out-of-date facts and repeating them.
 - **Pending choice: exclude empty-label groups from PR-1 populations (A-M2).**
   It was to be decided after a mentor answer on Q16; **no answer came**. PR-1
   still counts them and every record says so.
-- **For Kaiyuan:** push this state refresh on `main` (the EXECUTOR does not),
+- **For Kaiyuan:** push `work/m4-wp1` when ready (the EXECUTOR does not),
   and the Sophia `pip install -r requirements.txt` reinstall (`pypdfium2` pin).
 - **Q7, Q8, Q9, Q11, Q12, Q15, Q17, Q18** still block downstream use of the
   columns they name. **Export date** of the ClimRR file remains unknown (Q18).
 
 ## Next
 
-**M4-WP1 --- deterministic 10-paper ingestion and structured-claim
-pilot (authorized, D-016).** Sample: every 190th `LIT` item from `LIT-000001`,
-the later member of an exact-byte duplicate group never a second item, **frozen
-before any sampled file is opened**. Evidence locations: item id + file SHA-256
-+ JSON path + zero-based half-open `[start,end)` Unicode code-point span
-against the decoded, **unnormalized** JSON string value. `off_topic`,
-`no_eligible_claim`, parse failure and ambiguous-only are valid outcomes;
-off-topic items are kept, not replaced. Local only. Not representative, and
-never described as such. It extracts claims **without** deciding whether they
-match any prototype; prototype-to-claim compatibility is M5.
+**GUIDANCE reviews M4-WP1.** If it passes: **M5-WP1 --- compatibility check
+between the WP1 claims and the three prototypes, on this fixed set, to be
+designed by COORDINATOR after GUIDANCE review.**
 
-Still not authorised by any ruling: **QA generation**; semantic bridges; any
-prototype-to-paper matching or relevance scoring; embeddings; hazard labels for
-individual papers; any interpretation of a ClimRR column outside the 41 in the
-pilot subset. **D-014 changes none of that.**
+Still not authorised by any ruling: **QA generation**; semantic bridges beyond
+what M5-WP1 is designed to test; embeddings; corpus-wide search; hazard labels
+for papers outside the sample; any interpretation of a ClimRR column outside the
+41 in the pilot subset. **D-014 changes none of that.**
 
 ## Links
 
@@ -268,6 +288,7 @@ pilot subset. **D-014 changes none of that.**
 - **M4-WP0 ruling (PASS WITH ACTIONS):** [M4_WP0_GUIDANCE_RULING.md](M4_WP0_GUIDANCE_RULING.md)
 - **M4-WP0 review, merge authorization and M4-WP1 ruling (WP0 PASS):** [M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md](M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md)
 - **M4-WP0 report:** [../reports/milestones/M4_WP0_REPORT.md](../reports/milestones/M4_WP0_REPORT.md)
+- **M4-WP1 report:** [../reports/milestones/M4_WP1_REPORT.md](../reports/milestones/M4_WP1_REPORT.md); **pilot claims:** [LITERATURE_WP1_PILOT.md](LITERATURE_WP1_PILOT.md)
 - **Query scope:** [LITERATURE_QUERY_SCOPE.md](LITERATURE_QUERY_SCOPE.md); **corpus inventory:** [LITERATURE_CORPUS_INVENTORY.md](LITERATURE_CORPUS_INVENTORY.md)
 - The pinned query and the corpus identity: [../data/MANIFEST.md](../data/MANIFEST.md)
 - Operating rules: [../CLAUDE.md](../CLAUDE.md)
