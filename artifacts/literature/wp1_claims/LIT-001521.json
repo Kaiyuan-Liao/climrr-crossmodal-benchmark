@@ -1,0 +1,251 @@
+{
+  "item_id": "LIT-001521",
+  "file_sha256": "07ab5c49c475ba9aab0f1798d80fa6a0cb8d23a7ebccec5ba003cc7c15b0a4fa",
+  "corpus_manifest_sha256": "3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a",
+  "sample_sha256": "5cb81f9585040dd1d73a89ca7062d3c5e0060112f54e08ef4795db96a657b578",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR (Claude Code, model claude-opus-5-5); every sampled file read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no prototype, pilot family or collection query consulted",
+    "date": "2026-09-29",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "experimental design",
+    "library preparation and sequencing",
+    "analysis workflow",
+    "overall transcriptional profile of wildfire smokeexposed and filtered air control samples",
+    "functional enrichment analysis",
+    "discussion",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Robust differential gene expression patterns in the prefrontal cortex of male mice exposed to an occupationally relevant dose of laboratory-generated wildfire smoke",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper measures health-relevant effects of exposure to (laboratory-generated) wildfire smoke, an impact pathway of wildfire.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 540,
+    "char_end": 723,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "Here, we sought to address this by using RNA sequencing to examine transcriptomic signatures in the prefrontal cortex of male mice modeling career wildland firefighter smoke exposure.",
+    "evidence_sha256": "f944d77d955eb99e9cecd1b60499ad03fdb9ad9209fe2a3dd66898361ca6a885"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT-001521-C1",
+      "claim_text": "Chronic exposure to simulated wildfire smoke produced robust gene expression changes in the prefrontal cortex of male mice: 2,862 differentially expressed genes versus filtered-air controls.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "exposure to laboratory-generated (simulated) wildfire smoke at an occupationally relevant dose",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.title",
+          "char_start": 83,
+          "char_end": 164,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "exposed to an occupationally relevant dose of laboratory-generated wildfire smoke",
+          "evidence_sha256": "5e5ff120adefa1738f686ac471349173da3f305862dc05fa20df9c9b9c30911a"
+        }
+      },
+      "relation_or_direction": {
+        "value": "robust changes; 2,862 differentially expressed genes (51.2% increased)",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "temporal_frame": {
+        "value": "16 weeks of exposure (2 h/d, 5 d/wk)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"experimental design\"]",
+          "char_start": 331,
+          "char_end": 359,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "for 2 h/d, 5 d/wk, for 16 wk",
+          "evidence_sha256": "3ff3531b018f42d860c2a07e47a80614d2a76a29575046212518259a022ed0c7"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 723,
+        "char_end": 901,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "We report robust changes in gene expression profiles between smoke-exposed samples and filtered air controls, evidenced by 2,862 differentially expressed genes (51.2% increased).",
+        "evidence_sha256": "427fb8e90bd278e59bf2a9cba43ca06c341b79b78f9b902ce41c69da0beab18d"
+      },
+      "notes": "The split between increased and decreased genes is stated inconsistently in the paper (see rejected_or_ambiguous); only the total is used in claim_text."
+    },
+    {
+      "claim_id": "LIT-001521-C2",
+      "claim_text": "The smoke-altered genes were enriched in pathways related to synaptic transmission, neuroplasticity, blood-brain barrier integrity and neurotransmitter metabolism.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "differentially expressed genes; enriched pathways",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "enriched in synaptic transmission, neuroplasticity, blood-brain barrier integrity, neurotransmitter metabolism pathways",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "temporal_frame": {
+        "value": "16 weeks of exposure (2 h/d, 5 d/wk)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"experimental design\"]",
+          "char_start": 331,
+          "char_end": 359,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "for 2 h/d, 5 d/wk, for 16 wk",
+          "evidence_sha256": "3ff3531b018f42d860c2a07e47a80614d2a76a29575046212518259a022ed0c7"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 901,
+        "char_end": 1111,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "We further characterized the functional relevance of these genes highlighting enriched pathways related to synaptic transmission, neuroplasticity, blood-brain barrier integrity, and neurotransmitter metabolism.",
+        "evidence_sha256": "bc83bebb4f730fc832259ce8267125ea8f7da6841e196acffcb74d7d47007a8d"
+      },
+      "notes": null
+    },
+    {
+      "claim_id": "LIT-001521-C3",
+      "claim_text": "Contrary to expectation from prior smoke studies, the primary analyses showed no significant alterations in canonical neuroinflammatory pathways.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "canonical neuroinflammatory pathways",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "no significant alterations ('did not appear')",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "temporal_frame": {
+        "value": "16 weeks of exposure (2 h/d, 5 d/wk)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"experimental design\"]",
+          "char_start": 331,
+          "char_end": 359,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "for 2 h/d, 5 d/wk, for 16 wk",
+          "evidence_sha256": "3ff3531b018f42d860c2a07e47a80614d2a76a29575046212518259a022ed0c7"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 9763,
+        "char_end": 9893,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Interestingly, there did not appear to be significant alterations in canonical neuroinflammatory pathways in our primary analyses.",
+        "evidence_sha256": "8347000ab312d9c9b3a16db4124078bb7b1dcc5f6850ff2bb4dd93600a354922"
+      },
+      "notes": null
+    },
+    {
+      "claim_id": "LIT-001521-C4",
+      "claim_text": "Wildfires have become common worldwide alongside warmer, drier climates and are now major contributors to ambient air pollution.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "wildfires; ambient air pollution",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "have become common, concurrent with warmer and drier climates; major contributors to air pollution",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "global / worldwide",
+        "status": "explicit"
+      },
+      "temporal_frame": {
+        "value": "present ('now')",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 0,
+        "char_end": 154,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Wildfires have become common global phenomena concurrent with warmer and drier climates and are now major contributors to ambient air pollution worldwide.",
+        "evidence_sha256": "6e5780d5a20e7d80b3ab9ccbc7a9ffe33178cf36c6b9ef8e958c1d0b1308d51c"
+      },
+      "notes": "Background framing; not a finding of this paper."
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT-001521-R1",
+      "evidence": {
+        "json_path": "$[\"overall transcriptional profile of wildfire smokeexposed and filtered air control samples\"]",
+        "char_start": 933,
+        "char_end": 1050,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "genes/transcripts increased and 1,466 decreased in wildfire smoke-exposed samples compared with filtered air controls",
+        "evidence_sha256": "0080bf6d1db41f64baf38bf09e67b8662af35f8cf958b4965456d98676a5d733"
+      },
+      "reason": "The results text gives 1,396 increased and 1,466 decreased; the figure caption gives the reverse, and the abstract's '51.2% increased' matches 1,466 increased. The direction of the split is ambiguous."
+    },
+    {
+      "candidate_id": "LIT-001521-R2",
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 4500,
+        "char_end": 4605,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In our present dataset, the transcriptomic profile is highly similar to those previously identified in AD",
+        "evidence_sha256": "52390da6c70c6a0ae6512182fd4bb7ff83bec8b9ff377ae00fa5bce3591b8004"
+      },
+      "reason": "Interpretive comparison with other datasets; not promoted."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "Laboratory smoke, not an observed wildfire; the concept is recorded as the paper names it. The results field contains a journal page header ('Toxicological Sciences, 2024, Vol 201, Issue 2'), not recorded as a bibliographic field."
+}
