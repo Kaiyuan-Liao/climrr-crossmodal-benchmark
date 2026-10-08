@@ -1,0 +1,680 @@
+{
+  "item_id": "LIT-000381",
+  "file_sha256": "e6c8b631cda49aa6ff63da05cdf9f442ba1cce7cfb652bcba9017671ee0def69",
+  "corpus_manifest_sha256": "3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a",
+  "sample_sha256": "5cb81f9585040dd1d73a89ca7062d3c5e0060112f54e08ef4795db96a657b578",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR (Claude Code, model claude-opus-5-5); every sampled file read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no prototype, pilot family or collection query consulted",
+    "date": "2026-09-29",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "materials and methods",
+    "results",
+    "discussion",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Functional Composition Changes of a Subtropical Monsoon Evergreen Broad-Leaved Forest Under Environmental Change",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper attributes a 24-year shift in forest composition to soil dryness (drought) under regional warming and changed precipitation, i.e. an impact of a climate hazard.",
+  "scope_evidence": {
+    "json_path": "$.introduction",
+    "char_start": 2661,
+    "char_end": 2881,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "In our study site, previous studies have demonstrated that changes in regional warming and precipitation patterns led to decrease in annual relative humidity and soil water contents within root zone in past decades [14].",
+    "evidence_sha256": "bebf4e50e14568a13e08802f6f17aa77c09e7ca3f45c1a4a101d204e336c6ca1"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT-000381-C1",
+      "claim_text": "Over 24 years, the forest's species composition shifted toward species with high leaf nutrients, photosynthesis and hydraulic conductivity, low water-use efficiency and high drought tolerance, attributed to soil dryness and disturbance.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "functional (species) composition; drought tolerance traits; soil dryness and disturbance",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "shifted to favor ... high drought tolerance; due to soil dryness and disturbance",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "old-growth subtropical forest in southern China (Dinghushan natural reserve, Guangdong)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 394,
+          "char_end": 444,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "an old-growth subtropical forest in southern China",
+          "evidence_sha256": "ec63dfde9aff181b324a91cee266a53577890e4ef68062ec5f63c51ec14e9e7d"
+        }
+      },
+      "temporal_frame": {
+        "value": "past 24 years (censuses 1992-2015)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 339,
+          "char_end": 390,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "shifts in functional composition over past 24 years",
+          "evidence_sha256": "f9c0a6b5a132dfcf3d5b309c55979b8602078395a3cfee70807a386d6458e1df"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 1014,
+        "char_end": 1272,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "We found that species composition had shifted to favor species with high leaf nutrient content, high photosynthesis rate, high hydraulic conductivity, low water-use efficiency, and high drought tolerance traits, which was due to soil dryness and disturbance.",
+        "evidence_sha256": "19d3813a68655dc7ed07062578ef2ab4de4f0284d5b786bd8e50bb0e0fdac18a"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "adjudication": {
+        "package": "M4-WP1b-adj",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions for downstream use; both readers' values are kept above"
+        ],
+        "aligned_blind_claim_id": "211092500-C1",
+        "blind_evidence": {
+          "json_path": "$.abstract",
+          "char_start": 1014,
+          "char_end": 1272,
+          "evidence_text": "We found that species composition had shifted to favor species with high leaf nutrient content, high photosynthesis rate, high hydraulic conductivity, low water-use efficiency, and high drought tolerance traits, which was due to soil dryness and disturbance."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Reader 1 lists the drivers in concept; reader 2 in the relation.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Same traits; due to soil dryness and disturbance.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1's span ('an old-growth subtropical forest in southern China') does not state Dinghushan or Guangdong, which its value adds. Adopted: what that span states. Reader 2's site-level value (Dinghushan natural reserve, Guangdong Province) is supported by its own methods span but tagged inferred; it is recorded here, not adopted.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "old-growth subtropical forest in southern China",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.abstract",
+                "char_start": 394,
+                "char_end": 444,
+                "evidence_text": "an old-growth subtropical forest in southern China"
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "old-growth subtropical forest in southern China",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 394,
+              "char_end": 444,
+              "evidence_text": "an old-growth subtropical forest in southern China"
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-000381-C2",
+      "claim_text": "Soil dryness and disturbance together explained 47-58% of quadrat-level trait value changes.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "soil dryness and disturbance; quadrats' trait value changes",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "explained 47-58% together",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "old-growth subtropical forest in southern China (Dinghushan natural reserve, Guangdong)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 394,
+          "char_end": 444,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "an old-growth subtropical forest in southern China",
+          "evidence_sha256": "ec63dfde9aff181b324a91cee266a53577890e4ef68062ec5f63c51ec14e9e7d"
+        }
+      },
+      "temporal_frame": {
+        "value": "past 24 years (censuses 1992-2015)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 339,
+          "char_end": 390,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "shifts in functional composition over past 24 years",
+          "evidence_sha256": "f9c0a6b5a132dfcf3d5b309c55979b8602078395a3cfee70807a386d6458e1df"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 1272,
+        "char_end": 1349,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "These two factors explained 47-58% of quadrats' trait value changes together.",
+        "evidence_sha256": "acab46dd2e9e4f2c05aec41339877d6e30a01f612e762f46cf75154765dce15c"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "'These two factors' refers to soil dryness and disturbance, named in the preceding sentence of the same field.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "adjudication": {
+        "package": "M4-WP1b-adj",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions for downstream use; both readers' values are kept above"
+        ],
+        "aligned_blind_claim_id": "211092500-C2",
+        "blind_evidence": {
+          "json_path": "$.abstract",
+          "char_start": 1272,
+          "char_end": 1349,
+          "evidence_text": "These two factors explained 47-58% of quadrats' trait value changes together."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1's concept names soil dryness and disturbance as explicit, but the evidence span says only 'These two factors'; reader 2 places that identification in an inferred relation. Adopted concept: what the span states. The identification of the two factors rests on the preceding sentence (reader 2's inferred support span) and is not adopted as explicit.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "quadrats' trait value changes",
+              "tag": "explicit",
+              "support_from": "r1_evidence",
+              "support": {
+                "json_path": "$.abstract",
+                "char_start": 1272,
+                "char_end": 1349,
+                "evidence_text": "These two factors explained 47-58% of quadrats' trait value changes together."
+              }
+            }
+          },
+          "relation_or_direction": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "'explained 47-58% together' is stated in the evidence span; the '(by soil dryness and disturbance)' that reader 2 adds is the inferred link.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "explained 47-58% together",
+              "tag": "explicit",
+              "support_from": "r1_evidence",
+              "support": {
+                "json_path": "$.abstract",
+                "char_start": 1272,
+                "char_end": 1349,
+                "evidence_text": "These two factors explained 47-58% of quadrats' trait value changes together."
+              }
+            }
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "As LIT-000381-C1. Reader 2's site-level value (Dinghushan natural reserve, Guangdong Province) is supported by its own methods span but tagged inferred; it is recorded here, not adopted.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "old-growth subtropical forest in southern China",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.abstract",
+                "char_start": 394,
+                "char_end": 444,
+                "evidence_text": "an old-growth subtropical forest in southern China"
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "concept": {
+            "value": "quadrats' trait value changes",
+            "tag": "explicit",
+            "support_from": "r1_evidence",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 1272,
+              "char_end": 1349,
+              "evidence_text": "These two factors explained 47-58% of quadrats' trait value changes together."
+            }
+          },
+          "relation_or_direction": {
+            "value": "explained 47-58% together",
+            "tag": "explicit",
+            "support_from": "r1_evidence",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 1272,
+              "char_end": 1349,
+              "evidence_text": "These two factors explained 47-58% of quadrats' trait value changes together."
+            }
+          },
+          "geography": {
+            "value": "old-growth subtropical forest in southern China",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 394,
+              "char_end": 444,
+              "evidence_text": "an old-growth subtropical forest in southern China"
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-000381-C3",
+      "claim_text": "The increase in community drought tolerance was likely due to soil dryness rather than disturbance.",
+      "claim_type": "mechanism",
+      "concept": {
+        "value": "increasing drought tolerance; soil dryness; disturbance",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "likely due to soil dryness but not disturbance (hedged)",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "DHS plot (Dinghushan), monsoon evergreen broad-leaved forest",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.discussion",
+          "char_start": 158,
+          "char_end": 238,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "the species composition in the monsoon evergreen broad-leaved forest in DHS plot",
+          "evidence_sha256": "7221336bf1a0811e2a6ec2258f8088f486b2cb6ec29825ad935fa4bf6642de69"
+        }
+      },
+      "temporal_frame": {
+        "value": "past 24 years (censuses 1992-2015)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 339,
+          "char_end": 390,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "shifts in functional composition over past 24 years",
+          "evidence_sha256": "f9c0a6b5a132dfcf3d5b309c55979b8602078395a3cfee70807a386d6458e1df"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 1325,
+        "char_end": 1465,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Increasing drought tolerance (Hypothesis 2) was supported by our result (Figure 2) and it was likely due to soil dryness but not disturbance",
+        "evidence_sha256": "e068a028d0be49e75b58547a928b653d721e7c499793e02adca5fb4b1e11a392"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "The discussion field repeats this passage; the first occurrence is used.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "adjudication": {
+        "package": "M4-WP1b-adj",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [
+          "unresolved_tie"
+        ],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions for downstream use; both readers' values are kept above"
+        ],
+        "aligned_blind_claim_id": "211092500-C3",
+        "blind_evidence": {
+          "json_path": "$.discussion",
+          "char_start": 1325,
+          "char_end": 1465,
+          "evidence_text": "Increasing drought tolerance (Hypothesis 2) was supported by our result (Figure 2) and it was likely due to soil dryness but not disturbance",
+          "occurrence_note": "passage occurs 2 times in this value; first occurrence used"
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Increasing drought tolerance; soil dryness vs disturbance.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Both keep 'likely due to soil dryness but not disturbance'.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1's span states 'the monsoon evergreen broad-leaved forest in DHS plot' but not the expansion 'Dinghushan' its value adds. Reader 2's site-level value (Dinghushan natural reserve, Guangdong Province) is supported by its own methods span but tagged inferred; it is recorded here, not adopted.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "monsoon evergreen broad-leaved forest in DHS plot",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.discussion",
+                "char_start": 158,
+                "char_end": 238,
+                "evidence_text": "the species composition in the monsoon evergreen broad-leaved forest in DHS plot"
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1: mechanism; reader 2: finding. The span is the authors' result-based causal attribution ('likely due to'); both labels fit the rubric and neither is more conservative. Breaking the tie would need a reading beyond the recorded claims.",
+            "rule": "3c: claim_type differs; no conservative order; unresolved_tie",
+            "adopted": "unresolved_tie"
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "monsoon evergreen broad-leaved forest in DHS plot",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.discussion",
+              "char_start": 158,
+              "char_end": 238,
+              "evidence_text": "the species composition in the monsoon evergreen broad-leaved forest in DHS plot"
+            }
+          },
+          "claim_type": "unresolved_tie"
+        },
+        "unresolved_ties": [
+          "claim_type"
+        ]
+      }
+    },
+    {
+      "claim_id": "LIT-000381-C4",
+      "claim_text": "Prior studies at the site found regional warming and changed precipitation patterns reduced annual relative humidity and root-zone soil water over past decades.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "regional warming and precipitation patterns; annual relative humidity; soil water contents within root zone",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "led to decrease",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the study site: Dinghushan natural reserve, Guangdong Province, southern China",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"materials and methods\"]",
+          "char_start": 39,
+          "char_end": 156,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Dinghushan natural reserve (DHS, 23.17 • N, 112.56 • E) located in the middle of Guangdong Province in southern China",
+          "evidence_sha256": "4183924d48389a8374eb2954934799e533b0948e128304337ad6987caa9c5ca4"
+        }
+      },
+      "temporal_frame": {
+        "value": "past decades",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 2661,
+        "char_end": 2881,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In our study site, previous studies have demonstrated that changes in regional warming and precipitation patterns led to decrease in annual relative humidity and soil water contents within root zone in past decades [14].",
+        "evidence_sha256": "bebf4e50e14568a13e08802f6f17aa77c09e7ca3f45c1a4a101d204e336c6ca1"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "Attributed to reference [14]; recorded as background, not as this paper's finding.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "adjudication": {
+        "package": "M4-WP1b-adj",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions for downstream use; both readers' values are kept above"
+        ],
+        "aligned_blind_claim_id": "211092500-C4",
+        "blind_evidence": {
+          "json_path": "$.introduction",
+          "char_start": 2661,
+          "char_end": 2881,
+          "evidence_text": "In our study site, previous studies have demonstrated that changes in regional warming and precipitation patterns led to decrease in annual relative humidity and soil water contents within root zone in past decades [14]."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Drivers in concept (reader 1) or relation (reader 2).",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Both: led to decrease.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "Same place; reader 1 explicit, reader 2 inferred, both citing the same methods sentence. That span states the full value, so explicit stands.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "the study site: Dinghushan natural reserve, Guangdong Province, southern China",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$[\"materials and methods\"]",
+                "char_start": 39,
+                "char_end": 156,
+                "evidence_text": "Dinghushan natural reserve (DHS, 23.17 • N, 112.56 • E) located in the middle of Guangdong Province in southern China"
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "the study site: Dinghushan natural reserve, Guangdong Province, southern China",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$[\"materials and methods\"]",
+              "char_start": 39,
+              "char_end": 156,
+              "evidence_text": "Dinghushan natural reserve (DHS, 23.17 • N, 112.56 • E) located in the middle of Guangdong Province in southern China"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT-000381-R1",
+      "evidence": {
+        "json_path": "$.conclusion",
+        "char_start": 776,
+        "char_end": 934,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "These changes of the monsoon evergreen broad-leaved forest might affect forest ecosystem services, such as carbon sequestration and biodiversity conservation.",
+        "evidence_sha256": "524eb202a25158fb6735b913afdf18bdd5371ac637b0b0ccee8617e3e1ff9c5a"
+      },
+      "reason": "Speculative ('might affect'); not tested in the paper."
+    },
+    {
+      "candidate_id": "LIT-000381-R2",
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 5583,
+        "char_end": 5762,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "we hypothesized that environment change forced community-level ecology strategy to shift from conservation (K-strategy) to resource acquisition (r-strategy) with drought tolerance",
+        "evidence_sha256": "3e89d29bad81adf132791ff3f82a7c127785555e1f13d1340416e2e57a5153eb"
+      },
+      "reason": "Stated as a hypothesis; the support offered is consistency of patterns, not a test."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "Several fields repeat whole passages (an extraction artifact of the source file); spans use the first occurrence.",
+  "scope_adjudication": {
+    "reader_1": "in_scope_hazard",
+    "reader_2": "in_scope_hazard",
+    "adopted": "in_scope_hazard",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp1b_blind/211092500.json",
+    "reader_2_reason": "The paper examines how soil dryness (drought) and disturbance relate to shifts in forest functional composition.",
+    "adjudicated_terminal_status": "claims_extracted"
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP1b-adj",
+    "adjudicator": "the WP1 EXECUTOR (prototype-exposed; also reader 1)",
+    "first_pass_record_sha256": "1113784e769f520f373e783f95cefa12336fbde6c53f7ed65cf2f78f53f3152a",
+    "blind_record_sha256": "1afa78d43ffe1cfcda059f66a03559803ab234f9d4b23485d48384171653b1d3",
+    "no_paper_re_read": true
+  }
+}

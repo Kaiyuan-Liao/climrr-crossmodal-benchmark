@@ -205,3 +205,16 @@ PR-1 reference population: every distinct `State` label in the file, each formin
 This is what would be sent to retrieval. **Nothing has been sent.** No literature corpus exists in this repository, no index has been built, and no passage has been read. M3 is not authorised.
 
 Full record: [`../artifacts/phenomena/prototypes/P-STATE-1.json`](../artifacts/phenomena/prototypes/P-STATE-1.json)
+
+## Version note --- P-STATE-1 v2 (D-018, 2026-10-08)
+
+`artifacts/phenomena/prototypes/P-STATE-1.v2.json` is a **versioned provenance
+correction** of P-STATE-1, written by `scripts/build_p_state_1_v2.py`. v1 named
+its horizons only by the dictionary labels "Historical" and "End-Century"; v2
+adds the year windows those labels denote --- **baseline 1995-2004, future
+2085-2094** --- citing dictionary lines 101-102, and carries the same status and
+the same reading ("the field entry gives no years") that P-CELL-1 and
+P-COUNTY-1 already rest on. **No ClimRR value changed** (`V`, `D`, `M` identical
+to v1, tested). The section above, and v1's generated description, are v1's
+and unchanged. **`P-STATE-1.json` (v1) is not modified**: the frozen M5-WP1
+input names it, and the M5-WP1 result stands for that version.

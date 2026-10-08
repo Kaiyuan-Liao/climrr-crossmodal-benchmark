@@ -192,6 +192,19 @@ RULES = {
     "D-1": "direction: evaluated only if concept is compatible; then both a direction word: equal -> compatible, different -> incompatible; otherwise not_evaluable",
 }
 
+#: D-018 additions. Kept apart from `STATUSES` and `RULES`, which are the frozen
+#: M5-WP1 rule set that `scripts/compat_matrix.py` writes into its matrix. C-2
+#: runs only when a concept map is passed; without one every result is M5-WP1's.
+FAMILY_LEVEL = "compatible_at_family_level"
+ALL_STATUSES = STATUSES + (FAMILY_LEVEL,)
+D018_RULES = {
+    "C-2": ("concept (D-018): when C-1 does not match, the claim's normalized concept is exactly a member of "
+            "the accepted surface terms of an `approved_lexical` family in data/metadata/concept_map.yaml, and "
+            "that family is the prototype concept's family -> compatible_at_family_level (not `compatible`: "
+            "a family match is not metric equality); a family term of another family -> not_evaluable"),
+}
+ALL_RULES = {**RULES, **D018_RULES}
+
 _WS = re.compile(r"\s+")
 _YEAR_RANGE = re.compile(r"\b(\d{4})\s*(?:-|–|—|to)\s*(\d{4})\b")
 _RCP = re.compile(r"\bRCP\s*(\d(?:\.\d)?)\b", re.IGNORECASE)
@@ -235,7 +248,7 @@ def _is_unknown(dim: dict) -> bool:
 
 def _judgment(dimension: str, status: str, rule_id: str, claim_value: dict, prototype_value: dict,
               reason: str) -> dict:
-    assert status in STATUSES and rule_id in RULES
+    assert status in ALL_STATUSES and rule_id in ALL_RULES
     return {"dimension": dimension, "status": status, "rule_id": rule_id,
             "claim_value": claim_value, "prototype_value": prototype_value, "reason": reason}
 
@@ -281,7 +294,7 @@ def prototype_values(proto: dict) -> dict:
 # --- the five comparators -------------------------------------------------------
 
 
-def compare_concept(concept: dict, pv: dict) -> dict:
+def compare_concept(concept: dict, pv: dict, concept_map: list[dict] | None = None) -> dict:
     cv = {"raw": concept.get("value"), "tag": concept.get("status"), "derivation_rule": "CV-C1"}
     if _is_unknown(concept):
         return _judgment("concept", "not_evaluable", "U-1", {**cv, "normalized": None}, pv, "claim_value_unknown")
@@ -293,6 +306,16 @@ def compare_concept(concept: dict, pv: dict) -> dict:
     cv = {**cv, "normalized": claim_id, "mapped": mapped if mapped != claim_id else None}
     if _norm(mapped) == _norm(pv["canonical"]):
         return _judgment("concept", "compatible", "C-1", cv, pv, "identical_canonical_id")
+    if concept_map is not None:
+        from climrr import conceptmap
+        family = conceptmap.approved_family_terms(concept_map).get(conceptmap.normalize_concept(cv["raw"]))
+        proto_family = conceptmap.family_of(pv["canonical"], concept_map)
+        if family is not None:
+            cv = {**cv, "family": family}
+            pv = {**pv, "family": proto_family}
+            if family == proto_family:
+                return _judgment("concept", FAMILY_LEVEL, "C-2", cv, pv, "same_concept_family_by_approved_term")
+            return _judgment("concept", "not_evaluable", "C-2", cv, pv, "approved_term_of_another_family")
     return _judgment("concept", "not_evaluable", "C-1", cv, pv, "no_approved_mapping")
 
 
@@ -377,9 +400,9 @@ def compare_direction(direction: dict, concept_status: str, pv: dict) -> dict:
 # --- pairs and the matrix -------------------------------------------------------
 
 
-def evaluate_pair(claim: dict, proto: dict, geo_list: dict) -> dict:
+def evaluate_pair(claim: dict, proto: dict, geo_list: dict, concept_map: list[dict] | None = None) -> dict:
     pv = prototype_values(proto)
-    concept = compare_concept(claim["concept"], pv["concept"])
+    concept = compare_concept(claim["concept"], pv["concept"], concept_map)
     judgments = {
         "concept": concept,
         "geography": compare_geography(claim["geography"], pv["geography"], geo_list),
@@ -413,18 +436,21 @@ def load_frozen_claims_and_prototypes(frozen: dict) -> tuple[list[dict], list[di
     return claims, protos
 
 
-def build_matrix(claims: list[dict], protos: list[dict], geo_list: dict) -> list[dict]:
+def build_matrix(claims: list[dict], protos: list[dict], geo_list: dict,
+                 concept_map: list[dict] | None = None) -> list[dict]:
     """Every claim against every prototype, once each, nothing dropped."""
-    return [evaluate_pair(c, p, geo_list) for c in claims for p in protos]
+    return [evaluate_pair(c, p, geo_list, concept_map) for c in claims for p in protos]
 
 
 def summarize(rows: list[dict]) -> dict:
     """Counts computed from the rows. Nothing here expects any particular total."""
-    per_dim = {d: {s: 0 for s in STATUSES} for d in DIMENSIONS}
+    used = {j["status"] for r in rows for j in r["judgments"].values()}
+    statuses = STATUSES + ((FAMILY_LEVEL,) if FAMILY_LEVEL in used else ())
+    per_dim = {d: {s: 0 for s in statuses} for d in DIMENSIONS}
     per_proto: dict[str, dict] = {}
     incompat_rules: dict[str, int] = {}
     for r in rows:
-        pp = per_proto.setdefault(r["prototype_id"], {d: {s: 0 for s in STATUSES} for d in DIMENSIONS})
+        pp = per_proto.setdefault(r["prototype_id"], {d: {s: 0 for s in statuses} for d in DIMENSIONS})
         for d in DIMENSIONS:
             j = r["judgments"][d]
             per_dim[d][j["status"]] += 1

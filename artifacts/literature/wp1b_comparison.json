@@ -1,0 +1,4282 @@
+{
+  "artifact": "M4-WP1b comparison of two readings (Phases A-C)",
+  "authorized_by": "docs/M5_WP1_REVIEW_FOLLOWON_GUIDANCE_RULING.md (D-018), Track A",
+  "inputs": {
+    "reader_1": "artifacts/literature/wp1_claims/ (M4-WP1 EXECUTOR, prototype-exposed)",
+    "reader_2": "artifacts/literature/wp1b_blind/ (blind reader, frozen at 87bce48)",
+    "sha256": {
+      "artifacts/literature/wp1_claims/LIT-000001.json": "fb618e99761c266777d36df7a740a008903657640fdb0c2eb86b67869062fac6",
+      "artifacts/literature/wp1_claims/LIT-000191.json": "04269ea82b9ff3317d9cf66898c96014ae7de9c17e584d25cae613eb290d6ba5",
+      "artifacts/literature/wp1_claims/LIT-000381.json": "1113784e769f520f373e783f95cefa12336fbde6c53f7ed65cf2f78f53f3152a",
+      "artifacts/literature/wp1_claims/LIT-000571.json": "c473d3cb7cbf09be67153a510f4efe349875b916a2282a15d12866034c86ffd8",
+      "artifacts/literature/wp1_claims/LIT-000761.json": "1dccff144e11a9ab4d8341c9e2e5d3b543283b5177c855904005ab9d068643bc",
+      "artifacts/literature/wp1_claims/LIT-000951.json": "5034397d52ee7437e7cd490558e12558dfba3c03b36bf36a2a22591073a8306c",
+      "artifacts/literature/wp1_claims/LIT-001141.json": "007719936968055d94b2fd8d32e8b30e83d36d8c926b9ccd94f6dc4626d3862c",
+      "artifacts/literature/wp1_claims/LIT-001331.json": "4df7adc8103f0b55089a5d7ca697b6aa35a99c0845c508ddb9b2e9a3bf3397cf",
+      "artifacts/literature/wp1_claims/LIT-001521.json": "9efe23aedba6202e3555b9ca781a8aa87b0c20a47d8f8a066634c944f0470810",
+      "artifacts/literature/wp1_claims/LIT-001711.json": "95991a9e3297a80c40d905e30874343b70c1de6e3304eb85454955be4c5d260b",
+      "artifacts/literature/wp1_claims_summary.json": "fb913fe4242355af17794b1218ab30b88d0abe84ce53f5c89cf71a18c1f9cdde",
+      "artifacts/literature/wp1b_blind/100961700.json": "46d53bc75b6ef80c83bc5a239bcc5f36bd7f5b231461ceb386d993cd4af5ebbe",
+      "artifacts/literature/wp1b_blind/15420300.json": "f7769d9c3df66ffea5747da203d983f9bd7e04e03e4b66e9fde5b4269e0e16b1",
+      "artifacts/literature/wp1b_blind/211092500.json": "1afa78d43ffe1cfcda059f66a03559803ab234f9d4b23485d48384171653b1d3",
+      "artifacts/literature/wp1b_blind/225107600.json": "86568a5b80430654529c140406725bbf677eacaa3f4f24d6c03ac88932607156",
+      "artifacts/literature/wp1b_blind/235097800.json": "904404d247c83881a80048533ce249678f66e5d36237ced9fa4e9f7ede96ccb7",
+      "artifacts/literature/wp1b_blind/242697800.json": "e5bf6767111dc793ccedd962ec9d45c5ad3a04e7191a463ca4cc978148efe592",
+      "artifacts/literature/wp1b_blind/251972000.json": "9e2cb2129e3b5e5e0750b74b7cfa146fc8f2f0d2157c3d89369042bc93114845",
+      "artifacts/literature/wp1b_blind/259631800.json": "49b1267f6d4c8c41db7bcdb899a1ed4a717bc499d251f268a50c6584808de94d",
+      "artifacts/literature/wp1b_blind/271744500.json": "6914ec02070845d7cc9ab1979d615a28599a1f4d2e7989f3c6f0bb7dfd20b1f0",
+      "artifacts/literature/wp1b_blind/54542600.json": "adc00ea75b3df109f153457f08683680a7ed1420bb091dd17795f741ba034c5a",
+      "artifacts/literature/wp1b_blind/wp1b_blind_summary.json": "e732867f2afd73283c76662e1244a8b8cd44ba7e4a6dcf1ebb85003c192ff7df",
+      "artifacts/literature/wp1_sample.json": "5cb81f9585040dd1d73a89ca7062d3c5e0060112f54e08ef4795db96a657b578"
+    }
+  },
+  "reader_2_disclosed_deviations_verbatim": [
+    "Only the literature_corpus_root key of config/local_paths.yaml and the ten listed corpus files were opened by the reader.",
+    "The agent harness placed the repository CLAUDE.md and a git-status snapshot (branch, recent commit subjects) into context before the task began; no other repository file was opened.",
+    "pytest and scripts/verify_no_secrets_or_paths.py were executed (required before commit by repository rules) with only their summary lines inspected.",
+    "No run record was written: the records were produced by a scratch script outside the repository, and reading climrr.runrecord to call it would have broken the blind protocol.",
+    "Scenario dimension is 'unknown' for every claim: no paper's claims were tied to a named emissions/climate scenario; CO2 levels in 15420300 are recorded as experimental conditions."
+  ],
+  "span_verification": {
+    "reader_1": 96,
+    "reader_2": 85,
+    "failures": 0,
+    "rule": "every span of both readings re-sliced from the hash-verified decoded source"
+  },
+  "alignment_rule": "same normalised json_path and overlapping [char_start, char_end); one-to-one or the run fails; reader-2 raw keys normalised to $-paths with climrr.litingest.child_path",
+  "phase_a_scope": [
+    {
+      "item_id": "LIT-000001",
+      "blind_basename": "100961700.json",
+      "reader_1_scope": "off_topic",
+      "reader_2_scope": "ambiguous",
+      "agree": false,
+      "reader_1_reason": "A thermodynamics paper proposing an action-based method to estimate the entropy of atmospheric gases; it mentions global warming but examines no climate or weather hazard or its impacts.",
+      "reader_2_reason": "Global-warming and greenhouse-gas language is present, but the paper develops a thermodynamic method for gas entropy and does not examine a hazard or its impacts.",
+      "reader_1_terminal": "off_topic",
+      "reader_2_terminal": "ambiguous_only",
+      "reader_1_n_claims": 0,
+      "reader_2_n_claims": 0,
+      "adopted_scope": "ambiguous",
+      "scope_rule": "R1c: one reader off_topic, the other not; scope ambiguous, zero promoted claims"
+    },
+    {
+      "item_id": "LIT-000191",
+      "blind_basename": "15420300.json",
+      "reader_1_scope": "in_scope_hazard",
+      "reader_2_scope": "in_scope_hazard",
+      "agree": true,
+      "reader_1_reason": "The paper tests how elevated seawater temperature and CO2 (warming and acidification) affect survival and growth of coastal bivalves, i.e. impacts of climate-driven stressors.",
+      "reader_2_reason": "The paper experimentally examines effects of elevated (marine) temperature and CO2/acidification on bivalve survival and growth.",
+      "reader_1_terminal": "claims_extracted",
+      "reader_2_terminal": "claims_extracted",
+      "reader_1_n_claims": 4,
+      "reader_2_n_claims": 4,
+      "adopted_scope": "in_scope_hazard",
+      "scope_rule": "R1a: both readers agree; adopted"
+    },
+    {
+      "item_id": "LIT-000381",
+      "blind_basename": "211092500.json",
+      "reader_1_scope": "in_scope_hazard",
+      "reader_2_scope": "in_scope_hazard",
+      "agree": true,
+      "reader_1_reason": "The paper attributes a 24-year shift in forest composition to soil dryness (drought) under regional warming and changed precipitation, i.e. an impact of a climate hazard.",
+      "reader_2_reason": "The paper examines how soil dryness (drought) and disturbance relate to shifts in forest functional composition.",
+      "reader_1_terminal": "claims_extracted",
+      "reader_2_terminal": "claims_extracted",
+      "reader_1_n_claims": 4,
+      "reader_2_n_claims": 4,
+      "adopted_scope": "in_scope_hazard",
+      "scope_rule": "R1a: both readers agree; adopted"
+    },
+    {
+      "item_id": "LIT-000571",
+      "blind_basename": "225107600.json",
+      "reader_1_scope": "in_scope_hazard",
+      "reader_2_scope": "ambiguous",
+      "agree": false,
+      "reader_1_reason": "Borderline. The subject is social organization around irrigation, but the paper itself discusses water scarcity and weather-triggered mass movements as hazards to settlements and irrigation, and how communities respond to them.",
+      "reader_2_reason": "Hazard language (water scarcity, avalanches, mudflows) appears as context, but the paper examines social organisation of irrigation, not a hazard or its impacts.",
+      "reader_1_terminal": "claims_extracted",
+      "reader_2_terminal": "ambiguous_only",
+      "reader_1_n_claims": 5,
+      "reader_2_n_claims": 0,
+      "adopted_scope": "in_scope_hazard (contested)",
+      "scope_rule": "R1b: in_scope_hazard vs ambiguous; claims proceed, each adjudicated_modified"
+    },
+    {
+      "item_id": "LIT-000761",
+      "blind_basename": "235097800.json",
+      "reader_1_scope": "ambiguous",
+      "reader_2_scope": "ambiguous",
+      "agree": true,
+      "reader_1_reason": "One year of eddy-covariance measurements of water-use efficiency in a riparian forest of a permanently arid region; drought appears as the background condition and in cited statements, but the paper does not examine a hazard event or its impacts.",
+      "reader_2_reason": "Drought and high-temperature language appears, but the paper characterises one year of ecosystem carbon/water fluxes and their meteorological covariates; no drought event, heat hazard or impact is examined.",
+      "reader_1_terminal": "ambiguous_only",
+      "reader_2_terminal": "ambiguous_only",
+      "reader_1_n_claims": 0,
+      "reader_2_n_claims": 0,
+      "adopted_scope": "ambiguous",
+      "scope_rule": "R1a: both readers agree; adopted"
+    },
+    {
+      "item_id": "LIT-000951",
+      "blind_basename": "242697800.json",
+      "reader_1_scope": "off_topic",
+      "reader_2_scope": "ambiguous",
+      "agree": false,
+      "reader_1_reason": "A Bayesian geostatistical method for predicting annual runoff; floods are mentioned once as motivation, and no hazard or impact is examined.",
+      "reader_2_reason": "Flood exposure is mentioned as motivation, but the paper develops and evaluates a geostatistical model of annual runoff; no flood or other hazard is examined.",
+      "reader_1_terminal": "off_topic",
+      "reader_2_terminal": "ambiguous_only",
+      "reader_1_n_claims": 0,
+      "reader_2_n_claims": 0,
+      "adopted_scope": "ambiguous",
+      "scope_rule": "R1c: one reader off_topic, the other not; scope ambiguous, zero promoted claims"
+    },
+    {
+      "item_id": "LIT-001141",
+      "blind_basename": "251972000.json",
+      "reader_1_scope": "in_scope_hazard",
+      "reader_2_scope": "in_scope_hazard",
+      "agree": true,
+      "reader_1_reason": "The paper examines urban heat island (UHI) events - the hottest April land surface temperatures - and their intensification with urban growth in Bangalore.",
+      "reader_2_reason": "The paper examines urban heat island (UHI) events, measured as satellite land surface temperature during the hottest April window, and their relation to urban growth.",
+      "reader_1_terminal": "claims_extracted",
+      "reader_2_terminal": "claims_extracted",
+      "reader_1_n_claims": 5,
+      "reader_2_n_claims": 4,
+      "adopted_scope": "in_scope_hazard",
+      "scope_rule": "R1a: both readers agree; adopted"
+    },
+    {
+      "item_id": "LIT-001331",
+      "blind_basename": "259631800.json",
+      "reader_1_scope": "off_topic",
+      "reader_2_scope": "ambiguous",
+      "agree": false,
+      "reader_1_reason": "A theological essay on the human appreciation of nature's beauty; the climate crisis is framing, and no climate or weather hazard or impact is examined.",
+      "reader_2_reason": "Climate-crisis language is present, but this is a theological essay on human appreciation of nature's beauty; no hazard or impact is examined.",
+      "reader_1_terminal": "off_topic",
+      "reader_2_terminal": "ambiguous_only",
+      "reader_1_n_claims": 0,
+      "reader_2_n_claims": 0,
+      "adopted_scope": "ambiguous",
+      "scope_rule": "R1c: one reader off_topic, the other not; scope ambiguous, zero promoted claims"
+    },
+    {
+      "item_id": "LIT-001521",
+      "blind_basename": "271744500.json",
+      "reader_1_scope": "in_scope_hazard",
+      "reader_2_scope": "in_scope_hazard",
+      "agree": true,
+      "reader_1_reason": "The paper measures health-relevant effects of exposure to (laboratory-generated) wildfire smoke, an impact pathway of wildfire.",
+      "reader_2_reason": "The paper examines a health impact of wildfire smoke exposure (neurotoxicology) in an occupational exposure model.",
+      "reader_1_terminal": "claims_extracted",
+      "reader_2_terminal": "claims_extracted",
+      "reader_1_n_claims": 4,
+      "reader_2_n_claims": 4,
+      "adopted_scope": "in_scope_hazard",
+      "scope_rule": "R1a: both readers agree; adopted"
+    },
+    {
+      "item_id": "LIT-001711",
+      "blind_basename": "54542600.json",
+      "reader_1_scope": "in_scope_hazard",
+      "reader_2_scope": "in_scope_hazard",
+      "agree": true,
+      "reader_1_reason": "The paper reconstructs a century of floods and droughts of an arid-zone wetland and relates them to extreme rainfall.",
+      "reader_2_reason": "The paper examines the flood and drought (inundation) regime of a wetland and its hydroclimatic drivers, including extreme rainfall.",
+      "reader_1_terminal": "claims_extracted",
+      "reader_2_terminal": "claims_extracted",
+      "reader_1_n_claims": 5,
+      "reader_2_n_claims": 5,
+      "adopted_scope": "in_scope_hazard",
+      "scope_rule": "R1a: both readers agree; adopted"
+    }
+  ],
+  "phase_b_alignment": [
+    {
+      "item_id": "LIT-000001",
+      "blind_basename": "100961700.json",
+      "pairs": [],
+      "reader_1_only": [],
+      "reader_2_only": []
+    },
+    {
+      "item_id": "LIT-000191",
+      "blind_basename": "15420300.json",
+      "pairs": [
+        {
+          "reader_1_claim_id": "LIT-000191-C1",
+          "reader_2_claim_id": "15420300-C1",
+          "overlap_code_points": 216,
+          "reader_1_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 495,
+            "char_end": 711,
+            "evidence_text": "Results demonstrated that increases in temperature and CO 2 each significantly depressed survival, development, growth, and lipid synthesis of M. mercenaria and A. irradians larvae and that the effects were additive."
+          },
+          "reader_2_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 495,
+            "char_end": 711,
+            "evidence_text": "Results demonstrated that increases in temperature and CO 2 each significantly depressed survival, development, growth, and lipid synthesis of M. mercenaria and A. irradians larvae and that the effects were additive."
+          },
+          "reader_1_text": "Higher temperature and higher CO2 each significantly depressed survival, development, growth and lipid synthesis of hard clam and bay scallop larvae, and the effects were additive.",
+          "reader_2_text": "Raising temperature and CO2 each significantly depressed survival, development, growth and lipid synthesis of M. mercenaria and A. irradians larvae, and the effects were additive.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Reader 1 puts the drivers (temperature, CO2) in concept, reader 2 in the relation; the proposition is the same.",
+              "rule": "judged same content, same tag"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Both: each significantly depressed; additive.",
+              "rule": "judged same content, same tag"
+            },
+            "geography": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Both infer Northwest Atlantic from the same title span. Reader 2 adds 'temperate estuaries', which its cited span (the title) does not state; reader 1 adds a laboratory caveat. Adopted: the part both state and the span supports.",
+              "rule": "3c: same tag, content differs; span-limited value both readers support",
+              "adopted": {
+                "value": "Northwest Atlantic (the region of the species studied, per the title)",
+                "tag": "inferred",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$.title",
+                  "char_start": 105,
+                  "char_end": 149,
+                  "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+                }
+              }
+            },
+            "temporal_frame": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Both: 24 and 28 °C and ~250, 390, 750 ppm CO2, laboratory treatments; cited from different but consistent spans.",
+              "rule": "judged same content, same tag"
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "increases in temperature and CO 2; larval survival, development, growth, and lipid synthesis",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "survival, development, growth, and lipid synthesis of M. mercenaria and A. irradians larvae",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "each significantly depressed; effects additive",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "increases in temperature and CO 2 each significantly depressed; effects were additive",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "Northwest Atlantic (the region of the species studied, per the title); the experiments were laboratory treatments",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.title",
+                  "char_start": 105,
+                  "char_end": 149,
+                  "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+                }
+              },
+              "reader_2": {
+                "value": "Northwest Atlantic (species); temperate estuaries",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.title",
+                  "char_start": 105,
+                  "char_end": 149,
+                  "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+                }
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "experimental treatments 24 and 28 °C and ~250, 390 and 750 ppm CO2, described as representative of past, present and future summer conditions in temperate estuaries",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 330,
+                  "char_end": 493,
+                  "evidence_text": "to temperatures (24 and 28uC) and CO 2 concentrations (,250, 390, and 750 ppm) representative of past, present, and future summer conditions in temperate estuaries"
+                }
+              },
+              "reader_2": {
+                "value": "larvae grown at ~250, ~390, ~750 ppm CO2 and 24 or 28uC (laboratory)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$[\"larvae experiments\"]",
+                  "char_start": 174,
+                  "char_end": 442,
+                  "evidence_text": "M. mercenaria and A. irradians larvae were grown at three levels of CO 2 : a high level (,750 ppm CO 2 ), predicted for the year 2100, a modern level (,390 ppm CO 2 ), and a near pre-industrial level (,250 ppm CO 2 ), while at two different temperatures (24 and 28uC)."
+                }
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "claim_type": {
+              "reader_1": "finding",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        },
+        {
+          "reader_1_claim_id": "LIT-000191-C2",
+          "reader_2_claim_id": "15420300-C2",
+          "overlap_code_points": 126,
+          "reader_1_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 712,
+            "char_end": 963,
+            "evidence_text": "Juvenile M. mercenaria and A. irradians were negatively impacted by higher temperatures while C. virginica juveniles were not. C. virginica and A. irradians juveniles were negatively affected by higher CO 2 concentrations, while M. mercenaria was not."
+          },
+          "reader_2_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 712,
+            "char_end": 838,
+            "evidence_text": "Juvenile M. mercenaria and A. irradians were negatively impacted by higher temperatures while C. virginica juveniles were not."
+          },
+          "reader_1_text": "Juvenile hard clams and bay scallops were harmed by the higher temperature but juvenile oysters were not; juvenile oysters and bay scallops were harmed by higher CO2 but juvenile hard clams were not.",
+          "reader_2_text": "Higher temperature negatively affected juvenile M. mercenaria and A. irradians but not juvenile C. virginica.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1's evidence covers two sentences (temperature and CO2 effects on juveniles); reader 2's covers the temperature sentence only. Adopted: the temperature part both found. The CO2 sentence remains reader-1-only content within this claim.",
+              "rule": "3c: same tag, content differs; span-limited value both readers support",
+              "adopted": {
+                "value": "higher temperatures; juvenile M. mercenaria, A. irradians and C. virginica",
+                "tag": "explicit",
+                "support_from": "r2_evidence",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 712,
+                  "char_end": 838,
+                  "evidence_text": "Juvenile M. mercenaria and A. irradians were negatively impacted by higher temperatures while C. virginica juveniles were not."
+                }
+              }
+            },
+            "relation_or_direction": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "As for concept: the CO2 half is reader-1-only.",
+              "rule": "3c: same tag, content differs; span-limited value both readers support",
+              "adopted": {
+                "value": "negatively impacted by higher temperatures (M. mercenaria, A. irradians); C. virginica juveniles not",
+                "tag": "explicit",
+                "support_from": "r2_evidence",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 712,
+                  "char_end": 838,
+                  "evidence_text": "Juvenile M. mercenaria and A. irradians were negatively impacted by higher temperatures while C. virginica juveniles were not."
+                }
+              }
+            },
+            "geography": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Both infer Northwest Atlantic from the same title span. Reader 2 adds 'temperate estuaries', which its cited span (the title) does not state; reader 1 adds a laboratory caveat. Adopted: the part both state and the span supports.",
+              "rule": "3c: same tag, content differs; span-limited value both readers support",
+              "adopted": {
+                "value": "Northwest Atlantic (the region of the species studied, per the title)",
+                "tag": "inferred",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$.title",
+                  "char_start": 105,
+                  "char_end": 149,
+                  "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+                }
+              }
+            },
+            "temporal_frame": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1's support span states only the CO2 levels (~400, 1700 ppm); reader 2's states only the temperatures and adds '45 days', which its span does not state. Adopted: the temperatures, matching the adopted temperature-only scope, stated by reader 2's span.",
+              "rule": "3c: same tag, content differs; span-limited value both readers support",
+              "adopted": {
+                "value": "juvenile treatments at 24 or 28 °C",
+                "tag": "explicit",
+                "support_from": "r2",
+                "support": {
+                  "json_path": "$[\"juvenile experiments\"]",
+                  "char_start": 354,
+                  "char_end": 519,
+                  "evidence_text": "Ten individuals of each species were placed into triplicate, 10-liter, high-density polyethylene vessels that were maintained in water baths of 24 or 28uC (Table 2)."
+                }
+              }
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "higher temperatures; higher CO 2 concentrations; juvenile bivalves",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "juvenile M. mercenaria, A. irradians, C. virginica",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "negatively impacted / negatively affected, species-dependent",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "negatively impacted by higher temperatures (M. mercenaria, A. irradians); C. virginica not",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "Northwest Atlantic (the region of the species studied, per the title); the experiments were laboratory treatments",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.title",
+                  "char_start": 105,
+                  "char_end": 149,
+                  "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+                }
+              },
+              "reader_2": {
+                "value": "Northwest Atlantic (species); temperate estuaries",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.title",
+                  "char_start": 105,
+                  "char_end": 149,
+                  "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+                }
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "juvenile treatments 24 and 28 °C and ~400 and 1700 ppm CO2",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$[\"juvenile experiments\"]",
+                  "char_start": 520,
+                  "char_end": 591,
+                  "evidence_text": "CO 2 was continuously delivered as described above at ,400 and 1700 ppm"
+                }
+              },
+              "reader_2": {
+                "value": "juveniles held at 24 or 28uC and ~400 or 1700 ppm CO2 for 45 days (laboratory)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$[\"juvenile experiments\"]",
+                  "char_start": 354,
+                  "char_end": 519,
+                  "evidence_text": "Ten individuals of each species were placed into triplicate, 10-liter, high-density polyethylene vessels that were maintained in water baths of 24 or 28uC (Table 2)."
+                }
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "claim_type": {
+              "reader_1": "finding",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        },
+        {
+          "reader_1_claim_id": "LIT-000191-C3",
+          "reader_2_claim_id": "15420300-C3",
+          "overlap_code_points": 80,
+          "reader_1_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 964,
+            "char_end": 1044,
+            "evidence_text": "Larvae were substantially more vulnerable to elevated CO 2 than juvenile stages."
+          },
+          "reader_2_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 964,
+            "char_end": 1044,
+            "evidence_text": "Larvae were substantially more vulnerable to elevated CO 2 than juvenile stages."
+          },
+          "reader_1_text": "Bivalve larvae were substantially more vulnerable to elevated CO2 than juvenile stages.",
+          "reader_2_text": "Larvae were substantially more vulnerable to elevated CO2 than juvenile stages.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Elevated CO2; larval vs juvenile vulnerability.",
+              "rule": "judged same content, same tag"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "geography": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Both infer Northwest Atlantic from the same title span. Reader 2 adds 'temperate estuaries', which its cited span (the title) does not state; reader 1 adds a laboratory caveat. Adopted: the part both state and the span supports.",
+              "rule": "3c: same tag, content differs; span-limited value both readers support",
+              "adopted": {
+                "value": "Northwest Atlantic (the region of the species studied, per the title)",
+                "tag": "inferred",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$.title",
+                  "char_start": 105,
+                  "char_end": 149,
+                  "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+                }
+              }
+            },
+            "temporal_frame": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1 unknown; reader 2 lists larval and juvenile CO2 levels, but its support span states only the juvenile levels.",
+              "rule": "3a: unknown beats a value",
+              "adopted": {
+                "value": "unknown",
+                "tag": "unknown"
+              }
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "elevated CO 2; larval versus juvenile vulnerability",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "vulnerability of larval vs juvenile bivalve stages to elevated CO2",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "larvae substantially more vulnerable than juveniles",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "larvae substantially more vulnerable than juveniles",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "geography": {
+              "reader_1": {
+                "value": "Northwest Atlantic (the region of the species studied, per the title); the experiments were laboratory treatments",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.title",
+                  "char_start": 105,
+                  "char_end": 149,
+                  "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+                }
+              },
+              "reader_2": {
+                "value": "Northwest Atlantic (species); temperate estuaries",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.title",
+                  "char_start": 105,
+                  "char_end": 149,
+                  "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+                }
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "larvae at ~250/390/750 ppm; juveniles at ~400/1700 ppm CO2 (laboratory)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$[\"juvenile experiments\"]",
+                  "char_start": 520,
+                  "char_end": 591,
+                  "evidence_text": "CO 2 was continuously delivered as described above at ,400 and 1700 ppm"
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "claim_type": {
+              "reader_1": "finding",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        },
+        {
+          "reader_1_claim_id": "LIT-000191-C4",
+          "reader_2_claim_id": "15420300-C4",
+          "overlap_code_points": 154,
+          "reader_1_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 1045,
+            "char_end": 1199,
+            "evidence_text": "These findings suggest that current and future increases in temperature and CO 2 are likely to have negative consequences for coastal bivalve populations."
+          },
+          "reader_2_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 1045,
+            "char_end": 1199,
+            "evidence_text": "These findings suggest that current and future increases in temperature and CO 2 are likely to have negative consequences for coastal bivalve populations."
+          },
+          "reader_1_text": "The authors suggest current and future increases in temperature and CO2 are likely to have negative consequences for coastal bivalve populations.",
+          "reader_2_text": "The authors suggest current and future increases in temperature and CO2 are likely to have negative consequences for coastal bivalve populations.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Drivers in concept (reader 1) or relation (reader 2).",
+              "rule": "judged same content, same tag"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Both keep the hedges 'suggest' and 'likely'.",
+              "rule": "judged same content, same tag"
+            },
+            "geography": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1 unknown ('coastal' is a setting, not a geography); reader 2 'coastal', explicit.",
+              "rule": "3a: unknown beats a value",
+              "adopted": {
+                "value": "unknown",
+                "tag": "unknown"
+              }
+            },
+            "temporal_frame": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Both 'current and future'.",
+              "rule": "judged same content, same tag"
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1 unknown; reader 2 'inference drawn from the laboratory experiments', tagged inferred.",
+              "rule": "3a: unknown beats a value",
+              "adopted": {
+                "value": "unknown",
+                "tag": "unknown"
+              }
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "current and future increases in temperature and CO 2; coastal bivalve populations",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "coastal bivalve populations",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "likely negative consequences (hedged: 'suggest', 'likely')",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "increases in temperature and CO2 are likely to have negative consequences (suggested)",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "coastal",
+                "tag": "explicit"
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "current and future (horizon not stated)",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "current and future",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "inference drawn from the laboratory experiments",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 1045,
+                  "char_end": 1067,
+                  "evidence_text": "These findings suggest"
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "claim_type": {
+              "reader_1": "projection",
+              "reader_2": "projection",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        }
+      ],
+      "reader_1_only": [],
+      "reader_2_only": []
+    },
+    {
+      "item_id": "LIT-000381",
+      "blind_basename": "211092500.json",
+      "pairs": [
+        {
+          "reader_1_claim_id": "LIT-000381-C1",
+          "reader_2_claim_id": "211092500-C1",
+          "overlap_code_points": 258,
+          "reader_1_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 1014,
+            "char_end": 1272,
+            "evidence_text": "We found that species composition had shifted to favor species with high leaf nutrient content, high photosynthesis rate, high hydraulic conductivity, low water-use efficiency, and high drought tolerance traits, which was due to soil dryness and disturbance."
+          },
+          "reader_2_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 1014,
+            "char_end": 1272,
+            "evidence_text": "We found that species composition had shifted to favor species with high leaf nutrient content, high photosynthesis rate, high hydraulic conductivity, low water-use efficiency, and high drought tolerance traits, which was due to soil dryness and disturbance."
+          },
+          "reader_1_text": "Over 24 years, the forest's species composition shifted toward species with high leaf nutrients, photosynthesis and hydraulic conductivity, low water-use efficiency and high drought tolerance, attributed to soil dryness and disturbance.",
+          "reader_2_text": "Over 24 years the forest's species composition shifted toward high leaf nutrients, photosynthesis rate, hydraulic conductivity, low water-use efficiency and high drought tolerance, attributed to soil dryness and disturbance.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Reader 1 lists the drivers in concept; reader 2 in the relation.",
+              "rule": "judged same content, same tag"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Same traits; due to soil dryness and disturbance.",
+              "rule": "judged same content, same tag"
+            },
+            "geography": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1's span ('an old-growth subtropical forest in southern China') does not state Dinghushan or Guangdong, which its value adds. Adopted: what that span states. Reader 2's site-level value (Dinghushan natural reserve, Guangdong Province) is supported by its own methods span but tagged inferred; it is recorded here, not adopted.",
+              "rule": "3b: explicit kept only where its span states the adopted value",
+              "explicit_span_states": true,
+              "adopted": {
+                "value": "old-growth subtropical forest in southern China",
+                "tag": "explicit",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 394,
+                  "char_end": 444,
+                  "evidence_text": "an old-growth subtropical forest in southern China"
+                }
+              }
+            },
+            "temporal_frame": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "functional (species) composition; drought tolerance traits; soil dryness and disturbance",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "species composition (functional traits)",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "shifted to favor ... high drought tolerance; due to soil dryness and disturbance",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "shifted to favor high leaf nutrient, photosynthesis, hydraulic conductivity, low WUE, high drought tolerance; due to soil dryness and disturbance",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "old-growth subtropical forest in southern China (Dinghushan natural reserve, Guangdong)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 394,
+                  "char_end": 444,
+                  "evidence_text": "an old-growth subtropical forest in southern China"
+                }
+              },
+              "reader_2": {
+                "value": "Dinghushan natural reserve, Guangdong Province, southern China (1-ha plot)",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$[\"materials and methods\"]",
+                  "char_start": 12,
+                  "char_end": 157,
+                  "evidence_text": "The study was conducted in Dinghushan natural reserve (DHS, 23.17 • N, 112.56 • E) located in the middle of Guangdong Province in southern China."
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "past 24 years (censuses 1992-2015)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 339,
+                  "char_end": 390,
+                  "evidence_text": "shifts in functional composition over past 24 years"
+                }
+              },
+              "reader_2": {
+                "value": "past 24 years (censuses 1992-2015)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 323,
+                  "char_end": 444,
+                  "evidence_text": "we investigated shifts in functional composition over past 24 years in an old-growth subtropical forest in southern China"
+                }
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "claim_type": {
+              "reader_1": "finding",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        },
+        {
+          "reader_1_claim_id": "LIT-000381-C2",
+          "reader_2_claim_id": "211092500-C2",
+          "overlap_code_points": 77,
+          "reader_1_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 1272,
+            "char_end": 1349,
+            "evidence_text": "These two factors explained 47-58% of quadrats' trait value changes together."
+          },
+          "reader_2_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 1272,
+            "char_end": 1349,
+            "evidence_text": "These two factors explained 47-58% of quadrats' trait value changes together."
+          },
+          "reader_1_text": "Soil dryness and disturbance together explained 47-58% of quadrat-level trait value changes.",
+          "reader_2_text": "Soil dryness and disturbance together explained 47-58% of quadrats' trait value changes.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1's concept names soil dryness and disturbance as explicit, but the evidence span says only 'These two factors'; reader 2 places that identification in an inferred relation. Adopted concept: what the span states. The identification of the two factors rests on the preceding sentence (reader 2's inferred support span) and is not adopted as explicit.",
+              "rule": "3c: same tag, content differs; span-limited value both readers support",
+              "adopted": {
+                "value": "quadrats' trait value changes",
+                "tag": "explicit",
+                "support_from": "r1_evidence",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 1272,
+                  "char_end": 1349,
+                  "evidence_text": "These two factors explained 47-58% of quadrats' trait value changes together."
+                }
+              }
+            },
+            "relation_or_direction": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "'explained 47-58% together' is stated in the evidence span; the '(by soil dryness and disturbance)' that reader 2 adds is the inferred link.",
+              "rule": "3b: explicit kept only where its span states the adopted value",
+              "explicit_span_states": true,
+              "adopted": {
+                "value": "explained 47-58% together",
+                "tag": "explicit",
+                "support_from": "r1_evidence",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 1272,
+                  "char_end": 1349,
+                  "evidence_text": "These two factors explained 47-58% of quadrats' trait value changes together."
+                }
+              }
+            },
+            "geography": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "As LIT-000381-C1. Reader 2's site-level value (Dinghushan natural reserve, Guangdong Province) is supported by its own methods span but tagged inferred; it is recorded here, not adopted.",
+              "rule": "3b: explicit kept only where its span states the adopted value",
+              "explicit_span_states": true,
+              "adopted": {
+                "value": "old-growth subtropical forest in southern China",
+                "tag": "explicit",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 394,
+                  "char_end": 444,
+                  "evidence_text": "an old-growth subtropical forest in southern China"
+                }
+              }
+            },
+            "temporal_frame": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "soil dryness and disturbance; quadrats' trait value changes",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "quadrats' trait value changes",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "explained 47-58% together",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "explained 47-58% together (by soil dryness and disturbance)",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 1226,
+                  "char_end": 1289,
+                  "evidence_text": "which was due to soil dryness and disturbance.These two factors"
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "old-growth subtropical forest in southern China (Dinghushan natural reserve, Guangdong)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 394,
+                  "char_end": 444,
+                  "evidence_text": "an old-growth subtropical forest in southern China"
+                }
+              },
+              "reader_2": {
+                "value": "Dinghushan natural reserve, Guangdong Province, southern China (1-ha plot)",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$[\"materials and methods\"]",
+                  "char_start": 12,
+                  "char_end": 157,
+                  "evidence_text": "The study was conducted in Dinghushan natural reserve (DHS, 23.17 • N, 112.56 • E) located in the middle of Guangdong Province in southern China."
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "past 24 years (censuses 1992-2015)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 339,
+                  "char_end": 390,
+                  "evidence_text": "shifts in functional composition over past 24 years"
+                }
+              },
+              "reader_2": {
+                "value": "past 24 years (censuses 1992-2015)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 323,
+                  "char_end": 444,
+                  "evidence_text": "we investigated shifts in functional composition over past 24 years in an old-growth subtropical forest in southern China"
+                }
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "claim_type": {
+              "reader_1": "finding",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        },
+        {
+          "reader_1_claim_id": "LIT-000381-C3",
+          "reader_2_claim_id": "211092500-C3",
+          "overlap_code_points": 140,
+          "reader_1_evidence": {
+            "json_path": "$.discussion",
+            "char_start": 1325,
+            "char_end": 1465,
+            "evidence_text": "Increasing drought tolerance (Hypothesis 2) was supported by our result (Figure 2) and it was likely due to soil dryness but not disturbance"
+          },
+          "reader_2_evidence": {
+            "json_path": "$.discussion",
+            "char_start": 1325,
+            "char_end": 1465,
+            "evidence_text": "Increasing drought tolerance (Hypothesis 2) was supported by our result (Figure 2) and it was likely due to soil dryness but not disturbance",
+            "occurrence_note": "passage occurs 2 times in this value; first occurrence used"
+          },
+          "reader_1_text": "The increase in community drought tolerance was likely due to soil dryness rather than disturbance.",
+          "reader_2_text": "Increasing drought tolerance in the community was likely due to soil dryness rather than disturbance.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Increasing drought tolerance; soil dryness vs disturbance.",
+              "rule": "judged same content, same tag"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Both keep 'likely due to soil dryness but not disturbance'.",
+              "rule": "judged same content, same tag"
+            },
+            "geography": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1's span states 'the monsoon evergreen broad-leaved forest in DHS plot' but not the expansion 'Dinghushan' its value adds. Reader 2's site-level value (Dinghushan natural reserve, Guangdong Province) is supported by its own methods span but tagged inferred; it is recorded here, not adopted.",
+              "rule": "3b: explicit kept only where its span states the adopted value",
+              "explicit_span_states": true,
+              "adopted": {
+                "value": "monsoon evergreen broad-leaved forest in DHS plot",
+                "tag": "explicit",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$.discussion",
+                  "char_start": 158,
+                  "char_end": 238,
+                  "evidence_text": "the species composition in the monsoon evergreen broad-leaved forest in DHS plot"
+                }
+              }
+            },
+            "temporal_frame": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "claim_type": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1: mechanism; reader 2: finding. The span is the authors' result-based causal attribution ('likely due to'); both labels fit the rubric and neither is more conservative. Breaking the tie would need a reading beyond the recorded claims.",
+              "rule": "3c: claim_type differs; no conservative order; unresolved_tie",
+              "adopted": "unresolved_tie"
+            }
+          },
+          "unresolved_ties": [
+            "claim_type"
+          ],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "increasing drought tolerance; soil dryness; disturbance",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "drought tolerance (community level)",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "likely due to soil dryness but not disturbance (hedged)",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "increasing; likely due to soil dryness but not disturbance",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "DHS plot (Dinghushan), monsoon evergreen broad-leaved forest",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.discussion",
+                  "char_start": 158,
+                  "char_end": 238,
+                  "evidence_text": "the species composition in the monsoon evergreen broad-leaved forest in DHS plot"
+                }
+              },
+              "reader_2": {
+                "value": "Dinghushan natural reserve, Guangdong Province, southern China (1-ha plot)",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$[\"materials and methods\"]",
+                  "char_start": 12,
+                  "char_end": 157,
+                  "evidence_text": "The study was conducted in Dinghushan natural reserve (DHS, 23.17 • N, 112.56 • E) located in the middle of Guangdong Province in southern China."
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "past 24 years (censuses 1992-2015)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 339,
+                  "char_end": 390,
+                  "evidence_text": "shifts in functional composition over past 24 years"
+                }
+              },
+              "reader_2": {
+                "value": "past 24 years (censuses 1992-2015)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 323,
+                  "char_end": 444,
+                  "evidence_text": "we investigated shifts in functional composition over past 24 years in an old-growth subtropical forest in southern China"
+                }
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "claim_type": {
+              "reader_1": "mechanism",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": false
+            }
+          }
+        },
+        {
+          "reader_1_claim_id": "LIT-000381-C4",
+          "reader_2_claim_id": "211092500-C4",
+          "overlap_code_points": 220,
+          "reader_1_evidence": {
+            "json_path": "$.introduction",
+            "char_start": 2661,
+            "char_end": 2881,
+            "evidence_text": "In our study site, previous studies have demonstrated that changes in regional warming and precipitation patterns led to decrease in annual relative humidity and soil water contents within root zone in past decades [14]."
+          },
+          "reader_2_evidence": {
+            "json_path": "$.introduction",
+            "char_start": 2661,
+            "char_end": 2881,
+            "evidence_text": "In our study site, previous studies have demonstrated that changes in regional warming and precipitation patterns led to decrease in annual relative humidity and soil water contents within root zone in past decades [14]."
+          },
+          "reader_1_text": "Prior studies at the site found regional warming and changed precipitation patterns reduced annual relative humidity and root-zone soil water over past decades.",
+          "reader_2_text": "Earlier studies at the site showed regional warming and changed precipitation patterns decreased annual relative humidity and root-zone soil water content in past decades.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Drivers in concept (reader 1) or relation (reader 2).",
+              "rule": "judged same content, same tag"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Both: led to decrease.",
+              "rule": "judged same content, same tag"
+            },
+            "geography": {
+              "agree": false,
+              "content_judgement": "same",
+              "note": "Same place; reader 1 explicit, reader 2 inferred, both citing the same methods sentence. That span states the full value, so explicit stands.",
+              "rule": "3b: explicit kept only where its span states the adopted value",
+              "explicit_span_states": true,
+              "adopted": {
+                "value": "the study site: Dinghushan natural reserve, Guangdong Province, southern China",
+                "tag": "explicit",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$[\"materials and methods\"]",
+                  "char_start": 39,
+                  "char_end": 156,
+                  "evidence_text": "Dinghushan natural reserve (DHS, 23.17 • N, 112.56 • E) located in the middle of Guangdong Province in southern China"
+                }
+              }
+            },
+            "temporal_frame": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "regional warming and precipitation patterns; annual relative humidity; soil water contents within root zone",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "annual relative humidity and soil water contents within root zone",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "led to decrease",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "changes in regional warming and precipitation patterns led to decrease",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "the study site: Dinghushan natural reserve, Guangdong Province, southern China",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$[\"materials and methods\"]",
+                  "char_start": 39,
+                  "char_end": 156,
+                  "evidence_text": "Dinghushan natural reserve (DHS, 23.17 • N, 112.56 • E) located in the middle of Guangdong Province in southern China"
+                }
+              },
+              "reader_2": {
+                "value": "Dinghushan natural reserve, Guangdong Province, southern China (1-ha plot)",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$[\"materials and methods\"]",
+                  "char_start": 12,
+                  "char_end": 157,
+                  "evidence_text": "The study was conducted in Dinghushan natural reserve (DHS, 23.17 • N, 112.56 • E) located in the middle of Guangdong Province in southern China."
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "past decades",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "past decades",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "claim_type": {
+              "reader_1": "background_citation",
+              "reader_2": "background_citation",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        }
+      ],
+      "reader_1_only": [],
+      "reader_2_only": []
+    },
+    {
+      "item_id": "LIT-000571",
+      "blind_basename": "225107600.json",
+      "pairs": [],
+      "reader_1_only": [
+        {
+          "claim_id": "LIT-000571-C1",
+          "text": "At the Khorog and Ishkāshim stations, mean annual precipitation is below the threshold for successful rainfed agriculture, and nearly the whole April-September vegetation period is strongly arid.",
+          "evidence": {
+            "json_path": "$[\"three study sites in the western pamirs in tajikistan\"]",
+            "char_start": 5933,
+            "char_end": 6186,
+            "evidence_text": "at both measuring stations, first, the mean annual precipitation is below the threshold for practicing rainfed agriculture successfully and, second, that nearly the whole vegetation period from April to September is characterized by a strong arid regime"
+          },
+          "overlaps_reader_2_rejected": []
+        },
+        {
+          "claim_id": "LIT-000571-C2",
+          "text": "In the Pamirs, large snow and ice masses and rare heavy rainfall endanger settlements, arable land, irrigation infrastructure and transport links by triggering avalanches, mudflows and slope erosion.",
+          "evidence": {
+            "json_path": "$.results",
+            "char_start": 14083,
+            "char_end": 14448,
+            "evidence_text": "On the other hand, in the high mountain context of the Pamirs, larger snow and ice masses, as well as rather rare heavy rainfall pose potential dangers for settlements, arable land, and irrigation infrastructure, as well as communication lines and traffic installations, as they can trigger destructive mass movements such as avalanches, mudflows, and slope erosion"
+          },
+          "overlaps_reader_2_rejected": [
+            {
+              "rejected_id": "rejected[0]",
+              "overlap_code_points": 302,
+              "reason": "Hazard described as context for collaborative repair work; not examined.",
+              "evidence_text": "larger snow and ice masses, as well as rather rare heavy rainfall pose potential dangers for settlements, arable land, and irrigation infrastructure, as well as communication lines and traffic installations, as they can trigger destructive mass movements such as avalanches, mudflows, and slope erosion [35,55,59,61,76,77]."
+            }
+          ]
+        },
+        {
+          "claim_id": "LIT-000571-C3",
+          "text": "In Shirgin Village, summers with serious water scarcity force irrigation subgroups to negotiate distribution themselves, and in severe shortage each beneficiary's irrigation slot can shrink below one hour.",
+          "evidence": {
+            "json_path": "$.results",
+            "char_start": 43781,
+            "char_end": 44109,
+            "evidence_text": "In summers with serious water scarcity, the canal-specific subgroups mentioned before receiving 24-h-long irrigation rights, have to negotiate the water distribution within their groups independently. When the water shortage is severe, the time slot for irrigation can be shortened to less than one hour duration per beneficiary"
+          },
+          "overlaps_reader_2_rejected": []
+        },
+        {
+          "claim_id": "LIT-000571-C4",
+          "text": "In Sizhd Village, farms on the western edge suffer most from acute water shortages, especially after winters with low precipitation.",
+          "evidence": {
+            "json_path": "$.results",
+            "char_start": 29571,
+            "char_end": 29725,
+            "evidence_text": "However, the farms located on the western edge of the village suffer the most from acute water shortages, especially after winters with low precipitation."
+          },
+          "overlaps_reader_2_rejected": [
+            {
+              "rejected_id": "rejected[2]",
+              "overlap_code_points": 154,
+              "reason": "Interview-based description of irrigation water shortage within a study of social organisation; not a hazard analysis.",
+              "evidence_text": "However, the farms located on the western edge of the village suffer the most from acute water shortages, especially after winters with low precipitation."
+            }
+          ]
+        },
+        {
+          "claim_id": "LIT-000571-C5",
+          "text": "In Porshnev, after winters with little snow farmers mainly grow early-ripening, less water-needy fodder crops such as alfalfa and sainfoin, because water flow can stop in July.",
+          "evidence": {
+            "json_path": "$.results",
+            "char_start": 986,
+            "char_end": 1169,
+            "evidence_text": "After winters with little snow, mainly early ripening and less water-needy fodder plants such as alfalfa and sainfoin are cultivated as sufficient water flow can already stop in July."
+          },
+          "overlaps_reader_2_rejected": []
+        }
+      ],
+      "reader_2_only": []
+    },
+    {
+      "item_id": "LIT-000761",
+      "blind_basename": "235097800.json",
+      "pairs": [],
+      "reader_1_only": [],
+      "reader_2_only": []
+    },
+    {
+      "item_id": "LIT-000951",
+      "blind_basename": "242697800.json",
+      "pairs": [],
+      "reader_1_only": [],
+      "reader_2_only": []
+    },
+    {
+      "item_id": "LIT-001141",
+      "blind_basename": "251972000.json",
+      "pairs": [
+        {
+          "reader_1_claim_id": "LIT-001141-C1",
+          "reader_2_claim_id": "251972000-C1",
+          "overlap_code_points": 229,
+          "reader_1_evidence": {
+            "json_path": "$.conclusion",
+            "char_start": 1414,
+            "char_end": 1643,
+            "evidence_text": "We further found land surface temperature, on average, increased by about 0.34 • C per year in urban settlement areas of Bangalore during the UHI events of April 2001 and 2021, in contrast to 0.14 • C per year in non-urban areas."
+          },
+          "reader_2_evidence": {
+            "json_path": "$.conclusion",
+            "char_start": 1414,
+            "char_end": 1643,
+            "evidence_text": "We further found land surface temperature, on average, increased by about 0.34 • C per year in urban settlement areas of Bangalore during the UHI events of April 2001 and 2021, in contrast to 0.14 • C per year in non-urban areas."
+          },
+          "reader_1_text": "During April UHI events, land surface temperature in Bangalore's urban areas rose about 0.34 °C per year between 2001 and 2021, versus 0.14 °C per year in non-urban areas.",
+          "reader_2_text": "During April UHI events 2001-2021, land surface temperature rose about 0.34 °C per year in Bangalore's urban settlement areas versus 0.14 °C per year in non-urban areas.",
+          "status": "independently_confirmed",
+          "rule": "R2",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Reader 2 adds the paper's definition of a UHI event (highest 8-day April window) from methods; same concept.",
+              "rule": "judged same content, same tag"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "0.34 vs 0.14 °C per year, urban vs non-urban.",
+              "rule": "judged same content, same tag"
+            },
+            "geography": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Bangalore urban settlement areas (vs non-urban), both explicit in the evidence span.",
+              "rule": "judged same content, same tag"
+            },
+            "temporal_frame": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Punctuation only.",
+              "rule": "judged same content, same tag"
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "land surface temperature during UHI events",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "land surface temperature during the UHI events (MODIS LST, highest 8-day April window)",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "increased about 0.34 °C per year (urban) vs 0.14 °C per year (non-urban)",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "increased ~0.34 °C/yr urban vs 0.14 °C/yr non-urban",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "urban settlement areas of Bangalore",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "Bangalore (urban settlement areas vs non-urban areas)",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "UHI events of April, 2001 and 2021",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "UHI events of April 2001 and 2021",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "claim_type": {
+              "reader_1": "finding",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        },
+        {
+          "reader_1_claim_id": "LIT-001141-C2",
+          "reader_2_claim_id": "251972000-C2",
+          "overlap_code_points": 198,
+          "reader_1_evidence": {
+            "json_path": "$[\"results and discussion\"]",
+            "char_start": 5355,
+            "char_end": 5553,
+            "evidence_text": "It was observed that the mean-modeled LST as a function of the above parameters shows an increasing trend with a slope of 0.247 • C per year in contrast to 0.056 • C per year in non-urbanized areas."
+          },
+          "reader_2_evidence": {
+            "json_path": "$[\"results and discussion\"]",
+            "char_start": 5355,
+            "char_end": 5553,
+            "evidence_text": "It was observed that the mean-modeled LST as a function of the above parameters shows an increasing trend with a slope of 0.247 • C per year in contrast to 0.056 • C per year in non-urbanized areas."
+          },
+          "reader_1_text": "A mixed-effects model of April UHI-event land surface temperature gave an increasing trend of 0.247 °C per year at urban sites versus 0.056 °C per year at non-urbanized sites.",
+          "reader_2_text": "A linear mixed-effect model gave a mean modelled LST trend of 0.247 °C per year at urbanised sites versus 0.056 °C per year at non-urbanised sites.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "LST vs its abbreviation.",
+              "rule": "judged same content, same tag"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "0.247 vs 0.056 °C per year.",
+              "rule": "judged same content, same tag"
+            },
+            "geography": {
+              "agree": false,
+              "content_judgement": "same",
+              "note": "Both cite the same introduction span; it states 'Bangalore city' but not 'India', which both values add.",
+              "rule": "3b: explicit kept only where its span states the adopted value",
+              "explicit_span_states": true,
+              "adopted": {
+                "value": "Bangalore city",
+                "tag": "explicit",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$.introduction",
+                  "char_start": 819,
+                  "char_end": 910,
+                  "evidence_text": "The present study aims to assess the impacts of Bangalore city's urbanization over 20 years"
+                }
+              }
+            },
+            "temporal_frame": {
+              "agree": false,
+              "content_judgement": "same",
+              "note": "Reader 1's span 'during the April months from 2001 to 2021' states it; reader 2 cites the containing sentence as inferred.",
+              "rule": "3b: explicit kept only where its span states the adopted value",
+              "explicit_span_states": true,
+              "adopted": {
+                "value": "April months, 2001 to 2021",
+                "tag": "explicit",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$.introduction",
+                  "char_start": 1418,
+                  "char_end": 1459,
+                  "evidence_text": "during the April months from 2001 to 2021"
+                }
+              }
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "mean-modeled land surface temperature (LST)",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "mean-modeled LST",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "increasing trend, slope 0.247 °C per year vs 0.056 °C per year in non-urbanized areas",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "increasing trend, slope 0.247 °C/yr (urbanized) vs 0.056 °C/yr (non-urbanized)",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "Bangalore city, India",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.introduction",
+                  "char_start": 819,
+                  "char_end": 910,
+                  "evidence_text": "The present study aims to assess the impacts of Bangalore city's urbanization over 20 years"
+                }
+              },
+              "reader_2": {
+                "value": "Bangalore, India",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.introduction",
+                  "char_start": 819,
+                  "char_end": 910,
+                  "evidence_text": "The present study aims to assess the impacts of Bangalore city's urbanization over 20 years"
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "April months, 2001 to 2021",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.introduction",
+                  "char_start": 1418,
+                  "char_end": 1459,
+                  "evidence_text": "during the April months from 2001 to 2021"
+                }
+              },
+              "reader_2": {
+                "value": "April, 2001-2021",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.introduction",
+                  "char_start": 1330,
+                  "char_end": 1460,
+                  "evidence_text": "This study particularly focuses on the relationship between urban growth and UHI events during the April months from 2001 to 2021."
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "claim_type": {
+              "reader_1": "finding",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        },
+        {
+          "reader_1_claim_id": "LIT-001141-C3",
+          "reader_2_claim_id": "251972000-C3",
+          "overlap_code_points": 176,
+          "reader_1_evidence": {
+            "json_path": "$[\"results and discussion\"]",
+            "char_start": 11212,
+            "char_end": 11388,
+            "evidence_text": "Based on the comparison of three UHI temperature events, we observed that such events over the years in the same month have increased in intensity (3.25 • C from 2001 to 2021)."
+          },
+          "reader_2_evidence": {
+            "json_path": "$[\"results and discussion\"]",
+            "char_start": 11212,
+            "char_end": 11388,
+            "evidence_text": "Based on the comparison of three UHI temperature events, we observed that such events over the years in the same month have increased in intensity (3.25 • C from 2001 to 2021)."
+          },
+          "reader_1_text": "Comparing three April UHI events, their intensity in the same month increased by 3.25 °C from 2001 to 2021.",
+          "reader_2_text": "Comparing three April UHI temperature events, such events increased in intensity by 3.25 °C from 2001 to 2021.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "UHI temperature events / their intensity.",
+              "rule": "judged same content, same tag"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Increased by 3.25 °C.",
+              "rule": "judged same content, same tag"
+            },
+            "geography": {
+              "agree": false,
+              "content_judgement": "same",
+              "note": "As LIT-001141-C2.",
+              "rule": "3b: explicit kept only where its span states the adopted value",
+              "explicit_span_states": true,
+              "adopted": {
+                "value": "Bangalore city",
+                "tag": "explicit",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$.introduction",
+                  "char_start": 819,
+                  "char_end": 910,
+                  "evidence_text": "The present study aims to assess the impacts of Bangalore city's urbanization over 20 years"
+                }
+              }
+            },
+            "temporal_frame": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Word order only.",
+              "rule": "judged same content, same tag"
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "UHI temperature events",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "intensity of UHI temperature events",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "increased in intensity (3.25 °C)",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "increased (3.25 °C)",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "Bangalore city, India",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.introduction",
+                  "char_start": 819,
+                  "char_end": 910,
+                  "evidence_text": "The present study aims to assess the impacts of Bangalore city's urbanization over 20 years"
+                }
+              },
+              "reader_2": {
+                "value": "Bangalore, India",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.introduction",
+                  "char_start": 819,
+                  "char_end": 910,
+                  "evidence_text": "The present study aims to assess the impacts of Bangalore city's urbanization over 20 years"
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "2001 to 2021, same month (April)",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "same month (April), 2001 to 2021",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "claim_type": {
+              "reader_1": "finding",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        }
+      ],
+      "reader_1_only": [
+        {
+          "claim_id": "LIT-001141-C4",
+          "text": "The annual average MODIS temperature for 2001, 2011 and 2021 showed no significant change, which is why the hottest month was analysed.",
+          "evidence": {
+            "json_path": "$[\"results and discussion\"]",
+            "char_start": 3903,
+            "char_end": 4046,
+            "evidence_text": "Here, it is also notable to mention that the annual average temperature of MODIS for 2001, 2011, and 2021 did not show any significant changes."
+          },
+          "overlaps_reader_2_rejected": []
+        },
+        {
+          "claim_id": "LIT-001141-C5",
+          "text": "The authors attribute the temperature increase to increasing built-up area and decreasing vegetation.",
+          "evidence": {
+            "json_path": "$[\"results and discussion\"]",
+            "char_start": 9253,
+            "char_end": 9397,
+            "evidence_text": "The increase in the temperature as such could be well-attributed to the increasing built-up and decreasing vegetation, as indicated in Figure 3."
+          },
+          "overlaps_reader_2_rejected": []
+        }
+      ],
+      "reader_2_only": [
+        {
+          "claim_id": "251972000-C4",
+          "text": "Higher urban temperatures, besides altering regional climate, significantly influence human health and the economy (cited).",
+          "evidence": {
+            "json_path": "$[\"results and discussion\"]",
+            "char_start": 11470,
+            "char_end": 11605,
+            "evidence_text": "In addition to altering the regional climate, higher urban temperatures also significantly influence human health and the economy [44]."
+          },
+          "overlaps_reader_1_rejected": []
+        }
+      ]
+    },
+    {
+      "item_id": "LIT-001331",
+      "blind_basename": "259631800.json",
+      "pairs": [],
+      "reader_1_only": [],
+      "reader_2_only": []
+    },
+    {
+      "item_id": "LIT-001521",
+      "blind_basename": "271744500.json",
+      "pairs": [
+        {
+          "reader_1_claim_id": "LIT-001521-C1",
+          "reader_2_claim_id": "271744500-C1",
+          "overlap_code_points": 178,
+          "reader_1_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 723,
+            "char_end": 901,
+            "evidence_text": "We report robust changes in gene expression profiles between smoke-exposed samples and filtered air controls, evidenced by 2,862 differentially expressed genes (51.2% increased)."
+          },
+          "reader_2_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 723,
+            "char_end": 901,
+            "evidence_text": "We report robust changes in gene expression profiles between smoke-exposed samples and filtered air controls, evidenced by 2,862 differentially expressed genes (51.2% increased)."
+          },
+          "reader_1_text": "Chronic exposure to simulated wildfire smoke produced robust gene expression changes in the prefrontal cortex of male mice: 2,862 differentially expressed genes versus filtered-air controls.",
+          "reader_2_text": "Smoke-exposed mouse prefrontal cortex showed robust gene expression changes versus filtered-air controls, with 2,862 differentially expressed genes (51.2% increased).",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Reader 1 names the exposure, reader 2 the measured response, with the exposure in experimental_condition; same proposition, different facet.",
+              "rule": "judged same content, same tag"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Robust changes; 2,862 DEGs (51.2% increased). Both readers note the paper's inconsistent up/down split.",
+              "rule": "judged same content, same tag"
+            },
+            "geography": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "temporal_frame": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1 files the exposure regimen here; reader 2 leaves it unknown and files it under experimental_condition.",
+              "rule": "3a: unknown beats a value",
+              "adopted": {
+                "value": "unknown",
+                "tag": "unknown"
+              }
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1 unknown; reader 2 explicit. Rule 3a gives unknown; see override J-1.",
+              "rule": "3a: unknown beats a value",
+              "adopted": {
+                "value": "simulated wildfire smoke versus filtered air, 2 h/d, 5 d/wk, for 16 wk",
+                "tag": "explicit",
+                "support_from": "r2",
+                "support": {
+                  "json_path": "$[\"experimental design\"]",
+                  "char_start": 135,
+                  "char_end": 360,
+                  "evidence_text": "Mice were exposed to filtered air or simulated wildfire smoke in a 3D printed exposure chamber, which has been experimentally validated to evenly distribute particulate matter (Eden et al. 2023), for 2 h/d, 5 d/wk, for 16 wk."
+                }
+              },
+              "rule_result": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "override": {
+                "judgement_id": "J-1",
+                "reason": "Both readers record the same 16-week exposure regimen from the same experimental-design sentence (reader 1's span lies inside reader 2's) but under different dimensions: reader 1 as temporal_frame, reader 2 as experimental_condition. Rule 3a applied literally sets both to unknown and so loses a fact both readers found. D-017 placed laboratory treatments in experimental_condition; the regimen is a treatment, not the period of a hazard. Adopted in experimental_condition, limited to what reader 2's span states (strain and target concentration in reader 2's value are not in its span). temporal_frame stays unknown by rule 3a."
+              }
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [
+            "J-1"
+          ],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "exposure to laboratory-generated (simulated) wildfire smoke at an occupationally relevant dose",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.title",
+                  "char_start": 83,
+                  "char_end": 164,
+                  "evidence_text": "exposed to an occupationally relevant dose of laboratory-generated wildfire smoke"
+                }
+              },
+              "reader_2": {
+                "value": "gene expression profiles (prefrontal cortex, male mice)",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "robust changes; 2,862 differentially expressed genes (51.2% increased)",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "robust changes; 2,862 DEGs, 51.2% increased",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "16 weeks of exposure (2 h/d, 5 d/wk)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$[\"experimental design\"]",
+                  "char_start": 331,
+                  "char_end": 359,
+                  "evidence_text": "for 2 h/d, 5 d/wk, for 16 wk"
+                }
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "male Apoe-/- mice exposed to laboratory-generated wildfire smoke (target 40 mg/m3) 2 h/d, 5 d/wk for 16 wk vs filtered air",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$[\"experimental design\"]",
+                  "char_start": 135,
+                  "char_end": 360,
+                  "evidence_text": "Mice were exposed to filtered air or simulated wildfire smoke in a 3D printed exposure chamber, which has been experimentally validated to evenly distribute particulate matter (Eden et al. 2023), for 2 h/d, 5 d/wk, for 16 wk."
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "claim_type": {
+              "reader_1": "finding",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        },
+        {
+          "reader_1_claim_id": "LIT-001521-C2",
+          "reader_2_claim_id": "271744500-C2",
+          "overlap_code_points": 210,
+          "reader_1_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 901,
+            "char_end": 1111,
+            "evidence_text": "We further characterized the functional relevance of these genes highlighting enriched pathways related to synaptic transmission, neuroplasticity, blood-brain barrier integrity, and neurotransmitter metabolism."
+          },
+          "reader_2_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 901,
+            "char_end": 1111,
+            "evidence_text": "We further characterized the functional relevance of these genes highlighting enriched pathways related to synaptic transmission, neuroplasticity, blood-brain barrier integrity, and neurotransmitter metabolism."
+          },
+          "reader_1_text": "The smoke-altered genes were enriched in pathways related to synaptic transmission, neuroplasticity, blood-brain barrier integrity and neurotransmitter metabolism.",
+          "reader_2_text": "Differentially expressed genes were enriched in pathways related to synaptic transmission, neuroplasticity, blood-brain barrier integrity and neurotransmitter metabolism.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Enriched pathways of the DEGs.",
+              "rule": "judged same content, same tag"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Same four pathway groups (BBB = blood-brain barrier).",
+              "rule": "judged same content, same tag"
+            },
+            "geography": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "temporal_frame": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1 files the exposure regimen here; reader 2 leaves it unknown and files it under experimental_condition.",
+              "rule": "3a: unknown beats a value",
+              "adopted": {
+                "value": "unknown",
+                "tag": "unknown"
+              }
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1 unknown; reader 2 explicit. Rule 3a gives unknown; see override J-1.",
+              "rule": "3a: unknown beats a value",
+              "adopted": {
+                "value": "simulated wildfire smoke versus filtered air, 2 h/d, 5 d/wk, for 16 wk",
+                "tag": "explicit",
+                "support_from": "r2",
+                "support": {
+                  "json_path": "$[\"experimental design\"]",
+                  "char_start": 135,
+                  "char_end": 360,
+                  "evidence_text": "Mice were exposed to filtered air or simulated wildfire smoke in a 3D printed exposure chamber, which has been experimentally validated to evenly distribute particulate matter (Eden et al. 2023), for 2 h/d, 5 d/wk, for 16 wk."
+                }
+              },
+              "rule_result": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "override": {
+                "judgement_id": "J-1",
+                "reason": "Both readers record the same 16-week exposure regimen from the same experimental-design sentence (reader 1's span lies inside reader 2's) but under different dimensions: reader 1 as temporal_frame, reader 2 as experimental_condition. Rule 3a applied literally sets both to unknown and so loses a fact both readers found. D-017 placed laboratory treatments in experimental_condition; the regimen is a treatment, not the period of a hazard. Adopted in experimental_condition, limited to what reader 2's span states (strain and target concentration in reader 2's value are not in its span). temporal_frame stays unknown by rule 3a."
+              }
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [
+            "J-1"
+          ],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "differentially expressed genes; enriched pathways",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "functional pathways of differentially expressed genes",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "enriched in synaptic transmission, neuroplasticity, blood-brain barrier integrity, neurotransmitter metabolism pathways",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "enriched for synaptic transmission, neuroplasticity, BBB integrity, neurotransmitter metabolism",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "16 weeks of exposure (2 h/d, 5 d/wk)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$[\"experimental design\"]",
+                  "char_start": 331,
+                  "char_end": 359,
+                  "evidence_text": "for 2 h/d, 5 d/wk, for 16 wk"
+                }
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "male Apoe-/- mice exposed to laboratory-generated wildfire smoke (target 40 mg/m3) 2 h/d, 5 d/wk for 16 wk vs filtered air",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$[\"experimental design\"]",
+                  "char_start": 135,
+                  "char_end": 360,
+                  "evidence_text": "Mice were exposed to filtered air or simulated wildfire smoke in a 3D printed exposure chamber, which has been experimentally validated to evenly distribute particulate matter (Eden et al. 2023), for 2 h/d, 5 d/wk, for 16 wk."
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "claim_type": {
+              "reader_1": "finding",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        },
+        {
+          "reader_1_claim_id": "LIT-001521-C3",
+          "reader_2_claim_id": "271744500-C3",
+          "overlap_code_points": 130,
+          "reader_1_evidence": {
+            "json_path": "$.discussion",
+            "char_start": 9763,
+            "char_end": 9893,
+            "evidence_text": "Interestingly, there did not appear to be significant alterations in canonical neuroinflammatory pathways in our primary analyses."
+          },
+          "reader_2_evidence": {
+            "json_path": "$.discussion",
+            "char_start": 9763,
+            "char_end": 9893,
+            "evidence_text": "Interestingly, there did not appear to be significant alterations in canonical neuroinflammatory pathways in our primary analyses."
+          },
+          "reader_1_text": "Contrary to expectation from prior smoke studies, the primary analyses showed no significant alterations in canonical neuroinflammatory pathways.",
+          "reader_2_text": "Canonical neuroinflammatory pathways did not appear significantly altered in the primary analyses.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "No significant alteration ('did not appear').",
+              "rule": "judged same content, same tag"
+            },
+            "geography": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "temporal_frame": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1 files the exposure regimen here; reader 2 leaves it unknown and files it under experimental_condition.",
+              "rule": "3a: unknown beats a value",
+              "adopted": {
+                "value": "unknown",
+                "tag": "unknown"
+              }
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1 unknown; reader 2 explicit. Rule 3a gives unknown; see override J-1.",
+              "rule": "3a: unknown beats a value",
+              "adopted": {
+                "value": "simulated wildfire smoke versus filtered air, 2 h/d, 5 d/wk, for 16 wk",
+                "tag": "explicit",
+                "support_from": "r2",
+                "support": {
+                  "json_path": "$[\"experimental design\"]",
+                  "char_start": 135,
+                  "char_end": 360,
+                  "evidence_text": "Mice were exposed to filtered air or simulated wildfire smoke in a 3D printed exposure chamber, which has been experimentally validated to evenly distribute particulate matter (Eden et al. 2023), for 2 h/d, 5 d/wk, for 16 wk."
+                }
+              },
+              "rule_result": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "override": {
+                "judgement_id": "J-1",
+                "reason": "Both readers record the same 16-week exposure regimen from the same experimental-design sentence (reader 1's span lies inside reader 2's) but under different dimensions: reader 1 as temporal_frame, reader 2 as experimental_condition. Rule 3a applied literally sets both to unknown and so loses a fact both readers found. D-017 placed laboratory treatments in experimental_condition; the regimen is a treatment, not the period of a hazard. Adopted in experimental_condition, limited to what reader 2's span states (strain and target concentration in reader 2's value are not in its span). temporal_frame stays unknown by rule 3a."
+              }
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [
+            "J-1"
+          ],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "canonical neuroinflammatory pathways",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "canonical neuroinflammatory pathways",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "no significant alterations ('did not appear')",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "did not appear to be significantly altered",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "16 weeks of exposure (2 h/d, 5 d/wk)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$[\"experimental design\"]",
+                  "char_start": 331,
+                  "char_end": 359,
+                  "evidence_text": "for 2 h/d, 5 d/wk, for 16 wk"
+                }
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "male Apoe-/- mice exposed to laboratory-generated wildfire smoke (target 40 mg/m3) 2 h/d, 5 d/wk for 16 wk vs filtered air",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$[\"experimental design\"]",
+                  "char_start": 135,
+                  "char_end": 360,
+                  "evidence_text": "Mice were exposed to filtered air or simulated wildfire smoke in a 3D printed exposure chamber, which has been experimentally validated to evenly distribute particulate matter (Eden et al. 2023), for 2 h/d, 5 d/wk, for 16 wk."
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "claim_type": {
+              "reader_1": "finding",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        },
+        {
+          "reader_1_claim_id": "LIT-001521-C4",
+          "reader_2_claim_id": "271744500-C4",
+          "overlap_code_points": 154,
+          "reader_1_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 0,
+            "char_end": 154,
+            "evidence_text": "Wildfires have become common global phenomena concurrent with warmer and drier climates and are now major contributors to ambient air pollution worldwide."
+          },
+          "reader_2_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 0,
+            "char_end": 154,
+            "evidence_text": "Wildfires have become common global phenomena concurrent with warmer and drier climates and are now major contributors to ambient air pollution worldwide."
+          },
+          "reader_1_text": "Wildfires have become common worldwide alongside warmer, drier climates and are now major contributors to ambient air pollution.",
+          "reader_2_text": "Wildfires have become common globally, concurrent with warmer and drier climates, and are now major contributors to ambient air pollution worldwide.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Air pollution in concept (reader 1) or relation (reader 2).",
+              "rule": "judged same content, same tag"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Same wording save 'ambient'.",
+              "rule": "judged same content, same tag"
+            },
+            "geography": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "temporal_frame": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1 'present (now)' explicit; reader 2 unknown.",
+              "rule": "3a: unknown beats a value",
+              "adopted": {
+                "value": "unknown",
+                "tag": "unknown"
+              }
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "wildfires; ambient air pollution",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "wildfires",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "have become common, concurrent with warmer and drier climates; major contributors to air pollution",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "have become common, concurrent with warmer and drier climates; major contributors to ambient air pollution",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "global / worldwide",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "global / worldwide",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "present ('now')",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "claim_type": {
+              "reader_1": "background_citation",
+              "reader_2": "background_citation",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        }
+      ],
+      "reader_1_only": [],
+      "reader_2_only": []
+    },
+    {
+      "item_id": "LIT-001711",
+      "blind_basename": "54542600.json",
+      "pairs": [
+        {
+          "reader_1_claim_id": "LIT-001711-C1",
+          "reader_2_claim_id": "54542600-C1",
+          "overlap_code_points": 185,
+          "reader_1_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 941,
+            "char_end": 1126,
+            "evidence_text": "We found that severe and intense regional rainfall events, as well as the sequence of recharge events both within and between years, determine surface water expression on the floodplain"
+          },
+          "reader_2_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 941,
+            "char_end": 1126,
+            "evidence_text": "We found that severe and intense regional rainfall events, as well as the sequence of recharge events both within and between years, determine surface water expression on the floodplain"
+          },
+          "reader_1_text": "Severe, intense regional rainfall events and the sequence of recharge events within and between years determine surface water extent on the Fortescue Marsh floodplain.",
+          "reader_2_text": "Severe and intense regional rainfall events, plus the sequence of recharge events within and between years, determine surface water expression on the floodplain.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Drivers in concept (reader 1) or relation (reader 2).",
+              "rule": "judged same content, same tag"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "'determine' / 'determined by'.",
+              "rule": "judged same content, same tag"
+            },
+            "geography": {
+              "agree": false,
+              "content_judgement": "same",
+              "note": "Both name the Fortescue Marsh. Reader 1 tags it explicit via the abstract span 'the Fortescue Marsh, the largest water feature of inland northwest Australia'; reader 2 tags the same link inferred. The span states 'Fortescue Marsh' and 'inland northwest Australia' but not 'upper Fortescue River catchment', 'semi-arid' or 'Pilbara', which both readers' values add; adopted trimmed to the span.",
+              "rule": "3b: explicit kept only where its span states the adopted value",
+              "explicit_span_states": true,
+              "adopted": {
+                "value": "Fortescue Marsh, inland northwest Australia",
+                "tag": "explicit",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 683,
+                  "char_end": 759,
+                  "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+                }
+              }
+            },
+            "temporal_frame": {
+              "agree": false,
+              "content_judgement": "same",
+              "note": "Both cite the span 'from 1988 to 2012'; reader 1 explicit, reader 2 inferred. The span states the years; 'calibration' and 'satellite observations' in the values are not in it.",
+              "rule": "3b: explicit kept only where its span states the adopted value",
+              "explicit_span_states": true,
+              "adopted": {
+                "value": "1988 to 2012",
+                "tag": "explicit",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 761,
+                  "char_end": 778,
+                  "evidence_text": "from 1988 to 2012"
+                }
+              }
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "severe and intense regional rainfall events; sequence of recharge events; surface water expression",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "surface water expression on the floodplain",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "determine",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "determined by severe and intense regional rainfall events and the sequence of recharge events",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "Fortescue Marsh floodplain, upper Fortescue River catchment, semi-arid northwest Australia",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 683,
+                  "char_end": 759,
+                  "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+                }
+              },
+              "reader_2": {
+                "value": "Fortescue Marsh, upper Fortescue River catchment, Pilbara, northwest Australia",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 596,
+                  "char_end": 779,
+                  "evidence_text": "We used a monthly sequence of satellite images to quantify surface water expression on the Fortescue Marsh, the largest water feature of inland northwest Australia, from 1988 to 2012."
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "model calibrated on 1988-2012 satellite observations",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 761,
+                  "char_end": 778,
+                  "evidence_text": "from 1988 to 2012"
+                }
+              },
+              "reader_2": {
+                "value": "1988-2012 (calibration period)",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 761,
+                  "char_end": 778,
+                  "evidence_text": "from 1988 to 2012"
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "claim_type": {
+              "reader_1": "finding",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        },
+        {
+          "reader_1_claim_id": "LIT-001711-C2",
+          "reader_2_claim_id": "54542600-C2",
+          "overlap_code_points": 85,
+          "reader_1_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 1255,
+            "char_end": 1340,
+            "evidence_text": "The most severe inundation (∼ 1000 km 2 ) over the last century was recorded in 2000."
+          },
+          "reader_2_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 1255,
+            "char_end": 1340,
+            "evidence_text": "The most severe inundation (∼ 1000 km 2 ) over the last century was recorded in 2000."
+          },
+          "reader_1_text": "The most severe inundation of the last century on the Fortescue Marsh, about 1000 km2, was recorded in 2000.",
+          "reader_2_text": "The most severe inundation of the last century, about 1000 km2, was recorded in 2000.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Inundation (flood area).",
+              "rule": "judged same content, same tag"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Reader 2 moves the year 2000 into temporal_frame.",
+              "rule": "judged same content, same tag"
+            },
+            "geography": {
+              "agree": false,
+              "content_judgement": "same",
+              "note": "Both name the Fortescue Marsh. Reader 1 tags it explicit via the abstract span 'the Fortescue Marsh, the largest water feature of inland northwest Australia'; reader 2 tags the same link inferred. The span states 'Fortescue Marsh' and 'inland northwest Australia' but not 'upper Fortescue River catchment', 'semi-arid' or 'Pilbara', which both readers' values add; adopted trimmed to the span.",
+              "rule": "3b: explicit kept only where its span states the adopted value",
+              "explicit_span_states": true,
+              "adopted": {
+                "value": "Fortescue Marsh, inland northwest Australia",
+                "tag": "explicit",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 683,
+                  "char_end": 759,
+                  "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+                }
+              }
+            },
+            "temporal_frame": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Both 'last century'; reader 1 adds the reconstruction start (1912, from its support span), reader 2 the year 2000 (from the evidence).",
+              "rule": "judged same content, same tag"
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "inundation",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "inundation (flood area)",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "most severe (~1000 km2) in 2000",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "most severe (~1000 km2)",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "Fortescue Marsh floodplain, upper Fortescue River catchment, semi-arid northwest Australia",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 683,
+                  "char_end": 759,
+                  "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+                }
+              },
+              "reader_2": {
+                "value": "Fortescue Marsh, upper Fortescue River catchment, Pilbara, northwest Australia",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 596,
+                  "char_end": 779,
+                  "evidence_text": "We used a monthly sequence of satellite images to quantify surface water expression on the Fortescue Marsh, the largest water feature of inland northwest Australia, from 1988 to 2012."
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "last century (reconstruction since 1912)",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 879,
+                  "char_end": 940,
+                  "evidence_text": "reconstruct monthly history of floods and droughts since 1912"
+                }
+              },
+              "reader_2": {
+                "value": "over the last century; 2000",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "claim_type": {
+              "reader_1": "finding",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        },
+        {
+          "reader_1_claim_id": "LIT-001711-C3",
+          "reader_2_claim_id": "54542600-C4",
+          "overlap_code_points": 141,
+          "reader_1_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 1625,
+            "char_end": 1766,
+            "evidence_text": "Duration, severity and frequency of inundations between 1999 and 2006 were above average and unprecedented when compared to the last century."
+          },
+          "reader_2_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 1625,
+            "char_end": 1766,
+            "evidence_text": "Duration, severity and frequency of inundations between 1999 and 2006 were above average and unprecedented when compared to the last century."
+          },
+          "reader_1_text": "Between 1999 and 2006, the duration, severity and frequency of inundations were above average and unprecedented relative to the last century.",
+          "reader_2_text": "Inundation duration, severity and frequency during 1999-2006 were above average and unprecedented relative to the last century.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "relation_or_direction": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "geography": {
+              "agree": false,
+              "content_judgement": "same",
+              "note": "Both name the Fortescue Marsh. Reader 1 tags it explicit via the abstract span 'the Fortescue Marsh, the largest water feature of inland northwest Australia'; reader 2 tags the same link inferred. The span states 'Fortescue Marsh' and 'inland northwest Australia' but not 'upper Fortescue River catchment', 'semi-arid' or 'Pilbara', which both readers' values add; adopted trimmed to the span.",
+              "rule": "3b: explicit kept only where its span states the adopted value",
+              "explicit_span_states": true,
+              "adopted": {
+                "value": "Fortescue Marsh, inland northwest Australia",
+                "tag": "explicit",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 683,
+                  "char_end": 759,
+                  "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+                }
+              }
+            },
+            "temporal_frame": {
+              "agree": true,
+              "content_judgement": "same",
+              "note": "Wording only.",
+              "rule": "judged same content, same tag"
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "duration, severity and frequency of inundations",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "duration, severity and frequency of inundations",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "above average and unprecedented",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "above average and unprecedented",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "geography": {
+              "reader_1": {
+                "value": "Fortescue Marsh floodplain, upper Fortescue River catchment, semi-arid northwest Australia",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 683,
+                  "char_end": 759,
+                  "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+                }
+              },
+              "reader_2": {
+                "value": "Fortescue Marsh, upper Fortescue River catchment, Pilbara, northwest Australia",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 596,
+                  "char_end": 779,
+                  "evidence_text": "We used a monthly sequence of satellite images to quantify surface water expression on the Fortescue Marsh, the largest water feature of inland northwest Australia, from 1988 to 2012."
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "1999-2006, compared with the last century",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "1999-2006 compared to the last century",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "claim_type": {
+              "reader_1": "finding",
+              "reader_2": "finding",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        },
+        {
+          "reader_1_claim_id": "LIT-001711-C4",
+          "reader_2_claim_id": "54542600-C5",
+          "overlap_code_points": 197,
+          "reader_1_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 1826,
+            "char_end": 2023,
+            "evidence_text": "changes to the flooding regime over the last 20 years suggest that the wetland will become more persistent in response to increased frequency and intensity of extreme rainfall events for the region"
+          },
+          "reader_2_evidence": {
+            "json_path": "$.abstract",
+            "char_start": 1826,
+            "char_end": 2128,
+            "evidence_text": "changes to the flooding regime over the last 20 years suggest that the wetland will become more persistent in response to increased frequency and intensity of extreme rainfall events for the region, which in turn will likely impact on the structure and functioning of this highly specialized ecosystem."
+          },
+          "reader_1_text": "The authors suggest the wetland will become more persistent as extreme rainfall events in the region become more frequent and intense.",
+          "reader_2_text": "Recent flooding-regime changes suggest the wetland will become more persistent as extreme rainfall events increase in frequency and intensity, likely impacting the ecosystem's structure and functioning.",
+          "status": "adjudicated_modified",
+          "rule": "R3",
+          "decisions": {
+            "concept": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 2's evidence runs on through 'which in turn will likely impact on the structure and functioning of this highly specialized ecosystem' and its concept adds that; reader 1 stops before it. Adopted: the narrower content both spans contain.",
+              "rule": "3c: same tag, content differs; span-limited value both readers support",
+              "adopted": {
+                "value": "wetland persistence; frequency and intensity of extreme rainfall events",
+                "tag": "explicit",
+                "support_from": "r1_evidence",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 1826,
+                  "char_end": 2023,
+                  "evidence_text": "changes to the flooding regime over the last 20 years suggest that the wetland will become more persistent in response to increased frequency and intensity of extreme rainfall events for the region"
+                }
+              }
+            },
+            "relation_or_direction": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "As for concept; the ecosystem-impact clause is reader-2-only content.",
+              "rule": "3c: same tag, content differs; span-limited value both readers support",
+              "adopted": {
+                "value": "will become more persistent (hedged: 'suggest')",
+                "tag": "explicit",
+                "support_from": "r1_evidence",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 1826,
+                  "char_end": 2023,
+                  "evidence_text": "changes to the flooding regime over the last 20 years suggest that the wetland will become more persistent in response to increased frequency and intensity of extreme rainfall events for the region"
+                }
+              }
+            },
+            "geography": {
+              "agree": false,
+              "content_judgement": "same",
+              "note": "Both name the Fortescue Marsh. Reader 1 tags it explicit via the abstract span 'the Fortescue Marsh, the largest water feature of inland northwest Australia'; reader 2 tags the same link inferred. The span states 'Fortescue Marsh' and 'inland northwest Australia' but not 'upper Fortescue River catchment', 'semi-arid' or 'Pilbara', which both readers' values add; adopted trimmed to the span.",
+              "rule": "3b: explicit kept only where its span states the adopted value",
+              "explicit_span_states": true,
+              "adopted": {
+                "value": "Fortescue Marsh, inland northwest Australia",
+                "tag": "explicit",
+                "support_from": "r1",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 683,
+                  "char_end": 759,
+                  "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+                }
+              }
+            },
+            "temporal_frame": {
+              "agree": false,
+              "content_judgement": "differs",
+              "note": "Reader 1 unknown; reader 2 'over the last 20 years (basis); future unspecified'.",
+              "rule": "3a: unknown beats a value",
+              "adopted": {
+                "value": "unknown",
+                "tag": "unknown"
+              }
+            },
+            "scenario": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "experimental_condition": {
+              "agree": true,
+              "rule": "identical"
+            },
+            "claim_type": {
+              "agree": true,
+              "rule": "identical"
+            }
+          },
+          "unresolved_ties": [],
+          "overrides": [],
+          "mechanical": {
+            "concept": {
+              "reader_1": {
+                "value": "wetland persistence; frequency and intensity of extreme rainfall events",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "wetland persistence; ecosystem structure and functioning",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "relation_or_direction": {
+              "reader_1": {
+                "value": "will become more persistent (hedged: 'suggest')",
+                "tag": "explicit"
+              },
+              "reader_2": {
+                "value": "suggest will become more persistent in response to increased frequency and intensity of extreme rainfall; will likely impact",
+                "tag": "explicit"
+              },
+              "tag_agree": true,
+              "value_identical": false
+            },
+            "geography": {
+              "reader_1": {
+                "value": "Fortescue Marsh floodplain, upper Fortescue River catchment, semi-arid northwest Australia",
+                "tag": "explicit",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 683,
+                  "char_end": 759,
+                  "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+                }
+              },
+              "reader_2": {
+                "value": "the region (Fortescue Marsh)",
+                "tag": "inferred",
+                "support": {
+                  "json_path": "$.abstract",
+                  "char_start": 683,
+                  "char_end": 759,
+                  "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+                }
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "temporal_frame": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "over the last 20 years (basis); future unspecified",
+                "tag": "explicit"
+              },
+              "tag_agree": false,
+              "value_identical": false
+            },
+            "scenario": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "experimental_condition": {
+              "reader_1": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "reader_2": {
+                "value": "unknown",
+                "tag": "unknown"
+              },
+              "tag_agree": true,
+              "value_identical": true
+            },
+            "claim_type": {
+              "reader_1": "projection",
+              "reader_2": "projection",
+              "tag_agree": true,
+              "value_identical": true
+            }
+          }
+        }
+      ],
+      "reader_1_only": [
+        {
+          "claim_id": "LIT-001711-C5",
+          "text": "Extended droughts with no surface water on the Marsh were more frequent from the late 1930s to the early 1960s; the longest lasted 4.3 years, 1961-1965.",
+          "evidence": {
+            "json_path": "$[\"results and discussion\"]",
+            "char_start": 5485,
+            "char_end": 5723,
+            "evidence_text": "particularly extended drought periods (where no surface water is evident on the Marsh) were more frequent between the late 1930's and early 1960's, with the longest supraseasonal drought on record lasting 4.3 years (between 1961 and 1965)"
+          },
+          "overlaps_reader_2_rejected": []
+        }
+      ],
+      "reader_2_only": [
+        {
+          "claim_id": "54542600-C3",
+          "text": "The Fortescue Marsh was completely dry in 32% of all years, for periods of up to four consecutive years.",
+          "evidence": {
+            "json_path": "$.abstract",
+            "char_start": 1340,
+            "char_end": 1446,
+            "evidence_text": "The Fortescue Marsh was completely dry for 32 % of all years, for periods of up to four consecutive years."
+          },
+          "overlaps_reader_1_rejected": [
+            {
+              "rejected_id": "LIT-001711-R1",
+              "overlap_code_points": 106,
+              "reason": "Hard to reconcile with the results ('68 % of years ended with no surface water'; the longest drought 4.3 years); which quantity is meant is ambiguous.",
+              "evidence_text": "The Fortescue Marsh was completely dry for 32 % of all years, for periods of up to four consecutive years."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "phase_b_counts": {
+    "aligned_pairs": 19,
+    "reader_1_only": 8,
+    "reader_2_only": 2
+  },
+  "phase_c_statistics": {
+    "caveat": "n is small (10 items, 19 aligned pairs at most). These are descriptive counts of two readings, not estimates of reader reliability, and support no inferential statement.",
+    "scope_agreement": {
+      "agree": 6,
+      "n": 10
+    },
+    "per_item_claim_count_agreement": {
+      "agree": 8,
+      "n": 10,
+      "note": "equal counts do not imply the same claims (see alignment)"
+    },
+    "reader_1_claims_with_aligned_reader_2": {
+      "aligned": 19,
+      "n": 27
+    },
+    "reader_2_claims_with_aligned_reader_1": {
+      "aligned": 19,
+      "n": 21
+    },
+    "restricted_to_items_both_in_scope": {
+      "items": [
+        "LIT-000191",
+        "LIT-000381",
+        "LIT-001141",
+        "LIT-001521",
+        "LIT-001711"
+      ],
+      "reader_1_aligned": {
+        "aligned": 19,
+        "n": 22
+      },
+      "reader_2_aligned": {
+        "aligned": 19,
+        "n": 21
+      }
+    },
+    "per_dimension_over_aligned_pairs": {
+      "concept": {
+        "n_pairs": 19,
+        "tag_agreement": 19,
+        "exact_agreement_tag_and_content": 16,
+        "exact_agreement_rate": 0.842
+      },
+      "relation_or_direction": {
+        "n_pairs": 19,
+        "tag_agreement": 18,
+        "exact_agreement_tag_and_content": 16,
+        "exact_agreement_rate": 0.842
+      },
+      "geography": {
+        "n_pairs": 19,
+        "tag_agreement": 8,
+        "exact_agreement_tag_and_content": 5,
+        "exact_agreement_rate": 0.263
+      },
+      "temporal_frame": {
+        "n_pairs": 19,
+        "tag_agreement": 12,
+        "exact_agreement_tag_and_content": 12,
+        "exact_agreement_rate": 0.632
+      },
+      "scenario": {
+        "n_pairs": 19,
+        "tag_agreement": 19,
+        "exact_agreement_tag_and_content": 19,
+        "exact_agreement_rate": 1.0
+      },
+      "experimental_condition": {
+        "n_pairs": 19,
+        "tag_agreement": 14,
+        "exact_agreement_tag_and_content": 13,
+        "exact_agreement_rate": 0.684
+      },
+      "claim_type": {
+        "n_pairs": 19,
+        "tag_agreement": 19,
+        "exact_agreement_tag_and_content": 18,
+        "exact_agreement_rate": 0.947
+      }
+    }
+  },
+  "field_13_screen": {
+    "method": "boundary-aware lexical match (climrr.conceptmap.find_term) of the frozen WP2 concept terms and of the WP2 place terms plus United States, USA, U.S. over every recorded text of each claim (claim text, evidence, dimension values, support spans); scenario read from the tag. A screen of recorded claims, not a reading of any paper.",
+    "concept_terms": [
+      "fire weather index",
+      "FWI",
+      "heat index"
+    ],
+    "place_terms": [
+      "Oklahoma",
+      "Stephens",
+      "California",
+      "United States",
+      "USA",
+      "U.S."
+    ],
+    "claims": [
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-000191",
+        "claim_id": "LIT-000191-C1",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-000191",
+        "claim_id": "LIT-000191-C2",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-000191",
+        "claim_id": "LIT-000191-C3",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-000191",
+        "claim_id": "LIT-000191-C4",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-000191",
+        "claim_id": "15420300-C1",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-000191",
+        "claim_id": "15420300-C2",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-000191",
+        "claim_id": "15420300-C3",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-000191",
+        "claim_id": "15420300-C4",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-000381",
+        "claim_id": "LIT-000381-C1",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-000381",
+        "claim_id": "LIT-000381-C2",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-000381",
+        "claim_id": "LIT-000381-C3",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-000381",
+        "claim_id": "LIT-000381-C4",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-000381",
+        "claim_id": "211092500-C1",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-000381",
+        "claim_id": "211092500-C2",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-000381",
+        "claim_id": "211092500-C3",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-000381",
+        "claim_id": "211092500-C4",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-000571",
+        "claim_id": "LIT-000571-C1",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-000571",
+        "claim_id": "LIT-000571-C2",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-000571",
+        "claim_id": "LIT-000571-C3",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-000571",
+        "claim_id": "LIT-000571-C4",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-000571",
+        "claim_id": "LIT-000571-C5",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-001141",
+        "claim_id": "LIT-001141-C1",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-001141",
+        "claim_id": "LIT-001141-C2",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-001141",
+        "claim_id": "LIT-001141-C3",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-001141",
+        "claim_id": "LIT-001141-C4",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-001141",
+        "claim_id": "LIT-001141-C5",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-001141",
+        "claim_id": "251972000-C1",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-001141",
+        "claim_id": "251972000-C2",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-001141",
+        "claim_id": "251972000-C3",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-001141",
+        "claim_id": "251972000-C4",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-001521",
+        "claim_id": "LIT-001521-C1",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-001521",
+        "claim_id": "LIT-001521-C2",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-001521",
+        "claim_id": "LIT-001521-C3",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-001521",
+        "claim_id": "LIT-001521-C4",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-001521",
+        "claim_id": "271744500-C1",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-001521",
+        "claim_id": "271744500-C2",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-001521",
+        "claim_id": "271744500-C3",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-001521",
+        "claim_id": "271744500-C4",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-001711",
+        "claim_id": "LIT-001711-C1",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-001711",
+        "claim_id": "LIT-001711-C2",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-001711",
+        "claim_id": "LIT-001711-C3",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-001711",
+        "claim_id": "LIT-001711-C4",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_1",
+        "item_id": "LIT-001711",
+        "claim_id": "LIT-001711-C5",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-001711",
+        "claim_id": "54542600-C1",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-001711",
+        "claim_id": "54542600-C2",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-001711",
+        "claim_id": "54542600-C3",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-001711",
+        "claim_id": "54542600-C4",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      },
+      {
+        "reader": "reader_2",
+        "item_id": "LIT-001711",
+        "claim_id": "54542600-C5",
+        "pilot_concept_terms": [],
+        "us_geography_terms": [],
+        "scenario_tag": "unknown",
+        "scenario_value": "unknown"
+      }
+    ],
+    "flagged_any_reader": [],
+    "reader_2_only_flagged": [],
+    "answer": "The blind reader found no claim with US geography, an emissions scenario, or a pilot concept term that reader 1 missed."
+  },
+  "phase_d_status_counts": {
+    "independently_confirmed": 1,
+    "adjudicated_modified": 23,
+    "single_reader_provisional": 5,
+    "rejected_on_review": 0
+  }
+}

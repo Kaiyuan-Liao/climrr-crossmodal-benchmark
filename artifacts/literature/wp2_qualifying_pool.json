@@ -1,0 +1,72 @@
+{
+  "package": "M4-WP2 retrieval",
+  "statement": "Relevance-guided candidate-generation sample, not representative.",
+  "not_read": "No candidate has been read; semantic inspection waits for M4-WP1b (D-018).",
+  "rule": "Scan every corpus-manifest item (SHA-256 verified, decoded as JSON); in every string value at any depth (object keys not scanned), find every frozen term case-insensitively where the code points immediately before and after the match, if any, are not letters, numbers or combining marks (Unicode categories L*, N*, M*). Qualify iff >= 1 concept-term hit and >= 1 place-term hit. Remove the later member(s) of every exact-byte duplicate group (keep the lowest LIT id) before the cap. Sort by LIT id; take the first 12. No manual replacement.",
+  "cap": 12,
+  "terms_sha256": "3d0b1513478b8096a4507f454df1ab5b22928b25fd3354d096961198a1e7d02c",
+  "corpus_manifest_sha256": "3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a",
+  "corpus_content_identity_sha256": "e217076f0f155a12f0954313059fba14904826658676e504e8cbb4c042e71f5e",
+  "n_items_scanned": 1918,
+  "n_parse_failures": 0,
+  "parse_failures": [],
+  "n_with_concept_hit": 18,
+  "n_with_place_hit": 172,
+  "n_qualifying_before_dedupe": 4,
+  "removed_as_later_duplicates": [],
+  "n_qualifying_pool": 4,
+  "pool": [
+    {
+      "item_id": "LIT-000166",
+      "concept_hits": 1,
+      "place_hits": 1,
+      "by_term": {
+        "WP2-T01": 1,
+        "WP2-T02": 0,
+        "WP2-T03": 0,
+        "WP2-T04": 0,
+        "WP2-T05": 1,
+        "WP2-T06": 0
+      }
+    },
+    {
+      "item_id": "LIT-000519",
+      "concept_hits": 13,
+      "place_hits": 1,
+      "by_term": {
+        "WP2-T01": 6,
+        "WP2-T02": 7,
+        "WP2-T03": 0,
+        "WP2-T04": 0,
+        "WP2-T05": 0,
+        "WP2-T06": 1
+      }
+    },
+    {
+      "item_id": "LIT-001501",
+      "concept_hits": 11,
+      "place_hits": 22,
+      "by_term": {
+        "WP2-T01": 0,
+        "WP2-T02": 11,
+        "WP2-T03": 0,
+        "WP2-T04": 15,
+        "WP2-T05": 0,
+        "WP2-T06": 7
+      }
+    },
+    {
+      "item_id": "LIT-001536",
+      "concept_hits": 1,
+      "place_hits": 11,
+      "by_term": {
+        "WP2-T01": 0,
+        "WP2-T02": 0,
+        "WP2-T03": 1,
+        "WP2-T04": 2,
+        "WP2-T05": 0,
+        "WP2-T06": 9
+      }
+    }
+  ]
+}

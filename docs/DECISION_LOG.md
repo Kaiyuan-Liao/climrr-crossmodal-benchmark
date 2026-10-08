@@ -1150,3 +1150,87 @@ code emits, and the next GUIDANCE packet still chooses.
   `artifacts/literature/wp1_claims_summary.json`,
   `docs/LITERATURE_WP1_PILOT.md`, `reports/milestones/M4_WP1_REPORT.md`,
   `docs/PROJECT_STATE.md`, `docs/DECISION_LOG.md`.
+
+## D-018 --- M5-WP1 reviewed: PASS WITH ACTIONS, machinery validation only; concept map, P-STATE-1 v2, WP1b and WP2 retrieval authorized
+
+- **Date:** 2026-10-08
+- **Status:** **decided.**
+- **Owner:** **GUIDANCE**; **approved by Kaiyuan Liao**, who placed
+  `docs/M5_WP1_REVIEW_FOLLOWON_GUIDANCE_RULING.md` in the repository. Reviewed
+  head: **`c1010f0`**; merged into `main` at `55decb3`, scan fix `656044c`.
+- **What the ruling decides.**
+  1. **M5-WP1: PASS WITH ACTIONS --- machinery validation only.** Its frozen
+     inputs and matrix stay unchanged and reproducible at their original
+     hashes; the result remains valid for the prototype version it used. It is
+     not validated bridge evidence.
+  2. **P-STATE-1 year windows: authorized as a versioned provenance
+     correction.** Cite exact dictionary spans; inherit the same epistemic
+     status as the underlying interpretation; change no ClimRR numeric value;
+     log the amendment; hash and version the rebuilt prototype. **Do not
+     rewrite the frozen M5-WP1 input.**
+  3. **`concept_map.yaml` is authorized**, with family-versus-metric
+     specificity preserved. The ruling's rule, verbatim: *"A claim concept may
+     match a canonical concept only by exact membership in an approved
+     surface-term set."* *"Broad vocabulary must **not** silently map to a
+     narrower metric."* Distinguish **concept family** (e.g. `heat_index`,
+     `fire_weather_index`) from **specific metric / measure** (e.g.
+     `days_above_105F`, a seasonal FWI statistic, percent change).
+     `"heat index"` → a threshold-specific metric: **not by that phrase alone.**
+  4. **Who may approve a mapping**, verbatim: *"COORDINATOR may approve
+     mechanically source-backed lexical aliases without another GUIDANCE round
+     only when the alias does not broaden, narrow, or reinterpret scientific
+     meaning. Scientific synonymy, hierarchy, threshold interpretation, or
+     family→metric narrowing must return to GUIDANCE or the mentor."* No UHI →
+     heat index, wildfire smoke → FWI, or drought → FWI mapping on scientific
+     relatedness.
+  5. **`candidate_bridge_eligible`**, verbatim: a pair may advance for bridge
+     review when *"concept = `compatible`; geography = `compatible`; no
+     dimension is `incompatible`; time may be `compatible` or `not_evaluable`;
+     scenario may be `compatible` or `not_evaluable`; direction may be
+     `compatible` or `not_evaluable`."* Candidate eligibility is **candidate
+     bridge**, not validated supporting bridge; it is defined separately from
+     the final M5 relation.
+  6. **Unknown scenario is tolerated for candidacy, never for unqualified
+     support**, verbatim: *"a scenario-specific ClimRR prototype cannot receive
+     an unqualified `supporting` relation from a claim whose scenario is
+     unknown. Unknown scenario/time must remain visible in the final M5
+     relation."* Missing scenario is never scenario compatibility; "nothing
+     contradicts it" is never `supporting`.
+  7. **M4-WP1b authorized: a blind second reading of all ten WP1 papers.** The
+     second reader receives the ten frozen items, the extraction
+     rubric/schema and the evidence-location rules, and **not** the
+     prototypes, first-reader claims or scope labels, M5 results, or expected
+     outcomes. Its independent result is frozen before comparison and
+     adjudication; both readings and the adjudication are kept; disagreements
+     are preserved, not overwritten.
+  8. **M4-WP2 retrieval conditionally authorized**: approved concept terms +
+     approved prototype place terms → **boundary-aware** lexical scan
+     (unrestricted substring matching **rejected**) over all decoded JSON
+     string values → qualify iff ≥1 concept hit and ≥1 place hit →
+     **deduplicate exact-byte duplicates before the cap** → stable LIT-id order
+     → first 12 → **freeze before reading**. **Approved place terms only**: no
+     silent `California→CA`, `Oklahoma→OK` or similar. Every hit records item
+     id, JSON path, matched term, term class and exact span. No manual
+     replacement. Labelled **relevance-guided candidate-generation sample, not
+     representative**. A retrieval hit is not a semantic bridge. **Semantic
+     reading of WP2 candidates waits until WP1b closes** without materially
+     invalidating the premise for relevance-guided sampling.
+  9. **QA generation is still not authorized.**
+- **Mentor question recorded** (verbatim from the ruling, now first for the
+  next one-on-one in `MENTOR_BRIEF.md`): *"Does the intended bridge require
+  literature to match the exact ClimRR metric/scenario, or is support at the
+  broader hazard/concept level sufficient when unmatched dimensions are
+  explicitly disclosed?"*
+- **COORDINATOR approvals under item 4, recorded here:** the seed entries of
+  `data/metadata/concept_map.yaml` with status `approved_lexical` ---
+  `fire_weather_index` (family; "fire weather index", "FWI") and `heat_index`
+  (family; "heat index"), each term quoted from a dictionary line. The two
+  metric entries (`fwi_seasonal_value`, `heatindex_days_above_105F`) are
+  `proposed` with **no** surface terms: no dictionary phrase names either
+  statistic, and narrowing to them needs GUIDANCE or the mentor.
+- **Affected files:** `docs/M5_WP1_REVIEW_FOLLOWON_GUIDANCE_RULING.md` (tracked
+  as placed), `docs/DECISION_LOG.md`, `reports/milestones/M5_WP1_REPORT.md`
+  (fields 3, 14), `docs/MENTOR_BRIEF.md`, and on `work/m4-wp2-retrieval`:
+  `artifacts/phenomena/prototypes/P-STATE-1.v2.json`,
+  `data/metadata/concept_map.yaml`, `src/climrr/compat.py`,
+  `src/climrr/bridge.py`, the WP2 retrieval artifacts.

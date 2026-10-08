@@ -1,0 +1,694 @@
+{
+  "item_id": "LIT-000191",
+  "file_sha256": "c0d21168166315cd689a273109a0d218dae416380aaa2c2f3f33714816fa1398",
+  "corpus_manifest_sha256": "3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a",
+  "sample_sha256": "5cb81f9585040dd1d73a89ca7062d3c5e0060112f54e08ef4795db96a657b578",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR (Claude Code, model claude-opus-5-5); every sampled file read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no prototype, pilot family or collection query consulted",
+    "date": "2026-09-29",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "methods",
+    "larvae experiments",
+    "juvenile experiments",
+    "results",
+    "discussion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Effects of Elevated Temperature and Carbon Dioxide on the Growth and Survival of Larvae and Juveniles of Three Species of Northwest Atlantic Bivalves",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper tests how elevated seawater temperature and CO2 (warming and acidification) affect survival and growth of coastal bivalves, i.e. impacts of climate-driven stressors.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 0,
+    "char_end": 138,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "Rising CO 2 concentrations and water temperatures this century are likely to have transformative effects on many coastal marine organisms.",
+    "evidence_sha256": "3e958055a789fabece816b8cb07aee0d9a5138a808df291174eb439dc2c8d71f"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT-000191-C1",
+      "claim_text": "Higher temperature and higher CO2 each significantly depressed survival, development, growth and lipid synthesis of hard clam and bay scallop larvae, and the effects were additive.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "increases in temperature and CO 2; larval survival, development, growth, and lipid synthesis",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "each significantly depressed; effects additive",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Northwest Atlantic (the region of the species studied, per the title); the experiments were laboratory treatments",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.title",
+          "char_start": 105,
+          "char_end": 149,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Three Species of Northwest Atlantic Bivalves",
+          "evidence_sha256": "55c32f15f5f6d067f626f8054c578b7917a66ee2f4ab82c4929d8dd3b70afb3f"
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "experimental treatments 24 and 28 °C and ~250, 390 and 750 ppm CO2, described as representative of past, present and future summer conditions in temperate estuaries",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 330,
+          "char_end": 493,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "to temperatures (24 and 28uC) and CO 2 concentrations (,250, 390, and 750 ppm) representative of past, present, and future summer conditions in temperate estuaries",
+          "evidence_sha256": "9f6347314c2581baa1bd9386eb5147f0a80a43c8e15aba9fee33fd7d812edb8b"
+        }
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 495,
+        "char_end": 711,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Results demonstrated that increases in temperature and CO 2 each significantly depressed survival, development, growth, and lipid synthesis of M. mercenaria and A. irradians larvae and that the effects were additive.",
+        "evidence_sha256": "cee125e9ec92ec5811b3991e37f5a3a17dfd0a02e7d1679b35573858b8487860"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "'uC' in the source is the extracted form of °C; the evidence text is kept exactly as stored.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "adjudication": {
+        "package": "M4-WP1b-adj",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions for downstream use; both readers' values are kept above"
+        ],
+        "aligned_blind_claim_id": "15420300-C1",
+        "blind_evidence": {
+          "json_path": "$.abstract",
+          "char_start": 495,
+          "char_end": 711,
+          "evidence_text": "Results demonstrated that increases in temperature and CO 2 each significantly depressed survival, development, growth, and lipid synthesis of M. mercenaria and A. irradians larvae and that the effects were additive."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Reader 1 puts the drivers (temperature, CO2) in concept, reader 2 in the relation; the proposition is the same.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Both: each significantly depressed; additive.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Both infer Northwest Atlantic from the same title span. Reader 2 adds 'temperate estuaries', which its cited span (the title) does not state; reader 1 adds a laboratory caveat. Adopted: the part both state and the span supports.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "Northwest Atlantic (the region of the species studied, per the title)",
+              "tag": "inferred",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.title",
+                "char_start": 105,
+                "char_end": 149,
+                "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Both: 24 and 28 °C and ~250, 390, 750 ppm CO2, laboratory treatments; cited from different but consistent spans.",
+            "rule": "judged same content, same tag"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "Northwest Atlantic (the region of the species studied, per the title)",
+            "tag": "inferred",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.title",
+              "char_start": 105,
+              "char_end": 149,
+              "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-000191-C2",
+      "claim_text": "Juvenile hard clams and bay scallops were harmed by the higher temperature but juvenile oysters were not; juvenile oysters and bay scallops were harmed by higher CO2 but juvenile hard clams were not.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "higher temperatures; higher CO 2 concentrations; juvenile bivalves",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "negatively impacted / negatively affected, species-dependent",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Northwest Atlantic (the region of the species studied, per the title); the experiments were laboratory treatments",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.title",
+          "char_start": 105,
+          "char_end": 149,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Three Species of Northwest Atlantic Bivalves",
+          "evidence_sha256": "55c32f15f5f6d067f626f8054c578b7917a66ee2f4ab82c4929d8dd3b70afb3f"
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "juvenile treatments 24 and 28 °C and ~400 and 1700 ppm CO2",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"juvenile experiments\"]",
+          "char_start": 520,
+          "char_end": 591,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "CO 2 was continuously delivered as described above at ,400 and 1700 ppm",
+          "evidence_sha256": "a8a0ede90bb1cb4060fdf2f41163c712f164bc2dea848d9c73077dd4fdc19ca2"
+        }
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 712,
+        "char_end": 963,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Juvenile M. mercenaria and A. irradians were negatively impacted by higher temperatures while C. virginica juveniles were not. C. virginica and A. irradians juveniles were negatively affected by higher CO 2 concentrations, while M. mercenaria was not.",
+        "evidence_sha256": "7ad9744e44e2b2aa998a6e11a28ee7a490682b981807f883c6d759fa3a483a78"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "adjudication": {
+        "package": "M4-WP1b-adj",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions for downstream use; both readers' values are kept above"
+        ],
+        "aligned_blind_claim_id": "15420300-C2",
+        "blind_evidence": {
+          "json_path": "$.abstract",
+          "char_start": 712,
+          "char_end": 838,
+          "evidence_text": "Juvenile M. mercenaria and A. irradians were negatively impacted by higher temperatures while C. virginica juveniles were not."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1's evidence covers two sentences (temperature and CO2 effects on juveniles); reader 2's covers the temperature sentence only. Adopted: the temperature part both found. The CO2 sentence remains reader-1-only content within this claim.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "higher temperatures; juvenile M. mercenaria, A. irradians and C. virginica",
+              "tag": "explicit",
+              "support_from": "r2_evidence",
+              "support": {
+                "json_path": "$.abstract",
+                "char_start": 712,
+                "char_end": 838,
+                "evidence_text": "Juvenile M. mercenaria and A. irradians were negatively impacted by higher temperatures while C. virginica juveniles were not."
+              }
+            }
+          },
+          "relation_or_direction": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "As for concept: the CO2 half is reader-1-only.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "negatively impacted by higher temperatures (M. mercenaria, A. irradians); C. virginica juveniles not",
+              "tag": "explicit",
+              "support_from": "r2_evidence",
+              "support": {
+                "json_path": "$.abstract",
+                "char_start": 712,
+                "char_end": 838,
+                "evidence_text": "Juvenile M. mercenaria and A. irradians were negatively impacted by higher temperatures while C. virginica juveniles were not."
+              }
+            }
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Both infer Northwest Atlantic from the same title span. Reader 2 adds 'temperate estuaries', which its cited span (the title) does not state; reader 1 adds a laboratory caveat. Adopted: the part both state and the span supports.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "Northwest Atlantic (the region of the species studied, per the title)",
+              "tag": "inferred",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.title",
+                "char_start": 105,
+                "char_end": 149,
+                "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1's support span states only the CO2 levels (~400, 1700 ppm); reader 2's states only the temperatures and adds '45 days', which its span does not state. Adopted: the temperatures, matching the adopted temperature-only scope, stated by reader 2's span.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "juvenile treatments at 24 or 28 °C",
+              "tag": "explicit",
+              "support_from": "r2",
+              "support": {
+                "json_path": "$[\"juvenile experiments\"]",
+                "char_start": 354,
+                "char_end": 519,
+                "evidence_text": "Ten individuals of each species were placed into triplicate, 10-liter, high-density polyethylene vessels that were maintained in water baths of 24 or 28uC (Table 2)."
+              }
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "concept": {
+            "value": "higher temperatures; juvenile M. mercenaria, A. irradians and C. virginica",
+            "tag": "explicit",
+            "support_from": "r2_evidence",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 712,
+              "char_end": 838,
+              "evidence_text": "Juvenile M. mercenaria and A. irradians were negatively impacted by higher temperatures while C. virginica juveniles were not."
+            }
+          },
+          "relation_or_direction": {
+            "value": "negatively impacted by higher temperatures (M. mercenaria, A. irradians); C. virginica juveniles not",
+            "tag": "explicit",
+            "support_from": "r2_evidence",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 712,
+              "char_end": 838,
+              "evidence_text": "Juvenile M. mercenaria and A. irradians were negatively impacted by higher temperatures while C. virginica juveniles were not."
+            }
+          },
+          "geography": {
+            "value": "Northwest Atlantic (the region of the species studied, per the title)",
+            "tag": "inferred",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.title",
+              "char_start": 105,
+              "char_end": 149,
+              "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+            }
+          },
+          "experimental_condition": {
+            "value": "juvenile treatments at 24 or 28 °C",
+            "tag": "explicit",
+            "support_from": "r2",
+            "support": {
+              "json_path": "$[\"juvenile experiments\"]",
+              "char_start": 354,
+              "char_end": 519,
+              "evidence_text": "Ten individuals of each species were placed into triplicate, 10-liter, high-density polyethylene vessels that were maintained in water baths of 24 or 28uC (Table 2)."
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-000191-C3",
+      "claim_text": "Bivalve larvae were substantially more vulnerable to elevated CO2 than juvenile stages.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "elevated CO 2; larval versus juvenile vulnerability",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "larvae substantially more vulnerable than juveniles",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Northwest Atlantic (the region of the species studied, per the title); the experiments were laboratory treatments",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.title",
+          "char_start": 105,
+          "char_end": 149,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Three Species of Northwest Atlantic Bivalves",
+          "evidence_sha256": "55c32f15f5f6d067f626f8054c578b7917a66ee2f4ab82c4929d8dd3b70afb3f"
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 964,
+        "char_end": 1044,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Larvae were substantially more vulnerable to elevated CO 2 than juvenile stages.",
+        "evidence_sha256": "1cd8d132fbb970c4dc284bf048c82eaf8e9604ba6824dd4e2915d646b6ac6087"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "adjudication": {
+        "package": "M4-WP1b-adj",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions for downstream use; both readers' values are kept above"
+        ],
+        "aligned_blind_claim_id": "15420300-C3",
+        "blind_evidence": {
+          "json_path": "$.abstract",
+          "char_start": 964,
+          "char_end": 1044,
+          "evidence_text": "Larvae were substantially more vulnerable to elevated CO 2 than juvenile stages."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Elevated CO2; larval vs juvenile vulnerability.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Both infer Northwest Atlantic from the same title span. Reader 2 adds 'temperate estuaries', which its cited span (the title) does not state; reader 1 adds a laboratory caveat. Adopted: the part both state and the span supports.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "Northwest Atlantic (the region of the species studied, per the title)",
+              "tag": "inferred",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.title",
+                "char_start": 105,
+                "char_end": 149,
+                "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 unknown; reader 2 lists larval and juvenile CO2 levels, but its support span states only the juvenile levels.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "Northwest Atlantic (the region of the species studied, per the title)",
+            "tag": "inferred",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.title",
+              "char_start": 105,
+              "char_end": 149,
+              "evidence_text": "Three Species of Northwest Atlantic Bivalves"
+            }
+          },
+          "experimental_condition": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-000191-C4",
+      "claim_text": "The authors suggest current and future increases in temperature and CO2 are likely to have negative consequences for coastal bivalve populations.",
+      "claim_type": "projection",
+      "concept": {
+        "value": "current and future increases in temperature and CO 2; coastal bivalve populations",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "likely negative consequences (hedged: 'suggest', 'likely')",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "temporal_frame": {
+        "value": "current and future (horizon not stated)",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 1045,
+        "char_end": 1199,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "These findings suggest that current and future increases in temperature and CO 2 are likely to have negative consequences for coastal bivalve populations.",
+        "evidence_sha256": "d0bb56465d610170cc3e94c38ad5cffa69ae10de441f444b79cdece3be76de8a"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "'coastal' is a setting, not a stated geography, so geography is unknown.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "adjudication": {
+        "package": "M4-WP1b-adj",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions for downstream use; both readers' values are kept above"
+        ],
+        "aligned_blind_claim_id": "15420300-C4",
+        "blind_evidence": {
+          "json_path": "$.abstract",
+          "char_start": 1045,
+          "char_end": 1199,
+          "evidence_text": "These findings suggest that current and future increases in temperature and CO 2 are likely to have negative consequences for coastal bivalve populations."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Drivers in concept (reader 1) or relation (reader 2).",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Both keep the hedges 'suggest' and 'likely'.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 unknown ('coastal' is a setting, not a geography); reader 2 'coastal', explicit.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Both 'current and future'.",
+            "rule": "judged same content, same tag"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 unknown; reader 2 'inference drawn from the laboratory experiments', tagged inferred.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "unknown",
+            "tag": "unknown"
+          },
+          "experimental_condition": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT-000191-R1",
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 3380,
+        "char_end": 3496,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Our results demonstrate that interannual variability in temperature and CO 2 are also likely to promote such cycles.",
+        "evidence_sha256": "0e16765f67879ddb4025b9c83118d7de5dceaaeb4e917bccbaa7d62997d51ea3"
+      },
+      "reason": "The experiments applied static treatments; interannual variability was not tested. An extrapolation, not promoted."
+    },
+    {
+      "candidate_id": "LIT-000191-R2",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 202,
+        "char_end": 273,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Global temperatures are expected to increase 2 to 5uC this century [2].",
+        "evidence_sha256": "5d7bba9995b273ca362f118a226e23b07cc2cb8aee26e831a6ff19d0e6b169a5"
+      },
+      "reason": "Background statement attributed to another source; not this paper's evidence. Not promoted."
+    },
+    {
+      "candidate_id": "LIT-000191-R3",
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 3967,
+        "char_end": 4050,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "three weeks .28uC in NY in 2010; C. Flagg, Stony Brook University, unpublished data",
+        "evidence_sha256": "18ae4c5f8ad320d15adbdac64e1363a59ac9dcc27d33c2b4161f749f33e44e5b"
+      },
+      "reason": "Context from unpublished data cited in passing; not a finding of this paper."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": null,
+  "scope_adjudication": {
+    "reader_1": "in_scope_hazard",
+    "reader_2": "in_scope_hazard",
+    "adopted": "in_scope_hazard",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp1b_blind/15420300.json",
+    "reader_2_reason": "The paper experimentally examines effects of elevated (marine) temperature and CO2/acidification on bivalve survival and growth.",
+    "adjudicated_terminal_status": "claims_extracted"
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP1b-adj",
+    "adjudicator": "the WP1 EXECUTOR (prototype-exposed; also reader 1)",
+    "first_pass_record_sha256": "04269ea82b9ff3317d9cf66898c96014ae7de9c17e584d25cae613eb290d6ba5",
+    "blind_record_sha256": "f7769d9c3df66ffea5747da203d983f9bd7e04e03e4b66e9fde5b4269e0e16b1",
+    "no_paper_re_read": true
+  }
+}

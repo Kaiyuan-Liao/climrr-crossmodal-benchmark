@@ -1,0 +1,86 @@
+{
+  "item_id": "LIT-000951",
+  "file_sha256": "7808b0f31145323bc0d2e2c29d35b24833eef0bffecb21b5dd159ce4ccccacc1",
+  "corpus_manifest_sha256": "3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a",
+  "sample_sha256": "5cb81f9585040dd1d73a89ca7062d3c5e0060112f54e08ef4795db96a657b578",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR (Claude Code, model claude-opus-5-5); every sampled file read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no prototype, pilot family or collection query consulted",
+    "date": "2026-09-29",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "study area",
+    "background",
+    "statistical model for annual runoff",
+    "case study of annual runoff in voss",
+    "simulation study",
+    "discussion and conclusions"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "A two-field geostatistical model combining point and areal observations-A case study of annual runoff predictions in the Voss area",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "off_topic",
+  "scope_reason": "A Bayesian geostatistical method for predicting annual runoff; floods are mentioned once as motivation, and no hazard or impact is examined.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 0,
+    "char_end": 134,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "We estimate annual runoff by using a Bayesian geostatistical model for interpolation of hydrological data of different spatial support",
+    "evidence_sha256": "4f31003ca74ab4506ea15e985c6e761d5b42fcea0953b638e19b3ce6dbc4d675"
+  },
+  "claims": [],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT-000951-R1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 5741,
+        "char_end": 5822,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "This makes Voss flood exposed, and accurate runoff models are of high importance.",
+        "evidence_sha256": "9dcb95d27c3b952b74f63a3b214fba6df2e3abadd4873fb660be2f7ff709eccb"
+      },
+      "reason": "Motivation only; the paper models annual runoff, not floods."
+    }
+  ],
+  "terminal_status": "off_topic",
+  "notes": "The abstract field ends with a keyword list and an author running head ('ROKSVÅG et al.'); not recorded as bibliographic fields.",
+  "scope_adjudication": {
+    "reader_1": "off_topic",
+    "reader_2": "ambiguous",
+    "adopted": "ambiguous",
+    "rule": "R1c: one reader off_topic, the other not; scope ambiguous, zero promoted claims",
+    "reader_2_record": "artifacts/literature/wp1b_blind/242697800.json",
+    "reader_2_reason": "Flood exposure is mentioned as motivation, but the paper develops and evaluates a geostatistical model of annual runoff; no flood or other hazard is examined.",
+    "adjudicated_terminal_status": "ambiguous_only"
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP1b-adj",
+    "adjudicator": "the WP1 EXECUTOR (prototype-exposed; also reader 1)",
+    "first_pass_record_sha256": "5034397d52ee7437e7cd490558e12558dfba3c03b36bf36a2a22591073a8306c",
+    "blind_record_sha256": "e5bf6767111dc793ccedd962ec9d45c5ad3a04e7191a463ca4cc978148efe592",
+    "no_paper_re_read": true
+  }
+}
