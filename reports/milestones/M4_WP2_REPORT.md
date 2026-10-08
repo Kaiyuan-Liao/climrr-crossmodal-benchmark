@@ -1,13 +1,14 @@
 # M4-WP2 --- semantic inspection of the four frozen candidates (Phase 1: reader 1)
 
-**This report covers Phase 1 only** --- reader 1's reading of the four frozen
-candidates, the retrieval-hit classification done after it, and the D-019
-bookkeeping. Phases 2--4 (blind second reading in a separate session,
-adjudication, compatibility) are pending; fields 10--15 say so. The four items
-are a **relevance-guided candidate sample, not representative.** Authorized by
+**Fields 1--9 describe Phase 1** (reader 1's reading, the hit classification,
+the D-019 bookkeeping), written at `258536a`. **Fields 10--15 close the
+package** after Phase 2 (the blind reading, `939111e`, run in a separate
+session that saw none of reader 1's outputs) and Phase 3 (adjudication); the
+compatibility run (Phase 4) is reported in
+[`M5_WP2_REPORT.md`](M5_WP2_REPORT.md). The four items are a
+**relevance-guided candidate sample, not representative.** Authorized by
 [`docs/M4_WP1B_WP2_CANDIDATE_READING_GUIDANCE_RULING.md`](../../docs/M4_WP1B_WP2_CANDIDATE_READING_GUIDANCE_RULING.md)
-(D-019). No QA is generated. **This branch must not be merged into `main`
-before the blind reader has run**: the blind reader must not see these outputs.
+(D-019). No QA is generated.
 
 ## 1. Milestone ID and title
 
@@ -33,8 +34,11 @@ artifacts; QA.
 | | |
 | --- | --- |
 | Branch | `work/m4-wp2-read`, from `main` at **`e7da7cc`** |
-| Phase A --- D-019 bookkeeping, evidence tiers, C-2 revision | the first commit on the branch |
-| Phases B--D --- reading, hit classification, documents, this report, state | the second commit; its SHA travels with the hand-back |
+| Phase A --- D-019 bookkeeping | `410a7d0` |
+| Phases B--D --- reader 1, hits, documents | **`258536a`** (on `work/m4-wp2-read`) |
+| Phase 2 --- blind reading (separate session) | **`939111e`** (on `work/m4-wp2-blind`) |
+| Phase 3 --- adjudication; M5-WP2 inputs frozen | **`59880d7`** (on `work/m4-wp2-adj`, after merging `939111e` at `ab80335`) |
+| Phase 4, mentor report, fields 10--15, state | the commit after `59880d7`; its SHA travels with the hand-back |
 | Remote | **not pushed, not merged** |
 
 ## 4. Data version and checksums
@@ -181,42 +185,90 @@ prototype is Phase 4's question.
 
 ## 10. Validation performed
 
-**PENDING --- Phases 2--4.** Phase 1 checks are listed at the end of field 6;
-the full validation table (blind-reading freeze, adjudication reproduction,
-compatibility matrix) is completed after Phase 4.
+| Check | Result |
+| --- | --- |
+| `pytest` (`climrr` env) | **784 passed** at the final commit (753 at `258536a`) |
+| `scripts/verify_no_secrets_or_paths.py` | **0 hits**, after staging, at every commit |
+| Both readings pinned | reader-1 files equal their `258536a` blobs, blind files their `939111e` blobs (tests) |
+| Span integrity | **63** reader-1 and **66** blind spans re-slice from the hash-verified sources; 0 failures (test ran, not skipped) |
+| Hits | all 61 re-slice; each classified once |
+| Adjudication | every alignment and decision re-derives from the frozen readings and recorded judgements; **no override used** (test) |
+| Preservation | every reader-1 claim keeps its id and every original field (test) |
 
 ## 11. Failures, rejected cases, and known limitations
 
-**PENDING --- Phases 2--4.** Recorded now so they are not lost: reader 1 is
-prototype-exposed and knew the retrieval terms and hit counts (not locations)
-before reading; one build failed once on a stored combining accent
-("Hernández" as `a` + U+0301), fixed by quoting the stored code points; the
-C-2 whitespace behaviour change (field 8.5).
+- **The adjudicator is reader 1** (the prototype-exposed EXECUTOR), as in
+  WP1b. No contested scope arose (4/4 agreement) and no override was used, but
+  the 7 `adjudicated_modified` decisions are reader 1's judgements.
+- **Reader 1 knew the retrieval terms and hit counts** (not locations) before
+  reading; the blind reader knew none of them. Reader 1 promoted the one
+  pilot-term claim (`LIT-000519-C5`, "FWI" background); **the blind reader did
+  not** --- so it is single-reader, tier C.
+- **13 of 26 adjudicated claims are single-reader** (7 reader-1-only, 6
+  blind-only): the two readers chose different claims under the five-claim cap
+  more often than in WP1b (13 aligned of 20 / 19).
+- **The blind session's isolation cannot be verified from its artifacts.** Its
+  branch never held reader 1's outputs, but its base (`e7da7cc`) holds the hit
+  list and the prototypes, and its summary has no protocol disclosure (WP1b's
+  did). Criterion 6 is therefore put to Kaiyuan, who ran it.
+- **The blind reader's schema differed from WP1b's** (dimension `status`,
+  `support_span`, a scope object, `$["key"]` paths). An adapter normalised it;
+  nothing in the blind records was edited.
+- One reader-1 build failed once on a stored combining accent; fixed by quoting
+  the stored code points (Phase 1).
+- **n is four.** Agreement figures describe these readings only.
 
 ## 12. Deviations from the approved plan
 
-**PENDING --- Phases 2--4.** Phase 1 deviations so far: Phase B (reading) was
-done before the Phase A code changes, so that nothing in the bookkeeping could
-reach the reading; C-2 no longer collapses internal whitespace (field 8.5).
+1. Phase B (reading) preceded the Phase A code in WP2r1, so the bookkeeping
+   could not reach the reading.
+2. C-2 now matches internal whitespace exactly (the frozen matcher's rule); a
+   double space no longer matches as under whole-field equality.
+3. Blind-only claims take ids `LIT-…-B<n>` (as in WP1b).
+4. Each reader-1 claim keeps its first-pass tier as
+   `first_pass_evidence_tier` beside the adjudicated `evidence_tier`.
 
 ## 13. Open decisions and mentor questions
 
-**PENDING --- Phases 2--4.** Carried: the mentor question in D-019
-(family-level bridge with disclosed mismatch vs exact metric and scenario); the
-P-CELL-1/P-COUNTY-1 baseline-citation cleanup (D-019).
+| Item | Owner | Why it matters |
+| --- | --- | --- |
+| What the WP2 blind session was given and opened (criterion 6) | Kaiyuan | the blind record carries no protocol disclosure, unlike WP1b's |
+| Family-level match with disclosed metric/scenario gaps --- useful, or exact match required? | mentor | decides whether a `supporting_qualified` link could ever be used |
+| Zero eligible pairs: widen place terms to all US states (a predeclared WP2b), or change the unit to a region papers name | mentor / GUIDANCE | the next relevance-guided experiment |
+| Extend the G-2 disjoint list (Sardinia, European countries, the Sahel are now `not_evaluable`) | GUIDANCE | affects only `incompatible` vs `not_evaluable`, never eligibility |
+| P-CELL-1/P-COUNTY-1 baseline citations (D-019 cleanup) | COORDINATOR | provenance consistency |
 
 ## 14. Proposed gate status
 
-**PENDING --- Phases 2--4.** Phase 1 against D-019 criteria: 1 (exactly the
-four read), 2 (none substituted), 3 (hits not treated as claim truth), 4 (every
-promoted claim has exact evidence), 5 (hits classified after reading), 12
-(every claim carries a tier), 13--17 (C-2 approved terms only, boundary-aware
-inside the concept field, matched term and span recorded, no synonym
-expansion, metric distinct from family) --- evidence in fields 6, 8 and 9;
-proposed status after Phase 4.
+D-019 acceptance criteria (Phase 1 criteria 1--5 and 12--17 were evidenced at
+`258536a`, fields 6--9):
+
+| # | Criterion (abridged) | Status | Evidence |
+| ---: | --- | --- | --- |
+| 6 | Blind reader received no hit locations, prototypes, first reading or M5 results | **PARTLY VERIFIABLE** | reader 1's outputs were never on the blind branch (`work/m4-wp2-blind` branches from `e7da7cc`, which lacks them). But that base **does** contain the hit list (`wp2_candidates.json`) and the prototypes, and the blind summary records **no disclosure** of what the session was given or opened. Confirmation needed from Kaiyuan, who ran it |
+| 7 | Blind reading frozen before comparison | **MET** | `939111e` precedes `ab80335`; blind files equal their `939111e` blobs (test) |
+| 8 | Adjudication preserves both readings and every disagreement | **MET** | `wp2_comparison.json`; adjudicated records carry both values; originals untouched |
+| 9 | Rule 3 span-limited interpretation | **MET** | every 3c adoption is the span-stated common part (`LITERATURE_WP2_ADJUDICATION.md`) |
+| 10 | J-1 not generalised; new overrides justified | **MET** | no override used; the script refuses one |
+| 11 | Ties stay unresolved | **MET (none arose)** | claim types agreed on all 13 pairs |
+| 12 | Every final claim carries a tier | **MET** | A 6, B 7, C 13 |
+| 13--16 | C-2: approved terms only, boundary-aware in the concept field, term and span recorded, no synonyms | **MET** | `M5_WP2_COMPATIBILITY.md` (the one C-2 match records "FWI" [0, 3), `fire_weather_index`, D-018) |
+| 17 | Metric-level distinct from family-level | **MET** | 0 metric-level, 2 family-level judgments |
+| 18 | All adjudicated claims × all three prototypes | **MET** | 26 × 3 = 78 pairs, each once (test) |
+| 19 | P-STATE-1 v2 used; old M5-WP1 freeze untouched | **MET** | `m5wp2_inputs.json` names v2 and pins the M5-WP1 hashes (test) |
+| 20 | Unknown scenario stays `not_evaluable` | **MET** | scenario `not_evaluable` 78/78 |
+| 21 | Family-level concept cannot yield `supporting` | **MET** | relation tests |
+| 22 | Contested / single-reader claim cannot alone establish a bridge | **MET** | no eligible pair; the two concept-positive pairs are tier C and carry the tier |
+| 23 | Eligibility and relation separate outputs | **MET** | separate fields in every row |
+| 24 | No widening inside this package if no bridge emerges | **MET** | sample stays 4; widening is a question in the mentor report |
+| 25 | No QA | **MET** | none |
+
+**Proposed status:** ready for GUIDANCE review --- M4-WP2 complete (two
+readings, adjudication) with the adjudicator's non-independence disclosed;
+compatibility result in `M5_WP2_REPORT.md`.
 
 ## 15. Proposed next bounded objective
 
-**PENDING --- after Phase 2.** Next: the blind second reading of the four, in a
-fresh session given only the four files, the rubric and the location
-convention, frozen before comparison.
+Take the mentor's answers (family-level usefulness; widen places or change the
+unit) and, only then, predeclare a WP2b retrieval experiment with its place
+terms and prototype-selection rule fixed before any reading.

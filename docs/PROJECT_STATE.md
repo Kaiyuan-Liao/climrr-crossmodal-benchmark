@@ -6,12 +6,12 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 | | |
 | --- | --- |
-| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4:** M4-WP0 PASS (D-016); M4-WP1 PASS WITH ACTIONS (D-017), merged `0053968`; **M4-WP1b PASS WITH ACTIONS** and **M4-WP2 retrieval PASS (sample 4)** (D-019), both merged at `e7da7cc`; **M4-WP2 reading: Phase 1 (reader 1) done on `work/m4-wp2-read`, unmerged; Phase 2 (blind reader) next**. **M5:** **M5-WP1 closed --- PASS WITH ACTIONS, machinery validation only (D-018)**, merged `55decb3` |
-| **Active task** | **M4-WP2r1 --- Phase 1 done: reader 1 read the four frozen candidates** (20 claims, all `single_reader_provisional`, tier C; 61 hits classified after reading, 26 substantive / 35 incidental) **+ D-019 bookkeeping** (evidence tiers on WP1 adjudicated claims: A 1 / B 18 / C 10; C-2 revised to boundary-aware occurrence in the concept field; `unresolved_tie` → `not_evaluable` in claim-type rules). **No compatibility run.** Not pushed, **must not be merged before the blind reader runs** (Phase 2, separate session, sees none of this branch) |
+| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4:** M4-WP0 PASS (D-016); M4-WP1 PASS WITH ACTIONS (D-017), merged `0053968`; **M4-WP1b PASS WITH ACTIONS** and **M4-WP2 retrieval PASS (sample 4)** (D-019), both merged at `e7da7cc`; **M4-WP2 reading complete** (reader 1 `258536a`, blind `939111e`, adjudication `59880d7`, on `work/m4-wp2-adj`, unmerged). **M5-WP2 positive-case run: 0 eligible pairs of 78**; awaiting GUIDANCE and the mentor (2026-10-09). **M5:** **M5-WP1 closed --- PASS WITH ACTIONS, machinery validation only (D-018)**, merged `55decb3` |
+| **Active task** | **M4-WP2r3 --- done; awaiting review.** Adjudication of the four (scope 4/4; 13 aligned: 6 confirmed, 7 modified; 13 single-reader; tiers **A 6 / B 7 / C 13**; no override; adjudicator = reader 1). **M5-WP2**: 26 claims × P-CELL-1, P-COUNTY-1, P-STATE-1 v2 = 78 pairs; **0 candidate-bridge-eligible**; 2 `related_insufficient` (tier-C FWI background claim × the two fire units), 3 `incompatible` (T-2), 73 `uncertain`. Mentor report written. Not pushed, not merged |
 | **Latest accepted commit** | **`e7da7cc`** --- the merge of M4-WP1b (reviewed `25a86e5`) and M4-WP2 retrieval (reviewed `7ddee2c`) into `main`, both accepted under D-019. Previous: **`55decb3`** (M5-WP1, D-018; scan fix `656044c`); **`0053968`** (M4-WP1, D-017); `6f24b78` (M4-WP0 chain, D-016); `62c9137` (M1-WP1, D-009). It does **not** pass M1 |
 | **Tooling on `main`** | `d68ba15` --- merge of `work/knowledge-staging` (`c13a3d4`, `scripts/stage_knowledge.py`) on top of `6f24b78`. **No scientific content**; not a GUIDANCE-accepted package, and not an accepted scientific state |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at. The literature corpus is **not** on Sophia (runbook §8b) |
-| **Branch lineage** | M1-WP2 → M1-WP3 → M1-WP3b → M4-WP0 merged at `6f24b78`; M4-WP1 merged at `0053968`; M5-WP1 merged at `55decb3` (reviewed head `c1010f0`), scan fix `656044c`; M4-WP1b blind reading `87bce48` on `main`. **`work/m4-wp2-retrieval`** branches from `87bce48`: `8ee8857` (D-018 bookkeeping), `7ba2657` (P-STATE-1 v2), `f586d29` (concept map, C-2), `13c56fb` (eligibility), **`6080cc3` (terms frozen)**, **`7d0e128` (candidates frozen)**, then the report commit `7ddee2c`. **`work/m4-wp1b-adj`** branches from `7ddee2c`: **`0706679`** (Phases A--D), `25a86e5` (report). Both merged into `main` at **`e7da7cc`** (D-019). **`work/m4-wp2-read`** branches from `e7da7cc`: Phase A commit, then Phases B--D. **Not pushed, not merged** |
+| **Branch lineage** | M1-WP2 → M1-WP3 → M1-WP3b → M4-WP0 merged at `6f24b78`; M4-WP1 merged at `0053968`; M5-WP1 merged at `55decb3` (reviewed head `c1010f0`), scan fix `656044c`; M4-WP1b blind reading `87bce48` on `main`. **`work/m4-wp2-retrieval`** branches from `87bce48`: `8ee8857` (D-018 bookkeeping), `7ba2657` (P-STATE-1 v2), `f586d29` (concept map, C-2), `13c56fb` (eligibility), **`6080cc3` (terms frozen)**, **`7d0e128` (candidates frozen)**, then the report commit `7ddee2c`. **`work/m4-wp1b-adj`** branches from `7ddee2c`: **`0706679`** (Phases A--D), `25a86e5` (report). Both merged into `main` at **`e7da7cc`** (D-019). **`work/m4-wp2-read`** branches from `e7da7cc`: `410a7d0`, `258536a`. **`work/m4-wp2-blind`** (`939111e`) branches from `e7da7cc`. **`work/m4-wp2-adj`** branches from `258536a`: merge of the blind branch `ab80335`, `59880d7` (adjudication, M5-WP2 freeze), then the matrix/report commit. **Not pushed, not merged** |
 | **M4-WP0 commits** | `52a994a` (Phases A–E); **`1e2fd9f`** (report and state --- **the reviewed head**); then `e4a9de0`, the D-016 pre-merge bookkeeping |
 | **M4-WP1 sample** | `LIT-000001, 000191, 000381, 000571, 000761, 000951, 001141, 001331, 001521, 001711` --- every 190th id; no duplicate skip; `wp1_sample.json` SHA-256 `5cb81f95…`, committed before any file was opened |
 | **Prototypes built from** | `56eb10d` --- v1 records unchanged since M1-WP3b. **P-STATE-1 v2** (`P-STATE-1.v2.json`, D-018) adds explicit year windows only; V/D/M identical to v1; the frozen M5-WP1 input still names v1 |
@@ -19,7 +19,30 @@ session reasoning correctly from out-of-date facts and repeating them.
 | **Rulings in force** | D-009, D-011, D-012, D-013 + D-013-A1, D-015, D-016, D-017, D-018, **D-019 (M4-WP1b PASS WITH ACTIONS; rule-3 trimming and J-1 approved; `LIT-000381-C3` tie and `LIT-000571` contest kept; evidence tiers A/B/C; C-2 revised; WP2 retrieval PASS with 4; reading of the four authorized, two readers + adjudication, then compatibility with P-STATE-1 v2)** |
 | **Owner decisions since** | **D-014** (Kaiyuan, 2026-09-28): proceed on the "our reading" basis to test what QA could be generated; every `inferred_candidate` and `derived_from_inferred` status carried through; **promotes nothing, and does not authorise QA generation** |
 | **Meetings since the last refresh** | **Group 2026-09-14:** "No material objection to the prototype-unit design was raised." --- not validation, no semantic confirmed. **Mentor 2026-09-17 and 2026-09-24:** **no review of the answer sheet occurred** (R-003); nothing promoted |
-| **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M1 remains open.** **WP2 Phase 2 (blind reader):** needs a fresh session given only the four files, the rubric and the location convention; Phases 3--4 wait on it. **Metric-level concept terms** (`fwi_seasonal_value`, `heatindex_days_above_105F`): `proposed`, need GUIDANCE or the mentor. **QA generation: not authorised by any ruling** |
+| **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M1 remains open.** **Next relevance-guided step:** waits on the mentor (family-level usefulness; widen places or change the unit) and GUIDANCE; any WP2b must be predeclared. **Metric-level concept terms** (`fwi_seasonal_value`, `heatindex_days_above_105F`): `proposed`, need GUIDANCE or the mentor. **QA generation: not authorised by any ruling** |
+
+## Where things stand --- M4-WP2 adjudication and M5-WP2 (2026-10-08)
+
+- **Two readings of the four, adjudicated** by the WP1b rules: scope agrees
+  4/4; 13 aligned pairs (6 `independently_confirmed`, 7 `adjudicated_modified`),
+  7 reader-1-only, 6 blind-only; **tiers A 6, B 7, C 13**; no override. The
+  adjudicator is reader 1. The one pilot-term claim (`LIT-000519-C5`, "FWI"
+  background) was **not** found by the blind reader --- tier C.
+- **M5-WP2 positive-case run** (inputs frozen at `59880d7` before the matrix):
+  26 claims × P-CELL-1, P-COUNTY-1, **P-STATE-1 v2** = 78 pairs. **0 eligible.**
+  Concept positive 2 (family-level "FWI", no geography → `related_insufficient`);
+  geography compatible **0** (closest: "Dewey County, NW Oklahoma"; "California,
+  Arizona and Nevada"; inferred "Oklahoma and Texas panhandles"); scenario
+  `not_evaluable` 78/78; 3 `incompatible` (T-2, a 2020-2023 prison-heat finding).
+- **Criterion 6 not verifiable from artifacts**: the blind branch never held
+  reader 1's outputs, but its base holds the hit list and prototypes and its
+  summary has no protocol disclosure --- put to Kaiyuan.
+- **For the mentor (2026-10-09)**: [MENTOR_REPORT_2026-10-09.md](MENTOR_REPORT_2026-10-09.md)
+  --- plain language, three questions.
+- Documents: [LITERATURE_WP2_ADJUDICATION.md](LITERATURE_WP2_ADJUDICATION.md),
+  [M5_WP2_COMPATIBILITY.md](M5_WP2_COMPATIBILITY.md),
+  [../reports/milestones/M4_WP2_REPORT.md](../reports/milestones/M4_WP2_REPORT.md),
+  [../reports/milestones/M5_WP2_REPORT.md](../reports/milestones/M5_WP2_REPORT.md).
 
 ## Where things stand --- M4-WP2 reading, Phase 1, and D-019 (2026-10-08)
 
@@ -355,10 +378,12 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 ## Outstanding
 
-- **For Kaiyuan / COORDINATOR:** run the **WP2 blind reader** (Phase 2) in a
-  fresh session given only the four files, the rubric and the location
-  convention --- not this branch, the hits, the prototypes or reader 1's
-  results. Freeze it before comparison.
+- **For GUIDANCE:** review **M4-WP2** (two readings + adjudication) and
+  **M5-WP2** (0 eligible of 78); whether G-1 may accept a state within a list;
+  whether the G-2 list may be extended.
+- **For Kaiyuan:** what the WP2 blind session was given and opened (criterion 6).
+- **For the mentor (2026-10-09):** the three questions in
+  `MENTOR_REPORT_2026-10-09.md`.
 - **For GUIDANCE / mentor:** metric-level terms for `fwi_seasonal_value` and
   `heatindex_days_above_105F` are still `proposed`; the D-019 mentor question
   (family-level bridge with disclosed mismatch vs exact metric/scenario).
@@ -382,10 +407,10 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 ## Next
 
-**M4-WP2 Phase 2: the blind second reading of the four**, in a separate
-session, frozen before comparison; then Phase 3 adjudication (WP1b rules) and
-Phase 4 compatibility against all three prototypes with P-STATE-1 v2 and
-revised C-2.
+**The mentor one-on-one (2026-10-09)** with `MENTOR_REPORT_2026-10-09.md`;
+then GUIDANCE review of M4-WP2 and M5-WP2. Only after the mentor answers:
+predeclare one WP2b retrieval experiment (all US state names, or a region-level
+unit), terms and prototype-selection rule frozen before reading.
 
 Still not authorised by any ruling: **QA generation**; semantic bridges beyond
 what D-019 authorizes; widening the WP2 sample (a WP2b must be predeclared); embeddings; corpus-wide search; hazard labels
@@ -422,7 +447,8 @@ for papers outside the sample; any interpretation of a ClimRR column outside the
 - **M4-WP0 review, merge authorization and M4-WP1 ruling (WP0 PASS):** [M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md](M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md)
 - **M4-WP0 report:** [../reports/milestones/M4_WP0_REPORT.md](../reports/milestones/M4_WP0_REPORT.md)
 - **M4-WP1 review and M5-WP1 ruling (PASS WITH ACTIONS):** [M4_WP1_REVIEW_M5_WP1_GUIDANCE_RULING.md](M4_WP1_REVIEW_M5_WP1_GUIDANCE_RULING.md)
-- **M4-WP2 report (Phase 1):** [../reports/milestones/M4_WP2_REPORT.md](../reports/milestones/M4_WP2_REPORT.md); **reader-1 reading:** [LITERATURE_WP2_READING.md](LITERATURE_WP2_READING.md); **ruling:** [M4_WP1B_WP2_CANDIDATE_READING_GUIDANCE_RULING.md](M4_WP1B_WP2_CANDIDATE_READING_GUIDANCE_RULING.md)
+- **M5-WP2 report:** [../reports/milestones/M5_WP2_REPORT.md](../reports/milestones/M5_WP2_REPORT.md); **matrix:** [M5_WP2_COMPATIBILITY.md](M5_WP2_COMPATIBILITY.md); **adjudication:** [LITERATURE_WP2_ADJUDICATION.md](LITERATURE_WP2_ADJUDICATION.md); **mentor report:** [MENTOR_REPORT_2026-10-09.md](MENTOR_REPORT_2026-10-09.md)
+- **M4-WP2 report:** [../reports/milestones/M4_WP2_REPORT.md](../reports/milestones/M4_WP2_REPORT.md); **reader-1 reading:** [LITERATURE_WP2_READING.md](LITERATURE_WP2_READING.md); **ruling:** [M4_WP1B_WP2_CANDIDATE_READING_GUIDANCE_RULING.md](M4_WP1B_WP2_CANDIDATE_READING_GUIDANCE_RULING.md)
 - **M4-WP1b report:** [../reports/milestones/M4_WP1B_REPORT.md](../reports/milestones/M4_WP1B_REPORT.md); **adjudication:** [LITERATURE_WP1B_ADJUDICATION.md](LITERATURE_WP1B_ADJUDICATION.md)
 - **M4-WP2 retrieval report:** [../reports/milestones/M4_WP2_RETRIEVAL_REPORT.md](../reports/milestones/M4_WP2_RETRIEVAL_REPORT.md); **candidates:** [LITERATURE_WP2_CANDIDATES.md](LITERATURE_WP2_CANDIDATES.md); **eligibility:** [BRIDGE_ELIGIBILITY.md](BRIDGE_ELIGIBILITY.md); **ruling:** [M5_WP1_REVIEW_FOLLOWON_GUIDANCE_RULING.md](M5_WP1_REVIEW_FOLLOWON_GUIDANCE_RULING.md)
 - **M5-WP1 report:** [../reports/milestones/M5_WP1_REPORT.md](../reports/milestones/M5_WP1_REPORT.md); **matrix:** [M5_WP1_COMPATIBILITY.md](M5_WP1_COMPATIBILITY.md)
