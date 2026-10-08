@@ -71,9 +71,16 @@ def classify(term: str, structure: dict) -> dict:
 
 
 def load_probe_terms(prototypes_dir: Path) -> list[dict]:
-    """`record_id` and `literature_probe.concept_terms` of every prototype record."""
+    """`record_id` and `literature_probe.concept_terms` of every prototype record.
+
+    Only the unversioned (v1) records: a later version such as
+    `P-STATE-1.v2.json` (D-018) is a correction, not another prototype, and the
+    M4-WP0 coverage artifact was computed over v1.
+    """
     probes = []
     for path in sorted(Path(prototypes_dir).glob("*.json")):
+        if ".v" in path.stem:
+            continue
         record = json.loads(path.read_text(encoding="utf-8"))
         probes.append(
             {
