@@ -1,0 +1,91 @@
+# Concept map --- canonical concepts and the exact surface terms that name them.
+#
+# Authorized by D-018 (docs/M5_WP1_REVIEW_FOLLOWON_GUIDANCE_RULING.md). The rule:
+# "A claim concept may match a canonical concept only by exact membership in an
+# approved surface-term set." Broad vocabulary never maps to a narrower metric.
+#
+# Two levels:
+#   family --- a concept family, e.g. the Fire Weather Index as such;
+#   metric --- a specific measure inside a family (a seasonal statistic, a
+#              threshold count). A metric entry names its parent family.
+#
+# Who may approve (D-018, item 4): the COORDINATOR may approve mechanically
+# source-backed lexical aliases that neither broaden, narrow nor reinterpret
+# scientific meaning. Synonymy, hierarchy, threshold interpretation and
+# family->metric narrowing return to GUIDANCE or the mentor. So:
+#   * a family term must be quoted from a cited dictionary line (validated);
+#   * a metric entry may carry terms only with a `guidance` or `mentor` source
+#     (validated);
+#   * only `approved_lexical` entries are ever used for matching.
+#
+# `source_span` lists line numbers in data/metadata/dictionary_extracted.txt.
+# Seeded by M4-WP2 Track B with the COORDINATOR-approved entries below and
+# nothing else: no UHI, no smoke, no drought.
+
+schema_version: 1
+
+entries:
+
+  - canonical_id: fire_weather_index
+    level: family
+    accepted_surface_terms:
+      - fire weather index
+      - FWI
+    source_type: dictionary
+    source_reference: >-
+      ClimRR Metadata and Data Dictionary, section heading "Fire Weather Index"
+      and its opening narrative
+    source_span: [292, 293]
+    decision_id: D-018
+    date: 2026-10-08
+    status: approved_lexical
+    approved_by: COORDINATOR
+
+  - canonical_id: heat_index
+    level: family
+    accepted_surface_terms:
+      - heat index
+    source_type: dictionary
+    source_reference: >-
+      ClimRR Metadata and Data Dictionary, section heading "Heat Index" and its
+      opening narrative
+    source_span: [390, 391]
+    decision_id: D-018
+    date: 2026-10-08
+    status: approved_lexical
+    approved_by: COORDINATOR
+
+  - canonical_id: fwi_seasonal_value
+    level: metric
+    parent_family: fire_weather_index
+    accepted_surface_terms: []
+    source_type: dictionary
+    source_reference: >-
+      The FWI Averages narrative (seasonal average daily FWI, ensemble mean) and
+      the "Seasonal value" field entries. Cited as where the metric is
+      described, not as a source of surface terms: no dictionary phrase names
+      this statistic as a term a paper would use.
+    source_span: [346, 347, 352, 661, 663]
+    decision_id: D-018
+    date: 2026-10-08
+    status: proposed
+    approved_by: none
+    note: requires GUIDANCE/mentor
+
+  - canonical_id: heatindex_days_above_105F
+    level: metric
+    parent_family: heat_index
+    accepted_surface_terms: []
+    source_type: dictionary
+    source_reference: >-
+      The heat-index narrative item 3 ("Number of summer days with daily max
+      heat index above 95 / 105 / 115 / 125 F") and the Day105 field entries.
+      Cited as where the metric is described, not as a source of surface terms:
+      turning that description into a term a paper would use is threshold
+      interpretation, which D-018 reserves for GUIDANCE or the mentor.
+    source_span: [414, 680, 695]
+    decision_id: D-018
+    date: 2026-10-08
+    status: proposed
+    approved_by: none
+    note: requires GUIDANCE/mentor
