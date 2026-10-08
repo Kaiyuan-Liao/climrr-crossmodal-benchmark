@@ -1077,3 +1077,76 @@ code emits, and the next GUIDANCE packet still chooses.
 - **Affected files:** `docs/M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md` (tracked
   as placed), `reports/milestones/M4_WP0_REPORT.md`, `docs/PROJECT_STATE.md`,
   `docs/DECISION_LOG.md`.
+
+## D-017 --- M4-WP1 reviewed: PASS WITH ACTIONS; M5-WP1 authorized as machinery validation
+
+- **Date:** 2026-10-08
+- **Status:** **decided.**
+- **Owner:** **GUIDANCE**; **approved by Kaiyuan Liao**, who placed
+  `docs/M4_WP1_REVIEW_M5_WP1_GUIDANCE_RULING.md` in the repository. Reviewed
+  head: **`7ded08e`**, pushed to `origin/work/m4-wp1`.
+- **What the ruling decides.**
+  1. **M4-WP1: PASS WITH ACTIONS**, as an ingestion and structured-claim
+     pilot. All 27 claims are **single-reader provisional** literature claims,
+     exact-source anchored, until an independent reading closes that.
+  2. **Tracked verbatim excerpts are kept**, under **minimal-evidence-window
+     discipline**: retain only the smallest passage needed to support the
+     claim or decision; do not track whole sections for convenience; do not
+     concatenate large source passages into reports; **hash + offsets remain
+     the authoritative locator**; if text must later be removed, the record
+     must stay reconstructible from the external corpus and the offsets.
+     Replacing excerpts with hash + offsets only is **not** adopted.
+  3. **The scope rule is accepted:** `in_scope_hazard` may yield claims;
+     `off_topic` is terminal with zero claims; `ambiguous` → `ambiguous_only`
+     with zero promoted claims. It validates the pilot rule, not a universal
+     ontology of climate-hazard papers.
+  4. **`LIT-000571` → `in_scope_hazard` (borderline), accepted.
+     `LIT-000761` → `ambiguous_only`, accepted.**
+  5. **A second, blind, independent reader is required** over **all ten**
+     papers --- not a subsample --- **before** any claim is accepted as M5
+     evidence, before any table↔literature pair is accepted as a bridge,
+     before "zero compatible pairs" becomes a conclusion about the sample, and
+     before any claim becomes QA evidence. It is **not** required before M5
+     machinery is implemented. The second reader sees neither the prototypes
+     nor the first reader's scope labels or claims during initial extraction;
+     a fresh model session without prototype or first-pass context is
+     acceptable, followed by explicit adjudication. Planned as **M4-WP1b**.
+  6. **Climate scenario and experimental condition are split.** Laboratory
+     treatment levels are not climate or emissions scenarios. The two
+     `LIT-000191` treatment values move to a new `experimental_condition`
+     dimension (`explicit` / `inferred` / `unknown`); after the move,
+     **`scenario` is `unknown` for 27/27 WP1 claims.** Every claim also
+     carries `claim_validation_status`, with vocabulary
+     `single_reader_provisional`, `independently_confirmed`,
+     `adjudicated_modified`, `rejected_on_review`; all 27 are
+     `single_reader_provisional`.
+  7. **M5-WP1 authorized** as **deterministic negative-case compatibility
+     machinery validation** on the fixed 27 claims × 3 prototypes = 81 pairs,
+     five dimensions each (concept, geography, time, scenario, direction),
+     each `compatible` / `incompatible` / `not_evaluable` with rule ID, both
+     compared values and a reason. No embeddings, no LLM pair judgement. Its
+     outputs are validation results over provisional claims, not accepted
+     bridges. The ruling's 22 acceptance criteria govern it.
+  8. **A relevance-guided M4-WP2 becomes justified only if** M5-WP1 shows:
+     (i) the deterministic machinery works correctly on all 81 pairs; (ii) the
+     content-independent sample yields no fully compatible pair, or too few
+     positives to exercise the positive case; (iii) failure modes are visible
+     dimension by dimension; (iv) WP0 independently shows prototype concepts
+     present in collection vocabulary; (v) the second-reader / adjudication
+     work does not materially overturn the negative pilot conclusion. It
+     would optimize candidate yield, not estimate prevalence, and its
+     retrieval rule returns to GUIDANCE after M5-WP1.
+  9. **QA generation is still not authorized.**
+- **Closure actions done on `work/m4-wp1`** (this entry's commit): schema split
+  and validation status in `scripts/wp1_extractions.py` and
+  `scripts/build_wp1_claims.py`; records rebuilt --- **all 96 span locators and
+  evidence hashes identical to `7ded08e`**, span integrity 96/96 against the
+  corpus; pilot document re-rendered; two tests added; report fields 3, 4, 7,
+  9, 13, 14 and `PROJECT_STATE.md` refreshed. Merge to `main` is Kaiyuan's.
+- **Affected files:** `docs/M4_WP1_REVIEW_M5_WP1_GUIDANCE_RULING.md` (tracked
+  as placed), `scripts/wp1_extractions.py`, `scripts/build_wp1_claims.py`,
+  `scripts/render_wp1_pilot.py`, `tests/test_wp1_claims.py`,
+  `artifacts/literature/wp1_claims/*.json`,
+  `artifacts/literature/wp1_claims_summary.json`,
+  `docs/LITERATURE_WP1_PILOT.md`, `reports/milestones/M4_WP1_REPORT.md`,
+  `docs/PROJECT_STATE.md`, `docs/DECISION_LOG.md`.
