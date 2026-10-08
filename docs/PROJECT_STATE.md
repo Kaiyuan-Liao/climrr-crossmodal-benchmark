@@ -6,12 +6,12 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 | | |
 | --- | --- |
-| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4:** M4-WP0 PASS (D-016); M4-WP1 PASS WITH ACTIONS (D-017), merged `0053968`; **M4-WP1b in progress elsewhere** (blind reading committed on `main` at `87bce48`; comparison and adjudication pending); **M4-WP2 retrieval half frozen on `work/m4-wp2-retrieval`, unread**. **M5:** **M5-WP1 closed --- PASS WITH ACTIONS, machinery validation only (D-018)**, merged `55decb3` |
-| **Active task** | **M4-WP2 Track B --- retrieval only, done; awaiting review.** D-018 bookkeeping; P-STATE-1 v2 (year windows, v1 untouched); `concept_map.yaml` (2 families `approved_lexical`, 2 metrics `proposed`) and rule C-2; candidate-eligibility and relation definitions (`bridge.py`, not applied); terms frozen, then **4 candidates frozen from a qualifying pool of 4** (cap 12 not reached; terms not loosened). **No candidate read.** Not pushed, not merged |
+| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4:** M4-WP0 PASS (D-016); M4-WP1 PASS WITH ACTIONS (D-017), merged `0053968`; **M4-WP1b complete, awaiting GUIDANCE** (blind reading `87bce48`; comparison and adjudication on `work/m4-wp1b-adj`); **M4-WP2 retrieval half frozen on `work/m4-wp2-retrieval`, unread**. **M5:** **M5-WP1 closed --- PASS WITH ACTIONS, machinery validation only (D-018)**, merged `55decb3` |
+| **Active task** | **M4-WP1b Track A --- comparison and adjudication, done; awaiting review.** Scope agreement 6/10; 19 aligned pairs, 8 reader-1-only, 2 reader-2-only; statuses 1 `independently_confirmed` / 23 `adjudicated_modified` / 5 `single_reader_provisional` / 0 `rejected_on_review`; premise for relevance-guided sampling **not** invalidated. Adjudicator = the WP1 EXECUTOR (prototype-exposed). Not pushed, not merged. **Before that: M4-WP2 Track B --- retrieval only, done; awaiting review.** D-018 bookkeeping; P-STATE-1 v2 (year windows, v1 untouched); `concept_map.yaml` (2 families `approved_lexical`, 2 metrics `proposed`) and rule C-2; candidate-eligibility and relation definitions (`bridge.py`, not applied); terms frozen, then **4 candidates frozen from a qualifying pool of 4** (cap 12 not reached; terms not loosened). **No candidate read.** Not pushed, not merged |
 | **Latest accepted commit** | **`55decb3`** --- the merge of `work/m5-wp1` into `main`, M5-WP1 accepted by GUIDANCE as machinery validation only (D-018), reviewed at `c1010f0`; scan fix `656044c` on `main`. Previous: **`0053968`** (M4-WP1, D-017); `6f24b78` (M4-WP0 chain, D-016); `62c9137` (M1-WP1, D-009). It does **not** pass M1 |
 | **Tooling on `main`** | `d68ba15` --- merge of `work/knowledge-staging` (`c13a3d4`, `scripts/stage_knowledge.py`) on top of `6f24b78`. **No scientific content**; not a GUIDANCE-accepted package, and not an accepted scientific state |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at. The literature corpus is **not** on Sophia (runbook §8b) |
-| **Branch lineage** | M1-WP2 → M1-WP3 → M1-WP3b → M4-WP0 merged at `6f24b78`; M4-WP1 merged at `0053968`; M5-WP1 merged at `55decb3` (reviewed head `c1010f0`), scan fix `656044c`; M4-WP1b blind reading `87bce48` on `main`. **`work/m4-wp2-retrieval`** branches from `87bce48`: `8ee8857` (D-018 bookkeeping), `7ba2657` (P-STATE-1 v2), `f586d29` (concept map, C-2), `13c56fb` (eligibility), **`6080cc3` (terms frozen)**, **`7d0e128` (candidates frozen)**, then the report commit. **Not pushed** |
+| **Branch lineage** | M1-WP2 → M1-WP3 → M1-WP3b → M4-WP0 merged at `6f24b78`; M4-WP1 merged at `0053968`; M5-WP1 merged at `55decb3` (reviewed head `c1010f0`), scan fix `656044c`; M4-WP1b blind reading `87bce48` on `main`. **`work/m4-wp2-retrieval`** branches from `87bce48`: `8ee8857` (D-018 bookkeeping), `7ba2657` (P-STATE-1 v2), `f586d29` (concept map, C-2), `13c56fb` (eligibility), **`6080cc3` (terms frozen)**, **`7d0e128` (candidates frozen)**, then the report commit `7ddee2c`. **`work/m4-wp1b-adj`** branches from `7ddee2c`: **`0706679`** (Phases A--D), then the report commit. **Not pushed** |
 | **M4-WP0 commits** | `52a994a` (Phases A–E); **`1e2fd9f`** (report and state --- **the reviewed head**); then `e4a9de0`, the D-016 pre-merge bookkeeping |
 | **M4-WP1 sample** | `LIT-000001, 000191, 000381, 000571, 000761, 000951, 001141, 001331, 001521, 001711` --- every 190th id; no duplicate skip; `wp1_sample.json` SHA-256 `5cb81f95…`, committed before any file was opened |
 | **Prototypes built from** | `56eb10d` --- v1 records unchanged since M1-WP3b. **P-STATE-1 v2** (`P-STATE-1.v2.json`, D-018) adds explicit year windows only; V/D/M identical to v1; the frozen M5-WP1 input still names v1 |
@@ -19,7 +19,38 @@ session reasoning correctly from out-of-date facts and repeating them.
 | **Rulings in force** | D-009, D-011, D-012, D-013 + D-013-A1, D-015, D-016, D-017, **D-018 (M5-WP1 PASS WITH ACTIONS, machinery validation only; P-STATE-1 v2, concept map, candidate eligibility, WP1b and WP2 retrieval authorized; WP2 reading waits for WP1b)** |
 | **Owner decisions since** | **D-014** (Kaiyuan, 2026-09-28): proceed on the "our reading" basis to test what QA could be generated; every `inferred_candidate` and `derived_from_inferred` status carried through; **promotes nothing, and does not authorise QA generation** |
 | **Meetings since the last refresh** | **Group 2026-09-14:** "No material objection to the prototype-unit design was raised." --- not validation, no semantic confirmed. **Mentor 2026-09-17 and 2026-09-24:** **no review of the answer sheet occurred** (R-003); nothing promoted |
-| **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M1 remains open.** **WP2 semantic reading: blocked on M4-WP1b closing** (D-018). **Metric-level concept terms** (`fwi_seasonal_value`, `heatindex_days_above_105F`): `proposed`, need GUIDANCE or the mentor. **QA generation: not authorised by any ruling** |
+| **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M1 remains open.** **WP2 semantic reading:** M4-WP1b is complete and does not invalidate the premise; reading waits on **GUIDANCE review of WP1b and its ruling on pool size (4 < 12)**. **Metric-level concept terms** (`fwi_seasonal_value`, `heatindex_days_above_105F`): `proposed`, need GUIDANCE or the mentor. **QA generation: not authorised by any ruling** |
+
+## Where things stand --- M4-WP1b comparison and adjudication (2026-10-08)
+
+- **Both readings frozen and pinned.** The blind records equal their `87bce48`
+  blobs (test); every span of both readings --- 96 + 85 --- re-slices from the
+  hash-verified sources, **0 failures**. Neither reading was edited.
+- **Scope agreement 6/10.** Agreement on the five papers both read as in scope
+  and on `LIT-000761` (both `ambiguous`). All four disagreements are reader 1
+  `off_topic`/`in_scope` vs reader 2 `ambiguous`: three become `ambiguous`
+  (R1c; no first-pass claims there), and **`LIT-000571` becomes `in_scope_hazard
+  (contested)`** --- its five claims are `adjudicated_modified`, "scope
+  contested by blind reader"; the blind reader had rejected the passages under
+  two of them.
+- **Claims: 19 aligned, 8 reader-1-only, 2 reader-2-only.** Geography agrees
+  least (5/19 exact), almost entirely on the tag (explicit vs inferred for the
+  same place); scenario agrees 19/19 (all `unknown`).
+- **Statuses (29 claims): 1 `independently_confirmed`** (`LIT-001141-C1`),
+  **23 `adjudicated_modified`**, **5 `single_reader_provisional`** (3 first-pass,
+  2 new `blind_reader_only`), **0 `rejected_on_review`**. One unresolved tie
+  (`LIT-000381-C3`, claim_type); one post-rule override (J-1, smoke-exposure
+  regimen kept in `experimental_condition`). Originals untouched; adjudicated
+  set in `artifacts/literature/wp1_claims_adjudicated/`.
+- **Rule 3 was operationalised as span-limited trimming** (report field 12):
+  adopted values hold only what both readers support and the cited span states.
+- **Field 13: the premise stands.** A lexical screen of all 48 recorded claims
+  finds no pilot concept term, no US place term and no non-`unknown` scenario in
+  either reading; the blind reader found nothing of that kind reader 1 missed.
+- **The adjudicator is reader 1** (prototype-exposed). GUIDANCE may require a
+  third party for the contested items.
+- Documents: [LITERATURE_WP1B_ADJUDICATION.md](LITERATURE_WP1B_ADJUDICATION.md),
+  [../reports/milestones/M4_WP1B_REPORT.md](../reports/milestones/M4_WP1B_REPORT.md).
 
 ## Where things stand --- M4-WP2 retrieval and D-018 closure (2026-10-08)
 
@@ -300,8 +331,9 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 - **For GUIDANCE:** review **M4-WP2 retrieval** (report fields 13--14): the
   pool of 4 < 12, and the metric-level terms left `proposed`.
-- **For COORDINATOR:** M4-WP1b comparison and adjudication (the blind reading
-  is frozen on `main` at `87bce48`).
+- **For GUIDANCE:** review **M4-WP1b** (report fields 11--14): third-party
+  adjudication for contested items; rule 3's span-limited reading; whether
+  `adjudicated_modified` claims are usable M5 evidence.
 - **For GUIDANCE, still open from WP3b:** the S/T/C letter convention (D-013, D-013-A1), and --- at the
   M1 gate --- whether criterion 1 may pass on declared provisional statuses
   (D-014).
@@ -321,9 +353,9 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 ## Next
 
-**Close M4-WP1b** (comparison and adjudication of the blind reading). Then,
-if WP1b does not materially invalidate the premise, **M4-WP2 reading** of the
-4 frozen candidates. **GUIDANCE/mentor:** whether a pool of 4 is enough, and
+**M4-WP1b is closed pending review and does not invalidate the premise.** Next:
+**M4-WP2 reading** of the 4 frozen candidates, pending GUIDANCE ruling on pool
+size. **GUIDANCE/mentor:** whether a pool of 4 is enough, and
 whether metric-level terms may be approved; the mentor question now leading
 `MENTOR_BRIEF.md`.
 
@@ -362,6 +394,7 @@ for papers outside the sample; any interpretation of a ClimRR column outside the
 - **M4-WP0 review, merge authorization and M4-WP1 ruling (WP0 PASS):** [M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md](M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md)
 - **M4-WP0 report:** [../reports/milestones/M4_WP0_REPORT.md](../reports/milestones/M4_WP0_REPORT.md)
 - **M4-WP1 review and M5-WP1 ruling (PASS WITH ACTIONS):** [M4_WP1_REVIEW_M5_WP1_GUIDANCE_RULING.md](M4_WP1_REVIEW_M5_WP1_GUIDANCE_RULING.md)
+- **M4-WP1b report:** [../reports/milestones/M4_WP1B_REPORT.md](../reports/milestones/M4_WP1B_REPORT.md); **adjudication:** [LITERATURE_WP1B_ADJUDICATION.md](LITERATURE_WP1B_ADJUDICATION.md)
 - **M4-WP2 retrieval report:** [../reports/milestones/M4_WP2_RETRIEVAL_REPORT.md](../reports/milestones/M4_WP2_RETRIEVAL_REPORT.md); **candidates:** [LITERATURE_WP2_CANDIDATES.md](LITERATURE_WP2_CANDIDATES.md); **eligibility:** [BRIDGE_ELIGIBILITY.md](BRIDGE_ELIGIBILITY.md); **ruling:** [M5_WP1_REVIEW_FOLLOWON_GUIDANCE_RULING.md](M5_WP1_REVIEW_FOLLOWON_GUIDANCE_RULING.md)
 - **M5-WP1 report:** [../reports/milestones/M5_WP1_REPORT.md](../reports/milestones/M5_WP1_REPORT.md); **matrix:** [M5_WP1_COMPATIBILITY.md](M5_WP1_COMPATIBILITY.md)
 - **M4-WP1 report:** [../reports/milestones/M4_WP1_REPORT.md](../reports/milestones/M4_WP1_REPORT.md); **pilot claims:** [LITERATURE_WP1_PILOT.md](LITERATURE_WP1_PILOT.md)
