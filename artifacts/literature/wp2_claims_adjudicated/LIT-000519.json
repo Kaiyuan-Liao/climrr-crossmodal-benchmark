@@ -1,0 +1,688 @@
+{
+  "item_id": "LIT-000519",
+  "file_sha256": "ea74ebe3a9f45917c4c5dce172a912f3951e638201e66c0e1cec87b963827f18",
+  "corpus_manifest_sha256": "3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR (Claude Code, model claude-opus-5-5), reader 1; every candidate file read completely; no LLM API call, no model service, no embedding, no search over other corpus files; the reader is prototype-exposed and knew the frozen retrieval terms and per-candidate hit counts, but did not open hit locations before recording claims",
+    "date": "2026-10-08",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "the dfhi algorithm",
+    "results",
+    "discussion",
+    "conflict of interest"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "remote sensing The Daily Fire Hazard Index: A Fire Danger Rating Method for Mediterranean Areas",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "note": "The stored title begins with 'remote sensing ', apparently the journal name fused to the title; recorded as stored."
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper develops a daily wildfire hazard (fire danger) index and validates it against official wildfire records for Sardinia; wildfire hazard is the subject.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 1291,
+    "char_end": 1424,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "The results were validated on the Italian region of Sardinia using official wildfire records provided by the regional administration.",
+    "evidence_sha256": "8dff2db1cb048dd345c53ddbe28c72c7ee210675438e637ab353ba785ace04e5"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT-000519-C1",
+      "claim_text": "About one third of the pixels burned by wildfires in 2017 had been rated High or Very High Hazard on the day they burned, and a quarter Very High.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "pixels reportedly burned by wildfires; 'High Hazard' and 'Very High Hazard' classes",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "roughly one third classified High or Very High Hazard on the day they burnt; a quarter Very High",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Sardinia",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.results",
+          "char_start": 368,
+          "char_end": 430,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The area of interest, which consists of the region of Sardinia",
+          "evidence_sha256": "1d2eb85c8953238478d249c5f806643f781c4f6d668b4a44b7c81852675724f9"
+        }
+      },
+      "temporal_frame": {
+        "value": "2017",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 617,
+        "char_end": 859,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Roughly one third of the pixels that were reportedly burned by wildfires in the year 2017 were classified as \"High Hazard\" or \"Very High Hazard\" on the day they burnt, and in particular, a quarter of them was classified as \"Very High Hazard\".",
+        "evidence_sha256": "41249e1a6fabb7f882ff3ac40d713a277410b30e3e84658e1772e33a3b3f290e"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "The surrounding text places this result on the earlier index version (before the evapotranspiration correction); the new version gave 'slightly better, but qualitatively analogous results'. The authors caution that 2017 had too few qualifying fires for definitive conclusions (rejected R3).",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP2 Phase 3",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "221115000-C1",
+        "blind_evidence": {
+          "json_path": "$.discussion",
+          "char_start": 617,
+          "char_end": 859,
+          "evidence_text": "Roughly one third of the pixels that were reportedly burned by wildfires in the year 2017 were classified as \"High Hazard\" or \"Very High Hazard\" on the day they burnt, and in particular, a quarter of them was classified as \"Very High Hazard\"."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Hazard class of burnt pixels; reader 2 names the DFHI.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 2 adds the comparison with about 14% of all pixels, which its evidence span does not state.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "roughly one third classified High or Very High Hazard on the day they burnt; a quarter Very High",
+              "tag": "explicit",
+              "support_from": "r1_evidence",
+              "support": {
+                "json_path": "$.discussion",
+                "char_start": 617,
+                "char_end": 859,
+                "evidence_text": "Roughly one third of the pixels that were reportedly burned by wildfires in the year 2017 were classified as \"High Hazard\" or \"Very High Hazard\" on the day they burnt, and in particular, a quarter of them was classified as \"Very High Hazard\"."
+              }
+            }
+          },
+          "geography": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Sardinia, both inferred from the same results sentence.",
+            "rule": "judged same content, same tag"
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Both explicit; reader 2 adds the 1 June-31 August season from another sentence. Adopted: the year the evidence states.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "2017",
+              "tag": "explicit",
+              "support_from": "r1_evidence",
+              "support": {
+                "json_path": "$.discussion",
+                "char_start": 617,
+                "char_end": 859,
+                "evidence_text": "Roughly one third of the pixels that were reportedly burned by wildfires in the year 2017 were classified as \"High Hazard\" or \"Very High Hazard\" on the day they burnt, and in particular, a quarter of them was classified as \"Very High Hazard\"."
+              }
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 unknown (old-version caveat in its notes); reader 2 inferred the old algorithm and the 10 ha threshold. Rule 3a: unknown; no override.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "relation_or_direction": {
+            "value": "roughly one third classified High or Very High Hazard on the day they burnt; a quarter Very High",
+            "tag": "explicit",
+            "support_from": "r1_evidence",
+            "support": {
+              "json_path": "$.discussion",
+              "char_start": 617,
+              "char_end": 859,
+              "evidence_text": "Roughly one third of the pixels that were reportedly burned by wildfires in the year 2017 were classified as \"High Hazard\" or \"Very High Hazard\" on the day they burnt, and in particular, a quarter of them was classified as \"Very High Hazard\"."
+            }
+          },
+          "temporal_frame": {
+            "value": "2017",
+            "tag": "explicit",
+            "support_from": "r1_evidence",
+            "support": {
+              "json_path": "$.discussion",
+              "char_start": 617,
+              "char_end": 859,
+              "evidence_text": "Roughly one third of the pixels that were reportedly burned by wildfires in the year 2017 were classified as \"High Hazard\" or \"Very High Hazard\" on the day they burnt, and in particular, a quarter of them was classified as \"Very High Hazard\"."
+            }
+          },
+          "experimental_condition": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-000519-C2",
+      "claim_text": "The revised DFHI algorithm generally returned more High and Very High Hazard pixels than the earlier version.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "new algorithm; 'High' and 'Very High Hazard' pixels",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "tended to return more",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Sardinia",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.results",
+          "char_start": 368,
+          "char_end": 430,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The area of interest, which consists of the region of Sardinia",
+          "evidence_sha256": "1d2eb85c8953238478d249c5f806643f781c4f6d668b4a44b7c81852675724f9"
+        }
+      },
+      "temporal_frame": {
+        "value": "2017 fire season, 1 June to 31 August",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.results",
+          "char_start": 232,
+          "char_end": 367,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "DFHI maps were generated for the entire fire season of 2017, conventionally assumed to start the first of June and to end on 31 August.",
+          "evidence_sha256": "dd111e399af9ac9954d03475580f4d9a9f7a9dafb1a822511a23403f57bc06f7"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 1303,
+        "char_end": 1392,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In general, the new algorithm tended to return more \"High\" and \"Very High Hazard\" pixels.",
+        "evidence_sha256": "2eb0d1b3a9b7a056637ba1fb384c03d8bb09f1ee16814049590aeb8b74a27253"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP2 Phase 3",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "221115000-C2",
+        "blind_evidence": {
+          "json_path": "$.discussion",
+          "char_start": 1303,
+          "char_end": 1687,
+          "evidence_text": "In general, the new algorithm tended to return more \"High\" and \"Very High Hazard\" pixels. This tendency was to be expected given the fact that the evapotranspiration tends to increase the temperature of the vegetation, and therefore to increase the fire hazard during the wildfire season, confirming the usefulness of the methodological improvements which is the object of this paper."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "'High' / 'Very High Hazard' pixels of the new algorithm.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 2's longer span adds the authors' evapotranspiration explanation. Adopted: the part both state.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "tended to return more",
+              "tag": "explicit",
+              "support_from": "r1_evidence",
+              "support": {
+                "json_path": "$.discussion",
+                "char_start": 1303,
+                "char_end": 1392,
+                "evidence_text": "In general, the new algorithm tended to return more \"High\" and \"Very High Hazard\" pixels."
+              }
+            }
+          },
+          "geography": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Sardinia, both inferred from the same sentence.",
+            "rule": "judged same content, same tag"
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Both inferred; reader 1 adds 1 June-31 August, which its longer support span states but reader 2's does not. Adopted: the part both support.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "2017 fire season",
+              "tag": "inferred",
+              "support_from": "r2",
+              "support": {
+                "json_path": "$.results",
+                "char_start": 232,
+                "char_end": 291,
+                "evidence_text": "DFHI maps were generated for the entire fire season of 2017"
+              }
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 unknown; reader 2 inferred the version comparison. Rule 3a; no override.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "relation_or_direction": {
+            "value": "tended to return more",
+            "tag": "explicit",
+            "support_from": "r1_evidence",
+            "support": {
+              "json_path": "$.discussion",
+              "char_start": 1303,
+              "char_end": 1392,
+              "evidence_text": "In general, the new algorithm tended to return more \"High\" and \"Very High Hazard\" pixels."
+            }
+          },
+          "temporal_frame": {
+            "value": "2017 fire season",
+            "tag": "inferred",
+            "support_from": "r2",
+            "support": {
+              "json_path": "$.results",
+              "char_start": 232,
+              "char_end": 291,
+              "evidence_text": "DFHI maps were generated for the entire fire season of 2017"
+            }
+          },
+          "experimental_condition": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-000519-C3",
+      "claim_text": "Per EFFIS data, 144,837 wildfires burned 1,717,369 hectares in France, Greece, Italy, Portugal and Spain from 2014 to 2018.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "wildfires; land burned",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "1,717,369 hectares burned as a result of 144,837 wildfires",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "France, Greece, Italy, Portugal, and Spain",
+        "status": "explicit"
+      },
+      "temporal_frame": {
+        "value": "2014 to 2018 (called a 'four-year time span' in the paper)",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 275,
+        "char_end": 603,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "According to the data gathered by the the European Forest Fire Information System (EFFIS), and taking into account only the wildfires recorded in a four-year time span that goes from 2014 to 2018 in France, Greece, Italy, Portugal, and Spain, 1,717,369 hectares of land were burned as a result of 144,837 wildfires [1][2][3][4].",
+        "evidence_sha256": "11635b393e47d68124160d37a9fb43c84ca5157e20cd6c5aaac59565c558e021"
+      },
+      "claim_validation_status": "independently_confirmed",
+      "notes": "The paper calls 2014-2018 a four-year span; recorded as stated.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "A",
+      "adjudication": {
+        "package": "M4-WP2 Phase 3",
+        "rules_applied": [
+          "R2"
+        ],
+        "flags": [],
+        "notes": [],
+        "aligned_blind_claim_id": "221115000-C3",
+        "blind_evidence": {
+          "json_path": "$.introduction",
+          "char_start": 275,
+          "char_end": 603,
+          "evidence_text": "According to the data gathered by the the European Forest Fire Information System (EFFIS), and taking into account only the wildfires recorded in a four-year time span that goes from 2014 to 2018 in France, Greece, Italy, Portugal, and Spain, 1,717,369 hectares of land were burned as a result of 144,837 wildfires [1][2][3][4]."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Burned land and number of wildfires.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "geography": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "temporal_frame": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "2014-2018, both noting the paper's 'four-year' wording.",
+            "rule": "judged same content, same tag"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-000519-C4",
+      "claim_text": "In Sardinia, the most damaging wildfires occur on days of strong Mistral winds (cited as well known).",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "most damaging wildfires; strong Mistral winds",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "occur in days of strong Mistral winds",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Sardinia",
+        "status": "explicit"
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 368,
+        "char_end": 574,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The area of interest, which consists of the region of Sardinia, is particularly suitable for our purposes, since it is well known that the most damaging wildfires occur in days of strong Mistral winds [65].",
+        "evidence_sha256": "17b9313d740b65afc8f930365cb55035dd006b515bf99ced370aec022275974e"
+      },
+      "claim_validation_status": "independently_confirmed",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "A",
+      "adjudication": {
+        "package": "M4-WP2 Phase 3",
+        "rules_applied": [
+          "R2"
+        ],
+        "flags": [],
+        "notes": [],
+        "aligned_blind_claim_id": "221115000-C4",
+        "blind_evidence": {
+          "json_path": "$.results",
+          "char_start": 368,
+          "char_end": 574,
+          "evidence_text": "The area of interest, which consists of the region of Sardinia, is particularly suitable for our purposes, since it is well known that the most damaging wildfires occur in days of strong Mistral winds [65]."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Mistral winds in concept (reader 1) or relation (reader 2).",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "geography": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "'Sardinia' / 'the region of Sardinia'.",
+            "rule": "judged same content, same tag"
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-000519-C5",
+      "claim_text": "The authors report that comparative studies in other regions found the FWI performed better than other fire danger methods in almost all instances.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "FWI",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "performed better than other methods in almost all instances",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 7304,
+        "char_end": 7469,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Similar studies have been carried out in other regions using other methods, with the result that the FWI performed better than other methods in almost all instances.",
+        "evidence_sha256": "2918b4e7d5ffd9fd32c405d50dd6c79b3b2d2990c04594ed2709a6ca1f98d421"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "Earlier in the same field the paper names the Canadian Forest Fire Weather Index (FWI) System. 'Other regions' are not named, so geography is unknown. The sentence follows the JRC comparative study [20] but carries no citation of its own.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP2 Phase 3",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": []
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT-000519-R1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 14911,
+        "char_end": 15073,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "This index, commonly called \"integrated\" or \"advanced\", is based on the FPI derived by Burgan [27] for the United States and successfully validated in California.",
+        "evidence_sha256": "449a0e8e18df6d01a3efc582e3fd07ade56866a3f64dc1ec6b9a33379c824775"
+      },
+      "reason": "Provenance of the method in passing; not about the study area or a hazard this paper examines."
+    },
+    {
+      "candidate_id": "LIT-000519-R2",
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 2848,
+        "char_end": 2998,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The index does not show any bias towards lower or higher risk classes, and predicts the areas at risk over the area of interest with good reliability.",
+        "evidence_sha256": "47ebe9359cd261a8b99de8a1ec2012c340b8a1d94cc0b0327deb222f33ccbeff"
+      },
+      "reason": "A conclusion stronger than the authors' own caveat (R3); not promoted."
+    },
+    {
+      "candidate_id": "LIT-000519-R3",
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 1688,
+        "char_end": 1860,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Unfortunately, the number of wildfires that satisfied the condition on the minimum burnt area in 2017, while significant, was not sufficient to draw definitive conclusions.",
+        "evidence_sha256": "b1f85a0453f8129abc9c059c65e944faab9132a88526142faa8f6244c9cb0f50"
+      },
+      "reason": "The authors' caveat on C1-C2; kept for audit."
+    },
+    {
+      "candidate_id": "LIT-000519-R4",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 2372,
+        "char_end": 2512,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "notwithstanding the fact that over 90% of ignitions in the Mediterranean area are caused by human actions, either intentional or accidental.",
+        "evidence_sha256": "11850f8ca68f03873ebd80be4f7c74ac752daa7996c46f732d6ab5ae52f16084"
+      },
+      "reason": "Uncited background; not promoted under the five-claim cap."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": null,
+  "candidates_sha256": "e155e70e338ffb67f8c881a8a3fdb794e28c0f048c43afc10b0a723135ec8d9c",
+  "representativeness": "relevance-guided candidate sample, not representative",
+  "reader": "reader 1 (the EXECUTOR, prototype-exposed)",
+  "scope_adjudication": {
+    "reader_1": "in_scope_hazard",
+    "reader_2": "in_scope_hazard",
+    "adopted": "in_scope_hazard",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp2_blind/221115000.json",
+    "reader_2_reason": "The paper develops a daily fire hazard index and evaluates it against wildfire burnt-area records for Sardinia's 2017 fire season."
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP2 Phase 3",
+    "adjudicator": "reader 1 (the EXECUTOR, prototype-exposed)",
+    "first_pass_record_sha256": "c37b16ef6c88f7c85f987b3976a39f179c40ccd094981c5824931424011f9a8a",
+    "blind_record_sha256": "2cf141a23e8391ec9d7c52170779d5b2577d9c687da663737bc5cf71fe58ea9b",
+    "no_paper_re_read": true,
+    "representativeness": "relevance-guided candidate sample, not representative"
+  }
+}

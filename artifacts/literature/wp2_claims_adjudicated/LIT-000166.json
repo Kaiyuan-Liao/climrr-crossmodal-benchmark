@@ -1,0 +1,749 @@
+{
+  "item_id": "LIT-000166",
+  "file_sha256": "d63010c65b1955f330d76d9bf6c51e4114248a3e261af1b5160d40095a5fb594",
+  "corpus_manifest_sha256": "3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR (Claude Code, model claude-opus-5-5), reader 1; every candidate file read completely; no LLM API call, no model service, no embedding, no search over other corpus files; the reader is prototype-exposed and knew the frozen retrieval terms and per-candidate hit counts, but did not open hit locations before recording claims",
+    "date": "2026-10-08",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "methods",
+    "results",
+    "discussion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "The influence of vegetation, fire spread and fire behaviour on biomass burning and trace gas emissions: results from a process-based model",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper builds and evaluates a global process-based model of wildfire regimes (ignition, spread, burnt area, fire season) and fire emissions; wildfire and its impacts are the subject.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 0,
+    "char_end": 296,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "A process-based fire regime model (SPITFIRE) has been developed, coupled with ecosystem dynamics in the LPJ Dynamic Global Vegetation Model, and used to explore fire regimes and the current impact of fire on the terrestrial carbon cycle and associated emissions of trace atmospheric constituents.",
+    "evidence_sha256": "76b217d8e3c6f32cacb673693f4dda921d3704a1e5e776599ce0a6b5d9842b8f"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT-000166-C1",
+      "claim_text": "The LPJ-SPITFIRE model estimates an average CO2 release of 2.24 Pg C per year from biomass burning during the 1980s and 1990s.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "CO 2 from biomass burning (model estimate)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "average release of 2.24 Pg C yr −1",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "global",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.results",
+          "char_start": 8992,
+          "char_end": 9040,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "global patterns in simulated pyrogenic emissions",
+          "evidence_sha256": "900cff2f54af233397c11e73ad551198846a2622afe8301223b295eabd35b5b2"
+        }
+      },
+      "temporal_frame": {
+        "value": "1980s and 1990s",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 296,
+        "char_end": 410,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The model estimates an average release of 2.24 Pg C yr −1 as CO 2 from biomass burning during the 1980s and 1990s.",
+        "evidence_sha256": "8e4e19bbee9a0a23f0187004417c31a90cf0e0713a210d5c333b344ba00dbd1f"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "A model output. The results give 3.45 PgC yr −1 before croplands are excluded; 2.24 is after that correction (see rejected R4).",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP2 Phase 3",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "14300-C1",
+        "blind_evidence": {
+          "json_path": "$.abstract",
+          "char_start": 296,
+          "char_end": 410,
+          "evidence_text": "The model estimates an average release of 2.24 Pg C yr −1 as CO 2 from biomass burning during the 1980s and 1990s."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "CO2 release from biomass burning; wording only.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Average release of 2.24 Pg C per year (model estimate).",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 unknown (the cropland exclusion is in its notes, not a dimension); reader 2 inferred the post-simulation cropland exclusion. Rule 3a: unknown. No override: reader 1 did not record the fact in any dimension, so J-1's circumstance does not arise.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "experimental_condition": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-000166-C2",
+      "claim_text": "Fire season length increases from wet/cold to warm/dry biomes in both satellite data and the model: one to three months in the boreal zone, four to seven in semi-arid and seasonal climates.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "length of the fire season",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "increases from wet/cold to warm/dry biomes; one to three months (boreal), four to seven months (semi-arid, highly seasonal)",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "biomes worldwide, aggregated by biome",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.results",
+          "char_start": 5308,
+          "char_end": 5444,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Simulated and satellite-detected fire season lengths, defined on a grid cell basis as in Giglio et al. (2006), were aggregated by biomes",
+          "evidence_sha256": "8a087a5ec41aa1767b2563b0178361c69f65c15fa3c5bf1b4524ad125fa827f2"
+        }
+      },
+      "temporal_frame": {
+        "value": "November 2000 to October 2002 (MODIS evaluation period)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 20998,
+          "char_end": 21065,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Data from November 2000 to October 2002 are used in the evaluation.",
+          "evidence_sha256": "4e2288c56829deca4731e454b9104ca84ee04f348aee114f81cef9ff955490e3"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 5561,
+        "char_end": 5825,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The mean length of the fire season increases from wet/cold to warm/dry biomes, both in the data and in the model (Fig. 6).The fire season is short (one to three months) in the boreal zone and longer (four to seven months) in semi-arid and highly seasonal climates.",
+        "evidence_sha256": "7dd72b11a3c72e186ee6df36644c9c8598073e745238fdc06b0e99b56967c814"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "The results add that the model tends to over-estimate fire season length.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP2 Phase 3",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "14300-C3",
+        "blind_evidence": {
+          "json_path": "$.results",
+          "char_start": 5561,
+          "char_end": 5930,
+          "evidence_text": "The mean length of the fire season increases from wet/cold to warm/dry biomes, both in the data and in the model (Fig. 6).The fire season is short (one to three months) in the boreal zone and longer (four to seven months) in semi-arid and highly seasonal climates.The model reproduces these differences, but shows a general tendency to over-estimate fire season length."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "'length' vs 'mean length' of the fire season.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds the month ranges (one to three, four to seven); reader 2's longer span adds the model's over-estimation. Adopted: the part both state.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "increases from wet/cold to warm/dry biomes",
+              "tag": "explicit",
+              "support_from": "r1_evidence",
+              "support": {
+                "json_path": "$.results",
+                "char_start": 5561,
+                "char_end": 5825,
+                "evidence_text": "The mean length of the fire season increases from wet/cold to warm/dry biomes, both in the data and in the model (Fig. 6).The fire season is short (one to three months) in the boreal zone and longer (four to seven months) in semi-arid and highly seasonal climates."
+              }
+            }
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 inferred 'biomes worldwide'; reader 2 unknown. Rule 3a.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "November 2000 to October 2002, both inferred from the same methods sentence.",
+            "rule": "judged same content, same tag"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "relation_or_direction": {
+            "value": "increases from wet/cold to warm/dry biomes",
+            "tag": "explicit",
+            "support_from": "r1_evidence",
+            "support": {
+              "json_path": "$.results",
+              "char_start": 5561,
+              "char_end": 5825,
+              "evidence_text": "The mean length of the fire season increases from wet/cold to warm/dry biomes, both in the data and in the model (Fig. 6).The fire season is short (one to three months) in the boreal zone and longer (four to seven months) in semi-arid and highly seasonal climates."
+            }
+          },
+          "geography": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-000166-C3",
+      "claim_text": "Simulated burnt area is greatest in seasonally dry regions, especially savannas, and least in wet or cold regions.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "simulated area burnt",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "maximal in seasonally dry regions, particularly savannas; minimal in wet and/or cold regions",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "seasonally dry regions; savannas; wet and/or cold regions (global simulation)",
+        "status": "explicit"
+      },
+      "temporal_frame": {
+        "value": "annual averages, 1982-1999",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.discussion",
+          "char_start": 5413,
+          "char_end": 5477,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "(c) fractional area burnt (all as annual averages for 1982-1999)",
+          "evidence_sha256": "964cf041a853f43a08a454e5eeda4f692cca5df62d24294e4c827c365d80ccda"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 1065,
+        "char_end": 1219,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Simulated area burnt (Fig. 3c) is maximal in seasonally dry regions, particularly in savannas (Fig. 4d), and minimal in wet and/or cold regions (Fig. 4b).",
+        "evidence_sha256": "243b58b486803974b91d783f613e5e2943d071b0a89f559f4f9854d6e0a546d3"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "A model simulation result, not an observation.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP2 Phase 3",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": []
+      }
+    },
+    {
+      "claim_id": "LIT-000166-C4",
+      "claim_text": "In the simulation, few ignitions along the west coast of the USA, western Iberian coasts and around the Rio de la Plata estuary produce burnt areas as high as inland regions with far more ignitions.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "simulated burnt area relative to ignition frequency",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "relatively few ignitions (<0.08 km−2 yr−1) produce simulated burnt area (>0.3 yr−1) as high as inland regions with much more frequent ignitions",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "west coast of the USA; western coasts of the Iberian Peninsula; north and south of the Rio de la Plata estuary",
+        "status": "explicit"
+      },
+      "temporal_frame": {
+        "value": "annual averages, 1982-1999",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.discussion",
+          "char_start": 5413,
+          "char_end": 5477,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "(c) fractional area burnt (all as annual averages for 1982-1999)",
+          "evidence_sha256": "964cf041a853f43a08a454e5eeda4f692cca5df62d24294e4c827c365d80ccda"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 1844,
+        "char_end": 2175,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In contrast, along the west coast of the USA, along the western coasts of the Iberian Peninsula, and north and south of the Rio de la Plata estuary in South America, relatively few ignitions (<0.08 km −2 yr −1 ) produce a simulated burnt area (>0.3 yr −1 ) as high as that found in inland regions with much more frequent ignitions.",
+        "evidence_sha256": "637c6a90de8d02aea65e48d53be32712313a04ce28227f86239f6927db450fc6"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "A model simulation result. The time frame is inferred from the Fig. 3 caption, to which the surrounding paragraph refers.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP2 Phase 3",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": []
+      }
+    },
+    {
+      "claim_id": "LIT-000166-C5",
+      "claim_text": "The model's interannual variability of burnt area is weaker than observed in central Siberia; it tends to miss the large burnt areas of the most extreme years.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "interannual variability of simulated area burnt",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "less pronounced than observed; misses large burnt areas in the most extreme years",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "central Siberia",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.discussion",
+          "char_start": 6371,
+          "char_end": 6484,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Comparison of (a) observed (Sukhinin et al., 2004) and (b) simulated annual average area burnt in central Siberia",
+          "evidence_sha256": "b85d57b662d5e4d8875761d0202f70000537473c1c9c41c16690bf7da9279834"
+        }
+      },
+      "temporal_frame": {
+        "value": "1996-2002 (period of the observed comparison data)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 22685,
+          "char_end": 22750,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The Sukhinin data are available on a monthly basis for 1996-2002.",
+          "evidence_sha256": "b3cc45b2d0332b7387747170710434e5adf9a88b0aa4ae00d2cebec20794f679"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 8799,
+        "char_end": 8991,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The interannual variability of simulated area burnt is generally less pronounced than that observed (Fig. 9d), that is, the model tends to miss the large burnt areas in the most extreme years.",
+        "evidence_sha256": "9128fec814e923731373995683dc0df94268e4652e3567e72a31b0537cfb0a8b"
+      },
+      "claim_validation_status": "independently_confirmed",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "A",
+      "adjudication": {
+        "package": "M4-WP2 Phase 3",
+        "rules_applied": [
+          "R2"
+        ],
+        "flags": [],
+        "notes": [],
+        "aligned_blind_claim_id": "14300-C4",
+        "blind_evidence": {
+          "json_path": "$.results",
+          "char_start": 8799,
+          "char_end": 8991,
+          "evidence_text": "The interannual variability of simulated area burnt is generally less pronounced than that observed (Fig. 9d), that is, the model tends to miss the large burnt areas in the most extreme years."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Less pronounced than observed; misses the extreme years.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "temporal_frame": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "1996-2002, both inferred from the same sentence.",
+            "rule": "judged same content, same tag"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-000166-B2",
+      "origin": "blind_reader",
+      "blind_claim_id": "14300-C2",
+      "claim_text": "Compared with MODIS, the simulated peak fire season is about two months late in the Sahel, one month late in southern Africa and South America, and one to two months late in the southern boreal zone.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "peak simulated fire season",
+        "status": "explicit",
+        "blind_reader_reason": "Named in the evidence span."
+      },
+      "relation_or_direction": {
+        "value": "about two months late (Sahel); one month late (southern Africa, South America); one to two months late (southern part of the boreal zone)",
+        "status": "explicit",
+        "blind_reader_reason": "Stated in the evidence span, hedges kept ('about', 'one to two')."
+      },
+      "geography": {
+        "value": "the Sahel; southern Africa; South America; the southern part of the boreal zone",
+        "status": "explicit",
+        "blind_reader_reason": "Regions named in the evidence span as places where the model-versus-MODIS offset occurs (study regions within a global evaluation)."
+      },
+      "temporal_frame": {
+        "value": "November 2000 to October 2002",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.discussion",
+          "char_start": 5776,
+          "char_end": 5869,
+          "evidence_text": "Fig. 5. (a) Observed (MODIS) and (b) simulated fire peak month, November 2000 to October 2002",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "ff43c3098e955d2460b301f7f13f5cc162999246b8d0a6572dc3cdecf4e35407"
+        },
+        "blind_reader_reason": "The evidence span gives no period; the Fig. 5 caption gives the comparison period."
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "blind_reader_reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown",
+        "blind_reader_reason": "No treatment is stated."
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 3989,
+        "char_end": 4254,
+        "evidence_text": "The model (Fig. 5b) reproduces these broad features but with some offsets: the peak simulated fire season is about two months late in the Sahel, one month late in southern Africa and South America, and one to two months late in the southern part of the boreal zone.",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "06227bbc3ba106e54f85d05a3c1221e33ad9a1880f00c00fb28c6d682fc1cc3c"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP2 Phase 3",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ]
+      }
+    },
+    {
+      "claim_id": "LIT-000166-B5",
+      "origin": "blind_reader",
+      "blind_claim_id": "14300-C5",
+      "claim_text": "In the simulation, fire numbers increase with increasing fire danger, and seasonally dry regions show the most fires (>0.16 per km2 per year).",
+      "claim_type": "finding",
+      "concept": {
+        "value": "simulated fire numbers; fire danger (the model's FDI, defined as the probability that an ignition event starts a fire)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 7093,
+          "char_end": 7277,
+          "evidence_text": "the fire danger index (FDI), which we define here in a narrow sense, as the probability that an ignition event will start a fire (regardless of how large the fire becomes once started)",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "231d28c73ec051ac59a586c37a06a5bc367aa879d6fa6a0dde1d9eca70f871d1"
+        },
+        "blind_reader_reason": "'Simulated fire numbers' is explicit; the meaning of 'fire danger' is taken from the paper's own definition."
+      },
+      "relation_or_direction": {
+        "value": "increase with increasing fire danger; seasonally dry regions showing the most fires",
+        "status": "explicit",
+        "blind_reader_reason": "Stated in the evidence span."
+      },
+      "geography": {
+        "value": "seasonally dry regions",
+        "status": "explicit",
+        "blind_reader_reason": "A climate-region class named in the evidence span, not a named place."
+      },
+      "temporal_frame": {
+        "value": "annual averages for 1982-1999",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.discussion",
+          "char_start": 5341,
+          "char_end": 5476,
+          "evidence_text": "Fig. 3. Simulation results: (a) fire danger index, (b) number of fires, (c) fractional area burnt (all as annual averages for 1982-1999",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "b56b281b5cd88838f112f49eaaab0a77c9e99b0c43588ddcbf1ab04f4063f943"
+        },
+        "blind_reader_reason": "The Fig. 3 caption gives the averaging period."
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "blind_reader_reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown",
+        "blind_reader_reason": "No treatment is stated."
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 579,
+        "char_end": 721,
+        "evidence_text": "Simulated fire numbers increase with increasing fire danger (Fig. 3a) with seasonally dry regions showing the most fires (>0.16 km −2 yr −1 ).",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "ce76b9ee932140645b2361914f1a96387fa83ca79a2a36e558653f22c4e75d73"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP2 Phase 3",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ]
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT-000166-R1",
+      "evidence": {
+        "json_path": "$.methods",
+        "char_start": 1890,
+        "char_end": 2026,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Several fire danger indices are in use, including the Canadian Fire Weather Index (CFFBG, 1992) which has also been adapted to Indonesia",
+        "evidence_sha256": "b054f090bf84a3e04dfa032e6991fc919ff83d2ade8620ccbf8b499ef4b2f408"
+      },
+      "reason": "Lists operational fire danger indices as context for the model's design; the paper neither uses nor evaluates the Fire Weather Index."
+    },
+    {
+      "candidate_id": "LIT-000166-R2",
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 2198,
+        "char_end": 2337,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "One is the prediction of the consequences of climate change for fire regimes, vegetation and pyrogenic trace-gas and particulate emissions.",
+        "evidence_sha256": "d4d3e6908f64e6f9a6736939dd15a7f405bfd0182c7dbfba173a2b3d112e82ca"
+      },
+      "reason": "A proposed future application; no projection is made in this paper."
+    },
+    {
+      "candidate_id": "LIT-000166-R3",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 1075,
+        "char_end": 1200,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Biomass burning is thought to contribute up to 50% of global CO and NO x emissions in the troposphere (Galanter et al., 2000)",
+        "evidence_sha256": "75c4c09431aad490880a34ca355a29ccf99f59af76f26b1ccfecc172825a4a59"
+      },
+      "reason": "Cited background; not promoted under the five-claim cap."
+    },
+    {
+      "candidate_id": "LIT-000166-R4",
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 9042,
+        "char_end": 9211,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The simulated average annual CO 2 release from biomass burning during the 1980s and 1990s amounts to 3.45 PgC yr −1 with an interannual variability (1 s.d.) of about 7%.",
+        "evidence_sha256": "e4e1a6bcdcd891ed5f9126d503f7400202de3d3f239b4042ded6b523e517eb78"
+      },
+      "reason": "The pre-cropland-correction figure; kept for audit of C1, which uses the corrected 2.24."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": null,
+  "candidates_sha256": "e155e70e338ffb67f8c881a8a3fdb794e28c0f048c43afc10b0a723135ec8d9c",
+  "representativeness": "relevance-guided candidate sample, not representative",
+  "reader": "reader 1 (the EXECUTOR, prototype-exposed)",
+  "scope_adjudication": {
+    "reader_1": "in_scope_hazard",
+    "reader_2": "in_scope_hazard",
+    "adopted": "in_scope_hazard",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp2_blind/14300.json",
+    "reader_2_reason": "The paper builds and evaluates a process-based fire model that simulates fire danger, fire numbers, burnt area and fire emissions, and compares them with satellite fire products."
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP2 Phase 3",
+    "adjudicator": "reader 1 (the EXECUTOR, prototype-exposed)",
+    "first_pass_record_sha256": "fc110c8a3be78c2c67ca2e4a5a70087e82fad92471704de9f4b8c1843e81448c",
+    "blind_record_sha256": "33b9bdbd63a6e96706c20f737fbd2090b7eae44c00d07d997fefe4ee202ee8d1",
+    "no_paper_re_read": true,
+    "representativeness": "relevance-guided candidate sample, not representative"
+  }
+}
