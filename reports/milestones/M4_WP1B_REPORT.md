@@ -293,6 +293,13 @@ yields pilot-relevant claims, which neither reader found.
 adjudicator's non-independence and the contested items put to GUIDANCE, and
 the field-13 finding that the premise for relevance-guided sampling stands.
 
+**GUIDANCE outcome (D-019, `docs/M4_WP1B_WP2_CANDIDATE_READING_GUIDANCE_RULING.md`):
+PASS WITH ACTIONS**, reviewed at `25a86e5`, merged at `e7da7cc`. Rule 3
+span-limited trimming approved; J-1 approved as a one-off; `LIT-000381-C3`
+stays `unresolved_tie`; `LIT-000571` stays scope-contested; evidence tiers A/B/C
+introduced (added to the adjudicated records on `work/m4-wp2-read`: A 1, B 18,
+C 10); a third reader only if an accepted bridge depends on contested material.
+
 ## 15. Proposed next bounded objective
 
 M4-WP2 reading of the 4 frozen candidates, pending GUIDANCE ruling on pool size.

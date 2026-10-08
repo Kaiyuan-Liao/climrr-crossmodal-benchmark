@@ -224,6 +224,7 @@ def main() -> int:
             else:
                 raise w.AdjudicationError(f"{c['claim_id']}: no rule applies")
             c["claim_validation_status"] = status
+            c["evidence_tier"] = w.evidence_tier(status, adopted_scope == w.CONTESTED)  # D-019
             c["adjudication"] = adj
             status_counts[status] += 1
             for f in adj["flags"]:
@@ -246,6 +247,7 @@ def main() -> int:
                 new[d] = dd
             new["evidence"] = ev
             new["claim_validation_status"] = "single_reader_provisional"
+            new["evidence_tier"] = w.evidence_tier("single_reader_provisional", adopted_scope == w.CONTESTED)
             ov = next(x for x in it["reader_2_only"] if x["claim_id"] == b["claim_id"])["overlaps_reader_1_rejected"]
             new["adjudication"] = {"package": "M4-WP1b-adj", "rules_applied": ["R4"], "flags": ["blind_reader_only"],
                                    "notes": ["a new candidate from the blind reader, not confirmed"]}
@@ -269,7 +271,8 @@ def main() -> int:
         path = w.ADJ_DIR / f"{iid}.json"
         adj_files[path.name] = w.write_json(path, rec)
         per_item.append({"item_id": iid, "adopted_scope": adopted_scope, "adjudicated_terminal_status": adj_terminal,
-                         "statuses": {s: sum(1 for c in rec["claims"] if c["claim_validation_status"] == s) for s in w.STATUSES}})
+                         "statuses": {s: sum(1 for c in rec["claims"] if c["claim_validation_status"] == s) for s in w.STATUSES},
+                         "tiers": {t: sum(1 for c in rec["claims"] if c["evidence_tier"] == t) for t in ("A", "B", "C")}})
 
     summary = {
         "artifact": "M4-WP1b adjudicated claim set (Phase D)",
@@ -282,6 +285,8 @@ def main() -> int:
         "status_counts": status_counts,
         "status_counts_first_pass_claims_only": {s: status_counts[s] - (flags_count.get("blind_reader_only", 0) if s == "single_reader_provisional" else 0) for s in w.STATUSES},
         "flag_counts": flags_count,
+        "evidence_tiers": {"decision": "D-019", "definitions": w.EVIDENCE_TIERS,
+                           "counts": {t: sum(i["tiers"][t] for i in per_item) for t in ("A", "B", "C")}},
         "n_claims_total": sum(status_counts.values()),
         "items": per_item,
         "judgement_overrides": sorted({o for p in all_pairs for o in p["overrides"]}),
@@ -407,6 +412,8 @@ def render_doc(cmp: dict, summ: dict) -> str:
     for s in w.STATUSES:
         L.append(f"| {s} | {sc[s]} | {summ['status_counts_first_pass_claims_only'][s]} |")
     L.append(f"| **total** | **{summ['n_claims_total']}** | **{sum(summ['status_counts_first_pass_claims_only'].values())}** |")
+    tc = summ["evidence_tiers"]["counts"]
+    L += ["", "**Evidence tiers (D-019):** " + "; ".join(f"**{t}** {tc[t]} --- {_md(summ['evidence_tiers']['definitions'][t])}" for t in ("A", "B", "C")) + "."]
     L += ["", "Flags: " + ", ".join(f"`{k}` × {v}" for k, v in sorted(summ["flag_counts"].items())) + ".", "",
           "Post-rule judgement overrides: " + (", ".join(summ["judgement_overrides"]) or "none") +
           (" --- the wildfire-smoke exposure regimen, recorded by both readers under different dimensions, is kept in "

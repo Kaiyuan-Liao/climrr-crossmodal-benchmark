@@ -1,0 +1,351 @@
+{
+  "item_id": "LIT-001501",
+  "file_sha256": "d6ffb5e77697c932a4983dbb74a7d63cb4fccec955f0e12be51a63b2a2269c4b",
+  "corpus_manifest_sha256": "3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR (Claude Code, model claude-opus-5-5), reader 1; every candidate file read completely; no LLM API call, no model service, no embedding, no search over other corpus files; the reader is prototype-exposed and knew the frozen retrieval terms and per-candidate hit counts, but did not open hit locations before recording claims",
+    "date": "2026-10-08",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "data and methods",
+    "results",
+    "discussion",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "The wildfire impacts of the 2017-2018 precipitation whiplash event across the Southern Great Plains",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper examines how a 2017-2018 precipitation whiplash (pluvial to drought) fuelled spring wildfires in the Southern Great Plains, with their impacts (acres burned, fatalities, homes).",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 517,
+    "char_end": 683,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "The aim of this study was to examine the role of preceding precipitation whiplash events in providing fuel for wildfires, with 2017-2018 investigated as a case study.",
+    "evidence_sha256": "f4978a7fa20c613221f7e901078cb8f53c45c25d57d4d9506825d18274e33b0c"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT-001501-C1",
+      "claim_text": "Lag correlation showed a significant 0.53 correlation between precipitation in the preceding August and both the number of April wildfires and acres burned.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "precipitation in the August prior; number of April wildfires and acres burned",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "significant correlation of 0.53",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "study domain across the SGP (Southern Great Plains)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"data and methods\"]",
+          "char_start": 5789,
+          "char_end": 6009,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "This study examined the role of a preceding precipitation whiplash event in providing fuel for wildfires across the SGP.Specifically, our study domain for analysis was a region bounded by a north and south latitude of 34",
+          "evidence_sha256": "fdaca4d0feea97ea8db847ff0cfffb04ecaaabf951b5afbf595072d9b4202208"
+        }
+      },
+      "temporal_frame": {
+        "value": "wildfires 1984-2020 (historical record analysed)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"data and methods\"]",
+          "char_start": 5652,
+          "char_end": 5775,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "the number of acres burned and the ignition date were gathered for all fires designated as wildfires between 1984 and 2020.",
+          "evidence_sha256": "88926ebee5e6cfbd6fde9dddf44c04d74d4b10fb55e53d424d044d9e21cda92d"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 273,
+        "char_end": 491,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Through lag correlation analysis, a significant correlation of 0.53 was found between precipitation in the August prior and the number of wildfires as well as the number of acres burned in April (figures 1(a) and (d)).",
+        "evidence_sha256": "d23b965370758ae683d479f7261603ee85349b3427233e6a48e27e53d2e9e6af"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "Large fires only (MTBS thresholds); the authors note a skewed distribution because no large fire occurred in about a third of March-April months.",
+      "evidence_tier": "C"
+    },
+    {
+      "claim_id": "LIT-001501-C2",
+      "claim_text": "Precipitation at 137% of normal in the 2017 growing season gave way rapidly to drought, with precipitation 21% of normal through the following cool winter season.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "precipitation anomalies; drought conditions",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "137% of normal, then rapidly cascaded into drought with 21% of normal",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Oklahoma and Texas panhandles",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 1062,
+          "char_end": 1208,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "this study examined a highly impactful precipitation whiplash event that occurred during the Fall of 2017 across the Oklahoma and Texas panhandles",
+          "evidence_sha256": "d3884c13b871352e073092e92b3a23650220156bfd8640104a9bd8c1d7d1b802"
+        }
+      },
+      "temporal_frame": {
+        "value": "2017 growing season; then the cool winter season",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 1265,
+        "char_end": 1463,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Precipitation anomalies that were 137% of normal during the 2017 growing season rapidly cascaded into drought conditions with precipitation anomalies 21% of normal throughout the cool winter season.",
+        "evidence_sha256": "e2199974ba1cb49e5c9a041d04e4dee5cedd6fe974c9ed320a40d00c03fcf07c"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": null,
+      "evidence_tier": "C"
+    },
+    {
+      "claim_id": "LIT-001501-C3",
+      "claim_text": "In March-April 2018 the study domain had 23 wildfires burning 556,347 acres, against an average of 5.66 wildfires and about 120,500 acres.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "number of wildfires; acres burned",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "23 wildfires, 556 347 acres vs an average of 5.66 wildfires, ~120 500 acres",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "study domain across the SGP (Southern Great Plains)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"data and methods\"]",
+          "char_start": 5789,
+          "char_end": 6009,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "This study examined the role of a preceding precipitation whiplash event in providing fuel for wildfires across the SGP.Specifically, our study domain for analysis was a region bounded by a north and south latitude of 34",
+          "evidence_sha256": "fdaca4d0feea97ea8db847ff0cfffb04ecaaabf951b5afbf595072d9b4202208"
+        }
+      },
+      "temporal_frame": {
+        "value": "March-April 2018",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 4488,
+        "char_end": 4673,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In 2018, the March-April period yielded 23 wildfires that burned a total of 556 347 acres, compared to the average of 5.66 wildfires that burn approximately 120 500 acres (figure 2(c)).",
+        "evidence_sha256": "183731f82b3db9bf2c63aa7415424d1d7decef2a22ce4314880c955c0489e692"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": null,
+      "evidence_tier": "C"
+    },
+    {
+      "claim_id": "LIT-001501-C4",
+      "claim_text": "The Rhea Fire, starting 12 April 2018 in Dewey County, northwest Oklahoma, burned 277,949 acres, with at least two fatalities and dozens of homes destroyed.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "Rhea Fire",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "burned 277 949.00 acres; at least two fatalities; dozens of homes destroyed; over 500 personnel dispatched",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Dewey County, NW Oklahoma",
+        "status": "explicit"
+      },
+      "temporal_frame": {
+        "value": "from 12 April 2018",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 5033,
+        "char_end": 5334,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The Rhea Fire was by far the largest, beginning at approximately 1730 UTC on 12 April 2018, in Dewey County, which lies in NW Oklahoma.The fire burned a total of 277 949.00 acres with at least two fatalities, dozens of homes destroyed, and over 500 personnel dispatched to fight and mitigate the fire.",
+        "evidence_sha256": "3e9a5b6520ca3a6c4ad842630e6c0421cab73c1841a5ef202ed9ba1cc5c9ba3c"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "The abstract attributes the same fatalities and homes to the March-April 2018 fires collectively; the results attribute them to the Rhea Fire.",
+      "evidence_tier": "C"
+    },
+    {
+      "claim_id": "LIT-001501-C5",
+      "claim_text": "The authors argue that more frequent whiplash events, with fast vegetation recovery and desiccation, raise the risk of whiplash cascading into mega-fire conditions much more often in the future.",
+      "claim_type": "projection",
+      "concept": {
+        "value": "precipitation whiplash events; conditions that support mega-fires",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "enhances the risk ... at a much higher frequency",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "across the SGP",
+        "status": "explicit"
+      },
+      "temporal_frame": {
+        "value": "in the future (no horizon stated)",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 5407,
+        "char_end": 5698,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Therefore, the combination of an increase in precipitation whiplash events and the quick recovery and desiccation of the environment across the SGP, enhances the risk of precipitation whiplash events cascading into conditions that support mega-fires at a much higher frequency in the future.",
+        "evidence_sha256": "cf9d0615e3dd8b8d0c3ef14c9d05b532b05c05bfb7d1f22db93ef7d5d58e7244"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "No emissions scenario or horizon is named; the argument rests on cited projections of precipitation variability.",
+      "evidence_tier": "C"
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT-001501-R1",
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 1228,
+        "char_end": 1367,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Unlike precipitation and NDVI, temperature anomalies do not correlate significantly with the number of wildfires and acres burned in April.",
+        "evidence_sha256": "836c43f49531d54666f545bcbcb8a3c6a20f700b3c5a834dad8e8174957b6370"
+      },
+      "reason": "A valid finding of the paper; not promoted under the five-claim cap."
+    },
+    {
+      "candidate_id": "LIT-001501-R2",
+      "evidence": {
+        "json_path": "$[\"data and methods\"]",
+        "char_start": 3898,
+        "char_end": 4071,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In particular, to examine the soil moisture response, the fractional water index (FWI) was calculated at three different levels; 5, 25, and 60 cm below the natural sod cover",
+        "evidence_sha256": "a95b4ea537aab88a2820480d87e80db800dc714a8a35ef108bbc48b0e0f9f6f8"
+      },
+      "reason": "Defines 'FWI' in this paper as the Oklahoma Mesonet fractional water index (soil moisture), not a fire weather index. The soil-moisture transect is not promoted (cap)."
+    },
+    {
+      "candidate_id": "LIT-001501-R3",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 3408,
+        "char_end": 3560,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "For example, more than 1.4 million people in Oklahoma, or 41% of the population, live in an area at an elevated risk of wildfire (wildfirerisk.org2022).",
+        "evidence_sha256": "46fe6964413d3cd736a8bbf5524317ce7c2c413cdd18021c9649dbc7ef4b5f05"
+      },
+      "reason": "Cited background; not promoted under the cap."
+    },
+    {
+      "candidate_id": "LIT-001501-R4",
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 2836,
+        "char_end": 3054,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "These results also match those found by (Hernández Ayala et al 2021) in California, where 11 of the 20 wildfire seasons studied were found to be preceded by above-average levels of precipitation and vegetation growth.",
+        "evidence_sha256": "ad42313be2c40cbc3a9c77a67b7f43f39418982b11570bee6624dc0d4b5ff32b"
+      },
+      "reason": "A cited comparison about another region; not this paper's evidence. (The source stores the accent in 'Hernández' as a separate combining code point, U+0301; the quote matches it.)"
+    },
+    {
+      "candidate_id": "LIT-001501-R5",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 931,
+        "char_end": 1081,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Under projected 21st-century climate change, precipitation variability is expected to increase, contributing to increased vulnerability across the SGP",
+        "evidence_sha256": "c92f778a040ea8f68551bb0fc68400cf1597d56133262da82808aed1a6e95fb4"
+      },
+      "reason": "Cited background projection; no scenario named; not promoted."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": null,
+  "candidates_sha256": "e155e70e338ffb67f8c881a8a3fdb794e28c0f048c43afc10b0a723135ec8d9c",
+  "representativeness": "relevance-guided candidate sample, not representative",
+  "reader": "reader 1 (the EXECUTOR, prototype-exposed)"
+}

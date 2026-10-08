@@ -1,0 +1,318 @@
+{
+  "source_file": "272852900.json",
+  "source_sha256": "18b1fe556b697e2a97c609744268f89d88949401e1c905f1f91233362bd28ab3",
+  "keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "materials and methods",
+    "results",
+    "discussion",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title_raw": "Spatiotemporal Facility-Level Patterns of Summer Heat Exposure, Vulnerability, and Risk in United States Prison Landscapes",
+    "authors": "unknown",
+    "year": "unknown",
+    "venue": "unknown",
+    "note": "No author/year/venue field exists. The results value contains a stray running-header string ('GeoHealth 10.1029/2024GH001108 OVIENMHADA ET AL.') inside body text; not used because it is not a bibliographic field."
+  },
+  "scope_status": {
+    "value": "in_scope_hazard",
+    "reason": "The paper examines summer heat exposure at US prisons using modeled air temperature, and how exposure differs by population and facility characteristics.",
+    "quoted_span": {
+      "json_path": "$[\"abstract\"]",
+      "char_start": 354,
+      "char_end": 524,
+      "evidence_text": "We leveraged a high-resolution air temperature data set to evaluate short and long-term patterns of heat metrics for 1,614 prisons in the United States from 1990 to 2023."
+    }
+  },
+  "claims": [
+    {
+      "claim_id": "272852900-C1",
+      "restatement": "Based on the 90th percentile summer air temperature, the most heat-exposed prisons, and the states with the highest average prison heat exposure, were mostly in the Southwestern US.",
+      "claim_type": "finding",
+      "evidence": {
+        "json_path": "$[\"discussion\"]",
+        "char_start": 240,
+        "char_end": 557,
+        "evidence_text": "With regards to the patterns of the 90th percentile summer air temperature, we found that the most heat-exposed facilities and the states with the highest prison heat exposures on average were mostly in the Southwestern US where there are not universal air conditioning regulations in prisons (Santucci et al., 2022)."
+      },
+      "concept": {
+        "value": "prison heat exposure as the 90th percentile summer air temperature (modeled, Daymet)",
+        "status": "inferred",
+        "reason": "The metric is explicit in the evidence span; that the temperature data are modeled is stated in the introduction.",
+        "support_span": {
+          "json_path": "$[\"introduction\"]",
+          "char_start": 3426,
+          "char_end": 3483,
+          "evidence_text": "we use a high-resolution modeled air temperature data set"
+        }
+      },
+      "relation_or_direction": {
+        "value": "most heat-exposed facilities and states mostly in the Southwestern US",
+        "status": "explicit",
+        "reason": "Stated in the evidence span ('mostly' kept)."
+      },
+      "geography": {
+        "value": "Southwestern US (within US prisons)",
+        "status": "explicit",
+        "reason": "Region named in the evidence span as where the highest exposures fall (study area: US prisons)."
+      },
+      "temporal_frame": {
+        "value": "summers 2020-2023 (averaged)",
+        "status": "inferred",
+        "reason": "The 90th percentile metric is averaged over 2020-2023 per the results.",
+        "support_span": {
+          "json_path": "$[\"results\"]",
+          "char_start": 1147,
+          "char_end": 1264,
+          "evidence_text": "Figure 1b shows variation in the location-specific 90th percentile temperature at prisons averaged from 2020 to 2023."
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No treatment is stated."
+      }
+    },
+    {
+      "claim_id": "272852900-C2",
+      "restatement": "The highest facility-level temperature anomalies in 2020-2023, relative to a historical baseline, occurred at prisons in the Pacific Northwest, the Northeast, Texas, and parts of the Midwest.",
+      "claim_type": "finding",
+      "evidence": {
+        "json_path": "$[\"discussion\"]",
+        "char_start": 1313,
+        "char_end": 1496,
+        "evidence_text": "With this approach, we found that the highest facility-level temperature anomalies from 2020 to 2023 occurred in the Pacific Northwest, the Northeast, Texas, and parts of the Midwest."
+      },
+      "concept": {
+        "value": "facility-level temperature anomalies (summer 90th percentile)",
+        "status": "explicit",
+        "reason": "Named in the evidence span; the metric is in the Fig. 2 caption."
+      },
+      "relation_or_direction": {
+        "value": "highest anomalies occurred in the Pacific Northwest, the Northeast, Texas, and parts of the Midwest",
+        "status": "explicit",
+        "reason": "Stated in the evidence span."
+      },
+      "geography": {
+        "value": "the Pacific Northwest, the Northeast, Texas, and parts of the Midwest",
+        "status": "explicit",
+        "reason": "Regions named in the evidence span as locations of the highest anomalies (study area: US prisons)."
+      },
+      "temporal_frame": {
+        "value": "2020-2023 relative to a 1990-2019 average",
+        "status": "inferred",
+        "reason": "2020-2023 is in the evidence span; the baseline period is in the Fig. 2 caption. The baseline comes from modeled temperatures.",
+        "support_span": {
+          "json_path": "$[\"conclusion\"]",
+          "char_start": 866,
+          "char_end": 920,
+          "evidence_text": "Anomaly shows the difference from a 1990-2019 average."
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No treatment is stated."
+      }
+    },
+    {
+      "claim_id": "272852900-C3",
+      "restatement": "From 2020 to 2023, 67.3% of prisons, in 44 states and DC, had at least one day with daily mean temperature over 85°F.",
+      "claim_type": "finding",
+      "evidence": {
+        "json_path": "$[\"results\"]",
+        "char_start": 649,
+        "char_end": 880,
+        "evidence_text": "The majority (67.3%) of facilities (at least 986,145 incarcerated people and 222,154 staff) in 44 states and the District of Columbia had at least one day that the daily mean temperature was over 85°F from 2020 to 2023 (Figure 1a)."
+      },
+      "concept": {
+        "value": "days with daily mean temperature over 85°F at prisons",
+        "status": "explicit",
+        "reason": "Named in the evidence span."
+      },
+      "relation_or_direction": {
+        "value": "67.3% of facilities had at least one day",
+        "status": "explicit",
+        "reason": "Stated in the evidence span."
+      },
+      "geography": {
+        "value": "44 states and the District of Columbia (United States)",
+        "status": "explicit",
+        "reason": "Named in the evidence span as where the exposed facilities are."
+      },
+      "temporal_frame": {
+        "value": "2020 to 2023 (summer months, 1 June-31 August)",
+        "status": "explicit",
+        "reason": "2020 to 2023 is in the evidence span; the summer window is in the methods."
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No treatment is stated."
+      }
+    },
+    {
+      "claim_id": "272852900-C4",
+      "restatement": "In 2019, the 10 most heat-exposed prisons had 15.0% higher proportions of Hispanic or Latino incarcerated people than the 10 least heat-exposed prisons.",
+      "claim_type": "finding",
+      "evidence": {
+        "json_path": "$[\"results\"]",
+        "char_start": 4714,
+        "char_end": 4876,
+        "evidence_text": "The prisons with the top 10 heat exposures also had 15.0% higher proportions of Hispanic or Latino incarcerated populations than the lowest 10 prisons (Figure 4)."
+      },
+      "concept": {
+        "value": "proportion of Hispanic or Latino incarcerated populations",
+        "status": "explicit",
+        "reason": "Named in the evidence span."
+      },
+      "relation_or_direction": {
+        "value": "15.0% higher proportions in the top 10 than the lowest 10 heat-exposed prisons",
+        "status": "explicit",
+        "reason": "Stated in the evidence span; whether this means percentage points is not stated."
+      },
+      "geography": {
+        "value": "US",
+        "status": "inferred",
+        "reason": "The comparison is stated as across the US in the preceding sentence.",
+        "support_span": {
+          "json_path": "$[\"results\"]",
+          "char_start": 3989,
+          "char_end": 4062,
+          "evidence_text": "Across the US, the prisons with the top 10 heat exposures had 8.6% higher"
+        }
+      },
+      "temporal_frame": {
+        "value": "2019",
+        "status": "inferred",
+        "reason": "The demographic analysis uses 2019 heat exposure and the 2019 BJS census.",
+        "support_span": {
+          "json_path": "$[\"results\"]",
+          "char_start": 3753,
+          "char_end": 3848,
+          "evidence_text": "In 2019, the incarcerated populations of different race/ethnicity groups were unequally exposed"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No treatment is stated."
+      }
+    },
+    {
+      "claim_id": "272852900-C5",
+      "restatement": "Nine of 17 facility-level characteristics hypothesized to modify heat risk had significantly higher heat exposure (p < 0.05) for the groups with those characteristics, suggesting they may face elevated risk.",
+      "claim_type": "finding",
+      "evidence": {
+        "json_path": "$[\"results\"]",
+        "char_start": 5810,
+        "char_end": 6102,
+        "evidence_text": "Nine of the 17 test variables had statistically significant (p < 0.05) higher heat exposures for the groups with hypothesized effects on heat risk suggesting that these groups may face elevated risk not only due to these facility-level characteristics but also due to elevated heat exposures."
+      },
+      "concept": {
+        "value": "heat exposure by facility-level characteristics",
+        "status": "explicit",
+        "reason": "Named in the evidence span."
+      },
+      "relation_or_direction": {
+        "value": "statistically significant (p < 0.05) higher heat exposures; 'suggesting that these groups may face elevated risk'",
+        "status": "explicit",
+        "reason": "Stated in the evidence span, hedge kept."
+      },
+      "geography": {
+        "value": "US prisons",
+        "status": "inferred",
+        "reason": "The preceding sentence frames the analysis as US prisons.",
+        "support_span": {
+          "json_path": "$[\"results\"]",
+          "char_start": 5612,
+          "char_end": 5729,
+          "evidence_text": "is distributed by facility-level characteristics related to facility operations, housing, or conditions in US prisons"
+        }
+      },
+      "temporal_frame": {
+        "value": "2019",
+        "status": "inferred",
+        "reason": "Exposure is measured as the 2019 summer 90th percentile temperature.",
+        "support_span": {
+          "json_path": "$[\"results\"]",
+          "char_start": 5548,
+          "char_end": 5611,
+          "evidence_text": "(as measured by the 90th percentile summer temperature in 2019)"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No treatment is stated."
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "span": {
+        "json_path": "$[\"abstract\"]",
+        "char_start": 791,
+        "char_end": 954,
+        "evidence_text": "Prisons in the Pacific Northwest, the Northeast, and upper Midwest had the highest occurrences of days associated with an increased risk of heat-related mortality."
+      },
+      "reason": "Uses a proxy metric whose mortality link comes from a cited study; this paper does not assess mortality. Not promoted, to avoid reading it as a mortality finding (also the 5-claim limit)."
+    },
+    {
+      "span": {
+        "json_path": "$[\"introduction\"]",
+        "char_start": 638,
+        "char_end": 784,
+        "evidence_text": "while the provision of air conditioning (AC) has been shown to effectively eliminate heat-related mortality in Texas prisons (Skarha et al., 2022)"
+      },
+      "reason": "Background citation; not promoted."
+    },
+    {
+      "span": {
+        "json_path": "$[\"discussion\"]",
+        "char_start": 13505,
+        "char_end": 13618,
+        "evidence_text": "However, a decarceration approach is the most effective (physically and economically speaking) long-term solution"
+      },
+      "reason": "Normative policy position, not supported by this paper's analysis; not promoted as a recommendation."
+    },
+    {
+      "span": {
+        "json_path": "$[\"discussion\"]",
+        "char_start": 557,
+        "char_end": 659,
+        "evidence_text": "However, most (98.2%) of all prisons in the US are experiencing an upper decile of summer temperatures"
+      },
+      "reason": "The threshold it is compared with comes from a cited source and the value is not shown in the results; not promoted."
+    }
+  ],
+  "terminal_status": "claims_extracted"
+}

@@ -1234,3 +1234,74 @@ code emits, and the next GUIDANCE packet still chooses.
   `artifacts/phenomena/prototypes/P-STATE-1.v2.json`,
   `data/metadata/concept_map.yaml`, `src/climrr/compat.py`,
   `src/climrr/bridge.py`, the WP2 retrieval artifacts.
+
+## D-019 --- M4-WP1b and M4-WP2 retrieval reviewed: PASS WITH ACTIONS; evidence tiers; C-2 revised; reading of the four candidates authorized
+
+- **Date:** 2026-10-08
+- **Status:** **decided.**
+- **Owner:** **GUIDANCE**; **approved by Kaiyuan Liao**, who placed
+  `docs/M4_WP1B_WP2_CANDIDATE_READING_GUIDANCE_RULING.md` in the repository.
+  Reviewed heads: M4-WP1b **`25a86e5`**, M4-WP2 retrieval **`7ddee2c`**; both
+  merged into `main` at **`e7da7cc`**.
+- **What the ruling decides.**
+  1. **M4-WP1b: PASS WITH ACTIONS** --- an independent-reading validation
+     package, with contested claims kept explicitly qualified.
+  2. **Rule 3 span-limited trimming is approved**: keep only the part of a
+     value that both readers support and that an explicit evidence span
+     actually states; the surviving fragment stays `explicit` when the cited
+     span states it.
+  3. **J-1 is approved as a one-off schema-placement override**, with the
+     literal rule result preserved. Not a general permission to rescue facts
+     whenever adjudication yields `unknown`; a new override needs explicit
+     justification.
+  4. **`LIT-000381-C3.claim_type` stays `unresolved_tie`.** Any rule that
+     depends on claim type treats it as `not_evaluable` until independently
+     resolved.
+  5. **`LIT-000571` stays scope-contested.** Its five claims remain
+     `adjudicated_modified` / scope-contested and **may not serve as
+     independently validated M5 evidence**; they may enter diagnostic
+     compatibility analysis with that status carried.
+  6. **Evidence tiers**: **A** `independently_confirmed` (strongest); **B**
+     `adjudicated_modified` (usable for candidate/bridge analysis when the
+     adopted value is source-supported, the disagreement preserved, and no
+     unresolved issue directly determines the bridge); **C**
+     single-reader / contested provisional (diagnostic or candidate use only;
+     cannot independently establish an accepted bridge).
+  7. **Third reader**: not required for the whole WP1 set; **required** if a
+     final accepted bridge depends materially on a scope-contested claim, an
+     unresolved tie affecting the bridge, or a single-reader-only semantic
+     assertion.
+  8. **C-2 revised**: from whole-field exact equality to **boundary-aware
+     occurrence of an approved family surface term inside the claim's tagged
+     concept field**, using the frozen retrieval matcher; record matched term,
+     family id, concept-field span and concept-map provenance. **No new
+     synonyms.** `"heat index trends"` → family-level; `"urban heat island"`
+     and `"wildfire smoke exposure"` → `not_evaluable`. A family match is never
+     metric support.
+  9. **M4-WP2 retrieval: PASS, sample size 4**, not 12. The four frozen
+     candidate ids and retrieval artifacts stay unchanged; no place-term
+     expansion before reading; widening to all US states is a separately
+     predeclared WP2b, not part of WP2.
+  10. **Reading of the four candidates is authorized**, with the two-reader +
+      adjudication structure (reader 1; a blind reader in a fresh session given
+      only the four files, the rubric and the location convention; then
+      adjudication by the approved WP1b rules), followed by compatibility
+      against all three prototypes using **P-STATE-1 v2**, with v1 and the
+      frozen M5-WP1 inputs unchanged.
+  11. **QA generation is still not authorized.**
+- **Open task recorded (cleanup, not a blocker):** repair the baseline-window
+  citation chain of **P-CELL-1 / P-COUNTY-1** so that equivalent horizon claims
+  cite the same authoritative metadata source as P-STATE-1 v2.
+- **Mentor question kept** (verbatim): *"Is a family-level literature bridge
+  with disclosed metric/scenario mismatch useful for the intended benchmark,
+  or must literature support the exact ClimRR metric and scenario?"* Until it
+  is answered, `supporting_qualified` stays analytically separate from
+  unqualified `supporting`.
+- **Affected files (on `work/m4-wp2-read`):** this log; the ruling, tracked as
+  placed; `src/climrr/compat.py` (C-2 revised, tie rule), `src/climrr/wp1b.py`
+  and `scripts/wp1b_adjudicate.py` (evidence tiers), the regenerated
+  `artifacts/literature/wp1_claims_adjudicated/` (`evidence_tier` added,
+  nothing else changed --- tested against `e7da7cc`),
+  `docs/LITERATURE_WP1B_ADJUDICATION.md`, `docs/BRIDGE_ELIGIBILITY.md`,
+  `reports/milestones/M4_WP1B_REPORT.md` and `M4_WP2_RETRIEVAL_REPORT.md`
+  (field 14), `scripts/stage_knowledge.py`, `docs/PROJECT_STATE.md`.

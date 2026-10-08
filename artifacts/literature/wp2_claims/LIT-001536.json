@@ -1,0 +1,371 @@
+{
+  "item_id": "LIT-001536",
+  "file_sha256": "18b1fe556b697e2a97c609744268f89d88949401e1c905f1f91233362bd28ab3",
+  "corpus_manifest_sha256": "3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR (Claude Code, model claude-opus-5-5), reader 1; every candidate file read completely; no LLM API call, no model service, no embedding, no search over other corpus files; the reader is prototype-exposed and knew the frozen retrieval terms and per-candidate hit counts, but did not open hit locations before recording claims",
+    "date": "2026-10-08",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "materials and methods",
+    "results",
+    "discussion",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Spatiotemporal Facility-Level Patterns of Summer Heat Exposure, Vulnerability, and Risk in United States Prison Landscapes",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper quantifies summer heat exposure (modelled air-temperature metrics) at US prisons and its relation to population and facility characteristics; heat hazard, exposure and vulnerability are the subject.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 354,
+    "char_end": 524,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "We leveraged a high-resolution air temperature data set to evaluate short and long-term patterns of heat metrics for 1,614 prisons in the United States from 1990 to 2023.",
+    "evidence_sha256": "3b15934ae47a89dfac360ee9174e91dbe3c467df7051c2d7c99604182338a016"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT-001536-C1",
+      "claim_text": "The ten most heat-exposed US prisons, by 2020-2023 location-specific 90th-percentile summer temperature, were in California, Arizona and Nevada.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "most heat-exposed facilities, measured by the location-specific 90th percentile temperature",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.results",
+          "char_start": 1147,
+          "char_end": 1264,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Figure 1b shows variation in the location-specific 90th percentile temperature at prisons averaged from 2020 to 2023.",
+          "evidence_sha256": "ff007e1f5e4782f368673d2dc78f3005ea948858d728227fa3b373b11acd26de"
+        }
+      },
+      "relation_or_direction": {
+        "value": "top 10 located in California, Arizona and Nevada",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "California, Arizona and Nevada",
+        "status": "explicit"
+      },
+      "temporal_frame": {
+        "value": "2020-2023 average",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.results",
+          "char_start": 1147,
+          "char_end": 1264,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Figure 1b shows variation in the location-specific 90th percentile temperature at prisons averaged from 2020 to 2023.",
+          "evidence_sha256": "ff007e1f5e4782f368673d2dc78f3005ea948858d728227fa3b373b11acd26de"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 1319,
+        "char_end": 1410,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The top 10 most heat-exposed facilities were in California, Arizona and Nevada (Figure 1b).",
+        "evidence_sha256": "da7418a7583b621ea22af86c59f36ba43a04ce49687552f1201e729c96cc2d66"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "Temperatures are from the Daymet modelled air-temperature data set, not station observations.",
+      "evidence_tier": "C"
+    },
+    {
+      "claim_id": "LIT-001536-C2",
+      "claim_text": "67.3% of US prisons, in 44 states and the District of Columbia, had at least one day with daily mean temperature above 85°F during 2020-2023.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "days with daily mean temperature over 85°F",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "majority (67.3%) of facilities had at least one such day",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "44 states and the District of Columbia",
+        "status": "explicit"
+      },
+      "temporal_frame": {
+        "value": "2020 to 2023",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 649,
+        "char_end": 880,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The majority (67.3%) of facilities (at least 986,145 incarcerated people and 222,154 staff) in 44 states and the District of Columbia had at least one day that the daily mean temperature was over 85°F from 2020 to 2023 (Figure 1a).",
+        "evidence_sha256": "7b5cca4ecb710c070b8d55105089a4cf7a5891f285c17721b7f2ea096ad7d038"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "Summer months only (1 June to 31 August), per the methods; modelled temperatures.",
+      "evidence_tier": "C"
+    },
+    {
+      "claim_id": "LIT-001536-C3",
+      "claim_text": "From 2020 to 2023, 1,135 prisons (70.3%) had positive anomalies in their upper-decile summer heat exposure relative to the 1990-2019 baseline.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "upper decile of heat exposure",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "positive changes for 1,135 (70.3%) prisons",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "United States (1,614 prisons)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 467,
+          "char_end": 523,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "for 1,614 prisons in the United States from 1990 to 2023",
+          "evidence_sha256": "55b8220052139e0d0a8f783eb12323edeae6448def22a5b8d429aca01a7e8937"
+        }
+      },
+      "temporal_frame": {
+        "value": "2020-2023 compared with a 1990-2019 average",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.results",
+          "char_start": 2233,
+          "char_end": 2422,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Figure 2 shows the spatial pattern of anomalies in the average 90th percentile summer temperature for prisons from 2020 to 2023 when compared to a 1990-2019 averaged summer 90th percentile.",
+          "evidence_sha256": "cf76f06c1b02374ff757e2ca928d3e9d6a6485b48c9ff7d22b6959f2f9727448"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 2422,
+        "char_end": 2690,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "From 2020 to 2023, there were positive changes in the upper decile of heat exposure for 1,135 (70.3%) prisons meaning these prisons experienced approximately 9 out of 92 total days of summer that were hotter than all previous summers, on average, for a given location.",
+        "evidence_sha256": "dbc896cb6f0b8b5a700af6abc0dab3efd62209f856456dabbc2556dff884074b"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "The 1990-2019 baseline is itself from the modelled Daymet data set, not observations. 'Hotter than all previous summers' is the paper's own gloss and is not adopted in claim_text.",
+      "evidence_tier": "C"
+    },
+    {
+      "claim_id": "LIT-001536-C4",
+      "claim_text": "Population-weighted summer heat exposure was highest for Hispanic or Latino incarcerated people (97.1°F), against 93.2-94.7°F for the other groups.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "population-weighted summer heat exposure by race/ethnicity",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "Hispanic or Latino highest at 97.1°F; other groups 93.2-94.7°F",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "United States (all prisons)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 467,
+          "char_end": 523,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "for 1,614 prisons in the United States from 1990 to 2023",
+          "evidence_sha256": "55b8220052139e0d0a8f783eb12323edeae6448def22a5b8d429aca01a7e8937"
+        }
+      },
+      "temporal_frame": {
+        "value": "summer 2019",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"materials and methods\"]",
+          "char_start": 5105,
+          "char_end": 5213,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "we used the 2019 summer 90th percentile of daily max air temperature to match with the year of BJSCensus2019",
+          "evidence_sha256": "d1c00f62ade27bddd584dfa3aa850db032fabb1ec70c06e425e926fc6e000361"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 5130,
+        "char_end": 5511,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Across all prisons, the population-weighted summer heat exposure for the white, non-Hispanic, Black, non-Hispanic, American Indian non-Hispanic, Asian, non-Hispanic, and non-white, non-Hispanic incarcerated populations was between 93.2 and 94.7°F, while the Hispanic or Latino subgroup had the highest population-weighted exposure at 97.1°F (Table S4 in Supporting Information S1).",
+        "evidence_sha256": "25923e9972257d40cefa5adc717311ec03be7af35210b5733af2759cd9500216"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": null,
+      "evidence_tier": "C"
+    },
+    {
+      "claim_id": "LIT-001536-C5",
+      "claim_text": "Nine of 17 facility-level characteristics hypothesized to modify heat risk were associated with significantly higher heat exposure (p < 0.05).",
+      "claim_type": "finding",
+      "concept": {
+        "value": "facility-level characteristics hypothesized to modify heat risk; heat exposure",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "9 of 17 had statistically significant (p < 0.05) higher heat exposures",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "United States (all prisons)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 467,
+          "char_end": 523,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "for 1,614 prisons in the United States from 1990 to 2023",
+          "evidence_sha256": "55b8220052139e0d0a8f783eb12323edeae6448def22a5b8d429aca01a7e8937"
+        }
+      },
+      "temporal_frame": {
+        "value": "summer 2019",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.results",
+          "char_start": 5512,
+          "char_end": 5611,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Next, we assessed how heat exposure (as measured by the 90th percentile summer temperature in 2019)",
+          "evidence_sha256": "cf4533f8485955cf6aa1f8cfd819273e118f1278d8bbfa3a94d8cb5aea0ee88b"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 5810,
+        "char_end": 6102,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Nine of the 17 test variables had statistically significant (p < 0.05) higher heat exposures for the groups with hypothesized effects on heat risk suggesting that these groups may face elevated risk not only due to these facility-level characteristics but also due to elevated heat exposures.",
+        "evidence_sha256": "4a53fd47787fd72ba5a5dbe08addb8a7844e337c10032b167085d7ad0a9ebeac"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": null,
+      "evidence_tier": "C"
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT-001536-R1",
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 3165,
+        "char_end": 3402,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "a national study on heat-related mortality in prisons determined that neither heat index or wet bulb globe temperature better capture the relationship between heat and total mortality in the incarcerated population (Skarha et al., 2023).",
+        "evidence_sha256": "22e1914c9cbd6f80a80c52f9b871a359e0fce1703cbfffe40e904ebde17d13a9"
+      },
+      "reason": "A cited methodological aside justifying the paper's use of air temperature; not a finding about heat index in this paper; not promoted (cap)."
+    },
+    {
+      "candidate_id": "LIT-001536-R2",
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 3086,
+        "char_end": 3276,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "From 2020 to 2023, 828 (51.3%) facilities had at least one day that the prison experienced an outdoor temperature 10°F higher than their location-specific mean summer temperature (Figure 3).",
+        "evidence_sha256": "91fd067b8be7d62bb8814592345840825a59ebc801e8781c55c3632486a11548"
+      },
+      "reason": "Valid; not promoted under the cap. Its mortality link is a cited estimate."
+    },
+    {
+      "candidate_id": "LIT-001536-R3",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 638,
+        "char_end": 784,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "while the provision of air conditioning (AC) has been shown to effectively eliminate heat-related mortality in Texas prisons (Skarha et al., 2022)",
+        "evidence_sha256": "c6bb93ff0d840f32f5c24123d247b1b1588e5c1adf78d78c1d9f745465e61d55"
+      },
+      "reason": "Cited background; not promoted under the cap."
+    },
+    {
+      "candidate_id": "LIT-001536-R4",
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 13505,
+        "char_end": 13686,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "However, a decarceration approach is the most effective (physically and economically speaking) long-term solution to reduce environmental-related risk produced in carceral settings.",
+        "evidence_sha256": "3b760f3cfaf809375a0f325ed3d55ce7d941776948c9610f27b0660b25110f8b"
+      },
+      "reason": "A normative recommendation not tested by the paper's analysis."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": null,
+  "candidates_sha256": "e155e70e338ffb67f8c881a8a3fdb794e28c0f048c43afc10b0a723135ec8d9c",
+  "representativeness": "relevance-guided candidate sample, not representative",
+  "reader": "reader 1 (the EXECUTOR, prototype-exposed)"
+}

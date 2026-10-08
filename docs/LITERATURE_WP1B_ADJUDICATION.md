@@ -159,6 +159,8 @@ Rule 3 in practice: where two values differ in extent, the adopted value is the 
 | rejected_on_review | 0 | 0 |
 | **total** | **29** | **27** |
 
+**Evidence tiers (D-019):** **A** 1 --- independently_confirmed --- strongest evidence; **B** 18 --- adjudicated_modified --- usable for candidate/bridge analysis when the adopted value is source-supported, the disagreement is preserved, and no unresolved issue directly determines the bridge; **C** 10 --- single_reader_provisional, or scope-contested --- diagnostic or candidate use only; cannot independently establish an accepted bridge.
+
 Flags: `blind_reader_only` × 2, `not_independently_found` × 8, `scope_contested_by_blind_reader` × 5, `unresolved_tie` × 1.
 
 Post-rule judgement overrides: J-1 --- the wildfire-smoke exposure regimen, recorded by both readers under different dimensions, is kept in `experimental_condition` rather than lost to rule 3a; the rule result is recorded beside it.

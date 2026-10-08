@@ -272,6 +272,13 @@ Per-term counts and every hit's path and span are in
 M4-WP2 plus the M5-WP1 closure actions; all binding criteria met, with the pool
 shortfall (4 < 12) put to GUIDANCE.
 
+**GUIDANCE outcome (D-019, `docs/M4_WP1B_WP2_CANDIDATE_READING_GUIDANCE_RULING.md`):
+retrieval PASS WITH ACTIONS** (gate status of the joint ruling), reviewed at
+`7ddee2c`, merged at `e7da7cc`. **Sample size 4 accepted** --- "4 is the
+scientifically correct sample size under this retrieval definition"; do not
+widen to reach 12. C-2 revised to boundary-aware occurrence inside the concept
+field. Reading of the four authorized (M4-WP2r1).
+
 ## 15. Proposed next bounded objective
 
 Close **M4-WP1b** (comparison and adjudication). If it does not materially

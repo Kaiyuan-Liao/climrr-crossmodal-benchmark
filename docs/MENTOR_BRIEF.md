@@ -1,6 +1,6 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-10-08   Next meeting: not yet scheduled; the answer sheet is still outstanding
+Last updated: 2026-10-08   Next meeting: one-on-one, 2026-10-09 --- **bring [MENTOR_REPORT_2026-10-09.md](MENTOR_REPORT_2026-10-09.md)**; the answer sheet is still outstanding
 
 ## Status in five lines
 
@@ -9,6 +9,7 @@ Last updated: 2026-10-08   Next meeting: not yet scheduled; the answer sheet is 
 3. **The group (2026-09-14) raised no material objection to the prototype-unit design.** That is recorded as exactly that — the group is not the data owner, and it confirms no column meaning.
 4. **The project now proceeds on "our reading" (D-014)**: the prototypes are used as they stand to see what questions they could support, with every reasoned status carried visibly into anything built from them. Nothing is promoted by proceeding.
 5. **The literature side has started, separately from the table.** A corpus of 1,918 papers and its search query are pinned by checksum. Ten papers, picked by a fixed rule that ignores their content, were read in full: 6 discuss a climate or weather hazard and yield 27 claims, each tied to its exact source text; 3 are off-topic and 1 is ambiguous, and they are kept, not replaced. A first, purely mechanical check compared those 27 claims with the three example records on place, period, scenario, quantity and direction: **no claim matches any record on all five** — mostly because the papers are about other countries or other quantities, or simply do not say. That tests the checking rules, not the literature; the claims have had one reader so far, and a second, independent reading comes next. Three questions about how the corpus was collected are for its collector, not for you.
+6. **The literature link test now has a real result (2026-10-08).** Both readings of the ten random papers are done (no statement touches our units). A strict word search found exactly 4 papers naming one of our concepts and one of our places; each was read twice, independently, and disagreements settled by fixed, cautious rules: 26 statements, 6 recorded identically by both readers. Compared with the three units, **none qualifies as a candidate link**; the closest are a general statement about the Fire Weather Index with no place (one reader only) and a different Oklahoma county. "Stephens" turned out to be an author's surname and one paper's "FWI" a soil-moisture index. The plain-language summary and three questions for you are in [MENTOR_REPORT_2026-10-09.md](MENTOR_REPORT_2026-10-09.md).
 
 ## What I need from this meeting
 

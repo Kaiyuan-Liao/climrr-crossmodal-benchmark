@@ -79,6 +79,27 @@ CONTESTED = "in_scope_hazard (contested)"
 CONTESTED_NOTE = "scope contested by blind reader"
 
 
+#: D-019 evidence tiers (docs/M4_WP1B_WP2_CANDIDATE_READING_GUIDANCE_RULING.md, "Evidence check" 5).
+EVIDENCE_TIERS = {
+    "A": "independently_confirmed --- strongest evidence",
+    "B": ("adjudicated_modified --- usable for candidate/bridge analysis when the adopted value is "
+          "source-supported, the disagreement is preserved, and no unresolved issue directly determines the bridge"),
+    "C": ("single_reader_provisional, or scope-contested --- diagnostic or candidate use only; cannot "
+          "independently establish an accepted bridge"),
+}
+
+
+def evidence_tier(status: str, scope_contested: bool) -> str:
+    """D-019: A / B / C from a claim's validation status and its item's scope status."""
+    if status == "independently_confirmed" and not scope_contested:
+        return "A"
+    if status == "adjudicated_modified":
+        return "C" if scope_contested else "B"
+    if status == "single_reader_provisional" or scope_contested:
+        return "C"
+    raise AdjudicationError(f"no evidence tier for status {status!r}")
+
+
 class AdjudicationError(RuntimeError):
     """An input, span, judgement or rule application is inconsistent."""
 
