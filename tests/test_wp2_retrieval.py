@@ -84,3 +84,16 @@ def test_a_full_rescan_reproduces_the_frozen_artifacts():
     pool, cands = wp2retrieve.run(Path(root), json.loads(wp2retrieve.TERMS_PATH.read_text(encoding="utf-8")))
     cands["qualifying_pool_sha256"] = wp2retrieve.sha256_file(wp2retrieve.POOL_PATH)
     assert pool == POOL and cands == CANDS
+
+
+def test_the_candidates_document_agrees_with_the_artifacts_and_states_its_limits():
+    from climrr.checksums import sha256_file
+    from climrr.paths import REPO_ROOT
+    doc = (REPO_ROOT / "docs" / "LITERATURE_WP2_CANDIDATES.md").read_text(encoding="utf-8")
+    assert "Relevance-guided candidate-generation sample, not representative." in doc
+    assert "No candidate has been read; semantic inspection waits for M4-WP1b (D-018)." in doc
+    for c in CANDS["candidates"]:
+        assert f"| `{c['item_id']}` | {c['concept_hits']} | {c['place_hits']} |" in doc
+    for p in (wp2retrieve.TERMS_PATH, wp2retrieve.POOL_PATH, wp2retrieve.CANDIDATES_PATH):
+        assert sha256_file(p) in doc
+    assert f"| **Qualifying pool** | **{POOL['n_qualifying_pool']}** |" in doc
