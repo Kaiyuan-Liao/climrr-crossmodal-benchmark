@@ -1,0 +1,108 @@
+{
+  "item_id": "LIT-000761",
+  "file_sha256": "c6ff28c7c55ccb614f58c9e8c4822b306b76e291c7ece2924120d3436689c624",
+  "corpus_manifest_sha256": "3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a",
+  "sample_sha256": "5cb81f9585040dd1d73a89ca7062d3c5e0060112f54e08ef4795db96a657b578",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR (Claude Code, model claude-opus-5-5); every sampled file read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no prototype, pilot family or collection query consulted",
+    "date": "2026-09-29",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "methodology",
+    "results",
+    "discussion",
+    "conflict of interest"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Analysis on water use efficiency of Populus euphratica forest ecosystem in arid area",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "ambiguous",
+  "scope_reason": "One year of eddy-covariance measurements of water-use efficiency in a riparian forest of a permanently arid region; drought appears as the background condition and in cited statements, but the paper does not examine a hazard event or its impacts.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 623,
+    "char_end": 744,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "explored the main controlling factors of WUE in drought-stressed environment based on the synchronous meteorological data",
+    "evidence_sha256": "8b63212410009a7d5f307d4cc0d63efdf3b7b1effdca6da1b61424a8a6239c76"
+  },
+  "claims": [],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT-000761-R1",
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 1696,
+        "char_end": 1842,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Under the conditions of high temperature, strong radiation and low humidity in the summer, the growth rate of ET was much larger than that of GPP.",
+        "evidence_sha256": "f6a08e8aaed1e606436419ab626847017baf335f8d681234a771ada9c892d891"
+      },
+      "reason": "Seasonal ecosystem physiology under ordinary summer conditions of the site; not framed as a hazard."
+    },
+    {
+      "candidate_id": "LIT-000761-R2",
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 11474,
+        "char_end": 11529,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Figure 9(c) showed that WUE increased as SWC decreased.",
+        "evidence_sha256": "257416eb0524f3954bde45f57403ce6bf6183e53c5a047dd16e96a21dd88d321"
+      },
+      "reason": "The abstract states the soil-water relation differently ('WUE increased under moderate soil water content (SWC), but decreased due to the continuously rising SWC'); the direction is ambiguous, and it is not a hazard claim."
+    },
+    {
+      "candidate_id": "LIT-000761-R3",
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 408,
+        "char_end": 568,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "because long-term drought enhanced the ecosystem's resistance and resilience to water scarcity in order to mitigate the effects of water loss (Gang et al. 2016)",
+        "evidence_sha256": "f7ca1d70e87912a06cc12597861c1e89c6111b141c65b56838cc7e8261b207f1"
+      },
+      "reason": "An explanation borrowed from a cited source, not tested in this paper."
+    }
+  ],
+  "terminal_status": "ambiguous_only",
+  "notes": null,
+  "scope_adjudication": {
+    "reader_1": "ambiguous",
+    "reader_2": "ambiguous",
+    "adopted": "ambiguous",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp1b_blind/235097800.json",
+    "reader_2_reason": "Drought and high-temperature language appears, but the paper characterises one year of ecosystem carbon/water fluxes and their meteorological covariates; no drought event, heat hazard or impact is examined.",
+    "adjudicated_terminal_status": "ambiguous_only"
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP1b-adj",
+    "adjudicator": "the WP1 EXECUTOR (prototype-exposed; also reader 1)",
+    "first_pass_record_sha256": "1dccff144e11a9ab4d8341c9e2e5d3b543283b5177c855904005ab9d068643bc",
+    "blind_record_sha256": "904404d247c83881a80048533ce249678f66e5d36237ced9fa4e9f7ede96ccb7",
+    "no_paper_re_read": true
+  }
+}

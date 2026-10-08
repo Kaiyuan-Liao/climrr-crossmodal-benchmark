@@ -1,0 +1,834 @@
+{
+  "item_id": "LIT-001711",
+  "file_sha256": "349af8bb393c4f6bb71fab7261853a98cfcf8f57c38152013994f65a0cf27fe8",
+  "corpus_manifest_sha256": "3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a",
+  "sample_sha256": "5cb81f9585040dd1d73a89ca7062d3c5e0060112f54e08ef4795db96a657b578",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR (Claude Code, model claude-opus-5-5); every sampled file read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no prototype, pilot family or collection query consulted",
+    "date": "2026-09-29",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "methods",
+    "results and discussion",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Discussion Paper | Discussion Paper | Discussion Paper | Discussion Paper |",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "note": "The title field holds 'Discussion Paper | Discussion Paper | ...', a page-header artifact rather than a title. Recorded as the field says; not corrected."
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper reconstructs a century of floods and droughts of an arid-zone wetland and relates them to extreme rainfall.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 325,
+    "char_end": 500,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "Here, we sought to identify the main hydroclimatic determinants of the strongly episodic flood regime of a large catchment in the semi-arid, subtropical northwest of Australia",
+    "evidence_sha256": "0cdf3c09933de217aaf56a9cf6b40db045599c538f09b791086fdcac8e959d23"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT-001711-C1",
+      "claim_text": "Severe, intense regional rainfall events and the sequence of recharge events within and between years determine surface water extent on the Fortescue Marsh floodplain.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "severe and intense regional rainfall events; sequence of recharge events; surface water expression",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "determine",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Fortescue Marsh floodplain, upper Fortescue River catchment, semi-arid northwest Australia",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 683,
+          "char_end": 759,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia",
+          "evidence_sha256": "be738df99216b5f6ce466ef50dd9d6067fd908738a86e9f81dda7714d802282e"
+        }
+      },
+      "temporal_frame": {
+        "value": "model calibrated on 1988-2012 satellite observations",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 761,
+          "char_end": 778,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "from 1988 to 2012",
+          "evidence_sha256": "d24c96dc6ceba9a4b4f286603eb7f51483401c3bc898233f1400d9f13e4639a0"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 941,
+        "char_end": 1126,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "We found that severe and intense regional rainfall events, as well as the sequence of recharge events both within and between years, determine surface water expression on the floodplain",
+        "evidence_sha256": "9ce52ce52670ea45662f017f1c08b7abf28d0d948d9d5fa4f20bda1f98aa1806"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "adjudication": {
+        "package": "M4-WP1b-adj",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions for downstream use; both readers' values are kept above"
+        ],
+        "aligned_blind_claim_id": "54542600-C1",
+        "blind_evidence": {
+          "json_path": "$.abstract",
+          "char_start": 941,
+          "char_end": 1126,
+          "evidence_text": "We found that severe and intense regional rainfall events, as well as the sequence of recharge events both within and between years, determine surface water expression on the floodplain"
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Drivers in concept (reader 1) or relation (reader 2).",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "'determine' / 'determined by'.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "Both name the Fortescue Marsh. Reader 1 tags it explicit via the abstract span 'the Fortescue Marsh, the largest water feature of inland northwest Australia'; reader 2 tags the same link inferred. The span states 'Fortescue Marsh' and 'inland northwest Australia' but not 'upper Fortescue River catchment', 'semi-arid' or 'Pilbara', which both readers' values add; adopted trimmed to the span.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "Fortescue Marsh, inland northwest Australia",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.abstract",
+                "char_start": 683,
+                "char_end": 759,
+                "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "Both cite the span 'from 1988 to 2012'; reader 1 explicit, reader 2 inferred. The span states the years; 'calibration' and 'satellite observations' in the values are not in it.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "1988 to 2012",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.abstract",
+                "char_start": 761,
+                "char_end": 778,
+                "evidence_text": "from 1988 to 2012"
+              }
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "Fortescue Marsh, inland northwest Australia",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 683,
+              "char_end": 759,
+              "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+            }
+          },
+          "temporal_frame": {
+            "value": "1988 to 2012",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 761,
+              "char_end": 778,
+              "evidence_text": "from 1988 to 2012"
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-001711-C2",
+      "claim_text": "The most severe inundation of the last century on the Fortescue Marsh, about 1000 km2, was recorded in 2000.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "inundation",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "most severe (~1000 km2) in 2000",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Fortescue Marsh floodplain, upper Fortescue River catchment, semi-arid northwest Australia",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 683,
+          "char_end": 759,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia",
+          "evidence_sha256": "be738df99216b5f6ce466ef50dd9d6067fd908738a86e9f81dda7714d802282e"
+        }
+      },
+      "temporal_frame": {
+        "value": "last century (reconstruction since 1912)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 879,
+          "char_end": 940,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "reconstruct monthly history of floods and droughts since 1912",
+          "evidence_sha256": "a37fdde489a48c111b45cbcf13906168718da7cb33be894357a2ae02cbf9e059"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 1255,
+        "char_end": 1340,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The most severe inundation (∼ 1000 km 2 ) over the last century was recorded in 2000.",
+        "evidence_sha256": "58d46c9c6f49cacb3c1089a8fc5a11e8c772433add847f9144d6a7d27c48f3f5"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "adjudication": {
+        "package": "M4-WP1b-adj",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions for downstream use; both readers' values are kept above"
+        ],
+        "aligned_blind_claim_id": "54542600-C2",
+        "blind_evidence": {
+          "json_path": "$.abstract",
+          "char_start": 1255,
+          "char_end": 1340,
+          "evidence_text": "The most severe inundation (∼ 1000 km 2 ) over the last century was recorded in 2000."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Inundation (flood area).",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Reader 2 moves the year 2000 into temporal_frame.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "Both name the Fortescue Marsh. Reader 1 tags it explicit via the abstract span 'the Fortescue Marsh, the largest water feature of inland northwest Australia'; reader 2 tags the same link inferred. The span states 'Fortescue Marsh' and 'inland northwest Australia' but not 'upper Fortescue River catchment', 'semi-arid' or 'Pilbara', which both readers' values add; adopted trimmed to the span.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "Fortescue Marsh, inland northwest Australia",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.abstract",
+                "char_start": 683,
+                "char_end": 759,
+                "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Both 'last century'; reader 1 adds the reconstruction start (1912, from its support span), reader 2 the year 2000 (from the evidence).",
+            "rule": "judged same content, same tag"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "Fortescue Marsh, inland northwest Australia",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 683,
+              "char_end": 759,
+              "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-001711-C3",
+      "claim_text": "Between 1999 and 2006, the duration, severity and frequency of inundations were above average and unprecedented relative to the last century.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "duration, severity and frequency of inundations",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "above average and unprecedented",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Fortescue Marsh floodplain, upper Fortescue River catchment, semi-arid northwest Australia",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 683,
+          "char_end": 759,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia",
+          "evidence_sha256": "be738df99216b5f6ce466ef50dd9d6067fd908738a86e9f81dda7714d802282e"
+        }
+      },
+      "temporal_frame": {
+        "value": "1999-2006, compared with the last century",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 1625,
+        "char_end": 1766,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Duration, severity and frequency of inundations between 1999 and 2006 were above average and unprecedented when compared to the last century.",
+        "evidence_sha256": "3e9415c6e6449df3df56ec5f09a4fe789cd142fccd577291daaf3fb8d50bcd2a"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "adjudication": {
+        "package": "M4-WP1b-adj",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions for downstream use; both readers' values are kept above"
+        ],
+        "aligned_blind_claim_id": "54542600-C4",
+        "blind_evidence": {
+          "json_path": "$.abstract",
+          "char_start": 1625,
+          "char_end": 1766,
+          "evidence_text": "Duration, severity and frequency of inundations between 1999 and 2006 were above average and unprecedented when compared to the last century."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "Both name the Fortescue Marsh. Reader 1 tags it explicit via the abstract span 'the Fortescue Marsh, the largest water feature of inland northwest Australia'; reader 2 tags the same link inferred. The span states 'Fortescue Marsh' and 'inland northwest Australia' but not 'upper Fortescue River catchment', 'semi-arid' or 'Pilbara', which both readers' values add; adopted trimmed to the span.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "Fortescue Marsh, inland northwest Australia",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.abstract",
+                "char_start": 683,
+                "char_end": 759,
+                "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Wording only.",
+            "rule": "judged same content, same tag"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "Fortescue Marsh, inland northwest Australia",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 683,
+              "char_end": 759,
+              "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-001711-C4",
+      "claim_text": "The authors suggest the wetland will become more persistent as extreme rainfall events in the region become more frequent and intense.",
+      "claim_type": "projection",
+      "concept": {
+        "value": "wetland persistence; frequency and intensity of extreme rainfall events",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "will become more persistent (hedged: 'suggest')",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Fortescue Marsh floodplain, upper Fortescue River catchment, semi-arid northwest Australia",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 683,
+          "char_end": 759,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia",
+          "evidence_sha256": "be738df99216b5f6ce466ef50dd9d6067fd908738a86e9f81dda7714d802282e"
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 1826,
+        "char_end": 2023,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "changes to the flooding regime over the last 20 years suggest that the wetland will become more persistent in response to increased frequency and intensity of extreme rainfall events for the region",
+        "evidence_sha256": "a20524ebceea8ad8e72f7f92d0064c9894b9ac378109e3021ec00f780dcace0d"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "The basis is changes over the last 20 years; no future horizon and no scenario are stated, so both are unknown.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "adjudication": {
+        "package": "M4-WP1b-adj",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions for downstream use; both readers' values are kept above"
+        ],
+        "aligned_blind_claim_id": "54542600-C5",
+        "blind_evidence": {
+          "json_path": "$.abstract",
+          "char_start": 1826,
+          "char_end": 2128,
+          "evidence_text": "changes to the flooding regime over the last 20 years suggest that the wetland will become more persistent in response to increased frequency and intensity of extreme rainfall events for the region, which in turn will likely impact on the structure and functioning of this highly specialized ecosystem."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 2's evidence runs on through 'which in turn will likely impact on the structure and functioning of this highly specialized ecosystem' and its concept adds that; reader 1 stops before it. Adopted: the narrower content both spans contain.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "wetland persistence; frequency and intensity of extreme rainfall events",
+              "tag": "explicit",
+              "support_from": "r1_evidence",
+              "support": {
+                "json_path": "$.abstract",
+                "char_start": 1826,
+                "char_end": 2023,
+                "evidence_text": "changes to the flooding regime over the last 20 years suggest that the wetland will become more persistent in response to increased frequency and intensity of extreme rainfall events for the region"
+              }
+            }
+          },
+          "relation_or_direction": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "As for concept; the ecosystem-impact clause is reader-2-only content.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "will become more persistent (hedged: 'suggest')",
+              "tag": "explicit",
+              "support_from": "r1_evidence",
+              "support": {
+                "json_path": "$.abstract",
+                "char_start": 1826,
+                "char_end": 2023,
+                "evidence_text": "changes to the flooding regime over the last 20 years suggest that the wetland will become more persistent in response to increased frequency and intensity of extreme rainfall events for the region"
+              }
+            }
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "Both name the Fortescue Marsh. Reader 1 tags it explicit via the abstract span 'the Fortescue Marsh, the largest water feature of inland northwest Australia'; reader 2 tags the same link inferred. The span states 'Fortescue Marsh' and 'inland northwest Australia' but not 'upper Fortescue River catchment', 'semi-arid' or 'Pilbara', which both readers' values add; adopted trimmed to the span.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "Fortescue Marsh, inland northwest Australia",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.abstract",
+                "char_start": 683,
+                "char_end": 759,
+                "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 unknown; reader 2 'over the last 20 years (basis); future unspecified'.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "adopted_dimensions": {
+          "concept": {
+            "value": "wetland persistence; frequency and intensity of extreme rainfall events",
+            "tag": "explicit",
+            "support_from": "r1_evidence",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 1826,
+              "char_end": 2023,
+              "evidence_text": "changes to the flooding regime over the last 20 years suggest that the wetland will become more persistent in response to increased frequency and intensity of extreme rainfall events for the region"
+            }
+          },
+          "relation_or_direction": {
+            "value": "will become more persistent (hedged: 'suggest')",
+            "tag": "explicit",
+            "support_from": "r1_evidence",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 1826,
+              "char_end": 2023,
+              "evidence_text": "changes to the flooding regime over the last 20 years suggest that the wetland will become more persistent in response to increased frequency and intensity of extreme rainfall events for the region"
+            }
+          },
+          "geography": {
+            "value": "Fortescue Marsh, inland northwest Australia",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 683,
+              "char_end": 759,
+              "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia"
+            }
+          },
+          "temporal_frame": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT-001711-C5",
+      "claim_text": "Extended droughts with no surface water on the Marsh were more frequent from the late 1930s to the early 1960s; the longest lasted 4.3 years, 1961-1965.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "extended drought periods (no surface water evident)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "more frequent late 1930s-early 1960s; longest 4.3 years",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Fortescue Marsh floodplain, upper Fortescue River catchment, semi-arid northwest Australia",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 683,
+          "char_end": 759,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "the Fortescue Marsh, the largest water feature of inland northwest Australia",
+          "evidence_sha256": "be738df99216b5f6ce466ef50dd9d6067fd908738a86e9f81dda7714d802282e"
+        }
+      },
+      "temporal_frame": {
+        "value": "late 1930s to early 1960s; 1961-1965",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"results and discussion\"]",
+        "char_start": 5485,
+        "char_end": 5723,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "particularly extended drought periods (where no surface water is evident on the Marsh) were more frequent between the late 1930's and early 1960's, with the longest supraseasonal drought on record lasting 4.3 years (between 1961 and 1965)",
+        "evidence_sha256": "1a3498142419715ce1e22f1b62bf0f801dab25b508866b5439413681fb8123a2"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "adjudication": {
+        "package": "M4-WP1b-adj",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": []
+      }
+    },
+    {
+      "claim_id": "LIT-001711-B3",
+      "origin": "blind_reader",
+      "blind_claim_id": "54542600-C3",
+      "claim_text": "The Fortescue Marsh was completely dry in 32% of all years, for periods of up to four consecutive years.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "Marsh completely dry (drought)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "32% of all years; up to four consecutive years",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Fortescue Marsh",
+        "status": "explicit"
+      },
+      "temporal_frame": {
+        "value": "1912-2012 (reconstruction)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 779,
+          "char_end": 941,
+          "evidence_text": "We used this sequence together with instrumental rainfall data to build a multiple linear model and reconstruct monthly history of floods and droughts since 1912.",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "60ee24d7ac69bb102fa11001a2b50491ce69e17b5d742e38141f1cbc3afb811a"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 1340,
+        "char_end": 1446,
+        "evidence_text": "The Fortescue Marsh was completely dry for 32 % of all years, for periods of up to four consecutive years.",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "6aa16de07d13dee06d7ed47f24c3f11103d3114702791991e991db4b864d7119"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "adjudication": {
+        "package": "M4-WP1b-adj",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "first_reader_considered_and_rejected": [
+          {
+            "rejected_id": "LIT-001711-R1",
+            "overlap_code_points": 106,
+            "reason": "Hard to reconcile with the results ('68 % of years ended with no surface water'; the longest drought 4.3 years); which quantity is meant is ambiguous.",
+            "evidence_text": "The Fortescue Marsh was completely dry for 32 % of all years, for periods of up to four consecutive years."
+          }
+        ]
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT-001711-R1",
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 1340,
+        "char_end": 1446,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The Fortescue Marsh was completely dry for 32 % of all years, for periods of up to four consecutive years.",
+        "evidence_sha256": "6aa16de07d13dee06d7ed47f24c3f11103d3114702791991e991db4b864d7119"
+      },
+      "reason": "Hard to reconcile with the results ('68 % of years ended with no surface water'; the longest drought 4.3 years); which quantity is meant is ambiguous."
+    },
+    {
+      "candidate_id": "LIT-001711-R2",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 0,
+        "char_end": 257,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Extreme climatic events such as tropical cyclones, heavy rainfall and severe drought are projected to become more intense and less frequent globally over the next hundred years in response to anthropogenic-driven climate change (Coumou and Rahmstorf, 2012).",
+        "evidence_sha256": "13e2954eeef898b4143561eee2dde0bd4c9b9bb43e857f3373f8ba4800bb59b8"
+      },
+      "reason": "Background statement attributed to another source; not this paper's evidence."
+    },
+    {
+      "candidate_id": "LIT-001711-R3",
+      "evidence": {
+        "json_path": "$.conclusion",
+        "char_start": 465,
+        "char_end": 595,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "if current rainfall trends are sustained, increased flooding of the Fortescue Marsh will prolong the inundation period in the year",
+        "evidence_sha256": "ceb9ba67befd393bfb84175a4e13273082ec4513ccf825d8e9a00c69e0644f79"
+      },
+      "reason": "Conditional projection overlapping claim C4; not promoted."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": null,
+  "scope_adjudication": {
+    "reader_1": "in_scope_hazard",
+    "reader_2": "in_scope_hazard",
+    "adopted": "in_scope_hazard",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp1b_blind/54542600.json",
+    "reader_2_reason": "The paper examines the flood and drought (inundation) regime of a wetland and its hydroclimatic drivers, including extreme rainfall.",
+    "adjudicated_terminal_status": "claims_extracted"
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP1b-adj",
+    "adjudicator": "the WP1 EXECUTOR (prototype-exposed; also reader 1)",
+    "first_pass_record_sha256": "95991a9e3297a80c40d905e30874343b70c1de6e3304eb85454955be4c5d260b",
+    "blind_record_sha256": "adc00ea75b3df109f153457f08683680a7ed1420bb091dd17795f741ba034c5a",
+    "no_paper_re_read": true
+  }
+}
