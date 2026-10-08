@@ -1,0 +1,95 @@
+{
+  "work_package": "M4-WP1b blind independent reading",
+  "corpus_root": "<literature_corpus_root from config/local_paths.yaml>",
+  "offset_convention": "zero-based, half-open Unicode code-point offsets into the decoded JSON string value as stored; every span located by exact str.find and verified by re-slicing",
+  "files": [
+    {
+      "source_file": "100961700.json",
+      "source_sha256": "c9c8ca7c2180a655d4d45526f022454b5354e773ce1fed56ced989d0c19507c6",
+      "scope_status": "ambiguous",
+      "terminal_status": "ambiguous_only",
+      "claim_count": 0,
+      "rejected_or_ambiguous_count": 3
+    },
+    {
+      "source_file": "15420300.json",
+      "source_sha256": "c0d21168166315cd689a273109a0d218dae416380aaa2c2f3f33714816fa1398",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "claim_count": 4,
+      "rejected_or_ambiguous_count": 3
+    },
+    {
+      "source_file": "211092500.json",
+      "source_sha256": "e6c8b631cda49aa6ff63da05cdf9f442ba1cce7cfb652bcba9017671ee0def69",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "claim_count": 4,
+      "rejected_or_ambiguous_count": 2
+    },
+    {
+      "source_file": "225107600.json",
+      "source_sha256": "920fa34cfffd7c85229c6a131d98ad519d4f65d737055c242736148aa161f01f",
+      "scope_status": "ambiguous",
+      "terminal_status": "ambiguous_only",
+      "claim_count": 0,
+      "rejected_or_ambiguous_count": 3
+    },
+    {
+      "source_file": "235097800.json",
+      "source_sha256": "c6ff28c7c55ccb614f58c9e8c4822b306b76e291c7ece2924120d3436689c624",
+      "scope_status": "ambiguous",
+      "terminal_status": "ambiguous_only",
+      "claim_count": 0,
+      "rejected_or_ambiguous_count": 3
+    },
+    {
+      "source_file": "242697800.json",
+      "source_sha256": "7808b0f31145323bc0d2e2c29d35b24833eef0bffecb21b5dd159ce4ccccacc1",
+      "scope_status": "ambiguous",
+      "terminal_status": "ambiguous_only",
+      "claim_count": 0,
+      "rejected_or_ambiguous_count": 2
+    },
+    {
+      "source_file": "251972000.json",
+      "source_sha256": "87b5006205d3015b0e9939346d843cc510e66fa82b7d8de45b30a9e8e79be316",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "claim_count": 4,
+      "rejected_or_ambiguous_count": 3
+    },
+    {
+      "source_file": "259631800.json",
+      "source_sha256": "476939f86b5625e8d2b66b6c5693a9c66ddb174773f34adaa427e888e437a0d3",
+      "scope_status": "ambiguous",
+      "terminal_status": "ambiguous_only",
+      "claim_count": 0,
+      "rejected_or_ambiguous_count": 2
+    },
+    {
+      "source_file": "271744500.json",
+      "source_sha256": "07ab5c49c475ba9aab0f1798d80fa6a0cb8d23a7ebccec5ba003cc7c15b0a4fa",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "claim_count": 4,
+      "rejected_or_ambiguous_count": 2
+    },
+    {
+      "source_file": "54542600.json",
+      "source_sha256": "349af8bb393c4f6bb71fab7261853a98cfcf8f57c38152013994f65a0cf27fe8",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "claim_count": 5,
+      "rejected_or_ambiguous_count": 3
+    }
+  ],
+  "total_claims": 21,
+  "protocol_notes": [
+    "Only the literature_corpus_root key of config/local_paths.yaml and the ten listed corpus files were opened by the reader.",
+    "The agent harness placed the repository CLAUDE.md and a git-status snapshot (branch, recent commit subjects) into context before the task began; no other repository file was opened.",
+    "pytest and scripts/verify_no_secrets_or_paths.py were executed (required before commit by repository rules) with only their summary lines inspected.",
+    "No run record was written: the records were produced by a scratch script outside the repository, and reading climrr.runrecord to call it would have broken the blind protocol.",
+    "Scenario dimension is 'unknown' for every claim: no paper's claims were tied to a named emissions/climate scenario; CO2 levels in 15420300 are recorded as experimental conditions."
+  ]
+}
