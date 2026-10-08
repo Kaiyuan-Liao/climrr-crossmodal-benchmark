@@ -22,7 +22,8 @@ from climrr.runrecord import write_run_record  # noqa: E402
 
 LIT = REPO_ROOT / "artifacts" / "literature"
 OUT = REPO_ROOT / "docs" / "LITERATURE_WP1_PILOT.md"
-DIMENSIONS = ("concept", "relation_or_direction", "geography", "temporal_frame", "scenario")
+DIMENSIONS = ("concept", "relation_or_direction", "geography", "temporal_frame", "scenario",
+              "experimental_condition")
 STATEMENT = "Ten items, deterministically sampled, for workflow validation; not representative of the corpus."
 
 
@@ -51,6 +52,13 @@ def render() -> str:
     a(f"on {summary['extraction_date']} --- every file read completely, no model API, no embedding,")
     a("no search of other corpus files. No claim is related to any ClimRR prototype; that is")
     a("M5's question, not this pilot's.")
+    a("")
+    a(f"**Every claim is `single_reader_provisional`** "
+      f"({t['by_claim_validation_status']['single_reader_provisional']} of {t['claims']}): one reader, not yet")
+    a("independently confirmed (D-017). Status vocabulary: "
+      + ", ".join(f"`{v}`" for v in summary["claim_validation_status_values"]) + ".")
+    a("`scenario` is a climate or emissions scenario only; laboratory treatment levels are")
+    a("recorded under `experimental_condition` (D-017).")
     a("")
     a("## The sample")
     a("")
@@ -112,7 +120,7 @@ def render() -> str:
         a(f"Scope evidence: {span(r['scope_evidence'])}")
         a("")
         for c in r["claims"]:
-            a(f"**{c['claim_id']}** ({c['claim_type']}). {c['claim_text']}")
+            a(f"**{c['claim_id']}** ({c['claim_type']}; `{c['claim_validation_status']}`). {c['claim_text']}")
             a("")
             for d in DIMENSIONS:
                 dim = c[d]

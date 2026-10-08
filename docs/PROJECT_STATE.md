@@ -6,22 +6,35 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 | | |
 | --- | --- |
-| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4 --- literature ingestion and structured claim pilot:** M4-WP0 PASS (D-016); **M4-WP1 complete**, awaiting GUIDANCE review |
-| **Active task** | **M4-WP1 --- deterministic 10-paper ingestion and structured-claim pilot: complete** on the unmerged, unpushed branch `work/m4-wp1` (from `main` at `5ebb330`). Report: `reports/milestones/M4_WP1_REPORT.md` --- 20 criteria proposed MET, criterion 16 with a disclosed limitation. **Next: GUIDANCE review of M4-WP1** |
+| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4 --- literature ingestion and structured claim pilot:** M4-WP0 PASS (D-016); **M4-WP1 accepted --- PASS WITH ACTIONS (D-017)**, closure done, merge pending Kaiyuan. **M5-WP1 authorized** |
+| **Active task** | **M4-WP1 accepted, PASS WITH ACTIONS (D-017)**, reviewed at `7ded08e` (pushed). The closure actions --- `experimental_condition` split (`scenario` now `unknown` 27/27), `claim_validation_status` on every claim (all `single_reader_provisional`), D-017, bookkeeping --- are done in the commit after `7ded08e`, **not pushed**. **Merge to `main` pending Kaiyuan.** **Next: M5-WP1** --- deterministic negative-case compatibility machinery validation, 27 × 3 = 81 pairs |
 | **Latest accepted commit** | **`6f24b78`** --- the `--no-ff` merge of the M4-WP0 chain (M1-WP2, M1-WP3, M1-WP3b, M4-WP0) into `main`, accepted by GUIDANCE with M4-WP0 reviewed at `1e2fd9f` (D-016); its second parent is the chain head `e4a9de0`. **The authoritative integrated state.** It does **not** pass M1. Previous: `62c9137` (M1-WP1, D-009) |
 | **Tooling on `main`** | `d68ba15` --- merge of `work/knowledge-staging` (`c13a3d4`, `scripts/stage_knowledge.py`) on top of `6f24b78`. **No scientific content**; not a GUIDANCE-accepted package, and not an accepted scientific state |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at. The literature corpus is **not** on Sophia (runbook §8b) |
-| **Branch lineage** | M1-WP2 → M1-WP3 → M1-WP3b → M4-WP0 merged into `main` at `6f24b78`; tooling at `d68ba15`; state refresh `5ebb330`. **`work/m4-wp1`** branches from `5ebb330`: `6f9006c` (Phase A, sample frozen), `d728df6` (Phases B--D), then the report commit. **Not pushed, not merged** |
+| **Branch lineage** | M1-WP2 → M1-WP3 → M1-WP3b → M4-WP0 merged into `main` at `6f24b78`; tooling at `d68ba15`; state refresh `5ebb330`. **`work/m4-wp1`** branches from `5ebb330`: `6f9006c` (Phase A, sample frozen), `d728df6` (Phases B--D), **`7ded08e`** (report --- **the reviewed head, pushed**), then the D-017 closure commit (**not pushed**). **Not merged** |
 | **M4-WP0 commits** | `52a994a` (Phases A–E); **`1e2fd9f`** (report and state --- **the reviewed head**); then `e4a9de0`, the D-016 pre-merge bookkeeping |
 | **M4-WP1 sample** | `LIT-000001, 000191, 000381, 000571, 000761, 000951, 001141, 001331, 001521, 001711` --- every 190th id; no duplicate skip; `wp1_sample.json` SHA-256 `5cb81f95…`, committed before any file was opened |
 | **Prototypes built from** | `56eb10d` --- unchanged since M1-WP3b; no record rebuilt |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
-| **Rulings in force** | D-009 (M1-WP1 PASS), D-011 (D-010 ruling), D-012 (M1-WP3 pre-meeting, REVISE --- framing only, done), D-013 + D-013-A1 (M1-WP3b PASS WITH ACTIONS), **D-015 (M4-WP0 PASS WITH ACTIONS)**, **D-016 (M4-WP0 PASS; merge authorized; M4-WP1 authorized; overall PASS WITH ACTIONS)** |
+| **Rulings in force** | D-009 (M1-WP1 PASS), D-011 (D-010 ruling), D-012 (M1-WP3 pre-meeting, REVISE --- framing only, done), D-013 + D-013-A1 (M1-WP3b PASS WITH ACTIONS), **D-015 (M4-WP0 PASS WITH ACTIONS)**, **D-016 (M4-WP0 PASS; merge authorized; M4-WP1 authorized; overall PASS WITH ACTIONS)**, **D-017 (M4-WP1 PASS WITH ACTIONS; M5-WP1 authorized as machinery validation)** |
 | **Owner decisions since** | **D-014** (Kaiyuan, 2026-09-28): proceed on the "our reading" basis to test what QA could be generated; every `inferred_candidate` and `derived_from_inferred` status carried through; **promotes nothing, and does not authorise QA generation** |
 | **Meetings since the last refresh** | **Group 2026-09-14:** "No material objection to the prototype-unit design was raised." --- not validation, no semantic confirmed. **Mentor 2026-09-17 and 2026-09-24:** **no review of the answer sheet occurred** (R-003); nothing promoted |
-| **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M1 remains open.** **M5**: blocked on the GUIDANCE review of M4-WP1. **QA generation: not authorised by any ruling** |
+| **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M1 remains open.** **M5**: M5-WP1 authorized (D-017) **as machinery validation only**; no claim is accepted M5 evidence until the blind second reader (M4-WP1b) and adjudication close. **QA generation: not authorised by any ruling** |
 
-## Where things stand --- M4-WP1 (2026-09-29)
+## Where things stand --- M4-WP1 (2026-09-29; closure 2026-10-08)
+
+- **GUIDANCE: PASS WITH ACTIONS (D-017)**, on `7ded08e`. The 27 claims are
+  **single-reader provisional** --- usable to test compatibility machinery,
+  not accepted literature evidence. Excerpts stay, as **minimal evidence
+  windows** with hash + offsets authoritative. The scope rule and both
+  borderline calls are accepted. **A blind second reader over all ten papers
+  is required** before any claim is accepted M5 evidence (planned as
+  **M4-WP1b**). A relevance-guided M4-WP2 needs the ruling's five conditions,
+  and its retrieval rule returns to GUIDANCE after M5-WP1.
+- **Closure, done:** laboratory treatment levels moved from `scenario` to a new
+  `experimental_condition` dimension; **`scenario` is `unknown` in 27 of 27
+  claims**. Every claim carries `claim_validation_status:
+  single_reader_provisional`. All 96 span locators and hashes are unchanged.
 
 - **Ten corpus items were sampled by rule, frozen, and then read in full.** The
   sample reads only ids and duplicate groups from the frozen manifest; it was
@@ -33,8 +46,9 @@ session reasoning correctly from out-of-date facts and repeating them.
   missing once and holds a non-title twice (a journal name; a page header).
 - **Outcome:** 6 `in_scope_hazard` → `claims_extracted` (27 claims), 3
   `off_topic`, 1 `ambiguous_only`. 3 claims carry an `inferred` dimension, each
-  with its support span. 22 rejected or ambiguous passages are kept. Scenario is
-  `unknown` in 25 of 27 claims; no claim states an emissions scenario.
+  with its support span. 22 rejected or ambiguous passages are kept. No claim
+  states an emissions scenario (at `7ded08e` the two `LIT-000191` treatment
+  levels sat under `scenario`; D-017 moved them).
 - **Every one of 96 evidence spans re-slices exactly** from the decoded source:
   zero-based, half-open `[start, end)` code-point offsets on the unnormalized
   string, computed by exact search, never typed. A combining macron in a place
@@ -43,7 +57,8 @@ session reasoning correctly from out-of-date facts and repeating them.
   that had built the prototypes. The code reads no prototype, family or query
   (tested); the reader's prior exposure is disclosed, not claimed away. For
   GUIDANCE: whether a second, independent reader is needed before M5, and
-  whether tracked verbatim excerpts (96 short quotations) are acceptable.
+  whether tracked verbatim excerpts (96 short quotations) are acceptable ---
+  both answered in D-017.
 - Documents: [LITERATURE_WP1_PILOT.md](LITERATURE_WP1_PILOT.md),
   [../reports/milestones/M4_WP1_REPORT.md](../reports/milestones/M4_WP1_REPORT.md).
 
@@ -227,9 +242,8 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 ## Outstanding
 
-- **For GUIDANCE: review M4-WP1** (`reports/milestones/M4_WP1_REPORT.md`; field 13
-  lists five decisions --- the two borderline scope calls, the claims-only-in-scope
-  rule, a second reader, tracked excerpts, and the overloaded scenario dimension).
+- **For COORDINATOR:** scope **M5-WP1** (D-017's 22 criteria) and **M4-WP1b**,
+  the blind second-reader pass over all ten papers with adjudication.
 - **For GUIDANCE, still open from WP3b:** the S/T/C letter convention (D-013, D-013-A1), and --- at the
   M1 gate --- whether criterion 1 may pass on declared provisional statuses
   (D-014).
@@ -243,19 +257,23 @@ session reasoning correctly from out-of-date facts and repeating them.
 - **Pending choice: exclude empty-label groups from PR-1 populations (A-M2).**
   It was to be decided after a mentor answer on Q16; **no answer came**. PR-1
   still counts them and every record says so.
-- **For Kaiyuan:** push `work/m4-wp1` when ready (the EXECUTOR does not),
+- **For Kaiyuan:** push the D-017 closure commit and merge `work/m4-wp1`
+  into `main` when ready (the EXECUTOR does neither),
   and the Sophia `pip install -r requirements.txt` reinstall (`pypdfium2` pin).
 - **Q7, Q8, Q9, Q11, Q12, Q15, Q17, Q18** still block downstream use of the
   columns they name. **Export date** of the ClimRR file remains unknown (Q18).
 
 ## Next
 
-**GUIDANCE reviews M4-WP1.** If it passes: **M5-WP1 --- compatibility check
-between the WP1 claims and the three prototypes, on this fixed set, to be
-designed by COORDINATOR after GUIDANCE review.**
+**M5-WP1 --- deterministic negative-case compatibility machinery validation**
+(D-017): the fixed 27 claims × 3 prototypes = 81 pairs; five dimensions each,
+`compatible` / `incompatible` / `not_evaluable` with rule ID, both values and a
+reason; no embeddings, no LLM pair judgement. Outputs are validation results
+over provisional claims, not bridges. In parallel or after: **M4-WP1b**, the
+blind second reader.
 
 Still not authorised by any ruling: **QA generation**; semantic bridges beyond
-what M5-WP1 is designed to test; embeddings; corpus-wide search; hazard labels
+what M5-WP1 is designed to test; a relevance-guided M4-WP2; embeddings; corpus-wide search; hazard labels
 for papers outside the sample; any interpretation of a ClimRR column outside the
 41 in the pilot subset. **D-014 changes none of that.**
 
@@ -263,7 +281,7 @@ for papers outside the sample; any interpretation of a ClimRR column outside the
 
 - Charter: [BLUEPRINT.md](BLUEPRINT.md)
 - Plan and gate criteria: [PROJECT_PLAN.md](PROJECT_PLAN.md)
-- Decisions, including D-010 to D-013-A1 and **D-014, D-015, D-016**: [DECISION_LOG.md](DECISION_LOG.md)
+- Decisions, including D-010 to D-013-A1 and **D-014, D-015, D-016, D-017**: [DECISION_LOG.md](DECISION_LOG.md)
 - The ruling that authorised WP3: [M1_D010_GUIDANCE_RULING.md](M1_D010_GUIDANCE_RULING.md)
 - The pre-meeting review of WP3 (**REVISE**, framing only): [M1_WP3_PREMEETING_GUIDANCE_REVIEW.md](M1_WP3_PREMEETING_GUIDANCE_REVIEW.md)
 - The pilot subset, its rationale and its exclusions: [PILOT_SUBSET.md](PILOT_SUBSET.md)
@@ -288,6 +306,7 @@ for papers outside the sample; any interpretation of a ClimRR column outside the
 - **M4-WP0 ruling (PASS WITH ACTIONS):** [M4_WP0_GUIDANCE_RULING.md](M4_WP0_GUIDANCE_RULING.md)
 - **M4-WP0 review, merge authorization and M4-WP1 ruling (WP0 PASS):** [M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md](M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md)
 - **M4-WP0 report:** [../reports/milestones/M4_WP0_REPORT.md](../reports/milestones/M4_WP0_REPORT.md)
+- **M4-WP1 review and M5-WP1 ruling (PASS WITH ACTIONS):** [M4_WP1_REVIEW_M5_WP1_GUIDANCE_RULING.md](M4_WP1_REVIEW_M5_WP1_GUIDANCE_RULING.md)
 - **M4-WP1 report:** [../reports/milestones/M4_WP1_REPORT.md](../reports/milestones/M4_WP1_REPORT.md); **pilot claims:** [LITERATURE_WP1_PILOT.md](LITERATURE_WP1_PILOT.md)
 - **Query scope:** [LITERATURE_QUERY_SCOPE.md](LITERATURE_QUERY_SCOPE.md); **corpus inventory:** [LITERATURE_CORPUS_INVENTORY.md](LITERATURE_CORPUS_INVENTORY.md)
 - The pinned query and the corpus identity: [../data/MANIFEST.md](../data/MANIFEST.md)

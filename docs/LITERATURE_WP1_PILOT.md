@@ -10,6 +10,11 @@ on 2026-09-29 --- every file read completely, no model API, no embedding,
 no search of other corpus files. No claim is related to any ClimRR prototype; that is
 M5's question, not this pilot's.
 
+**Every claim is `single_reader_provisional`** (27 of 27): one reader, not yet
+independently confirmed (D-017). Status vocabulary: `single_reader_provisional`, `independently_confirmed`, `adjudicated_modified`, `rejected_on_review`.
+`scenario` is a climate or emissions scenario only; laboratory treatment levels are
+recorded under `experimental_condition` (D-017).
+
 ## The sample
 
 - Rule: Every 190th LIT item by numeric id, starting at LIT-000001 (LIT-000001, LIT-000191, LIT-000381, ...), ten items. If a selected item is the later member of an exact-byte duplicate group, skip to the next id and record the skip; later positions stay on the 190-step grid. Derived from the frozen corpus manifest alone; no file is opened.
@@ -82,41 +87,45 @@ Rejected or ambiguous:
 **Scope: `in_scope_hazard`.** The paper tests how elevated seawater temperature and CO2 (warming and acidification) affect survival and growth of coastal bivalves, i.e. impacts of climate-driven stressors.  
 Scope evidence: `$.abstract` [0, 138): “Rising CO 2 concentrations and water temperatures this century are likely to have transformative effects on many coastal marine organisms.”
 
-**LIT-000191-C1** (finding). Higher temperature and higher CO2 each significantly depressed survival, development, growth and lipid synthesis of hard clam and bay scallop larvae, and the effects were additive.
+**LIT-000191-C1** (finding; `single_reader_provisional`). Higher temperature and higher CO2 each significantly depressed survival, development, growth and lipid synthesis of hard clam and bay scallop larvae, and the effects were additive.
 
 - concept: increases in temperature and CO 2; larval survival, development, growth, and lipid synthesis [`explicit`]
 - relation or direction: each significantly depressed; effects additive [`explicit`]
 - geography: Northwest Atlantic (the region of the species studied, per the title); the experiments were laboratory treatments [`inferred`] --- support `$.title` [105, 149): “Three Species of Northwest Atlantic Bivalves”
 - temporal frame: unknown [`unknown`]
-- scenario: experimental treatments 24 and 28 °C and ~250, 390 and 750 ppm CO2, described as representative of past, present and future summer conditions in temperate estuaries [`explicit`] --- support `$.abstract` [330, 493): “to temperatures (24 and 28uC) and CO 2 concentrations (,250, 390, and 750 ppm) representative of past, present, and future summer conditions in temperate estuaries”
+- scenario: unknown [`unknown`]
+- experimental condition: experimental treatments 24 and 28 °C and ~250, 390 and 750 ppm CO2, described as representative of past, present and future summer conditions in temperate estuaries [`explicit`] --- support `$.abstract` [330, 493): “to temperatures (24 and 28uC) and CO 2 concentrations (,250, 390, and 750 ppm) representative of past, present, and future summer conditions in temperate estuaries”
 - evidence: `$.abstract` [495, 711): “Results demonstrated that increases in temperature and CO 2 each significantly depressed survival, development, growth, and lipid synthesis of M. mercenaria and A. irradians larvae and that the effects were additive.”
 - note: 'uC' in the source is the extracted form of °C; the evidence text is kept exactly as stored.
 
-**LIT-000191-C2** (finding). Juvenile hard clams and bay scallops were harmed by the higher temperature but juvenile oysters were not; juvenile oysters and bay scallops were harmed by higher CO2 but juvenile hard clams were not.
+**LIT-000191-C2** (finding; `single_reader_provisional`). Juvenile hard clams and bay scallops were harmed by the higher temperature but juvenile oysters were not; juvenile oysters and bay scallops were harmed by higher CO2 but juvenile hard clams were not.
 
 - concept: higher temperatures; higher CO 2 concentrations; juvenile bivalves [`explicit`]
 - relation or direction: negatively impacted / negatively affected, species-dependent [`explicit`]
 - geography: Northwest Atlantic (the region of the species studied, per the title); the experiments were laboratory treatments [`inferred`] --- support `$.title` [105, 149): “Three Species of Northwest Atlantic Bivalves”
 - temporal frame: unknown [`unknown`]
-- scenario: juvenile treatments 24 and 28 °C and ~400 and 1700 ppm CO2 [`explicit`] --- support `$["juvenile experiments"]` [520, 591): “CO 2 was continuously delivered as described above at ,400 and 1700 ppm”
+- scenario: unknown [`unknown`]
+- experimental condition: juvenile treatments 24 and 28 °C and ~400 and 1700 ppm CO2 [`explicit`] --- support `$["juvenile experiments"]` [520, 591): “CO 2 was continuously delivered as described above at ,400 and 1700 ppm”
 - evidence: `$.abstract` [712, 963): “Juvenile M. mercenaria and A. irradians were negatively impacted by higher temperatures while C. virginica juveniles were not. C. virginica and A. irradians juveniles were negatively affected by higher CO 2 concentrations, while M. mercenaria was not.”
 
-**LIT-000191-C3** (finding). Bivalve larvae were substantially more vulnerable to elevated CO2 than juvenile stages.
+**LIT-000191-C3** (finding; `single_reader_provisional`). Bivalve larvae were substantially more vulnerable to elevated CO2 than juvenile stages.
 
 - concept: elevated CO 2; larval versus juvenile vulnerability [`explicit`]
 - relation or direction: larvae substantially more vulnerable than juveniles [`explicit`]
 - geography: Northwest Atlantic (the region of the species studied, per the title); the experiments were laboratory treatments [`inferred`] --- support `$.title` [105, 149): “Three Species of Northwest Atlantic Bivalves”
 - temporal frame: unknown [`unknown`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.abstract` [964, 1044): “Larvae were substantially more vulnerable to elevated CO 2 than juvenile stages.”
 
-**LIT-000191-C4** (projection). The authors suggest current and future increases in temperature and CO2 are likely to have negative consequences for coastal bivalve populations.
+**LIT-000191-C4** (projection; `single_reader_provisional`). The authors suggest current and future increases in temperature and CO2 are likely to have negative consequences for coastal bivalve populations.
 
 - concept: current and future increases in temperature and CO 2; coastal bivalve populations [`explicit`]
 - relation or direction: likely negative consequences (hedged: 'suggest', 'likely') [`explicit`]
 - geography: unknown [`unknown`]
 - temporal frame: current and future (horizon not stated) [`explicit`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.abstract` [1045, 1199): “These findings suggest that current and future increases in temperature and CO 2 are likely to have negative consequences for coastal bivalve populations.”
 - note: 'coastal' is a setting, not a stated geography, so geography is unknown.
 
@@ -131,42 +140,46 @@ Rejected or ambiguous:
 **Scope: `in_scope_hazard`.** The paper attributes a 24-year shift in forest composition to soil dryness (drought) under regional warming and changed precipitation, i.e. an impact of a climate hazard.  
 Scope evidence: `$.introduction` [2661, 2881): “In our study site, previous studies have demonstrated that changes in regional warming and precipitation patterns led to decrease in annual relative humidity and soil water contents within root zone in past decades [14].”
 
-**LIT-000381-C1** (finding). Over 24 years, the forest's species composition shifted toward species with high leaf nutrients, photosynthesis and hydraulic conductivity, low water-use efficiency and high drought tolerance, attributed to soil dryness and disturbance.
+**LIT-000381-C1** (finding; `single_reader_provisional`). Over 24 years, the forest's species composition shifted toward species with high leaf nutrients, photosynthesis and hydraulic conductivity, low water-use efficiency and high drought tolerance, attributed to soil dryness and disturbance.
 
 - concept: functional (species) composition; drought tolerance traits; soil dryness and disturbance [`explicit`]
 - relation or direction: shifted to favor ... high drought tolerance; due to soil dryness and disturbance [`explicit`]
 - geography: old-growth subtropical forest in southern China (Dinghushan natural reserve, Guangdong) [`explicit`] --- support `$.abstract` [394, 444): “an old-growth subtropical forest in southern China”
 - temporal frame: past 24 years (censuses 1992-2015) [`explicit`] --- support `$.abstract` [339, 390): “shifts in functional composition over past 24 years”
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.abstract` [1014, 1272): “We found that species composition had shifted to favor species with high leaf nutrient content, high photosynthesis rate, high hydraulic conductivity, low water-use efficiency, and high drought tolerance traits, which was due to soil dryness and disturbance.”
 
-**LIT-000381-C2** (finding). Soil dryness and disturbance together explained 47-58% of quadrat-level trait value changes.
+**LIT-000381-C2** (finding; `single_reader_provisional`). Soil dryness and disturbance together explained 47-58% of quadrat-level trait value changes.
 
 - concept: soil dryness and disturbance; quadrats' trait value changes [`explicit`]
 - relation or direction: explained 47-58% together [`explicit`]
 - geography: old-growth subtropical forest in southern China (Dinghushan natural reserve, Guangdong) [`explicit`] --- support `$.abstract` [394, 444): “an old-growth subtropical forest in southern China”
 - temporal frame: past 24 years (censuses 1992-2015) [`explicit`] --- support `$.abstract` [339, 390): “shifts in functional composition over past 24 years”
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.abstract` [1272, 1349): “These two factors explained 47-58% of quadrats' trait value changes together.”
 - note: 'These two factors' refers to soil dryness and disturbance, named in the preceding sentence of the same field.
 
-**LIT-000381-C3** (mechanism). The increase in community drought tolerance was likely due to soil dryness rather than disturbance.
+**LIT-000381-C3** (mechanism; `single_reader_provisional`). The increase in community drought tolerance was likely due to soil dryness rather than disturbance.
 
 - concept: increasing drought tolerance; soil dryness; disturbance [`explicit`]
 - relation or direction: likely due to soil dryness but not disturbance (hedged) [`explicit`]
 - geography: DHS plot (Dinghushan), monsoon evergreen broad-leaved forest [`explicit`] --- support `$.discussion` [158, 238): “the species composition in the monsoon evergreen broad-leaved forest in DHS plot”
 - temporal frame: past 24 years (censuses 1992-2015) [`explicit`] --- support `$.abstract` [339, 390): “shifts in functional composition over past 24 years”
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.discussion` [1325, 1465): “Increasing drought tolerance (Hypothesis 2) was supported by our result (Figure 2) and it was likely due to soil dryness but not disturbance”
 - note: The discussion field repeats this passage; the first occurrence is used.
 
-**LIT-000381-C4** (background_citation). Prior studies at the site found regional warming and changed precipitation patterns reduced annual relative humidity and root-zone soil water over past decades.
+**LIT-000381-C4** (background_citation; `single_reader_provisional`). Prior studies at the site found regional warming and changed precipitation patterns reduced annual relative humidity and root-zone soil water over past decades.
 
 - concept: regional warming and precipitation patterns; annual relative humidity; soil water contents within root zone [`explicit`]
 - relation or direction: led to decrease [`explicit`]
 - geography: the study site: Dinghushan natural reserve, Guangdong Province, southern China [`explicit`] --- support `$["materials and methods"]` [39, 156): “Dinghushan natural reserve (DHS, 23.17 • N, 112.56 • E) located in the middle of Guangdong Province in southern China”
 - temporal frame: past decades [`explicit`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.introduction` [2661, 2881): “In our study site, previous studies have demonstrated that changes in regional warming and precipitation patterns led to decrease in annual relative humidity and soil water contents within root zone in past decades [14].”
 - note: Attributed to reference [14]; recorded as background, not as this paper's finding.
 
@@ -182,51 +195,56 @@ Rejected or ambiguous:
 **Scope: `in_scope_hazard`.** Borderline. The subject is social organization around irrigation, but the paper itself discusses water scarcity and weather-triggered mass movements as hazards to settlements and irrigation, and how communities respond to them.  
 Scope evidence: `$.results` [14083, 14294): “On the other hand, in the high mountain context of the Pamirs, larger snow and ice masses, as well as rather rare heavy rainfall pose potential dangers for settlements, arable land, and irrigation infrastructure”
 
-**LIT-000571-C1** (finding). At the Khorog and Ishkāshim stations, mean annual precipitation is below the threshold for successful rainfed agriculture, and nearly the whole April-September vegetation period is strongly arid.
+**LIT-000571-C1** (finding; `single_reader_provisional`). At the Khorog and Ishkāshim stations, mean annual precipitation is below the threshold for successful rainfed agriculture, and nearly the whole April-September vegetation period is strongly arid.
 
 - concept: mean annual precipitation; arid regime of the vegetation period [`explicit`]
 - relation or direction: below the threshold for rainfed agriculture; strong arid regime [`explicit`]
 - geography: Khorog and Ishkāshim measuring stations, Western Pamirs, Tajikistan [`explicit`] --- support `$["three study sites in the western pamirs in tajikistan"]` [1137, 1200): “the climate diagrams of Khorog and the settlement of Ishkāshim”
 - temporal frame: vegetation period April to September (climatological period of the diagrams not stated) [`explicit`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$["three study sites in the western pamirs in tajikistan"]` [5933, 6186): “at both measuring stations, first, the mean annual precipitation is below the threshold for practicing rainfed agriculture successfully and, second, that nearly the whole vegetation period from April to September is characterized by a strong arid regime”
 - note: The field repeats this passage; the first occurrence is used.
 
-**LIT-000571-C2** (mechanism). In the Pamirs, large snow and ice masses and rare heavy rainfall endanger settlements, arable land, irrigation infrastructure and transport links by triggering avalanches, mudflows and slope erosion.
+**LIT-000571-C2** (mechanism; `single_reader_provisional`). In the Pamirs, large snow and ice masses and rare heavy rainfall endanger settlements, arable land, irrigation infrastructure and transport links by triggering avalanches, mudflows and slope erosion.
 
 - concept: larger snow and ice masses; rather rare heavy rainfall; destructive mass movements [`explicit`]
 - relation or direction: pose potential dangers; can trigger avalanches, mudflows, and slope erosion [`explicit`]
 - geography: the Pamirs (high mountain context) [`explicit`]
 - temporal frame: unknown [`unknown`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.results` [14083, 14448): “On the other hand, in the high mountain context of the Pamirs, larger snow and ice masses, as well as rather rare heavy rainfall pose potential dangers for settlements, arable land, and irrigation infrastructure, as well as communication lines and traffic installations, as they can trigger destructive mass movements such as avalanches, mudflows, and slope erosion”
 - note: Supported in the paper by references and respondents; recorded as the paper states it.
 
-**LIT-000571-C3** (finding). In Shirgin Village, summers with serious water scarcity force irrigation subgroups to negotiate distribution themselves, and in severe shortage each beneficiary's irrigation slot can shrink below one hour.
+**LIT-000571-C3** (finding; `single_reader_provisional`). In Shirgin Village, summers with serious water scarcity force irrigation subgroups to negotiate distribution themselves, and in severe shortage each beneficiary's irrigation slot can shrink below one hour.
 
 - concept: serious water scarcity; irrigation water distribution [`explicit`]
 - relation or direction: time slot shortened to less than one hour per beneficiary [`explicit`]
 - geography: Shirgin Village, Ishkāshim District, Western Pamirs [`explicit`] --- support `$.results` [35496, 35548): “the local irrigation arrangement of shirgin village-”
 - temporal frame: summers with serious water scarcity [`explicit`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.results` [43781, 44109): “In summers with serious water scarcity, the canal-specific subgroups mentioned before receiving 24-h-long irrigation rights, have to negotiate the water distribution within their groups independently. When the water shortage is severe, the time slot for irrigation can be shortened to less than one hour duration per beneficiary”
 
-**LIT-000571-C4** (finding). In Sizhd Village, farms on the western edge suffer most from acute water shortages, especially after winters with low precipitation.
+**LIT-000571-C4** (finding; `single_reader_provisional`). In Sizhd Village, farms on the western edge suffer most from acute water shortages, especially after winters with low precipitation.
 
 - concept: acute water shortages [`explicit`]
 - relation or direction: suffer the most, especially after winters with low precipitation [`explicit`]
 - geography: Sizhd Village, Western Pamirs [`explicit`] --- support `$.results` [27377, 27432): “the interlocal irrigation arrangement of sizhd village-”
 - temporal frame: after winters with low precipitation [`explicit`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.results` [29571, 29725): “However, the farms located on the western edge of the village suffer the most from acute water shortages, especially after winters with low precipitation.”
 
-**LIT-000571-C5** (finding). In Porshnev, after winters with little snow farmers mainly grow early-ripening, less water-needy fodder crops such as alfalfa and sainfoin, because water flow can stop in July.
+**LIT-000571-C5** (finding; `single_reader_provisional`). In Porshnev, after winters with little snow farmers mainly grow early-ripening, less water-needy fodder crops such as alfalfa and sainfoin, because water flow can stop in July.
 
 - concept: winters with little snow; irrigation water flow; cultivation choices [`explicit`]
 - relation or direction: shift to early ripening, less water-needy fodder plants [`explicit`]
 - geography: municipality of Porshnev, Western Pamirs [`explicit`] --- support `$.results` [838, 985): “In the municipality of Porshnev, cultivation patterns based on continuous weather observation and local environmental knowledge are widely applied.”
 - temporal frame: after winters with little snow [`explicit`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.results` [986, 1169): “After winters with little snow, mainly early ripening and less water-needy fodder plants such as alfalfa and sainfoin are cultivated as sufficient water flow can already stop in July.”
 
 Rejected or ambiguous:
@@ -263,52 +281,57 @@ Rejected or ambiguous:
 **Scope: `in_scope_hazard`.** The paper examines urban heat island (UHI) events - the hottest April land surface temperatures - and their intensification with urban growth in Bangalore.  
 Scope evidence: `$.introduction` [1330, 1460): “This study particularly focuses on the relationship between urban growth and UHI events during the April months from 2001 to 2021.”
 
-**LIT-001141-C1** (finding). During April UHI events, land surface temperature in Bangalore's urban areas rose about 0.34 °C per year between 2001 and 2021, versus 0.14 °C per year in non-urban areas.
+**LIT-001141-C1** (finding; `single_reader_provisional`). During April UHI events, land surface temperature in Bangalore's urban areas rose about 0.34 °C per year between 2001 and 2021, versus 0.14 °C per year in non-urban areas.
 
 - concept: land surface temperature during UHI events [`explicit`]
 - relation or direction: increased about 0.34 °C per year (urban) vs 0.14 °C per year (non-urban) [`explicit`]
 - geography: urban settlement areas of Bangalore [`explicit`]
 - temporal frame: UHI events of April, 2001 and 2021 [`explicit`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.conclusion` [1414, 1643): “We further found land surface temperature, on average, increased by about 0.34 • C per year in urban settlement areas of Bangalore during the UHI events of April 2001 and 2021, in contrast to 0.14 • C per year in non-urban areas.”
 - note: The results section reports a different modelled rate (0.247 vs 0.056 °C per year, claim C2). Both are recorded as stated; the paper does not reconcile them.
 
-**LIT-001141-C2** (finding). A mixed-effects model of April UHI-event land surface temperature gave an increasing trend of 0.247 °C per year at urban sites versus 0.056 °C per year at non-urbanized sites.
+**LIT-001141-C2** (finding; `single_reader_provisional`). A mixed-effects model of April UHI-event land surface temperature gave an increasing trend of 0.247 °C per year at urban sites versus 0.056 °C per year at non-urbanized sites.
 
 - concept: mean-modeled land surface temperature (LST) [`explicit`]
 - relation or direction: increasing trend, slope 0.247 °C per year vs 0.056 °C per year in non-urbanized areas [`explicit`]
 - geography: Bangalore city, India [`explicit`] --- support `$.introduction` [819, 910): “The present study aims to assess the impacts of Bangalore city's urbanization over 20 years”
 - temporal frame: April months, 2001 to 2021 [`explicit`] --- support `$.introduction` [1418, 1459): “during the April months from 2001 to 2021”
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$["results and discussion"]` [5355, 5553): “It was observed that the mean-modeled LST as a function of the above parameters shows an increasing trend with a slope of 0.247 • C per year in contrast to 0.056 • C per year in non-urbanized areas.”
 - note: Differs from the conclusion's 0.34 vs 0.14 °C per year (C1).
 
-**LIT-001141-C3** (finding). Comparing three April UHI events, their intensity in the same month increased by 3.25 °C from 2001 to 2021.
+**LIT-001141-C3** (finding; `single_reader_provisional`). Comparing three April UHI events, their intensity in the same month increased by 3.25 °C from 2001 to 2021.
 
 - concept: UHI temperature events [`explicit`]
 - relation or direction: increased in intensity (3.25 °C) [`explicit`]
 - geography: Bangalore city, India [`explicit`] --- support `$.introduction` [819, 910): “The present study aims to assess the impacts of Bangalore city's urbanization over 20 years”
 - temporal frame: 2001 to 2021, same month (April) [`explicit`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$["results and discussion"]` [11212, 11388): “Based on the comparison of three UHI temperature events, we observed that such events over the years in the same month have increased in intensity (3.25 • C from 2001 to 2021).”
 
-**LIT-001141-C4** (finding). The annual average MODIS temperature for 2001, 2011 and 2021 showed no significant change, which is why the hottest month was analysed.
+**LIT-001141-C4** (finding; `single_reader_provisional`). The annual average MODIS temperature for 2001, 2011 and 2021 showed no significant change, which is why the hottest month was analysed.
 
 - concept: annual average temperature of MODIS [`explicit`]
 - relation or direction: did not show any significant changes [`explicit`]
 - geography: Bangalore city, India [`explicit`] --- support `$.introduction` [819, 910): “The present study aims to assess the impacts of Bangalore city's urbanization over 20 years”
 - temporal frame: 2001, 2011, and 2021 [`explicit`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$["results and discussion"]` [3903, 4046): “Here, it is also notable to mention that the annual average temperature of MODIS for 2001, 2011, and 2021 did not show any significant changes.”
 - note: Qualifies C1-C3: the reported increases are for the hottest-month events, not annual means.
 
-**LIT-001141-C5** (mechanism). The authors attribute the temperature increase to increasing built-up area and decreasing vegetation.
+**LIT-001141-C5** (mechanism; `single_reader_provisional`). The authors attribute the temperature increase to increasing built-up area and decreasing vegetation.
 
 - concept: increase in the temperature; increasing built-up and decreasing vegetation [`explicit`]
 - relation or direction: could be well-attributed to (hedged) [`explicit`]
 - geography: Bangalore city, India [`explicit`] --- support `$.introduction` [819, 910): “The present study aims to assess the impacts of Bangalore city's urbanization over 20 years”
 - temporal frame: April months, 2001 to 2021 [`explicit`] --- support `$.introduction` [1418, 1459): “during the April months from 2001 to 2021”
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$["results and discussion"]` [9253, 9397): “The increase in the temperature as such could be well-attributed to the increasing built-up and decreasing vegetation, as indicated in Figure 3.”
 
 Rejected or ambiguous:
@@ -333,41 +356,45 @@ Rejected or ambiguous:
 **Scope: `in_scope_hazard`.** The paper measures health-relevant effects of exposure to (laboratory-generated) wildfire smoke, an impact pathway of wildfire.  
 Scope evidence: `$.abstract` [540, 723): “Here, we sought to address this by using RNA sequencing to examine transcriptomic signatures in the prefrontal cortex of male mice modeling career wildland firefighter smoke exposure.”
 
-**LIT-001521-C1** (finding). Chronic exposure to simulated wildfire smoke produced robust gene expression changes in the prefrontal cortex of male mice: 2,862 differentially expressed genes versus filtered-air controls.
+**LIT-001521-C1** (finding; `single_reader_provisional`). Chronic exposure to simulated wildfire smoke produced robust gene expression changes in the prefrontal cortex of male mice: 2,862 differentially expressed genes versus filtered-air controls.
 
 - concept: exposure to laboratory-generated (simulated) wildfire smoke at an occupationally relevant dose [`explicit`] --- support `$.title` [83, 164): “exposed to an occupationally relevant dose of laboratory-generated wildfire smoke”
 - relation or direction: robust changes; 2,862 differentially expressed genes (51.2% increased) [`explicit`]
 - geography: unknown [`unknown`]
 - temporal frame: 16 weeks of exposure (2 h/d, 5 d/wk) [`explicit`] --- support `$["experimental design"]` [331, 359): “for 2 h/d, 5 d/wk, for 16 wk”
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.abstract` [723, 901): “We report robust changes in gene expression profiles between smoke-exposed samples and filtered air controls, evidenced by 2,862 differentially expressed genes (51.2% increased).”
 - note: The split between increased and decreased genes is stated inconsistently in the paper (see rejected_or_ambiguous); only the total is used in claim_text.
 
-**LIT-001521-C2** (finding). The smoke-altered genes were enriched in pathways related to synaptic transmission, neuroplasticity, blood-brain barrier integrity and neurotransmitter metabolism.
+**LIT-001521-C2** (finding; `single_reader_provisional`). The smoke-altered genes were enriched in pathways related to synaptic transmission, neuroplasticity, blood-brain barrier integrity and neurotransmitter metabolism.
 
 - concept: differentially expressed genes; enriched pathways [`explicit`]
 - relation or direction: enriched in synaptic transmission, neuroplasticity, blood-brain barrier integrity, neurotransmitter metabolism pathways [`explicit`]
 - geography: unknown [`unknown`]
 - temporal frame: 16 weeks of exposure (2 h/d, 5 d/wk) [`explicit`] --- support `$["experimental design"]` [331, 359): “for 2 h/d, 5 d/wk, for 16 wk”
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.abstract` [901, 1111): “We further characterized the functional relevance of these genes highlighting enriched pathways related to synaptic transmission, neuroplasticity, blood-brain barrier integrity, and neurotransmitter metabolism.”
 
-**LIT-001521-C3** (finding). Contrary to expectation from prior smoke studies, the primary analyses showed no significant alterations in canonical neuroinflammatory pathways.
+**LIT-001521-C3** (finding; `single_reader_provisional`). Contrary to expectation from prior smoke studies, the primary analyses showed no significant alterations in canonical neuroinflammatory pathways.
 
 - concept: canonical neuroinflammatory pathways [`explicit`]
 - relation or direction: no significant alterations ('did not appear') [`explicit`]
 - geography: unknown [`unknown`]
 - temporal frame: 16 weeks of exposure (2 h/d, 5 d/wk) [`explicit`] --- support `$["experimental design"]` [331, 359): “for 2 h/d, 5 d/wk, for 16 wk”
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.discussion` [9763, 9893): “Interestingly, there did not appear to be significant alterations in canonical neuroinflammatory pathways in our primary analyses.”
 
-**LIT-001521-C4** (background_citation). Wildfires have become common worldwide alongside warmer, drier climates and are now major contributors to ambient air pollution.
+**LIT-001521-C4** (background_citation; `single_reader_provisional`). Wildfires have become common worldwide alongside warmer, drier climates and are now major contributors to ambient air pollution.
 
 - concept: wildfires; ambient air pollution [`explicit`]
 - relation or direction: have become common, concurrent with warmer and drier climates; major contributors to air pollution [`explicit`]
 - geography: global / worldwide [`explicit`]
 - temporal frame: present ('now') [`explicit`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.abstract` [0, 154): “Wildfires have become common global phenomena concurrent with warmer and drier climates and are now major contributors to ambient air pollution worldwide.”
 - note: Background framing; not a finding of this paper.
 
@@ -383,50 +410,55 @@ Rejected or ambiguous:
 **Scope: `in_scope_hazard`.** The paper reconstructs a century of floods and droughts of an arid-zone wetland and relates them to extreme rainfall.  
 Scope evidence: `$.abstract` [325, 500): “Here, we sought to identify the main hydroclimatic determinants of the strongly episodic flood regime of a large catchment in the semi-arid, subtropical northwest of Australia”
 
-**LIT-001711-C1** (finding). Severe, intense regional rainfall events and the sequence of recharge events within and between years determine surface water extent on the Fortescue Marsh floodplain.
+**LIT-001711-C1** (finding; `single_reader_provisional`). Severe, intense regional rainfall events and the sequence of recharge events within and between years determine surface water extent on the Fortescue Marsh floodplain.
 
 - concept: severe and intense regional rainfall events; sequence of recharge events; surface water expression [`explicit`]
 - relation or direction: determine [`explicit`]
 - geography: Fortescue Marsh floodplain, upper Fortescue River catchment, semi-arid northwest Australia [`explicit`] --- support `$.abstract` [683, 759): “the Fortescue Marsh, the largest water feature of inland northwest Australia”
 - temporal frame: model calibrated on 1988-2012 satellite observations [`explicit`] --- support `$.abstract` [761, 778): “from 1988 to 2012”
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.abstract` [941, 1126): “We found that severe and intense regional rainfall events, as well as the sequence of recharge events both within and between years, determine surface water expression on the floodplain”
 
-**LIT-001711-C2** (finding). The most severe inundation of the last century on the Fortescue Marsh, about 1000 km2, was recorded in 2000.
+**LIT-001711-C2** (finding; `single_reader_provisional`). The most severe inundation of the last century on the Fortescue Marsh, about 1000 km2, was recorded in 2000.
 
 - concept: inundation [`explicit`]
 - relation or direction: most severe (~1000 km2) in 2000 [`explicit`]
 - geography: Fortescue Marsh floodplain, upper Fortescue River catchment, semi-arid northwest Australia [`explicit`] --- support `$.abstract` [683, 759): “the Fortescue Marsh, the largest water feature of inland northwest Australia”
 - temporal frame: last century (reconstruction since 1912) [`explicit`] --- support `$.abstract` [879, 940): “reconstruct monthly history of floods and droughts since 1912”
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.abstract` [1255, 1340): “The most severe inundation (∼ 1000 km 2 ) over the last century was recorded in 2000.”
 
-**LIT-001711-C3** (finding). Between 1999 and 2006, the duration, severity and frequency of inundations were above average and unprecedented relative to the last century.
+**LIT-001711-C3** (finding; `single_reader_provisional`). Between 1999 and 2006, the duration, severity and frequency of inundations were above average and unprecedented relative to the last century.
 
 - concept: duration, severity and frequency of inundations [`explicit`]
 - relation or direction: above average and unprecedented [`explicit`]
 - geography: Fortescue Marsh floodplain, upper Fortescue River catchment, semi-arid northwest Australia [`explicit`] --- support `$.abstract` [683, 759): “the Fortescue Marsh, the largest water feature of inland northwest Australia”
 - temporal frame: 1999-2006, compared with the last century [`explicit`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.abstract` [1625, 1766): “Duration, severity and frequency of inundations between 1999 and 2006 were above average and unprecedented when compared to the last century.”
 
-**LIT-001711-C4** (projection). The authors suggest the wetland will become more persistent as extreme rainfall events in the region become more frequent and intense.
+**LIT-001711-C4** (projection; `single_reader_provisional`). The authors suggest the wetland will become more persistent as extreme rainfall events in the region become more frequent and intense.
 
 - concept: wetland persistence; frequency and intensity of extreme rainfall events [`explicit`]
 - relation or direction: will become more persistent (hedged: 'suggest') [`explicit`]
 - geography: Fortescue Marsh floodplain, upper Fortescue River catchment, semi-arid northwest Australia [`explicit`] --- support `$.abstract` [683, 759): “the Fortescue Marsh, the largest water feature of inland northwest Australia”
 - temporal frame: unknown [`unknown`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$.abstract` [1826, 2023): “changes to the flooding regime over the last 20 years suggest that the wetland will become more persistent in response to increased frequency and intensity of extreme rainfall events for the region”
 - note: The basis is changes over the last 20 years; no future horizon and no scenario are stated, so both are unknown.
 
-**LIT-001711-C5** (finding). Extended droughts with no surface water on the Marsh were more frequent from the late 1930s to the early 1960s; the longest lasted 4.3 years, 1961-1965.
+**LIT-001711-C5** (finding; `single_reader_provisional`). Extended droughts with no surface water on the Marsh were more frequent from the late 1930s to the early 1960s; the longest lasted 4.3 years, 1961-1965.
 
 - concept: extended drought periods (no surface water evident) [`explicit`]
 - relation or direction: more frequent late 1930s-early 1960s; longest 4.3 years [`explicit`]
 - geography: Fortescue Marsh floodplain, upper Fortescue River catchment, semi-arid northwest Australia [`explicit`] --- support `$.abstract` [683, 759): “the Fortescue Marsh, the largest water feature of inland northwest Australia”
 - temporal frame: late 1930s to early 1960s; 1961-1965 [`explicit`]
 - scenario: unknown [`unknown`]
+- experimental condition: unknown [`unknown`]
 - evidence: `$["results and discussion"]` [5485, 5723): “particularly extended drought periods (where no surface water is evident on the Marsh) were more frequent between the late 1930's and early 1960's, with the longest supraseasonal drought on record lasting 4.3 years (between 1961 and 1965)”
 
 Rejected or ambiguous:

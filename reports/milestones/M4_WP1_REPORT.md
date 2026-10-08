@@ -31,8 +31,9 @@ labelling any claim supporting or contradicting; M5; QA.
 | Phase A --- sample frozen | `6f9006c`, committed 05:17:40Z; **the first corpus file was opened at 05:18:25Z** (the Phase B schema run) |
 | Phases B--D | `d728df6` |
 | Evidence runs | all four WP1 scripts re-run at `d728df6` on a clean tree; every tracked output reproduced byte for byte |
-| This report, `PROJECT_STATE.md`, brief status | this report's own commit; its SHA travels with the hand-back |
-| Remote | **Not pushed, not merged**, as the work package requires |
+| This report, `PROJECT_STATE.md`, brief status | `7ded08e` --- **the reviewed head** |
+| Remote | **`7ded08e` pushed to `origin/work/m4-wp1`** and reviewed there by GUIDANCE (D-017). **Not merged** |
+| D-017 closure (schema split, validation status, bookkeeping) | the commit after `7ded08e`; its SHA travels with the hand-back. **Not pushed**; merge to `main` is Kaiyuan's |
 
 ## 4. Data version and checksums
 
@@ -41,9 +42,9 @@ labelling any claim supporting or contradicting; M5; QA.
 | Corpus manifest (`LITCORPUS-00` identity) | `3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a` |
 | `artifacts/literature/wp1_sample.json` | `5cb81f9585040dd1d73a89ca7062d3c5e0060112f54e08ef4795db96a657b578` |
 | `artifacts/literature/wp1_schema_observed.json` | `a7787ec74537cb19971d690ccc8ee592c0b7ba30cc63bc271af9f6ce7dd94fe9` |
-| `artifacts/literature/wp1_claims_summary.json` | `121b22d987874fe07ff1883477eecc114131f8ec6568297b2ea25773d5d2473d` |
-| `scripts/wp1_extractions.py` (the reading, as data) | `cf4c700266592d3897158804cabc69b640e04ccbaf1dc8c750734b6f579b5685` |
-| `docs/LITERATURE_WP1_PILOT.md` | `846ff2b8d1b0ffdd585890f2002d969ab5ba293bc03084e54395faf4d1d764a8` |
+| `artifacts/literature/wp1_claims_summary.json` | `fb913fe4242355af17794b1218ab30b88d0abe84ce53f5c89cf71a18c1f9cdde` (D-017 rebuild; `121b22d9…` at `7ded08e`) |
+| `scripts/wp1_extractions.py` (the reading, as data) | `9b1bf6fedd8271ba54af0648ba5ecf32cccda50d530c556ea84a97d64c99b9a2` (D-017 split; `cf4c7002…` at `7ded08e`) |
+| `docs/LITERATURE_WP1_PILOT.md` | `398d32866196bd9ff48c5d82e1eedc890608682ed8e88a09467cafca0d9c4a0e` (D-017 re-render; `846ff2b8…` at `7ded08e`) |
 
 Each of the ten sampled files was verified against its manifest SHA-256 before
 it was decoded, on every run (fail closed); the per-file hashes are in
@@ -93,6 +94,15 @@ holds the verified read, the structure description and the span functions.
 
 **Changed:** `docs/PROJECT_STATE.md`, `docs/MENTOR_BRIEF.md`.
 
+**GUIDANCE ruling on this package:**
+[`docs/M4_WP1_REVIEW_M5_WP1_GUIDANCE_RULING.md`](../../docs/M4_WP1_REVIEW_M5_WP1_GUIDANCE_RULING.md)
+(D-017, PASS WITH ACTIONS). **Changed at D-017 closure:**
+`scripts/wp1_extractions.py`, `scripts/build_wp1_claims.py`,
+`scripts/render_wp1_pilot.py`, `tests/test_wp1_claims.py`, the six
+`claims_extracted` records, `wp1_claims_summary.json`,
+`docs/LITERATURE_WP1_PILOT.md`, `docs/DECISION_LOG.md`, this report;
+run records `reports/runs/20261008T*`.
+
 ## 8. Methods and rules that affect scientific meaning
 
 **No rule was applied to any ClimRR column.** The rules below decide what the
@@ -117,10 +127,12 @@ claim records say.
    `ambiguous` → terminal `ambiguous_only`; in scope with no claim →
    `no_eligible_claim`. The builder refuses any other combination.
 5. **Dimensions** --- concept, relation or direction, geography, temporal
-   frame, scenario --- each tagged `explicit` (the paper says it, in the claim
+   frame, scenario, and (from D-017) experimental condition --- each tagged `explicit` (the paper says it, in the claim
    span or a quoted `support` span), `inferred` (the extractor linked it; a
    support span is mandatory) or `unknown` (value exactly `unknown`). Nothing is
    filled from general knowledge, filenames, the query or the prototypes.
+   **`scenario` means a climate or emissions scenario only**; laboratory
+   treatment levels go in `experimental_condition` (D-017).
 6. **Claim types:** `finding`, `projection`, `mechanism`, `recommendation`,
    `background_citation`. Hedging (`suggest`, `likely`, `might`) is kept in the
    relation value, not removed.
@@ -136,6 +148,11 @@ claim records say.
    page headers inside body text are noted, not recorded as bibliography. A
    title field holding a non-title is recorded as stored and noted.
 9. **Rejected or ambiguous passages** are kept with span and reason.
+10. **Claim validation status** (D-017). Every claim carries
+    `claim_validation_status` from `single_reader_provisional`,
+    `independently_confirmed`, `adjudicated_modified`, `rejected_on_review`.
+    WP1 writes only `single_reader_provisional`; only an independent-review
+    package may set another value.
 
 ## 9. Results with compact tables or examples
 
@@ -164,9 +181,11 @@ two files each, and 35 keys in one file each.
 | **Total** | | | **27** | **3** | **22** |
 
 By type: 20 findings, 3 mechanisms, 2 projections, 2 background citations. Every
-claim, with its span, is in `docs/LITERATURE_WP1_PILOT.md`. Scenario is
-`unknown` in 25 of 27 claims; the 2 `explicit` ones are experimental treatment
-levels (`LIT-000191`) --- no claim states an emissions scenario. The three `inferred` dimensions are all the
+claim, with its span, is in `docs/LITERATURE_WP1_PILOT.md`. **After the D-017 split, `scenario` is `unknown` in
+27 of 27 claims**; the two treatment-level values of `LIT-000191` (C1, C2) are
+`explicit` under `experimental_condition`, unchanged. (At `7ded08e` they sat
+under `scenario`, which read 25 of 27 `unknown`.) All 27 claims are
+`single_reader_provisional`. The three `inferred` dimensions are all the
 geography of `LIT-000191`'s laboratory findings, linked to "Northwest Atlantic"
 through the title.
 
@@ -185,6 +204,7 @@ the verified decoded source and matched exactly; hashes match.
 | Span integrity | 96/96, in the build and again in `test_every_span_re_slices_from_the_verified_source` |
 | Clean-head reproduction | all WP1 outputs byte-identical at `d728df6` |
 | Firewall | test: no WP1 script or module references prototypes, pilot families or the query |
+| **D-017 closure** | `pytest` **565 passed** (2 new: validation status; scenario/experimental split); scanner **0 hits**; rebuild at closure: **96/96 spans, every locator and evidence hash identical to `7ded08e`**; `test_every_span_re_slices_from_the_verified_source` ran against the corpus, not skipped |
 
 ## 11. Failures, rejected cases, and known limitations
 
@@ -211,10 +231,11 @@ the verified decoded source and matched exactly; hashes match.
   water scarcity and mass-movement hazards) was ruled in scope; `LIT-000761`
   (fluxes in a permanently arid forest) ambiguous. A different reader could
   swap them.
-- **"Scenario" is overloaded.** For `LIT-000191` the scenario dimension holds
+- **"Scenario" was overloaded.** For `LIT-000191` the scenario dimension held
   experimental treatment levels the paper calls representative of past, present
-  and future conditions --- not an emissions scenario. No claim in the pilot
-  states an emissions scenario.
+  and future conditions --- not an emissions scenario. **Resolved by D-017**:
+  they now sit under `experimental_condition`. No claim in the pilot states an
+  emissions scenario.
 
 **Known limitations.**
 
@@ -247,13 +268,21 @@ the verified decoded source and matched exactly; hashes match.
 
 ## 13. Open decisions and mentor questions
 
+Decided by GUIDANCE in D-017:
+
+| Item | Ruling |
+| --- | --- |
+| Scope calls `LIT-000571` (in, borderline) and `LIT-000761` (ambiguous) | **accepted** |
+| "Claims only for in-scope items"; "ambiguous yields no claim" | **accepted** |
+| Tracked verbatim excerpts | **kept**, under minimal-evidence-window discipline; hash + offsets authoritative |
+| Experimental treatment vs. scenario | **split**; done at closure; `scenario` `unknown` 27/27 |
+| Second, independent reader | **required before any claim is accepted M5 evidence**; not before M5 machinery |
+
+Still open:
+
 | Item | Owner | Why it matters |
 | --- | --- | --- |
-| Accept the scope calls for `LIT-000571` (in) and `LIT-000761` (ambiguous) | GUIDANCE | they move 5 claims |
-| Accept "claims only for in-scope items" and "ambiguous yields no claim" | GUIDANCE | it defines what M5 will see |
-| Whether manual extraction by the EXECUTOR needs a second, independent reader before M5 | GUIDANCE / Kaiyuan | reproducibility of the judgement, as distinct from the spans |
-| Tracked verbatim excerpts: acceptable, or store hashes and offsets only | GUIDANCE / Kaiyuan | WP0 kept all corpus bytes out |
-| Separate "experimental treatment" from "scenario" in the claim schema | COORDINATOR | the dimension is overloaded (`LIT-000191`) |
+| **Second-reader pass, planned as M4-WP1b**: blind, all ten papers, no prototypes, no first-pass labels or claims during extraction; then adjudication of scope, inclusion, type and every dimension | COORDINATOR to scope; Kaiyuan | until it closes, all 27 claims stay `single_reader_provisional` and M5-WP1 can pass only as machinery validation |
 | Q19–Q21 (collection platform, dates, completeness) | JL | unchanged |
 
 ## 14. Proposed gate status
@@ -274,7 +303,7 @@ The ruling's 20 acceptance criteria, one line each:
 | 10 | Zero claims is a valid result | **MET** | 4 items with 0 claims |
 | 11 | Off-topic papers remain, not replaced | **MET** | 3 off_topic kept |
 | 12 | Bibliographic metadata only when present | **MET** | `as_stored`, `recovered_from_other_field`, `unknown` |
-| 13 | Unstated dimensions are `unknown` | **MET** | e.g. scenario `unknown` in 25 of 27 claims |
+| 13 | Unstated dimensions are `unknown` | **MET** | e.g. scenario `unknown` in 27 of 27 claims after the D-017 split |
 | 14 | Explicit distinguished from inferred | **MET** | 3 inferred, each with a support span |
 | 15 | No claim labelled supporting or contradicting a prototype | **MET** | test |
 | 16 | No prototype guides reading or passage selection | **MET, with a disclosed limitation** | code firewall tested; the reader's prior exposure cannot be removed (field 11) |
@@ -283,11 +312,20 @@ The ruling's 20 acceptance criteria, one line each:
 | 19 | Described as an ingestion / claim-extraction pilot, not an estimate | **MET** | stated once in the pilot document, tested |
 | 20 | All outputs tied to the WP0 manifest identity | **MET** | `3281aa72…` in sample and every record |
 
-**Proposed status: M4-WP1 ready for GUIDANCE review; 20 criteria met, criterion
-16 with a disclosed limitation.** The EXECUTOR proposes; GUIDANCE decides.
+**Proposed status (at `7ded08e`):** ready for GUIDANCE review; 20 criteria met,
+criterion 16 with a disclosed limitation.
+
+**GUIDANCE status: PASS WITH ACTIONS** (D-017), on the reviewed head
+`7ded08e`. The 27 claims are accepted as **single-reader provisional**
+structured claims for compatibility-machinery validation, not as independently
+validated literature evidence. The closure actions (schema split, claim
+validation status, D-017, bookkeeping) are done in the commit after `7ded08e`;
+the second-reader pass is planned as M4-WP1b (field 13).
 
 ## 15. Proposed next bounded objective
 
 **M5-WP1 --- compatibility check between the WP1 claims and the three
 prototypes, on this fixed set, to be designed by COORDINATOR after GUIDANCE
-review.**
+review.** *(Proposed at `7ded08e`.)* **Authorized by D-017** as deterministic
+negative-case compatibility machinery validation, 27 × 3 = 81 pairs, under the
+ruling's 22 acceptance criteria.

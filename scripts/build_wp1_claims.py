@@ -11,7 +11,8 @@ slice of the source with the computed `[start, end)` span does not reproduce
 the evidence text exactly, if an evidence hash does not match, if a dimension
 is `inferred` without a support span or `unknown` with a value, if a claim text
 exceeds 40 words, or if a terminal status contradicts the scope and the claim
-count. Offsets are zero-based, half-open Unicode code-point offsets into the
+count. Every claim carries `claim_validation_status`; WP1 writes only
+`single_reader_provisional` (D-017). Offsets are zero-based, half-open Unicode code-point offsets into the
 JSON string value after decoding and before any normalization (D-016).
 
 This script reads the sample, the corpus manifest, the ten sampled files and
@@ -47,7 +48,14 @@ SCOPES = ("in_scope_hazard", "off_topic", "ambiguous")
 TERMINALS = ("claims_extracted", "no_eligible_claim", "off_topic", "parse_failure", "ambiguous_only")
 CLAIM_TYPES = ("finding", "projection", "mechanism", "recommendation", "background_citation")
 STATUSES = ("explicit", "inferred", "unknown")
-DIMENSIONS = ("concept", "relation_or_direction", "geography", "temporal_frame", "scenario")
+DIMENSIONS = ("concept", "relation_or_direction", "geography", "temporal_frame", "scenario",
+              "experimental_condition")
+# Claim-level validation status (D-017). Every WP1 claim is written as
+# `single_reader_provisional`; only a later independent-review package may set
+# another value.
+CLAIM_VALIDATION_STATUSES = ("single_reader_provisional", "independently_confirmed",
+                             "adjudicated_modified", "rejected_on_review")
+WP1_CLAIM_VALIDATION_STATUS = "single_reader_provisional"
 MAX_WORDS = 40
 
 
@@ -123,6 +131,7 @@ def build_item(item: dict, doc: object, s: dict, manifest_sha: str, sample_sha: 
         for dim in DIMENSIONS:
             claim[dim] = dimension(doc, c[dim], f"{where}.{dim}")
         claim["evidence"] = evidence(doc, c["evidence"])
+        claim["claim_validation_status"] = WP1_CLAIM_VALIDATION_STATUS
         claim["notes"] = c.get("notes")
         claims.append(claim)
 
@@ -218,6 +227,7 @@ def main() -> int:
         "extraction_date": spec.EXTRACTION_DATE,
         "representativeness": sample["representativeness"],
         "span_integrity_check": {"spans_checked": n_spans, "result": "passed"},
+        "claim_validation_status_values": list(CLAIM_VALIDATION_STATUSES),
         "totals": {
             "items": len(rows),
             "claims": sum(r["n_claims"] for r in rows),
@@ -225,6 +235,8 @@ def main() -> int:
             "rejected_or_ambiguous": sum(r["n_rejected_or_ambiguous"] for r in rows),
             "by_terminal_status": {t: sum(r["terminal_status"] == t for r in rows) for t in TERMINALS},
             "by_scope_status": {s: sum(r["scope_status"] == s for r in rows) for s in SCOPES},
+            "by_claim_validation_status": {v: sum(r["n_claims"] for r in rows) if v == WP1_CLAIM_VALIDATION_STATUS else 0
+                                           for v in CLAIM_VALIDATION_STATUSES},
         },
         "items": rows,
     }

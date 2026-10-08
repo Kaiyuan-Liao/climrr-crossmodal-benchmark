@@ -23,7 +23,8 @@ sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 LIT = REPO_ROOT / "artifacts" / "literature"
 CLAIMS_DIR = LIT / "wp1_claims"
-DIMENSIONS = ("concept", "relation_or_direction", "geography", "temporal_frame", "scenario")
+DIMENSIONS = ("concept", "relation_or_direction", "geography", "temporal_frame", "scenario",
+              "experimental_condition")
 
 
 def _records() -> list[dict]:
@@ -149,6 +150,32 @@ def test_dimension_rules_hold_in_every_claim():
                     assert dim["value"] == "unknown" and "support" not in dim
                 if dim["status"] == "inferred":
                     assert "support" in dim
+
+
+def test_every_claim_carries_a_validation_status_and_wp1_writes_only_provisional():
+    import build_wp1_claims
+
+    assert build_wp1_claims.CLAIM_VALIDATION_STATUSES == (
+        "single_reader_provisional", "independently_confirmed", "adjudicated_modified", "rejected_on_review")
+    summary = json.loads((LIT / "wp1_claims_summary.json").read_text(encoding="utf-8"))
+    assert summary["claim_validation_status_values"] == list(build_wp1_claims.CLAIM_VALIDATION_STATUSES)
+    n = 0
+    for r in _records():
+        for c in r["claims"]:
+            assert c["claim_validation_status"] == "single_reader_provisional", c["claim_id"]
+            n += 1
+    assert summary["totals"]["by_claim_validation_status"]["single_reader_provisional"] == n
+
+
+def test_experimental_treatments_are_not_climate_scenarios():
+    # D-017: the LIT-000191 treatment levels live under experimental_condition.
+    # After the split no WP1 claim states a climate scenario.
+    for r in _records():
+        for c in r["claims"]:
+            assert "experimental_condition" in c, c["claim_id"]
+            assert c["scenario"] == {"value": "unknown", "status": "unknown"}, c["claim_id"]
+            if c["experimental_condition"]["status"] != "unknown":
+                assert r["item_id"] == "LIT-000191", c["claim_id"]
 
 
 def test_no_claim_is_labelled_against_a_prototype():
