@@ -208,8 +208,8 @@ set.*
 
 **What happened.**
 
-- **One scan hit, fixed.** The secrets scan flagged the word "token" in rule
-  text (12 lines; a false positive on a credential pattern). My pre-commit check
+- **One scan hit, fixed.** The secrets scan flagged a credential-class word in
+  rule text (12 lines; a false positive on a credential pattern). My pre-commit check
   piped the scanner through `tail`, which hid its exit status, so the first
   Phase B--D commit went in with the hit. It was reworded ("label", "word"), the
   matrix regenerated, and that unpushed commit amended; `703083b` scans clean.
