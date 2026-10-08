@@ -6,12 +6,12 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 | | |
 | --- | --- |
-| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4 --- literature ingestion and structured claim pilot:** M4-WP0 PASS (D-016); **M4-WP1 accepted --- PASS WITH ACTIONS (D-017)**, closure done, merge pending Kaiyuan. **M5-WP1 authorized** |
-| **Active task** | **M4-WP1 accepted, PASS WITH ACTIONS (D-017)**, reviewed at `7ded08e` (pushed). The closure actions --- `experimental_condition` split (`scenario` now `unknown` 27/27), `claim_validation_status` on every claim (all `single_reader_provisional`), D-017, bookkeeping --- are done in the commit after `7ded08e`, **not pushed**. **Merge to `main` pending Kaiyuan.** **Next: M5-WP1** --- deterministic negative-case compatibility machinery validation, 27 × 3 = 81 pairs |
-| **Latest accepted commit** | **`6f24b78`** --- the `--no-ff` merge of the M4-WP0 chain (M1-WP2, M1-WP3, M1-WP3b, M4-WP0) into `main`, accepted by GUIDANCE with M4-WP0 reviewed at `1e2fd9f` (D-016); its second parent is the chain head `e4a9de0`. **The authoritative integrated state.** It does **not** pass M1. Previous: `62c9137` (M1-WP1, D-009) |
+| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4 --- literature ingestion and structured claim pilot:** M4-WP0 PASS (D-016); **M4-WP1 accepted --- PASS WITH ACTIONS (D-017)**, closure done, **merged at `0053968`**. **M5-WP1 authorized** |
+| **Active task** | **M4-WP1 accepted, PASS WITH ACTIONS (D-017)**, reviewed at `7ded08e` (pushed). The closure actions --- `experimental_condition` split (`scenario` now `unknown` 27/27), `claim_validation_status` on every claim (all `single_reader_provisional`), D-017, bookkeeping --- are done in `8a43313`. **Merged into `main` at `0053968`.** **Next: M5-WP1** --- deterministic negative-case compatibility machinery validation, 27 × 3 = 81 pairs |
+| **Latest accepted commit** | **`0053968`** --- the `--no-ff` merge of `work/m4-wp1` into `main` (parents `5ebb330`, `8a43313`), M4-WP1 accepted by GUIDANCE with the package reviewed at `7ded08e` and the D-017 closure actions applied in `8a43313`. **The authoritative integrated state.** It does **not** pass M1. Previous: **`6f24b78`** --- the `--no-ff` merge of the M4-WP0 chain (M1-WP2, M1-WP3, M1-WP3b, M4-WP0) into `main`, accepted by GUIDANCE with M4-WP0 reviewed at `1e2fd9f` (D-016); its second parent is the chain head `e4a9de0`. Before that: `62c9137` (M1-WP1, D-009) |
 | **Tooling on `main`** | `d68ba15` --- merge of `work/knowledge-staging` (`c13a3d4`, `scripts/stage_knowledge.py`) on top of `6f24b78`. **No scientific content**; not a GUIDANCE-accepted package, and not an accepted scientific state |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at. The literature corpus is **not** on Sophia (runbook §8b) |
-| **Branch lineage** | M1-WP2 → M1-WP3 → M1-WP3b → M4-WP0 merged into `main` at `6f24b78`; tooling at `d68ba15`; state refresh `5ebb330`. **`work/m4-wp1`** branches from `5ebb330`: `6f9006c` (Phase A, sample frozen), `d728df6` (Phases B--D), **`7ded08e`** (report --- **the reviewed head, pushed**), then the D-017 closure commit (**not pushed**). **Not merged** |
+| **Branch lineage** | M1-WP2 → M1-WP3 → M1-WP3b → M4-WP0 merged into `main` at `6f24b78`; tooling at `d68ba15`; state refresh `5ebb330`. **`work/m4-wp1`** branches from `5ebb330`: `6f9006c` (Phase A, sample frozen), `d728df6` (Phases B--D), **`7ded08e`** (report --- **the reviewed head, pushed**), **`8a43313`** (D-017 closure). **Merged into `main` at `0053968`** |
 | **M4-WP0 commits** | `52a994a` (Phases A–E); **`1e2fd9f`** (report and state --- **the reviewed head**); then `e4a9de0`, the D-016 pre-merge bookkeeping |
 | **M4-WP1 sample** | `LIT-000001, 000191, 000381, 000571, 000761, 000951, 001141, 001331, 001521, 001711` --- every 190th id; no duplicate skip; `wp1_sample.json` SHA-256 `5cb81f95…`, committed before any file was opened |
 | **Prototypes built from** | `56eb10d` --- unchanged since M1-WP3b; no record rebuilt |
@@ -257,9 +257,7 @@ session reasoning correctly from out-of-date facts and repeating them.
 - **Pending choice: exclude empty-label groups from PR-1 populations (A-M2).**
   It was to be decided after a mentor answer on Q16; **no answer came**. PR-1
   still counts them and every record says so.
-- **For Kaiyuan:** push the D-017 closure commit and merge `work/m4-wp1`
-  into `main` when ready (the EXECUTOR does neither),
-  and the Sophia `pip install -r requirements.txt` reinstall (`pypdfium2` pin).
+- **For Kaiyuan:** the Sophia `pip install -r requirements.txt` reinstall (`pypdfium2` pin).
 - **Q7, Q8, Q9, Q11, Q12, Q15, Q17, Q18** still block downstream use of the
   columns they name. **Export date** of the ClimRR file remains unknown (Q18).
 

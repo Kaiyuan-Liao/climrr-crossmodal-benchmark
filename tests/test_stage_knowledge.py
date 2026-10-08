@@ -85,3 +85,8 @@ def test_the_real_list_exists_and_has_unique_basenames():
     names = [p.rsplit("/", 1)[-1] for p in sk.KNOWLEDGE_FILES]
     assert len(names) == len(set(names))
     assert [f for f in sk.KNOWLEDGE_FILES if not (REPO_ROOT / f).is_file()] == []
+
+
+def test_the_list_carries_the_m4_wp1_pilot_and_its_ruling():
+    assert "docs/LITERATURE_WP1_PILOT.md" in sk.KNOWLEDGE_FILES
+    assert "docs/M4_WP1_REVIEW_M5_WP1_GUIDANCE_RULING.md" in sk.KNOWLEDGE_FILES

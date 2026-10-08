@@ -47,6 +47,8 @@ KNOWLEDGE_FILES = (
     "docs/M1_WP3B_GUIDANCE_RULING.md",
     "docs/M4_WP0_GUIDANCE_RULING.md",
     "docs/M4_WP0_REVIEW_MERGE_WP1_GUIDANCE_RULING.md",
+    "docs/LITERATURE_WP1_PILOT.md",
+    "docs/M4_WP1_REVIEW_M5_WP1_GUIDANCE_RULING.md",
 )
 
 DEST_DIR = REPO_ROOT / "refresh_knowledge"
