@@ -1,0 +1,277 @@
+{
+  "source_file": "221115000.json",
+  "source_sha256": "ea74ebe3a9f45917c4c5dce172a912f3951e638201e66c0e1cec87b963827f18",
+  "keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "the dfhi algorithm",
+    "results",
+    "discussion",
+    "conflict of interest"
+  ],
+  "bibliographic": {
+    "title_raw": "remote sensing The Daily Fire Hazard Index: A Fire Danger Rating Method for Mediterranean Areas",
+    "authors": "unknown",
+    "year": "unknown",
+    "venue": "unknown",
+    "note": "Stored title begins with the stray prefix 'remote sensing '; recorded as stored. No author/year/venue field exists."
+  },
+  "scope_status": {
+    "value": "in_scope_hazard",
+    "reason": "The paper develops a daily fire hazard index and evaluates it against wildfire burnt-area records for Sardinia's 2017 fire season.",
+    "quoted_span": {
+      "json_path": "$[\"abstract\"]",
+      "char_start": 1291,
+      "char_end": 1424,
+      "evidence_text": "The results were validated on the Italian region of Sardinia using official wildfire records provided by the regional administration."
+    }
+  },
+  "claims": [
+    {
+      "claim_id": "221115000-C1",
+      "restatement": "With the earlier DFHI algorithm, roughly one third of pixels reportedly burned by wildfires in 2017 were classified High or Very High Hazard on the day they burnt; about a quarter were Very High.",
+      "claim_type": "finding",
+      "evidence": {
+        "json_path": "$[\"discussion\"]",
+        "char_start": 617,
+        "char_end": 859,
+        "evidence_text": "Roughly one third of the pixels that were reportedly burned by wildfires in the year 2017 were classified as \"High Hazard\" or \"Very High Hazard\" on the day they burnt, and in particular, a quarter of them was classified as \"Very High Hazard\"."
+      },
+      "concept": {
+        "value": "DFHI hazard class of pixels reportedly burned by wildfires",
+        "status": "explicit",
+        "reason": "Named in the evidence span. The DFHI is a fire hazard (danger) index; burned pixels come from official wildfire records."
+      },
+      "relation_or_direction": {
+        "value": "roughly one third classified 'High Hazard' or 'Very High Hazard' on the day they burnt; a quarter 'Very High Hazard' (compared with about 14% of all pixels in the two highest classes)",
+        "status": "explicit",
+        "reason": "Stated in the evidence span and the preceding sentences. The authors add that the number of qualifying wildfires 'was not sufficient to draw definitive conclusions'."
+      },
+      "geography": {
+        "value": "the region of Sardinia",
+        "status": "inferred",
+        "reason": "Study area named in the results, not in the evidence span.",
+        "support_span": {
+          "json_path": "$[\"results\"]",
+          "char_start": 368,
+          "char_end": 430,
+          "evidence_text": "The area of interest, which consists of the region of Sardinia"
+        }
+      },
+      "temporal_frame": {
+        "value": "the year 2017 (fire season assumed 1 June to 31 August)",
+        "status": "explicit",
+        "reason": "'the year 2017' is in the evidence span; the season dates come from the results.",
+        "support_span": {
+          "json_path": "$[\"results\"]",
+          "char_start": 232,
+          "char_end": 367,
+          "evidence_text": "DFHI maps were generated for the entire fire season of 2017, conventionally assumed to start the first of June and to end on 31 August."
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "old DFHI algorithm without the evapotranspiration temperature correction; burnt areas above 10 ha only",
+        "status": "inferred",
+        "reason": "The discussion's first results correspond to the first run described in the results (old algorithm); the 10 ha threshold is stated in the results.",
+        "support_span": {
+          "json_path": "$[\"results\"]",
+          "char_start": 2412,
+          "char_end": 2543,
+          "evidence_text": "This process was carried out firstly using the old DFHI algorithm that did not correct the temperature using the evapotranspiration"
+        }
+      },
+      "caveat_span": {
+        "json_path": "$[\"discussion\"]",
+        "char_start": 1688,
+        "char_end": 1860,
+        "evidence_text": "Unfortunately, the number of wildfires that satisfied the condition on the minimum burnt area in 2017, while significant, was not sufficient to draw definitive conclusions."
+      }
+    },
+    {
+      "claim_id": "221115000-C2",
+      "restatement": "The revised DFHI tended to return more High and Very High Hazard pixels, which the authors expected because evapotranspiration tends to increase vegetation temperature and therefore fire hazard during the wildfire season.",
+      "claim_type": "finding",
+      "evidence": {
+        "json_path": "$[\"discussion\"]",
+        "char_start": 1303,
+        "char_end": 1687,
+        "evidence_text": "In general, the new algorithm tended to return more \"High\" and \"Very High Hazard\" pixels. This tendency was to be expected given the fact that the evapotranspiration tends to increase the temperature of the vegetation, and therefore to increase the fire hazard during the wildfire season, confirming the usefulness of the methodological improvements which is the object of this paper."
+      },
+      "concept": {
+        "value": "share of 'High' and 'Very High Hazard' DFHI pixels",
+        "status": "explicit",
+        "reason": "Named in the evidence span."
+      },
+      "relation_or_direction": {
+        "value": "new algorithm tended to return more High and Very High Hazard pixels; attributed to evapotranspiration tending to increase vegetation temperature and therefore fire hazard",
+        "status": "explicit",
+        "reason": "Stated in the evidence span, hedges kept ('tended', 'tends'). The paper gives inconsistent baselines for the old version (14% and 13%), so no numbers are carried here."
+      },
+      "geography": {
+        "value": "the region of Sardinia",
+        "status": "inferred",
+        "reason": "Study area named in the results.",
+        "support_span": {
+          "json_path": "$[\"results\"]",
+          "char_start": 368,
+          "char_end": 430,
+          "evidence_text": "The area of interest, which consists of the region of Sardinia"
+        }
+      },
+      "temporal_frame": {
+        "value": "2017 fire season",
+        "status": "inferred",
+        "reason": "Validation period stated in the results.",
+        "support_span": {
+          "json_path": "$[\"results\"]",
+          "char_start": 232,
+          "char_end": 291,
+          "evidence_text": "DFHI maps were generated for the entire fire season of 2017"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "latest DFHI version with evapotranspiration-based (Penman-Monteith) temperature correction, compared with the old version",
+        "status": "inferred",
+        "reason": "The comparison is between the two algorithm versions described in the results.",
+        "support_span": {
+          "json_path": "$[\"results\"]",
+          "char_start": 2584,
+          "char_end": 2665,
+          "evidence_text": "Secondly, the process was repeated using the latest version of the DFHI algorithm"
+        }
+      }
+    },
+    {
+      "claim_id": "221115000-C3",
+      "restatement": "According to EFFIS data, wildfires recorded from 2014 to 2018 in France, Greece, Italy, Portugal and Spain burned 1,717,369 hectares from 144,837 wildfires.",
+      "claim_type": "background_citation",
+      "evidence": {
+        "json_path": "$[\"introduction\"]",
+        "char_start": 275,
+        "char_end": 603,
+        "evidence_text": "According to the data gathered by the the European Forest Fire Information System (EFFIS), and taking into account only the wildfires recorded in a four-year time span that goes from 2014 to 2018 in France, Greece, Italy, Portugal, and Spain, 1,717,369 hectares of land were burned as a result of 144,837 wildfires [1][2][3][4]."
+      },
+      "concept": {
+        "value": "hectares of land burned; number of wildfires",
+        "status": "explicit",
+        "reason": "Named in the evidence span."
+      },
+      "relation_or_direction": {
+        "value": "1,717,369 hectares burned as a result of 144,837 wildfires",
+        "status": "explicit",
+        "reason": "Stated in the evidence span (cited data)."
+      },
+      "geography": {
+        "value": "France, Greece, Italy, Portugal, and Spain",
+        "status": "explicit",
+        "reason": "Countries named as the coverage of the cited EFFIS statistic (data source), not the study area."
+      },
+      "temporal_frame": {
+        "value": "a four-year time span that goes from 2014 to 2018",
+        "status": "explicit",
+        "reason": "Recorded exactly as stated; the paper calls 2014 to 2018 a four-year span."
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No treatment is stated."
+      }
+    },
+    {
+      "claim_id": "221115000-C4",
+      "restatement": "In Sardinia, the most damaging wildfires occur on days of strong Mistral winds, as the authors state is well known.",
+      "claim_type": "background_citation",
+      "evidence": {
+        "json_path": "$[\"results\"]",
+        "char_start": 368,
+        "char_end": 574,
+        "evidence_text": "The area of interest, which consists of the region of Sardinia, is particularly suitable for our purposes, since it is well known that the most damaging wildfires occur in days of strong Mistral winds [65]."
+      },
+      "concept": {
+        "value": "most damaging wildfires",
+        "status": "explicit",
+        "reason": "Named in the evidence span."
+      },
+      "relation_or_direction": {
+        "value": "occur in days of strong Mistral winds",
+        "status": "explicit",
+        "reason": "Stated in the evidence span, with citation [65]."
+      },
+      "geography": {
+        "value": "the region of Sardinia",
+        "status": "explicit",
+        "reason": "Study area named in the evidence span."
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No period is stated for this statement."
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No treatment is stated."
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "span": {
+        "json_path": "$[\"discussion\"]",
+        "char_start": 2848,
+        "char_end": 2998,
+        "evidence_text": "The index does not show any bias towards lower or higher risk classes, and predicts the areas at risk over the area of interest with good reliability."
+      },
+      "reason": "Conclusion stated more strongly than the results support; the paper itself says the number of qualifying wildfires was not sufficient for definitive conclusions."
+    },
+    {
+      "span": {
+        "json_path": "$[\"introduction\"]",
+        "char_start": 2372,
+        "char_end": 2477,
+        "evidence_text": "notwithstanding the fact that over 90% of ignitions in the Mediterranean area are caused by human actions"
+      },
+      "reason": "Background aside with no citation attached in this passage; not promoted."
+    },
+    {
+      "span": {
+        "json_path": "$[\"abstract\"]",
+        "char_start": 0,
+        "char_end": 236,
+        "evidence_text": "Mediterranean forests are gravely affected by wildfires, and despite the increased prevention effort of competent authorities in the past few decades, the yearly number of fires and the consequent damage has not decreased significantly."
+      },
+      "reason": "General motivating statement; no data, period or citation given in the span."
+    },
+    {
+      "span": {
+        "json_path": "$[\"introduction\"]",
+        "char_start": 9565,
+        "char_end": 9662,
+        "evidence_text": "One of the most recent efforts in this sense [46] proposes a new Midterm Fire Danger Index (MFDI)"
+      },
+      "reason": "Description of another method (Greece); a literature summary, not a hazard claim."
+    }
+  ],
+  "terminal_status": "claims_extracted"
+}
