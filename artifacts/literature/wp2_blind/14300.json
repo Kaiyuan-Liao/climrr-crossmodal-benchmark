@@ -1,0 +1,323 @@
+{
+  "source_file": "14300.json",
+  "source_sha256": "d63010c65b1955f330d76d9bf6c51e4114248a3e261af1b5160d40095a5fb594",
+  "keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "methods",
+    "results",
+    "discussion"
+  ],
+  "bibliographic": {
+    "title_raw": "The influence of vegetation, fire spread and fire behaviour on biomass burning and trace gas emissions: results from a process-based model",
+    "authors": "unknown",
+    "year": "unknown",
+    "venue": "unknown",
+    "note": "No author/year/venue field exists. The results value contains a stray running-header string ('www.biogeosciences.net/7/1991/2010/Biogeosciences, 7, 1991-2011, 2010') inside body text; not used because it is not a bibliographic field."
+  },
+  "scope_status": {
+    "value": "in_scope_hazard",
+    "reason": "The paper builds and evaluates a process-based fire model that simulates fire danger, fire numbers, burnt area and fire emissions, and compares them with satellite fire products.",
+    "quoted_span": {
+      "json_path": "$[\"abstract\"]",
+      "char_start": 145,
+      "char_end": 295,
+      "evidence_text": "used to explore fire regimes and the current impact of fire on the terrestrial carbon cycle and associated emissions of trace atmospheric constituents"
+    }
+  },
+  "claims": [
+    {
+      "claim_id": "14300-C1",
+      "restatement": "The LPJ-SPITFIRE model estimates an average release of 2.24 Pg C per year as CO2 from biomass burning during the 1980s and 1990s.",
+      "claim_type": "finding",
+      "evidence": {
+        "json_path": "$[\"abstract\"]",
+        "char_start": 296,
+        "char_end": 410,
+        "evidence_text": "The model estimates an average release of 2.24 Pg C yr −1 as CO 2 from biomass burning during the 1980s and 1990s."
+      },
+      "concept": {
+        "value": "release of carbon as CO 2 from biomass burning",
+        "status": "explicit",
+        "reason": "Named in the evidence span."
+      },
+      "relation_or_direction": {
+        "value": "model estimates an average release of 2.24 Pg C yr −1",
+        "status": "explicit",
+        "reason": "Stated in the evidence span; a model estimate, not a measurement."
+      },
+      "geography": {
+        "value": "global",
+        "status": "inferred",
+        "reason": "The abstract does not name the extent; Table 2 compares the figure with 'global' estimates.",
+        "support_span": {
+          "json_path": "$[\"discussion\"]",
+          "char_start": 7167,
+          "char_end": 7220,
+          "evidence_text": "Comparison of estimates of global annual CO 2 release"
+        }
+      },
+      "temporal_frame": {
+        "value": "1980s and 1990s",
+        "status": "explicit",
+        "reason": "Stated in the evidence span."
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No emissions or climate scenario is named; the run is a historical transient simulation."
+      },
+      "experimental_condition": {
+        "value": "croplands excluded after simulation (land-cover correction); 3.45 PgC yr −1 before exclusion",
+        "status": "inferred",
+        "reason": "The results state the 2.24 figure results from reducing natural vegetation to exclude croplands; the abstract omits this.",
+        "support_span": {
+          "json_path": "$[\"results\"]",
+          "char_start": 9491,
+          "char_end": 9584,
+          "evidence_text": "is reduced to exclude croplands, the simulated average CO 2 release is reduced to 2.24 PgC yr"
+        }
+      }
+    },
+    {
+      "claim_id": "14300-C2",
+      "restatement": "Compared with MODIS, the simulated peak fire season is about two months late in the Sahel, one month late in southern Africa and South America, and one to two months late in the southern boreal zone.",
+      "claim_type": "finding",
+      "evidence": {
+        "json_path": "$[\"results\"]",
+        "char_start": 3989,
+        "char_end": 4254,
+        "evidence_text": "The model (Fig. 5b) reproduces these broad features but with some offsets: the peak simulated fire season is about two months late in the Sahel, one month late in southern Africa and South America, and one to two months late in the southern part of the boreal zone."
+      },
+      "concept": {
+        "value": "peak simulated fire season",
+        "status": "explicit",
+        "reason": "Named in the evidence span."
+      },
+      "relation_or_direction": {
+        "value": "about two months late (Sahel); one month late (southern Africa, South America); one to two months late (southern part of the boreal zone)",
+        "status": "explicit",
+        "reason": "Stated in the evidence span, hedges kept ('about', 'one to two')."
+      },
+      "geography": {
+        "value": "the Sahel; southern Africa; South America; the southern part of the boreal zone",
+        "status": "explicit",
+        "reason": "Regions named in the evidence span as places where the model-versus-MODIS offset occurs (study regions within a global evaluation)."
+      },
+      "temporal_frame": {
+        "value": "November 2000 to October 2002",
+        "status": "inferred",
+        "reason": "The evidence span gives no period; the Fig. 5 caption gives the comparison period.",
+        "support_span": {
+          "json_path": "$[\"discussion\"]",
+          "char_start": 5776,
+          "char_end": 5869,
+          "evidence_text": "Fig. 5. (a) Observed (MODIS) and (b) simulated fire peak month, November 2000 to October 2002"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No treatment is stated."
+      }
+    },
+    {
+      "claim_id": "14300-C3",
+      "restatement": "In both satellite data and the model, mean fire season length increases from wet/cold to warm/dry biomes; the model reproduces the differences but generally over-estimates fire season length.",
+      "claim_type": "finding",
+      "evidence": {
+        "json_path": "$[\"results\"]",
+        "char_start": 5561,
+        "char_end": 5930,
+        "evidence_text": "The mean length of the fire season increases from wet/cold to warm/dry biomes, both in the data and in the model (Fig. 6).The fire season is short (one to three months) in the boreal zone and longer (four to seven months) in semi-arid and highly seasonal climates.The model reproduces these differences, but shows a general tendency to over-estimate fire season length."
+      },
+      "concept": {
+        "value": "mean length of the fire season",
+        "status": "explicit",
+        "reason": "Named in the evidence span."
+      },
+      "relation_or_direction": {
+        "value": "increases from wet/cold to warm/dry biomes; model shows a general tendency to over-estimate",
+        "status": "explicit",
+        "reason": "Stated in the evidence span."
+      },
+      "geography": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "Results are aggregated by biome classes, not by named places."
+      },
+      "temporal_frame": {
+        "value": "November 2000 to October 2002",
+        "status": "inferred",
+        "reason": "The MODIS evaluation period stated in the methods.",
+        "support_span": {
+          "json_path": "$[\"methods\"]",
+          "char_start": 20998,
+          "char_end": 21065,
+          "evidence_text": "Data from November 2000 to October 2002 are used in the evaluation."
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No treatment is stated."
+      }
+    },
+    {
+      "claim_id": "14300-C4",
+      "restatement": "Simulated interannual variability of burnt area is generally less pronounced than observed, so the model tends to miss the large burnt areas in the most extreme years.",
+      "claim_type": "finding",
+      "evidence": {
+        "json_path": "$[\"results\"]",
+        "char_start": 8799,
+        "char_end": 8991,
+        "evidence_text": "The interannual variability of simulated area burnt is generally less pronounced than that observed (Fig. 9d), that is, the model tends to miss the large burnt areas in the most extreme years."
+      },
+      "concept": {
+        "value": "interannual variability of simulated area burnt",
+        "status": "explicit",
+        "reason": "Named in the evidence span."
+      },
+      "relation_or_direction": {
+        "value": "generally less pronounced than that observed; model tends to miss the large burnt areas in the most extreme years",
+        "status": "explicit",
+        "reason": "Stated in the evidence span, hedges kept."
+      },
+      "geography": {
+        "value": "central Siberia",
+        "status": "inferred",
+        "reason": "The comparison (Fig. 9d) is captioned as central Siberia; study area of the comparison.",
+        "support_span": {
+          "json_path": "$[\"discussion\"]",
+          "char_start": 6363,
+          "char_end": 6484,
+          "evidence_text": "Fig. 9. Comparison of (a) observed (Sukhinin et al., 2004) and (b) simulated annual average area burnt in central Siberia"
+        }
+      },
+      "temporal_frame": {
+        "value": "1996-2002 (Sukhinin data availability)",
+        "status": "inferred",
+        "reason": "The observed data's stated period; Fig. 8 elsewhere uses 1997-2002, so the exact years of Fig. 9 are not stated.",
+        "support_span": {
+          "json_path": "$[\"methods\"]",
+          "char_start": 22685,
+          "char_end": 22750,
+          "evidence_text": "The Sukhinin data are available on a monthly basis for 1996-2002."
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No treatment is stated."
+      }
+    },
+    {
+      "claim_id": "14300-C5",
+      "restatement": "In the simulation, fire numbers increase with increasing fire danger, and seasonally dry regions show the most fires (>0.16 per km2 per year).",
+      "claim_type": "finding",
+      "evidence": {
+        "json_path": "$[\"results\"]",
+        "char_start": 579,
+        "char_end": 721,
+        "evidence_text": "Simulated fire numbers increase with increasing fire danger (Fig. 3a) with seasonally dry regions showing the most fires (>0.16 km −2 yr −1 )."
+      },
+      "concept": {
+        "value": "simulated fire numbers; fire danger (the model's FDI, defined as the probability that an ignition event starts a fire)",
+        "status": "inferred",
+        "reason": "'Simulated fire numbers' is explicit; the meaning of 'fire danger' is taken from the paper's own definition.",
+        "support_span": {
+          "json_path": "$[\"methods\"]",
+          "char_start": 7093,
+          "char_end": 7277,
+          "evidence_text": "the fire danger index (FDI), which we define here in a narrow sense, as the probability that an ignition event will start a fire (regardless of how large the fire becomes once started)"
+        }
+      },
+      "relation_or_direction": {
+        "value": "increase with increasing fire danger; seasonally dry regions showing the most fires",
+        "status": "explicit",
+        "reason": "Stated in the evidence span."
+      },
+      "geography": {
+        "value": "seasonally dry regions",
+        "status": "explicit",
+        "reason": "A climate-region class named in the evidence span, not a named place."
+      },
+      "temporal_frame": {
+        "value": "annual averages for 1982-1999",
+        "status": "inferred",
+        "reason": "The Fig. 3 caption gives the averaging period.",
+        "support_span": {
+          "json_path": "$[\"discussion\"]",
+          "char_start": 5341,
+          "char_end": 5476,
+          "evidence_text": "Fig. 3. Simulation results: (a) fire danger index, (b) number of fires, (c) fractional area burnt (all as annual averages for 1982-1999"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No emissions or climate scenario is named."
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown",
+        "reason": "No treatment is stated."
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "span": {
+        "json_path": "$[\"introduction\"]",
+        "char_start": 497,
+        "char_end": 570,
+        "evidence_text": "The annual area burnt in boreal regions can vary by an order of magnitude"
+      },
+      "reason": "Background statement supported by citations; not promoted because the paper's own results were preferred within the 5-claim limit."
+    },
+    {
+      "span": {
+        "json_path": "$[\"results\"]",
+        "char_start": 4489,
+        "char_end": 4549,
+        "evidence_text": "MODIS detects fires in Indonesia that LPJ-SPITFIRE does not."
+      },
+      "reason": "Model-data discrepancy; the explanation that follows is hedged ('could in part reflect', 'likely'), so it was not promoted as a mechanism."
+    },
+    {
+      "span": {
+        "json_path": "$[\"discussion\"]",
+        "char_start": 2198,
+        "char_end": 2274,
+        "evidence_text": "One is the prediction of the consequences of climate change for fire regimes"
+      },
+      "reason": "A proposed future application, not a result; no scenario or projection is reported."
+    },
+    {
+      "span": {
+        "json_path": "$[\"abstract\"]",
+        "char_start": 765,
+        "char_end": 841,
+        "evidence_text": "Comparisons with remotely sensed burnt-area products indicate that the model"
+      },
+      "reason": "Abstract value is truncated mid-sentence; the burnt-area conclusion is incomplete here and was not used."
+    }
+  ],
+  "terminal_status": "claims_extracted"
+}
