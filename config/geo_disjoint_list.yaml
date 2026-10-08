@@ -1,0 +1,42 @@
+# M5-WP1 rule G-2: the fixed list of named places that are explicitly disjoint
+# from the United States, and the named places that are NOT.
+#
+# Written for M5-WP1 and committed before the matrix was generated. It is a
+# list of place names, not a gazetteer and not a synonym table: a term matches
+# only as a whole word, case-insensitively, inside a claim geography tagged
+# `explicit`. Nothing is inferred from a city, river, village or forest name.
+#
+# Every prototype in this pilot lies inside a US `State` label (an
+# inferred_candidate reading, A-G1), so a place outside the United States is
+# disjoint from every prototype geography.
+
+version: 1
+rule: G-2
+
+# Named countries outside the United States. A match here, with no term from
+# `not_disjoint` or `us_markers` in the same string, yields `incompatible`.
+disjoint_from_united_states:
+  - China
+  - India
+  - Tajikistan
+  - Australia
+
+# Named, but not explicitly disjoint from the United States. A match here
+# yields `not_evaluable`, even when a disjoint term is also present.
+not_disjoint:
+  - term: global
+    reason: a global scope includes the United States
+  - term: worldwide
+    reason: a worldwide scope includes the United States
+  - term: Northwest Atlantic
+    reason: >-
+      an ocean region that adjoins the US Atlantic coast and includes US waters;
+      not a named place outside the United States. (The work package's list is
+      ambiguous on this term; the conservative reading is taken, and no real
+      pair depends on it: every WP1 claim naming it is tagged `inferred`.)
+
+# Strings that name the United States. Their presence blocks G-2.
+us_markers:
+  - United States
+  - USA
+  - U.S.
