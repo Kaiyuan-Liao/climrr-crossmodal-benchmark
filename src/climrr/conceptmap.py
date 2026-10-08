@@ -31,6 +31,15 @@ from climrr.paths import REPO_ROOT
 CONCEPT_MAP_PATH = REPO_ROOT / "data" / "metadata" / "concept_map.yaml"
 DICTIONARY_TEXT_PATH = REPO_ROOT / "data" / "metadata" / "dictionary_extracted.txt"
 
+BOUNDARY_RULE = (
+    "A term matches at [start, end) in a string when the characters equal the term case-insensitively "
+    "(Python re.IGNORECASE; no normalization, so offsets are code points on the unnormalized string) and the "
+    "code point before start and the code point at end, where they exist, are not letters, numbers or "
+    "combining marks (Unicode general categories L*, N*, M*). So 'FWI' does not match 'FWIs' or 'FWI2' and "
+    "does match 'FWI,', '(FWI)', 'FWI-based' and 'FWI_x'; 'heat index' does not match 'heat-index' or "
+    "'heat  index'."
+)
+
 LEVELS = ("family", "metric")
 SOURCE_TYPES = ("dictionary", "mentor", "guidance")
 ENTRY_STATUSES = ("approved_lexical", "proposed")
