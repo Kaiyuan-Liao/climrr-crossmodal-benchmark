@@ -1,0 +1,222 @@
+# M4-WP2 --- semantic inspection of the four frozen candidates (Phase 1: reader 1)
+
+**This report covers Phase 1 only** --- reader 1's reading of the four frozen
+candidates, the retrieval-hit classification done after it, and the D-019
+bookkeeping. Phases 2--4 (blind second reading in a separate session,
+adjudication, compatibility) are pending; fields 10--15 say so. The four items
+are a **relevance-guided candidate sample, not representative.** Authorized by
+[`docs/M4_WP1B_WP2_CANDIDATE_READING_GUIDANCE_RULING.md`](../../docs/M4_WP1B_WP2_CANDIDATE_READING_GUIDANCE_RULING.md)
+(D-019). No QA is generated. **This branch must not be merged into `main`
+before the blind reader has run**: the blind reader must not see these outputs.
+
+## 1. Milestone ID and title
+
+**M4-WP2 --- semantic inspection of the four frozen relevance-guided
+candidates (M4-WP2r1: Phase 1, reader 1; plus D-019 bookkeeping).** M4
+(literature). **M1 remains open** (D-014).
+
+## 2. Objective
+
+Read exactly `LIT-000166`, `LIT-000519`, `LIT-001501`, `LIT-001536` under the
+WP1 rubric unchanged; record claims with exact spans before looking at any
+retrieval hit location; then classify every hit as substantive or incidental;
+and carry out the ruling's bookkeeping (D-019, evidence tiers, C-2 revision,
+report field 14s, state, knowledge list).
+
+**Excluded, and not done:** the blind second reading; adjudication; any
+compatibility run (no claim has been compared with any prototype); any new
+surface term or synonym; any change to the frozen candidates or retrieval
+artifacts; QA.
+
+## 3. Repository commit SHA
+
+| | |
+| --- | --- |
+| Branch | `work/m4-wp2-read`, from `main` at **`e7da7cc`** |
+| Phase A --- D-019 bookkeeping, evidence tiers, C-2 revision | the first commit on the branch |
+| Phases B--D --- reading, hit classification, documents, this report, state | the second commit; its SHA travels with the hand-back |
+| Remote | **not pushed, not merged** |
+
+## 4. Data version and checksums
+
+| Object | SHA-256 |
+| --- | --- |
+| `LIT-000166` = `14300.json` | `d63010c65b1955f330d76d9bf6c51e4114248a3e261af1b5160d40095a5fb594` |
+| `LIT-000519` = `221115000.json` | `ea74ebe3a9f45917c4c5dce172a912f3951e638201e66c0e1cec87b963827f18` |
+| `LIT-001501` = `270320300.json` | `d6ffb5e77697c932a4983dbb74a7d63cb4fccec955f0e12be51a63b2a2269c4b` |
+| `LIT-001536` = `272852900.json` | `18b1fe556b697e2a97c609744268f89d88949401e1c905f1f91233362bd28ab3` |
+| `artifacts/literature/wp2_candidates.json` (frozen, **unchanged**) | `e155e70e338ffb67f8c881a8a3fdb794e28c0f048c43afc10b0a723135ec8d9c` |
+| Corpus manifest (`LITCORPUS-00`) | `3281aa724f9fd8e01975b8031861d7b2f30179f3d1ef1f9e3bf369006dd5f04a` |
+| `data/metadata/concept_map.yaml` (**unchanged**) | `6ec6b081658e82b5fba4171bcd3135f69ce71710a7a515f32cac83404ebd3664` |
+
+Each candidate file was verified against the manifest before decoding (fail
+closed), at reading and at every build. Output hashes are in the run records
+(`build_wp2_claims`, `wp2_hit_classification`). `FullData.csv` was not read.
+
+## 5. Environment and execution location
+
+conda environment `climrr`, Python 3.11.16, location `local`; D-007 pins
+matched. Corpus read from `literature_corpus_root` in the untracked config.
+Sophia not used.
+
+## 6. Work completed
+
+**Phase A (bookkeeping).** D-019 in `DECISION_LOG.md`; the ruling tracked as
+placed and added to `KNOWLEDGE_FILES`; field 14 of the M4-WP1b and M4-WP2
+retrieval reports records the GUIDANCE outcome. **Evidence tiers**:
+`climrr.wp1b.evidence_tier`; the WP1 adjudicated records regenerated with
+`evidence_tier` (A 1, B 18, C 10) --- a test proves nothing else changed since
+`e7da7cc`; documented in `docs/BRIDGE_ELIGIBILITY.md` §3. **Claim-type ties**:
+`compare_time` returns `not_evaluable` (`claim_type_unresolved_tie`) instead of
+applying T-2 to an `unresolved_tie`. **C-2 revised** (`compat.compare_concept`,
+`compat.family_term_hits`): boundary-aware occurrence of an approved
+family term inside the concept value, using `climrr.conceptmap.find_term`
+(tested to be the function the retrieval scan calls), recording family,
+surface term, `[start, end)`, entry and decision id. Required cases tested:
+`"heat index trends"` → family match; `"urban heat island"`, `"wildfire smoke
+exposure"` → `not_evaluable`; `"FWIs"` → no match.
+
+**Phase B (reading).** Each candidate verified and read completely. The
+reading is data in `scripts/wp2_extractions.py`; `scripts/build_wp2_claims.py`
+runs it through **the WP1 builder unchanged** (`build_wp1_claims.build_item`,
+`verify_record`) --- exact-search spans, re-slicing, rubric checks --- and adds
+`evidence_tier: C`. **The hit list was not opened until all four records were
+built.**
+
+**Phase C (hits).** `scripts/wp2_hit_classification.py`: every one of the 61
+frozen hits re-sliced from source and classified with a reason; overlap with
+promoted claims **computed** from spans.
+
+**Phase D.** `docs/LITERATURE_WP2_READING.md` (generated by
+`scripts/render_wp2_reading.py`), this report, `PROJECT_STATE.md`.
+
+Checks so far: `pytest` **753 passed** (`climrr` env); every span (63) and
+every hit (61) re-slices from the verified source (tests ran, not skipped);
+secrets/paths scan 0 hits at each commit.
+
+## 7. Deliverables and exact file paths
+
+**New:** `scripts/wp2_extractions.py`, `scripts/build_wp2_claims.py`,
+`scripts/wp2_hit_classification.py`, `scripts/render_wp2_reading.py`,
+`artifacts/literature/wp2_claims/LIT-000166.json`, `LIT-000519.json`,
+`LIT-001501.json`, `LIT-001536.json`, `wp2_claims_summary.json`,
+`artifacts/literature/wp2_hit_classification.json`,
+`docs/LITERATURE_WP2_READING.md`,
+`docs/M4_WP1B_WP2_CANDIDATE_READING_GUIDANCE_RULING.md` (tracked as placed),
+`tests/test_wp2_claims.py`, this report, run records `reports/runs/20261008T2256*`
+to `2300*`.
+
+**Changed:** `src/climrr/compat.py`, `src/climrr/wp1b.py`,
+`scripts/wp1b_adjudicate.py`, `artifacts/literature/wp1_claims_adjudicated/`
+(`evidence_tier` added), `docs/LITERATURE_WP1B_ADJUDICATION.md` (tier line),
+`docs/BRIDGE_ELIGIBILITY.md`, `docs/DECISION_LOG.md`, `docs/PROJECT_STATE.md`,
+`reports/milestones/M4_WP1B_REPORT.md` and `M4_WP2_RETRIEVAL_REPORT.md` (field
+14), `scripts/stage_knowledge.py`, `tests/test_conceptmap.py`,
+`tests/test_wp1b.py`.
+
+## 8. Methods and rules that affect scientific meaning
+
+1. **The WP1 rubric, unchanged** (D-016, D-017): scope rule; claims 0--5;
+   six dimensions each `explicit` / `inferred` (with support span) /
+   `unknown`; `scenario` is a climate/emissions scenario only; experimental
+   treatments in `experimental_condition`; exact-search code-point spans on the
+   unnormalized string.
+2. **Selection under the cap**: the paper's own findings first, then
+   background framing the hazard the paper examines. Passages not promoted are
+   kept with reasons (17).
+3. **No dimension was filled from a hit.** Geography and concept values come
+   from the claim's own span or a quoted support span.
+4. **Hit classes** (Phase C): `substantive` --- the passage states something
+   about the concept or place and the paper treats it (studies, analyses, or
+   reviews it beyond a list entry); `incidental` --- surname, citation or
+   reference entry, instrument-network name, list entry, passing mention, or a
+   different referent under the same letters.
+5. **Evidence tiers** (D-019) and **revised C-2** (field 6). C-2 now uses the
+   frozen matcher's exact internal whitespace: a double space no longer
+   matches, as it did under whole-field equality (field 11).
+
+## 9. Results with compact tables or examples
+
+| Item | Paper (as read) | Scope | Terminal | Claims | Hits | Substantive | Incidental |
+| --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| `LIT-000166` | SPITFIRE: global process-based fire regime model | in_scope_hazard | claims_extracted | 5 | 2 | 0 | 2 |
+| `LIT-000519` | Daily Fire Hazard Index, Sardinia | in_scope_hazard | claims_extracted | 5 | 14 | 8 | 6 |
+| `LIT-001501` | 2017-18 precipitation whiplash and wildfires, Southern Great Plains | in_scope_hazard | claims_extracted | 5 | 33 | 8 | 25 |
+| `LIT-001536` | Summer heat exposure at US prisons | in_scope_hazard | claims_extracted | 5 | 12 | 10 | 2 |
+| **Total** | | | | **20** | **61** | **26** | **35** |
+
+**What the hits turned out to be:**
+
+- **`Stephens` (`LIT-000166`) is an author surname** ("Stephens and Finney,
+  2002") --- the paper's only place hit. Its one concept hit is the Fire
+  Weather Index named in a list of indices the model does not use. **Both hits
+  incidental.**
+- **`California` is never an affiliation** in these four. In `LIT-000519` it is
+  a passing mention of where the method's predecessor was validated; in
+  `LIT-001501` it is always another region studied by others or a reference
+  entry; in `LIT-001536` it is a study state in 8 of 9 hits (one is a citation
+  author, "State of California, 2021").
+- **All 11 `FWI` hits in `LIT-001501` are the Oklahoma Mesonet *fractional water
+  index* (soil moisture), not the Fire Weather Index.** The paper qualified
+  through letters that name something else.
+- **`LIT-000519` is the only item whose concept hits are substantive** (8 of
+  13): its introduction reviews the Fire Weather Index System; its own
+  analysis concerns a different index (DFHI).
+- `heat index` (`LIT-001536`): a single cited aside on why the paper uses air
+  temperature; incidental.
+- 3 hits fall inside a promoted claim's evidence: `FWI` in `LIT-000519-C5`,
+  `Oklahoma` in `LIT-001501-C4`, `California` in `LIT-001536-C1`.
+
+**Screens over the 20 claims** (deterministic, `render_wp2_reading.py`):
+
+| Screen | Claims |
+| --- | --- |
+| Geography names a US place | **11** --- 5 `explicit` (`LIT-000166-C4` west coast of the USA; `LIT-001501-C4` Dewey County, NW Oklahoma; `LIT-001501-C5` the SGP; `LIT-001536-C1` California, Arizona, Nevada; `LIT-001536-C2` 44 states and DC), 6 `inferred` |
+| …of which name a prototype place term | `Oklahoma`: `LIT-001501-C2` (inferred), `-C4` (explicit); `California`: `LIT-001536-C1` (explicit); `Stephens`: none |
+| Approved pilot family term in the concept field (revised C-2 search) | **1** --- `LIT-000519-C5`, "FWI" (Fire Weather Index, a cited background claim with geography `unknown`) |
+| Named climate/emissions scenario | **0** |
+
+No compatibility judgement has been made; whether any of these pairs with a
+prototype is Phase 4's question.
+
+## 10. Validation performed
+
+**PENDING --- Phases 2--4.** Phase 1 checks are listed at the end of field 6;
+the full validation table (blind-reading freeze, adjudication reproduction,
+compatibility matrix) is completed after Phase 4.
+
+## 11. Failures, rejected cases, and known limitations
+
+**PENDING --- Phases 2--4.** Recorded now so they are not lost: reader 1 is
+prototype-exposed and knew the retrieval terms and hit counts (not locations)
+before reading; one build failed once on a stored combining accent
+("Hernández" as `a` + U+0301), fixed by quoting the stored code points; the
+C-2 whitespace behaviour change (field 8.5).
+
+## 12. Deviations from the approved plan
+
+**PENDING --- Phases 2--4.** Phase 1 deviations so far: Phase B (reading) was
+done before the Phase A code changes, so that nothing in the bookkeeping could
+reach the reading; C-2 no longer collapses internal whitespace (field 8.5).
+
+## 13. Open decisions and mentor questions
+
+**PENDING --- Phases 2--4.** Carried: the mentor question in D-019
+(family-level bridge with disclosed mismatch vs exact metric and scenario); the
+P-CELL-1/P-COUNTY-1 baseline-citation cleanup (D-019).
+
+## 14. Proposed gate status
+
+**PENDING --- Phases 2--4.** Phase 1 against D-019 criteria: 1 (exactly the
+four read), 2 (none substituted), 3 (hits not treated as claim truth), 4 (every
+promoted claim has exact evidence), 5 (hits classified after reading), 12
+(every claim carries a tier), 13--17 (C-2 approved terms only, boundary-aware
+inside the concept field, matched term and span recorded, no synonym
+expansion, metric distinct from family) --- evidence in fields 6, 8 and 9;
+proposed status after Phase 4.
+
+## 15. Proposed next bounded objective
+
+**PENDING --- after Phase 2.** Next: the blind second reading of the four, in a
+fresh session given only the four files, the rubric and the location
+convention, frozen before comparison.
