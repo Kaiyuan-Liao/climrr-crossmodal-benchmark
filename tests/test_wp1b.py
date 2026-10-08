@@ -217,7 +217,7 @@ def test_phase_counts():
 # --- the adjudicated set ---------------------------------------------------------------
 
 
-ADDED_KEYS = {"first_pass_claim_validation_status", "adjudication", "claim_validation_status"}
+ADDED_KEYS = {"first_pass_claim_validation_status", "adjudication", "claim_validation_status", "evidence_tier"}
 
 
 def test_every_first_pass_claim_keeps_its_id_and_content_and_gains_a_status():
@@ -282,3 +282,39 @@ def test_the_adjudication_document_is_in_the_knowledge_list():
     sk = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(sk)
     assert "docs/LITERATURE_WP1B_ADJUDICATION.md" in sk.KNOWLEDGE_FILES
+
+
+# --- D-019 evidence tiers -------------------------------------------------------------
+
+#: The adjudicated set as reviewed (merged at e7da7cc). D-019 adds `evidence_tier`
+#: to every claim and tier counts to the summary; nothing else may change.
+REVIEWED_ADJUDICATION_COMMIT = "e7da7cc"
+
+
+def test_every_adjudicated_claim_carries_the_tier_its_status_and_scope_imply():
+    for r in _adjudicated().values():
+        contested = r["scope_adjudication"]["adopted"] == w.CONTESTED
+        for c in r["claims"]:
+            assert c["evidence_tier"] == w.evidence_tier(c["claim_validation_status"], contested)
+    assert _load(w.ADJ_SUMMARY_PATH)["evidence_tiers"]["counts"] == {"A": 1, "B": 18, "C": 10}
+
+
+def test_scope_contested_and_single_reader_claims_are_tier_c():
+    adj = _adjudicated()
+    assert all(c["evidence_tier"] == "C" for c in adj["LIT-000571"]["claims"])
+    for r in adj.values():
+        for c in r["claims"]:
+            if c["claim_validation_status"] == "single_reader_provisional":
+                assert c["evidence_tier"] == "C"
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="git is required")
+def test_d019_only_added_evidence_tier_to_the_reviewed_adjudicated_records():
+    for p in sorted(w.ADJ_DIR.glob("LIT-*.json")):
+        rel = str(p.relative_to(REPO_ROOT))
+        old = json.loads(subprocess.run(["git", "show", f"{REVIEWED_ADJUDICATION_COMMIT}:{rel}"], cwd=REPO_ROOT,
+                                        capture_output=True, check=True).stdout)
+        new = _load(p)
+        for c in new["claims"]:
+            c.pop("evidence_tier")
+        assert new == old, rel

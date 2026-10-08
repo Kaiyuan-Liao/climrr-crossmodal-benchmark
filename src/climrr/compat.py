@@ -198,12 +198,17 @@ RULES = {
 FAMILY_LEVEL = "compatible_at_family_level"
 ALL_STATUSES = STATUSES + (FAMILY_LEVEL,)
 D018_RULES = {
-    "C-2": ("concept (D-018): when C-1 does not match, the claim's normalized concept is exactly a member of "
-            "the accepted surface terms of an `approved_lexical` family in data/metadata/concept_map.yaml, and "
-            "that family is the prototype concept's family -> compatible_at_family_level (not `compatible`: "
-            "a family match is not metric equality); a family term of another family -> not_evaluable"),
+    "C-2": ("concept (D-018, revised by D-019): when C-1 does not match, search the claim's tagged concept "
+            "value with the frozen boundary-aware matcher (climrr.conceptmap.find_term, the M4-WP2 retrieval "
+            "matcher) for the accepted surface terms of the prototype concept's family, `approved_lexical` "
+            "entries of data/metadata/concept_map.yaml only. A hit -> compatible_at_family_level (not "
+            "`compatible`: a family match is not metric equality), recording the family, the surface term, "
+            "its [start, end) within the concept value and the entry's decision id. No hit for that family but "
+            "a hit for another approved family -> not_evaluable. Lexical occurrence only; no synonymy"),
 }
 ALL_RULES = {**RULES, **D018_RULES}
+#: D-019: an adjudicated claim_type left as a tie (e.g. LIT-000381-C3).
+UNRESOLVED_TIE = "unresolved_tie"
 
 _WS = re.compile(r"\s+")
 _YEAR_RANGE = re.compile(r"\b(\d{4})\s*(?:-|–|—|to)\s*(\d{4})\b")
@@ -307,16 +312,44 @@ def compare_concept(concept: dict, pv: dict, concept_map: list[dict] | None = No
     if _norm(mapped) == _norm(pv["canonical"]):
         return _judgment("concept", "compatible", "C-1", cv, pv, "identical_canonical_id")
     if concept_map is not None:
-        from climrr import conceptmap
-        family = conceptmap.approved_family_terms(concept_map).get(conceptmap.normalize_concept(cv["raw"]))
-        proto_family = conceptmap.family_of(pv["canonical"], concept_map)
-        if family is not None:
-            cv = {**cv, "family": family}
-            pv = {**pv, "family": proto_family}
-            if family == proto_family:
-                return _judgment("concept", FAMILY_LEVEL, "C-2", cv, pv, "same_concept_family_by_approved_term")
-            return _judgment("concept", "not_evaluable", "C-2", cv, pv, "approved_term_of_another_family")
+        hits = family_term_hits(cv["raw"], concept_map)
+        proto_family = conceptmap_family_of(pv["canonical"], concept_map)
+        own = [h for h in hits if h["family"] == proto_family]
+        if own:
+            first = own[0]
+            cv = {**cv, "family_match": first, "all_family_term_hits": hits}
+            return _judgment("concept", FAMILY_LEVEL, "C-2", cv, {**pv, "family": proto_family},
+                             "approved_family_term_occurs_in_concept_value")
+        if hits:
+            cv = {**cv, "all_family_term_hits": hits}
+            return _judgment("concept", "not_evaluable", "C-2", cv, {**pv, "family": proto_family},
+                             "approved_term_of_another_family")
     return _judgment("concept", "not_evaluable", "C-1", cv, pv, "no_approved_mapping")
+
+
+def conceptmap_family_of(canonical_id: str | None, concept_map: list[dict]) -> str | None:
+    from climrr import conceptmap
+    return conceptmap.family_of(canonical_id, concept_map) if canonical_id else None
+
+
+def family_term_hits(concept_value: str, concept_map: list[dict]) -> list[dict]:
+    """Every boundary-aware occurrence of an approved family surface term in a concept value (C-2, D-019).
+
+    Uses `climrr.conceptmap.find_term` --- the matcher the M4-WP2 retrieval scan
+    froze --- unchanged. Ordered by position, then term. Offsets are code points
+    within `concept_value`.
+    """
+    from climrr import conceptmap
+    out = []
+    for e in concept_map:
+        if e["level"] != "family" or e["status"] != "approved_lexical":
+            continue
+        for t in e["accepted_surface_terms"]:
+            for s, end in conceptmap.find_term(t, concept_value):
+                out.append({"family": e["canonical_id"], "surface_term": t, "char_start": s, "char_end": end,
+                            "matched_text": concept_value[s:end], "concept_map_decision_id": e["decision_id"],
+                            "concept_map_entry": e["canonical_id"]})
+    return sorted(out, key=lambda h: (h["char_start"], h["surface_term"]))
 
 
 def compare_geography(geography: dict, pv: dict, geo_list: dict) -> dict:
@@ -357,6 +390,8 @@ def compare_time(temporal: dict, claim_type: str, pv: dict) -> dict:
         return _judgment("time", "not_evaluable", "T-3", cv, pv, "prototype_window_has_no_year_range")
     if rng[0] <= fut[1] and fut[0] <= rng[1]:
         return _judgment("time", "compatible", "T-1", cv, pv, "overlaps_prototype_future_window")
+    if claim_type == UNRESOLVED_TIE:  # D-019: a rule that depends on claim type cannot use an unresolved tie
+        return _judgment("time", "not_evaluable", "T-3", cv, pv, "claim_type_unresolved_tie")
     if claim_type == "finding" and rng[1] < T2_CUTOFF_YEAR and fut[0] >= T2_CUTOFF_YEAR:
         return _judgment("time", "incompatible", "T-2", cv, pv, "historical_finding_ends_before_2045")
     reason = "claim_type_not_finding" if claim_type != "finding" else "range_not_entirely_before_2045"
