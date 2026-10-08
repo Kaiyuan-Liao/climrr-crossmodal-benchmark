@@ -49,6 +49,20 @@ def test_a_changed_prototype_record_fails_the_freeze():
         compat.verify_inputs(tampered)
 
 
+#: The M5-WP1 artifacts as reviewed (D-018). They are frozen: a later package
+#: versions a prototype or adds a rule, it never rewrites these bytes.
+M5WP1_FROZEN_SHA256 = {
+    "m5wp1_inputs.json": "bc22b4fa9344283fd31e9b7ac1f70fa53276d8dd171d6749933a4cf0b6a628cc",
+    "m5wp1_matrix.json": "526ac573f58a027c53b99e90a88fc7b3509c550afe205a9d6f15f74072d4cd02",
+}
+
+
+@pytest.mark.parametrize("name", sorted(M5WP1_FROZEN_SHA256))
+def test_the_reviewed_m5wp1_artifacts_are_byte_identical(name):
+    from climrr.checksums import sha256_file
+    assert sha256_file(compat.BRIDGES / name) == M5WP1_FROZEN_SHA256[name]
+
+
 def test_record_hash_ignores_key_order_but_not_content():
     assert compat.record_sha256({"a": 1, "b": "x"}) == compat.record_sha256({"b": "x", "a": 1})
     assert compat.record_sha256({"a": 1}) != compat.record_sha256({"a": 2})

@@ -12,6 +12,14 @@ Last updated: 2026-10-08   Next meeting: not yet scheduled; the answer sheet is 
 
 ## What I need from this meeting
 
+> ### **First question for the next one-on-one**
+>
+> **"Does the intended bridge require literature to match the exact ClimRR metric/scenario, or is support at the broader hazard/concept level sufficient when unmatched dimensions are explicitly disclosed?"**
+>
+> **Why it matters:** it decides whether a paper about heat-index trends can support a record built on *days above 105°F* — the same hazard family, but not the same measure, and usually without the record's emissions scenario.
+>
+> **What it unblocks:** the final set of relation categories for connecting a paper to a table record, and the design of the questions the benchmark will eventually ask.
+
 *Unchanged since 2026-09-13 and still outstanding: the sheet was brought to the one-on-ones of 2026-09-17 and 2026-09-24 and not reviewed at either (R-003).*
 
 > ### **Please review the three example records in [`MENTOR_EXAMPLES.md`](MENTOR_EXAMPLES.md).**

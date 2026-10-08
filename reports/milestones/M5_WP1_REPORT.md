@@ -32,8 +32,8 @@ corpus, replacing the WP1 sample, QA.
 | Phase A --- inputs frozen | `000e71e`; no comparison code exists at that commit |
 | Phases B--D --- rules, matrix, tests | `703083b` |
 | Clean-head evidence runs | both scripts re-run at `703083b` on a clean tree (`git_dirty: false`); **zero tracked files changed** --- every output reproduced byte for byte |
-| This report, `PROJECT_STATE.md`, brief status | the commit after `703083b`; its SHA travels with the hand-back |
-| Remote | **not pushed, not merged** (work-package instruction) |
+| This report, `PROJECT_STATE.md`, brief status | `c1010f0` --- **the reviewed head** |
+| Remote and merge | reviewed by GUIDANCE at **`c1010f0`** (D-018); **merged into `main` at `55decb3`**; scan fix to this report `656044c` on `main` |
 
 ## 4. Data version and checksums
 
@@ -335,6 +335,12 @@ The ruling's 22 acceptance criteria:
 22 criteria met, criterion 21 by the pending branch. The structural-zero
 observation (field 11) and the concept-mapping question (field 13) are put to
 GUIDANCE with it.
+
+**GUIDANCE: PASS WITH ACTIONS — machinery validation only** (D-018,
+`docs/M5_WP1_REVIEW_FOLLOWON_GUIDANCE_RULING.md`), on the reviewed head
+`c1010f0`. The frozen inputs and matrix stay unchanged at their original
+hashes; P-STATE-1's year windows are corrected in a new version, not in the
+M5-WP1 input.
 
 ## 15. Proposed next bounded objective
 
