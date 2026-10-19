@@ -17,8 +17,8 @@ from climrr.checksums import sha256_file
 from climrr.conceptmap import CONCEPT_MAP_PATH
 from climrr.paths import REPO_ROOT
 
-#: `data/metadata/concept_map.yaml` as committed at f586d29 (D-018) and unchanged since.
-CONCEPT_MAP_SHA256 = "6ec6b081658e82b5fba4171bcd3135f69ce71710a7a515f32cac83404ebd3664"
+#: `data/metadata/concept_map.yaml` after D-025 (additional_surface_terms); was 6ec6b081... (D-018).
+CONCEPT_MAP_SHA256 = "27f7a44deabf24c244f1222c28d17c5c43fd86b9c017d4634bf0eef00931d7b4"
 
 RULING = REPO_ROOT / "docs" / "M4_WP3_SOURCE_YIELD_GUIDANCE_RULING.md"
 FIRE_QUERY = REPO_ROOT / "artifacts" / "literature" / "litcorpus01" / "queries" / "fire_weather_v1_query.txt"

@@ -110,7 +110,7 @@ def test_the_real_list_exists_and_has_unique_basenames():
 def test_the_list_carries_the_m4_wp3_rulings_and_records():
     for f in ("docs/M4_WP3_CONCEPT_FIRST_GUIDANCE_RULING.md", "docs/M4_WP3_SOURCE_YIELD_GUIDANCE_RULING.md",
               "docs/LITCORPUS01_SHARD_PILOT.md", "docs/LITCORPUS02_PROVENANCE.md",
-              "reports/milestones/M4_WP3_REPORT.md"):
+              "reports/milestones/M4_WP3_REPORT.md", "docs/M4_WP3_WORKING_CORPUS_STAGE2_GUIDANCE_RULING.md"):
         assert f in sk.KNOWLEDGE_FILES
 
 

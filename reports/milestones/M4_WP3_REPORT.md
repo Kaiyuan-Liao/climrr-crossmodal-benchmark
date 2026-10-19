@@ -26,8 +26,8 @@ reading.
 | --- | --- |
 | Branch | `work/m4-wp3`, from `main` at **`ccd2d24`** (Phase 0: clean tree apart from the untracked ruling; `git branch --no-merged main` empty) |
 | Package commit | **`85ed69a`**; clean-tree freeze run record **`968e7ba`** |
-| Follow-up --- LITCORPUS-01 R-FWI-1 result recorded | the commit after `968e7ba`; its SHA travels with the hand-back |
-| Remote | **not pushed, not merged** |
+| Follow-up --- LITCORPUS-01 R-FWI-1 result recorded | **`6b2b5a6`** --- **the reviewed head** (D-025) |
+| Remote | **pushed: `origin/work/m4-wp3` at `6b2b5a6`**; not merged. Closeout bookkeeping (D-025) and the M4-WP4 sample freeze follow on the same branch |
 
 Decision numbers: D-A → **D-020**, D-B → **D-021**, D-C → **D-022**, D-D →
 **D-023**, D-E → **D-024** (the log's last entry was D-019).
@@ -285,16 +285,29 @@ of the literature, and no representativeness is inferred.
 Kaiyuan's proposal of a dictionary-grounded concept survey (pending GUIDANCE).
 **For JL:** Q22.
 
-## 14. Proposed gate status
+## 14. Gate status
 
-**Ready for GUIDANCE review.** Proposed: **PASS WITH ACTIONS** --- actions:
-decisions 1--5 above (the LITCORPUS-01 R-FWI-1 run is done). Not proposed for merge
-by the EXECUTOR.
+**GUIDANCE: PASS WITH ACTIONS (D-025)**, on reviewed head `6b2b5a6`
+(`docs/M4_WP3_WORKING_CORPUS_STAGE2_GUIDANCE_RULING.md`). The five questions of
+field 13: (1) LITCORPUS-02 is the working candidate corpus and LITCORPUS-01
+sectionization is closed as not required; (2) the matcher difference is accepted
+as a disclosed limitation --- the yield change is not a formal source-effect
+estimate; (3) the five topical terms are governed in `concept_map.yaml`
+(four `approved_lexical`, `extended heat index` `approved_family_term`);
+(4) R-FWI-1 accepted as implemented; (5) exact-byte duplicates are suppressed
+for sampling only, identities kept. Q22 stays open. Global `.gitattributes`
+cleanup deferred to housekeeping. *Proposed before the ruling: PASS WITH
+ACTIONS.*
 
-## 15. Proposed next bounded objective
+## 15. Next bounded objective --- both authorized (D-025)
 
-GUIDANCE review of this packet. Then, if approved, a **two-reader reading plan on
-a predeclared sample of the place candidates** (100 fire, 143 heat), sample rule
-and size frozen before any file is opened. Separately, and pending GUIDANCE:
-Kaiyuan's proposal for a **dictionary-grounded concept survey** across the whole
-data dictionary. QA remains unauthorized.
+- **Track A --- M4-WP4:** a 20-paper two-reader reading pilot on the place
+  candidates, 10 fire + 10 heat by the rank rule, sample frozen before any file is
+  opened (`artifacts/literature/wp4_sample.json`); reader 1 → blind reader →
+  freeze → comparison → adjudication → evidence tiers → compatibility against
+  P-CELL-1, P-COUNTY-1, P-STATE-1 v2.
+- **Track B --- Stage 2a--2c:** dictionary-grounded concept inventory, candidate
+  surface forms (`candidate_surface_form`, inert), and a diagnostic yield survey
+  over the frozen LITCORPUS-02 index.
+
+QA remains unauthorized.

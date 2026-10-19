@@ -1,5 +1,8 @@
 # LITCORPUS-02 --- provenance of the concept-first 705k arm
 
+**Status: working concept-first candidate corpus (D-025)** --- for candidate
+generation, not a representative sample of the literature. Q22 stays open.
+
 **`LITCORPUS-02-conceptfirst-705k-v1`** --- frozen 2026-10-19 (D-024): the union
 of the two admitted production arms, produced by the **frozen v1 queries** and
 **R-FWI-1 v1** over the D-023 source. **1,308 items.** **No paper was read,

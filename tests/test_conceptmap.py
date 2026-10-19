@@ -118,11 +118,11 @@ def test_revised_c2_matches_a_family_term_occurring_inside_the_concept_field(con
 
 @pytest.mark.parametrize("concept,pid", [("urban heat island", "P-STATE-1"), ("wildfire smoke exposure", "P-CELL-1"),
                                          ("wildfire smoke exposure", "P-COUNTY-1"), ("days above 105F", "P-STATE-1"),
-                                         ("drought", "P-CELL-1"), ("heat-index trends", "P-STATE-1"),
+                                         ("drought", "P-CELL-1"), ("heat indexes", "P-STATE-1"),
                                          ("FWIs over time", "P-CELL-1"), ("FWI2", "P-COUNTY-1"),
                                          ("fire  weather index", "P-COUNTY-1")])
 def test_revised_c2_does_not_match_without_an_approved_term_at_a_boundary(concept, pid):
-    """No synonymy (UHI, smoke, drought), and the boundary rule holds ('FWIs', 'FWI2', 'heat-index'; internal
+    """No synonymy (UHI, smoke, drought), and the boundary rule holds ('FWIs', 'FWI2', 'heat indexes'; internal
     whitespace is matched exactly, so a double space no longer matches as it did under exact-membership C-2)."""
     j = compat.evaluate_pair(_claim(concept), PROTOS[pid], GEO, ENTRIES)["judgments"]["concept"]
     assert j["status"] == "not_evaluable"
@@ -137,7 +137,8 @@ def test_revised_c2_uses_the_frozen_retrieval_matcher(monkeypatch):
     real = conceptmap.find_term
     monkeypatch.setattr(conceptmap, "find_term", lambda t, s: calls.append(t) or real(t, s))
     compat.family_term_hits("heat index trends", ENTRIES)
-    assert set(calls) == {"fire weather index", "FWI", "heat index"}
+    assert set(calls) == {"fire weather index", "FWI", "heat index", "fire-weather index",
+                          "canadian forest fire weather index", "canadian fwi", "heat-index", "extended heat index"}
 
 
 def test_revised_c2_family_match_never_reaches_compatible_or_supporting_direction():
@@ -164,3 +165,69 @@ def test_without_a_concept_map_the_m5wp1_rules_are_unchanged():
     j = compat.evaluate_pair(_claim("heat index"), PROTOS["P-STATE-1"], GEO)["judgments"]["concept"]
     assert (j["status"], j["rule_id"]) == ("not_evaluable", "C-1")
     assert "C-2" not in compat.RULES and compat.FAMILY_LEVEL not in compat.STATUSES
+
+
+# --- D-025: the five governed query terms ----------------------------------------
+
+D025_LEXICAL = {"fire-weather index": "fire_weather_index", "canadian forest fire weather index": "fire_weather_index",
+                "canadian fwi": "fire_weather_index", "heat-index": "heat_index"}
+
+
+def _additional():
+    return {a["term"]: (e["canonical_id"], a) for e in ENTRIES for a in e.get("additional_surface_terms", [])}
+
+
+def test_the_five_terms_carry_guidance_governance():
+    add = _additional()
+    assert set(add) == set(D025_LEXICAL) | {"extended heat index"}
+    for t, (cid, a) in add.items():
+        assert (a["source_type"], a["decision_id"], a["approved_under"], a["approved_by"]) == ("guidance", "D-022", "D-025", "GUIDANCE")
+    for t, fam in D025_LEXICAL.items():
+        assert add[t][0] == fam and add[t][1]["status"] == "approved_lexical"
+    cid, ehi = add["extended heat index"]
+    assert cid == "heat_index" and ehi["status"] == "approved_family_term" and ehi["usage"] == ["collection", "retrieval"]
+    assert "not a synonym of heat index" in ehi["note"] and "heatindex_days_above_105F" in ehi["note"]
+    # dictionary-backed terms are unchanged
+    assert {e["canonical_id"]: e["accepted_surface_terms"] for e in ENTRIES if e["level"] == "family"} == \
+        {"fire_weather_index": ["fire weather index", "FWI"], "heat_index": ["heat index"]}
+
+
+@pytest.mark.parametrize("concept,pid,term", [("fire-weather index trends", "P-CELL-1", "fire-weather index"),
+                                              ("Canadian FWI projections", "P-COUNTY-1", "canadian fwi"),
+                                              ("Canadian Forest Fire Weather Index", "P-CELL-1", "canadian forest fire weather index"),
+                                              ("heat-index trends", "P-STATE-1", "heat-index")])
+def test_d025_lexical_forms_give_a_c2_family_match(concept, pid, term):
+    j = compat.evaluate_pair(_claim(concept), PROTOS[pid], GEO, ENTRIES)["judgments"]["concept"]
+    assert j["status"] == compat.FAMILY_LEVEL and j["rule_id"] == "C-2"
+    assert j["claim_value"]["family_match"]["surface_term"] == term
+
+
+@pytest.mark.parametrize("concept", ["extended heat index", "extended heat index trends", "Extended Heat Index"])
+def test_extended_heat_index_is_not_a_c2_match(concept):
+    """approved_family_term: collection / retrieval only; it masks the 'heat index' it contains."""
+    j = compat.evaluate_pair(_claim(concept), PROTOS["P-STATE-1"], GEO, ENTRIES)["judgments"]["concept"]
+    assert j["status"] == "not_evaluable"
+    assert "family_match" not in j["claim_value"]
+    assert compat.family_term_hits(concept, ENTRIES) == []
+
+
+def test_the_mask_only_covers_its_own_span():
+    hits = compat.family_term_hits("extended heat index and heat index", ENTRIES)
+    assert [(h["surface_term"], h["char_start"]) for h in hits] == [("heat index", 24)]
+
+
+@pytest.mark.parametrize("term", [*D025_LEXICAL, "extended heat index"])
+@pytest.mark.parametrize("pid", ["P-CELL-1", "P-COUNTY-1", "P-STATE-1"])
+def test_no_d025_term_ever_matches_at_metric_level(term, pid):
+    j = compat.evaluate_pair(_claim(term), PROTOS[pid], GEO, ENTRIES)["judgments"]["concept"]
+    assert j["status"] != "compatible"            # C-1 (metric level) never fires
+    assert not (j["rule_id"] == "C-1" and j["reason"] == "identical_canonical_id")
+
+
+def test_approved_family_term_cannot_be_declared_for_c2():
+    data = copy.deepcopy(RAW)
+    heat = next(e for e in data["entries"] if e["canonical_id"] == "heat_index")
+    ehi = next(a for a in heat["additional_surface_terms"] if a["term"] == "extended heat index")
+    ehi["usage"].append("c2_family_match")
+    with pytest.raises(conceptmap.ConceptMapError, match="only approved_lexical"):
+        conceptmap.validate(data, DICT_LINES)

@@ -19,8 +19,20 @@ def _frozen() -> dict:
     return json.loads(m5wp2.INPUTS_PATH.read_text(encoding="utf-8"))
 
 
+#: Inputs D-025 changed after the M5-WP2 freeze; recorded as frozen, checked against the pre-D-025 blobs.
+D025_CHANGED = ("concept_map_sha256", "compat_rule_version")
+
+
 def test_the_frozen_inputs_still_match():
-    m5wp2.verify_inputs()
+    from _frozen_state import committed_sha256
+    frozen, current = _frozen(), m5wp2.build_inputs()
+    assert {k: v for k, v in current.items() if k not in D025_CHANGED} == \
+        {k: v for k, v in frozen.items() if k not in D025_CHANGED}
+    assert frozen["concept_map_sha256"] == committed_sha256("data/metadata/concept_map.yaml")
+    assert frozen["compat_rule_version"]["compat_py_sha256"] == committed_sha256("src/climrr/compat.py")
+    # the rule records themselves did not change; only C-2's term set (D-025)
+    for k in ("rules_record_sha256", "relation_rules_record_sha256"):
+        assert frozen["compat_rule_version"][k] == current["compat_rule_version"][k]
 
 
 def test_the_freeze_uses_p_state_1_v2_and_leaves_m5wp1_untouched():

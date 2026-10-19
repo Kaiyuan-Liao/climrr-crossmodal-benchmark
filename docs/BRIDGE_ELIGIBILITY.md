@@ -122,8 +122,8 @@ hits in `LIT-001501`). So:
 - **Both locations recorded**: the first bare-term hit and the first
   disambiguator hit, each as section key, section index and `[start, end)` on
   the unnormalized string.
-- **`FWI` stays in `concept_map.yaml`**, unchanged (hash pinned by test). The
-  rule governs retrieval eligibility only; rule C-2 above still treats `FWI` as
+- **`FWI` stays in `concept_map.yaml`** as a dictionary-backed surface term.
+  The rule governs retrieval eligibility only; rule C-2 above still treats `FWI` as
   a `fire_weather_index` surface term inside a claim's concept field.
 - **Applies to** LITCORPUS-01, LITCORPUS-02, the legacy corpus if it is
   re-queried, and every future source (ruling action 10).
@@ -137,3 +137,18 @@ matcher), and a non-ASCII letter touching the term, e.g. `éFWI` (a boundary onl
 for DuckDB, whose `\b` is ASCII). Neither difference changes the synthetic-test
 results (`tests/test_litcollect_tools.py`); its effect on the 705k arms is
 unmeasured, because the texts are on Eagle.
+
+## 6. Four layers, kept apart (D-025)
+
+| Layer | Vocabulary | Decides | Code |
+| --- | --- | --- | --- |
+| **Collection** | the frozen query files: topical group (concept-map family terms, incl. D-025 `additional_surface_terms` of either status) AND a context clause (precision only, never an alias) | which documents a source run returns | `scripts/litcollect/run_query.py` |
+| **Retrieval --- R-FWI-1** | bare `fwi` + the six disambiguators | whether a returned document is fire-weather eligible | `climrr.retrieval` |
+| **C-2 family-level claim matching** | dictionary-backed `accepted_surface_terms` + `approved_lexical` additional forms (`fire-weather index`, `canadian forest fire weather index`, `canadian fwi`, `heat-index`); **not** `approved_family_term` forms --- an occurrence of `extended heat index` masks the `heat index` inside it | `compatible_at_family_level` for a claim's concept field | `climrr.compat.family_term_hits`, `climrr.conceptmap.c2_terms` |
+| **Metric-level compatibility (C-1)** | metric canonical ids only; no surface term yet (`fwi_seasonal_value`, `heatindex_days_above_105F` are `proposed`) | `compatible` | `climrr.compat.compare_concept` |
+
+**None of the first three establishes metric compatibility.** A collection hit,
+an R-FWI-1 admission and a C-2 family match are each lexical; only C-1 gives
+`compatible`, and no D-025 term reaches it (tested). `extended heat index` is
+heat-index-family collection and retrieval vocabulary, not a synonym of heat
+index and not the ClimRR threshold metric `heatindex_days_above_105F`.

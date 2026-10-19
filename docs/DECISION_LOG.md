@@ -1411,3 +1411,59 @@ code emits, and the next GUIDANCE packet still chooses.
 - **Affected files:** this log; `artifacts/literature/litcorpus0{1,2}/`,
   `data/manifest.json`, `docs/LITCORPUS01_SHARD_PILOT.md`,
   `docs/LITCORPUS02_PROVENANCE.md`, `reports/milestones/M4_WP3_REPORT.md`.
+
+## D-025 --- M4-WP3 reviewed: PASS WITH ACTIONS; LITCORPUS-02 the working corpus; five terms governed; WP4 sample and Stage 2a--2c authorized
+
+- **Date:** 2026-10-19
+- **Status:** **decided.**
+- **Owner:** **GUIDANCE**; placed by Kaiyuan Liao as
+  `docs/M4_WP3_WORKING_CORPUS_STAGE2_GUIDANCE_RULING.md`. Reviewed head
+  **`6b2b5a6`** (pushed, `origin/work/m4-wp3`).
+- **What the ruling decides.**
+  1. **M4-WP3: PASS WITH ACTIONS.**
+  2. **`LITCORPUS-02-conceptfirst-705k-v1` is the working concept-first
+     candidate corpus** --- for candidate generation, **not** a representative
+     sample of the literature (448 / 861 / 1,308).
+  3. **LITCORPUS-01 stays the provenance/yield pilot; its sectionization is
+     closed as not required.**
+  4. **Q22** (the upstream 705k → 186,346 filter) **stays open**; not a blocker
+     for candidate use.
+  5. **Five query terms governed** (`source_type: guidance`, `decision_id:
+     D-022`, approval under D-025): `fire-weather index`, `canadian forest fire
+     weather index`, `canadian fwi` (`fire_weather_index`) and `heat-index`
+     (`heat_index`) are **`approved_lexical`** --- collection, retrieval and C-2;
+     **`extended heat index`** is **`approved_family_term`** for heat-index
+     collection and retrieval only --- not a synonym of heat index, not the
+     threshold metric `heatindex_days_above_105F`.
+  6. **R-FWI-1 accepted as implemented** (six disambiguators).
+  7. **Matcher difference accepted as a disclosed limitation**: the yield change
+     is **not** a formal source-effect estimate.
+  8. **A 20-paper two-reader pilot (M4-WP4) is authorized** with the rank-based
+     10 + 10 rule: ranks 10, 20, …, 100 (fire) and 14, 28, …, 140 (heat) after
+     sorting by `LIT2` id and suppressing later exact-byte duplicates for
+     sampling only; advance on a missing rank; fire before heat on overlap.
+     Frozen before reading; reader 1 → blind reader → freeze → comparison →
+     adjudication → evidence tiers → compatibility.
+  9. **Stage 2a--2c authorized as diagnostics**: dictionary-described concepts
+     only; model proposals are `candidate_surface_form` and inert; literature
+     yield never selects units or assigns column meaning.
+  10. **Global `.gitattributes` cleanup deferred** to a housekeeping package.
+  11. **QA not authorized.**
+- **Implementation (M4-WP3 closeout).** `data/metadata/concept_map.yaml` gains
+  per-term `additional_surface_terms` (the dictionary-backed
+  `accepted_surface_terms` are unchanged); `climrr.conceptmap.c2_terms` feeds C-2
+  the dictionary terms plus the `approved_lexical` forms; an
+  `approved_family_term` occurrence in a claim concept masks the family-term
+  hits it contains, so "extended heat index" is never a C-2 match. Concept-map
+  SHA-256 `6ec6b081…3664` → **`27f7a44d…d7b4`**. The frozen M4-WP2 terms and
+  M5-WP2 inputs keep their recorded pre-D-025 hashes (tested against the blobs at
+  `6b2b5a6`); the M5-WP2 matrix reproduces unchanged under the new C-2 (no
+  adjudicated claim contains any of the five terms).
+- **Affected files:** this log; the ruling; `data/metadata/concept_map.yaml`,
+  `src/climrr/conceptmap.py`, `src/climrr/compat.py`, `tests/test_conceptmap.py`,
+  `tests/test_retrieval.py`, `tests/test_wp2_retrieval.py`, `tests/test_m5wp2.py`,
+  `tests/_frozen_state.py`; `docs/BRIDGE_ELIGIBILITY.md`,
+  `docs/LITCORPUS01_SHARD_PILOT.md`, `docs/LITCORPUS02_PROVENANCE.md`,
+  `reports/milestones/M4_WP3_REPORT.md`, `docs/PROJECT_STATE.md`,
+  `docs/MENTOR_BRIEF.md`; `scripts/wp4_sample.py`,
+  `artifacts/literature/wp4_sample.json`.

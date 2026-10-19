@@ -1,7 +1,8 @@
 # LITCORPUS-01 --- the concept-first shard pilot
 
 **`LITCORPUS-01-conceptfirst-v1`** --- frozen 2026-10-19 (D-022, D-024). A
-**provenance/yield pilot, not the bridge corpus**. Retained, not discarded.
+**provenance/yield pilot, not the bridge corpus** (confirmed, D-025;
+sectionization closed as not required). Retained, not discarded.
 **No paper was read, opened for content, or sampled.** Retrieval hits are
 lexical locations, not claims and not bridges.
 
@@ -180,7 +181,10 @@ package assigns project ids only to LITCORPUS-02.
 **`c686425710a5c5ad23abdd904d0ca38982933b978c04463594b3ea6469faeda8`**, recorded
 in `data/manifest.json` under `external_corpora` (`LITCORPUS-01-conceptfirst-v1`).
 
-## 8. Disclosed deviation --- sectionization deferred
+## 8. Sectionization --- **closed as not required (D-025)**
+
+GUIDANCE confirmed LITCORPUS-02 as the working corpus and closed LITCORPUS-01
+sectionization as not required. The record below is kept as written.
 
 The ruling authorizes sectionizing and flattening the 14 raw records (action 13).
 **It was not done.** The raw records are hash-pinned and stay on Eagle; GUIDANCE
