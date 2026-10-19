@@ -218,3 +218,37 @@ def test_git_never_rewrites_the_frozen_records():
     out = subprocess.run(["git", "check-attr", "text", "--", *map(str, probes)], cwd=REPO_ROOT,
                          capture_output=True, text=True, check=True).stdout
     assert out.count(": text: unset") == len(probes), out
+
+
+# --- LITCORPUS-01 R-FWI-1, applied retroactively on Polaris (M4-WP3 follow-up) --------
+
+#: `rfwi1_retroactive.json` as returned from the Polaris run at 968e7ba.
+RFWI1_RETRO_SHA256 = "7ba860d6d179f929c47254f7a10c94506ffe91fd6a0a9f0da23ca86f00c75db0"
+RFWI1_RETRO_RUN = REPO_ROOT / "reports" / "runs" / "20261019T225623Z_local_apply_rfwi1_litcorpus01.json"
+
+
+def test_rfwi1_retroactive_result_matches_the_pinned_raw_records():
+    p = L1 / "rfwi1_retroactive.json"
+    assert sha256_file(p) == RFWI1_RETRO_SHA256
+    r = _json(p)
+    raw = {rel: d for rel, d in lc.read_hash_list(L1 / "evidence" / "litcorpus01_raw_hashes.txt").items()
+           if rel.split("/")[1] == "fire_weather_v1"}
+    assert {x["rel_path"]: x["sha256"] for x in r["records"]} == raw          # all four, hash for hash
+    assert sorted(x["item_id"] for x in r["records"]) == sorted(_ids(L1 / "ids" / "fire_weather_v1_ids.txt"))
+    basis = {x["item_id"]: x["basis"] for x in r["records"]}
+    assert basis == {"134165809": "direct_topical_term", "188013273": "direct_topical_term",
+                     "232342359": "bare_fwi_without_disambiguator", "257970033": "bare_fwi_without_disambiguator"}
+    assert r["admitted"] == ["134165809", "188013273"] and r["admitted_count"] == 2
+    assert all(x["rule_id"] == "R-FWI-1" and x["rule_version"] == "v1" and x["decision_id"] == "D-022"
+               for x in r["records"])
+    # Consistent with the collision evidence: the two excluded are exactly the two collisions in the arm.
+    excluded = sorted(i for i, b in basis.items() if b == "bare_fwi_without_disambiguator")
+    assert excluded == _json(L1 / "litcorpus01_manifest.json")["fwi_collision_evidence"]["in_fire_weather_v1_arm"]
+
+
+def test_rfwi1_retroactive_run_record():
+    rec = _json(RFWI1_RETRO_RUN)
+    assert rec["git_commit"].startswith("968e7ba") and rec["git_dirty"] is False
+    assert rec["hostname"] == "polaris-login-01" and rec["passed"] is True
+    assert rec["data_sha256"] == sha256_file(L1 / "evidence" / "litcorpus01_raw_hashes.txt")
+    assert rec["result_summary"] == {"admitted_count": 2, "admitted": ["134165809", "188013273"]}

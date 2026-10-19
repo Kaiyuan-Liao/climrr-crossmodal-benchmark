@@ -7,7 +7,7 @@ session reasoning correctly from out-of-date facts and repeating them.
 | | |
 | --- | --- |
 | **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4:** M4-WP0 PASS (D-016); M4-WP1 PASS WITH ACTIONS (D-017), merged `0053968`; **M4-WP1b PASS WITH ACTIONS** and **M4-WP2 retrieval PASS (sample 4)** (D-019), both merged at `e7da7cc`; **M4-WP2 reading complete** and merged into `main` at `ccd2d24` (pending GUIDANCE review at `2206c00`). **M5-WP2 positive-case run: 0 eligible pairs of 78.** **M4-WP3 (concept-first corpus provenance) done on `work/m4-wp3`; awaiting GUIDANCE.** **M5:** **M5-WP1 closed --- PASS WITH ACTIONS, machinery validation only (D-018)**, merged `55decb3` |
-| **Active task** | **M4-WP3 --- done; awaiting GUIDANCE review** (`reports/milestones/M4_WP3_REPORT.md`). LITCORPUS-01 (shard pilot: 4 / 10) and **LITCORPUS-02** (705k arm: fire 495 → **448** after R-FWI-1, heat **861**, union **1,308**) frozen; place candidates **100 / 143** frozen, **unread**. One action open: the LITCORPUS-01 R-FWI-1 count needs a Polaris run (Kaiyuan). Not pushed, not merged. *Previous:* **M4-WP2r3 --- done; awaiting review.** Adjudication of the four (scope 4/4; 13 aligned: 6 confirmed, 7 modified; 13 single-reader; tiers **A 6 / B 7 / C 13**; no override; adjudicator = reader 1). **M5-WP2**: 26 claims × P-CELL-1, P-COUNTY-1, P-STATE-1 v2 = 78 pairs; **0 candidate-bridge-eligible**; 2 `related_insufficient` (tier-C FWI background claim × the two fire units), 3 `incompatible` (T-2), 73 `uncertain`. Mentor report written. Not pushed, not merged |
+| **Active task** | **M4-WP3 --- done; awaiting GUIDANCE review** (`reports/milestones/M4_WP3_REPORT.md`). LITCORPUS-01 (shard pilot: 4 / 10) and **LITCORPUS-02** (705k arm: fire 495 → **448** after R-FWI-1, heat **861**, union **1,308**) frozen; place candidates **100 / 143** frozen, **unread**. LITCORPUS-01 fire arm after R-FWI-1 (run on Polaris at `968e7ba`): **2 of 4** admitted. Not pushed, not merged. *Previous:* **M4-WP2r3 --- done; awaiting review.** Adjudication of the four (scope 4/4; 13 aligned: 6 confirmed, 7 modified; 13 single-reader; tiers **A 6 / B 7 / C 13**; no override; adjudicator = reader 1). **M5-WP2**: 26 claims × P-CELL-1, P-COUNTY-1, P-STATE-1 v2 = 78 pairs; **0 candidate-bridge-eligible**; 2 `related_insufficient` (tier-C FWI background claim × the two fire units), 3 `incompatible` (T-2), 73 `uncertain`. Mentor report written. Not pushed, not merged |
 | **Latest accepted commit** | **`e7da7cc`** --- the merge of M4-WP1b (reviewed `25a86e5`) and M4-WP2 retrieval (reviewed `7ddee2c`) into `main`, both accepted under D-019. Previous: **`55decb3`** (M5-WP1, D-018; scan fix `656044c`); **`0053968`** (M4-WP1, D-017); `6f24b78` (M4-WP0 chain, D-016); `62c9137` (M1-WP1, D-009). It does **not** pass M1 |
 | **Tooling on `main`** | `d68ba15` --- merge of `work/knowledge-staging` (`c13a3d4`, `scripts/stage_knowledge.py`) on top of `6f24b78`. **No scientific content**; not a GUIDANCE-accepted package, and not an accepted scientific state |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at. The literature corpus is **not** on Sophia (runbook §8b) |
@@ -30,9 +30,9 @@ session reasoning correctly from out-of-date facts and repeating them.
   `concept_map.yaml` (hash unchanged, tested).
 - **LITCORPUS-01-conceptfirst-v1** (S2ORC shard, 54,081 records *as reported by
   the tool team*): **4** fire, **10** heat; diagnostics 13 / 11; 2 of the 4 fire
-  papers are FWI collisions. **R-FWI-1 retroactive count not computed** --- raw
-  records on Eagle only; helper `scripts/litcollect/apply_rfwi1_litcorpus01.py`
-  for Kaiyuan. Sectionization deferred for GUIDANCE.
+  papers are FWI collisions. **R-FWI-1 retroactively (Polaris, `968e7ba`): 2 of 4
+  admitted** (`134165809`, `188013273`); the two excluded are the two collisions.
+  Sectionization deferred for GUIDANCE.
 - **LITCORPUS-02-conceptfirst-705k-v1** (D-023 source, `full_705k_v2_filtered.zip`
   from JL, 186,346 files; filter unknown, Q22): same queries byte for byte;
   fire raw 495 → **448**, heat **861**, overlap 1 (`270275181`), union
@@ -409,8 +409,6 @@ session reasoning correctly from out-of-date facts and repeating them.
   LITCORPUS-01 (sectionization); whether the 705k arm belongs in WP3 or WP3b;
   the five topical query variants absent from the concept map; the two-term
   R-FWI-1 argument; duplicate policy before sampling.
-- **For Kaiyuan:** run `scripts/litcollect/apply_rfwi1_litcorpus01.py` on
-  Polaris and return `rfwi1_retroactive.json` + run record.
 - **For JL:** Q22 (the 705k → 186,346 filter).
 - **For the mentor:** the FWI-rule confirmation; Kaiyuan's dictionary-grounded
   concept-survey proposal (pending GUIDANCE).

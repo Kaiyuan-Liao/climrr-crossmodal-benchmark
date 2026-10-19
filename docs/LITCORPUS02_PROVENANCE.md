@@ -87,6 +87,15 @@ index` contain `fire weather`, `fire-weather index` contains `fire-weather`, and
 a document containing `canadian fwi` hits that topical term and so is never
 "bare-only".
 
+**The repository implementation carries all six.** `src/climrr/retrieval.py`
+defines `DISAMBIGUATORS = ("fire weather", "fire-weather", "fire weather
+index", "fire-weather index", "canadian forest fire weather index", "canadian
+fwi")`, in the ruling's order; `tests/test_retrieval.py::test_disambiguators_are_exactly_the_rulings_list`
+parses the list out of `docs/M4_WP3_SOURCE_YIELD_GUIDANCE_RULING.md` and
+requires equality. So the two-term argument is confined to the external 705k
+run; every application inside this repository --- including the LITCORPUS-01
+retroactive run --- uses the full six-term rule.
+
 `rfwi1_fire_weather_v1.csv` holds, for each of the 495 raw documents, the run's
 decision, its basis and the first **bare-term**, **disambiguator** and **direct
 topical** hit (term, section key, section index, `[start, end)`):

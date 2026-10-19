@@ -117,29 +117,50 @@ arm. So the arm holds **at most 2 plausible Fire Weather Index papers before
 reading** (D-022). The snippets are the collection team's evidence, kept as
 received; they motivated R-FWI-1 and were not used to read any paper.
 
-## 6. R-FWI-1 applied retroactively --- **pending, not computed**
+## 6. R-FWI-1 applied retroactively --- **2 of 4 admitted**
 
-The rule (D-022; `docs/BRIDGE_ELIGIBILITY.md` §5) is to be applied to the four
+The rule (D-022; `docs/BRIDGE_ELIGIBILITY.md` §5) was applied to the four
 fire-weather records **by term-hit evidence only**, from the raw JSON text with
-the repo matcher. **It has not been run**: the four raw records are hash-pinned
-on Eagle and are not on the authoring host, and the four ids are **not** in the
-705k source either (checked against `full_705k_ids.txt`), so no other copy
-exists here. **The post-rule count is therefore not reported.** The collection
-team's figure --- 3 of the 13 diagnostic documents contain `fire weather` --- is
-theirs and is not substituted for a computation.
+the repo matcher (`climrr.retrieval.evaluate`, every string value at any depth;
+`section_key` is the value's JSON path). It ran on a **Polaris login node**
+(`polaris-login-01`) **from the Eagle checkout at `968e7ba`** (clean tree), by
+Kaiyuan, with `scripts/litcollect/apply_rfwi1_litcorpus01.py`; each record was
+SHA-256-verified against `evidence/litcorpus01_raw_hashes.txt` first. Result:
+`artifacts/literature/litcorpus01/rfwi1_retroactive.json` (SHA-256
+`7ba860d6d179f929c47254f7a10c94506ffe91fd6a0a9f0da23ca86f00c75db0`); run record
+`reports/runs/20261019T225623Z_local_apply_rfwi1_litcorpus01.{json,md}`.
 
-**Runbook (Kaiyuan, on Polaris, from a checkout of the pinned commit):**
+**Post-R-FWI-1 count for the fire arm: 2.**
 
-```bash
-python scripts/litcollect/apply_rfwi1_litcorpus01.py --raw-parent "<dir holding raw/fire_weather_v1/>"
-```
+| Item | Decision | Basis | First hits (`$.content.text`, section idx, `[start, end)`) |
+| --- | --- | --- | --- |
+| 134165809 | **admitted** | `direct_topical_term` | `Fire Weather Index` 6 `[4467, 4485)`; bare `FWI` 6 `[4487, 4490)` |
+| 188013273 | **admitted** | `direct_topical_term` | `Fire Weather Index` 7 `[145599, 145617)`; bare `FWI` 7 `[145619, 145622)`; disambiguator `fire weather` 7 `[137550, 137562)` |
+| 232342359 | excluded | `bare_fwi_without_disambiguator` | bare `fwi` 5 `[118340, 118343)`; no disambiguator |
+| 257970033 | excluded | `bare_fwi_without_disambiguator` | bare `FWI` 6 `[39325, 39328)`; no disambiguator |
 
-It SHA-256-verifies each of the four records against
-`evidence/litcorpus01_raw_hashes.txt` (failing, writing nothing, on any
-mismatch), applies `climrr.retrieval.evaluate` to every string value at any
-depth, and writes `artifacts/literature/litcorpus01/rfwi1_retroactive.json`
-(decision, basis, bare-term and disambiguator locations, matched characters
-only) plus a run record. Copy both back; they are small evidence.
+The two excluded records are exactly the two collision documents of §5 that sit
+in this arm --- consistent with the collision evidence, and with "at most 2
+plausible FWI papers". Admission is a retrieval decision only; it does not
+establish that either paper concerns the ClimRR FWI metric. Checked by
+`tests/test_litcorpus.py` (all four hashes equal the pinned raw-record hashes;
+decisions; run record).
+
+**Disclosed about the run:**
+
+- The run record's `location` label reads `local` (hence `_local_` in its file
+  name): `climrr.runrecord.detect_location()` knows only `sophia` (by hostname)
+  and labels every other host `local`. The `hostname`, `polaris-login-01`, is
+  the authoritative execution location. The labeller is unchanged.
+- The Polaris Python (3.13.14) does **not** match the D-007 pins (pandas,
+  pytest, pypdfium2 not installed; numpy 2.5.3; pypdf 6.14.2; `pip freeze`
+  unavailable). The rule uses only the standard library and PyYAML (to load
+  the concept map), and PyYAML 6.0.3 **matches** its pin; none of the
+  mismatched libraries is imported on this path.
+- `litcorpus01_manifest.json` (frozen at `85ed69a`, pinned in
+  `data/manifest.json`) still reads `rfwi1_retroactive: pending`. It is left
+  unchanged as the freeze-time record; `rfwi1_retroactive.json` is the result
+  and supersedes that field.
 
 ## 7. Stable ids and manifest
 

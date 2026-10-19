@@ -25,7 +25,8 @@ reading.
 | | |
 | --- | --- |
 | Branch | `work/m4-wp3`, from `main` at **`ccd2d24`** (Phase 0: clean tree apart from the untracked ruling; `git branch --no-merged main` empty) |
-| Package commit | this commit; its SHA travels with the hand-back |
+| Package commit | **`85ed69a`**; clean-tree freeze run record **`968e7ba`** |
+| Follow-up --- LITCORPUS-01 R-FWI-1 result recorded | the commit after `968e7ba`; its SHA travels with the hand-back |
 | Remote | **not pushed, not merged** |
 
 Decision numbers: D-A → **D-020**, D-B → **D-021**, D-C → **D-022**, D-D →
@@ -72,8 +73,8 @@ All corpus manifests and summaries are pinned in `data/manifest.json`
   and to the untracked local config; `stage_knowledge.py` writes no run record
   (test; exemption noted in `CLAUDE.md`).
 - **Phase B.** LITCORPUS-01 record (`docs/LITCORPUS01_SHARD_PILOT.md`,
-  `artifacts/literature/litcorpus01/`). R-FWI-1 retroactive count **not
-  computed** (field 11); Polaris helper and runbook ready.
+  `artifacts/literature/litcorpus01/`). R-FWI-1 applied retroactively on
+  Polaris by Kaiyuan at `968e7ba` (follow-up): **2 of 4 admitted** (field 9).
 - **Phase C.** LITCORPUS-02 record (`docs/LITCORPUS02_PROVENANCE.md`,
   `artifacts/literature/litcorpus02/`): source, index, matcher, yields, R-FWI-1
   evidence, duplicates, legacy overlap, `LIT2` ids, manifests.
@@ -93,7 +94,7 @@ All corpus manifests and summaries are pinned in `data/manifest.json`
 | `src/climrr/retrieval.py`, `tests/test_retrieval.py` | R-FWI-1 v1 |
 | `src/climrr/litcorpus.py`, `scripts/freeze_litcorpus.py`, `tests/test_litcorpus.py` | the freeze and its checks |
 | `scripts/litcollect/{build_index.py,run_query.py,run_v1_on_705k.sh,requirements.txt}`, `tests/test_litcollect_tools.py` | the collection tools |
-| `scripts/litcollect/apply_rfwi1_litcorpus01.py` | Polaris helper for the deferred LITCORPUS-01 count |
+| `scripts/litcollect/apply_rfwi1_litcorpus01.py`, `artifacts/literature/litcorpus01/rfwi1_retroactive.json`, `reports/runs/20261019T225623Z_local_apply_rfwi1_litcorpus01.{json,md}` | the LITCORPUS-01 R-FWI-1 helper, its result and run record |
 | `docs/DECISION_LOG.md`, `docs/MENTOR_BRIEF.md`, `docs/METADATA_QUESTIONS.md`, `docs/BRIDGE_ELIGIBILITY.md`, `docs/PROJECT_STATE.md`, `CLAUDE.md`, `config/local_paths.example.yaml`, `data/manifest.json`, `scripts/stage_knowledge.py`, `tests/test_stage_knowledge.py` | bookkeeping |
 
 ## 8. Methods and rules that affect scientific meaning
@@ -118,7 +119,7 @@ package except the directory count** (field 11).
 
 | | LITCORPUS-01 (shard) | LITCORPUS-02 (705k) |
 | --- | --- | --- |
-| fire_weather_v1 | **4** | raw **495** → admitted **448** (R-FWI-1 excludes 47) |
+| fire_weather_v1 | **4** → **2** after R-FWI-1 | raw **495** → admitted **448** (R-FWI-1 excludes 47) |
 | extreme_heat_v1 | **10** | **861 / 861** |
 | fire diag (topical only) | 13 | 548 raw → 473 |
 | heat diag (topical only) | 11 | 1,082 |
@@ -126,6 +127,15 @@ package except the directory count** (field 11).
 | cross-arm overlap | 0 | **1** --- `270275181` (`LIT2-001017`) |
 | unique items | 14 | **1,308** (`LIT2-000001`…`LIT2-001308`) |
 | exact-byte redundant copies in arms | 0 | **10** (5 + 5; none across arms) |
+
+**LITCORPUS-01 fire arm under R-FWI-1** (`litcorpus01/rfwi1_retroactive.json`;
+run on `polaris-login-01` from the Eagle checkout at `968e7ba`, run record
+`reports/runs/20261019T225623Z_local_apply_rfwi1_litcorpus01.json`): **2
+admitted** --- `134165809`, `188013273`, basis `direct_topical_term` (`Fire
+Weather Index`); **2 excluded** --- `257970033`, `232342359`, basis
+`bare_fwi_without_disambiguator`. The excluded two are exactly the two
+collision documents in the arm, consistent with the collision evidence. All
+four record hashes equal `litcorpus01_raw_hashes.txt` (test).
 | place candidates | --- | fire **100** (CA 96, Stephens 10, OK 3); heat **143** (CA 136, OK 13, Stephens 3) |
 
 LITCORPUS-00 ⊂ 705k source: **1,918 / 1,918**; in the arms 4 (fire:
@@ -150,7 +160,7 @@ LITCORPUS-00 ⊂ 705k source: **1,918 / 1,918**; in the arms 4 (fire:
 | 11 | R-FWI-1 versioned and deterministic | met | `src/climrr/retrieval.py`; `docs/BRIDGE_ELIGIBILITY.md` §5 |
 | 12 | Bare `FWI` alone cannot admit | met | `tests/test_retrieval.py`; 47 exclusions in `rfwi1_fire_weather_v1.csv` |
 | 13 | Longer terms directly eligible | met | `tests/test_retrieval.py` (Canadian FWI, Fire Weather Index) |
-| 14 | Same-document disambiguator hits stored with locations | **met for LITCORPUS-02; pending for LITCORPUS-01** | `litcorpus02/rfwi1_fire_weather_v1.csv`; `scripts/litcollect/apply_rfwi1_litcorpus01.py` |
+| 14 | Same-document disambiguator hits stored with locations | met | `litcorpus02/rfwi1_fire_weather_v1.csv`; `litcorpus01/rfwi1_retroactive.json` |
 | 15 | No change to the concept-map identity of `FWI` | met | hash test in `tests/test_retrieval.py` |
 | 16 | Outputs external except manifests / provenance / small evidence | met | corpus files on Eagle; `litcorpus0{1,2}/` hold ids, hashes, locations |
 | 17 | Every v1 document has a stable id / hash | met | `litcorpus01_manifest.csv` (14); `lit2_ids.csv` (1,308) |
@@ -165,9 +175,10 @@ LITCORPUS-00 ⊂ 705k source: **1,918 / 1,918**; in the arms 4 (fire:
 
 ## 10. Validation performed
 
-- `python -m pytest -q` (conda env `climrr`): **817 passed, 0 failed, 0
-  skipped**; `python scripts/verify_no_secrets_or_paths.py`: **0 hits** (480
-  tracked text files).
+- `python -m pytest -q` (conda env `climrr`): **819 passed, 0 failed, 0
+  skipped** after the follow-up (817 at `85ed69a`);
+  `python scripts/verify_no_secrets_or_paths.py`: **0 hits** (485 tracked text
+  files).
 - At freeze, fail-closed: every copied evidence file listed in a hash list
   matched it; id lists match extract-log counts and raw-record hash lists;
   `query_sha256` in every 705k summary equals the shard-run hash; every run
@@ -185,10 +196,16 @@ LITCORPUS-00 ⊂ 705k source: **1,918 / 1,918**; in the arms 4 (fire:
 
 ## 11. Failures, rejected cases, known limitations, and deviations
 
-1. **LITCORPUS-01 R-FWI-1 count not computed.** The four raw records are on
-   Eagle only, and the ids are not in the 705k source. Not substituted with the
-   tool team's "3 of 13 contain `fire weather`". Helper + runbook ready
-   (`LITCORPUS01_SHARD_PILOT.md` §6).
+1. **LITCORPUS-01 R-FWI-1 count computed off the authoring host.** The four
+   raw records are on Eagle only, so Kaiyuan ran the helper on
+   `polaris-login-01` from the Eagle checkout at `968e7ba` (clean tree): **2 of 4
+   admitted**. On that host the D-007 pins do not hold (pandas, pytest,
+   pypdfium2 absent; numpy 2.5.3; pypdf 6.14.2; `pip freeze` unavailable); the
+   rule imports none of them, and PyYAML 6.0.3 matches. The run record's
+   `location` label reads `local` because `detect_location()` recognises only
+   Sophia; `hostname` is authoritative. `litcorpus01_manifest.json` keeps its
+   freeze-time `pending` field unchanged; `rfwi1_retroactive.json` supersedes
+   it (`LITCORPUS01_SHARD_PILOT.md` §6).
 2. **Sectionization of LITCORPUS-01 deferred** (disclosed in the work package):
    GUIDANCE asked to confirm LITCORPUS-02 supersedes it first.
 3. **Per-section (705k) vs concatenated-document (shard) matching**; also
@@ -266,12 +283,12 @@ of the literature, and no representativeness is inferred.
 
 **For the mentor** (`MENTOR_BRIEF.md`): (i) confirmation of the FWI rule; (ii)
 Kaiyuan's proposal of a dictionary-grounded concept survey (pending GUIDANCE).
-**For JL:** Q22. **For Kaiyuan:** run the LITCORPUS-01 R-FWI-1 helper on Polaris.
+**For JL:** Q22.
 
 ## 14. Proposed gate status
 
-**Ready for GUIDANCE review.** Proposed: **PASS WITH ACTIONS** --- actions: the
-LITCORPUS-01 R-FWI-1 Polaris run; decisions 1--5 above. Not proposed for merge
+**Ready for GUIDANCE review.** Proposed: **PASS WITH ACTIONS** --- actions:
+decisions 1--5 above (the LITCORPUS-01 R-FWI-1 run is done). Not proposed for merge
 by the EXECUTOR.
 
 ## 15. Proposed next bounded objective
