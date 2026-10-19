@@ -6,8 +6,8 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 | | |
 | --- | --- |
-| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4:** M4-WP0 PASS (D-016); M4-WP1 PASS WITH ACTIONS (D-017), merged `0053968`; **M4-WP1b PASS WITH ACTIONS** and **M4-WP2 retrieval PASS (sample 4)** (D-019), both merged at `e7da7cc`; **M4-WP2 reading complete** and merged into `main` at `ccd2d24` (pending GUIDANCE review at `2206c00`). **M5-WP2 positive-case run: 0 eligible pairs of 78.** **M4-WP3 (concept-first corpus provenance) done on `work/m4-wp3`; awaiting GUIDANCE.** **M5:** **M5-WP1 closed --- PASS WITH ACTIONS, machinery validation only (D-018)**, merged `55decb3` |
-| **Active task** | **M4-WP3 --- done; awaiting GUIDANCE review** (`reports/milestones/M4_WP3_REPORT.md`). LITCORPUS-01 (shard pilot: 4 / 10) and **LITCORPUS-02** (705k arm: fire 495 → **448** after R-FWI-1, heat **861**, union **1,308**) frozen; place candidates **100 / 143** frozen, **unread**. LITCORPUS-01 fire arm after R-FWI-1 (run on Polaris at `968e7ba`): **2 of 4** admitted. Not pushed, not merged. *Previous:* **M4-WP2r3 --- done; awaiting review.** Adjudication of the four (scope 4/4; 13 aligned: 6 confirmed, 7 modified; 13 single-reader; tiers **A 6 / B 7 / C 13**; no override; adjudicator = reader 1). **M5-WP2**: 26 claims × P-CELL-1, P-COUNTY-1, P-STATE-1 v2 = 78 pairs; **0 candidate-bridge-eligible**; 2 `related_insufficient` (tier-C FWI background claim × the two fire units), 3 `incompatible` (T-2), 73 `uncertain`. Mentor report written. Not pushed, not merged |
+| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4:** M4-WP0 PASS (D-016); M4-WP1 PASS WITH ACTIONS (D-017), merged `0053968`; **M4-WP1b PASS WITH ACTIONS** and **M4-WP2 retrieval PASS (sample 4)** (D-019), both merged at `e7da7cc`; **M4-WP2 reading complete** and merged into `main` at `ccd2d24` (pending GUIDANCE review at `2206c00`). **M5-WP2 positive-case run: 0 eligible pairs of 78.** **M4-WP3 --- PASS WITH ACTIONS (D-025)** on reviewed head `6b2b5a6` (pushed `origin/work/m4-wp3`, not merged); closeout done. **M4-WP4 sample frozen** (`58e0fd6`); reading not started. **M5:** **M5-WP1 closed --- PASS WITH ACTIONS, machinery validation only (D-018)**, merged `55decb3` |
+| **Active task** | **M4-WP4 --- sample frozen, reading not started.** 20 place candidates (10 fire weather at ranks 10…100, 10 heat index at ranks 14…140; one heat duplicate suppressed; no rank advanced), `artifacts/literature/wp4_sample.json` SHA-256 `f3cb5d0c…ea15`, committed before any file was fetched. The reading package is issued separately; the blind reader runs in a fresh session. **Stage 2a--2c** (dictionary concept survey) authorized as diagnostics, not started. *Previous:* M4-WP3 closeout (D-025): LITCORPUS-02 the working candidate corpus; five query terms governed in `concept_map.yaml` (SHA-256 now `27f7a44d…d7b4`). Not merged |
 | **Latest accepted commit** | **`e7da7cc`** --- the merge of M4-WP1b (reviewed `25a86e5`) and M4-WP2 retrieval (reviewed `7ddee2c`) into `main`, both accepted under D-019. Previous: **`55decb3`** (M5-WP1, D-018; scan fix `656044c`); **`0053968`** (M4-WP1, D-017); `6f24b78` (M4-WP0 chain, D-016); `62c9137` (M1-WP1, D-009). It does **not** pass M1 |
 | **Tooling on `main`** | `d68ba15` --- merge of `work/knowledge-staging` (`c13a3d4`, `scripts/stage_knowledge.py`) on top of `6f24b78`. **No scientific content**; not a GUIDANCE-accepted package, and not an accepted scientific state |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at. The literature corpus is **not** on Sophia (runbook §8b) |
@@ -16,10 +16,28 @@ session reasoning correctly from out-of-date facts and repeating them.
 | **M4-WP1 sample** | `LIT-000001, 000191, 000381, 000571, 000761, 000951, 001141, 001331, 001521, 001711` --- every 190th id; no duplicate skip; `wp1_sample.json` SHA-256 `5cb81f95…`, committed before any file was opened |
 | **Prototypes built from** | `56eb10d` --- v1 records unchanged since M1-WP3b. **P-STATE-1 v2** (`P-STATE-1.v2.json`, D-018) adds explicit year windows only; V/D/M identical to v1; the frozen M5-WP1 input still names v1 |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
-| **Rulings in force** | **D-021** (concept-first collection), **D-022** (source yield; LITCORPUS-01 a pilot; **R-FWI-1**; no reading), D-009, D-011, D-012, D-013 + D-013-A1, D-015, D-016, D-017, D-018, **D-019 (M4-WP1b PASS WITH ACTIONS; rule-3 trimming and J-1 approved; `LIT-000381-C3` tie and `LIT-000571` contest kept; evidence tiers A/B/C; C-2 revised; WP2 retrieval PASS with 4; reading of the four authorized, two readers + adjudication, then compatibility with P-STATE-1 v2)** |
+| **Rulings in force** | **D-025** (M4-WP3 PASS WITH ACTIONS; LITCORPUS-02 working corpus; five terms governed; WP4 10+10 sample; Stage 2a--2c diagnostics), **D-021** (concept-first collection), **D-022** (source yield; LITCORPUS-01 a pilot; **R-FWI-1**; no reading), D-009, D-011, D-012, D-013 + D-013-A1, D-015, D-016, D-017, D-018, **D-019 (M4-WP1b PASS WITH ACTIONS; rule-3 trimming and J-1 approved; `LIT-000381-C3` tie and `LIT-000571` contest kept; evidence tiers A/B/C; C-2 revised; WP2 retrieval PASS with 4; reading of the four authorized, two readers + adjudication, then compatibility with P-STATE-1 v2)** |
 | **Owner decisions since** | **D-014** (Kaiyuan, 2026-09-28): proceed on the "our reading" basis to test what QA could be generated; every `inferred_candidate` and `derived_from_inferred` status carried through; **promotes nothing, and does not authorise QA generation** |
 | **Meetings since the last refresh** | **Mentor 2026-10-09:** direction D-020 --- concepts from the table units first, then collect papers for them; keep the three units. **Mentor 2026-10-13:** shard yields reported, a larger source asked for; outcome = JL's Drive link (D-023). *Earlier:* **Group 2026-09-14:** "No material objection to the prototype-unit design was raised." --- not validation, no semantic confirmed. **Mentor 2026-09-17 and 2026-09-24:** **no review of the answer sheet occurred** (R-003); nothing promoted |
 | **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M1 remains open.** **Next relevance-guided step:** waits on the mentor (family-level usefulness; widen places or change the unit) and GUIDANCE; any WP2b must be predeclared. **Metric-level concept terms** (`fwi_seasonal_value`, `heatindex_days_above_105F`): `proposed`, need GUIDANCE or the mentor. **QA generation: not authorised by any ruling.** **Reading of any LITCORPUS-01/02 paper: not authorised** (D-022) |
+
+## Where things stand --- M4-WP3 closeout and M4-WP4 sample (2026-10-19)
+
+- **D-025: M4-WP3 PASS WITH ACTIONS** on `6b2b5a6`. LITCORPUS-02 is the working
+  concept-first **candidate** corpus (not representative); LITCORPUS-01 stays the
+  pilot, sectionization closed; Q22 open, not a blocker; matcher difference a
+  disclosed limitation (no source-effect estimate).
+- **Concept map:** `fire-weather index`, `canadian forest fire weather index`,
+  `canadian fwi`, `heat-index` are `approved_lexical` (C-2 participates);
+  `extended heat index` is `approved_family_term` (collection / retrieval only,
+  masks the `heat index` inside it, never C-2, never metric). Frozen WP2 terms
+  and M5-WP2 inputs keep their pre-D-025 hashes; the M5-WP2 matrix reproduces.
+- **M4-WP4 sample frozen before reading** (`58e0fd6`): fire `LIT2-000185`,
+  `000366`, `000499`, `000560`, `000673`, `000786`, `001063`, `001157`, `001236`,
+  `001308`; heat `LIT2-000084`, `000203`, `000315`, `000470`, `000662`, `000803`,
+  `000927`, `001075`, `001160`, `001293`. **`LIT2-001075` = `272852900` =
+  LITCORPUS-00 `LIT-001536`**, already read twice in M4-WP2 --- kept (no manual
+  replacement); for the reading package to handle.
 
 ## Where things stand --- M4-WP3 concept-first provenance (2026-10-19)
 
@@ -405,13 +423,12 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 ## Outstanding
 
-- **For GUIDANCE (M4-WP3):** review the packet; whether LITCORPUS-02 supersedes
-  LITCORPUS-01 (sectionization); whether the 705k arm belongs in WP3 or WP3b;
-  the five topical query variants absent from the concept map; the two-term
-  R-FWI-1 argument; duplicate policy before sampling.
+- **For COORDINATOR:** the M4-WP4 reading package (reader 1, then a blind
+  reader in a fresh session); how to treat `LIT2-001075` (= `LIT-001536`, read in
+  M4-WP2); the Stage 2a--2c package; `.gitattributes` housekeeping (D-025).
 - **For JL:** Q22 (the 705k → 186,346 filter).
-- **For the mentor:** the FWI-rule confirmation; Kaiyuan's dictionary-grounded
-  concept-survey proposal (pending GUIDANCE).
+- **For the mentor (Thursday 2026-10-22):** the FWI-rule confirmation; which
+  dictionary concepts to prioritize for new units if coverage is comparable.
 - **For GUIDANCE:** review **M4-WP2** (two readings + adjudication) and
   **M5-WP2** (0 eligible of 78); whether G-1 may accept a state within a list;
   whether the G-2 list may be extended.
@@ -441,10 +458,11 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 ## Next
 
-**GUIDANCE review of M4-WP3** (and of M4-WP2 / M5-WP2, still pending). If
-approved: a two-reader reading plan on a **predeclared** sample of the place
-candidates, sample rule frozen before any file is opened. Separately, pending
-GUIDANCE: Kaiyuan's dictionary-grounded concept survey.
+**Track A --- M4-WP4:** the 20-paper reading on the frozen sample (reading
+package to be issued; reader 1 → blind reader → freeze → comparison →
+adjudication → tiers → compatibility). **Track B --- Stage 2a--2c** dictionary
+concept survey on Polaris, diagnostics only. Mentor one-on-one Thursday
+2026-10-22. GUIDANCE review of M4-WP2 / M5-WP2 still pending.
 
 Still not authorised by any ruling: **QA generation**; semantic bridges beyond
 what D-019 authorizes; widening the WP2 sample (a WP2b must be predeclared); embeddings; corpus-wide search; hazard labels
@@ -489,5 +507,6 @@ for papers outside the sample; any interpretation of a ClimRR column outside the
 - **M4-WP1 report:** [../reports/milestones/M4_WP1_REPORT.md](../reports/milestones/M4_WP1_REPORT.md); **pilot claims:** [LITERATURE_WP1_PILOT.md](LITERATURE_WP1_PILOT.md)
 - **Query scope:** [LITERATURE_QUERY_SCOPE.md](LITERATURE_QUERY_SCOPE.md); **corpus inventory:** [LITERATURE_CORPUS_INVENTORY.md](LITERATURE_CORPUS_INVENTORY.md)
 - The pinned query and the corpus identity: [../data/MANIFEST.md](../data/MANIFEST.md)
+- **M4-WP3 ruling (PASS WITH ACTIONS, D-025):** [M4_WP3_WORKING_CORPUS_STAGE2_GUIDANCE_RULING.md](M4_WP3_WORKING_CORPUS_STAGE2_GUIDANCE_RULING.md); **WP4 sample:** [../artifacts/literature/wp4_sample.json](../artifacts/literature/wp4_sample.json)
 - **M4-WP3 report:** [../reports/milestones/M4_WP3_REPORT.md](../reports/milestones/M4_WP3_REPORT.md); **rulings:** [M4_WP3_CONCEPT_FIRST_GUIDANCE_RULING.md](M4_WP3_CONCEPT_FIRST_GUIDANCE_RULING.md), [M4_WP3_SOURCE_YIELD_GUIDANCE_RULING.md](M4_WP3_SOURCE_YIELD_GUIDANCE_RULING.md); **corpora:** [LITCORPUS01_SHARD_PILOT.md](LITCORPUS01_SHARD_PILOT.md), [LITCORPUS02_PROVENANCE.md](LITCORPUS02_PROVENANCE.md)
 - Operating rules: [../CLAUDE.md](../CLAUDE.md)

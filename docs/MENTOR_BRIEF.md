@@ -1,32 +1,36 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-10-19   Next meeting: not yet set --- bring the two questions under *Next questions* below; the answer sheet is still outstanding
+Last updated: 2026-10-19   Next meeting: **Thursday 2026-10-22** --- bring the items under *For Thursday* below; the answer sheet is still outstanding
 
 ## Status in five lines
 
-1. The ClimRR table is in the project, unchanged and checksum-pinned — 62,834 rows, 275 columns, every value read as text so identifiers keep their leading zeros.
-2. **41 of the 275 columns are interpreted — 21 the dictionary states outright, 20 reasoned and marked as reasoned.** Nothing reasoned has been confirmed: **the answer sheet was not reviewed at either one-on-one (2026-09-17, 2026-09-24)**, so all 20 stay `inferred_candidate`.
-3. **The group (2026-09-14) raised no material objection to the prototype-unit design.** That is recorded as exactly that — the group is not the data owner, and it confirms no column meaning.
-4. **The project now proceeds on "our reading" (D-014)**: the prototypes are used as they stand to see what questions they could support, with every reasoned status carried visibly into anything built from them. Nothing is promoted by proceeding.
-5. **The literature side has started, separately from the table.** A corpus of 1,918 papers and its search query are pinned by checksum. Ten papers, picked by a fixed rule that ignores their content, were read in full: 6 discuss a climate or weather hazard and yield 27 claims, each tied to its exact source text; 3 are off-topic and 1 is ambiguous, and they are kept, not replaced. A first, purely mechanical check compared those 27 claims with the three example records on place, period, scenario, quantity and direction: **no claim matches any record on all five** — mostly because the papers are about other countries or other quantities, or simply do not say. That tests the checking rules, not the literature; the claims have had one reader so far, and a second, independent reading comes next. Three questions about how the corpus was collected are for its collector, not for you.
-6. **The literature link test now has a real result (2026-10-08).** Both readings of the ten random papers are done (no statement touches our units). A strict word search found exactly 4 papers naming one of our concepts and one of our places; each was read twice, independently, and disagreements settled by fixed, cautious rules: 26 statements, 6 recorded identically by both readers. Compared with the three units, **none qualifies as a candidate link**; the closest are a general statement about the Fire Weather Index with no place (one reader only) and a different Oklahoma county. "Stephens" turned out to be an author's surname and one paper's "FWI" a soil-moisture index. The plain-language summary and three questions for you are in [MENTOR_REPORT_2026-10-09.md](MENTOR_REPORT_2026-10-09.md).
-7. **Concept-first collection (your direction of 2026-10-09).** The same two fixed concept searches --- Fire Weather Index and heat index --- were run first on one S2ORC shard (4 and 10 papers) and then, unchanged, on the 186,346-file climate set JL shared after 2026-10-13: **448 and 861 papers**. Bare "FWI" now counts only when the same paper also says "fire weather" (it also means full waveform inversion, among others). 100 and 143 of those papers mention Oklahoma, Stephens or California somewhere; none has been read. Details: [LITCORPUS02_PROVENANCE.md](LITCORPUS02_PROVENANCE.md).
+1. **The table is pinned and partly interpreted**: 62,834 rows, 275 columns, read as text; 41 columns interpreted (21 stated by the dictionary, 20 reasoned and marked so). Nothing reasoned is confirmed --- **the answer sheet has still not been reviewed**, so all 20 stay `inferred_candidate`; the project proceeds on "our reading" (D-014), which promotes nothing.
+2. **The first literature corpus gave no link.** 1,918 papers collected for another purpose; ten read at random and four found by a strict concept + place search, each read twice: **0 of 78 statement-unit pairs qualify as a candidate link** ([MENTOR_REPORT_2026-10-09.md](MENTOR_REPORT_2026-10-09.md)).
+3. **Your direction of 2026-10-09 is now the method:** concepts from the table units first, then papers for those concepts. The same two fixed searches (Fire Weather Index, heat index) gave **2 and 10** papers on one S2ORC shard (fire weather after the FWI rule below) and **448 and 861** on the 186,346-file climate set JL shared after 2026-10-13. A bare "FWI" counts only when the same paper also says "fire weather". GUIDANCE accepted this as the working corpus (D-025) --- for finding candidates, not as a sample of the literature.
+4. **100 fire-weather and 143 heat-index papers mention Oklahoma, Stephens or California somewhere.** That is a word match only --- the word may be a study area, an affiliation or a surname. **20 of them (10 + 10), picked by a fixed rank rule that never looks at content, are frozen** for a two-reader reading; none has been opened.
+5. **Next:** the 20-paper double reading, then the same mechanical comparison with the three units; and, separately, a survey of which other dictionary concepts have literature coverage, run on Polaris as diagnostics only. **No questions are generated** until a link exists.
 
 ## What I need from this meeting
 
-> ### **Next questions (added 2026-10-19)**
+> ### **For Thursday 2026-10-22**
 >
-> **(i) The "FWI" rule.** In general scientific text "FWI" often means something
-> else (full waveform inversion, Forest Watch Indonesia, fatal work injuries).
-> We now count a bare "FWI" only when the same paper also says "fire weather"
-> or one of a few longer fire-weather phrases. **Is that the right rule for the
+> 1. **Same concepts, same queries, new source.** Fire weather **2 → 448**
+>    papers, heat index **10 → 861** (shard → climate set). 100 and 143 of them
+>    mention one of our three places --- word matches, not yet read.
+> 2. **A 20-paper double reading starts now** (10 fire weather + 10 heat
+>    index, chosen by a fixed rule before anyone opened them).
+> 3. **The dictionary-wide concept survey runs on Polaris as diagnostics**: for
+>    each concept the dictionary describes, how much literature mentions it.
+>    It ranks nothing into the benchmark by itself.
+>
+> **Question for you:** *if coverage turned out comparable, which dictionary
+> concepts would you prioritize for new units?*
+>
+> **Still open from 2026-10-19:** in general scientific text "FWI" often means
+> something else (full waveform inversion, Forest Watch Indonesia, fatal work
+> injuries); we count a bare "FWI" only when the same paper also says "fire
+> weather" or a longer fire-weather phrase. **Is that the right rule for the
 > fire-weather literature you have in mind?**
->
-> **(ii) Surveying concepts across the whole dictionary** (Kaiyuan's proposal,
-> pending GUIDANCE): define candidate concepts from every family in the data
-> dictionary, not only the two pilot families, before collecting more papers.
-> **Would that be useful, or should we stay with the two families until a
-> positive link is shown?**
 
 > ### **First question for the next one-on-one**
 >
