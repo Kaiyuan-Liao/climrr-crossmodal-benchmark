@@ -119,6 +119,12 @@ evidence. The record captures the commit SHA, whether the tree was dirty, the
 host and location label, the Python version, a `pip freeze` fingerprint, the
 config snapshot, and the SHA-256 of the data actually read.
 
+Two exemptions (M4-WP3): `scripts/stage_knowledge.py` produces no evidence and
+writes no run record; and `scripts/litcollect/build_index.py`, `run_query.py`
+and `run_v1_on_705k.sh` are the external collection tools, kept as they ran on
+Polaris --- their own `summary.json` / `index_summary.json` are the run
+evidence, frozen by `scripts/freeze_litcorpus.py`, which does write one.
+
 ## Knowledge-refresh staging
 
 `scripts/stage_knowledge.py` copies the files the COORDINATOR and GUIDANCE

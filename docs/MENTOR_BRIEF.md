@@ -1,6 +1,6 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-10-08   Next meeting: one-on-one, 2026-10-09 --- **bring [MENTOR_REPORT_2026-10-09.md](MENTOR_REPORT_2026-10-09.md)**; the answer sheet is still outstanding
+Last updated: 2026-10-19   Next meeting: not yet set --- bring the two questions under *Next questions* below; the answer sheet is still outstanding
 
 ## Status in five lines
 
@@ -10,8 +10,23 @@ Last updated: 2026-10-08   Next meeting: one-on-one, 2026-10-09 --- **bring [MEN
 4. **The project now proceeds on "our reading" (D-014)**: the prototypes are used as they stand to see what questions they could support, with every reasoned status carried visibly into anything built from them. Nothing is promoted by proceeding.
 5. **The literature side has started, separately from the table.** A corpus of 1,918 papers and its search query are pinned by checksum. Ten papers, picked by a fixed rule that ignores their content, were read in full: 6 discuss a climate or weather hazard and yield 27 claims, each tied to its exact source text; 3 are off-topic and 1 is ambiguous, and they are kept, not replaced. A first, purely mechanical check compared those 27 claims with the three example records on place, period, scenario, quantity and direction: **no claim matches any record on all five** — mostly because the papers are about other countries or other quantities, or simply do not say. That tests the checking rules, not the literature; the claims have had one reader so far, and a second, independent reading comes next. Three questions about how the corpus was collected are for its collector, not for you.
 6. **The literature link test now has a real result (2026-10-08).** Both readings of the ten random papers are done (no statement touches our units). A strict word search found exactly 4 papers naming one of our concepts and one of our places; each was read twice, independently, and disagreements settled by fixed, cautious rules: 26 statements, 6 recorded identically by both readers. Compared with the three units, **none qualifies as a candidate link**; the closest are a general statement about the Fire Weather Index with no place (one reader only) and a different Oklahoma county. "Stephens" turned out to be an author's surname and one paper's "FWI" a soil-moisture index. The plain-language summary and three questions for you are in [MENTOR_REPORT_2026-10-09.md](MENTOR_REPORT_2026-10-09.md).
+7. **Concept-first collection (your direction of 2026-10-09).** The same two fixed concept searches --- Fire Weather Index and heat index --- were run first on one S2ORC shard (4 and 10 papers) and then, unchanged, on the 186,346-file climate set JL shared after 2026-10-13: **448 and 861 papers**. Bare "FWI" now counts only when the same paper also says "fire weather" (it also means full waveform inversion, among others). 100 and 143 of those papers mention Oklahoma, Stephens or California somewhere; none has been read. Details: [LITCORPUS02_PROVENANCE.md](LITCORPUS02_PROVENANCE.md).
 
 ## What I need from this meeting
+
+> ### **Next questions (added 2026-10-19)**
+>
+> **(i) The "FWI" rule.** In general scientific text "FWI" often means something
+> else (full waveform inversion, Forest Watch Indonesia, fatal work injuries).
+> We now count a bare "FWI" only when the same paper also says "fire weather"
+> or one of a few longer fire-weather phrases. **Is that the right rule for the
+> fire-weather literature you have in mind?**
+>
+> **(ii) Surveying concepts across the whole dictionary** (Kaiyuan's proposal,
+> pending GUIDANCE): define candidate concepts from every family in the data
+> dictionary, not only the two pilot families, before collecting more papers.
+> **Would that be useful, or should we stay with the two families until a
+> positive link is shown?**
 
 > ### **First question for the next one-on-one**
 >
@@ -100,6 +115,7 @@ listed here so the whole question inventory stays in one place. Each is
 | 1 | Q19 | On which platform or database was the query executed, and which fields did it search? | The same Boolean text returns different results on different databases. | Reproducing or citing the collection. |
 | 2 | Q20 | When was the query executed, and when were the results exported? | The corpus has to be cited as a dated snapshot. | Citability of the corpus. |
 | 3 | Q21 | Is the folder of 1,918 files the complete result set, and if not, what selected them? | A capped or filtered set changes what any sample drawn from it can represent. | How far M4-WP1's sample can be generalised. |
+| 4 | Q22 | How was `full_705k_v2_filtered` (186,346 files) filtered from the 705k set? | The filter decides what the concept-first yields can be compared against. | Interpreting LITCORPUS-02's yields. |
 
 ## Answers received
 
@@ -190,6 +206,28 @@ line, as ruling action 11 requires --- exact responses if obtained, otherwise
 Not a meeting entry. JL supplied the literature corpus (a folder of 1,918
 files) and the Boolean query it was collected with. Both are pinned by
 SHA-256 (M4-WP0, D-015); no paper has been opened. Q19--Q21 are for JL.
+
+### 2026-10-09 — mentor one-on-one
+
+**Reported:** [MENTOR_REPORT_2026-10-09.md](MENTOR_REPORT_2026-10-09.md) --- the
+M4-WP2 / M5-WP2 result, 0 eligible pairs of 78.
+
+**Direction (D-020, relayed by Kaiyuan):** define concepts from the table units
+first, then collect papers for those concepts with the ANL paper-collection
+tool, rather than reading a corpus collected for another purpose; keep the
+three units for now.
+
+### 2026-10-13 — mentor meeting
+
+**Reported:** the first concept-first run on one S2ORC shard --- **4** papers for
+fire weather and **10** for heat index; the topical-only diagnostics, **13** and
+**11**; and that bare "FWI" collides with other meanings (10 of the 13
+diagnostic hits). **Asked:** for a larger source.
+
+**Outcome:** JL shared a Google Drive link. JL's email: *"the google drive link
+that I shared with you have 200K version of filtered climate dataset with name
+full_705k_v2_filtered. This contains actually 186,346 json files."* Received
+and pinned 2026-10-19 (D-023). Nothing else from the meeting is recorded here.
 
 ---
 

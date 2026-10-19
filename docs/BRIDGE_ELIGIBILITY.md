@@ -98,3 +98,42 @@ adjudication and Phase 4 compatibility run (D-019), and a later
 M5 package. The mentor question now leading `MENTOR_BRIEF.md` --- exact
 metric/scenario match, or disclosed family-level support --- decides whether
 `supporting_qualified` is a bridge the benchmark will use.
+
+## 5. Retrieval governance --- R-FWI-1 v1 (D-022)
+
+Retrieval decides which documents a later package may inspect; it is upstream
+of everything above and never establishes a claim or a bridge. One governed
+rule exists. Code: `src/climrr/retrieval.py`; tests: `tests/test_retrieval.py`.
+
+**R-FWI-1 v1** (GUIDANCE source-yield ruling, 2026-10-12, D-022). In
+heterogeneous scientific text bare `FWI` is polysemous --- full waveform
+inversion, Forest Watch Indonesia, fatal work injuries, a fractional water index
+(LITCORPUS-01 evidence: 10 of 13 diagnostic hits; LITCORPUS-00: all 11 `FWI`
+hits in `LIT-001501`). So:
+
+| A document whose fire-weather topical hits are | is |
+| --- | --- |
+| a longer term --- `fire weather index`, `fire-weather index`, `canadian forest fire weather index`, `canadian fwi` | eligible (`direct_topical_term`) |
+| bare `fwi`, and the **same document** contains an approved disambiguator --- `fire weather`, `fire-weather`, `fire weather index`, `fire-weather index`, `canadian forest fire weather index`, `canadian fwi` | eligible (`bare_fwi_with_same_document_disambiguator`) |
+| bare `fwi` only | **not eligible** (`bare_fwi_without_disambiguator`) |
+
+- **Same-document**, not same-sentence or same-section: a paper that defines FWI
+  once and uses the acronym later is kept.
+- **Both locations recorded**: the first bare-term hit and the first
+  disambiguator hit, each as section key, section index and `[start, end)` on
+  the unnormalized string.
+- **`FWI` stays in `concept_map.yaml`**, unchanged (hash pinned by test). The
+  rule governs retrieval eligibility only; rule C-2 above still treats `FWI` as
+  a `fire_weather_index` surface term inside a claim's concept field.
+- **Applies to** LITCORPUS-01, LITCORPUS-02, the legacy corpus if it is
+  re-queried, and every future source (ruling action 10).
+
+**Matcher differences, disclosed.** `climrr.retrieval` uses the frozen repo
+matcher (`climrr.conceptmap.find_term`). The external collection runs used
+DuckDB `regexp_matches(text, '\b'+term+'\b', 'i')`, and their hit offsets were
+computed with Python `re` `\b`. The three agree on ordinary text and differ in
+two edge cases: `FWI_x` (an underscore is a boundary only for the repo
+matcher), and a non-ASCII letter touching the term, e.g. `éFWI` (a boundary only
+for DuckDB, whose `\b` is ASCII). Neither difference changes the synthetic-test
+results (`tests/test_litcollect_tools.py`); its effect on the 705k arms is
+unmeasured, because the texts are on Eagle.

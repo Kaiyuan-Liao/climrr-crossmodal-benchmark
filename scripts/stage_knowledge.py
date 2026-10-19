@@ -11,6 +11,10 @@ the list is missing, nothing is copied and the run fails: a partial refresh
 would look complete. `refresh_knowledge/` is gitignored; it is a staging area,
 not evidence.
 
+**It writes no run record** (M4-WP3, Phase A.5): staging copies knowledge files
+and produces no evidence, so it is exempt from the run-record rule and leaves
+`reports/runs/` untouched. The commit it prints ties the staged set to the tree.
+
 `--only` takes repo-relative paths or basenames from the list, comma-separated.
 A name that is not on the list is an error, not a silent skip.
 """
@@ -26,7 +30,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "src"))
 
 from climrr.checksums import sha256_file  # noqa: E402
-from climrr.runrecord import git_commit, git_dirty, write_run_record  # noqa: E402
+from climrr.runrecord import git_commit, git_dirty  # noqa: E402
 
 #: Maintained by the COORDINATOR. Repo-relative paths; basenames must be unique.
 KNOWLEDGE_FILES = (
@@ -56,6 +60,11 @@ KNOWLEDGE_FILES = (
     "docs/M4_WP1B_WP2_CANDIDATE_READING_GUIDANCE_RULING.md",
     "docs/MENTOR_REPORT_2026-10-09.md",
     "docs/M5_WP2_COMPATIBILITY.md",
+    "docs/M4_WP3_CONCEPT_FIRST_GUIDANCE_RULING.md",
+    "docs/M4_WP3_SOURCE_YIELD_GUIDANCE_RULING.md",
+    "docs/LITCORPUS01_SHARD_PILOT.md",
+    "docs/LITCORPUS02_PROVENANCE.md",
+    "reports/milestones/M4_WP3_REPORT.md",
 )
 
 DEST_DIR = REPO_ROOT / "refresh_knowledge"
@@ -109,7 +118,6 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--only", default=None, help="comma-separated subset of the list")
     parser.add_argument("--dest", type=Path, default=DEST_DIR, help=argparse.SUPPRESS)
     parser.add_argument("--root", type=Path, default=REPO_ROOT, help=argparse.SUPPRESS)
-    parser.add_argument("--runs-dir", type=Path, default=None, help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
 
     try:
@@ -123,15 +131,6 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  {item['source']}")
     print(f"Staged {len(staged)} file(s) into {args.dest.name}/")
     print(f"Commit: {commit}{' (tracked files modified)' if dirty else ''}")
-
-    record = write_run_record(
-        "stage_knowledge",
-        result_summary={"n_staged": len(staged), "staged": staged, "subset": args.only or "all"},
-        passed=True,
-        config_snapshot={"dest": args.dest.name, "only": args.only},
-        runs_dir=args.runs_dir,
-    )
-    print(f"Run record: {record.name}")
     return 0
 
 

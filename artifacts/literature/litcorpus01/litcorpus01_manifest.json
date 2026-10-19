@@ -1,0 +1,113 @@
+{
+  "corpus_id": "LITCORPUS-01-conceptfirst-v1",
+  "role": "provenance/yield pilot; not the bridge corpus (D-022)",
+  "status": "frozen; retained, not discarded (D-024)",
+  "source": {
+    "kind": "S2ORC v1 shard, via ANL araiadoc",
+    "shard_filename": "20250110_123425_00414_fcji5_ece7efc6-de1c-4b47-8d63-7d0a484800e3.gz",
+    "shard_bytes": 1073892084,
+    "shard_bytes_source": "evidence/shard_listing.txt (ls -l on Eagle; directory redacted)",
+    "records": 54081,
+    "records_provenance": "reported by the collection-tool team; not computed by this project",
+    "composition": "~48% PubMed, ~18% arXiv --- reported by the collection-tool team; not computed by this project"
+  },
+  "collection_tool": {
+    "araiadoc_commit": "f9d3c6bbf1183bc16040a280a33b5ac9f5a20f23",
+    "matcher": "DuckDB, whole-word, case-insensitive, no stemming, over the concatenated document (as reported for araiadoc; the 705k arm matches per section)",
+    "duckdb_settings": "threads=1, memory_limit=16GB (extract logs)",
+    "host": "Polaris login node",
+    "date": "2026-10-12"
+  },
+  "queries": {
+    "fire_weather_v1": {
+      "file": "queries/fire_weather_v1_query.txt",
+      "sha256": "73c13461940d6cff39bdf5740bab55e16308093df576f2f3ed573000b4732d35",
+      "role": "production (corpus-defining)"
+    },
+    "extreme_heat_v1": {
+      "file": "queries/extreme_heat_v1_query.txt",
+      "sha256": "04cbcee537a4571952ab90bdd22933d6a998e5cd1b86c753bb997605156579c8",
+      "role": "production (corpus-defining)"
+    },
+    "fire_weather_diag_topical_only": {
+      "file": "queries/fire_weather_diag_topical_only_query.txt",
+      "sha256": "88d148d6f5db9db03e9f42895759afc1f183a45b7311b6b39c2da76f5f87a07b",
+      "role": "collection sensitivity diagnostic (no corpus identity)"
+    },
+    "extreme_heat_diag_topical_only": {
+      "file": "queries/extreme_heat_diag_topical_only_query.txt",
+      "sha256": "849388b459b2523587cbb358fa40738cb283b84b9c5b9444f9dc21be7282a3ba",
+      "role": "collection sensitivity diagnostic (no corpus identity)"
+    },
+    "fire_weather_v1_btsd_unused": {
+      "file": "queries/fire_weather_v1_btsd_unused_query.txt",
+      "sha256": "0ba70b64766386c6baab187192351b578a1f0809cdc20ba02ae7b472dc88744f",
+      "role": "unused / not executed as corpus-defining query"
+    },
+    "extreme_heat_v1_btsd_unused": {
+      "file": "queries/extreme_heat_v1_btsd_unused_query.txt",
+      "sha256": "bf292b1fabf45c8dbd977026c8863475c83fc3500434f7b343ac918ddc7ad20b",
+      "role": "unused / not executed as corpus-defining query"
+    }
+  },
+  "yields": {
+    "fire_weather_v1": {
+      "count": 4,
+      "role": "production (corpus-defining)"
+    },
+    "extreme_heat_v1": {
+      "count": 10,
+      "role": "production (corpus-defining)"
+    },
+    "fire_weather_diag_topical_only": {
+      "count": 13,
+      "role": "collection sensitivity diagnostic (no corpus identity)"
+    },
+    "extreme_heat_diag_topical_only": {
+      "count": 11,
+      "role": "collection sensitivity diagnostic (no corpus identity)"
+    },
+    "cross_arm_overlap": [],
+    "unique_production_items": 14,
+    "exact_byte_duplicate_groups_in_production": []
+  },
+  "fwi_collision_evidence": {
+    "file": "evidence/fwi_collision_snippets.txt",
+    "documents": [
+      "244316563",
+      "258509670",
+      "232342359",
+      "232332945",
+      "257970033",
+      "213672196",
+      "270637568",
+      "253457291",
+      "116023495",
+      "108962524"
+    ],
+    "in_fire_weather_v1_arm": [
+      "232342359",
+      "257970033"
+    ],
+    "statement": "at most 2 plausible FWI papers in the 4-paper arm before reading (D-022)"
+  },
+  "rfwi1_retroactive": {
+    "status": "pending --- not computed",
+    "reason": "the four raw records are hash-pinned on Eagle and not available on the authoring host; scripts/litcollect/apply_rfwi1_litcorpus01.py applies climrr.retrieval R-FWI-1 v1 to them after verifying each SHA-256, for Kaiyuan to run on Polaris"
+  },
+  "manifest": {
+    "production_csv": "litcorpus01_manifest.csv",
+    "production_csv_sha256": "c686425710a5c5ad23abdd904d0ca38982933b978c04463594b3ea6469faeda8",
+    "diagnostics_csv": "litcorpus01_diagnostics.csv",
+    "diagnostics_csv_sha256": "059aa114df801a066c17e16ca28449534cbb466532de783e6c535c97fcb64b29"
+  },
+  "item_id_rule": "item id = source basename (S2 corpus id); per-item SHA-256 of the raw record from evidence/litcorpus01_raw_hashes.txt",
+  "sectionization": "deferred (disclosed deviation): GUIDANCE is asked to confirm LITCORPUS-02 supersedes LITCORPUS-01 as the working corpus first",
+  "metadata": {
+    "year": "unknown",
+    "venue": "unknown",
+    "authors": "unknown"
+  },
+  "not_read": "No paper was read, opened for content, or sampled. Retrieval hits are lexical locations, not claims and not bridges.",
+  "storage": "raw records external on Eagle; never in Git"
+}

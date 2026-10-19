@@ -548,6 +548,17 @@ downloaded.
 **Question.** Is the folder every result the query returned? If not, what rule
 selected the files in it?
 
+### Q22 --- How was `full_705k_v2_filtered` filtered from the 705k set?
+
+Added in M4-WP3 (D-023). JL's email describes the source as the "200K version of
+filtered climate dataset with name full_705k_v2_filtered", containing 186,346
+JSON files. The project has the files and their hashes, not the filter. The
+705k parent's provenance is JL's, reported, not verified.
+
+**Question.** What rule selected the 186,346 files from the 705k set (fields,
+terms, classifier, venue or subject filter, deduplication), and when was it
+applied? And what is the 705k set itself?
+
 ---
 
 ## Ownership
@@ -560,7 +571,7 @@ selected the files in it?
 | **Mentor / ClimRR authors** (undocumented families) | Q7, Q8, Q13, Q14, Q15 |
 | **Mentor** (non-ClimRR columns joined into the table) | Q9, Q10, Q12 |
 | **Kaiyuan + mentor** (fitness for use) | Q16, Q17 |
-| **JL, the collection scientist** (literature corpus provenance) | Q19, Q20, Q21 --- added in M4-WP0 |
+| **JL, the collection scientist** (literature corpus provenance) | Q19, Q20, Q21 --- added in M4-WP0; Q22 --- added in M4-WP3 |
 
 **All nineteen questions Q0--Q18 were for the mentor or the ClimRR authors.**
 Q19--Q21, added later, are for the collection scientist. D-008 closed the
@@ -575,6 +586,7 @@ side.
 | **Q0** | **Closed, answered negative** (R-001). No further documentation exists. |
 | **Q11.4** | **Answered deterministically** from the bytes, not by the mentor. The two columns are neither duplicates nor a reordering. |
 | **Q19–Q21** | **Open, added 2026-09-28** (M4-WP0). For the collection scientist, not the mentor. |
+| **Q22** | **Open, added 2026-10-19** (M4-WP3). For JL: the 705k → 186,346 filter. |
 | **Q1–Q18** (all the rest, including the other parts of Q11) | **Mentor: no answer available.** They were put; none was answered per column (R-002). **Resolution path per D-010 pending** a GUIDANCE ruling and Kaiyuan's approval. |
 
 "No answer available" is not "unanswerable". It means the one source that could
