@@ -10,3 +10,11 @@
 # The literature collection query (M4-WP0) is pinned by SHA-256 in
 # data/manifest.json. Git must never rewrite it, even though it is plain text.
 data/metadata/literature_query.txt -text
+
+# M4-WP3: the collection evidence and the frozen corpus records are pinned by
+# SHA-256 (705k_stage1_hashes.txt, redactions.json, data/manifest.json); some
+# evidence CSVs use CRLF as received. Byte-exact: Git must never rewrite them.
+# (The `* text=auto` line above takes precedence over `*.csv -text`, so the
+# rule has to be restated after it for these paths.)
+artifacts/literature/litcorpus01/** -text
+artifacts/literature/litcorpus02/** -text

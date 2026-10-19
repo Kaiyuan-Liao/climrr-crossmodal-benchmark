@@ -1,0 +1,39 @@
+{
+  "query": "places_approved_query.txt",
+  "query_sha256": "cd0d596f538e838ee7ada805e655bdc781efa9a5919c5240909c18238c17ae75",
+  "query_text": "( oklahoma OR stephens OR california )",
+  "source_documents_matched": 16457,
+  "per_term_source_documents": {
+    "g0:oklahoma": 1525,
+    "g0:stephens": 1643,
+    "g0:california": 14054
+  },
+  "arms": {
+    "fire_weather_v1": {
+      "candidates": 100,
+      "list": "fire_weather_v1_place_candidates.txt",
+      "list_sha256": "122ee177f45dd98ecb76765a7ce0e8c543261694c5e991380ab94139d756a149",
+      "per_term": {
+        "oklahoma": 3,
+        "stephens": 10,
+        "california": 96
+      }
+    },
+    "extreme_heat_v1": {
+      "candidates": 143,
+      "list": "extreme_heat_v1_place_candidates.txt",
+      "list_sha256": "eb28845e43bbd63875a8ac7b25f64fef9aabb07abde69a7ae75e14bb689c623c",
+      "per_term": {
+        "oklahoma": 13,
+        "stephens": 3,
+        "california": 136
+      }
+    }
+  },
+  "first_hits_csv": "first_hits.csv",
+  "candidate_hits_csv": "candidate_hits.csv",
+  "statement": "Lexical hits; role of each place term (study area, affiliation, surname) unknown until reading; reading not authorized.",
+  "frozen_before_reading": true,
+  "first_hits_csv_sha256": "06c8064c36941ab787e33cd3eae4883f33fb71355a3e598c5aa0c56f61f22c29",
+  "candidate_hits_csv_sha256": "c33aa60c2f9d8290674bfa0e51c6c03bf72b0c25c7760615e4a6802f113153c1"
+}

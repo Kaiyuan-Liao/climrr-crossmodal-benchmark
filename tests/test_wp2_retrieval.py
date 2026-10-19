@@ -12,7 +12,15 @@ def _terms() -> dict:
 
 
 def test_the_frozen_terms_equal_a_rebuild():
-    assert wp2retrieve.build_terms() == _terms()
+    """Equal except the concept-map hash, which records the pre-D-025 map the terms were frozen from.
+
+    D-025 adds `additional_surface_terms`; the WP2 rule reads `accepted_surface_terms` only, so the
+    frozen term list itself is unchanged."""
+    from _frozen_state import PRE_D025_CONCEPT_MAP_SHA256, committed_sha256
+    rebuilt, frozen = wp2retrieve.build_terms(), _terms()
+    assert {k: v for k, v in rebuilt.items() if k != "concept_map_sha256"} == \
+        {k: v for k, v in frozen.items() if k != "concept_map_sha256"}
+    assert frozen["concept_map_sha256"] == PRE_D025_CONCEPT_MAP_SHA256 == committed_sha256("data/metadata/concept_map.yaml")
 
 
 def test_terms_are_approved_concept_terms_and_the_three_exact_place_labels_only():

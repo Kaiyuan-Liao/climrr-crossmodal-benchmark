@@ -1,0 +1,283 @@
+{
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "definition": "the union of the admitted fire_weather_v1 and extreme_heat_v1 arms, produced by the frozen v1 queries + R-FWI-1 over the D-023 source (D-024)",
+  "source": {
+    "name": "full_705k_v2_filtered.zip",
+    "supplied_by": "JL, via Google Drive link (D-023)",
+    "zip_bytes": 2283251035,
+    "zip_sha256": "516baf87049eda6b117f230e23ec52a016301ce482fc4edcd3581a6897baaa94",
+    "files": 186346,
+    "unpacked_bytes": 7651208072,
+    "directories": 100,
+    "directories_note": "the source's own layout, recorded not interpreted: 00-62, 64-99 and one named 'unknown' (2,126 files); there is no directory 63 (evidence/705k_stage1.log)",
+    "filtering_705k_to_186346": "unknown (Q22)",
+    "parent_705k_provenance": "JL's; reported, not verified",
+    "location": "Eagle, under config/local_paths.yaml:litcollect_root_polaris; immutable from receipt"
+  },
+  "index": {
+    "files": 186346,
+    "parse_failures": 0,
+    "section_rows": 1658731,
+    "total_bytes": 7651208072,
+    "distinct_sha256": 184268,
+    "manifest_csv_sha256": "a94885b9f2ebb6c47adb2f1ca09a2b62941cfb200151aad7ca4199ced1e4d212",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "content_identity_rule": "SHA-256 of UTF-8 lines 'rel_path<TAB>sha256<TAB>bytes<LF>' in rel_path order",
+    "duckdb_version": "1.5.4",
+    "python": "3.13.14",
+    "built_utc": "2026-10-19T21:52:17Z",
+    "exact_byte_redundant_copies_in_source": 2078,
+    "manifest_csv": "external (not in the evidence bundle); identified by manifest_csv_sha256"
+  },
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "matcher_difference_from_litcorpus01": "per-section rather than concatenated-document matching: a phrase cannot straddle a section boundary",
+  "queries_byte_identical_to_litcorpus01": true,
+  "rfwi1": {
+    "rule": "R-FWI-1 v1 (D-022)",
+    "run_argument": "fwi=fire weather|fire-weather",
+    "evidence": "rfwi1_fire_weather_v1.csv"
+  },
+  "execution": {
+    "fire_weather_v1": {
+      "run_utc": "2026-10-19T21:57:08Z",
+      "threads": 4,
+      "memory_limit": "4GB",
+      "duckdb_version": "1.5.4"
+    },
+    "extreme_heat_v1": {
+      "run_utc": "2026-10-19T22:01:42Z",
+      "threads": 4,
+      "memory_limit": "4GB",
+      "duckdb_version": "1.5.4"
+    },
+    "fire_weather_diag_topical_only": {
+      "run_utc": "2026-10-19T22:03:06Z",
+      "threads": 4,
+      "memory_limit": "4GB",
+      "duckdb_version": "1.5.4"
+    },
+    "extreme_heat_diag_topical_only": {
+      "run_utc": "2026-10-19T22:04:20Z",
+      "threads": 4,
+      "memory_limit": "4GB",
+      "duckdb_version": "1.5.4"
+    },
+    "host": "polaris-login-01 (evidence/705k_stage1.log)"
+  },
+  "yields": {
+    "fire_weather_v1": {
+      "role": "production (corpus-defining)",
+      "raw_count": 495,
+      "admitted_count": 448,
+      "excluded_by_rfwi1": 47,
+      "disambiguation_arg": "fwi=fire weather|fire-weather",
+      "per_group_doc_counts": [
+        548,
+        120833
+      ],
+      "per_term_doc_counts": {
+        "g0:fire weather index": 462,
+        "g0:fire-weather index": 9,
+        "g0:fwi": 408,
+        "g0:canadian forest fire weather index": 104,
+        "g0:canadian fwi": 42,
+        "g1:climate change": 104227,
+        "g1:climate projection": 1273,
+        "g1:climate projections": 6263,
+        "g1:warming": 56632,
+        "g1:rcp": 6017,
+        "g1:rcp8": 5028,
+        "g1:rcp4": 3272,
+        "g1:rcp2": 1907,
+        "g1:rcp6": 858,
+        "g1:ssp": 2851,
+        "g1:ssp1": 1023,
+        "g1:ssp2": 1235,
+        "g1:ssp3": 775,
+        "g1:ssp5": 1364,
+        "g1:cmip": 1564,
+        "g1:cmip5": 5442,
+        "g1:cmip6": 2856,
+        "g1:downscaled": 5807,
+        "g1:downscaling": 6764,
+        "g1:regional climate model": 2839,
+        "g1:historical baseline": 365,
+        "g1:end of century": 380,
+        "g1:end-century": 119,
+        "g1:mid-century": 1752,
+        "g1:mid century": 54,
+        "g1:future climate": 18531,
+        "g1:climate scenario": 2921,
+        "g1:climate scenarios": 7226,
+        "g1:fire season": 1870,
+        "g1:fire danger": 1041,
+        "gD:fire weather": 1298,
+        "gD:fire-weather": 128
+      }
+    },
+    "extreme_heat_v1": {
+      "role": "production (corpus-defining)",
+      "raw_count": 861,
+      "admitted_count": 861,
+      "excluded_by_rfwi1": 0,
+      "disambiguation_arg": null,
+      "per_group_doc_counts": [
+        1082,
+        125938
+      ],
+      "per_term_doc_counts": {
+        "g0:heat index": 1080,
+        "g0:heat-index": 13,
+        "g0:extended heat index": 1,
+        "g1:climate change": 104227,
+        "g1:climate projection": 1273,
+        "g1:climate projections": 6263,
+        "g1:warming": 56632,
+        "g1:rcp": 6017,
+        "g1:rcp8": 5028,
+        "g1:rcp4": 3272,
+        "g1:rcp2": 1907,
+        "g1:rcp6": 858,
+        "g1:ssp": 2851,
+        "g1:ssp1": 1023,
+        "g1:ssp2": 1235,
+        "g1:ssp3": 775,
+        "g1:ssp5": 1364,
+        "g1:cmip": 1564,
+        "g1:cmip5": 5442,
+        "g1:cmip6": 2856,
+        "g1:downscaled": 5807,
+        "g1:downscaling": 6764,
+        "g1:regional climate model": 2839,
+        "g1:historical baseline": 365,
+        "g1:end of century": 380,
+        "g1:end-century": 119,
+        "g1:mid-century": 1752,
+        "g1:mid century": 54,
+        "g1:future climate": 18531,
+        "g1:climate scenario": 2921,
+        "g1:climate scenarios": 7226,
+        "g1:public health": 15815,
+        "g1:heat wave": 4123,
+        "g1:heatwave": 3470
+      }
+    },
+    "fire_weather_diag_topical_only": {
+      "role": "collection sensitivity diagnostic (no corpus identity)",
+      "raw_count": 548,
+      "admitted_count": 473,
+      "excluded_by_rfwi1": 75,
+      "disambiguation_arg": "fwi=fire weather|fire-weather",
+      "per_group_doc_counts": [
+        548
+      ],
+      "per_term_doc_counts": {
+        "g0:fire weather index": 462,
+        "g0:fire-weather index": 9,
+        "g0:fwi": 408,
+        "g0:canadian forest fire weather index": 104,
+        "g0:canadian fwi": 42,
+        "gD:fire weather": 1298,
+        "gD:fire-weather": 128
+      }
+    },
+    "extreme_heat_diag_topical_only": {
+      "role": "collection sensitivity diagnostic (no corpus identity)",
+      "raw_count": 1082,
+      "admitted_count": 1082,
+      "excluded_by_rfwi1": 0,
+      "disambiguation_arg": null,
+      "per_group_doc_counts": [
+        1082
+      ],
+      "per_term_doc_counts": {
+        "g0:heat index": 1080,
+        "g0:heat-index": 13,
+        "g0:extended heat index": 1
+      }
+    }
+  },
+  "stable_ids": {
+    "item_id_rule": "source basename (S2 corpus id)",
+    "lit2_rule": "LIT2-NNNNNN in code-point order of item id over the union of the two admitted arms",
+    "n": 1308,
+    "first": "LIT2-000001",
+    "last": "LIT2-001308"
+  },
+  "manifests": {
+    "fire_weather_v1_manifest.csv": "e0943c668f9fb2442385edd87e93fdaf2c27d3f297191292e40f86488dffedc4",
+    "extreme_heat_v1_manifest.csv": "5de3e7aef402f0beed606f50ee61c210c84f4a2c838eea66e26535402a43da2d",
+    "lit2_ids.csv": "415aae90c9888291d46f4afc99c6f630aa5789a1190711b77aa718363cccbb82",
+    "rfwi1_fire_weather_v1.csv": "156fffad20e181438eb2d3dfe65ba8a86891f2be0d0344630ae17a1cdfc3e487",
+    "overlaps.json": "19b49c3f02d867f69299a9eb0de4752e13149b59fcc83956f834ce47613bea8d"
+  },
+  "manifest_bytes_column": "omitted: per-item byte counts are not in the evidence bundle",
+  "place_candidates": {
+    "query": "places_approved_query.txt",
+    "query_sha256": "cd0d596f538e838ee7ada805e655bdc781efa9a5919c5240909c18238c17ae75",
+    "query_text": "( oklahoma OR stephens OR california )",
+    "source_documents_matched": 16457,
+    "per_term_source_documents": {
+      "g0:oklahoma": 1525,
+      "g0:stephens": 1643,
+      "g0:california": 14054
+    },
+    "arms": {
+      "fire_weather_v1": {
+        "candidates": 100,
+        "list": "fire_weather_v1_place_candidates.txt",
+        "list_sha256": "122ee177f45dd98ecb76765a7ce0e8c543261694c5e991380ab94139d756a149",
+        "per_term": {
+          "oklahoma": 3,
+          "stephens": 10,
+          "california": 96
+        }
+      },
+      "extreme_heat_v1": {
+        "candidates": 143,
+        "list": "extreme_heat_v1_place_candidates.txt",
+        "list_sha256": "eb28845e43bbd63875a8ac7b25f64fef9aabb07abde69a7ae75e14bb689c623c",
+        "per_term": {
+          "oklahoma": 13,
+          "stephens": 3,
+          "california": 136
+        }
+      }
+    },
+    "first_hits_csv": "first_hits.csv",
+    "candidate_hits_csv": "candidate_hits.csv",
+    "statement": "Lexical hits; role of each place term (study area, affiliation, surname) unknown until reading; reading not authorized.",
+    "frozen_before_reading": true,
+    "first_hits_csv_sha256": "06c8064c36941ab787e33cd3eae4883f33fb71355a3e598c5aa0c56f61f22c29",
+    "candidate_hits_csv_sha256": "c33aa60c2f9d8290674bfa0e51c6c03bf72b0c25c7760615e4a6802f113153c1"
+  },
+  "metadata": {
+    "year": "unknown",
+    "venue": "unknown",
+    "authors": "unknown"
+  },
+  "not_read": "No paper was read, opened for content, or sampled. Retrieval hits are lexical locations, not claims and not bridges.",
+  "storage": "corpus files external on Eagle; only manifests, ids, hashes and hit locations are tracked",
+  "verified_against_hash_lists": {
+    "index/full_705k_v2_filtered/index_summary.json": "ed3cb63a13d9d20663ff6155fd294ce5d46c2a4c47e55564df91d5c35260e9aa",
+    "queries/extreme_heat_diag_topical_only_query.txt": "849388b459b2523587cbb358fa40738cb283b84b9c5b9444f9dc21be7282a3ba",
+    "queries/extreme_heat_v1_query.txt": "04cbcee537a4571952ab90bdd22933d6a998e5cd1b86c753bb997605156579c8",
+    "queries/fire_weather_diag_topical_only_query.txt": "88d148d6f5db9db03e9f42895759afc1f183a45b7311b6b39c2da76f5f87a07b",
+    "queries/fire_weather_v1_query.txt": "73c13461940d6cff39bdf5740bab55e16308093df576f2f3ed573000b4732d35",
+    "queries/places_approved_query.txt": "cd0d596f538e838ee7ada805e655bdc781efa9a5919c5240909c18238c17ae75",
+    "runs/705k/extreme_heat_diag_topical_only/ids.txt": "7f87ddcd360983846e7fa4f991a4d534906432fe1f795752d48a33637025f49e",
+    "runs/705k/extreme_heat_diag_topical_only/summary.json": "4cf510740397d23500a625e225bf68350871b0371e74bdae17975aeaf9566bc4",
+    "runs/705k/extreme_heat_v1/hits.csv": "feb4342ced02d3df6ce2a08d1d004faa63c782c72709bc81c2524a3cfc3d5ecc",
+    "runs/705k/extreme_heat_v1/ids.txt": "e8c83965fdfafda8fc6c29dd5949571bfbad5e79ffd25b5b7409c87f39a08364",
+    "runs/705k/extreme_heat_v1/summary.json": "895d4e6e5566289f5a1a63ba5ceb51064a5d3013f1e4ff728f0d380f3d7a9314",
+    "runs/705k/extreme_heat_v1_place_candidates.txt": "eb28845e43bbd63875a8ac7b25f64fef9aabb07abde69a7ae75e14bb689c623c",
+    "runs/705k/fire_weather_diag_topical_only/ids.txt": "df934e8c656e3ccfc43a45ae1f47fcac9c9aee731ef243d997e44cce84c92e76",
+    "runs/705k/fire_weather_diag_topical_only/summary.json": "1f5fac61a6bba01df7ed526f8bb91787069fbe455f5c6c37808d2688bc848a53",
+    "runs/705k/fire_weather_v1/hits.csv": "9fd398dcd37914610cbe753f013d3d77c005595c8fdb9140519ad56b47d4a834",
+    "runs/705k/fire_weather_v1/ids.txt": "7fbaafc3d3a59b78c491d8efaac8543973880987464e8cf7f4e1f6989a1cb3aa",
+    "runs/705k/fire_weather_v1/summary.json": "9b82526f19df68270c71492d9f366e2242d2d81cd43b0cb26d7974d0e604def0",
+    "runs/705k/fire_weather_v1_place_candidates.txt": "122ee177f45dd98ecb76765a7ce0e8c543261694c5e991380ab94139d756a149",
+    "runs/705k/places_approved/ids.txt": "5c21335989fe35563d695846511724a3d9978520af0f0a109597db02b5cf3b53",
+    "runs/705k/places_approved/summary.json": "7624080ee0613d61eca95b59e96e38d24e9888202f19c8d81f0c17ccafe20832"
+  }
+}

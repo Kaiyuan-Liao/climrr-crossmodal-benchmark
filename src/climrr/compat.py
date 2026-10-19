@@ -338,16 +338,24 @@ def family_term_hits(concept_value: str, concept_map: list[dict]) -> list[dict]:
     Uses `climrr.conceptmap.find_term` --- the matcher the M4-WP2 retrieval scan
     froze --- unchanged. Ordered by position, then term. Offsets are code points
     within `concept_value`.
+
+    D-025: the terms are `conceptmap.c2_terms` (dictionary-backed plus
+    `approved_lexical` additional forms). A hit lying inside an occurrence of an
+    `approved_family_term` form (e.g. "heat index" inside "extended heat index")
+    is dropped: that form is collection/retrieval vocabulary, not a C-2 match.
     """
     from climrr import conceptmap
+    masks = [span for m in conceptmap.family_term_masks(concept_map) for span in conceptmap.find_term(m, concept_value)]
     out = []
     for e in concept_map:
         if e["level"] != "family" or e["status"] != "approved_lexical":
             continue
-        for t in e["accepted_surface_terms"]:
+        for t, decision in conceptmap.c2_terms(e):
             for s, end in conceptmap.find_term(t, concept_value):
+                if any(ms <= s and end <= me for ms, me in masks):
+                    continue
                 out.append({"family": e["canonical_id"], "surface_term": t, "char_start": s, "char_end": end,
-                            "matched_text": concept_value[s:end], "concept_map_decision_id": e["decision_id"],
+                            "matched_text": concept_value[s:end], "concept_map_decision_id": decision,
                             "concept_map_entry": e["canonical_id"]})
     return sorted(out, key=lambda h: (h["char_start"], h["surface_term"]))
 

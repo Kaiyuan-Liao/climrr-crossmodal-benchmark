@@ -21,6 +21,18 @@
 # `source_span` lists line numbers in data/metadata/dictionary_extracted.txt.
 # Seeded by M4-WP2 Track B with the COORDINATOR-approved entries below and
 # nothing else: no UHI, no smoke, no drought.
+#
+# `additional_surface_terms` (M4-WP3 closeout, D-025): per-term governance for
+# terms that are NOT quoted from the dictionary and so cannot sit in the
+# dictionary-backed `accepted_surface_terms`. Each carries its own status,
+# source, decision and usage:
+#   approved_lexical      --- an ordinary family lexical form: collection,
+#                             retrieval and C-2 family-level claim matching;
+#   approved_family_term  --- collection and retrieval only; never C-2, never
+#                             compatibility, never a synonym of the family term.
+#                             Inside a claim concept an occurrence of it masks
+#                             any family-term hit it contains.
+# No additional term ever matches at metric level.
 
 schema_version: 1
 
@@ -40,6 +52,31 @@ entries:
     date: 2026-10-08
     status: approved_lexical
     approved_by: COORDINATOR
+    additional_surface_terms:
+      - term: fire-weather index
+        status: approved_lexical
+        usage: [collection, retrieval, c2_family_match]
+        source_type: guidance
+        decision_id: D-022
+        approved_under: D-025
+        approved_by: GUIDANCE
+        date: 2026-10-19
+      - term: canadian forest fire weather index
+        status: approved_lexical
+        usage: [collection, retrieval, c2_family_match]
+        source_type: guidance
+        decision_id: D-022
+        approved_under: D-025
+        approved_by: GUIDANCE
+        date: 2026-10-19
+      - term: canadian fwi
+        status: approved_lexical
+        usage: [collection, retrieval, c2_family_match]
+        source_type: guidance
+        decision_id: D-022
+        approved_under: D-025
+        approved_by: GUIDANCE
+        date: 2026-10-19
 
   - canonical_id: heat_index
     level: family
@@ -54,6 +91,26 @@ entries:
     date: 2026-10-08
     status: approved_lexical
     approved_by: COORDINATOR
+    additional_surface_terms:
+      - term: heat-index
+        status: approved_lexical
+        usage: [collection, retrieval, c2_family_match]
+        source_type: guidance
+        decision_id: D-022
+        approved_under: D-025
+        approved_by: GUIDANCE
+        date: 2026-10-19
+      - term: extended heat index
+        status: approved_family_term
+        usage: [collection, retrieval]
+        source_type: guidance
+        decision_id: D-022
+        approved_under: D-025
+        approved_by: GUIDANCE
+        date: 2026-10-19
+        note: >-
+          not a synonym of heat index; not the ClimRR threshold metric
+          heatindex_days_above_105F
 
   - canonical_id: fwi_seasonal_value
     level: metric

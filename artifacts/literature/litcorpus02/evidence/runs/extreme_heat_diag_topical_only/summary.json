@@ -1,0 +1,37 @@
+{
+  "name": "extreme_heat_diag_topical_only_705k",
+  "run_utc": "2026-10-19T22:04:20Z",
+  "query_file": "extreme_heat_diag_topical_only_query.txt",
+  "query_sha256": "849388b459b2523587cbb358fa40738cb283b84b9c5b9444f9dc21be7282a3ba",
+  "query_text": "( \"heat index\" OR \"heat-index\" OR \"extended heat index\" )\n",
+  "parsed_groups": [
+    [
+      "heat index",
+      "heat-index",
+      "extended heat index"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "<LITCOLLECT_ROOT_POLARIS>/index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    1082
+  ],
+  "per_term_doc_counts": {
+    "g0:heat index": 1080,
+    "g0:heat-index": 13,
+    "g0:extended heat index": 1
+  },
+  "raw_count": 1082,
+  "disambiguation": null,
+  "admitted_count": 1082,
+  "excluded_by_disambiguation": 0,
+  "elapsed_seconds": 65.0,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

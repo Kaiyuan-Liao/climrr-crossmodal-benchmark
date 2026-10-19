@@ -1,0 +1,43 @@
+{
+  "name": "fire_weather_diag_topical_only_705k",
+  "run_utc": "2026-10-19T22:03:06Z",
+  "query_file": "fire_weather_diag_topical_only_query.txt",
+  "query_sha256": "88d148d6f5db9db03e9f42895759afc1f183a45b7311b6b39c2da76f5f87a07b",
+  "query_text": "( \"fire weather index\" OR \"fire-weather index\" OR fwi OR \"canadian forest fire weather index\" OR \"canadian fwi\" )\n",
+  "parsed_groups": [
+    [
+      "fire weather index",
+      "fire-weather index",
+      "fwi",
+      "canadian forest fire weather index",
+      "canadian fwi"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "<LITCOLLECT_ROOT_POLARIS>/index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    548
+  ],
+  "per_term_doc_counts": {
+    "g0:fire weather index": 462,
+    "g0:fire-weather index": 9,
+    "g0:fwi": 408,
+    "g0:canadian forest fire weather index": 104,
+    "g0:canadian fwi": 42,
+    "gD:fire weather": 1298,
+    "gD:fire-weather": 128
+  },
+  "raw_count": 548,
+  "disambiguation": "fwi=fire weather|fire-weather",
+  "admitted_count": 473,
+  "excluded_by_disambiguation": 75,
+  "elapsed_seconds": 73.0,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

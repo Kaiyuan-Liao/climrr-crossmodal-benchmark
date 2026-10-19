@@ -43,6 +43,10 @@ BOUNDARY_RULE = (
 LEVELS = ("family", "metric")
 SOURCE_TYPES = ("dictionary", "mentor", "guidance")
 ENTRY_STATUSES = ("approved_lexical", "proposed")
+#: Per-term governance for `additional_surface_terms` (D-025).
+ADDITIONAL_STATUSES = ("approved_lexical", "approved_family_term")
+ADDITIONAL_REQUIRED = ("term", "status", "usage", "source_type", "decision_id", "approved_under", "approved_by", "date")
+C2_USAGE = "c2_family_match"
 REQUIRED = ("canonical_id", "level", "accepted_surface_terms", "source_type", "source_reference",
             "source_span", "decision_id", "date", "status", "approved_by")
 
@@ -103,7 +107,19 @@ def validate(data: dict, dictionary_lines: list[str]) -> list[dict]:
                     raise ConceptMapError(f"{cid}: term {t!r} is not on any cited dictionary line")
         if e["status"] == "approved_lexical" and (not e["approved_by"] or e["approved_by"] == "none"):
             raise ConceptMapError(f"{cid}: approved_lexical without approved_by")
-        for t in terms:
+        for a in e.get("additional_surface_terms", []):
+            missing = [k for k in ADDITIONAL_REQUIRED if k not in a]
+            if missing:
+                raise ConceptMapError(f"{cid}: additional term {a.get('term')!r} missing {missing}")
+            if e["level"] != "family":
+                raise ConceptMapError(f"{cid}: additional surface terms are family-level only")
+            if a["status"] not in ADDITIONAL_STATUSES or a["source_type"] not in ("guidance", "mentor"):
+                raise ConceptMapError(f"{cid}: additional term {a['term']!r}: status or source_type not allowed")
+            if (C2_USAGE in a["usage"]) != (a["status"] == "approved_lexical"):
+                raise ConceptMapError(f"{cid}: additional term {a['term']!r}: only approved_lexical forms enter C-2")
+            if not a["approved_by"] or a["approved_by"] == "none":
+                raise ConceptMapError(f"{cid}: additional term {a['term']!r} without approved_by")
+        for t in [*terms, *(a["term"] for a in e.get("additional_surface_terms", []))]:
             key = normalize_concept(t)
             if key in seen_terms:
                 raise ConceptMapError(f"{cid}: term {t!r} already belongs to {seen_terms[key]}")
@@ -117,10 +133,26 @@ def load(path: Path | None = None, dictionary_path: Path | None = None) -> list[
     return validate(data, lines)
 
 
+def c2_terms(entry: dict) -> list[tuple[str, str]]:
+    """(surface term, decision id) for C-2 family matching: the dictionary-backed terms plus the
+    `approved_lexical` additional terms (D-025). `approved_family_term` forms are excluded."""
+    out = [(t, entry["decision_id"]) for t in entry["accepted_surface_terms"]]
+    out += [(a["term"], a["decision_id"]) for a in entry.get("additional_surface_terms", [])
+            if a["status"] == "approved_lexical"]
+    return out
+
+
+def family_term_masks(entries: list[dict]) -> list[str]:
+    """`approved_family_term` forms (collection / retrieval only). Inside a claim concept, an
+    occurrence of one masks every C-2 hit it contains (D-025)."""
+    return [a["term"] for e in entries for a in e.get("additional_surface_terms", [])
+            if a["status"] == "approved_family_term"]
+
+
 def approved_family_terms(entries: list[dict]) -> dict[str, str]:
-    """Normalized surface term -> family canonical id, `approved_lexical` families only."""
+    """Normalized C-2 surface term -> family canonical id, `approved_lexical` families only."""
     return {normalize_concept(t): e["canonical_id"] for e in entries
-            if e["level"] == "family" and e["status"] == "approved_lexical" for t in e["accepted_surface_terms"]}
+            if e["level"] == "family" and e["status"] == "approved_lexical" for t, _ in c2_terms(e)}
 
 
 def family_of(canonical_id: str, entries: list[dict]) -> str | None:

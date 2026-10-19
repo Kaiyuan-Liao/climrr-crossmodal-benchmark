@@ -1,0 +1,122 @@
+{
+  "corpus_id": "LITCORPUS-01-conceptfirst-v1",
+  "arm": "fire_weather_v1",
+  "rule": "R-FWI-1 v1 (D-022): a document is fire-weather retrieval-eligible iff some string section contains a topical term other than bare 'fwi' (fire weather index, fire-weather index, canadian forest fire weather index, canadian fwi), or some section contains bare 'fwi' and some section of the same document contains an approved disambiguator (fire weather, fire-weather, fire weather index, fire-weather index, canadian forest fire weather index, canadian fwi). Same-document, not same-sentence. Matching: climrr.conceptmap.find_term (case-insensitive, boundary-aware, no normalization). The first bare-term hit and the first disambiguator hit (document order) are both recorded as section key, section index and [start, end).",
+  "section_key_note": "section_key is the JSON path of the string value",
+  "n_records": 4,
+  "admitted_count": 2,
+  "admitted": [
+    "134165809",
+    "188013273"
+  ],
+  "records": [
+    {
+      "item_id": "134165809",
+      "rel_path": "raw/fire_weather_v1/09/134165809.json",
+      "sha256": "6c62d5cdbc68895f3ca4350376fc641a598afaa918c7e31b73b2ddd7c86d00db",
+      "rule_id": "R-FWI-1",
+      "rule_version": "v1",
+      "decision_id": "D-022",
+      "eligible": true,
+      "basis": "direct_topical_term",
+      "direct_term_hit": {
+        "term": "fire weather index",
+        "section_key": "$.content.text",
+        "section_idx": 6,
+        "char_start": 4467,
+        "char_end": 4485,
+        "matched_text": "Fire Weather Index"
+      },
+      "bare_term_hit": {
+        "term": "fwi",
+        "section_key": "$.content.text",
+        "section_idx": 6,
+        "char_start": 4487,
+        "char_end": 4490,
+        "matched_text": "FWI"
+      },
+      "disambiguator_hit": {
+        "term": "fire weather index",
+        "section_key": "$.content.text",
+        "section_idx": 6,
+        "char_start": 4467,
+        "char_end": 4485,
+        "matched_text": "Fire Weather Index"
+      }
+    },
+    {
+      "item_id": "257970033",
+      "rel_path": "raw/fire_weather_v1/33/257970033.json",
+      "sha256": "0593280c0d011553eeae9d35f5c1f4ac8f0ecabc0e582327ac7d6f927019550a",
+      "rule_id": "R-FWI-1",
+      "rule_version": "v1",
+      "decision_id": "D-022",
+      "eligible": false,
+      "basis": "bare_fwi_without_disambiguator",
+      "direct_term_hit": null,
+      "bare_term_hit": {
+        "term": "fwi",
+        "section_key": "$.content.text",
+        "section_idx": 6,
+        "char_start": 39325,
+        "char_end": 39328,
+        "matched_text": "FWI"
+      },
+      "disambiguator_hit": null
+    },
+    {
+      "item_id": "232342359",
+      "rel_path": "raw/fire_weather_v1/59/232342359.json",
+      "sha256": "1d68b87de377c029689dc7e4f79076ca20488488a9d767230d88b4be9d77310f",
+      "rule_id": "R-FWI-1",
+      "rule_version": "v1",
+      "decision_id": "D-022",
+      "eligible": false,
+      "basis": "bare_fwi_without_disambiguator",
+      "direct_term_hit": null,
+      "bare_term_hit": {
+        "term": "fwi",
+        "section_key": "$.content.text",
+        "section_idx": 5,
+        "char_start": 118340,
+        "char_end": 118343,
+        "matched_text": "fwi"
+      },
+      "disambiguator_hit": null
+    },
+    {
+      "item_id": "188013273",
+      "rel_path": "raw/fire_weather_v1/73/188013273.json",
+      "sha256": "20a6b7998b97f7edbd8d7f68209540a7edd8c4347a1d4303bccee0d10c5936c9",
+      "rule_id": "R-FWI-1",
+      "rule_version": "v1",
+      "decision_id": "D-022",
+      "eligible": true,
+      "basis": "direct_topical_term",
+      "direct_term_hit": {
+        "term": "fire weather index",
+        "section_key": "$.content.text",
+        "section_idx": 7,
+        "char_start": 145599,
+        "char_end": 145617,
+        "matched_text": "Fire Weather Index"
+      },
+      "bare_term_hit": {
+        "term": "fwi",
+        "section_key": "$.content.text",
+        "section_idx": 7,
+        "char_start": 145619,
+        "char_end": 145622,
+        "matched_text": "FWI"
+      },
+      "disambiguator_hit": {
+        "term": "fire weather",
+        "section_key": "$.content.text",
+        "section_idx": 7,
+        "char_start": 137550,
+        "char_end": 137562,
+        "matched_text": "fire weather"
+      }
+    }
+  ]
+}

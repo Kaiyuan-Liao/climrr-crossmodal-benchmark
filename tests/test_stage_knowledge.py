@@ -65,18 +65,38 @@ def test_a_basename_collision_fails(root, tmp_path):
 
 def test_main_end_to_end_in_a_temp_dir(root, tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(sk, "KNOWLEDGE_FILES", FILES)
-    dest, runs = tmp_path / "out", tmp_path / "runs"
-    rc = sk.main(["--root", str(root), "--dest", str(dest), "--runs-dir", str(runs), "--only", "top.md"])
+    dest = tmp_path / "out"
+    rc = sk.main(["--root", str(root), "--dest", str(dest), "--only", "top.md"])
     assert rc == 0
     assert [p.name for p in dest.iterdir()] == ["top.md"]
     out = capsys.readouterr().out
     assert "top.md" in out and "Commit:" in out
-    assert len(list(runs.glob("*_stage_knowledge.json"))) == 1
+    assert "Run record" not in out
+
+
+def test_main_writes_no_run_record(root, tmp_path, monkeypatch):
+    """M4-WP3 Phase A.5: staging leaves reports/runs/ untouched and never calls the run-record writer."""
+    import ast
+
+    import climrr.runrecord as rr
+
+    calls = []
+    monkeypatch.setattr(rr, "write_run_record", lambda *a, **k: calls.append(a))
+    monkeypatch.setattr(sk, "KNOWLEDGE_FILES", FILES)
+    runs = REPO_ROOT / "reports" / "runs"
+    before = sorted(p.name for p in runs.iterdir())
+    assert sk.main(["--root", str(root), "--dest", str(tmp_path / "out")]) == 0
+    assert sorted(p.name for p in runs.iterdir()) == before
+    assert calls == []
+    tree = ast.parse((REPO_ROOT / "scripts" / "stage_knowledge.py").read_text(encoding="utf-8"))
+    names = {n.id for n in ast.walk(tree) if isinstance(n, ast.Name)} | {
+        a.name for n in ast.walk(tree) if isinstance(n, ast.ImportFrom) for a in n.names}
+    assert "write_run_record" not in names
 
 
 def test_main_fails_on_a_missing_file(root, tmp_path, monkeypatch):
     monkeypatch.setattr(sk, "KNOWLEDGE_FILES", FILES + ("gone.md",))
-    rc = sk.main(["--root", str(root), "--dest", str(tmp_path / "out"), "--runs-dir", str(tmp_path / "runs")])
+    rc = sk.main(["--root", str(root), "--dest", str(tmp_path / "out")])
     assert rc == 1
     assert not (tmp_path / "out").exists()
 
@@ -85,6 +105,13 @@ def test_the_real_list_exists_and_has_unique_basenames():
     names = [p.rsplit("/", 1)[-1] for p in sk.KNOWLEDGE_FILES]
     assert len(names) == len(set(names))
     assert [f for f in sk.KNOWLEDGE_FILES if not (REPO_ROOT / f).is_file()] == []
+
+
+def test_the_list_carries_the_m4_wp3_rulings_and_records():
+    for f in ("docs/M4_WP3_CONCEPT_FIRST_GUIDANCE_RULING.md", "docs/M4_WP3_SOURCE_YIELD_GUIDANCE_RULING.md",
+              "docs/LITCORPUS01_SHARD_PILOT.md", "docs/LITCORPUS02_PROVENANCE.md",
+              "reports/milestones/M4_WP3_REPORT.md", "docs/M4_WP3_WORKING_CORPUS_STAGE2_GUIDANCE_RULING.md"):
+        assert f in sk.KNOWLEDGE_FILES
 
 
 def test_the_list_carries_the_m4_wp1_pilot_and_its_ruling():

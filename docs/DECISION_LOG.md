@@ -1305,3 +1305,165 @@ code emits, and the next GUIDANCE packet still chooses.
   `docs/LITERATURE_WP1B_ADJUDICATION.md`, `docs/BRIDGE_ELIGIBILITY.md`,
   `reports/milestones/M4_WP1B_REPORT.md` and `M4_WP2_RETRIEVAL_REPORT.md`
   (field 14), `scripts/stage_knowledge.py`, `docs/PROJECT_STATE.md`.
+
+---
+
+## D-020 --- Mentor direction: define concepts from the table units first, then collect papers for them
+
+- **Date:** 2026-10-09 (the one-on-one); recorded 2026-10-19 in M4-WP3.
+- **Status:** **decided.**
+- **Owner:** **the mentor**, relayed by Kaiyuan Liao.
+- **Decision.** Define the literature concepts from the table units first, then
+  collect papers for those concepts with the ANL paper-collection tool, rather
+  than reading a corpus collected for another purpose. Keep the three units
+  (P-CELL-1, P-COUNTY-1, P-STATE-1) for now.
+- **Context (the EXECUTOR's, not the mentor's words; no rationale was
+  relayed).** The direction followed the M5-WP2 result --- 0 eligible pairs of
+  78 --- on LITCORPUS-00, a corpus collected by a hazard query whose scope
+  covers one of the pilot concept terms exactly and three not at all.
+- **Consequences.** A new, separately versioned concept-first corpus. The legacy
+  corpus and every M4-WP0--WP2 artifact are kept unchanged, as method
+  validation and negative-case evidence (D-021).
+- **Affected files:** this log; `docs/MENTOR_BRIEF.md`.
+
+## D-021 --- Concept-first collection ruling (GUIDANCE): PASS WITH ACTIONS
+
+- **Date:** 2026-10-12
+- **Status:** **decided.**
+- **Owner:** **GUIDANCE**; placed by Kaiyuan Liao as
+  `docs/M4_WP3_CONCEPT_FIRST_GUIDANCE_RULING.md`.
+- **What the ruling decides.** The concept-first pivot is the primary path for
+  positive-bridge discovery. A **new, separately versioned corpus**, not a
+  continuation of LITCORPUS-00. Collection queries use **only tracked
+  concept-map family vocabulary** --- no scientific synonyms without
+  concept-map governance. **No US place term in collection**; geography
+  filtering only after the concept corpus is frozen. Year / venue / authors stay
+  **`unknown`**. M4-WP0-style provenance is required. Next package **M4-WP3**.
+  **No paper is read before the provenance/yield packet is reviewed.** QA
+  generation still not authorized.
+- **Consequences.** The earlier corpus history is not rewritten; LITCORPUS-00
+  stays the record of what was tried first.
+- **Affected files:** this log; the ruling, tracked as placed.
+
+## D-022 --- Source-yield ruling (GUIDANCE): PASS WITH ACTIONS; LITCORPUS-01 frozen as a pilot; R-FWI-1
+
+- **Date:** 2026-10-12
+- **Status:** **decided.**
+- **Owner:** **GUIDANCE**; placed by Kaiyuan Liao as
+  `docs/M4_WP3_SOURCE_YIELD_GUIDANCE_RULING.md`.
+- **What the ruling decides.**
+  1. The shard run is frozen as **`LITCORPUS-01-conceptfirst-v1`** --- a
+     provenance/yield pilot, **not** the bridge corpus.
+  2. A **larger and/or domain-appropriate source** is authorized, queried with
+     the **identical frozen queries**; each source arm separately identified.
+  3. The context-free runs are **"collection sensitivity diagnostics"**, never
+     a corpus version.
+  4. **Retrieval rule R-FWI-1:** bare `fwi` admits a document only with a
+     same-document approved disambiguator --- `fire weather`, `fire-weather`,
+     `fire weather index`, `fire-weather index`, `canadian forest fire weather
+     index`, `canadian fwi` --- same-document, not same-sentence, with both hit
+     locations recorded. Longer terms admit directly.
+  5. **`FWI` stays in `concept_map.yaml`, unchanged.** R-FWI-1 is retrieval
+     governance, not a change to the concept.
+  6. LITCORPUS-01 provenance mechanics may proceed. **No reading.**
+- **Implemented in M4-WP3** as `climrr.retrieval` (R-FWI-1 v1), documented in
+  `docs/BRIDGE_ELIGIBILITY.md` §5. The 705k run applied it with the argument
+  `fwi=fire weather|fire-weather`, which is equivalent to the six-term list for
+  the frozen fire query (`docs/LITCORPUS02_PROVENANCE.md` §4).
+- **Affected files:** this log; the ruling; `src/climrr/retrieval.py`,
+  `tests/test_retrieval.py`, `docs/BRIDGE_ELIGIBILITY.md`.
+
+## D-023 --- Source received: `full_705k_v2_filtered.zip`
+
+- **Date:** 2026-10-19
+- **Status:** **decided** (a record of receipt).
+- **Owner:** **Kaiyuan Liao**.
+- **What was received.** `full_705k_v2_filtered.zip`, supplied by **JL** through
+  a Google Drive link following the 2026-10-13 mentor meeting. JL's email:
+  *"the google drive link that I shared with you have 200K version of filtered
+  climate dataset with name full_705k_v2_filtered. This contains actually
+  186,346 json files."* **2,283,251,035 bytes**; SHA-256
+  **`516baf87049eda6b117f230e23ec52a016301ce482fc4edcd3581a6897baaa94`**;
+  **186,346** `.json` files, **7,651,208,072** bytes unpacked. Stored on
+  Polaris/Eagle under the path held in the untracked `config/local_paths.yaml`
+  at the new key `litcollect_root_polaris`. **Immutable from receipt.**
+- **Unknown.** How JL filtered "705k → 186,346" (**Q22**). The provenance of the
+  705k parent is JL's, **reported, not verified**.
+- **Affected files:** this log; `docs/METADATA_QUESTIONS.md` (Q22);
+  `config/local_paths.example.yaml`; `docs/LITCORPUS02_PROVENANCE.md`.
+
+## D-024 --- LITCORPUS-02 frozen
+
+- **Date:** 2026-10-19
+- **Status:** **decided.**
+- **Owner:** **CONTROL / Kaiyuan Liao**.
+- **Decision.** **`LITCORPUS-02-conceptfirst-705k-v1`** is the union of the two
+  admitted production arms --- `fire_weather_v1` (495 raw → **448** after
+  R-FWI-1) and `extreme_heat_v1` (**861**), overlap 1 --- **1,308 items**,
+  produced by the frozen v1 queries and R-FWI-1 over the D-023 source. Each
+  item keeps its source basename as item id and receives a frozen `LIT2-NNNNNN`
+  in code-point order of that id. LITCORPUS-00 and LITCORPUS-01 are
+  **retained, not discarded**.
+- **Consequences.** The corpus files stay on Eagle; manifests, ids, hashes and
+  hit locations are tracked under `artifacts/literature/litcorpus02/` and
+  pinned in `data/manifest.json` (`external_corpora`). The geography preflight
+  (100 / 143 place candidates) is frozen and **unread**.
+- **Affected files:** this log; `artifacts/literature/litcorpus0{1,2}/`,
+  `data/manifest.json`, `docs/LITCORPUS01_SHARD_PILOT.md`,
+  `docs/LITCORPUS02_PROVENANCE.md`, `reports/milestones/M4_WP3_REPORT.md`.
+
+## D-025 --- M4-WP3 reviewed: PASS WITH ACTIONS; LITCORPUS-02 the working corpus; five terms governed; WP4 sample and Stage 2a--2c authorized
+
+- **Date:** 2026-10-19
+- **Status:** **decided.**
+- **Owner:** **GUIDANCE**; placed by Kaiyuan Liao as
+  `docs/M4_WP3_WORKING_CORPUS_STAGE2_GUIDANCE_RULING.md`. Reviewed head
+  **`6b2b5a6`** (pushed, `origin/work/m4-wp3`).
+- **What the ruling decides.**
+  1. **M4-WP3: PASS WITH ACTIONS.**
+  2. **`LITCORPUS-02-conceptfirst-705k-v1` is the working concept-first
+     candidate corpus** --- for candidate generation, **not** a representative
+     sample of the literature (448 / 861 / 1,308).
+  3. **LITCORPUS-01 stays the provenance/yield pilot; its sectionization is
+     closed as not required.**
+  4. **Q22** (the upstream 705k → 186,346 filter) **stays open**; not a blocker
+     for candidate use.
+  5. **Five query terms governed** (`source_type: guidance`, `decision_id:
+     D-022`, approval under D-025): `fire-weather index`, `canadian forest fire
+     weather index`, `canadian fwi` (`fire_weather_index`) and `heat-index`
+     (`heat_index`) are **`approved_lexical`** --- collection, retrieval and C-2;
+     **`extended heat index`** is **`approved_family_term`** for heat-index
+     collection and retrieval only --- not a synonym of heat index, not the
+     threshold metric `heatindex_days_above_105F`.
+  6. **R-FWI-1 accepted as implemented** (six disambiguators).
+  7. **Matcher difference accepted as a disclosed limitation**: the yield change
+     is **not** a formal source-effect estimate.
+  8. **A 20-paper two-reader pilot (M4-WP4) is authorized** with the rank-based
+     10 + 10 rule: ranks 10, 20, …, 100 (fire) and 14, 28, …, 140 (heat) after
+     sorting by `LIT2` id and suppressing later exact-byte duplicates for
+     sampling only; advance on a missing rank; fire before heat on overlap.
+     Frozen before reading; reader 1 → blind reader → freeze → comparison →
+     adjudication → evidence tiers → compatibility.
+  9. **Stage 2a--2c authorized as diagnostics**: dictionary-described concepts
+     only; model proposals are `candidate_surface_form` and inert; literature
+     yield never selects units or assigns column meaning.
+  10. **Global `.gitattributes` cleanup deferred** to a housekeeping package.
+  11. **QA not authorized.**
+- **Implementation (M4-WP3 closeout).** `data/metadata/concept_map.yaml` gains
+  per-term `additional_surface_terms` (the dictionary-backed
+  `accepted_surface_terms` are unchanged); `climrr.conceptmap.c2_terms` feeds C-2
+  the dictionary terms plus the `approved_lexical` forms; an
+  `approved_family_term` occurrence in a claim concept masks the family-term
+  hits it contains, so "extended heat index" is never a C-2 match. Concept-map
+  SHA-256 `6ec6b081…3664` → **`27f7a44d…d7b4`**. The frozen M4-WP2 terms and
+  M5-WP2 inputs keep their recorded pre-D-025 hashes (tested against the blobs at
+  `6b2b5a6`); the M5-WP2 matrix reproduces unchanged under the new C-2 (no
+  adjudicated claim contains any of the five terms).
+- **Affected files:** this log; the ruling; `data/metadata/concept_map.yaml`,
+  `src/climrr/conceptmap.py`, `src/climrr/compat.py`, `tests/test_conceptmap.py`,
+  `tests/test_retrieval.py`, `tests/test_wp2_retrieval.py`, `tests/test_m5wp2.py`,
+  `tests/_frozen_state.py`; `docs/BRIDGE_ELIGIBILITY.md`,
+  `docs/LITCORPUS01_SHARD_PILOT.md`, `docs/LITCORPUS02_PROVENANCE.md`,
+  `reports/milestones/M4_WP3_REPORT.md`, `docs/PROJECT_STATE.md`,
+  `docs/MENTOR_BRIEF.md`; `scripts/wp4_sample.py`,
+  `artifacts/literature/wp4_sample.json`.
