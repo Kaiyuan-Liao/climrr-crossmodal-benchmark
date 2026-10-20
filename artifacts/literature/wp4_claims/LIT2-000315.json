@@ -1,0 +1,375 @@
+{
+  "lit2_id": "LIT2-000315",
+  "item_id": "225397451",
+  "arm": "extreme_heat_v1",
+  "rank": 42,
+  "rel_path": "51/225397451.json",
+  "file_sha256": "d0eca4d6aa1c750a5974a5f8e6206188967e1230237081f11e38138d36c7cd4e",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "methods",
+    "results",
+    "discussion and conclusions"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Environmental Research Letters Effect of irrigation on humid heat extremes OPEN ACCESS RECEIVED",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "note": "The stored title carries the venue name and page labels: 'Environmental Research Letters ... OPEN ACCESS RECEIVED'. The venue is not recorded as a bibliographic field because no field holds only it."
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper estimates, with a global climate model, how irrigation changes humid heat extremes (wet-bulb temperature) and the frequency of dangerous humid heat.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 193,
+    "char_end": 452,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "We analyzed global climate model results over hot locations and seasons at high temporal resolution to estimate the impact of irrigation on humid heat extremes, quantified as different percentiles of wet-bulb temperature (T w ), under contemporary conditions.",
+    "evidence_sha256": "c5d091b252dc77a1f62efbd62cb826efe2257e640d3d6e9ef7a256f37ee5fc45"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-000315-C1",
+      "claim_text": "Over hot land areas and months, irrigation lowered median daily maximum temperature by about 0.1 °C but slightly raised median wet-bulb temperature (about 0.03 °C), with no significant change in its 90th or 99th percentiles.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "median daily maximum temperature; wet-bulb temperature (T w) percentiles; irrigation",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "temperature decrease ~0.1 °C; T w,50 increase ~0.03 °C; no significant change at 90th/99th",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "hot land locations and months globally (90th percentile of daily maximum T w at least 27 °C)",
+        "status": "explicit",
+        "role": "analysis domain (global hot land areas)",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 5556,
+          "char_end": 5667,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Hot locations and months were defined as ones where the 90th percentile of daily maximum T w is at least 27 • C",
+          "evidence_sha256": "dbc66b61b00a8a3a936bfe6bffdb4a66d77199c85d873ac60f6fc03195adb7da"
+        }
+      },
+      "temporal_frame": {
+        "value": "contemporary conditions (forcings and boundary conditions circa year 2000; 30 analysed model years)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 2820,
+          "char_end": 2966,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The No-irrig and Irrigated simulations were each run for 31 years, maintaining the forcings and boundary conditions at the values from circa 2000.",
+          "evidence_sha256": "5166064633de2888a358dcefb3c9dcf0909bcdb83fe6d6c571ee973f0501830a"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "two GISS ModelE v2.1 simulations, 'No-irrig' and 'Irrigated' (year-2000 irrigation forcing), fixed SSTs",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 27,
+          "char_end": 165,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "We conducted two simulations using the latest version (v2.1) of the Goddard Institute for Space Studies (GISS) climate model, ModelE [23].",
+          "evidence_sha256": "3697e1096ec9b752f2b4c3cc808b528da04bd9314e3f2c9731df81d0ef3b051e"
+        }
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 2332,
+        "char_end": 2523,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The cooling and higher humidity combine to yield a slight increase of~0.03 • C in median wet-bulb temperature (T w,50 ), but no significant change in the 90th or 99th percentiles ( figure 3).",
+        "evidence_sha256": "0a11aefbe7c73563686a63150142b72aacff36f7bc4ebcec8d76196235a96eea"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The ~0.1 °C temperature decrease is in the preceding sentence: 'irrigation results in a decrease of~0.1 • C in median daily maximum temperature'."
+    },
+    {
+      "claim_id": "LIT2-000315-C2",
+      "claim_text": "In central North America's Mississippi valley, irrigation produced significant increases of 0.3-0.5 °C in the 50th, 90th and 99th percentile wet-bulb temperatures, with no change in median temperature.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "wet-bulb temperature percentiles; dew point; irrigation",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "significant increases of 0.3-0.5 °C; no change in median temperature; increase in dew point",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Central North America's Mississippi valley",
+        "status": "explicit",
+        "role": "analysis region (hot land region)"
+      },
+      "temporal_frame": {
+        "value": "contemporary conditions (forcings and boundary conditions circa year 2000; 30 analysed model years)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 2820,
+          "char_end": 2966,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The No-irrig and Irrigated simulations were each run for 31 years, maintaining the forcings and boundary conditions at the values from circa 2000.",
+          "evidence_sha256": "5166064633de2888a358dcefb3c9dcf0909bcdb83fe6d6c571ee973f0501830a"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "two GISS ModelE v2.1 simulations, 'No-irrig' and 'Irrigated' (year-2000 irrigation forcing), fixed SSTs",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 27,
+          "char_end": 165,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "We conducted two simulations using the latest version (v2.1) of the Goddard Institute for Space Studies (GISS) climate model, ModelE [23].",
+          "evidence_sha256": "3697e1096ec9b752f2b4c3cc808b528da04bd9314e3f2c9731df81d0ef3b051e"
+        }
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 2789,
+        "char_end": 3026,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Central North America's Mississippi valley, some of which is irrigated, shows no change in median temperature and an increase in dew point, and significant increases of 0.3-0.5 • C in 50th, 90th, and 99th percetile wet bulb temperatures.",
+        "evidence_sha256": "4fd41fd8db5a3e2f30240d692632610ce77417621afe5980f826d34c977828e1"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "'percetile' is the source's spelling."
+    },
+    {
+      "claim_id": "LIT2-000315-C3",
+      "claim_text": "Irrigation raised the frequency of dangerous wet-bulb temperatures (≥27 °C) by half a day per year over hot areas, nearly doubling it in the Mississippi Valley (4 to 7 days) and decreasing it about 6% over the Ganges.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "frequency of dangerous conditions with T w ≥ 27 °C",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "+0.5 day/year overall (22.6 to 23.1); almost doubling in the Mississippi Valley; +10-20% Arabia and Indus; -6% Ganges",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "hot areas overall; the Mississippi Valley region; Arabia; the Indus Basin; the Ganges Basin",
+        "status": "explicit",
+        "role": "analysis regions"
+      },
+      "temporal_frame": {
+        "value": "contemporary conditions (forcings and boundary conditions circa year 2000; 30 analysed model years)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 2820,
+          "char_end": 2966,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The No-irrig and Irrigated simulations were each run for 31 years, maintaining the forcings and boundary conditions at the values from circa 2000.",
+          "evidence_sha256": "5166064633de2888a358dcefb3c9dcf0909bcdb83fe6d6c571ee973f0501830a"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "two GISS ModelE v2.1 simulations, 'No-irrig' and 'Irrigated' (year-2000 irrigation forcing), fixed SSTs",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 27,
+          "char_end": 165,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "We conducted two simulations using the latest version (v2.1) of the Goddard Institute for Space Studies (GISS) climate model, ModelE [23].",
+          "evidence_sha256": "3697e1096ec9b752f2b4c3cc808b528da04bd9314e3f2c9731df81d0ef3b051e"
+        }
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 7387,
+        "char_end": 7569,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Dangerous conditions with T w ≥ 27 • C slightly increased in frequency overall in hot areas due to irrigation, by a half day per year (going from 22.6 to 23.1 days) or 2% (figure 6).",
+        "evidence_sha256": "b4e7765499d0433b8ca177bc5748ed2718249eee9c131b6938bee9c2cd3786e1"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The regional changes are in the next sentence of the same field."
+    },
+    {
+      "claim_id": "LIT2-000315-C4",
+      "claim_text": "Extremely dangerous wet-bulb conditions (≥30 °C) showed no significant overall change with irrigation, but increased significantly over Arabia (3.5 to 4.2 days/year) and decreased in the Indus basin (0.2 to 0.1).",
+      "claim_type": "finding",
+      "concept": {
+        "value": "frequency of extremely dangerous conditions with T w ≥ 30 °C",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "no significant overall change; increase over Arabia; decrease in the Indus basin",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "hot regions overall; Arabia; the Indus basin",
+        "status": "explicit",
+        "role": "analysis regions"
+      },
+      "temporal_frame": {
+        "value": "contemporary conditions (forcings and boundary conditions circa year 2000; 30 analysed model years)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 2820,
+          "char_end": 2966,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The No-irrig and Irrigated simulations were each run for 31 years, maintaining the forcings and boundary conditions at the values from circa 2000.",
+          "evidence_sha256": "5166064633de2888a358dcefb3c9dcf0909bcdb83fe6d6c571ee973f0501830a"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "two GISS ModelE v2.1 simulations, 'No-irrig' and 'Irrigated' (year-2000 irrigation forcing), fixed SSTs",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 27,
+          "char_end": 165,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "We conducted two simulations using the latest version (v2.1) of the Goddard Institute for Space Studies (GISS) climate model, ModelE [23].",
+          "evidence_sha256": "3697e1096ec9b752f2b4c3cc808b528da04bd9314e3f2c9731df81d0ef3b051e"
+        }
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 7863,
+        "char_end": 8185,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Extremely dangerous conditions with T w ≥ 30 • C (not shown; 2.6 days per year overall in hot regions) showed no significant change in frequency due to irrigation overall, but increased significantly over Arabia (from 3.5 to 4.2 days per year), while decreasing significantly in the Indus basin (0.2 to 0.1 days per year).",
+        "evidence_sha256": "5b1187ecd2fb3ec69360dc89fcabe332f5e5026a7983dfbfb27b9dd65dcde2f1"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": null
+    },
+    {
+      "claim_id": "LIT2-000315-C5",
+      "claim_text": "A cited regional modelling study of California and Nebraska found mean heat index decreased less than mean temperature in irrigated areas, and peak heat index, unlike peak temperature, did not decrease under irrigation.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "mean heat index, which combines temperature and humidity; peak heat index; irrigation",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "mean heat index decreased less than mean temperature; peak heat index did not decrease",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "California and Nebraska",
+        "status": "explicit",
+        "role": "study area of the cited study"
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 2388,
+        "char_end": 2711,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Lobell et al [21] studied heat extremes in California and Nebraska using regional climate modeling, finding that mean heat index, which combines temperature and humidity, decreased less in irrigated areas than mean temperature, and that the peak heat index value, unlike peak temperature, did not decrease under irrigation.",
+        "evidence_sha256": "d01f47ec4e95f98bc745cb614888b80697daf95776a7d067c6485cd423ce4331"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "Attributed to Lobell et al [21]."
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-000315-R1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 1922,
+        "char_end": 2104,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Ambient T w of 35 • C, which could become widespread under greenhouse warming from continued high rates of fossil fuel burning, makes lethal overheating inevitable even at rest [16].",
+        "evidence_sha256": "2c2d83cffa7ee30ce223f841be6d29b684114ae63223aa8e5547b2df193699cb"
+      },
+      "reason": "Cited, hedged ('could become') statement about future warming; no named scenario or horizon."
+    },
+    {
+      "candidate_id": "LIT2-000315-R2",
+      "evidence": {
+        "json_path": "$.methods",
+        "char_start": 5669,
+        "char_end": 5795,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "the approximate threshold for dangerously hot conditions in the US National Weather Service classification based on heat index",
+        "evidence_sha256": "8371f81c51faf7a87b91538623ff83fe521172d31bfef2322d965da5ca57f8ba"
+      },
+      "reason": "Definition of the analysis threshold, not a finding."
+    },
+    {
+      "candidate_id": "LIT2-000315-R3",
+      "evidence": {
+        "json_path": "$[\"discussion and conclusions\"]",
+        "char_start": 3995,
+        "char_end": 4078,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "particularly in places like California where topographic variation is large [60,61]",
+        "evidence_sha256": "868c9bde3c973b467d4591c2cb0f1a3f758f05c5e5510cfb0317606ff8ab1dd6"
+      },
+      "reason": "A limitation remark about model resolution, not a finding."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": null
+}

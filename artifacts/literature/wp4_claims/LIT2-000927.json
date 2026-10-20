@@ -1,0 +1,371 @@
+{
+  "lit2_id": "LIT2-000927",
+  "item_id": "266658220",
+  "arm": "extreme_heat_v1",
+  "rank": 98,
+  "rel_path": "20/266658220.json",
+  "file_sha256": "746d04dd0494931b6a0fb8a86a8a014a07f1109f245390b3599914a5cf76b0b1",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "mortality and population data",
+    "temperature data",
+    "statistical analysis",
+    "descriptive statistics",
+    "dlnm",
+    "threshold regression",
+    "discussion",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Identifying heat thresholds for South Africa towards the development of a heat-health warning system",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper estimates temperature-mortality associations and district heat thresholds for South Africa to inform a heat-health warning system, i.e. the health impacts of extreme heat.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 346,
+    "char_end": 468,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "This study contributes to the development of a HHWS for South Africa that can potentially minimize heat-related mortality.",
+    "evidence_sha256": "02c3eb606708815def4db31efbf47728e71098962a021aca803549b877c7feb6"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-000927-C1",
+      "claim_text": "Maximum temperature was the most statistically significant predictor of all-cause summer mortality in 40 of 52 South African districts (77%), ahead of minimum temperature (7 districts) and diurnal temperature range (3).",
+      "claim_type": "finding",
+      "concept": {
+        "value": "maximum temperature, minimum temperature, diurnal temperature range; all-cause mortality",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "maximum temperature most significant in 40 (77%) districts; minimum 7 (13%); DTR 3 (6%)",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the 52 districts in South Africa",
+        "status": "explicit",
+        "role": "study area",
+        "support": {
+          "json_path": "$.introduction",
+          "char_start": 4205,
+          "char_end": 4279,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "while adjusting for population in each of the 52 districts in South Africa",
+          "evidence_sha256": "1803b5b164ae6d47ac8001af08fdc49353a4358a1fc24ffa5645780c3439d4dd"
+        }
+      },
+      "temporal_frame": {
+        "value": "1997 to 2013, summer months (October to March)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 853,
+          "char_end": 1016,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The mortality dataset contained records of daily registered deaths (n = 8,476,532) from 1997 to 2013 and data for the temperature indices were for the same period.",
+          "evidence_sha256": "caa06493d49373d9ac7d0fab1f227e9e36faafa9cf431109346bd2a466688823"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "district-level distributed lag nonlinear models (quasi-Poisson), population-adjusted; threshold regression",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"statistical analysis\"]",
+          "char_start": 111,
+          "char_end": 266,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "a distributed lag nonlinear model (DLNM) using a quasi-Poisson regression model was implemented to express the nonlinear exposure-lag-response relationship",
+          "evidence_sha256": "e593f8b5c28647a28246c51af58d170880f154c8f9a7d42cfb1aba800412c212"
+        }
+      },
+      "evidence": {
+        "json_path": "$.dlnm",
+        "char_start": 0,
+        "char_end": 117,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Maximum temperature was the most statistically significant temperature metric in 40 (77%) districts out 52 (Table 1).",
+        "evidence_sha256": "b67b533b09f4e1684856f8b53f7e22d4122aaa35b303b3f5d65f80f56cdcebbb"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The minimum-temperature and DTR counts are two sentences later in the same field."
+    },
+    {
+      "claim_id": "LIT2-000927-C2",
+      "claim_text": "Maximum temperature was associated with increased risk of mortality in all but three of the South African districts.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "maximum temperature; risk of mortality",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "increased risk in all but three districts",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the 52 districts in South Africa",
+        "status": "explicit",
+        "role": "study area",
+        "support": {
+          "json_path": "$.introduction",
+          "char_start": 4205,
+          "char_end": 4279,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "while adjusting for population in each of the 52 districts in South Africa",
+          "evidence_sha256": "1803b5b164ae6d47ac8001af08fdc49353a4358a1fc24ffa5645780c3439d4dd"
+        }
+      },
+      "temporal_frame": {
+        "value": "1997 to 2013, summer months (October to March)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 853,
+          "char_end": 1016,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The mortality dataset contained records of daily registered deaths (n = 8,476,532) from 1997 to 2013 and data for the temperature indices were for the same period.",
+          "evidence_sha256": "caa06493d49373d9ac7d0fab1f227e9e36faafa9cf431109346bd2a466688823"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "district-level distributed lag nonlinear models (quasi-Poisson), population-adjusted; threshold regression",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"statistical analysis\"]",
+          "char_start": 111,
+          "char_end": 266,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "a distributed lag nonlinear model (DLNM) using a quasi-Poisson regression model was implemented to express the nonlinear exposure-lag-response relationship",
+          "evidence_sha256": "e593f8b5c28647a28246c51af58d170880f154c8f9a7d42cfb1aba800412c212"
+        }
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 1179,
+        "char_end": 1281,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Maximum temperature was associated with increased risk of mortality in all but three of the districts.",
+        "evidence_sha256": "384389c3eae2743ecf6e1eaac0448d76d0c7ee1b4484a454d12f2b13474430d5"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": null
+    },
+    {
+      "claim_id": "LIT2-000927-C3",
+      "claim_text": "District maximum-temperature mortality thresholds followed climate zones: the hot arid Northern Cape and North West averaged 33.31 and 33.05, versus 27.92 in Mpumalanga and 26.37 in the Eastern Cape.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "district-level maximum temperature thresholds above which daily mortality increases",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "highest in hot arid interior provinces; lower in temperate interior and coastal provinces",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Northern Cape and North West (hot arid interior); Mpumalanga (temperate interior); Eastern Cape (coast) — provinces of South Africa",
+        "status": "explicit",
+        "role": "study area (provincial averages)"
+      },
+      "temporal_frame": {
+        "value": "1997 to 2013, summer months (October to March)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 853,
+          "char_end": 1016,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The mortality dataset contained records of daily registered deaths (n = 8,476,532) from 1997 to 2013 and data for the temperature indices were for the same period.",
+          "evidence_sha256": "caa06493d49373d9ac7d0fab1f227e9e36faafa9cf431109346bd2a466688823"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "district-level distributed lag nonlinear models (quasi-Poisson), population-adjusted; threshold regression",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"statistical analysis\"]",
+          "char_start": 111,
+          "char_end": 266,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "a distributed lag nonlinear model (DLNM) using a quasi-Poisson regression model was implemented to express the nonlinear exposure-lag-response relationship",
+          "evidence_sha256": "e593f8b5c28647a28246c51af58d170880f154c8f9a7d42cfb1aba800412c212"
+        }
+      },
+      "evidence": {
+        "json_path": "$[\"threshold regression\"]",
+        "char_start": 679,
+        "char_end": 1024,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Figure 1 shows that, on average, districts located in the hot arid interior provinces of the Northern Cape and the North West had the highest thresholds (provincial average of 33.31 and 33.05) compared to districts located in the temperate interior (Mpumalanga province) and along the coast (Eastern Cape province) 27.92 and 26.37, respectively.",
+        "evidence_sha256": "994aeef10b55439dbd7f1d68072d64d102f5878d882ac6883496afa5380404ca"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "Units are not stated in this sentence (the thresholds are maximum temperatures, presumably °C, not asserted here)."
+    },
+    {
+      "claim_id": "LIT2-000927-C4",
+      "claim_text": "The study recommends a heat-health warning system for South Africa that issues heat alerts using district-level maximum temperature thresholds.",
+      "claim_type": "recommendation",
+      "concept": {
+        "value": "heat-health warning system (HHWS); district-level maximum temperature thresholds",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "recommends incorporating thresholds to issue heat alerts",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "South Africa",
+        "status": "explicit",
+        "role": "target of the recommendation"
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.conclusion",
+        "char_start": 749,
+        "char_end": 882,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Based on the findings, this study recommends a HHWS incorporating district-level maximum temperature thresholds to issue heat alerts.",
+        "evidence_sha256": "fc8ded192e6bd3deaf750c1530038db4fa763b5d86a9137a421f1eff6dc19633"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": null
+    },
+    {
+      "claim_id": "LIT2-000927-C5",
+      "claim_text": "A cited study found the US National Weather Service's national heat index alert threshold of 40.1 °C ineffective in California's desert communities, where it was regularly exceeded by well-adapted residents.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "the national heat index threshold of 40.1 °C used by the US National Weather Service to issue heat alerts",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "found to be ineffective; regularly exceeded; residents well adapted",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the desert communities of California",
+        "status": "explicit",
+        "role": "study area of the cited study"
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 3785,
+        "char_end": 3972,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "For example, the national heat index threshold of 40.1 °C used by the US National Weather Service to issue heat alerts was found to be ineffective in the desert communities of California.",
+        "evidence_sha256": "957fd6442b5838e07c01172ed96b8d5510d5c8e7263331de10c63f7d629f121a"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "Attributed to Guirguis et al. (2014)."
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-000927-R1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 710,
+        "char_end": 822,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In 2006 in the USA, California (which was the most affected state) recorded 655 heat-related deaths over 2 weeks",
+        "evidence_sha256": "04991b3cc925b8186da067768e61a1e6547c092f25e8ab19416e9d8967bde47b"
+      },
+      "reason": "Background figure attributed to other studies; beyond the five-claim cap."
+    },
+    {
+      "candidate_id": "LIT2-000927-R2",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 0,
+        "char_end": 192,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Climate change is projected to intensify the adverse health impacts of extreme heat by increasing their frequency, severity, and duration of heatwave events (Ebi et al. 2021;Zhao et al. 2022).",
+        "evidence_sha256": "d524e758ad862672a77207554ede4820a732cfb5b179fcca58864e787e03215f"
+      },
+      "reason": "Cited projection; no scenario, horizon or place."
+    },
+    {
+      "candidate_id": "LIT2-000927-R3",
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 3535,
+        "char_end": 3677,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The findings of our study relating to the high maximum temperature thresholds for hot regions indicate population adaptation to local climate.",
+        "evidence_sha256": "efb1ba8fa6a21100997dafad3e5fe2d0fc752d6a7097fef05fa967a9b5503531"
+      },
+      "reason": "An interpretation (adaptation) not tested in the study."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "Several fields end mid-sentence in the source ('Buffalo City (Eastern Cape), Cape Winelands', 'These are among the hottest')."
+}
