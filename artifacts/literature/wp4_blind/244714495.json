@@ -1,0 +1,273 @@
+{
+  "source_basename": "244714495.json",
+  "source_relpath": "95/244714495.json",
+  "source_sha256": "a335fbf2e6c78485c30ad32b32debd77032457dbdc88e554dca4f096b0cd0f24",
+  "offset_convention": "zero-based half-open Unicode code-point offsets into the decoded JSON string value as stored (no normalization)",
+  "keys_read": [
+    {
+      "json_path": "$[\"title\"]",
+      "length": 58
+    },
+    {
+      "json_path": "$[\"abstract\"]",
+      "length": 991
+    },
+    {
+      "json_path": "$[\"introduction\"]",
+      "length": 4274
+    },
+    {
+      "json_path": "$[\"related work\"]",
+      "length": 3066
+    },
+    {
+      "json_path": "$[\"study area\"]",
+      "length": 2001
+    },
+    {
+      "json_path": "$[\"modeling process\"]",
+      "length": 1604
+    },
+    {
+      "json_path": "$[\"online parameter estimation\"]",
+      "length": 2452
+    },
+    {
+      "json_path": "$[\"fire map prediction\"]",
+      "length": 565
+    },
+    {
+      "json_path": "$[\"evaluation and discussion\"]",
+      "length": 817
+    },
+    {
+      "json_path": "$[\"algorithm 1 two-time-scale stochastic optimization\"]",
+      "length": 738
+    },
+    {
+      "json_path": "$[\"temporal validation\"]",
+      "length": 401
+    },
+    {
+      "json_path": "$[\"estimation\"]",
+      "length": 1513
+    },
+    {
+      "json_path": "$[\"conclusion\"]",
+      "length": 1000
+    }
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Learning Wildfire Model from Incomplete State Observations",
+      "json_path": "$[\"title\"]",
+      "note": "raw stored value"
+    },
+    "authors": {
+      "value": "unknown"
+    },
+    "year": {
+      "value": "unknown"
+    },
+    "venue": {
+      "value": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper builds and evaluates a wildfire burned-area prediction model for five western US locations from satellite fire and climate data.",
+  "scope_quote": {
+    "json_path": "$[\"abstract\"]",
+    "char_start": 287,
+    "char_end": 469,
+    "evidence_text": "we create a dynamic model for future wildfire predictions of five locations within the western United States through a deep neural network via historical burned area and climate data",
+    "occurrences_in_value": 1
+  },
+  "claims": [
+    {
+      "claim_id": "244714495-c1",
+      "restatement": "The proposed dynamic auto-encoder outperformed the alternative models for Salt Lake City, Portland and Medford on binary cross-entropy loss, but did not outperform them on the other metric (AUROC).",
+      "restatement_word_count": 29,
+      "claim_type": "finding",
+      "concept": {
+        "value": "binary cross-entropy (BCE) loss",
+        "tag": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "outperforms the other ... in terms of the binary cross-entropy (BCE) loss; did not outperform in terms of the other performance metric",
+        "tag": "explicit"
+      },
+      "geography": {
+        "value": "Salt Lake City, Portland, and Medford",
+        "tag": "explicit",
+        "role": {
+          "value": "study area",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"study area\"]",
+            "char_start": 123,
+            "char_end": 335,
+            "evidence_text": "Squares were centered at cities that have experienced moderate to high wildfire activity in the past decade, including: Portland, Oregon; Medford, Oregon; Reno, Nevada; Denver, Colorado; and Salt Lake City, Utah.",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "validation data beginning 06/08/2016 and ending 04/08/2020",
+        "tag": "inferred",
+        "support_span": {
+          "json_path": "$[\"evaluation and discussion\"]",
+          "char_start": 247,
+          "char_end": 379,
+          "evidence_text": "Then, the corrected trained models were applied to the later time-series validation data beginning 06/08/2016 and ending 04/08/2020.",
+          "occurrences_in_value": 1
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "experimental_condition": {
+        "value": "validation data sets in a different time period from training",
+        "tag": "inferred",
+        "support_span": {
+          "json_path": "$[\"estimation\"]",
+          "char_start": 140,
+          "char_end": 215,
+          "evidence_text": "The validation and training time series data are in different time periods.",
+          "occurrences_in_value": 1
+        }
+      },
+      "evidence": {
+        "json_path": "$[\"estimation\"]",
+        "char_start": 458,
+        "char_end": 723,
+        "evidence_text": "The proposed model (dynamic auto-encoder) outperforms the other for the three locations (Salt Lake City, Portland, and Medford) in terms of the binary cross-entropy (BCE) loss. However, the proposed model did not outperform in terms of the other performance metric.",
+        "occurrences_in_value": 1
+      }
+    },
+    {
+      "claim_id": "244714495-c2",
+      "restatement": "The authors suggest the proposed model's better performance could come from the dynamic auto-encoder's ability to estimate for confounding factors.",
+      "restatement_word_count": 20,
+      "claim_type": "mechanism",
+      "concept": {
+        "value": "greater performance of the proposed",
+        "tag": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "could be from the dynamic auto-encoder's ability to estimate for confounding factors",
+        "tag": "explicit"
+      },
+      "geography": {
+        "value": "unknown",
+        "tag": "unknown",
+        "role": {
+          "value": "unknown",
+          "tag": "unknown"
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"estimation\"]",
+        "char_start": 1365,
+        "char_end": 1513,
+        "evidence_text": "This means that the greater performance of the proposed metric could be from the dynamic auto-encoder's ability to estimate for confounding factors.",
+        "occurrences_in_value": 1
+      }
+    },
+    {
+      "claim_id": "244714495-c3",
+      "restatement": "Citing Higuera and Abatzoglou (2020), the paper states the 2020 western US season saw over 2.5 million hectares burned, the largest wildfire season recorded in modern history.",
+      "restatement_word_count": 27,
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "hectares burned",
+        "tag": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "over 2.5 million hectares burned, the largest wildfire season recorded in modern history",
+        "tag": "explicit"
+      },
+      "geography": {
+        "value": "the western United States",
+        "tag": "explicit",
+        "role": {
+          "value": "contextual mention",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"introduction\"]",
+            "char_start": 1069,
+            "char_end": 1098,
+            "evidence_text": "(Higuera and Abatzoglou 2020)",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "the 2020 season",
+        "tag": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"introduction\"]",
+        "char_start": 924,
+        "char_end": 1099,
+        "evidence_text": "In the western United States alone, the 2020 season saw over 2.5 million hectares burned, the largest wildfire season recorded in modern history (Higuera and Abatzoglou 2020).",
+        "occurrences_in_value": 1
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "json_path": "$[\"abstract\"]",
+      "char_start": 0,
+      "char_end": 60,
+      "evidence_text": "As wildfires are expected to become more frequent and severe",
+      "occurrences_in_value": 1,
+      "reason": "Uncited framing projection with no source, geography or timeframe in the paper; not promoted."
+    },
+    {
+      "json_path": "$[\"abstract\"]",
+      "char_start": 801,
+      "char_end": 991,
+      "evidence_text": "When compared to existing approaches that do not account for incomplete state observation within wildfire time-series data, on average, we are able to achieve higher prediction performances.",
+      "occurrences_in_value": 1,
+      "reason": "Generalises the result to 'on average'; the detailed results section qualifies this (better on BCE for three locations, not on AUROC), so the narrower statement was used instead."
+    },
+    {
+      "json_path": "$[\"evaluation and discussion\"]",
+      "char_start": 606,
+      "char_end": 729,
+      "evidence_text": "In Figure 9, as shown in the linked video, the wildfire prediction map shows qualitative correlation with the ground truth.",
+      "occurrences_in_value": 1,
+      "reason": "Depends on a figure and video not present in the stored text; qualitative only."
+    },
+    {
+      "json_path": "$[\"introduction\"]",
+      "char_start": 236,
+      "char_end": 435,
+      "evidence_text": "Anthropogenic-induced climate change, human activity, accumulation of fuels, and past forest management techniques are all contributing factors to the increasing number and severity of forest fires .",
+      "occurrences_in_value": 1,
+      "reason": "Uncited background assertion (citation appears to be missing in the stored text); not promoted."
+    }
+  ],
+  "terminal_status": "claims_extracted"
+}

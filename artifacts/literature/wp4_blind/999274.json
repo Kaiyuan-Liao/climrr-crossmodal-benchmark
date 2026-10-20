@@ -1,0 +1,367 @@
+{
+  "source_basename": "999274.json",
+  "source_relpath": "74/999274.json",
+  "source_sha256": "ccc828ae11a6b4f4f224b03d0bb422a3bf5febd4d8e711e79ca5144568307617",
+  "offset_convention": "zero-based half-open Unicode code-point offsets into the decoded JSON string value as stored (no normalization)",
+  "keys_read": [
+    {
+      "json_path": "$[\"title\"]",
+      "length": 152
+    },
+    {
+      "json_path": "$[\"abstract\"]",
+      "length": 2680
+    },
+    {
+      "json_path": "$[\"background\"]",
+      "length": 7849
+    },
+    {
+      "json_path": "$[\"methods\"]",
+      "length": 1067
+    },
+    {
+      "json_path": "$[\"fire emissions and atmospheric transport and dispersion modeling\"]",
+      "length": 3692
+    },
+    {
+      "json_path": "$[\"statistical modeling input data\"]",
+      "length": 798
+    },
+    {
+      "json_path": "$[\"atmospheric particulates\"]",
+      "length": 2491
+    },
+    {
+      "json_path": "$[\"syndromic surveillance heath data\"]",
+      "length": 2133
+    },
+    {
+      "json_path": "$[\"additional model variables\"]",
+      "length": 1487
+    },
+    {
+      "json_path": "$[\"statistical framework\"]",
+      "length": 2496
+    },
+    {
+      "json_path": "$[\"variable and model selection\"]",
+      "length": 4544
+    },
+    {
+      "json_path": "$[\"model diagnostics and results\"]",
+      "length": 6054
+    },
+    {
+      "json_path": "$[\"discussion\"]",
+      "length": 10489
+    },
+    {
+      "json_path": "$[\"conclusion\"]",
+      "length": 1359
+    }
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Modeling acute respiratory illness during the 2007 San Diego wildland fires using a coupled emissions-transport system and generalized additive modeling",
+      "json_path": "$[\"title\"]",
+      "note": "raw stored value"
+    },
+    "authors": {
+      "value": "unknown"
+    },
+    "year": {
+      "value": "unknown"
+    },
+    "venue": {
+      "value": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper models wildfire smoke particulate exposure and its association with respiratory emergency department visits during the 2007 San Diego wildland fires.",
+  "scope_quote": {
+    "json_path": "$[\"abstract\"]",
+    "char_start": 12,
+    "char_end": 140,
+    "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented.",
+    "occurrences_in_value": 1
+  },
+  "claims": [
+    {
+      "claim_id": "999274-c1",
+      "restatement": "Scaled to peak mean modeled concentrations, fire-emitted PM10 increased the odds of seeking emergency care by approximately 41% (regional model) and 72% (sub-regional model).",
+      "restatement_word_count": 24,
+      "claim_type": "finding",
+      "concept": {
+        "value": "fire-emitted PM 10",
+        "tag": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "odds increase is approximately 41% (regional) and 72% (sub-regional)",
+        "tag": "explicit"
+      },
+      "geography": {
+        "value": "San Diego County",
+        "tag": "inferred",
+        "support_span": {
+          "json_path": "$[\"abstract\"]",
+          "char_start": 12,
+          "char_end": 140,
+          "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented.",
+          "occurrences_in_value": 1
+        },
+        "role": {
+          "value": "study area",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"abstract\"]",
+            "char_start": 12,
+            "char_end": 140,
+            "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented.",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "08/01/2007 through 11/29/2007",
+        "tag": "inferred",
+        "support_span": {
+          "json_path": "$[\"syndromic surveillance heath data\"]",
+          "char_start": 2035,
+          "char_end": 2132,
+          "evidence_text": "analysis of the complete data set was limited to the time period of 08/01/2007 through 11/29/2007",
+          "occurrences_in_value": 1
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "experimental_condition": {
+        "value": "peak mean modeled concentrations",
+        "tag": "explicit"
+      },
+      "evidence": {
+        "json_path": "$[\"model diagnostics and results\"]",
+        "char_start": 4774,
+        "char_end": 5131,
+        "evidence_text": "An example of a variable with continuous data is that of the fire-emitted PM 10 (first line), where the original logistic regression coefficient from Table 3 may at first appear small, but when scaled to account for the peak mean modeled concentrations, the resulting odds increase is approximately 41% (regional) and 72% (sub-regional) as shown in Table 4.",
+        "occurrences_in_value": 1
+      }
+    },
+    {
+      "claim_id": "999274-c2",
+      "restatement": "The county-level model explained 76.6% of deviance but under-estimated emergency department visits by roughly 15% on days of the PM10 spike following the October burn event.",
+      "restatement_word_count": 26,
+      "claim_type": "finding",
+      "concept": {
+        "value": "ED visits",
+        "tag": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "deviance explained is 76.6% ... under-estimated by roughly 15% for these days",
+        "tag": "explicit"
+      },
+      "geography": {
+        "value": "San Diego County",
+        "tag": "inferred",
+        "support_span": {
+          "json_path": "$[\"model diagnostics and results\"]",
+          "char_start": 1640,
+          "char_end": 1749,
+          "evidence_text": "A time series of estimated and observed ED visits for the San Diego County-level model is shown in Figure 11a",
+          "occurrences_in_value": 1
+        },
+        "role": {
+          "value": "study area",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"abstract\"]",
+            "char_start": 12,
+            "char_end": 140,
+            "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented.",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "08/01/2007 through 11/29/2007",
+        "tag": "inferred",
+        "support_span": {
+          "json_path": "$[\"syndromic surveillance heath data\"]",
+          "char_start": 2035,
+          "char_end": 2132,
+          "evidence_text": "analysis of the complete data set was limited to the time period of 08/01/2007 through 11/29/2007",
+          "occurrences_in_value": 1
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"model diagnostics and results\"]",
+        "char_start": 1898,
+        "char_end": 2379,
+        "evidence_text": "The model performs well (deviance explained is 76.6%; Table 3) capturing the increasing seasonal trend in ED respiratory-related visits and inter-day variability related to the weekend effect. Two exceptions are mid-August and the PM 10 spike following the October burn event. The August deviation is likely a result of this being a high-vacation period, while the late October spike deviation is difficult to attribute. ED visits are under-estimated by roughly 15% for these days.",
+        "occurrences_in_value": 1
+      }
+    },
+    {
+      "claim_id": "999274-c3",
+      "restatement": "In the sub-regional model, SR3 showed a 51% decrease and SR6 a 20% increase in odds of seeking ED care; higher wealthy-household proportion decreased odds and higher under-24 proportion increased them.",
+      "restatement_word_count": 31,
+      "claim_type": "finding",
+      "concept": {
+        "value": "odds of seeking ED care",
+        "tag": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "SR3 (51% decrease in odds of seeking ED care) and SR6 (20% increase; an increase in proportion of wealthy households (>$50 k) leads to a decrease in ED visit odds; population below 24 years increases the odds",
+        "tag": "explicit",
+        "support_span": {
+          "json_path": "$[\"model diagnostics and results\"]",
+          "char_start": 5668,
+          "char_end": 5911,
+          "evidence_text": "The coefficients of these demographic variables in Table 4 show that an increase in proportion of wealthy households (>$50 k) leads to a decrease in ED visit odds while an increase in proportion of population below 24 years increases the odds.",
+          "occurrences_in_value": 1
+        }
+      },
+      "geography": {
+        "value": "SR3; SR6 (sub-regions of San Diego County)",
+        "tag": "inferred",
+        "support_span": {
+          "json_path": "$[\"statistical modeling input data\"]",
+          "char_start": 555,
+          "char_end": 638,
+          "evidence_text": "The latter aggregation corresponds to six sub-regions that group adjacent zip codes",
+          "occurrences_in_value": 1
+        },
+        "role": {
+          "value": "study area",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"abstract\"]",
+            "char_start": 12,
+            "char_end": 140,
+            "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented.",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "08/01/2007 through 11/29/2007",
+        "tag": "inferred",
+        "support_span": {
+          "json_path": "$[\"syndromic surveillance heath data\"]",
+          "char_start": 2035,
+          "char_end": 2132,
+          "evidence_text": "analysis of the complete data set was limited to the time period of 08/01/2007 through 11/29/2007",
+          "occurrences_in_value": 1
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"model diagnostics and results\"]",
+        "char_start": 5336,
+        "char_end": 5521,
+        "evidence_text": "The additional variables included in the sub-regional model show spatially specific effects on odds within SR3 (51% decrease in odds of seeking ED care) and SR6 (20% increase; Table 4).",
+        "occurrences_in_value": 1
+      }
+    },
+    {
+      "claim_id": "999274-c4",
+      "restatement": "Citing prior work, the paper states models of future climate generally predict weather conditions favoring increased occurrence and severity of California wildland fires, such as low annual precipitation and high average daily temperatures.",
+      "restatement_word_count": 33,
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "occurrence and severity of California wildland fires",
+        "tag": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "weather conditions that favor an increase",
+        "tag": "explicit"
+      },
+      "geography": {
+        "value": "California",
+        "tag": "explicit",
+        "role": {
+          "value": "contextual mention",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"background\"]",
+            "char_start": 1051,
+            "char_end": 1087,
+            "evidence_text": "high average daily temperatures [5])",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "future climate",
+        "tag": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"background\"]",
+        "char_start": 860,
+        "char_end": 1145,
+        "evidence_text": "Models of future climate generally predict weather conditions that favor an increase in the occurrence and severity of California wildland fires (i.e. periods of low annual precipitation and high average daily temperatures [5]) and long-term trends conducive to lengthened fire season.",
+        "occurrences_in_value": 1
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "json_path": "$[\"discussion\"]",
+      "char_start": 6993,
+      "char_end": 7246,
+      "evidence_text": "Canadian Fire Weather Index was calculated for the study area using weather variables produced by the Regional Climate Model (RegCM v. 4 San Diego County will experience approximately two extreme fire seasons each decade by 2040, similar to the present.",
+      "occurrences_in_value": 1,
+      "reason": "Stored text is truncated mid-sentence, breaking the link between the Fire Weather Index method and the projection; the 'extreme fire seasons' are fire-weather based (FWI), not fire occurrence, and no scenario is stated. Not promoted."
+    },
+    {
+      "json_path": "$[\"abstract\"]",
+      "char_start": 1592,
+      "char_end": 1867,
+      "evidence_text": "The model coefficients and nonlinear function plots indicate that at peak fire PM concentrations the odds of a person seeking emergency care is increased by approximately 50% compared to non-fire conditions (40% for the regional case, 70% for a geographically specific case).",
+      "occurrences_in_value": 1,
+      "reason": "Same result as promoted claim but with rounded values (40%/70%) that differ from results/conclusion (41%/72%); results section used."
+    },
+    {
+      "json_path": "$[\"background\"]",
+      "char_start": 0,
+      "char_end": 120,
+      "evidence_text": "In 2007, catastrophic wildland fires burned approximately 650,000 acres of southern Californian grassland and chaparral.",
+      "occurrences_in_value": 1,
+      "reason": "Uncited event descriptor; not promoted."
+    },
+    {
+      "json_path": "$[\"model diagnostics and results\"]",
+      "char_start": 4552,
+      "char_end": 4663,
+      "evidence_text": "on Mondays, the odds that a person seeks ED care increases by 17% for both the regional and sub-regional model.",
+      "occurrences_in_value": 1,
+      "reason": "Day-of-week covariate effect, not a hazard claim."
+    }
+  ],
+  "terminal_status": "claims_extracted"
+}
