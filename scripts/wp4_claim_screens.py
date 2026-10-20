@@ -2,7 +2,7 @@
 """M4-WP4r1: three descriptive screens over reader 1's claims --- not a compatibility run.
 
 1. **US geography**: the claim's `geography` value (status not `unknown`) names a US
-   place, by the reader-1 token list below (states, cities, regions as the papers
+   place, by the reader-1 place-term list below (states, cities, regions as the papers
    name them). Explicit and inferred counted separately.
 2. **Pilot concept term**: an approved C-2 family term (`climrr.conceptmap.c2_terms`,
    `approved_lexical` only, `approved_family_term` forms masking) occurs, by the
