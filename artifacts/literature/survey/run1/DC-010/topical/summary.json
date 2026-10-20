@@ -1,0 +1,50 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-20T22:08:25Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "c396f721550df2ce8f6351a0f2a32751b3ebc7848177ffa669448fcc8ad1abf3",
+  "query_text": "( \"summer seasonal maximum heat index\" OR \"summer maximum heat index\" OR \"seasonal maximum heat index\" OR \"summer max heat index\" OR \"max heat index summer\" OR \"summer peak heat index\" OR \"summer extreme heat index\" OR \"summer hi max\" OR \"max hi summer\" )\n",
+  "parsed_groups": [
+    [
+      "summer seasonal maximum heat index",
+      "summer maximum heat index",
+      "seasonal maximum heat index",
+      "summer max heat index",
+      "max heat index summer",
+      "summer peak heat index",
+      "summer extreme heat index",
+      "summer hi max",
+      "max hi summer"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    1
+  ],
+  "per_term_doc_counts": {
+    "g0:summer seasonal maximum heat index": 0,
+    "g0:summer maximum heat index": 0,
+    "g0:seasonal maximum heat index": 1,
+    "g0:summer max heat index": 0,
+    "g0:max heat index summer": 0,
+    "g0:summer peak heat index": 0,
+    "g0:summer extreme heat index": 0,
+    "g0:summer hi max": 0,
+    "g0:max hi summer": 0
+  },
+  "raw_count": 1,
+  "disambiguation": null,
+  "admitted_count": 1,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 64.7,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

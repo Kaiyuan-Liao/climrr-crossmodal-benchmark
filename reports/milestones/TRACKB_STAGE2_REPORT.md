@@ -7,10 +7,10 @@ index 117.**
 
 ## 1. Milestone ID and title
 
-**Track B / Stage 2a --- dictionary concept inventory + survey tooling.** Stage
-2b/2c (candidate surface forms; yield survey) are **to be executed by Kaiyuan on
-Polaris with the pinned driver; results arrive as `survey_table.csv` +
-per-concept folders.** M1 remains open (D-014). Track A (M4-WP4) runs separately.
+**Track B / Stage 2a --- dictionary concept inventory + survey tooling; Stage
+2b/2c --- survey run 1, executed by Kaiyuan on Polaris and ingested here as a
+diagnostic** (follow-up: v3 tools tracked; run 1 ingested; coverage doc). M1
+remains open (D-014). Track A (M4-WP4) runs separately.
 
 ## 2. Objective
 
@@ -38,6 +38,10 @@ on Polaris).
 | **`data/metadata/litcollect/survey_context_clause_v1.txt`** (new) | **`fec9b5ca97f18e6e409a4b6e10b50faf5ab3c5404a33381eb8e67e9debc3626f`** | 403 bytes; pinned in `data/manifest.json`; `-text` |
 | `trackb_scripts.tar.gz` (delivered, read) | `8c3f75fea90c66bdb9461e342afe429ec7aab48ae0bb545804a9582ee7c20f59` | matches the work package |
 | **`scripts/litcollect/survey_driver.py`** (as tracked) | **`877fec477c5005f0642e31b558b3a01493d5466680546fc610bc3d05e8797155`** | the COORDINATOR's revised driver (follow-up on `246fccd`), byte-identical to the delivered file; replaces the tarball member `b3292e22…0d3a` |
+| **`scripts/litcollect/survey_driver.py` v3** (as tracked, follow-up) | **`e1fb664c98e4ff866bb348c8930bfc1b9243957441b8a19ea0893e0b711af4cd`** | the driver run 1 executed; passes `--no-hits` (D-026) |
+| **`scripts/litcollect/run_query.py` v3** (as tracked, follow-up) | **`5f56ee49f0da675f49ef490b506c030b307c693032e8be9097e499cf1c64030d`** | v2 `a93eeba7…7708` (LITCORPUS-02, at `38116a0`) + opt-in `--no-hits` |
+| `survey_run1.tar.gz` (delivered, read) | `edd68196834d54fae7cd0073dcb6d389a55452caf90f23d6fc838e160c7a2739` | extracted outside the repo; both script members equal the v3 hashes |
+| **`artifacts/literature/survey/run1/manifest.csv`** (new) | **`74ba7d7c72e7920ac16e1cc7c49ab2543add316df37baf60ff3b52c10c2d125d`** | 122 files, 12,237,164 bytes; pinned in `data/manifest.json` → `diagnostics` |
 | `scripts/litcollect/probe_alcf_inference.py` (as tracked) | `79181c48981c709b49b90d78fc8aaddffaf12d2f1bb0591b9a9daa3aad438c66` | byte-identical to the tarball member |
 
 `data/raw/FullData.csv` was verified by `pytest` (hash gate) and **not read** by
@@ -49,7 +53,21 @@ Local (`location: local`), conda env `climrr`, Python 3.11.16, macOS arm64,
 pinned D-007 libraries (pypdf 6.18.0, PyYAML 6.0.3); DuckDB 1.5.4 for the
 synthetic-index tests. Run record:
 `reports/runs/20261020T175937Z_local_build_dictionary_inventory.{json,md}`.
-**Sophia not involved; Polaris not involved yet** (2b/2c pending).
+**Sophia not involved.**
+
+**Survey run 1 (2b/2c) --- Polaris**, executed by Kaiyuan: login node
+`polaris-login-01`; `module load conda/2026-10-01` + conda env `globus_env`;
+Python 3.11.x (**patch version not recorded** in any run output --- the work
+package said to take it from `_context/summary.json`, which records DuckDB only);
+DuckDB **1.5.4** (`_context/summary.json`); model `gpt-oss-120b` on Metis via
+`https://inference-api.alcf.anl.gov/resource_server/metis/api/v1`;
+**2026-10-20T21:54:34Z → 22:09:18Z** (`survey.log`). Index identity
+`fbb4affb…7a94` (LITCORPUS-02 source index, 186,346 documents); inventory
+`288d08c5…d064`; context clause `fec9b5ca…626f`, matching **120,050** documents.
+**Executed from untracked copies in the litcollect `scripts/` folder whose SHA-256
+equal the tracked v3 files**, after an aborted first attempt (offsets stage; no
+outputs kept). Local ingest run record:
+`reports/runs/20261020T224151Z_local_ingest_survey_run1.{json,md}`.
 
 ## 6. Work completed
 
@@ -67,6 +85,11 @@ synthetic-index tests. Run record:
   `build_index.py` index; governance text in `docs/BRIDGE_ELIGIBILITY.md` §7.
 - **Phase D.** This report; `docs/PROJECT_STATE.md` (two tracks open);
   `docs/DECISION_LOG.md` D-026.
+- **Follow-up (survey run 1).** Phase A: v3 `run_query.py` / `survey_driver.py`
+  tracked (hashes verified), allowlist re-pinned, `--no-hits` tested, v2 → v3 in
+  D-026. Phase B: run 1 verified and ingested as diagnostic `TRACKB-SURVEY-RUN1`.
+  Phase C: `docs/CONCEPT_COVERAGE_SURVEY.md` generated from the rows. Phase D:
+  this report, `PROJECT_STATE.md`, `MENTOR_BRIEF.md`, `KNOWLEDGE_FILES`.
 
 ## 7. Deliverables and exact file paths
 
@@ -75,6 +98,14 @@ synthetic-index tests. Run record:
 `data/metadata/litcollect/survey_context_clause_v1.txt` ·
 `scripts/litcollect/survey_driver.py` · `scripts/litcollect/probe_alcf_inference.py` ·
 `tests/test_dictconcepts.py` · `tests/test_survey_driver.py` ·
+**follow-up:** `scripts/litcollect/run_query.py` + `survey_driver.py` (v3) ·
+`src/climrr/coveragesurvey.py` · `scripts/ingest_survey_run1.py` ·
+`artifacts/literature/survey/run1/` (+ `manifest.csv`) ·
+`artifacts/literature/survey/survey_run1.log` · `docs/CONCEPT_COVERAGE_SURVEY.md` ·
+`tests/test_survey_run1.py` · edits to `tests/test_litcollect_tools.py`,
+`tests/test_survey_driver.py`, `scripts/stage_knowledge.py`, `docs/MENTOR_BRIEF.md`,
+`.gitattributes` ·
+`reports/runs/20261020T224151Z_local_ingest_survey_run1.{json,md}` ·
 `reports/runs/20261020T175937Z_local_build_dictionary_inventory.{json,md}` ·
 edits: `data/manifest.json` (two `files` entries + amendment), `.gitattributes`,
 `scripts/verify_no_secrets_or_paths.py` + `tests/test_secrets_scan.py` (exemption),
@@ -134,95 +165,144 @@ Full table: `docs/DICTIONARY_CONCEPTS.md`.
 | DC-006 | dropped (parentheses) | stripped variant **`degree days`** |
 | DC-011--014 | dropped ("more than 6 words") | **none** --- model terms only; no model term → `status: "error"` row |
 
-Stage 2b/2c: **PENDING --- Kaiyuan, Polaris**: `survey_table.csv` plus
-`<out>/DC-NNN/` (prompt, response, candidates, topical run, row) and `survey.log`.
+**Stage 2b/2c --- survey run 1 (EXECUTED, diagnostic).** 14 rows: **12 `ok`, 2
+`error`**. Counts are **diagnostic coverage counts, not prevalence**; terms are
+`candidate_surface_form`, inert. Full table, per-term counts and findings:
+[`docs/CONCEPT_COVERAGE_SURVEY.md`](../../docs/CONCEPT_COVERAGE_SURVEY.md) (generated from the rows).
+
+| Concept | Topical-only | Context-filtered | Status |
+| --- | --- | --- | --- |
+| DC-001 | 124,420 | 88,245 | ok |
+| DC-002 | 123,948 | 88,021 | ok |
+| DC-003 | 84,926 | 61,190 | ok |
+| DC-004 | 27,498 | 17,394 | ok |
+| DC-005 | 6,981 | 4,946 | ok |
+| DC-006 | 3,076 | 2,638 | ok |
+| DC-007 | 548 | 395 | ok |
+| DC-008 | 551 | 396 | ok |
+| DC-009 | 0 | 0 | ok |
+| DC-010 | 1 | 1 | ok |
+| DC-011 | --- | --- | error (no searchable phrase) |
+| DC-012 | 0 | 0 | ok |
+| DC-013 | --- | --- | error (no searchable phrase) |
+| DC-014 | 2 | 2 | ok |
+
+Findings, computed: **(a)** DC-007's 548 topical ids **are** the 548 of the
+LITCORPUS-02 fire-weather topical-only diagnostic (set equality, not just the
+count) --- consistency check passed. **(b)** DC-001/002/003: the bare word is
+99.6 / 100.0 / 99.9 % of the topical count. **(c)** heat-index measures DC-009--014:
+0, 1, ---, 0, ---, 2; every DC-011/013 model proposal contained `°` or `>`.
+**(d)** heat-index family group 1,082 (`heat index` alone 1,080) vs measure-level
+maximum 2.
 
 ## 10. Validation performed
 
-- `pytest`: **894 passed** (851 before + 16 `test_dictconcepts.py` + 24
-  `test_survey_driver.py` + 3 `test_secrets_scan.py`). The new tests cover: re-slicing of passages and names
-  from the page text (hash-checked); verbatim units/threshold/scenario; ids
-  unique and contiguous; `family_hint` null; `verified_columns` ⊂ the 21
-  verified; manifest pin; byte-identical rebuild; status counts unchanged. For
-  the driver: reasoning-field fallback; sanitizer (non-plain, >6 words,
-  duplicates, cap 10); dictionary name first; restart skips completed concepts;
-  `context_filtered_count == |topical ∩ context|`; every `candidates.json`
-  `candidate_surface_form` with model, endpoint, prompt SHA-256 and date; tool
-  pins.
-- `scripts/verify_no_secrets_or_paths.py`, run with every new file staged (the scan
-  reads only tracked/staged files): **zero hits** --- after the hash-pinned
-  exemption below; before it, 12 credential-word hits in the two delivered tools
-  and 1 in my test (fixed with string fragments).
+- `pytest`: **906 passed** (894 at `9d2da14` + 12): `--no-hits` writes a
+  header-only `hits.csv`, sets `hits_recorded: false`, and leaves ids, raw ids,
+  `disambiguation.csv` and every count identical to a run without the flag
+  (`test_litcollect_tools.py`); the v3 driver passes it, so `_context` and topical
+  `hits.csv` are header-only (`test_survey_driver.py`); `test_survey_run1.py` (10):
+  the copy equals `manifest.csv`, which is pinned under `diagnostics` and not in
+  `external_corpora`; no `_duckdb_tmp`, no `topical/hits.csv`; every row
+  re-verifies against its id files and equals `survey_table.csv`; pins of
+  inventory, clause, index and v3 tools; DC-007 set equality; the heat figures;
+  error rows are sanitizer drops with `model_parse_error: null`; the doc
+  regenerates byte for byte; no candidate reaches `concept_map.yaml`.
+- Before copying, `verify_source` checked both delivered scripts against the
+  tracked v3 hashes, that each of the 12 `topical/hits.csv` is header-only, and
+  that `reports/survey_run1.log` is byte-identical to `survey/run1/survey.log`.
+- `scripts/verify_no_secrets_or_paths.py` with every new file staged: **zero hits**.
+  The run files hold no absolute path (index path is relative,
+  `index/full_705k_v2_filtered`) and no credential; the credential word occurs only inside
+  the model `usage` field names (`completion_…s`, `reasoning_…s`), which the
+  boundary-anchored rule does not match.
+- Pre-existing pins unchanged: `concept_map.yaml`, the M5-WP2 matrix, the
+  LITCORPUS-02 records; the D-026 allowlist re-pinned to the v3 driver only.
 
 ## 11. Failures, rejected cases, and known limitations
 
-- **7 of 14 dictionary names are not themselves searchable** (table in §9): the
-  stored names of DC-001, 002, 006 (parentheses) and DC-011--014 (more than six
-  words) never enter a query. The revised driver adds parenthetical-stripped
-  variants for the first three; **DC-011--014 get none**. The four threshold
-  concepts also **share one passage**, so the name is the only thing in the prompt
-  that tells them apart --- and it is not searchable. **Their vocabulary comes from
-  the model only.**
-- **The stripped variants broaden two concepts.** DC-001 and DC-002 both search
-  the bare word `temperature`, far wider than annual/seasonal max--min daily
-  temperature; their topical counts will be inflated relative to the others. A
-  code-generated candidate, inert like the rest (`BRIDGE_ELIGIBILITY.md` §7), but
-  to be read with that in mind.
-- **Error rows are final on restart.** A concept that ends `status: "error"`
-  (no searchable candidate, or a failed scan) still writes `row.json`, so a rerun
-  skips it rather than retrying; retrying means deleting `out/<id>/` (tested).
-  *Resolved by the revised driver:* the run no longer aborts on such a concept,
-  and `%` / `°` / quotes (which defeat `\b`) are dropped with a reason.
-- **Run records.** The driver and the probe write none; they are now on the
-  CLAUDE.md run-record exemption list (D-026), with `survey.log`, `row.json`,
-  `survey_table.csv` and `probe_alcf_inference.json` as the evidence.
-- Passage windows are EXECUTOR choices (verbatim, but the start and end are judgement).
+**Deviations in the run itself (survey run 1):**
+
+- **Untracked-copy execution.** The run executed from untracked copies in the
+  litcollect `scripts/` folder whose SHA-256 equal the tracked v3 files --- not
+  from a pinned checkout of this repository. The equality is the only link.
+- **Aborted first attempt.** The first attempt stalled in `run_query.py`'s offsets
+  stage (O(admitted documents × terms) in Python; >3 h for the 120,050-document
+  context set); no outputs kept. Hence v3 (`--no-hits`, D-026).
+- **Sanitizer-driven error rows.** DC-011 and DC-013 are `error` because every
+  proposed phrase contained `°` or `>` (and the stored names exceed six words):
+  "no searchable phrase exists", not a model failure. DC-012 / DC-014 survived on
+  4 and 1 phrases. The four threshold concepts share one passage, so their
+  vocabulary is the model's alone (§9, Stage 2a).
+- **Run-record label `local`.** The driver writes no run record (exempt, D-026);
+  the only run record is the **local** ingest
+  (`20261020T224151Z_local_ingest_survey_run1`), whose host, Python and
+  `pip freeze` are this laptop's, not Polaris's. The Polaris run is evidenced by
+  `survey.log`, `row.json`, `candidates.json`, `summary.json` and
+  `survey_table.csv`.
+
+**Limitations:** no hit offsets for any run-1 document (`--no-hits`); Python patch
+version on Polaris unrecorded; R-FWI-1 not applied (bare `fwi` in DC-007/008);
+no place filter; `temperature` (DC-001/002) and `precipitation` (DC-003) dominate
+their rows; `cdd` is shared by DC-005 and DC-006; `mat` is a 3-letter candidate.
 
 ## 12. Deviations from the approved plan
 
-- **Escalation, not improvisation:** the granularity was put to Kaiyuan before
-  any inventory was written (D-026).
-- The inventory adds a `name_source` field (page + span of the name) beyond the
-  work package's schema, so names are checkable like passages.
-- The context clause file ends with a trailing LF (as the frozen query files do).
-- **Scanner exemption (owner decision, D-026).** The two delivered tools trip the
-  credential-word rule 12 times (the access env var names, a
-  parameter, the Bearer header --- no value). CLAUDE.md requires a stop; escalated to
-  Kaiyuan, who chose a **hash-pinned allowlist** in `verify_no_secrets_or_paths.py`:
-  those two paths only, the credential-word rule only, and only while each file's
-  SHA-256 equals the pinned value. A governance change to the guard, for
-  COORDINATOR/GUIDANCE review.
-- Report fields 10--15 completed, since the template forbids omitting fields.
+- **Stage 2a** (unchanged): granularity escalated (D-026); `name_source` added;
+  trailing LF on the clause; hash-pinned scanner allowlist (D-026).
+- **Follow-up --- EXECUTOR choices, for review:**
+  - Ingest done by a tracked script (`scripts/ingest_survey_run1.py` +
+    `src/climrr/coveragesurvey.py`) that writes a run record, as CLAUDE.md
+    requires of every script; it verifies before copying and is rerunnable
+    (an existing copy must be byte-identical).
+  - **`_context/hits.csv` was kept.** It is header-only too, but the work package
+    excludes only the `topical/hits.csv` files; it is 79 bytes and in the manifest.
+  - **Finding (d) wording corrected.** The work package says "the family term
+    `heat index` alone matches 1,082"; the LITCORPUS-02 diagnostic records
+    **1,080** for `heat index` alone and **1,082** for the family group (`heat
+    index` | `heat-index` | `extended heat index`). The doc states both. The
+    conclusion (two to three orders of magnitude) is unchanged.
+  - **Finding (c) wording.** "return 0--2" applies to the four `ok` rows; the two
+    `error` rows have no count. The doc says so.
+  - The run log is stored as `artifacts/literature/survey/survey_run1.log` (beside
+    `run1/`), byte-identical to `run1/survey.log`.
+  - `survey_table.csv` is kept as delivered (sorted by count, errors last); the doc
+    sorts by concept id.
+  - Report fields 1, 4, 5 and 7 were updated alongside 9--15, as they named the
+    pre-run state.
 
 ## 13. Open decisions and mentor questions
 
 | Item | Owner | Blocks |
 | --- | --- | --- |
-| D-026 measure level and the hash-pinned allowlist | **confirmed by the COORDINATOR** (2026-10-20); GUIDANCE review pending | --- |
-| Revised driver issued; run-record exemption extended | **done** (follow-up) | --- |
-| Bare `temperature` for DC-001/002 (§11) --- accept for the diagnostic run? | COORDINATOR | nothing; interpretation of two rows |
+| **(Q-a)** report coverage at both levels — authorize a run-2 prompt variant that asks for the *family* name of the quantity (one row per dictionary concept, same provenance, labelled diagnostic)? | GUIDANCE | any run 2 |
+| **(Q-b)** treat threshold measures as lexically unsearchable and survey them only at family level? | GUIDANCE | interpretation of DC-011--014 |
+| **(Q-c)** may the sanitizer accept `°`, `>` and `%` by normalizing to words (`degrees f`, `above`, `percent`) — or is any transformation of a model term out of bounds? | GUIDANCE | a sanitizer change |
+| D-026 v2 → v3 tools and the re-pinned allowlist | COORDINATOR / GUIDANCE review | --- |
+| Bare `temperature` for DC-001/002 --- accepted for the diagnostic run? (now shown to be 99.6--100 % of those rows) | COORDINATOR | interpretation of two rows |
+| Python patch version on Polaris (`python --version` in `globus_env`) | Kaiyuan | nothing; provenance completeness |
 | Q22 (705k filter) stays open | JL | nothing here |
 
 ## 14. Proposed gate status
 
 | Criterion (D-025 ruling, verbatim) | Status | Evidence |
 | --- | --- | --- |
-| 23. Stage 2a contains only dictionary-described concepts/metrics. | **MET** | every entry has a page-sliced passage; `tests/test_dictconcepts.py` |
+| 23. Stage 2a contains only dictionary-described concepts/metrics. | **MET** | page-sliced passages; `test_dictconcepts.py` |
 | 24. Stage 2a does not change existing column statuses. | **MET** | status counts 21/20/130/28/76 unchanged (test) |
-| 25. Index 117 remains unlabeled. | **MET** | not referenced (test); statement in YAML and doc |
-| 26. Stage 2b outputs are explicitly `candidate_surface_form`. | **MET (tooling)** | driver + test; real run PENDING |
-| 27. Stage 2b records model and prompt provenance. | **MET (tooling)** | test; real run PENDING |
-| 28. Stage 2b vocabulary never enters production automatically. | **MET** | `BRIDGE_ELIGIBILITY.md` §7; test |
-| 29. Stage 2c is deterministic and restartable. | **MET (tooling)** | restart test; error rows continue the run and are final on restart (§11) |
-| 30. Stage 2c counts are labeled diagnostics, not literature-prevalence estimates. | **MET (tooling)** | `row.json` label (test); docs |
-| 31. Literature yield does not automatically determine unit selection. | **MET** | no code reads survey output |
+| 25. Index 117 remains unlabeled. | **MET** | not referenced (test) |
+| 26. Stage 2b outputs are explicitly `candidate_surface_form`. | **MET** | all 14 `candidates.json` (`test_survey_run1.py`) |
+| 27. Stage 2b records model and prompt provenance. | **MET** | model, endpoint, date, prompt SHA-256 re-checked per concept |
+| 28. Stage 2b vocabulary never enters production automatically. | **MET** | `concept_map.yaml` unchanged; no code reads survey terms (test) |
+| 29. Stage 2c is deterministic and restartable. | **MET** | restart test; run 1 counts re-derive from its id files |
+| 30. Stage 2c counts are labeled diagnostics, not literature-prevalence estimates. | **MET** | `row.json` label; every count column in the doc labelled |
+| 31. Literature yield does not automatically determine unit selection. | **MET** | no code reads survey output for selection; questions put to GUIDANCE |
 | 33. No QA is generated. | **MET** | none |
 
-**Proposed: Stage 2a COMPLETE; Stage 2b/2c READY TO RUN with the revised driver.**
+**Proposed: Stage 2a COMPLETE; Stage 2b/2c run 1 EXECUTED AND INGESTED (diagnostic), for GUIDANCE review.**
 
 ## 15. Proposed next bounded objective
 
-Kaiyuan runs `survey_driver.py` (pinned SHA-256 `877fec47…7155`) on Polaris over
-the frozen LITCORPUS-02 source index with `dictionary_concepts.yaml` and
-`survey_context_clause_v1.txt`, and returns `survey_table.csv` and the 14
-per-concept folders for a diagnostic review.
+GUIDANCE reviews run 1 and answers Q-a / Q-b / Q-c. If Q-a is authorized: a
+run-2 prompt variant asking for the family name of each dictionary concept, same
+index, inventory, clause and provenance, labelled diagnostic, with the prompt and
+any sanitizer change pinned before the run.

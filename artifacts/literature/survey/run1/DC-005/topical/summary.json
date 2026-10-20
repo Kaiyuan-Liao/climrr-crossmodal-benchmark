@@ -1,0 +1,50 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-20T22:03:07Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "056d0ac6bb8cba26b6502ac156020e2fa1d58b197e6c245d887a8b0987b93332",
+  "query_text": "( \"consecutive days with no precipitation\" OR \"consecutive dry days\" OR \"dry spell length\" OR \"dry spell duration\" OR \"dry spell\" OR \"run of dry days\" OR \"dry period\" OR \"days without precipitation\" OR \"cdd\" )\n",
+  "parsed_groups": [
+    [
+      "consecutive days with no precipitation",
+      "consecutive dry days",
+      "dry spell length",
+      "dry spell duration",
+      "dry spell",
+      "run of dry days",
+      "dry period",
+      "days without precipitation",
+      "cdd"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    6981
+  ],
+  "per_term_doc_counts": {
+    "g0:consecutive days with no precipitation": 5,
+    "g0:consecutive dry days": 690,
+    "g0:dry spell length": 123,
+    "g0:dry spell duration": 72,
+    "g0:dry spell": 1375,
+    "g0:run of dry days": 1,
+    "g0:dry period": 4779,
+    "g0:days without precipitation": 161,
+    "g0:cdd": 865
+  },
+  "raw_count": 6981,
+  "disambiguation": null,
+  "admitted_count": 6981,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 64.9,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

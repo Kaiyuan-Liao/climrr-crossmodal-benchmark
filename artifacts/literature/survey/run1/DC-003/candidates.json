@@ -1,0 +1,65 @@
+{
+  "concept_id": "DC-003",
+  "dictionary_name": "Precipitation",
+  "status": "candidate_surface_form",
+  "model": "gpt-oss-120b",
+  "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+  "prompt_sha256": "73fd2c9285de4df8d87e1dd8d93a16a18af35d3a8892393e45b604f8bc61a1ae",
+  "date_utc": "2026-10-20T22:00:05Z",
+  "model_seconds": 0.9,
+  "model_raw_terms": [
+    "annual precipitation",
+    "total annual precipitation",
+    "mean annual precipitation",
+    "precipitation amount",
+    "precipitation total",
+    "precipitation (mm)",
+    "precipitation (in)",
+    "precip"
+  ],
+  "model_parse_error": null,
+  "model_content_excerpt": "[\"annual precipitation\",\"total annual precipitation\",\"mean annual precipitation\",\"precipitation amount\",\"precipitation total\",\"precipitation (mm)\",\"precipitation (in)\",\"precip\"]",
+  "candidates": [
+    {
+      "term": "precipitation",
+      "source": "dictionary_name"
+    },
+    {
+      "term": "annual precipitation",
+      "source": "model"
+    },
+    {
+      "term": "total annual precipitation",
+      "source": "model"
+    },
+    {
+      "term": "mean annual precipitation",
+      "source": "model"
+    },
+    {
+      "term": "precipitation amount",
+      "source": "model"
+    },
+    {
+      "term": "precipitation total",
+      "source": "model"
+    },
+    {
+      "term": "precip",
+      "source": "model"
+    }
+  ],
+  "dropped": [
+    {
+      "term": "precipitation (mm)",
+      "reason": "not a plain lowercase phrase (letters, digits, space, - / . only)",
+      "source": "model"
+    },
+    {
+      "term": "precipitation (in)",
+      "reason": "not a plain lowercase phrase (letters, digits, space, - / . only)",
+      "source": "model"
+    }
+  ],
+  "note": "Candidates are inert: not approved vocabulary; not in concept_map.yaml; not used by production queries, C-2 or compatibility."
+}

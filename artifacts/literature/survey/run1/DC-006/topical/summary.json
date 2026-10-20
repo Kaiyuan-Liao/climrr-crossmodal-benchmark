@@ -1,0 +1,48 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-20T22:04:08Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "06770717ef9da71d777cfbf2db0ec608bc4cee4baf968c57ad2aa68793df277c",
+  "query_text": "( \"degree days\" OR \"heating degree days\" OR \"cooling degree days\" OR \"hdd\" OR \"cdd\" OR \"heating-degree-days\" OR \"cooling-degree-days\" OR \"base 65 degree days\" )\n",
+  "parsed_groups": [
+    [
+      "degree days",
+      "heating degree days",
+      "cooling degree days",
+      "hdd",
+      "cdd",
+      "heating-degree-days",
+      "cooling-degree-days",
+      "base 65 degree days"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    3076
+  ],
+  "per_term_doc_counts": {
+    "g0:degree days": 2317,
+    "g0:heating degree days": 212,
+    "g0:cooling degree days": 243,
+    "g0:hdd": 231,
+    "g0:cdd": 865,
+    "g0:heating-degree-days": 3,
+    "g0:cooling-degree-days": 3,
+    "g0:base 65 degree days": 0
+  },
+  "raw_count": 3076,
+  "disambiguation": null,
+  "admitted_count": 3076,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 57.9,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

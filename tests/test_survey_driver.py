@@ -27,10 +27,11 @@ from climrr.paths import REPO_ROOT
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
 CONTEXT = REPO_ROOT / "data" / "metadata" / "litcollect" / "survey_context_clause_v1.txt"
 
-#: survey_driver.py: the revised driver of the Track B follow-up (SHA-256 877fec47...7155);
+#: survey_driver.py: v3, the driver survey run 1 executed (SHA-256 e1fb664c...f4cd); it differs
+#: from the revised driver (877fec47...7155) only by passing --no-hits to run_query.py (D-026);
 #: probe_alcf_inference.py: byte-identical to trackb_scripts.tar.gz (SHA-256 8c3f75fe...0f59).
 TOOL_SHA256 = {
-    "survey_driver.py": "877fec477c5005f0642e31b558b3a01493d5466680546fc610bc3d05e8797155",
+    "survey_driver.py": "e1fb664c98e4ff866bb348c8930bfc1b9243957441b8a19ea0893e0b711af4cd",
     "probe_alcf_inference.py": "79181c48981c709b49b90d78fc8aaddffaf12d2f1bb0591b9a9daa3aad438c66",
 }
 
@@ -252,6 +253,13 @@ def test_survey_table_lists_every_row_labelled_diagnostic(survey):
     assert {ln.split(",")[0] for ln in lines[1:]} == {"DC-901", "DC-902"}
     for cid in ("DC-901", "DC-902"):
         assert json.loads((out / cid / "row.json").read_text())["label"].startswith("diagnostic")
+
+
+def test_the_driver_passes_no_hits_so_hits_files_are_header_only(survey):
+    out = survey["out"]
+    for run in (out / "_context", out / "DC-901" / "topical", out / "DC-902" / "topical"):
+        assert len((run / "hits.csv").read_text(encoding="utf-8").splitlines()) == 1, run
+        assert json.loads((run / "summary.json").read_text(encoding="utf-8"))["hits_recorded"] is False
 
 
 def test_survey_writes_nothing_into_the_repository(survey):

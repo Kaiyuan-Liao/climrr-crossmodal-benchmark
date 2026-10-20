@@ -97,6 +97,7 @@ def main():
     ap.add_argument("--disambiguate", default=None, help="e.g. 'fwi=fire weather|fire-weather'")
     ap.add_argument("--threads", type=int, default=4)
     ap.add_argument("--memory-limit", default="4GB")
+    ap.add_argument("--no-hits", action="store_true", help="skip the per-section offset stage (counts and id sets only); for diagnostic surveys with large admitted sets")
     a = ap.parse_args()
 
     out = Path(a.out)
@@ -154,7 +155,7 @@ def main():
 
     # Exact offsets on the unnormalized strings, for admitted docs only.
     hits = []
-    if admitted:
+    if admitted and not a.no_hits:
         con.execute("CREATE TABLE adm(doc_id VARCHAR)"); con.executemany("INSERT INTO adm VALUES (?)", [(d,) for d in sorted(admitted)])
         meta = {r[0]: (r[1], r[2]) for r in con.execute(f"SELECT d.doc_id, d.rel_path, d.sha256 FROM read_parquet('{doc_glob}') d JOIN adm USING(doc_id)").fetchall()}
         secs = con.execute(f"SELECT s.doc_id, s.section_idx, s.section_key, s.text FROM read_parquet('{sec_glob}') s JOIN adm USING(doc_id) ORDER BY s.doc_id, s.section_idx").fetchall()
@@ -192,6 +193,7 @@ def main():
         "disambiguation": a.disambiguate,
         "admitted_count": len(admitted),
         "excluded_by_disambiguation": len(raw_ids) - len(admitted),
+        "hits_recorded": not a.no_hits,
         "elapsed_seconds": round(time.time() - t0, 1),
         "duckdb_version": duckdb.__version__, "threads": a.threads, "memory_limit": a.memory_limit,
     }

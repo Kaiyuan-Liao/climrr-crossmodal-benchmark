@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "[\"days with heat index above 95°f\",\"summer days heat index >95°f\",\"number of days heat index >95°f\",\"heat index 95°f days\",\"hi >95°f days\",\"days exceeding 95°f heat index\",\"count of heat index >95°f days\",\"summer heat index days above 95°f\"]",
+        "reasoning": "We need to propose up to 8 surface forms (words or short phrases) that a scientific paper would use when discussing this variable: \"Number of Summer days with daily max heat index above 95 F\". So terms like \"summer days above 95°F heat index\", \"days with heat index >95°F\", \"heat index >95°F days\", \"number of days with max heat index >95°F\", \"95°F heat index days\", \"summer heat index days >95°F\", \"days exceeding 95°F heat index\", \"count of days with heat index above 95°F\". Also abbreviations: \"HI >95°F days\", \"HI95 days\", \"heat index 95°F threshold days\". Hyphenation: \"95‑F heat‑index days\". Also \"summer days >95°F heat index\". Need up to 8.\n\nMake sure each is lowercase, no regex, max 6 words. Let's craft:\n\n1. \"days with heat index above 95°f\"\n2. \"summer days heat index >95°f\"\n3. \"number of days heat index >95°f\"\n4. \"heat index 95°f days\"\n5. \"hi >95°f days\"\n6. \"days exceeding 95°f heat index\"\n7. \"count of heat index >95°f days\"\n8. \"summer heat index days above 95°f\"\n\nCheck word counts: each <=6 words.\n\n1: days(1) with2 heat3 index4 above5 95°f6 -> 6 ok.\n2: summer1 days2 heat3 index4 >95°f5 -> 5 ok.\n3: number1 of2 days3 heat4 index5 >95°f6 ->6 ok.\n4: heat1 index2 95°f3 days4 ->4 ok.\n5: hi1 >95°f2 days3 ->3 ok.\n6: days1 exceeding2 95°f3 heat4 index5 ->5 ok.\n7: count1 of2 heat3 index4 >95°f5 days6 ->6 ok.\n8: summer1 heat2 index3 days4 above5 95°f6 ->6 ok.\n\nAll lowercase, include abbreviation hi. Hyphenation not needed but okay. Return JSON array.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792534107,
+  "id": "2e0e2cbe-c451-400e-8d05-903c12f0cc45",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 558,
+    "completion_tokens_after_first_per_sec": 742.7072759156092,
+    "completion_tokens_after_first_per_sec_first_ten": 744.7973121044247,
+    "completion_tokens_after_first_per_sec_graph": 744.7973121044247,
+    "completion_tokens_details": {
+      "reasoning_tokens": 476
+    },
+    "completion_tokens_per_sec": 694.1935923237207,
+    "end_time": 1792534107.071495,
+    "is_last_response": true,
+    "prompt_tokens": 270,
+    "start_time": 1792534106.2676847,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.05385136604309082,
+    "time_to_first_token_graph": 0.048192501068115234,
+    "total_latency": 0.8038103580474854,
+    "total_tokens": 828,
+    "total_tokens_per_sec": 1030.09371764165
+  }
+}

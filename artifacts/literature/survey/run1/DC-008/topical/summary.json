@@ -1,0 +1,50 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-20T22:06:15Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "cfea16f7f8e555c4a46fa0c998df5776f2d8f15f1cf19a2cb820e6d8737aa570",
+  "query_text": "( \"calculating fwi classes\" OR \"fire weather index\" OR \"fwi\" OR \"fwi class\" OR \"fire danger class\" OR \"fire weather index class\" OR \"95th percentile fwi\" OR \"fwi percentile\" OR \"relative fire danger\" )\n",
+  "parsed_groups": [
+    [
+      "calculating fwi classes",
+      "fire weather index",
+      "fwi",
+      "fwi class",
+      "fire danger class",
+      "fire weather index class",
+      "95th percentile fwi",
+      "fwi percentile",
+      "relative fire danger"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    551
+  ],
+  "per_term_doc_counts": {
+    "g0:calculating fwi classes": 0,
+    "g0:fire weather index": 462,
+    "g0:fwi": 408,
+    "g0:fwi class": 6,
+    "g0:fire danger class": 14,
+    "g0:fire weather index class": 0,
+    "g0:95th percentile fwi": 2,
+    "g0:fwi percentile": 1,
+    "g0:relative fire danger": 2
+  },
+  "raw_count": 551,
+  "disambiguation": null,
+  "admitted_count": 551,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 65.1,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

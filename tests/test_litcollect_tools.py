@@ -23,12 +23,14 @@ from climrr.paths import REPO_ROOT
 
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
 
-#: build_index.py and run_query.py are byte-identical to the files that ran on Polaris.
+#: build_index.py is byte-identical to the file that ran on Polaris. run_query.py is v3
+#: (Track B survey run 1, D-026): v2 (SHA-256 a93eeba7...7708, the file that produced
+#: LITCORPUS-02, recoverable at 38116a0) plus an opt-in --no-hits flag only.
 #: run_v1_on_705k.sh differs from the executed file (SHA-256 0c9516b7...) in one line only:
 #: BASE is read from LITCOLLECT_ROOT_POLARIS instead of an absolute Eagle path.
 TOOL_SHA256 = {
     "build_index.py": "5e063a44f30bee0da81205b6b119d647d87fd08ddf38998eb1d8fa0c235b99a9",
-    "run_query.py": "a93eeba766f2eb4d487a8a157d2a2d207b41af0482fefdb774886a66c2d57708",
+    "run_query.py": "5f56ee49f0da675f49ef490b506c030b307c693032e8be9097e499cf1c64030d",
     "run_v1_on_705k.sh": "47fe1e17f3dc27fa8267ec21a173bbb3c773d4bc5f2e2045a7d5ccd379ffba59",
 }
 
@@ -83,11 +85,11 @@ def synthetic(tmp_path_factory):
     subprocess.run([sys.executable, str(TOOLS / "run_query.py"), "--index", str(idx), "--query-file",
                     str(base / "q.txt"), "--out", str(runs), "--threads", "1",
                     "--disambiguate", "fwi=fire weather|fire-weather"], check=True, capture_output=True)
-    return src, idx, runs
+    return src, idx, runs, base
 
 
 def test_index_records_parse_failures_and_non_strings_without_repair(synthetic):
-    _, idx, _ = synthetic
+    _, idx, _, _ = synthetic
     s = json.loads((idx / "index_summary.json").read_text(encoding="utf-8"))
     assert (s["files"], s["parse_failures"], s["section_rows"]) == (5, 1, 5)
     with (idx / "manifest.csv").open(encoding="utf-8") as f:
@@ -96,7 +98,7 @@ def test_index_records_parse_failures_and_non_strings_without_repair(synthetic):
 
 
 def test_whole_word_and_rfwi1_exclusion(synthetic):
-    _, _, runs = synthetic
+    _, _, runs, _ = synthetic
     s = json.loads((runs / "summary.json").read_text(encoding="utf-8"))
     raw = (runs / "ids_raw.txt").read_text().split()
     admitted = (runs / "ids.txt").read_text().split()
@@ -107,7 +109,7 @@ def test_whole_word_and_rfwi1_exclusion(synthetic):
 
 
 def test_the_repo_rule_agrees_with_the_tool_on_the_synthetic_documents(synthetic):
-    _, _, runs = synthetic
+    _, _, runs, _ = synthetic
     admitted = set((runs / "ids.txt").read_text().split())
     for d, obj in DOCS.items():
         if obj is None:
@@ -116,7 +118,7 @@ def test_the_repo_rule_agrees_with_the_tool_on_the_synthetic_documents(synthetic
 
 
 def test_offsets_reslice_the_unnormalized_text(synthetic):
-    src, _, runs = synthetic
+    src, _, runs, _ = synthetic
     with (runs / "hits.csv").open(encoding="utf-8") as f:
         hits = list(csv.DictReader(f))
     assert hits
@@ -126,3 +128,27 @@ def test_offsets_reslice_the_unnormalized_text(synthetic):
         assert text[int(h["char_start"]):int(h["char_end"])].lower() == h["term"]
     accented = [h for h in hits if h["doc_id"] == "1005" and h["term"] == "canadian fwi"]
     assert accented and int(accented[0]["char_start"]) == DOCS["1005"]["t"].index("Canadian")
+
+
+# --- v3: --no-hits (Track B survey run 1, D-026) ------------------------------
+
+HITS_HEADER = "doc_id,rel_path,sha256,group,term,section_key,section_idx,char_start,char_end"
+
+
+def test_no_hits_writes_a_header_only_hits_file_and_leaves_counts_and_ids_unchanged(synthetic):
+    _, idx, runs, base = synthetic
+    nohits = base / "runs_nohits"
+    subprocess.run([sys.executable, str(TOOLS / "run_query.py"), "--index", str(idx), "--query-file",
+                    str(base / "q.txt"), "--out", str(nohits), "--threads", "1",
+                    "--disambiguate", "fwi=fire weather|fire-weather", "--no-hits"],
+                   check=True, capture_output=True)
+    assert (nohits / "hits.csv").read_text(encoding="utf-8").splitlines() == [HITS_HEADER]
+    assert len((runs / "hits.csv").read_text(encoding="utf-8").splitlines()) > 1
+    for f in ("ids.txt", "ids_raw.txt", "disambiguation.csv"):
+        assert (nohits / f).read_bytes() == (runs / f).read_bytes(), f
+    with_hits = json.loads((runs / "summary.json").read_text(encoding="utf-8"))
+    without = json.loads((nohits / "summary.json").read_text(encoding="utf-8"))
+    assert with_hits["hits_recorded"] is True and without["hits_recorded"] is False
+    for k in ("per_group_doc_counts", "per_term_doc_counts", "raw_count", "admitted_count",
+              "excluded_by_disambiguation", "documents_in_index", "parsed_groups", "query_sha256"):
+        assert without[k] == with_hits[k], k

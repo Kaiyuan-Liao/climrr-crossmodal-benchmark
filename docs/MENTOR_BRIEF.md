@@ -1,6 +1,6 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-10-19   Next meeting: **Thursday 2026-10-22** --- bring the items under *For Thursday* below; the answer sheet is still outstanding
+Last updated: 2026-10-20   Next meeting: **Thursday 2026-10-22** --- bring the items under *For Thursday* below; the answer sheet is still outstanding
 
 ## Status in five lines
 
@@ -19,9 +19,8 @@ Last updated: 2026-10-19   Next meeting: **Thursday 2026-10-22** --- bring the i
 >    mention one of our three places --- word matches, not yet read.
 > 2. **A 20-paper double reading starts now** (10 fire weather + 10 heat
 >    index, chosen by a fixed rule before anyone opened them).
-> 3. **The dictionary-wide concept survey runs on Polaris as diagnostics**: for
->    each concept the dictionary describes, how much literature mentions it.
->    It ranks nothing into the benchmark by itself.
+> 3. **Dictionary-wide coverage survey done: strong coverage for FWI, precipitation, temperature, wind; heat-index threshold measures have no lexical footprint — family-level only.**
+>    Diagnostic counts, not prevalence ([CONCEPT_COVERAGE_SURVEY.md](CONCEPT_COVERAGE_SURVEY.md)); it ranks nothing into the benchmark by itself.
 >
 > **Question for you:** *if coverage turned out comparable, which dictionary
 > concepts would you prioritize for new units?*

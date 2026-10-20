@@ -105,7 +105,7 @@ def sanitize(name: str, proposed):
 
 
 def run_query(index, qfile, out):
-    cmd = [sys.executable, str(RUN_QUERY), "--index", str(index), "--query-file", str(qfile), "--out", str(out), "--name", out.name]
+    cmd = [sys.executable, str(RUN_QUERY), "--index", str(index), "--query-file", str(qfile), "--out", str(out), "--name", out.name, "--no-hits"]
     r = subprocess.run(cmd, capture_output=True, text=True)
     if r.returncode != 0:
         raise RuntimeError(f"run_query failed: {r.stderr[-2000:]}")

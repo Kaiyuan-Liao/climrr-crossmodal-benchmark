@@ -1508,6 +1508,23 @@ code emits, and the next GUIDANCE packet still chooses.
   candidate or a failed scan gives a `status: "error"` row and the run continues.
   The allowlist is re-pinned to the new hash; the two litcollect scripts join the
   CLAUDE.md run-record exemption list.
+- **Tools v2 → v3 for survey run 1 (Track B follow-up, 2026-10-20).** The
+  Polaris run first aborted in `run_query.py`'s offsets stage, which is
+  O(admitted documents × terms) in Python and took **more than 3 h** for the
+  120,050-document context set; no outputs were kept. v3 adds an opt-in
+  `--no-hits` flag to `run_query.py` (skip the offsets stage; header-only
+  `hits.csv`; `summary.json` gains `hits_recorded`; counts and id sets
+  unchanged) and makes `survey_driver.py` pass it. Nothing else changes.
+  - `run_query.py`: `a93eeba766f2eb4d487a8a157d2a2d207b41af0482fefdb774886a66c2d57708`
+    (v2, the file that produced LITCORPUS-02, recoverable at `38116a0`) →
+    **`5f56ee49f0da675f49ef490b506c030b307c693032e8be9097e499cf1c64030d`**.
+  - `survey_driver.py`: `877fec477c5005f0642e31b558b3a01493d5466680546fc610bc3d05e8797155`
+    → **`e1fb664c98e4ff866bb348c8930bfc1b9243957441b8a19ea0893e0b711af4cd`**.
+  The allowlist is re-pinned to the v3 driver; `--no-hits` is tested
+  (`tests/test_litcollect_tools.py`, `tests/test_survey_driver.py`). Run 1 was
+  executed from untracked copies in the litcollect `scripts/` folder whose
+  SHA-256 equal the tracked v3 files; ingested as the diagnostic
+  `TRACKB-SURVEY-RUN1` (`docs/CONCEPT_COVERAGE_SURVEY.md`).
 - **Affected files:** this log; `scripts/verify_no_secrets_or_paths.py`,
   `tests/test_secrets_scan.py`; `src/climrr/dictconcepts.py`,
   `scripts/build_dictionary_inventory.py`, `data/metadata/dictionary_concepts.yaml`,

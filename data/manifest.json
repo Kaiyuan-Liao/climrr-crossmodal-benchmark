@@ -124,6 +124,12 @@
       "milestone": "Track B Stage 2a",
       "change": "Added data/metadata/dictionary_concepts.yaml (Stage 2a inventory) and data/metadata/litcollect/survey_context_clause_v1.txt (survey context clause v1, diagnostic). Existing entries unchanged.",
       "decision_ref": "D-025, D-026"
+    },
+    {
+      "date": "2026-10-20",
+      "milestone": "Track B Stage 2b/2c",
+      "change": "Added the diagnostics block pinning Track B survey run 1 (artifacts/literature/survey/run1/manifest.csv). A diagnostic, not a corpus: not under external_corpora. Existing entries unchanged.",
+      "decision_ref": "D-025, D-026"
     }
   ],
   "external_corpora": [
@@ -210,6 +216,57 @@
         "decision_ref": "D-025",
         "statement": "frozen before reading"
       }
+    }
+  ],
+  "diagnostics": [
+    {
+      "diagnostic_id": "TRACKB-SURVEY-RUN1",
+      "role": "Track B Stage 2b/2c dictionary concept coverage survey, run 1 --- a diagnostic, not a corpus; counts are diagnostic coverage counts, not prevalence; candidate terms are candidate_surface_form, inert",
+      "manifest_path": "artifacts/literature/survey/run1/manifest.csv",
+      "manifest_sha256": "74ba7d7c72e7920ac16e1cc7c49ab2543add316df37baf60ff3b52c10c2d125d",
+      "n_files": 122,
+      "total_bytes": 12237164,
+      "log_path": "artifacts/literature/survey/survey_run1.log",
+      "log_sha256": "907ce4a0b206e0f59c36017c3d4d01543a28420b0d0b17f4fa1158003d861a9b",
+      "not_copied": {
+        "header_only_hits_csv": [
+          "DC-001/topical/hits.csv",
+          "DC-002/topical/hits.csv",
+          "DC-003/topical/hits.csv",
+          "DC-004/topical/hits.csv",
+          "DC-005/topical/hits.csv",
+          "DC-006/topical/hits.csv",
+          "DC-007/topical/hits.csv",
+          "DC-008/topical/hits.csv",
+          "DC-009/topical/hits.csv",
+          "DC-010/topical/hits.csv",
+          "DC-012/topical/hits.csv",
+          "DC-014/topical/hits.csv"
+        ],
+        "reason": "run_query.py --no-hits writes a header-only hits.csv; the topical copies are omitted",
+        "duckdb_tmp_dirs": "none present"
+      },
+      "run": {
+        "host": "polaris-login-01 (Polaris login node)",
+        "environment": "module conda/2026-10-01 + conda env globus_env",
+        "python": "3.11.x (patch version not recorded in any run output)",
+        "duckdb": "1.5.4",
+        "model": "gpt-oss-120b",
+        "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+        "start_utc": "2026-10-20T21:54:34Z",
+        "end_utc": "2026-10-20T22:09:18Z",
+        "execution": "executed from untracked copies in the litcollect `scripts/` folder whose SHA-256 equal the tracked v3 files",
+        "prior_attempt": "an aborted first attempt (offsets stage; no outputs kept)",
+        "tools_sha256": {
+          "scripts/litcollect/run_query.py": "5f56ee49f0da675f49ef490b506c030b307c693032e8be9097e499cf1c64030d",
+          "scripts/litcollect/survey_driver.py": "e1fb664c98e4ff866bb348c8930bfc1b9243957441b8a19ea0893e0b711af4cd"
+        },
+        "inventory_sha256": "288d08c5b92a32dbc5329834ceffc6a7ebc746d02479308431407cfddd81d064",
+        "context_clause_sha256": "fec9b5ca97f18e6e409a4b6e10b50faf5ab3c5404a33381eb8e67e9debc3626f",
+        "context_clause_documents": 120050,
+        "index_content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94"
+      },
+      "decision_ref": "D-025, D-026"
     }
   ]
 }

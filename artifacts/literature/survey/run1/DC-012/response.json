@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "[\"summer days heat index >105f\",\"days with max heat index >105f\",\"heat index exceedance days 105f\",\"105f heat index days\",\"hi >105f days\",\"summer heat index >105f days\",\"days above 105f heat index\",\"number of days heat index 105f\"]",
+        "reasoning": "We need to propose up to 8 surface forms (words or short phrases) that a scientific paper would use when discussing this variable: \"Number of Summer days with daily max heat index above 105 F\". So terms like \"summer days above 105°F heat index\", \"days with heat index >105°F\", \"heat index exceedance days\", \"number of days with max heat index >105°F\", \"heat index >105°F days\", \"summer heat index exceedance days\", \"days above 105°F heat index\", \"heat index 105°F threshold days\". Also abbreviations: \"HI >105°F days\", \"HI exceedance days\", \"HI >105°F\". Also \"105°F heat index days\". Up to 8.\n\nMake sure each is lowercase, no regex, max 6 words. Let's count words.\n\n1. \"summer days with heat index above 105°f\" -> that's 7 words? summer(1) days2 with3 heat4 index5 above6 105°f7. Too many. Need <=6. Could be \"summer days heat index >105f\". That's 5 words? summer1 days2 heat3 index4 >105f5. Good.\n\n2. \"days with max heat index >105f\" -> days1 with2 max3 heat4 index5 >105f6. OK.\n\n3. \"heat index exceedance days 105f\" -> heat1 index2 exceedance3 days4 105f5.\n\n4. \"105f heat index days\" -> 105f1 heat2 index3 days4.\n\n5. \"hi >105f days\" (hi abbreviation) -> hi1 >105f2 days3.\n\n6. \"summer heat index >105f days\" -> summer1 heat2 index3 >105f4 days5.\n\n7. \"days above 105f heat index\" -> days1 above2 105f3 heat4 index5.\n\n8. \"number of days heat index 105f\" -> number1 of2 days3 heat4 index5 105f6.\n\nAll lowercase, no special characters except > maybe okay. Use \"°f\"? Might be okay but keep simple \"f\". Use \"105f\". Provide JSON array.\n\n",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792534108,
+  "id": "30d489c8-6c3b-4d8d-962e-ff6b8d140e3a",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 535,
+    "completion_tokens_after_first_per_sec": 739.395246760175,
+    "completion_tokens_after_first_per_sec_first_ten": 740.7727741923961,
+    "completion_tokens_after_first_per_sec_graph": 740.7727741923961,
+    "completion_tokens_details": {
+      "reasoning_tokens": 463
+    },
+    "completion_tokens_per_sec": 688.4489812949005,
+    "end_time": 1792534108.0650413,
+    "is_last_response": true,
+    "prompt_tokens": 270,
+    "start_time": 1792534107.2879322,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.054897308349609375,
+    "time_to_first_token_graph": 0.04776811599731445,
+    "total_latency": 0.7771091461181641,
+    "total_tokens": 805,
+    "total_tokens_per_sec": 1035.890523256813
+  }
+}
