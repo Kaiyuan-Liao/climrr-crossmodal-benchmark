@@ -68,7 +68,7 @@ FORBIDDEN_PATTERNS = [
 # Hash-pinned exemption from the credential-word rule only (D-026). Path -> SHA-256.
 WORD_EXEMPTION_LABEL = "credential-bearing word"
 WORD_EXEMPTIONS = {
-    "scripts/litcollect/survey_driver.py": "b3292e22f067f6f2388e1233ec17b521c753d6d955e54b67751798c98f340d3a",
+    "scripts/litcollect/survey_driver.py": "877fec477c5005f0642e31b558b3a01493d5466680546fc610bc3d05e8797155",
     "scripts/litcollect/probe_alcf_inference.py": "79181c48981c709b49b90d78fc8aaddffaf12d2f1bb0591b9a9daa3aad438c66",
 }
 

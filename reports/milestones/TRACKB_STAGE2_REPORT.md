@@ -37,7 +37,7 @@ on Polaris).
 | **`data/metadata/dictionary_concepts.yaml`** (new) | **`288d08c5b92a32dbc5329834ceffc6a7ebc746d02479308431407cfddd81d064`** | byte-deterministic; pinned in `data/manifest.json`; `-text` |
 | **`data/metadata/litcollect/survey_context_clause_v1.txt`** (new) | **`fec9b5ca97f18e6e409a4b6e10b50faf5ab3c5404a33381eb8e67e9debc3626f`** | 403 bytes; pinned in `data/manifest.json`; `-text` |
 | `trackb_scripts.tar.gz` (delivered, read) | `8c3f75fea90c66bdb9461e342afe429ec7aab48ae0bb545804a9582ee7c20f59` | matches the work package |
-| **`scripts/litcollect/survey_driver.py`** (as tracked) | **`b3292e22f067f6f2388e1233ec17b521c753d6d955e54b67751798c98f340d3a`** | byte-identical to the tarball member; matches the work package |
+| **`scripts/litcollect/survey_driver.py`** (as tracked) | **`877fec477c5005f0642e31b558b3a01493d5466680546fc610bc3d05e8797155`** | the COORDINATOR's revised driver (follow-up on `246fccd`), byte-identical to the delivered file; replaces the tarball member `b3292e22…0d3a` |
 | `scripts/litcollect/probe_alcf_inference.py` (as tracked) | `79181c48981c709b49b90d78fc8aaddffaf12d2f1bb0591b9a9daa3aad438c66` | byte-identical to the tarball member |
 
 `data/raw/FullData.csv` was verified by `pytest` (hash gate) and **not read** by
@@ -125,20 +125,21 @@ DC-012  p11  Number of Summer days with daily max heat index above 105 F   thres
 
 Full table: `docs/DICTIONARY_CONCEPTS.md`.
 
-**Driver behaviour on this inventory (observed, logic unchanged):**
+**Revised driver (`877fec47…7155`) on this inventory --- what reaches the query from the name:**
 
-| Concepts | Dictionary name through the sanitizer |
-| --- | --- |
-| DC-003, 004, 005, 007, 008, 009, 010 | **kept** as the first candidate |
-| DC-001, 002, 006 | **dropped** --- "not a plain lowercase phrase" (parentheses) |
-| DC-011--014 | **dropped** --- "more than 6 words" |
+| Concepts | Stored name | First candidate |
+| --- | --- | --- |
+| DC-003, 004, 005, 007, 008, 009, 010 | kept | the name |
+| DC-001, 002 | dropped (parentheses) | stripped variant **`temperature`** (both) |
+| DC-006 | dropped (parentheses) | stripped variant **`degree days`** |
+| DC-011--014 | dropped ("more than 6 words") | **none** --- model terms only; no model term → `status: "error"` row |
 
 Stage 2b/2c: **PENDING --- Kaiyuan, Polaris**: `survey_table.csv` plus
 `<out>/DC-NNN/` (prompt, response, candidates, topical run, row) and `survey.log`.
 
 ## 10. Validation performed
 
-- `pytest`: **883 passed** (851 before + 16 `test_dictconcepts.py` + 13
+- `pytest`: **894 passed** (851 before + 16 `test_dictconcepts.py` + 24
   `test_survey_driver.py` + 3 `test_secrets_scan.py`). The new tests cover: re-slicing of passages and names
   from the page text (hash-checked); verbatim units/threshold/scenario; ids
   unique and contiguous; `family_hint` null; `verified_columns` ⊂ the 21
@@ -155,20 +156,26 @@ Stage 2b/2c: **PENDING --- Kaiyuan, Polaris**: `survey_table.csv` plus
 
 ## 11. Failures, rejected cases, and known limitations
 
-- **7 of 14 dictionary names never reach the query** (table above). The four
-  threshold concepts also share one passage, so the name is the only thing in
-  the prompt that tells them apart --- and it is dropped. Their candidate sets
-  will rest on the model alone.
-- **A concept whose candidates are all dropped aborts the run.** With no kept
-  term the driver writes `(  )`; `run_query.parse` refuses it; the driver does
-  not catch the `RuntimeError`. Possible on a model error for DC-001/002/006/
-  011--014. A rerun resumes after the completed concepts but repeats the failing one.
-- **`\b` and trailing `%` / `°`.** The sanitizer admits `%` and `°`, but
-  `run_query.py` wraps every term in `\b…\b`, so a term ending in one of them
-  almost never matches.
-- **No run record from the driver or the probe.** Both are outside the CLAUDE.md
-  run-record exemption list (M4-WP3) and must not be modified here; their
-  `survey.log`, `row.json` and `probe_alcf_inference.json` are the evidence.
+- **7 of 14 dictionary names are not themselves searchable** (table in §9): the
+  stored names of DC-001, 002, 006 (parentheses) and DC-011--014 (more than six
+  words) never enter a query. The revised driver adds parenthetical-stripped
+  variants for the first three; **DC-011--014 get none**. The four threshold
+  concepts also **share one passage**, so the name is the only thing in the prompt
+  that tells them apart --- and it is not searchable. **Their vocabulary comes from
+  the model only.**
+- **The stripped variants broaden two concepts.** DC-001 and DC-002 both search
+  the bare word `temperature`, far wider than annual/seasonal max--min daily
+  temperature; their topical counts will be inflated relative to the others. A
+  code-generated candidate, inert like the rest (`BRIDGE_ELIGIBILITY.md` §7), but
+  to be read with that in mind.
+- **Error rows are final on restart.** A concept that ends `status: "error"`
+  (no searchable candidate, or a failed scan) still writes `row.json`, so a rerun
+  skips it rather than retrying; retrying means deleting `out/<id>/` (tested).
+  *Resolved by the revised driver:* the run no longer aborts on such a concept,
+  and `%` / `°` / quotes (which defeat `\b`) are dropped with a reason.
+- **Run records.** The driver and the probe write none; they are now on the
+  CLAUDE.md run-record exemption list (D-026), with `survey.log`, `row.json`,
+  `survey_table.csv` and `probe_alcf_inference.json` as the evidence.
 - Passage windows are EXECUTOR choices (verbatim, but the start and end are judgement).
 
 ## 12. Deviations from the approved plan
@@ -191,10 +198,9 @@ Stage 2b/2c: **PENDING --- Kaiyuan, Polaris**: `survey_table.csv` plus
 
 | Item | Owner | Blocks |
 | --- | --- | --- |
-| Confirm D-026 (measure level) | COORDINATOR / GUIDANCE | the frozen ids |
-| Confirm the hash-pinned scanner exemption (D-026) | COORDINATOR / GUIDANCE | nothing now; a revised driver needs a new pin |
-| Driver: dropped names and empty-candidate abort --- accept, or issue a revised driver before the Polaris run | COORDINATOR | the Stage 2b/2c run |
-| Extend the run-record exemption to `survey_driver.py` and `probe_alcf_inference.py` | COORDINATOR | nothing now |
+| D-026 measure level and the hash-pinned allowlist | **confirmed by the COORDINATOR** (2026-10-20); GUIDANCE review pending | --- |
+| Revised driver issued; run-record exemption extended | **done** (follow-up) | --- |
+| Bare `temperature` for DC-001/002 (§11) --- accept for the diagnostic run? | COORDINATOR | nothing; interpretation of two rows |
 | Q22 (705k filter) stays open | JL | nothing here |
 
 ## 14. Proposed gate status
@@ -207,17 +213,16 @@ Stage 2b/2c: **PENDING --- Kaiyuan, Polaris**: `survey_table.csv` plus
 | 26. Stage 2b outputs are explicitly `candidate_surface_form`. | **MET (tooling)** | driver + test; real run PENDING |
 | 27. Stage 2b records model and prompt provenance. | **MET (tooling)** | test; real run PENDING |
 | 28. Stage 2b vocabulary never enters production automatically. | **MET** | `BRIDGE_ELIGIBILITY.md` §7; test |
-| 29. Stage 2c is deterministic and restartable. | **MET (tooling)** | restart test; caveat §11 (abort on empty candidates) |
+| 29. Stage 2c is deterministic and restartable. | **MET (tooling)** | restart test; error rows continue the run and are final on restart (§11) |
 | 30. Stage 2c counts are labeled diagnostics, not literature-prevalence estimates. | **MET (tooling)** | `row.json` label (test); docs |
 | 31. Literature yield does not automatically determine unit selection. | **MET** | no code reads survey output |
 | 33. No QA is generated. | **MET** | none |
 
-**Proposed: Stage 2a COMPLETE; Stage 2b/2c READY TO RUN, subject to the
-COORDINATOR's call on the §11 driver behaviour.**
+**Proposed: Stage 2a COMPLETE; Stage 2b/2c READY TO RUN with the revised driver.**
 
 ## 15. Proposed next bounded objective
 
-Kaiyuan runs `survey_driver.py` (pinned SHA-256 `b3292e22…0d3a`) on Polaris over
+Kaiyuan runs `survey_driver.py` (pinned SHA-256 `877fec47…7155`) on Polaris over
 the frozen LITCORPUS-02 source index with `dictionary_concepts.yaml` and
 `survey_context_clause_v1.txt`, and returns `survey_table.csv` and the 14
 per-concept folders for a diagnostic review.

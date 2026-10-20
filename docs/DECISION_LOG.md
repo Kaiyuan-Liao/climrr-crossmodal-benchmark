@@ -1499,6 +1499,15 @@ code emits, and the next GUIDANCE packet still chooses.
   paths, and only while each file's SHA-256 equals the pinned value, the
   credential-word rule is not reported; path and key-prefix rules still apply;
   any change makes the exemption lapse. Tested in `tests/test_secrets_scan.py`.
+- **Confirmed by the COORDINATOR (2026-10-20, Track B follow-up on `246fccd`):
+  both decisions** --- measure-level granularity and the hash-pinned allowlist.
+  In the same follow-up the COORDINATOR issued a revised `survey_driver.py`
+  (SHA-256 `877fec477c5005f0642e31b558b3a01493d5466680546fc610bc3d05e8797155`,
+  replacing `b3292e22…0d3a`): a parenthetical-stripped variant of the dictionary
+  name; `%`, `°` and quotes no longer admitted; a concept with no searchable
+  candidate or a failed scan gives a `status: "error"` row and the run continues.
+  The allowlist is re-pinned to the new hash; the two litcollect scripts join the
+  CLAUDE.md run-record exemption list.
 - **Affected files:** this log; `scripts/verify_no_secrets_or_paths.py`,
   `tests/test_secrets_scan.py`; `src/climrr/dictconcepts.py`,
   `scripts/build_dictionary_inventory.py`, `data/metadata/dictionary_concepts.yaml`,

@@ -28,12 +28,15 @@ session reasoning correctly from out-of-date facts and repeating them.
   **0** `listed_only`; every name and passage an exact slice of one page's pypdf 6.18.0
   text; `family_hint` all null; `verified_columns` all empty (no verified column has a
   resolution record). **No column status moved; index 117 unlabeled.**
-- **Survey context clause v1** (diagnostic) tracked and pinned; **`survey_driver.py` /
-  `probe_alcf_inference.py`** tracked byte-identical to the delivered tarball, tested
-  against a mock server. Candidates are inert (`docs/BRIDGE_ELIGIBILITY.md` §7).
-- **Driver behaviour to know before the Polaris run:** 7 of 14 dictionary names fail
-  its sanitizer (parentheses, or more than six words) and are dropped, not rewritten;
-  a concept whose candidates are all dropped aborts the run (empty query).
+- **Survey context clause v1** (diagnostic) tracked and pinned; **revised
+  `survey_driver.py` (`877fec47…7155`)** and `probe_alcf_inference.py` tracked
+  byte-identical to the delivered files, tested against a mock server. Candidates are
+  inert (`docs/BRIDGE_ELIGIBILITY.md` §7). **D-026 confirmed by the COORDINATOR.**
+- **Driver behaviour to know before the Polaris run:** 7 of 14 stored dictionary names
+  are not searchable; DC-001/002/006 get parenthetical-stripped variants (DC-001/002
+  both search bare `temperature`); the four threshold concepts (shared passage) rely on
+  model terms only. A failing concept gives a `status: "error"` row and the run
+  continues; error rows are not retried on restart.
 - **Next:** Kaiyuan runs 2b/2c on Polaris with the pinned driver; GUIDANCE reviews.
 
 ## Where things stand --- M4-WP3 closeout and M4-WP4 sample (2026-10-19)

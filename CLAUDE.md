@@ -124,6 +124,10 @@ writes no run record; and `scripts/litcollect/build_index.py`, `run_query.py`
 and `run_v1_on_705k.sh` are the external collection tools, kept as they ran on
 Polaris --- their own `summary.json` / `index_summary.json` are the run
 evidence, frozen by `scripts/freeze_litcorpus.py`, which does write one.
+Track B (D-026, COORDINATOR-confirmed) adds `scripts/litcollect/survey_driver.py`
+and `probe_alcf_inference.py`, also run on Polaris and kept byte-identical to the
+delivered files: their `survey.log`, per-concept `candidates.json` / `row.json`,
+`survey_table.csv` and `probe_alcf_inference.json` are the run evidence.
 
 ## Knowledge-refresh staging
 

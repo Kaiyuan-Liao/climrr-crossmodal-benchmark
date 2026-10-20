@@ -27,9 +27,10 @@ from climrr.paths import REPO_ROOT
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
 CONTEXT = REPO_ROOT / "data" / "metadata" / "litcollect" / "survey_context_clause_v1.txt"
 
-#: Byte-identical to the files in trackb_scripts.tar.gz (SHA-256 8c3f75fe...0f59).
+#: survey_driver.py: the revised driver of the Track B follow-up (SHA-256 877fec47...7155);
+#: probe_alcf_inference.py: byte-identical to trackb_scripts.tar.gz (SHA-256 8c3f75fe...0f59).
 TOOL_SHA256 = {
-    "survey_driver.py": "b3292e22f067f6f2388e1233ec17b521c753d6d955e54b67751798c98f340d3a",
+    "survey_driver.py": "877fec477c5005f0642e31b558b3a01493d5466680546fc610bc3d05e8797155",
     "probe_alcf_inference.py": "79181c48981c709b49b90d78fc8aaddffaf12d2f1bb0591b9a9daa3aad438c66",
 }
 
@@ -52,6 +53,9 @@ REPLIES = {
                            '"FWI (index)", "one two three four five six seven"]'},
     "Heat Index": {"content": '["heat index", "apparent temperature"]'},
 }
+
+
+PLAIN = "not a plain lowercase phrase (letters, digits, space, - / . only)"
 
 
 def _sha(s: str) -> str:
@@ -104,7 +108,7 @@ def test_sanitizer_drops_non_plain_long_and_duplicate_terms_and_caps_at_ten():
     assert len(kept) == 10
     reasons = {d["term"]: d["reason"] for d in dropped}
     assert reasons["fire weather index"] == "duplicate"
-    assert reasons["FWI (index)"] == reasons["fwi|x"] == "not a plain lowercase phrase"
+    assert reasons["FWI (index)"] == reasons["fwi|x"] == PLAIN
     assert reasons["one two three four five six seven"] == "more than 6 words"
 
 
@@ -114,14 +118,31 @@ def test_dictionary_name_is_the_first_candidate_even_when_the_model_repeats_it()
     assert [d["source"] for d in dropped] == ["model", "model"]
 
 
-def test_a_non_plain_dictionary_name_is_dropped_not_rewritten():
-    """Driver behaviour, recorded: a name with parentheses, a dash or more than six
-    words fails the sanitizer and is dropped with its reason --- never rewritten.
-    7 of the 14 Stage 2a names fall here (see TRACKB_STAGE2_REPORT.md)."""
+def test_name_variants_strip_a_parenthetical():
+    assert _driver().name_variants("Temperature (Annual)") == ["temperature (annual)", "temperature"]
+    assert _driver().name_variants("Fire Weather Index") == ["fire weather index"]
+
+
+def test_the_stripped_name_is_kept_as_the_first_candidate():
+    """The stored name (with parentheses) is dropped with its reason; the stripped
+    variant is kept, first, as a dictionary_name candidate."""
     kept, dropped = _driver().sanitize("Temperature (Annual)", ["annual mean temperature"])
-    assert [k["source"] for k in kept] == ["model"]
-    assert dropped[0] == {"term": "Temperature (Annual)", "reason": "not a plain lowercase phrase",
-                          "source": "dictionary_name"}
+    assert kept == [{"term": "temperature", "source": "dictionary_name"},
+                    {"term": "annual mean temperature", "source": "model"}]
+    assert dropped == [{"term": "temperature (annual)", "reason": PLAIN, "source": "dictionary_name"}]
+
+
+def test_a_name_over_six_words_has_no_searchable_variant():
+    """DC-011..014: the threshold names stay unsearchable; their vocabulary is the model's only."""
+    kept, dropped = _driver().sanitize("Number of Summer days with daily max heat index above 105 F", [])
+    assert kept == [] and dropped[0]["reason"] == "more than 6 words"
+
+
+@pytest.mark.parametrize("term", ["100%", "95°f", "105 °f", "o'brien index"])
+def test_terms_with_percent_degree_or_quote_are_dropped_with_a_reason(term):
+    kept, dropped = _driver().sanitize("Heat Index", [term])
+    assert [k["term"] for k in kept] == ["heat index"]
+    assert dropped == [{"term": term, "reason": PLAIN, "source": "model"}]
 
 
 def test_the_stage2a_inventory_loads_in_the_driver():
@@ -237,3 +258,77 @@ def test_survey_writes_nothing_into_the_repository(survey):
     """Candidates stay in the survey output dir: the concept map is untouched."""
     cm = REPO_ROOT / "data" / "metadata" / "concept_map.yaml"
     assert "candidate_surface_form" not in cm.read_text(encoding="utf-8")
+
+
+# --- one failing concept never aborts the run ---------------------------------
+
+ERR_INVENTORY = {"concepts": [
+    {"id": "DC-911", "name": "Number of Summer days with daily max heat index above 95 F",
+     "passage": "synthetic", "page": 1},                       # every candidate dropped
+    {"id": "DC-912", "name": "Heat Index", "passage": "synthetic", "page": 2},   # run_query fails
+    {"id": "DC-913", "name": "Fire Weather Index", "passage": "synthetic", "page": 3},  # ok
+]}
+REPLIES["Number of Summer days with daily max heat index above 95 F"] = {"content": '["100%", "95°f"]'}
+
+
+@pytest.fixture(scope="module")
+def failing(tmp_path_factory):
+    pytest.importorskip("duckdb")
+    base = tmp_path_factory.mktemp("failing")
+    src, idx, out = base / "src", base / "idx", base / "out"
+    (src / "00").mkdir(parents=True)
+    for d, obj in DOCS.items():
+        (src / "00" / f"{d}.json").write_text(json.dumps(obj), encoding="utf-8")
+    subprocess.run([sys.executable, str(TOOLS / "build_index.py"), "--root", str(src), "--out", str(idx)],
+                   check=True, capture_output=True)
+    inv = base / "inventory.json"
+    inv.write_text(json.dumps(ERR_INVENTORY), encoding="utf-8")
+    # run_query.py refuses a non-empty output dir: a pre-seeded file makes DC-912's scan fail.
+    (out / "DC-912" / "topical").mkdir(parents=True)
+    (out / "DC-912" / "topical" / "seed").write_text("x")
+    mock = _Mock()
+    env = {**os.environ, "TOK" + "EN": "test-value"}  # fragments: keeps this file scannable
+    cmd = [sys.executable, str(TOOLS / "survey_driver.py"), "--inventory", str(inv), "--index", str(idx),
+           "--context", str(CONTEXT), "--out", str(out), "--base-url", mock.url, "--model", "mock-model"]
+    run = subprocess.run(cmd, env=env, capture_output=True, text=True)
+    n_prompts = len(mock.prompts)
+    rerun = subprocess.run(cmd, env=env, capture_output=True, text=True)
+    yield {"out": out, "run": run, "rerun": rerun, "n_prompts": n_prompts, "mock": mock}
+    mock.server.shutdown()
+
+
+def test_the_run_continues_past_failing_concepts(failing):
+    assert failing["run"].returncode == 0, failing["run"].stderr
+    ok = json.loads((failing["out"] / "DC-913" / "row.json").read_text())
+    assert ok["status"] == "ok" and ok["topical_only_count"] == 3
+
+
+def test_all_candidates_dropped_gives_an_error_row(failing):
+    row = json.loads((failing["out"] / "DC-911" / "row.json").read_text())
+    assert row["status"] == "error" and row["topical_only_count"] is None
+    assert row["context_filtered_count"] is None and row["topical_query_sha256"] is None
+    assert "no searchable candidate term" in row["notes"]
+    c = json.loads((failing["out"] / "DC-911" / "candidates.json").read_text())
+    assert c["candidates"] == [] and {d["term"] for d in c["dropped"]} >= {"100%", "95°f"}
+
+
+def test_a_run_query_failure_gives_an_error_row(failing):
+    row = json.loads((failing["out"] / "DC-912" / "row.json").read_text())
+    assert row["status"] == "error" and row["topical_only_count"] is None
+    assert "run_query failed" in row["notes"]
+    assert (failing["out"] / "DC-912" / "scan_error.txt").is_file()
+
+
+def test_error_rows_are_skipped_on_restart_not_retried(failing):
+    """Driver behaviour, recorded: an error row is a completed row; a rerun does not retry it.
+    Retrying means deleting out/<id>/ by hand."""
+    assert failing["rerun"].returncode == 0
+    assert len(failing["mock"].prompts) == failing["n_prompts"] == 3
+
+
+def test_error_rows_sort_last_in_the_table(failing):
+    import csv
+
+    with (failing["out"] / "survey_table.csv").open(encoding="utf-8", newline="") as f:
+        ids = [r["concept_id"] for r in csv.DictReader(f)]  # an error note may span lines
+    assert ids[0] == "DC-913" and set(ids[1:]) == {"DC-911", "DC-912"}

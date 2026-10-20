@@ -23,7 +23,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 RUN_QUERY = HERE / "run_query.py"
-TERM_OK = re.compile(r"^[a-z0-9][a-z0-9 \-/.%°']{0,59}$")
+TERM_OK = re.compile(r"^[a-z0-9][a-z0-9 \-/.]{0,59}$")  # no %, °, quotes: they defeat \b word boundaries
 
 PROMPT_TEMPLATE = """You are helping build a lexical search over scientific papers. Below is ONE variable from a climate-data dictionary, quoted verbatim. Propose up to {k} surface forms (words or short phrases, lowercase, no regular expressions) that a scientific paper would use when it discusses THIS variable or the quantity it measures. Rules: (1) propose only forms that name the same quantity or a standard name for it, not broader topics; (2) include common abbreviations and hyphenation variants; (3) do not include place names, years, or scenario names; (4) each form at most 6 words. Return ONLY a JSON array of strings, nothing else.
 
@@ -77,13 +77,23 @@ def extract_terms(content: str):
     return [str(x) for x in arr], None
 
 
+def name_variants(name: str):
+    """Dictionary name as stored, plus a parenthetical-stripped variant (e.g. 'temperature (annual)' -> 'temperature')."""
+    base = " ".join(name.lower().strip().split())
+    out = [base]
+    stripped = " ".join(re.sub(r"\([^)]*\)", " ", base).split())
+    if stripped and stripped != base:
+        out.append(stripped)
+    return out
+
+
 def sanitize(name: str, proposed):
     """Lowercase, whitespace-normalize, drop anything that is not a plain phrase; dictionary name first."""
     kept, dropped, seen = [], [], set()
-    for src, t in [("dictionary_name", name)] + [("model", p) for p in proposed]:
+    for src, t in [("dictionary_name", v) for v in name_variants(name)] + [("model", p) for p in proposed]:
         t2 = " ".join(str(t).lower().strip().split())
         if not TERM_OK.match(t2):
-            dropped.append({"term": t, "reason": "not a plain lowercase phrase", "source": src}); continue
+            dropped.append({"term": t, "reason": "not a plain lowercase phrase (letters, digits, space, - / . only)", "source": src}); continue
         if len(t2.split()) > 6:
             dropped.append({"term": t, "reason": "more than 6 words", "source": src}); continue
         if t2 in seen:
@@ -172,35 +182,43 @@ def main():
             "note": "Candidates are inert: not approved vocabulary; not in concept_map.yaml; not used by production queries, C-2 or compatibility.",
         }
         (cdir / "candidates.json").write_text(json.dumps(candidates, indent=2, ensure_ascii=False))
-        # 2c — deterministic counts
+        # 2c — deterministic counts (never abort the run on one concept)
         terms = [k["term"] for k in kept]
-        qtext = "( " + " OR ".join(f'"{t}"' for t in terms) + " )\n"
-        (cdir / "query_topical.txt").write_text(qtext, encoding="utf-8")
-        t0 = time.time()
-        summ = run_query(index, cdir / "query_topical.txt", cdir / "topical")
-        topical_ids = set((cdir / "topical" / "ids.txt").read_text().split())
-        ctx_count = len(topical_ids & ctx_ids)
-        (cdir / "topical_and_context_ids.txt").write_text("".join(f"{d}\n" for d in sorted(topical_ids & ctx_ids)))
-        per_term = summ.get("per_term_doc_counts", {})
+        t0 = time.time(); topical_ids, ctx_count, per_term, scan_err = set(), None, {}, None
+        if not terms:
+            scan_err = "no searchable candidate term (all proposals dropped and/or model call failed)"
+        else:
+            qtext = "( " + " OR ".join(f'"{t}"' for t in terms) + " )\n"
+            (cdir / "query_topical.txt").write_text(qtext, encoding="utf-8")
+            try:
+                summ = run_query(index, cdir / "query_topical.txt", cdir / "topical")
+                topical_ids = set((cdir / "topical" / "ids.txt").read_text().split())
+                ctx_count = len(topical_ids & ctx_ids)
+                (cdir / "topical_and_context_ids.txt").write_text("".join(f"{d}\n" for d in sorted(topical_ids & ctx_ids)))
+                per_term = summ.get("per_term_doc_counts", {})
+            except Exception as e:  # noqa: BLE001
+                scan_err = f"run_query failed: {e}"[:500]; (cdir / "scan_error.txt").write_text(scan_err + "\n")
+        notes = "; ".join(x for x in [f"model parse error: {perr}" if perr else "", f"dropped {len(dropped)} proposed terms" if dropped else "", scan_err or ""] if x)
         row = {
             "concept_id": cid, "dictionary_name": c["name"], "dictionary_page": c.get("page"), "dictionary_span": c.get("passage"),
             "candidate_surface_forms": terms, "per_term_doc_counts": {k.split(":", 1)[1]: v for k, v in per_term.items()},
-            "topical_only_count": len(topical_ids), "context_filtered_count": ctx_count,
-            "topical_query_sha256": sha(qtext), "context_clause_sha256": ctx_sha, "inventory_sha256": inv_sha,
+            "topical_only_count": len(topical_ids) if not scan_err else None, "context_filtered_count": ctx_count,
+            "topical_query_sha256": sha(qtext) if terms else None, "context_clause_sha256": ctx_sha, "inventory_sha256": inv_sha,
             "index_content_identity_sha256": idx_summary.get("content_identity_sha256"), "scan_seconds": round(time.time() - t0, 1),
             "label": "diagnostic — coverage count, not prevalence; candidate vocabulary, not approved",
-            "notes": "; ".join(x for x in [f"model parse error: {perr}" if perr else "", f"dropped {len(dropped)} proposed terms" if dropped else ""] if x),
+            "status": "error" if scan_err else "ok",
+            "notes": notes,
         }
         (cdir / "row.json").write_text(json.dumps(row, indent=2, ensure_ascii=False))
         done += 1
-        say(f"{cid} '{c['name']}': terms={len(terms)} topical={len(topical_ids)} context={ctx_count} model_s={secs} scan_s={row['scan_seconds']}")
+        say(f"{cid} '{c['name']}': status={row['status']} terms={len(terms)} topical={row['topical_only_count']} context={ctx_count} model_s={secs} scan_s={row['scan_seconds']}")
 
     # Regenerate the table from all rows.
     rows = [json.loads(p.read_text()) for p in sorted(out.glob("*/row.json")) if p.parent.name != "_context"]
     with open(out / "survey_table.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f, lineterminator="\n")
         w.writerow(["concept_id", "dictionary_name", "dictionary_page", "candidate_surface_forms", "topical_only_count", "context_filtered_count", "notes"])
-        for r in sorted(rows, key=lambda r: -r["topical_only_count"]):
+        for r in sorted(rows, key=lambda r: -(r["topical_only_count"] if r["topical_only_count"] is not None else -1)):
             w.writerow([r["concept_id"], r["dictionary_name"], r.get("dictionary_page"), " | ".join(r["candidate_surface_forms"]), r["topical_only_count"], r["context_filtered_count"], r["notes"]])
     say(f"DONE rows={len(rows)} table={out/'survey_table.csv'}")
 
