@@ -1,0 +1,61 @@
+# Track B orthographic normalization table v1 --- FROZEN before Stage 2 run 2.
+# Authorized by the GUIDANCE ruling of 2026-10-20, B4 (D-027):
+#   docs/M4_WP4_TRACKB_GUIDANCE_RULING.md
+# Pinned by SHA-256 in data/manifest.json. Never edit in place: a change is a
+# new version (v2) with its own decision.
+table_id: normalization_table_v1
+status: frozen
+decision_ref: D-027
+scope: >-
+  Model-proposed candidate terms (candidate_surface_form) in the Track B
+  concept coverage survey. Orthographic only: no semantic paraphrasing, no
+  stemming, no abbreviation expansion, no synonym inference. Any character or
+  sequence not listed below is left exactly as it is.
+provenance: >-
+  The original model term is retained unchanged; the normalized form is stored
+  separately, with the ids of the rules that fired (in id order, each once).
+  A term no rule touches has normalized == original and no rule ids.
+application: >-
+  Rules are applied in id order (N-1 ... N-7); within a rule, every
+  non-overlapping occurrence of each listed match string is replaced, left to
+  right. Spacing: a replacement word is separated by one space from an adjacent
+  letter or digit (so "95°f" becomes "95 degrees f", not "95degrees f"); next to
+  a space, another character, or the start or end of the term, nothing is
+  inserted. No other whitespace is changed.
+letter_case: >-
+  N-3 ... N-6 list the lowercase letter as a separate form of the same rule
+  (survey model terms are lowercased by the driver); the letter's case is kept
+  in the replacement. The ruling's forms are listed first.
+rules:
+  - id: N-1
+    ruling_form: "> → above"
+    forms:
+      - {match: ">", replace: "above"}
+  - id: N-2
+    ruling_form: "< → below"
+    forms:
+      - {match: "<", replace: "below"}
+  - id: N-3
+    ruling_form: "°F → degrees F"
+    forms:
+      - {match: "°F", replace: "degrees F"}
+      - {match: "°f", replace: "degrees f"}
+  - id: N-4
+    ruling_form: "° F → degrees F"
+    forms:
+      - {match: "° F", replace: "degrees F"}
+      - {match: "° f", replace: "degrees f"}
+  - id: N-5
+    ruling_form: "°C → degrees C"
+    forms:
+      - {match: "°C", replace: "degrees C"}
+      - {match: "°c", replace: "degrees c"}
+  - id: N-6
+    ruling_form: "° C → degrees C"
+    forms:
+      - {match: "° C", replace: "degrees C"}
+      - {match: "° c", replace: "degrees c"}
+  - id: N-7
+    ruling_form: "% → percent"
+    forms:
+      - {match: "%", replace: "percent"}

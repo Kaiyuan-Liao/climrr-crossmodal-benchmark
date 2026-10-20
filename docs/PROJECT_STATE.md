@@ -16,10 +16,24 @@ session reasoning correctly from out-of-date facts and repeating them.
 | **M4-WP1 sample** | `LIT-000001, 000191, 000381, 000571, 000761, 000951, 001141, 001331, 001521, 001711` --- every 190th id; no duplicate skip; `wp1_sample.json` SHA-256 `5cb81f95…`, committed before any file was opened |
 | **Prototypes built from** | `56eb10d` --- v1 records unchanged since M1-WP3b. **P-STATE-1 v2** (`P-STATE-1.v2.json`, D-018) adds explicit year windows only; V/D/M identical to v1; the frozen M5-WP1 input still names v1 |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
-| **Rulings in force** | **D-025** (M4-WP3 PASS WITH ACTIONS; LITCORPUS-02 working corpus; five terms governed; WP4 10+10 sample; Stage 2a--2c diagnostics), **D-021** (concept-first collection), **D-022** (source yield; LITCORPUS-01 a pilot; **R-FWI-1**; no reading), D-009, D-011, D-012, D-013 + D-013-A1, D-015, D-016, D-017, D-018, **D-019 (M4-WP1b PASS WITH ACTIONS; rule-3 trimming and J-1 approved; `LIT-000381-C3` tie and `LIT-000571` contest kept; evidence tiers A/B/C; C-2 revised; WP2 retrieval PASS with 4; reading of the four authorized, two readers + adjudication, then compatibility with P-STATE-1 v2)** |
+| **Rulings in force** | **D-027** (Track A + Track B PASS WITH ACTIONS; G-R; prospective C-2 mask and G-2; unit-granularity diagnostic next; family-level run 2; narrow orthographic normalization), **D-025** (M4-WP3 PASS WITH ACTIONS; LITCORPUS-02 working corpus; five terms governed; WP4 10+10 sample; Stage 2a--2c diagnostics), **D-021** (concept-first collection), **D-022** (source yield; LITCORPUS-01 a pilot; **R-FWI-1**; no reading), D-009, D-011, D-012, D-013 + D-013-A1, D-015, D-016, D-017, D-018, **D-019 (M4-WP1b PASS WITH ACTIONS; rule-3 trimming and J-1 approved; `LIT-000381-C3` tie and `LIT-000571` contest kept; evidence tiers A/B/C; C-2 revised; WP2 retrieval PASS with 4; reading of the four authorized, two readers + adjudication, then compatibility with P-STATE-1 v2)** |
 | **Owner decisions since** | **D-026** (Kaiyuan, 2026-10-20): Stage 2a inventory at measure level --- one concept per output quantity the dictionary narrative describes; assigns no column meaning. **D-014** (Kaiyuan, 2026-09-28): proceed on the "our reading" basis to test what QA could be generated; every `inferred_candidate` and `derived_from_inferred` status carried through; **promotes nothing, and does not authorise QA generation** |
 | **Meetings since the last refresh** | **Mentor 2026-10-09:** direction D-020 --- concepts from the table units first, then collect papers for them; keep the three units. **Mentor 2026-10-13:** shard yields reported, a larger source asked for; outcome = JL's Drive link (D-023). *Earlier:* **Group 2026-09-14:** "No material objection to the prototype-unit design was raised." --- not validation, no semantic confirmed. **Mentor 2026-09-17 and 2026-09-24:** **no review of the answer sheet occurred** (R-003); nothing promoted |
 | **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M1 remains open.** **Next relevance-guided step:** waits on the mentor (family-level usefulness; widen places or change the unit) and GUIDANCE; any WP2b must be predeclared. **Metric-level concept terms** (`fwi_seasonal_value`, `heatindex_days_above_105F`): `proposed`, need GUIDANCE or the mentor. **QA generation: not authorised by any ruling.** **Reading of any LITCORPUS-01/02 paper: not authorised** (D-022) |
+
+## Where things stand --- GUIDANCE ruling D-027, pre-merge bookkeeping (2026-10-20)
+
+- **D-027: PASS WITH ACTIONS** for Track A (M4-WP4 / M5-WP4, reviewed `c0be540`;
+  bounded zero of 354 accepted) and Track B (Stage 2 run 1 **PASS as diagnostic**,
+  reviewed `2331e19`). Ruling: [M4_WP4_TRACKB_GUIDANCE_RULING.md](M4_WP4_TRACKB_GUIDANCE_RULING.md).
+  Both merges authorized after bookkeeping; **Kaiyuan performs them**.
+- **Track B bookkeeping (this branch):** D-027 logged; orthographic table
+  `normalization_table_v1.yaml` (N-1 … N-7) frozen and pinned, driver unchanged;
+  survey doc carries the B3 sentence and the run-2 side-by-side note; Polaris
+  Python patch `unknown`; mentor brief for 2026-10-22 (seven discussion families,
+  questions a--c). **Track A bookkeeping** is on `work/m4-wp4-adj`.
+- **Next (not started):** Track A-next unit-granularity diagnostic; Stage 2
+  run 2 at family level after a driver update. **QA not authorized.**
 
 ## Where things stand --- Track B survey run 1 (2026-10-20)
 

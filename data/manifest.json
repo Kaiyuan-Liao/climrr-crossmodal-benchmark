@@ -110,6 +110,22 @@
       "interpretation_notes": "no interpretation assigned; a diagnostic filter only --- its counts are coverage diagnostics, not literature-prevalence estimates",
       "tracked_in_git": true,
       "decision_ref": "D-025"
+    },
+    {
+      "filename": "normalization_table_v1.yaml",
+      "path": "data/metadata/litcollect/normalization_table_v1.yaml",
+      "role": "Track B orthographic normalization table v1 (diagnostic) --- the seven transforms authorized by GUIDANCE ruling B4 (N-1...N-7), frozen before Stage 2 run 2; not vocabulary, not a production query",
+      "sha256": "80a5e0e386dfe8a984e1a5ba2ace781d15601f9b0723b75d238b6de5d1226e03",
+      "bytes": 2470,
+      "row_count": null,
+      "column_count": null,
+      "encoding_note": "UTF-8 (contains U+00B0 DEGREE SIGN), LF line endings, no byte-order mark. Pinned -text in .gitattributes (data/metadata/litcollect/**).",
+      "source_description": "written by the EXECUTOR from the ruling's B4 table (docs/M4_WP4_TRACKB_GUIDANCE_RULING.md), with the lowercase letter forms the work package's example requires",
+      "acquisition_date": "2026-10-20",
+      "storage_policy": "tracked in ordinary Git as an immutable object; a change is a new version with its own decision",
+      "interpretation_notes": "no interpretation assigned; orthographic only --- no semantic paraphrasing, stemming, abbreviation expansion or synonym inference; original terms retained beside normalized forms",
+      "tracked_in_git": true,
+      "decision_ref": "D-027"
     }
   ],
   "amendments": [
@@ -130,6 +146,12 @@
       "milestone": "Track B Stage 2b/2c",
       "change": "Added the diagnostics block pinning Track B survey run 1 (artifacts/literature/survey/run1/manifest.csv). A diagnostic, not a corpus: not under external_corpora. Existing entries unchanged.",
       "decision_ref": "D-025, D-026"
+    },
+    {
+      "date": "2026-10-20",
+      "milestone": "Track B ruling bookkeeping (D-027)",
+      "change": "Added data/metadata/litcollect/normalization_table_v1.yaml (orthographic normalization table v1, frozen before Stage 2 run 2). TRACKB-SURVEY-RUN1 run.python: the Polaris patch version is recorded as `unknown` (ruling action 22); no hash changed. Existing entries otherwise unchanged.",
+      "decision_ref": "D-027"
     }
   ],
   "external_corpora": [
@@ -249,7 +271,7 @@
       "run": {
         "host": "polaris-login-01 (Polaris login node)",
         "environment": "module conda/2026-10-01 + conda env globus_env",
-        "python": "3.11.x (patch version not recorded in any run output)",
+        "python": "3.11.x --- patch version `unknown` (not recorded in any run output and not supplied; ruling action 22, D-027)",
         "duckdb": "1.5.4",
         "model": "gpt-oss-120b",
         "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",

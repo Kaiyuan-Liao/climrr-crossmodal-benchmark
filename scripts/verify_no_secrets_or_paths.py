@@ -19,6 +19,11 @@ while each file's SHA-256 equals the pinned value**, hits of the
 paths, key prefixes --- still applies to them, and any change to either file
 makes the exemption lapse, so the word hits return and the scan fails.
 
+Extended under the same terms (owner decision recorded in D-027) to the GUIDANCE
+ruling `docs/M4_WP4_TRACKB_GUIDANCE_RULING.md`, which uses the credential word
+in its ordinary sense ("scenario-<word> retrieval") and must stay byte-identical
+to the ruling as delivered.
+
 Matching rules
 --------------
 Absolute paths are matched **case-sensitively, as literal substrings**, because
@@ -65,11 +70,12 @@ FORBIDDEN_PATTERNS = [
     ("credential-bearing word", re.compile(r"\b" + "pass" + r"word\b", re.IGNORECASE)),
 ]
 
-# Hash-pinned exemption from the credential-word rule only (D-026). Path -> SHA-256.
+# Hash-pinned exemption from the credential-word rule only (D-026, D-027). Path -> SHA-256.
 WORD_EXEMPTION_LABEL = "credential-bearing word"
 WORD_EXEMPTIONS = {
     "scripts/litcollect/survey_driver.py": "e1fb664c98e4ff866bb348c8930bfc1b9243957441b8a19ea0893e0b711af4cd",
     "scripts/litcollect/probe_alcf_inference.py": "79181c48981c709b49b90d78fc8aaddffaf12d2f1bb0591b9a9daa3aad438c66",
+    "docs/M4_WP4_TRACKB_GUIDANCE_RULING.md": "ae4129d3a16c5b4d9b60422b5ef37022b21b441c8d60affc0bf793ffab246402",
 }
 
 # Binary / data files that are tracked on purpose and are not text to scan.

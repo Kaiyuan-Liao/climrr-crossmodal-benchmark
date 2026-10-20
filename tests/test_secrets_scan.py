@@ -119,13 +119,14 @@ def test_the_tracked_blueprint_needs_no_exemption():
     assert scan_text(blueprint.read_text(encoding="utf-8")) == []
 
 
-# --- the hash-pinned credential-word exemption (D-026) ---
+# --- the hash-pinned credential-word exemption (D-026; the D-027 ruling added) ---
 
-def test_word_exemption_is_exactly_the_two_delivered_tools():
+def test_word_exemption_is_exactly_the_two_delivered_tools_and_the_d027_ruling():
     import verify_no_secrets_or_paths as v
 
     assert set(v.WORD_EXEMPTIONS) == {
-        "scripts/litcollect/survey_driver.py", "scripts/litcollect/probe_alcf_inference.py"}
+        "scripts/litcollect/survey_driver.py", "scripts/litcollect/probe_alcf_inference.py",
+        "docs/M4_WP4_TRACKB_GUIDANCE_RULING.md"}
     for rel in v.WORD_EXEMPTIONS:
         path = REPO_ROOT / rel
         assert v.word_exempt(path)

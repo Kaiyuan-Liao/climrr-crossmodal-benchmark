@@ -275,15 +275,23 @@ their rows; `cdd` is shared by DC-005 and DC-006; `mat` is a 3-letter candidate.
 
 | Item | Owner | Blocks |
 | --- | --- | --- |
-| **(Q-a)** report coverage at both levels — authorize a run-2 prompt variant that asks for the *family* name of the quantity (one row per dictionary concept, same provenance, labelled diagnostic)? | GUIDANCE | any run 2 |
-| **(Q-b)** treat threshold measures as lexically unsearchable and survey them only at family level? | GUIDANCE | interpretation of DC-011--014 |
-| **(Q-c)** may the sanitizer accept `°`, `>` and `%` by normalizing to words (`degrees f`, `above`, `percent`) — or is any transformation of a model term out of bounds? | GUIDANCE | a sanitizer change |
+| **(Q-a)** *answered (D-027): authorized, `candidate_family` only* --- report coverage at both levels — authorize a run-2 prompt variant that asks for the *family* name of the quantity (one row per dictionary concept, same provenance, labelled diagnostic)? | GUIDANCE | any run 2 |
+| **(Q-b)** *answered (D-027): no; family coverage alongside, never attributed to a measure* --- treat threshold measures as lexically unsearchable and survey them only at family level? | GUIDANCE | interpretation of DC-011--014 |
+| **(Q-c)** *answered (D-027): narrowly authorized, N-1 … N-7* --- may the sanitizer accept `°`, `>` and `%` by normalizing to words (`degrees f`, `above`, `percent`) — or is any transformation of a model term out of bounds? | GUIDANCE | a sanitizer change |
 | D-026 v2 → v3 tools and the re-pinned allowlist | COORDINATOR / GUIDANCE review | --- |
 | Bare `temperature` for DC-001/002 --- accepted for the diagnostic run? (now shown to be 99.6--100 % of those rows) | COORDINATOR | interpretation of two rows |
-| Python patch version on Polaris (`python --version` in `globus_env`) | Kaiyuan | nothing; provenance completeness |
+| Python patch version on Polaris --- *closed as `unknown` (ruling action 22, D-027); not supplied* | Kaiyuan | nothing; provenance completeness |
 | Q22 (705k filter) stays open | JL | nothing here |
 
-## 14. Proposed gate status
+## 14. Gate status
+
+**GUIDANCE: PASS as diagnostic (D-027, 2026-10-20)** --- Stage 2a complete;
+Stage 2b/2c run 1 accepted as exploratory coverage evidence. Reviewed head
+**`2331e19`** (pushed, `origin/work/trackb-stage2`). Merge authorized after the
+ruling bookkeeping (this commit); Kaiyuan performs the merge. Ruling:
+[`docs/M4_WP4_TRACKB_GUIDANCE_RULING.md`](../../docs/M4_WP4_TRACKB_GUIDANCE_RULING.md).
+
+As proposed for review:
 
 | Criterion (D-025 ruling, verbatim) | Status | Evidence |
 | --- | --- | --- |
@@ -300,9 +308,21 @@ their rows; `cdd` is shared by DC-005 and DC-006; `mat` is a 3-letter candidate.
 
 **Proposed: Stage 2a COMPLETE; Stage 2b/2c run 1 EXECUTED AND INGESTED (diagnostic), for GUIDANCE review.**
 
-## 15. Proposed next bounded objective
+## 15. Next bounded objective
 
-GUIDANCE reviews run 1 and answers Q-a / Q-b / Q-c. If Q-a is authorized: a
-run-2 prompt variant asking for the family name of each dictionary concept, same
-index, inventory, clause and provenance, labelled diagnostic, with the prompt and
-any sanitizer change pinned before the run.
+**Stage 2 run 2, family level (authorized, D-027) --- pending the driver
+update.** For all 14 measure concepts: preserve run-1 measure identity; request
+a `candidate_family` (stored only as `status: candidate_family`, with
+`dictionary_concept_id`, `dictionary_passage`, `model_id`, `prompt_sha256`,
+`candidate_family`, `candidate_family_surface_forms`, `date`, `status`); apply
+only the frozen orthographic table
+(`data/metadata/litcollect/normalization_table_v1.yaml`, SHA-256
+`80a5e0e386dfe8a984e1a5ba2ace781d15601f9b0723b75d238b6de5d1226e03`, N-1 … N-7;
+originals retained); topical-only and context-filtered counts; measure-level and
+family-level coverage side by side, **run 1 unchanged**. Not started; the driver
+is unchanged in the bookkeeping package.
+
+For the driver update, observed while testing the table (not acted on): of the
+29 run-1 model terms dropped as "not a plain lowercase phrase", the table makes
+**26** plain (3 keep their parentheses); only **7** of those 26 have six words or
+fewer, so the driver's unchanged "more than 6 words" rule would still drop 19.

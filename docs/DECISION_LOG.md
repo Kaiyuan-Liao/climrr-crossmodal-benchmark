@@ -1529,3 +1529,133 @@ code emits, and the next GUIDANCE packet still chooses.
   `tests/test_secrets_scan.py`; `src/climrr/dictconcepts.py`,
   `scripts/build_dictionary_inventory.py`, `data/metadata/dictionary_concepts.yaml`,
   `docs/DICTIONARY_CONCEPTS.md`, `data/manifest.json`, `tests/test_dictconcepts.py`.
+
+## D-027 --- Track A (M4-WP4 / M5-WP4) and Track B (Stage 2 run 1) reviewed: PASS WITH ACTIONS; bounded zero accepted; geography role approved; unit-granularity diagnostic next; family-level run 2 and narrow orthographic normalization authorized
+
+- **Date:** 2026-10-20
+- **Status:** **decided.**
+- **Owner:** **GUIDANCE**; placed by Kaiyuan Liao as
+  `docs/M4_WP4_TRACKB_GUIDANCE_RULING.md` (byte-identical to the delivered
+  `CLIMRR_TRACKA_TRACKB_GUIDANCE_RULING_2026-10-20.md`, SHA-256
+  `ae4129d3a16c5b4d9b60422b5ef37022b21b441c8d60affc0bf793ffab246402`). Reviewed
+  heads **`c0be540`** (`work/m4-wp4-adj`, Track A) and **`2331e19`**
+  (`work/trackb-stage2`, Track B), both pushed; base `main` @ `38116a0`.
+- **Gate:** **PASS WITH ACTIONS** for both tracks. M4-WP4 passes as the
+  20-paper, two-reader semantic-reading/adjudication pilot; M5-WP4 passes as the
+  bounded positive-case compatibility experiment (**0 candidate-bridge-eligible
+  pairs among 354** deterministic claim--prototype comparisons); Stage 2a--2c run
+  1 passes as a diagnostic. Both merges are authorized after this bookkeeping.
+- **Bounded statement (A1), verbatim:** "No candidate-bridge-eligible pair was
+  found under the current deterministic rules among the adjudicated claims of
+  the twenty frozen LITCORPUS-02 place candidates." Do not generalize beyond the
+  tested sample.
+- **The ruling's decision table, verbatim:**
+
+  | Question | Ruling |
+  |---|---|
+  | A1 M4-WP4 gate | **PASS WITH ACTIONS** |
+  | A1 M5-WP4 gate | **PASS WITH ACTIONS — bounded zero accepted** |
+  | Merge Track A | **Authorized after ruling bookkeeping** |
+  | A2 geography role enters G-1 | **Approved** |
+  | Conservative role on disagreement | **Approved** |
+  | `cited_study_area` as study geography | **Approved, evidence tier retained** |
+  | `m5wp4.py` layered over frozen `compat.py` | **Approved** |
+  | A3 `standardized heat index` | **Prospectively mask from automatic C-2 matching** |
+  | Rewrite frozen WP4 matrix | **No** |
+  | A4 mixed-continent geography | **Prospectively `not_evaluable` unless wholly disjoint** |
+  | A5 next route | **Unit-redesign diagnostic** |
+  | Scenario-keyword retrieval as next primary route | **No** |
+  | Immediately replace existing prototypes | **No** |
+  | B1 Stage 2 run 1 | **PASS as diagnostic** |
+  | Merge Track B | **Authorized after ruling bookkeeping** |
+  | B2 family-level run 2 | **Authorized** |
+  | Model family assignment | **`candidate_family` only** |
+  | B3 threshold measures inherently unsearchable | **No** |
+  | Add family-level coverage for threshold concepts | **Yes** |
+  | B4 deterministic `°`, `>`, `<`, `%` normalization | **Authorized narrowly** |
+  | Semantic synonym/paraphrase normalization | **Not authorized** |
+  | B5 choose final families now | **Wait for mentor** |
+  | Candidate families to discuss | **temperature, precipitation, wind speed, dry-spell/CDD, degree days, FWI, heat index** |
+  | QA | **Still not authorized** |
+
+  *One word differs from the ruling:* in the row "Scenario-keyword retrieval as
+  next primary route" the ruling's second word is the secrets scan's credential
+  word, used in its ordinary sense; it is replaced here by `keyword`, and the
+  exact row is in the ruling file (exempt, below). Every other row is verbatim.
+- **What the rows mean, as ruled.**
+  1. **Geography role (G-R) gates G-1.** A place string alone is insufficient;
+     affiliation, citation/person, contextual or data-source geography never
+     becomes geographic compatibility.
+  2. **Conservative role on disagreement:** the more conservative geography role,
+     unless both readers independently support study geography.
+  3. **`cited_study_area` is study geography, evidence tier retained:** it may
+     satisfy the role gate, but the claim's evidence tier still constrains
+     whether it can establish an accepted bridge.
+  4. **`m5wp4.py` layered beside frozen `compat.py`:** old freezes preserved;
+     prior compatibility code never mutated retroactively.
+  5. **Prospective C-2 mask** for `standardized heat index` (with `extended heat
+     index` already masked). The ruling's rule: "**A recognized compound concept
+     containing an approved family term must mask that inner phrase when the
+     compound's equivalence has not been explicitly approved.**" The frozen
+     M5-WP4 matrix is not rewritten.
+  6. **Prospective G-2 revision:** `incompatible` only when the entire explicit
+     geography is wholly disjoint from the prototype; a mixture of disjoint and
+     potentially relevant regions → `not_evaluable`; a broad region containing
+     the prototype but not resolving to the required granularity →
+     `not_evaluable`; exact supported geography → G-1/G-R. Documented now;
+     implemented in a later package; WP4 not rerun for it.
+  7. **Next route: a constrained unit-granularity redesign diagnostic** (Track
+     A-next); retrieval that requires an RCP/SSP scenario term is not the
+     primary next experiment;
+     P-CELL-1, P-COUNTY-1 and P-STATE-1 v2 stay as controls.
+  8. **Stage 2 run 1: PASS as diagnostic.** **Family-level run 2 authorized**;
+     every model family assignment stored only as `status: candidate_family`.
+  9. **Threshold measures are not "inherently unsearchable".** The supported
+     sentence (B3), verbatim: "**Under the current run-1 candidate terms and
+     matcher representation, the threshold-specific heat-index measures have
+     effectively no direct lexical footprint in this source.**" Measure-level
+     coverage is kept; family coverage is added alongside and never attributed to
+     a threshold measure.
+  10. **Narrow orthographic normalization authorized (B4):** `>` → above, `<` →
+      below, `°F` / `° F` → degrees F, `°C` / `° C` → degrees C, `%` → percent.
+      Original model term retained; normalized form stored separately; transform
+      rule ids recorded; table frozen before run 2; **no semantic normalization**
+      (no paraphrase, stemming, abbreviation expansion, synonym inference).
+  11. **Seven discussion families carried to the mentor** --- temperature,
+      precipitation, wind speed, consecutive dry days / dry spell, degree days,
+      Fire Weather Index, heat index --- as **discussion candidates only**: not
+      approved, and **not ranked by coverage**. Heat-index thresholds remain
+      measures within the heat-index family.
+  12. **QA not authorized.**
+- **Owner-confirmed fact (Kaiyuan Liao, 2026-10-20) --- blind-session
+  isolation for M4-WP4.** The blind reading (M4-WP4r2, `c452d7d`) ran in a
+  **fresh session on `main` @ `38116a0`**, given **only the blind prompt text**,
+  and **the prompt forbade opening any other file**. Recorded as an owner
+  confirmation of what the session was given; the artifacts alone show only that
+  the blind tree held no reader-1 output (`M4_WP4_REPORT.md`, criterion 16).
+- **Owner decision (Kaiyuan Liao, 2026-10-20) --- scanner exemption for the
+  ruling.** The tracked ruling uses the scan's credential word five times
+  (no credential is involved) and must stay byte-identical to the delivered file.
+  Kaiyuan chose to add it to the D-026 hash-pinned `WORD_EXEMPTIONS` in
+  `scripts/verify_no_secrets_or_paths.py` (SHA-256 `ae4129d3…6402`): only the
+  credential-word rule is suppressed, only while the hash matches; the path and
+  key-prefix rules still apply. This log is **not** exempt (the one table row is
+  reworded instead). Tested in `tests/test_secrets_scan.py`.
+- **Provenance gap closed as `unknown` (ruling action 22):** the Polaris Python
+  patch version for survey run 1 was not recorded and was not supplied; it is
+  recorded as `unknown` (`docs/CONCEPT_COVERAGE_SURVEY.md`, the
+  `TRACKB-SURVEY-RUN1` entry in `data/manifest.json`).
+- **Implementation (this bookkeeping, two branches).** Track B
+  (`work/trackb-stage2`): this entry; the ruling; `KNOWLEDGE_FILES`;
+  `data/metadata/litcollect/normalization_table_v1.yaml` (N-1 … N-7, frozen,
+  pinned in `data/manifest.json`) with `src/climrr/termnorm.py` and
+  `tests/test_normalization_table.py` --- **the driver is unchanged**;
+  `docs/CONCEPT_COVERAGE_SURVEY.md` (regenerated);
+  `reports/milestones/TRACKB_STAGE2_REPORT.md` fields 14--15;
+  `docs/MENTOR_BRIEF.md`. Track A (`work/m4-wp4-adj`): `M4_WP4_REPORT.md` and
+  `M5_WP4_REPORT.md` fields 14--15; `docs/BRIDGE_ELIGIBILITY.md` (G-R, `cited_study_area`,
+  prospective C-2 mask list and G-2 semantics); `docs/M5_WP4_COMPATIBILITY.md`
+  (bounded statement). Next diagnostics (ruling actions 12, 13, 16) **not started**.
+- **What it does not decide.** No M1 status changes; index 117 stays
+  unlabeled; the frozen M5-WP4 matrix and `compat.py` are unchanged; no
+  candidate family is approved; Q22 stays open; no QA.
