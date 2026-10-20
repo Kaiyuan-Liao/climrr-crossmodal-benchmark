@@ -110,3 +110,25 @@ def test_every_span_reslices_from_the_source():
             litingest.check_span(doc, b)
             n += 1
     assert n == 300
+
+
+def test_hit_classification_is_complete_and_in_vocabulary():
+    import wp4_hit_judgements as hj
+    h = json.loads((LIT / "wp4_hit_classification.json").read_text(encoding="utf-8"))
+    assert h["made_after_reading_frozen_at"] == "e0857aa"
+    pairs = [(it["lit2_id"], p) for it in h["items"] for p in it["pairs"]]
+    assert {(lid, p["term"]) for lid, p in pairs} == set(hj.JUDGEMENTS)
+    for _, p in pairs:
+        vocab = hj.CONCEPT_CLASSES if p["kind"] == "concept" else hj.PLACE_CLASSES
+        assert p["frozen_first_hits_reproduced"] is True
+        assert p["n_occurrences"] == len(p["occurrences"]) >= len(p["frozen_first_hits"])
+        assert all(o["class"] in vocab for o in p["occurrences"])
+        assert p["primary_class"] == next(c for c in vocab if c in p["class_counts"])
+    assert h["totals"]["occurrences"] == sum(p["n_occurrences"] for _, p in pairs)
+
+
+def test_screens_cover_every_claim_and_name_no_scenario():
+    s = json.loads((LIT / "wp4_claim_screens.json").read_text(encoding="utf-8"))
+    ids = {c["claim_id"] for r in _records() for c in r["claims"]}
+    assert {c["claim_id"] for c in s["claims"]} == ids
+    assert s["totals"]["scenario_named"] == 0

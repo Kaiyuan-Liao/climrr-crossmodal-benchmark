@@ -7,7 +7,7 @@ session reasoning correctly from out-of-date facts and repeating them.
 | | |
 | --- | --- |
 | **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4:** M4-WP0 PASS (D-016); M4-WP1 PASS WITH ACTIONS (D-017), merged `0053968`; **M4-WP1b PASS WITH ACTIONS** and **M4-WP2 retrieval PASS (sample 4)** (D-019), both merged at `e7da7cc`; **M4-WP2 reading complete** and merged into `main` at `ccd2d24` (pending GUIDANCE review at `2206c00`). **M5-WP2 positive-case run: 0 eligible pairs of 78.** **M4-WP3 --- PASS WITH ACTIONS (D-025)** on reviewed head `6b2b5a6` (pushed `origin/work/m4-wp3`, not merged); closeout done. **M4-WP4 sample frozen** (`58e0fd6`); reading not started. **M5:** **M5-WP1 closed --- PASS WITH ACTIONS, machinery validation only (D-018)**, merged `55decb3` |
-| **Active task** | **M4-WP4 --- sample frozen, reading not started.** 20 place candidates (10 fire weather at ranks 10…100, 10 heat index at ranks 14…140; one heat duplicate suppressed; no rank advanced), `artifacts/literature/wp4_sample.json` SHA-256 `f3cb5d0c…ea15`, committed before any file was fetched. The reading package is issued separately; the blind reader runs in a fresh session. **Stage 2a--2c** (dictionary concept survey) authorized as diagnostics, not started. *Previous:* M4-WP3 closeout (D-025): LITCORPUS-02 the working candidate corpus; five query terms governed in `concept_map.yaml` (SHA-256 now `27f7a44d…d7b4`). Not merged |
+| **Active task** | **M4-WP4 --- reader-1 reading done on `work/m4-wp4-read` (not pushed, not merged); blind reading next.** Reading frozen at `e0857aa` before any hit file was opened; hit precision and claim screens in the Phase C--D commit. 83 claims from 19 items (1 `ambiguous`), all `single_reader_provisional`, tier C. The blind reader runs in a fresh session on `main` and must not see this branch. **Stage 2a--2c** authorized as diagnostics, not started. *Previous:* M4-WP4 sample frozen (`58e0fd6`, SHA-256 `f3cb5d0c…ea15`); M4-WP3 closeout (D-025). |
 | **Latest accepted commit** | **`e7da7cc`** --- the merge of M4-WP1b (reviewed `25a86e5`) and M4-WP2 retrieval (reviewed `7ddee2c`) into `main`, both accepted under D-019. Previous: **`55decb3`** (M5-WP1, D-018; scan fix `656044c`); **`0053968`** (M4-WP1, D-017); `6f24b78` (M4-WP0 chain, D-016); `62c9137` (M1-WP1, D-009). It does **not** pass M1 |
 | **Tooling on `main`** | `d68ba15` --- merge of `work/knowledge-staging` (`c13a3d4`, `scripts/stage_knowledge.py`) on top of `6f24b78`. **No scientific content**; not a GUIDANCE-accepted package, and not an accepted scientific state |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at. The literature corpus is **not** on Sophia (runbook §8b) |
@@ -20,6 +20,26 @@ session reasoning correctly from out-of-date facts and repeating them.
 | **Owner decisions since** | **D-014** (Kaiyuan, 2026-09-28): proceed on the "our reading" basis to test what QA could be generated; every `inferred_candidate` and `derived_from_inferred` status carried through; **promotes nothing, and does not authorise QA generation** |
 | **Meetings since the last refresh** | **Mentor 2026-10-09:** direction D-020 --- concepts from the table units first, then collect papers for them; keep the three units. **Mentor 2026-10-13:** shard yields reported, a larger source asked for; outcome = JL's Drive link (D-023). *Earlier:* **Group 2026-09-14:** "No material objection to the prototype-unit design was raised." --- not validation, no semantic confirmed. **Mentor 2026-09-17 and 2026-09-24:** **no review of the answer sheet occurred** (R-003); nothing promoted |
 | **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M1 remains open.** **Next relevance-guided step:** waits on the mentor (family-level usefulness; widen places or change the unit) and GUIDANCE; any WP2b must be predeclared. **Metric-level concept terms** (`fwi_seasonal_value`, `heatindex_days_above_105F`): `proposed`, need GUIDANCE or the mentor. **QA generation: not authorised by any ruling.** **Reading of any LITCORPUS-01/02 paper: not authorised** (D-022) |
+
+## Where things stand --- M4-WP4 reader-1 reading (2026-10-19)
+
+- **On `work/m4-wp4-read` only** (from `38116a0`; not pushed, not merged). The blind
+  reader must work from `main` without this branch, the hit files or the prototypes.
+- **Phase A:** sample = manifest; 20/20 source files matched before any decode.
+  `LIT2-001075` = `LIT-001536` (read in M4-WP2) carries `prior_exposure`; no WP2
+  artifact or bridge file opened.
+- **Phase B (frozen `e0857aa`):** 19 `in_scope_hazard`, 1 `ambiguous` (`LIT2-000803`);
+  **83 claims** (59 finding, 19 background citation); 300 spans exact.
+- **Phase C (after reading):** concept hits substantive in **6** items (fire 2, heat 4),
+  incidental 13, collision 1 (`001160`, "standardized heat index"); every bare `fwi`
+  is the fire index. Place hits study-area in **8** items; `california` is an
+  affiliation in 2 items (UC Irvine; Palmdale flight base); `stephens` is a citation
+  surname (1 item); `oklahoma` study-area in both its items.
+- **Screens (not compatibility):** US geography 42 claims; pilot family term in
+  `concept` 8 (1 = the SHI collision); named scenario **0**.
+- Documents: [LITERATURE_WP4_READING.md](LITERATURE_WP4_READING.md),
+  [../reports/milestones/M4_WP4_REPORT.md](../reports/milestones/M4_WP4_REPORT.md)
+  (fields 1--9; 10--15 pending).
 
 ## Where things stand --- M4-WP3 closeout and M4-WP4 sample (2026-10-19)
 
