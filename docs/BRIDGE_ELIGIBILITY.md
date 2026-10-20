@@ -152,3 +152,28 @@ an R-FWI-1 admission and a C-2 family match are each lexical; only C-1 gives
 `compatible`, and no D-025 term reaches it (tested). `extended heat index` is
 heat-index-family collection and retrieval vocabulary, not a synonym of heat
 index and not the ClimRR threshold metric `heatindex_days_above_105F`.
+
+## 7. Stage 2b survey candidates are inert (D-025, Track B)
+
+The Stage 2b/2c coverage survey (`scripts/litcollect/survey_driver.py`, run by
+Kaiyuan on Polaris) asks a model for surface forms per Stage 2a dictionary
+concept (`data/metadata/dictionary_concepts.yaml`) and counts them over the
+frozen LITCORPUS-02 source index. **Every proposal is a
+`candidate_surface_form` and is inert:**
+
+- it is **not** in `data/metadata/concept_map.yaml`, in either
+  `accepted_surface_terms` or `additional_surface_terms`;
+- it does **not** enter any production query (collection), R-FWI-1
+  (retrieval), C-2 family-level matching, or C-1 metric compatibility --- none of
+  the four layers in section 6 reads survey output;
+- its counts (`topical_only_count`, `context_filtered_count`, the latter
+  filtered by `data/metadata/litcollect/survey_context_clause_v1.txt`) are
+  **coverage diagnostics, not literature-prevalence estimates**, and never select
+  a unit or assign meaning to a column (criteria 30--31).
+
+**The only path from candidate to approved term is a GUIDANCE decision recorded
+in `docs/DECISION_LOG.md`**, naming the term, its canonical id, its status
+(`approved_lexical` or `approved_family_term`) and its permitted usage, after
+which the concept map is edited as in D-025. No script promotes a candidate;
+the survey writes only into its own output directory (tested,
+`tests/test_survey_driver.py`).

@@ -117,3 +117,43 @@ def test_the_tracked_blueprint_needs_no_exemption():
     if not blueprint.is_file():
         pytest.skip("docs/BLUEPRINT.md not present in this clone")
     assert scan_text(blueprint.read_text(encoding="utf-8")) == []
+
+
+# --- the hash-pinned credential-word exemption (D-026) ---
+
+def test_word_exemption_is_exactly_the_two_delivered_tools():
+    import verify_no_secrets_or_paths as v
+
+    assert set(v.WORD_EXEMPTIONS) == {
+        "scripts/litcollect/survey_driver.py", "scripts/litcollect/probe_alcf_inference.py"}
+    for rel in v.WORD_EXEMPTIONS:
+        path = REPO_ROOT / rel
+        assert v.word_exempt(path)
+        assert any(h[1] == v.WORD_EXEMPTION_LABEL for h in scan_text(path.read_text(encoding="utf-8")))
+        assert v.scan_file(path) == []
+
+
+def test_word_exemption_lapses_when_the_file_changes(tmp_path, monkeypatch):
+    import verify_no_secrets_or_paths as v
+
+    rel = "scripts/litcollect/survey_driver.py"
+    copy = tmp_path / rel
+    copy.parent.mkdir(parents=True)
+    copy.write_bytes((REPO_ROOT / rel).read_bytes() + b"\n")
+    monkeypatch.setattr(v, "REPO_ROOT", tmp_path.resolve())
+    assert not v.word_exempt(copy)
+    assert any(h[1] == v.WORD_EXEMPTION_LABEL for h in v.scan_file(copy))
+
+
+def test_word_exemption_filters_only_the_credential_word(tmp_path, monkeypatch):
+    import hashlib
+
+    import verify_no_secrets_or_paths as v
+
+    f = tmp_path / "tool.py"
+    f.write_text(f"x = {WORD_TOKEN!r}\ny = {USER_PATH!r}\nz = {KEY!r}\n", encoding="utf-8")
+    monkeypatch.setattr(v, "REPO_ROOT", tmp_path.resolve())
+    monkeypatch.setattr(v, "WORD_EXEMPTIONS", {"tool.py": hashlib.sha256(f.read_bytes()).hexdigest()})
+    labels = [h[1] for h in v.scan_file(f)]
+    assert v.WORD_EXEMPTION_LABEL not in labels
+    assert len(labels) == 2  # the path and the key prefix are still reported

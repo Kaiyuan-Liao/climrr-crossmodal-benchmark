@@ -78,6 +78,38 @@
           "Q21"
         ]
       }
+    },
+    {
+      "filename": "dictionary_concepts.yaml",
+      "path": "data/metadata/dictionary_concepts.yaml",
+      "role": "Stage 2a dictionary concept inventory (Track B, diagnostic) --- derived from the data dictionary PDF by scripts/build_dictionary_inventory.py; not data, not literature",
+      "sha256": "288d08c5b92a32dbc5329834ceffc6a7ebc746d02479308431407cfddd81d064",
+      "bytes": 14362,
+      "row_count": null,
+      "column_count": null,
+      "encoding_note": "UTF-8, LF line endings, no byte-order mark; byte-deterministic (no timestamps), so a rebuild reproduces this hash. Pinned -text in .gitattributes.",
+      "source_description": "generated from data/metadata/ClimRR_Metadata_and_Data_Dictionary.pdf (SHA-256 b28dff7c...23db) with pypdf 6.18.0",
+      "acquisition_date": "2026-10-20",
+      "storage_policy": "tracked in ordinary Git; regenerated, never hand-edited; ids frozen after Track B Stage 2a",
+      "interpretation_notes": "no interpretation assigned to any CSV column; existing M1 statuses are unchanged; index 117 remains unlabeled. Measure-level granularity (D-026); family_hint always null",
+      "tracked_in_git": true,
+      "decision_ref": "D-025, D-026"
+    },
+    {
+      "filename": "survey_context_clause_v1.txt",
+      "path": "data/metadata/litcollect/survey_context_clause_v1.txt",
+      "role": "survey context clause v1 (diagnostic) --- Stage 2c context filter in run_query grammar; not a production query",
+      "sha256": "fec9b5ca97f18e6e409a4b6e10b50faf5ab3c5404a33381eb8e67e9debc3626f",
+      "bytes": 403,
+      "row_count": null,
+      "column_count": null,
+      "encoding_note": "ASCII (valid UTF-8), one line plus a trailing LF, no byte-order mark. Pinned -text in .gitattributes.",
+      "source_description": "the v1 production context terms (identical in fire_weather_v1 and extreme_heat_v1) minus the family-specific ones: fire season, fire danger, public health, heat wave, heatwave",
+      "acquisition_date": "2026-10-20",
+      "storage_policy": "tracked in ordinary Git as an immutable object",
+      "interpretation_notes": "no interpretation assigned; a diagnostic filter only --- its counts are coverage diagnostics, not literature-prevalence estimates",
+      "tracked_in_git": true,
+      "decision_ref": "D-025"
     }
   ],
   "amendments": [
@@ -86,6 +118,12 @@
       "milestone": "M4-WP0",
       "change": "Added data/metadata/literature_query.txt, and the external_corpora block pinning the literature corpus by its inventory manifest. Existing entries unchanged.",
       "decision_ref": "D-015"
+    },
+    {
+      "date": "2026-10-20",
+      "milestone": "Track B Stage 2a",
+      "change": "Added data/metadata/dictionary_concepts.yaml (Stage 2a inventory) and data/metadata/litcollect/survey_context_clause_v1.txt (survey context clause v1, diagnostic). Existing entries unchanged.",
+      "decision_ref": "D-025, D-026"
     }
   ],
   "external_corpora": [

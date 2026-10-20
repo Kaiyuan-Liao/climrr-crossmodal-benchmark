@@ -1467,3 +1467,39 @@ code emits, and the next GUIDANCE packet still chooses.
   `reports/milestones/M4_WP3_REPORT.md`, `docs/PROJECT_STATE.md`,
   `docs/MENTOR_BRIEF.md`; `scripts/wp4_sample.py`,
   `artifacts/literature/wp4_sample.json`.
+
+## D-026 --- Stage 2a inventory granularity: measure level
+
+- **Date:** 2026-10-20
+- **Status:** **decided.**
+- **Owner:** **Kaiyuan Liao**, answering the EXECUTOR's escalation during Track
+  B Stage 2a (the work package said "one entry per dictionary-described variable
+  or metric" without fixing the unit). Recorded by the EXECUTOR; for COORDINATOR
+  and GUIDANCE review with `reports/milestones/TRACKB_STAGE2_REPORT.md`.
+- **Options put.** (a) **measure level** --- one concept per ClimRR output
+  quantity the narrative (pp. 4--12) describes; (b) variable level --- one per
+  item of the p. 4 variable list, linked to differently-titled narrative
+  sections by an EXECUTOR inference; (c) field level --- one per field-table row
+  (~270, scenario variants separate).
+- **Decision: (a).** Two quantities the dictionary describes in one passage
+  (maximum and minimum daily temperature; HDD and CDD) stay one concept. The heat
+  index is split as the dictionary enumerates it, the four thresholds as four
+  concepts (p. 12: "the 6 variables"). Methodology sections (Climate Scenarios,
+  Downscaled Climate Models, Ensemble Means, Components of the FWI) are
+  excluded; the variable lists on pp. 4 and 13 and the field-table rows are not
+  separate concepts. Result: **14 concepts, 0 `listed_only`**.
+- **What it does not decide.** Nothing about any CSV column; no status moves;
+  index 117 stays unlabeled; no family assignment (`family_hint` null).
+- **Second owner decision, same session --- scanner exemption.** The delivered
+  `survey_driver.py` and `probe_alcf_inference.py` trip the secrets scan's
+  credential-word rule 12 times (the env var name, a parameter, the Bearer
+  header; no credential value). Editing them would break "do not modify" and
+  the pinned SHA-256; CLAUDE.md requires a stop. Kaiyuan chose a **hash-pinned
+  allowlist** in `scripts/verify_no_secrets_or_paths.py`: for exactly those two
+  paths, and only while each file's SHA-256 equals the pinned value, the
+  credential-word rule is not reported; path and key-prefix rules still apply;
+  any change makes the exemption lapse. Tested in `tests/test_secrets_scan.py`.
+- **Affected files:** this log; `scripts/verify_no_secrets_or_paths.py`,
+  `tests/test_secrets_scan.py`; `src/climrr/dictconcepts.py`,
+  `scripts/build_dictionary_inventory.py`, `data/metadata/dictionary_concepts.yaml`,
+  `docs/DICTIONARY_CONCEPTS.md`, `data/manifest.json`, `tests/test_dictconcepts.py`.
