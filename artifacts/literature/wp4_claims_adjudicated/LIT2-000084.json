@@ -1,0 +1,1009 @@
+{
+  "lit2_id": "LIT2-000084",
+  "item_id": "154971876",
+  "arm": "extreme_heat_v1",
+  "rank": 14,
+  "rel_path": "76/154971876.json",
+  "file_sha256": "1a461ccb68f4b6bce7cc628f981c3cd488c7beab47a32e7880647e161ca97d89",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "methods",
+    "results",
+    "discussion and conclusions"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Increased heat waves with loss of irrigation in the United States",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper uses a regional climate model to quantify how loss of irrigation changes heat wave frequency, duration and intensity across the US, i.e. a heat hazard and its drivers.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 175,
+    "char_end": 390,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "In this study we investigated how loss of irrigation affects heat wave frequency, duration, and intensity across fifteen heat wave indices (HINs) using a regional climate model that incorporated dynamic crop growth.",
+    "evidence_sha256": "28060674efd9c3252259fa7ffb74ab02df6d9dd57a8fe77feec0c362efcab281"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-000084-C1",
+      "claim_text": "Averaged across all 15 heat wave indices in the US, simulated loss of irrigation increased heat wave frequency by 0.70 events/year, duration by 0.62 days/event, and intensity by 0.24 °C.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "heat wave frequency, duration, and intensity; loss of irrigation",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "increased by 0.70 events/year, 0.62 days/event, and 0.24 °C",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the US (contiguous US model domain)",
+        "status": "explicit",
+        "role": "study area (model domain)",
+        "support": {
+          "json_path": "$.introduction",
+          "char_start": 3681,
+          "char_end": 3760,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "we analyze the effects of loss of irrigation on heat waves in the contiguous US",
+          "evidence_sha256": "74974e7b5f861568dc6132aeaa8b57bbbfa0336df1ec422b7e716db33ad1b5ae"
+        }
+      },
+      "temporal_frame": {
+        "value": "8-year (2004-2011) simulated period",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 6099,
+          "char_end": 6179,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "We compared 8-year (2004-2011) differences (CROP-CROPIRR) in heat wave frequency",
+          "evidence_sha256": "a36d7ba39b9b3f5b2f64ce1ff1961079ecfa1216513ccb47c4cf30cf6d6a4eb6"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "two WRF3.3-CLM4crop simulations, without irrigation (CROP) and with irrigation (CROPIRR); a hypothetical irrigation loss scenario",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 1546,
+          "char_end": 1688,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "One is a simulation without irrigation (hereafter referred to as CROP), and the other includes irrigation (hereafter referred to as CRO-PIRR).",
+          "evidence_sha256": "ee41b858fa79cef4ceaa05707e83a546dea2d9b094d81024a4687c0a6f6f872a"
+        }
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 715,
+        "char_end": 879,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "On average across all 15 HINs in the US, loss of irrigation increased heat wave frequency, duration, and intensity by 0.70 events/year, 0.62 days/event, and 0.24°C.",
+        "evidence_sha256": "e16cc3d022b36f117ec2758de6e35102416274a33e0635613634266b2f409a91"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "The 'hypothetical irrigation loss scenario' is a model experiment, recorded under experimental_condition, not an emissions scenario.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "154971876-c1",
+        "blind_evidence": {
+          "json_path": "$.results",
+          "char_start": 715,
+          "char_end": 879,
+          "evidence_text": "On average across all 15 HINs in the US, loss of irrigation increased heat wave frequency, duration, and intensity by 0.70 events/year, 0.62 days/event, and 0.24°C."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds the driver 'loss of irrigation', which reader 2 keeps in the relation. Adopted: the part both state.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "heat wave frequency, duration, and intensity",
+              "tag": "explicit"
+            }
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Same increases (0.70 events/year, 0.62 days/event, 0.24 °C); elision only.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds 'contiguous US model domain' from its support span; the evidence says 'in the US'.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "the US",
+              "tag": "explicit"
+            }
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "reader 1's support span states it; reader 2 cites the same sentence and tags it inferred. Rule 3b: explicit kept. 'simulated period' trimmed.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "8-year (2004-2011)",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.methods",
+                "char_start": 6099,
+                "char_end": 6179,
+                "evidence_text": "We compared 8-year (2004-2011) differences (CROP-CROPIRR) in heat wave frequency"
+              }
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "Reader 1's support states the two runs; its 'WRF3.3-CLM4crop' and 'hypothetical irrigation loss scenario' are not in that span. Trimmed.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "simulation without irrigation (CROP) versus with irrigation (CROPIRR)",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.methods",
+                "char_start": 1546,
+                "char_end": 1688,
+                "evidence_text": "One is a simulation without irrigation (hereafter referred to as CROP), and the other includes irrigation (hereafter referred to as CRO-PIRR)."
+              }
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "study area (model domain)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_1": {
+            "value": "study area (model domain)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$.introduction",
+              "char_start": 3681,
+              "char_end": 3760,
+              "evidence_text": "we analyze the effects of loss of irrigation on heat waves in the contiguous US"
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "concept": {
+            "value": "heat wave frequency, duration, and intensity",
+            "tag": "explicit"
+          },
+          "geography": {
+            "value": "the US",
+            "tag": "explicit"
+          },
+          "temporal_frame": {
+            "value": "8-year (2004-2011)",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.methods",
+              "char_start": 6099,
+              "char_end": 6179,
+              "evidence_text": "We compared 8-year (2004-2011) differences (CROP-CROPIRR) in heat wave frequency"
+            }
+          },
+          "experimental_condition": {
+            "value": "simulation without irrigation (CROP) versus with irrigation (CROPIRR)",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.methods",
+              "char_start": 1546,
+              "char_end": 1688,
+              "evidence_text": "One is a simulation without irrigation (hereafter referred to as CROP), and the other includes irrigation (hereafter referred to as CRO-PIRR)."
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000084-C2",
+      "claim_text": "Without irrigation, heat wave frequency and duration increased significantly in California's Central Valley and the Southern High Plains for up to 8 of 15 indices, most in the Southern High Plains (up to 3 events/year, 2 days/event).",
+      "claim_type": "finding",
+      "concept": {
+        "value": "heat wave frequency and duration",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "significantly increased; greatest increases up to 3 events/year and 2 days/event",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "California's Central Valley and the Southern High Plains",
+        "status": "explicit",
+        "role": "regions of strongest simulated effect"
+      },
+      "temporal_frame": {
+        "value": "8-year (2004-2011) simulated period",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 6099,
+          "char_end": 6179,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "We compared 8-year (2004-2011) differences (CROP-CROPIRR) in heat wave frequency",
+          "evidence_sha256": "a36d7ba39b9b3f5b2f64ce1ff1961079ecfa1216513ccb47c4cf30cf6d6a4eb6"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "two WRF3.3-CLM4crop simulations, without irrigation (CROP) and with irrigation (CROPIRR); a hypothetical irrigation loss scenario",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 1546,
+          "char_end": 1688,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "One is a simulation without irrigation (hereafter referred to as CROP), and the other includes irrigation (hereafter referred to as CRO-PIRR).",
+          "evidence_sha256": "ee41b858fa79cef4ceaa05707e83a546dea2d9b094d81024a4687c0a6f6f872a"
+        }
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 880,
+        "char_end": 1227,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Heat wave frequency and duration was significantly increased without irrigation in California's Central Valley and the Southern High Plains for up to 8 out of 15 HINs (figures S1 and S2), with the greatest increases in the Southern High Plains of up to 3 events/year and 2 days/event for frequency and duration respectively (figures 1(a) and (b)).",
+        "evidence_sha256": "35009ee53bfe81016d989b506bbefe45c9e168ed11c26ac89652db01652f21d3"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "154971876-c2",
+        "blind_evidence": {
+          "json_path": "$.results",
+          "char_start": 880,
+          "char_end": 1227,
+          "evidence_text": "Heat wave frequency and duration was significantly increased without irrigation in California's Central Valley and the Southern High Plains for up to 8 out of 15 HINs (figures S1 and S2), with the greatest increases in the Southern High Plains of up to 3 events/year and 2 days/event for frequency and duration respectively (figures 1(a) and (b))."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Significantly increased; up to 3 events/year and 2 days/event in the Southern High Plains.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "reader 1's support span states it; reader 2 cites the same sentence and tags it inferred. Rule 3b: explicit kept.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "8-year (2004-2011)",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.methods",
+                "char_start": 6099,
+                "char_end": 6179,
+                "evidence_text": "We compared 8-year (2004-2011) differences (CROP-CROPIRR) in heat wave frequency"
+              }
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 2 records the evidence's 'without irrigation'; reader 1 the full run description from a methods span. Adopted: the part both state.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "without irrigation",
+              "tag": "explicit"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "regions of strongest simulated effect",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_1": {
+            "value": "regions of strongest simulated effect",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$.introduction",
+              "char_start": 3681,
+              "char_end": 3760,
+              "evidence_text": "we analyze the effects of loss of irrigation on heat waves in the contiguous US"
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "temporal_frame": {
+            "value": "8-year (2004-2011)",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.methods",
+              "char_start": 6099,
+              "char_end": 6179,
+              "evidence_text": "We compared 8-year (2004-2011) differences (CROP-CROPIRR) in heat wave frequency"
+            }
+          },
+          "experimental_condition": {
+            "value": "without irrigation",
+            "tag": "explicit"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000084-C3",
+      "claim_text": "Heat index temperature metrics that include humidity were less sensitive to loss of irrigation, because increased temperature trades off against decreased humidity.",
+      "claim_type": "mechanism",
+      "concept": {
+        "value": "heat index temperature metrics that include humidity",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "less sensitive to loss of irrigation (trade-off between increased temperature and decreased humidity)",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the United States",
+        "status": "inferred",
+        "role": "study area (model domain)",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 495,
+          "char_end": 629,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "In the United States, irrigation effects on heat waves were statistically significant over irrigated cropland for the majority of HINs",
+          "evidence_sha256": "d005037f65fcf5bc5439695cafaf06ff3615a92e0f9c20dd295991caf10a8f47"
+        }
+      },
+      "temporal_frame": {
+        "value": "8-year (2004-2011) simulated period",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 6099,
+          "char_end": 6179,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "We compared 8-year (2004-2011) differences (CROP-CROPIRR) in heat wave frequency",
+          "evidence_sha256": "a36d7ba39b9b3f5b2f64ce1ff1961079ecfa1216513ccb47c4cf30cf6d6a4eb6"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "two WRF3.3-CLM4crop simulations, without irrigation (CROP) and with irrigation (CROPIRR); a hypothetical irrigation loss scenario",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 1546,
+          "char_end": 1688,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "One is a simulation without irrigation (hereafter referred to as CROP), and the other includes irrigation (hereafter referred to as CRO-PIRR).",
+          "evidence_sha256": "ee41b858fa79cef4ceaa05707e83a546dea2d9b094d81024a4687c0a6f6f872a"
+        }
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 711,
+        "char_end": 884,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The heat index temperature metrics that include humidity were less sensitive to loss of irrigation due to the trade-off between increased temperature and decreased humidity.",
+        "evidence_sha256": "acfc98fc797b2a9ed05d1ee76baf90322bd1edc6a6fc33a4d69c8f16600b7560"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "'Heat index' here covers the paper's humidity-including metrics (apparent temperature and HI, Schoen 2005); the paper uses 'HI' for heat index.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "154971876-c3",
+        "blind_evidence": {
+          "json_path": "$.abstract",
+          "char_start": 711,
+          "char_end": 884,
+          "evidence_text": "The heat index temperature metrics that include humidity were less sensitive to loss of irrigation due to the trade-off between increased temperature and decreased humidity."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Less sensitive because of the temperature-humidity trade-off; wording only.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "'the United States' / 'In the United States', both inferred from the same sentence.",
+            "rule": "judged same content, same tag"
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 explicit 8-year period; reader 2 unknown. Rule 3a.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 2 keeps the evidence's words; reader 1 adds the run description. Adopted: the part both state.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "loss of irrigation",
+              "tag": "explicit"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "study area (model domain)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_1": {
+            "value": "study area (model domain)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 495,
+              "char_end": 629,
+              "evidence_text": "In the United States, irrigation effects on heat waves were statistically significant over irrigated cropland for the majority of HINs"
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "temporal_frame": {
+            "value": "unknown",
+            "tag": "unknown"
+          },
+          "experimental_condition": {
+            "value": "loss of irrigation",
+            "tag": "explicit"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000084-C4",
+      "claim_text": "In the Southern Great Plains, heat wave frequency, duration and intensity rose gradually as irrigation amount or irrigated area declined.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "heat wave frequency, duration, and intensity; gradual declines in irrigation amount or irrigated area",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "gradual increase with gradual declines in irrigation",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the Southern Great Plains (Kansas, Nebraska, Oklahoma, and Texas)",
+        "status": "explicit",
+        "role": "analysis region",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 6903,
+          "char_end": 6997,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "we performed an analysis for the Southern Great Plains (Kansas, Nebraska, Oklahoma, and Texas)",
+          "evidence_sha256": "baf5dfef87dedebe0037a7b0d792b66293daf20c86a35ede4ce1d75a2a94d21d"
+        }
+      },
+      "temporal_frame": {
+        "value": "8-year (2004-2011) simulated period",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 6099,
+          "char_end": 6179,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "We compared 8-year (2004-2011) differences (CROP-CROPIRR) in heat wave frequency",
+          "evidence_sha256": "a36d7ba39b9b3f5b2f64ce1ff1961079ecfa1216513ccb47c4cf30cf6d6a4eb6"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "binned spatial comparison of grid cells by irrigated area / irrigation amount within CROPIRR, corrected with CROP",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 7275,
+          "char_end": 7472,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "We understand the gradual reduction irrigation effects by comparing subsets of grid cells with low irrigated area/irrigation amount to subsets with high irrigated area/irrigation amount in CROPIRR.",
+          "evidence_sha256": "bc2ce1d8df9426fe85520f45136b9f56493ff8bf782a6a1a750c0fd1427c0c30"
+        }
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 4209,
+        "char_end": 4413,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "We found a gradual increase in heat wave frequency, duration, and intensity with gradual declines in irrigation amount (figures 3(a)-(c)) or irrigated area (figures 3(d)-(f)) in the Southern Great Plains.",
+        "evidence_sha256": "c907e0924c4dec6e90f8b313c3a979153d5c62196863c22a8de4db6d02dd1daf"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "analysis region",
+            "class": "study_area"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "analysis region",
+            "tag": null,
+            "class": "study_area"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000084-C5",
+      "claim_text": "The most affected areas are in Texas, Kansas, Nebraska and California, where irrigated area is greatest; nearly 35 million people live in counties sensitive to heat wave increases with irrigation decline.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "areas and population sensitive to heat wave increases with irrigation decline",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "most significantly affected where irrigated area is greatest; nearly 35 million people, mostly in California and Texas",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Texas, Kansas, Nebraska, and California",
+        "status": "explicit",
+        "role": "regions of strongest simulated effect"
+      },
+      "temporal_frame": {
+        "value": "8-year (2004-2011) simulated period",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 6099,
+          "char_end": 6179,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "We compared 8-year (2004-2011) differences (CROP-CROPIRR) in heat wave frequency",
+          "evidence_sha256": "a36d7ba39b9b3f5b2f64ce1ff1961079ecfa1216513ccb47c4cf30cf6d6a4eb6"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "two WRF3.3-CLM4crop simulations, without irrigation (CROP) and with irrigation (CROPIRR); a hypothetical irrigation loss scenario",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 1546,
+          "char_end": 1688,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "One is a simulation without irrigation (hereafter referred to as CROP), and the other includes irrigation (hereafter referred to as CRO-PIRR).",
+          "evidence_sha256": "ee41b858fa79cef4ceaa05707e83a546dea2d9b094d81024a4687c0a6f6f872a"
+        }
+      },
+      "evidence": {
+        "json_path": "$[\"discussion and conclusions\"]",
+        "char_start": 2021,
+        "char_end": 2201,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "We found that the most significantly affected areas (sum of the stippled area in figures 1(a)-(c)) are in Texas, Kansas, Nebraska, and California, where irrigated area is greatest.",
+        "evidence_sha256": "5d3361f9d687687fcf81cae3763e446b601b86d70f3c66e7c53e4ec5cd27ebf8"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "The population figure is the next sentence: 'Nearly 35 million people live in counties sensitive to heat wave increases with irrigation decline, mostly in California and Texas.'",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "regions of strongest simulated effect",
+            "class": "study_area"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "regions of strongest simulated effect",
+            "tag": null,
+            "class": "study_area"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000084-B4",
+      "origin": "blind_reader",
+      "blind_claim_id": "154971876-c4",
+      "claim_text": "The authors state the Southern High Plains are most likely to suffer more and longer heat waves if irrigation is reduced due to groundwater depletion.",
+      "claim_type": "projection",
+      "concept": {
+        "value": "more and longer heat waves",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "most likely to suffer ... if there is a reduction in irrigation due to groundwater depletion",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "The Southern High Plains",
+        "status": "explicit",
+        "role": "study area",
+        "blind_role_record": {
+          "value": "study area",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"results\"]",
+            "char_start": 581,
+            "char_end": 714,
+            "evidence_text": "Most HINs showed significant irrigation effects on heat waves in California's Central Valley and the Southern High Plains (figure 1).",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "a reduction in irrigation due to groundwater depletion",
+        "status": "explicit"
+      },
+      "evidence": {
+        "json_path": "$[\"discussion and conclusions\"]",
+        "char_start": 791,
+        "char_end": 936,
+        "evidence_text": "The Southern High Plains are most likely to suffer more and longer heat waves if there is a reduction in irrigation due to groundwater depletion.",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "7db31634231a469117ed7b5af6b21d712657fa53f414a07af3681c037d91dd47"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "study area",
+            "class": "study_area"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$.results",
+              "char_start": 581,
+              "char_end": 714,
+              "evidence_text": "Most HINs showed significant irrigation effects on heat waves in California's Central Valley and the Southern High Plains (figure 1)."
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000084-B5",
+      "origin": "blind_reader",
+      "blind_claim_id": "154971876-c5",
+      "claim_text": "Nearly 35 million people live in counties sensitive to heat wave increases with irrigation decline, mostly in California and Texas.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "people live in counties sensitive to heat wave increases",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "Nearly 35 million",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "mostly in California and Texas",
+        "status": "explicit",
+        "role": "study area",
+        "blind_role_record": {
+          "value": "study area",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"introduction\"]",
+            "char_start": 3681,
+            "char_end": 3760,
+            "evidence_text": "we analyze the effects of loss of irrigation on heat waves in the contiguous US",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "irrigation decline",
+        "status": "explicit"
+      },
+      "evidence": {
+        "json_path": "$[\"discussion and conclusions\"]",
+        "char_start": 2202,
+        "char_end": 2333,
+        "evidence_text": "Nearly 35 million people live in counties sensitive to heat wave increases with irrigation decline, mostly in California and Texas.",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "5f78575a9bd461df47780b087a438ab5d933501c28f1d5577083da0cb2344dd1"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "study area",
+            "class": "study_area"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$.introduction",
+              "char_start": 3681,
+              "char_end": 3760,
+              "evidence_text": "we analyze the effects of loss of irrigation on heat waves in the contiguous US"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-000084-R1",
+      "evidence": {
+        "json_path": "$[\"discussion and conclusions\"]",
+        "char_start": 3250,
+        "char_end": 3409,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Deryng et al (2014) found that extreme heat stress during anthesis under the RCP 8.5 climate scenario could reduce maize, spring wheat, and soybean production.",
+        "evidence_sha256": "3b20d5559eb625ad78fb00de86d6b64554b1dd734a80fee4174edd447b1b2019"
+      },
+      "reason": "A cited projection under a named scenario (RCP 8.5); not this paper's evidence; beyond the five-claim cap."
+    },
+    {
+      "candidate_id": "LIT2-000084-R2",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 230,
+        "char_end": 422,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "For example, there were at least 700 excess deaths during the 1995 Chicago heat waves (Semenza et al 1996), and 15 000 excess deaths during the 2003 heat waves in France (Fouillet et al 2006).",
+        "evidence_sha256": "e18d31f7158e539823739fc6c93e441a9ff2f08ad706c28a73cd94aeb51a5bb4"
+      },
+      "reason": "Background figures attributed to other studies."
+    },
+    {
+      "candidate_id": "LIT2-000084-R3",
+      "evidence": {
+        "json_path": "$[\"discussion and conclusions\"]",
+        "char_start": 2619,
+        "char_end": 2868,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "With up to 2 days/event longer duration without irrigation, heat-related mortality is a concern in six counties (Fresno, Kern, Madera, Merced, Stanislaus, and Tulare) in California's Central Valley and many other counties in the Southern High Plains",
+        "evidence_sha256": "36bebde0e6915470cff9012615d618a68d5a45ae350f503ee4c39764a45bf2c5"
+      },
+      "reason": "An inference from the simulated duration change to a mortality concern; mortality is not modelled. Not promoted."
+    },
+    {
+      "candidate_id": "LIT2-000084-R4",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 2902,
+        "char_end": 3073,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In the Southern High Plains, 35% of the area will be unable to support irrigation within the next 30 years under current ground water depletion rates (Scanlon et al 2012).",
+        "evidence_sha256": "803bd13b7b50b05f417a8bd992da629334f8ee5a9f22116a1ae18cf551f26e2b"
+      },
+      "reason": "Cited projection of groundwater depletion; not a heat finding of this paper."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": null,
+  "scope_adjudication": {
+    "reader_1": "in_scope_hazard",
+    "reader_2": "in_scope_hazard",
+    "adopted": "in_scope_hazard",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp4_blind/154971876.json",
+    "reader_2_reason": "The paper uses a regional climate model to examine how loss of irrigation changes heat wave frequency, duration and intensity in the contiguous US."
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP4r3 Phase A",
+    "adjudicator": "reader 1 (the EXECUTOR, prototype-exposed)",
+    "first_pass_record_sha256": "64a13830e8993e988dcbc5afd9e5e195d95c7f2581c850166ec699ec0d247879",
+    "blind_record_sha256": "c8b1dcb3532c6f4deaf9161ec1c61a86060b818aec2e29c3ebb53ea0baa99a44",
+    "no_paper_re_read": true,
+    "representativeness": "deterministic rank sample of lexical place candidates from LITCORPUS-02; not representative of the corpus or the literature"
+  }
+}
