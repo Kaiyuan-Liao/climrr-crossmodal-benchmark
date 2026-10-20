@@ -299,14 +299,24 @@ For GUIDANCE:
 - Whether `background_citation` claims may be bridge-eligible (from Phase 1), and the
   "standardized heat index" collision (see `M5_WP4_REPORT.md`).
 
-## 14. Proposed gate status
+## 14. Gate status
 
-Against the D-025 acceptance criteria 15--22:
+**GUIDANCE: PASS WITH ACTIONS (D-027, 2026-10-20)** --- M4-WP4 passes as the
+20-paper, two-reader semantic-reading/adjudication pilot. Reviewed head
+**`c0be540`** (pushed, `origin/work/m4-wp4-adj`). Merge authorized after the
+ruling bookkeeping (this commit); Kaiyuan performs the merge. Ruling: [`docs/M4_WP4_TRACKB_GUIDANCE_RULING.md`](../../docs/M4_WP4_TRACKB_GUIDANCE_RULING.md).
+G-R gating, the conservative role on disagreement (rule 3-role) and
+`cited_study_area` as study geography (evidence tier retained) are approved
+(`docs/BRIDGE_ELIGIBILITY.md` §8). **Criterion 16** is now owner-confirmed:
+Kaiyuan confirms the blind session was a fresh session on `main` @ `38116a0`,
+given only the blind prompt text, which forbade opening any other file (D-027).
+
+As proposed for review --- against the D-025 acceptance criteria 15--22:
 
 | # | Criterion | Status |
 | --- | --- | --- |
 | 15 | Reader 1 receives no prefilled claim semantics from retrieval hits | **MET** --- reading frozen at `e0857aa` before any hit file was opened |
-| 16 | Blind reader receives no hit locations, prototypes, reader-1 output, expected bridge result | **PARTLY VERIFIABLE** --- no reader-1 output in the blind tree; hit files and prototypes present in its base; put to Kaiyuan |
+| 16 | Blind reader receives no hit locations, prototypes, reader-1 output, expected bridge result | **PARTLY VERIFIABLE** from artifacts --- no reader-1 output in the blind tree; hit files and prototypes present in its base; **owner-confirmed (D-027)**: fresh session, blind prompt only, other files forbidden |
 | 17 | Blind reading frozen before comparison | **MET** --- `c452d7d` committed before the merge `d90595c`; pins tested |
 | 18 | Adjudication preserves disagreements and evidence tiers | **MET** --- both values and the rule recorded per dimension and role; tiers A 3, B 47, C 68; nothing deleted |
 | 19 | Concept-hit precision classified separately from place-hit precision | **MET** --- separate vocabularies and item classes, carried in the adjudication document |
@@ -317,9 +327,17 @@ Against the D-025 acceptance criteria 15--22:
 **Proposed status:** ready for GUIDANCE review, with criterion 16 pending Kaiyuan's
 confirmation.
 
-## 15. Proposed next bounded objective
+## 15. Next bounded objective
 
-GUIDANCE review of M4-WP4 and M5-WP4 together. If accepted, the next decisions are
-the mentor's (family-level usefulness; place widening or a different unit) and
-GUIDANCE's (SHI collision; background-citation eligibility; rule 3-role). Stage
-2a--2c remains authorized and not started.
+**Track A-next --- unit-granularity redesign diagnostic (authorized by D-027; not
+started).** The question: can table-side units be represented at the concept and
+geography granularity scientific literature states, while staying
+deterministically grounded in ClimRR? Before any compatibility test: define the
+unit schema, the deterministic table aggregation, frozen unit identities, and
+geography hierarchy/containment rules; keep exact-metric, family-level,
+scenario-specific and scenario-unspecified support distinct. P-CELL-1, P-COUNTY-1
+and P-STATE-1 v2 stay as controls; no unit is designed around a paper already
+read. Retrieval that requires an RCP/SSP scenario term is not the primary next route. No QA.
+
+*Superseded:* "GUIDANCE review of M4-WP4 and M5-WP4 together" --- done (D-027);
+the SHI collision and rule 3-role are ruled (`docs/BRIDGE_ELIGIBILITY.md` §8).

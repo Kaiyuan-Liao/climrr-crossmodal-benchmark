@@ -116,3 +116,11 @@ def test_extended_heat_index_stays_masked_and_plain_heat_index_is_not_flagged():
     assert ext["judgments"]["concept"]["status"] == "not_evaluable" and not ext["flags"]
     plain = m5wp4.evaluate_pair(_claim("X", "study_area", "heat index trends"), PROTOS["P-STATE-1"], geo, cmap)
     assert plain["judgments"]["concept"]["status"] == compat.FAMILY_LEVEL and not plain["flags"]
+
+
+def test_the_frozen_matrix_and_compat_are_byte_identical_after_d027():
+    """D-027: the prospective C-2 mask and G-2 revision never rewrite the reviewed (c0be540) M5-WP4 outputs."""
+    assert sha256_file(m5wp4.MATRIX_JSON) == "2af92a2325697b9b7e034f5e9f9c59abcebde6391d653b54ccfdbc498c80d8f4"
+    assert sha256_file(m5wp4.MATRIX_CSV) == "8aa9da33d43ec2e48b271ec1fd547dafff37ac36e2377d0218ed7a23ac059285"
+    assert sha256_file(m5wp4.INPUTS_PATH) == "fb8bd3cb12f9cf00bc9d03ffdaae90241266cb3dc44737619cd0cb49149635fc"
+    assert sha256_file(compat.__file__) == "dd5052e6fb31bdfcdc590595f58a90309ad1da13042fd57bd14683cfecf95750"

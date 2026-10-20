@@ -8,6 +8,8 @@ Inputs `fb8bd3cb…`; concept map `27f7a44d…`; R-FWI-1 v1 (recorded; it govern
 
 > No candidate-bridge-eligible pair was found under the current deterministic rules among the adjudicated claims of the twenty frozen LITCORPUS-02 place candidates.
 
+**GUIDANCE, D-027 (2026-10-20): PASS WITH ACTIONS --- bounded zero accepted.** The sentence above is the accepted bounded statement, verbatim. **Do not generalize beyond the tested sample**: these adjudicated claims of these twenty frozen papers, against these three prototypes, under these rules. It is not evidence that cross-modal bridges are impossible. The ruling's prospective changes --- the C-2 mask for "standardized heat index" and the mixed-region G-2 semantics (`docs/BRIDGE_ELIGIBILITY.md` §8) --- apply to future runs only; **this matrix is not rewritten** and its rows are unchanged.
+
 ## Per-dimension counts
 
 | Dimension | compatible | compatible_at_family_level | incompatible | not_evaluable |
@@ -42,7 +44,7 @@ C-2 is lexical: an approved family term inside the claim's concept value gives `
 
 ## Collision list for GUIDANCE --- "standardized heat index"
 
-C-2 matches `heat index` inside "standardized heat index". As ordered, **no mask was added**; every such match is recorded with the flag `possible_collision: standardized heat index`.
+C-2 matches `heat index` inside "standardized heat index". As ordered, **no mask was added**; every such match is recorded with the flag `possible_collision: standardized heat index`. D-027 adds the mask **prospectively** (future runs); the rows below are as frozen.
 
 | Pair | Tier | Concept value | Hit [start, end) | Concept judgment | Relation |
 | --- | --- | --- | --- | --- | --- |

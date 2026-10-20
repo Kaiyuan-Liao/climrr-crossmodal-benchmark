@@ -70,6 +70,12 @@ def render(rows: list[dict], summ: dict, frozen: dict, scen: dict) -> str:
          + f"). Candidate-bridge-eligible: **{n_elig}**.", ""]
     if n_elig == 0:
         L += [f"> {m5wp4.BOUNDED_SENTENCE}", ""]
+        L += ["**GUIDANCE, D-027 (2026-10-20): PASS WITH ACTIONS --- bounded zero accepted.** The sentence above is the "
+              "accepted bounded statement, verbatim. **Do not generalize beyond the tested sample**: these adjudicated claims "
+              "of these twenty frozen papers, against these three prototypes, under these rules. It is not evidence that "
+              "cross-modal bridges are impossible. The ruling's prospective changes --- the C-2 mask for "
+              "\"standardized heat index\" and the mixed-region G-2 semantics (`docs/BRIDGE_ELIGIBILITY.md` §8) --- apply "
+              "to future runs only; **this matrix is not rewritten** and its rows are unchanged.", ""]
     L += ["## Per-dimension counts", "", "| Dimension | compatible | compatible_at_family_level | incompatible | not_evaluable |",
           "| --- | ---: | ---: | ---: | ---: |"]
     for d, v in summ["per_dimension"].items():
@@ -108,7 +114,8 @@ def render(rows: list[dict], summ: dict, frozen: dict, scen: dict) -> str:
     coll = [r for r in rows if m5wp4.COLLISION_FLAG in r["flags"]]
     L += ["", "## Collision list for GUIDANCE --- \"standardized heat index\"", "",
           "C-2 matches `heat index` inside \"standardized heat index\". As ordered, **no mask was added**; every such match is "
-          f"recorded with the flag `{m5wp4.COLLISION_FLAG}`.", ""]
+          f"recorded with the flag `{m5wp4.COLLISION_FLAG}`. D-027 adds the mask **prospectively** (future runs); the "
+          "rows below are as frozen.", ""]
     if coll:
         L += ["| Pair | Tier | Concept value | Hit [start, end) | Concept judgment | Relation |", "| --- | --- | --- | --- | --- | --- |"]
         for r in coll:

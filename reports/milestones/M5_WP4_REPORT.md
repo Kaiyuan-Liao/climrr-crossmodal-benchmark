@@ -198,18 +198,34 @@ States) as not disjoint; (d) the role-gate reading in field 12, 3. For the mento
 (standing): is family-level support with disclosed metric and scenario gaps useful;
 widen places or change the unit.
 
-## 14. Proposed gate status
+## 14. Gate status
 
-Against D-025 acceptance criteria 20--22 and the package: inputs frozen before the
+**GUIDANCE: PASS WITH ACTIONS --- bounded zero accepted (D-027, 2026-10-20)** ---
+M5-WP4 passes as the bounded positive-case compatibility experiment: **0
+candidate-bridge-eligible pairs among 354**. Reviewed head **`c0be540`** (pushed,
+`origin/work/m4-wp4-adj`). Merge authorized after the ruling bookkeeping (this
+commit); Kaiyuan performs the merge. Ruling: [`docs/M4_WP4_TRACKB_GUIDANCE_RULING.md`](../../docs/M4_WP4_TRACKB_GUIDANCE_RULING.md). Accepted statement,
+verbatim: "No candidate-bridge-eligible pair was found under the current
+deterministic rules among the adjudicated claims of the twenty frozen LITCORPUS-02
+place candidates." Do not generalize beyond the tested sample. `m5wp4.py` beside
+frozen `compat.py`: approved. The `standardized heat index` mask and the
+mixed-region G-2 revision are **prospective**; the 354-pair matrix is unchanged
+(SHA-256 tested; `docs/BRIDGE_ELIGIBILITY.md` §8).
+
+As proposed for review --- against D-025 acceptance criteria 20--22 and the package: inputs frozen before the
 matrix; all claims × 3 prototypes, each pair once, tier carried; five judgments with
 rule ids and both values; eligibility and `not_evaluable` list per pair; provisional
 relation per pair; G-1 with role; collision list made; **0 eligible**, bounded
 sentence only. **Proposed status:** ready for GUIDANCE review with M4-WP4 --- a
 second **negative result**, bounded to these twenty papers and these rules.
 
-## 15. Proposed next bounded objective
+## 15. Next bounded objective
 
-After GUIDANCE and the mentor: decide whether the next experiment changes the unit
-(a place a paper would name as its study area --- the 2 bare-`California` claims here
-were not about a pilot concept) or the concept level (family-level support), and
-predeclare it before any reading. No QA until an eligible pair exists.
+**Track A-next --- unit-granularity redesign diagnostic (authorized by D-027; not
+started).** Test whether bridge feasibility changes when representation
+granularity is aligned (family-level concept; state or broader deterministic
+geography; scenario kept in provenance but not required for candidate
+eligibility; time only at supported granularity) --- not to force positive pairs.
+Units defined, table-grounded and frozen before any literature comparison; the
+three prototypes stay as negative controls. Retrieval that requires an RCP/SSP
+scenario term is not the primary next route. No QA.
