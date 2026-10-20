@@ -1,17 +1,20 @@
 # M4-WP4 --- 20-paper concept/place candidate reading pilot
 
-**Status: Phase 1 (reader 1) complete. Blind reading, comparison, adjudication,
-evidence tiers and compatibility PENDING.** Branch `work/m4-wp4-read`, not pushed,
-not merged. The blind reader runs next in a fresh session on `main` and must not
-see this branch.
+**Status: reading, blind reading, comparison, adjudication and compatibility
+complete (M4-WP4r1 + r2 + r3). Ready for GUIDANCE review.** Branch
+`work/m4-wp4-adj` (from `work/m4-wp4-read` at `72617da`, blind branch `c452d7d`
+merged at `d90595c`); not pushed, not merged. Compatibility is reported
+separately in [`M5_WP4_REPORT.md`](M5_WP4_REPORT.md).
 
 ---
 
 ## 1. Milestone ID and title
 
-M4-WP4 (reading package M4-WP4r1) --- first reading of the frozen 20-paper
-LITCORPUS-02 candidate sample by reader 1, with concept-hit and place-hit precision
-classified after reading. Authorized by
+M4-WP4 --- the frozen 20-paper LITCORPUS-02 candidate sample read by reader 1
+(M4-WP4r1, with concept-hit and place-hit precision classified after reading), read
+blind by a second reader (M4-WP4r2), then compared and adjudicated (M4-WP4r3
+Phase A). Fields 1--9 describe r1; fields 10--15 cover the whole package.
+Authorized by
 [`docs/M4_WP3_WORKING_CORPUS_STAGE2_GUIDANCE_RULING.md`](../../docs/M4_WP3_WORKING_CORPUS_STAGE2_GUIDANCE_RULING.md)
 (D-025, Track A; required actions 8--15, acceptance criteria 8--22).
 
@@ -22,9 +25,12 @@ WP1/WP2 rubric; record scope, terminal status and up to five claims per item wit
 exact evidence spans; then, only after the reading is frozen, classify every matched
 concept term and place term as the ruling's precision categories.
 
-**Excluded:** the blind second reading, comparison, adjudication and evidence-tier
-assignment beyond `C`; compatibility with P-CELL-1, P-COUNTY-1, P-STATE-1 v2; any
-use of a retrieval hit as a bridge; QA; Stage 2a--2c. The sample is a
+r3 Phase A: compare the two frozen readings by the D-019 / WP1b rules, unchanged,
+and adjudicate, with evidence tiers; carry the hit-precision tables alongside.
+Compatibility (r3 Phase B) is reported in `M5_WP4_REPORT.md`.
+
+**Excluded:** any use of a retrieval hit as a bridge; re-reading a paper to break a
+tie; QA; Stage 2a--2c. The sample is a
 **deterministic rank sample of lexical place candidates from LITCORPUS-02; not
 representative of the corpus or the literature.**
 
@@ -33,9 +39,15 @@ representative of the corpus or the literature.**
 - Base: `main` at `38116a0` (merge of M4-WP3).
 - **`e0857aa`** --- Phases A--B: sample verified, reader-1 records. Committed
   **before any `hits.csv` or place-hit location was opened.**
-- Phase C--D commit (hit classification, claim screens, reading document, this
-  report, project state): the head of `work/m4-wp4-read` reported with this package.
-- Remote: nothing pushed (package instruction).
+- **`72617da`** --- Phase C--D (hit classification, claim screens, reading document).
+- **`c452d7d`** --- the blind reading (M4-WP4r2), on its own branch from `38116a0`;
+  merged into `work/m4-wp4-adj` at **`d90595c`** (`--no-ff`).
+- **`90d55fc`** --- the secrets/paths-scan fix (field 12, deviation 7).
+- **`6c856e2`** --- M4-WP4r3 Phase A: comparison and adjudication.
+- `220ca84` / `8436c25` --- M5-WP4 freeze and matrix (see `M5_WP4_REPORT.md`).
+- The Phase C commit (this report's fields 10--15, M5-WP4 report, state, brief):
+  the head of `work/m4-wp4-adj` handed back with this package.
+- Remote: nothing pushed, nothing merged (package instruction).
 
 ## 4. Data version and checksums
 
@@ -49,7 +61,9 @@ representative of the corpus or the literature.**
 | `data/metadata/concept_map.yaml` | `27f7a44d…d7b4` | read by the claim screen only; unchanged |
 | `artifacts/literature/wp4_claims_summary.json` | `e062f050…9b02` | output |
 | `artifacts/literature/wp4_hit_classification.json` | `001d76c9…c30cc0` | output |
-| `artifacts/literature/wp4_claim_screens.json` | `4fec0b51…aa92` | output |
+| `artifacts/literature/wp4_claim_screens.json` | `125a566d…b321` | output; `4fec0b51…aa92` at `72617da`, one docstring line reworded at `90d55fc` (field 12) |
+| 20 + 1 blind records `artifacts/literature/wp4_blind/` | pinned in `climrr.wp4adj.FROZEN_INPUT_SHA256` | equal their `c452d7d` blobs (test) |
+| `artifacts/literature/wp4_comparison.json`, `wp4_claims_adjudicated/` | run record `reports/runs/20261020T220725Z_local_wp4_adjudicate.json` | outputs; a second run (`…T220931Z`) verified byte equality |
 
 Source files are external (gitignored corpus, D-015/D-023), opened read-only, never
 copied into the repository. `data/raw/FullData.csv` was not read.
@@ -111,6 +125,12 @@ records. Checks: `pytest` and the secrets/paths scan (field 10).
   `…T000421Z_local_build_wp4_claims.*`, `…T000928Z_local_wp4_hit_classification.*`,
   `…T001021Z_local_wp4_claim_screens.*`, `…T001204Z_local_render_wp4_reading.*`
 - This report; `docs/PROJECT_STATE.md` refreshed.
+- **M4-WP4r3 Phase A:** `src/climrr/wp4adj.py`, `src/climrr/wp4_judgements.py`,
+  `scripts/wp4_adjudicate.py`, `tests/test_wp4adj.py`;
+  `artifacts/literature/wp4_comparison.json`, `artifacts/literature/wp4_claims_adjudicated/`
+  (20 records + `adjudication_summary.json`),
+  [`docs/LITERATURE_WP4_ADJUDICATION.md`](../../docs/LITERATURE_WP4_ADJUDICATION.md);
+  run records `20261020T220725Z_*`, `20261020T220931Z_*` (`wp4_adjudicate`).
 
 ## 8. Methods and rules that affect scientific meaning
 
@@ -196,64 +216,110 @@ Scenario not `unknown` 2 (both 000203, described not named); **named scenario 0*
 
 ## 10. Validation performed
 
-PENDING --- whole-package validation after blind reading and adjudication. Phase-1
-checks run on this branch: `python -m pytest -q` 856 passed at `e0857aa` and 858
-passed before the Phase C--D commit (two tests added); `python scripts/verify_no_secrets_or_paths.py`
-0 hits both times; 300/300 spans re-sliced (builder and `tests/test_wp4_claims.py`); 81/81 frozen
-first hits reproduced.
+| Check | Result |
+| --- | --- |
+| Frozen inputs | both readings and the sample pinned by SHA-256 (`climrr.wp4adj.FROZEN_INPUT_SHA256`, 43 files); a test checks each pin against its committed blob (reader 1 `e0857aa`, blind `c452d7d`) |
+| Span integrity | **300** reader-1 and **377** reader-2 spans re-sliced from the hash-verified sources, **0 failures** (stop condition not met); re-checked by test where the corpus is configured |
+| Alignment | one-to-one on all 20 items (the run fails on any many-to-one overlap); counts re-derived by test; every recorded judgement used, none for a pair that did not align |
+| Rules | `wp1b.resolve_pair` validates each judgement against rules 3a--3c (a judgement that contradicts the rule fails the run); **no override**; 1 `unresolved_tie` |
+| Nothing deleted | every reader-1 claim kept with its text, type, evidence and dimensions unchanged; blind-only claims added (test) |
+| Evidence | every adjudicated claim carries an exact evidence span with `evidence_sha256` (test) |
+| Reproduction | a second `wp4_adjudicate.py` run verified the comparison, the 21 adjudicated files and the document byte for byte |
+| `pytest` / scan | **895 passed**; scan **0 hits** (after `90d55fc`, field 12) |
 
 ## 11. Failures, rejected cases, and known limitations
 
-**Prior exposure (required note).** `LIT2-001075` (item `272852900`) is
-LITCORPUS-00 `LIT-001536`, already read twice in M4-WP2. Reader 1 is therefore not
-naive to it. It was re-read from its source bytes; no WP2 artifact, WP2 document,
-M5-WP2 document or bridge file was opened in this package. The item's record carries
-`prior_exposure`; the blind reader's view of it is the cleaner one.
+**Prior exposure.** `LIT2-001075` = LITCORPUS-00 `LIT-001536`, read twice in M4-WP2.
+Reader 1 --- **also the adjudicator** --- had read it before; its record says so. The
+blind reader was a fresh session and was not told; its record carries no exposure
+note. Its 7 adjudicated claims (3 aligned, tier B) are recorded with that note.
 
-Phase-1 limitations (the rest PENDING after adjudication):
-- One reader; every claim tier `C`. Scope is borderline for 000673 (aerosol forecast
-  model), 001236 (IoT interoperability), 001293 (statistics method) and 000803
-  (`ambiguous`).
-- Several source files are damaged (truncated sentences, merged section keys,
-  plot-marker residue, repeated passages, a `$` in place of `~` in 001160); recorded in
-  item notes, never repaired.
-- `LIT2-001308-C4` (FWI projection to 2040) rests on a truncated sentence; its concept
-  link is `inferred`.
-- 000662's `heat index` class (`incidental`) is a close call.
+**The adjudicator is reader 1** (prototype-exposed). Every judgement is recorded in
+`src/climrr/wp4_judgements.py` and checked against the rules; none needed a paper
+re-read. GUIDANCE may want a third party for the tier-B adoptions.
+
+**Agreement is modest and concentrated on tags** (descriptive; n = 20 items, 50 pairs):
+geography tag 27/50, temporal-frame tag 19/50 --- mostly reader 1 `explicit` with a
+support span from another sentence where the blind reader wrote `inferred` from the
+same span. Rule 3b kept `explicit` only where reader 1's span states the adopted
+value (51 dimension decisions); 11 times it did not, and the tag became `inferred`.
+
+**33 reader-1 and 35 blind claims found by one reader only** (tier C). In 9 items
+both readers recorded the five-claim maximum and still chose partly different
+passages. 9 reader-1-only claims fall on a passage the blind reader considered and
+did not promote, and 6 blind-only claims on a passage reader 1 had set aside; both
+are recorded on the claim.
+
+**Hit precision vs the blind role.** Of 23 place-term pairs, the blind reader recorded
+a claim naming the place in 6: 5 agree with reader 1's place-hit class, 1 disagrees
+(`LIT2-001308` `california`: reader 1 study area through "San Diego County,
+California"; the only blind claim naming "California" is a background citation,
+contextual). 17 not comparable --- the blind reader recorded no claim naming the
+place, as for both affiliation items and the `stephens` surname.
+
+**Other limitations.** n = 20, a deterministic place-candidate sample, not
+representative. Role vocabularies differed (free text vs the rubric's categories);
+the mapping of reader 1's 42 role strings to classes is the adjudicator's
+(`ROLE_CLASS_OF_R1`), recorded and tested for coverage.
 
 ## 12. Deviations from the approved plan
 
-PENDING --- final list after adjudication. Phase-1 deviations so far:
-1. De-duplicated reading view for repeated text (a reading aid; all quotes verified
-   on the raw string).
-2. `geography.role` added to the record (asked for by the package, absent from the
-   WP1 schema).
-3. `litcorpus02_root` placeholder added to `config/local_paths.example.yaml` (the key
-   existed only in the untracked config).
-4. A claim-screen script added to produce the screen counts the package asks to
-   report.
-5. Phases A--B committed separately (`e0857aa`) before Phase C, to evidence the order.
-6. Two run records first produced with an interpreter that fails the D-007 pins were
-   deleted (never committed) and the scripts re-run in env `climrr`.
+1--6. As listed at Phase 1 (de-duplicated reading view; `geography.role` added; config
+   placeholder; claim-screen script; separate Phase A--B commit; two run records with
+   the wrong interpreter deleted before commit).
+7. **Secrets/paths scan fix** (`90d55fc`). The scan failed with 2 hits at `72617da`
+   (reported there as 0): a standalone credential-class word in the
+   `wp4_claim_screens.py` docstring, which the script embeds in
+   `wp4_claim_screens.json`. Reworded ("place-term list") and regenerated; only that
+   line changed, every count identical; JSON SHA-256 `4fec0b51…` → `125a566d…`.
+8. **Rule 3-role** (new, needed because the package asks for geography *and role*):
+   roles are compared by class; on disagreement the more conservative class is
+   adopted (`unknown` > citation/person > affiliation > other > data source >
+   contextual > cited study area > study area), and the pair becomes
+   `adjudicated_modified`. This made **1** pair tier B instead of A
+   (`LIT2-000786-C3`, role only). The order is the adjudicator's reading of "more
+   conservative" for role; GUIDANCE should confirm it.
+9. **A role class `cited_study_area`** for the area of a cited study whose finding a
+   background claim restates; it counts as study geography for G-1 (M5-WP4). Not a
+   decision on whether background citations may bridge (field 13).
+10. Single-reader claims keep their reader's role and class (rule 4 analogue).
 
 ## 13. Open decisions and mentor questions
 
-PENDING --- after adjudication. Raised by Phase 1 for GUIDANCE:
-- **C-2 matches "standardized heat index".** The screen counts `LIT2-001160-C4` as a
-  heat-index-family concept although SHI is a different index; the family matcher is
-  lexical. Whether a mask (like `extended heat index`) is needed is a governance
-  decision, not reader 1's.
-- Whether `background_citation` claims (19) are eligible for compatibility.
-- Whether the primary-class rule (most substantive occurrence wins) is the intended
-  item-level summary.
+For GUIDANCE:
+- **Criterion 16 (blind isolation) is only partly verifiable from artifacts.** The
+  blind branch (`c452d7d`, from `38116a0`) never held reader 1's output (checked:
+  no `wp4_claims`, `wp4_hit_*`, reading document or report in its tree), but its base
+  tree holds the hit files and the prototypes, and its summary carries no protocol
+  disclosure --- the M4-WP2 criterion-6 situation. **Put to Kaiyuan** to confirm what
+  the blind session was given.
+- Rule 3-role's conservative order and the `cited_study_area` class (field 12, 8--9).
+- `LIT2-000203-C2` claim_type tie (background_citation vs projection): kept as
+  `unresolved_tie`; it needs a re-read or a third reader, not authorized here.
+- Whether `background_citation` claims may be bridge-eligible (from Phase 1), and the
+  "standardized heat index" collision (see `M5_WP4_REPORT.md`).
 
 ## 14. Proposed gate status
 
-PENDING --- after blind reading, comparison, adjudication and compatibility
-(acceptance criteria 16--22 cannot be judged yet).
+Against the D-025 acceptance criteria 15--22:
+
+| # | Criterion | Status |
+| --- | --- | --- |
+| 15 | Reader 1 receives no prefilled claim semantics from retrieval hits | **MET** --- reading frozen at `e0857aa` before any hit file was opened |
+| 16 | Blind reader receives no hit locations, prototypes, reader-1 output, expected bridge result | **PARTLY VERIFIABLE** --- no reader-1 output in the blind tree; hit files and prototypes present in its base; put to Kaiyuan |
+| 17 | Blind reading frozen before comparison | **MET** --- `c452d7d` committed before the merge `d90595c`; pins tested |
+| 18 | Adjudication preserves disagreements and evidence tiers | **MET** --- both values and the rule recorded per dimension and role; tiers A 3, B 47, C 68; nothing deleted |
+| 19 | Concept-hit precision classified separately from place-hit precision | **MET** --- separate vocabularies and item classes, carried in the adjudication document |
+| 20 | Every promoted claim has exact source evidence | **MET** --- 677 spans re-sliced; every adjudicated claim's `evidence_sha256` checked |
+| 21 | Compatibility runs only after adjudication | **MET** --- adjudication `6c856e2`, freeze `220ca84`, matrix `8436c25` |
+| 22 | No lexical retrieval hit is treated as a bridge | **MET** --- only structured claims entered the matrix; 0 eligible pairs |
+
+**Proposed status:** ready for GUIDANCE review, with criterion 16 pending Kaiyuan's
+confirmation.
 
 ## 15. Proposed next bounded objective
 
-PENDING. Next step as already authorized by D-025: the blind reading of the same 20
-items in a fresh session on `main`, without this branch, the hit files, the
-prototypes or this report.
+GUIDANCE review of M4-WP4 and M5-WP4 together. If accepted, the next decisions are
+the mentor's (family-level usefulness; place widening or a different unit) and
+GUIDANCE's (SHI collision; background-citation eligibility; rule 3-role). Stage
+2a--2c remains authorized and not started.

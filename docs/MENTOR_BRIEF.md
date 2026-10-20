@@ -1,14 +1,14 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-10-19   Next meeting: **Thursday 2026-10-22** --- bring the items under *For Thursday* below; the answer sheet is still outstanding
+Last updated: 2026-10-20   Next meeting: **Thursday 2026-10-22** --- bring the items under *For Thursday* below; the answer sheet is still outstanding
 
 ## Status in five lines
 
 1. **The table is pinned and partly interpreted**: 62,834 rows, 275 columns, read as text; 41 columns interpreted (21 stated by the dictionary, 20 reasoned and marked so). Nothing reasoned is confirmed --- **the answer sheet has still not been reviewed**, so all 20 stay `inferred_candidate`; the project proceeds on "our reading" (D-014), which promotes nothing.
 2. **The first literature corpus gave no link.** 1,918 papers collected for another purpose; ten read at random and four found by a strict concept + place search, each read twice: **0 of 78 statement-unit pairs qualify as a candidate link** ([MENTOR_REPORT_2026-10-09.md](MENTOR_REPORT_2026-10-09.md)).
 3. **Your direction of 2026-10-09 is now the method:** concepts from the table units first, then papers for those concepts. The same two fixed searches (Fire Weather Index, heat index) gave **2 and 10** papers on one S2ORC shard (fire weather after the FWI rule below) and **448 and 861** on the 186,346-file climate set JL shared after 2026-10-13. A bare "FWI" counts only when the same paper also says "fire weather". GUIDANCE accepted this as the working corpus (D-025) --- for finding candidates, not as a sample of the literature.
-4. **100 fire-weather and 143 heat-index papers mention Oklahoma, Stephens or California somewhere.** That is a word match only --- the word may be a study area, an affiliation or a surname. **20 of them (10 + 10), picked by a fixed rank rule that never looks at content, are frozen** for a two-reader reading; none has been opened.
-5. **Next:** the 20-paper double reading, then the same mechanical comparison with the three units; and, separately, a survey of which other dictionary concepts have literature coverage, run on Polaris as diagnostics only. **No questions are generated** until a link exists.
+4. **100 fire-weather and 143 heat-index papers mention Oklahoma, Stephens or California somewhere.** That is a word match only --- the word may be a study area, an affiliation or a surname. **20 of them (10 + 10), picked by a fixed rank rule that never looks at content, were read by two readers independently and reconciled.** On the first reader's classification, the place word was the paper's own study area in 8 of the 20; in the others it was context, an affiliation (2) or a surname (1).
+5. **Result: 118 reconciled statements, 0 of 354 statement-unit pairs qualify as a candidate link.** 12 pairs share the concept family (fire weather index or heat index) but not the place; the 2 that name exactly "California" are not about either index. Next, separately: a survey of which other dictionary concepts have literature coverage, diagnostics only. **No questions are generated** until a link exists.
 
 ## What I need from this meeting
 
@@ -17,8 +17,16 @@ Last updated: 2026-10-19   Next meeting: **Thursday 2026-10-22** --- bring the i
 > 1. **Same concepts, same queries, new source.** Fire weather **2 → 448**
 >    papers, heat index **10 → 861** (shard → climate set). 100 and 143 of them
 >    mention one of our three places --- word matches, not yet read.
-> 2. **A 20-paper double reading starts now** (10 fire weather + 10 heat
->    index, chosen by a fixed rule before anyone opened them).
+> 2. **The 20-paper double reading is done** (10 fire weather + 10 heat
+>    index, chosen by a fixed rule before anyone opened them). Two readers
+>    agreed on scope 20/20.
+>    - **Statements after reconciliation: 118** --- 3 found identically by
+>      both readers, 47 found by both and reconciled, 68 found by one reader
+>      only.
+>    - **Candidate links: 0 of 354** --- 12 "same concept family, place
+>      unknown or different", 57 ruled out (mostly a past period against the
+>      units' future window), 285 undecidable; no statement names an
+>      emissions scenario.
 > 3. **The dictionary-wide concept survey runs on Polaris as diagnostics**: for
 >    each concept the dictionary describes, how much literature mentions it.
 >    It ranks nothing into the benchmark by itself.
