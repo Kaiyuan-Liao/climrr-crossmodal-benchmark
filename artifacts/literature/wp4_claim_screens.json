@@ -1,0 +1,1555 @@
+{
+  "artifact": "M4-WP4 reader-1 claim screens (descriptive; not a compatibility run)",
+  "screens": "1. **US geography**: the claim's `geography` value (status not `unknown`) names a US\n   place, by the reader-1 place-term list below (states, cities, regions as the papers\n   name them). Explicit and inferred counted separately.\n2. **Pilot concept term**: an approved C-2 family term (`climrr.conceptmap.c2_terms`,\n   `approved_lexical` only, `approved_family_term` forms masking) occurs, by the\n   project boundary rule, inside the claim's `concept` value. This is the M4-WP2\n   screen; it is **not** C-2 compatibility and nothing is compared with a prototype.\n3. **Scenario**: the claim's `scenario` is not `unknown`; `named` if it names an\n   RCP, SSP or SRES pathway.",
+  "us_tokens": [
+    "United States",
+    "U.S.",
+    "US",
+    "USA",
+    "contiguous US",
+    "California",
+    "Oklahoma",
+    "Texas",
+    "Kansas",
+    "Nebraska",
+    "Washington",
+    "Maine",
+    "Idaho",
+    "Arizona",
+    "Nevada",
+    "Minnesota",
+    "Florida",
+    "Mississippi",
+    "Chicago",
+    "Salt Lake City",
+    "Portland",
+    "Medford",
+    "San Diego",
+    "Malheur",
+    "Lake Mendocino",
+    "Riverside County",
+    "Midwest",
+    "Southern High Plains",
+    "Southern Great Plains",
+    "West region",
+    "District of Columbia"
+  ],
+  "boundary_rule": "A term matches at [start, end) in a string when the characters equal the term case-insensitively (Python re.IGNORECASE; no normalization, so offsets are code points on the unnormalized string) and the code point before start and the code point at end, where they exist, are not letters, numbers or combining marks (Unicode general categories L*, N*, M*). So 'FWI' does not match 'FWIs' or 'FWI2' and does match 'FWI,', '(FWI)', 'FWI-based' and 'FWI_x'; 'heat index' does not match 'heat-index' or 'heat  index'.",
+  "masks": [
+    "extended heat index"
+  ],
+  "input_sha256": {
+    "artifacts/literature/wp4_sample.json": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+    "artifacts/literature/wp4_claims_summary.json": "e062f05086185ef2616fe5c47ca8fe4d294e389055b4725160737a9a364c9b02",
+    "data/metadata/concept_map.yaml": "27f7a44deabf24c244f1222c28d17c5c43fd86b9c017d4634bf0eef00931d7b4"
+  },
+  "totals": {
+    "claims": 83,
+    "us_geography": 42,
+    "us_geography_explicit": 41,
+    "us_geography_inferred": 1,
+    "us_geography_by_type": {
+      "background_citation": 12,
+      "finding": 26,
+      "mechanism": 1,
+      "projection": 1,
+      "recommendation": 2
+    },
+    "pilot_family_term_in_concept": 8,
+    "pilot_family_term_in_concept_by_family": {
+      "fire_weather_index": 4,
+      "heat_index": 4
+    },
+    "pilot_family_term_and_us_geography": 5,
+    "scenario_not_unknown": 2,
+    "scenario_named": 0
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-000185-C1",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "California",
+      "geography_status": "explicit",
+      "geography_role": "comparison / validation area for the database",
+      "us_geography_tokens": [
+        "California"
+      ],
+      "concept": "large fires; total burnt area of each fire (GlobFire versus CALFIRE)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000185-C2",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "Portugal",
+      "geography_status": "explicit",
+      "geography_role": "comparison / validation area for the database",
+      "us_geography_tokens": [],
+      "concept": "magnitude of the burnt area",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000185-C3",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "Portugal (north versus central area of the country)",
+      "geography_status": "explicit",
+      "geography_role": "example region of the global database's regional summary",
+      "us_geography_tokens": [],
+      "concept": "number of fires; average fire size",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000185-C4",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "south of Spain, the Peloponnese (Greece), central Portugal; Santa Isabel (Argentina), Malheur (USA), Tableland (Australia), Halhgol (Mongolia), Chernozermel'skiy rayon (Russia), the Republic of Tanganika",
+      "geography_status": "explicit",
+      "geography_role": "regions named as results of the global regional summary",
+      "us_geography_tokens": [
+        "USA",
+        "Malheur"
+      ],
+      "concept": "maximum fire spread speed",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000185-C5",
+      "arm": "fire_weather_v1",
+      "claim_type": "background_citation",
+      "geography": "many European countries",
+      "geography_status": "explicit",
+      "geography_role": "background context",
+      "us_geography_tokens": [],
+      "concept": "fire danger indicators such as the Canadian Fire Weather Index (FWI)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [
+        {
+          "family": "fire_weather_index",
+          "term": "fire weather index",
+          "decision_id": "D-018",
+          "span": [
+            44,
+            62
+          ]
+        },
+        {
+          "family": "fire_weather_index",
+          "term": "FWI",
+          "decision_id": "D-018",
+          "span": [
+            64,
+            67
+          ]
+        }
+      ],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000366-C1",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "Montesinho nature park in Portugal",
+      "geography_status": "inferred",
+      "geography_role": "area of the forest fire data set used for testing",
+      "us_geography_tokens": [],
+      "concept": "forest fire risk prediction accuracy of an optimized auto-sklearn framework",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000366-C2",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "Montesinho nature park in Portugal",
+      "geography_status": "inferred",
+      "geography_role": "area of the forest fire data set used for testing",
+      "us_geography_tokens": [],
+      "concept": "classification accuracy of the optimized framework versus general classifiers",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000366-C3",
+      "arm": "fire_weather_v1",
+      "claim_type": "background_citation",
+      "geography": "Canada; The United States, New Zealand and some others",
+      "geography_status": "explicit",
+      "geography_role": "background context (where the systems are used)",
+      "us_geography_tokens": [
+        "United States"
+      ],
+      "concept": "the Canada's forest fire weather index system; forest fire whether index(FWI)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [
+        {
+          "family": "fire_weather_index",
+          "term": "fire weather index",
+          "decision_id": "D-018",
+          "span": [
+            20,
+            38
+          ]
+        },
+        {
+          "family": "fire_weather_index",
+          "term": "FWI",
+          "decision_id": "D-018",
+          "span": [
+            73,
+            76
+          ]
+        }
+      ],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000499-C1",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "540 houses exposed to two fires (Linksview and Mt York) in the Blue Mountains of NSW",
+      "geography_status": "explicit",
+      "geography_role": "study area (where the houses and fires were observed)",
+      "us_geography_tokens": [],
+      "concept": "defence of the house; likelihood a house would be impacted",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000499-C2",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "540 houses exposed to two fires (Linksview and Mt York) in the Blue Mountains of NSW",
+      "geography_status": "explicit",
+      "geography_role": "study area (where the houses and fires were observed)",
+      "us_geography_tokens": [],
+      "concept": "westerly distance to forest; house impact",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000499-C3",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "540 houses exposed to two fires (Linksview and Mt York) in the Blue Mountains of NSW",
+      "geography_status": "explicit",
+      "geography_role": "study area (where the houses and fires were observed)",
+      "us_geography_tokens": [],
+      "concept": "weather; Forest Fire Danger Index (FFDI); house impact",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000499-C4",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "540 houses exposed to two fires (Linksview and Mt York) in the Blue Mountains of NSW",
+      "geography_status": "explicit",
+      "geography_role": "study area (where the houses and fires were observed)",
+      "us_geography_tokens": [],
+      "concept": "worst-case and best-case house situations; house impact",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000499-C5",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "houses exposed to destructive fires in south-eastern Australia",
+      "geography_status": "explicit",
+      "geography_role": "study area (as summarised in the conclusion)",
+      "us_geography_tokens": [],
+      "concept": "preparedness actions; response actions; house impact themes",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000560-C1",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "Salt Lake City, Portland, and Medford (100 km by 100 km grid squares in the western United States centred on these cities)",
+      "geography_status": "explicit",
+      "geography_role": "study area (modelled grid squares)",
+      "us_geography_tokens": [
+        "United States",
+        "Salt Lake City",
+        "Portland",
+        "Medford"
+      ],
+      "concept": "wildfire prediction performance (binary cross-entropy loss; AUROC) of a dynamic auto-encoder",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000560-C2",
+      "arm": "fire_weather_v1",
+      "claim_type": "background_citation",
+      "geography": "the western United States",
+      "geography_status": "explicit",
+      "geography_role": "background context",
+      "us_geography_tokens": [
+        "United States"
+      ],
+      "concept": "wildfire season burned area",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000673-C1",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "South America near the border of Bolivia, Paraguay, and Brazil (Amazon rainforest fires)",
+      "geography_status": "explicit",
+      "geography_role": "evaluation case region (fire event)",
+      "us_geography_tokens": [],
+      "concept": "total AOD forecast during fire events (smoke from large fires)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000673-C2",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "the Alta Floresta site, in the middle of the Amazon fire source region",
+      "geography_status": "explicit",
+      "geography_role": "evaluation site (fire source region)",
+      "us_geography_tokens": [],
+      "concept": "daily total AOD variations; fire plumes",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000673-C3",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "60 selected AERONET sites globally",
+      "geography_status": "explicit",
+      "geography_role": "evaluation network (global)",
+      "us_geography_tokens": [],
+      "concept": "correlation of daily total AOD with AERONET",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000673-C4",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "southern Africa, Siberia, the central Amazon, and central South America",
+      "geography_status": "explicit",
+      "geography_role": "regions of evaluated fire events",
+      "us_geography_tokens": [],
+      "concept": "forecast of biomass burning events (major fires) in AOD",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000786-C1",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "North and South America, Europe, Australia, and Africa (studies from Europe, South America, and Africa limited)",
+      "geography_status": "explicit",
+      "geography_role": "regions of the reviewed studies",
+      "us_geography_tokens": [],
+      "concept": "bat responses to prescribed fire and wildfire",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000786-C2",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "North and South America, Europe, Australia, and Africa (studies from Europe, South America, and Africa limited)",
+      "geography_status": "inferred",
+      "geography_role": "regions of the reviewed studies",
+      "us_geography_tokens": [],
+      "concept": "negative responses to wildfire; resilience of bats to fire",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000786-C3",
+      "arm": "fire_weather_v1",
+      "claim_type": "background_citation",
+      "geography": "Vesuvius National Park in southern Italy",
+      "geography_status": "explicit",
+      "geography_role": "study area of the cited study",
+      "us_geography_tokens": [],
+      "concept": "suitable habitat for bat species after a severe wildfire",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000786-C4",
+      "arm": "fire_weather_v1",
+      "claim_type": "background_citation",
+      "geography": "mixed-conifer forests of the Sierra Nevada, California",
+      "geography_status": "explicit",
+      "geography_role": "study area of the cited study",
+      "us_geography_tokens": [
+        "California",
+        "Nevada"
+      ],
+      "concept": "bat species richness; extent of areas burned by wildfires",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000786-C5",
+      "arm": "fire_weather_v1",
+      "claim_type": "background_citation",
+      "geography": "the montane forests of California",
+      "geography_status": "explicit",
+      "geography_role": "study area of the cited study",
+      "us_geography_tokens": [
+        "California"
+      ],
+      "concept": "bat occupancy; time since last fire",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001063-C1",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "Lake Mendocino, a reservoir in the upper Russian River watershed in coastal northern California",
+      "geography_status": "explicit",
+      "geography_role": "case-study site (this paper's own counterfactual calculation)",
+      "us_geography_tokens": [
+        "California",
+        "Lake Mendocino"
+      ],
+      "concept": "Forecast Informed Reservoir Operations (FIRO) as a drought adaptation; reservoir water storage",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001063-C2",
+      "arm": "fire_weather_v1",
+      "claim_type": "background_citation",
+      "geography": "Portugal",
+      "geography_status": "explicit",
+      "geography_role": "case-study area (from a cited study)",
+      "us_geography_tokens": [],
+      "concept": "climate change signal; burned areas of the fire season",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001063-C3",
+      "arm": "fire_weather_v1",
+      "claim_type": "background_citation",
+      "geography": "most of the Portuguese territory",
+      "geography_status": "explicit",
+      "geography_role": "case-study area (fire event)",
+      "us_geography_tokens": [],
+      "concept": "advection of extremely hot and dry air; near-surface temperature; relative humidity",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001063-C4",
+      "arm": "fire_weather_v1",
+      "claim_type": "background_citation",
+      "geography": "the southern Horn of Africa covering parts of southern Ethiopia, southern Somalia, and eastern Kenya",
+      "geography_status": "explicit",
+      "geography_role": "case-study area (from a cited study)",
+      "us_geography_tokens": [],
+      "concept": "drought severity; anthropogenic influence on rainfall and evapotranspiration",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001063-C5",
+      "arm": "fire_weather_v1",
+      "claim_type": "background_citation",
+      "geography": "California",
+      "geography_status": "explicit",
+      "geography_role": "case-study area (from a cited study)",
+      "us_geography_tokens": [
+        "California"
+      ],
+      "concept": "drought (depth, length, warmth); return period",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001157-C1",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "the Sierras Chicas (810,000 ha) in Córdoba province, Argentina, Chaco Serrano subregion",
+      "geography_status": "explicit",
+      "geography_role": "study area",
+      "us_geography_tokens": [],
+      "concept": "fuel moisture content (FMC) thresholds for extreme and high fire hazard",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001157-C2",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "the Sierras Chicas (810,000 ha) in Córdoba province, Argentina, Chaco Serrano subregion",
+      "geography_status": "explicit",
+      "geography_role": "study area",
+      "us_geography_tokens": [],
+      "concept": "pre-fire fuel moisture content; fire size",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001157-C3",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "the Sierras Chicas (810,000 ha) in Córdoba province, Argentina, Chaco Serrano subregion",
+      "geography_status": "explicit",
+      "geography_role": "study area",
+      "us_geography_tokens": [],
+      "concept": "pre-fire FMC; fire size (upper quantiles)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001157-C4",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "the Sierras Chicas (810,000 ha) in Córdoba province, Argentina, Chaco Serrano subregion",
+      "geography_status": "explicit",
+      "geography_role": "study area",
+      "us_geography_tokens": [],
+      "concept": "average FMC in high versus low fire-activity years",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001157-C5",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "the Sierras Chicas (810,000 ha) in Córdoba province, Argentina, Chaco Serrano subregion",
+      "geography_status": "explicit",
+      "geography_role": "study area",
+      "us_geography_tokens": [],
+      "concept": "days below the extreme fire hazard FMC threshold",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001236-C1",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "the eastern part of Attica Greece, 20 km from Athens city center, in a semi-rural touristic area called Rafina-Mati",
+      "geography_status": "explicit",
+      "geography_role": "evaluation case (retrospective wildfire incident)",
+      "us_geography_tokens": [],
+      "concept": "cross-platform fire detection decision support (fire occurrence probability)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001236-C2",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "the eastern part of Attica Greece, 20 km from Athens city center, in a semi-rural touristic area called Rafina-Mati",
+      "geography_status": "explicit",
+      "geography_role": "evaluation case (retrospective wildfire incident)",
+      "us_geography_tokens": [],
+      "concept": "fire weather index (FWI), based on the Canadian forest fire danger rating system",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [
+        {
+          "family": "fire_weather_index",
+          "term": "fire weather index",
+          "decision_id": "D-018",
+          "span": [
+            0,
+            18
+          ]
+        },
+        {
+          "family": "fire_weather_index",
+          "term": "FWI",
+          "decision_id": "D-018",
+          "span": [
+            20,
+            23
+          ]
+        }
+      ],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001236-C3",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "the eastern part of Attica Greece, 20 km from Athens city center, in a semi-rural touristic area called Rafina-Mati",
+      "geography_status": "explicit",
+      "geography_role": "evaluation case (retrospective wildfire incident)",
+      "us_geography_tokens": [],
+      "concept": "social media (Twitter) activity as a fire-detection signal",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001308-C1",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "San Diego County, California (county region and six sub-regions)",
+      "geography_status": "explicit",
+      "geography_role": "study area",
+      "us_geography_tokens": [
+        "California",
+        "San Diego"
+      ],
+      "concept": "wildfire (fire-emitted) particulate concentrations; odds of seeking emergency care for respiratory syndromes",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001308-C2",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "San Diego County, California (county region and six sub-regions)",
+      "geography_status": "explicit",
+      "geography_role": "study area",
+      "us_geography_tokens": [
+        "California",
+        "San Diego"
+      ],
+      "concept": "model fit for respiratory-related ED visits",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001308-C3",
+      "arm": "fire_weather_v1",
+      "claim_type": "finding",
+      "geography": "San Diego County, California (county region and six sub-regions)",
+      "geography_status": "explicit",
+      "geography_role": "study area",
+      "us_geography_tokens": [
+        "California",
+        "San Diego"
+      ],
+      "concept": "demographic variables (income, age); odds of ED visits following a wildfire",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001308-C4",
+      "arm": "fire_weather_v1",
+      "claim_type": "projection",
+      "geography": "San Diego County",
+      "geography_status": "explicit",
+      "geography_role": "study area (projection)",
+      "us_geography_tokens": [
+        "San Diego"
+      ],
+      "concept": "Canadian Fire Weather Index; extreme fire seasons",
+      "concept_status": "inferred",
+      "pilot_family_terms_in_concept": [
+        {
+          "family": "fire_weather_index",
+          "term": "fire weather index",
+          "decision_id": "D-018",
+          "span": [
+            9,
+            27
+          ]
+        }
+      ],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000084-C1",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "the US (contiguous US model domain)",
+      "geography_status": "explicit",
+      "geography_role": "study area (model domain)",
+      "us_geography_tokens": [
+        "US",
+        "contiguous US"
+      ],
+      "concept": "heat wave frequency, duration, and intensity; loss of irrigation",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000084-C2",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "California's Central Valley and the Southern High Plains",
+      "geography_status": "explicit",
+      "geography_role": "regions of strongest simulated effect",
+      "us_geography_tokens": [
+        "California",
+        "Southern High Plains"
+      ],
+      "concept": "heat wave frequency and duration",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000084-C3",
+      "arm": "extreme_heat_v1",
+      "claim_type": "mechanism",
+      "geography": "the United States",
+      "geography_status": "inferred",
+      "geography_role": "study area (model domain)",
+      "us_geography_tokens": [
+        "United States"
+      ],
+      "concept": "heat index temperature metrics that include humidity",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [
+        {
+          "family": "heat_index",
+          "term": "heat index",
+          "decision_id": "D-018",
+          "span": [
+            0,
+            10
+          ]
+        }
+      ],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000084-C4",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "the Southern Great Plains (Kansas, Nebraska, Oklahoma, and Texas)",
+      "geography_status": "explicit",
+      "geography_role": "analysis region",
+      "us_geography_tokens": [
+        "Oklahoma",
+        "Texas",
+        "Kansas",
+        "Nebraska",
+        "Southern Great Plains"
+      ],
+      "concept": "heat wave frequency, duration, and intensity; gradual declines in irrigation amount or irrigated area",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000084-C5",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "Texas, Kansas, Nebraska, and California",
+      "geography_status": "explicit",
+      "geography_role": "regions of strongest simulated effect",
+      "us_geography_tokens": [
+        "California",
+        "Texas",
+        "Kansas",
+        "Nebraska"
+      ],
+      "concept": "areas and population sensitive to heat wave increases with irrigation decline",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000203-C1",
+      "arm": "extreme_heat_v1",
+      "claim_type": "background_citation",
+      "geography": "California (temperate regions)",
+      "geography_status": "explicit",
+      "geography_role": "study area of the cited study",
+      "us_geography_tokens": [
+        "California"
+      ],
+      "concept": "ambient temperature exposure; prematurity",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000203-C2",
+      "arm": "extreme_heat_v1",
+      "claim_type": "background_citation",
+      "geography": "global",
+      "geography_status": "explicit",
+      "geography_role": "background context",
+      "us_geography_tokens": [],
+      "concept": "global temperatures",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "without effective mitigation of current emission rates",
+      "scenario_status": "explicit",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000203-C3",
+      "arm": "extreme_heat_v1",
+      "claim_type": "background_citation",
+      "geography": "low-income countries versus high-income countries",
+      "geography_status": "explicit",
+      "geography_role": "background context",
+      "us_geography_tokens": [],
+      "concept": "burden of severe heat events; \"temperature of equivalence\"",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "target temperatures of less than 1.5°C are met",
+      "scenario_status": "explicit",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000315-C1",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "hot land locations and months globally (90th percentile of daily maximum T w at least 27 °C)",
+      "geography_status": "explicit",
+      "geography_role": "analysis domain (global hot land areas)",
+      "us_geography_tokens": [],
+      "concept": "median daily maximum temperature; wet-bulb temperature (T w) percentiles; irrigation",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000315-C2",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "Central North America's Mississippi valley",
+      "geography_status": "explicit",
+      "geography_role": "analysis region (hot land region)",
+      "us_geography_tokens": [
+        "Mississippi"
+      ],
+      "concept": "wet-bulb temperature percentiles; dew point; irrigation",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000315-C3",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "hot areas overall; the Mississippi Valley region; Arabia; the Indus Basin; the Ganges Basin",
+      "geography_status": "explicit",
+      "geography_role": "analysis regions",
+      "us_geography_tokens": [
+        "Mississippi"
+      ],
+      "concept": "frequency of dangerous conditions with T w ≥ 27 °C",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000315-C4",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "hot regions overall; Arabia; the Indus basin",
+      "geography_status": "explicit",
+      "geography_role": "analysis regions",
+      "us_geography_tokens": [],
+      "concept": "frequency of extremely dangerous conditions with T w ≥ 30 °C",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000315-C5",
+      "arm": "extreme_heat_v1",
+      "claim_type": "background_citation",
+      "geography": "California and Nebraska",
+      "geography_status": "explicit",
+      "geography_role": "study area of the cited study",
+      "us_geography_tokens": [
+        "California",
+        "Nebraska"
+      ],
+      "concept": "mean heat index, which combines temperature and humidity; peak heat index; irrigation",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [
+        {
+          "family": "heat_index",
+          "term": "heat index",
+          "decision_id": "D-018",
+          "span": [
+            5,
+            15
+          ]
+        },
+        {
+          "family": "heat_index",
+          "term": "heat index",
+          "decision_id": "D-018",
+          "span": [
+            63,
+            73
+          ]
+        }
+      ],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000470-C1",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "the US workers (US workplaces)",
+      "geography_status": "explicit",
+      "geography_role": "target population of the recommendations",
+      "us_geography_tokens": [
+        "US"
+      ],
+      "concept": "occupational heat safety recommendations (Delphi consensus)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000470-C2",
+      "arm": "extreme_heat_v1",
+      "claim_type": "recommendation",
+      "geography": "the US workers (US workplaces)",
+      "geography_status": "explicit",
+      "geography_role": "target population of the recommendations",
+      "us_geography_tokens": [
+        "US"
+      ],
+      "concept": "heat acclimatization (HA) program; effects of heat stress",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000470-C3",
+      "arm": "extreme_heat_v1",
+      "claim_type": "recommendation",
+      "geography": "the US workers (US workplaces)",
+      "geography_status": "explicit",
+      "geography_role": "target population of the recommendations",
+      "us_geography_tokens": [
+        "US"
+      ],
+      "concept": "environmental monitoring of heat stress",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000470-C4",
+      "arm": "extreme_heat_v1",
+      "claim_type": "background_citation",
+      "geography": "US",
+      "geography_status": "explicit",
+      "geography_role": "background context (national)",
+      "us_geography_tokens": [
+        "US"
+      ],
+      "concept": "work in extreme heat",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000470-C5",
+      "arm": "extreme_heat_v1",
+      "claim_type": "background_citation",
+      "geography": "California, Washington, and Minnesota",
+      "geography_status": "explicit",
+      "geography_role": "regulatory context (states with heat standards)",
+      "us_geography_tokens": [
+        "California",
+        "Washington",
+        "Minnesota"
+      ],
+      "concept": "OSHA-approved heat safety standards (state enforcement)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000662-C1",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "49 cities of the U.S. (contiguous United States; grouped into West, South and North regions)",
+      "geography_status": "explicit",
+      "geography_role": "study area (city sample)",
+      "us_geography_tokens": [
+        "United States",
+        "U.S."
+      ],
+      "concept": "urban expansion intensity index (UEII); heat wave intensity change; heat wave duration change",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000662-C2",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "the West region (12 cities, e.g. Seattle, Las Vegas, Fresno)",
+      "geography_status": "explicit",
+      "geography_role": "analysis region",
+      "us_geography_tokens": [
+        "West region"
+      ],
+      "concept": "UEII; heat wave intensity change",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000662-C3",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "49 cities of the U.S. (contiguous United States; grouped into West, South and North regions)",
+      "geography_status": "explicit",
+      "geography_role": "study area (city sample)",
+      "us_geography_tokens": [
+        "United States",
+        "U.S."
+      ],
+      "concept": "green expansion intensity index (GEII); heat wave frequency, duration, season, and intensity",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000662-C4",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "49 cities of the U.S. (contiguous United States; grouped into West, South and North regions)",
+      "geography_status": "explicit",
+      "geography_role": "study area (city sample)",
+      "us_geography_tokens": [
+        "United States",
+        "U.S."
+      ],
+      "concept": "green expansion versus urban expansion (GEII, UEII)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000662-C5",
+      "arm": "extreme_heat_v1",
+      "claim_type": "background_citation",
+      "geography": "Florida, Texas, and California",
+      "geography_status": "explicit",
+      "geography_role": "study area of the cited study",
+      "us_geography_tokens": [
+        "California",
+        "Texas",
+        "Florida"
+      ],
+      "concept": "heat-related fatality rates (workers)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000927-C1",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "the 52 districts in South Africa",
+      "geography_status": "explicit",
+      "geography_role": "study area",
+      "us_geography_tokens": [],
+      "concept": "maximum temperature, minimum temperature, diurnal temperature range; all-cause mortality",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000927-C2",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "the 52 districts in South Africa",
+      "geography_status": "explicit",
+      "geography_role": "study area",
+      "us_geography_tokens": [],
+      "concept": "maximum temperature; risk of mortality",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000927-C3",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "Northern Cape and North West (hot arid interior); Mpumalanga (temperate interior); Eastern Cape (coast) — provinces of South Africa",
+      "geography_status": "explicit",
+      "geography_role": "study area (provincial averages)",
+      "us_geography_tokens": [],
+      "concept": "district-level maximum temperature thresholds above which daily mortality increases",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000927-C4",
+      "arm": "extreme_heat_v1",
+      "claim_type": "recommendation",
+      "geography": "South Africa",
+      "geography_status": "explicit",
+      "geography_role": "target of the recommendation",
+      "us_geography_tokens": [],
+      "concept": "heat-health warning system (HHWS); district-level maximum temperature thresholds",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-000927-C5",
+      "arm": "extreme_heat_v1",
+      "claim_type": "background_citation",
+      "geography": "the desert communities of California",
+      "geography_status": "explicit",
+      "geography_role": "study area of the cited study",
+      "us_geography_tokens": [
+        "California"
+      ],
+      "concept": "the national heat index threshold of 40.1 °C used by the US National Weather Service to issue heat alerts",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [
+        {
+          "family": "heat_index",
+          "term": "heat index",
+          "decision_id": "D-018",
+          "span": [
+            13,
+            23
+          ]
+        }
+      ],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001075-C1",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "prisons in 44 states and the District of Columbia (United States)",
+      "geography_status": "explicit",
+      "geography_role": "study area (facility sample)",
+      "us_geography_tokens": [
+        "United States",
+        "District of Columbia"
+      ],
+      "concept": "days with daily mean temperature over 85°F at prisons",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001075-C2",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "California, Arizona and Nevada (top 10 facilities); Calipatria State Prison in California",
+      "geography_status": "explicit",
+      "geography_role": "facilities ranked within the study area",
+      "us_geography_tokens": [
+        "California",
+        "Arizona",
+        "Nevada"
+      ],
+      "concept": "location-specific 90th percentile summer temperature at prisons",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001075-C3",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "prisons in Washington, California, Maine, Idaho, and Texas",
+      "geography_status": "explicit",
+      "geography_role": "facilities ranked within the study area",
+      "us_geography_tokens": [
+        "California",
+        "Texas",
+        "Washington",
+        "Maine",
+        "Idaho"
+      ],
+      "concept": "anomaly in average 90th percentile summer temperature at prisons",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001075-C4",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "Across the US (prisons with the top and lowest 10 heat exposures)",
+      "geography_status": "explicit",
+      "geography_role": "study area (national comparison)",
+      "us_geography_tokens": [
+        "US"
+      ],
+      "concept": "heat exposure (90th percentile summer temperature) by race/ethnicity of incarcerated populations",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001075-C5",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "1,614 prisons in the United States",
+      "geography_status": "explicit",
+      "geography_role": "study area (facility sample)",
+      "us_geography_tokens": [
+        "United States"
+      ],
+      "concept": "heat exposure by facility-level characteristics that could modify risk to heat",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001160-C1",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "Midwest US, specifically Chicago; South and Southwest US; west of Arizona and southeast of California",
+      "geography_status": "explicit",
+      "geography_role": "validation case region (July 1995 heatwave)",
+      "us_geography_tokens": [
+        "US",
+        "California",
+        "Arizona",
+        "Chicago",
+        "Midwest"
+      ],
+      "concept": "frequency of heatwave days under a constant temperature threshold",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001160-C2",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "western Europe; an extended region around Paris, France",
+      "geography_status": "explicit",
+      "geography_role": "validation case region (2003 heatwave)",
+      "us_geography_tokens": [],
+      "concept": "frequency of heatwave days and heatwave amplitude (daily minimum temperature)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001160-C3",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "A large region surrounding Moscow, Russia; western Russia",
+      "geography_status": "explicit",
+      "geography_role": "validation case region (2010 heatwave)",
+      "us_geography_tokens": [],
+      "concept": "frequency of heatwave days; heatwave amplitude (daily maximum temperature)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001160-C4",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "Moscow, Russia",
+      "geography_status": "explicit",
+      "geography_role": "validation case (index comparison)",
+      "us_geography_tokens": [],
+      "concept": "excess heat factor (EHF) versus standardized heat index (SHI)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [
+        {
+          "family": "heat_index",
+          "term": "heat index",
+          "decision_id": "D-018",
+          "span": [
+            45,
+            55
+          ]
+        }
+      ],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001160-C5",
+      "arm": "extreme_heat_v1",
+      "claim_type": "background_citation",
+      "geography": "Chicago, IL (Midwest US)",
+      "geography_status": "explicit",
+      "geography_role": "validation case region (from cited studies)",
+      "us_geography_tokens": [
+        "US",
+        "Chicago",
+        "Midwest"
+      ],
+      "concept": "excessive heat and humidity; hospital admission; excess deaths",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001293-C1",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "the Karachi Airport station (Karachi, Pakistan)",
+      "geography_status": "explicit",
+      "geography_role": "example data site (motivating application)",
+      "us_geography_tokens": [],
+      "concept": "joint exceedance probability of temperature and relative humidity (heat wave conditions)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001293-C2",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "the March AFB station, which lies in Riverside County, CA (southern California Santa Ana weather regime)",
+      "geography_status": "explicit",
+      "geography_role": "example data site (motivating application)",
+      "us_geography_tokens": [
+        "California",
+        "Riverside County"
+      ],
+      "concept": "joint exceedance probability of windspeed and dryness (Santa Ana weather regime) on fire ignition days",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001293-C3",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "the March AFB station, which lies in Riverside County, CA (southern California Santa Ana weather regime)",
+      "geography_status": "explicit",
+      "geography_role": "example data site (motivating application)",
+      "us_geography_tokens": [
+        "California",
+        "Riverside County"
+      ],
+      "concept": "tail dependence between windspeed and dryness (Santa Ana weather regime)",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    },
+    {
+      "claim_id": "LIT2-001293-C4",
+      "arm": "extreme_heat_v1",
+      "claim_type": "finding",
+      "geography": "the Karachi Airport station (Karachi, Pakistan)",
+      "geography_status": "explicit",
+      "geography_role": "example data site (motivating application)",
+      "us_geography_tokens": [],
+      "concept": "tail association of temperature and relative humidity",
+      "concept_status": "explicit",
+      "pilot_family_terms_in_concept": [],
+      "scenario": "unknown",
+      "scenario_status": "unknown",
+      "scenario_named": false
+    }
+  ]
+}

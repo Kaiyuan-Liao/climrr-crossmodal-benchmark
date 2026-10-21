@@ -1,0 +1,299 @@
+{
+  "lit2_id": "LIT2-001236",
+  "item_id": "59342086",
+  "arm": "fire_weather_v1",
+  "rank": 90,
+  "rel_path": "86/59342086.json",
+  "file_sha256": "d2ab3a8af862fe0ce63a01dd590328640c402176fc50767c9a352ed264450d1d",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "related work",
+    "iot and standards-based data interoperability mechanisms",
+    "system architecture",
+    "experiment design and rationale",
+    "experiment execution and evaluation of the findings",
+    "conclusions and future work"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Semantic Interoperability for IoT Platforms in Support of Decision Making: An Experiment on Early Wildfire Detection",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "Borderline. Mainly an IoT data-interoperability paper, but its evaluation is early wildfire detection and fire-danger assessment, tested retrospectively on a deadly 2018 wildfire in Greece.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 809,
+    "char_end": 1037,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "These specifications have been utilised for the implementation of the IoT2Edge interoperability enabling mechanism which is evaluated within the context of a catastrophic wildfire incident that took place in Greece on July 2018.",
+    "evidence_sha256": "952ca6b7df0b87d0b5248b6e878d658ad5f6927759f686b98062ef47f74ffe5b"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-001236-C1",
+      "claim_text": "Triggered every two minutes over 20-26 July 2018, the decision-making service correctly detected the presence or absence of the fire in 93.6-98.9% of over 5000 triggers for the optimal weight configurations.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "cross-platform fire detection decision support (fire occurrence probability)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "successfully detects existence or lack of fire in 93.6-98.9% of triggers",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the eastern part of Attica Greece, 20 km from Athens city center, in a semi-rural touristic area called Rafina-Mati",
+        "status": "explicit",
+        "role": "evaluation case (retrospective wildfire incident)",
+        "support": {
+          "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+          "char_start": 5247,
+          "char_end": 5354,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "a lethal wild fire broke out at the eastern part of Attica Greece, 20 km from Athens city center in a semi-",
+          "evidence_sha256": "e19b6e3587cebc6cc2dcc4d6f263b80914a5d1404f7aa8aafb234589f63fc4ee"
+        }
+      },
+      "temporal_frame": {
+        "value": "20-26/7/2018 (fire on 23/7/2018 from 16:41)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+          "char_start": 11695,
+          "char_end": 11793,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "the DMS was triggered to detect potential fire incidents every two min for the period 20-26/7/2018",
+          "evidence_sha256": "b01c22768db10d197f8cfe407cee76d183e896de061f1313ec81d8a8ff6361a0"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "weighted fusion of MESP image, social media, weather and EFFIS scores; FD TRUE thresholds tested in [0.60,0.95]",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+          "char_start": 12114,
+          "char_end": 12170,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "where the range of FD TRUE values tested was [0.60,0.95]",
+          "evidence_sha256": "de13fabffd49fecbd6d1520ab9bb0b371c1b95a62cbc992eac6446ec36f1d61d"
+        }
+      },
+      "evidence": {
+        "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+        "char_start": 11932,
+        "char_end": 12112,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "This resulted in over 5000 DMS triggers for 93.6-98.9% of which the DMS successfully detects the existence or lack of fire incident occurrence for the optimal weight configurations",
+        "evidence_sha256": "f0f0a5f794a949b26f86c5ff619226b28f2e9130b82dbadfe58e0e057db91211"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "A retrospective evaluation on collected data, not a live deployment."
+    },
+    {
+      "claim_id": "LIT2-001236-C2",
+      "claim_text": "The fire weather index computed from local weather data was above 100 when the Rafina-Mati fire ignited and stayed extremely high for the whole fire; EFFIS's Extreme class corresponds to FWI above 50.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "fire weather index (FWI), based on the Canadian forest fire danger rating system",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+          "char_start": 9212,
+          "char_end": 9363,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "the weather measurements have been processed to extract the respective fire weather index (FWI), based on the Canadian forest fire danger rating system",
+          "evidence_sha256": "783440348f3c13300673201c276378058899222290874f2000f96935f18089a2"
+        }
+      },
+      "relation_or_direction": {
+        "value": "very high at ignition (above 100); remained extremely high for the entire fire duration",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the eastern part of Attica Greece, 20 km from Athens city center, in a semi-rural touristic area called Rafina-Mati",
+        "status": "explicit",
+        "role": "evaluation case (retrospective wildfire incident)",
+        "support": {
+          "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+          "char_start": 5247,
+          "char_end": 5354,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "a lethal wild fire broke out at the eastern part of Attica Greece, 20 km from Athens city center in a semi-",
+          "evidence_sha256": "e19b6e3587cebc6cc2dcc4d6f263b80914a5d1404f7aa8aafb234589f63fc4ee"
+        }
+      },
+      "temporal_frame": {
+        "value": "23 July 2018 (the fire's duration)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+          "char_start": 5221,
+          "char_end": 5245,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "at 16.40 on 23 July 2018",
+          "evidence_sha256": "e08ad9e2435341db048f766b1138e3626025211cd52c68227b9f5d3d5a13c89c"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+        "char_start": 9428,
+        "char_end": 9630,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "As one may easily observe, the fire ignition occurred when very high fire weather index levels were in place (i.e., above 100) and for the entire fire duration the respective FWI remained extremely high",
+        "evidence_sha256": "12eb936fbfe624a10e5b969fdb7552c6c427ada562f7e6558fd51a94d0e1938f"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "FWI here is the Canadian fire weather index computed from air temperature, relative humidity, wind speed and precipitation from local weather stations."
+    },
+    {
+      "claim_id": "LIT2-001236-C3",
+      "claim_text": "The first related tweet about the fire was posted at 16:53, 12 minutes after the official ignition, and tweet volumes rose promptly once the fire started.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "social media (Twitter) activity as a fire-detection signal",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "first tweet 12 min after ignition; tweet populations increased promptly",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the eastern part of Attica Greece, 20 km from Athens city center, in a semi-rural touristic area called Rafina-Mati",
+        "status": "explicit",
+        "role": "evaluation case (retrospective wildfire incident)",
+        "support": {
+          "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+          "char_start": 5247,
+          "char_end": 5354,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "a lethal wild fire broke out at the eastern part of Attica Greece, 20 km from Athens city center in a semi-",
+          "evidence_sha256": "e19b6e3587cebc6cc2dcc4d6f263b80914a5d1404f7aa8aafb234589f63fc4ee"
+        }
+      },
+      "temporal_frame": {
+        "value": "23 July 2018; tweets collected 19/7/2018 to 26/7/2018",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+          "char_start": 6442,
+          "char_end": 6500,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "we collected all the Tweets from 19/7/2018 until 26/7/2018",
+          "evidence_sha256": "0af7360985db5414a637383eaa63b0bf5d0a7ec6c0624843466f53c95eb81675"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+        "char_start": 6316,
+        "char_end": 6418,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "It is also worth noting that the tweet was posted just 12 min after the official ignition of the fire.",
+        "evidence_sha256": "04fe51f5397e487541295919c99f6caee804cee80626aab0a85fe049ab2491fe"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The time 16:53 is in the preceding sentence: 'the first related tweet was posted at 16:53'."
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-001236-R1",
+      "evidence": {
+        "json_path": "$[\"experiment design and rationale\"]",
+        "char_start": 787,
+        "char_end": 986,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "to the \"deadliest and most destructive fire in the USA's modern history\" in California, where more than 150,000 acres of land were burned and 86 casualties were recorded, in November of the same year",
+        "evidence_sha256": "0e582c8017bd2bf4e0a509ed9283e1f187db79c0c96a9096a55fca09b3f59c07"
+      },
+      "reason": "Background motivation about another fire; not this paper's evidence."
+    },
+    {
+      "candidate_id": "LIT2-001236-R2",
+      "evidence": {
+        "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+        "char_start": 2541,
+        "char_end": 2669,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "This means that the employed data interoperability mechanism causes the MESP-R to operate approximately 2 hours and 18 min less.",
+        "evidence_sha256": "d4fd25db8b20e652f27edab4105b45a5d6b8d93aa99d50b08971b1a4bb9daaff"
+      },
+      "reason": "A device energy result; not about a hazard."
+    },
+    {
+      "candidate_id": "LIT2-001236-R3",
+      "evidence": {
+        "json_path": "$[\"experiment design and rationale\"]",
+        "char_start": 7362,
+        "char_end": 7543,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "These forecasts are based on the Canadian Forest Fire Weather Index (FWI) System where past, current and future weather information are aggregated with location specific information",
+        "evidence_sha256": "2c137259bba920e738f9c9359cdb9987dfaa3d0e272d53f06a59383aea43d1ab"
+      },
+      "reason": "Description of the EFFIS data source; not a finding."
+    },
+    {
+      "candidate_id": "LIT2-001236-R4",
+      "evidence": {
+        "json_path": "$[\"experiment design and rationale\"]",
+        "char_start": 323,
+        "char_end": 550,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "A combination of climate change, population growth, negligent forest management and modern building practices has had an increasing effect on the proliferation of forest wildfires at a global level over the last few years [65].",
+        "evidence_sha256": "a79361dacc17994ce56623a19623e8533095a3d229b0d5aae16b1b18ec53c23b"
+      },
+      "reason": "Background statement attributed to a reference."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "In the 'experiment design and rationale' field the source names a Raspberry Pi with an arduino.cc URL; kept as stored."
+}

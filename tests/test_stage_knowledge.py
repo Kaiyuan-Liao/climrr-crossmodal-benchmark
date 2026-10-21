@@ -114,6 +114,11 @@ def test_the_list_carries_the_m4_wp3_rulings_and_records():
         assert f in sk.KNOWLEDGE_FILES
 
 
+def test_the_list_carries_the_m4_wp4_adjudication_and_m5_wp4_compatibility():
+    for f in ("docs/LITERATURE_WP4_ADJUDICATION.md", "docs/M5_WP4_COMPATIBILITY.md"):
+        assert f in sk.KNOWLEDGE_FILES
+
+
 def test_the_list_carries_the_m4_wp1_pilot_and_its_ruling():
     assert "docs/LITERATURE_WP1_PILOT.md" in sk.KNOWLEDGE_FILES
     assert "docs/M4_WP1_REVIEW_M5_WP1_GUIDANCE_RULING.md" in sk.KNOWLEDGE_FILES

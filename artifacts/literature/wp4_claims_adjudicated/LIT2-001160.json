@@ -1,0 +1,973 @@
+{
+  "lit2_id": "LIT2-001160",
+  "item_id": "53109236",
+  "arm": "extreme_heat_v1",
+  "rank": 126,
+  "rel_path": "36/53109236.json",
+  "file_sha256": "f33f69f4a36065a1c4975b10960d7b632cf4d0fbe9e48b46f50e69e0d71aa1cb",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "background & summary",
+    "methods",
+    "constant temperature threshold approach",
+    "pdf-derived temperature threshold",
+    "average temperature+5degc",
+    "upper tail percentile",
+    "summer-derived threshold approach",
+    "excess heat factor (ehf",
+    "standardized heat index (shi",
+    "global heatwave and warm-spell toolbox, ghwt",
+    "data records",
+    "technical validation",
+    "chicago heatwave (july 1995",
+    "european heatwave (summer 2003",
+    "global heatwave/warm-spell maps",
+    "usage notes",
+    "caveats"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Data Descriptor: GHWR, a multi- method global heatwave and warm-spell record and toolbox Background & Summary",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "note": "The stored title carries the labels 'Data Descriptor:' and 'Background & Summary'."
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "A data descriptor for a multi-method global heatwave and warm-spell record, introducing a standardized heat index and validating it on high-impact historical heatwaves.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 0,
+    "char_end": 114,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "Heatwaves are extended periods of unusually high temperatures with significant societal and environmental impacts.",
+    "evidence_sha256": "aef2b9365a100b4ab24baca56333d351d9c3eb380a41a5316587d6ea797295e3"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-001160-C1",
+      "claim_text": "With a constant threshold (daily maximum above 35 °C for at least four days), Chicago and the Midwest had about 5 heatwave days in July 1995, while parts of western Arizona and southeast California counted all 31 days.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "frequency of heatwave days under a constant temperature threshold",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "around 5 days in the Midwest/Chicago; much more frequent in the South and Southwest US; entire month in some regions",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Midwest US, specifically Chicago; South and Southwest US; west of Arizona and southeast of California",
+        "status": "explicit",
+        "role": "validation case region (July 1995 heatwave)"
+      },
+      "temporal_frame": {
+        "value": "July of 1995",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "maximum daily temperatures above 35°C with a duration of at least four consecutive days",
+        "status": "explicit"
+      },
+      "evidence": {
+        "json_path": "$[\"chicago heatwave (july 1995\"]",
+        "char_start": 1312,
+        "char_end": 1501,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "While Midwest US, and specifically Chicago, experienced around 5 heatwave days in July of 1995 according to this definition, heatwave days were much more frequent in South and Southwest US.",
+        "evidence_sha256": "7aa204b3a01362520c4449a8b8e17a9ee71fc7e737d8d11fd3b7cb3731b52b4b"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "The 31-day statement is the next sentence: 'Indeed, the entire month of July, 1995 (31 days) is categorized as heatwave days for some regions in the west of Arizona and southeast of California in this category.' The paper uses this to argue for local thresholds.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "53109236-c1",
+        "blind_evidence": {
+          "json_path": "$[\"chicago heatwave (july 1995\"]",
+          "char_start": 1312,
+          "char_end": 1501,
+          "evidence_text": "While Midwest US, and specifically Chicago, experienced around 5 heatwave days in July of 1995 according to this definition, heatwave days were much more frequent in South and Southwest US."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Frequency of heatwave days (constant threshold).",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds 'entire month in some regions', which its evidence span does not state.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "around 5 days in the Midwest / Chicago; much more frequent in the South and Southwest US",
+              "tag": "explicit"
+            }
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds western Arizona and south-east California from outside its evidence span.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "Midwest US, specifically Chicago; South and Southwest US",
+              "tag": "explicit"
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "Reader 1 tagged the definition explicit, but its evidence says only 'this definition'; reader 2's support span states it. Rule 3b: inferred.",
+            "rule": "3b: inferred beats explicit; the explicit span does not state it",
+            "explicit_span_states": false,
+            "adopted": {
+              "value": "heatwave defined as daily maximum temperature above 35 °C for at least four consecutive days",
+              "tag": "inferred",
+              "support_from": "r2",
+              "support": {
+                "json_path": "$[\"chicago heatwave (july 1995\"]",
+                "char_start": 1156,
+                "char_end": 1311,
+                "evidence_text": "Figure 2a displays frequency of heatwave days defined based on the maximum daily temperatures above 35°C with a duration of at least four consecutive days."
+              }
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "validation case region (July 1995 heatwave)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_1": {
+            "value": "validation case region (July 1995 heatwave)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$[\"technical validation\"]",
+              "char_start": 0,
+              "char_end": 124,
+              "evidence_text": "We analyze three historical heatwave events from around the globe that led to high societal impacts using the GHWR data set."
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "relation_or_direction": {
+            "value": "around 5 days in the Midwest / Chicago; much more frequent in the South and Southwest US",
+            "tag": "explicit"
+          },
+          "geography": {
+            "value": "Midwest US, specifically Chicago; South and Southwest US",
+            "tag": "explicit"
+          },
+          "experimental_condition": {
+            "value": "heatwave defined as daily maximum temperature above 35 °C for at least four consecutive days",
+            "tag": "inferred",
+            "support_from": "r2",
+            "support": {
+              "json_path": "$[\"chicago heatwave (july 1995\"]",
+              "char_start": 1156,
+              "char_end": 1311,
+              "evidence_text": "Figure 2a displays frequency of heatwave days defined based on the maximum daily temperatures above 35°C with a duration of at least four consecutive days."
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001160-C2",
+      "claim_text": "In July-August 2003, some western European locations had around 45 night-time heatwave days, and peak night-time temperature exceeded 30 °C in an extended region around Paris.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "frequency of heatwave days and heatwave amplitude (daily minimum temperature)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "around 45 heatwave days in two months; amplitude exceeding 30°C around Paris",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "western Europe; an extended region around Paris, France",
+        "status": "explicit",
+        "role": "validation case region (2003 heatwave)"
+      },
+      "temporal_frame": {
+        "value": "July and August, 2003",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "heatwave defined by daily temperature above the 90th percentile of the long-term distribution for each grid and calendar day, at least four consecutive days (CPC 0.5° daily data)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"european heatwave (summer 2003\"]",
+          "char_start": 808,
+          "char_end": 970,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "as defined by minimum daily temperature exceeding 90 th percentile of long-term distribution of TMIN for each day and each grid for at least four consecutive days",
+          "evidence_sha256": "e9b9913b76ec3299083471a81a11eb20d0519e03916b1b11c7a921c0c541acbc"
+        }
+      },
+      "evidence": {
+        "json_path": "$[\"european heatwave (summer 2003\"]",
+        "char_start": 972,
+        "char_end": 1057,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Some locations, interestingly, endure around 45 heatwave days in a two months period.",
+        "evidence_sha256": "1a0d6a5f967cc4301dafba1a5ae2aa2d32005a19791b3199ab687a064b962635"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "The Paris amplitude is in the following sentence of the same field.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "53109236-c2",
+        "blind_evidence": {
+          "json_path": "$[\"european heatwave (summer 2003\"]",
+          "char_start": 712,
+          "char_end": 1057,
+          "evidence_text": "Figure 3a displays the frequency of heatwave days over July and August, 2003 in western Europe, as defined by minimum daily temperature exceeding 90 th percentile of long-term distribution of TMIN for each day and each grid for at least four consecutive days. Some locations, interestingly, endure around 45 heatwave days in a two months period."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds heatwave amplitude, which its evidence span does not state.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "frequency of heatwave days",
+              "tag": "explicit"
+            }
+          },
+          "relation_or_direction": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds the Paris amplitude above 30 °C.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "around 45 heatwave days in a two-month period at some locations",
+              "tag": "explicit"
+            }
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds the region around Paris. Adopted: the place both name (in reader 2's evidence span).",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "western Europe",
+              "tag": "explicit"
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Same definition; reader 1 adds the CPC data set. Adopted: reader 2's evidence words.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "minimum daily temperature exceeding the 90th percentile of the long-term TMIN distribution for each day and grid, for at least four consecutive days",
+              "tag": "explicit"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "validation case region (2003 heatwave)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_1": {
+            "value": "validation case region (2003 heatwave)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$[\"technical validation\"]",
+              "char_start": 0,
+              "char_end": 124,
+              "evidence_text": "We analyze three historical heatwave events from around the globe that led to high societal impacts using the GHWR data set."
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "concept": {
+            "value": "frequency of heatwave days",
+            "tag": "explicit"
+          },
+          "relation_or_direction": {
+            "value": "around 45 heatwave days in a two-month period at some locations",
+            "tag": "explicit"
+          },
+          "geography": {
+            "value": "western Europe",
+            "tag": "explicit"
+          },
+          "experimental_condition": {
+            "value": "minimum daily temperature exceeding the 90th percentile of the long-term TMIN distribution for each day and grid, for at least four consecutive days",
+            "tag": "explicit"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001160-C3",
+      "claim_text": "In July-August 2010, a large region around Moscow experienced 40+ heatwave days, with heatwave daily maximum temperature amplitude above 45 °C for most of western Russia.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "frequency of heatwave days; heatwave amplitude (daily maximum temperature)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "40+ heatwave days in two months; amplitude soaring 45+°C",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "A large region surrounding Moscow, Russia; western Russia",
+        "status": "explicit",
+        "role": "validation case region (2010 heatwave)"
+      },
+      "temporal_frame": {
+        "value": "July and August, 2010",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "daily maximum temperature exceeding the 90th percentile of the long-term TMAX climatology for at least four consecutive days",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"european heatwave (summer 2003\"]",
+          "char_start": 2058,
+          "char_end": 2238,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Heatwave is defined by daily maximum temperature exceeding 90 th percentile of the long-term TMAX climatology for at least four consecutive days for each location and calendar day.",
+          "evidence_sha256": "d4ccfed2dca1ae130685adc909d25b32c5c714ead4895709e7dc7445c8c9b5b6"
+        }
+      },
+      "evidence": {
+        "json_path": "$[\"european heatwave (summer 2003\"]",
+        "char_start": 2239,
+        "char_end": 2326,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "A large region surrounding Moscow, Russia, experienced 40+ heatwave days in two months.",
+        "evidence_sha256": "17b21ac4033b1f315d2afcd0eac8e261f423f5789d4a4264f21ff6ad86ec7b8d"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "The Russia 2010 text is stored inside the 'european heatwave (summer 2003' field (section headings merged in the source).",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "53109236-c3",
+        "blind_evidence": {
+          "json_path": "$[\"european heatwave (summer 2003\"]",
+          "char_start": 2239,
+          "char_end": 2326,
+          "evidence_text": "A large region surrounding Moscow, Russia, experienced 40+ heatwave days in two months."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "As LIT2-001160-C2.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "frequency of heatwave days",
+              "tag": "explicit"
+            }
+          },
+          "relation_or_direction": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds the 45+ °C amplitude.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "40+ heatwave days in two months",
+              "tag": "explicit"
+            }
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds western Russia.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "a large region surrounding Moscow, Russia",
+              "tag": "explicit"
+            }
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "Reader 1 tagged the dates explicit, but its evidence does not state them; reader 2's support does. Rule 3b: inferred.",
+            "rule": "3b: inferred beats explicit; the explicit span does not state it",
+            "explicit_span_states": false,
+            "adopted": {
+              "value": "July and August, 2010",
+              "tag": "inferred",
+              "support_from": "r2",
+              "support": {
+                "json_path": "$[\"european heatwave (summer 2003\"]",
+                "char_start": 1968,
+                "char_end": 2057,
+                "evidence_text": "Figure 4a displays frequency of heatwave days in western Russia in July and August, 2010."
+              }
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "reader 1's support span states it; reader 2 cites the same sentence and tags it inferred. Rule 3b: explicit kept.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "daily maximum temperature exceeding the 90th percentile of the long-term TMAX climatology for at least four consecutive days",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$[\"european heatwave (summer 2003\"]",
+                "char_start": 2058,
+                "char_end": 2238,
+                "evidence_text": "Heatwave is defined by daily maximum temperature exceeding 90 th percentile of the long-term TMAX climatology for at least four consecutive days for each location and calendar day."
+              }
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "validation case region (2010 heatwave)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_1": {
+            "value": "validation case region (2010 heatwave)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$[\"technical validation\"]",
+              "char_start": 0,
+              "char_end": 124,
+              "evidence_text": "We analyze three historical heatwave events from around the globe that led to high societal impacts using the GHWR data set."
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "concept": {
+            "value": "frequency of heatwave days",
+            "tag": "explicit"
+          },
+          "relation_or_direction": {
+            "value": "40+ heatwave days in two months",
+            "tag": "explicit"
+          },
+          "geography": {
+            "value": "a large region surrounding Moscow, Russia",
+            "tag": "explicit"
+          },
+          "temporal_frame": {
+            "value": "July and August, 2010",
+            "tag": "inferred",
+            "support_from": "r2",
+            "support": {
+              "json_path": "$[\"european heatwave (summer 2003\"]",
+              "char_start": 1968,
+              "char_end": 2057,
+              "evidence_text": "Figure 4a displays frequency of heatwave days in western Russia in July and August, 2010."
+            }
+          },
+          "experimental_condition": {
+            "value": "daily maximum temperature exceeding the 90th percentile of the long-term TMAX climatology for at least four consecutive days",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$[\"european heatwave (summer 2003\"]",
+              "char_start": 2058,
+              "char_end": 2238,
+              "evidence_text": "Heatwave is defined by daily maximum temperature exceeding 90 th percentile of the long-term TMAX climatology for at least four consecutive days for each location and calendar day."
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001160-C4",
+      "claim_text": "For Moscow in late July 2010, the excess heat factor dropped sharply (from about 60 to about 4 °C²) while the standardized heat index fell only moderately (about 2.5 to 1.75), reflecting EHF's acclimation term.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "excess heat factor (EHF) versus standardized heat index (SHI)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "EHF drastically reduces; SHI shows a more moderate drop",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Moscow, Russia",
+        "status": "explicit",
+        "role": "validation case (index comparison)"
+      },
+      "temporal_frame": {
+        "value": "June-September, 2010 (late July)",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"european heatwave (summer 2003\"]",
+        "char_start": 3025,
+        "char_end": 3245,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In late July as average daily temperature drops from $32°C to $25°C, EHF drastically reduces from $60°C 2 to $ 4°C 2 , whereas SHI shows a more moderate drop from $ 2.5 ( $99 th percentile) to $1.75 ( $96 th percentile).",
+        "evidence_sha256": "cad8c1803054cbb50cd97f0e9795b47815a09493fe82e52535b53ca2074459e1"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "'$' in the stored text stands where '~' (approximately) appears to have been; kept exactly as stored. 'Standardized heat index' is this paper's probabilistic temperature index, not the NWS temperature-humidity heat index.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "validation case (index comparison)",
+            "class": "study_area"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "validation case (index comparison)",
+            "tag": null,
+            "class": "study_area"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001160-C5",
+      "claim_text": "During the July 1995 heatwave, hospital admissions rose 35% for people aged 65 and older, and multiple studies attributed at least 600 excess deaths to the heat.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "excessive heat and humidity; hospital admission; excess deaths",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "admissions increased 35% for the elderly; at least 600 excess deaths",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Chicago, IL (Midwest US)",
+        "status": "explicit",
+        "role": "validation case region (from cited studies)"
+      },
+      "temporal_frame": {
+        "value": "July 1995",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"chicago heatwave (july 1995\"]",
+        "char_start": 282,
+        "char_end": 396,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Due to the excessive heat and humidity, hospital admission increased 35% for the elderly (65 years and older) 24 .",
+        "evidence_sha256": "7c0d5394af3dbc5cfa0b78ef109d89d456760d4546bee46d5429029f8dc8e8f1"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "The excess-death figure is the next sentence ('Multiple studies 49,50 attributed at least 600 excess deaths').",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "validation case region (from cited studies)",
+            "class": "cited_study_area"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "validation case region (from cited studies)",
+            "tag": null,
+            "class": "cited_study_area"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001160-B4",
+      "origin": "blind_reader",
+      "blind_claim_id": "53109236-c4",
+      "claim_text": "For Moscow in 2010, EHF and SHI responded differently in late July and mid September; the authors attribute this to EHF accounting for acclimation to recent weather while SHI does not.",
+      "claim_type": "mechanism",
+      "concept": {
+        "value": "different response of these two metrics",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "rooted in their definitions",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Moscow, Russia",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"european heatwave (summer 2003\"]",
+          "char_start": 2729,
+          "char_end": 2843,
+          "evidence_text": "Figure 5 displays daily time series of EHF (a) and SHI (b) values for Moscow, Russia, during June-September, 2010.",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "52e04b724d8338b82f55a43089d2c694dcea9126ca7946c4406ecd4ffd54d923"
+        },
+        "role": "study area",
+        "blind_role_record": {
+          "value": "study area",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"technical validation\"]",
+            "char_start": 0,
+            "char_end": 124,
+            "evidence_text": "We analyze three historical heatwave events from around the globe that led to high societal impacts using the GHWR data set.",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "June-September, 2010",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"european heatwave (summer 2003\"]",
+          "char_start": 2729,
+          "char_end": 2843,
+          "evidence_text": "Figure 5 displays daily time series of EHF (a) and SHI (b) values for Moscow, Russia, during June-September, 2010.",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "52e04b724d8338b82f55a43089d2c694dcea9126ca7946c4406ecd4ffd54d923"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"european heatwave (summer 2003\"]",
+        "char_start": 3246,
+        "char_end": 3473,
+        "evidence_text": "The different response of these two metrics is rooted in their definitions, as EHF considers acclimation to recent weather conditions (mean daily temperature of the previous 30 days) whereas SHI does not include such an effect.",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "c21d6c128dad1ae59dfc4a951e97149d1bff9880ae202747d0b8970089f34b07"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "study area",
+            "class": "study_area"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$[\"technical validation\"]",
+              "char_start": 0,
+              "char_end": 124,
+              "evidence_text": "We analyze three historical heatwave events from around the globe that led to high societal impacts using the GHWR data set."
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001160-B5",
+      "origin": "blind_reader",
+      "blind_claim_id": "53109236-c5",
+      "claim_text": "Citing prior studies, the paper states the 2003 European heatwave claimed more than 70,000 lives, hitting France the hardest.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "lives",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "claimed more than 70,000",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "European; France",
+        "status": "explicit",
+        "role": "contextual mention",
+        "blind_role_record": {
+          "value": "contextual mention",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"european heatwave (summer 2003\"]",
+            "char_start": 304,
+            "char_end": 338,
+            "evidence_text": "hitting France the hardest 53,54 .",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "2003",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"european heatwave (summer 2003\"]",
+        "char_start": 245,
+        "char_end": 338,
+        "evidence_text": "the 2003 European heatwave claimed more than 70,000 lives, hitting France the hardest 53,54 .",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "0704079c4047f77ddc795fc08a4e97662a0ddc850319764452a9a79545bab365"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "contextual mention",
+            "class": "contextual"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "contextual mention",
+            "tag": "inferred",
+            "class": "contextual",
+            "support": {
+              "json_path": "$[\"european heatwave (summer 2003\"]",
+              "char_start": 304,
+              "char_end": 338,
+              "evidence_text": "hitting France the hardest 53,54 ."
+            }
+          }
+        }
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-001160-R1",
+      "evidence": {
+        "json_path": "$[\"usage notes\"]",
+        "char_start": 945,
+        "char_end": 1072,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "For example, warm-spells have induced earlier spring snow melt, which in turn increase western US forest wildfire activity 63 .",
+        "evidence_sha256": "d29f3ff780eca34912febf5443ef0052ee94431b45bbb8db5c9af20c2c3db337"
+      },
+      "reason": "Cited background; not this paper's evidence."
+    },
+    {
+      "candidate_id": "LIT2-001160-R2",
+      "evidence": {
+        "json_path": "$[\"global heatwave/warm-spell maps\"]",
+        "char_start": 638,
+        "char_end": 813,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Karachi, Pakistan, experienced an extreme heatwave in June, 2015, which along with power outage and water distribution system failure, imposed a death toll of 700+ people 62 .",
+        "evidence_sha256": "c56ee798ac62658a513ff20a6aae2e2473abfa5e2eee98381702b6306f411150"
+      },
+      "reason": "Cited impact figure; beyond the five-claim cap."
+    },
+    {
+      "candidate_id": "LIT2-001160-R3",
+      "evidence": {
+        "json_path": "$[\"background & summary\"]",
+        "char_start": 2673,
+        "char_end": 2803,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The GHWR data set is generated using the CPC global air temperature data provided by the NOAA/OAR/ESRL PSD, Boulder, Colorado, USA",
+        "evidence_sha256": "975325cfe0d123043bfe876e983162c030917f781846a6ace669cb0b6238e124"
+      },
+      "reason": "Data-provider statement, not a finding."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "Several section headings are truncated or merged in the source keys (e.g. 'excess heat factor (ehf', 'european heatwave (summer 2003'). A Russian 2010 subsection is folded into the 2003 field.",
+  "scope_adjudication": {
+    "reader_1": "in_scope_hazard",
+    "reader_2": "in_scope_hazard",
+    "adopted": "in_scope_hazard",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp4_blind/53109236.json",
+    "reader_2_reason": "The paper builds a global gridded heatwave/warm-spell record and uses it to characterise historical heatwave events (Chicago 1995, Europe 2003, Russia 2010)."
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP4r3 Phase A",
+    "adjudicator": "reader 1 (the EXECUTOR, prototype-exposed)",
+    "first_pass_record_sha256": "8df462946c0c038efaf842e63a1fb7a2a6373ef4aff2b0788b8c8931be1e369e",
+    "blind_record_sha256": "53926b6ab7c3ca5ebf5cf93e2ece830c43e3029e775de33009d67ed820ec85bf",
+    "no_paper_re_read": true,
+    "representativeness": "deterministic rank sample of lexical place candidates from LITCORPUS-02; not representative of the corpus or the literature"
+  }
+}

@@ -1,0 +1,1012 @@
+{
+  "lit2_id": "LIT2-001293",
+  "item_id": "88523156",
+  "arm": "extreme_heat_v1",
+  "rank": 140,
+  "rel_path": "56/88523156.json",
+  "file_sha256": "8de24ca86509a83b7827c584b2e27723f27c7d2557fdd7c96c44ac335a95c031",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "mathematical background for approach",
+    "a diagnostic plot and bootstrap uncertainty"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "A Nonparametric Method for Producing Isolines of Bivariate Exceedance Probabilities",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "note": "The 'introduction' field contains an arXiv identifier and date string ('arXiv:1710.05248v1 [stat.ME] 14 Oct 2017'); not recorded as venue or year because no field holds only it."
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "Borderline. A statistical methods paper for bivariate exceedance isolines, motivated by and applied to fire-weather conditions (Santa Ana winds) and a deadly heat wave (Karachi, June 2015), with results on how rare those hazard conditions were.",
+  "scope_evidence": {
+    "json_path": "$.introduction",
+    "char_start": 1337,
+    "char_end": 1438,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "Here, risk is in terms of human health impacts which worsen by simultaneous hot and humid conditions.",
+    "evidence_sha256": "e0381dfde3e608cc6de5391069a58d1753a8d93a519aec6760073b99f8207c6a"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-001293-C1",
+      "claim_text": "The temperature-humidity conditions recorded at Karachi airport on 18-23 June 2015 were all rare: every day exceeded the 0.005 joint-exceedance isoline, three exceeded 0.001 and one exceeded 0.0005.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "joint exceedance probability of temperature and relative humidity (heat wave conditions)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "all exceed the 0.005 isoline; three exceed 0.001; one exceeds 0.0005",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the Karachi Airport station (Karachi, Pakistan)",
+        "status": "explicit",
+        "role": "example data site (motivating application)",
+        "support": {
+          "json_path": "$[\"mathematical background for approach\"]",
+          "char_start": 18726,
+          "char_end": 18768,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "this time for the Karachi Airport station.",
+          "evidence_sha256": "a9f6ef5bd67a6bd2239d1822a4a48e89b686346759c7c842326f73e5799846c2"
+        }
+      },
+      "temporal_frame": {
+        "value": "June 18 to June 23, 2015 (relative to a 1973-2015 record)",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "HadISD data 1973-2015, April-October; temperature and relative humidity at the time of the daily maximum heat index; isolines under asymptotic independence",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"mathematical background for approach\"]",
+          "char_start": 18895,
+          "char_end": 19087,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "For each day, we retain the temperature (converted to Fahrenheit) and relative humidity both at the time of the maximum heat index value which itself is a function of temperature and humidity.",
+          "evidence_sha256": "b59dce8e60145d9157a8f64df443908c753f91e16531410068b788a3dba5b3c3"
+        }
+      },
+      "evidence": {
+        "json_path": "$[\"mathematical background for approach\"]",
+        "char_start": 39004,
+        "char_end": 39112,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The conditions recorded at the Karachi airport on the dates between June 18 and June 23, 2015 were all rare.",
+        "evidence_sha256": "380b8ae11d57f4ec82bd08cbe48ea0b7642d971872e7d45b2a66b8374e21e4ac"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "The counts are in the next sentence. The paper stresses that isolines denote rarity, not impact.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "88523156-c3",
+        "blind_evidence": {
+          "json_path": "$[\"mathematical background for approach\"]",
+          "char_start": 39004,
+          "char_end": 39228,
+          "evidence_text": "The conditions recorded at the Karachi airport on the dates between June 18 and June 23, 2015 were all rare. The points corresponding to these dates all exceedˆ X (0.005), three exceedˆ X (0.001) and one exceedŝ X (0.0005)."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1's evidence says only 'the conditions recorded'; reader 2's support states temperature and relative humidity. Rule 3b: inferred.",
+            "rule": "3b: inferred beats explicit; the explicit span does not state it",
+            "explicit_span_states": false,
+            "adopted": {
+              "value": "recorded temperature and relative humidity conditions",
+              "tag": "inferred",
+              "support_from": "r2",
+              "support": {
+                "json_path": "$[\"mathematical background for approach\"]",
+                "char_start": 18895,
+                "char_end": 19031,
+                "evidence_text": "For each day, we retain the temperature (converted to Fahrenheit) and relative humidity both at the time of the maximum heat index value"
+              }
+            }
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "All exceed 0.005; three exceed 0.001; one exceeds 0.0005.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds 'Karachi, Pakistan'. Adopted: the evidence's words.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "the Karachi airport",
+              "tag": "explicit"
+            }
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds the 1973-2015 record.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "June 18 to June 23, 2015",
+              "tag": "explicit"
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 explicit; reader 2 unknown. Rule 3a.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "example data site (motivating application)",
+            "tag": null,
+            "class": "data_source"
+          },
+          "reader_1": {
+            "value": "example data site (motivating application)",
+            "tag": null,
+            "class": "data_source"
+          },
+          "reader_2": {
+            "value": "data source",
+            "tag": "inferred",
+            "class": "data_source",
+            "support": {
+              "json_path": "$[\"mathematical background for approach\"]",
+              "char_start": 18669,
+              "char_end": 18768,
+              "evidence_text": "The data are again a HadISD dataset (Dunn et al., 2012), this time for the Karachi Airport station."
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "concept": {
+            "value": "recorded temperature and relative humidity conditions",
+            "tag": "inferred",
+            "support_from": "r2",
+            "support": {
+              "json_path": "$[\"mathematical background for approach\"]",
+              "char_start": 18895,
+              "char_end": 19031,
+              "evidence_text": "For each day, we retain the temperature (converted to Fahrenheit) and relative humidity both at the time of the maximum heat index value"
+            }
+          },
+          "geography": {
+            "value": "the Karachi airport",
+            "tag": "explicit"
+          },
+          "temporal_frame": {
+            "value": "June 18 to June 23, 2015",
+            "tag": "explicit"
+          },
+          "experimental_condition": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001293-C2",
+      "claim_text": "At the March AFB station, the windspeed-dryness combination on the Cedar Fire ignition day was not extremely rare (below the 0.005 isoline), whereas conditions on the Witch Fire day were quite rare.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "joint exceedance probability of windspeed and dryness (Santa Ana weather regime) on fire ignition days",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "Cedar Fire day not extremely rare; Witch Fire day quite rare",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the March AFB station, which lies in Riverside County, CA (southern California Santa Ana weather regime)",
+        "status": "explicit",
+        "role": "example data site (motivating application)",
+        "support": {
+          "json_path": "$[\"mathematical background for approach\"]",
+          "char_start": 5628,
+          "char_end": 5692,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "for the March AFB station 1 , which lies in Riverside County, CA",
+          "evidence_sha256": "600daee3e805fcff29d4b614c84bd18513055fb52de2532318f0600120b08cc1"
+        }
+      },
+      "temporal_frame": {
+        "value": "1973-2015 record, September-November",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "HadISD hourly data 1973-2015, September-November; daily windspeed and dryness; bivariate isolines under asymptotic dependence",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"mathematical background for approach\"]",
+          "char_start": 5801,
+          "char_end": 5914,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The data span the years 1973-2015 and we restrict our attention to the months of September, October, and November",
+          "evidence_sha256": "fcb4c11c37cc881289dc13591fb0d473ded13da87d67f534c04f3e5c59186511"
+        }
+      },
+      "evidence": {
+        "json_path": "$[\"mathematical background for approach\"]",
+        "char_start": 18191,
+        "char_end": 18338,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "We see that the combination of windspeed and dryness seen at this weather station on the day corresponding to the Cedar Fire was not extremely rare",
+        "evidence_sha256": "d341048a4ac35ec6192b4457dbbfdabe9f74404d302a352462f3bf5ae07881fb"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "The Witch Fire statement follows: 'The conditions at this station on the day corresponding to the Witch Fire were quite rare'; the sentence is truncated in the source.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "88523156-c2",
+        "blind_evidence": {
+          "json_path": "$[\"mathematical background for approach\"]",
+          "char_start": 18191,
+          "char_end": 18507,
+          "evidence_text": "We see that the combination of windspeed and dryness seen at this weather station on the day corresponding to the Cedar Fire was not extremely rare, as this point is belowˆ X (0.005). The conditions at this station on the day corresponding to the Witch Fire were quite rare as this point lies betweenˆ X (0.0005) and"
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "The windspeed-dryness combination.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Cedar Fire day not extremely rare; Witch Fire day quite rare.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "reader 1's support span states it; reader 2 cites another sentence and tags it inferred. Rule 3b: explicit kept.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "the March AFB station, Riverside County, CA",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$[\"mathematical background for approach\"]",
+                "char_start": 5628,
+                "char_end": 5692,
+                "evidence_text": "for the March AFB station 1 , which lies in Riverside County, CA"
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 tagged '1973-2015, September-November' explicit with no span stating it; reader 2's support states the ignition days. Rule 3b: inferred.",
+            "rule": "3b: inferred beats explicit; the explicit span does not state it",
+            "explicit_span_states": false,
+            "adopted": {
+              "value": "ignition days of the Cedar and Witch Fires",
+              "tag": "inferred",
+              "support_from": "r2",
+              "support": {
+                "json_path": "$.introduction",
+                "char_start": 1036,
+                "char_end": 1140,
+                "evidence_text": "The points labeled \"C\" and \"W\" correspond to the ignition days of the Cedar and Witch Fires respectively"
+              }
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Rule 3a.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "example data site (motivating application)",
+            "tag": null,
+            "class": "data_source"
+          },
+          "reader_1": {
+            "value": "example data site (motivating application)",
+            "tag": null,
+            "class": "data_source"
+          },
+          "reader_2": {
+            "value": "data source",
+            "tag": "inferred",
+            "class": "data_source",
+            "support": {
+              "json_path": "$[\"mathematical background for approach\"]",
+              "char_start": 5558,
+              "char_end": 5692,
+              "evidence_text": "Hourly data were obtained from the HadISD dataset (Dunn et al., 2012) for the March AFB station 1 , which lies in Riverside County, CA"
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "the March AFB station, Riverside County, CA",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$[\"mathematical background for approach\"]",
+              "char_start": 5628,
+              "char_end": 5692,
+              "evidence_text": "for the March AFB station 1 , which lies in Riverside County, CA"
+            }
+          },
+          "temporal_frame": {
+            "value": "ignition days of the Cedar and Witch Fires",
+            "tag": "inferred",
+            "support_from": "r2",
+            "support": {
+              "json_path": "$.introduction",
+              "char_start": 1036,
+              "char_end": 1140,
+              "evidence_text": "The points labeled \"C\" and \"W\" correspond to the ignition days of the Cedar and Witch Fires respectively"
+            }
+          },
+          "experimental_condition": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001293-C3",
+      "claim_text": "For the Santa Ana data, the estimated tail dependence χ ≈ 0.3 implies conditions are at their driest about 30% of the time when windspeeds are at their highest.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "tail dependence between windspeed and dryness (Santa Ana weather regime)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "χ ≈ 0.3; driest about 30% of the time at highest windspeeds",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the March AFB station, which lies in Riverside County, CA (southern California Santa Ana weather regime)",
+        "status": "explicit",
+        "role": "example data site (motivating application)",
+        "support": {
+          "json_path": "$[\"mathematical background for approach\"]",
+          "char_start": 5628,
+          "char_end": 5692,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "for the March AFB station 1 , which lies in Riverside County, CA",
+          "evidence_sha256": "600daee3e805fcff29d4b614c84bd18513055fb52de2532318f0600120b08cc1"
+        }
+      },
+      "temporal_frame": {
+        "value": "1973-2015 record, September-November",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "HadISD hourly data 1973-2015, September-November; daily windspeed and dryness; bivariate isolines under asymptotic dependence",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"mathematical background for approach\"]",
+          "char_start": 5801,
+          "char_end": 5914,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The data span the years 1973-2015 and we restrict our attention to the months of September, October, and November",
+          "evidence_sha256": "fcb4c11c37cc881289dc13591fb0d473ded13da87d67f534c04f3e5c59186511"
+        }
+      },
+      "evidence": {
+        "json_path": "$[\"mathematical background for approach\"]",
+        "char_start": 6560,
+        "char_end": 6677,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "implying that conditions are at their driest levels about 30% of the time when windspeeds are at their highest levels",
+        "evidence_sha256": "ceae3b8e711cc96ca9a85670f60e61782b8006de716d81a60d9ef5f165efb05f"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "88523156-c1",
+        "blind_evidence": {
+          "json_path": "$[\"mathematical background for approach\"]",
+          "char_start": 6485,
+          "char_end": 6678,
+          "evidence_text": "The chiplot function of R's evd library (not shown) indicates thatχ ≈ 0.3, implying that conditions are at their driest levels about 30% of the time when windspeeds are at their highest levels."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "Reader 1's evidence states the co-occurrence but not 'tail dependence'; reader 2's support names the variables. Rule 3b: inferred.",
+            "rule": "3b: inferred beats explicit; the explicit span does not state it",
+            "explicit_span_states": false,
+            "adopted": {
+              "value": "windspeed and dryness (tail dependence χ)",
+              "tag": "inferred",
+              "support_from": "r2",
+              "support": {
+                "json_path": "$[\"mathematical background for approach\"]",
+                "char_start": 6176,
+                "char_end": 6273,
+                "evidence_text": "Let X t = (X t,1 , X t,2 ) T denote the random vector representing windspeed and dryness on day t"
+              }
+            }
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "χ ≈ 0.3; driest about 30% of the time at the highest windspeeds.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "reader 1's support span states it; reader 2 cites another sentence and tags it inferred. Rule 3b: explicit kept.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "the March AFB station, Riverside County, CA",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$[\"mathematical background for approach\"]",
+                "char_start": 5628,
+                "char_end": 5692,
+                "evidence_text": "for the March AFB station 1 , which lies in Riverside County, CA"
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "Reader 1 tagged it explicit with no span; reader 2's support states it. Rule 3b: inferred.",
+            "rule": "3b: inferred beats explicit; the explicit span does not state it",
+            "explicit_span_states": false,
+            "adopted": {
+              "value": "1973-2015, months of September, October, and November",
+              "tag": "inferred",
+              "support_from": "r2",
+              "support": {
+                "json_path": "$[\"mathematical background for approach\"]",
+                "char_start": 5801,
+                "char_end": 5914,
+                "evidence_text": "The data span the years 1973-2015 and we restrict our attention to the months of September, October, and November"
+              }
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Rule 3a.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "example data site (motivating application)",
+            "tag": null,
+            "class": "data_source"
+          },
+          "reader_1": {
+            "value": "example data site (motivating application)",
+            "tag": null,
+            "class": "data_source"
+          },
+          "reader_2": {
+            "value": "data source",
+            "tag": "inferred",
+            "class": "data_source",
+            "support": {
+              "json_path": "$[\"mathematical background for approach\"]",
+              "char_start": 5558,
+              "char_end": 5692,
+              "evidence_text": "Hourly data were obtained from the HadISD dataset (Dunn et al., 2012) for the March AFB station 1 , which lies in Riverside County, CA"
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "concept": {
+            "value": "windspeed and dryness (tail dependence χ)",
+            "tag": "inferred",
+            "support_from": "r2",
+            "support": {
+              "json_path": "$[\"mathematical background for approach\"]",
+              "char_start": 6176,
+              "char_end": 6273,
+              "evidence_text": "Let X t = (X t,1 , X t,2 ) T denote the random vector representing windspeed and dryness on day t"
+            }
+          },
+          "geography": {
+            "value": "the March AFB station, Riverside County, CA",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$[\"mathematical background for approach\"]",
+              "char_start": 5628,
+              "char_end": 5692,
+              "evidence_text": "for the March AFB station 1 , which lies in Riverside County, CA"
+            }
+          },
+          "temporal_frame": {
+            "value": "1973-2015, months of September, October, and November",
+            "tag": "inferred",
+            "support_from": "r2",
+            "support": {
+              "json_path": "$[\"mathematical background for approach\"]",
+              "char_start": 5801,
+              "char_end": 5914,
+              "evidence_text": "The data span the years 1973-2015 and we restrict our attention to the months of September, October, and November"
+            }
+          },
+          "experimental_condition": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001293-C4",
+      "claim_text": "The Karachi temperature and humidity data are asymptotically independent and negatively associated: the hottest days have lower humidity and the most humid days lower temperatures.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "tail association of temperature and relative humidity",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "asymptotically independent; negative association (η estimated 0.20)",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the Karachi Airport station (Karachi, Pakistan)",
+        "status": "explicit",
+        "role": "example data site (motivating application)",
+        "support": {
+          "json_path": "$[\"mathematical background for approach\"]",
+          "char_start": 18726,
+          "char_end": 18768,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "this time for the Karachi Airport station.",
+          "evidence_sha256": "a9f6ef5bd67a6bd2239d1822a4a48e89b686346759c7c842326f73e5799846c2"
+        }
+      },
+      "temporal_frame": {
+        "value": "1973-2015 record, April-October",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "HadISD data 1973-2015, April-October; temperature and relative humidity at the time of the daily maximum heat index; isolines under asymptotic independence",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"mathematical background for approach\"]",
+          "char_start": 18895,
+          "char_end": 19087,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "For each day, we retain the temperature (converted to Fahrenheit) and relative humidity both at the time of the maximum heat index value which itself is a function of temperature and humidity.",
+          "evidence_sha256": "b59dce8e60145d9157a8f64df443908c753f91e16531410068b788a3dba5b3c3"
+        }
+      },
+      "evidence": {
+        "json_path": "$[\"mathematical background for approach\"]",
+        "char_start": 19864,
+        "char_end": 20053,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In fact these data exhibit negative association: days with highest temperature are days with lower humidity, and conversely, the days with highest humidity are days with lower temperatures.",
+        "evidence_sha256": "f4dcd5340b63404feb14e1bec0e6c880e2d5b65eb856f65fd78a332ca2e65f28"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "88523156-c4",
+        "blind_evidence": {
+          "json_path": "$[\"mathematical background for approach\"]",
+          "char_start": 19807,
+          "char_end": 20053,
+          "evidence_text": "The Karachi data are clearly asymptotically independent. In fact these data exhibit negative association: days with highest temperature are days with lower humidity, and conversely, the days with highest humidity are days with lower temperatures."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 2's 'The Karachi data' names the data set; reader 1 the variables, which the evidence states.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "temperature and humidity association",
+              "tag": "explicit"
+            }
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Asymptotically independent; negative association (η = 0.20).",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "reader 1's support span states it; reader 2 cites another sentence and tags it inferred. Rule 3b: explicit kept.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "the Karachi Airport station",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$[\"mathematical background for approach\"]",
+                "char_start": 18726,
+                "char_end": 18768,
+                "evidence_text": "this time for the Karachi Airport station."
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 tagged 'April-October' explicit with no span; reader 2's support states 1973-2015 only. Rule 3b: inferred.",
+            "rule": "3b: inferred beats explicit; the explicit span does not state it",
+            "explicit_span_states": false,
+            "adopted": {
+              "value": "1973-2015",
+              "tag": "inferred",
+              "support_from": "r2",
+              "support": {
+                "json_path": "$[\"mathematical background for approach\"]",
+                "char_start": 18771,
+                "char_end": 18828,
+                "evidence_text": "The original data span 1973-2015 and are nominally hourly"
+              }
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Rule 3a.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "example data site (motivating application)",
+            "tag": null,
+            "class": "data_source"
+          },
+          "reader_1": {
+            "value": "example data site (motivating application)",
+            "tag": null,
+            "class": "data_source"
+          },
+          "reader_2": {
+            "value": "data source",
+            "tag": "inferred",
+            "class": "data_source",
+            "support": {
+              "json_path": "$[\"mathematical background for approach\"]",
+              "char_start": 18669,
+              "char_end": 18768,
+              "evidence_text": "The data are again a HadISD dataset (Dunn et al., 2012), this time for the Karachi Airport station."
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "concept": {
+            "value": "temperature and humidity association",
+            "tag": "explicit"
+          },
+          "geography": {
+            "value": "the Karachi Airport station",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$[\"mathematical background for approach\"]",
+              "char_start": 18726,
+              "char_end": 18768,
+              "evidence_text": "this time for the Karachi Airport station."
+            }
+          },
+          "temporal_frame": {
+            "value": "1973-2015",
+            "tag": "inferred",
+            "support_from": "r2",
+            "support": {
+              "json_path": "$[\"mathematical background for approach\"]",
+              "char_start": 18771,
+              "char_end": 18828,
+              "evidence_text": "The original data span 1973-2015 and are nominally hourly"
+            }
+          },
+          "experimental_condition": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001293-B5",
+      "origin": "blind_reader",
+      "blind_claim_id": "88523156-c5",
+      "claim_text": "Citing Masood et al. (2015), the paper states six successive days in June 2015 corresponded to a Karachi heat wave blamed for the deaths of more than 700 people.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "heat wave",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "blamed for the deaths of more than 700 people",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Karachi, Pakistan",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.introduction",
+          "char_start": 1226,
+          "char_end": 1336,
+          "evidence_text": "The right panel shows daily temperature measurements and relative humidity measurements for Karachi, Pakistan.",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "96b1e90a2c9c5f73f743c6372b02bcd5b75aba72ed95c20327e9f7558ce98714"
+        },
+        "role": "contextual mention",
+        "blind_role_record": {
+          "value": "contextual mention",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"introduction\"]",
+            "char_start": 1578,
+            "char_end": 1599,
+            "evidence_text": "(Masood et al., 2015)",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "June 2015",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 1439,
+        "char_end": 1600,
+        "evidence_text": "Shown in black are six successive days in June 2015 which correspond to a heat wave which is blamed for the deaths of more than 700 people (Masood et al., 2015).",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "7e37068ee14ea8b7ae1d28029412ee119ba5279c7a49bbfe21fbe6826d578fbe"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "contextual mention",
+            "class": "contextual"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "contextual mention",
+            "tag": "inferred",
+            "class": "contextual",
+            "support": {
+              "json_path": "$.introduction",
+              "char_start": 1578,
+              "char_end": 1599,
+              "evidence_text": "(Masood et al., 2015)"
+            }
+          }
+        },
+        "first_reader_considered_and_rejected": [
+          {
+            "rejected_id": "LIT2-001293-R1",
+            "overlap_code_points": 161,
+            "reason": "Cited impact figure for the motivating example; not this paper's evidence.",
+            "evidence_text": "Shown in black are six successive days in June 2015 which correspond to a heat wave which is blamed for the deaths of more than 700 people (Masood et al., 2015)."
+          }
+        ]
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-001293-R1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 1439,
+        "char_end": 1600,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Shown in black are six successive days in June 2015 which correspond to a heat wave which is blamed for the deaths of more than 700 people (Masood et al., 2015).",
+        "evidence_sha256": "7e37068ee14ea8b7ae1d28029412ee119ba5279c7a49bbfe21fbe6826d578fbe"
+      },
+      "reason": "Cited impact figure for the motivating example; not this paper's evidence."
+    },
+    {
+      "candidate_id": "LIT2-001293-R2",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 876,
+        "char_end": 1035,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The left panel shows data related to a southern California weather regime known as the Santa Ana winds, a windy and dry weather regime conducive for wildfires.",
+        "evidence_sha256": "109418df7b353ecc217900234e7ad0cb6ad1e4687481fa2f37466f6129612712"
+      },
+      "reason": "Description of the motivating data, not a finding."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "Large parts of the stored text are plot-marker residue ('q q q ...'). The paper cites 'Stephenson, 2002' (the evd R package author).",
+  "scope_adjudication": {
+    "reader_1": "in_scope_hazard",
+    "reader_2": "in_scope_hazard",
+    "adopted": "in_scope_hazard",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp4_blind/88523156.json",
+    "reader_2_reason": "Although primarily a statistics methods paper, it applies its isoline method to assess the joint rarity of Santa Ana fire-weather conditions (windspeed, dryness) and of Karachi heat-wave temperature-humidity conditions."
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP4r3 Phase A",
+    "adjudicator": "reader 1 (the EXECUTOR, prototype-exposed)",
+    "first_pass_record_sha256": "453d0ff6ed582cebd16596d3aed705823f9d54f6544a4908c861eb87390dc885",
+    "blind_record_sha256": "1389a381b80c277db18be779cea54a1f2cf8d1f5c7405119e51ed826e8366273",
+    "no_paper_re_read": true,
+    "representativeness": "deterministic rank sample of lexical place candidates from LITCORPUS-02; not representative of the corpus or the literature"
+  }
+}

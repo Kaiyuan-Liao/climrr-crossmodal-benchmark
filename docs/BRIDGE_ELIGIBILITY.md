@@ -177,3 +177,61 @@ in `docs/DECISION_LOG.md`**, naming the term, its canonical id, its status
 which the concept map is edited as in D-025. No script promotes a candidate;
 the survey writes only into its own output directory (tested,
 `tests/test_survey_driver.py`).
+
+## 8. Geography role, `cited_study_area`, and the prospective C-2 mask and G-2 revision (D-027)
+
+*(§7, the Stage 2 candidate-surface-form governance, is on `work/trackb-stage2`;
+this section is numbered to follow it after both merges.)*
+
+GUIDANCE, 2026-10-20 (`docs/M4_WP4_TRACKB_GUIDANCE_RULING.md`, D-027), on the
+M5-WP4 layer `climrr.m5wp4` (beside the frozen `compat.py`, which is unchanged;
+**approved**).
+
+**G-R --- the geography-role gate enters G-1: approved.** A place string alone is
+insufficient. Affiliation, citation/person, contextual geography or data-source
+geography never becomes geographic compatibility. As implemented in M5-WP4:
+role class `affiliation` or `citation_or_person` → `not_evaluable` whatever the
+place; an exact G-1 label match is `compatible` only for role class `study_area`
+or `cited_study_area`, otherwise `not_evaluable`; G-R never gives `incompatible`.
+
+**Conservative role on disagreement: approved.** The more conservative geography
+role is used unless both readers independently support study geography (rule
+3-role, `climrr.wp4adj.ROLE_CONSERVATIVE_ORDER`).
+
+**`cited_study_area` is study geography, with evidence-tier qualification:
+approved.** It may satisfy the role gate, but the claim's evidence tier (§3)
+still constrains whether it can establish an accepted bridge.
+
+**Prospective C-2 mask list (future runs only):**
+
+| Masked compound | Masks | Decided |
+| --- | --- | --- |
+| `extended heat index` | the `heat index` inside it | D-025 (`approved_family_term`) |
+| `standardized heat index` | the `heat index` inside it | **D-027, prospective** |
+
+The rule, as ruled (verbatim):
+
+> **A recognized compound concept containing an approved family term must mask that inner phrase when the compound's equivalence has not been explicitly approved.**
+
+There is no approved equivalence between Standardized Heat Index and the ClimRR
+heat-index family. **The frozen M5-WP4 matrix is not rewritten**: its three
+`LIT2-001160-C4` pairs keep the `possible_collision: standardized heat index`
+flag and their recorded judgments, and `artifacts/bridges/m5wp4_matrix.json` /
+`.csv` keep their SHA-256 (tested). WP4 is not rerun to apply the mask.
+
+**Prospective G-2 semantics (documented here; implemented in a later package,
+not now).** G-2 may return `incompatible` only when the **entire** explicit
+geography is wholly disjoint from the prototype. For a multi-region claim:
+
+| Claim geography | G-2 result |
+| --- | --- |
+| all listed regions disjoint from the prototype | `incompatible` |
+| a mixture of disjoint and potentially relevant regions | `not_evaluable` |
+| a broad region containing the prototype but not resolving to the required granularity | `not_evaluable` |
+| exact supported geography | G-1 / G-R |
+
+The M5-WP4 G-2 judgments are as frozen; M5-WP4 is not rewritten. Containment and
+granularity rules for state, county, national, climate-region and multi-region
+geographies must be declared before any evaluation that uses them (ruling,
+scientific risk 7); no ad hoc containment (e.g. `San Diego County` →
+`California`).

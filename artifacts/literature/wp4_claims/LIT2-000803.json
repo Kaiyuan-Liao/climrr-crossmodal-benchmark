@@ -1,0 +1,110 @@
+{
+  "lit2_id": "LIT2-000803",
+  "item_id": "257854681",
+  "arm": "extreme_heat_v1",
+  "rank": 84,
+  "rel_path": "81/257854681.json",
+  "file_sha256": "ff6b0e7cd71d113fafdf57e6f6a7b128d9cfe2fcee7ff7b5db4d0962190b3cc6",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "methods",
+    "results",
+    "discussion",
+    "limitations and future work",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Natural ventilation versus air pollution: assessing the impact of outdoor pollution on natural ventilation potential in informal settlements in India",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "ambiguous",
+  "scope_reason": "The paper examines how outdoor PM2.5 air pollution limits natural-ventilation cooling hours in Indian informal settlements; heat appears through heat-index comfort thresholds and passing mentions of heat waves and heat stress, but no heat hazard or its impacts is itself examined.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 190,
+    "char_end": 450,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "Here, we propose a modeling approach that integrates highly granular air pollution data with a coupled EnergyPlus and differential equation airflow model to evaluate how NV potential for space cooling changes when accounting for air pollution exposure (PM2.5).",
+    "evidence_sha256": "bb3d7c5ac6438f88208e7ee9047d8709e3a220b47cfdfa60776655875e1fbd68"
+  },
+  "claims": [],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-000803-R1",
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 2366,
+        "char_end": 2581,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "We observe an average reduction of 57% in NV potential for the NAAQS Scenarios-II A, II B and II C and a decrease of 90% for the WHO Scenarios-III A, III B and III C compared to the corresponding baseline scenarios.",
+        "evidence_sha256": "3060df924a2d47f402f61ca21aa8b070cc7a2df06ae2e9e79355ccd96868f3c9"
+      },
+      "reason": "The paper's main result concerns air-pollution limits on ventilation hours in New Delhi; air pollution is not a climate or weather hazard. Kept as ambiguous, not promoted. The 'Scenarios' are air-quality operating rules, not climate scenarios."
+    },
+    {
+      "candidate_id": "LIT2-000803-R2",
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 26774,
+        "char_end": 27000,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "On the other hand, during the summer, high temperatures drive the unfavorable conditions for NV especially during daytime as heat index levels greater than 39 • C are extremely unsafe for the occupants as shown in figure 9(B).",
+        "evidence_sha256": "057ed752dab98283cb509b95a18b26999ad5f02e26971dad9bf47944d48af2a1"
+      },
+      "reason": "Uses heat index as a thermal-comfort control rule for a typical summer day in New Delhi; heat is a constraint on ventilation, not the object of study."
+    },
+    {
+      "candidate_id": "LIT2-000803-R3",
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 3950,
+        "char_end": 4145,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Amidst rising heat waves pushing temperatures beyond 110 • F in the country [14], cooling energy demand for India is projected to grow around 2.2 times in 2027 and around 8 times by 2037-38 [11].",
+        "evidence_sha256": "bfb0d49fc4ad7ad86fc7244ee5563481553f8ebb50542aa76bbd6c36a5bef61e"
+      },
+      "reason": "Cited background on heat waves and cooling demand in India; not this paper's evidence."
+    },
+    {
+      "candidate_id": "LIT2-000803-R4",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 8646,
+        "char_end": 8836,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "studied the impact of PM2.5 specifically on the potential for NV cooling of office buildings for five locations in California, nine European cities and three megacities in Asia [30][31][32].",
+        "evidence_sha256": "1452cb787ec72b849f4dadba6c903c57579f727b528af17e940d53d801702bf4"
+      },
+      "reason": "A cited air-quality/ventilation study; California appears only as a location of other work."
+    }
+  ],
+  "terminal_status": "ambiguous_only",
+  "notes": "The 'abstract' field also holds part of the introduction and a publisher line; several fields repeat passages. Study cities: New Delhi and Bangalore."
+}

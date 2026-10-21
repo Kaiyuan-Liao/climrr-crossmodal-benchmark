@@ -1,0 +1,414 @@
+{
+  "lit2_id": "LIT2-000499",
+  "item_id": "238725720",
+  "arm": "fire_weather_v1",
+  "rank": 30,
+  "rel_path": "20/238725720.json",
+  "file_sha256": "801c20d060281c7515a6aa7ccc73792f08ad6eb3c43725fff5d6303335a8ac34",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "method the study area and fires",
+    "data sources",
+    "analysis",
+    "results",
+    "discussion",
+    "defensive action",
+    "preparedness actions",
+    "house construction",
+    "landscape fuels",
+    "topography",
+    "weather",
+    "other factors",
+    "limitations",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Comprehensive Examination of the Determinants of Damage to Houses in Two Wildfires in Eastern Australia in 2013",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "Price, O.F.; Whittaker, J.; Gibbons, P.; Bradstock, R.",
+      "status": "recovered_from_other_field",
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 10,
+        "char_end": 64,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Price, O.F.; Whittaker, J.; Gibbons, P.; Bradstock, R.",
+        "evidence_sha256": "8a28651f9d88143f3dab01e81599856be36aa5a2c7ae2641fd2ecebe30853abc"
+      }
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "note": "`abstract` holds a truncated citation string, not an abstract; authors recovered from it. Year and venue are not stated in any field (the title's '2013' is the fire year)."
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper analyses which factors determined damage to houses exposed to two wildfires, i.e. the impacts of a fire hazard on buildings, including the role of fire weather.",
+  "scope_evidence": {
+    "json_path": "$.introduction",
+    "char_start": 7929,
+    "char_end": 8182,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "In this study, we examined the impact on houses from two fires from the Blue Mountains (New South Wales, Australia) in October 2013, using Random Forest modelling to disentangle the independent effects of risk factors from all six themes on fire impact.",
+    "evidence_sha256": "0623a16a7ab78336f2522318ff98a3ba3484d98d476b0168845b290d3f0695cc"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-000499-C1",
+      "claim_text": "House defence was the most important variable for whether a house was impacted: 14.7% of defended houses were impacted compared with 42.4% of undefended houses.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "defence of the house; likelihood a house would be impacted",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "most important variable; defended 14.7% impacted versus undefended 42.4%",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "540 houses exposed to two fires (Linksview and Mt York) in the Blue Mountains of NSW",
+        "status": "explicit",
+        "role": "study area (where the houses and fires were observed)",
+        "support": {
+          "json_path": "$[\"method the study area and fires\"]",
+          "char_start": 0,
+          "char_end": 97,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Our study focused on 540 houses exposed to two fires in the Blue Mountains of NSW in October 2013",
+          "evidence_sha256": "4ee67517a9b996f7cc72aab1b2d8578be1f3e095185ddd5fb2cd07a9631fb5d1"
+        }
+      },
+      "temporal_frame": {
+        "value": "October 2013 (fires of 17 October 2013)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"method the study area and fires\"]",
+          "char_start": 0,
+          "char_end": 97,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Our study focused on 540 houses exposed to two fires in the Blue Mountains of NSW in October 2013",
+          "evidence_sha256": "4ee67517a9b996f7cc72aab1b2d8578be1f3e095185ddd5fb2cd07a9631fb5d1"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 939,
+        "char_end": 1042,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The proportion of defended houses that were impacted was 14.7% compared to 42.4% for undefended houses.",
+        "evidence_sha256": "e6314b7c2167f6535228ac76da06c0a348fbb714054d07e24875cc054c3c8247"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The ranking is stated in the preceding sentence: 'The Random Forest analysis identified defence as the most important variable affecting the likelihood a house would be impacted'."
+    },
+    {
+      "claim_id": "LIT2-000499-C2",
+      "claim_text": "Westerly distance to forest up to about 50 m had a strong negative relationship with house impact; forest cover beyond 50 m in that direction did not influence impact.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "westerly distance to forest; house impact",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "strong negative relationship up to about 50 m; no influence beyond 50 m",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "540 houses exposed to two fires (Linksview and Mt York) in the Blue Mountains of NSW",
+        "status": "explicit",
+        "role": "study area (where the houses and fires were observed)",
+        "support": {
+          "json_path": "$[\"method the study area and fires\"]",
+          "char_start": 0,
+          "char_end": 97,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Our study focused on 540 houses exposed to two fires in the Blue Mountains of NSW in October 2013",
+          "evidence_sha256": "4ee67517a9b996f7cc72aab1b2d8578be1f3e095185ddd5fb2cd07a9631fb5d1"
+        }
+      },
+      "temporal_frame": {
+        "value": "October 2013 (fires of 17 October 2013)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"method the study area and fires\"]",
+          "char_start": 0,
+          "char_end": 97,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Our study focused on 540 houses exposed to two fires in the Blue Mountains of NSW in October 2013",
+          "evidence_sha256": "4ee67517a9b996f7cc72aab1b2d8578be1f3e095185ddd5fb2cd07a9631fb5d1"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 1043,
+        "char_end": 1229,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Westerly distance to forest up to about 50 m distance from houses had a strong negative relationship on house impact. Forest cover beyond 50 m in this direction did not influence impact.",
+        "evidence_sha256": "2b0c544fea9f96bb27c6554d26dc9d4f95df5b30d96fbcda25e3ee8e41f55a20"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": null
+    },
+    {
+      "claim_id": "LIT2-000499-C3",
+      "claim_text": "Weather had only a minor role in which houses were impacted: FFDI ranked 20th in the Random Forest model, although impact was twice as high at FFDI 75 as at 34 (38% versus 19%).",
+      "claim_type": "finding",
+      "concept": {
+        "value": "weather; Forest Fire Danger Index (FFDI); house impact",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "minor role; impact 38% at FFDI 75 versus 19% at 34",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "540 houses exposed to two fires (Linksview and Mt York) in the Blue Mountains of NSW",
+        "status": "explicit",
+        "role": "study area (where the houses and fires were observed)",
+        "support": {
+          "json_path": "$[\"method the study area and fires\"]",
+          "char_start": 0,
+          "char_end": 97,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Our study focused on 540 houses exposed to two fires in the Blue Mountains of NSW in October 2013",
+          "evidence_sha256": "4ee67517a9b996f7cc72aab1b2d8578be1f3e095185ddd5fb2cd07a9631fb5d1"
+        }
+      },
+      "temporal_frame": {
+        "value": "October 2013 (fires of 17 October 2013)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"method the study area and fires\"]",
+          "char_start": 0,
+          "char_end": 97,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Our study focused on 540 houses exposed to two fires in the Blue Mountains of NSW in October 2013",
+          "evidence_sha256": "4ee67517a9b996f7cc72aab1b2d8578be1f3e095185ddd5fb2cd07a9631fb5d1"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.weather",
+        "char_start": 0,
+        "char_end": 161,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Weather only had a minor role in determining which houses were impacted (Figure 5i), with FFDI being the 20th most important variable in the Random Forest model.",
+        "evidence_sha256": "2a2aadf331ec8b6afd3c8fb529433459082fdb574084055b423fc4df6fa3f6ed"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The 38% versus 19% figures are in the same field: 'While house impact was twice the rate at FFDI 75 than at 34 (38% impacted compared to 19%)'. The paper suggests the muted role may reflect a fire-weather range that was 'quite low'."
+    },
+    {
+      "claim_id": "LIT2-000499-C4",
+      "claim_text": "In the worst-case situation defined by the model (forest under 10 m to the west, undefended, facing west-south-west, dense vegetation), 71% of houses were impacted, versus 3% in the best case.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "worst-case and best-case house situations; house impact",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "71% impacted in the worst case versus 3% in the best case",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "540 houses exposed to two fires (Linksview and Mt York) in the Blue Mountains of NSW",
+        "status": "explicit",
+        "role": "study area (where the houses and fires were observed)",
+        "support": {
+          "json_path": "$[\"method the study area and fires\"]",
+          "char_start": 0,
+          "char_end": 97,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Our study focused on 540 houses exposed to two fires in the Blue Mountains of NSW in October 2013",
+          "evidence_sha256": "4ee67517a9b996f7cc72aab1b2d8578be1f3e095185ddd5fb2cd07a9631fb5d1"
+        }
+      },
+      "temporal_frame": {
+        "value": "October 2013 (fires of 17 October 2013)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"method the study area and fires\"]",
+          "char_start": 0,
+          "char_end": 97,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Our study focused on 540 houses exposed to two fires in the Blue Mountains of NSW in October 2013",
+          "evidence_sha256": "4ee67517a9b996f7cc72aab1b2d8578be1f3e095185ddd5fb2cd07a9631fb5d1"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 1411,
+        "char_end": 1508,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The impact on houses in the worst-case situation, as defined by the Random Forest model, was 71%.",
+        "evidence_sha256": "b1c3db13f7d3a5140177688afbda054210adad68901601c43e68da79a21cb0bf"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The best-case figure is in the same field: 'By contrast, only 3% of the 31 houses in the best-case situation were impacted.'"
+    },
+    {
+      "claim_id": "LIT2-000499-C5",
+      "claim_text": "Preparedness actions and response actions were the most important themes for house impact, more important than house construction, landscape fuels, topography and weather.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "preparedness actions; response actions; house impact themes",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "most important themes; more important than the other four",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "houses exposed to destructive fires in south-eastern Australia",
+        "status": "explicit",
+        "role": "study area (as summarised in the conclusion)",
+        "support": {
+          "json_path": "$.conclusion",
+          "char_start": 0,
+          "char_end": 79,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "This analysis of houses exposed to destructive fires in south-eastern Australia",
+          "evidence_sha256": "fcfbd82db9831e6c4a140775c180c972835497195e407e02eb4f9c2aaf65f537"
+        }
+      },
+      "temporal_frame": {
+        "value": "October 2013 (fires of 17 October 2013)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"method the study area and fires\"]",
+          "char_start": 0,
+          "char_end": 97,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Our study focused on 540 houses exposed to two fires in the Blue Mountains of NSW in October 2013",
+          "evidence_sha256": "4ee67517a9b996f7cc72aab1b2d8578be1f3e095185ddd5fb2cd07a9631fb5d1"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.conclusion",
+        "char_start": 187,
+        "char_end": 362,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "We found that preparedness actions and response actions were the most important themes (i.e., more important than house construction, landscape fuels, topography and weather).",
+        "evidence_sha256": "662b89027a046a3ec3d7cd7f63d5c315900f3270b0d6f00b722a04eb488b6ebf"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": null
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-000499-R1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 84,
+        "char_end": 255,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "For example, in 2017, 7500 houses were destroyed in California [1], and 500 in Portugal [2], while Australia experienced its worst event in 2019/20 (3113 houses lost [3]).",
+        "evidence_sha256": "34bf365791e0b69289c3f9361df52f5ba060bd9883b3a4d48beadbc90a3901c2"
+      },
+      "reason": "Background figures attributed to other sources; not this paper's evidence. Also beyond the five-claim cap."
+    },
+    {
+      "candidate_id": "LIT2-000499-R2",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 6829,
+        "char_end": 7055,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Fire weather indices such as the Australian Forest Fire Danger Index [41], the Canadian Fire Weather Index [42] and the US Fosberg Fire Weather Index [43] all contain components describing temperature, humidity and wind speed.",
+        "evidence_sha256": "9852074e4e0cb3e7810e5862c81a17c3a81d50dcda657125be7ee5d246ff5566"
+      },
+      "reason": "Background description of indices with citations; the paper's own analysis uses FFDI only. Not promoted (five-claim cap; background)."
+    },
+    {
+      "candidate_id": "LIT2-000499-R3",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 2627,
+        "char_end": 2811,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Weather is a natural feature that no human agents can control, although climate change is driven by human activity and in the long term, may increase the severity of fire weather [16].",
+        "evidence_sha256": "c202d2c143e0ebfd22249028dff8045b954efebaa7ee5a33d5b3288821cf6a0c"
+      },
+      "reason": "Hedged background statement ('may') attributed to a reference; no horizon, scenario or place."
+    },
+    {
+      "candidate_id": "LIT2-000499-R4",
+      "evidence": {
+        "json_path": "$[\"defensive action\"]",
+        "char_start": 2353,
+        "char_end": 2440,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Indeed, defence may become more dangerous as the fire weather becomes more severe [59].",
+        "evidence_sha256": "8b158afb43e385c3a0970c14a1b88abc5cd2b7e7f95ce972e129f44fb8a56b8b"
+      },
+      "reason": "Hedged statement attributed to a reference; not tested here."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "Several fields repeat whole passages (an extraction artifact); spans use the first occurrence."
+}
