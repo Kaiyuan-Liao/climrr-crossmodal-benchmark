@@ -70,6 +70,8 @@ KNOWLEDGE_FILES = (
     "docs/M4_WP4_TRACKB_GUIDANCE_RULING.md",
     "docs/LITERATURE_WP4_ADJUDICATION.md",
     "docs/M5_WP4_COMPATIBILITY.md",
+    "docs/LITERATURE_WP4_READING.md",
+    "docs/DICTIONARY_CONCEPTS.md",
 )
 
 DEST_DIR = REPO_ROOT / "refresh_knowledge"

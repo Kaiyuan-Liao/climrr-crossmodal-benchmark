@@ -122,3 +122,22 @@ def test_the_list_carries_the_m4_wp4_adjudication_and_m5_wp4_compatibility():
 def test_the_list_carries_the_m4_wp1_pilot_and_its_ruling():
     assert "docs/LITERATURE_WP1_PILOT.md" in sk.KNOWLEDGE_FILES
     assert "docs/M4_WP1_REVIEW_M5_WP1_GUIDANCE_RULING.md" in sk.KNOWLEDGE_FILES
+
+
+def _project_state_knowledge_links() -> list[str]:
+    """Repo-relative paths linked in the `## Knowledge files` section of PROJECT_STATE.md."""
+    import os
+    import re
+
+    text = (REPO_ROOT / "docs" / "PROJECT_STATE.md").read_text(encoding="utf-8")
+    section = text.split("\n## Knowledge files\n", 1)[1].split("\n## ", 1)[0]
+    return [os.path.normpath(f"docs/{rel}") for rel in re.findall(r"\]\(([^)#]+)\)", section)]
+
+
+def test_every_knowledge_file_named_in_project_state_is_on_the_list():
+    """Track B run 2, Phase A: LITERATURE_WP4_READING.md and DICTIONARY_CONCEPTS.md had been omitted."""
+    linked = _project_state_knowledge_links()
+    assert linked, "PROJECT_STATE.md has no Knowledge files section"
+    assert [f for f in linked if f not in sk.KNOWLEDGE_FILES] == []
+    for f in ("docs/LITERATURE_WP4_READING.md", "docs/DICTIONARY_CONCEPTS.md"):
+        assert f in sk.KNOWLEDGE_FILES and f in linked
