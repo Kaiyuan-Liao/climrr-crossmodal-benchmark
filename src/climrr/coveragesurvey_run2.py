@@ -46,12 +46,13 @@ NORM_TABLE_SHA256 = "80a5e0e386dfe8a984e1a5ba2ace781d15601f9b0723b75d238b6de5d12
 FAMILY_LABEL = "diagnostic — family coverage is not attributable to the measure"
 MAX_KEPT = 10  # the driver's cap on searched forms per concept (`MAX_KEPT` in survey_driver.py v4)
 
-#: From the run's own files (log, summaries, rows); `verify_source` checks them. Host, environment
-#: and Python are not recorded in any run-2 output and were not stated in the work package.
+#: From the run's own files (log, summaries, rows); `verify_source` checks them --- except host and
+#: environment, which no run-2 output records: they are `owner_confirmed` (Kaiyuan Liao, D-028 action 13).
+#: The Python patch version is in no run-2 output and was not supplied: `unknown`, never run 1's (action 14).
 RUN_FACTS = {
-    "host": "Polaris --- login node not recorded in the run outputs",
-    "environment": "not recorded in the run outputs",
-    "python": "not recorded in the run outputs (`unknown`)",
+    "host": "polaris-login-01 (Polaris login node) --- `owner_confirmed`, not run-derived",
+    "environment": "module conda/2026-10-01 + conda env globus_env --- `owner_confirmed`, not run-derived",
+    "python": "patch version `unknown` (not recorded in any run-2 output and not supplied; run 1's is not copied)",
     "duckdb": "1.5.4",
     "model": "gpt-oss-120b",
     "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
@@ -360,6 +361,9 @@ def render_section(rows2: list[dict], manifest_sha: str) -> str:
     hlo, hhi = f["heat_measure_range"]
     return f"""## Run 2 (family level) --- executed (diagnostic)
 
+Accepted by GUIDANCE (D-028) as **{DIAGNOSTIC_ID} --- family-level diagnostic
+coverage survey**; never ontology generation.
+
 **Every `candidate_family` below is a model hypothesis with `status:
 candidate_family`, not an approved family** (D-027 B2). Each family count is a
 **{cs.LABEL}**, labelled *"{FAMILY_LABEL}"*; measure counts are copied unchanged from
@@ -432,18 +436,24 @@ disambiguator count, {f['fire_weather_l2']:,}), `fire danger` **{f['fire_danger_
 in {', '.join(warm)}. **Family coverage is not attributed to any threshold
 measure** (D-027 B3); the run-1 measure counts stand as they were.
 
-**(5) Three coverage levels are distinguishable.**
+**(5) Three coverage levels --- the standing presentation (D-028).**
 
 | Level | What is searched | Documents (topical-only) |
 | --- | --- | --- |
-| Measure-level phrases (run 1) | the dictionary measure's own wording, heat-index measures DC-009--014 | {hlo}--{hhi} |
-| Concept-map family terms (LITCORPUS-02 diagnostics) | approved terms of the two concept-map families | fire weather index group **{f['fwi_group_l2']:,}** before R-FWI-1, {f['fwi_rfwi1']:,} after (`fire weather index` alone {f['fwi_term_l2']:,}); `heat index` **{f['heat_index_l2']:,}** (group {f['heat_group_l2']:,}) |
-| Model-proposed broad families (run 2) | `candidate_family` surface forms | {lo:,} -- {hi:,} |
+| **Level 1 --- Dictionary-measure diagnostic coverage** (run 1) | the dictionary measure's own wording, heat-index measures DC-009--014 | {hlo}--{hhi} |
+| **Level 2 --- Governed concept-map family coverage** (LITCORPUS-02 diagnostics) | approved terms of the two concept-map families | fire weather index group **{f['fwi_group_l2']:,}** before R-FWI-1, {f['fwi_rfwi1']:,} after (`fire weather index` alone {f['fwi_term_l2']:,}); `heat index` **{f['heat_index_l2']:,}** (group {f['heat_group_l2']:,}) |
+| **Level 3 --- Model-proposed candidate-family diagnostic coverage** (run 2) | `candidate_family` surface forms | {lo:,} -- {hi:,} |
 
-Only the middle level rests on governed (concept-map) vocabulary; the run-1
+Only Level 2 rests on governed (concept-map) vocabulary; the run-1
 measure phrases and the run-2 family forms are model proposals
-(`candidate_surface_form`, `candidate_family`). The levels are reported side by
-side and never substituted for one another.
+(`candidate_surface_form`, `candidate_family`). **Standing rule (D-028):** the
+three levels are never ranked or combined, concepts are not ranked across levels
+as though the counts were semantically comparable, and Level-2 or Level-3
+coverage is never attributed to a Level-1 threshold measure. A Level-1 zero
+means no direct lexical match under the current measure representation and
+search rules, not that no relevant literature exists. Level-3 counts are never
+family prevalence, approved family coverage, benchmark relevance, or evidence
+for unit selection.
 
 """
 

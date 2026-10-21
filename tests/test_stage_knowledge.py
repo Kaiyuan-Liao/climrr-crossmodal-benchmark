@@ -141,3 +141,7 @@ def test_every_knowledge_file_named_in_project_state_is_on_the_list():
     assert [f for f in linked if f not in sk.KNOWLEDGE_FILES] == []
     for f in ("docs/LITERATURE_WP4_READING.md", "docs/DICTIONARY_CONCEPTS.md"):
         assert f in sk.KNOWLEDGE_FILES and f in linked
+
+
+def test_the_list_carries_the_run2_ruling():
+    assert "docs/TRACKB_STAGE2_RUN2_GUIDANCE_RULING.md" in sk.KNOWLEDGE_FILES

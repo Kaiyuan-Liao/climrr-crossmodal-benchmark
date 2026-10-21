@@ -1659,3 +1659,92 @@ code emits, and the next GUIDANCE packet still chooses.
 - **What it does not decide.** No M1 status changes; index 117 stays
   unlabeled; the frozen M5-WP4 matrix and `compat.py` are unchanged; no
   candidate family is approved; Q22 stays open; no QA.
+
+## D-028 --- Track B Stage 2 run 2 reviewed: PASS WITH ACTIONS (diagnostic only); three-level coverage reporting standing; Track A-next at the governed concept-map family level; Track B paused
+
+- **Date:** 2026-10-21
+- **Status:** **decided.**
+- **Owner:** **GUIDANCE**; placed by Kaiyuan Liao as
+  `docs/TRACKB_STAGE2_RUN2_GUIDANCE_RULING.md` (byte-identical to the delivered
+  `CLIMRR_TRACKB_STAGE2_RUN2_GUIDANCE_RULING_2026-10-21.md`, SHA-256
+  `9a6a3dc452ee273244eb2ce85d90a83549d5c7efe2ee5c1e1fad0d31fb7b58b0`). Reviewed
+  head **`ea2f2ea`** (`work/trackb-run2`); base `main` @ `d7032de`.
+- **Gate:** **PASS WITH ACTIONS.** Run 2 is accepted as **"TRACKB-SURVEY-RUN2 —
+  family-level diagnostic coverage survey"**; it must never be described as
+  ontology generation. **Merge of `work/trackb-run2` is authorized** after this
+  bookkeeping; Kaiyuan performs it.
+- **The ruling's decision table, verbatim:**
+
+  | Question | Ruling |
+  |---|---|
+  | R1 Stage 2 run 2 | **PASS WITH ACTIONS — diagnostic accepted** |
+  | Merge `work/trackb-run2` | **Authorized after ruling bookkeeping** |
+  | R2 three-level coverage reporting | **Approved as standing reporting structure** |
+  | Level 1 | **Dictionary-measure diagnostic coverage** |
+  | Level 2 | **Governed concept-map family coverage** |
+  | Level 3 | **Model-proposed candidate-family diagnostic coverage** |
+  | Rank concepts using model-family counts | **No** |
+  | Use model-family counts for unit selection | **No** |
+  | R3 redesigned units at threshold level | **No, not as primary redesign** |
+  | R3 redesigned units at model-family level | **No** |
+  | R3 redesigned units at concept-map family level | **Yes** |
+  | Immediate redesign families | **`fire_weather_index`, `heat_index`** |
+  | Automatically govern the other five discussion families | **No** |
+  | R4 additional Track B run before mentor meeting | **No — pause** |
+  | Concept-map changes now | **No** |
+  | QA | **Still not authorized** |
+
+- **What the rows mean, as ruled.**
+  1. **Three-level coverage reporting is the standing presentation:** Level 1
+     dictionary-measure diagnostic coverage; Level 2 governed concept-map family
+     coverage (only terms accepted through concept-map governance); Level 3
+     model-proposed candidate-family diagnostic coverage (never family
+     prevalence, approved family coverage, benchmark relevance, or evidence for
+     unit selection). The levels are **never ranked or combined**, and Level-2 or
+     Level-3 coverage is **never attributed to a Level-1 threshold measure**. A
+     Level-1 zero means no direct lexical match under the current measure
+     representation and search rules, not that no relevant literature exists.
+  2. **Track A-next redesign semantic level = governed concept-map family.**
+     Immediate candidates `fire_weather_index` and `heat_index`; the specific
+     metric and scenario are kept as provenance (`metric_status:
+     provenance_specific_measure`, `scenario_role: provenance`); geography a
+     `deterministic_supported_aggregate`. Current exact prototypes remain
+     controls. Recorded in `docs/BRIDGE_ELIGIBILITY.md` §9.
+  3. **Not approved unit families:** `fire_risk`, `fire_danger`, `hydrology`,
+     temperature-for-degree-days, `extreme_heat_days`, `heat_wave_days`. **No
+     concept-map change**; all 14 run-2 assignments stay `candidate_family`. The
+     five ungoverned discussion families (temperature, precipitation, wind speed,
+     dry spell, degree days) get **no units until a separate governance
+     decision**.
+  4. **Normalization machinery accepted.** N-1 … N-7 firing zero times is
+     acceptable: predeclared, frozen, tested, inert when unnecessary.
+  5. **Track B paused** after the merge until mentor feedback (2026-10-22); **no
+     run 3** and no further family-vocabulary survey. Reopens only via a
+     **governance package** (mentor approves a new family for redesign; GUIDANCE
+     needs vocabulary evidence to govern an ungoverned family; or a redesigned
+     unit requires a new concept-map family).
+  6. **QA not authorized.**
+- **Run-2 execution provenance (ruling actions 13--14).** Login node and conda
+  environment appear in no run-2 output; recorded as **`owner_confirmed`**
+  (Kaiyuan Liao), not run-derived: `polaris-login-01`, `module conda/2026-10-01`
+  + conda env `globus_env`. **Python patch version: `unknown`** --- not recorded,
+  not supplied, and run 1's is not copied. `RUN_FACTS` in
+  `src/climrr/coveragesurvey_run2.py` and the `TRACKB-SURVEY-RUN2` entry in
+  `data/manifest.json` amended; no hash changed.
+- **Mentor key question (2026-10-22), verbatim from the ruling:** "Should a
+  benchmark unit represent the exact ClimRR metric, or is a governed
+  family-level quantity such as heat index / Fire Weather Index an acceptable
+  table-side semantic object when the exact measure and scenario remain
+  preserved as provenance?" --- question 1 in `docs/MENTOR_BRIEF.md`.
+- **Implementation (this bookkeeping, `work/trackb-run2`):** this entry; the
+  ruling and `KNOWLEDGE_FILES`; `src/climrr/coveragesurvey_run2.py` and
+  `docs/CONCEPT_COVERAGE_SURVEY.md` (regenerated: the three levels named as
+  ruled, the standing rule, the Level-1-zero sentence, owner-confirmed host and
+  environment); `data/manifest.json` (amendment);
+  `reports/milestones/TRACKB_STAGE2_REPORT.md` fields 14--15;
+  `docs/BRIDGE_ELIGIBILITY.md` §9; `docs/MENTOR_BRIEF.md`;
+  `docs/PROJECT_STATE.md`; `tests/test_survey_run2.py`. Run 1 and run 2
+  manifests, driver v4, prompt F and normalization-table hashes unchanged.
+- **What it does not decide.** No M1 status changes; index 117 stays
+  unlabeled; no candidate family is approved; no unit schema or code is defined;
+  Q22 stays open; no QA.

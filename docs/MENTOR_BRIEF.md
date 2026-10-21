@@ -8,7 +8,7 @@ Last updated: 2026-10-21   Next meeting: **Thursday 2026-10-22** --- bring the i
 2. **Your concept-first method found papers, but still no link.** On the 186,346-file climate set JL shared, the fire weather index and heat-index searches gave 448 and 861 papers. 20 of those that mention Oklahoma, Stephens or California (10 + 10, picked by a fixed rule before anyone opened them) were each read by two independent readers and reconciled into **118 statements** (3 found identically by both readers, 47 found by both and reconciled, 68 found by one reader only): **0 of 354 statement--unit pairs qualify as a candidate link.**
 3. **The zero now points at our units, not at the papers.** 12 pairs share the concept family and 2 share the place, but never both in the same statement. GUIDANCE's reading: papers usually describe a broader quantity (for example "heat index" rather than "days above 105 °F"), a broader area (a state or a region rather than one county or grid cell) and often no emissions scenario. GUIDANCE accepted the zero for these 20 papers only, and nothing beyond them (D-027).
 4. **A survey of every concept in the data dictionary is done** (diagnostic counts, not prevalence). Broad quantities appear widely in the literature; the specific heat-index threshold measures barely appear by their exact wording. Under our current search terms, those threshold measures have **effectively no direct word-for-word footprint**. That does **not** show the literature lacks them.
-5. **Next:** a small test of whether table units stated at the level papers use (a quantity family, a state or region) make links possible, with the current three units kept as controls. The second survey run, at the family level, is done (below). **No questions are generated** (QA is still not authorized).
+5. **Next:** a small test of whether table units stated at the level papers use (a quantity family, a state or region) make links possible, with the current three units kept as controls. The second survey run, at the family level, is done and accepted as a diagnostic (D-028); the literature-survey track now pauses until your feedback. **No questions are generated** (QA is still not authorized).
 
 ## What I need from this meeting
 
@@ -22,7 +22,9 @@ Last updated: 2026-10-21   Next meeting: **Thursday 2026-10-22** --- bring the i
 > measures), the approved family terms in our concept map (548 for the fire weather index, 1,080 for "heat index"),
 > and broad families proposed by the model (2,681 to 143,266 documents, often much broader than the measure, such as
 > "moisture" for precipitation) --- and only the middle level uses approved vocabulary; none is credited to a single
-> measure.**
+> measure.** GUIDANCE (D-028) adopted these three levels as the standing way we report coverage: they are
+> never ranked or added together, and a zero at the exact-measure level means no word-for-word match under our
+> current search rules, not that no relevant literature exists.
 >
 > | Family (discussion candidate) | Dictionary measure(s) | Measure-level coverage, run 1 (all / with climate context) | Concept-map family terms (approved vocabulary; all documents) |
 > | --- | --- | --- | --- |
@@ -39,10 +41,19 @@ Last updated: 2026-10-21   Next meeting: **Thursday 2026-10-22** --- bring the i
 > here: they rest on search words the model proposed, many broader than the quantity itself, and no
 > family count is ever credited to a single threshold measure.
 >
-> **(a) Which families would you prioritize for redesigned units, and why --- independent of literature
-> coverage?** Coverage counts will not decide this on their own.
+> **Questions, in priority order.** The two families that already have approved concept-map terms, fire
+> weather index and heat index, are the first candidates for redesigned units; the other five are not used
+> until they are governed.
 >
-> **(b) A candidate question type: cross-location comparison.** *"A paper reports a pattern for a
+> **1. The key scientific question (GUIDANCE, verbatim):** *"Should a benchmark unit represent the exact
+> ClimRR metric, or is a governed family-level quantity such as heat index / Fire Weather Index an acceptable
+> table-side semantic object when the exact measure and scenario remain preserved as provenance?"* For
+> example: a unit whose family is *heat index*, while the exact measure (*days above 105 °F*) and the emissions
+> scenario stay attached to it as a record of where the number came from, not as something a paper must match.
+>
+> **2. Would state-level or region-level units be acceptable to you as the table-side granularity?**
+>
+> **3. A candidate question type: cross-location comparison.** *"A paper reports a pattern for a
 > phenomenon family at place A; the table's deterministic value for the same family at place B; same or
 > different direction."* This is a **candidate relation**. It would be defined and frozen before any test,
 > and nothing has been generated. Guardrails:
@@ -56,7 +67,11 @@ Last updated: 2026-10-21   Next meeting: **Thursday 2026-10-22** --- bring the i
 >
 > Is this a relation you would want the benchmark to test?
 >
-> **(c) Would state-level or region-level units be acceptable to you as the table-side granularity?**
+> **4. Which of the five families without approved terms --- temperature, precipitation, wind speed,
+> consecutive dry days / dry spell, degree days --- would you want governed, if any?** Choosing one would start
+> a separate decision on its approved vocabulary; coverage counts will not decide this on their own, and broader
+> families the model proposed (for example "hydrology" for precipitation, or generic "fire risk") are not
+> candidates.
 >
 > **Still open from 2026-10-19:** in general scientific text "FWI" often means
 > something else (full waveform inversion, Forest Watch Indonesia, fatal work
@@ -65,6 +80,8 @@ Last updated: 2026-10-21   Next meeting: **Thursday 2026-10-22** --- bring the i
 > fire-weather literature you have in mind?**
 
 > ### **First question for the next one-on-one**
+>
+> *For 2026-10-22 this is asked as question 1 above, in GUIDANCE's sharper wording (D-028).*
 >
 > **"Does the intended bridge require literature to match the exact ClimRR metric/scenario, or is support at the broader hazard/concept level sufficient when unmatched dimensions are explicitly disclosed?"**
 >

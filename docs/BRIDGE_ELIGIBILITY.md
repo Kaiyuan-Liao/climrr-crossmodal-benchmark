@@ -235,3 +235,25 @@ granularity rules for state, county, national, climate-region and multi-region
 geographies must be declared before any evaluation that uses them (ruling,
 scientific risk 7); no ad hoc containment (e.g. `San Diego County` →
 `California`).
+
+## 9. Unit-granularity redesign (Track A-next) semantic level = governed concept-map family (D-028)
+
+For the Track A-next unit-granularity diagnostic the semantic comparison level is
+the **governed concept-map family**, not the threshold-specific measure and not a
+model-proposed `candidate_family`; the immediate candidates are
+`fire_weather_index` and `heat_index` only, and the exact table metric and
+scenario are kept as provenance. Conceptually (the ruling's example):
+`unit.family = heat_index`; `unit.metric = days_above_105F` with
+`unit.metric_status = provenance_specific_measure`; `unit.scenario = RCP8.5` with
+`unit.scenario_role = provenance`; `unit.geography =
+deterministic_supported_aggregate`. A literature claim may then be evaluated at
+the family level without pretending to match the exact threshold, scenario or
+time horizon --- heat-index-family support is not support for a 95/105/115/125°F
+threshold measure, and `fire_weather_index` / `heat_index` stay distinct from
+broader fire-risk or extreme-heat concepts. `fire_risk`, `fire_danger`,
+`hydrology`, temperature-for-degree-days, `extreme_heat_days` and
+`heat_wave_days` are **not** approved unit families; the five ungoverned
+discussion families (temperature, precipitation, wind speed, dry spell, degree
+days) get no units until a separate governance decision; `concept_map.yaml` is
+unchanged; P-CELL-1, P-COUNTY-1 and P-STATE-1 v2 remain controls. Conceptual
+fields only --- no schema or code is defined here.

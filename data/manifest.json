@@ -158,6 +158,12 @@
       "milestone": "Track B Stage 2 run 2",
       "change": "Added TRACKB-SURVEY-RUN2 to the diagnostics block (artifacts/literature/survey/run2/manifest.csv; family level, candidate_family). A diagnostic, not a corpus: not under external_corpora. TRACKB-SURVEY-RUN1 and every other entry unchanged.",
       "decision_ref": "D-025, D-026, D-027"
+    },
+    {
+      "date": "2026-10-21",
+      "milestone": "Track B run-2 ruling bookkeeping (D-028)",
+      "change": "TRACKB-SURVEY-RUN2 run.host and run.environment recorded as owner_confirmed (polaris-login-01; module conda/2026-10-01 + conda env globus_env), not run-derived; run.python: patch version `unknown`, run 1's not copied (ruling actions 13-14). No hash changed. Existing entries otherwise unchanged.",
+      "decision_ref": "D-028"
     }
   ],
   "external_corpora": [
@@ -327,9 +333,9 @@
         "duckdb_tmp_dirs": "none present"
       },
       "run": {
-        "host": "Polaris --- login node not recorded in the run outputs",
-        "environment": "not recorded in the run outputs",
-        "python": "not recorded in the run outputs (`unknown`)",
+        "host": "polaris-login-01 (Polaris login node) --- `owner_confirmed`, not run-derived",
+        "environment": "module conda/2026-10-01 + conda env globus_env --- `owner_confirmed`, not run-derived",
+        "python": "patch version `unknown` (not recorded in any run-2 output and not supplied; run 1's is not copied)",
         "duckdb": "1.5.4",
         "model": "gpt-oss-120b",
         "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",

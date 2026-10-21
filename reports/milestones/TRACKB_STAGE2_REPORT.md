@@ -3,7 +3,9 @@
 Authorized by [`docs/M4_WP3_WORKING_CORPUS_STAGE2_GUIDANCE_RULING.md`](../../docs/M4_WP3_WORKING_CORPUS_STAGE2_GUIDANCE_RULING.md)
 (D-025, Track B, Stage 2a--2c **as diagnostics**; criteria 23--31); run 2 by
 [`docs/M4_WP4_TRACKB_GUIDANCE_RULING.md`](../../docs/M4_WP4_TRACKB_GUIDANCE_RULING.md)
-(D-027, B2--B4). **No paper was read. No QA. Nothing here changes `concept_map.yaml`, any column status, or
+(D-027, B2--B4); run 2 ruled by
+[`docs/TRACKB_STAGE2_RUN2_GUIDANCE_RULING.md`](../../docs/TRACKB_STAGE2_RUN2_GUIDANCE_RULING.md)
+(D-028). **No paper was read. No QA. Nothing here changes `concept_map.yaml`, any column status, or
 index 117.**
 
 ## 1. Milestone ID and title
@@ -39,7 +41,7 @@ compatibility, unit design or QA.
 | Branch | `work/trackb-stage2`, from `main` at **`38116a0`** (clean tree; `work/m4-wp4-*` untouched) |
 | Package commit | the commit carrying this report (single commit; head SHA reported to the COORDINATOR) |
 | Remote | **not pushed, not merged** (as the work package directs) |
-| **Run 2** | `work/trackb-run2` from `main` at **`d7032de`**: `1efdb47` (knowledge list), `3ccb4ba` (driver v4), then the ingest commit carrying this report version; **not pushed, not merged** |
+| **Run 2** | `work/trackb-run2` from `main` at **`d7032de`**: `1efdb47` (knowledge list), `3ccb4ba` (driver v4), `ea2f2ea` (ingest; **reviewed head**, D-028), then the D-028 ruling bookkeeping commit; **not pushed, not merged** (merge authorized by D-028; Kaiyuan merges) |
 
 ## 4. Data version and checksums
 
@@ -93,8 +95,11 @@ Metis endpoint; DuckDB **1.5.4**; the log's START line carries `driver_sha
 f929ab6a3669`, `prompt_f_sha 7097c86ccbb6`, `norm_table_sha 80a5e0e386df`,
 `inventory_sha 288d08c5b92a`, `context_sha fec9b5ca97f1`, `index_identity
 fbb4affb7162`, `run1_rows=14`; context clause **120,050** documents (id set equal
-to run 1's). **Login node, conda environment and Python version are not recorded
-in any run-2 output** and were not stated; recorded as such. Local ingest run
+to run 1's). **Login node and conda environment are not recorded in any run-2
+output**; they are recorded as **`owner_confirmed`** (Kaiyuan Liao; D-028 action
+13), not run-derived: login node `polaris-login-01`, `module load
+conda/2026-10-01` + conda env `globus_env`. **Python patch version: `unknown`**
+(in no run-2 output, not supplied; run 1's is not copied --- D-028 action 14). Local ingest run
 record: `reports/runs/20261021T202937Z_local_ingest_survey_run2.{json,md}`.
 
 ## 6. Work completed
@@ -505,7 +510,23 @@ terms; thresholds → `extreme_heat_days` / `heat_wave_days` resting on `hot day
 
 ## 14. Gate status
 
-**GUIDANCE: PASS as diagnostic (D-027, 2026-10-20)** --- Stage 2a complete;
+**Run 2 --- GUIDANCE: PASS WITH ACTIONS, diagnostic only (D-028, 2026-10-21).**
+Reviewed head **`ea2f2ea`** (`work/trackb-run2`; base `main` @ `d7032de`).
+Accepted as **"TRACKB-SURVEY-RUN2 — family-level diagnostic coverage survey"**,
+never ontology generation. Merge authorized after the ruling bookkeeping (this
+commit); Kaiyuan performs the merge. Ruling:
+[`docs/TRACKB_STAGE2_RUN2_GUIDANCE_RULING.md`](../../docs/TRACKB_STAGE2_RUN2_GUIDANCE_RULING.md).
+Normalization machinery accepted (N-1 … N-7 firing zero times is acceptable:
+predeclared, frozen, tested, inert when unnecessary). All 14 assignments stay
+`candidate_family`; no concept-map change. **Three-level coverage reporting is
+the standing presentation** (Level 1 dictionary-measure diagnostic coverage;
+Level 2 governed concept-map family coverage; Level 3 model-proposed
+candidate-family diagnostic coverage) --- never ranked or combined, Level 2/3
+never attributed to a Level-1 threshold measure
+(`docs/CONCEPT_COVERAGE_SURVEY.md` finding 5). Run-2 host/environment
+`owner_confirmed`; Python patch version `unknown`. **QA not authorized.**
+
+**Run 1 --- GUIDANCE: PASS as diagnostic (D-027, 2026-10-20)** --- Stage 2a complete;
 Stage 2b/2c run 1 accepted as exploratory coverage evidence. Reviewed head
 **`2331e19`** (pushed, `origin/work/trackb-stage2`). Merge authorized after the
 ruling bookkeeping (this commit); Kaiyuan performs the merge. Ruling:
@@ -550,10 +571,13 @@ As proposed for review:
 
 ## 15. Next bounded objective
 
-**GUIDANCE review of Stage 2 run 2** (diagnostic), on `work/trackb-run2` at the
-head commit reported to the COORDINATOR (not pushed, not merged; Kaiyuan pushes
-for review and performs any merge). For review: §9 (side by side), §13 (the
-three-level finding), §12 (the driver choices and the statement corrections),
-§14 (criteria 15--24, 27--29). **QA not authorized.** Nothing touches
-`concept_map.yaml`, M1 statuses, index 117, production queries, C-2 or
-compatibility; no `candidate_family` is proposed for governance.
+**Track B is paused (D-028, R4).** After the merge of `work/trackb-run2`, no
+further Track B work until mentor feedback (2026-10-22); **no run 3**, and no
+further vocabulary or family survey. Track B **reopens only via a governance
+package** --- not another unconstrained model-family survey --- and only if the
+mentor approves a new candidate family for redesign, GUIDANCE needs vocabulary
+evidence to govern one of the five ungoverned families (temperature,
+precipitation, wind speed, dry spell, degree days), or a redesigned unit requires
+a new concept-map family. The next work is Track A-next (unit-granularity
+diagnostic at the governed concept-map family level: `fire_weather_index`,
+`heat_index`; `docs/BRIDGE_ELIGIBILITY.md`). **QA not authorized.**

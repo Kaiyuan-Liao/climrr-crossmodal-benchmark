@@ -104,6 +104,9 @@ threshold measure.
 
 ## Run 2 (family level) --- executed (diagnostic)
 
+Accepted by GUIDANCE (D-028) as **TRACKB-SURVEY-RUN2 --- family-level diagnostic
+coverage survey**; never ontology generation.
+
 **Every `candidate_family` below is a model hypothesis with `status:
 candidate_family`, not an approved family** (D-027 B2). Each family count is a
 **diagnostic coverage count, not prevalence**, labelled *"diagnostic — family coverage is not attributable to the measure"*; measure counts are copied unchanged from
@@ -115,7 +118,7 @@ before execution (`reports/milestones/TRACKB_STAGE2_REPORT.md` §15).
 | | |
 | --- | --- |
 | Ingested run | `artifacts/literature/survey/run2/` (`manifest.csv` SHA-256 `1182deea5d2ec6ed992e9415a6e6d7b8bcadd78e09da22ab9cb86fab2887c363`, pinned in `data/manifest.json` under `diagnostics`); source `survey_run2.tar.gz` `8f92e3c328e642ef142fc1e77edb7721926518e7d70087bd7503ade7a03bf85a` |
-| Host / environment | Polaris --- login node not recorded in the run outputs; environment not recorded in the run outputs; Python not recorded in the run outputs (`unknown`); DuckDB 1.5.4 |
+| Host / environment | polaris-login-01 (Polaris login node) --- `owner_confirmed`, not run-derived; environment module conda/2026-10-01 + conda env globus_env --- `owner_confirmed`, not run-derived; Python patch version `unknown` (not recorded in any run-2 output and not supplied; run 1's is not copied); DuckDB 1.5.4 |
 | Model / endpoint | `gpt-oss-120b`, `https://inference-api.alcf.anl.gov/resource_server/metis/api/v1` |
 | Time (UTC, from `survey.log`) | 2026-10-21T20:02:05Z → 2026-10-21T20:18:28Z |
 | Driver / prompt F / table | `survey_driver.py` v4 `f929ab6a366987d29e5565fe9fa9f80b47cb1c57d19e01ff3af5affdd99baf9f`, `--mode family`; prompt F `7097c86ccbb694fe34fa5f4dc51ed087594295e3c37ddd97c56ab94702a97931`; `normalization_table_v1.yaml` `80a5e0e386dfe8a984e1a5ba2ace781d15601f9b0723b75d238b6de5d1226e03` |
@@ -202,18 +205,24 @@ disambiguator count, 1,298), `fire danger` **1,041**.
 in DC-011, DC-013. **Family coverage is not attributed to any threshold
 measure** (D-027 B3); the run-1 measure counts stand as they were.
 
-**(5) Three coverage levels are distinguishable.**
+**(5) Three coverage levels --- the standing presentation (D-028).**
 
 | Level | What is searched | Documents (topical-only) |
 | --- | --- | --- |
-| Measure-level phrases (run 1) | the dictionary measure's own wording, heat-index measures DC-009--014 | 0--2 |
-| Concept-map family terms (LITCORPUS-02 diagnostics) | approved terms of the two concept-map families | fire weather index group **548** before R-FWI-1, 473 after (`fire weather index` alone 462); `heat index` **1,080** (group 1,082) |
-| Model-proposed broad families (run 2) | `candidate_family` surface forms | 2,681 -- 143,266 |
+| **Level 1 --- Dictionary-measure diagnostic coverage** (run 1) | the dictionary measure's own wording, heat-index measures DC-009--014 | 0--2 |
+| **Level 2 --- Governed concept-map family coverage** (LITCORPUS-02 diagnostics) | approved terms of the two concept-map families | fire weather index group **548** before R-FWI-1, 473 after (`fire weather index` alone 462); `heat index` **1,080** (group 1,082) |
+| **Level 3 --- Model-proposed candidate-family diagnostic coverage** (run 2) | `candidate_family` surface forms | 2,681 -- 143,266 |
 
-Only the middle level rests on governed (concept-map) vocabulary; the run-1
+Only Level 2 rests on governed (concept-map) vocabulary; the run-1
 measure phrases and the run-2 family forms are model proposals
-(`candidate_surface_form`, `candidate_family`). The levels are reported side by
-side and never substituted for one another.
+(`candidate_surface_form`, `candidate_family`). **Standing rule (D-028):** the
+three levels are never ranked or combined, concepts are not ranked across levels
+as though the counts were semantically comparable, and Level-2 or Level-3
+coverage is never attributed to a Level-1 threshold measure. A Level-1 zero
+means no direct lexical match under the current measure representation and
+search rules, not that no relevant literature exists. Level-3 counts are never
+family prevalence, approved family coverage, benchmark relevance, or evidence
+for unit selection.
 
 ## Caveats
 

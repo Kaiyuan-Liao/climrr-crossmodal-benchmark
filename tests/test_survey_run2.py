@@ -1,4 +1,4 @@
-"""Track B survey run 2 (family level), ingested as a diagnostic artifact (D-025, D-026, D-027).
+"""Track B survey run 2 (family level), ingested as a diagnostic artifact (D-025, D-026, D-027, D-028).
 
 The copy under `artifacts/literature/survey/run2/` equals its `manifest.csv`,
 pinned in `data/manifest.json` under `diagnostics`; run 1 is untouched (its
@@ -134,3 +134,29 @@ def test_candidate_families_never_reach_the_concept_map():
     assert "candidate_family" not in text
     assert not ids & {r["row"]["candidate_family"] for r in _rows()} - {"heat_index"}
     assert ids >= {"heat_index"}  # pre-existing D-018 entry; run 2 proposed the same name, nothing added
+
+
+def test_the_doc_names_the_three_levels_and_the_standing_rule_as_ruled():
+    """D-028 R2: level names exactly as the ruling; never ranked or combined; the Level-1-zero sentence."""
+    text = cs.DOC_PATH.read_text(encoding="utf-8")
+    ruling = (REPO_ROOT / "docs" / "TRACKB_STAGE2_RUN2_GUIDANCE_RULING.md").read_text(encoding="utf-8")
+    for n, name in ((1, "Dictionary-measure diagnostic coverage"), (2, "Governed concept-map family coverage"),
+                    (3, "Model-proposed candidate-family diagnostic coverage")):
+        assert f"| Level {n} | **{name}** |" in ruling
+        assert f"**Level {n} --- {name}**" in text
+    flat = " ".join(text.split())
+    assert "the three levels are never ranked or combined" in flat
+    assert "Level-2 or Level-3 coverage is never attributed to a Level-1 threshold measure" in flat
+    assert ("A Level-1 zero means no direct lexical match under the current measure representation and "
+            "search rules, not that no relevant literature exists.") in flat
+    assert "TRACKB-SURVEY-RUN2 --- family-level diagnostic coverage survey" in flat
+
+
+def test_run2_host_and_environment_are_owner_confirmed_and_python_is_unknown():
+    """D-028 actions 13--14: owner_confirmed, not run-derived; run 1's Python version not copied."""
+    run = ENTRY["run"]
+    assert run["host"].startswith("polaris-login-01") and "`owner_confirmed`" in run["host"]
+    assert "globus_env" in run["environment"] and "`owner_confirmed`" in run["environment"]
+    assert "`unknown`" in run["python"] and "3.11" not in run["python"]
+    assert {k: run[k] for k in ("host", "environment", "python")} == {
+        k: cs2.RUN_FACTS[k] for k in ("host", "environment", "python")}
