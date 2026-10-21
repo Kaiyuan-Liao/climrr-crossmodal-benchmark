@@ -1,0 +1,15 @@
+You are helping build a lexical search over scientific papers. Below is ONE variable from a climate-data dictionary, quoted verbatim. Given its dictionary name and passage, return ONLY a JSON object, nothing else, of this form: {"candidate_family": "<short lowercase snake_case name of the broader scientific quantity family this measure belongs to>", "family_surface_forms": [up to 8 lowercase words/phrases a paper would use for that family, no place names, years, scenario names, thresholds or statistics]}
+
+Dictionary name: Consecutive Days with No Precipitation
+Dictionary passage: Using this information, Argonne identified 
+the greatest number of consecutive days in which no precipitation occurred (i.e., the total daily 
+precipitation quantity equaled zero) for that scenario's model year (e.g., for the year 2045 under scenario 
+RCP4.5, the highest number of consecutive days without any precipitation was X). This process was 
+repeated for each year within a given time period/scenario (e.g., 2046, 2047, and so forth) and across all 
+three climate models (CCSM, GFDL, and HadGEM) producing 10 yearly values for each model, with 
+each value representing the longest consecutive span with no precipitation for that year. Of the 10 yearly 
+values for each climate model, the maximum value was selected (e.g., the decadal maximum). This 
+resulted in 3 values for the longest consecutive number of days without precipitation for each time 
+period/scenario, with one value for each climate model’s 10 years of data. The average of these maximum 
+of the maxima was then taken to produce the ensemble mean of the decade’s highest number of 
+consecutive days without precipitation in a single year.

@@ -1,0 +1,48 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-21T20:10:11Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "2b171807ee99aecdd12fd3940db3192b6af0d5741784391d22de365d96ec2229",
+  "query_text": "( \"dry spell\" OR \"dry period\" OR \"dry spell length\" OR \"consecutive dry days\" OR \"dry spell duration\" OR \"dry days\" OR \"no precipitation days\" OR \"dry spell frequency\" )\n",
+  "parsed_groups": [
+    [
+      "dry spell",
+      "dry period",
+      "dry spell length",
+      "consecutive dry days",
+      "dry spell duration",
+      "dry days",
+      "no precipitation days",
+      "dry spell frequency"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    7351
+  ],
+  "per_term_doc_counts": {
+    "g0:dry spell": 1375,
+    "g0:dry period": 4779,
+    "g0:dry spell length": 123,
+    "g0:consecutive dry days": 690,
+    "g0:dry spell duration": 72,
+    "g0:dry days": 1895,
+    "g0:no precipitation days": 9,
+    "g0:dry spell frequency": 20
+  },
+  "raw_count": 7351,
+  "disambiguation": null,
+  "admitted_count": 7351,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 57.8,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

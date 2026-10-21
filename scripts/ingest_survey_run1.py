@@ -64,7 +64,11 @@ def main() -> int:
         data["amendments"].append(AMENDMENT)
     cs.MANIFEST.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
-    cs.DOC_PATH.write_text(cs.render_doc(rows, manifest_sha), encoding="utf-8")
+    if (cs.SURVEY_DIR / "run2" / "manifest.csv").exists():  # run 2 ingested: the doc covers both runs
+        from climrr import coveragesurvey_run2 as cs2
+        cs.DOC_PATH.write_text(cs2.render_full_doc(), encoding="utf-8")
+    else:
+        cs.DOC_PATH.write_text(cs.render_doc(rows, manifest_sha), encoding="utf-8")
 
     summary = {
         "n_rows": len(rows),

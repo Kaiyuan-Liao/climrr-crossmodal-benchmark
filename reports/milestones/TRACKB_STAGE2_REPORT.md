@@ -1,15 +1,20 @@
 # Track B / Stage 2 --- dictionary-grounded concept coverage survey (diagnostic)
 
 Authorized by [`docs/M4_WP3_WORKING_CORPUS_STAGE2_GUIDANCE_RULING.md`](../../docs/M4_WP3_WORKING_CORPUS_STAGE2_GUIDANCE_RULING.md)
-(D-025, Track B, Stage 2a--2c **as diagnostics**; criteria 23--31). **No paper
-was read. No QA. Nothing here changes `concept_map.yaml`, any column status, or
+(D-025, Track B, Stage 2a--2c **as diagnostics**; criteria 23--31); run 2 by
+[`docs/M4_WP4_TRACKB_GUIDANCE_RULING.md`](../../docs/M4_WP4_TRACKB_GUIDANCE_RULING.md)
+(D-027, B2--B4); run 2 ruled by
+[`docs/TRACKB_STAGE2_RUN2_GUIDANCE_RULING.md`](../../docs/TRACKB_STAGE2_RUN2_GUIDANCE_RULING.md)
+(D-028). **No paper was read. No QA. Nothing here changes `concept_map.yaml`, any column status, or
 index 117.**
 
 ## 1. Milestone ID and title
 
 **Track B / Stage 2a --- dictionary concept inventory + survey tooling; Stage
 2b/2c --- survey run 1, executed by Kaiyuan on Polaris and ingested here as a
-diagnostic** (follow-up: v3 tools tracked; run 1 ingested; coverage doc). M1
+diagnostic** (follow-up: v3 tools tracked; run 1 ingested; coverage doc).
+**Stage 2 run 2 (family level, D-027 B2--B4) --- driver v4; executed by Kaiyuan
+on Polaris 2026-10-21 and ingested here as diagnostic `TRACKB-SURVEY-RUN2`.** M1
 remains open (D-014). Track A (M4-WP4) runs separately.
 
 ## 2. Objective
@@ -21,6 +26,14 @@ CSV-column interpretation, any status change, family assignment, concept-map
 change, reading, QA, and running 2b/2c here (the ALCF endpoint and the index are
 on Polaris).
 
+**Run 2:** for each of the 14 measures, ask the model for a broader
+`candidate_family` and its surface forms, normalize them under the frozen
+orthographic table only, count topical-only and context-filtered documents over
+the family forms, and report family coverage **beside** the unchanged run-1
+measure coverage. **Excluded:** approving any family, attributing family
+coverage to a measure, any change to run 1, the concept map, C-2,
+compatibility, unit design or QA.
+
 ## 3. Repository commit SHA
 
 | | |
@@ -28,6 +41,7 @@ on Polaris).
 | Branch | `work/trackb-stage2`, from `main` at **`38116a0`** (clean tree; `work/m4-wp4-*` untouched) |
 | Package commit | the commit carrying this report (single commit; head SHA reported to the COORDINATOR) |
 | Remote | **not pushed, not merged** (as the work package directs) |
+| **Run 2** | `work/trackb-run2` from `main` at **`d7032de`**: `1efdb47` (knowledge list), `3ccb4ba` (driver v4), `ea2f2ea` (ingest; **reviewed head**, D-028), then the D-028 ruling bookkeeping commit; **not pushed, not merged** (merge authorized by D-028; Kaiyuan merges) |
 
 ## 4. Data version and checksums
 
@@ -42,6 +56,12 @@ on Polaris).
 | **`scripts/litcollect/run_query.py` v3** (as tracked, follow-up) | **`5f56ee49f0da675f49ef490b506c030b307c693032e8be9097e499cf1c64030d`** | v2 `a93eeba7…7708` (LITCORPUS-02, at `38116a0`) + opt-in `--no-hits` |
 | `survey_run1.tar.gz` (delivered, read) | `edd68196834d54fae7cd0073dcb6d389a55452caf90f23d6fc838e160c7a2739` | extracted outside the repo; both script members equal the v3 hashes |
 | **`artifacts/literature/survey/run1/manifest.csv`** (new) | **`74ba7d7c72e7920ac16e1cc7c49ab2543add316df37baf60ff3b52c10c2d125d`** | 122 files, 12,237,164 bytes; pinned in `data/manifest.json` → `diagnostics` |
+| **`scripts/litcollect/survey_driver.py` v4** (run 2) | **`f929ab6a366987d29e5565fe9fa9f80b47cb1c57d19e01ff3af5affdd99baf9f`** | tracked at `3ccb4ba`; equals `driver_sha256` in all 14 run-2 rows |
+| prompt variant F (`PROMPT_F`, the template) | `7097c86ccbb694fe34fa5f4dc51ed087594295e3c37ddd97c56ab94702a97931` | equals `prompt_template_sha256` in all 14 rows |
+| `data/metadata/litcollect/normalization_table_v1.yaml` | `80a5e0e386dfe8a984e1a5ba2ace781d15601f9b0723b75d238b6de5d1226e03` | frozen (D-027); equals every row's `normalization_table_sha256` |
+| `survey_run2.tar.gz` (delivered, read) | `8f92e3c328e642ef142fc1e77edb7721926518e7d70087bd7503ade7a03bf85a` | matches the work package; extracted outside the repo |
+| **`artifacts/literature/survey/run2/manifest.csv`** (new) | **`1182deea5d2ec6ed992e9415a6e6d7b8bcadd78e09da22ab9cb86fab2887c363`** | 132 files, 19,106,195 bytes; pinned in `data/manifest.json` → `diagnostics` (`TRACKB-SURVEY-RUN2`) |
+| `artifacts/literature/survey/run1/manifest.csv` (unchanged) | `74ba7d7c72e7920ac16e1cc7c49ab2543add316df37baf60ff3b52c10c2d125d` | run 1 untouched (test) |
 | `scripts/litcollect/probe_alcf_inference.py` (as tracked) | `79181c48981c709b49b90d78fc8aaddffaf12d2f1bb0591b9a9daa3aad438c66` | byte-identical to the tarball member |
 
 `data/raw/FullData.csv` was verified by `pytest` (hash gate) and **not read** by
@@ -69,6 +89,19 @@ equal the tracked v3 files**, after an aborted first attempt (offsets stage; no
 outputs kept). Local ingest run record:
 `reports/runs/20261020T224151Z_local_ingest_survey_run1.{json,md}`.
 
+**Survey run 2 --- Polaris**, executed by Kaiyuan: **2026-10-21T20:02:05Z →
+20:18:28Z** (`survey.log`), `--mode family`, model `gpt-oss-120b` on the same
+Metis endpoint; DuckDB **1.5.4**; the log's START line carries `driver_sha
+f929ab6a3669`, `prompt_f_sha 7097c86ccbb6`, `norm_table_sha 80a5e0e386df`,
+`inventory_sha 288d08c5b92a`, `context_sha fec9b5ca97f1`, `index_identity
+fbb4affb7162`, `run1_rows=14`; context clause **120,050** documents (id set equal
+to run 1's). **Login node and conda environment are not recorded in any run-2
+output**; they are recorded as **`owner_confirmed`** (Kaiyuan Liao; D-028 action
+13), not run-derived: login node `polaris-login-01`, `module load
+conda/2026-10-01` + conda env `globus_env`. **Python patch version: `unknown`**
+(in no run-2 output, not supplied; run 1's is not copied --- D-028 action 14). Local ingest run
+record: `reports/runs/20261021T202937Z_local_ingest_survey_run2.{json,md}`.
+
 ## 6. Work completed
 
 - **Phase A --- 2a.** Escalated the one undefined point --- the unit of "one
@@ -90,6 +123,17 @@ outputs kept). Local ingest run record:
   D-026. Phase B: run 1 verified and ingested as diagnostic `TRACKB-SURVEY-RUN1`.
   Phase C: `docs/CONCEPT_COVERAGE_SURVEY.md` generated from the rows. Phase D:
   this report, `PROJECT_STATE.md`, `MENTOR_BRIEF.md`, `KNOWLEDGE_FILES`.
+- **Run 2 (D-027 B2--B4).** Driver v4 (`3ccb4ba`, method in §8). Kaiyuan ran it
+  on Polaris. Ingest: tarball hash checked; log START line verified against the
+  pins; every row re-verified (pins, `candidate_family` status, counts re-derived
+  from the id files, context id set = run 1's, measure counts and run-1 row
+  SHA-256 = the **ingested** run-1 rows, `survey_table.csv` = the rows); copied to
+  `artifacts/literature/survey/run2/` without the 14 header-only
+  `topical/hits.csv`; `manifest.csv` pinned under `diagnostics`; run 1 checked
+  byte-unchanged before and after. `docs/CONCEPT_COVERAGE_SURVEY.md` regenerated
+  with the run-2 section (side-by-side table, per-term counts, normalization
+  record, findings 1--5 computed). `MENTOR_BRIEF.md`, `PROJECT_STATE.md`, this
+  report.
 
 ## 7. Deliverables and exact file paths
 
@@ -111,6 +155,16 @@ edits: `data/manifest.json` (two `files` entries + amendment), `.gitattributes`,
 `scripts/verify_no_secrets_or_paths.py` + `tests/test_secrets_scan.py` (exemption),
 `docs/LITCORPUS02_PROVENANCE.md`, `docs/BRIDGE_ELIGIBILITY.md`,
 `docs/DECISION_LOG.md`, `docs/PROJECT_STATE.md`, this report.
+**Run 2:** `scripts/litcollect/survey_driver.py` v4 · `tests/test_survey_driver_v4.py`
+(at `3ccb4ba`) · `src/climrr/coveragesurvey_run2.py` · `scripts/ingest_survey_run2.py` ·
+`tests/test_survey_run2.py` · `artifacts/literature/survey/run2/` (+ `manifest.csv`) ·
+`artifacts/literature/survey/survey_run2.log` ·
+`reports/runs/20261021T202937Z_local_ingest_survey_run2.{json,md}` · edits:
+`src/climrr/coveragesurvey.py` (`render_doc` takes the run-2 section),
+`scripts/ingest_survey_run1.py` (regenerates the two-run doc once run 2 exists),
+`tests/test_survey_run1.py` (doc test), `data/manifest.json`, `.gitattributes`
+(comment), `docs/CONCEPT_COVERAGE_SURVEY.md`, `docs/MENTOR_BRIEF.md`,
+`docs/PROJECT_STATE.md`, this report.
 
 ## 8. Methods and rules that affect scientific meaning
 
@@ -135,6 +189,34 @@ edits: `data/manifest.json` (two `files` entries + amendment), `.gitattributes`,
   `resolutions.yaml` forbids a record from assigning that status).
 - **No filtering, aggregation, unit conversion, coercion or renaming of any data.**
   No CSV column name is read.
+
+**Run 2 --- driver v4 (`f929ab6a…af9f`).** `--mode measure` (default) is v3: on the synthetic corpus its
+outputs are **byte-identical** to v3's (recovered from git at `d7032de`,
+`e1fb664c…f4cd`) for the same inputs, under a frozen clock, restart included.
+`--mode family`: prompt F per concept; `family.json` with exactly the ruling's
+fields plus `model_raw_response_excerpt` and `parse_error`, `status:
+candidate_family`; every model form normalized under the frozen table, then
+sanitized, each recorded with `original`, `normalized`, `rules_applied`,
+`searched` (plus `search_term`, `reason`); topical-only and context-filtered
+counts over the family forms; `row.json` carries the run-1 measure identity and
+counts copied from `--run1` (row SHA-256 recorded) beside the family counts,
+labelled *"diagnostic — family coverage is not attributable to the measure"*;
+`survey_table.csv` side by side, sorted by concept id. Restart, error rows and
+logging as v3.
+
+**Fail-closed checks added.** The cached `_context` id set is reused only if its
+`summary.json` records the same context-clause SHA-256 and index identity and
+`ids.txt` holds `admitted_count` ids (missing in v3; both modes). Family mode
+refuses to start unless every run-1 row exists and matches this run's concept
+id, dictionary name, inventory, context clause and index identity --- so measure
+and family counts are always over the same index and clause.
+
+**Run-2 ingest.** Verified before copying (see §6); the doc's run-2 statements
+are computed from the ingested rows, the LITCORPUS-02 diagnostics
+(`fire_weather_diag_topical_only`, `extreme_heat_diag_topical_only`) and
+`concept_map.yaml` --- none is typed in. Three coverage levels are kept apart in
+every table: measure-level (run 1), concept-map family terms (LITCORPUS-02
+diagnostics), model-proposed family forms (run 2).
 
 ## 9. Results with compact tables or examples
 
@@ -195,6 +277,35 @@ count) --- consistency check passed. **(b)** DC-001/002/003: the bare word is
 **(d)** heat-index family group 1,082 (`heat index` alone 1,080) vs measure-level
 maximum 2.
 
+**Stage 2 run 2 (EXECUTED, family level, diagnostic).** 14 rows, all `ok`; every
+`candidate_family` a model hypothesis, `status: candidate_family`. Measure =
+run 1, copied unchanged; family counts labelled *"diagnostic — family coverage
+is not attributable to the measure"*. Topical-only / context-filtered:
+
+| Concept | Measure (run 1) | `candidate_family` | Family |
+| --- | --- | --- | --- |
+| DC-001 Temperature (Annual) | 124,420 / 88,245 | `temperature` | 123,948 / 88,021 |
+| DC-002 Temperature (Seasonal) | 123,948 / 88,021 | `temperature` | 123,948 / 88,021 |
+| DC-003 Precipitation | 84,926 / 61,190 | `hydrology` | 124,314 / 84,437 |
+| DC-004 Wind Speed | 27,498 / 17,394 | `wind` | 58,320 / 38,833 |
+| DC-005 Consecutive Days with No Precipitation | 6,981 / 4,946 | `dry_spell` | 7,351 / 5,267 |
+| DC-006 Degree Days (HDD/CDD) | 3,076 / 2,638 | `temperature` | 143,266 / 101,847 |
+| DC-007 Fire Weather Index | 548 / 395 | `fire_risk` | 4,465 / 3,044 |
+| DC-008 Calculating FWI Classes | 551 / 396 | `fire_danger` | 4,323 / 2,942 |
+| DC-009 Summer daily maximum heat index | 0 / 0 | `heat_index` | 15,749 / 11,719 |
+| DC-010 Summer seasonal maximum heat index | 1 / 1 | `heat_index` | 15,731 / 11,704 |
+| DC-011 … above 95 F | --- / --- | `extreme_heat_days` | 3,335 / 2,985 |
+| DC-012 … above 105 F | 0 / 0 | `extreme_heat_days` | 2,681 / 2,397 |
+| DC-013 … above 115 F | --- / --- | `heat_wave_days` | 3,347 / 2,996 |
+| DC-014 … above 125 F | 2 / 2 | `extreme_heat_days` | 2,686 / 2,402 |
+
+**Forms and normalization:** prompt F asked for up to 8 forms; the model returned
+8 for every concept --- **112 forms, 112 searched, 0 recorded over the 10-term
+cap, 0 dropped. No normalization rule fired** (every `rules_applied` is empty;
+no form contained `>`, `<`, `°` or `%`). Per-term counts for every searched form:
+[`docs/CONCEPT_COVERAGE_SURVEY.md`](../../docs/CONCEPT_COVERAGE_SURVEY.md), run-2
+section. Findings 1--5 there; the three-level finding is §13.
+
 ## 10. Validation performed
 
 - `pytest`: **906 passed** (894 at `9d2da14` + 12): `--no-hits` writes a
@@ -219,6 +330,29 @@ maximum 2.
 - Pre-existing pins unchanged: `concept_map.yaml`, the M5-WP2 matrix, the
   LITCORPUS-02 records; the D-026 allowlist re-pinned to the v3 driver only.
 
+**Run 2:** Driver v4 tests (at `3ccb4ba`): `tests/test_survey_driver_v4.py` (mock server, synthetic index):
+byte-identity with v3 (mutation-checked: perturbing one measure field fails
+it); JSON-object parsing, reasoning fallback, last object wins; `status:
+candidate_family`; normalization recorded (`days with heat index above 95°f`
+searched as `days with heat index above 95 degrees f`, `N-3`, original kept;
+`100%` → `100 percent`, `N-7`); 6/10 limits; side-by-side counts and table;
+restart; error row with the measure kept; `--normalize` in measure mode; the
+three context-cache mismatches in both modes; run-1 mismatch; tampered table.
+`coveragesurvey.verify_source` now checks the v3 tools as committed at
+`2331e19`, since the working-tree driver is v4. Scanner allowlist re-pinned to
+the v4 hash.
+
+`tests/test_survey_run2.py` (11): run 1 untouched (run-1 `manifest.csv` =
+`74ba7d7c…125d`, its copy re-hashes); run-2 copy = its `manifest.csv`, pinned under
+`diagnostics` not `external_corpora`; no `topical/hits.csv` copied (14 listed);
+log START fields; every row re-verifies and equals the side-by-side table;
+every family `candidate_family`; 112 / 112 / 0 / 0 forms, no rule fired; each
+computed statement (findings 1--5); doc regenerates byte for byte; no candidate
+family enters `concept_map.yaml`. `verify_run` mutation-checked outside the repo:
+a changed family count, measure count, run-1 row SHA-256 or
+`candidate_family_status` each fails it. Full suite: **1019 passed** (0 skipped, raw-data hash gate active).
+Scanner: **0 hits** (885 tracked text files, every new file staged).
+
 ## 11. Failures, rejected cases, and known limitations
 
 **Deviations in the run itself (survey run 1):**
@@ -240,6 +374,16 @@ maximum 2.
   `pip freeze` are this laptop's, not Polaris's. The Polaris run is evidenced by
   `survey.log`, `row.json`, `candidates.json`, `summary.json` and
   `survey_table.csv`.
+
+**Run 2:** (i) login node, conda environment and Python version not recorded in
+any run-2 output; (ii) **no normalization rule fired**, so N-1 … N-7 were
+exercised only by the tests, never on real output; (iii) prompt F asked for at
+most 8 forms, so the 10-term cap never bound; (iv) no hit offsets
+(`--no-hits`); (v) several families are much broader than their measure
+(findings 2--4) --- their counts describe the proposed forms, not the measure;
+(vi) DC-001's family count (123,948) is below its run-1 measure count (124,420):
+the run-1 terms included `mat` and others not proposed in run 2; (vii) no place
+filter; R-FWI-1 not relevant (no bare `fwi` among the family forms).
 
 **Limitations:** no hit offsets for any run-1 document (`--no-hits`); Python patch
 version on Polaris unrecorded; R-FWI-1 not applied (bare `fwi` in DC-007/008);
@@ -271,7 +415,88 @@ their rows; `cdd` is shared by DC-005 and DC-006; `mat` is a 3-letter candidate.
   - Report fields 1, 4, 5 and 7 were updated alongside 9--15, as they named the
     pre-run state.
 
+**Run-2 driver (v4) --- choices the work package left open, disclosed for the COORDINATOR:**
+
+1. **Normalization in measure mode is opt-in (`--normalize`).** The package asks
+   both that measure mode reproduce v3 *exactly* and that normalization apply in
+   measure mode; with normalization always on, measure outputs could not be
+   byte-identical (`95°f` would become searchable). Default = v3; `--normalize`
+   applies the table, with the same records and limits as family mode. Run 2
+   does not run measure mode, so no run-2 count depends on this.
+2. **Word limits: 10 for a form a rule changed, 6 otherwise** (as directed; the
+   ruling sets no limit), recorded in each `row.json` as
+   `sanitizer_word_limits`. Effect, observed on the run-1 terms: of the 26
+   dropped terms the table makes plain, **all 26** pass at 10 words, against 7
+   at 6. Dictionary names are not normalized (not model-proposed).
+3. **The 60-character bound** is unchanged but, in the v4 path only, a form over
+   it is reported as "longer than 60 characters" rather than "not a plain
+   lowercase phrase"; forms past the 10-term cap are recorded, not silently cut.
+4. **Reply parsing:** the *last* JSON object with a `candidate_family` key in the
+   content or reasoning field is taken (a reasoning field may hold drafts). The
+   family name is stored as returned, never edited; the forms are what is searched.
+5. **Polaris invocation keeps run 1's relative paths.** The package says
+   `PYTHONPATH=src`; the docstring runs from `$LITCOLLECT_ROOT_POLARIS` with
+   `PYTHONPATH="$CLIMRR_REPO/src"`, so `index/…` and `survey/run2` stay relative
+   and no absolute Eagle path lands in any `summary.json` or the log (run 1's
+   convention, and what the scanner needs at ingest). `$CLIMRR_REPO` must be a
+   checkout of the pinned commit, so the branch has to reach Polaris first.
+
+**Run-2 ingest --- EXECUTOR choices and corrections, for review:**
+
+- **Statement (2), heat index.** The work package attributes `apparent
+  temperature`, `heat stress`, `humid heat` (15,749) to "the heat-index
+  measures". That is DC-009's list; **DC-010's `heat_index` forms do not include
+  `humid heat`** (15,731; it has `heat stress index` instead). Stated per concept.
+- **Statement (3), "excluded from production vocabulary".** None of `wildfire
+  risk`, `fire hazard`, `fire danger`, `fire risk` is a `concept_map.yaml` term,
+  and D-021 (2026-10-12) restricts collection to approved concept-map family
+  vocabulary. But **`fire danger` does occur in the frozen v1 fire query --- in
+  its context group**, not as a topical term (and is removed from the survey
+  context clause). The doc says this rather than "excluded" without
+  qualification.
+- **Statement (4), "hot days", "warm days".** `hot days` (2,333) is a form in all
+  four threshold rows; **`warm days` (854) only in DC-011 and DC-013**.
+- **Statement (5), level 2.** "fire weather index 548" is the LITCORPUS-02 fire
+  diagnostic's **family group** (five approved terms) before R-FWI-1 (473 after;
+  `fire weather index` alone 462); "heat index 1,080" is the term alone (group
+  1,082). The doc gives both.
+- **Mentor brief, concept-map counts.** Only two of the seven discussion
+  families have a concept-map entry (`fire_weather_index`, `heat_index`); the
+  other five have no concept-map term and so no concept-map count. The brief
+  says so and keeps their run-1 measure counts, labelled; it shows no
+  model-family total.
+- `scripts/ingest_survey_run1.py` now regenerates the two-run doc once run 2 is
+  ingested (otherwise a rerun would drop the run-2 section); run-1 output and
+  copy unchanged. `render_doc` without a run-2 section is byte-identical to before
+  (checked).
+- Run-2 `RUN_FACTS` records host / environment / Python as not recorded, rather
+  than copying run 1's.
+- `_context/hits.csv` kept (header-only, 79 bytes), as in run 1.
+
 ## 13. Open decisions and mentor questions
+
+**Finding of run 2 --- three coverage levels are distinguishable** (computed,
+`docs/CONCEPT_COVERAGE_SURVEY.md`, finding 5):
+
+| Level | Searched | Documents (topical-only) |
+| --- | --- | --- |
+| Measure-level phrases (run 1) | the measure's own wording; heat-index measures DC-009--014 | **0--2** |
+| Concept-map family terms (LITCORPUS-02 diagnostics) | approved terms of the only two concept-map families | fire weather index group **548** (473 after R-FWI-1); `heat index` **1,080** (group 1,082) |
+| Model-proposed broad families (run 2) | `candidate_family` forms | **2,681 -- 143,266** |
+
+Only the middle level rests on governed vocabulary. The third is a model
+hypothesis, often broader than the dictionary concept (precipitation →
+`hydrology` with `moisture`, `water cycle`; degree days → `temperature` with
+`heat`, `cold`, `warming`; FWI → `fire_risk` / `fire_danger` from non-concept-map
+terms; thresholds → `extreme_heat_days` / `heat_wave_days` resting on `hot days`).
+**No family count is attributed to a measure.**
+
+| Item | Owner | Blocks |
+| --- | --- | --- |
+| Does GUIDANCE accept run 2 as diagnostic, and the three-level reading as the way to report coverage? | GUIDANCE | any use of run-2 counts |
+| Should any `candidate_family` be considered for concept-map governance (none is proposed here)? | GUIDANCE / Kaiyuan | nothing now |
+| The statement (2)--(5) corrections in §12 | COORDINATOR | the wording of the brief |
+*Carried from run 1:*
 
 | Item | Owner | Blocks |
 | --- | --- | --- |
@@ -285,7 +510,23 @@ their rows; `cdd` is shared by DC-005 and DC-006; `mat` is a 3-letter candidate.
 
 ## 14. Gate status
 
-**GUIDANCE: PASS as diagnostic (D-027, 2026-10-20)** --- Stage 2a complete;
+**Run 2 --- GUIDANCE: PASS WITH ACTIONS, diagnostic only (D-028, 2026-10-21).**
+Reviewed head **`ea2f2ea`** (`work/trackb-run2`; base `main` @ `d7032de`).
+Accepted as **"TRACKB-SURVEY-RUN2 — family-level diagnostic coverage survey"**,
+never ontology generation. Merge authorized after the ruling bookkeeping (this
+commit); Kaiyuan performs the merge. Ruling:
+[`docs/TRACKB_STAGE2_RUN2_GUIDANCE_RULING.md`](../../docs/TRACKB_STAGE2_RUN2_GUIDANCE_RULING.md).
+Normalization machinery accepted (N-1 … N-7 firing zero times is acceptable:
+predeclared, frozen, tested, inert when unnecessary). All 14 assignments stay
+`candidate_family`; no concept-map change. **Three-level coverage reporting is
+the standing presentation** (Level 1 dictionary-measure diagnostic coverage;
+Level 2 governed concept-map family coverage; Level 3 model-proposed
+candidate-family diagnostic coverage) --- never ranked or combined, Level 2/3
+never attributed to a Level-1 threshold measure
+(`docs/CONCEPT_COVERAGE_SURVEY.md` finding 5). Run-2 host/environment
+`owner_confirmed`; Python patch version `unknown`. **QA not authorized.**
+
+**Run 1 --- GUIDANCE: PASS as diagnostic (D-027, 2026-10-20)** --- Stage 2a complete;
 Stage 2b/2c run 1 accepted as exploratory coverage evidence. Reviewed head
 **`2331e19`** (pushed, `origin/work/trackb-stage2`). Merge authorized after the
 ruling bookkeeping (this commit); Kaiyuan performs the merge. Ruling:
@@ -308,21 +549,35 @@ As proposed for review:
 
 **Proposed: Stage 2a COMPLETE; Stage 2b/2c run 1 EXECUTED AND INGESTED (diagnostic), for GUIDANCE review.**
 
+**Run 2 --- as proposed for review** (D-027 acceptance criteria, verbatim):
+
+| Criterion (D-027 ruling, verbatim) | Status | Evidence |
+| --- | --- | --- |
+| 15. Stage-2 run 2 preserves run 1 unchanged. | **MET** | run-1 `manifest.csv` `74ba7d7c…125d` unchanged; copy re-hashes (`test_survey_run2.py`, `test_survey_run1.py`) |
+| 16. Every proposed family is `candidate_family`. | **MET** | 14/14 `family.json` and rows (test) |
+| 17. Candidate-family provenance includes model/prompt/date. | **MET** | `model_id`, `endpoint`, `prompt_sha256` (= `prompt.txt`), `date` in every `family.json` |
+| 18. Original model-proposed forms are retained. | **MET** | `original` per form, 112/112 |
+| 19. Normalized forms carry deterministic transform-rule provenance. | **MET (vacuous on this run)** | `rules_applied` per form; **no rule fired** (all empty) |
+| 20. Only `>`, `<`, degree notation, and `%` receive authorized normalization. | **MET** | frozen table `80a5e0e3…6e03`, hash-verified; 0 forms changed |
+| 21. No semantic synonym generation occurs during normalization. | **MET** | normalized == original for all 112 |
+| 22. Threshold-measure coverage remains separately reported. | **MET** | measure columns copied from run 1 beside family columns |
+| 23. Family coverage is not attributed to a threshold measure. | **MET** | label on every row; doc finding 4 |
+| 24. The seven discussion families are not automatically approved as benchmark families. | **MET** | mentor brief: discussion candidates, concept-map counts only |
+| 27. No M1 column status changes. | **MET** | none |
+| 28. Index 117 remains unlabeled. | **MET** | not referenced |
+| 29. No QA is generated. | **MET** | none |
+
+**Proposed: Stage 2 run 2 EXECUTED AND INGESTED (diagnostic), for GUIDANCE review.**
+
 ## 15. Next bounded objective
 
-**Stage 2 run 2, family level (authorized, D-027) --- pending the driver
-update.** For all 14 measure concepts: preserve run-1 measure identity; request
-a `candidate_family` (stored only as `status: candidate_family`, with
-`dictionary_concept_id`, `dictionary_passage`, `model_id`, `prompt_sha256`,
-`candidate_family`, `candidate_family_surface_forms`, `date`, `status`); apply
-only the frozen orthographic table
-(`data/metadata/litcollect/normalization_table_v1.yaml`, SHA-256
-`80a5e0e386dfe8a984e1a5ba2ace781d15601f9b0723b75d238b6de5d1226e03`, N-1 … N-7;
-originals retained); topical-only and context-filtered counts; measure-level and
-family-level coverage side by side, **run 1 unchanged**. Not started; the driver
-is unchanged in the bookkeeping package.
-
-For the driver update, observed while testing the table (not acted on): of the
-29 run-1 model terms dropped as "not a plain lowercase phrase", the table makes
-**26** plain (3 keep their parentheses); only **7** of those 26 have six words or
-fewer, so the driver's unchanged "more than 6 words" rule would still drop 19.
+**Track B is paused (D-028, R4).** After the merge of `work/trackb-run2`, no
+further Track B work until mentor feedback (2026-10-22); **no run 3**, and no
+further vocabulary or family survey. Track B **reopens only via a governance
+package** --- not another unconstrained model-family survey --- and only if the
+mentor approves a new candidate family for redesign, GUIDANCE needs vocabulary
+evidence to govern one of the five ungoverned families (temperature,
+precipitation, wind speed, dry spell, degree days), or a redesigned unit requires
+a new concept-map family. The next work is Track A-next (unit-granularity
+diagnostic at the governed concept-map family level: `fire_weather_index`,
+`heat_index`; `docs/BRIDGE_ELIGIBILITY.md`). **QA not authorized.**

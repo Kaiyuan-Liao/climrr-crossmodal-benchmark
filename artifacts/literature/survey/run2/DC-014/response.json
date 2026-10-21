@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"candidate_family\": \"extreme_heat_days\",\n  \"family_surface_forms\": [\n    \"extreme heat days\",\n    \"heat stress days\",\n    \"heat index days\",\n    \"hot days\",\n    \"high heat index days\",\n    \"heat wave days\",\n    \"summer heat days\",\n    \"heat extreme days\"\n  ]\n}",
+        "reasoning": "We need to parse the variable: \"Number of Summer days with daily max heat index above 125 F\". The broader scientific quantity family: likely \"heat stress days\" or \"extreme heat days\". Could be \"heat index days\", \"heat wave days\". The family name should be short lowercase snake_case. Something like \"extreme_heat_days\". The surface forms: phrases a paper would use for that family: \"extreme heat days\", \"heat stress days\", \"heat index days\", \"hot days\", \"high heat index days\", \"heat wave days\", \"summer heat days\", \"days above 125°F\". Up to 8.\n\nWe need JSON with candidate_family and family_surface_forms list.\n\nPick candidate_family: \"extreme_heat_days\". That seems appropriate.\n\nProvide list: [\"extreme heat days\",\"heat stress days\",\"heat index days\",\"hot days\",\"high heat index days\",\"heat wave days\",\"summer heat days\",\"days above 125 f\"]\n\nAll lowercase. No place names, years, scenario names, thresholds or statistics? Actually thresholds are part of variable but surface forms should not include thresholds? The instruction: \"no place names, years, scenario names, thresholds or statistics\". So we should avoid \"days above 125 f\". That includes threshold. So remove that. Provide other forms without thresholds.\n\nList maybe: [\"extreme heat days\",\"heat stress days\",\"heat index days\",\"hot days\",\"high heat index days\",\"heat wave days\",\"summer heat days\",\"heat extreme days\"]? \"high heat index days\" includes \"high\" but not a numeric threshold, okay.\n\nMake sure up to 8.\n\nReturn JSON only.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792613854,
+  "id": "ec2d7a60-d4d3-4e57-9b1b-5cb3c879d997",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 416,
+    "completion_tokens_after_first_per_sec": 738.6807400403665,
+    "completion_tokens_after_first_per_sec_first_ten": 740.4287387237547,
+    "completion_tokens_after_first_per_sec_graph": 740.4287387237547,
+    "completion_tokens_details": {
+      "reasoning_tokens": 337
+    },
+    "completion_tokens_per_sec": 674.6341016789776,
+    "end_time": 1792613854.482236,
+    "is_last_response": true,
+    "prompt_tokens": 237,
+    "start_time": 1792613853.8656054,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.054818153381347656,
+    "time_to_first_token_graph": 0.04886460304260254,
+    "total_latency": 0.6166305541992188,
+    "total_tokens": 653,
+    "total_tokens_per_sec": 1058.9809336451258
+  }
+}

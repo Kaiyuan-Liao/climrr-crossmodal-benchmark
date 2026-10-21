@@ -69,8 +69,8 @@ def test_the_run_used_the_pinned_inventory_clause_index_and_v3_tools():
     assert run["context_clause_sha256"] == sha256_file(cs.CONTEXT)
     assert run["context_clause_documents"] == 120050
     assert run["index_content_identity_sha256"].startswith("fbb4affb")
-    for path, sha in run["tools_sha256"].items():
-        assert sha256_file(REPO_ROOT / path) == sha
+    for path, sha in run["tools_sha256"].items():  # the v3 files as committed (the working-tree driver is v4)
+        assert cs._v3_tracked_sha256(path.rsplit("/", 1)[1]) == sha
     assert "untracked copies" in run["execution"] and "aborted first attempt" in run["prior_attempt"]
 
 
@@ -93,8 +93,12 @@ def test_error_rows_are_sanitizer_drops_not_model_failures():
 
 
 def test_the_doc_regenerates_byte_for_byte():
+    # since run 2 is ingested the doc covers both runs; the run-1 part is rendered by the same code
+    from climrr import coveragesurvey_run2 as cs2
+    assert cs2.render_full_doc() == cs.DOC_PATH.read_text(encoding="utf-8")
     rows = cs.verify_run(cs.RUN_DIR)
-    assert cs.render_doc(rows, ENTRY["manifest_sha256"]) == cs.DOC_PATH.read_text(encoding="utf-8")
+    run1_only = cs.render_doc(rows, ENTRY["manifest_sha256"])
+    assert cs.RUN2_PENDING in run1_only and cs.RUN2_PENDING not in cs.DOC_PATH.read_text(encoding="utf-8")
 
 
 def test_candidates_never_reach_the_concept_map():

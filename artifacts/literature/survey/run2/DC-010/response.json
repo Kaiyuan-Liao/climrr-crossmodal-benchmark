@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"candidate_family\": \"heat_index\",\n  \"family_surface_forms\": [\n    \"heat index\",\n    \"apparent temperature\",\n    \"perceived temperature\",\n    \"thermal discomfort\",\n    \"heat stress\",\n    \"temperature humidity index\",\n    \"heat stress index\",\n    \"heat exposure\"\n  ]\n}",
+        "reasoning": "We need to output JSON with candidate_family: short lowercase snake_case name of broader scientific quantity family. The variable is \"Summer seasonal maximum heat index\". The broader family likely \"heat stress\" or \"heat index\" or \"temperature\". Heat index is a measure combining temperature and humidity, representing perceived temperature. Family could be \"heat index\" or \"apparent temperature\". The variable is a seasonal maximum of heat index. So family: \"heat_index\". Provide surface forms: phrases a paper would use for that family: \"heat index\", \"apparent temperature\", \"perceived temperature\", \"humidex\"? But humidex is different. Up to 8. Use lowercase. So:\n\n{\n \"candidate_family\": \"heat_index\",\n \"family_surface_forms\": [\"heat index\", \"apparent temperature\", \"perceived temperature\", \"thermal discomfort\", \"heat stress\", \"temperature‑humidity index\", \"heat stress index\", \"heat exposure\"]\n}\n\nMake sure no special characters like hyphen? It's okay. Provide JSON only.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792613636,
+  "id": "a89f4f9d-57c1-49a0-849c-91b494b64cf2",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 279,
+    "completion_tokens_after_first_per_sec": 740.7851143689948,
+    "completion_tokens_after_first_per_sec_first_ten": 743.5803409324977,
+    "completion_tokens_after_first_per_sec_graph": 743.5803409324977,
+    "completion_tokens_details": {
+      "reasoning_tokens": 207
+    },
+    "completion_tokens_per_sec": 649.2813506170113,
+    "end_time": 1792613636.1523902,
+    "is_last_response": true,
+    "prompt_tokens": 273,
+    "start_time": 1792613635.7226844,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.0544283390045166,
+    "time_to_first_token_graph": 0.04848933219909668,
+    "total_latency": 0.4297058582305908,
+    "total_tokens": 552,
+    "total_tokens_per_sec": 1284.5996614358073
+  }
+}

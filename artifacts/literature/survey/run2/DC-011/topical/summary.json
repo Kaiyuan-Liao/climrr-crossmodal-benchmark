@@ -1,0 +1,48 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-21T20:15:45Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "408fee549312e77604001da66d95e18868437b9a8e8517c7a1a135821506fea4",
+  "query_text": "( \"heat wave days\" OR \"extreme heat days\" OR \"high heat index days\" OR \"heat stress days\" OR \"hot days\" OR \"summer heat days\" OR \"heat index days\" OR \"warm days\" )\n",
+  "parsed_groups": [
+    [
+      "heat wave days",
+      "extreme heat days",
+      "high heat index days",
+      "heat stress days",
+      "hot days",
+      "summer heat days",
+      "heat index days",
+      "warm days"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    3335
+  ],
+  "per_term_doc_counts": {
+    "g0:heat wave days": 245,
+    "g0:extreme heat days": 156,
+    "g0:high heat index days": 1,
+    "g0:heat stress days": 77,
+    "g0:hot days": 2333,
+    "g0:summer heat days": 2,
+    "g0:heat index days": 5,
+    "g0:warm days": 854
+  },
+  "raw_count": 3335,
+  "disambiguation": null,
+  "admitted_count": 3335,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 53.9,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

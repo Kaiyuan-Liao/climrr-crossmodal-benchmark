@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\"candidate_family\":\"temperature\",\"family_surface_forms\":[\"temperature\",\"air temperature\",\"surface temperature\",\"daily temperature\",\"maximum temperature\",\"minimum temperature\",\"average temperature\",\"annual temperature\"]}",
+        "reasoning": "We need to output JSON with candidate_family: short lowercase snake_case name of broader scientific quantity family. For temperature measures, family could be \"temperature\". But maybe broader family is \"temperature\". Could be \"air_temperature\". The passage is about temperature readings, max daily, min daily, annual average. So family: \"temperature\". Provide surface forms: list up to 8 lowercase words/phrases a paper would use for that family, no place names, years, scenario names, thresholds or statistics. So surface forms: \"temperature\", \"air temperature\", \"surface temperature\", \"daily temperature\", \"maximum temperature\", \"minimum temperature\", \"average temperature\", \"annual temperature\". That's 8. Return JSON.\n\nCheck format: {\"candidate_family\": \"<...>\", \"family_surface_forms\": [ ... ]}. Use double quotes. Ensure lower case. No extra spaces? It's fine.\n\nThus final.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792613112,
+  "id": "ce2a7b11-16b4-40b5-a654-5cdc1320b25e",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 223,
+    "completion_tokens_after_first_per_sec": 691.9051358492922,
+    "completion_tokens_after_first_per_sec_first_ten": 693.9445476639233,
+    "completion_tokens_after_first_per_sec_graph": 693.9445476639233,
+    "completion_tokens_details": {
+      "reasoning_tokens": 181
+    },
+    "completion_tokens_per_sec": 208.78880500845017,
+    "end_time": 1792613112.1254976,
+    "is_last_response": true,
+    "prompt_tokens": 293,
+    "start_time": 1792613111.0574327,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.7472116947174072,
+    "time_to_first_token_graph": 0.0468440055847168,
+    "total_latency": 1.0680649280548096,
+    "total_tokens": 516,
+    "total_tokens_per_sec": 483.1166967908533
+  }
+}

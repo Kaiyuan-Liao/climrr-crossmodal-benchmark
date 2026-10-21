@@ -1,0 +1,48 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-21T20:09:10Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "77af7bfe154ea3b142b5e3c238933580a89d2db9221f9042939021ddf7be03dd",
+  "query_text": "( \"wind speed\" OR \"wind velocity\" OR \"air flow\" OR \"wind\" OR \"breeze speed\" OR \"gust speed\" OR \"wind magnitude\" OR \"wind intensity\" )\n",
+  "parsed_groups": [
+    [
+      "wind speed",
+      "wind velocity",
+      "air flow",
+      "wind",
+      "breeze speed",
+      "gust speed",
+      "wind magnitude",
+      "wind intensity"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    58320
+  ],
+  "per_term_doc_counts": {
+    "g0:wind speed": 25732,
+    "g0:wind velocity": 3739,
+    "g0:air flow": 2318,
+    "g0:wind": 57608,
+    "g0:breeze speed": 6,
+    "g0:gust speed": 200,
+    "g0:wind magnitude": 170,
+    "g0:wind intensity": 702
+  },
+  "raw_count": 58320,
+  "disambiguation": null,
+  "admitted_count": 58320,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 57.9,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

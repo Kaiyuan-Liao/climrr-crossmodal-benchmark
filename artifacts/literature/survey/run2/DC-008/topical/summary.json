@@ -1,0 +1,48 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-21T20:13:00Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "67d2c0b4ad58df8c218aed07ad1d7a8fa9ec94952cd2d6348ebe89a91512505a",
+  "query_text": "( \"fire danger\" OR \"wildfire risk\" OR \"fire hazard\" OR \"fire danger rating\" OR \"fire danger index\" OR \"fire risk\" OR \"fire weather\" OR \"fire danger classes\" )\n",
+  "parsed_groups": [
+    [
+      "fire danger",
+      "wildfire risk",
+      "fire hazard",
+      "fire danger rating",
+      "fire danger index",
+      "fire risk",
+      "fire weather",
+      "fire danger classes"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    4323
+  ],
+  "per_term_doc_counts": {
+    "g0:fire danger": 1041,
+    "g0:wildfire risk": 1061,
+    "g0:fire hazard": 886,
+    "g0:fire danger rating": 293,
+    "g0:fire danger index": 223,
+    "g0:fire risk": 2327,
+    "g0:fire weather": 1298,
+    "g0:fire danger classes": 39
+  },
+  "raw_count": 4323,
+  "disambiguation": null,
+  "admitted_count": 4323,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 53.2,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

@@ -152,6 +152,18 @@
       "milestone": "Track B ruling bookkeeping (D-027)",
       "change": "Added data/metadata/litcollect/normalization_table_v1.yaml (orthographic normalization table v1, frozen before Stage 2 run 2). TRACKB-SURVEY-RUN1 run.python: the Polaris patch version is recorded as `unknown` (ruling action 22); no hash changed. Existing entries otherwise unchanged.",
       "decision_ref": "D-027"
+    },
+    {
+      "date": "2026-10-21",
+      "milestone": "Track B Stage 2 run 2",
+      "change": "Added TRACKB-SURVEY-RUN2 to the diagnostics block (artifacts/literature/survey/run2/manifest.csv; family level, candidate_family). A diagnostic, not a corpus: not under external_corpora. TRACKB-SURVEY-RUN1 and every other entry unchanged.",
+      "decision_ref": "D-025, D-026, D-027"
+    },
+    {
+      "date": "2026-10-21",
+      "milestone": "Track B run-2 ruling bookkeeping (D-028)",
+      "change": "TRACKB-SURVEY-RUN2 run.host and run.environment recorded as owner_confirmed (polaris-login-01; module conda/2026-10-01 + conda env globus_env), not run-derived; run.python: patch version `unknown`, run 1's not copied (ruling actions 13-14). No hash changed. Existing entries otherwise unchanged.",
+      "decision_ref": "D-028"
     }
   ],
   "external_corpora": [
@@ -289,6 +301,60 @@
         "index_content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94"
       },
       "decision_ref": "D-025, D-026"
+    },
+    {
+      "diagnostic_id": "TRACKB-SURVEY-RUN2",
+      "role": "Track B Stage 2 dictionary concept coverage survey, run 2 (family level, D-027 B2) --- a diagnostic, not a corpus; counts are diagnostic coverage counts, not prevalence; every candidate_family is a model hypothesis (status candidate_family), inert; family coverage is not attributable to the measure",
+      "manifest_path": "artifacts/literature/survey/run2/manifest.csv",
+      "manifest_sha256": "1182deea5d2ec6ed992e9415a6e6d7b8bcadd78e09da22ab9cb86fab2887c363",
+      "n_files": 132,
+      "total_bytes": 19106195,
+      "log_path": "artifacts/literature/survey/survey_run2.log",
+      "log_sha256": "bc871aaaaab527bef7daa50c5a5a8668be574d8a3e8f7223a48e222a71830682",
+      "source_tarball_sha256": "8f92e3c328e642ef142fc1e77edb7721926518e7d70087bd7503ade7a03bf85a",
+      "not_copied": {
+        "header_only_hits_csv": [
+          "DC-001/topical/hits.csv",
+          "DC-002/topical/hits.csv",
+          "DC-003/topical/hits.csv",
+          "DC-004/topical/hits.csv",
+          "DC-005/topical/hits.csv",
+          "DC-006/topical/hits.csv",
+          "DC-007/topical/hits.csv",
+          "DC-008/topical/hits.csv",
+          "DC-009/topical/hits.csv",
+          "DC-010/topical/hits.csv",
+          "DC-011/topical/hits.csv",
+          "DC-012/topical/hits.csv",
+          "DC-013/topical/hits.csv",
+          "DC-014/topical/hits.csv"
+        ],
+        "reason": "run_query.py --no-hits writes a header-only hits.csv; the topical copies are omitted (as run 1)",
+        "duckdb_tmp_dirs": "none present"
+      },
+      "run": {
+        "host": "polaris-login-01 (Polaris login node) --- `owner_confirmed`, not run-derived",
+        "environment": "module conda/2026-10-01 + conda env globus_env --- `owner_confirmed`, not run-derived",
+        "python": "patch version `unknown` (not recorded in any run-2 output and not supplied; run 1's is not copied)",
+        "duckdb": "1.5.4",
+        "model": "gpt-oss-120b",
+        "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+        "start_utc": "2026-10-21T20:02:05Z",
+        "end_utc": "2026-10-21T20:18:28Z",
+        "mode": "family",
+        "tools_sha256": {
+          "scripts/litcollect/survey_driver.py": "f929ab6a366987d29e5565fe9fa9f80b47cb1c57d19e01ff3af5affdd99baf9f",
+          "scripts/litcollect/run_query.py": "5f56ee49f0da675f49ef490b506c030b307c693032e8be9097e499cf1c64030d"
+        },
+        "prompt_f_template_sha256": "7097c86ccbb694fe34fa5f4dc51ed087594295e3c37ddd97c56ab94702a97931",
+        "normalization_table_sha256": "80a5e0e386dfe8a984e1a5ba2ace781d15601f9b0723b75d238b6de5d1226e03",
+        "inventory_sha256": "288d08c5b92a32dbc5329834ceffc6a7ebc746d02479308431407cfddd81d064",
+        "context_clause_sha256": "fec9b5ca97f18e6e409a4b6e10b50faf5ab3c5404a33381eb8e67e9debc3626f",
+        "context_clause_documents": 120050,
+        "index_content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+        "run1_manifest_sha256": "74ba7d7c72e7920ac16e1cc7c49ab2543add316df37baf60ff3b52c10c2d125d"
+      },
+      "decision_ref": "D-025, D-026, D-027"
     }
   ]
 }

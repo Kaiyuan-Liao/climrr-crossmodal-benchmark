@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"candidate_family\": \"heat_index\",\n  \"family_surface_forms\": [\n    \"heat index\",\n    \"apparent temperature\",\n    \"perceived temperature\",\n    \"heat stress\",\n    \"thermal discomfort\",\n    \"temperature humidity index\",\n    \"heat exposure\",\n    \"humid heat\"\n  ]\n}",
+        "reasoning": "We need to output JSON with candidate_family: a short lowercase snake_case name of broader scientific quantity family. The variable is \"Summer daily maximum heat index\". The family likely \"heat stress\" or \"heat index\" or \"temperature\". Heat index is a measure combining temperature and humidity to reflect perceived temperature. The broader family could be \"heat index\" or \"apparent temperature\". Probably \"heat index\" family. So candidate_family: \"heat_index\". family_surface_forms: up to 8 lowercase words/phrases a paper would use for that family, no place names, years, scenario names, thresholds or statistics. So surface forms: \"heat index\", \"apparent temperature\", \"perceived temperature\", \"thermal discomfort\", \"heat stress\", \"humid heat\", \"temperature‑humidity index\", \"heat exposure\". Need lowercase. Provide list of strings.\n\nReturn JSON only.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792613581,
+  "id": "0189a49d-f5d5-489b-81ea-1814e11183b7",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 249,
+    "completion_tokens_after_first_per_sec": 712.008942316446,
+    "completion_tokens_after_first_per_sec_first_ten": 714.419814984866,
+    "completion_tokens_after_first_per_sec_graph": 714.419814984866,
+    "completion_tokens_details": {
+      "reasoning_tokens": 178
+    },
+    "completion_tokens_per_sec": 614.9886357011753,
+    "end_time": 1792613581.6108203,
+    "is_last_response": true,
+    "prompt_tokens": 274,
+    "start_time": 1792613581.2059348,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.05657529830932617,
+    "time_to_first_token_graph": 0.04853034019470215,
+    "total_latency": 0.40488553047180176,
+    "total_tokens": 523,
+    "total_tokens_per_sec": 1291.7231183602998
+  }
+}
