@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "[\"summer daily maximum heat index\",\"summer max heat index\",\"summer daily max heat index\",\"summer heat index maximum\",\"summer maximum heat index\",\"summer HI max\",\"summer HI maximum\",\"summer daily max HI\"]",
+        "reasoning": "We need to propose up to 8 surface forms (words or short phrases) that a scientific paper would use when discussing this variable: \"Summer daily maximum heat index\". Need forms that name the same quantity or standard name for it. Include common abbreviations and hyphenation variants. No broader topics. Each form at most 6 words. Lowercase. No regex. Return JSON array.\n\nPossible forms:\n\n- summer daily maximum heat index\n- summer max heat index\n- summer daily max heat index\n- summer heat index maximum\n- summer maximum heat index\n- daily maximum heat index (summer)\n- summer HI max\n- summer heat index (max)\n\nBut need to be careful about naming same quantity. \"daily maximum heat index\" could be generic, not necessarily summer, but still could be used. But rule (1) same quantity, not broader topics. \"daily maximum heat index\" could be broader (includes other seasons). Might be okay if context is summer, but maybe too broad. Better keep summer qualifier.\n\nAbbreviations: \"HI\" for heat index. So \"summer HI max\". Also \"summer HI maximum\". Also \"summer heat index maximum\". Also \"summer max HI\". Also \"summer daily max HI\". Also \"summer daily maximum HI\". Also \"summer daily max heat index\". That's 7.\n\nMake sure each <=6 words. Count words:\n\n- \"summer daily maximum heat index\" (5)\n- \"summer max heat index\" (4)\n- \"summer daily max heat index\" (5)\n- \"summer heat index maximum\" (4)\n- \"summer maximum heat index\" (4)\n- \"summer HI max\" (3)\n- \"summer HI maximum\" (3)\n- \"summer daily max HI\" (4)\n\nAll good.\n\nReturn JSON array.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792533977,
+  "id": "b8fbd5f3-25fb-4cba-b282-f738c8e06a28",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 417,
+    "completion_tokens_after_first_per_sec": 739.0155373525002,
+    "completion_tokens_after_first_per_sec_first_ten": 741.6869700354854,
+    "completion_tokens_after_first_per_sec_graph": 741.6869700354854,
+    "completion_tokens_details": {
+      "reasoning_tokens": 368
+    },
+    "completion_tokens_per_sec": 674.7981201602054,
+    "end_time": 1792533977.2082067,
+    "is_last_response": true,
+    "prompt_tokens": 307,
+    "start_time": 1792533976.590244,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.055051565170288086,
+    "time_to_first_token_graph": 0.04838705062866211,
+    "total_latency": 0.6179625988006592,
+    "total_tokens": 724,
+    "total_tokens_per_sec": 1171.5919400383423
+  }
+}

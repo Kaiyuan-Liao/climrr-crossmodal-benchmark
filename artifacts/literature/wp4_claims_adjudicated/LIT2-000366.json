@@ -1,0 +1,586 @@
+{
+  "lit2_id": "LIT2-000366",
+  "item_id": "229495849",
+  "arm": "fire_weather_v1",
+  "rank": 20,
+  "rel_path": "49/229495849.json",
+  "file_sha256": "31cd6aeb07897bc49e7ad65b67b18da54a968c61298ef3e635c059200e3d1dac",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "principles of automatic machine learning",
+    "optimization for classification of binary unbalanced datasets",
+    "experiments and results",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Automatic machine learning Framework for Forest fire forecasting",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper builds and tests a machine-learning framework that predicts forest fire occurrence from meteorological data, i.e. prediction of a weather-driven hazard.",
+  "scope_evidence": {
+    "json_path": "$.conclusion",
+    "char_start": 213,
+    "char_end": 379,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "This framework can effectively predict the occurrence of forest fires based on meteorological data, and has good regional adaptability and good application prospects.",
+    "evidence_sha256": "818ca7986c4522ed505605d1856c0e93a5aecc382ab4e1ffac1b6f964496888b"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-000366-C1",
+      "claim_text": "The optimized automatic machine learning framework improves forest fire prediction accuracy by 13% on average across test sets compared with the unimproved framework.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "forest fire risk prediction accuracy of an optimized auto-sklearn framework",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "improved by 13% on average",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Montesinho nature park in Portugal",
+        "status": "inferred",
+        "role": "area of the forest fire data set used for testing",
+        "support": {
+          "json_path": "$[\"experiments and results\"]",
+          "char_start": 1742,
+          "char_end": 1843,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The data set records the forest fire occurrence in Montesinho nature park in Portugal for three years",
+          "evidence_sha256": "57071b53ecd6a448efcd25bbdf00be4080a74fd60d06e5c3a21d568fbbcbdc29"
+        }
+      },
+      "temporal_frame": {
+        "value": "three years (the period of the data set; years not stated)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"experiments and results\"]",
+          "char_start": 1742,
+          "char_end": 1843,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The data set records the forest fire occurrence in Montesinho nature park in Portugal for three years",
+          "evidence_sha256": "57071b53ecd6a448efcd25bbdf00be4080a74fd60d06e5c3a21d568fbbcbdc29"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "binary classification of a discretized forest fire data set; training/test split 3:2; regional samples from unsupervised clustering of location",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"experiments and results\"]",
+          "char_start": 1995,
+          "char_end": 2132,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "In the process of data preprocessing, we discretize the labels and transform the regression problem into a binary classification problem.",
+          "evidence_sha256": "c684395f10b16fd7f3b355684a7adf2964c5032121b973bdafaaee57bf49f4f3"
+        }
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 777,
+        "char_end": 923,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The comparative analysis results show that the prediction accuracy of the improved framework in different test sets is improved by 13% on average.",
+        "evidence_sha256": "1af1c41e63a33423380ab068ed3ec8117240a2036d06f8f3c656e5e3618f115b"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "A methods / model-performance finding; the hazard enters only as the prediction target.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "229495849-c1",
+        "blind_evidence": {
+          "json_path": "$.abstract",
+          "char_start": 777,
+          "char_end": 923,
+          "evidence_text": "The comparative analysis results show that the prediction accuracy of the improved framework in different test sets is improved by 13% on average."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Prediction accuracy of the optimized framework.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "geography": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "temporal_frame": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "'three years', both inferred.",
+            "rule": "judged same content, same tag"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 2 keeps the evidence's words; reader 1 the preprocessing from a support span. Adopted: the part both state.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "different test sets",
+              "tag": "explicit"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "area of the forest fire data set used for testing",
+            "tag": null,
+            "class": "data_source"
+          },
+          "reader_1": {
+            "value": "area of the forest fire data set used for testing",
+            "tag": null,
+            "class": "data_source"
+          },
+          "reader_2": {
+            "value": "data source",
+            "tag": "inferred",
+            "class": "data_source",
+            "support": {
+              "json_path": "$[\"experiments and results\"]",
+              "char_start": 1742,
+              "char_end": 1843,
+              "evidence_text": "The data set records the forest fire occurrence in Montesinho nature park in Portugal for three years"
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "experimental_condition": {
+            "value": "different test sets",
+            "tag": "explicit"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000366-C2",
+      "claim_text": "On the forest fire data set, the optimized framework's classification accuracy is not lower than that of general classifiers (SVM, random forest), and it shows natural regional adaptability.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "classification accuracy of the optimized framework versus general classifiers",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "not lower than existing models; natural regional adaptability",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Montesinho nature park in Portugal",
+        "status": "inferred",
+        "role": "area of the forest fire data set used for testing",
+        "support": {
+          "json_path": "$[\"experiments and results\"]",
+          "char_start": 1742,
+          "char_end": 1843,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The data set records the forest fire occurrence in Montesinho nature park in Portugal for three years",
+          "evidence_sha256": "57071b53ecd6a448efcd25bbdf00be4080a74fd60d06e5c3a21d568fbbcbdc29"
+        }
+      },
+      "temporal_frame": {
+        "value": "three years (the period of the data set; years not stated)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"experiments and results\"]",
+          "char_start": 1742,
+          "char_end": 1843,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The data set records the forest fire occurrence in Montesinho nature park in Portugal for three years",
+          "evidence_sha256": "57071b53ecd6a448efcd25bbdf00be4080a74fd60d06e5c3a21d568fbbcbdc29"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"experiments and results\"]",
+        "char_start": 3193,
+        "char_end": 3410,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Compared with the accuracy of general classifiers, the classification accuracy of the optimized automatic machine learning framework is not lower than that of the existing model, and has natural regional adaptability.",
+        "evidence_sha256": "ed316d902401c997756f2d56a2aedbd0912fda094eb094bb607f30a7e34adace"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "area of the forest fire data set used for testing",
+            "class": "data_source"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "area of the forest fire data set used for testing",
+            "tag": null,
+            "class": "data_source"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000366-C3",
+      "claim_text": "Canada's forest fire weather index system calculates the FWI from temperature, humidity and wind speed; the United States, New Zealand and others built fire danger forecast systems on its ideas.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "the Canada's forest fire weather index system; forest fire whether index(FWI)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "calculated from temperature, humidity and wind speed; adopted as the basis of other national systems",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Canada; The United States, New Zealand and some others",
+        "status": "explicit",
+        "role": "background context (where the systems are used)"
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 539,
+        "char_end": 651,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "It calculates the forest fire whether index(FWI) based on features such as temperature, humidity and wind speed.",
+        "evidence_sha256": "c4bf59f52913aec47678ae3fc275f166f6c025b9553626c9ec8a4ea1d2619ee8"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "'whether' is the source's spelling; kept exactly. Background description, not this paper's analysis; no citation is given for it.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "229495849-c2",
+        "blind_evidence": {
+          "json_path": "$.introduction",
+          "char_start": 411,
+          "char_end": 651,
+          "evidence_text": "For example, the Canada's forest fire weather index system, which is currently the most developed and widely used in the world. It calculates the forest fire whether index(FWI) based on features such as temperature, humidity and wind speed."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds 'the Canada's forest fire weather index system', which is in reader 2's longer span but not reader 1's. Adopted: the index both name, as stored (the source misspells 'weather').",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "forest fire whether index(FWI)",
+              "tag": "explicit"
+            }
+          },
+          "relation_or_direction": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds adoption by other national systems, from a sentence neither evidence span contains.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "calculated from temperature, humidity and wind speed",
+              "tag": "explicit"
+            }
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds the United States, New Zealand and others from outside both evidence spans. Adopted: 'Canada'.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "Canada",
+              "tag": "explicit"
+            }
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 unknown; reader 2 explicit 'currently'. Rule 3a.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "background context (where the systems are used)",
+            "tag": null,
+            "class": "contextual"
+          },
+          "reader_1": {
+            "value": "background context (where the systems are used)",
+            "tag": null,
+            "class": "contextual"
+          },
+          "reader_2": {
+            "value": "contextual mention",
+            "tag": "inferred",
+            "class": "contextual",
+            "support": {
+              "json_path": "$.introduction",
+              "char_start": 652,
+              "char_end": 804,
+              "evidence_text": "The United States, New Zealand and some others have also successfully formed their own fire danger level forecast systems based on the ideas of the FWI."
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "concept": {
+            "value": "forest fire whether index(FWI)",
+            "tag": "explicit"
+          },
+          "relation_or_direction": {
+            "value": "calculated from temperature, humidity and wind speed",
+            "tag": "explicit"
+          },
+          "geography": {
+            "value": "Canada",
+            "tag": "explicit"
+          },
+          "temporal_frame": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000366-B3",
+      "origin": "blind_reader",
+      "blind_claim_id": "229495849-c3",
+      "claim_text": "The authors conclude that their framework can effectively predict the occurrence of forest fires based on meteorological data and has good regional adaptability.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "occurrence of forest fires",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "can effectively predict ... based on meteorological data",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Montesinho nature park in Portugal",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"experiments and results\"]",
+          "char_start": 1742,
+          "char_end": 1843,
+          "evidence_text": "The data set records the forest fire occurrence in Montesinho nature park in Portugal for three years",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "57071b53ecd6a448efcd25bbdf00be4080a74fd60d06e5c3a21d568fbbcbdc29"
+        },
+        "role": "data source",
+        "blind_role_record": {
+          "value": "data source",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"experiments and results\"]",
+            "char_start": 1742,
+            "char_end": 1843,
+            "evidence_text": "The data set records the forest fire occurrence in Montesinho nature park in Portugal for three years",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.conclusion",
+        "char_start": 213,
+        "char_end": 379,
+        "evidence_text": "This framework can effectively predict the occurrence of forest fires based on meteorological data, and has good regional adaptability and good application prospects.",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "818ca7986c4522ed505605d1856c0e93a5aecc382ab4e1ffac1b6f964496888b"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "data source",
+            "class": "data_source"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "data source",
+            "tag": "inferred",
+            "class": "data_source",
+            "support": {
+              "json_path": "$[\"experiments and results\"]",
+              "char_start": 1742,
+              "char_end": 1843,
+              "evidence_text": "The data set records the forest fire occurrence in Montesinho nature park in Portugal for three years"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-000366-R1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 261,
+        "char_end": 410,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Among many factors that may cause forest fires, weather and climate conditions have always been considered as the most important influencing factors.",
+        "evidence_sha256": "84014d09138e21007da3ee9ea7083af75b1d3d951ec114d90ea13e22fa1a0e6d"
+      },
+      "reason": "General background assertion without evidence in this paper."
+    },
+    {
+      "candidate_id": "LIT2-000366-R2",
+      "evidence": {
+        "json_path": "$.conclusion",
+        "char_start": 380,
+        "char_end": 508,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "This framework also performs well on other binary imbalanced data sets, and has certain application potential in related fields.",
+        "evidence_sha256": "36a0b8538b0523672c1244b502029ef55ddc3a1e658b106db4469cfc3b864140"
+      },
+      "reason": "Concerns non-fire data sets; not about a hazard."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "The data set is described as 'provided by the University of California at Irvine' (data provider), separate from the study area.",
+  "scope_adjudication": {
+    "reader_1": "in_scope_hazard",
+    "reader_2": "in_scope_hazard",
+    "adopted": "in_scope_hazard",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp4_blind/229495849.json",
+    "reader_2_reason": "The paper builds and tests a model that predicts forest fire occurrence from meteorological data, i.e. it examines a wildfire hazard."
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP4r3 Phase A",
+    "adjudicator": "reader 1 (the EXECUTOR, prototype-exposed)",
+    "first_pass_record_sha256": "7a2861a13d64030f06d14cc5a2b6de0cef82deac026169eed3b388dfb62fdb3e",
+    "blind_record_sha256": "60d48520c517c3bd3d3078c7e8e453cf44c70217ca71698a35d8f7415d30d207",
+    "no_paper_re_read": true,
+    "representativeness": "deterministic rank sample of lexical place candidates from LITCORPUS-02; not representative of the corpus or the literature"
+  }
+}

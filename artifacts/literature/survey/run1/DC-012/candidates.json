@@ -1,0 +1,68 @@
+{
+  "concept_id": "DC-012",
+  "dictionary_name": "Number of Summer days with daily max heat index above 105 F",
+  "status": "candidate_surface_form",
+  "model": "gpt-oss-120b",
+  "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+  "prompt_sha256": "2bde2e5009521971e76ab224ed6859090fefafdacef2281032b7076e42a191d0",
+  "date_utc": "2026-10-20T22:08:28Z",
+  "model_seconds": 1.0,
+  "model_raw_terms": [
+    "summer days heat index >105f",
+    "days with max heat index >105f",
+    "heat index exceedance days 105f",
+    "105f heat index days",
+    "hi >105f days",
+    "summer heat index >105f days",
+    "days above 105f heat index",
+    "number of days heat index 105f"
+  ],
+  "model_parse_error": null,
+  "model_content_excerpt": "[\"summer days heat index >105f\",\"days with max heat index >105f\",\"heat index exceedance days 105f\",\"105f heat index days\",\"hi >105f days\",\"summer heat index >105f days\",\"days above 105f heat index\",\"number of days heat index 105f\"]",
+  "candidates": [
+    {
+      "term": "heat index exceedance days 105f",
+      "source": "model"
+    },
+    {
+      "term": "105f heat index days",
+      "source": "model"
+    },
+    {
+      "term": "days above 105f heat index",
+      "source": "model"
+    },
+    {
+      "term": "number of days heat index 105f",
+      "source": "model"
+    }
+  ],
+  "dropped": [
+    {
+      "term": "number of summer days with daily max heat index above 105 f",
+      "reason": "more than 6 words",
+      "source": "dictionary_name"
+    },
+    {
+      "term": "summer days heat index >105f",
+      "reason": "not a plain lowercase phrase (letters, digits, space, - / . only)",
+      "source": "model"
+    },
+    {
+      "term": "days with max heat index >105f",
+      "reason": "not a plain lowercase phrase (letters, digits, space, - / . only)",
+      "source": "model"
+    },
+    {
+      "term": "hi >105f days",
+      "reason": "not a plain lowercase phrase (letters, digits, space, - / . only)",
+      "source": "model"
+    },
+    {
+      "term": "summer heat index >105f days",
+      "reason": "not a plain lowercase phrase (letters, digits, space, - / . only)",
+      "source": "model"
+    }
+  ],
+  "note": "Candidates are inert: not approved vocabulary; not in concept_map.yaml; not used by production queries, C-2 or compatibility."
+}

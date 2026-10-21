@@ -6,20 +6,120 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 | | |
 | --- | --- |
-| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4:** M4-WP0 PASS (D-016); M4-WP1 PASS WITH ACTIONS (D-017), merged `0053968`; **M4-WP1b PASS WITH ACTIONS** and **M4-WP2 retrieval PASS (sample 4)** (D-019), both merged at `e7da7cc`; **M4-WP2 reading complete** and merged into `main` at `ccd2d24` (pending GUIDANCE review at `2206c00`). **M5-WP2 positive-case run: 0 eligible pairs of 78.** **M4-WP3 --- PASS WITH ACTIONS (D-025)** on reviewed head `6b2b5a6` (pushed `origin/work/m4-wp3`, not merged); closeout done. **M4-WP4 sample frozen** (`58e0fd6`); reading not started. **M5:** **M5-WP1 closed --- PASS WITH ACTIONS, machinery validation only (D-018)**, merged `55decb3` |
-| **Active task** | **M4-WP4 --- sample frozen, reading not started.** 20 place candidates (10 fire weather at ranks 10…100, 10 heat index at ranks 14…140; one heat duplicate suppressed; no rank advanced), `artifacts/literature/wp4_sample.json` SHA-256 `f3cb5d0c…ea15`, committed before any file was fetched. The reading package is issued separately; the blind reader runs in a fresh session. **Stage 2a--2c** (dictionary concept survey) authorized as diagnostics, not started. *Previous:* M4-WP3 closeout (D-025): LITCORPUS-02 the working candidate corpus; five query terms governed in `concept_map.yaml` (SHA-256 now `27f7a44d…d7b4`). Not merged |
+| **Current milestones** | **M1 --- data grounding and metadata audit: open.** Criterion 1 will be evaluated on **provisional statuses, explicitly declared** (D-014). **M4:** M4-WP0 PASS (D-016); M4-WP1 PASS WITH ACTIONS (D-017), merged `0053968`; **M4-WP1b PASS WITH ACTIONS** and **M4-WP2 retrieval PASS (sample 4)** (D-019), both merged at `e7da7cc`; **M4-WP2 reading complete** and merged into `main` at `ccd2d24` (pending GUIDANCE review at `2206c00`). **M5-WP2 positive-case run: 0 eligible pairs of 78.** **M4-WP3 --- PASS WITH ACTIONS (D-025)** on reviewed head `6b2b5a6` (pushed `origin/work/m4-wp3`, not merged); closeout done. **M4-WP4 + M5-WP4 (Track A) --- PASS WITH ACTIONS (D-027)**, reviewed `c0be540`: read twice and adjudicated; **0 eligible pairs of 354**, a bounded zero for these 20 papers only. **Track B Stage 2 run 1 --- PASS as diagnostic (D-027)**, reviewed `2331e19`. **M5:** **M5-WP1 closed --- PASS WITH ACTIONS, machinery validation only (D-018)**, merged `55decb3` |
+| **Active task** | **Both tracks accepted by GUIDANCE (D-027) and combined:** `work/m4-wp4-adj` (Track A, head `a7479bb`) merged into `work/trackb-stage2` (Track B, head `e1ae9d6`); not pushed, not merged to `main` --- **Kaiyuan performs the merge to `main`**. Ruling bookkeeping done on both branches (Track A: reports 14--15, `BRIDGE_ELIGIBILITY.md` §8; Track B: `normalization_table_v1.yaml` frozen, survey doc, mentor brief). **Next (not started):** Track A-next unit-granularity diagnostic; Stage 2 run 2 at family level after a driver update. **QA not authorized.** *Previous:* Track A --- M4-WP4r3 adjudication + M5-WP4 (`work/m4-wp4-adj`); Track B --- Stage 2a and survey run 1 (`work/trackb-stage2`); see `reports/milestones/M4_WP4_REPORT.md`, `M5_WP4_REPORT.md`, `TRACKB_STAGE2_REPORT.md` |
 | **Latest accepted commit** | **`e7da7cc`** --- the merge of M4-WP1b (reviewed `25a86e5`) and M4-WP2 retrieval (reviewed `7ddee2c`) into `main`, both accepted under D-019. Previous: **`55decb3`** (M5-WP1, D-018; scan fix `656044c`); **`0053968`** (M4-WP1, D-017); `6f24b78` (M4-WP0 chain, D-016); `62c9137` (M1-WP1, D-009). It does **not** pass M1 |
 | **Tooling on `main`** | `d68ba15` --- merge of `work/knowledge-staging` (`c13a3d4`, `scripts/stage_knowledge.py`) on top of `6f24b78`. **No scientific content**; not a GUIDANCE-accepted package, and not an accepted scientific state |
 | **Sophia-verified commit** | `2b7345f` --- the pinned commit the cross-host reproduction ran at. The literature corpus is **not** on Sophia (runbook §8b) |
-| **Branch lineage** | M1-WP2 → M1-WP3 → M1-WP3b → M4-WP0 merged at `6f24b78`; M4-WP1 merged at `0053968`; M5-WP1 merged at `55decb3` (reviewed head `c1010f0`), scan fix `656044c`; M4-WP1b blind reading `87bce48` on `main`. **`work/m4-wp2-retrieval`** branches from `87bce48`: `8ee8857` (D-018 bookkeeping), `7ba2657` (P-STATE-1 v2), `f586d29` (concept map, C-2), `13c56fb` (eligibility), **`6080cc3` (terms frozen)**, **`7d0e128` (candidates frozen)**, then the report commit `7ddee2c`. **`work/m4-wp1b-adj`** branches from `7ddee2c`: **`0706679`** (Phases A--D), `25a86e5` (report). Both merged into `main` at **`e7da7cc`** (D-019). **`work/m4-wp2-read`** branches from `e7da7cc`: `410a7d0`, `258536a`. **`work/m4-wp2-blind`** (`939111e`) branches from `e7da7cc`. **`work/m4-wp2-adj`** branches from `258536a`: merge of the blind branch `ab80335`, `59880d7` (adjudication, M5-WP2 freeze), then the matrix/report commit `2206c00`; merged into `main` at **`ccd2d24`**. **`work/m4-wp3`** branches from `ccd2d24`. **Not pushed, not merged** |
+| **Branch lineage** | M1-WP2 → M1-WP3 → M1-WP3b → M4-WP0 merged at `6f24b78`; M4-WP1 merged at `0053968`; M5-WP1 merged at `55decb3` (reviewed head `c1010f0`), scan fix `656044c`; M4-WP1b blind reading `87bce48` on `main`. **`work/m4-wp2-retrieval`** branches from `87bce48`: `8ee8857` (D-018 bookkeeping), `7ba2657` (P-STATE-1 v2), `f586d29` (concept map, C-2), `13c56fb` (eligibility), **`6080cc3` (terms frozen)**, **`7d0e128` (candidates frozen)**, then the report commit `7ddee2c`. **`work/m4-wp1b-adj`** branches from `7ddee2c`: **`0706679`** (Phases A--D), `25a86e5` (report). Both merged into `main` at **`e7da7cc`** (D-019). **`work/m4-wp2-read`** branches from `e7da7cc`: `410a7d0`, `258536a`. **`work/m4-wp2-blind`** (`939111e`) branches from `e7da7cc`. **`work/m4-wp2-adj`** branches from `258536a`: merge of the blind branch `ab80335`, `59880d7` (adjudication, M5-WP2 freeze), then the matrix/report commit `2206c00`; merged into `main` at **`ccd2d24`**. **`work/m4-wp3`** branches from `ccd2d24`. **`work/m4-wp4-read`** from `38116a0` (`e0857aa`, `72617da`); **`work/m4-wp4-blind`** (`c452d7d`) from `38116a0`; **`work/m4-wp4-adj`** from `72617da`: `d90595c` (blind merge), `90d55fc` (scan fix), `6c856e2` (adjudication), `220ca84` (M5-WP4 freeze), `8436c25` (matrix), then the report commit. **Not pushed, not merged** |
 | **M4-WP0 commits** | `52a994a` (Phases A–E); **`1e2fd9f`** (report and state --- **the reviewed head**); then `e4a9de0`, the D-016 pre-merge bookkeeping |
 | **M4-WP1 sample** | `LIT-000001, 000191, 000381, 000571, 000761, 000951, 001141, 001331, 001521, 001711` --- every 190th id; no duplicate skip; `wp1_sample.json` SHA-256 `5cb81f95…`, committed before any file was opened |
 | **Prototypes built from** | `56eb10d` --- v1 records unchanged since M1-WP3b. **P-STATE-1 v2** (`P-STATE-1.v2.json`, D-018) adds explicit year windows only; V/D/M identical to v1; the frozen M5-WP1 input still names v1 |
 | **M0 gate** | **PASSED --- PASS WITH ACTIONS**, GUIDANCE, at commit `b87564b` (D-006) |
-| **Rulings in force** | **D-025** (M4-WP3 PASS WITH ACTIONS; LITCORPUS-02 working corpus; five terms governed; WP4 10+10 sample; Stage 2a--2c diagnostics), **D-021** (concept-first collection), **D-022** (source yield; LITCORPUS-01 a pilot; **R-FWI-1**; no reading), D-009, D-011, D-012, D-013 + D-013-A1, D-015, D-016, D-017, D-018, **D-019 (M4-WP1b PASS WITH ACTIONS; rule-3 trimming and J-1 approved; `LIT-000381-C3` tie and `LIT-000571` contest kept; evidence tiers A/B/C; C-2 revised; WP2 retrieval PASS with 4; reading of the four authorized, two readers + adjudication, then compatibility with P-STATE-1 v2)** |
-| **Owner decisions since** | **D-014** (Kaiyuan, 2026-09-28): proceed on the "our reading" basis to test what QA could be generated; every `inferred_candidate` and `derived_from_inferred` status carried through; **promotes nothing, and does not authorise QA generation** |
+| **Rulings in force** | **D-027** (Track A + Track B PASS WITH ACTIONS; G-R; prospective C-2 mask and G-2; unit-granularity diagnostic next; family-level run 2; narrow orthographic normalization), **D-025** (M4-WP3 PASS WITH ACTIONS; LITCORPUS-02 working corpus; five terms governed; WP4 10+10 sample; Stage 2a--2c diagnostics), **D-021** (concept-first collection), **D-022** (source yield; LITCORPUS-01 a pilot; **R-FWI-1**; no reading), D-009, D-011, D-012, D-013 + D-013-A1, D-015, D-016, D-017, D-018, **D-019 (M4-WP1b PASS WITH ACTIONS; rule-3 trimming and J-1 approved; `LIT-000381-C3` tie and `LIT-000571` contest kept; evidence tiers A/B/C; C-2 revised; WP2 retrieval PASS with 4; reading of the four authorized, two readers + adjudication, then compatibility with P-STATE-1 v2)** |
+| **Owner decisions since** | **D-026** (Kaiyuan, 2026-10-20): Stage 2a inventory at measure level --- one concept per output quantity the dictionary narrative describes; assigns no column meaning. **D-014** (Kaiyuan, 2026-09-28): proceed on the "our reading" basis to test what QA could be generated; every `inferred_candidate` and `derived_from_inferred` status carried through; **promotes nothing, and does not authorise QA generation** |
 | **Meetings since the last refresh** | **Mentor 2026-10-09:** direction D-020 --- concepts from the table units first, then collect papers for them; keep the three units. **Mentor 2026-10-13:** shard yields reported, a larger source asked for; outcome = JL's Drive link (D-023). *Earlier:* **Group 2026-09-14:** "No material objection to the prototype-unit design was raised." --- not validation, no semantic confirmed. **Mentor 2026-09-17 and 2026-09-24:** **no review of the answer sheet occurred** (R-003); nothing promoted |
 | **Blockers** | **M1** promotion of any column: blocked on the mentor, who has not reviewed the sheet. **M1 remains open.** **Next relevance-guided step:** waits on the mentor (family-level usefulness; widen places or change the unit) and GUIDANCE; any WP2b must be predeclared. **Metric-level concept terms** (`fwi_seasonal_value`, `heatindex_days_above_105F`): `proposed`, need GUIDANCE or the mentor. **QA generation: not authorised by any ruling.** **Reading of any LITCORPUS-01/02 paper: not authorised** (D-022) |
+
+## Where things stand --- GUIDANCE ruling D-027, pre-merge bookkeeping (2026-10-20)
+
+- **D-027: PASS WITH ACTIONS** for Track A (M4-WP4 / M5-WP4, reviewed `c0be540`;
+  bounded zero of 354 accepted) and Track B (Stage 2 run 1 **PASS as diagnostic**,
+  reviewed `2331e19`). Ruling: [M4_WP4_TRACKB_GUIDANCE_RULING.md](M4_WP4_TRACKB_GUIDANCE_RULING.md).
+  Both merges authorized after bookkeeping; **Kaiyuan performs them**.
+- **Track B bookkeeping (this branch):** D-027 logged; orthographic table
+  `normalization_table_v1.yaml` (N-1 … N-7) frozen and pinned, driver unchanged;
+  survey doc carries the B3 sentence and the run-2 side-by-side note; Polaris
+  Python patch `unknown`; mentor brief for 2026-10-22 (seven discussion families,
+  questions a--c). **Track A bookkeeping** is on `work/m4-wp4-adj` (`a7479bb`), now merged into this branch.
+- **Next (not started):** Track A-next unit-granularity diagnostic; Stage 2
+  run 2 at family level after a driver update. **QA not authorized.**
+
+## Where things stand --- Track B survey run 1 (2026-10-20)
+
+- **Run 1 executed on Polaris** (`polaris-login-01`, 21:54--22:09 Z; `gpt-oss-120b`
+  on Metis) from untracked copies whose SHA-256 equal the tracked **v3** tools,
+  after an aborted first attempt (offsets stage, >3 h; no outputs kept). v3 = an
+  opt-in `--no-hits` in `run_query.py`, passed by the driver; logged in D-026.
+- **Ingested as diagnostic `TRACKB-SURVEY-RUN1`**: 122 files, `manifest.csv`
+  `74ba7d7c…125d`, pinned under `diagnostics` (not `external_corpora`); the 12
+  header-only `topical/hits.csv` not copied. Every row's counts re-derive from its id
+  files (test). **12 `ok`, 2 `error`** (DC-011, DC-013: every proposed phrase had
+  `°`/`>`, so no searchable phrase; the model answered).
+- **Facts** (diagnostic coverage counts, not prevalence): DC-007 topical set =
+  the LITCORPUS-02 fire diagnostic, **548 = 548, same ids**; DC-001/002/003 are
+  99.6--100 % bare `temperature` / `precipitation`; heat-index measures DC-009--014
+  reach **0--2** vs **1,082** for the family group (`heat index` alone 1,080).
+- **Open for GUIDANCE:** Q-a (family-level run 2), Q-b (thresholds family-level
+  only), Q-c (sanitizer normalization). Nothing moved in `concept_map.yaml`, no
+  column status, index 117 unlabeled.
+
+## Where things stand --- Track B Stage 2a (2026-10-20)
+
+- **Stage 2a inventory built** (diagnostic, D-025): `data/metadata/dictionary_concepts.yaml`,
+  **14** concepts at measure level (D-026, Kaiyuan's answer to an EXECUTOR escalation),
+  **0** `listed_only`; every name and passage an exact slice of one page's pypdf 6.18.0
+  text; `family_hint` all null; `verified_columns` all empty (no verified column has a
+  resolution record). **No column status moved; index 117 unlabeled.**
+- **Survey context clause v1** (diagnostic) tracked and pinned; **revised
+  `survey_driver.py` (`877fec47…7155`)** and `probe_alcf_inference.py` tracked
+  byte-identical to the delivered files, tested against a mock server. Candidates are
+  inert (`docs/BRIDGE_ELIGIBILITY.md` §7). **D-026 confirmed by the COORDINATOR.**
+- **Driver behaviour to know before the Polaris run:** 7 of 14 stored dictionary names
+  are not searchable; DC-001/002/006 get parenthetical-stripped variants (DC-001/002
+  both search bare `temperature`); the four threshold concepts (shared passage) rely on
+  model terms only. A failing concept gives a `status: "error"` row and the run
+  continues; error rows are not retried on restart.
+- **Next:** Kaiyuan runs 2b/2c on Polaris with the pinned driver; GUIDANCE reviews.
+
+## Where things stand --- M4-WP4 adjudication and M5-WP4 (2026-10-20)
+
+- **Branch `work/m4-wp4-adj`** (not pushed, not merged): merge of the blind reading
+  `d90595c`; scan fix `90d55fc`; **adjudication `6c856e2`**; **M5-WP4 freeze `220ca84`**
+  (before the matrix); matrix `8436c25`; reports and state in the head commit.
+- **Scan fix:** `72617da` failed the secrets/paths scan (2 hits, a credential-class word
+  in the `wp4_claim_screens.py` docstring, embedded in its JSON) although its report said
+  0. Reworded; `wp4_claim_screens.json` `4fec0b51…` → `125a566d…`, counts unchanged.
+- **Adjudication (D-019 rules; adjudicator = reader 1):** both readings pinned and tested
+  against their commits; 300 + 377 spans re-slice, 0 failures. Scope **20/20**.
+  **50 aligned, 33 reader-1-only, 35 reader-2-only.** Tiers **A 3, B 47, C 68**; no
+  override; 1 `unresolved_tie` (`LIT2-000203-C2`, claim_type). New **rule 3-role**
+  (geography role by class, more conservative adopted); new class `cited_study_area`.
+  `LIT2-001075` prior exposure recorded. Hit precision carried: blind role vs reader-1
+  place-hit class --- 5 agree, 1 disagree, 17 not comparable (of 23).
+- **M5-WP4** (118 claims × P-CELL-1, P-COUNTY-1, P-STATE-1 v2 = 354): **0 eligible**.
+  Concept family-level 12 (8 claims); geography compatible 2 (bare `California` vs
+  P-STATE-1, concepts not in a pilot family), role-gated 2 (contextual); incompatible 57
+  (T-2 48, G-2 9); scenario `not_evaluable` 354/354, **named scenario 0**. **G-R** (role
+  gate) and the granularity reason live in `m5wp4.py`; `compat.py` unchanged.
+  **SHI:** `LIT2-001160-C4` × 3 flagged `possible_collision`, no mask.
+- **Open for GUIDANCE:** criterion 16 (blind base held hits + prototypes; put to
+  Kaiyuan); rule 3-role order and `cited_study_area`; SHI; background-citation
+  eligibility; G-2 on a continent list naming North America (`LIT2-000786-C1`).
+- Documents: [LITERATURE_WP4_ADJUDICATION.md](LITERATURE_WP4_ADJUDICATION.md),
+  [M5_WP4_COMPATIBILITY.md](M5_WP4_COMPATIBILITY.md),
+  [../reports/milestones/M4_WP4_REPORT.md](../reports/milestones/M4_WP4_REPORT.md),
+  [../reports/milestones/M5_WP4_REPORT.md](../reports/milestones/M5_WP4_REPORT.md).
+
+## Where things stand --- M4-WP4 reader-1 reading (2026-10-19)
+
+- **On `work/m4-wp4-read` only** (from `38116a0`; not pushed, not merged). The blind
+  reader must work from `main` without this branch, the hit files or the prototypes.
+- **Phase A:** sample = manifest; 20/20 source files matched before any decode.
+  `LIT2-001075` = `LIT-001536` (read in M4-WP2) carries `prior_exposure`; no WP2
+  artifact or bridge file opened.
+- **Phase B (frozen `e0857aa`):** 19 `in_scope_hazard`, 1 `ambiguous` (`LIT2-000803`);
+  **83 claims** (59 finding, 19 background citation); 300 spans exact.
+- **Phase C (after reading):** concept hits substantive in **6** items (fire 2, heat 4),
+  incidental 13, collision 1 (`001160`, "standardized heat index"); every bare `fwi`
+  is the fire index. Place hits study-area in **8** items; `california` is an
+  affiliation in 2 items (UC Irvine; Palmdale flight base); `stephens` is a citation
+  surname (1 item); `oklahoma` study-area in both its items.
+- **Screens (not compatibility):** US geography 42 claims; pilot family term in
+  `concept` 8 (1 = the SHI collision); named scenario **0**.
+- Documents: [LITERATURE_WP4_READING.md](LITERATURE_WP4_READING.md),
+  [../reports/milestones/M4_WP4_REPORT.md](../reports/milestones/M4_WP4_REPORT.md)
+  (fields 1--9; 10--15 pending).
 
 ## Where things stand --- M4-WP3 closeout and M4-WP4 sample (2026-10-19)
 
@@ -460,8 +560,8 @@ session reasoning correctly from out-of-date facts and repeating them.
 
 **Track A --- M4-WP4:** the 20-paper reading on the frozen sample (reading
 package to be issued; reader 1 → blind reader → freeze → comparison →
-adjudication → tiers → compatibility). **Track B --- Stage 2a--2c** dictionary
-concept survey on Polaris, diagnostics only. Mentor one-on-one Thursday
+adjudication → tiers → compatibility). **Track B:** GUIDANCE review of survey
+run 1 and answers to Q-a/Q-b/Q-c before any run 2; diagnostics only. Mentor one-on-one Thursday
 2026-10-22. GUIDANCE review of M4-WP2 / M5-WP2 still pending.
 
 Still not authorised by any ruling: **QA generation**; semantic bridges beyond

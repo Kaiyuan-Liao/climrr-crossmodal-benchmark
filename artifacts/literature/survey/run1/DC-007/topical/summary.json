@@ -1,0 +1,48 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-20T22:05:08Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "f4da1d957622a0444d41c1cc0fd36566fd025d82a7b9a2f508cbdc59c1f7ed7d",
+  "query_text": "( \"fire weather index\" OR \"fwi\" OR \"fire-weather index\" OR \"daily fire weather index\" OR \"seasonal fire weather index\" OR \"average fire weather index\" OR \"mean fire weather index\" OR \"fire weather index value\" )\n",
+  "parsed_groups": [
+    [
+      "fire weather index",
+      "fwi",
+      "fire-weather index",
+      "daily fire weather index",
+      "seasonal fire weather index",
+      "average fire weather index",
+      "mean fire weather index",
+      "fire weather index value"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    548
+  ],
+  "per_term_doc_counts": {
+    "g0:fire weather index": 462,
+    "g0:fwi": 408,
+    "g0:fire-weather index": 9,
+    "g0:daily fire weather index": 8,
+    "g0:seasonal fire weather index": 3,
+    "g0:average fire weather index": 0,
+    "g0:mean fire weather index": 2,
+    "g0:fire weather index value": 2
+  },
+  "raw_count": 548,
+  "disambiguation": null,
+  "admitted_count": 548,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 56.3,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

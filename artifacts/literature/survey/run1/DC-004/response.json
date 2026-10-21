@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "[\"wind speed\",\"wind-speed\",\"windspeed\",\"mean wind speed\",\"average wind speed\",\"daily average wind speed\",\"annual average wind speed\",\"wind velocity\"]",
+        "reasoning": "We need to propose up to 8 surface forms (words or short phrases) that a scientific paper would use when discussing this variable (Wind Speed). Must be lowercase, no regex, each at most 6 words. Include common abbreviations and hyphenation variants. Not broader topics. So forms like \"wind speed\", \"wind-speed\", \"windspeed\", \"average wind speed\", \"annual average wind speed\", \"daily wind speed\", \"mean wind speed\", \"wind velocity\"? But \"velocity\" might be considered same quantity but maybe considered different term; but it's acceptable as standard name? Might be okay. Also \"mph\" as unit but that's not variable name. Should be quantity name. So include \"wind speed (mph)\"? Probably not. Keep to variable names.\n\nList up to 8:\n\n- wind speed\n- wind-speed\n- windspeed\n- mean wind speed\n- average wind speed\n- daily average wind speed\n- annual average wind speed\n- wind velocity\n\nThat's 8. Ensure each <=6 words. All good.\n\nReturn JSON array.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792533659,
+  "id": "ab19c910-760a-443b-8121-8a29f4aba189",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 259,
+    "completion_tokens_after_first_per_sec": 741.209088237772,
+    "completion_tokens_after_first_per_sec_first_ten": 743.5053715567209,
+    "completion_tokens_after_first_per_sec_graph": 743.5053715567209,
+    "completion_tokens_details": {
+      "reasoning_tokens": 220
+    },
+    "completion_tokens_per_sec": 640.5771821024582,
+    "end_time": 1792533659.448464,
+    "is_last_response": true,
+    "prompt_tokens": 529,
+    "start_time": 1792533659.044141,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.056242942810058594,
+    "time_to_first_token_graph": 0.04760551452636719,
+    "total_latency": 0.40432286262512207,
+    "total_tokens": 788,
+    "total_tokens_per_sec": 1948.9375270144287
+  }
+}

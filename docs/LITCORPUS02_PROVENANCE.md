@@ -232,3 +232,22 @@ each reads `<LITCOLLECT_ROOT_POLARIS>`. Original and redacted SHA-256 are in
 `redactions.json`; five of the six originals were verified against
 `705k_stage1_hashes.txt` first (the log is not listed there). Every other
 evidence file is byte-identical to the bundle and matches its listed hash.
+
+## 12. Survey context clause v1 (diagnostic)
+
+`data/metadata/litcollect/survey_context_clause_v1.txt`, SHA-256
+**`fec9b5ca97f18e6e409a4b6e10b50faf5ab3c5404a33381eb8e67e9debc3626f`**, 403 bytes
+(one line plus a trailing LF), pinned in `data/manifest.json` and `-text` in
+`.gitattributes`. Authorized by D-025 for the Track B Stage 2c coverage survey.
+
+It is the v1 production context group --- identical, term for term and in order,
+in `fire_weather_v1` and `extreme_heat_v1` --- **minus the family-specific
+terms** `fire season`, `fire danger` (fire arm) and `public health`, `heat
+wave`, `heatwave` (heat arm): 28 terms, one OR-group in `run_query.py` grammar.
+Checked by `tests/test_survey_driver.py` against the frozen query files.
+
+**Diagnostic only.** It is not a production query, has no corpus identity, and
+changes neither LITCORPUS-02 nor any arm. `survey_driver.py` evaluates it once
+over the frozen source index (cached as `_context/`) and intersects it with each
+concept's topical set; the resulting `context_filtered_count` is a coverage
+diagnostic, not a prevalence estimate.

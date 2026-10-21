@@ -66,6 +66,10 @@ KNOWLEDGE_FILES = (
     "docs/LITCORPUS02_PROVENANCE.md",
     "reports/milestones/M4_WP3_REPORT.md",
     "docs/M4_WP3_WORKING_CORPUS_STAGE2_GUIDANCE_RULING.md",
+    "docs/CONCEPT_COVERAGE_SURVEY.md",
+    "docs/M4_WP4_TRACKB_GUIDANCE_RULING.md",
+    "docs/LITERATURE_WP4_ADJUDICATION.md",
+    "docs/M5_WP4_COMPATIBILITY.md",
 )
 
 DEST_DIR = REPO_ROOT / "refresh_knowledge"

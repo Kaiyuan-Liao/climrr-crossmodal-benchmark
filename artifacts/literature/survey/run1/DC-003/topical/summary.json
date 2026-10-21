@@ -1,0 +1,46 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-20T22:00:58Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "d493048b554151a6846ca5e221d9f6cdf993e88012077c00535705bcc2a07018",
+  "query_text": "( \"precipitation\" OR \"annual precipitation\" OR \"total annual precipitation\" OR \"mean annual precipitation\" OR \"precipitation amount\" OR \"precipitation total\" OR \"precip\" )\n",
+  "parsed_groups": [
+    [
+      "precipitation",
+      "annual precipitation",
+      "total annual precipitation",
+      "mean annual precipitation",
+      "precipitation amount",
+      "precipitation total",
+      "precip"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    84926
+  ],
+  "per_term_doc_counts": {
+    "g0:precipitation": 84880,
+    "g0:annual precipitation": 23982,
+    "g0:total annual precipitation": 2027,
+    "g0:mean annual precipitation": 7606,
+    "g0:precipitation amount": 3406,
+    "g0:precipitation total": 454,
+    "g0:precip": 841
+  },
+  "raw_count": 84926,
+  "disambiguation": null,
+  "admitted_count": 84926,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 50.8,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

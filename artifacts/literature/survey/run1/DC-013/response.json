@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "[\"days with heat index above 115°f\",\"summer days heat index >115°f\",\"number of 115°f heat index days\",\"heat index exceedance days 115°f\",\"days exceeding 115°f heat index\",\"high heat index days (115°f)\",\"115°f heat index day count\",\"summer heat index >115°f days\"]",
+        "reasoning": "We need to propose up to 8 surface forms (words or short phrases) that a scientific paper would use when discussing this variable: \"Number of Summer days with daily max heat index above 115 F\". So terms like \"summer days above 115°F heat index\", \"days with heat index >115°F\", \"heat index exceedance days\", \"number of days with heat index >115°F\", \"115°F heat index days\", \"high heat index days\", \"extreme heat index days\", \"days exceeding 115°F heat index\", \"summer heat index exceedance count\". Must be lowercase, no regex, up to 6 words each. Include abbreviations: \"HI\" for heat index, \"°F\". Possibly \"heat index >115°F days\". Hyphenation variants: \"heat-index\". Must be surface forms that name same quantity. Up to 8.\n\nLet's craft list:\n\n1. \"days with heat index above 115°f\"\n2. \"summer days heat index >115°f\"\n3. \"number of 115°f heat index days\"\n4. \"heat index exceedance days 115°f\"\n5. \"days exceeding 115°f heat index\"\n6. \"high heat index days (115°f)\"\n7. \"115°f heat index day count\"\n8. \"summer heat index >115°f days\"\n\nCheck each <=6 words: count.\n\n1. \"days with heat index above 115°f\" -> words: days(1) with2 heat3 index4 above5 115°f6 => 6 ok.\n2. \"summer days heat index >115°f\" -> summer1 days2 heat3 index4 >115°f5 => 5 ok.\n3. \"number of 115°f heat index days\" -> number1 of2 115°f3 heat4 index5 days6 =>6 ok.\n4. \"heat index exceedance days 115°f\" -> heat1 index2 exceedance3 days4 115°f5 =>5 ok.\n5. \"days exceeding 115°f heat index\" -> days1 exceeding2 115°f3 heat4 index5 =>5 ok.\n6. \"high heat index days (115°f)\" -> high1 heat2 index3 days4 (115°f)5 =>5 ok.\n7. \"115°f heat index day count\" -> 115°f1 heat2 index3 day4 count5 =>5 ok.\n8. \"summer heat index >115°f days\" -> summer1 heat2 index3 >115°f4 days5 =>5 ok.\n\nAll lowercase, include degree symbol? Use \"°f\". Might be okay. Provide JSON array.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792534144,
+  "id": "5cd50b0d-ffd0-4c84-b7a5-8ce1683cb816",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 649,
+    "completion_tokens_after_first_per_sec": 733.6263956710815,
+    "completion_tokens_after_first_per_sec_first_ten": 735.0000722044115,
+    "completion_tokens_after_first_per_sec_graph": 735.0000722044115,
+    "completion_tokens_details": {
+      "reasoning_tokens": 565
+    },
+    "completion_tokens_per_sec": 693.031402398429,
+    "end_time": 1792534144.2595706,
+    "is_last_response": true,
+    "prompt_tokens": 270,
+    "start_time": 1792534143.323105,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.053182125091552734,
+    "time_to_first_token_graph": 0.046927690505981445,
+    "total_latency": 0.9364655017852783,
+    "total_tokens": 919,
+    "total_tokens_per_sec": 981.3495513161114
+  }
+}

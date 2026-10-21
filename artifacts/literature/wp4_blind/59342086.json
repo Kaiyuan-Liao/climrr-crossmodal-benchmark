@@ -1,0 +1,292 @@
+{
+  "source_basename": "59342086.json",
+  "source_relpath": "86/59342086.json",
+  "source_sha256": "d2ab3a8af862fe0ce63a01dd590328640c402176fc50767c9a352ed264450d1d",
+  "offset_convention": "zero-based half-open Unicode code-point offsets into the decoded JSON string value as stored (no normalization)",
+  "keys_read": [
+    {
+      "json_path": "$[\"title\"]",
+      "length": 116
+    },
+    {
+      "json_path": "$[\"abstract\"]",
+      "length": 1498
+    },
+    {
+      "json_path": "$[\"introduction\"]",
+      "length": 7650
+    },
+    {
+      "json_path": "$[\"related work\"]",
+      "length": 19767
+    },
+    {
+      "json_path": "$[\"iot and standards-based data interoperability mechanisms\"]",
+      "length": 16159
+    },
+    {
+      "json_path": "$[\"system architecture\"]",
+      "length": 15031
+    },
+    {
+      "json_path": "$[\"experiment design and rationale\"]",
+      "length": 19003
+    },
+    {
+      "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+      "length": 13100
+    },
+    {
+      "json_path": "$[\"conclusions and future work\"]",
+      "length": 3812
+    }
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Semantic Interoperability for IoT Platforms in Support of Decision Making: An Experiment on Early Wildfire Detection",
+      "json_path": "$[\"title\"]",
+      "note": "raw stored value"
+    },
+    "authors": {
+      "value": "unknown"
+    },
+    "year": {
+      "value": "unknown"
+    },
+    "venue": {
+      "value": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "Although an IoT interoperability paper, it evaluates its early wildfire detection decision system on retrospectively collected data from the 23 July 2018 Rafina-Mati wildfire, reporting detection and fire-weather results for that event.",
+  "scope_quote": {
+    "json_path": "$[\"abstract\"]",
+    "char_start": 809,
+    "char_end": 1037,
+    "evidence_text": "These specifications have been utilised for the implementation of the IoT2Edge interoperability enabling mechanism which is evaluated within the context of a catastrophic wildfire incident that took place in Greece on July 2018.",
+    "occurrences_in_value": 1
+  },
+  "claims": [
+    {
+      "claim_id": "59342086-c1",
+      "restatement": "Triggered every two minutes over 20-26 July 2018 (over 5000 triggers), the decision-making service correctly detected presence or absence of the fire in 93.6-98.9% of cases for optimal weight configurations.",
+      "restatement_word_count": 30,
+      "claim_type": "finding",
+      "concept": {
+        "value": "existence or lack of fire incident occurrence",
+        "tag": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "over 5000 DMS triggers for 93.6-98.9% of which the DMS successfully detects the existence or lack of fire incident occurrence",
+        "tag": "explicit"
+      },
+      "geography": {
+        "value": "Rafina-Mati, eastern part of Attica Greece",
+        "tag": "inferred",
+        "support_span": {
+          "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+          "char_start": 5221,
+          "char_end": 5393,
+          "evidence_text": "at 16.40 on 23 July 2018, a lethal wild fire broke out at the eastern part of Attica Greece, 20 km from Athens city center in a semi-rural touristic area called Rafina-Mati",
+          "occurrences_in_value": 1
+        },
+        "role": {
+          "value": "study area",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+            "char_start": 5221,
+            "char_end": 5393,
+            "evidence_text": "at 16.40 on 23 July 2018, a lethal wild fire broke out at the eastern part of Attica Greece, 20 km from Athens city center in a semi-rural touristic area called Rafina-Mati",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "the period 20-26/7/2018",
+        "tag": "inferred",
+        "support_span": {
+          "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+          "char_start": 11668,
+          "char_end": 11794,
+          "evidence_text": "To validate this approach, the DMS was triggered to detect potential fire incidents every two min for the period 20-26/7/2018.",
+          "occurrences_in_value": 1
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "experimental_condition": {
+        "value": "optimal weight configurations; range of FD TRUE values tested was [0.60,0.95]",
+        "tag": "explicit"
+      },
+      "evidence": {
+        "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+        "char_start": 11932,
+        "char_end": 12171,
+        "evidence_text": "This resulted in over 5000 DMS triggers for 93.6-98.9% of which the DMS successfully detects the existence or lack of fire incident occurrence for the optimal weight configurations, where the range of FD TRUE values tested was [0.60,0.95].",
+        "occurrences_in_value": 1
+      }
+    },
+    {
+      "claim_id": "59342086-c2",
+      "restatement": "Fire weather index values computed from local weather data were very high (above 100) at ignition and remained extremely high for the fire's duration; EFFIS maps FWI above 50 to its Extreme fire danger class.",
+      "restatement_word_count": 35,
+      "claim_type": "finding",
+      "concept": {
+        "value": "fire weather index levels",
+        "tag": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "very high ... (i.e., above 100) ... remained extremely high",
+        "tag": "explicit"
+      },
+      "geography": {
+        "value": "Rafina-Mati, eastern part of Attica Greece",
+        "tag": "inferred",
+        "support_span": {
+          "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+          "char_start": 5221,
+          "char_end": 5393,
+          "evidence_text": "at 16.40 on 23 July 2018, a lethal wild fire broke out at the eastern part of Attica Greece, 20 km from Athens city center in a semi-rural touristic area called Rafina-Mati",
+          "occurrences_in_value": 1
+        },
+        "role": {
+          "value": "study area",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+            "char_start": 5221,
+            "char_end": 5393,
+            "evidence_text": "at 16.40 on 23 July 2018, a lethal wild fire broke out at the eastern part of Attica Greece, 20 km from Athens city center in a semi-rural touristic area called Rafina-Mati",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "the fire ignition and entire fire duration (23 July 2018)",
+        "tag": "inferred",
+        "support_span": {
+          "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+          "char_start": 5221,
+          "char_end": 5393,
+          "evidence_text": "at 16.40 on 23 July 2018, a lethal wild fire broke out at the eastern part of Attica Greece, 20 km from Athens city center in a semi-rural touristic area called Rafina-Mati",
+          "occurrences_in_value": 1
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+        "char_start": 9428,
+        "char_end": 9630,
+        "evidence_text": "As one may easily observe, the fire ignition occurred when very high fire weather index levels were in place (i.e., above 100) and for the entire fire duration the respective FWI remained extremely high",
+        "occurrences_in_value": 1
+      }
+    },
+    {
+      "claim_id": "59342086-c3",
+      "restatement": "The first related tweet, giving the fire's exact location, was posted at 16:53, 12 minutes after the official ignition of the fire.",
+      "restatement_word_count": 22,
+      "claim_type": "finding",
+      "concept": {
+        "value": "first related tweet",
+        "tag": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "posted at 16:53 ... just 12 min after the official ignition of the fire",
+        "tag": "explicit",
+        "support_span": {
+          "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+          "char_start": 6316,
+          "char_end": 6418,
+          "evidence_text": "It is also worth noting that the tweet was posted just 12 min after the official ignition of the fire.",
+          "occurrences_in_value": 1
+        }
+      },
+      "geography": {
+        "value": "Rafina Ntaou Pentelis",
+        "tag": "explicit",
+        "role": {
+          "value": "study area",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+            "char_start": 5221,
+            "char_end": 5393,
+            "evidence_text": "at 16.40 on 23 July 2018, a lethal wild fire broke out at the eastern part of Attica Greece, 20 km from Athens city center in a semi-rural touristic area called Rafina-Mati",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "16:53 (23 July 2018)",
+        "tag": "inferred",
+        "support_span": {
+          "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+          "char_start": 5221,
+          "char_end": 5393,
+          "evidence_text": "at 16.40 on 23 July 2018, a lethal wild fire broke out at the eastern part of Attica Greece, 20 km from Athens city center in a semi-rural touristic area called Rafina-Mati",
+          "occurrences_in_value": 1
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "tag": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+        "char_start": 5901,
+        "char_end": 6137,
+        "evidence_text": "With regards to the social media, the first related tweet was posted at 16:53, is publicly available and it states (translated from Greek) \"We are burning . . . ..!!!!! Rafina Ntaou Pentelis right now, God help us today mercyyyy!\" [75].",
+        "occurrences_in_value": 1
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "json_path": "$[\"experiment design and rationale\"]",
+      "char_start": 551,
+      "char_end": 752,
+      "evidence_text": "From the \"national tragedy\" that hit Greece in the summer of 2018, with the worst wildfire in over a decade killing 100 people, injuring over 200 and leaving thousands more homeless in Rafina-Mati area",
+      "occurrences_in_value": 1,
+      "reason": "Uncited event descriptor; not promoted."
+    },
+    {
+      "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+      "char_start": 2541,
+      "char_end": 2669,
+      "evidence_text": "This means that the employed data interoperability mechanism causes the MESP-R to operate approximately 2 hours and 18 min less.",
+      "occurrences_in_value": 1,
+      "reason": "IoT device energy result; not a hazard claim."
+    },
+    {
+      "json_path": "$[\"experiment design and rationale\"]",
+      "char_start": 323,
+      "char_end": 550,
+      "evidence_text": "A combination of climate change, population growth, negligent forest management and modern building practices has had an increasing effect on the proliferation of forest wildfires at a global level over the last few years [65].",
+      "occurrences_in_value": 1,
+      "reason": "Cited general background; not promoted."
+    },
+    {
+      "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+      "char_start": 8280,
+      "char_end": 8486,
+      "evidence_text": "The fact that they drop drastically at some point is attributed to the strong winds that completely changed the course of fire, thus saving the actual house the camera of which captured the processed video.",
+      "occurrences_in_value": 1,
+      "reason": "Anecdotal interpretation of image scores; not promoted."
+    }
+  ],
+  "terminal_status": "claims_extracted"
+}

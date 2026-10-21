@@ -1,0 +1,976 @@
+{
+  "lit2_id": "LIT2-001063",
+  "item_id": "272211804",
+  "arm": "fire_weather_v1",
+  "rank": 70,
+  "rel_path": "04/272211804.json",
+  "file_sha256": "5b8a1fee72dd7ace91a490ba7a371663e27f6d316c7825ab61f4e1f5f37f4110",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "general framework",
+    "case study",
+    "discussion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Broadening the scope of anthropogenic influence in extreme event attribution",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "A perspective proposing a broader framework for attributing the impacts of extreme weather events (droughts, marine heatwave, wildfires, floods) to human influence, illustrated with five case studies.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 652,
+    "char_end": 881,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "In this perspective, we argue that adapting current practice in EEA to also consider other causal factors in attribution of extreme weather impacts would provide richer and more comprehensive insight into the causes of disasters.",
+    "evidence_sha256": "4a71fa1ccdd4d88106501da0d0788984dac87fdd935eecb8e712b49abbe8c762"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-001063-C1",
+      "claim_text": "At Lake Mendocino, the water saved by the FIRO-enabled deviation from mandated reservoir storage limits was close to 20% in water year 2020.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "Forecast Informed Reservoir Operations (FIRO) as a drought adaptation; reservoir water storage",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "water saved close to 20% compared with the counterfactual mandated storage",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Lake Mendocino, a reservoir in the upper Russian River watershed in coastal northern California",
+        "status": "explicit",
+        "role": "case-study site (this paper's own counterfactual calculation)",
+        "support": {
+          "json_path": "$[\"case study\"]",
+          "char_start": 33621,
+          "char_end": 33783,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The pilot project was Lake Mendocino, a reservoir with a maximum storage of 111 000 acre-feet in the upper Russian River watershed in coastal northern California.",
+          "evidence_sha256": "59481dfee60bc2d2173ec6df1016621d2e29782f65869f389e1faafaada825ef"
+        }
+      },
+      "temporal_frame": {
+        "value": "water year 2020",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "counterfactual: storage limited to the previously mandated level during the cool season",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"case study\"]",
+          "char_start": 34832,
+          "char_end": 34984,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "To construct the counterfactual, we limit the storage to the mandated level during the cool season when water input is provided from atmospheric rivers.",
+          "evidence_sha256": "cd7ec0b024b79ecf66e25a84278a6a5e740e7ca89aebdb4e17ef42a0d346e4fa"
+        }
+      },
+      "evidence": {
+        "json_path": "$[\"case study\"]",
+        "char_start": 35700,
+        "char_end": 35866,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The water saved through the use of a major deviation, requested as a result of the positive FIRO viability assessment, was close to 20% in water year 2020 (figure 7).",
+        "evidence_sha256": "1379e722d3bae6baed46fa2ea2a4c0ecd489e3b97e979d5271b05dc99deb6429"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "The paper calls the factual/counterfactual pair 'both scenarios'; these are operating-rule counterfactuals, not emissions scenarios, so `scenario` is unknown.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "272211804-c1",
+        "blind_evidence": {
+          "json_path": "$[\"case study\"]",
+          "char_start": 35700,
+          "char_end": 35866,
+          "evidence_text": "The water saved through the use of a major deviation, requested as a result of the positive FIRO viability assessment, was close to 20% in water year 2020 (figure 7)."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 frames FIRO as drought adaptation; reader 2 'water saved'. Adopted: what the evidence states.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "water saved through a FIRO-enabled major deviation",
+              "tag": "explicit"
+            }
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Close to 20%.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "reader 1's support span states it; reader 2 cites the same sentence and tags it inferred. Rule 3b: explicit kept.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "Lake Mendocino, a reservoir in the upper Russian River watershed in coastal northern California",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$[\"case study\"]",
+                "char_start": 33621,
+                "char_end": 33783,
+                "evidence_text": "The pilot project was Lake Mendocino, a reservoir with a maximum storage of 111 000 acre-feet in the upper Russian River watershed in coastal northern California."
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "Reader 1's support span states the counterfactual; reader 2 infers the same from another sentence.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "counterfactual: storage limited to the mandated level during the cool season",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$[\"case study\"]",
+                "char_start": 34832,
+                "char_end": 34984,
+                "evidence_text": "To construct the counterfactual, we limit the storage to the mandated level during the cool season when water input is provided from atmospheric rivers."
+              }
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "case-study site (this paper's own counterfactual calculation)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_1": {
+            "value": "case-study site (this paper's own counterfactual calculation)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$[\"case study\"]",
+              "char_start": 34527,
+              "char_end": 34588,
+              "evidence_text": "The stressor is the water level in Lake Mendocino (figure 6)."
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "concept": {
+            "value": "water saved through a FIRO-enabled major deviation",
+            "tag": "explicit"
+          },
+          "geography": {
+            "value": "Lake Mendocino, a reservoir in the upper Russian River watershed in coastal northern California",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$[\"case study\"]",
+              "char_start": 33621,
+              "char_end": 33783,
+              "evidence_text": "The pilot project was Lake Mendocino, a reservoir with a maximum storage of 111 000 acre-feet in the upper Russian River watershed in coastal northern California."
+            }
+          },
+          "experimental_condition": {
+            "value": "counterfactual: storage limited to the mandated level during the cool season",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$[\"case study\"]",
+              "char_start": 34832,
+              "char_end": 34984,
+              "evidence_text": "To construct the counterfactual, we limit the storage to the mandated level during the cool season when water input is provided from atmospheric rivers."
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001063-C2",
+      "claim_text": "A cited study showed that the climate change signal would have led to larger burned areas in Portugal's 2017 fire season, in the absence of other drivers.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "climate change signal; burned areas of the fire season",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "would have led to larger burned areas",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Portugal",
+        "status": "explicit",
+        "role": "case-study area (from a cited study)"
+      },
+      "temporal_frame": {
+        "value": "the 2017 fire season (not restricted to the October event)",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"case study\"]",
+        "char_start": 15446,
+        "char_end": 15663,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Turco et al (2019) have already shown that the climate change signal would have led to larger burned areas for the 2017 fire season over Portugal (not restricted to the October event), in the absence of other drivers.",
+        "evidence_sha256": "46822364f7652078888219baa1e3838d5a7a3569f300e17489658e404e1d2136"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "Attributed to Turco et al (2019).",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "case-study area (from a cited study)",
+            "class": "cited_study_area"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "case-study area (from a cited study)",
+            "tag": null,
+            "class": "cited_study_area"
+          }
+        },
+        "blind_reader_considered_and_rejected": [
+          {
+            "rejected_id": "rejected[1]",
+            "overlap_code_points": 217,
+            "reason": "Valid cited claim; not promoted given the five-claim cap.",
+            "evidence_text": "Turco et al (2019) have already shown that the climate change signal would have led to larger burned areas for the 2017 fire season over Portugal (not restricted to the October event), in the absence of other drivers."
+          }
+        ]
+      }
+    },
+    {
+      "claim_id": "LIT2-001063-C3",
+      "claim_text": "On 15 October 2017, Hurricane Ophelia near the Iberian coast advected extremely hot, dry air from Northern Africa, with temperatures over 30 °C and relative humidity below 20% over most of Portugal.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "advection of extremely hot and dry air; near-surface temperature; relative humidity",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "temperature over 30 °C; relative humidity below 20%",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "most of the Portuguese territory",
+        "status": "explicit",
+        "role": "case-study area (fire event)"
+      },
+      "temporal_frame": {
+        "value": "15 October (2017)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"case study\"]",
+          "char_start": 12387,
+          "char_end": 12452,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "here we focus on the event occurring between 15 and 16 of October",
+          "evidence_sha256": "bd201997a941f0e8dc730d6041ca4cceec5a0c36f9f56c4640f416ef3362edd5"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"case study\"]",
+        "char_start": 14432,
+        "char_end": 14720,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "On 15 October Ophelia was close to the coast of the Iberian Peninsula and promoted the advection of extremely hot and dry air from Northern Africa, with near-surface temperature reaching over 30 • C and relative humidity below 20% over most of the Portuguese territory (Ramos et al 2023).",
+        "evidence_sha256": "be3ee2158210d7cdad5c3ca32e0182ba38f00d963ec26399c81077a54b211f88"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "Attributed to Ramos et al (2023). The year is given by the case study's framing ('The year 2017 was one of the worst fire seasons recorded in Europe').",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "case-study area (fire event)",
+            "class": "cited_study_area"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "case-study area (fire event)",
+            "tag": null,
+            "class": "cited_study_area"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001063-C4",
+      "claim_text": "A cited attribution analysis found anthropogenic influence on rainfall and evapotranspiration raised the 2021-2022 southern Horn of Africa drought to 'exceptional'; without climate change it would have been a normal drought.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "drought severity; anthropogenic influence on rainfall and evapotranspiration",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "increased the drought severity to 'exceptional'; otherwise a normal drought",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the southern Horn of Africa covering parts of southern Ethiopia, southern Somalia, and eastern Kenya",
+        "status": "explicit",
+        "role": "case-study area (from a cited study)"
+      },
+      "temporal_frame": {
+        "value": "the drought years (2021-2022)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"case study\"]",
+          "char_start": 4741,
+          "char_end": 4818,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The drought years (2021-2022) have also been affected by internal variability",
+          "evidence_sha256": "5a1ad61fae43bdc62e8a03dee9d63311c06ef8261fc407cb89e54e9ab160588c"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"case study\"]",
+        "char_start": 4059,
+        "char_end": 4547,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Attribution analysis of rainfall trends and the combined effect of rainfall deficit with high temperatures in the southern Horn of Africa covering parts of southern Ethiopia, southern Somalia, and eastern Kenya showed that anthropogenic influence on both rainfall and evapotranspiration increased the drought severity to 'exceptional' (based on the US Drought Monitor classification n.d.), whereas in the absence of climate change it would have been a normal drought (Kimutai et al 2023).",
+        "evidence_sha256": "d846a00a5614161a1c3800cd0d263671e1a44597330ba48449ccbe6b24814b9e"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "Attributed to Kimutai et al (2023). The counterfactual 'absence of climate change' is not an emissions scenario.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "case-study area (from a cited study)",
+            "class": "cited_study_area"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "case-study area (from a cited study)",
+            "tag": null,
+            "class": "cited_study_area"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001063-C5",
+      "claim_text": "From 2012 to 2016, California had one of its deepest, longest and warmest droughts in history, with an estimated return period of one in 1200 years.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "drought (depth, length, warmth); return period",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "one of the deepest, longest, and warmest; return period one in 1200 years",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "California",
+        "status": "explicit",
+        "role": "case-study area (from a cited study)"
+      },
+      "temporal_frame": {
+        "value": "2012 to 2016",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"case study\"]",
+        "char_start": 28601,
+        "char_end": 28775,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "From 2012 to 2016, California experienced one of its deepest, longest, and warmest droughts in history, with a return period estimated at one in 1200 years (Lund et al 2018).",
+        "evidence_sha256": "7164d613e5171f98fc380d65ce5f23c9e887d2b74b24333548191a7d0e157f6f"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "Attributed to Lund et al (2018).",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "case-study area (from a cited study)",
+            "class": "cited_study_area"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "case-study area (from a cited study)",
+            "tag": null,
+            "class": "cited_study_area"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001063-B2",
+      "origin": "blind_reader",
+      "blind_claim_id": "272211804-c2",
+      "claim_text": "Citing Kimutai et al (2023), the paper states that in today's climate, March-April-May dry conditions with a 10-year return period have become twice as likely due to climate change.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "dry conditions in the March-April-May rainfall season with a return period of 10 years",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "have become twice as likely due to climate change",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the southern Horn of Africa covering parts of southern Ethiopia, southern Somalia, and eastern Kenya",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"case study\"]",
+          "char_start": 4059,
+          "char_end": 4269,
+          "evidence_text": "Attribution analysis of rainfall trends and the combined effect of rainfall deficit with high temperatures in the southern Horn of Africa covering parts of southern Ethiopia, southern Somalia, and eastern Kenya",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "36392bb6b85c71b54b119fc24464a3b55339b6b3d509a2caac832f7d48913e40"
+        },
+        "role": "contextual mention",
+        "blind_role_record": {
+          "value": "contextual mention",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"case study\"]",
+            "char_start": 4547,
+            "char_end": 4578,
+            "evidence_text": "Kimutai et al (2023) also found",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "in today's climate",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"case study\"]",
+        "char_start": 4547,
+        "char_end": 4741,
+        "evidence_text": "Kimutai et al (2023) also found that in today's climate, dry conditions in the March-April-May rainfall season with a return period of 10 years have become twice as likely due to climate change.",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "26ae15eae0d49be640d1681ff8d49dbd069d033ba0bde6cf9427a034937d558d"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "contextual mention",
+            "class": "contextual"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "contextual mention",
+            "tag": "inferred",
+            "class": "contextual",
+            "support": {
+              "json_path": "$[\"case study\"]",
+              "char_start": 4547,
+              "char_end": 4578,
+              "evidence_text": "Kimutai et al (2023) also found"
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001063-B3",
+      "origin": "blind_reader",
+      "blind_claim_id": "272211804-c3",
+      "claim_text": "Citing Sebastian et al (2019), during Hurricane Harvey urban development alone increased peak discharges by 54% (±28%), climate change alone by 20% (±3%), combined 84% (±35%).",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "peak discharges",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "urban development alone increased ... by 54% (±28%) ... climate change alone ... 20% (±3%) ... combined effect of 84% (±35%)",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "catchment response during Hurricane Harvey",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.introduction",
+          "char_start": 6239,
+          "char_end": 6368,
+          "evidence_text": "Sebastian et al (2019) disentangled the impacts of urbanization and climate change on catchment response during Hurricane Harvey.",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "c4da8e11a8a8d1ab1b82c589c4a3691e8407b784014ef88c6be5423fbb026868"
+        },
+        "role": "contextual mention",
+        "blind_role_record": {
+          "value": "contextual mention",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"introduction\"]",
+            "char_start": 6239,
+            "char_end": 6368,
+            "evidence_text": "Sebastian et al (2019) disentangled the impacts of urbanization and climate change on catchment response during Hurricane Harvey.",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "three counterfactuals: pre-development conditions, urbanization without climate change, and climate change without urbanization",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.introduction",
+          "char_start": 6368,
+          "char_end": 6507,
+          "evidence_text": "They built three counterfactuals: pre-development conditions, urbanization without climate change, and climate change without urbanization.",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "b6592abcef2da0047ef12d8b6a70d09d93ccb6e0c726af23b497af5c9172b965"
+        }
+      },
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 6507,
+        "char_end": 6677,
+        "evidence_text": "They found that urban development alone increased peak discharges by 54% (±28%) and climate change alone increased them by 20% (±3%) with a combined effect of 84% (±35%).",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "eb223e588fea387df3574125d7743ea696d4b701ff3a0d3d72a7a18275ef1cf5"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "contextual mention",
+            "class": "contextual"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "contextual mention",
+            "tag": "inferred",
+            "class": "contextual",
+            "support": {
+              "json_path": "$.introduction",
+              "char_start": 6239,
+              "char_end": 6368,
+              "evidence_text": "Sebastian et al (2019) disentangled the impacts of urbanization and climate change on catchment response during Hurricane Harvey."
+            }
+          }
+        },
+        "first_reader_considered_and_rejected": [
+          {
+            "rejected_id": "LIT2-001063-R3",
+            "overlap_code_points": 170,
+            "reason": "A cited result (Sebastian et al 2019, Hurricane Harvey); beyond the five-claim cap and peripheral to the paper's case studies.",
+            "evidence_text": "They found that urban development alone increased peak discharges by 54% (±28%) and climate change alone increased them by 20% (±3%) with a combined effect of 84% (±35%)."
+          }
+        ]
+      }
+    },
+    {
+      "claim_id": "LIT2-001063-B4",
+      "origin": "blind_reader",
+      "blind_claim_id": "272211804-c4",
+      "claim_text": "Citing prior studies, the paper states that in the 15-16 October 2017 Portugal fire event over 200 thousand ha burned, most in under 24 h, and 51 people died.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "ha were burned; people died",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "over 200 thousand ha ... most of them in under 24 h ... 51 people died",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Portugal",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"case study\"]",
+          "char_start": 12713,
+          "char_end": 12839,
+          "evidence_text": "resulting in an increase in hospital admissions due to asthma and other respiratory diseases in Portugal (Oliveira et al 2020)",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "5b64fc95eef4e18126650be7cfd35ca6283bce1dda7236f6bf150b2d8bef422b"
+        },
+        "role": "contextual mention",
+        "blind_role_record": {
+          "value": "contextual mention",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"case study\"]",
+            "char_start": 12524,
+            "char_end": 12591,
+            "evidence_text": "(Castellnou et al 2018), and 51 people died (Rodrigues et al 2022).",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "between 15 and 16 of October",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"case study\"]",
+        "char_start": 12387,
+        "char_end": 12591,
+        "evidence_text": "here we focus on the event occurring between 15 and 16 of October, in which over 200 thousand ha were burned, most of them in under 24 h (Castellnou et al 2018), and 51 people died (Rodrigues et al 2022).",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "f6ddfc2a0909bd0ed72339f55e7dc84e774293fb791fe30be8ec0765b0ffa09b"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "contextual mention",
+            "class": "contextual"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "contextual mention",
+            "tag": "inferred",
+            "class": "contextual",
+            "support": {
+              "json_path": "$[\"case study\"]",
+              "char_start": 12524,
+              "char_end": 12591,
+              "evidence_text": "(Castellnou et al 2018), and 51 people died (Rodrigues et al 2022)."
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001063-B5",
+      "origin": "blind_reader",
+      "blind_claim_id": "272211804-c5",
+      "claim_text": "Citing prior studies, the paper states that between 2013 and 2015 the northeast Pacific had the most intense and longest-lasting marine heatwave recorded, with SST anomalies above 5°C lasting over 350 days.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "marine heatwave",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "most intense and longest-lasting ... maximum sea surface temperature (SST) anomalies of more than 5 • C lasting for more than 350 days",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the northeast Pacific",
+        "status": "explicit",
+        "role": "contextual mention",
+        "blind_role_record": {
+          "value": "contextual mention",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"case study\"]",
+            "char_start": 7518,
+            "char_end": 7569,
+            "evidence_text": "(Di Lorenzo andMantua 2016, Laufkötter et al 2020)",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "Between 2013 and 2015",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"case study\"]",
+        "char_start": 7290,
+        "char_end": 7570,
+        "evidence_text": "Between 2013 and 2015, the northeast Pacific experienced the most intense and longest-lasting marine heatwave ever recorded, with maximum sea surface temperature (SST) anomalies of more than 5 • C lasting for more than 350 days (Di Lorenzo andMantua 2016, Laufkötter et al 2020).",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "fd90489ee7a415584b31ca20b577822f57a2a824b6d69293b8bb4b3afc606fde"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "contextual mention",
+            "class": "contextual"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "contextual mention",
+            "tag": "inferred",
+            "class": "contextual",
+            "support": {
+              "json_path": "$[\"case study\"]",
+              "char_start": 7518,
+              "char_end": 7569,
+              "evidence_text": "(Di Lorenzo andMantua 2016, Laufkötter et al 2020)"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-001063-R1",
+      "evidence": {
+        "json_path": "$[\"case study\"]",
+        "char_start": 13055,
+        "char_end": 13303,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "They based their analysis on a commonly used fire risk model, the Canadian Forest Fire Weather Index System to decompose the event into the most relevant components of the 'fire triangle': hydroclimatic drivers, fuel characteristics, and ignitions.",
+        "evidence_sha256": "6b8d5ab5deef187315d34d3f17fcec94451124d2b7b42b61744e758c29848118"
+      },
+      "reason": "Describes the method of a cited study (Ramos et al 2023); no result to restate."
+    },
+    {
+      "candidate_id": "LIT2-001063-R2",
+      "evidence": {
+        "json_path": "$[\"case study\"]",
+        "char_start": 15663,
+        "char_end": 15892,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "It thus appears reasonable to hypothesize (although no specific attribution analysis has been conducted to our knowledge) that climate change may have contributed to increasing the heat and atmospheric dryness advected by Ophelia",
+        "evidence_sha256": "98abc70f4efad5834fdee67da4ec6811d723c78a20cca27a17af934379a2d8df"
+      },
+      "reason": "Explicitly a hypothesis without an attribution analysis; not promoted."
+    },
+    {
+      "candidate_id": "LIT2-001063-R3",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 6507,
+        "char_end": 6677,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "They found that urban development alone increased peak discharges by 54% (±28%) and climate change alone increased them by 20% (±3%) with a combined effect of 84% (±35%).",
+        "evidence_sha256": "eb223e588fea387df3574125d7743ea696d4b701ff3a0d3d72a7a18275ef1cf5"
+      },
+      "reason": "A cited result (Sebastian et al 2019, Hurricane Harvey); beyond the five-claim cap and peripheral to the paper's case studies."
+    },
+    {
+      "candidate_id": "LIT2-001063-R4",
+      "evidence": {
+        "json_path": "$[\"case study\"]",
+        "char_start": 30877,
+        "char_end": 31082,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The severity of these extremes is predicted to increase with climate change, with high uncertainties on the average precipitation trends (Gershunov et al 2017, 2019, Swain et al 2018, Bevacqua et al 2022).",
+        "evidence_sha256": "c9358237071a86ad8296b63bcd70db2c55814bda2d325c3ca20fd28dd9869004"
+      },
+      "reason": "Cited projection with no stated scenario or horizon."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "A perspective paper; most quantitative statements are attributed to cited studies. Several sentences in the source run together without a space after the full stop.",
+  "scope_adjudication": {
+    "reader_1": "in_scope_hazard",
+    "reader_2": "in_scope_hazard",
+    "adopted": "in_scope_hazard",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp4_blind/272211804.json",
+    "reader_2_reason": "The perspective paper proposes an extreme-event-attribution framework and examines hazard events and their impacts through case studies (Kenyan drought, NE Pacific marine heatwave, 2017 Portugal fires, Venice Acqua Alta, California drought), including its own reservoir counterfactual analysis."
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP4r3 Phase A",
+    "adjudicator": "reader 1 (the EXECUTOR, prototype-exposed)",
+    "first_pass_record_sha256": "150de4503b214e209fe714eccbb45e4467aa0d37991d1d895e7144bfbf92a088",
+    "blind_record_sha256": "f523c8d9b8256e44f01097c34e2829ae5c33a88d6c70e68841a86167a21e7078",
+    "no_paper_re_read": true,
+    "representativeness": "deterministic rank sample of lexical place candidates from LITCORPUS-02; not representative of the corpus or the literature"
+  }
+}

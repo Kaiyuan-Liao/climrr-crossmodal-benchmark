@@ -1,0 +1,848 @@
+{
+  "lit2_id": "LIT2-001308",
+  "item_id": "999274",
+  "arm": "fire_weather_v1",
+  "rank": 100,
+  "rel_path": "74/999274.json",
+  "file_sha256": "ccc828ae11a6b4f4f224b03d0bb422a3bf5febd4d8e711e79ca5144568307617",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "background",
+    "methods",
+    "fire emissions and atmospheric transport and dispersion modeling",
+    "statistical modeling input data",
+    "atmospheric particulates",
+    "syndromic surveillance heath data",
+    "additional model variables",
+    "statistical framework",
+    "variable and model selection",
+    "model diagnostics and results",
+    "discussion",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Modeling acute respiratory illness during the 2007 San Diego wildland fires using a coupled emissions-transport system and generalized additive modeling",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper models how particulate matter from the 2007 San Diego wildland fires affected emergency department visits for respiratory illness, i.e. the health impacts of a fire hazard.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 12,
+    "char_end": 140,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented.",
+    "evidence_sha256": "3f61a24507a1101161c5eeab27909957a871933f85e186500b6e8316924b83d0"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-001308-C1",
+      "claim_text": "For the 2007 season, at peak fire particulate concentrations the odds of a person seeking emergency care rose by about 50% compared with non-fire conditions (41% regional model, 72% sub-regional model).",
+      "claim_type": "finding",
+      "concept": {
+        "value": "wildfire (fire-emitted) particulate concentrations; odds of seeking emergency care for respiratory syndromes",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "increased by approximately 50% (41% generalized case, 72% geographically specific case)",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "San Diego County, California (county region and six sub-regions)",
+        "status": "explicit",
+        "role": "study area",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 12,
+          "char_end": 140,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented.",
+          "evidence_sha256": "3f61a24507a1101161c5eeab27909957a871933f85e186500b6e8316924b83d0"
+        }
+      },
+      "temporal_frame": {
+        "value": "2007 season; ED data analysed 08/01/2007 through 11/29/2007",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"syndromic surveillance heath data\"]",
+          "char_start": 2035,
+          "char_end": 2132,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "analysis of the complete data set was limited to the time period of 08/01/2007 through 11/29/2007",
+          "evidence_sha256": "07fd4f62e0094a448888f0987976e4d75e4f01db74b27c162bedc2f5c57fbf84"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.conclusion",
+        "char_start": 581,
+        "char_end": 876,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Model results from this study for the 2007 season, show that at peak fire particulate concentrations the odds of a person seeking emergency care is increased by approximately 50% compared to non-fire conditions (41% for the generalized case, 72% for a geographically specific case; see Table 4).",
+        "evidence_sha256": "27c448735521a5e7cc7a0bce6c8edff38cce9944b99009b31ba3c7033eb9abcc"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "The abstract gives the same result as '40% for the regional case, 70% for a geographically specific case'; the conclusion's 41% / 72% match the results section.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "study area",
+            "class": "study_area"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "study area",
+            "tag": null,
+            "class": "study_area"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001308-C2",
+      "claim_text": "The county-level model explained 76.6% of deviance in respiratory ED visits, but under-estimated visits by roughly 15% in mid-August and during the PM10 spike after the October burn.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "model fit for respiratory-related ED visits",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "deviance explained 76.6%; under-estimated by roughly 15% on the two exception periods",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "San Diego County, California (county region and six sub-regions)",
+        "status": "explicit",
+        "role": "study area",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 12,
+          "char_end": 140,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented.",
+          "evidence_sha256": "3f61a24507a1101161c5eeab27909957a871933f85e186500b6e8316924b83d0"
+        }
+      },
+      "temporal_frame": {
+        "value": "2007 season; ED data analysed 08/01/2007 through 11/29/2007",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"syndromic surveillance heath data\"]",
+          "char_start": 2035,
+          "char_end": 2132,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "analysis of the complete data set was limited to the time period of 08/01/2007 through 11/29/2007",
+          "evidence_sha256": "07fd4f62e0094a448888f0987976e4d75e4f01db74b27c162bedc2f5c57fbf84"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"model diagnostics and results\"]",
+        "char_start": 1898,
+        "char_end": 2090,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The model performs well (deviance explained is 76.6%; Table 3) capturing the increasing seasonal trend in ED respiratory-related visits and inter-day variability related to the weekend effect.",
+        "evidence_sha256": "3fcbc63e69ae5b0405dabea63af07ffaba16e0b9b2013298cbfd04491def9e2b"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "The exceptions and the 15% figure are in the following sentences of the same field.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "999274-c2",
+        "blind_evidence": {
+          "json_path": "$[\"model diagnostics and results\"]",
+          "char_start": 1898,
+          "char_end": 2379,
+          "evidence_text": "The model performs well (deviance explained is 76.6%; Table 3) capturing the increasing seasonal trend in ED respiratory-related visits and inter-day variability related to the weekend effect. Two exceptions are mid-August and the PM 10 spike following the October burn event. The August deviation is likely a result of this being a high-vacation period, while the late October spike deviation is difficult to attribute. ED visits are under-estimated by roughly 15% for these days."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Model fit for respiratory ED visits.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "76.6% deviance explained; ~15% under-estimate on the exception days.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "reader 1's support span states it; reader 2 cites another sentence and tags it inferred. Rule 3b: explicit kept.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "San Diego County, California",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.abstract",
+                "char_start": 12,
+                "char_end": 140,
+                "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented."
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "reader 1's support span states it; reader 2 cites the same sentence and tags it inferred. Rule 3b: explicit kept.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "08/01/2007 through 11/29/2007",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$[\"syndromic surveillance heath data\"]",
+                "char_start": 2035,
+                "char_end": 2132,
+                "evidence_text": "analysis of the complete data set was limited to the time period of 08/01/2007 through 11/29/2007"
+              }
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "study area",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_1": {
+            "value": "study area",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 12,
+              "char_end": 140,
+              "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented."
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "San Diego County, California",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 12,
+              "char_end": 140,
+              "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented."
+            }
+          },
+          "temporal_frame": {
+            "value": "08/01/2007 through 11/29/2007",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$[\"syndromic surveillance heath data\"]",
+              "char_start": 2035,
+              "char_end": 2132,
+              "evidence_text": "analysis of the complete data set was limited to the time period of 08/01/2007 through 11/29/2007"
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001308-C3",
+      "claim_text": "In the sub-regional model, a higher proportion of households above $50k lowered the odds of ED visits while a higher proportion of people under 24 raised them, suggesting geographic differences in health care access after a wildfire.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "demographic variables (income, age); odds of ED visits following a wildfire",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "wealthier households decrease odds; population below 24 increases odds; access may vary by geography (hedged)",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "San Diego County, California (county region and six sub-regions)",
+        "status": "explicit",
+        "role": "study area",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 12,
+          "char_end": 140,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented.",
+          "evidence_sha256": "3f61a24507a1101161c5eeab27909957a871933f85e186500b6e8316924b83d0"
+        }
+      },
+      "temporal_frame": {
+        "value": "2007 season; ED data analysed 08/01/2007 through 11/29/2007",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"syndromic surveillance heath data\"]",
+          "char_start": 2035,
+          "char_end": 2132,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "analysis of the complete data set was limited to the time period of 08/01/2007 through 11/29/2007",
+          "evidence_sha256": "07fd4f62e0094a448888f0987976e4d75e4f01db74b27c162bedc2f5c57fbf84"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"model diagnostics and results\"]",
+        "char_start": 5668,
+        "char_end": 5911,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The coefficients of these demographic variables in Table 4 show that an increase in proportion of wealthy households (>$50 k) leads to a decrease in ED visit odds while an increase in proportion of population below 24 years increases the odds.",
+        "evidence_sha256": "a2b418a8f73fa6d398a467db959194b6b5faf0dae7abda4ce1a1eb1006d53d20"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "study area",
+            "class": "study_area"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "study area",
+            "tag": null,
+            "class": "study_area"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001308-C4",
+      "claim_text": "A separate analysis using the Canadian Fire Weather Index computed from Regional Climate Model output indicates San Diego County will see about two extreme fire seasons each decade by 2040, similar to the present.",
+      "claim_type": "projection",
+      "concept": {
+        "value": "Canadian Fire Weather Index; extreme fire seasons",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.discussion",
+          "char_start": 6993,
+          "char_end": 7129,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Canadian Fire Weather Index was calculated for the study area using weather variables produced by the Regional Climate Model (RegCM v. 4",
+          "evidence_sha256": "4e44f6a3ed77dd65f149cd55426ebf21df933c8cd2e62ffdde8ad411db3ade24"
+        }
+      },
+      "relation_or_direction": {
+        "value": "approximately two extreme fire seasons each decade by 2040, similar to the present",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "San Diego County",
+        "status": "explicit",
+        "role": "study area (projection)"
+      },
+      "temporal_frame": {
+        "value": "by 2040",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 7130,
+        "char_end": 7246,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "San Diego County will experience approximately two extreme fire seasons each decade by 2040, similar to the present.",
+        "evidence_sha256": "baa394e77d28084d5d0516aacd5ae7f467a83dc376ccc166dcb75c93b21e4021"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "The source text is truncated: the sentence naming the FWI and RegCM v. 4 breaks off and runs into this one, so the link between the FWI calculation and the projection is inferred from adjacency. No emissions scenario is named.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "study area (projection)",
+            "class": "study_area"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "study area (projection)",
+            "tag": null,
+            "class": "study_area"
+          }
+        },
+        "blind_reader_considered_and_rejected": [
+          {
+            "rejected_id": "rejected[0]",
+            "overlap_code_points": 116,
+            "reason": "Stored text is truncated mid-sentence, breaking the link between the Fire Weather Index method and the projection; the 'extreme fire seasons' are fire-weather based (FWI), not fire occurrence, and no scenario is stated. Not promoted.",
+            "evidence_text": "Canadian Fire Weather Index was calculated for the study area using weather variables produced by the Regional Climate Model (RegCM v. 4 San Diego County will experience approximately two extreme fire seasons each decade by 2040, similar to the present."
+          }
+        ]
+      }
+    },
+    {
+      "claim_id": "LIT2-001308-B1",
+      "origin": "blind_reader",
+      "blind_claim_id": "999274-c1",
+      "claim_text": "Scaled to peak mean modeled concentrations, fire-emitted PM10 increased the odds of seeking emergency care by approximately 41% (regional model) and 72% (sub-regional model).",
+      "claim_type": "finding",
+      "concept": {
+        "value": "fire-emitted PM 10",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "odds increase is approximately 41% (regional) and 72% (sub-regional)",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "San Diego County",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 12,
+          "char_end": 140,
+          "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented.",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "3f61a24507a1101161c5eeab27909957a871933f85e186500b6e8316924b83d0"
+        },
+        "role": "study area",
+        "blind_role_record": {
+          "value": "study area",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"abstract\"]",
+            "char_start": 12,
+            "char_end": 140,
+            "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented.",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "08/01/2007 through 11/29/2007",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"syndromic surveillance heath data\"]",
+          "char_start": 2035,
+          "char_end": 2132,
+          "evidence_text": "analysis of the complete data set was limited to the time period of 08/01/2007 through 11/29/2007",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "07fd4f62e0094a448888f0987976e4d75e4f01db74b27c162bedc2f5c57fbf84"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "peak mean modeled concentrations",
+        "status": "explicit"
+      },
+      "evidence": {
+        "json_path": "$[\"model diagnostics and results\"]",
+        "char_start": 4774,
+        "char_end": 5131,
+        "evidence_text": "An example of a variable with continuous data is that of the fire-emitted PM 10 (first line), where the original logistic regression coefficient from Table 3 may at first appear small, but when scaled to account for the peak mean modeled concentrations, the resulting odds increase is approximately 41% (regional) and 72% (sub-regional) as shown in Table 4.",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "e7bba37bda4529ab1376d31e2900d9e779156096a025eb877cdcd989e9aba4a4"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "study area",
+            "class": "study_area"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 12,
+              "char_end": 140,
+              "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented."
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001308-B3",
+      "origin": "blind_reader",
+      "blind_claim_id": "999274-c3",
+      "claim_text": "In the sub-regional model, SR3 showed a 51% decrease and SR6 a 20% increase in odds of seeking ED care; higher wealthy-household proportion decreased odds and higher under-24 proportion increased them.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "odds of seeking ED care",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "SR3 (51% decrease in odds of seeking ED care) and SR6 (20% increase; an increase in proportion of wealthy households (>$50 k) leads to a decrease in ED visit odds; population below 24 years increases the odds",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"model diagnostics and results\"]",
+          "char_start": 5668,
+          "char_end": 5911,
+          "evidence_text": "The coefficients of these demographic variables in Table 4 show that an increase in proportion of wealthy households (>$50 k) leads to a decrease in ED visit odds while an increase in proportion of population below 24 years increases the odds.",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "a2b418a8f73fa6d398a467db959194b6b5faf0dae7abda4ce1a1eb1006d53d20"
+        }
+      },
+      "geography": {
+        "value": "SR3; SR6 (sub-regions of San Diego County)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"statistical modeling input data\"]",
+          "char_start": 555,
+          "char_end": 638,
+          "evidence_text": "The latter aggregation corresponds to six sub-regions that group adjacent zip codes",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "3dee276d876f8c816b474645e92050156db73d1c5e1545747430f26c1d942771"
+        },
+        "role": "study area",
+        "blind_role_record": {
+          "value": "study area",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"abstract\"]",
+            "char_start": 12,
+            "char_end": 140,
+            "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented.",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "08/01/2007 through 11/29/2007",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"syndromic surveillance heath data\"]",
+          "char_start": 2035,
+          "char_end": 2132,
+          "evidence_text": "analysis of the complete data set was limited to the time period of 08/01/2007 through 11/29/2007",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "07fd4f62e0094a448888f0987976e4d75e4f01db74b27c162bedc2f5c57fbf84"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"model diagnostics and results\"]",
+        "char_start": 5336,
+        "char_end": 5521,
+        "evidence_text": "The additional variables included in the sub-regional model show spatially specific effects on odds within SR3 (51% decrease in odds of seeking ED care) and SR6 (20% increase; Table 4).",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "0706eda069c011a149cc343dd77613ef0551ad137e8f30671f2be54876f92bf9"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "study area",
+            "class": "study_area"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 12,
+              "char_end": 140,
+              "evidence_text": "A study of the impacts on respiratory health of the 2007 wildland fires in and around San Diego County, California is presented."
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-001308-B4",
+      "origin": "blind_reader",
+      "blind_claim_id": "999274-c4",
+      "claim_text": "Citing prior work, the paper states models of future climate generally predict weather conditions favoring increased occurrence and severity of California wildland fires, such as low annual precipitation and high average daily temperatures.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "occurrence and severity of California wildland fires",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "weather conditions that favor an increase",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "California",
+        "status": "explicit",
+        "role": "contextual mention",
+        "blind_role_record": {
+          "value": "contextual mention",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"background\"]",
+            "char_start": 1051,
+            "char_end": 1087,
+            "evidence_text": "high average daily temperatures [5])",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "future climate",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.background",
+        "char_start": 860,
+        "char_end": 1145,
+        "evidence_text": "Models of future climate generally predict weather conditions that favor an increase in the occurrence and severity of California wildland fires (i.e. periods of low annual precipitation and high average daily temperatures [5]) and long-term trends conducive to lengthened fire season.",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "b30329e69f4f39449e9dec6f1fc0a5465e14ad50dfdcb5705c38c6c1ff75ac35"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "contextual mention",
+            "class": "contextual"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "contextual mention",
+            "tag": "inferred",
+            "class": "contextual",
+            "support": {
+              "json_path": "$.background",
+              "char_start": 1051,
+              "char_end": 1087,
+              "evidence_text": "high average daily temperatures [5])"
+            }
+          }
+        },
+        "first_reader_considered_and_rejected": [
+          {
+            "rejected_id": "LIT2-001308-R2",
+            "overlap_code_points": 144,
+            "reason": "General background projection attributed to a reference; no scenario or horizon.",
+            "evidence_text": "Models of future climate generally predict weather conditions that favor an increase in the occurrence and severity of California wildland fires"
+          }
+        ]
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-001308-R1",
+      "evidence": {
+        "json_path": "$.background",
+        "char_start": 0,
+        "char_end": 120,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In 2007, catastrophic wildland fires burned approximately 650,000 acres of southern Californian grassland and chaparral.",
+        "evidence_sha256": "d59c3b5df54918913a720e29ad57eff9a3d4fdebd513ed8e19a228334e694c98"
+      },
+      "reason": "Context for the study event, stated without analysis in this paper; not promoted."
+    },
+    {
+      "candidate_id": "LIT2-001308-R2",
+      "evidence": {
+        "json_path": "$.background",
+        "char_start": 860,
+        "char_end": 1004,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Models of future climate generally predict weather conditions that favor an increase in the occurrence and severity of California wildland fires",
+        "evidence_sha256": "275d672ec4e11319be7e8effea736d67c913d0024affcb9fdc0ca24970b63f86"
+      },
+      "reason": "General background projection attributed to a reference; no scenario or horizon."
+    },
+    {
+      "candidate_id": "LIT2-001308-R3",
+      "evidence": {
+        "json_path": "$[\"model diagnostics and results\"]",
+        "char_start": 4664,
+        "char_end": 4773,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "On Tuesdays, the effect is less pronounced with a 7% increase in the odds of seeking ED care for both models.",
+        "evidence_sha256": "e98eb724b4decb3838605244807722dad43a27ece9fb8ec7a495788046779bb7"
+      },
+      "reason": "Day-of-week effect; not about the hazard."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": null,
+  "scope_adjudication": {
+    "reader_1": "in_scope_hazard",
+    "reader_2": "in_scope_hazard",
+    "adopted": "in_scope_hazard",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp4_blind/999274.json",
+    "reader_2_reason": "The paper models wildfire smoke particulate exposure and its association with respiratory emergency department visits during the 2007 San Diego wildland fires."
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP4r3 Phase A",
+    "adjudicator": "reader 1 (the EXECUTOR, prototype-exposed)",
+    "first_pass_record_sha256": "1a2c46ce9f554821d53979968011da9cbc5efb68a0e2f09f7ce2e01a3c2564d9",
+    "blind_record_sha256": "b5278b9aa8ff548bbc2269cc918c825282de64bdef14c796db7eb33167af94da",
+    "no_paper_re_read": true,
+    "representativeness": "deterministic rank sample of lexical place candidates from LITCORPUS-02; not representative of the corpus or the literature"
+  }
+}

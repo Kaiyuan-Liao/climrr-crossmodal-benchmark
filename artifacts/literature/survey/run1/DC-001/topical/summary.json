@@ -1,0 +1,50 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-20T21:58:57Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "b37f592f55e7a45fb547c4fd3725bee8b8d65f7a2e6b9d38ea24c8cd0d570038",
+  "query_text": "( \"temperature\" OR \"annual mean temperature\" OR \"mean annual temperature\" OR \"annual average temperature\" OR \"average annual temperature\" OR \"annual temperature average\" OR \"annual-mean temperature\" OR \"mat\" OR \"annual mean temp\" )\n",
+  "parsed_groups": [
+    [
+      "temperature",
+      "annual mean temperature",
+      "mean annual temperature",
+      "annual average temperature",
+      "average annual temperature",
+      "annual temperature average",
+      "annual-mean temperature",
+      "mat",
+      "annual mean temp"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    124420
+  ],
+  "per_term_doc_counts": {
+    "g0:temperature": 123948,
+    "g0:annual mean temperature": 3649,
+    "g0:mean annual temperature": 7778,
+    "g0:annual average temperature": 3285,
+    "g0:average annual temperature": 4670,
+    "g0:annual temperature average": 20,
+    "g0:annual-mean temperature": 34,
+    "g0:mat": 3107,
+    "g0:annual mean temp": 4
+  },
+  "raw_count": 124420,
+  "disambiguation": null,
+  "admitted_count": 124420,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 63.1,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

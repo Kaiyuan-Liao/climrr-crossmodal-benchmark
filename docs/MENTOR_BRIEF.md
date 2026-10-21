@@ -1,30 +1,55 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-10-19   Next meeting: **Thursday 2026-10-22** --- bring the items under *For Thursday* below; the answer sheet is still outstanding
+Last updated: 2026-10-20   Next meeting: **Thursday 2026-10-22** --- bring the items under *For Thursday* below; the answer sheet is still outstanding
 
 ## Status in five lines
 
 1. **The table is pinned and partly interpreted**: 62,834 rows, 275 columns, read as text; 41 columns interpreted (21 stated by the dictionary, 20 reasoned and marked so). Nothing reasoned is confirmed --- **the answer sheet has still not been reviewed**, so all 20 stay `inferred_candidate`; the project proceeds on "our reading" (D-014), which promotes nothing.
-2. **The first literature corpus gave no link.** 1,918 papers collected for another purpose; ten read at random and four found by a strict concept + place search, each read twice: **0 of 78 statement-unit pairs qualify as a candidate link** ([MENTOR_REPORT_2026-10-09.md](MENTOR_REPORT_2026-10-09.md)).
-3. **Your direction of 2026-10-09 is now the method:** concepts from the table units first, then papers for those concepts. The same two fixed searches (Fire Weather Index, heat index) gave **2 and 10** papers on one S2ORC shard (fire weather after the FWI rule below) and **448 and 861** on the 186,346-file climate set JL shared after 2026-10-13. A bare "FWI" counts only when the same paper also says "fire weather". GUIDANCE accepted this as the working corpus (D-025) --- for finding candidates, not as a sample of the literature.
-4. **100 fire-weather and 143 heat-index papers mention Oklahoma, Stephens or California somewhere.** That is a word match only --- the word may be a study area, an affiliation or a surname. **20 of them (10 + 10), picked by a fixed rank rule that never looks at content, are frozen** for a two-reader reading; none has been opened.
-5. **Next:** the 20-paper double reading, then the same mechanical comparison with the three units; and, separately, a survey of which other dictionary concepts have literature coverage, run on Polaris as diagnostics only. **No questions are generated** until a link exists.
+2. **Your concept-first method found papers, but still no link.** On the 186,346-file climate set JL shared, the fire weather index and heat-index searches gave 448 and 861 papers. 20 of those that mention Oklahoma, Stephens or California (10 + 10, picked by a fixed rule before anyone opened them) were each read by two independent readers and reconciled into **118 statements** (3 found identically by both readers, 47 found by both and reconciled, 68 found by one reader only): **0 of 354 statement--unit pairs qualify as a candidate link.**
+3. **The zero now points at our units, not at the papers.** 12 pairs share the concept family and 2 share the place, but never both in the same statement. GUIDANCE's reading: papers usually describe a broader quantity (for example "heat index" rather than "days above 105 °F"), a broader area (a state or a region rather than one county or grid cell) and often no emissions scenario. GUIDANCE accepted the zero for these 20 papers only, and nothing beyond them (D-027).
+4. **A survey of every concept in the data dictionary is done** (diagnostic counts, not prevalence). Broad quantities appear widely in the literature; the specific heat-index threshold measures barely appear by their exact wording. Under our current search terms, those threshold measures have **effectively no direct word-for-word footprint**. That does **not** show the literature lacks them.
+5. **Next:** a small test of whether table units stated at the level papers use (a quantity family, a state or region) make links possible, with the current three units kept as controls; and a second survey run at the family level. **No questions are generated** (QA is still not authorized).
 
 ## What I need from this meeting
 
 > ### **For Thursday 2026-10-22**
 >
-> 1. **Same concepts, same queries, new source.** Fire weather **2 → 448**
->    papers, heat index **10 → 861** (shard → climate set). 100 and 143 of them
->    mention one of our three places --- word matches, not yet read.
-> 2. **A 20-paper double reading starts now** (10 fire weather + 10 heat
->    index, chosen by a fixed rule before anyone opened them).
-> 3. **The dictionary-wide concept survey runs on Polaris as diagnostics**: for
->    each concept the dictionary describes, how much literature mentions it.
->    It ranks nothing into the benchmark by itself.
+> **Seven quantity families as discussion candidates.** These are **for discussion only**, not approved
+> benchmark families. They are listed in dictionary order (pp. 6--11), and **the order is not a ranking**.
+> The counts are **measure-level** survey run 1 counts (documents matching any search term for the
+> dictionary's own measure; diagnostic coverage counts, not prevalence). **Family-level coverage is pending run 2.**
 >
-> **Question for you:** *if coverage turned out comparable, which dictionary
-> concepts would you prioritize for new units?*
+> | Family (discussion candidate) | Dictionary measure(s) | Measure-level coverage, run 1 (all / with climate context) |
+> | --- | --- | --- |
+> | temperature | annual; seasonal | 124,420 / 88,245; 123,948 / 88,021 (both counts are almost entirely the bare word "temperature") |
+> | precipitation | precipitation | 84,926 / 61,190 |
+> | wind speed | wind speed | 27,498 / 17,394 |
+> | consecutive dry days / dry spell | consecutive days with no precipitation | 6,981 / 4,946 |
+> | degree days | heating and cooling degree days | 3,076 / 2,638 |
+> | fire weather index | seasonal FWI; FWI classes | 548 / 395; 551 / 396 |
+> | heat index | daily max; seasonal max; days above 95 / 105 / 115 / 125 °F | 0; 1; --- (no searchable term); 0; --- (no searchable term); 2 (all and with-context counts are equal) |
+>
+> *Family-level coverage pending run 2.* A count for the heat-index family as a whole will be reported
+> beside these measure counts and will never be credited to a single threshold measure.
+>
+> **(a) Which families would you prioritize for redesigned units, and why --- independent of literature
+> coverage?** Coverage counts will not decide this on their own.
+>
+> **(b) A candidate question type: cross-location comparison.** *"A paper reports a pattern for a
+> phenomenon family at place A; the table's deterministic value for the same family at place B; same or
+> different direction."* This is a **candidate relation**. It would be defined and frozen before any test,
+> and nothing has been generated. Guardrails:
+>
+> - **Paper side:** an adjudicated claim with an explicit concept, a direction, and the paper's own
+>   study-area geography.
+> - **Table side:** a frozen deterministic aggregate at a granularity papers actually name.
+> - **Answer:** two attested facts plus a computed comparison.
+> - **Scenario:** an unknown scenario is tolerated and flagged, never treated as a match.
+> - **Exclusions:** papers that state no place are excluded.
+>
+> Is this a relation you would want the benchmark to test?
+>
+> **(c) Would state-level or region-level units be acceptable to you as the table-side granularity?**
 >
 > **Still open from 2026-10-19:** in general scientific text "FWI" often means
 > something else (full waveform inversion, Forest Watch Indonesia, fatal work

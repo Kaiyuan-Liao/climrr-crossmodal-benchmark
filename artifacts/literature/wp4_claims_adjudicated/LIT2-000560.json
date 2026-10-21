@@ -1,0 +1,524 @@
+{
+  "lit2_id": "LIT2-000560",
+  "item_id": "244714495",
+  "arm": "fire_weather_v1",
+  "rank": 40,
+  "rel_path": "95/244714495.json",
+  "file_sha256": "a335fbf2e6c78485c30ad32b32debd77032457dbdc88e554dca4f096b0cd0f24",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "related work",
+    "study area",
+    "modeling process",
+    "online parameter estimation",
+    "fire map prediction",
+    "evaluation and discussion",
+    "algorithm 1 two-time-scale stochastic optimization",
+    "temporal validation",
+    "estimation",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Learning Wildfire Model from Incomplete State Observations",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper builds and evaluates a deep-learning model that predicts future wildfire burn area from historical fire and climate data, i.e. prediction of a hazard.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 272,
+    "char_end": 470,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "In this paper, we create a dynamic model for future wildfire predictions of five locations within the western United States through a deep neural network via historical burned area and climate data.",
+    "evidence_sha256": "a10150539ceb1e44cd6124a0c819e51c0a01be2eac6fb527dc6fbb42d451dd23"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-000560-C1",
+      "claim_text": "On temporally held-out validation data, the proposed dynamic auto-encoder outperformed the alternative models in binary cross-entropy loss for Salt Lake City, Portland and Medford, but not in AUROC.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "wildfire prediction performance (binary cross-entropy loss; AUROC) of a dynamic auto-encoder",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "outperforms the others in BCE; did not outperform in AUROC",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Salt Lake City, Portland, and Medford (100 km by 100 km grid squares in the western United States centred on these cities)",
+        "status": "explicit",
+        "role": "study area (modelled grid squares)",
+        "support": {
+          "json_path": "$[\"study area\"]",
+          "char_start": 0,
+          "char_end": 102,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "In this study, the regions chosen encompass 100 km by 100 km grid squares in the western United States",
+          "evidence_sha256": "ca697b3b629a402e1d1a12c6773655007e6a1d8d27ca5f13c6034d45f32aa735"
+        }
+      },
+      "temporal_frame": {
+        "value": "trained on 11/01/2000 to 06/08/2016; validated on 06/08/2016 to 04/08/2020",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"evaluation and discussion\"]",
+          "char_start": 97,
+          "char_end": 179,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "We first trained a model using the time-series data from 11/01/2000 to 06/08/2016.",
+          "evidence_sha256": "6101437f2ac0a24054b6bb75cfe493a8e772fca1e89495d168357d771667598a"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "temporal 70% training / 30% validation split in weekly intervals; fire predicted four weekly steps ahead",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"study area\"]",
+          "char_start": 1554,
+          "char_end": 1676,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "data set is divided temporally in weekly time intervals, t, following a ratio of 70% training data and 30% validation data",
+          "evidence_sha256": "baf0de8e6d60bf53cf1a6aea0e2d2be5b634bc1becd911e9f3245a2c84b95eed"
+        }
+      },
+      "evidence": {
+        "json_path": "$.estimation",
+        "char_start": 458,
+        "char_end": 723,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The proposed model (dynamic auto-encoder) outperforms the other for the three locations (Salt Lake City, Portland, and Medford) in terms of the binary cross-entropy (BCE) loss. However, the proposed model did not outperform in terms of the other performance metric.",
+        "evidence_sha256": "677ad85a45fae6c5eeda8bb9ef2458f035f71382c1173e6be84a75f6ccf95528"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "A model-performance finding; five locations were modelled, three are named for this result.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "244714495-c1",
+        "blind_evidence": {
+          "json_path": "$.estimation",
+          "char_start": 458,
+          "char_end": 723,
+          "evidence_text": "The proposed model (dynamic auto-encoder) outperforms the other for the three locations (Salt Lake City, Portland, and Medford) in terms of the binary cross-entropy (BCE) loss. However, the proposed model did not outperform in terms of the other performance metric."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Model performance on BCE loss (and the other metric).",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Outperforms on BCE; not on the other metric.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds the grid-square description from a support span. Adopted: the evidence's places.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "Salt Lake City, Portland, and Medford",
+              "tag": "explicit"
+            }
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1's support span states only the training period; the claim is about the validation period, which reader 2's span states. Rule 3b: inferred.",
+            "rule": "3b: inferred beats explicit; the explicit span does not state it",
+            "explicit_span_states": false,
+            "adopted": {
+              "value": "validation data 06/08/2016 to 04/08/2020",
+              "tag": "inferred",
+              "support_from": "r2",
+              "support": {
+                "json_path": "$[\"evaluation and discussion\"]",
+                "char_start": 247,
+                "char_end": 379,
+                "evidence_text": "Then, the corrected trained models were applied to the later time-series validation data beginning 06/08/2016 and ending 04/08/2020."
+              }
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "Reader 1's support span states the temporal 70/30 split, which carries reader 2's 'different time period'.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "temporal 70% training / 30% validation split",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$[\"study area\"]",
+                "char_start": 1554,
+                "char_end": 1676,
+                "evidence_text": "data set is divided temporally in weekly time intervals, t, following a ratio of 70% training data and 30% validation data"
+              }
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "study area (modelled grid squares)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_1": {
+            "value": "study area (modelled grid squares)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$[\"study area\"]",
+              "char_start": 123,
+              "char_end": 335,
+              "evidence_text": "Squares were centered at cities that have experienced moderate to high wildfire activity in the past decade, including: Portland, Oregon; Medford, Oregon; Reno, Nevada; Denver, Colorado; and Salt Lake City, Utah."
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "Salt Lake City, Portland, and Medford",
+            "tag": "explicit"
+          },
+          "temporal_frame": {
+            "value": "validation data 06/08/2016 to 04/08/2020",
+            "tag": "inferred",
+            "support_from": "r2",
+            "support": {
+              "json_path": "$[\"evaluation and discussion\"]",
+              "char_start": 247,
+              "char_end": 379,
+              "evidence_text": "Then, the corrected trained models were applied to the later time-series validation data beginning 06/08/2016 and ending 04/08/2020."
+            }
+          },
+          "experimental_condition": {
+            "value": "temporal 70% training / 30% validation split",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$[\"study area\"]",
+              "char_start": 1554,
+              "char_end": 1676,
+              "evidence_text": "data set is divided temporally in weekly time intervals, t, following a ratio of 70% training data and 30% validation data"
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000560-C2",
+      "claim_text": "In the western United States, the 2020 season burned over 2.5 million hectares, the largest wildfire season recorded in modern history.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "wildfire season burned area",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "over 2.5 million hectares burned; largest season recorded in modern history",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the western United States",
+        "status": "explicit",
+        "role": "background context"
+      },
+      "temporal_frame": {
+        "value": "the 2020 season",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 924,
+        "char_end": 1099,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In the western United States alone, the 2020 season saw over 2.5 million hectares burned, the largest wildfire season recorded in modern history (Higuera and Abatzoglou 2020).",
+        "evidence_sha256": "1ec8e3307df5a712b21143b54de0157bc6e26948bd76e5f1e3cdeddc663b51ff"
+      },
+      "claim_validation_status": "independently_confirmed",
+      "notes": "Attributed to Higuera and Abatzoglou 2020.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "A",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R2"
+        ],
+        "flags": [],
+        "notes": [],
+        "aligned_blind_claim_id": "244714495-c3",
+        "blind_evidence": {
+          "json_path": "$.introduction",
+          "char_start": 924,
+          "char_end": 1099,
+          "evidence_text": "In the western United States alone, the 2020 season saw over 2.5 million hectares burned, the largest wildfire season recorded in modern history (Higuera and Abatzoglou 2020)."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Hectares burned in the wildfire season.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Over 2.5 million ha; the largest season recorded in modern history.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "background context",
+            "tag": null,
+            "class": "contextual"
+          },
+          "reader_1": {
+            "value": "background context",
+            "tag": null,
+            "class": "contextual"
+          },
+          "reader_2": {
+            "value": "contextual mention",
+            "tag": "inferred",
+            "class": "contextual",
+            "support": {
+              "json_path": "$.introduction",
+              "char_start": 1069,
+              "char_end": 1098,
+              "evidence_text": "(Higuera and Abatzoglou 2020)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000560-B2",
+      "origin": "blind_reader",
+      "blind_claim_id": "244714495-c2",
+      "claim_text": "The authors suggest the proposed model's better performance could come from the dynamic auto-encoder's ability to estimate for confounding factors.",
+      "claim_type": "mechanism",
+      "concept": {
+        "value": "greater performance of the proposed",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "could be from the dynamic auto-encoder's ability to estimate for confounding factors",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "unknown",
+        "status": "unknown",
+        "role": "unknown",
+        "blind_role_record": {
+          "value": "unknown",
+          "tag": "unknown"
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.estimation",
+        "char_start": 1365,
+        "char_end": 1513,
+        "evidence_text": "This means that the greater performance of the proposed metric could be from the dynamic auto-encoder's ability to estimate for confounding factors.",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "9e56c3d817f92b668456e9bd0df49fb61d3dca4effbd9a1dba3680dd36110a4f"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "unknown",
+            "class": "unknown"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "unknown",
+            "tag": "unknown",
+            "class": "unknown"
+          }
+        }
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-000560-R1",
+      "evidence": {
+        "json_path": "$[\"evaluation and discussion\"]",
+        "char_start": 606,
+        "char_end": 729,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In Figure 9, as shown in the linked video, the wildfire prediction map shows qualitative correlation with the ground truth.",
+        "evidence_sha256": "b18171ba7723e6cf147eb10a4703ffa42a3741dee596dbc6d027156a83f8bffe"
+      },
+      "reason": "Qualitative statement about a figure and video; no measurable result to restate."
+    },
+    {
+      "candidate_id": "LIT2-000560-R2",
+      "evidence": {
+        "json_path": "$[\"related work\"]",
+        "char_start": 0,
+        "char_end": 260,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Wildfire forecasting models have been created through several methods, but existing systems, such as the Canadian Forest Fire Weather Index System, rely on weather stations and closed-form mathematical equations to attain a fire risk probability (Wagner 1987).",
+        "evidence_sha256": "40162914080210463ecd1600bfd331529746ff1585ccf87bd84e126d69817b8b"
+      },
+      "reason": "Background characterisation of another system; not this paper's evidence."
+    },
+    {
+      "candidate_id": "LIT2-000560-R3",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 1291,
+        "char_end": 1436,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Figure 1: Wildfire in Northern California between 06/01/2020 and 12/31/2020 from Fire Information for Resource Management System (FIRMS) data set",
+        "evidence_sha256": "0c2af23dd589a41c0a0504893eb6979cfa03b736aac9de09081b229fbe99e310"
+      },
+      "reason": "A figure caption illustrating the data; Northern California is not among the modelled locations."
+    },
+    {
+      "candidate_id": "LIT2-000560-R4",
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 0,
+        "char_end": 143,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "As wildfires are expected to become more frequent and severe, improved prediction models are vital to mitigating risk and allocating resources.",
+        "evidence_sha256": "02c6b922c21a12754cc1d2667d96b9079e1514c2b88e72644082dcfc954d9c43"
+      },
+      "reason": "Motivational statement with no source, horizon or place."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "The five study cities are Portland, Oregon; Medford, Oregon; Reno, Nevada; Denver, Colorado; and Salt Lake City, Utah.",
+  "scope_adjudication": {
+    "reader_1": "in_scope_hazard",
+    "reader_2": "in_scope_hazard",
+    "adopted": "in_scope_hazard",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp4_blind/244714495.json",
+    "reader_2_reason": "The paper builds and evaluates a wildfire burned-area prediction model for five western US locations from satellite fire and climate data."
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP4r3 Phase A",
+    "adjudicator": "reader 1 (the EXECUTOR, prototype-exposed)",
+    "first_pass_record_sha256": "ed522d4aed9b0dfd0bc119d3931084684b35444b7dc30fff566176ca05a99266",
+    "blind_record_sha256": "f676559dc2881c4e69eb51ef99ae35fe9a34f3f212e38af7c17073e0b64a06b9",
+    "no_paper_re_read": true,
+    "representativeness": "deterministic rank sample of lexical place candidates from LITCORPUS-02; not representative of the corpus or the literature"
+  }
+}

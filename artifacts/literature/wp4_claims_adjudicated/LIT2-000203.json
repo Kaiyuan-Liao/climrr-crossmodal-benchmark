@@ -1,0 +1,550 @@
+{
+  "lit2_id": "LIT2-000203",
+  "item_id": "211267687",
+  "arm": "extreme_heat_v1",
+  "rank": 28,
+  "rel_path": "87/211267687.json",
+  "file_sha256": "b6b27b6d57b2952a5ce1677a36c2d1964c1a1a326105a3dd6d4cc628a28db553",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "temperature regulation",
+    "pathophysiology of heat strain",
+    "specific considerations in pregnancy",
+    "climate change, occupational health and pregnancy",
+    "aims and objectives",
+    "study design",
+    "setting",
+    "history of cardiac disease",
+    "limitations",
+    "dissemination",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Open Peer Review STUDY PROTOCOL A protocol for an observational cohort study of heat strain and its effect on fetal wellbeing in pregnant farmers in The Gambia [version 2; peer review: 2 approved]",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "note": "The stored title carries the labels 'Open Peer Review STUDY PROTOCOL' and '[version 2; peer review: 2 approved]'. `abstract` holds the abstract followed by a reference list and reviewer comments."
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "A study protocol for measuring heat stress and heat strain in pregnant farmers in The Gambia and its effect on fetal wellbeing, i.e. the health impacts of a heat hazard. It reports no results of its own.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 487,
+    "char_end": 656,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "This protocol describes a study to assess the physiological response of pregnant women to environmental heat stress and the immediate effect this has on fetal wellbeing.",
+    "evidence_sha256": "209ceaf3565f900624bef697f94378a97a85e0bf94bfaea109f438eb36b7ef3f"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-000203-C1",
+      "claim_text": "A cited case-crossover study from California found an 8.6% increase in prematurity with every 5.6 °C increase in ambient temperature exposure.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "ambient temperature exposure; prematurity",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "8.6% increase per 5.6 °C increase",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "California (temperate regions)",
+        "status": "explicit",
+        "role": "study area of the cited study"
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 1674,
+        "char_end": 1835,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In temperate regions, a case-crossover study from California found an 8.6% increase in prematurity with every 5.6°C increase in ambient temperature exposure 17 .",
+        "evidence_sha256": "e3981a1087f4e8119f7bc6e1046e9df7860709c851c8b80f2754f2f7be56b664"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "Attributed to reference 17.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream",
+          "geography role classes differ; the more conservative class is adopted (rule 3-role)"
+        ],
+        "aligned_blind_claim_id": "211267687-c2",
+        "blind_evidence": {
+          "json_path": "$.introduction",
+          "char_start": 1674,
+          "char_end": 1835,
+          "evidence_text": "In temperate regions, a case-crossover study from California found an 8.6% increase in prematurity with every 5.6°C increase in ambient temperature exposure 17 ."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Prematurity and ambient temperature exposure; reader 2 keeps the exposure in the relation.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "8.6% increase per 5.6 °C; wording only.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds '(temperate regions)', the sentence's framing, not the study's place. Adopted: 'California'.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "California",
+              "tag": "explicit"
+            }
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": false,
+          "rule": "3-role: classes differ; more conservative class adopted (reader_2)",
+          "adopted": {
+            "value": "contextual mention",
+            "tag": "inferred",
+            "class": "contextual",
+            "support": {
+              "json_path": "$.introduction",
+              "char_start": 1696,
+              "char_end": 1740,
+              "evidence_text": "a case-crossover study from California found"
+            }
+          },
+          "reader_1": {
+            "value": "study area of the cited study",
+            "tag": null,
+            "class": "cited_study_area"
+          },
+          "reader_2": {
+            "value": "contextual mention",
+            "tag": "inferred",
+            "class": "contextual",
+            "support": {
+              "json_path": "$.introduction",
+              "char_start": 1696,
+              "char_end": 1740,
+              "evidence_text": "a case-crossover study from California found"
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "California",
+            "tag": "explicit"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000203-C2",
+      "claim_text": "Climate change predictions indicate global temperatures are likely to exceed those of the last 200,000 years, rising about 4 °C above pre-industrial levels by 2100 without effective mitigation of current emission rates.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "global temperatures",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "likely to exceed the last 200,000 years; rising by around 4 °C above pre-industrial levels",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "global",
+        "status": "explicit",
+        "role": "background context"
+      },
+      "temporal_frame": {
+        "value": "by 2100",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "without effective mitigation of current emission rates",
+        "status": "explicit"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 0,
+        "char_end": 248,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Climate change predictions indicate that global temperatures Introduction: are likely to exceed those seen in the last 200,000 years, rising by around 4°C above pre-industrial levels by 2100 (without effective mitigation of current emission rates).",
+        "evidence_sha256": "905b2cc1095a4db48c4bc7a8b40c12e124a37fd0b42336ce2f151c9a4ed71133"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "The section label 'Introduction:' is embedded mid-sentence in the stored abstract; kept verbatim. The emissions pathway is described, not named (no RCP/SSP).",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [
+          "unresolved_tie"
+        ],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "211267687-c1",
+        "blind_evidence": {
+          "json_path": "$.abstract",
+          "char_start": 0,
+          "char_end": 248,
+          "evidence_text": "Climate change predictions indicate that global temperatures Introduction: are likely to exceed those seen in the last 200,000 years, rising by around 4°C above pre-industrial levels by 2100 (without effective mitigation of current emission rates)."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Likely to exceed the last 200,000 years; around 4 °C above pre-industrial.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "temporal_frame": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "claim_type": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 background_citation, reader 2 projection. The shared span (an abstract sentence with no citation marker) does not settle whether the projection is the paper's or cited; breaking it would need re-reading the paper. Recorded as a tie.",
+            "rule": "3c: claim_type differs; no conservative order; unresolved_tie",
+            "adopted": "unresolved_tie"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "background context",
+            "tag": null,
+            "class": "contextual"
+          },
+          "reader_1": {
+            "value": "background context",
+            "tag": null,
+            "class": "contextual"
+          },
+          "reader_2": {
+            "value": "contextual mention",
+            "tag": "inferred",
+            "class": "contextual",
+            "support": {
+              "json_path": "$.abstract",
+              "char_start": 0,
+              "char_end": 60,
+              "evidence_text": "Climate change predictions indicate that global temperatures"
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "claim_type": "unresolved_tie"
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000203-C3",
+      "claim_text": "A cited study showed low-income countries will bear a greater burden of severe heat events than high-income countries, even if warming targets below 1.5 °C are met.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "burden of severe heat events; \"temperature of equivalence\"",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "greater burden in low-income than high-income countries",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "low-income countries versus high-income countries",
+        "status": "explicit",
+        "role": "background context"
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "target temperatures of less than 1.5°C are met",
+        "status": "explicit"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 349,
+        "char_end": 532,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "demonstrated that low-income countries will bear a greater burden of severe heat events compared to high-income countries, even if target temperatures of less than 1.5°C are met 4,5 .",
+        "evidence_sha256": "b50feadac8262631fbfe62c68427cdcafeb1f0ffbb43cb69b4245ca5493f96b6"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "Attributed to references 4 and 5; a warming target, recorded under scenario as stated.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "background context",
+            "class": "contextual"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "background context",
+            "tag": null,
+            "class": "contextual"
+          }
+        },
+        "blind_reader_considered_and_rejected": [
+          {
+            "rejected_id": "rejected[1]",
+            "overlap_code_points": 183,
+            "reason": "Cited background; passage repeats within the key; not promoted given the paper's protocol status and to keep claims few.",
+            "evidence_text": "demonstrated that low-income countries will bear a greater burden of severe heat events compared to high-income countries, even if target temperatures of less than 1.5°C are met 4,5 ."
+          }
+        ]
+      }
+    },
+    {
+      "claim_id": "LIT2-000203-B3",
+      "origin": "blind_reader",
+      "blind_claim_id": "211267687-c3",
+      "claim_text": "Citing prior Gambian studies, the paper states women work between 50% and 83% of a 9-hour day on agricultural work, depending on season, even when pregnant.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "a 9-hour day on agricultural work",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "between 50% to 83% ... depending on the season, even when pregnant",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "The Gambia",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.setting",
+          "char_start": 1645,
+          "char_end": 1767,
+          "evidence_text": "Previous work in The Gambia has assessed the energy expenditure of pregnant women during different agricultural activities",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "2853b75fd5527cca6c38c966e56acbdf0cc2a1bc8f59259ba641e418b86c19b3"
+        },
+        "role": "contextual mention",
+        "blind_role_record": {
+          "value": "contextual mention",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"setting\"]",
+            "char_start": 1645,
+            "char_end": 1726,
+            "evidence_text": "Previous work in The Gambia has assessed the energy expenditure of pregnant women",
+            "occurrences_in_value": 2,
+            "note": "passage occurs 2 times in this value; first occurrence used"
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.setting",
+        "char_start": 1832,
+        "char_end": 1980,
+        "evidence_text": "These studies show that women will work between 50% to 83% of a 9-hour day on agricultural work, depending on the season, even when pregnant 45-48 .",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "98030a7ff827d5a008b210a94e76f94e6d85cba375837ab6d613528b2e013270"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "contextual mention",
+            "class": "contextual"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "contextual mention",
+            "tag": "inferred",
+            "class": "contextual",
+            "support": {
+              "json_path": "$.setting",
+              "char_start": 1645,
+              "char_end": 1726,
+              "evidence_text": "Previous work in The Gambia has assessed the energy expenditure of pregnant women"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-000203-R1",
+      "evidence": {
+        "json_path": "$[\"history of cardiac disease\"]",
+        "char_start": 12487,
+        "char_end": 12597,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "These will include the WBGT, the Universal Thermal Climate Index, the apparent temperature and the heat index.",
+        "evidence_sha256": "9fff8ed1206633bd288cf9b4e84a5133513e6aaa84daf52cbdb8185a0722640d"
+      },
+      "reason": "Planned calculation of heat stress indices in a protocol; no result."
+    },
+    {
+      "candidate_id": "LIT2-000203-R2",
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 845,
+        "char_end": 945,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "We will recruit 125 pregnant women of all ages who perform agricultural work during their pregnancy.",
+        "evidence_sha256": "10dc371fc80651e56727b2048bf773d68f3ef7c749e8f4150e839d9bcbfdd72a"
+      },
+      "reason": "Study design, not a finding."
+    },
+    {
+      "candidate_id": "LIT2-000203-R3",
+      "evidence": {
+        "json_path": "$[\"history of cardiac disease\"]",
+        "char_start": 114,
+        "char_end": 292,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Based on published literature, we expect around 35% of agricultural workers to experience heat strain and assume this incidence risk remains at least as high in pregnancy 49,50 .",
+        "evidence_sha256": "6e40067d2376517ff3420463de6058989d116c5b775b3b2130dfe4d48a83fa68"
+      },
+      "reason": "A planning assumption for the sample size, not a finding."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "A protocol with no results; every promoted claim is background attributed to cited work. Most fields repeat sentences (an extraction artifact); spans use the first occurrence. The study area is West Kiang district / Keneba, The Gambia.",
+  "scope_adjudication": {
+    "reader_1": "in_scope_hazard",
+    "reader_2": "in_scope_hazard",
+    "adopted": "in_scope_hazard",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp4_blind/211267687.json",
+    "reader_2_reason": "The paper is a study protocol on environmental heat stress and heat strain in pregnant farmers in The Gambia and its effect on fetal wellbeing; it reports no results of its own, so only background statements are extractable."
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP4r3 Phase A",
+    "adjudicator": "reader 1 (the EXECUTOR, prototype-exposed)",
+    "first_pass_record_sha256": "8fe53b585cd70f8f80f4cbda9aad02c50bb4ddd4b0aa555a12333091b48ea9d5",
+    "blind_record_sha256": "80226454a10eeb229bc4916ed81c779507e1796aa4243757da0fdd83a5047813",
+    "no_paper_re_read": true,
+    "representativeness": "deterministic rank sample of lexical place candidates from LITCORPUS-02; not representative of the corpus or the literature"
+  }
+}

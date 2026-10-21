@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "[\"seasonal mean temperature\",\"seasonal average temperature\",\"seasonal max temperature\",\"seasonal min temperature\",\"seasonal average of daily maximum temperature\",\"seasonal average of daily minimum temperature\",\"seasonal mean of daily maximum temperature\",\"seasonal mean of daily minimum temperature\"]",
+        "reasoning": "We need to propose up to 8 surface forms (words or short phrases) that a scientific paper would use when discussing this variable: Temperature (Seasonal). The passage describes maximum daily temperature, minimum daily temperature, seasonal average of both max and min. So surface forms could be: \"seasonal mean temperature\", \"seasonal average temperature\", \"seasonal temperature\", \"seasonal mean max temperature\", \"seasonal mean min temperature\", \"seasonal average of daily maximum temperature\", \"seasonal average of daily minimum temperature\", \"seasonal max temperature\", \"seasonal min temperature\". Also abbreviations: \"T_season\", maybe \"Tseason\". But need up to 8.\n\nMake sure each form is lowercase, no regex, at most 6 words. Provide JSON array of strings.\n\nLet's craft list:\n\n1. \"seasonal mean temperature\"\n2. \"seasonal average temperature\"\n3. \"seasonal max temperature\"\n4. \"seasonal min temperature\"\n5. \"seasonal average of daily maximum temperature\"\n6. \"seasonal average of daily minimum temperature\"\n7. \"seasonal mean of daily maximum temperature\"\n8. \"seasonal mean of daily minimum temperature\"\n\nCheck word counts: each <=6 words.\n\n1: seasonal(1) mean2 temperature3 => 3 words OK.\n2: seasonal average temperature => 3.\n3: seasonal max temperature => 3.\n4: seasonal min temperature => 3.\n5: seasonal average of daily maximum temperature => words: seasonal(1) average2 of3 daily4 maximum5 temperature6 => 6 OK.\n6: seasonal average of daily minimum temperature => 6.\n7: seasonal mean of daily maximum temperature => 6.\n8: seasonal mean of daily minimum temperature => 6.\n\nAll good. Return JSON array.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792533538,
+  "id": "581af485-3b10-43b6-a491-2d78d1262dd3",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 428,
+    "completion_tokens_after_first_per_sec": 725.8095832092221,
+    "completion_tokens_after_first_per_sec_first_ten": 727.4218212597824,
+    "completion_tokens_after_first_per_sec_graph": 727.4218212597824,
+    "completion_tokens_details": {
+      "reasoning_tokens": 367
+    },
+    "completion_tokens_per_sec": 666.9324664613418,
+    "end_time": 1792533538.6494837,
+    "is_last_response": true,
+    "prompt_tokens": 366,
+    "start_time": 1792533538.0077395,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.053435564041137695,
+    "time_to_first_token_graph": 0.047943830490112305,
+    "total_latency": 0.6417441368103027,
+    "total_tokens": 794,
+    "total_tokens_per_sec": 1237.2532204913678
+  }
+}

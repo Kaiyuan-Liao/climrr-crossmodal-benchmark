@@ -1,0 +1,4044 @@
+{
+  "artifact": "M4-WP4 reader-1 concept-hit and place-hit precision",
+  "reader": "reader_1",
+  "made_after_reading_frozen_at": "e0857aa",
+  "statement": "Classification of lexical retrieval hits after reading; no hit is a bridge and none changes a claim. Deterministic rank sample of lexical place candidates from LITCORPUS-02; not representative of the corpus or the literature.",
+  "matcher": "per-section whole-word, case-insensitive, no stemming: \\bterm\\b with re.IGNORECASE (as scripts/litcollect/run_query.py)",
+  "scope_of_terms": "query group 0 concept terms (incl. bare fwi) and the place terms oklahoma / stephens / california; group-1 context terms not classified",
+  "primary_class_rule": "most substantive class present among a pair's occurrences, in vocabulary order; an item's class is the most substantive pair class",
+  "vocabulary": {
+    "concept": [
+      "substantive_concept_use",
+      "incidental_mention",
+      "ambiguous_acronym_or_collision"
+    ],
+    "place": [
+      "study_area_or_phenomenon_geography",
+      "contextual_geography",
+      "institution_or_affiliation",
+      "citation_surname_or_person",
+      "other_incidental"
+    ]
+  },
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "input_sha256": {
+    "artifacts/literature/wp4_sample.json": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+    "artifacts/literature/litcorpus02/evidence/runs/fire_weather_v1/hits.csv": "9fd398dcd37914610cbe753f013d3d77c005595c8fdb9140519ad56b47d4a834",
+    "artifacts/literature/litcorpus02/evidence/runs/extreme_heat_v1/hits.csv": "feb4342ced02d3df6ce2a08d1d004faa63c782c72709bc81c2524a3cfc3d5ecc",
+    "artifacts/literature/litcorpus02/place_candidates/candidate_hits.csv": "c33aa60c2f9d8290674bfa0e51c6c03bf72b0c25c7760615e4a6802f113153c1",
+    "scripts/wp4_hit_judgements.py": "c089f50b5476f0407dfa8d737bffcf94501adf71aaa30d317daacecbd0587f5a",
+    "artifacts/literature/wp4_claims_summary.json": "e062f05086185ef2616fe5c47ca8fe4d294e389055b4725160737a9a364c9b02"
+  },
+  "totals": {
+    "items": 20,
+    "item_term_pairs": {
+      "concept": 29,
+      "place": 23
+    },
+    "frozen_first_hit_rows": 81,
+    "occurrences": 205,
+    "concept_pairs_by_primary_class": {
+      "substantive_concept_use": 8,
+      "incidental_mention": 20,
+      "ambiguous_acronym_or_collision": 1
+    },
+    "place_pairs_by_primary_class": {
+      "study_area_or_phenomenon_geography": 10,
+      "contextual_geography": 10,
+      "institution_or_affiliation": 2,
+      "citation_surname_or_person": 1,
+      "other_incidental": 0
+    },
+    "concept_occurrences_by_class": {
+      "substantive_concept_use": 55,
+      "incidental_mention": 40,
+      "ambiguous_acronym_or_collision": 4
+    },
+    "place_occurrences_by_class": {
+      "study_area_or_phenomenon_geography": 65,
+      "contextual_geography": 24,
+      "institution_or_affiliation": 5,
+      "citation_surname_or_person": 6,
+      "other_incidental": 6
+    },
+    "items_by_concept_class": {
+      "substantive_concept_use": 6,
+      "incidental_mention": 13,
+      "ambiguous_acronym_or_collision": 1
+    },
+    "items_by_place_class": {
+      "study_area_or_phenomenon_geography": 8,
+      "contextual_geography": 10,
+      "institution_or_affiliation": 2,
+      "citation_surname_or_person": 0,
+      "other_incidental": 0
+    },
+    "place_pairs_by_term": {
+      "california": {
+        "study_area_or_phenomenon_geography": 8,
+        "contextual_geography": 10,
+        "institution_or_affiliation": 2,
+        "citation_surname_or_person": 0,
+        "other_incidental": 0
+      },
+      "oklahoma": {
+        "study_area_or_phenomenon_geography": 2,
+        "contextual_geography": 0,
+        "institution_or_affiliation": 0,
+        "citation_surname_or_person": 0,
+        "other_incidental": 0
+      },
+      "stephens": {
+        "study_area_or_phenomenon_geography": 0,
+        "contextual_geography": 0,
+        "institution_or_affiliation": 0,
+        "citation_surname_or_person": 1,
+        "other_incidental": 0
+      }
+    }
+  },
+  "items": [
+    {
+      "lit2_id": "LIT2-000185",
+      "item_id": "208499235",
+      "arm": "fire_weather_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 5,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "fire weather index",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "background & summary",
+              "section_idx": 2,
+              "char_start": 668,
+              "char_end": 686
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "incidental_mention",
+          "reason": "One background sentence attributed to ref. 3 (FWI highest in 37 years in Europe); the paper builds a burnt-area event database and never uses FWI.",
+          "class_counts": {
+            "incidental_mention": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-000185-C5"
+          ],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"background & summary\"]",
+              "section_idx": 2,
+              "char_start": 668,
+              "char_end": 686,
+              "matched_text": "Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "One background sentence attributed to ref. 3 (FWI highest in 37 years in Europe); the paper builds a burnt-area event database and never uses FWI.",
+              "inside_claim_spans": [
+                "LIT2-000185-C5:evidence"
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "concept",
+          "term": "fwi",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "background & summary",
+              "section_idx": 2,
+              "char_start": 688,
+              "char_end": 691
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 2,
+          "primary_class": "incidental_mention",
+          "reason": "The same background passage (FWI and its DC/DMC components); no use of FWI in the analysis.",
+          "class_counts": {
+            "incidental_mention": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-000185-C5"
+          ],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"background & summary\"]",
+              "section_idx": 2,
+              "char_start": 688,
+              "char_end": 691,
+              "matched_text": "FWI",
+              "class": "incidental_mention",
+              "reason": "The same background passage (FWI and its DC/DMC components); no use of FWI in the analysis.",
+              "inside_claim_spans": [
+                "LIT2-000185-C5:evidence"
+              ]
+            },
+            {
+              "json_path": "$[\"background & summary\"]",
+              "section_idx": 2,
+              "char_start": 888,
+              "char_end": 891,
+              "matched_text": "FWI",
+              "class": "incidental_mention",
+              "reason": "The same background passage (FWI and its DC/DMC components); no use of FWI in the analysis.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "statistical analysis",
+              "section_idx": 7,
+              "char_start": 407,
+              "char_end": 417
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 2,
+          "primary_class": "study_area_or_phenomenon_geography",
+          "reason": "California is the validation area: GlobFire's large fires are compared with CALFIRE's top-20 list.",
+          "class_counts": {
+            "study_area_or_phenomenon_geography": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [
+            "LIT2-000185-C1:geography.support"
+          ],
+          "occurrences": [
+            {
+              "json_path": "$[\"statistical analysis\"]",
+              "section_idx": 7,
+              "char_start": 407,
+              "char_end": 417,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California is the validation area: GlobFire's large fires are compared with CALFIRE's top-20 list.",
+              "inside_claim_spans": [
+                "LIT2-000185-C1:geography.support"
+              ]
+            },
+            {
+              "json_path": "$[\"statistical analysis\"]",
+              "section_idx": 7,
+              "char_start": 1195,
+              "char_end": 1205,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California is the validation area: GlobFire's large fires are compared with CALFIRE's top-20 list.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "incidental_mention",
+      "item_place_class": "study_area_or_phenomenon_geography"
+    },
+    {
+      "lit2_id": "LIT2-000366",
+      "item_id": "229495849",
+      "arm": "fire_weather_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 3,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "fire weather index",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 444,
+              "char_end": 462
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "incidental_mention",
+          "reason": "Background description of Canada's forest fire weather index system; the paper's model uses a UCI meteorological data set, not FWI.",
+          "class_counts": {
+            "incidental_mention": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 444,
+              "char_end": 462,
+              "matched_text": "fire weather index",
+              "class": "incidental_mention",
+              "reason": "Background description of Canada's forest fire weather index system; the paper's model uses a UCI meteorological data set, not FWI.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "concept",
+          "term": "fwi",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 583,
+              "char_end": 586
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 2,
+          "primary_class": "incidental_mention",
+          "reason": "The same background passage ('forest fire whether index(FWI)', systems built on FWI ideas); FWI is not computed or used.",
+          "class_counts": {
+            "incidental_mention": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-000366-C3"
+          ],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 583,
+              "char_end": 586,
+              "matched_text": "FWI",
+              "class": "incidental_mention",
+              "reason": "The same background passage ('forest fire whether index(FWI)', systems built on FWI ideas); FWI is not computed or used.",
+              "inside_claim_spans": [
+                "LIT2-000366-C3:evidence"
+              ]
+            },
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 800,
+              "char_end": 803,
+              "matched_text": "FWI",
+              "class": "incidental_mention",
+              "reason": "The same background passage ('forest fire whether index(FWI)', systems built on FWI ideas); FWI is not computed or used.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "experiments and results",
+              "section_idx": 5,
+              "char_start": 1720,
+              "char_end": 1730
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "institution_or_affiliation",
+          "reason": "'University of California at Irvine' names the data-set provider; the study area is Montesinho park, Portugal.",
+          "class_counts": {
+            "institution_or_affiliation": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"experiments and results\"]",
+              "section_idx": 5,
+              "char_start": 1720,
+              "char_end": 1730,
+              "matched_text": "California",
+              "class": "institution_or_affiliation",
+              "reason": "'University of California at Irvine' names the data-set provider; the study area is Montesinho park, Portugal.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "incidental_mention",
+      "item_place_class": "institution_or_affiliation"
+    },
+    {
+      "lit2_id": "LIT2-000499",
+      "item_id": "238725720",
+      "arm": "fire_weather_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 5,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "fire weather index",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 6917,
+              "char_end": 6935
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 2,
+          "primary_class": "incidental_mention",
+          "reason": "Background list of indices (Canadian FWI, US Fosberg FWI); the paper's own analysis uses the Australian FFDI.",
+          "class_counts": {
+            "incidental_mention": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 6917,
+              "char_end": 6935,
+              "matched_text": "Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "Background list of indices (Canadian FWI, US Fosberg FWI); the paper's own analysis uses the Australian FFDI.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 6960,
+              "char_end": 6978,
+              "matched_text": "Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "Background list of indices (Canadian FWI, US Fosberg FWI); the paper's own analysis uses the Australian FFDI.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 136,
+              "char_end": 146
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 3,
+          "primary_class": "contextual_geography",
+          "reason": "Background only: 2017 house losses in California, the California Public Resource Code, a 2007 southern California evacuation; the study area is the Blue Mountains, NSW.",
+          "class_counts": {
+            "contextual_geography": 3
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 136,
+              "char_end": 146,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Background only: 2017 house losses in California, the California Public Resource Code, a 2007 southern California evacuation; the study area is the Blue Mountains, NSW.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 4308,
+              "char_end": 4318,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Background only: 2017 house losses in California, the California Public Resource Code, a 2007 southern California evacuation; the study area is the Blue Mountains, NSW.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 4721,
+              "char_end": 4731,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Background only: 2017 house losses in California, the California Public Resource Code, a 2007 southern California evacuation; the study area is the Blue Mountains, NSW.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "incidental_mention",
+      "item_place_class": "contextual_geography"
+    },
+    {
+      "lit2_id": "LIT2-000560",
+      "item_id": "244714495",
+      "arm": "fire_weather_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 2,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "canadian forest fire weather index",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "related work",
+              "section_idx": 3,
+              "char_start": 105,
+              "char_end": 139
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "incidental_mention",
+          "reason": "Related-work characterisation of the Canadian Forest Fire Weather Index System; not used.",
+          "class_counts": {
+            "incidental_mention": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"related work\"]",
+              "section_idx": 3,
+              "char_start": 105,
+              "char_end": 139,
+              "matched_text": "Canadian Forest Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "Related-work characterisation of the Canadian Forest Fire Weather Index System; not used.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "concept",
+          "term": "fire weather index",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "related work",
+              "section_idx": 3,
+              "char_start": 121,
+              "char_end": 139
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "incidental_mention",
+          "reason": "The same related-work sentence (inside 'Canadian Forest Fire Weather Index System'); not used.",
+          "class_counts": {
+            "incidental_mention": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"related work\"]",
+              "section_idx": 3,
+              "char_start": 121,
+              "char_end": 139,
+              "matched_text": "Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "The same related-work sentence (inside 'Canadian Forest Fire Weather Index System'); not used.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 1322,
+              "char_end": 1332
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "contextual_geography",
+          "reason": "A Figure 1 caption illustrating FIRMS data for Northern California; the modelled sites are Portland, Medford, Reno, Denver and Salt Lake City.",
+          "class_counts": {
+            "contextual_geography": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 1322,
+              "char_end": 1332,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "A Figure 1 caption illustrating FIRMS data for Northern California; the modelled sites are Portland, Medford, Reno, Denver and Salt Lake City.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "incidental_mention",
+      "item_place_class": "contextual_geography"
+    },
+    {
+      "lit2_id": "LIT2-000673",
+      "item_id": "250541813",
+      "arm": "fire_weather_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 4,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "fire weather index",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "emissions",
+              "section_idx": 6,
+              "char_start": 21449,
+              "char_end": 21467
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 3,
+          "primary_class": "incidental_mention",
+          "reason": "Future-work sentence ('a parameterization based on the fire weather index (FWI) ... may help'), stored three times; FWI is not used.",
+          "class_counts": {
+            "incidental_mention": 3
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.emissions",
+              "section_idx": 6,
+              "char_start": 21449,
+              "char_end": 21467,
+              "matched_text": "fire weather index",
+              "class": "incidental_mention",
+              "reason": "Future-work sentence ('a parameterization based on the fire weather index (FWI) ... may help'), stored three times; FWI is not used.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.emissions",
+              "section_idx": 6,
+              "char_start": 23974,
+              "char_end": 23992,
+              "matched_text": "fire weather index",
+              "class": "incidental_mention",
+              "reason": "Future-work sentence ('a parameterization based on the fire weather index (FWI) ... may help'), stored three times; FWI is not used.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.emissions",
+              "section_idx": 6,
+              "char_start": 26499,
+              "char_end": 26517,
+              "matched_text": "fire weather index",
+              "class": "incidental_mention",
+              "reason": "Future-work sentence ('a parameterization based on the fire weather index (FWI) ... may help'), stored three times; FWI is not used.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "concept",
+          "term": "fwi",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "emissions",
+              "section_idx": 6,
+              "char_start": 21469,
+              "char_end": 21472
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 3,
+          "primary_class": "incidental_mention",
+          "reason": "The same future-work sentence, three copies.",
+          "class_counts": {
+            "incidental_mention": 3
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.emissions",
+              "section_idx": 6,
+              "char_start": 21469,
+              "char_end": 21472,
+              "matched_text": "FWI",
+              "class": "incidental_mention",
+              "reason": "The same future-work sentence, three copies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.emissions",
+              "section_idx": 6,
+              "char_start": 23994,
+              "char_end": 23997,
+              "matched_text": "FWI",
+              "class": "incidental_mention",
+              "reason": "The same future-work sentence, three copies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.emissions",
+              "section_idx": 6,
+              "char_start": 26519,
+              "char_end": 26522,
+              "matched_text": "FWI",
+              "class": "incidental_mention",
+              "reason": "The same future-work sentence, three copies.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "observation, reanalysis data, and other model data",
+              "section_idx": 4,
+              "char_start": 10879,
+              "char_end": 10889
+            },
+            {
+              "section_key": "atom-1 retrospective forecast evaluation",
+              "section_idx": 10,
+              "char_start": 24441,
+              "char_end": 24451
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 9,
+          "primary_class": "institution_or_affiliation",
+          "reason": "ATom-1 aircraft route logistics (flights 'returned to California', 'from Minnesota to southern California'); not a study area of the forecast evaluation.",
+          "class_counts": {
+            "institution_or_affiliation": 3,
+            "other_incidental": 6
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"observation, reanalysis data, and other model data\"]",
+              "section_idx": 4,
+              "char_start": 10879,
+              "char_end": 10889,
+              "matched_text": "California",
+              "class": "institution_or_affiliation",
+              "reason": "Locates the Armstrong Flight Research Center 'in Palmdale, California', where the flights originated.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"observation, reanalysis data, and other model data\"]",
+              "section_idx": 4,
+              "char_start": 11011,
+              "char_end": 11021,
+              "matched_text": "California",
+              "class": "other_incidental",
+              "reason": "ATom-1 aircraft route logistics (flights 'returned to California', 'from Minnesota to southern California'); not a study area of the forecast evaluation.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"observation, reanalysis data, and other model data\"]",
+              "section_idx": 4,
+              "char_start": 11954,
+              "char_end": 11964,
+              "matched_text": "California",
+              "class": "institution_or_affiliation",
+              "reason": "Locates the Armstrong Flight Research Center 'in Palmdale, California', where the flights originated.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"observation, reanalysis data, and other model data\"]",
+              "section_idx": 4,
+              "char_start": 12086,
+              "char_end": 12096,
+              "matched_text": "California",
+              "class": "other_incidental",
+              "reason": "ATom-1 aircraft route logistics (flights 'returned to California', 'from Minnesota to southern California'); not a study area of the forecast evaluation.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"observation, reanalysis data, and other model data\"]",
+              "section_idx": 4,
+              "char_start": 13029,
+              "char_end": 13039,
+              "matched_text": "California",
+              "class": "institution_or_affiliation",
+              "reason": "Locates the Armstrong Flight Research Center 'in Palmdale, California', where the flights originated.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"observation, reanalysis data, and other model data\"]",
+              "section_idx": 4,
+              "char_start": 13161,
+              "char_end": 13171,
+              "matched_text": "California",
+              "class": "other_incidental",
+              "reason": "ATom-1 aircraft route logistics (flights 'returned to California', 'from Minnesota to southern California'); not a study area of the forecast evaluation.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"atom-1 retrospective forecast evaluation\"]",
+              "section_idx": 10,
+              "char_start": 24441,
+              "char_end": 24451,
+              "matched_text": "California",
+              "class": "other_incidental",
+              "reason": "ATom-1 aircraft route logistics (flights 'returned to California', 'from Minnesota to southern California'); not a study area of the forecast evaluation.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"atom-1 retrospective forecast evaluation\"]",
+              "section_idx": 10,
+              "char_start": 24913,
+              "char_end": 24923,
+              "matched_text": "California",
+              "class": "other_incidental",
+              "reason": "ATom-1 aircraft route logistics (flights 'returned to California', 'from Minnesota to southern California'); not a study area of the forecast evaluation.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"atom-1 retrospective forecast evaluation\"]",
+              "section_idx": 10,
+              "char_start": 25385,
+              "char_end": 25395,
+              "matched_text": "California",
+              "class": "other_incidental",
+              "reason": "ATom-1 aircraft route logistics (flights 'returned to California', 'from Minnesota to southern California'); not a study area of the forecast evaluation.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "incidental_mention",
+      "item_place_class": "institution_or_affiliation"
+    },
+    {
+      "lit2_id": "LIT2-000786",
+      "item_id": "257108685",
+      "arm": "fire_weather_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 5,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "fire weather index",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "bat responses to burned versus unburned sites",
+              "section_idx": 4,
+              "char_start": 10530,
+              "char_end": 10548
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 3,
+          "primary_class": "incidental_mention",
+          "reason": "A figure caption describing a background fire-potential map (days above the 95th percentile of FWI, Bowman et al. 2020), stored three times.",
+          "class_counts": {
+            "incidental_mention": 3
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"bat responses to burned versus unburned sites\"]",
+              "section_idx": 4,
+              "char_start": 10530,
+              "char_end": 10548,
+              "matched_text": "Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "A figure caption describing a background fire-potential map (days above the 95th percentile of FWI, Bowman et al. 2020), stored three times.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"bat responses to burned versus unburned sites\"]",
+              "section_idx": 4,
+              "char_start": 14561,
+              "char_end": 14579,
+              "matched_text": "Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "A figure caption describing a background fire-potential map (days above the 95th percentile of FWI, Bowman et al. 2020), stored three times.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"bat responses to burned versus unburned sites\"]",
+              "section_idx": 4,
+              "char_start": 18592,
+              "char_end": 18610,
+              "matched_text": "Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "A figure caption describing a background fire-potential map (days above the 95th percentile of FWI, Bowman et al. 2020), stored three times.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "bat responses to burned versus unburned sites",
+              "section_idx": 4,
+              "char_start": 12031,
+              "char_end": 12041
+            },
+            {
+              "section_key": "effects of fire parameters on bats-burn extent",
+              "section_idx": 5,
+              "char_start": 15875,
+              "char_end": 15885
+            },
+            {
+              "section_key": "effects of fire parameters on bats-burn severity or intensity",
+              "section_idx": 7,
+              "char_start": 6009,
+              "char_end": 6019
+            },
+            {
+              "section_key": "effects of fire parameters on bats-pyrodiversity",
+              "section_idx": 8,
+              "char_start": 1662,
+              "char_end": 1672
+            },
+            {
+              "section_key": "bat responses to fire-prescribed fire versus wildfire",
+              "section_idx": 9,
+              "char_start": 6757,
+              "char_end": 6767
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 21,
+          "primary_class": "study_area_or_phenomenon_geography",
+          "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+          "class_counts": {
+            "study_area_or_phenomenon_geography": 21
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-000786-C4",
+            "LIT2-000786-C5"
+          ],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"bat responses to burned versus unburned sites\"]",
+              "section_idx": 4,
+              "char_start": 12031,
+              "char_end": 12041,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": [
+                "LIT2-000786-C4:evidence"
+              ]
+            },
+            {
+              "json_path": "$[\"bat responses to burned versus unburned sites\"]",
+              "section_idx": 4,
+              "char_start": 16062,
+              "char_end": 16072,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"bat responses to burned versus unburned sites\"]",
+              "section_idx": 4,
+              "char_start": 20093,
+              "char_end": 20103,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-burn extent\"]",
+              "section_idx": 5,
+              "char_start": 15875,
+              "char_end": 15885,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": [
+                "LIT2-000786-C5:evidence"
+              ]
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-burn extent\"]",
+              "section_idx": 5,
+              "char_start": 16648,
+              "char_end": 16658,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-burn extent\"]",
+              "section_idx": 5,
+              "char_start": 17421,
+              "char_end": 17431,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-burn severity or intensity\"]",
+              "section_idx": 7,
+              "char_start": 6009,
+              "char_end": 6019,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-burn severity or intensity\"]",
+              "section_idx": 7,
+              "char_start": 6289,
+              "char_end": 6299,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-burn severity or intensity\"]",
+              "section_idx": 7,
+              "char_start": 6719,
+              "char_end": 6729,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-burn severity or intensity\"]",
+              "section_idx": 7,
+              "char_start": 7801,
+              "char_end": 7811,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-burn severity or intensity\"]",
+              "section_idx": 7,
+              "char_start": 8081,
+              "char_end": 8091,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-burn severity or intensity\"]",
+              "section_idx": 7,
+              "char_start": 8511,
+              "char_end": 8521,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-burn severity or intensity\"]",
+              "section_idx": 7,
+              "char_start": 9593,
+              "char_end": 9603,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-burn severity or intensity\"]",
+              "section_idx": 7,
+              "char_start": 9873,
+              "char_end": 9883,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-burn severity or intensity\"]",
+              "section_idx": 7,
+              "char_start": 10303,
+              "char_end": 10313,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-pyrodiversity\"]",
+              "section_idx": 8,
+              "char_start": 1662,
+              "char_end": 1672,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-pyrodiversity\"]",
+              "section_idx": 8,
+              "char_start": 3580,
+              "char_end": 3590,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire parameters on bats-pyrodiversity\"]",
+              "section_idx": 8,
+              "char_start": 5498,
+              "char_end": 5508,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"bat responses to fire-prescribed fire versus wildfire\"]",
+              "section_idx": 9,
+              "char_start": 6757,
+              "char_end": 6767,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"bat responses to fire-prescribed fire versus wildfire\"]",
+              "section_idx": 9,
+              "char_start": 7416,
+              "char_end": 7426,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"bat responses to fire-prescribed fire versus wildfire\"]",
+              "section_idx": 9,
+              "char_start": 8075,
+              "char_end": 8085,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Study areas of the reviewed bat-fire studies (Sierra Nevada, montane and mixed-conifer forests of California); the review's evidence base.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "stephens",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "effects of fire on roosts and roosting habitat",
+              "section_idx": 13,
+              "char_start": 707,
+              "char_end": 715
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 3,
+          "primary_class": "citation_surname_or_person",
+          "reason": "Citation surname: 'Stephens and Moghaddas 2005' (snag availability), stored three times.",
+          "class_counts": {
+            "citation_surname_or_person": 3
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"effects of fire on roosts and roosting habitat\"]",
+              "section_idx": 13,
+              "char_start": 707,
+              "char_end": 715,
+              "matched_text": "Stephens",
+              "class": "citation_surname_or_person",
+              "reason": "Citation surname: 'Stephens and Moghaddas 2005' (snag availability), stored three times.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire on roosts and roosting habitat\"]",
+              "section_idx": 13,
+              "char_start": 2178,
+              "char_end": 2186,
+              "matched_text": "Stephens",
+              "class": "citation_surname_or_person",
+              "reason": "Citation surname: 'Stephens and Moghaddas 2005' (snag availability), stored three times.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"effects of fire on roosts and roosting habitat\"]",
+              "section_idx": 13,
+              "char_start": 3649,
+              "char_end": 3657,
+              "matched_text": "Stephens",
+              "class": "citation_surname_or_person",
+              "reason": "Citation surname: 'Stephens and Moghaddas 2005' (snag availability), stored three times.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "incidental_mention",
+      "item_place_class": "study_area_or_phenomenon_geography"
+    },
+    {
+      "lit2_id": "LIT2-001063",
+      "item_id": "272211804",
+      "arm": "fire_weather_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 5,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "canadian forest fire weather index",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "case study",
+              "section_idx": 4,
+              "char_start": 13121,
+              "char_end": 13155
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "incidental_mention",
+          "reason": "Describes the method of a cited study (Ramos et al 2023) for the Portugal 2017 case; this perspective does not compute FWI.",
+          "class_counts": {
+            "incidental_mention": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 13121,
+              "char_end": 13155,
+              "matched_text": "Canadian Forest Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "Describes the method of a cited study (Ramos et al 2023) for the Portugal 2017 case; this perspective does not compute FWI.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "concept",
+          "term": "fire weather index",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "case study",
+              "section_idx": 4,
+              "char_start": 13137,
+              "char_end": 13155
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "incidental_mention",
+          "reason": "The same sentence (inside 'Canadian Forest Fire Weather Index System').",
+          "class_counts": {
+            "incidental_mention": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 13137,
+              "char_end": 13155,
+              "matched_text": "Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "The same sentence (inside 'Canadian Forest Fire Weather Index System').",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 13537,
+              "char_end": 13547
+            },
+            {
+              "section_key": "case study",
+              "section_idx": 4,
+              "char_start": 1642,
+              "char_end": 1652
+            },
+            {
+              "section_key": "discussion",
+              "section_idx": 5,
+              "char_start": 9112,
+              "char_end": 9122
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 21,
+          "primary_class": "study_area_or_phenomenon_geography",
+          "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+          "class_counts": {
+            "study_area_or_phenomenon_geography": 18,
+            "contextual_geography": 2,
+            "institution_or_affiliation": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-001063-C5"
+          ],
+          "occurs_inside_claim_support_span": [
+            "LIT2-001063-C1:geography.support"
+          ],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 13537,
+              "char_end": 13547,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 1642,
+              "char_end": 1652,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 1900,
+              "char_end": 1910,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 8781,
+              "char_end": 8791,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Marine-heatwave case context: sea-lion strandings and whale entanglements off California.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 11532,
+              "char_end": 11542,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Marine-heatwave case context: sea-lion strandings and whale entanglements off California.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 28429,
+              "char_end": 28439,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 28512,
+              "char_end": 28522,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 28620,
+              "char_end": 28630,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": [
+                "LIT2-001063-C5:evidence"
+              ]
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 29203,
+              "char_end": 29213,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 30588,
+              "char_end": 30598,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 30715,
+              "char_end": 30725,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 30769,
+              "char_end": 30779,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 32069,
+              "char_end": 32079,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 32112,
+              "char_end": 32122,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 32334,
+              "char_end": 32344,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 32678,
+              "char_end": 32688,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 32746,
+              "char_end": 32756,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 33512,
+              "char_end": 33522,
+              "matched_text": "California",
+              "class": "institution_or_affiliation",
+              "reason": "'the University of California' as a partner institution of the FIRO programme.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 33772,
+              "char_end": 33782,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": [
+                "LIT2-001063-C1:geography.support"
+              ]
+            },
+            {
+              "json_path": "$[\"case study\"]",
+              "section_idx": 4,
+              "char_start": 35498,
+              "char_end": 35508,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.discussion",
+              "section_idx": 5,
+              "char_start": 9112,
+              "char_end": 9122,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "The 2020 California drought and FIRO at Lake Mendocino (coastal northern California) is one of the paper's case studies.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "incidental_mention",
+      "item_place_class": "study_area_or_phenomenon_geography"
+    },
+    {
+      "lit2_id": "LIT2-001157",
+      "item_id": "52918429",
+      "arm": "fire_weather_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 5,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "canadian forest fire weather index",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 2620,
+              "char_end": 2654
+            },
+            {
+              "section_key": "relationship between pre-fire fmc and fire size",
+              "section_idx": 7,
+              "char_start": 1962,
+              "char_end": 1996
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 2,
+          "primary_class": "incidental_mention",
+          "reason": "Context: the existing Sierras Chicas warning system uses CFWIS point estimates; CFWIS percentile calibration cited as a precedent. The paper's metric is fuel moisture content.",
+          "class_counts": {
+            "incidental_mention": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 2620,
+              "char_end": 2654,
+              "matched_text": "Canadian Forest Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "Context: the existing Sierras Chicas warning system uses CFWIS point estimates; CFWIS percentile calibration cited as a precedent. The paper's metric is fuel moisture content.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"relationship between pre-fire fmc and fire size\"]",
+              "section_idx": 7,
+              "char_start": 1962,
+              "char_end": 1996,
+              "matched_text": "Canadian Forest Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "Context: the existing Sierras Chicas warning system uses CFWIS point estimates; CFWIS percentile calibration cited as a precedent. The paper's metric is fuel moisture content.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "concept",
+          "term": "fire weather index",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 2636,
+              "char_end": 2654
+            },
+            {
+              "section_key": "relationship between pre-fire fmc and fire size",
+              "section_idx": 7,
+              "char_start": 1978,
+              "char_end": 1996
+            },
+            {
+              "section_key": "discussion",
+              "section_idx": 11,
+              "char_start": 7346,
+              "char_end": 7364
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 3,
+          "primary_class": "incidental_mention",
+          "reason": "The same CFWIS mentions plus a cited example (de Jong et al. used the 99th percentile of FWI in the UK); FWI is not used.",
+          "class_counts": {
+            "incidental_mention": 3
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 2636,
+              "char_end": 2654,
+              "matched_text": "Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "The same CFWIS mentions plus a cited example (de Jong et al. used the 99th percentile of FWI in the UK); FWI is not used.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"relationship between pre-fire fmc and fire size\"]",
+              "section_idx": 7,
+              "char_start": 1978,
+              "char_end": 1996,
+              "matched_text": "Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "The same CFWIS mentions plus a cited example (de Jong et al. used the 99th percentile of FWI in the UK); FWI is not used.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.discussion",
+              "section_idx": 11,
+              "char_start": 7346,
+              "char_end": 7364,
+              "matched_text": "Fire Weather Index",
+              "class": "incidental_mention",
+              "reason": "The same CFWIS mentions plus a cited example (de Jong et al. used the 99th percentile of FWI in the UK); FWI is not used.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "concept",
+          "term": "fwi",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "discussion",
+              "section_idx": 11,
+              "char_start": 7341,
+              "char_end": 7344
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "incidental_mention",
+          "reason": "The de Jong et al. citation only.",
+          "class_counts": {
+            "incidental_mention": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.discussion",
+              "section_idx": 11,
+              "char_start": 7341,
+              "char_end": 7344,
+              "matched_text": "FWI",
+              "class": "incidental_mention",
+              "reason": "The de Jong et al. citation only.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "discussion",
+              "section_idx": 11,
+              "char_start": 1226,
+              "char_end": 1236
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "contextual_geography",
+          "reason": "A cited comparison: large fires in the Chaparral in California below 79% live fuel moisture; the study area is Córdoba, Argentina.",
+          "class_counts": {
+            "contextual_geography": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.discussion",
+              "section_idx": 11,
+              "char_start": 1226,
+              "char_end": 1236,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "A cited comparison: large fires in the Chaparral in California below 79% live fuel moisture; the study area is Córdoba, Argentina.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "incidental_mention",
+      "item_place_class": "contextual_geography"
+    },
+    {
+      "lit2_id": "LIT2-001236",
+      "item_id": "59342086",
+      "arm": "fire_weather_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 3,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "canadian forest fire weather index",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "experiment design and rationale",
+              "section_idx": 6,
+              "char_start": 7395,
+              "char_end": 7429
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "substantive_concept_use",
+          "reason": "Names the basis of the EFFIS fire danger forecasts that the system ingests as one of its four classifier inputs.",
+          "class_counts": {
+            "substantive_concept_use": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"experiment design and rationale\"]",
+              "section_idx": 6,
+              "char_start": 7395,
+              "char_end": 7429,
+              "matched_text": "Canadian Forest Fire Weather Index",
+              "class": "substantive_concept_use",
+              "reason": "Names the basis of the EFFIS fire danger forecasts that the system ingests as one of its four classifier inputs.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "concept",
+          "term": "fire weather index",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "experiment design and rationale",
+              "section_idx": 6,
+              "char_start": 7411,
+              "char_end": 7429
+            },
+            {
+              "section_key": "experiment execution and evaluation of the findings",
+              "section_idx": 7,
+              "char_start": 9283,
+              "char_end": 9301
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 4,
+          "primary_class": "substantive_concept_use",
+          "reason": "The system computes the fire weather index from local weather data; the evaluation reports FWI above 100 at the Rafina-Mati ignition (claim C2).",
+          "class_counts": {
+            "substantive_concept_use": 4
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-001236-C2"
+          ],
+          "occurs_inside_claim_support_span": [
+            "LIT2-001236-C2:concept.support"
+          ],
+          "occurrences": [
+            {
+              "json_path": "$[\"experiment design and rationale\"]",
+              "section_idx": 6,
+              "char_start": 7411,
+              "char_end": 7429,
+              "matched_text": "Fire Weather Index",
+              "class": "substantive_concept_use",
+              "reason": "The system computes the fire weather index from local weather data; the evaluation reports FWI above 100 at the Rafina-Mati ignition (claim C2).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"experiment design and rationale\"]",
+              "section_idx": 6,
+              "char_start": 14687,
+              "char_end": 14705,
+              "matched_text": "fire weather index",
+              "class": "substantive_concept_use",
+              "reason": "The system computes the fire weather index from local weather data; the evaluation reports FWI above 100 at the Rafina-Mati ignition (claim C2).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+              "section_idx": 7,
+              "char_start": 9283,
+              "char_end": 9301,
+              "matched_text": "fire weather index",
+              "class": "substantive_concept_use",
+              "reason": "The system computes the fire weather index from local weather data; the evaluation reports FWI above 100 at the Rafina-Mati ignition (claim C2).",
+              "inside_claim_spans": [
+                "LIT2-001236-C2:concept.support"
+              ]
+            },
+            {
+              "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+              "section_idx": 7,
+              "char_start": 9497,
+              "char_end": 9515,
+              "matched_text": "fire weather index",
+              "class": "substantive_concept_use",
+              "reason": "The system computes the fire weather index from local weather data; the evaluation reports FWI above 100 at the Rafina-Mati ignition (claim C2).",
+              "inside_claim_spans": [
+                "LIT2-001236-C2:evidence"
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "concept",
+          "term": "fwi",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "experiment design and rationale",
+              "section_idx": 6,
+              "char_start": 7431,
+              "char_end": 7434
+            },
+            {
+              "section_key": "experiment execution and evaluation of the findings",
+              "section_idx": 7,
+              "char_start": 9303,
+              "char_end": 9306
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 9,
+          "primary_class": "substantive_concept_use",
+          "reason": "FWI is computed, normalised to alert classes, and reported for the 2018 fire; EFFIS FWI data are an input.",
+          "class_counts": {
+            "substantive_concept_use": 9
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-001236-C2"
+          ],
+          "occurs_inside_claim_support_span": [
+            "LIT2-001236-C2:concept.support"
+          ],
+          "occurrences": [
+            {
+              "json_path": "$[\"experiment design and rationale\"]",
+              "section_idx": 6,
+              "char_start": 7431,
+              "char_end": 7434,
+              "matched_text": "FWI",
+              "class": "substantive_concept_use",
+              "reason": "FWI is computed, normalised to alert classes, and reported for the 2018 fire; EFFIS FWI data are an input.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"experiment design and rationale\"]",
+              "section_idx": 6,
+              "char_start": 7869,
+              "char_end": 7872,
+              "matched_text": "FWI",
+              "class": "substantive_concept_use",
+              "reason": "FWI is computed, normalised to alert classes, and reported for the 2018 fire; EFFIS FWI data are an input.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"experiment design and rationale\"]",
+              "section_idx": 6,
+              "char_start": 14707,
+              "char_end": 14710,
+              "matched_text": "FWI",
+              "class": "substantive_concept_use",
+              "reason": "FWI is computed, normalised to alert classes, and reported for the 2018 fire; EFFIS FWI data are an input.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"experiment design and rationale\"]",
+              "section_idx": 6,
+              "char_start": 14926,
+              "char_end": 14929,
+              "matched_text": "FWI",
+              "class": "substantive_concept_use",
+              "reason": "FWI is computed, normalised to alert classes, and reported for the 2018 fire; EFFIS FWI data are an input.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+              "section_idx": 7,
+              "char_start": 9303,
+              "char_end": 9306,
+              "matched_text": "FWI",
+              "class": "substantive_concept_use",
+              "reason": "FWI is computed, normalised to alert classes, and reported for the 2018 fire; EFFIS FWI data are an input.",
+              "inside_claim_spans": [
+                "LIT2-001236-C2:concept.support"
+              ]
+            },
+            {
+              "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+              "section_idx": 7,
+              "char_start": 9413,
+              "char_end": 9416,
+              "matched_text": "FWI",
+              "class": "substantive_concept_use",
+              "reason": "FWI is computed, normalised to alert classes, and reported for the 2018 fire; EFFIS FWI data are an input.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+              "section_idx": 7,
+              "char_start": 9603,
+              "char_end": 9606,
+              "matched_text": "FWI",
+              "class": "substantive_concept_use",
+              "reason": "FWI is computed, normalised to alert classes, and reported for the 2018 fire; EFFIS FWI data are an input.",
+              "inside_claim_spans": [
+                "LIT2-001236-C2:evidence"
+              ]
+            },
+            {
+              "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+              "section_idx": 7,
+              "char_start": 9702,
+              "char_end": 9705,
+              "matched_text": "FWI",
+              "class": "substantive_concept_use",
+              "reason": "FWI is computed, normalised to alert classes, and reported for the 2018 fire; EFFIS FWI data are an input.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"experiment execution and evaluation of the findings\"]",
+              "section_idx": 7,
+              "char_start": 9881,
+              "char_end": 9884,
+              "matched_text": "FWI",
+              "class": "substantive_concept_use",
+              "reason": "FWI is computed, normalised to alert classes, and reported for the 2018 fire; EFFIS FWI data are an input.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "experiment design and rationale",
+              "section_idx": 6,
+              "char_start": 863,
+              "char_end": 873
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 2,
+          "primary_class": "contextual_geography",
+          "reason": "Background and analogy: the November 2018 Camp fire in California; the evaluation case is Rafina-Mati, Greece.",
+          "class_counts": {
+            "contextual_geography": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"experiment design and rationale\"]",
+              "section_idx": 6,
+              "char_start": 863,
+              "char_end": 873,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Background and analogy: the November 2018 Camp fire in California; the evaluation case is Rafina-Mati, Greece.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"experiment design and rationale\"]",
+              "section_idx": 6,
+              "char_start": 6081,
+              "char_end": 6091,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Background and analogy: the November 2018 Camp fire in California; the evaluation case is Rafina-Mati, Greece.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "substantive_concept_use",
+      "item_place_class": "contextual_geography"
+    },
+    {
+      "lit2_id": "LIT2-001308",
+      "item_id": "999274",
+      "arm": "fire_weather_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 4,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "fire weather index",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "discussion",
+              "section_idx": 12,
+              "char_start": 7002,
+              "char_end": 7020
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "substantive_concept_use",
+          "reason": "The authors report a separate project analysis: Canadian FWI calculated for the study area from RegCM v.4 output, yielding a 2040 projection (claim C4); the sentence is truncated in the source.",
+          "class_counts": {
+            "substantive_concept_use": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [
+            "LIT2-001308-C4:concept.support"
+          ],
+          "occurrences": [
+            {
+              "json_path": "$.discussion",
+              "section_idx": 12,
+              "char_start": 7002,
+              "char_end": 7020,
+              "matched_text": "Fire Weather Index",
+              "class": "substantive_concept_use",
+              "reason": "The authors report a separate project analysis: Canadian FWI calculated for the study area from RegCM v.4 output, yielding a 2040 projection (claim C4); the sentence is truncated in the source.",
+              "inside_claim_spans": [
+                "LIT2-001308-C4:concept.support"
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "fire_weather_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "abstract",
+              "section_idx": 1,
+              "char_start": 116,
+              "char_end": 126
+            },
+            {
+              "section_key": "background",
+              "section_idx": 2,
+              "char_start": 374,
+              "char_end": 384
+            },
+            {
+              "section_key": "fire emissions and atmospheric transport and dispersion modeling",
+              "section_idx": 4,
+              "char_start": 422,
+              "char_end": 432
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 7,
+          "primary_class": "study_area_or_phenomenon_geography",
+          "reason": "San Diego County, California and the 2007 southern California wildland fires are the study area and event.",
+          "class_counts": {
+            "study_area_or_phenomenon_geography": 4,
+            "contextual_geography": 3
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [
+            "LIT2-001308-C1:geography.support",
+            "LIT2-001308-C2:geography.support",
+            "LIT2-001308-C3:geography.support"
+          ],
+          "occurrences": [
+            {
+              "json_path": "$.abstract",
+              "section_idx": 1,
+              "char_start": 116,
+              "char_end": 126,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "San Diego County, California and the 2007 southern California wildland fires are the study area and event.",
+              "inside_claim_spans": [
+                "LIT2-001308-C1:geography.support",
+                "LIT2-001308-C2:geography.support",
+                "LIT2-001308-C3:geography.support"
+              ]
+            },
+            {
+              "json_path": "$.background",
+              "section_idx": 2,
+              "char_start": 374,
+              "char_end": 384,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "San Diego County, California and the 2007 southern California wildland fires are the study area and event.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.background",
+              "section_idx": 2,
+              "char_start": 566,
+              "char_end": 576,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Cited background on southern California: Santa Ana winds accompany the largest fires; climate models favour more California wildland fires.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.background",
+              "section_idx": 2,
+              "char_start": 672,
+              "char_end": 682,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Cited background on southern California: Santa Ana winds accompany the largest fires; climate models favour more California wildland fires.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.background",
+              "section_idx": 2,
+              "char_start": 979,
+              "char_end": 989,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Cited background on southern California: Santa Ana winds accompany the largest fires; climate models favour more California wildland fires.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.background",
+              "section_idx": 2,
+              "char_start": 1628,
+              "char_end": 1638,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "San Diego County, California and the 2007 southern California wildland fires are the study area and event.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"fire emissions and atmospheric transport and dispersion modeling\"]",
+              "section_idx": 4,
+              "char_start": 422,
+              "char_end": 432,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "San Diego County, California and the 2007 southern California wildland fires are the study area and event.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "substantive_concept_use",
+      "item_place_class": "study_area_or_phenomenon_geography"
+    },
+    {
+      "lit2_id": "LIT2-000084",
+      "item_id": "154971876",
+      "arm": "extreme_heat_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 5,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "heat index",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "abstract",
+              "section_idx": 1,
+              "char_start": 715,
+              "char_end": 725
+            },
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 1163,
+              "char_end": 1173
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 2,
+          "primary_class": "substantive_concept_use",
+          "reason": "The paper uses heat index (Schoen 2005) as its heat-wave intensity measure and reports humidity-including metrics as less sensitive (claim C3).",
+          "class_counts": {
+            "substantive_concept_use": 1,
+            "incidental_mention": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-000084-C3"
+          ],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.abstract",
+              "section_idx": 1,
+              "char_start": 715,
+              "char_end": 725,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "The paper uses heat index (Schoen 2005) as its heat-wave intensity measure and reports humidity-including metrics as less sensitive (claim C3).",
+              "inside_claim_spans": [
+                "LIT2-000084-C3:evidence"
+              ]
+            },
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 1163,
+              "char_end": 1173,
+              "matched_text": "heat index",
+              "class": "incidental_mention",
+              "reason": "Introduction background: greenhouse gas emissions increase the heat index of heat waves (cited).",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 3200,
+              "char_end": 3210
+            },
+            {
+              "section_key": "results",
+              "section_idx": 4,
+              "char_start": 646,
+              "char_end": 656
+            },
+            {
+              "section_key": "discussion and conclusions",
+              "section_idx": 5,
+              "char_start": 951,
+              "char_end": 961
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 8,
+          "primary_class": "study_area_or_phenomenon_geography",
+          "reason": "California's Central Valley is a region of the paper's own significant simulated effects (results, discussion).",
+          "class_counts": {
+            "study_area_or_phenomenon_geography": 7,
+            "contextual_geography": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-000084-C2",
+            "LIT2-000084-C5"
+          ],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 3200,
+              "char_end": 3210,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Introduction example of irrigation loss in drought years in California's Central Valley.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 646,
+              "char_end": 656,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California's Central Valley is a region of the paper's own significant simulated effects (results, discussion).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 963,
+              "char_end": 973,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California's Central Valley is a region of the paper's own significant simulated effects (results, discussion).",
+              "inside_claim_spans": [
+                "LIT2-000084-C2:evidence"
+              ]
+            },
+            {
+              "json_path": "$[\"discussion and conclusions\"]",
+              "section_idx": 5,
+              "char_start": 951,
+              "char_end": 961,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California's Central Valley is a region of the paper's own significant simulated effects (results, discussion).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"discussion and conclusions\"]",
+              "section_idx": 5,
+              "char_start": 2156,
+              "char_end": 2166,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California's Central Valley is a region of the paper's own significant simulated effects (results, discussion).",
+              "inside_claim_spans": [
+                "LIT2-000084-C5:evidence"
+              ]
+            },
+            {
+              "json_path": "$[\"discussion and conclusions\"]",
+              "section_idx": 5,
+              "char_start": 2312,
+              "char_end": 2322,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California's Central Valley is a region of the paper's own significant simulated effects (results, discussion).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"discussion and conclusions\"]",
+              "section_idx": 5,
+              "char_start": 2789,
+              "char_end": 2799,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California's Central Valley is a region of the paper's own significant simulated effects (results, discussion).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"discussion and conclusions\"]",
+              "section_idx": 5,
+              "char_start": 4161,
+              "char_end": 4171,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California's Central Valley is a region of the paper's own significant simulated effects (results, discussion).",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "oklahoma",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "methods",
+              "section_idx": 3,
+              "char_start": 6977,
+              "char_end": 6985
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "study_area_or_phenomenon_geography",
+          "reason": "Oklahoma is one of the four states defining the paper's Southern Great Plains analysis region (claim C4).",
+          "class_counts": {
+            "study_area_or_phenomenon_geography": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [
+            "LIT2-000084-C4:geography.support"
+          ],
+          "occurrences": [
+            {
+              "json_path": "$.methods",
+              "section_idx": 3,
+              "char_start": 6977,
+              "char_end": 6985,
+              "matched_text": "Oklahoma",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Oklahoma is one of the four states defining the paper's Southern Great Plains analysis region (claim C4).",
+              "inside_claim_spans": [
+                "LIT2-000084-C4:geography.support"
+              ]
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "substantive_concept_use",
+      "item_place_class": "study_area_or_phenomenon_geography"
+    },
+    {
+      "lit2_id": "LIT2-000203",
+      "item_id": "211267687",
+      "arm": "extreme_heat_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 3,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "heat index",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "history of cardiac disease",
+              "section_idx": 10,
+              "char_start": 12586,
+              "char_end": 12596
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 2,
+          "primary_class": "incidental_mention",
+          "reason": "Listed among heat stress indices the protocol will calculate (stored twice); a protocol with no results.",
+          "class_counts": {
+            "incidental_mention": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"history of cardiac disease\"]",
+              "section_idx": 10,
+              "char_start": 12586,
+              "char_end": 12596,
+              "matched_text": "heat index",
+              "class": "incidental_mention",
+              "reason": "Listed among heat stress indices the protocol will calculate (stored twice); a protocol with no results.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"history of cardiac disease\"]",
+              "section_idx": 10,
+              "char_start": 13323,
+              "char_end": 13333,
+              "matched_text": "heat index",
+              "class": "incidental_mention",
+              "reason": "Listed among heat stress indices the protocol will calculate (stored twice); a protocol with no results.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "abstract",
+              "section_idx": 1,
+              "char_start": 3691,
+              "char_end": 3701
+            },
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 1724,
+              "char_end": 1734
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 4,
+          "primary_class": "contextual_geography",
+          "reason": "A cited case-crossover study from California (prematurity and temperature), stored twice.",
+          "class_counts": {
+            "contextual_geography": 2,
+            "citation_surname_or_person": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-000203-C1"
+          ],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.abstract",
+              "section_idx": 1,
+              "char_start": 3691,
+              "char_end": 3701,
+              "matched_text": "California",
+              "class": "citation_surname_or_person",
+              "reason": "Inside a cited article title in the reference list: 'Risk of Stillbirth in California'.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.abstract",
+              "section_idx": 1,
+              "char_start": 19663,
+              "char_end": 19673,
+              "matched_text": "California",
+              "class": "citation_surname_or_person",
+              "reason": "Inside a cited article title in the reference list: 'Risk of Stillbirth in California'.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 1724,
+              "char_end": 1734,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "A cited case-crossover study from California (prematurity and temperature), stored twice.",
+              "inside_claim_spans": [
+                "LIT2-000203-C1:evidence"
+              ]
+            },
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 2058,
+              "char_end": 2068,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "A cited case-crossover study from California (prematurity and temperature), stored twice.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "incidental_mention",
+      "item_place_class": "contextual_geography"
+    },
+    {
+      "lit2_id": "LIT2-000315",
+      "item_id": "225397451",
+      "arm": "extreme_heat_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 5,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "heat index",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 2506,
+              "char_end": 2516
+            },
+            {
+              "section_key": "methods",
+              "section_idx": 3,
+              "char_start": 5785,
+              "char_end": 5795
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 3,
+          "primary_class": "incidental_mention",
+          "reason": "Cited background (Lobell et al.: mean and peak heat index under irrigation) and the NWS heat-index basis of the 27 °C threshold; the paper's measure is wet-bulb temperature.",
+          "class_counts": {
+            "incidental_mention": 3
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-000315-C5"
+          ],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 2506,
+              "char_end": 2516,
+              "matched_text": "heat index",
+              "class": "incidental_mention",
+              "reason": "Cited background (Lobell et al.: mean and peak heat index under irrigation) and the NWS heat-index basis of the 27 °C threshold; the paper's measure is wet-bulb temperature.",
+              "inside_claim_spans": [
+                "LIT2-000315-C5:evidence"
+              ]
+            },
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 2634,
+              "char_end": 2644,
+              "matched_text": "heat index",
+              "class": "incidental_mention",
+              "reason": "Cited background (Lobell et al.: mean and peak heat index under irrigation) and the NWS heat-index basis of the 27 °C threshold; the paper's measure is wet-bulb temperature.",
+              "inside_claim_spans": [
+                "LIT2-000315-C5:evidence"
+              ]
+            },
+            {
+              "json_path": "$.methods",
+              "section_idx": 3,
+              "char_start": 5785,
+              "char_end": 5795,
+              "matched_text": "heat index",
+              "class": "incidental_mention",
+              "reason": "Cited background (Lobell et al.: mean and peak heat index under irrigation) and the NWS heat-index basis of the 27 °C threshold; the paper's measure is wet-bulb temperature.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 2431,
+              "char_end": 2441
+            },
+            {
+              "section_key": "discussion and conclusions",
+              "section_idx": 5,
+              "char_start": 4023,
+              "char_end": 4033
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 2,
+          "primary_class": "contextual_geography",
+          "reason": "Cited study area (Lobell et al., California and Nebraska) and a limitation remark on topography; the analysis is global.",
+          "class_counts": {
+            "contextual_geography": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-000315-C5"
+          ],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 2431,
+              "char_end": 2441,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Cited study area (Lobell et al., California and Nebraska) and a limitation remark on topography; the analysis is global.",
+              "inside_claim_spans": [
+                "LIT2-000315-C5:evidence"
+              ]
+            },
+            {
+              "json_path": "$[\"discussion and conclusions\"]",
+              "section_idx": 5,
+              "char_start": 4023,
+              "char_end": 4033,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Cited study area (Lobell et al., California and Nebraska) and a limitation remark on topography; the analysis is global.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "incidental_mention",
+      "item_place_class": "contextual_geography"
+    },
+    {
+      "lit2_id": "LIT2-000470",
+      "item_id": "237371886",
+      "arm": "extreme_heat_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 5,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "heat index",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 3242,
+              "char_end": 3252
+            },
+            {
+              "section_key": "narrative review",
+              "section_idx": 5,
+              "char_start": 20234,
+              "char_end": 20244
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 9,
+          "primary_class": "substantive_concept_use",
+          "reason": "The narrative review discusses heat index as an occupational heat-stress metric (definition, adjustments, limits, OSHA guidance on heat index usage).",
+          "class_counts": {
+            "substantive_concept_use": 7,
+            "incidental_mention": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 3242,
+              "char_end": 3252,
+              "matched_text": "heat index",
+              "class": "incidental_mention",
+              "reason": "Background: an OSHA/NIOSH app giving recommendations based on heat index.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"narrative review\"]",
+              "section_idx": 5,
+              "char_start": 20234,
+              "char_end": 20244,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "The narrative review discusses heat index as an occupational heat-stress metric (definition, adjustments, limits, OSHA guidance on heat index usage).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"narrative review\"]",
+              "section_idx": 5,
+              "char_start": 20657,
+              "char_end": 20667,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "The narrative review discusses heat index as an occupational heat-stress metric (definition, adjustments, limits, OSHA guidance on heat index usage).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"narrative review\"]",
+              "section_idx": 5,
+              "char_start": 20805,
+              "char_end": 20815,
+              "matched_text": "Heat index",
+              "class": "substantive_concept_use",
+              "reason": "The narrative review discusses heat index as an occupational heat-stress metric (definition, adjustments, limits, OSHA guidance on heat index usage).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"narrative review\"]",
+              "section_idx": 5,
+              "char_start": 21092,
+              "char_end": 21102,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "The narrative review discusses heat index as an occupational heat-stress metric (definition, adjustments, limits, OSHA guidance on heat index usage).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"narrative review\"]",
+              "section_idx": 5,
+              "char_start": 21589,
+              "char_end": 21599,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "The narrative review discusses heat index as an occupational heat-stress metric (definition, adjustments, limits, OSHA guidance on heat index usage).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"narrative review\"]",
+              "section_idx": 5,
+              "char_start": 45128,
+              "char_end": 45138,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "The narrative review discusses heat index as an occupational heat-stress metric (definition, adjustments, limits, OSHA guidance on heat index usage).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"narrative review\"]",
+              "section_idx": 5,
+              "char_start": 60034,
+              "char_end": 60044,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "The narrative review discusses heat index as an occupational heat-stress metric (definition, adjustments, limits, OSHA guidance on heat index usage).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"narrative review\"]",
+              "section_idx": 5,
+              "char_start": 63940,
+              "char_end": 63950,
+              "matched_text": "heat index",
+              "class": "incidental_mention",
+              "reason": "Inside a cited title: 'Using the heat index: A guide for employers'.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 2320,
+              "char_end": 2330
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "contextual_geography",
+          "reason": "Regulatory context: California is one of three states enforcing OSHA-approved heat standards (claim C5, background).",
+          "class_counts": {
+            "contextual_geography": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-000470-C5"
+          ],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 2320,
+              "char_end": 2330,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Regulatory context: California is one of three states enforcing OSHA-approved heat standards (claim C5, background).",
+              "inside_claim_spans": [
+                "LIT2-000470-C5:evidence"
+              ]
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "substantive_concept_use",
+      "item_place_class": "contextual_geography"
+    },
+    {
+      "lit2_id": "LIT2-000662",
+      "item_id": "250039675",
+      "arm": "extreme_heat_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 5,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "heat index",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "materials and methods",
+              "section_idx": 1,
+              "char_start": 3678,
+              "char_end": 3688
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 3,
+          "primary_class": "incidental_mention",
+          "reason": "Only in the definition of an excessive heat event 'by the NCDC heat index' (stored three times, twice truncated); the analysed variables are apparent-temperature heat-wave statistics taken from another study. Borderline.",
+          "class_counts": {
+            "incidental_mention": 3
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"materials and methods\"]",
+              "section_idx": 1,
+              "char_start": 3678,
+              "char_end": 3688,
+              "matched_text": "heat index",
+              "class": "incidental_mention",
+              "reason": "Only in the definition of an excessive heat event 'by the NCDC heat index' (stored three times, twice truncated); the analysed variables are apparent-temperature heat-wave statistics taken from another study. Borderline.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"materials and methods\"]",
+              "section_idx": 1,
+              "char_start": 4105,
+              "char_end": 4115,
+              "matched_text": "heat index",
+              "class": "incidental_mention",
+              "reason": "Only in the definition of an excessive heat event 'by the NCDC heat index' (stored three times, twice truncated); the analysed variables are apparent-temperature heat-wave statistics taken from another study. Borderline.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"materials and methods\"]",
+              "section_idx": 1,
+              "char_start": 4531,
+              "char_end": 4541,
+              "matched_text": "heat index",
+              "class": "incidental_mention",
+              "reason": "Only in the definition of an excessive heat event 'by the NCDC heat index' (stored three times, twice truncated); the analysed variables are apparent-temperature heat-wave statistics taken from another study. Borderline.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "results",
+              "section_idx": 2,
+              "char_start": 1801,
+              "char_end": 1811
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 2,
+          "primary_class": "contextual_geography",
+          "reason": "Cited worker heat-fatality rates (Gubernot et al.) for Florida, Texas and California.",
+          "class_counts": {
+            "contextual_geography": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-000662-C5"
+          ],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.results",
+              "section_idx": 2,
+              "char_start": 1801,
+              "char_end": 1811,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Cited worker heat-fatality rates (Gubernot et al.) for Florida, Texas and California.",
+              "inside_claim_spans": [
+                "LIT2-000662-C5:evidence"
+              ]
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 2,
+              "char_start": 1958,
+              "char_end": 1968,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Cited worker heat-fatality rates (Gubernot et al.) for Florida, Texas and California.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "incidental_mention",
+      "item_place_class": "contextual_geography"
+    },
+    {
+      "lit2_id": "LIT2-000803",
+      "item_id": "257854681",
+      "arm": "extreme_heat_v1",
+      "scope_status": "ambiguous",
+      "terminal_status": "ambiguous_only",
+      "n_claims": 0,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "heat index",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "methods",
+              "section_idx": 3,
+              "char_start": 13968,
+              "char_end": 13978
+            },
+            {
+              "section_key": "results",
+              "section_idx": 4,
+              "char_start": 699,
+              "char_end": 709
+            },
+            {
+              "section_key": "conclusion",
+              "section_idx": 7,
+              "char_start": 801,
+              "char_end": 811
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 30,
+          "primary_class": "substantive_concept_use",
+          "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+          "class_counts": {
+            "substantive_concept_use": 30
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.methods",
+              "section_idx": 3,
+              "char_start": 13968,
+              "char_end": 13978,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.methods",
+              "section_idx": 3,
+              "char_start": 14004,
+              "char_end": 14014,
+              "matched_text": "Heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.methods",
+              "section_idx": 3,
+              "char_start": 14075,
+              "char_end": 14085,
+              "matched_text": "Heat Index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.methods",
+              "section_idx": 3,
+              "char_start": 14185,
+              "char_end": 14195,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.methods",
+              "section_idx": 3,
+              "char_start": 15347,
+              "char_end": 15357,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.methods",
+              "section_idx": 3,
+              "char_start": 15383,
+              "char_end": 15393,
+              "matched_text": "Heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.methods",
+              "section_idx": 3,
+              "char_start": 15454,
+              "char_end": 15464,
+              "matched_text": "Heat Index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.methods",
+              "section_idx": 3,
+              "char_start": 15564,
+              "char_end": 15574,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 699,
+              "char_end": 709,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 1734,
+              "char_end": 1744,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 2326,
+              "char_end": 2336,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 3333,
+              "char_end": 3343,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 17661,
+              "char_end": 17671,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 17772,
+              "char_end": 17782,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 18664,
+              "char_end": 18674,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 19061,
+              "char_end": 19071,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 19172,
+              "char_end": 19182,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 20064,
+              "char_end": 20074,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 20614,
+              "char_end": 20624,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 21241,
+              "char_end": 21251,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 26283,
+              "char_end": 26293,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 26412,
+              "char_end": 26422,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 26713,
+              "char_end": 26723,
+              "matched_text": "Heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 26899,
+              "char_end": 26909,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 27296,
+              "char_end": 27306,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 27425,
+              "char_end": 27435,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 27726,
+              "char_end": 27736,
+              "matched_text": "Heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 27912,
+              "char_end": 27922,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.conclusion",
+              "section_idx": 7,
+              "char_start": 801,
+              "char_end": 811,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.conclusion",
+              "section_idx": 7,
+              "char_start": 1711,
+              "char_end": 1721,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Heat index caution levels are an operational control rule of the ventilation model and appear throughout the results (the paper's scope is ambiguous).",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 8761,
+              "char_end": 8771
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 2,
+          "primary_class": "contextual_geography",
+          "reason": "Locations of a cited ventilation study ('five locations in California'), stored twice.",
+          "class_counts": {
+            "contextual_geography": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 8761,
+              "char_end": 8771,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Locations of a cited ventilation study ('five locations in California'), stored twice.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 10141,
+              "char_end": 10151,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Locations of a cited ventilation study ('five locations in California'), stored twice.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "substantive_concept_use",
+      "item_place_class": "contextual_geography"
+    },
+    {
+      "lit2_id": "LIT2-000927",
+      "item_id": "266658220",
+      "arm": "extreme_heat_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 5,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "heat index",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "discussion",
+              "section_idx": 9,
+              "char_start": 3811,
+              "char_end": 3821
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "incidental_mention",
+          "reason": "A cited example: the NWS national heat index threshold found ineffective in California desert communities (claim C5, background); the paper's metric is maximum temperature.",
+          "class_counts": {
+            "incidental_mention": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-000927-C5"
+          ],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.discussion",
+              "section_idx": 9,
+              "char_start": 3811,
+              "char_end": 3821,
+              "matched_text": "heat index",
+              "class": "incidental_mention",
+              "reason": "A cited example: the NWS national heat index threshold found ineffective in California desert communities (claim C5, background); the paper's metric is maximum temperature.",
+              "inside_claim_spans": [
+                "LIT2-000927-C5:evidence"
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 730,
+              "char_end": 740
+            },
+            {
+              "section_key": "discussion",
+              "section_idx": 9,
+              "char_start": 3961,
+              "char_end": 3971
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 2,
+          "primary_class": "contextual_geography",
+          "reason": "Background (2006 California heat deaths) and the cited California-desert example; the study area is South Africa.",
+          "class_counts": {
+            "contextual_geography": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-000927-C5"
+          ],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 730,
+              "char_end": 740,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Background (2006 California heat deaths) and the cited California-desert example; the study area is South Africa.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.discussion",
+              "section_idx": 9,
+              "char_start": 3961,
+              "char_end": 3971,
+              "matched_text": "California",
+              "class": "contextual_geography",
+              "reason": "Background (2006 California heat deaths) and the cited California-desert example; the study area is South Africa.",
+              "inside_claim_spans": [
+                "LIT2-000927-C5:evidence"
+              ]
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "incidental_mention",
+      "item_place_class": "contextual_geography"
+    },
+    {
+      "lit2_id": "LIT2-001075",
+      "item_id": "272852900",
+      "arm": "extreme_heat_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 5,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "heat index",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "discussion",
+              "section_idx": 5,
+              "char_start": 3243,
+              "char_end": 3253
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "incidental_mention",
+          "reason": "A cited finding (Skarha et al. 2023) used to justify air temperature over heat index; heat index is not used.",
+          "class_counts": {
+            "incidental_mention": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.discussion",
+              "section_idx": 5,
+              "char_start": 3243,
+              "char_end": 3253,
+              "matched_text": "heat index",
+              "class": "incidental_mention",
+              "reason": "A cited finding (Skarha et al. 2023) used to justify air temperature over heat index; heat index is not used.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "results",
+              "section_idx": 4,
+              "char_start": 483,
+              "char_end": 493
+            },
+            {
+              "section_key": "discussion",
+              "section_idx": 5,
+              "char_start": 1868,
+              "char_end": 1878
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 9,
+          "primary_class": "study_area_or_phenomenon_geography",
+          "reason": "California prisons are part of the national study sample and its rankings (claims C2, C3).",
+          "class_counts": {
+            "study_area_or_phenomenon_geography": 8,
+            "citation_surname_or_person": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [
+            "LIT2-001075-C2",
+            "LIT2-001075-C3"
+          ],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 483,
+              "char_end": 493,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California prisons are part of the national study sample and its rankings (claims C2, C3).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 907,
+              "char_end": 917,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California prisons are part of the national study sample and its rankings (claims C2, C3).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 1017,
+              "char_end": 1027,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California prisons are part of the national study sample and its rankings (claims C2, C3).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 1367,
+              "char_end": 1377,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California prisons are part of the national study sample and its rankings (claims C2, C3).",
+              "inside_claim_spans": [
+                "LIT2-001075-C2:evidence"
+              ]
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 1487,
+              "char_end": 1497,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California prisons are part of the national study sample and its rankings (claims C2, C3).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 1838,
+              "char_end": 1848,
+              "matched_text": "California",
+              "class": "citation_surname_or_person",
+              "reason": "Citation author: '(State of California, 2021)'.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 2830,
+              "char_end": 2840,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California prisons are part of the national study sample and its rankings (claims C2, C3).",
+              "inside_claim_spans": [
+                "LIT2-001075-C3:evidence"
+              ]
+            },
+            {
+              "json_path": "$.discussion",
+              "section_idx": 5,
+              "char_start": 1868,
+              "char_end": 1878,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California prisons are part of the national study sample and its rankings (claims C2, C3).",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.discussion",
+              "section_idx": 5,
+              "char_start": 2744,
+              "char_end": 2754,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "California prisons are part of the national study sample and its rankings (claims C2, C3).",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "oklahoma",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "results",
+              "section_idx": 4,
+              "char_start": 2142,
+              "char_end": 2150
+            },
+            {
+              "section_key": "discussion",
+              "section_idx": 5,
+              "char_start": 2772,
+              "char_end": 2780
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 2,
+          "primary_class": "study_area_or_phenomenon_geography",
+          "reason": "Oklahoma appears in the paper's state-average heat exposure ranking and in its comparison with a prior national study.",
+          "class_counts": {
+            "study_area_or_phenomenon_geography": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.results",
+              "section_idx": 4,
+              "char_start": 2142,
+              "char_end": 2150,
+              "matched_text": "Oklahoma",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Oklahoma appears in the paper's state-average heat exposure ranking and in its comparison with a prior national study.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$.discussion",
+              "section_idx": 5,
+              "char_start": 2772,
+              "char_end": 2780,
+              "matched_text": "Oklahoma",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Oklahoma appears in the paper's state-average heat exposure ranking and in its comparison with a prior national study.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "incidental_mention",
+      "item_place_class": "study_area_or_phenomenon_geography"
+    },
+    {
+      "lit2_id": "LIT2-001160",
+      "item_id": "53109236",
+      "arm": "extreme_heat_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 5,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "heat index",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "abstract",
+              "section_idx": 1,
+              "char_start": 841,
+              "char_end": 851
+            },
+            {
+              "section_key": "background & summary",
+              "section_idx": 2,
+              "char_start": 2026,
+              "char_end": 2036
+            },
+            {
+              "section_key": "excess heat factor (ehf",
+              "section_idx": 9,
+              "char_start": 1196,
+              "char_end": 1206
+            },
+            {
+              "section_key": "standardized heat index (shi",
+              "section_idx": 10,
+              "char_start": 26,
+              "char_end": 36
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 4,
+          "primary_class": "ambiguous_acronym_or_collision",
+          "reason": "Every occurrence is inside a different index: the paper's own 'standardized heat index (SHI)', a probabilistic temperature-percentile index, or 'Excess heat index' (EHI, a component of EHF); not the temperature-humidity heat index.",
+          "class_counts": {
+            "ambiguous_acronym_or_collision": 4
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.abstract",
+              "section_idx": 1,
+              "char_start": 841,
+              "char_end": 851,
+              "matched_text": "heat index",
+              "class": "ambiguous_acronym_or_collision",
+              "reason": "Every occurrence is inside a different index: the paper's own 'standardized heat index (SHI)', a probabilistic temperature-percentile index, or 'Excess heat index' (EHI, a component of EHF); not the temperature-humidity heat index.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"background & summary\"]",
+              "section_idx": 2,
+              "char_start": 2026,
+              "char_end": 2036,
+              "matched_text": "heat index",
+              "class": "ambiguous_acronym_or_collision",
+              "reason": "Every occurrence is inside a different index: the paper's own 'standardized heat index (SHI)', a probabilistic temperature-percentile index, or 'Excess heat index' (EHI, a component of EHF); not the temperature-humidity heat index.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"excess heat factor (ehf\"]",
+              "section_idx": 9,
+              "char_start": 1196,
+              "char_end": 1206,
+              "matched_text": "heat index",
+              "class": "ambiguous_acronym_or_collision",
+              "reason": "Every occurrence is inside a different index: the paper's own 'standardized heat index (SHI)', a probabilistic temperature-percentile index, or 'Excess heat index' (EHI, a component of EHF); not the temperature-humidity heat index.",
+              "inside_claim_spans": []
+            },
+            {
+              "json_path": "$[\"standardized heat index (shi\"]",
+              "section_idx": 10,
+              "char_start": 26,
+              "char_end": 36,
+              "matched_text": "heat index",
+              "class": "ambiguous_acronym_or_collision",
+              "reason": "Every occurrence is inside a different index: the paper's own 'standardized heat index (SHI)', a probabilistic temperature-percentile index, or 'Excess heat index' (EHI, a component of EHF); not the temperature-humidity heat index.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "chicago heatwave (july 1995",
+              "section_idx": 14,
+              "char_start": 1640,
+              "char_end": 1650
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "study_area_or_phenomenon_geography",
+          "reason": "Southeast California appears in the paper's own July 1995 validation map (heatwave days by the constant-threshold definition).",
+          "class_counts": {
+            "study_area_or_phenomenon_geography": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$[\"chicago heatwave (july 1995\"]",
+              "section_idx": 14,
+              "char_start": 1640,
+              "char_end": 1650,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "Southeast California appears in the paper's own July 1995 validation map (heatwave days by the constant-threshold definition).",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "ambiguous_acronym_or_collision",
+      "item_place_class": "study_area_or_phenomenon_geography"
+    },
+    {
+      "lit2_id": "LIT2-001293",
+      "item_id": "88523156",
+      "arm": "extreme_heat_v1",
+      "scope_status": "in_scope_hazard",
+      "terminal_status": "claims_extracted",
+      "n_claims": 4,
+      "pairs": [
+        {
+          "kind": "concept",
+          "term": "heat index",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "mathematical background for approach",
+              "section_idx": 3,
+              "char_start": 19015,
+              "char_end": 19025
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 2,
+          "primary_class": "substantive_concept_use",
+          "reason": "Operational use in data construction: daily observations are taken at the time of the maximum heat index, and months selected where heat index exceeded its 0.95 quantile.",
+          "class_counts": {
+            "substantive_concept_use": 2
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [
+            "LIT2-001293-C1:experimental_condition.support",
+            "LIT2-001293-C4:experimental_condition.support"
+          ],
+          "occurrences": [
+            {
+              "json_path": "$[\"mathematical background for approach\"]",
+              "section_idx": 3,
+              "char_start": 19015,
+              "char_end": 19025,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Operational use in data construction: daily observations are taken at the time of the maximum heat index, and months selected where heat index exceeded its 0.95 quantile.",
+              "inside_claim_spans": [
+                "LIT2-001293-C1:experimental_condition.support",
+                "LIT2-001293-C4:experimental_condition.support"
+              ]
+            },
+            {
+              "json_path": "$[\"mathematical background for approach\"]",
+              "section_idx": 3,
+              "char_start": 19183,
+              "char_end": 19193,
+              "matched_text": "heat index",
+              "class": "substantive_concept_use",
+              "reason": "Operational use in data construction: daily observations are taken at the time of the maximum heat index, and months selected where heat index exceeded its 0.95 quantile.",
+              "inside_claim_spans": []
+            }
+          ]
+        },
+        {
+          "kind": "place",
+          "term": "california",
+          "frozen_source": [
+            "extreme_heat_v1"
+          ],
+          "frozen_first_hits": [
+            {
+              "section_key": "introduction",
+              "section_idx": 2,
+              "char_start": 924,
+              "char_end": 934
+            }
+          ],
+          "frozen_first_hits_reproduced": true,
+          "n_occurrences": 1,
+          "primary_class": "study_area_or_phenomenon_geography",
+          "reason": "'a southern California weather regime known as the Santa Ana winds' locates one of the paper's two applied data examples.",
+          "class_counts": {
+            "study_area_or_phenomenon_geography": 1
+          },
+          "occurs_inside_promoted_claim_evidence": [],
+          "occurs_inside_claim_support_span": [],
+          "occurrences": [
+            {
+              "json_path": "$.introduction",
+              "section_idx": 2,
+              "char_start": 924,
+              "char_end": 934,
+              "matched_text": "California",
+              "class": "study_area_or_phenomenon_geography",
+              "reason": "'a southern California weather regime known as the Santa Ana winds' locates one of the paper's two applied data examples.",
+              "inside_claim_spans": []
+            }
+          ]
+        }
+      ],
+      "item_concept_class": "substantive_concept_use",
+      "item_place_class": "study_area_or_phenomenon_geography"
+    }
+  ]
+}

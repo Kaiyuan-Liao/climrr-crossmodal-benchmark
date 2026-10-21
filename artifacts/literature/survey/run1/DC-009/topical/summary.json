@@ -1,0 +1,48 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-20T22:07:16Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "4a0ebd3d41dd7ee596950c3a8a28ad4bfee925d6cd20c29d401729a4495fe343",
+  "query_text": "( \"summer daily maximum heat index\" OR \"summer max heat index\" OR \"summer daily max heat index\" OR \"summer heat index maximum\" OR \"summer maximum heat index\" OR \"summer hi max\" OR \"summer hi maximum\" OR \"summer daily max hi\" )\n",
+  "parsed_groups": [
+    [
+      "summer daily maximum heat index",
+      "summer max heat index",
+      "summer daily max heat index",
+      "summer heat index maximum",
+      "summer maximum heat index",
+      "summer hi max",
+      "summer hi maximum",
+      "summer daily max hi"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    0
+  ],
+  "per_term_doc_counts": {
+    "g0:summer daily maximum heat index": 0,
+    "g0:summer max heat index": 0,
+    "g0:summer daily max heat index": 0,
+    "g0:summer heat index maximum": 0,
+    "g0:summer maximum heat index": 0,
+    "g0:summer hi max": 0,
+    "g0:summer hi maximum": 0,
+    "g0:summer daily max hi": 0
+  },
+  "raw_count": 0,
+  "disambiguation": null,
+  "admitted_count": 0,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 57.9,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

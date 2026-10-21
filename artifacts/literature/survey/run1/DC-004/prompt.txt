@@ -1,0 +1,16 @@
+You are helping build a lexical search over scientific papers. Below is ONE variable from a climate-data dictionary, quoted verbatim. Propose up to 8 surface forms (words or short phrases, lowercase, no regular expressions) that a scientific paper would use when it discusses THIS variable or the quantity it measures. Rules: (1) propose only forms that name the same quantity or a standard name for it, not broader topics; (2) include common abbreviations and hyphenation variants; (3) do not include place names, years, or scenario names; (4) each form at most 6 words. Return ONLY a JSON array of strings, nothing else.
+
+Dictionary name: Wind Speed
+Dictionary passage: Each climate model generates estimated wind speed readings (in miles per hour, or mph) every 3 hours, 
+or 8 wind speed readings per day. These values are irrespective of wind direction and only represent the 
+magnitude of wind speed. Using these readings, Argonne calculated the average daily wind speed (the 
+average of each day's 8 wind speed readings) for every day within a given time period/scenario (e.g., mid-
+century RCP4.5) and for each climate model (CCSM, GFDL, and HadGEM). Argonne then took the 
+average of each daily average wind speed for a given year (e.g., 2045) within a given time period/scenario 
+(e.g., mid-century RCP4.5) and for a given climate model (e.g., CCSM), which produced the annual 
+average wind speed for that scenario's model year, such as CCSM's estimate of annual average wind 
+speeds in 2045 under climate scenario RCP4.5. This process was repeated for each year within a given 
+time period/scenario (e.g., 2046, 2047, and so forth) and across all three climate models (CCSM, GFDL, 
+and HadGEM), producing a total of 30 estimates of annual average wind speeds for a given time 
+period/scenario. The average of these values was taken to produce the ensemble mean of the annual 
+average wind speed (in mph) for each time period/scenario.

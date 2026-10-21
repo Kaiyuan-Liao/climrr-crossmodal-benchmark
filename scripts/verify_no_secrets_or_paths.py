@@ -10,6 +10,20 @@ This script is excluded from its own scan: it necessarily contains the literal
 patterns it searches for. It is the only self-exempt file, and it contains no
 real path or credential -- read it to confirm.
 
+One narrow, hash-pinned exemption (Track B Stage 2a, owner decision recorded in
+D-026): the two delivered ALCF tools in `WORD_EXEMPTIONS` read an access value
+from an environment variable whose name contains the credential word, and must
+stay byte-identical to the files delivered. For exactly those paths, and **only
+while each file's SHA-256 equals the pinned value**, hits of the
+"credential-bearing word" rule are not reported. Every other rule --- absolute
+paths, key prefixes --- still applies to them, and any change to either file
+makes the exemption lapse, so the word hits return and the scan fails.
+
+Extended under the same terms (owner decision recorded in D-027) to the GUIDANCE
+ruling `docs/M4_WP4_TRACKB_GUIDANCE_RULING.md`, which uses the credential word
+in its ordinary sense ("scenario-<word> retrieval") and must stay byte-identical
+to the ruling as delivered.
+
 Matching rules
 --------------
 Absolute paths are matched **case-sensitively, as literal substrings**, because
@@ -29,6 +43,7 @@ false positives it was avoiding.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import re
 import subprocess
 import sys
@@ -54,6 +69,14 @@ FORBIDDEN_PATTERNS = [
     ("credential-bearing word", re.compile(r"\b" + "tok" + r"en\b", re.IGNORECASE)),
     ("credential-bearing word", re.compile(r"\b" + "pass" + r"word\b", re.IGNORECASE)),
 ]
+
+# Hash-pinned exemption from the credential-word rule only (D-026, D-027). Path -> SHA-256.
+WORD_EXEMPTION_LABEL = "credential-bearing word"
+WORD_EXEMPTIONS = {
+    "scripts/litcollect/survey_driver.py": "e1fb664c98e4ff866bb348c8930bfc1b9243957441b8a19ea0893e0b711af4cd",
+    "scripts/litcollect/probe_alcf_inference.py": "79181c48981c709b49b90d78fc8aaddffaf12d2f1bb0591b9a9daa3aad438c66",
+    "docs/M4_WP4_TRACKB_GUIDANCE_RULING.md": "ae4129d3a16c5b4d9b60422b5ef37022b21b441c8d60affc0bf793ffab246402",
+}
 
 # Binary / data files that are tracked on purpose and are not text to scan.
 SKIP_SUFFIXES = {".csv", ".pdf", ".png", ".jpg", ".jpeg", ".zip", ".npy", ".npz", ".parquet", ".pkl"}
@@ -85,12 +108,25 @@ def scan_text(text: str) -> list[tuple[int, str, str]]:
     return hits
 
 
+def word_exempt(path: Path) -> bool:
+    """True iff `path` is in WORD_EXEMPTIONS and its bytes still hash to the pinned value."""
+    try:
+        rel = path.resolve().relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return False
+    pinned = WORD_EXEMPTIONS.get(rel)
+    return pinned is not None and hashlib.sha256(path.read_bytes()).hexdigest() == pinned
+
+
 def scan_file(path: Path) -> list[tuple[int, str, str]]:
     try:
         text = path.read_text(encoding="utf-8")
     except (UnicodeDecodeError, OSError):
         return []
-    return scan_text(text)
+    hits = scan_text(text)
+    if word_exempt(path):
+        hits = [h for h in hits if h[1] != WORD_EXEMPTION_LABEL]
+    return hits
 
 
 def main() -> int:

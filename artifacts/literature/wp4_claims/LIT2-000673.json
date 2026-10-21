@@ -1,0 +1,320 @@
+{
+  "lit2_id": "LIT2-000673",
+  "item_id": "250541813",
+  "arm": "fire_weather_v1",
+  "rank": 50,
+  "rel_path": "13/250541813.json",
+  "file_sha256": "7cbb12d18dcd947b0059f07b8ec0bd43d111fe5576411b412e035d4df2367311",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "fv3gfs and gefs-aerosols",
+    "observation, reanalysis data, and other model data",
+    "model ensemble analysis aod and other model forecasts",
+    "emissions",
+    "evaluation of aod associated with fire events",
+    "evaluation of aod associated with dust events",
+    "evaluation of major regional averages",
+    "atom-1 retrospective forecast evaluation",
+    "summary and future plan"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Model description paper Development and evaluation of the Aerosol Forecast Member in the National Center for Environment Prediction (NCEP)'s Global Ensemble Forecast System (GEFS-Aerosols v1)",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "note": "The stored title begins with the label 'Model description paper'. `abstract` holds only a repeated fragment ('The National Oceanic and Atmospheric', three times)."
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "Borderline. The paper describes and evaluates a global aerosol forecast model; a large part of the evaluation is its forecast of smoke (AOD) from wildfire and biomass-burning events and of dust events, framed by the health concern of PM2.5 exposure.",
+  "scope_evidence": {
+    "json_path": "$.introduction",
+    "char_start": 393,
+    "char_end": 599,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "The US Environmental Protection Agency (EPA) and the Centers for Disease Control and Prevention (CDC) also use the NOAA forecasts for applications with wildfire, health, and smoke vulnerability assessments.",
+    "evidence_sha256": "d4adbd647eeb70897cc06c4570ed8145d70796d39de6a160c2059896b4e2a136"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-000673-C1",
+      "claim_text": "For the August 2019 fires in South America, GEFS-Aerosols reproduced the enhanced AOD near the Bolivia-Paraguay-Brazil border seen by satellites and MERRA-2, whereas NGACv2 AOD was over 80% below observations.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "total AOD forecast during fire events (smoke from large fires)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "GEFS-Aerosols reproduces the enhancement; NGACv2 more than 80% smaller than observations",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "South America near the border of Bolivia, Paraguay, and Brazil (Amazon rainforest fires)",
+        "status": "explicit",
+        "role": "evaluation case region (fire event)"
+      },
+      "temporal_frame": {
+        "value": "August 2019 (forecast for 25 August)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.emissions",
+          "char_start": 12356,
+          "char_end": 12440,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Figure 4 shows the total AOD forecast on 25 August compared against the NGACv2 model",
+          "evidence_sha256": "93ad5d5031d48c92f40051955c82ee59c2845b0da915288697b54ac38b342cea"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.emissions",
+        "char_start": 12609,
+        "char_end": 12872,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The GEFS-Aerosols AOD is able to reproduce the enhanced AOD due to several fire events over South America near the border of Bolivia, Paraguay, and Brazil, which were also observed by the VIIRS and MODIS satellite instruments and captured by the MERRA-2 analysis.",
+        "evidence_sha256": "29b82559126ff63ce1c3b16f24e08be2a940a9c4f204e3b14f578c38817cabb1"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The NGACv2 figure is in the same field: 'NGACv2 AOD is more than 80 % smaller than the observations over the fire source region'."
+    },
+    {
+      "claim_id": "LIT2-000673-C2",
+      "claim_text": "At the Alta Floresta AERONET site in the Amazon fire source region, GEFS-Aerosols Day-1 AOD reproduced two fire-plume AOD peaks (late August, late September), with correlation 0.66 versus ICAP 0.9 and NGACv2 0.68.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "daily total AOD variations; fire plumes",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "consistent with AERONET; correlation (RMSE) 0.66 (0.23) GEFS-Aerosols, 0.9 (0.12) ICAP, 0.68 (0.31) NGACv2",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the Alta Floresta site, in the middle of the Amazon fire source region",
+        "status": "explicit",
+        "role": "evaluation site (fire source region)"
+      },
+      "temporal_frame": {
+        "value": "1 July-30 November 2019",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"evaluation of aod associated with fire events\"]",
+          "char_start": 318,
+          "char_end": 434,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "at the four AERONET sites near the fire source regions of South America during the period of 1 July-30 November 2019",
+          "evidence_sha256": "88eb66c50b482277d73868f374d322538425889c0369ca59035c84e343bd2be9"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"evaluation of aod associated with fire events\"]",
+        "char_start": 436,
+        "char_end": 788,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "At the Alta Floresta site, which is in the middle of the Amazon fire source region, the daily AOD variations of both the ICAP and GEFS-Aerosols Day-1 predictions are quite consistent with those of the AERONET data, especially as they are able to reproduce two peaks in AOD enhancements in late August and late September caused by fire plumes (Fig. 9a).",
+        "evidence_sha256": "a0fbd835cacebfc431fb7e9ccebdeeb90fb9bb3a7f3f7385c8187067732de6bc"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The statistics are in the next sentence: 'The correlation (RMSE) is 0.66 (0.23), 0.9 (0.12), and 0.68 (0.31) for GEFS-Aerosols, ICAP, and NGACv2.'"
+    },
+    {
+      "claim_id": "LIT2-000673-C3",
+      "claim_text": "Of the selected AERONET sites, 20 (about 30%) had GEFS-Aerosols total AOD correlations above 0.7, against only one site for NGACv2.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "correlation of daily total AOD with AERONET",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "20 sites above 0.7 for GEFS-Aerosols versus 1 site for NGACv2",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "60 selected AERONET sites globally",
+        "status": "explicit",
+        "role": "evaluation network (global)",
+        "support": {
+          "json_path": "$.emissions",
+          "char_start": 21686,
+          "char_end": 21789,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The locations of the 60 selected AERONET sites where these comparisons were made are listed in Table 1.",
+          "evidence_sha256": "41f06eddb37c5c39fc5dcb7bf6ad74766f78a8804f68f6eb1ab85c4a4aa748a6"
+        }
+      },
+      "temporal_frame": {
+        "value": "5 July to 30 November 2019 (Day-1 real-time forecasts)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.emissions",
+          "char_start": 22203,
+          "char_end": 22253,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "for the period between 5 July and 30 November 2019",
+          "evidence_sha256": "0055e504fbeb5bd6066c337aa0c20ce3c4eb989a5433f5f9d35d5e4461701936"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.emissions",
+        "char_start": 22946,
+        "char_end": 23123,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "There are 20 sites (about 30 % of the site total) displaying highly correlated total AOD for the AERONET data and GEFS-Aerosols, with the correlation coefficients exceeding 0.7.",
+        "evidence_sha256": "6d5e46066fe8369079d60477a585f08fbb444f58ad89bcf4129c5765d8fff3c1"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The NGACv2 count is in the next sentence: 'In contrast, there is only 1 site with a correlation coefficient larger than 0.7 for NGACv2 model vs. AERONET'."
+    },
+    {
+      "claim_id": "LIT2-000673-C4",
+      "claim_text": "During biomass burning events, GEFS-Aerosols captured major fires over southern Africa, Siberia, the central Amazon and central South America much better than NGACv2, possibly partly through plume-rise vertical transport.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "forecast of biomass burning events (major fires) in AOD",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "captured much better than NGACv2; part of the improvement may be due to the plume rise module (hedged)",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "southern Africa, Siberia, the central Amazon, and central South America",
+        "status": "explicit",
+        "role": "regions of evaluated fire events"
+      },
+      "temporal_frame": {
+        "value": "5 July to 30 November 2019 (Day-1 real-time forecasts)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.emissions",
+          "char_start": 22203,
+          "char_end": 22253,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "for the period between 5 July and 30 November 2019",
+          "evidence_sha256": "0055e504fbeb5bd6066c337aa0c20ce3c4eb989a5433f5f9d35d5e4461701936"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"summary and future plan\"]",
+        "char_start": 13812,
+        "char_end": 13983,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "During the biomass burning events, GEFS-Aerosols captured major fires over southern Africa, Siberia, the central Amazon, and central South America much better than NGACv2.",
+        "evidence_sha256": "7bb1f026d1a572fe15a9fdeb03f7e2e4e05e5ce6c31ee1c6bca56ab8940ab98c"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The plume-rise attribution is the next sentence: 'Part of the improvement may be due to the vertical transport by the plume rise module.'"
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-000673-R1",
+      "evidence": {
+        "json_path": "$.emissions",
+        "char_start": 21403,
+        "char_end": 21598,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Additionally, a parameterization based on the fire weather index (FWI) to estimate biomass burning emissions on longer temporal scales may help to improve and extend the forecast of fire impacts.",
+        "evidence_sha256": "bb8cb572795ba8af412eea4c5367649434273e2b1e30d5aa84b445ac6259ac87"
+      },
+      "reason": "Hedged future work ('may help'); FWI is not used in this paper."
+    },
+    {
+      "candidate_id": "LIT2-000673-R2",
+      "evidence": {
+        "json_path": "$.emissions",
+        "char_start": 16079,
+        "char_end": 16155,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Angola experienced almost 3 times more fires than Brazil in mid-August 2019.",
+        "evidence_sha256": "941bfe03703f5a31edcc490aa6143a38a665ff95869566f356152b4d92d45026"
+      },
+      "reason": "Context attributed to NASA satellite imagery; not this paper's analysis."
+    },
+    {
+      "candidate_id": "LIT2-000673-R3",
+      "evidence": {
+        "json_path": "$[\"evaluation of major regional averages\"]",
+        "char_start": 5433,
+        "char_end": 5597,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Both the eastern and western US regions exhibit GEFS-Aerosols low biases of about 5 %-30 %, with the largest differences in the eastern US occurring in August 2019.",
+        "evidence_sha256": "894b8780e96752383cdb68fe7a4a3d2cbc3ce693b0fb10a8c9b27a779c23d183"
+      },
+      "reason": "A general AOD bias result for US regions, not tied to a fire or dust hazard event."
+    },
+    {
+      "candidate_id": "LIT2-000673-R4",
+      "evidence": {
+        "json_path": "$[\"atom-1 retrospective forecast evaluation\"]",
+        "char_start": 24176,
+        "char_end": 24452,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "During ATom-1, plumes from dust storms and large biomass burning events and low-level sea-salt aerosols were observed over the South and central Atlantic, and anthropogenic pollution was observed over the United States on the last flight from Minnesota to southern California.",
+        "evidence_sha256": "992961912bec1e8d81b511e084f5ce42b828fe4f22369e479f22959cfe7b6fc0"
+      },
+      "reason": "Describes what the aircraft campaign observed; context for the retrospective evaluation, not a finding about a hazard."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "Most fields repeat whole passages two or three times (an extraction artifact); spans use the first occurrence. The ATom-1 section states measurements 'in July and August 2021' for a 2016 campaign; kept as stored, not used."
+}

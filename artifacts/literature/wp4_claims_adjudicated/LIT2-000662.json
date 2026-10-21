@@ -1,0 +1,1057 @@
+{
+  "lit2_id": "LIT2-000662",
+  "item_id": "250039675",
+  "arm": "extreme_heat_v1",
+  "rank": 70,
+  "rel_path": "75/250039675.json",
+  "file_sha256": "77d1f14bcd0684de821675500e313c7129beba0929deb1cb5ecde198716b636d",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "introduction",
+    "materials and methods",
+    "results",
+    "discussion",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "note": "No `title` key; no field holds a title, authors, year or venue."
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper correlates urban and green-space expansion in 49 US cities with changes in heat wave frequency, duration, season and intensity, i.e. a heat hazard and its land-use drivers.",
+  "scope_evidence": {
+    "json_path": "$.introduction",
+    "char_start": 6722,
+    "char_end": 6826,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "This study aimed to examine how changing land use conditions is related to the occurrence of heat waves.",
+    "evidence_sha256": "78c234634b6caa11ac3090084bd4851b57b8dd730e575f5362bbbfcc8675469a"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-000662-C1",
+      "claim_text": "Across 49 US cities, the urban expansion intensity index was positively and significantly correlated with heat wave intensity change (Spearman 0.317, p = 0.02699) and negatively correlated with duration change.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "urban expansion intensity index (UEII); heat wave intensity change; heat wave duration change",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "positive and significant with intensity change (0.317); negative with duration change",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "49 cities of the U.S. (contiguous United States; grouped into West, South and North regions)",
+        "status": "explicit",
+        "role": "study area (city sample)",
+        "support": {
+          "json_path": "$.discussion",
+          "char_start": 2143,
+          "char_end": 2298,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Spearman correlation analysis within the 49 cities in the U.S. revealed that the heat wave duration and intensity changes are significantly linked to UEII.",
+          "evidence_sha256": "3bf7094d116319315face40b5c4e25802e47c7ec3048a85856b6407bab68fa04"
+        }
+      },
+      "temporal_frame": {
+        "value": "land cover 1992 and 2019 (27 years)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.results",
+          "char_start": 33,
+          "char_end": 85,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "In this study, the UEII was determined for 27 years.",
+          "evidence_sha256": "24b5aa485578c787d2ae41dd7332250e6082a609dace10eda32bdab8c324d3fd"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "heat wave defined as minimum apparent temperature above the local 85th percentile for two or more days; Spearman correlations with UEII/GEII",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"materials and methods\"]",
+          "char_start": 4726,
+          "char_end": 4869,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "In this study, a heat wave is defined as any minimum apparent temperature that exceeds the local 85th percentile for two or more days in a row.",
+          "evidence_sha256": "4423a747cf26b36c68ffb3f5fb165ed28995fdf040eaf6e6d09376398c3ee62f"
+        }
+      },
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 2766,
+        "char_end": 2910,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "However, UEII was positively and significantly (p = 0.02699) related to heat wave intensity, with the Spearman correlation coefficient of 0.317.",
+        "evidence_sha256": "8a4e5e6de77c4846eaf3003e2e484dca9ebabbc6f95c0c17ab6df4c1ce9ee476"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": "The negative duration correlation is two sentences earlier: 'In this study, duration change was negatively correlated with UEII.'",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "250039675-c1",
+        "blind_evidence": {
+          "json_path": "$.discussion",
+          "char_start": 2766,
+          "char_end": 2910,
+          "evidence_text": "However, UEII was positively and significantly (p = 0.02699) related to heat wave intensity, with the Spearman correlation coefficient of 0.317."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds heat wave duration change, which its evidence span does not state.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "urban expansion intensity index (UEII); heat wave intensity",
+              "tag": "explicit"
+            }
+          },
+          "relation_or_direction": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds the negative duration correlation, from outside both evidence spans.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "positive and significant (Spearman 0.317, p = 0.02699)",
+              "tag": "explicit"
+            }
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "reader 1's support span states it; reader 2 cites the same sentence and tags it inferred. Rule 3b: explicit kept.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "the 49 cities in the U.S.",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.discussion",
+                "char_start": 2143,
+                "char_end": 2298,
+                "evidence_text": "Spearman correlation analysis within the 49 cities in the U.S. revealed that the heat wave duration and intensity changes are significantly linked to UEII."
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "Reader 1's support span states '27 years' but not 1992 / 2019. Explicit kept for '27 years' only.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "27 years",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.results",
+                "char_start": 33,
+                "char_end": 85,
+                "evidence_text": "In this study, the UEII was determined for 27 years."
+              }
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 explicit heat-wave definition; reader 2 unknown. Rule 3a.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "study area (city sample)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_1": {
+            "value": "study area (city sample)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$.discussion",
+              "char_start": 2143,
+              "char_end": 2298,
+              "evidence_text": "Spearman correlation analysis within the 49 cities in the U.S. revealed that the heat wave duration and intensity changes are significantly linked to UEII."
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "concept": {
+            "value": "urban expansion intensity index (UEII); heat wave intensity",
+            "tag": "explicit"
+          },
+          "relation_or_direction": {
+            "value": "positive and significant (Spearman 0.317, p = 0.02699)",
+            "tag": "explicit"
+          },
+          "geography": {
+            "value": "the 49 cities in the U.S.",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.discussion",
+              "char_start": 2143,
+              "char_end": 2298,
+              "evidence_text": "Spearman correlation analysis within the 49 cities in the U.S. revealed that the heat wave duration and intensity changes are significantly linked to UEII."
+            }
+          },
+          "temporal_frame": {
+            "value": "27 years",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.results",
+              "char_start": 33,
+              "char_end": 85,
+              "evidence_text": "In this study, the UEII was determined for 27 years."
+            }
+          },
+          "experimental_condition": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000662-C2",
+      "claim_text": "In the West region, UEII showed a significant positive correlation with heat wave intensity change (coefficient 0.64, p = 0.03).",
+      "claim_type": "finding",
+      "concept": {
+        "value": "UEII; heat wave intensity change",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "significant and positive (0.64, p = 0.03)",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the West region (12 cities, e.g. Seattle, Las Vegas, Fresno)",
+        "status": "explicit",
+        "role": "analysis region"
+      },
+      "temporal_frame": {
+        "value": "land cover 1992 and 2019 (27 years)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.results",
+          "char_start": 33,
+          "char_end": 85,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "In this study, the UEII was determined for 27 years.",
+          "evidence_sha256": "24b5aa485578c787d2ae41dd7332250e6082a609dace10eda32bdab8c324d3fd"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "heat wave defined as minimum apparent temperature above the local 85th percentile for two or more days; Spearman correlations with UEII/GEII",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"materials and methods\"]",
+          "char_start": 4726,
+          "char_end": 4869,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "In this study, a heat wave is defined as any minimum apparent temperature that exceeds the local 85th percentile for two or more days in a row.",
+          "evidence_sha256": "4423a747cf26b36c68ffb3f5fb165ed28995fdf040eaf6e6d09376398c3ee62f"
+        }
+      },
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 4970,
+        "char_end": 5125,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The West region shows a significant and positive correlation only between UEII and intensity change. The coefficient value is 0.64 and the p-value is 0.03.",
+        "evidence_sha256": "0b49ac5657fa1242e4cf00fe297f27098fd2e009215753e3959dd24272cc08b9"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "250039675-c4",
+        "blind_evidence": {
+          "json_path": "$.discussion",
+          "char_start": 4970,
+          "char_end": 5125,
+          "evidence_text": "The West region shows a significant and positive correlation only between UEII and intensity change. The coefficient value is 0.64 and the p-value is 0.03."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "UEII and heat wave intensity change.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Significant positive, 0.64, p = 0.03.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 adds example cities from outside the evidence span.",
+            "rule": "3c: same tag, content differs; span-limited value both readers support",
+            "adopted": {
+              "value": "the West region",
+              "tag": "explicit"
+            }
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Reader 1 explicit 27 years; reader 2 unknown. Rule 3a.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Rule 3a.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "analysis region",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_1": {
+            "value": "analysis region",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$[\"materials and methods\"]",
+              "char_start": 2712,
+              "char_end": 2802,
+              "evidence_text": "As shown in Figure 1, the cities were then grouped into 3 regions: West, South, and North."
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "the West region",
+            "tag": "explicit"
+          },
+          "temporal_frame": {
+            "value": "unknown",
+            "tag": "unknown"
+          },
+          "experimental_condition": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000662-C3",
+      "claim_text": "The green expansion intensity index was not significantly related to heat wave frequency, duration, season or intensity.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "green expansion intensity index (GEII); heat wave frequency, duration, season, and intensity",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "relationships not statistically significant",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "49 cities of the U.S. (contiguous United States; grouped into West, South and North regions)",
+        "status": "explicit",
+        "role": "study area (city sample)",
+        "support": {
+          "json_path": "$.discussion",
+          "char_start": 2143,
+          "char_end": 2298,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Spearman correlation analysis within the 49 cities in the U.S. revealed that the heat wave duration and intensity changes are significantly linked to UEII.",
+          "evidence_sha256": "3bf7094d116319315face40b5c4e25802e47c7ec3048a85856b6407bab68fa04"
+        }
+      },
+      "temporal_frame": {
+        "value": "land cover 1992 and 2019 (27 years)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.results",
+          "char_start": 33,
+          "char_end": 85,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "In this study, the UEII was determined for 27 years.",
+          "evidence_sha256": "24b5aa485578c787d2ae41dd7332250e6082a609dace10eda32bdab8c324d3fd"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "heat wave defined as minimum apparent temperature above the local 85th percentile for two or more days; Spearman correlations with UEII/GEII",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"materials and methods\"]",
+          "char_start": 4726,
+          "char_end": 4869,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "In this study, a heat wave is defined as any minimum apparent temperature that exceeds the local 85th percentile for two or more days in a row.",
+          "evidence_sha256": "4423a747cf26b36c68ffb3f5fb165ed28995fdf040eaf6e6d09376398c3ee62f"
+        }
+      },
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 3283,
+        "char_end": 3429,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "However, the relationships between GEII and heat wave frequency, duration, season, and intensity were not statistically significant in this study.",
+        "evidence_sha256": "d4e054f9a48784c4b9d6658f23368eb2eea7ebf51a54bbd0c647fec19ea2b31c"
+      },
+      "claim_validation_status": "adjudicated_modified",
+      "notes": null,
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "B",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R3"
+        ],
+        "flags": [],
+        "notes": [
+          "claim_text is reader 1's, unchanged; adopted_dimensions replace the differing dimensions downstream"
+        ],
+        "aligned_blind_claim_id": "250039675-c3",
+        "blind_evidence": {
+          "json_path": "$.discussion",
+          "char_start": 3283,
+          "char_end": 3429,
+          "evidence_text": "However, the relationships between GEII and heat wave frequency, duration, season, and intensity were not statistically significant in this study."
+        },
+        "dimension_decisions": {
+          "concept": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "GEII and heat wave frequency, duration, season, intensity.",
+            "rule": "judged same content, same tag"
+          },
+          "relation_or_direction": {
+            "agree": true,
+            "content_judgement": "same",
+            "note": "Not statistically significant.",
+            "rule": "judged same content, same tag"
+          },
+          "geography": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "reader 1's support span states it; reader 2 cites the same sentence and tags it inferred. Rule 3b: explicit kept.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "the 49 cities in the U.S.",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.discussion",
+                "char_start": 2143,
+                "char_end": 2298,
+                "evidence_text": "Spearman correlation analysis within the 49 cities in the U.S. revealed that the heat wave duration and intensity changes are significantly linked to UEII."
+              }
+            }
+          },
+          "temporal_frame": {
+            "agree": false,
+            "content_judgement": "same",
+            "note": "As LIT2-000662-C1.",
+            "rule": "3b: explicit kept only where its span states the adopted value",
+            "explicit_span_states": true,
+            "adopted": {
+              "value": "27 years",
+              "tag": "explicit",
+              "support_from": "r1",
+              "support": {
+                "json_path": "$.results",
+                "char_start": 33,
+                "char_end": 85,
+                "evidence_text": "In this study, the UEII was determined for 27 years."
+              }
+            }
+          },
+          "scenario": {
+            "agree": true,
+            "rule": "identical"
+          },
+          "experimental_condition": {
+            "agree": false,
+            "content_judgement": "differs",
+            "note": "Rule 3a.",
+            "rule": "3a: unknown beats a value",
+            "adopted": {
+              "value": "unknown",
+              "tag": "unknown"
+            }
+          },
+          "claim_type": {
+            "agree": true,
+            "rule": "identical"
+          }
+        },
+        "geography_role": {
+          "agree": true,
+          "rule": "3-role: same role class",
+          "adopted": {
+            "value": "study area (city sample)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_1": {
+            "value": "study area (city sample)",
+            "tag": null,
+            "class": "study_area"
+          },
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$.discussion",
+              "char_start": 2143,
+              "char_end": 2298,
+              "evidence_text": "Spearman correlation analysis within the 49 cities in the U.S. revealed that the heat wave duration and intensity changes are significantly linked to UEII."
+            }
+          }
+        },
+        "adopted_dimensions": {
+          "geography": {
+            "value": "the 49 cities in the U.S.",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.discussion",
+              "char_start": 2143,
+              "char_end": 2298,
+              "evidence_text": "Spearman correlation analysis within the 49 cities in the U.S. revealed that the heat wave duration and intensity changes are significantly linked to UEII."
+            }
+          },
+          "temporal_frame": {
+            "value": "27 years",
+            "tag": "explicit",
+            "support_from": "r1",
+            "support": {
+              "json_path": "$.results",
+              "char_start": 33,
+              "char_end": 85,
+              "evidence_text": "In this study, the UEII was determined for 27 years."
+            }
+          },
+          "experimental_condition": {
+            "value": "unknown",
+            "tag": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000662-C4",
+      "claim_text": "Urban expansion outpaced green expansion in the 49 cities: the mean annual GEII was 0.017% against a mean UEII of 1.5%.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "green expansion versus urban expansion (GEII, UEII)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "mean GEII 0.017% versus mean UEII 1.5% per year",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "49 cities of the U.S. (contiguous United States; grouped into West, South and North regions)",
+        "status": "explicit",
+        "role": "study area (city sample)",
+        "support": {
+          "json_path": "$.discussion",
+          "char_start": 2143,
+          "char_end": 2298,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Spearman correlation analysis within the 49 cities in the U.S. revealed that the heat wave duration and intensity changes are significantly linked to UEII.",
+          "evidence_sha256": "3bf7094d116319315face40b5c4e25802e47c7ec3048a85856b6407bab68fa04"
+        }
+      },
+      "temporal_frame": {
+        "value": "land cover 1992 and 2019 (27 years)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.results",
+          "char_start": 33,
+          "char_end": 85,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "In this study, the UEII was determined for 27 years.",
+          "evidence_sha256": "24b5aa485578c787d2ae41dd7332250e6082a609dace10eda32bdab8c324d3fd"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 860,
+        "char_end": 1031,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The mean GEII of 0.017% and the mean UEII of 1.5% indicate that the urban expansion is more evident than green expansion in the 49 cities of the U.S. as an annual average.",
+        "evidence_sha256": "ebf234dbc00acec7670004fb30b930fa23fcfb64cdc76b6886833de993c83ad5"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "A land-use result supporting the heat analysis; not itself a heat measurement.",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "study area (city sample)",
+            "class": "study_area"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "study area (city sample)",
+            "tag": null,
+            "class": "study_area"
+          }
+        },
+        "blind_reader_considered_and_rejected": [
+          {
+            "rejected_id": "rejected[3]",
+            "overlap_code_points": 171,
+            "reason": "Land-use statistic, not a hazard claim.",
+            "evidence_text": "The mean GEII of 0.017% and the mean UEII of 1.5% indicate that the urban expansion is more evident than green expansion in the 49 cities of the U.S. as an annual average."
+          }
+        ]
+      }
+    },
+    {
+      "claim_id": "LIT2-000662-C5",
+      "claim_text": "A cited study found 2000-2010 heat-related worker fatality rates of 0.37, 0.33 and 0.24 per million workers per year in Florida, Texas and California, among the top ten states.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "heat-related fatality rates (workers)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "0.37, 0.33, and 0.24 per million workers per year; among the top ten states",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Florida, Texas, and California",
+        "status": "explicit",
+        "role": "study area of the cited study"
+      },
+      "temporal_frame": {
+        "value": "from 2000 to 2010",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.results",
+        "char_start": 1751,
+        "char_end": 1924,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "They showed that the rates in Florida, Texas, and California were 0.37, 0.33, and 0.24 per million workers per year, respectively, which are listed among the top ten states.",
+        "evidence_sha256": "efc75894c5aa370a87574e59598c7a26458cdd89163c0fd0bce08c9624ad4d74"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "notes": "Attributed to Gubernot et al. [46].",
+      "first_pass_claim_validation_status": "single_reader_provisional",
+      "first_pass_evidence_tier": "C",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "not_independently_found"
+        ],
+        "notes": [],
+        "geography_role": {
+          "adopted": {
+            "value": "study area of the cited study",
+            "class": "cited_study_area"
+          },
+          "rule": "R4: single reader (reader 1); role as recorded",
+          "reader_1": {
+            "value": "study area of the cited study",
+            "tag": null,
+            "class": "cited_study_area"
+          }
+        },
+        "blind_reader_considered_and_rejected": [
+          {
+            "rejected_id": "rejected[1]",
+            "overlap_code_points": 173,
+            "reason": "Cited background about heat-related occupational fatality rates; not promoted given the five-claim cap.",
+            "evidence_text": "They showed that the rates in Florida, Texas, and California were 0.37, 0.33, and 0.24 per million workers per year, respectively, which are listed among the top ten states."
+          }
+        ]
+      }
+    },
+    {
+      "claim_id": "LIT2-000662-B2",
+      "origin": "blind_reader",
+      "blind_claim_id": "250039675-c2",
+      "claim_text": "Heat wave duration change was negatively correlated with UEII, which the authors read as cities expanding more rapidly might receive fewer consecutive heat wave days.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "duration change",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "negatively correlated with UEII; might receive fewer days of the consecutive heat wave",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the 49 cities in the U.S.",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.discussion",
+          "char_start": 2143,
+          "char_end": 2298,
+          "evidence_text": "Spearman correlation analysis within the 49 cities in the U.S. revealed that the heat wave duration and intensity changes are significantly linked to UEII.",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "3bf7094d116319315face40b5c4e25802e47c7ec3048a85856b6407bab68fa04"
+        },
+        "role": "study area",
+        "blind_role_record": {
+          "value": "study area",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"discussion\"]",
+            "char_start": 2143,
+            "char_end": 2298,
+            "evidence_text": "Spearman correlation analysis within the 49 cities in the U.S. revealed that the heat wave duration and intensity changes are significantly linked to UEII.",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "27 years (land cover 1992 to 2019)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$.results",
+          "char_start": 33,
+          "char_end": 85,
+          "evidence_text": "In this study, the UEII was determined for 27 years.",
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_sha256": "24b5aa485578c787d2ae41dd7332250e6082a609dace10eda32bdab8c324d3fd"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 2584,
+        "char_end": 2765,
+        "evidence_text": "In this study, duration change was negatively correlated with UEII. It means that the cities expanding every year more rapidly might receive fewer days of the consecutive heat wave.",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "f8f5fc4b43bcbabe9a7d878f88f98803983f5f3d2ace9d471468cd878c7b5006"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "study area",
+            "class": "study_area"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "study area",
+            "tag": "inferred",
+            "class": "study_area",
+            "support": {
+              "json_path": "$.discussion",
+              "char_start": 2143,
+              "char_end": 2298,
+              "evidence_text": "Spearman correlation analysis within the 49 cities in the U.S. revealed that the heat wave duration and intensity changes are significantly linked to UEII."
+            }
+          }
+        }
+      }
+    },
+    {
+      "claim_id": "LIT2-000662-B5",
+      "origin": "blind_reader",
+      "blind_claim_id": "250039675-c5",
+      "claim_text": "The authors state results imply cities would be better in a more compact pattern with more expanded green areas to mitigate negative health impacts of heat waves.",
+      "claim_type": "recommendation",
+      "concept": {
+        "value": "negative health impacts of heat waves",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "would be better in a more compact pattern with more expanded green areas to mitigate",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "urban areas",
+        "status": "explicit",
+        "role": "other",
+        "blind_role_record": {
+          "value": "other",
+          "tag": "inferred",
+          "support_span": {
+            "json_path": "$[\"conclusion\"]",
+            "char_start": 695,
+            "char_end": 775,
+            "evidence_text": "to mitigate the negative health impacts of heat waves on citizens in urban areas",
+            "occurrences_in_value": 1
+          }
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.conclusion",
+        "char_start": 588,
+        "char_end": 776,
+        "evidence_text": "The results imply that the cities would be better in a more compact pattern with more expanded green areas to mitigate the negative health impacts of heat waves on citizens in urban areas.",
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_sha256": "8f4b6b8fef3d30f5b3c663be6c27547d947a9a5c726c6d0bc24cbf7a1171a428"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "adjudication": {
+        "package": "M4-WP4r3 Phase A",
+        "rules_applied": [
+          "R4"
+        ],
+        "flags": [
+          "blind_reader_only"
+        ],
+        "notes": [
+          "a new candidate from the blind reader, not confirmed"
+        ],
+        "geography_role": {
+          "adopted": {
+            "value": "other",
+            "class": "other"
+          },
+          "rule": "R4: single reader (reader 2); role as recorded",
+          "reader_2": {
+            "value": "other",
+            "tag": "inferred",
+            "class": "other",
+            "support": {
+              "json_path": "$.conclusion",
+              "char_start": 695,
+              "char_end": 775,
+              "evidence_text": "to mitigate the negative health impacts of heat waves on citizens in urban areas"
+            }
+          }
+        },
+        "first_reader_considered_and_rejected": [
+          {
+            "rejected_id": "LIT2-000662-R2",
+            "overlap_code_points": 188,
+            "reason": "An implication the paper draws although its GEII correlations were not significant; not promoted.",
+            "evidence_text": "The results imply that the cities would be better in a more compact pattern with more expanded green areas to mitigate the negative health impacts of heat waves on citizens in urban areas."
+          }
+        ]
+      }
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-000662-R1",
+      "evidence": {
+        "json_path": "$[\"materials and methods\"]",
+        "char_start": 3593,
+        "char_end": 3709,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "An excessive heat event (EHE) is defined by the NCDC (National Climatic Data Center) heat index as any day where the",
+        "evidence_sha256": "33dfae6ec4cc1a4523d968a9bf9cfa4018e522d38f9a7b475c47c9e234db8a5d"
+      },
+      "reason": "A definition carried over from the source data; not a finding."
+    },
+    {
+      "candidate_id": "LIT2-000662-R2",
+      "evidence": {
+        "json_path": "$.conclusion",
+        "char_start": 588,
+        "char_end": 776,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "The results imply that the cities would be better in a more compact pattern with more expanded green areas to mitigate the negative health impacts of heat waves on citizens in urban areas.",
+        "evidence_sha256": "8f4b6b8fef3d30f5b3c663be6c27547d947a9a5c726c6d0bc24cbf7a1171a428"
+      },
+      "reason": "An implication the paper draws although its GEII correlations were not significant; not promoted."
+    },
+    {
+      "candidate_id": "LIT2-000662-R3",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 3006,
+        "char_end": 3112,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "They proposed that in a city with a relatively compact urban spatial form, heat waves occur on fewer days.",
+        "evidence_sha256": "7b43c0a7629cd1ca683f2faf92258440af2266d0cb22f9bf832efbc79f55fcc7"
+      },
+      "reason": "A cited result (Stone and Rodgers); beyond the five-claim cap."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "The heat wave data are taken from Habeeb et al. [12] (50 cities, San Juan dropped). The 'conclusion' field ends mid-word ('Different analytical ap-').",
+  "scope_adjudication": {
+    "reader_1": "in_scope_hazard",
+    "reader_2": "in_scope_hazard",
+    "adopted": "in_scope_hazard",
+    "rule": "R1a: both readers agree; adopted",
+    "reader_2_record": "artifacts/literature/wp4_blind/250039675.json",
+    "reader_2_reason": "The paper correlates urban and green area expansion indices with changes in heat wave frequency, duration, season and intensity in 49 US cities."
+  },
+  "adjudication_provenance": {
+    "package": "M4-WP4r3 Phase A",
+    "adjudicator": "reader 1 (the EXECUTOR, prototype-exposed)",
+    "first_pass_record_sha256": "cd6afe4b16a4f37356e466147d87f28b3515afc0227845da4e12ad160a8b609b",
+    "blind_record_sha256": "130b718bcb08b7f72c8e895067958f4dd4311bcea6b02b577ec7aad6e6d8f4f6",
+    "no_paper_re_read": true,
+    "representativeness": "deterministic rank sample of lexical place candidates from LITCORPUS-02; not representative of the corpus or the literature"
+  }
+}

@@ -1,0 +1,355 @@
+{
+  "lit2_id": "LIT2-000470",
+  "item_id": "237371886",
+  "arm": "extreme_heat_v1",
+  "rank": 56,
+  "rel_path": "86/237371886.json",
+  "file_sha256": "5a4bef5f3bbb7911328e90fc913fd678bed8e55957afb6198e880e908a79d8ff",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "methods",
+    "results: recommendations",
+    "narrative review",
+    "conclusion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Heat Safety in the Workplace: Modified Delphi Consensus to Establish Strategies and Resources to Protect the US Workers",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "A Delphi consensus of 51 experts producing occupational heat safety recommendations to protect US workers from heat stress and heat-related illness.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 175,
+    "char_end": 315,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "Heat safety recommendations were created to protect worker health and to avoid productivity losses associated with occupational heat stress.",
+    "evidence_sha256": "750dd021bf19f4caa6c94283255ac912a15c40305dfca66975e8c8a1c2a12ada"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-000470-C1",
+      "claim_text": "After two rounds of Delphi scoring, the 59 originally developed recommendations were reduced to 40 occupational heat safety recommendations across eight topics.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "occupational heat safety recommendations (Delphi consensus)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "59 originally developed; 40 retained after two rounds of scoring",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the US workers (US workplaces)",
+        "status": "explicit",
+        "role": "target population of the recommendations",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 0,
+          "char_end": 174,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The purpose of this consensus document was to develop feasible, evidence-based occupational heat safety recommendations to protect the US workers that experience heat stress.",
+          "evidence_sha256": "dc1dff47561096060398c487cf62f6d034f18a774ef8a543b907579cacbc597a"
+        }
+      },
+      "temporal_frame": {
+        "value": "roundtable meeting December 10, 2020",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 242,
+          "char_end": 289,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "A virtual meeting was held on December 10, 2020",
+          "evidence_sha256": "e76b24e53a4c5cee5736237cad4e863a4cf2395425ed9933ac1bb51fdcdda6b4"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "Delphi method; each recommendation scored 0-9 on scientific evidence, feasibility and clarity; retained if average 7 or higher",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.methods",
+          "char_start": 4864,
+          "char_end": 4997,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Recommendations that received an average score 7 or higher for each category were transferred to the final version of the manuscript.",
+          "evidence_sha256": "9aa540f0370076ab184721911b680aca8dce3af1a6a50b0c0e4c0b1399359dad"
+        }
+      },
+      "evidence": {
+        "json_path": "$[\"results: recommendations\"]",
+        "char_start": 245,
+        "char_end": 427,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Following the round table meeting, 59 recommendations were originally developed. After two rounds of scoring, the Delphi method resulted in 40 recommendations across all eight topics",
+        "evidence_sha256": "5adfa744cf22afa91200301998d455c2e8756a4f6ce3fcadd336319dfeb80161"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "A result of the consensus process, not an observation of heat or health."
+    },
+    {
+      "claim_id": "LIT2-000470-C2",
+      "claim_text": "Employers or supervisors should create and implement a gradual, progressive heat acclimatization program of 5-7 days to minimize the effects of heat stress (evidence level B).",
+      "claim_type": "recommendation",
+      "concept": {
+        "value": "heat acclimatization (HA) program; effects of heat stress",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "should create and implement (5-7 days) to minimize effects",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the US workers (US workplaces)",
+        "status": "explicit",
+        "role": "target population of the recommendations",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 0,
+          "char_end": 174,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The purpose of this consensus document was to develop feasible, evidence-based occupational heat safety recommendations to protect the US workers that experience heat stress.",
+          "evidence_sha256": "dc1dff47561096060398c487cf62f6d034f18a774ef8a543b907579cacbc597a"
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"narrative review\"]",
+        "char_start": 52670,
+        "char_end": 52807,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "#1: Employers/supervisors should create and implement a gradual, progressive HA program (5-7 days) to minimize the effects of heat stress",
+        "evidence_sha256": "e2f9e2b626aa6f8a10ddb42eb57defe74799582e67ab5aed8bcb8bb2b98b6eed"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The SORT grade 'B' follows the recommendation in the source table text."
+    },
+    {
+      "claim_id": "LIT2-000470-C3",
+      "claim_text": "Environmental heat measurements should be taken on-site, as close to the individual work site as possible, to best represent environmental heat stress (evidence level A).",
+      "claim_type": "recommendation",
+      "concept": {
+        "value": "environmental monitoring of heat stress",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "should be taken on-site, as close to the work site as possible",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the US workers (US workplaces)",
+        "status": "explicit",
+        "role": "target population of the recommendations",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 0,
+          "char_end": 174,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The purpose of this consensus document was to develop feasible, evidence-based occupational heat safety recommendations to protect the US workers that experience heat stress.",
+          "evidence_sha256": "dc1dff47561096060398c487cf62f6d034f18a774ef8a543b907579cacbc597a"
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"narrative review\"]",
+        "char_start": 53620,
+        "char_end": 53768,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "#1: Environmental measurements should be taken on-site-as close to the individual work site as possible-to best represent environmental heat stress.",
+        "evidence_sha256": "208a2ce4c9f2ab9672fbba4ca996cb350c98523900818219e51ee8a16a28181d"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The SORT grade 'A' follows in the source table text."
+    },
+    {
+      "claim_id": "LIT2-000470-C4",
+      "claim_text": "About 13.3 million US workers performed work in extreme heat every day in July 2017.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "work in extreme heat",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "approximately 13.3 million workers every day",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "US",
+        "status": "explicit",
+        "role": "background context (national)"
+      },
+      "temporal_frame": {
+        "value": "July 2017",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 0,
+        "char_end": 108,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Approximately 13.3 million US workers performed work in extreme heat every day in July 2017 (Tanglis, 2018).",
+        "evidence_sha256": "a97084c0876742b0e393b72d988c234eab94f9e6d7a6897cdf1605ca22697f58"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "Attributed to Tanglis (2018)."
+    },
+    {
+      "claim_id": "LIT2-000470-C5",
+      "claim_text": "California, Washington and Minnesota are the only three US states that enforce OSHA-approved heat safety standards.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "OSHA-approved heat safety standards (state enforcement)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "the only three states that enforce",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "California, Washington, and Minnesota",
+        "status": "explicit",
+        "role": "regulatory context (states with heat standards)"
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 2320,
+        "char_end": 2517,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "California, Washington, and Minnesota are the only three states in the United States that enforce Occupational Safety and Health Administration (OSHA)-approved heat safety standards (NI-OSH, 2016).",
+        "evidence_sha256": "ec3fed527946c0d513d9cc81670b4c894f2c0ef058c48368b8318fedf686ecbc"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "Attributed to NIOSH (2016). A policy fact, not a hazard measurement."
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-000470-R1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 3130,
+        "char_end": 3252,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In 2016, the partnership updated a heat safety mobile application that provides safety recommendations based on heat index",
+        "evidence_sha256": "733de00ea217697d30c5c38849df548f023ff6c9992fcc8b8351c6041700a704"
+      },
+      "reason": "Background on a tool; not a finding."
+    },
+    {
+      "candidate_id": "LIT2-000470-R2",
+      "evidence": {
+        "json_path": "$[\"narrative review\"]",
+        "char_start": 20993,
+        "char_end": 21198,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Further, in certain hot and dry locations, air temperature alone is more appropriate to use than a heat index in determining necessary interventions to prevent heat-related illness (Anderson et al., 2013).",
+        "evidence_sha256": "340a8296bfce811138d677c3216f1dae513087f3d5e57cef6552b8b96d453475"
+      },
+      "reason": "Cited methodological guidance without place; beyond the five-claim cap."
+    },
+    {
+      "candidate_id": "LIT2-000470-R3",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 1630,
+        "char_end": 1781,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "reported that 35% of workers experienced occupational heat strain during or following the work shift, while 30% of workers reported productivity losses",
+        "evidence_sha256": "9ec6f32f6471390e638fe2a03ccc8ef0a30ebc23dd7ca61ced9bc2215e0307c1"
+      },
+      "reason": "A cited meta-analysis result with no geography; beyond the five-claim cap."
+    },
+    {
+      "candidate_id": "LIT2-000470-R4",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 563,
+        "char_end": 769,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Many workers have been at high risk of heat-related illness and death at worksites for decades, and the conditions are being exacerbated by rising temperatures related to climate change (Moda et al., 2019).",
+        "evidence_sha256": "3e84486c0a289b2a08dc5b1ad3c18879d84e1ca4f3c087608c71a14e783a8bad"
+      },
+      "reason": "General background attributed to a reference; no horizon or scenario."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "The 'narrative review' field holds several sections and table text run together; recommendation numbers restart per topic, so '#1' occurs many times — each quote includes enough text to be unique at its first occurrence."
+}

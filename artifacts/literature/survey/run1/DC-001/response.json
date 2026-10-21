@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "[\"annual mean temperature\",\"mean annual temperature\",\"annual average temperature\",\"average annual temperature\",\"annual temperature average\",\"annual-mean temperature\",\"MAT\",\"annual mean temp\"]",
+        "reasoning": "We need to propose up to 8 surface forms (words or short phrases) that a scientific paper would use when discussing this variable: Temperature (Annual). The passage describes annual average of daily max and min temperatures. So surface forms could be: \"annual mean temperature\", \"annual average temperature\", \"mean annual temperature\", \"average annual temperature\", \"annual temperature\", \"annual mean of daily max and min temperature\", but need to be short (max 6 words). Also include abbreviations: \"MAT\" (mean annual temperature), \"annual T\", \"annual temp\", \"annual mean temp\". Also \"annual average of daily maximum temperature\" maybe too long. Keep within 6 words.\n\nWe must not include broader topics. So forms that refer to the same quantity: annual average temperature, mean annual temperature, annual mean temperature, annual temperature average, annual mean of daily max/min temperature, annual mean of daily maximum temperature, annual mean of daily minimum temperature? Those are specific but still same quantity? The variable is \"Temperature (Annual)\" defined as annual average of both max and min daily temperatures. So forms could be \"annual mean of daily max/min temperature\". That's okay.\n\nInclude hyphenation variants: \"annual-mean temperature\". Also abbreviation \"MAT\". Also \"annual temperature average\". Also \"annual average temperature\". Also \"mean annual temperature\". Also \"average annual temperature\". Also \"annual mean temperature\". That's 7.\n\nWe need up to 8. Could add \"annual mean temp\". That's 4 words.\n\nMake JSON array of strings.\n\nLet's list:\n\n1. \"annual mean temperature\"\n2. \"mean annual temperature\"\n3. \"annual average temperature\"\n4. \"average annual temperature\"\n5. \"annual temperature average\"\n6. \"annual-mean temperature\"\n7. \"MAT\"\n8. \"annual mean temp\"\n\nAll lowercase. Ensure each <=6 words. Yes.\n\nReturn JSON array.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792533473,
+  "id": "bda0d885-86fc-4f49-b9cc-13de71275ce1",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 427,
+    "completion_tokens_after_first_per_sec": 724.195200007782,
+    "completion_tokens_after_first_per_sec_first_ten": 725.5653097646995,
+    "completion_tokens_after_first_per_sec_graph": 725.5653097646995,
+    "completion_tokens_details": {
+      "reasoning_tokens": 387
+    },
+    "completion_tokens_per_sec": 663.7599836336306,
+    "end_time": 1792533473.3128612,
+    "is_last_response": true,
+    "prompt_tokens": 326,
+    "start_time": 1792533472.6695564,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.05506563186645508,
+    "time_to_first_token_graph": 0.04788327217102051,
+    "total_latency": 0.6433048248291016,
+    "total_tokens": 753,
+    "total_tokens_per_sec": 1170.5181912789785
+  }
+}

@@ -1,0 +1,337 @@
+{
+  "lit2_id": "LIT2-000185",
+  "item_id": "208499235",
+  "arm": "fire_weather_v1",
+  "rank": 10,
+  "rel_path": "35/208499235.json",
+  "file_sha256": "7248f074a7ebb02f7eb11794e272861a63b63238400e517c9404c267d49cf5b7",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "background & summary",
+    "open",
+    "methods",
+    "data records",
+    "technical validation",
+    "statistical analysis",
+    "usage notes"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "A global wildfire dataset for the analysis of fire regimes and fire behaviour",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "A data-descriptor paper presenting a global database of individual wildfire events derived from MODIS burnt area, framed by wildfire damage and changing fire regimes, with comparisons against regional fire records.",
+  "scope_evidence": {
+    "json_path": "$[\"background & summary\"]",
+    "char_start": 0,
+    "char_end": 138,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "Wildfires are an important phenomenon at the global scale, as they are responsible for large amounts of economic and environmental damage.",
+    "evidence_sha256": "dfaac1c091c7dce93584a974058b2679ff8cdb742167ca90b3c97ce2361e0932"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-000185-C1",
+      "claim_text": "All of the biggest fires reported by CALFIRE from 2001 to 2017 were found in the GlobFire database, which also reports some additional big fires, with considerably different total burnt area per fire.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "large fires; total burnt area of each fire (GlobFire versus CALFIRE)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "all found in GlobFire; additional big fires; burnt area considerably different",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "California",
+        "status": "explicit",
+        "role": "comparison / validation area for the database",
+        "support": {
+          "json_path": "$[\"statistical analysis\"]",
+          "char_start": 362,
+          "char_end": 489,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Table 2 shows a comparison of large fires in California using the GlobFire database and the top 20 largest wildfires of CALFIRE",
+          "evidence_sha256": "4f533934cae8b434e0be6fdb17ff724a418cdedd55637237c021cdffbfc55436"
+        }
+      },
+      "temporal_frame": {
+        "value": "2001 to 2017",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"statistical analysis\"]",
+        "char_start": 625,
+        "char_end": 856,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "All the biggest fires reported by CALFIRE from 2001 to 2017 were found in the GlobFire database. However, the GlobFire database also reports some additional big fires and the total burnt area of each fire is considerably different.",
+        "evidence_sha256": "324550a869a22afee1cbfaa2339882fa271d69c28abea1723530f1ee795e714f"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": null
+    },
+    {
+      "claim_id": "LIT2-000185-C2",
+      "claim_text": "For Portugal, the magnitude of burnt area agrees strongly across the three sources compared (GlobFire, EFFIS remote sensing and national reports).",
+      "claim_type": "finding",
+      "concept": {
+        "value": "magnitude of the burnt area",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "agreement of the three different sources is strong",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Portugal",
+        "status": "explicit",
+        "role": "comparison / validation area for the database",
+        "support": {
+          "json_path": "$[\"statistical analysis\"]",
+          "char_start": 1949,
+          "char_end": 2061,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "Considering the magnitude of the burnt area in Portugal, the agreement of the three different sources is strong.",
+          "evidence_sha256": "fa79d8d4f13c982732548592cb9d2ade60e1f8a25ffae8ed29d3b3b1792290c8"
+        }
+      },
+      "temporal_frame": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"statistical analysis\"]",
+        "char_start": 1949,
+        "char_end": 2061,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Considering the magnitude of the burnt area in Portugal, the agreement of the three different sources is strong.",
+        "evidence_sha256": "fa79d8d4f13c982732548592cb9d2ade60e1f8a25ffae8ed29d3b3b1792290c8"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The three sources are named earlier in the same field (GlobFire, EFFIS's MODIS-based database and the country reports)."
+    },
+    {
+      "claim_id": "LIT2-000185-C3",
+      "claim_text": "In Portugal the number of fires is considerably higher in the north, but the average fire size is much higher in the central area, so fires are on average bigger in the centre.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "number of fires; average fire size",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "number higher in the north; average size much higher in the central area",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "Portugal (north versus central area of the country)",
+        "status": "explicit",
+        "role": "example region of the global database's regional summary"
+      },
+      "temporal_frame": {
+        "value": "2001 to 2017 (the period of the regional summary)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"statistical analysis\"]",
+          "char_start": 7548,
+          "char_end": 7733,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The GlobFire database has been used to determine the number of fires, the average fire size and the maximum fire spread speed for each administrative 3rd level region from 2001 to 2017.",
+          "evidence_sha256": "83d4f2103051500bd2f635345ed4956b630b5ea1f1266afe8aa84d26f5414ce9"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"statistical analysis\"]",
+        "char_start": 8361,
+        "char_end": 8547,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "For instance, focusing on Portugal, the number of fires is considerable higher in the north of the country. However, the average fire size is much higher in the central area of Portugal.",
+        "evidence_sha256": "3da3a84b522607db218c6989a4922657c9cb8971881622edeb05ad16a1873519"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": null
+    },
+    {
+      "claim_id": "LIT2-000185-C4",
+      "claim_text": "The fastest maximum fire spread speeds are found in south Spain, the Peloponnese and central Portugal within Europe, and globally in Santa Isabel, Malheur, Tableland, Halhgol, Chernozermel'skiy rayon and Tanganika.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "maximum fire spread speed",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "fastest moving fires occur in the named regions",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "south of Spain, the Peloponnese (Greece), central Portugal; Santa Isabel (Argentina), Malheur (USA), Tableland (Australia), Halhgol (Mongolia), Chernozermel'skiy rayon (Russia), the Republic of Tanganika",
+        "status": "explicit",
+        "role": "regions named as results of the global regional summary"
+      },
+      "temporal_frame": {
+        "value": "2001 to 2017 (the period of the regional summary)",
+        "status": "inferred",
+        "support": {
+          "json_path": "$[\"statistical analysis\"]",
+          "char_start": 7548,
+          "char_end": 7733,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "The GlobFire database has been used to determine the number of fires, the average fire size and the maximum fire spread speed for each administrative 3rd level region from 2001 to 2017.",
+          "evidence_sha256": "83d4f2103051500bd2f635345ed4956b630b5ea1f1266afe8aa84d26f5414ce9"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"statistical analysis\"]",
+        "char_start": 9369,
+        "char_end": 9514,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "In Europe, the fastest moving fires occur in south of Spain (b), in the Peloponnese (Greece, annotation c) and specially in central Portugal (b).",
+        "evidence_sha256": "3b072d62a79b690eaf3116bd8f73ca76429cea98b6a0362a5aa07675fcc48eea"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The global list is in the following sentence of the same field: 'From the global perspective, Santa Isabel (Argentina, annotation f), Malheur (USA, annotation a), ...'."
+    },
+    {
+      "claim_id": "LIT2-000185-C5",
+      "claim_text": "Fire danger indicators such as the Canadian Fire Weather Index have recently shown the highest values of the last 37 years in many European countries.",
+      "claim_type": "background_citation",
+      "concept": {
+        "value": "fire danger indicators such as the Canadian Fire Weather Index (FWI)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "highest values registered during the last 37 years",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "many European countries",
+        "status": "explicit",
+        "role": "background context"
+      },
+      "temporal_frame": {
+        "value": "recently; the last 37 years",
+        "status": "explicit"
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"background & summary\"]",
+        "char_start": 614,
+        "char_end": 788,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Recently, fire danger indicators such as the Canadian Fire Weather Index (FWI) 3 have shown the highest values registered during the last 37 years in many European countries.",
+        "evidence_sha256": "3340bd7edf6d43884fe850d2c540a56ddca407f9d9176cdbb72e7b590ae63fef"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "Attributed to reference 3; background, not this paper's analysis."
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-000185-R1",
+      "evidence": {
+        "json_path": "$[\"background & summary\"]",
+        "char_start": 211,
+        "char_end": 425,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Wildfire regimes are changing, wildfire seasons are becoming longer 1 , wildfire average sizes are increasing in many areas of the world and wildfires are happening in areas in which they did not occur in the past.",
+        "evidence_sha256": "b7f53e8904bae40e63a9c7de04cad5a7909c3d180055d6327c0c9d541274e142"
+      },
+      "reason": "General background with citations and no stated geography or period; not this paper's evidence."
+    },
+    {
+      "candidate_id": "LIT2-000185-R2",
+      "evidence": {
+        "json_path": "$[\"statistical analysis\"]",
+        "char_start": 9078,
+        "char_end": 9176,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Recently, several works [35][36][37][38][39] establish the links between climate change and fires.",
+        "evidence_sha256": "8d88353025f921ea25cf430c8c99a66af86e1e818ce602ed40fa1cf749da01d1"
+      },
+      "reason": "A pointer to other works; no content of its own."
+    },
+    {
+      "candidate_id": "LIT2-000185-R3",
+      "evidence": {
+        "json_path": "$[\"statistical analysis\"]",
+        "char_start": 1122,
+        "char_end": 1206,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Therefore, GlobFire is suitable for querying data about extreme fires in California.",
+        "evidence_sha256": "7f4b7efb5ab99ffef23b887fc3fbc8fdecc773508778ad635c8d05ea39e9d419"
+      },
+      "reason": "A usage recommendation drawn from claim C1, not a separate finding."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": null
+}

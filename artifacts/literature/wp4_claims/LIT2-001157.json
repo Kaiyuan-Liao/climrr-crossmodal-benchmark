@@ -1,0 +1,408 @@
+{
+  "lit2_id": "LIT2-001157",
+  "item_id": "52918429",
+  "arm": "fire_weather_v1",
+  "rank": 80,
+  "rel_path": "29/52918429.json",
+  "file_sha256": "30f015eb1229abd0b6cae728f614cfd39b1632746086bd4a60ee30a20422ea5a",
+  "sample_sha256": "f3cb5d0c3c4e0598860b2dad5a66219a3c252a92a7800d193111dec21fdcea15",
+  "corpus_id": "LITCORPUS-02-conceptfirst-705k-v1",
+  "reader": "reader_1",
+  "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+  "extraction": {
+    "method": "manual reading by the EXECUTOR as reader 1 (Claude Code, model claude-opus-5-5); every sampled file verified by SHA-256, then read completely; no LLM API call, no model service, no embedding, no search over other corpus files; no term-hit file, place-hit location, prototype or pilot-family document consulted before the reading was complete",
+    "date": "2026-10-19",
+    "read_completely": true
+  },
+  "parse_status": "parsed",
+  "observed_keys": [
+    "title",
+    "abstract",
+    "introduction",
+    "methods",
+    "study area",
+    "fuel moisture content modeling",
+    "fuel moisture content estimation",
+    "relationship between pre-fire fmc and fire size",
+    "results",
+    "pre-fire fmc in different land covers",
+    "wildfire hazard classification based on fmc",
+    "discussion"
+  ],
+  "bibliographic": {
+    "title": {
+      "value": "Determining fuel moisture thresholds to assess wildfire hazard: A contribution to an operational early warning system",
+      "status": "as_stored",
+      "json_path": "$.title"
+    },
+    "authors": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "year": {
+      "value": "unknown",
+      "status": "unknown"
+    },
+    "venue": {
+      "value": "unknown",
+      "status": "unknown"
+    }
+  },
+  "scope_status": "in_scope_hazard",
+  "scope_reason": "The paper derives satellite fuel-moisture thresholds to classify wildfire hazard for an Argentine mountain range, i.e. assessment of a fire hazard for early warning.",
+  "scope_evidence": {
+    "json_path": "$.abstract",
+    "char_start": 265,
+    "char_end": 450,
+    "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+    "evidence_text": "Our objectives were to analyze pre-fire FMC among different land covers and to propose a wildfire hazard classification for the Sierras Chicas in the Chaco Serrano subregion (Argentina)",
+    "evidence_sha256": "c168a9a68c1ce7940f0fadfdc1de091bcbb6862ba87ec41dcd8f15d0ab28c906"
+  },
+  "claims": [
+    {
+      "claim_id": "LIT2-001157-C1",
+      "claim_text": "Extreme and high fire hazard fuel moisture thresholds were set at 55% and 67% for grasslands, 72% and 105% for forests, and 106% and 121% for shrublands.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "fuel moisture content (FMC) thresholds for extreme and high fire hazard",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "thresholds differ by land cover (grasslands lowest)",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the Sierras Chicas (810,000 ha) in Córdoba province, Argentina, Chaco Serrano subregion",
+        "status": "explicit",
+        "role": "study area",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 389,
+          "char_end": 450,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "the Sierras Chicas in the Chaco Serrano subregion (Argentina)",
+          "evidence_sha256": "af9b6e2aa266679a724f274f89ff45bb43cad2fa44f1ed28152af66b2ce751cb"
+        }
+      },
+      "temporal_frame": {
+        "value": "FMC maps every 8 days from 2002 to 2016 (11 fire seasons analysed)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 669,
+          "char_end": 749,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "derived FMC maps every 8 days from 2002 to 2016 using MODIS reflectance products",
+          "evidence_sha256": "90d283c6df0cfa2fae01b25cfc035e98fefff69544e5ab656f672c1b63a2053c"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "thresholds from percentiles of pre-fire FMC: P60 extreme, P85 high, P97 moderate",
+        "status": "explicit",
+        "support": {
+          "json_path": "$[\"relationship between pre-fire fmc and fire size\"]",
+          "char_start": 2446,
+          "char_end": 2561,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "we used the following percentiles: P60 defined Extreme hazard, P85 defined High hazard, P97 defined Moderate hazard",
+          "evidence_sha256": "508bb576d2f67417b66cbd8f0fa7fe210f2a76cb2d244e3d703f68de9902bfab"
+        }
+      },
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 923,
+        "char_end": 1095,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Extreme and high fire hazard thresholds for grasslands were established at FMC of 55% and 67% respectively, at 72% and 105% for forests and at 106% and 121% for shrublands.",
+        "evidence_sha256": "f1e15f1ab621b22e4004e4af6d3591117e8d32eade22cdf85aed83266d39b9fc"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": null
+    },
+    {
+      "claim_id": "LIT2-001157-C2",
+      "claim_text": "Large fires (over 1000 ha) occurred at a median live fuel moisture of about 74%, significantly lower than small fires (100-500 ha) at about 91%.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "pre-fire fuel moisture content; fire size",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "large fires at lower LFMC (74% versus 91%; Kruskal Wallis H = 8.44, P = 0.0037)",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the Sierras Chicas (810,000 ha) in Córdoba province, Argentina, Chaco Serrano subregion",
+        "status": "explicit",
+        "role": "study area",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 389,
+          "char_end": 450,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "the Sierras Chicas in the Chaco Serrano subregion (Argentina)",
+          "evidence_sha256": "af9b6e2aa266679a724f274f89ff45bb43cad2fa44f1ed28152af66b2ce751cb"
+        }
+      },
+      "temporal_frame": {
+        "value": "FMC maps every 8 days from 2002 to 2016 (11 fire seasons analysed)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 669,
+          "char_end": 749,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "derived FMC maps every 8 days from 2002 to 2016 using MODIS reflectance products",
+          "evidence_sha256": "90d283c6df0cfa2fae01b25cfc035e98fefff69544e5ab656f672c1b63a2053c"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"relationship between pre-fire fmc and fire size\"]",
+        "char_start": 4349,
+        "char_end": 4525,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Large fires occurred with median LFMC values around 74%; whereas small fires occurred with median values around 91%, which means a difference of 17 percentage points (Table 1).",
+        "evidence_sha256": "78e0c3d065d501bafd3835d579cb0193c14868e5868bf5961e44a94e4680ceb1"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": "The significance test is in the preceding sentence: '(Kruskal Wallis H = 8.44; P = 0.0037)'."
+    },
+    {
+      "claim_id": "LIT2-001157-C3",
+      "claim_text": "Higher fuel moisture constrains the maximum size wildfires reach: quantile regression showed a significant negative relationship between the upper 30% of fire sizes and pre-fire FMC, with limited effect on mean size.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "pre-fire FMC; fire size (upper quantiles)",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "significant negative relationship for quantiles of 0.7 and above (p < 0.05); limited effect on the mean size",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the Sierras Chicas (810,000 ha) in Córdoba province, Argentina, Chaco Serrano subregion",
+        "status": "explicit",
+        "role": "study area",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 389,
+          "char_end": 450,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "the Sierras Chicas in the Chaco Serrano subregion (Argentina)",
+          "evidence_sha256": "af9b6e2aa266679a724f274f89ff45bb43cad2fa44f1ed28152af66b2ce751cb"
+        }
+      },
+      "temporal_frame": {
+        "value": "FMC maps every 8 days from 2002 to 2016 (11 fire seasons analysed)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 669,
+          "char_end": 749,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "derived FMC maps every 8 days from 2002 to 2016 using MODIS reflectance products",
+          "evidence_sha256": "90d283c6df0cfa2fae01b25cfc035e98fefff69544e5ab656f672c1b63a2053c"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"relationship between pre-fire fmc and fire size\"]",
+        "char_start": 3910,
+        "char_end": 4035,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Quantile regression estimates indicated a significant negative relationship between the upper 30% fire sizes and pre-fire FMC",
+        "evidence_sha256": "4caafbc46021ca3e1e43a00dfc45c1b0dcb336569e15b5d2bd05d710681f6d1f"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": null
+    },
+    {
+      "claim_id": "LIT2-001157-C4",
+      "claim_text": "On average, fuel moisture was 12.1, 11.4 and 7.1 percentage points lower in years with high fire activity than in low-fire years for Chaco forests, grasslands and shrublands.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "average FMC in high versus low fire-activity years",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "lower by 12.1, 11.4 and 7.1 percentage points",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the Sierras Chicas (810,000 ha) in Córdoba province, Argentina, Chaco Serrano subregion",
+        "status": "explicit",
+        "role": "study area",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 389,
+          "char_end": 450,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "the Sierras Chicas in the Chaco Serrano subregion (Argentina)",
+          "evidence_sha256": "af9b6e2aa266679a724f274f89ff45bb43cad2fa44f1ed28152af66b2ce751cb"
+        }
+      },
+      "temporal_frame": {
+        "value": "FMC maps every 8 days from 2002 to 2016 (11 fire seasons analysed)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 669,
+          "char_end": 749,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "derived FMC maps every 8 days from 2002 to 2016 using MODIS reflectance products",
+          "evidence_sha256": "90d283c6df0cfa2fae01b25cfc035e98fefff69544e5ab656f672c1b63a2053c"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"wildfire hazard classification based on fmc\"]",
+        "char_start": 2481,
+        "char_end": 2673,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "On average, FMC was 12.1, 11.4 and 7.1 percentage points lower in years with high fire activity than in years with low fire activity for Chaco forests, grasslands and shrublands, respectively.",
+        "evidence_sha256": "b5ed32ecfda04c823a1f39f36c24480a3a6cb3c0d3318b0e2bf01f2e0ca41490"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": null
+    },
+    {
+      "claim_id": "LIT2-001157-C5",
+      "claim_text": "Average FMC over all years never fell below the extreme hazard threshold for grasslands and Chaco forests, but in fire years it was below it for 48 and 40 days, respectively.",
+      "claim_type": "finding",
+      "concept": {
+        "value": "days below the extreme fire hazard FMC threshold",
+        "status": "explicit"
+      },
+      "relation_or_direction": {
+        "value": "never below on average; 48 and 40 days below during fire years",
+        "status": "explicit"
+      },
+      "geography": {
+        "value": "the Sierras Chicas (810,000 ha) in Córdoba province, Argentina, Chaco Serrano subregion",
+        "status": "explicit",
+        "role": "study area",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 389,
+          "char_end": 450,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "the Sierras Chicas in the Chaco Serrano subregion (Argentina)",
+          "evidence_sha256": "af9b6e2aa266679a724f274f89ff45bb43cad2fa44f1ed28152af66b2ce751cb"
+        }
+      },
+      "temporal_frame": {
+        "value": "FMC maps every 8 days from 2002 to 2016 (11 fire seasons analysed)",
+        "status": "explicit",
+        "support": {
+          "json_path": "$.abstract",
+          "char_start": 669,
+          "char_end": 749,
+          "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+          "evidence_text": "derived FMC maps every 8 days from 2002 to 2016 using MODIS reflectance products",
+          "evidence_sha256": "90d283c6df0cfa2fae01b25cfc035e98fefff69544e5ab656f672c1b63a2053c"
+        }
+      },
+      "scenario": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "experimental_condition": {
+        "value": "unknown",
+        "status": "unknown"
+      },
+      "evidence": {
+        "json_path": "$[\"wildfire hazard classification based on fmc\"]",
+        "char_start": 1959,
+        "char_end": 2158,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "While the average FMC of all years was never below the extreme fire hazard threshold for grasslands and Chaco forests, during fire years FMC was below this threshold for 48 and 40 days, respectively.",
+        "evidence_sha256": "b209bb95f404df3b9eb96a55ff8d2a08969e63e0125e48fe2feebfd479f00e55"
+      },
+      "claim_validation_status": "single_reader_provisional",
+      "evidence_tier": "C",
+      "notes": null
+    }
+  ],
+  "rejected_or_ambiguous": [
+    {
+      "candidate_id": "LIT2-001157-R1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "char_start": 2467,
+        "char_end": 2666,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "At present, the existing early warning systems in the Sierras Chicas are based on: i) sparse point-based estimations of the fire danger indices from the Canadian Forest Fire Weather Index System [44]",
+        "evidence_sha256": "f57acab41f0bfb30c728f951f9c38ff2a825c462bbd9c03e1c2681550529a4f9"
+      },
+      "reason": "Context on the current warning system; not a finding."
+    },
+    {
+      "candidate_id": "LIT2-001157-R2",
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 1143,
+        "char_end": 1365,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "Similar to what we observed in the Sierras Chicas, large fires in the Chaparral in California take place when live fuel moisture lowers below a threshold of 79% [23], and small fires occur over a wide range of values [17].",
+        "evidence_sha256": "0a2ca94d006a6c15ec34e8979a63f501c34b3c72e2c270e0a599c2924bfe2d5f"
+      },
+      "reason": "A cited comparison result from another ecosystem; not this paper's evidence."
+    },
+    {
+      "candidate_id": "LIT2-001157-R3",
+      "evidence": {
+        "json_path": "$.discussion",
+        "char_start": 7268,
+        "char_end": 7480,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "For instance, de Jong et al. [67] used the 99th percentile of historical FWI (Fire Weather Index of the Canadian Forest Fire Weather Rating System) data to determine exceptional fire weather conditions in the UK.",
+        "evidence_sha256": "a84034a6da114c176bb6469f86fc65f5b81e847b12bfaf1aa2aa539e004bb419"
+      },
+      "reason": "Cited methodological example for choosing percentiles; not a finding about a hazard."
+    },
+    {
+      "candidate_id": "LIT2-001157-R4",
+      "evidence": {
+        "json_path": "$.abstract",
+        "char_start": 1600,
+        "char_end": 1770,
+        "offset_convention": "zero-based, half-open [start, end) Unicode code-point offsets into the JSON string value after json decoding and before any normalization",
+        "evidence_text": "However, moisture alone is not sufficient to represent true fire hazard in Chaco forests and the combination with other variables would provide better hazard assessments.",
+        "evidence_sha256": "68a111fd46c9fd55babf1ee6cfffdebd3116e3108b0165095514f3513d4af9ad"
+      },
+      "reason": "An interpretive judgement rather than a measured result."
+    }
+  ],
+  "terminal_status": "claims_extracted",
+  "notes": "The 'introduction' field begins mid-sentence ('before fires in Mediterranean grasslands ...'); part of it is missing in the source."
+}
