@@ -93,8 +93,12 @@ def test_error_rows_are_sanitizer_drops_not_model_failures():
 
 
 def test_the_doc_regenerates_byte_for_byte():
+    # since run 2 is ingested the doc covers both runs; the run-1 part is rendered by the same code
+    from climrr import coveragesurvey_run2 as cs2
+    assert cs2.render_full_doc() == cs.DOC_PATH.read_text(encoding="utf-8")
     rows = cs.verify_run(cs.RUN_DIR)
-    assert cs.render_doc(rows, ENTRY["manifest_sha256"]) == cs.DOC_PATH.read_text(encoding="utf-8")
+    run1_only = cs.render_doc(rows, ENTRY["manifest_sha256"])
+    assert cs.RUN2_PENDING in run1_only and cs.RUN2_PENDING not in cs.DOC_PATH.read_text(encoding="utf-8")
 
 
 def test_candidates_never_reach_the_concept_map():

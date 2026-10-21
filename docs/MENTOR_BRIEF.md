@@ -1,6 +1,6 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-10-20   Next meeting: **Thursday 2026-10-22** --- bring the items under *For Thursday* below; the answer sheet is still outstanding
+Last updated: 2026-10-21   Next meeting: **Thursday 2026-10-22** --- bring the items under *For Thursday* below; the answer sheet is still outstanding
 
 ## Status in five lines
 
@@ -8,7 +8,7 @@ Last updated: 2026-10-20   Next meeting: **Thursday 2026-10-22** --- bring the i
 2. **Your concept-first method found papers, but still no link.** On the 186,346-file climate set JL shared, the fire weather index and heat-index searches gave 448 and 861 papers. 20 of those that mention Oklahoma, Stephens or California (10 + 10, picked by a fixed rule before anyone opened them) were each read by two independent readers and reconciled into **118 statements** (3 found identically by both readers, 47 found by both and reconciled, 68 found by one reader only): **0 of 354 statement--unit pairs qualify as a candidate link.**
 3. **The zero now points at our units, not at the papers.** 12 pairs share the concept family and 2 share the place, but never both in the same statement. GUIDANCE's reading: papers usually describe a broader quantity (for example "heat index" rather than "days above 105 °F"), a broader area (a state or a region rather than one county or grid cell) and often no emissions scenario. GUIDANCE accepted the zero for these 20 papers only, and nothing beyond them (D-027).
 4. **A survey of every concept in the data dictionary is done** (diagnostic counts, not prevalence). Broad quantities appear widely in the literature; the specific heat-index threshold measures barely appear by their exact wording. Under our current search terms, those threshold measures have **effectively no direct word-for-word footprint**. That does **not** show the literature lacks them.
-5. **Next:** a small test of whether table units stated at the level papers use (a quantity family, a state or region) make links possible, with the current three units kept as controls; and a second survey run at the family level. **No questions are generated** (QA is still not authorized).
+5. **Next:** a small test of whether table units stated at the level papers use (a quantity family, a state or region) make links possible, with the current three units kept as controls. The second survey run, at the family level, is done (below). **No questions are generated** (QA is still not authorized).
 
 ## What I need from this meeting
 
@@ -17,20 +17,27 @@ Last updated: 2026-10-20   Next meeting: **Thursday 2026-10-22** --- bring the i
 > **Seven quantity families as discussion candidates.** These are **for discussion only**, not approved
 > benchmark families. They are listed in dictionary order (pp. 6--11), and **the order is not a ranking**.
 > The counts are **measure-level** survey run 1 counts (documents matching any search term for the
-> dictionary's own measure; diagnostic coverage counts, not prevalence). **Family-level coverage is pending run 2.**
+> dictionary's own measure; diagnostic coverage counts, not prevalence). **The second, family-level survey run
+> separates three levels of coverage --- the dictionary's exact measure wording (0--2 documents for the heat-index
+> measures), the approved family terms in our concept map (548 for the fire weather index, 1,080 for "heat index"),
+> and broad families proposed by the model (2,681 to 143,266 documents, often much broader than the measure, such as
+> "moisture" for precipitation) --- and only the middle level uses approved vocabulary; none is credited to a single
+> measure.**
 >
-> | Family (discussion candidate) | Dictionary measure(s) | Measure-level coverage, run 1 (all / with climate context) |
-> | --- | --- | --- |
-> | temperature | annual; seasonal | 124,420 / 88,245; 123,948 / 88,021 (both counts are almost entirely the bare word "temperature") |
-> | precipitation | precipitation | 84,926 / 61,190 |
-> | wind speed | wind speed | 27,498 / 17,394 |
-> | consecutive dry days / dry spell | consecutive days with no precipitation | 6,981 / 4,946 |
-> | degree days | heating and cooling degree days | 3,076 / 2,638 |
-> | fire weather index | seasonal FWI; FWI classes | 548 / 395; 551 / 396 |
-> | heat index | daily max; seasonal max; days above 95 / 105 / 115 / 125 °F | 0; 1; --- (no searchable term); 0; --- (no searchable term); 2 (all and with-context counts are equal) |
+> | Family (discussion candidate) | Dictionary measure(s) | Measure-level coverage, run 1 (all / with climate context) | Concept-map family terms (approved vocabulary; all documents) |
+> | --- | --- | --- | --- |
+> | temperature | annual; seasonal | 124,420 / 88,245; 123,948 / 88,021 (both counts are almost entirely the bare word "temperature") | no concept-map entry |
+> | precipitation | precipitation | 84,926 / 61,190 | no concept-map entry |
+> | wind speed | wind speed | 27,498 / 17,394 | no concept-map entry |
+> | consecutive dry days / dry spell | consecutive days with no precipitation | 6,981 / 4,946 | no concept-map entry |
+> | degree days | heating and cooling degree days | 3,076 / 2,638 | no concept-map entry |
+> | fire weather index | seasonal FWI; FWI classes | 548 / 395; 551 / 396 | **548** (the five approved fire-weather-index terms; 473 once a bare "FWI" must be backed by "fire weather") |
+> | heat index | daily max; seasonal max; days above 95 / 105 / 115 / 125 °F | 0; 1; --- (no searchable term); 0; --- (no searchable term); 2 (all and with-context counts are equal) | **1,080** ("heat index" alone; 1,082 with "heat-index" and "extended heat index") |
 >
-> *Family-level coverage pending run 2.* A count for the heat-index family as a whole will be reported
-> beside these measure counts and will never be credited to a single threshold measure.
+> Only two of the seven families have approved concept-map terms so far, so the other five have no
+> concept-map count. The model-proposed family totals from the second run are deliberately **not** shown
+> here: they rest on search words the model proposed, many broader than the quantity itself, and no
+> family count is ever credited to a single threshold measure.
 >
 > **(a) Which families would you prioritize for redesigned units, and why --- independent of literature
 > coverage?** Coverage counts will not decide this on their own.

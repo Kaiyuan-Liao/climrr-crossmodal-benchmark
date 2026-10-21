@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"candidate_family\": \"temperature\",\n  \"family_surface_forms\": [\n    \"temperature\",\n    \"thermal\",\n    \"heat\",\n    \"cold\",\n    \"warming\",\n    \"cooling\",\n    \"heat stress\",\n    \"thermal conditions\"\n  ]\n}",
+        "reasoning": "We need to output JSON with candidate_family: short lowercase snake_case name of broader scientific quantity family. For degree days, the family is \"temperature\" or \"thermal demand\" or \"energy demand\". Likely \"temperature\" is broader. Could be \"degree_days\" but family is broader. I'd choose \"temperature\". Family surface forms: list up to 8 lowercase words/phrases a paper would use for that family, no place names, years, scenario names, thresholds or statistics. So for temperature family: \"temperature\", \"thermal\", \"heat\", \"cold\", \"warming\", \"cooling\", \"heat stress\"? Need up to 8. Provide relevant terms: \"temperature\", \"thermal\", \"heat\", \"cold\", \"warming\", \"cooling\", \"heat stress\", \"thermal conditions\". All lowercase. Provide JSON.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792613412,
+  "id": "58dd72be-44a7-476a-9fd2-3e139ed11ba9",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 233,
+    "completion_tokens_after_first_per_sec": 720.3938881769435,
+    "completion_tokens_after_first_per_sec_first_ten": 723.2042333390312,
+    "completion_tokens_after_first_per_sec_graph": 723.2042333390312,
+    "completion_tokens_details": {
+      "reasoning_tokens": 171
+    },
+    "completion_tokens_per_sec": 619.5010586263468,
+    "end_time": 1792613412.581891,
+    "is_last_response": true,
+    "prompt_tokens": 350,
+    "start_time": 1792613412.205782,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.05406308174133301,
+    "time_to_first_token_graph": 0.04781341552734375,
+    "total_latency": 0.37610912322998047,
+    "total_tokens": 583,
+    "total_tokens_per_sec": 1550.082047979228
+  }
+}

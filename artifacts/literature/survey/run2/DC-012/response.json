@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"candidate_family\": \"extreme_heat_days\",\n  \"family_surface_forms\": [\n    \"heat wave days\",\n    \"extreme heat days\",\n    \"hot days\",\n    \"high heat index days\",\n    \"heat stress days\",\n    \"summer heat days\",\n    \"heat index exceedance days\",\n    \"days above heat index threshold\"\n  ]\n}",
+        "reasoning": "We need to parse the variable: \"Number of Summer days with daily max heat index above 105 F\". The broader scientific quantity family: likely \"heat wave days\" or \"extreme heat days\". Could be \"heat stress days\". The family name in snake_case: maybe \"extreme_heat_days\". Need to output candidate_family and family_surface_forms: up to 8 lowercase words/phrases a paper would use for that family, no place names, years, scenario names, thresholds or statistics.\n\nSo family: \"extreme_heat_days\". Surface forms: \"heat wave days\", \"extreme heat days\", \"hot days\", \"high heat index days\", \"heat stress days\", \"summer heat days\", \"days above heat index threshold\", \"heat index exceedance days\". Need up to 8.\n\nReturn JSON only.\n\nCheck format: {\"candidate_family\": \"<short lowercase snake_case name of the broader scientific quantity family this measure belongs to>\", \"family_surface_forms\": [up to 8 lowercase words/phrases ...]}\n\nThus:\n\n{\n  \"candidate_family\": \"extreme_heat_days\",\n  \"family_surface_forms\": [\"heat wave days\",\"extreme heat days\",\"hot days\",\"high heat index days\",\"heat stress days\",\"summer heat days\",\"heat index exceedance days\",\"days above heat index threshold\"]\n}\n\nMake sure all lowercase. No punctuation inside strings except maybe spaces. Provide as JSON.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792613746,
+  "id": "afe6f4f5-0e67-4747-9992-ca8c87970045",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 371,
+    "completion_tokens_after_first_per_sec": 727.5653283600423,
+    "completion_tokens_after_first_per_sec_first_ten": 729.4373166879748,
+    "completion_tokens_after_first_per_sec_graph": 729.4373166879748,
+    "completion_tokens_details": {
+      "reasoning_tokens": 288
+    },
+    "completion_tokens_per_sec": 661.4108620049152,
+    "end_time": 1792613746.3654916,
+    "is_last_response": true,
+    "prompt_tokens": 237,
+    "start_time": 1792613745.8045695,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.052376747131347656,
+    "time_to_first_token_graph": 0.04721879959106445,
+    "total_latency": 0.5609221458435059,
+    "total_tokens": 608,
+    "total_tokens_per_sec": 1083.929391102395
+  }
+}

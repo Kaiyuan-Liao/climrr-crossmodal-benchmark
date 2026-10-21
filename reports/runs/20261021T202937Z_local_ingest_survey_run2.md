@@ -1,0 +1,42 @@
+# Run record: 20261021T202937Z_local_ingest_survey_run2
+
+- **Result**: PASS
+- **UTC timestamp**: 2026-10-21T20:29:37.495227+00:00
+- **Git commit**: `3ccb4bacad3481bf10ee616b34a65157277a3c69`
+- **Working tree dirty (tracked files)**: True
+- **Untracked files present**: 137
+- **Hostname**: ryous-MacBook-Pro-2.local
+- **Location**: local
+- **Python**: 3.11.16 (macOS-15.3-arm64-arm-64bit)
+- **pip freeze SHA-256**: `d9af804d5018f7022ae9f4db0bb83a8d57104d2ff6ff5676d912d896f952bf51`
+- **Pinned libraries (D-007)**: `pandas==3.0.5`, `numpy==2.4.6`, `pypdf==6.18.0`, `pyyaml==6.0.3`, `pytest==9.1.1`, `pypdfium2==5.13.0`
+- **Data path (repo-relative)**: `survey_run2.tar.gz`
+- **Data SHA-256**: `8f92e3c328e642ef142fc1e77edb7721926518e7d70087bd7503ade7a03bf85a`
+- **Output path**: `artifacts/literature/survey/run2`
+
+## Config snapshot
+
+```json
+{
+  "source": "survey_run2.tar.gz",
+  "source_tarball_sha256": "8f92e3c328e642ef142fc1e77edb7721926518e7d70087bd7503ade7a03bf85a",
+  "driver_sha256": "f929ab6a366987d29e5565fe9fa9f80b47cb1c57d19e01ff3af5affdd99baf9f",
+  "prompt_f_sha256": "7097c86ccbb694fe34fa5f4dc51ed087594295e3c37ddd97c56ab94702a97931",
+  "normalization_table_sha256": "80a5e0e386dfe8a984e1a5ba2ace781d15601f9b0723b75d238b6de5d1226e03",
+  "run_executed_on": "Polaris; this record is the local ingest, not the run",
+  "excluded": "header-only topical/hits.csv"
+}
+```
+
+## Result summary
+
+- `n_rows`: 14
+- `n_files_ingested`: 132
+- `total_bytes`: 19106195
+- `manifest_sha256`: 1182deea5d2ec6ed992e9415a6e6d7b8bcadd78e09da22ab9cb86fab2887c363
+- `run1_manifest_sha256_unchanged`: 74ba7d7c72e7920ac16e1cc7c49ab2543add316df37baf60ff3b52c10c2d125d
+- `header_only_hits_not_copied`: 14
+- `forms`: {'forms_total': 112, 'forms_searched': 112, 'forms_over_cap': 0, 'forms_dropped_other': 0, 'rules_fired': {}, 'forms_changed_by_normalization': 0, 'forms_per_concept': [8], 'prompt_k': [8]}
+- `doc_sha256`: af63f4b53216a87b3163f29fbb74f10e67534625dedfca89d628c3049a015a33
+- `side_by_side`: {'DC-001': {'measure': [124420, 88245], 'candidate_family': 'temperature', 'family': [123948, 88021]}, 'DC-002': {'measure': [123948, 88021], 'candidate_family': 'temperature', 'family': [123948, 88021]}, 'DC-003': {'measure': [84926, 61190], 'candidate_family': 'hydrology', 'family': [124314, 84437]}, 'DC-004': {'measure': [27498, 17394], 'candidate_family': 'wind', 'family': [58320, 38833]}, 'DC-005': {'measure': [6981, 4946], 'candidate_family': 'dry_spell', 'family': [7351, 5267]}, 'DC-006': {'measure': [3076, 2638], 'candidate_family': 'temperature', 'family': [143266, 101847]}, 'DC-007': {'measure': [548, 395], 'candidate_family': 'fire_risk', 'family': [4465, 3044]}, 'DC-008': {'measure': [551, 396], 'candidate_family': 'fire_danger', 'family': [4323, 2942]}, 'DC-009': {'measure': [0, 0], 'candidate_family': 'heat_index', 'family': [15749, 11719]}, 'DC-010': {'measure': [1, 1], 'candidate_family': 'heat_index', 'family': [15731, 11704]}, 'DC-011': {'measure': [None, None], 'candidate_family': 'extreme_heat_days', 'family': [3335, 2985]}, 'DC-012': {'measure': [0, 0], 'candidate_family': 'extreme_heat_days', 'family': [2681, 2397]}, 'DC-013': {'measure': [None, None], 'candidate_family': 'heat_wave_days', 'family': [3347, 2996]}, 'DC-014': {'measure': [2, 2], 'candidate_family': 'extreme_heat_days', 'family': [2686, 2402]}}
+- `label`: diagnostic — family coverage is not attributable to the measure

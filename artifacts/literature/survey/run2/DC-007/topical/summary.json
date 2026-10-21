@@ -1,0 +1,48 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-21T20:12:06Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "e985ed02ad95f7f5cea8a122d5e15ee843b007a6a24b8eb6d1c7375c8bc7560b",
+  "query_text": "( \"fire risk\" OR \"wildfire risk\" OR \"fire danger\" OR \"fire hazard\" OR \"fire weather\" OR \"wildfire danger\" OR \"fire potential\" OR \"fire probability\" )\n",
+  "parsed_groups": [
+    [
+      "fire risk",
+      "wildfire risk",
+      "fire danger",
+      "fire hazard",
+      "fire weather",
+      "wildfire danger",
+      "fire potential",
+      "fire probability"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    4465
+  ],
+  "per_term_doc_counts": {
+    "g0:fire risk": 2327,
+    "g0:wildfire risk": 1061,
+    "g0:fire danger": 1041,
+    "g0:fire hazard": 886,
+    "g0:fire weather": 1298,
+    "g0:wildfire danger": 97,
+    "g0:fire potential": 283,
+    "g0:fire probability": 269
+  },
+  "raw_count": 4465,
+  "disambiguation": null,
+  "admitted_count": 4465,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 55.0,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

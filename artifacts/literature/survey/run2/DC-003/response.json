@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\"candidate_family\":\"hydrology\",\"family_surface_forms\":[\"hydrology\",\"water cycle\",\"hydrologic cycle\",\"precipitation\",\"rainfall\",\"snowfall\",\"moisture\",\"hydrological processes\"]}",
+        "reasoning": "We need to output JSON with candidate_family: short lowercase snake_case name of broader scientific quantity family this measure belongs to. For precipitation, the family is \"hydrology\" or \"precipitation\" itself? The broader scientific quantity family could be \"hydrological_cycle\" or \"precipitation\" is a variable within \"hydrology\". The instruction: short lowercase snake_case name of the broader scientific quantity family this measure belongs to. Likely \"hydrology\". Provide family_surface_forms: up to 8 lowercase words/phrases a paper would use for that family, no place names, years, scenario names, thresholds or statistics. So surface forms for hydrology: \"hydrology\", \"water cycle\", \"hydrologic cycle\", \"precipitation\", \"rainfall\", \"snowfall\", \"moisture\", \"hydrological processes\". Up to 8. Provide as list of strings.\n\nThus JSON: {\"candidate_family\":\"hydrology\",\"family_surface_forms\":[\"hydrology\",\"water cycle\",\"hydrologic cycle\",\"precipitation\",\"rainfall\",\"snowfall\",\"moisture\",\"hydrological processes\"]}\n\nCheck lower case: all lower case. \"hydrologic cycle\" vs \"hydrological cycle\". Use lower case. Provide exactly.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792613228,
+  "id": "7f7a7682-7b25-4b94-9576-2c6d4d6c375e",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 304,
+    "completion_tokens_after_first_per_sec": 708.0421792031145,
+    "completion_tokens_after_first_per_sec_first_ten": 710.0573365239725,
+    "completion_tokens_after_first_per_sec_graph": 710.0573365239725,
+    "completion_tokens_details": {
+      "reasoning_tokens": 255
+    },
+    "completion_tokens_per_sec": 631.2898048948823,
+    "end_time": 1792613228.5092597,
+    "is_last_response": true,
+    "prompt_tokens": 381,
+    "start_time": 1792613228.027706,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.05361318588256836,
+    "time_to_first_token_graph": 0.047441959381103516,
+    "total_latency": 0.4815537929534912,
+    "total_tokens": 685,
+    "total_tokens_per_sec": 1422.4786722137972
+  }
+}

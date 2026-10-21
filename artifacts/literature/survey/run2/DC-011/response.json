@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"candidate_family\": \"extreme_heat_days\",\n  \"family_surface_forms\": [\n    \"heat wave days\",\n    \"extreme heat days\",\n    \"high heat index days\",\n    \"heat stress days\",\n    \"hot days\",\n    \"summer heat days\",\n    \"heat index days\",\n    \"warm days\"\n  ]\n}",
+        "reasoning": "We need to parse the variable: \"Number of Summer days with daily max heat index above 95 F\". The broader scientific quantity family: likely \"heat wave days\" or \"extreme heat days\". Could be \"heat stress days\". The family name in snake_case: maybe \"extreme_heat_days\". Need to output candidate_family and family_surface_forms: up to 8 lowercase words/phrases a paper would use for that family, no place names, years, scenario names, thresholds or statistics.\n\nSo family_surface_forms could include: \"heat wave days\", \"extreme heat days\", \"hot days\", \"high heat index days\", \"heat stress days\", \"warm days\", \"summer heat days\", \"heat index days\". Need up to 8.\n\nCandidate_family: short lowercase snake_case name of broader scientific quantity family. Could be \"extreme_heat_days\". That seems appropriate.\n\nReturn JSON only.\n\nThus:\n\n{\n  \"candidate_family\": \"extreme_heat_days\",\n  \"family_surface_forms\": [\"heat wave days\",\"extreme heat days\",\"high heat index days\",\"heat stress days\",\"hot days\",\"summer heat days\",\"heat index days\",\"warm days\"]\n}\n\nMake sure all lowercase. No punctuation except commas. Ensure JSON format.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792613690,
+  "id": "86f6ef7d-7773-4f92-9dd2-45a94c5a3821",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 332,
+    "completion_tokens_after_first_per_sec": 728.3603874334892,
+    "completion_tokens_after_first_per_sec_first_ten": 730.2433841950759,
+    "completion_tokens_after_first_per_sec_graph": 730.2433841950759,
+    "completion_tokens_details": {
+      "reasoning_tokens": 254
+    },
+    "completion_tokens_per_sec": 654.8893599150084,
+    "end_time": 1792613690.9259782,
+    "is_last_response": true,
+    "prompt_tokens": 237,
+    "start_time": 1792613690.4190223,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.05251049995422363,
+    "time_to_first_token_graph": 0.04732465744018555,
+    "total_latency": 0.5069558620452881,
+    "total_tokens": 569,
+    "total_tokens_per_sec": 1122.3856800953006
+  }
+}

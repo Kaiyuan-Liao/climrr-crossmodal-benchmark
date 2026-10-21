@@ -1,0 +1,48 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-21T20:07:07Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "baf817bb63d7c7b2f3851130c230f948c77d48d33681dbc2331810bfcf2f8902",
+  "query_text": "( \"temperature\" OR \"air temperature\" OR \"surface temperature\" OR \"daily temperature\" OR \"maximum temperature\" OR \"minimum temperature\" OR \"high temperature\" OR \"low temperature\" )\n",
+  "parsed_groups": [
+    [
+      "temperature",
+      "air temperature",
+      "surface temperature",
+      "daily temperature",
+      "maximum temperature",
+      "minimum temperature",
+      "high temperature",
+      "low temperature"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    123948
+  ],
+  "per_term_doc_counts": {
+    "g0:temperature": 123948,
+    "g0:air temperature": 32084,
+    "g0:surface temperature": 24917,
+    "g0:daily temperature": 7551,
+    "g0:maximum temperature": 12865,
+    "g0:minimum temperature": 10111,
+    "g0:high temperature": 18523,
+    "g0:low temperature": 7792
+  },
+  "raw_count": 123948,
+  "disambiguation": null,
+  "admitted_count": 123948,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 54.8,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

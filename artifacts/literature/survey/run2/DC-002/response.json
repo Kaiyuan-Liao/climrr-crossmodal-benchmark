@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\"candidate_family\":\"temperature\",\"family_surface_forms\":[\"temperature\",\"air temperature\",\"surface temperature\",\"daily temperature\",\"maximum temperature\",\"minimum temperature\",\"high temperature\",\"low temperature\"]}",
+        "reasoning": "We need to output JSON with candidate_family: short lowercase snake_case name of broader scientific quantity family. For temperature seasonal, the family is \"temperature\". Could be \"air_temperature\" or \"temperature\". The passage deals with daily max/min, seasonal average. So family likely \"temperature\". Provide surface forms: \"temperature\", \"air temperature\", \"surface temperature\", \"daily temperature\", \"maximum temperature\", \"minimum temperature\", \"high temperature\", \"low temperature\". Up to 8. All lowercase. No place names etc. So produce JSON.\n\n",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792613170,
+  "id": "12e4151a-4ce7-499f-b562-2f1c406f4794",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 152,
+    "completion_tokens_after_first_per_sec": 703.3788533192659,
+    "completion_tokens_after_first_per_sec_first_ten": 707.3293872208498,
+    "completion_tokens_after_first_per_sec_graph": 707.3293872208498,
+    "completion_tokens_details": {
+      "reasoning_tokens": 110
+    },
+    "completion_tokens_per_sec": 568.6405608501947,
+    "end_time": 1792613170.1532981,
+    "is_last_response": true,
+    "prompt_tokens": 333,
+    "start_time": 1792613169.885994,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.05262613296508789,
+    "time_to_first_token_graph": 0.04700016975402832,
+    "total_latency": 0.2673041820526123,
+    "total_tokens": 485,
+    "total_tokens_per_sec": 1814.4123158706868
+  }
+}

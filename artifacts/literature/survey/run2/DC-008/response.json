@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"candidate_family\": \"fire_danger\",\n  \"family_surface_forms\": [\n    \"fire danger\",\n    \"wildfire risk\",\n    \"fire hazard\",\n    \"fire danger rating\",\n    \"fire danger index\",\n    \"fire risk\",\n    \"fire weather\",\n    \"fire danger classes\"\n  ]\n}",
+        "reasoning": "We need to output JSON with candidate_family: short lowercase snake_case name of broader scientific quantity family this measure belongs to. The variable is \"Calculating FWI Classes\". It's about Fire Weather Index (FWI) values, percentiles, fire danger classes. The broader family likely \"fire danger\" or \"fire weather index\" or \"wildfire risk\". Choose a short snake_case: \"fire_danger\". Could also be \"wildfire_risk\". Which is broader? The measure is about classes of relative fire danger based on FWI percentiles. So family: \"fire_danger\". Provide surface forms: list up to 8 lowercase words/phrases a paper would use for that family, no place names, years, scenario names, thresholds or statistics. So surface forms: \"fire danger\", \"wildfire risk\", \"fire hazard\", \"fire danger rating\", \"fire danger index\", \"fire risk\", \"fire weather\", \"fire danger classes\". That's 8. Ensure lowercase. Return JSON only.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792613527,
+  "id": "99f1692e-cc5e-451d-8dab-916c69a38a57",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 280,
+    "completion_tokens_after_first_per_sec": 743.3251366328483,
+    "completion_tokens_after_first_per_sec_first_ten": 746.2274895116534,
+    "completion_tokens_after_first_per_sec_graph": 746.2274895116534,
+    "completion_tokens_details": {
+      "reasoning_tokens": 207
+    },
+    "completion_tokens_per_sec": 653.7307803209189,
+    "end_time": 1792613527.3964627,
+    "is_last_response": true,
+    "prompt_tokens": 322,
+    "start_time": 1792613526.9681518,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.05297040939331055,
+    "time_to_first_token_graph": 0.047501325607299805,
+    "total_latency": 0.4283108711242676,
+    "total_tokens": 602,
+    "total_tokens_per_sec": 1405.5211776899757
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "topical",
+  "run_utc": "2026-10-21T20:14:50Z",
+  "query_file": "query_topical.txt",
+  "query_sha256": "7addd5af71d1e347313b72a1f046b2e4ce4dc34ac53b0b805144a791379f9663",
+  "query_text": "( \"heat index\" OR \"apparent temperature\" OR \"perceived temperature\" OR \"thermal discomfort\" OR \"heat stress\" OR \"temperature humidity index\" OR \"heat stress index\" OR \"heat exposure\" )\n",
+  "parsed_groups": [
+    [
+      "heat index",
+      "apparent temperature",
+      "perceived temperature",
+      "thermal discomfort",
+      "heat stress",
+      "temperature humidity index",
+      "heat stress index",
+      "heat exposure"
+    ]
+  ],
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); doc matches iff every group has a matching term in some section",
+  "index": {
+    "path": "index/full_705k_v2_filtered",
+    "content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94",
+    "files": 186346
+  },
+  "documents_in_index": 186346,
+  "per_group_doc_counts": [
+    15731
+  ],
+  "per_term_doc_counts": {
+    "g0:heat index": 1080,
+    "g0:apparent temperature": 680,
+    "g0:perceived temperature": 237,
+    "g0:thermal discomfort": 808,
+    "g0:heat stress": 13785,
+    "g0:temperature humidity index": 366,
+    "g0:heat stress index": 213,
+    "g0:heat exposure": 2574
+  },
+  "raw_count": 15731,
+  "disambiguation": null,
+  "admitted_count": 15731,
+  "excluded_by_disambiguation": 0,
+  "hits_recorded": false,
+  "elapsed_seconds": 53.7,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

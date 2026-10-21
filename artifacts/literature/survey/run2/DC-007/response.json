@@ -1,0 +1,39 @@
+{
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "{\n  \"candidate_family\": \"fire_risk\",\n  \"family_surface_forms\": [\n    \"fire risk\",\n    \"wildfire risk\",\n    \"fire danger\",\n    \"fire hazard\",\n    \"fire weather\",\n    \"wildfire danger\",\n    \"fire potential\",\n    \"fire probability\"\n  ]\n}",
+        "reasoning": "We need to output JSON with candidate_family: short lowercase snake_case name of broader scientific quantity family this measure belongs to. Fire Weather Index is a fire risk metric, part of fire danger, fire hazard, fire weather, wildfire risk. Family could be \"fire_risk\" or \"wildfire_risk\". Choose \"fire_risk\". Provide family_surface_forms: up to 8 lowercase words/phrases a paper would use for that family, no place names, years, scenario names, thresholds or statistics. So surface forms: \"fire risk\", \"wildfire risk\", \"fire danger\", \"fire hazard\", \"fire weather\", \"wildfire danger\", \"fire potential\", \"fire probability\". Provide JSON.",
+        "role": "assistant"
+      }
+    }
+  ],
+  "created": 1792613469,
+  "id": "0acb815e-f6be-4061-bc4e-fcdfec94ad08",
+  "model": "gpt-oss-120b",
+  "object": "chat.completion",
+  "system_fingerprint": "fastcoe",
+  "usage": {
+    "completion_tokens": 216,
+    "completion_tokens_after_first_per_sec": 729.2058732677046,
+    "completion_tokens_after_first_per_sec_first_ten": 732.245810055866,
+    "completion_tokens_after_first_per_sec_graph": 732.245810055866,
+    "completion_tokens_details": {
+      "reasoning_tokens": 145
+    },
+    "completion_tokens_per_sec": 618.1426606405973,
+    "end_time": 1792613469.6730185,
+    "is_last_response": true,
+    "prompt_tokens": 355,
+    "start_time": 1792613469.3235846,
+    "stop_reason": "stop",
+    "time_to_first_token": 0.05459260940551758,
+    "time_to_first_token_graph": 0.048052072525024414,
+    "total_latency": 0.34943389892578125,
+    "total_tokens": 571,
+    "total_tokens_per_sec": 1634.0715704897273
+  }
+}
