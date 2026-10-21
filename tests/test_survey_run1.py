@@ -69,8 +69,8 @@ def test_the_run_used_the_pinned_inventory_clause_index_and_v3_tools():
     assert run["context_clause_sha256"] == sha256_file(cs.CONTEXT)
     assert run["context_clause_documents"] == 120050
     assert run["index_content_identity_sha256"].startswith("fbb4affb")
-    for path, sha in run["tools_sha256"].items():
-        assert sha256_file(REPO_ROOT / path) == sha
+    for path, sha in run["tools_sha256"].items():  # the v3 files as committed (the working-tree driver is v4)
+        assert cs._v3_tracked_sha256(path.rsplit("/", 1)[1]) == sha
     assert "untracked copies" in run["execution"] and "aborted first attempt" in run["prior_attempt"]
 
 

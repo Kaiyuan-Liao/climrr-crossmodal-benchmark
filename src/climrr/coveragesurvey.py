@@ -18,9 +18,11 @@ directories and the header-only `topical/hits.csv` files (`run_query.py
 from __future__ import annotations
 
 import csv
+import hashlib
 import io
 import json
 import shutil
+import subprocess
 from pathlib import Path
 
 from climrr.checksums import sha256_file
@@ -39,7 +41,9 @@ L2_RUNS = REPO_ROOT / "artifacts" / "literature" / "litcorpus02" / "evidence" / 
 
 DIAGNOSTIC_ID = "TRACKB-SURVEY-RUN1"
 
-#: The v3 tools that executed run 1 (D-026); the tracked files must equal them.
+#: The v3 tools that executed run 1 (D-026); the files as tracked at `V3_COMMIT` must equal them.
+#: (`survey_driver.py` is v4 in the working tree since Track B run 2; `run_query.py` is unchanged.)
+V3_COMMIT = "2331e19"
 TOOL_SHA256 = {
     "run_query.py": "5f56ee49f0da675f49ef490b506c030b307c693032e8be9097e499cf1c64030d",
     "survey_driver.py": "e1fb664c98e4ff866bb348c8930bfc1b9243957441b8a19ea0893e0b711af4cd",
@@ -175,11 +179,18 @@ def verify_run(run: Path) -> list[dict]:
     return rows
 
 
+def _v3_tracked_sha256(name: str) -> str:
+    """The tool as committed at `V3_COMMIT` (the tracked driver is v4 since Track B run 2)."""
+    blob = subprocess.run(["git", "show", f"{V3_COMMIT}:scripts/litcollect/{name}"], cwd=REPO_ROOT,
+                          capture_output=True, check=True).stdout
+    return hashlib.sha256(blob).hexdigest()
+
+
 def verify_source(src: Path) -> list[dict]:
-    """The extracted tarball: tools equal the tracked v3 files, then the run itself."""
+    """The extracted tarball: tools equal the v3 files as tracked at `V3_COMMIT`, then the run itself."""
     for name, sha in TOOL_SHA256.items():
-        if sha256_file(TOOLS / name) != sha:
-            raise SurveyIngestError(f"tracked {name} is not the v3 file")
+        if _v3_tracked_sha256(name) != sha:
+            raise SurveyIngestError(f"tracked {name} at {V3_COMMIT} is not the v3 file")
         if sha256_file(src / "scripts" / name) != sha:
             raise SurveyIngestError(f"delivered {name} is not the v3 file")
     run = src / "survey" / "run1"
@@ -422,14 +433,43 @@ They are **not** inherently unsearchable, and run 1 does not show that the
 literature lacks them. Heat-index family coverage is never attributed to a
 threshold measure.
 
-## Run 2 (authorized, not yet run)
+## Run 2 (family level) --- pending execution
 
-D-027 authorizes a **family-level** diagnostic run 2 (`candidate_family` only).
-Run 2 will be reported **side by side with run 1**, measure level and family
-level in separate columns; **run 1 --- its ingested rows, counts and this
-table --- stays unchanged.** The driver update for run 2 (prompt, candidate
-family record, orthographic normalization under the frozen table) is a later
-package.
+D-027 (B2--B4) authorizes a **family-level** diagnostic run 2. The driver is
+`survey_driver.py` v4, `--mode family` (SHA-256 in
+`reports/milestones/TRACKB_STAGE2_REPORT.md` §15); **not yet run**, so no run-2
+count exists. Method, per dictionary concept (all 14):
+
+1. **Prompt variant F** (`PROMPT_F` in the driver, stored verbatim, hash recorded
+   per concept) gives the model the dictionary name and passage and asks for
+   ONLY a JSON object: a `candidate_family` (short snake_case name of the
+   broader scientific quantity family the measure belongs to) and up to 8
+   `family_surface_forms` (no place names, years, scenario names, thresholds or
+   statistics). Same model, endpoint and temperature (0) as run 1, same
+   reasoning-field fallback.
+2. `family.json` records `dictionary_concept_id`, `dictionary_passage`,
+   `model_id`, `endpoint`, `prompt_sha256`, `candidate_family`,
+   `candidate_family_surface_forms`, `date`, **`status: candidate_family`**, the
+   raw reply excerpt and any parse error. A candidate family is a hypothesis:
+   never vocabulary, ontology, C-2 input, compatibility logic or unit design
+   without later approval.
+3. **Normalization** under the frozen table
+   (`normalization_table_v1.yaml`, N-1 … N-7, hash-verified, fail closed) is
+   applied to every model-proposed form before the sanitizer; each form keeps
+   `original`, `normalized`, `rules_applied` and `searched`. A form a rule
+   changed may have up to 10 words (the ruling sets no limit; the driver's
+   choice, disclosed); every other form keeps the 6-word limit.
+4. Topical-only and context-filtered counts over the **family surface forms
+   only**, same index and same context clause as run 1 (the driver refuses
+   run-1 rows or a cached context set that do not match).
+
+**Reporting rule --- two columns, never conflated.** Each run-2 row carries the
+run-1 **measure** counts, copied unchanged from the run-1 row (its SHA-256
+recorded), beside the **family** counts, labelled *"diagnostic — family
+coverage is not attributable to the measure"*. Measure and family counts are
+never added, merged or substituted; a family count is never reported as a
+threshold measure's coverage. **Run 1 --- its ingested rows, counts and this
+table --- stays unchanged.**
 
 ## Caveats
 

@@ -102,14 +102,43 @@ They are **not** inherently unsearchable, and run 1 does not show that the
 literature lacks them. Heat-index family coverage is never attributed to a
 threshold measure.
 
-## Run 2 (authorized, not yet run)
+## Run 2 (family level) --- pending execution
 
-D-027 authorizes a **family-level** diagnostic run 2 (`candidate_family` only).
-Run 2 will be reported **side by side with run 1**, measure level and family
-level in separate columns; **run 1 --- its ingested rows, counts and this
-table --- stays unchanged.** The driver update for run 2 (prompt, candidate
-family record, orthographic normalization under the frozen table) is a later
-package.
+D-027 (B2--B4) authorizes a **family-level** diagnostic run 2. The driver is
+`survey_driver.py` v4, `--mode family` (SHA-256 in
+`reports/milestones/TRACKB_STAGE2_REPORT.md` §15); **not yet run**, so no run-2
+count exists. Method, per dictionary concept (all 14):
+
+1. **Prompt variant F** (`PROMPT_F` in the driver, stored verbatim, hash recorded
+   per concept) gives the model the dictionary name and passage and asks for
+   ONLY a JSON object: a `candidate_family` (short snake_case name of the
+   broader scientific quantity family the measure belongs to) and up to 8
+   `family_surface_forms` (no place names, years, scenario names, thresholds or
+   statistics). Same model, endpoint and temperature (0) as run 1, same
+   reasoning-field fallback.
+2. `family.json` records `dictionary_concept_id`, `dictionary_passage`,
+   `model_id`, `endpoint`, `prompt_sha256`, `candidate_family`,
+   `candidate_family_surface_forms`, `date`, **`status: candidate_family`**, the
+   raw reply excerpt and any parse error. A candidate family is a hypothesis:
+   never vocabulary, ontology, C-2 input, compatibility logic or unit design
+   without later approval.
+3. **Normalization** under the frozen table
+   (`normalization_table_v1.yaml`, N-1 … N-7, hash-verified, fail closed) is
+   applied to every model-proposed form before the sanitizer; each form keeps
+   `original`, `normalized`, `rules_applied` and `searched`. A form a rule
+   changed may have up to 10 words (the ruling sets no limit; the driver's
+   choice, disclosed); every other form keeps the 6-word limit.
+4. Topical-only and context-filtered counts over the **family surface forms
+   only**, same index and same context clause as run 1 (the driver refuses
+   run-1 rows or a cached context set that do not match).
+
+**Reporting rule --- two columns, never conflated.** Each run-2 row carries the
+run-1 **measure** counts, copied unchanged from the run-1 row (its SHA-256
+recorded), beside the **family** counts, labelled *"diagnostic — family
+coverage is not attributable to the measure"*. Measure and family counts are
+never added, merged or substituted; a family count is never reported as a
+threshold measure's coverage. **Run 1 --- its ingested rows, counts and this
+table --- stays unchanged.**
 
 ## Caveats
 

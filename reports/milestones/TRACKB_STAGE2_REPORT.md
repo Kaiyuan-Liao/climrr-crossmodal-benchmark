@@ -310,19 +310,79 @@ As proposed for review:
 
 ## 15. Next bounded objective
 
-**Stage 2 run 2, family level (authorized, D-027) --- pending the driver
-update.** For all 14 measure concepts: preserve run-1 measure identity; request
-a `candidate_family` (stored only as `status: candidate_family`, with
-`dictionary_concept_id`, `dictionary_passage`, `model_id`, `prompt_sha256`,
-`candidate_family`, `candidate_family_surface_forms`, `date`, `status`); apply
-only the frozen orthographic table
-(`data/metadata/litcollect/normalization_table_v1.yaml`, SHA-256
-`80a5e0e386dfe8a984e1a5ba2ace781d15601f9b0723b75d238b6de5d1226e03`, N-1 … N-7;
-originals retained); topical-only and context-filtered counts; measure-level and
-family-level coverage side by side, **run 1 unchanged**. Not started; the driver
-is unchanged in the bookkeeping package.
+**Stage 2 run 2, family level (authorized, D-027 B2--B4) --- driver ready,
+pending execution on Polaris.** Branch `work/trackb-run2` from `main` at
+`d7032de` (not pushed, not merged); the package commit is the one carrying this
+field. Run 1 --- its ingested rows, `manifest.csv` and the coverage table --- is
+byte-unchanged (`test_survey_run1.py`).
 
-For the driver update, observed while testing the table (not acted on): of the
-29 run-1 model terms dropped as "not a plain lowercase phrase", the table makes
-**26** plain (3 keep their parentheses); only **7** of those 26 have six words or
-fewer, so the driver's unchanged "more than 6 words" rule would still drop 19.
+| Object | SHA-256 |
+| --- | --- |
+| `scripts/litcollect/survey_driver.py` **v4** | `f929ab6a366987d29e5565fe9fa9f80b47cb1c57d19e01ff3af5affdd99baf9f` |
+| prompt variant F (`PROMPT_F`, the template) | `7097c86ccbb694fe34fa5f4dc51ed087594295e3c37ddd97c56ab94702a97931` |
+| `scripts/litcollect/run_query.py` v3 (unchanged) | `5f56ee49f0da675f49ef490b506c030b307c693032e8be9097e499cf1c64030d` |
+| `normalization_table_v1.yaml` (verified by the driver, fail closed) | `80a5e0e386dfe8a984e1a5ba2ace781d15601f9b0723b75d238b6de5d1226e03` |
+
+**What v4 does.** `--mode measure` (default) is v3: on the synthetic corpus its
+outputs are **byte-identical** to v3's (recovered from git at `d7032de`,
+`e1fb664c…f4cd`) for the same inputs, under a frozen clock, restart included.
+`--mode family`: prompt F per concept; `family.json` with exactly the ruling's
+fields plus `model_raw_response_excerpt` and `parse_error`, `status:
+candidate_family`; every model form normalized under the frozen table, then
+sanitized, each recorded with `original`, `normalized`, `rules_applied`,
+`searched` (plus `search_term`, `reason`); topical-only and context-filtered
+counts over the family forms; `row.json` carries the run-1 measure identity and
+counts copied from `--run1` (row SHA-256 recorded) beside the family counts,
+labelled *"diagnostic — family coverage is not attributable to the measure"*;
+`survey_table.csv` side by side, sorted by concept id. Restart, error rows and
+logging as v3.
+
+**Fail-closed checks added.** The cached `_context` id set is reused only if its
+`summary.json` records the same context-clause SHA-256 and index identity and
+`ids.txt` holds `admitted_count` ids (missing in v3; both modes). Family mode
+refuses to start unless every run-1 row exists and matches this run's concept
+id, dictionary name, inventory, context clause and index identity --- so measure
+and family counts are always over the same index and clause.
+
+**Choices the work package left open --- disclosed, for the COORDINATOR:**
+
+1. **Normalization in measure mode is opt-in (`--normalize`).** The package asks
+   both that measure mode reproduce v3 *exactly* and that normalization apply in
+   measure mode; with normalization always on, measure outputs could not be
+   byte-identical (`95°f` would become searchable). Default = v3; `--normalize`
+   applies the table, with the same records and limits as family mode. Run 2
+   does not run measure mode, so no run-2 count depends on this.
+2. **Word limits: 10 for a form a rule changed, 6 otherwise** (as directed; the
+   ruling sets no limit), recorded in each `row.json` as
+   `sanitizer_word_limits`. Effect, observed on the run-1 terms: of the 26
+   dropped terms the table makes plain, **all 26** pass at 10 words, against 7
+   at 6. Dictionary names are not normalized (not model-proposed).
+3. **The 60-character bound** is unchanged but, in the v4 path only, a form over
+   it is reported as "longer than 60 characters" rather than "not a plain
+   lowercase phrase"; forms past the 10-term cap are recorded, not silently cut.
+4. **Reply parsing:** the *last* JSON object with a `candidate_family` key in the
+   content or reasoning field is taken (a reasoning field may hold drafts). The
+   family name is stored as returned, never edited; the forms are what is searched.
+5. **Polaris invocation keeps run 1's relative paths.** The package says
+   `PYTHONPATH=src`; the docstring runs from `$LITCOLLECT_ROOT_POLARIS` with
+   `PYTHONPATH="$CLIMRR_REPO/src"`, so `index/…` and `survey/run2` stay relative
+   and no absolute Eagle path lands in any `summary.json` or the log (run 1's
+   convention, and what the scanner needs at ingest). `$CLIMRR_REPO` must be a
+   checkout of the pinned commit, so the branch has to reach Polaris first.
+
+**Tests:** `tests/test_survey_driver_v4.py` (mock server, synthetic index):
+byte-identity with v3 (mutation-checked: perturbing one measure field fails
+it); JSON-object parsing, reasoning fallback, last object wins; `status:
+candidate_family`; normalization recorded (`days with heat index above 95°f`
+searched as `days with heat index above 95 degrees f`, `N-3`, original kept;
+`100%` → `100 percent`, `N-7`); 6/10 limits; side-by-side counts and table;
+restart; error row with the measure kept; `--normalize` in measure mode; the
+three context-cache mismatches in both modes; run-1 mismatch; tampered table.
+`coveragesurvey.verify_source` now checks the v3 tools as committed at
+`2331e19`, since the working-tree driver is v4. Scanner allowlist re-pinned to
+the v4 hash.
+
+**After execution:** Kaiyuan returns `survey/run2/` and the log; a later package
+ingests it as a separate diagnostic beside run 1 (run 1 untouched) and reports
+the two columns. **QA not authorized.** Nothing touches `concept_map.yaml`, M1
+statuses, index 117, production queries, C-2 or compatibility.

@@ -27,11 +27,13 @@ from climrr.paths import REPO_ROOT
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
 CONTEXT = REPO_ROOT / "data" / "metadata" / "litcollect" / "survey_context_clause_v1.txt"
 
-#: survey_driver.py: v3, the driver survey run 1 executed (SHA-256 e1fb664c...f4cd); it differs
-#: from the revised driver (877fec47...7155) only by passing --no-hits to run_query.py (D-026);
+#: survey_driver.py: v4 (Track B run 2, D-027). Its default --mode measure is v3 --- the driver
+#: survey run 1 executed (SHA-256 e1fb664c...f4cd, recoverable from git) --- byte for byte in its
+#: outputs (tests/test_survey_driver_v4.py), so the tests below exercise v3 behaviour unchanged.
+#: v3 differs from the revised driver (877fec47...7155) only by passing --no-hits (D-026);
 #: probe_alcf_inference.py: byte-identical to trackb_scripts.tar.gz (SHA-256 8c3f75fe...0f59).
 TOOL_SHA256 = {
-    "survey_driver.py": "e1fb664c98e4ff866bb348c8930bfc1b9243957441b8a19ea0893e0b711af4cd",
+    "survey_driver.py": "f929ab6a366987d29e5565fe9fa9f80b47cb1c57d19e01ff3af5affdd99baf9f",
     "probe_alcf_inference.py": "79181c48981c709b49b90d78fc8aaddffaf12d2f1bb0591b9a9daa3aad438c66",
 }
 
