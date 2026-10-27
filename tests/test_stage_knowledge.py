@@ -145,3 +145,7 @@ def test_every_knowledge_file_named_in_project_state_is_on_the_list():
 
 def test_the_list_carries_the_run2_ruling():
     assert "docs/TRACKB_STAGE2_RUN2_GUIDANCE_RULING.md" in sk.KNOWLEDGE_FILES
+
+
+def test_the_list_carries_the_external_references():
+    assert "docs/REFERENCES.md" in sk.KNOWLEDGE_FILES

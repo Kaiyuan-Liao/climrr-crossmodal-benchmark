@@ -1748,3 +1748,139 @@ code emits, and the next GUIDANCE packet still chooses.
 - **What it does not decide.** No M1 status changes; index 117 stays
   unlabeled; no candidate family is approved; no unit schema or code is defined;
   Q22 stays open; no QA.
+
+## D-029 --- Mentor direction 2026-10-22: soft-constrained QA
+
+- **Date:** 2026-10-22 (mentor one-on-one); recorded 2026-10-27.
+- **Status:** **decided.**
+- **Owner:** **the mentor**, relayed by Kaiyuan Liao. Owner-relayed facts,
+  recorded in Kaiyuan's words in `docs/MENTOR_BRIEF.md` (meeting log,
+  2026-10-22). Mentor-directed: it takes precedence over earlier GUIDANCE "do
+  not do yet" items it touches; GUIDANCE is informed and asked for guardrails,
+  not approval.
+- **Mentor's direction, verbatim as relayed:** "right now we hardly find solid
+  links; soften the rules or involve semantic understanding like an LLM agent to
+  get soft-constrained QAs; as long as the original resources from both the
+  table side and the paper side are recorded, someone can manually check the
+  quality of the QA with that recorded information."
+- **Decision.** Semantic matching by an LLM agent is permitted for linking
+  table-side objects to paper passages and for drafting example QA pairs, under
+  three conditions:
+  - **(a) Exact provenance on every candidate.** Table side: unit or filled
+    template, columns, rows/cells, scenario, period, computed value. Paper side:
+    item id, file SHA-256, JSON path, `[start,end)` span, verbatim passage.
+  - **(b) `llm_candidate` until checked and reviewed.** Every LLM output has
+    status `llm_candidate` until it passes a deterministic consistency check
+    (the span re-slices to the passage; concept and place terms are located;
+    the place role is recorded) **and** a human review.
+  - **(c) No LLM output enters governed state.** Nothing an LLM produces enters
+    the concept map, column statuses, or compatibility rules.
+- **Supersession (scoped).** For **the two new tracks only** (Track C, D-030;
+  Track D, D-031), this supersedes the earlier rule that compatibility is
+  decided by deterministic rules alone. The deterministic matrix machinery
+  (C/G/T/S/D) is **retained as a recorded attribute of each candidate, not as
+  the gate**. Elsewhere the deterministic rules stand unchanged.
+- **Mentor answers recorded (2026-10-22 list):** Q1 "good" --- family-level
+  table-side object accepted, exact metric and scenario as provenance; Q2
+  "good" --- state / multi-state / climate-region accepted as table-side
+  geography; Q3 "good" --- cross-location comparison accepted as a question
+  type. **Q4 open** (not discussed).
+- **Rationale.** The mentor's direction: the strict deterministic gate yields
+  hardly any solid links (0 of 78, M5-WP2; 0 of 354, M5-WP4); quality is to be
+  assured instead by recording both sources exactly so that a person can check
+  each QA.
+- **Alternatives considered.** Keep deterministic rules as the sole acceptance
+  gate --- set aside by the mentor's direction for Tracks C and D.
+- **Consequences.** A new candidate status `llm_candidate` and its check and
+  review steps (`docs/BRIDGE_ELIGIBILITY.md` §10). Track A-next and Track B stay
+  GUIDANCE-authorized but are deprioritized behind Tracks C and D. **This entry
+  generates no QA, changes no column status, leaves index 117 unlabeled and
+  leaves `concept_map.yaml` unchanged.** The answers name no column; no
+  `resolutions.yaml` record.
+- **Affected files:** `docs/DECISION_LOG.md`, `docs/MENTOR_BRIEF.md`,
+  `docs/PROJECT_STATE.md`, `docs/BRIDGE_ELIGIBILITY.md` §10.
+
+## D-030 --- Track C: LLM-assisted grouping over the LITCORPUS-02 place candidates
+
+- **Date:** 2026-10-22 (mentor direction); recorded 2026-10-27.
+- **Status:** **decided; design pending.**
+- **Owner:** **mentor direction**, relayed by Kaiyuan Liao.
+- **Decision.**
+  - **Inputs:** the frozen 100 + 143 place-candidate papers (full text from the
+    frozen index); the three units and their family-level descriptions; the QA
+    types --- pattern → explanation; claim → region identification;
+    cross-source validation; compound-risk reasoning; regional contrast;
+    cross-location comparison (per mentor Q3, D-029).
+  - **Output per paper:** groups (passage → unit → QA type → one example QA
+    pair → rationale), each with status `llm_candidate`, carrying the D-029
+    provenance and passing the D-029 deterministic check.
+  - **Model:** ALCF inference endpoint (Metis `gpt-oss-120b` unless changed).
+  - **Execution:** on Polaris; restartable; outputs inspectable mid-run.
+- **Rationale.** One of the two directions the mentor asked the project to try
+  (D-029).
+- **Alternatives considered.** None recorded; mentor-directed.
+- **Consequences.** Design, code and run are later work packages; nothing is
+  built or run under this entry. Every output is governed by D-029.
+- **Affected files:** `docs/DECISION_LOG.md`, `docs/PROJECT_STATE.md`,
+  `docs/MENTOR_BRIEF.md`.
+
+## D-031 --- Track D: table-grounded question templates
+
+- **Date:** 2026-10-22 (mentor direction); recorded 2026-10-27.
+- **Status:** **decided; design pending.**
+- **Owner:** **mentor direction**, relayed by Kaiyuan Liao.
+- **Decision.** Mimic the slot-template mechanism of the reference repository
+  (D-032), grounded in the table. Slots:
+  - `[CONCEPT]` --- dictionary concept families; multi-concept templates
+    allowed;
+  - `[LOCATION]` --- table-supported state / county labels;
+  - `[PERIOD]` --- historical / mid-century / end-century windows as the
+    dictionary defines them;
+  - `[SCENARIO]` --- RCP4.5 / RCP8.5;
+  - `[SEASON]`;
+  - `[STATISTIC]`.
+
+  A filled template is a question whose answer is **computed deterministically
+  from the table**; its slots generate the literature query; retrieved passages
+  are linked by the Track C agent (D-030) under D-029. Phenomenon units are not
+  required as a separate object in this track; the frozen three remain as
+  controls and provenance examples.
+- **Standing constraint retained.** A slot may draw only on columns with status
+  `verified_from_dictionary` (or a logged resolution).
+- **Rationale.** The second of the two directions the mentor asked the project
+  to try (D-029).
+- **Alternatives considered.** None recorded; mentor-directed.
+- **Consequences.** Design and code are later work packages; no template is
+  written or filled under this entry.
+- **Affected files:** `docs/DECISION_LOG.md`, `docs/PROJECT_STATE.md`,
+  `docs/MENTOR_BRIEF.md`.
+
+## D-032 --- External reference recorded: `LLM_Eval-main.zip`
+
+- **Date:** supplied by the mentor 2026-10-22; hash computed 2026-10-27.
+- **Status:** **decided.**
+- **Owner:** Kaiyuan Liao (record); the mentor supplied the archive.
+- **Decision.** Record `LLM_Eval-main.zip` (WildfireGPT case-study question
+  templates and literature-review prompt pipeline; author per file header
+  Yangxinyu Xie) as an external reference.
+  - **Zip SHA-256:**
+    `a88a9f0df284213769b8e65abd69c2c0e8c5f7dec0d46c0d2121338e7ad2938f`
+    (computed by Kaiyuan on the Mac, 2026-10-27; two downloaded copies,
+    identical hash).
+  - **Contents** (for the record, from inspection of the archive, not copied
+    into the repo): `templates.py`, `infrastructure.py`, `prompt.py`,
+    `prompt.yml`, `search.py`, `index.py`, `embedding.py`, `utils.py`,
+    `README.md`, `WildfireGPT Case Study Questions.md`, `pyproject.toml`.
+  - **Taken from it:** the template/slot mechanism (`templates.py`,
+    `infrastructure.py`); the question categories (fact-based / recommendation
+    / hybrid; data analysis / literature review / both); the case-study
+    question table.
+  - **Not taken:** its random slot filling, its embedding retrieval, its
+    news-style answer generation.
+- **Rationale.** Track D (D-031) mimics its slot mechanism; the source must be
+  pinned.
+- **Alternatives considered.** None.
+- **Consequences.** **Nothing from the zip is stored in the repository** except
+  this record and the `docs/REFERENCES.md` entry.
+- **Affected files:** `docs/DECISION_LOG.md`, `docs/REFERENCES.md`,
+  `scripts/stage_knowledge.py` (`KNOWLEDGE_FILES`).

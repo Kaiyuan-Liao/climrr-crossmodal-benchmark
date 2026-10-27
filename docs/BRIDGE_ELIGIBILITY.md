@@ -257,3 +257,39 @@ discussion families (temperature, precipitation, wind speed, dry spell, degree
 days) get no units until a separate governance decision; `concept_map.yaml` is
 unchanged; P-CELL-1, P-COUNTY-1 and P-STATE-1 v2 remain controls. Conceptual
 fields only --- no schema or code is defined here.
+
+## 10. Soft-constrained candidates (D-029)
+
+For **Track C (D-030) and Track D (D-031) only**, an LLM agent may link
+table-side objects to paper passages and draft example QA pairs. Its outputs are
+governed as follows; outside these two tracks §§1--9 stand unchanged.
+
+**Status `llm_candidate`.** Every LLM output enters with status
+`llm_candidate`. It leaves that status only after **both** the deterministic
+consistency check and a human review below. No LLM output, at any status,
+enters the concept map, column statuses, or compatibility rules.
+
+**Provenance fields (required on every candidate).**
+
+| Side | Fields |
+| --- | --- |
+| Table | unit or filled template; columns; rows / cells; scenario; period; computed value |
+| Paper | item id; file SHA-256; JSON path; `[start,end)` span; verbatim passage |
+
+A candidate missing any field fails the check.
+
+**Deterministic consistency check.**
+
+1. The `[start,end)` span re-slices from the file at the JSON path to exactly
+   the verbatim passage.
+2. The concept terms and the place terms the candidate relies on are located in
+   the passage.
+3. The place role is recorded (§8).
+
+**Human review.** A candidate that passes the check goes to a human reviewer,
+who judges it against the recorded provenance. The review protocol is an open
+question to the mentor (`docs/MENTOR_BRIEF.md`, *For the next meeting*, item A)
+and is not defined here.
+
+The C/G/T/S/D judgments are recorded on every candidate for audit but are not
+the acceptance gate in Tracks C and D.

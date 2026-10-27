@@ -1,30 +1,37 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-10-21   Next meeting: **Thursday 2026-10-22** --- bring the items under *For Thursday* below; the answer sheet is still outstanding
+Last updated: 2026-10-27   Next meeting: not yet scheduled --- bring the items under *For the next meeting* below; the answer sheet is still outstanding
 
 ## Status in five lines
 
 1. **The table is pinned and partly interpreted**: 62,834 rows, 275 columns, read as text; 41 columns interpreted (21 stated by the dictionary, 20 reasoned and marked so). Nothing reasoned is confirmed --- **the answer sheet has still not been reviewed**, so all 20 stay `inferred_candidate`; the project proceeds on "our reading" (D-014), which promotes nothing.
-2. **Your concept-first method found papers, but still no link.** On the 186,346-file climate set JL shared, the fire weather index and heat-index searches gave 448 and 861 papers. 20 of those that mention Oklahoma, Stephens or California (10 + 10, picked by a fixed rule before anyone opened them) were each read by two independent readers and reconciled into **118 statements** (3 found identically by both readers, 47 found by both and reconciled, 68 found by one reader only): **0 of 354 statement--unit pairs qualify as a candidate link.**
-3. **The zero now points at our units, not at the papers.** 12 pairs share the concept family and 2 share the place, but never both in the same statement. GUIDANCE's reading: papers usually describe a broader quantity (for example "heat index" rather than "days above 105 °F"), a broader area (a state or a region rather than one county or grid cell) and often no emissions scenario. GUIDANCE accepted the zero for these 20 papers only, and nothing beyond them (D-027).
-4. **A survey of every concept in the data dictionary is done** (diagnostic counts, not prevalence). Broad quantities appear widely in the literature; the specific heat-index threshold measures barely appear by their exact wording. Under our current search terms, those threshold measures have **effectively no direct word-for-word footprint**. That does **not** show the literature lacks them.
-5. **Next:** a small test of whether table units stated at the level papers use (a quantity family, a state or region) make links possible, with the current three units kept as controls. The second survey run, at the family level, is done and accepted as a diagnostic (D-028); the literature-survey track now pauses until your feedback. **No questions are generated** (QA is still not authorized).
+2. **The strict search found papers but no link.** 20 papers read twice and adjudicated gave **0 of 354** qualifying statement--unit pairs (D-027); the family-level survey separated three levels of coverage (D-028). Both remain recorded as diagnostics.
+3. **On 2026-10-22 you answered "good" to questions 1--3**: a family-level table-side object with the exact metric and scenario kept as provenance; state, multi-state or climate-region geography on the table side; and cross-location comparison as a question type. Question 4 (which further families to govern) was not discussed and stays open.
+4. **Your direction is now the governing principle (D-029):** soften the rules and use an LLM agent's semantic understanding to obtain soft-constrained QAs, with the table-side and paper-side sources recorded exactly so that a person can check each QA. Every LLM output is an `llm_candidate` until a deterministic check and a human review; nothing an LLM produces changes the concept map, column statuses or compatibility rules.
+5. **Next:** the two tracks you asked for --- **Track C**, LLM-assisted grouping of the 243 place-candidate papers into passage → unit → QA type → example QA (D-030), and **Track D**, table-grounded question templates whose answers are computed from the table (D-031). Both are at the design stage; **no QA has been generated yet**. The earlier unit-granularity diagnostic and literature survey are kept but deprioritized behind them.
 
 ## What I need from this meeting
 
-> ### **For Thursday 2026-10-22**
+> ### **For the next meeting**
 >
-> **Seven quantity families as discussion candidates.** These are **for discussion only**, not approved
-> benchmark families. They are listed in dictionary order (pp. 6--11), and **the order is not a ranking**.
-> The counts are **measure-level** survey run 1 counts (documents matching any search term for the
-> dictionary's own measure; diagnostic coverage counts, not prevalence). **The second, family-level survey run
-> separates three levels of coverage --- the dictionary's exact measure wording (0--2 documents for the heat-index
-> measures), the approved family terms in our concept map (548 for the fire weather index, 1,080 for "heat index"),
-> and broad families proposed by the model (2,681 to 143,266 documents, often much broader than the measure, such as
-> "moisture" for precipitation) --- and only the middle level uses approved vocabulary; none is credited to a single
-> measure.** GUIDANCE (D-028) adopted these three levels as the standing way we report coverage: they are
-> never ranked or added together, and a zero at the exact-measure level means no word-for-word match under our
-> current search rules, not that no relevant literature exists.
+> Questions 1--3 of the 2026-10-22 list were answered "good" (see the meeting log). Two items are carried and
+> one is new.
+>
+> **A. New --- soft-constrained QAs (D-029).** *Which QA types do you want for the soft-constrained QAs, and
+> which human check protocol should a reviewer follow when judging one?* The candidate types we have so far are
+> pattern → explanation; claim → region identification; cross-source validation; compound-risk reasoning;
+> regional contrast; and cross-location comparison (your "good" to question 3). Each candidate will carry its
+> exact table-side and paper-side sources; what we need from you is which types to keep and what the reviewer
+> checks.
+>
+> **B. Carried from 2026-10-22 (question 4, not discussed). Which of the five families without
+> approved terms --- temperature, precipitation, wind speed, consecutive dry days / dry spell, degree days --- would you want governed, if any?** Choosing one would start
+> a separate decision on its approved vocabulary; coverage counts will not decide this on their own, and broader
+> families the model proposed (for example "hydrology" for precipitation, or generic "fire risk") are not
+> candidates.
+>
+> For reference, the measure-level and concept-map coverage of the seven discussion families (diagnostic
+> counts, not prevalence; the three coverage levels are never ranked or added together, D-028):
 >
 > | Family (discussion candidate) | Dictionary measure(s) | Measure-level coverage, run 1 (all / with climate context) | Concept-map family terms (approved vocabulary; all documents) |
 > | --- | --- | --- | --- |
@@ -36,58 +43,17 @@ Last updated: 2026-10-21   Next meeting: **Thursday 2026-10-22** --- bring the i
 > | fire weather index | seasonal FWI; FWI classes | 548 / 395; 551 / 396 | **548** (the five approved fire-weather-index terms; 473 once a bare "FWI" must be backed by "fire weather") |
 > | heat index | daily max; seasonal max; days above 95 / 105 / 115 / 125 °F | 0; 1; --- (no searchable term); 0; --- (no searchable term); 2 (all and with-context counts are equal) | **1,080** ("heat index" alone; 1,082 with "heat-index" and "extended heat index") |
 >
-> Only two of the seven families have approved concept-map terms so far, so the other five have no
-> concept-map count. The model-proposed family totals from the second run are deliberately **not** shown
-> here: they rest on search words the model proposed, many broader than the quantity itself, and no
-> family count is ever credited to a single threshold measure.
->
-> **Questions, in priority order.** The two families that already have approved concept-map terms, fire
-> weather index and heat index, are the first candidates for redesigned units; the other five are not used
-> until they are governed.
->
-> **1. The key scientific question (GUIDANCE, verbatim):** *"Should a benchmark unit represent the exact
-> ClimRR metric, or is a governed family-level quantity such as heat index / Fire Weather Index an acceptable
-> table-side semantic object when the exact measure and scenario remain preserved as provenance?"* For
-> example: a unit whose family is *heat index*, while the exact measure (*days above 105 °F*) and the emissions
-> scenario stay attached to it as a record of where the number came from, not as something a paper must match.
->
-> **2. Would state-level or region-level units be acceptable to you as the table-side granularity?**
->
-> **3. A candidate question type: cross-location comparison.** *"A paper reports a pattern for a
-> phenomenon family at place A; the table's deterministic value for the same family at place B; same or
-> different direction."* This is a **candidate relation**. It would be defined and frozen before any test,
-> and nothing has been generated. Guardrails:
->
-> - **Paper side:** an adjudicated claim with an explicit concept, a direction, and the paper's own
->   study-area geography.
-> - **Table side:** a frozen deterministic aggregate at a granularity papers actually name.
-> - **Answer:** two attested facts plus a computed comparison.
-> - **Scenario:** an unknown scenario is tolerated and flagged, never treated as a match.
-> - **Exclusions:** papers that state no place are excluded.
->
-> Is this a relation you would want the benchmark to test?
->
-> **4. Which of the five families without approved terms --- temperature, precipitation, wind speed,
-> consecutive dry days / dry spell, degree days --- would you want governed, if any?** Choosing one would start
-> a separate decision on its approved vocabulary; coverage counts will not decide this on their own, and broader
-> families the model proposed (for example "hydrology" for precipitation, or generic "fire risk") are not
-> candidates.
->
-> **Still open from 2026-10-19:** in general scientific text "FWI" often means
+> **C. Still open from 2026-10-19:** in general scientific text "FWI" often means
 > something else (full waveform inversion, Forest Watch Indonesia, fatal work
 > injuries); we count a bare "FWI" only when the same paper also says "fire
 > weather" or a longer fire-weather phrase. **Is that the right rule for the
 > fire-weather literature you have in mind?**
 
-> ### **First question for the next one-on-one**
->
-> *For 2026-10-22 this is asked as question 1 above, in GUIDANCE's sharper wording (D-028).*
+> ### **Answered 2026-10-22 --- the earlier first question**
 >
 > **"Does the intended bridge require literature to match the exact ClimRR metric/scenario, or is support at the broader hazard/concept level sufficient when unmatched dimensions are explicitly disclosed?"**
 >
-> **Why it matters:** it decides whether a paper about heat-index trends can support a record built on *days above 105°F* — the same hazard family, but not the same measure, and usually without the record's emissions scenario.
->
-> **What it unblocks:** the final set of relation categories for connecting a paper to a table record, and the design of the questions the benchmark will eventually ask.
+> Asked on 2026-10-22 as question 1, in GUIDANCE's sharper wording (D-028); answer "good" --- the family-level table-side object is accepted, with the exact measure and scenario kept as provenance (D-029).
 
 *Unchanged since 2026-09-13 and still outstanding: the sheet was brought to the one-on-ones of 2026-09-17 and 2026-09-24 and not reviewed at either (R-003).*
 
@@ -177,6 +143,7 @@ listed here so the whole question inventory stays in one place. Each is
 | 2026-09-10 | Q0 | There is no additional metadata for the table — no newer data dictionary, no assembly document or script, no release note. | R-001, D-010. **Q0 closed, answered negative.** Paraphrase, not verbatim. |
 | 2026-09-10 | Q1–Q18 | "We do not need to use all the fields. We could let an AI reason out what the columns mean and use the fields that are reliable or can be reasonably explained. Each row stands for one event, so those fields can be used to construct the event and then build the connection to the literature. She wants to see examples." | R-002, D-010 (**approved 2026-09-13, with the GUIDANCE ruling incorporated as D-011**). A direction, not a column meaning: **no per-column answer was given for any of Q1–Q18**, and none was recorded. "Each row stands for one event" is Kaiyuan's reading and is **still to be confirmed with you** — it is line 1 of every checklist in `MENTOR_EXAMPLES.md`. Paraphrase, not verbatim. |
 | 2026-09-17, 2026-09-24 | — | No review of the `MENTOR_EXAMPLES` answer sheet occurred. | R-003, D-014. **No line answered; no status changed.** Not an answer to any question --- recorded because the ruling requires the outcome to be recorded either way. |
+| 2026-10-22 | Meeting questions 1--3 of the 2026-10-22 list (not inventory Q1--Q3) | Q1 (exact metric vs governed family-level quantity with metric and scenario as provenance): "good" --- family-level table-side object accepted. Q2 (state / multi-state / climate-region as table-side geography): "good" --- accepted. Q3 (cross-location comparison as a question type): "good" --- accepted. | D-029. Owner-relayed by Kaiyuan. **Names no column; no status changed.** Meeting question 4 not discussed; open. |
 
 ## Meeting log
 
@@ -281,6 +248,58 @@ diagnostic hits). **Asked:** for a larger source.
 that I shared with you have 200K version of filtered climate dataset with name
 full_705k_v2_filtered. This contains actually 186,346 json files."* Received
 and pinned 2026-10-19 (D-023). Nothing else from the meeting is recorded here.
+
+### 2026-10-22 — mentor one-on-one
+
+**Brought:** the *For Thursday 2026-10-22* block of this brief (the seven
+discussion families with their coverage counts, and four questions in priority
+order).
+
+**Answers, as relayed by Kaiyuan** (owner-relayed facts, recorded in his words;
+D-029):
+
+- **Q1** (exact ClimRR metric vs governed family-level quantity with metric /
+  scenario as provenance): mentor answer "good" --- family-level table-side
+  object accepted.
+- **Q2** (state / multi-state / climate-region as table-side geography):
+  "good" --- accepted.
+- **Q3** (cross-location comparison as a question type): "good" --- accepted.
+- **Q4** (which of temperature, precipitation, wind speed, consecutive dry days,
+  degree days should enter the benchmark): **not discussed; stays open.**
+
+**Mentor's overall direction, verbatim as relayed:**
+
+> "right now we hardly find solid links; soften the rules or involve semantic
+> understanding like an LLM agent to get soft-constrained QAs; as long as the
+> original resources from both the table side and the paper side are recorded,
+> someone can manually check the quality of the QA with that recorded
+> information."
+
+**Two directions the mentor asked us to try:**
+
+- **Track C (D-030)** --- LLM-assisted grouping over the LITCORPUS-02
+  place-candidate papers: passage → unit → QA type → one example QA pair →
+  rationale, each an `llm_candidate` with exact provenance.
+- **Track D (D-031)** --- table-grounded question templates on the slot
+  mechanism of the mentor-supplied reference repository (D-032), with answers
+  computed deterministically from the table.
+
+Both are **mentor-directed and take precedence over earlier GUIDANCE "do not do
+yet" items they touch**; GUIDANCE is being informed and asked for guardrails,
+not approval. The governing principle is D-029.
+
+**Also supplied:** `LLM_Eval-main.zip` (WildfireGPT question templates and
+literature-review pipeline), recorded in [`REFERENCES.md`](REFERENCES.md)
+(D-032); nothing from it is stored in the repository.
+
+**No column status moved.** The answers name no column, so no record is made in
+`data/metadata/resolutions.yaml`; all 20 `inferred_candidate` columns stay as
+they are. The answer sheet in `MENTOR_EXAMPLES.md` was not reviewed. The
+"FWI" disambiguation question of 2026-10-19 received no recorded answer and is
+carried.
+
+**Newly asked:** which QA types and which human check protocol the mentor wants
+for soft-constrained QAs.
 
 ---
 

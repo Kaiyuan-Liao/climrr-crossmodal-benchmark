@@ -73,6 +73,7 @@ KNOWLEDGE_FILES = (
     "docs/LITERATURE_WP4_READING.md",
     "docs/DICTIONARY_CONCEPTS.md",
     "docs/TRACKB_STAGE2_RUN2_GUIDANCE_RULING.md",
+    "docs/REFERENCES.md",
 )
 
 DEST_DIR = REPO_ROOT / "refresh_knowledge"
