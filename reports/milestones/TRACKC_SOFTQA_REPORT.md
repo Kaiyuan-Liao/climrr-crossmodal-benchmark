@@ -27,7 +27,8 @@ computing any table-side value, Track D design, merging, pushing.
 | --- | --- |
 | Branch | `work/meeting-2026-10-22`, from head `9e16391` |
 | **Freeze commit** | **`4fb887f`** --- schema, protocol, form, view, inputs, agent, tests, D-033, manifest pins. **Schema v1 and protocol v1 are frozen at `4fb887f`.** |
-| Report commit | the commit carrying this report and the `PROJECT_STATE.md` refresh (head SHA reported to the COORDINATOR) |
+| Report commit | `12145e0` (this report, fields 1--9, and the `PROJECT_STATE.md` refresh) |
+| Follow-up commit | the commit carrying the COORDINATOR's decisions (D-033 addendum) and the re-pinned units file (head SHA reported to the COORDINATOR). The schema, protocol, QA types, candidate list and agent are unchanged since `4fb887f` |
 | Remote | **not pushed, not merged** |
 
 ## 4. Data version and checksums
@@ -36,7 +37,7 @@ computing any table-side value, Track D design, merging, pushing.
 | --- | --- | --- | --- |
 | `docs/TRACKC_TRACKD_SOFT_QA_GUARDRAILS_RULING.md` | `1d1b3bb8faebb3fd477624b54eca643ec641caec66740c02464a8a1f31937d39` | | verbatim copy; equals the delivered file |
 | **`data/metadata/softqa/candidate_schema_v1.json`** | **`6a62e3e10fde1ce2aa10b1b4c1baa8be14c7815afaa0f8e97349e02d47414d0b`** | 19,876 | pinned in `data/manifest.json`; `-text` |
-| **`data/metadata/softqa/units_definitions_v1.json`** | **`61e4c7fe3af2c23430cdda0c62bf72ee7373c558c29c642d3543f4a00877fc82`** | 3,651 | pinned; `-text` |
+| **`data/metadata/softqa/units_definitions_v1.json`** | **`0cf496a1854933cf96ebc9ef06c59ba29a15691bba574d87dd760f70019f282e`** | 3,650 | pinned; `-text`; UTF-8 (°). **Re-pinned in the follow-up** (P-STATE-1 names its metric); was `61e4c7fe…7c82`, 3,651 bytes, at `4fb887f` |
 | **`data/metadata/softqa/qa_types_v1.json`** | **`bc425268fc9fc56a5727b80286a8402fb011c1a2817f4d880c2e7206df3e567d`** | 2,261 | pinned; `-text` |
 | **`data/metadata/softqa/trackc_candidates_v1.json`** | **`6fb9c911acb07f4798fea90332be389a9327351174038167849a02daff23c943`** | 13,036 | pinned; `-text`; 243 records |
 | `data/metadata/softqa/review_form_v1.yaml` | `804bd3c0f8344f24b3126cff4a1fe916ad0538c0c034cb289b1c9f1ad2eb3790` | 1,781 | pinned; `-text` |
@@ -100,16 +101,19 @@ No data rule was applied: nothing was filtered, aggregated, converted or
 renamed, and no table value was read. The rules below shape what the agent and
 the reviewer will see, and are put to the COORDINATOR.
 
-1. **Unit definitions carry no number and no direction** (tested: only years,
-   `R106C361`, `RCP8.5`, unit ids and version labels contain digits; none of
-   *value / increase / decrease / change by*). Every FWI definition says "not
+1. **Unit definitions carry no computed number and no direction** (tested:
+   only years, `R106C361`, `RCP8.5`, unit ids, version labels and the P-STATE-1
+   threshold `105 °F` contain digits; none of *value / increase / decrease /
+   change by*). Every FWI definition says "not
    fire occurrence"; every historical window is "modeled historical baseline".
-2. **P-STATE-1 is described at family level** ("the summer heat index, with the
-   exact ClimRR metric kept as provenance"). Its actual metric is a count of
-   summer days above a heat-index threshold; the threshold is a number and the
-   metric term is `proposed` (D-018), so the definition omits it. Consequence:
-   the agent may link P-STATE-1 to heat-index passages that are not about
-   threshold days; the reviewer's concept judgment must catch that.
+2. **P-STATE-1 names its metric** (follow-up, COORDINATOR): "The number of
+   summer days with daily maximum heat index above 105 °F, over the ClimRR rows
+   labelled State California, comparing the modeled historical baseline
+   1995-2004 with the modeled end-century decade 2085-2094 under RCP8.5." The
+   threshold is the metric's name and is allowed; no computed value, no
+   direction. *At `4fb887f` the definition was family-level only ("the summer
+   heat index, with the exact ClimRR metric kept as provenance"), which risked
+   links to heat-index passages not about threshold days; superseded.*
 3. **Family surface terms** = the concept map's `approved_lexical` terms (FWI:
    5; heat index: 2), `extended heat index` excluded (tested against
    `concept_map.yaml`). Place terms: `oklahoma`, `stephens` (P-COUNTY-1),
@@ -170,7 +174,20 @@ PYTHONPATH="$CLIMRR_REPO/src" python "$CLIMRR_REPO/scripts/litcollect/softqa_age
     --source-commit "$(git -C "$CLIMRR_REPO" rev-parse HEAD)"
 ```
 
-**For the COORDINATOR before the run --- found, not resolved:**
+**COORDINATOR decisions (2026-10-27, follow-up; D-033 addendum)** on the items
+below:
+
+- **(a) accepted:** concept/place term location anywhere in the paper stands as
+  the pre-check; semantic adequacy of the occurrence is the reviewer's judgment.
+- **(b) decided:** P-CELL-1 and P-COUNTY-1 candidates may be proposed and
+  reviewed but **cannot reach `accepted` / `accepted_after_edit` until the FWI
+  column meanings (IC-006, IC-008, IC-010) are owner-confirmed** --- now the
+  first question in `docs/MENTOR_BRIEF.md`.
+- **(e) accepted:** the invocation in `src/climrr/softqa.py`'s docstring is fine.
+- **P-STATE-1's definition** now names its metric (field 8, item 2).
+- (c), (d), (f), (g): no decision recorded; they stand as disclosed.
+
+**As found before the run (pre-decision wording kept for the record):**
 
 - **(a) Term location is paper-wide.** The agent locates concept and place
   terms anywhere in the paper; the earlier §10 wording said "in the passage".
@@ -220,8 +237,9 @@ invocation location; run record per view; built-in validator).
 
 ## 13. Open decisions and mentor questions
 
-**PENDING --- COORDINATOR / GUIDANCE on 9a--9b; mentor on which QA types to keep
-and on the reviewer** (`docs/MENTOR_BRIEF.md`, item A).
+9a, 9b and 9e decided by the COORDINATOR (field 9). **PENDING --- the mentor:
+confirmation of the FWI columns (brief question 0; gates `accepted` for
+P-CELL-1 / P-COUNTY-1), which QA types to keep and the reviewer** (item A).
 
 ## 14. Proposed gate status
 

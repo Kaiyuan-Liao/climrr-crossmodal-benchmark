@@ -137,7 +137,7 @@ def test_schema_hash_is_pinned_in_the_manifest():
         p = SOFTQA / name
         assert e["sha256"] == sha256_file(p) and e["bytes"] == p.stat().st_size, name
         assert e["decision_ref"] == "D-033"
-        p.read_bytes().decode("ascii")  # ASCII content, as the manifest's encoding note says
+        p.read_bytes().decode("utf-8" if name == "units_definitions_v1.json" else "ascii")  # as the encoding note says
         assert b"\r" not in p.read_bytes()
 
 
@@ -244,7 +244,8 @@ def test_builtin_validator_agrees_with_jsonschema(schema):
 
 # --- Track C inputs --------------------------------------------------------------
 
-ALLOWED_NUMERIC = re.compile(r"\b(?:19|20)\d{2}\b|R106C361|RCP8\.5|P-(?:CELL|COUNTY|STATE)-1|\bv\d\b|_v\d\b")
+#: Years, labels, and the P-STATE-1 metric's threshold (COORDINATOR, D-033 addendum: the threshold is the metric name).
+ALLOWED_NUMERIC = re.compile(r"\b(?:19|20)\d{2}\b|R106C361|RCP8\.5|P-(?:CELL|COUNTY|STATE)-1|\bv\d\b|_v\d\b|105 \u00b0F")
 
 
 def test_unit_definitions_carry_no_number_and_no_direction():
@@ -271,6 +272,14 @@ def test_units_pass_the_agents_startup_check_and_match_the_concept_map():
     assert {u["unit_id"]: u["place_label"] for u in units}["F-FWI"] == "none"
     assert [u["family"] for u in units] == ["fire_weather_index"] * 2 + ["heat_index", "fire_weather_index",
                                                                          "heat_index"]
+
+
+def test_p_state_1_names_its_metric_and_threshold():
+    units = {u["unit_id"]: u for u in json.loads((SOFTQA / "units_definitions_v1.json").read_text(encoding="utf-8"))["units"]}
+    assert units["P-STATE-1"]["definition"].startswith(
+        "The number of summer days with daily maximum heat index above 105 \u00b0F, over the ClimRR rows")
+    text = (SOFTQA / "units_definitions_v1.json").read_text(encoding="utf-8")
+    assert text.count("105") == 1                                     # the threshold, nowhere else
 
 
 def test_fwi_definitions_say_index_not_fire_and_historical_is_modeled():

@@ -1965,3 +1965,28 @@ code emits, and the next GUIDANCE packet still chooses.
   `docs/BRIDGE_ELIGIBILITY.md`, `docs/SOFTQA_REVIEW_PROTOCOL.md`,
   `scripts/stage_knowledge.py` (`KNOWLEDGE_FILES`), `data/manifest.json`,
   `CLAUDE.md` (run-record exemption list).
+- **Addendum (COORDINATOR, 2026-10-27, before the Track C run; on `12145e0`).**
+  Decisions on the items the pre-run report (field 9) put to the COORDINATOR:
+  1. **Term location anywhere in the paper is accepted as a pre-check.** The
+     agent's paper-wide, first-occurrence location of concept and place terms
+     stands as the deterministic check; whether the occurrence is semantically
+     adequate (e.g. `stephens` as a surname, bare `FWI` as another index) is the
+     reviewer's judgment.
+  2. **P-CELL-1 and P-COUNTY-1 candidates may be proposed and reviewed but cannot
+     reach `accepted` (or `accepted_after_edit`) until the FWI column meanings
+     are owner-confirmed.** Their `wildfire_summer_*` columns are
+     `inferred_candidate` (IC-006, IC-008, IC-010); the question goes to the
+     mentor as the first item in `docs/MENTOR_BRIEF.md`. P-STATE-1 (verified
+     heat-index columns), F-FWI and F-HEAT are not affected by this rule.
+  3. **The Polaris invocation in `src/climrr/softqa.py`'s docstring is fine**;
+     the agent stays byte-identical.
+  4. **P-STATE-1's definition names its metric**: "number of summer days with
+     daily maximum heat index above 105 °F" --- the threshold is the metric's
+     name, so it is allowed; still no computed value and no direction.
+     `units_definitions_v1.json` re-pinned (`61e4c7fe…7c82` → `0cf496a1…282e`);
+     the no-digits test allows that threshold string only.
+
+  Affected files: `data/metadata/softqa/units_definitions_v1.json`,
+  `data/manifest.json` (entry and amendment), `tests/test_softqa.py`,
+  `docs/BRIDGE_ELIGIBILITY.md` §10, `docs/MENTOR_BRIEF.md`,
+  `docs/PROJECT_STATE.md`, `reports/milestones/TRACKC_SOFTQA_REPORT.md`.

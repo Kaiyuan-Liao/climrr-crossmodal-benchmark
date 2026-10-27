@@ -43,9 +43,11 @@ session reasoning correctly from out-of-date facts and repeating them.
   F-HEAT), six candidate QA types; `scripts/litcollect/softqa_agent.py`
   (`159e2c5c…397c`, byte-identical); records in `candidate_schema_v1.json`;
   review by `docs/SOFTQA_REVIEW_PROTOCOL.md`. ALCF Metis `gpt-oss-120b`;
-  Polaris, restartable. **Open for the COORDINATOR before the run:**
-  paper-wide term location (`stephens`, bare `FWI`); `verified_columns_only` vs
-  the `inferred_candidate` FWI columns (report field 9).
+  Polaris, restartable. **COORDINATOR follow-up (D-033 addendum):** paper-wide
+  term location accepted as a pre-check; **P-CELL-1 / P-COUNTY-1 candidates
+  cannot reach `accepted` until the FWI columns are owner-confirmed** (mentor
+  brief, question 0); P-STATE-1 definition names its metric (105 °F; units file
+  re-pinned `0cf496a1…282e`).
 - **Track D --- design pending (D-031, D-033):** table-grounded slot templates
   (`[CONCEPT]`, `[LOCATION]`, `[PERIOD]`, `[SCENARIO]`, `[SEASON]`,
   `[STATISTIC]`), answers computed from the table; slots only on

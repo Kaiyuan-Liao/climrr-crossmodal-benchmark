@@ -163,11 +163,11 @@
       "filename": "units_definitions_v1.json",
       "path": "data/metadata/softqa/units_definitions_v1.json",
       "role": "Track C unit definitions v1 --- definitions only, no table values and no direction (D-033 agent visibility): P-CELL-1, P-COUNTY-1, P-STATE-1 v2 and the family pseudo-units F-FWI, F-HEAT",
-      "sha256": "61e4c7fe3af2c23430cdda0c62bf72ee7373c558c29c642d3543f4a00877fc82",
-      "bytes": 3651,
+      "sha256": "0cf496a1854933cf96ebc9ef06c59ba29a15691bba574d87dd760f70019f282e",
+      "bytes": 3650,
       "row_count": null,
       "column_count": null,
-      "encoding_note": "UTF-8 (ASCII content), LF line endings, no byte-order mark. Pinned -text in .gitattributes (data/metadata/softqa/**).",
+      "encoding_note": "UTF-8 (contains U+00B0 DEGREE SIGN), LF line endings, no byte-order mark. Pinned -text in .gitattributes (data/metadata/softqa/**).",
       "acquisition_date": "2026-10-27",
       "storage_policy": "tracked in ordinary Git as an immutable object; a change is a new version with its own decision",
       "tracked_in_git": true,
@@ -354,6 +354,12 @@
       "milestone": "Track C soft-QA schema, protocol and inputs (pre-run)",
       "change": "Added five data/metadata/softqa/ files (candidate_schema_v1.json, review_form_v1.yaml, units_definitions_v1.json, qa_types_v1.json, trackc_candidates_v1.json), frozen before any generation run. Existing entries unchanged.",
       "decision_ref": "D-033"
+    },
+    {
+      "date": "2026-10-27",
+      "milestone": "Track C pre-run follow-up (COORDINATOR)",
+      "change": "units_definitions_v1.json re-pinned: P-STATE-1's definition names its metric, 'number of summer days with daily maximum heat index above 105 °F' (the threshold is the metric name; no computed value, no direction). Previous SHA-256 61e4c7fe3af2c23430cdda0c62bf72ee7373c558c29c642d3543f4a00877fc82 (at 4fb887f). Encoding note updated (U+00B0). Every other entry unchanged.",
+      "decision_ref": "D-033 (addendum)"
     }
   ],
   "external_corpora": [

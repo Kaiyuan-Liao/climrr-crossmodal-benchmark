@@ -15,7 +15,15 @@ Last updated: 2026-10-27   Next meeting: not yet scheduled --- bring the items u
 > ### **For the next meeting**
 >
 > Questions 1--3 of the 2026-10-22 list were answered "good" (see the meeting log). Two items are carried and
-> one is new.
+> two are new.
+>
+> **0. New, first --- can you confirm what the summer Fire Weather Index columns hold?** Our reading, not yet
+> confirmed by anyone: `wildfire_summer_Hist` is the modeled historical (1995--2004) summer Fire Weather Index,
+> `wildfire_summer_Endc` the end-century (2085--2094) RCP8.5 value, and `wildfire_summer_Dend` the difference
+> between them (records IC-006, IC-008, IC-010; line 7 of the `MENTOR_EXAMPLES` answer sheet asks which way round
+> the difference is taken). Two of our three table-side units (P-CELL-1, P-COUNTY-1) rest on these columns. Their
+> soft-QA candidates can be proposed and reviewed, but **none can be accepted into the benchmark until you confirm
+> (or correct) this reading** (D-033 addendum). A confirm / correct / don't know per column is enough.
 >
 > **A. New --- soft-constrained QAs (D-029).** *Which QA types do you want for the soft-constrained QAs, and
 > which human check protocol should a reviewer follow when judging one?* The candidate types we have so far are

@@ -289,8 +289,9 @@ Among them:
 2. The concept terms and the place terms the candidate relies on are located.
    *As implemented by `softqa_agent v1`:* located as the first whole-word,
    case-insensitive occurrence **anywhere in the paper**, not within the passage
-   (this section's earlier wording said "in the passage"; the difference is open
-   for the COORDINATOR). For a `different` geography relation the place check
+   (this section's earlier wording said "in the passage"). **Accepted by the
+   COORDINATOR as a pre-check (D-033 addendum)**; whether an occurrence is
+   semantically adequate is the reviewer's judgment. For a `different` geography relation the place check
    instead requires the paper to name its own place with role `study_area` or
    `cited_study_area`.
 3. The place role is recorded (§8).
@@ -316,6 +317,11 @@ reviewer after the deterministic checks; a mandatory second reviewer for the ten
 listed high-risk cases; adjudication on disagreement; evidence first, agent
 rationale and confidence last (`scripts/softqa_review_view.py`); the ten-item
 checklist (`data/metadata/softqa/review_form_v1.yaml`).
+
+**FWI units held below `accepted` (D-033 addendum).** P-CELL-1 and P-COUNTY-1
+candidates may be proposed and reviewed but cannot reach `accepted` or
+`accepted_after_edit` until the meanings of their `wildfire_summer_*` columns
+(`inferred_candidate`: IC-006, IC-008, IC-010) are owner-confirmed.
 
 **Variable governance.** No unverified column in any semantic, retrieval, answer
 or comparison slot --- "query-only use is still semantic use".
