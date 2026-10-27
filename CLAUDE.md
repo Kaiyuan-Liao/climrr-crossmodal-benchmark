@@ -128,6 +128,10 @@ Track B (D-026, COORDINATOR-confirmed) adds `scripts/litcollect/survey_driver.py
 and `probe_alcf_inference.py`, also run on Polaris and kept byte-identical to the
 delivered files: their `survey.log`, per-concept `candidates.json` / `row.json`,
 `survey_table.csv` and `probe_alcf_inference.json` are the run evidence.
+Track C (D-033) adds `scripts/litcollect/softqa_agent.py`, run on Polaris and kept
+byte-identical to the delivered file: its `agent.log`, per-paper `result.json` /
+`prompt_user.txt` / `response.json`, `candidates.jsonl` and `summary.json` are the
+run evidence.
 
 ## Knowledge-refresh staging
 

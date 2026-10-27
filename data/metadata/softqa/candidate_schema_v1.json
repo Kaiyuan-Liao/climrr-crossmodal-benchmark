@@ -1,0 +1,806 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "climrr/softqa/candidate_schema_v1",
+  "title": "Soft-QA candidate record, v1",
+  "description": "D-029 / D-033 (docs/TRACKC_TRACKD_SOFT_QA_GUARDRAILS_RULING.md). The seven field groups are the ruling's, field for field. Table-side and human-review fields are null until their stage. agent_record and mapping are supplementary: the generator's output verbatim (incl. the example question and confidence, needed for review and for freezing the final QA separately) and the mapper's notes on what is pending.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "candidate_identity",
+    "paper_provenance",
+    "table_provenance",
+    "soft_link",
+    "generation_controls",
+    "deterministic_validation",
+    "human_review",
+    "agent_record",
+    "mapping"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "softqa_candidate_v1"
+    },
+    "status": {
+      "enum": [
+        "llm_candidate",
+        "deterministic_pass",
+        "human_review",
+        "accepted",
+        "rejected_pre_review",
+        "needs_second_review",
+        "needs_adjudication",
+        "rejected_human",
+        "accepted_after_edit"
+      ]
+    },
+    "candidate_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id",
+        "track",
+        "generator_version",
+        "generator_model",
+        "prompt_hash",
+        "generation_timestamp",
+        "source_commit"
+      ],
+      "properties": {
+        "candidate_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable id, e.g. C-<paper_item_id>-<nn> for Track C."
+        },
+        "track": {
+          "enum": [
+            "C",
+            "D"
+          ],
+          "description": "D-030 (C) or D-031 (D)."
+        },
+        "generator_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generator_model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prompt_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "SHA-256 of the exact prompt sent (system + user)."
+        },
+        "generation_timestamp": {
+          "type": "string",
+          "minLength": 1,
+          "description": "UTC, ISO 8601."
+        },
+        "source_commit": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Repository commit the generator inputs were taken from."
+        }
+      }
+    },
+    "paper_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paper_item_id",
+        "paper_sha256",
+        "json_path",
+        "span_start",
+        "span_end",
+        "verbatim_passage",
+        "claim_or_passage_type",
+        "paper_geography",
+        "paper_geography_role",
+        "paper_time",
+        "paper_scenario",
+        "paper_concept"
+      ],
+      "properties": {
+        "paper_item_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "paper_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "SHA-256 of the source file bytes."
+        },
+        "json_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Path of the section holding the passage, e.g. $.<section_key>. Null when the passage did not re-slice."
+        },
+        "span_start": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Zero-based code-point offset, inclusive, on the unnormalized section string."
+        },
+        "span_end": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Zero-based code-point offset, exclusive."
+        },
+        "verbatim_passage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The passage as proposed. It is evidence only if span_reslice_pass is true."
+        },
+        "claim_or_passage_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "E.g. the paper's own result vs a background/cited claim. Not produced by softqa_agent v1."
+        },
+        "paper_geography": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "As the paper names it, or 'unknown'."
+        },
+        "paper_geography_role": {
+          "enum": [
+            "study_area",
+            "cited_study_area",
+            "contextual",
+            "affiliation",
+            "person_or_citation",
+            "data_source",
+            "unknown",
+            null
+          ],
+          "description": "Role of the paper's place (BRIDGE_ELIGIBILITY section 8 vocabulary as used by the agent)."
+        },
+        "paper_time": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "As stated, or 'unknown'."
+        },
+        "paper_scenario": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "As stated, or 'unknown'."
+        },
+        "paper_concept": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The quantity the passage is about, as the paper names it."
+        }
+      }
+    },
+    "table_provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit_id_or_template_id",
+        "table_data_sha256",
+        "row_ids",
+        "column_ids",
+        "column_statuses",
+        "raw_cell_values",
+        "derived_value",
+        "derivation_rule_id",
+        "concept_family",
+        "metric",
+        "location",
+        "period",
+        "scenario",
+        "season",
+        "statistic"
+      ],
+      "properties": {
+        "unit_id_or_template_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Unit (Track C) or filled template (Track D)."
+        },
+        "table_data_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "SHA-256 of data/raw/FullData.csv as read."
+        },
+        "row_ids": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Row identifiers, as text."
+        },
+        "column_ids": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Column names, verbatim."
+        },
+        "column_statuses": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Column name -> M1 status at computation time."
+        },
+        "raw_cell_values": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Raw cell strings as read (dtype=str), keyed by row and column."
+        },
+        "derived_value": {
+          "description": "Deterministically computed value; never LLM-authored."
+        },
+        "derivation_rule_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Versioned derivation rule."
+        },
+        "concept_family": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Governed concept-map family."
+        },
+        "metric": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Exact metric, kept as provenance."
+        },
+        "location": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": ""
+        },
+        "period": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": ""
+        },
+        "scenario": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": ""
+        },
+        "season": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": ""
+        },
+        "statistic": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": ""
+        }
+      }
+    },
+    "soft_link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "qa_type",
+        "link_rationale",
+        "concept_relation",
+        "geography_relation",
+        "time_relation",
+        "scenario_relation",
+        "direction_relation",
+        "c_g_t_s_d_audit",
+        "unmatched_dimensions",
+        "assumptions"
+      ],
+      "properties": {
+        "qa_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "One of the permitted QA types (data/metadata/softqa/qa_types_v1.json)."
+        },
+        "link_rationale": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Generator's rationale. Withheld from the reviewer until after the evidence-first judgments."
+        },
+        "concept_relation": {
+          "enum": [
+            "direct",
+            "related",
+            "mismatch",
+            null
+          ],
+          "description": ""
+        },
+        "geography_relation": {
+          "enum": [
+            "same",
+            "contains",
+            "contained_in",
+            "different",
+            "unknown",
+            null
+          ],
+          "description": ""
+        },
+        "time_relation": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Not produced by softqa_agent v1."
+        },
+        "scenario_relation": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Not produced by softqa_agent v1."
+        },
+        "direction_relation": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Not produced by softqa_agent v1."
+        },
+        "c_g_t_s_d_audit": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "C/G/T/S/D judgments, retained for audit; not an acceptance gate (D-033)."
+        },
+        "unmatched_dimensions": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "enum": [
+              "concept",
+              "geography",
+              "time",
+              "scenario",
+              "direction"
+            ]
+          }
+        },
+        "assumptions": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": ""
+        }
+      }
+    },
+    "generation_controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "table_values_visible_to_generator",
+        "answer_visible_to_generator",
+        "retrieval_terms",
+        "retrieval_source"
+      ],
+      "properties": {
+        "table_values_visible_to_generator": {
+          "const": false
+        },
+        "answer_visible_to_generator": {
+          "const": false
+        },
+        "retrieval_terms": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "description": "Terms that selected the paper or passage; every one from the authorized set (no unverified column, even query-only)."
+        },
+        "retrieval_source": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": ""
+        }
+      }
+    },
+    "deterministic_validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "span_reslice_pass",
+        "table_recompute_pass",
+        "concept_location_pass",
+        "place_location_pass",
+        "place_role_recorded",
+        "slot_validation_pass",
+        "verified_columns_only",
+        "pre_review_status"
+      ],
+      "properties": {
+        "span_reslice_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": ""
+        },
+        "table_recompute_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": ""
+        },
+        "concept_location_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": ""
+        },
+        "place_location_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": ""
+        },
+        "place_role_recorded": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": ""
+        },
+        "slot_validation_pass": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": ""
+        },
+        "verified_columns_only": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": ""
+        },
+        "pre_review_status": {
+          "enum": [
+            "llm_candidate",
+            "deterministic_pass",
+            "rejected_pre_review",
+            null
+          ],
+          "description": ""
+        }
+      }
+    },
+    "human_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewer_1_id",
+        "reviewer_1_date",
+        "paper_fidelity",
+        "table_fidelity",
+        "concept_validity",
+        "geography_validity",
+        "temporal_validity",
+        "scenario_validity",
+        "question_validity",
+        "answer_validity",
+        "overclaim_check",
+        "reviewer_1_disposition",
+        "requires_second_review",
+        "reviewer_2_id",
+        "reviewer_2_disposition",
+        "adjudication_status",
+        "final_status",
+        "final_question",
+        "final_answer",
+        "edit_history"
+      ],
+      "properties": {
+        "reviewer_1_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": ""
+        },
+        "reviewer_1_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": ""
+        },
+        "paper_fidelity": {
+          "enum": [
+            "yes",
+            "no",
+            "unclear",
+            null
+          ],
+          "description": ""
+        },
+        "table_fidelity": {
+          "enum": [
+            "yes",
+            "no",
+            "unclear",
+            null
+          ],
+          "description": ""
+        },
+        "concept_validity": {
+          "enum": [
+            "yes",
+            "no",
+            "unclear",
+            null
+          ],
+          "description": ""
+        },
+        "geography_validity": {
+          "enum": [
+            "yes",
+            "no",
+            "unclear",
+            null
+          ],
+          "description": ""
+        },
+        "temporal_validity": {
+          "enum": [
+            "yes",
+            "no",
+            "unclear",
+            null
+          ],
+          "description": ""
+        },
+        "scenario_validity": {
+          "enum": [
+            "yes",
+            "no",
+            "unclear",
+            null
+          ],
+          "description": ""
+        },
+        "question_validity": {
+          "enum": [
+            "yes",
+            "no",
+            "unclear",
+            null
+          ],
+          "description": ""
+        },
+        "answer_validity": {
+          "enum": [
+            "yes",
+            "no",
+            "unclear",
+            null
+          ],
+          "description": ""
+        },
+        "overclaim_check": {
+          "enum": [
+            "yes",
+            "no",
+            "unclear",
+            null
+          ],
+          "description": "yes = the QA avoids implying stronger equivalence or causation than supported."
+        },
+        "reviewer_1_disposition": {
+          "enum": [
+            "accept",
+            "accept_with_edit",
+            "ambiguous",
+            "reject",
+            null
+          ],
+          "description": ""
+        },
+        "requires_second_review": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": ""
+        },
+        "reviewer_2_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": ""
+        },
+        "reviewer_2_disposition": {
+          "enum": [
+            "accept",
+            "accept_with_edit",
+            "ambiguous",
+            "reject",
+            null
+          ],
+          "description": ""
+        },
+        "adjudication_status": {
+          "enum": [
+            "not_required",
+            "pending",
+            "resolved",
+            null
+          ],
+          "description": ""
+        },
+        "final_status": {
+          "enum": [
+            "llm_candidate",
+            "deterministic_pass",
+            "human_review",
+            "accepted",
+            "rejected_pre_review",
+            "needs_second_review",
+            "needs_adjudication",
+            "rejected_human",
+            "accepted_after_edit",
+            null
+          ],
+          "description": ""
+        },
+        "final_question": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Frozen separately from the LLM proposal."
+        },
+        "final_answer": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Frozen separately from the LLM proposal; from deterministic computation where possible."
+        },
+        "edit_history": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "object",
+            "required": [
+              "reviewer_id",
+              "date",
+              "field",
+              "before",
+              "after"
+            ],
+            "properties": {
+              "reviewer_id": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              },
+              "field": {
+                "type": "string"
+              },
+              "before": {},
+              "after": {},
+              "reason": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "agent_record": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The generator's record verbatim (supplementary)."
+    },
+    "mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mapper_version",
+        "pending_stages",
+        "invalid_agent_values"
+      ],
+      "properties": {
+        "mapper_version": {
+          "type": "string"
+        },
+        "pending_stages": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "group.field -> the stage that fills it (null until then)."
+        },
+        "invalid_agent_values": {
+          "type": "object",
+          "description": "group.field -> agent value rejected by the schema vocabulary (kept verbatim in agent_record)."
+        }
+      }
+    }
+  }
+}

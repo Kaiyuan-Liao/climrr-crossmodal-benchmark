@@ -74,6 +74,7 @@ KNOWLEDGE_FILES = (
     "docs/DICTIONARY_CONCEPTS.md",
     "docs/TRACKB_STAGE2_RUN2_GUIDANCE_RULING.md",
     "docs/REFERENCES.md",
+    "docs/TRACKC_TRACKD_SOFT_QA_GUARDRAILS_RULING.md",
 )
 
 DEST_DIR = REPO_ROOT / "refresh_knowledge"

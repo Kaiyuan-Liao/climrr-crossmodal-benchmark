@@ -1,0 +1,50 @@
+{
+  "units_id": "softqa_units_definitions_v1",
+  "statement": "Definitions only, for the Track C proposal agent. No table number and no direction are given on purpose. Definitions are taken from docs/PHENOMENON_PROTOTYPES.md (P-STATE-1 as its v2 record); family surface terms are the approved_lexical terms of data/metadata/concept_map.yaml (approved_family_term excluded); place terms are drawn from the approved place-term set (oklahoma, stephens, california). F-FWI and F-HEAT are family-level pseudo-units. Historical periods are modeled baselines, never observations; the Fire Weather Index is a meteorological fire-danger index, never fire occurrence. Decision references are in data/manifest.json.",
+  "units": [
+    {
+      "unit_id": "P-CELL-1",
+      "family": "fire_weather_index",
+      "definition": "The summer (June, July and August) Fire Weather Index, a meteorological fire-danger index and not fire occurrence, at the single ClimRR grid cell R106C361, comparing the modeled historical baseline 1995-2004 with the modeled end-century decade 2085-2094 under RCP8.5.",
+      "family_surface_terms": ["fire weather index", "FWI", "fire-weather index", "canadian forest fire weather index", "canadian fwi"],
+      "place_label": "grid cell R106C361",
+      "place_terms": [],
+      "variable_status": "inferred_candidate"
+    },
+    {
+      "unit_id": "P-COUNTY-1",
+      "family": "fire_weather_index",
+      "definition": "The summer (June, July and August) Fire Weather Index, a meteorological fire-danger index and not fire occurrence, over the ClimRR rows labelled State Oklahoma and NAME Stephens, comparing the modeled historical baseline 1995-2004 with the modeled end-century decade 2085-2094 under RCP8.5.",
+      "family_surface_terms": ["fire weather index", "FWI", "fire-weather index", "canadian forest fire weather index", "canadian fwi"],
+      "place_label": "rows labelled State Oklahoma, NAME Stephens (reading the labels as a state and a county name is inferred_candidate)",
+      "place_terms": ["oklahoma", "stephens"],
+      "variable_status": "inferred_candidate"
+    },
+    {
+      "unit_id": "P-STATE-1",
+      "unit_version": "v2",
+      "family": "heat_index",
+      "definition": "The summer heat index, with the exact ClimRR metric kept as provenance, over the ClimRR rows labelled State California, comparing the modeled historical baseline 1995-2004 with the modeled end-century decade 2085-2094 under RCP8.5.",
+      "family_surface_terms": ["heat index", "heat-index"],
+      "place_label": "rows labelled State California (reading the label as a state name is inferred_candidate)",
+      "place_terms": ["california"],
+      "variable_status": "verified_from_dictionary"
+    },
+    {
+      "unit_id": "F-FWI",
+      "family": "fire_weather_index",
+      "definition": "The Fire Weather Index family as a whole, a meteorological fire-danger index and not fire occurrence, as projected in ClimRR for modeled historical and future periods; the exact metric, season and scenario are kept as provenance, not fixed here.",
+      "family_surface_terms": ["fire weather index", "FWI", "fire-weather index", "canadian forest fire weather index", "canadian fwi"],
+      "place_label": "none",
+      "place_terms": []
+    },
+    {
+      "unit_id": "F-HEAT",
+      "family": "heat_index",
+      "definition": "The heat index family as a whole, as projected in ClimRR for modeled historical and future periods; the exact metric, season and scenario are kept as provenance, not fixed here.",
+      "family_surface_terms": ["heat index", "heat-index"],
+      "place_label": "none",
+      "place_terms": []
+    }
+  ]
+}

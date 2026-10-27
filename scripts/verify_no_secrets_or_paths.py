@@ -70,12 +70,13 @@ FORBIDDEN_PATTERNS = [
     ("credential-bearing word", re.compile(r"\b" + "pass" + r"word\b", re.IGNORECASE)),
 ]
 
-# Hash-pinned exemption from the credential-word rule only (D-026, D-027). Path -> SHA-256.
-# survey_driver.py: v4 (Track B run 2); v3 was e1fb664c...f4cd.
+# Hash-pinned exemption from the credential-word rule only (D-026, D-027, D-033). Path -> SHA-256.
+# survey_driver.py: v4 (Track B run 2); v3 was e1fb664c...f4cd. softqa_agent.py: Track C v1, as delivered.
 WORD_EXEMPTION_LABEL = "credential-bearing word"
 WORD_EXEMPTIONS = {
     "scripts/litcollect/survey_driver.py": "f929ab6a366987d29e5565fe9fa9f80b47cb1c57d19e01ff3af5affdd99baf9f",
     "scripts/litcollect/probe_alcf_inference.py": "79181c48981c709b49b90d78fc8aaddffaf12d2f1bb0591b9a9daa3aad438c66",
+    "scripts/litcollect/softqa_agent.py": "159e2c5c4f00608da37b1bc85556fecfd82dbd2e1a5abfd10c59a2e46061397c",
     "docs/M4_WP4_TRACKB_GUIDANCE_RULING.md": "ae4129d3a16c5b4d9b60422b5ef37022b21b441c8d60affc0bf793ffab246402",
 }
 

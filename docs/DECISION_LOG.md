@@ -1884,3 +1884,84 @@ code emits, and the next GUIDANCE packet still chooses.
   this record and the `docs/REFERENCES.md` entry.
 - **Affected files:** `docs/DECISION_LOG.md`, `docs/REFERENCES.md`,
   `scripts/stage_knowledge.py` (`KNOWLEDGE_FILES`).
+
+## D-033 --- Track C / Track D soft-QA guardrails: PASS WITH ACTIONS (guardrail update)
+
+- **Date:** 2026-10-27 (GUIDANCE ruling); recorded 2026-10-27.
+- **Status:** **decided.**
+- **Owner:** **GUIDANCE**, placed by Kaiyuan Liao. Ruling tracked verbatim as
+  [`docs/TRACKC_TRACKD_SOFT_QA_GUARDRAILS_RULING.md`](TRACKC_TRACKD_SOFT_QA_GUARDRAILS_RULING.md)
+  (SHA-256 `1d1b3bb8…7d39`), on `KNOWLEDGE_FILES`. GUIDANCE was notified of the
+  mentor direction (D-029--D-031) on 2026-10-27 and returned this ruling the
+  same day.
+- **Gate status:** **PASS WITH ACTIONS --- guardrail update only.** It refines
+  D-029 for Tracks C (D-030) and D (D-031); it supersedes nothing outside them.
+- **Validity chain (verbatim):** "candidate generation → deterministic
+  provenance/consistency checks → human semantic review → accepted QA" --- not
+  "deterministic compatibility → QA".
+- **Decision table (verbatim from the ruling):**
+
+  | Question | Ruling |
+  |---|---|
+  | One human reviewer enough by default? | **Yes, after deterministic pre-checks** |
+  | Two reviewers for every QA? | **No** |
+  | Mandatory second reviewer for ambiguous/high-risk cases? | **Yes** |
+  | Human reviewer blind to QA itself? | **No** |
+  | Human reviewer initially blind to agent confidence/rationale? | **Yes, preferred** |
+  | Deterministic checks before human review? | **Required** |
+  | Agent may see unit definitions? | **Yes** |
+  | Agent may see computed table values during proposal? | **No** |
+  | Reveal values after candidate structure freezes? | **Yes** |
+  | Agent may generate final authoritative numeric answer? | **No; deterministic computation should** |
+  | Unverified column allowed as query-only term? | **No** |
+  | Multi-concept QA allowed? | **Yes, if every semantic slot is authorized** |
+  | C/G/T/S/D still recorded? | **Yes** |
+  | C/G/T/S/D remain acceptance gate? | **No** |
+  | LLM output may modify concept map or column status? | **No** |
+
+- **Review.** **One independent human reviewer** after the deterministic
+  pre-checks is sufficient for ordinary candidates; the reviewer is not the
+  generating agent or process. A **second reviewer** is mandatory for the
+  ruling's ten listed high-risk cases (first reviewer `ambiguous`; soft/related
+  concept relation; geography beyond explicit study area; multi-concept;
+  cross-location comparison with differing granularity; material scenario or
+  time mismatch; derived statistic; background/cited passage; reviewer-requested
+  escalation). **Disagreement → `needs_adjudication`**, resolved by a third,
+  adjudicating reviewer. Failure of any mandatory mechanical check →
+  `rejected_pre_review`, never "send to a human and see". Evidence first; agent
+  confidence and rationale last. Protocol: `docs/SOFTQA_REVIEW_PROTOCOL.md`.
+- **Agent visibility.** **Definitions only** during proposal: unit definitions,
+  family descriptions, permitted QA types, the paper, the provenance schema.
+  **Never** computed table values, derived answers, target answer direction, or
+  prior accepted/rejected answers for the same paper. Values are populated by
+  deterministic code only after the candidate structure is frozen; the
+  authoritative answer comes from deterministic computation.
+- **Variable governance.** **No unverified column, even as a query term ---
+  "query-only use is still semantic use."** Every semantic, retrieval, answer
+  and comparison slot uses an authorized/verified field; a useful unresolved
+  variable first goes through metadata/concept governance.
+- **Audit.** C/G/T/S/D judgments are **retained on every candidate for audit,
+  not as a gate**; unmatched dimensions recorded explicitly; no LLM output alters
+  concept-map status, column status or compatibility rules.
+- **Status lifecycle:** `llm_candidate → deterministic_pass → human_review →
+  accepted`, with side exits `rejected_pre_review`, `needs_second_review`,
+  `needs_adjudication`, `rejected_human`, `accepted_after_edit`. A candidate is
+  benchmark-valid only at `accepted` or `accepted_after_edit` with the final
+  edited QA frozen.
+- **Implementation (this package, `work/meeting-2026-10-22`, pre-run):**
+  `data/metadata/softqa/candidate_schema_v1.json` (JSON Schema) and
+  `src/climrr/softqa.py` (loader, validator, Track C mapper);
+  `docs/SOFTQA_REVIEW_PROTOCOL.md`, `data/metadata/softqa/review_form_v1.yaml`,
+  `scripts/softqa_review_view.py`; Track C inputs `units_definitions_v1.json`,
+  `qa_types_v1.json`, `trackc_candidates_v1.json`; the agent tracked as
+  `scripts/litcollect/softqa_agent.py` (byte-identical, SHA-256 `159e2c5c…397c`;
+  scanner word exemption; run-record exemption); all hash-pinned in
+  `data/manifest.json`; `docs/BRIDGE_ELIGIBILITY.md` §10.
+- **What it does not decide.** No model call is made and no QA generated under
+  this entry; no column status, concept-map entry or compatibility rule changes;
+  index 117 stays unlabeled. Track D design is pending.
+- **Affected files:** `docs/DECISION_LOG.md`,
+  `docs/TRACKC_TRACKD_SOFT_QA_GUARDRAILS_RULING.md`, `docs/PROJECT_STATE.md`,
+  `docs/BRIDGE_ELIGIBILITY.md`, `docs/SOFTQA_REVIEW_PROTOCOL.md`,
+  `scripts/stage_knowledge.py` (`KNOWLEDGE_FILES`), `data/manifest.json`,
+  `CLAUDE.md` (run-record exemption list).

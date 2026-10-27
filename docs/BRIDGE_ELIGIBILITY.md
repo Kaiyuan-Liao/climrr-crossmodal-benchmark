@@ -278,18 +278,47 @@ enters the concept map, column statuses, or compatibility rules.
 
 A candidate missing any field fails the check.
 
-**Deterministic consistency check.**
+**Deterministic consistency check (`pre_review_check`, D-033).** The ruling's
+fourteen deterministic prerequisites (`docs/SOFTQA_REVIEW_PROTOCOL.md` §3) must
+all pass before a human sees a candidate; failure of any mandatory mechanical
+check sets `status = rejected_pre_review`, never "send to a human and see".
+Among them:
 
 1. The `[start,end)` span re-slices from the file at the JSON path to exactly
    the verbatim passage.
-2. The concept terms and the place terms the candidate relies on are located in
-   the passage.
+2. The concept terms and the place terms the candidate relies on are located.
+   *As implemented by `softqa_agent v1`:* located as the first whole-word,
+   case-insensitive occurrence **anywhere in the paper**, not within the passage
+   (this section's earlier wording said "in the passage"; the difference is open
+   for the COORDINATOR). For a `different` geography relation the place check
+   instead requires the paper to name its own place with role `study_area` or
+   `cited_study_area`.
 3. The place role is recorded (§8).
 
-**Human review.** A candidate that passes the check goes to a human reviewer,
-who judges it against the recorded provenance. The review protocol is an open
-question to the mentor (`docs/MENTOR_BRIEF.md`, *For the next meeting*, item A)
-and is not defined here.
+**Record schema.** Every candidate is a record of
+`data/metadata/softqa/candidate_schema_v1.json` (pinned in
+`data/manifest.json`; loader, validator and Track C mapper in
+`src/climrr/softqa.py`): the ruling's seven field groups --- candidate identity,
+paper-side provenance, table-side provenance, soft-link record, leakage /
+generation controls, deterministic validation, human review --- field for field.
+Table-side and human-review fields are null until their stage. The generator
+never sees table values or the answer (`table_values_visible_to_generator` and
+`answer_visible_to_generator` are the constant `false`).
+
+**Status lifecycle.** `llm_candidate → deterministic_pass → human_review →
+accepted`, side exits `rejected_pre_review`, `needs_second_review`,
+`needs_adjudication`, `rejected_human`, `accepted_after_edit`. A candidate is
+benchmark-valid only at `accepted` or `accepted_after_edit` with the final
+edited QA frozen.
+
+**Human review.** `docs/SOFTQA_REVIEW_PROTOCOL.md` (D-033): one independent
+reviewer after the deterministic checks; a mandatory second reviewer for the ten
+listed high-risk cases; adjudication on disagreement; evidence first, agent
+rationale and confidence last (`scripts/softqa_review_view.py`); the ten-item
+checklist (`data/metadata/softqa/review_form_v1.yaml`).
+
+**Variable governance.** No unverified column in any semantic, retrieval, answer
+or comparison slot --- "query-only use is still semantic use".
 
 The C/G/T/S/D judgments are recorded on every candidate for audit but are not
 the acceptance gate in Tracks C and D.

@@ -45,8 +45,9 @@ session reasoning correctly from out-of-date facts and repeating them.
   `LLM_Eval-main.zip` pinned in `docs/REFERENCES.md` (D-032), not stored.
 - **Deprioritized:** Track A-next (unit-granularity diagnostic) and Track B
   remain GUIDANCE-authorized items but sit **behind** Tracks C and D.
-- **GUIDANCE notice sent:** date _not yet supplied to the EXECUTOR_ --- informed
-  and asked for guardrails, not approval (the tracks are mentor-directed).
+- **GUIDANCE notice sent:** 2026-10-27 --- informed and asked for guardrails,
+  not approval (the tracks are mentor-directed). **Guardrail ruling received:
+  2026-10-27** --- PASS WITH ACTIONS, guardrail update only (D-033).
 - **Not done here:** no code for the new tracks; no QA generated; no column
   status changed; index 117 unlabeled; `concept_map.yaml` unchanged. Not
   merged, not pushed.
