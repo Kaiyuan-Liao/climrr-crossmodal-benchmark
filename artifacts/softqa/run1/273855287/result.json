@@ -1,0 +1,88 @@
+{
+  "item_id": "273855287",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "7eb328f5de244ba2677d308f9d1fbefe97f39113d40ac1a577eecfb9f59eafc7",
+  "n_sections": 9,
+  "paper_chars": 116588,
+  "truncated": true,
+  "model_seconds": 3.2,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-273855287-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "65b047fad433b917db99890df475f237f816005b0a0a55355025a17772af3568",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:33:49Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "273855287",
+      "paper_rel_path": "87/273855287.json",
+      "paper_sha256": "7eb328f5de244ba2677d308f9d1fbefe97f39113d40ac1a577eecfb9f59eafc7",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "The Canadian Forest Fire Danger Rating System (CFFDRS) addresses these factors daily in the Canadian Forest Fire Weather Index (FWI) system (Van Wagner, 1987), a system that has seen uptake not only in North America but also in New Zealand, Mexico, parts of Europe and southeast Asia (Taylor and Alexander, 2006). Daily and hourly temperature, humidity, wind speed and precipitation are used to estimate the various FWI system indices.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          6552,
+          6570
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The Canadian Forest Fire Danger Rating System (CFFDRS) addresses these factors daily in the Canadian Forest Fire Weather Index (FWI) system (Van Wagner, 1987), a system that has seen uptake not only in North America but also in New Zealand, Mexico, parts of Europe and southeast Asia (Taylor and Alexander, 2006). Daily and hourly temperature, humidity, wind speed and precipitation are used to estimate the various FWI system indices.",
+        "section_key": "theory",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR table, what is the projected summer Fire Weather Index for grid cell R106C361 under RCP8.5, and how does the paper describe the role of the Canadian Forest Fire Weather Index system in modeling fire behavior?",
+        "paper_side_fact": "The paper states that the Canadian Forest Fire Danger Rating System uses the Canadian Forest Fire Weather Index system, which incorporates daily temperature, humidity, wind speed and precipitation to estimate fire weather indices and is used internationally.",
+        "table_side_needed": "The modeled summer Fire Weather Index values for grid cell R106C361 comparing the historical baseline (1995‑2004) to the end‑century decade (2085‑2094) under scenario RCP8.5.",
+        "paper_geography": "unknown",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index (FWI) system",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The passage explains what the FWI system is and how it operates, which directly relates to the table’s fire‑weather‑index projection for a specific grid cell, making it appropriate for a pattern‑to‑explanation question.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.3
+}

@@ -1,0 +1,87 @@
+{
+  "item_id": "214074018",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "510c9b06dd8e7c168690b961ce8c8b6e77f7f10bda78047ecbb282c0c4fd7ff6",
+  "n_sections": 12,
+  "paper_chars": 22867,
+  "truncated": false,
+  "model_seconds": 2.3,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-214074018-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "c13c0e8cd861d24cb4b82d73abd25a40c799c970db60d48f54df99fba0f9e9c7",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:36:19Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "214074018",
+      "paper_rel_path": "18/214074018.json",
+      "paper_sha256": "510c9b06dd8e7c168690b961ce8c8b6e77f7f10bda78047ecbb282c0c4fd7ff6",
+      "arm": "extreme_heat_v1",
+      "evidence": null,
+      "verbatim_passage": "Ten percent of agriculture related fatalities are related to heat‑induced illnesses (Jackson & Rosenberg, 2010). The physical labor of agricultural work during warm weather may contribute to heat stress even in lower temperatures, especially when humidity is high and wind speeds are low (Jackson & Rosenberg, 2010).",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.recommendations",
+        "section_idx": 6,
+        "span": [
+          3127,
+          3137
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Ten percent of agriculture related fatalities are related to heat‑induced illnesses (Jackson & Rosenberg, 2010). The physical labor of agricultural work during warm weather may contribute to heat stress even in lower temperatures, especially when humidity is high and wind speeds are low (Jackson & Rosenberg, 2010).",
+        "section_key": "heat stress",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in summer heat index according to the ClimRR table, and how does the paper explain the mechanisms by which heat stress affects farm workers?",
+        "paper_side_fact": "Heat stress can occur during agricultural work even at lower temperatures when humidity is high and wind speeds are low, contributing to heat‑induced illnesses.",
+        "table_side_needed": "The projected difference in summer heat index values between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5, as shown in the ClimRR table.",
+        "paper_geography": "unknown",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat stress / heat‑induced illnesses",
+        "concept_relation": "related",
+        "geography_relation": "unknown",
+        "link_rationale": "The table provides a quantitative projection of future heat index increases, while the passage describes physiological mechanisms that cause heat stress, linking the projected increase to heightened risk for farm workers.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.3
+}

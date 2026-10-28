@@ -1,0 +1,87 @@
+{
+  "item_id": "56076970",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "1152b3b1f8d826cc1bfef8605c7e6a1ef1b456ee06026fae3ddcf1ca1bfde8ab",
+  "n_sections": 6,
+  "paper_chars": 38543,
+  "truncated": false,
+  "model_seconds": 2.8,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-56076970-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "67160d8aac556066ea8d36a454f34d85f8f617c2b5745a575c597d3a7e74be1c",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:34:34Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "56076970",
+      "paper_rel_path": "70/56076970.json",
+      "paper_sha256": "1152b3b1f8d826cc1bfef8605c7e6a1ef1b456ee06026fae3ddcf1ca1bfde8ab",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "8 meteorology variables averaged over the fire perimeter area: RH, wind speed (log), Fosberg fire weather index (FFWI) (log) during the first two days of fire, preceding March‑May precipitation, and two cumulative precipitation indices from the previous three winters and from the previous three water years, monthly RH and monthly vapor pressure deficit;",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.data and methods",
+        "section_idx": 3,
+        "span": [
+          10300,
+          10318
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "8 meteorology variables averaged over the fire perimeter area: RH, wind speed (log), Fosberg fire weather index (FFWI) (log) during the first two days of fire, preceding March‑May precipitation, and two cumulative precipitation indices from the previous three winters and from the previous three water years, monthly RH and monthly vapor pressure deficit;",
+        "section_key": "data and methods",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer Fire Weather Index under RCP8.5, and how does the paper explain the role of this index in Southern California fire behavior?",
+        "paper_side_fact": "The study used the Fosberg fire weather index (FFWI) averaged over fire perimeters during the first two days of each fire as one of the meteorological variables.",
+        "table_side_needed": "The projected change (increase or decrease) in the summer Fire Weather Index for the relevant period under the RCP8.5 scenario as recorded in the ClimRR table.",
+        "paper_geography": "Southern California",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fosberg fire weather index (FWI)",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage identifies the Fosberg fire weather index as a key meteorological variable influencing fire behavior in Southern California, which directly matches the fire‑weather‑index family represented by the table unit. The question asks for the projected change in that index and the paper’s explanation of its importance, linking the two sources.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.8
+}

@@ -1,0 +1,91 @@
+{
+  "item_id": "154971876",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "1a461ccb68f4b6bce7cc628f981c3cd488c7beab47a32e7880647e161ca97d89",
+  "n_sections": 6,
+  "paper_chars": 27105,
+  "truncated": false,
+  "model_seconds": 2.3,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-154971876-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "b7e7c84a9c2d838b9932f94649621da3274cdf968f350926b95c7010e34f8c42",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:35:39Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "154971876",
+      "paper_rel_path": "76/154971876.json",
+      "paper_sha256": "1a461ccb68f4b6bce7cc628f981c3cd488c7beab47a32e7880647e161ca97d89",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.results",
+        "section_idx": 4,
+        "span_start": 715,
+        "span_end": 1227
+      },
+      "verbatim_passage": "On average across all 15 HINs in the US, loss of irrigation increased heat wave frequency, duration, and intensity by 0.70 events/year, 0.62 days/event, and 0.24°C. Heat wave frequency and duration was significantly increased without irrigation in California's Central Valley and the Southern High Plains for up to 8 out of 15 HINs (figures S1 and S2), with the greatest increases in the Southern High Plains of up to 3 events/year and 2 days/event for frequency and duration respectively (figures 1(a) and (b)).",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          715,
+          725
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "On average across all 15 HINs in the US, loss of irrigation increased heat wave frequency, duration, and intensity by 0.70 events/year, 0.62 days/event, and 0.24°C. Heat wave frequency and duration was significantly increased without irrigation in California's Central Valley and the Southern High Plains for up to 8 out of 15 HINs (figures S1 and S2), with the greatest increases in the Southern High Plains of up to 3 events/year and 2 days/event for frequency and duration respectively (figures 1(a) and (b)).",
+        "section_key": "results",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What pattern does the ClimRR table show for the projected change in summer heat‑index values in California under RCP8.5, and how does the paper explain the underlying cause of that pattern?",
+        "paper_side_fact": "Loss of irrigation increased heat‑wave frequency, duration, and intensity in California's Central Valley.",
+        "table_side_needed": "The projected change (increase or decrease) in a heat‑index metric for California between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5.",
+        "paper_geography": "California's Central Valley",
+        "paper_geography_role": "study_area",
+        "paper_time": "2004‑2011 (simulation period)",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat‑wave frequency, duration, and intensity (heat‑index based)",
+        "concept_relation": "related",
+        "geography_relation": "same",
+        "link_rationale": "Both the paper and the table discuss changes in a heat‑index‑related quantity for California. The paper provides a mechanistic explanation (irrigation loss) that could account for any projected increase shown in the table.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.3
+}

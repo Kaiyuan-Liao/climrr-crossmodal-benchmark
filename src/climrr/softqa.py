@@ -14,7 +14,19 @@ e.g. a `deterministic_pass` with a failed mechanical check. `map_trackc` turns o
 `scripts/litcollect/softqa_agent.py` candidate into a schema record: the agent's
 `proposal`, `evidence`, `concept_hit`, `place_hit` and `pre_review_checks` fill
 the fields they correspond to; everything the agent did not produce stays null,
-and `mapping.pending_stages` names the stage that will fill it.
+and `mapping.pending_stages` names the stage that will fill it. It reads both
+agent versions: v2 adds `passage_type` (→ `claim_or_passage_type`) and stores
+the paper's own text as `verbatim_passage` (the model's as `passage_as_proposed`).
+
+**FWI hold** (D-033 addendum, COORDINATOR 2026-10-27): a candidate on P-CELL-1
+or P-COUNTY-1, or one whose recorded table columns include the columns of
+IC-006 / IC-008 / IC-010, cannot take `accepted` / `accepted_after_edit` while
+those records are unconfirmed. `acceptance_gate` returns
+`{"status": "hold_owner_confirmation", "reason": ...}` for such a candidate, and
+`consistency_errors` refuses a record that carries either final status anyway.
+`hold_owner_confirmation` is a gate result, not a schema v1 lifecycle status
+(the frozen schema is unchanged); the held record stays at its pre-acceptance
+status.
 
 Nothing here calls a model, reads table values, or touches the concept map,
 column statuses or compatibility rules.
@@ -22,7 +34,7 @@ column statuses or compatibility rules.
 **Track C run on Polaris** (the agent is tracked byte-identical to the delivered
 file, so its invocation is documented here rather than in its own docstring).
 `$CLIMRR_REPO` is a checkout of the pinned commit; run from the litcollect root
-so `index/…` and `softqa/run1` stay relative and no absolute path lands in any
+so `index/…` and `softqa/run2` stay relative and no absolute path lands in any
 output (the Track B convention); the ALCF inference credential is in the
 environment variable the agent's `main` reads, as for the Track B driver:
 
@@ -31,8 +43,11 @@ environment variable the agent's `main` reads, as for the Track B driver:
         --candidates "$CLIMRR_REPO/data/metadata/softqa/trackc_candidates_v1.json" \\
         --units "$CLIMRR_REPO/data/metadata/softqa/units_definitions_v1.json" \\
         --qa-types "$CLIMRR_REPO/data/metadata/softqa/qa_types_v1.json" \\
-        --index index/full_705k_v2_filtered --out softqa/run1 \\
+        --index index/full_705k_v2_filtered --out softqa/run2 \\
         --source-commit "$(git -C "$CLIMRR_REPO" rev-parse HEAD)"
+
+Run 1 (agent v1, `--out softqa/run1`) ran at `95e1ec8` and is ingested under
+`artifacts/softqa/run1/`; run 2 uses agent v2 with the same inputs.
 
 Defaults: Metis `gpt-oss-120b`, temperature 0, `--max-chars 90000` (a longer
 paper is truncated and flagged). Restartable: a paper with `result.json` is
@@ -46,13 +61,15 @@ import json
 import re
 from pathlib import Path
 
+import yaml
+
 from climrr.checksums import sha256_file
 from climrr.paths import REPO_ROOT
 
 SOFTQA_DIR = REPO_ROOT / "data" / "metadata" / "softqa"
 SCHEMA_PATH = SOFTQA_DIR / "candidate_schema_v1.json"
 SCHEMA_VERSION = "softqa_candidate_v1"
-MAPPER_VERSION = "softqa.map_trackc v1"
+MAPPER_VERSION = "softqa.map_trackc v2"
 
 GROUPS = ("candidate_identity", "paper_provenance", "table_provenance", "soft_link",
           "generation_controls", "deterministic_validation", "human_review")
@@ -68,10 +85,17 @@ STAGE_TABLE = "table_computation (deterministic; after the candidate structure i
 STAGE_AUDIT = "c_g_t_s_d_audit (deterministic matrix, recorded for audit only)"
 STAGE_HUMAN = "human_review (docs/SOFTQA_REVIEW_PROTOCOL.md)"
 STAGE_INGEST = "ingest (from the generator input provenance)"
-STAGE_NOT_PRODUCED = "not produced by softqa_agent v1; stage unassigned"
+STAGE_NOT_PRODUCED = "not produced by softqa_agent (v1 or v2); stage unassigned"
 
-#: Mechanical checks whose failure means `rejected_pre_review` (agent v1 mandatory set).
+#: Mechanical checks whose failure means `rejected_pre_review` (agent v1 mandatory set; v2 adds
+#: `passage_type_pass`, which has no schema field and stays in `agent_record.pre_review_checks`).
 TRACKC_MANDATORY_CHECKS = ("span_reslice_pass", "concept_location_pass", "place_location_pass", "place_role_recorded")
+
+#: FWI hold (D-033 addendum): units resting on the unconfirmed summer FWI columns, and the records.
+FWI_HOLD_UNITS = ("P-CELL-1", "P-COUNTY-1")
+FWI_HOLD_RECORDS = ("IC-006", "IC-008", "IC-010")
+HOLD_STATUS = "hold_owner_confirmation"
+INFERRED_CANDIDATES_PATH = REPO_ROOT / "data" / "metadata" / "inferred_candidates.yaml"
 
 
 class SchemaError(ValueError):
@@ -145,6 +169,38 @@ def schema_errors(record: dict, schema: dict | None = None) -> list[str]:
     return errors
 
 
+def fwi_hold_columns(path: Path = INFERRED_CANDIDATES_PATH) -> dict[str, str]:
+    """Column name and column index of each FWI hold record still `inferred_candidate` -> record id."""
+    out: dict[str, str] = {}
+    for r in yaml.safe_load(Path(path).read_text(encoding="utf-8"))["inferred_candidates"]:
+        if r["id"] in FWI_HOLD_RECORDS and r["status"] == "inferred_candidate":
+            out[str(r["column_name"])] = r["id"]
+            out[str(r["column_index"])] = r["id"]
+    return out
+
+
+def fwi_hold_reason(record: dict) -> str | None:
+    """Why the candidate is held from acceptance, or None. Unit ids are held unconditionally;
+    lifting the hold needs a logged decision and a change here, not a status edit alone."""
+    unit = record["table_provenance"]["unit_id_or_template_id"]
+    if unit in FWI_HOLD_UNITS:
+        return (f"unit {unit} rests on the summer FWI columns ({', '.join(FWI_HOLD_RECORDS)}), not yet "
+                "owner-confirmed (D-033 addendum)")
+    held = fwi_hold_columns()
+    hits = sorted({held[str(c)] for c in record["table_provenance"]["column_ids"] or [] if str(c) in held})
+    if hits:
+        return f"table columns include unconfirmed FWI records {', '.join(hits)} (D-033 addendum)"
+    return None
+
+
+def acceptance_gate(record: dict) -> dict:
+    """Gate for setting `accepted` / `accepted_after_edit`: `clear`, or `hold_owner_confirmation` with the reason."""
+    reason = fwi_hold_reason(record)
+    if reason:
+        return {"status": HOLD_STATUS, "reason": reason}
+    return {"status": "clear", "reason": None}
+
+
 def consistency_errors(record: dict) -> list[str]:
     """Lifecycle rules the schema cannot express."""
     errs: list[str] = []
@@ -178,6 +234,10 @@ def consistency_errors(record: dict) -> list[str]:
             errs.append("accepted_after_edit requires a non-empty edit_history")
         if hr["requires_second_review"] and hr["reviewer_2_disposition"] is None:
             errs.append("second review required but reviewer_2_disposition is null")
+    if st in VALID_FINAL or hr["final_status"] in VALID_FINAL:
+        gate = acceptance_gate(record)
+        if gate["status"] == HOLD_STATUS:
+            errs.append(f"{HOLD_STATUS}: {gate['reason']}")
     return errs
 
 
@@ -204,7 +264,7 @@ def _fits(value, sch: dict) -> bool:
 
 
 def map_trackc(agent: dict, schema: dict | None = None) -> dict:
-    """Map one softqa_agent v1 candidate (a `candidates.jsonl` line) onto candidate_schema_v1.
+    """Map one softqa_agent v1 or v2 candidate (a `candidates.jsonl` line) onto candidate_schema_v1.
 
     A value the agent produced goes into its schema field if it fits the field's
     vocabulary; otherwise the field stays null and the value is listed in
@@ -238,7 +298,10 @@ def map_trackc(agent: dict, schema: dict | None = None) -> dict:
             put("paper_provenance", f, evidence.get(f))
     for f in ("paper_geography", "paper_geography_role", "paper_time", "paper_scenario", "paper_concept"):
         put("paper_provenance", f, proposal.get(f))
-    pending["paper_provenance.claim_or_passage_type"] = STAGE_NOT_PRODUCED
+    if "passage_type" in proposal:  # agent v2
+        put("paper_provenance", "claim_or_passage_type", proposal.get("passage_type"))
+    else:
+        pending["paper_provenance.claim_or_passage_type"] = STAGE_NOT_PRODUCED
 
     put("table_provenance", "unit_id_or_template_id", proposal.get("unit_id"))
     for f in rec["table_provenance"]:

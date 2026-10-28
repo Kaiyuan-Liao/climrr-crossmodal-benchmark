@@ -1,0 +1,87 @@
+{
+  "item_id": "55319732",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "8d7dfad00d06748c1069c218e620786b2e7391e1c80d3fbad6a21cd55c6ac01f",
+  "n_sections": 8,
+  "paper_chars": 26707,
+  "truncated": false,
+  "model_seconds": 3.5,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-55319732-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "c38d01dbe063bfd63c6b9e71812b513fe6ce17556a16e80450acc8991ee95650",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:34:27Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "55319732",
+      "paper_rel_path": "32/55319732.json",
+      "paper_sha256": "8d7dfad00d06748c1069c218e620786b2e7391e1c80d3fbad6a21cd55c6ac01f",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "The most important exposure element when assessing the spread of an exterior fire is the climate. This element can be divided in two: first, by assessing the severity and frequency of forest and wildland fires, e.g. by looking at forest or wildland fire risk indexes like the Canadian Forest Fire Weather Index [20], and second, by assessing the probability of challenging wind speeds.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.the fire protective envelope",
+        "section_idx": 3,
+        "span": [
+          6633,
+          6651
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The most important exposure element when assessing the spread of an exterior fire is the climate. This element can be divided in two: first, by assessing the severity and frequency of forest and wildland fires, e.g. by looking at forest or wildland fire risk indexes like the Canadian Forest Fire Weather Index [20], and second, by assessing the probability of challenging wind speeds.",
+        "section_key": "the fire protective envelope",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What pattern does the table show for the summer Fire Weather Index in the projected future period, and how does the paper explain the role of climate and the Canadian Forest Fire Weather Index in influencing exterior fire risk?",
+        "paper_side_fact": "The passage states that climate is the most important exposure element for exterior fire spread, assessed via fire risk indexes such as the Canadian Forest Fire Weather Index and wind speed.",
+        "table_side_needed": "Projected summer Fire Weather Index values (baseline vs. end‑century) for the region and period shown in the table.",
+        "paper_geography": "unknown",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index (as a climate‑based fire risk indicator)",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The passage provides a mechanistic explanation of why a fire‑weather index matters for exterior fire risk, which aligns with the table’s projected fire‑weather index values, allowing a question that links the observed pattern to the paper’s explanation.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.5
+}

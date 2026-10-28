@@ -1,0 +1,95 @@
+{
+  "item_id": "34148006",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "ed5e50a64ff400b2f9d419fce466d70ded110e02dca5888dc5973c889aedc353",
+  "n_sections": 5,
+  "paper_chars": 14917,
+  "truncated": false,
+  "model_seconds": 1.9,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-34148006-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "5e3e094add667381088c25bf863f67e2b7a603fadeb938cede66067897d8fb81",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:39:46Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "34148006",
+      "paper_rel_path": "06/34148006.json",
+      "paper_sha256": "ed5e50a64ff400b2f9d419fce466d70ded110e02dca5888dc5973c889aedc353",
+      "arm": "extreme_heat_v1",
+      "evidence": null,
+      "verbatim_passage": "*The National Weather Service issues a heat advisory when the maximum daytime heat index is expected to be ≥105°F (40.6°C) and the minimum nighttime heat index is expected to be 80°F (26.7°C) for 2 or more consecutive days.*",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.united states",
+        "section_idx": 1,
+        "span": [
+          4565,
+          4575
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.outbreak of multidrug-resistant",
+        "section_idx": 2,
+        "span": [
+          5167,
+          5177
+        ]
+      },
+      "proposal": {
+        "passage": "*The National Weather Service issues a heat advisory when the maximum daytime heat index is expected to be ≥105°F (40.6°C) and the minimum nighttime heat index is expected to be 80°F (26.7°C) for 2 or more consecutive days.*",
+        "section_key": "united states",
+        "unit_id": "P-STATE-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR table, how many summer days in California are projected to have a daily maximum heat index above 105 °F in the end‑century decade, and why does the National Weather Service use the 105 °F threshold for issuing heat advisories?",
+        "paper_side_fact": "The National Weather Service issues a heat advisory when the maximum daytime heat index is expected to be ≥105°F and the minimum nighttime heat index is expected to be 80°F for 2 or more consecutive days.",
+        "table_side_needed": "The projected count of summer days with daily maximum heat index >105 °F for California (historical baseline vs. end‑century decade under RCP8.5).",
+        "paper_geography": "United States",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index (maximum daytime heat index)",
+        "concept_relation": "related",
+        "geography_relation": "different",
+        "link_rationale": "The passage explains the significance of a heat‑index threshold (≥105 °F) that is the same threshold used in the table unit for counting hot days in California. Combining the table’s projected count with the advisory rationale creates a meaningful question.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": false,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 1.9
+}

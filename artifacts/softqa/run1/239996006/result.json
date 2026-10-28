@@ -1,0 +1,92 @@
+{
+  "item_id": "239996006",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "4bb60fe9aae3fde11d0b3cc7db90b67c97c0342c2c0c798fa8f0c838fb31e83f",
+  "n_sections": 5,
+  "paper_chars": 23842,
+  "truncated": false,
+  "model_seconds": 2.2,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-239996006-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "0869c5ec83bd0dfa71eafca8e6dcf62a9380f40cdbabbb2f1a914672be4ff010",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:37:34Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "239996006",
+      "paper_rel_path": "06/239996006.json",
+      "paper_sha256": "4bb60fe9aae3fde11d0b3cc7db90b67c97c0342c2c0c798fa8f0c838fb31e83f",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.results",
+        "section_idx": 3,
+        "span_start": 1657,
+        "span_end": 1823
+      },
+      "verbatim_passage": "Despite a decrease in relative humidity, both the AT as well as the differences between the AT and T are projected to increase with future warming (figures 2 and S2).",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          6545,
+          6555
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Despite a decrease in relative humidity, both the AT as well as the differences between the AT and T are projected to increase with future warming (figures 2 and S2).",
+        "section_key": "results",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR table, how is the heat index projected to change in the future period, and what explanation does the paper give for this pattern?",
+        "paper_side_fact": "Apparent temperature (AT) is projected to increase with future warming despite a decrease in relative humidity.",
+        "table_side_needed": "The projected future values or trend for the heat index (e.g., increase in magnitude or number of days above a threshold) compared to the historical baseline.",
+        "paper_geography": "southeastern United States",
+        "paper_geography_role": "study_area",
+        "paper_time": "future period",
+        "paper_scenario": "RCP8.5",
+        "paper_concept": "apparent temperature (heat index)",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The paper provides a mechanistic explanation (warming despite lower humidity) for an increase in heat index, which aligns with the table's projected pattern of heat index change. This makes the passage suitable for a pattern‑to‑explanation question.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.2
+}

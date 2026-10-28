@@ -1,0 +1,100 @@
+{
+  "item_id": "220302054",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "0a262dd0303d8942c8bd72c4c4e6c0a8300e3628e63a9325560cddde6b6b7fbe",
+  "n_sections": 12,
+  "paper_chars": 27721,
+  "truncated": false,
+  "model_seconds": 2.0,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-220302054-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "8ed9a1ee2265eb70da38bc52c80a0bfc46e300786bec916f2cc411c6225549b7",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:36:36Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "220302054",
+      "paper_rel_path": "54/220302054.json",
+      "paper_sha256": "0a262dd0303d8942c8bd72c4c4e6c0a8300e3628e63a9325560cddde6b6b7fbe",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.standardized precipitation index and heat index",
+        "section_idx": 4,
+        "span_start": 1726,
+        "span_end": 1998
+      },
+      "verbatim_passage": "The HI was obtained by the following two steps. First, the GDD was aggregated to monthly GDD (for comparison with the SPI calculated on a monthly basis). Second, the monthly GDD was used in the SPI algorithm to obtain the standardized GDD. We referred to the former as HI.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.development of drought stress index",
+        "section_idx": 3,
+        "span": [
+          464,
+          474
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.background",
+        "section_idx": 2,
+        "span": [
+          1213,
+          1223
+        ]
+      },
+      "proposal": {
+        "passage": "The HI was obtained by the following two steps. First, the GDD was aggregated to monthly GDD (for comparison with the SPI calculated on a monthly basis). Second, the monthly GDD was used in the SPI algorithm to obtain the standardized GDD. We referred to the former as HI.",
+        "section_key": "standardized precipitation index and heat index",
+        "unit_id": "P-STATE-1",
+        "qa_type": "cross_location_comparison",
+        "example_question": "How does the heat index (HI) used in the Korean Drought Stress Index compare to the projected number of summer days with daily maximum heat index above 105 °F in California under RCP8.5?",
+        "paper_side_fact": "The passage states that the heat index (HI) is derived by aggregating monthly GDD and applying the SPI algorithm to obtain a standardized GDD.",
+        "table_side_needed": "The projected number of summer days with daily maximum heat index above 105 °F for California, comparing the historical baseline (1995‑2004) to the end‑century decade (2085‑2094) under RCP8.5.",
+        "paper_geography": "Korea",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index (HI) derived from GDD and SPI",
+        "concept_relation": "related",
+        "geography_relation": "different",
+        "link_rationale": "The passage explains how a heat‑index metric (HI) is constructed for Korean forest stress monitoring, while the unit provides a heat‑index projection for California. Comparing these two heat‑related quantities across locations enables cross‑location reasoning about heat stress.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.0
+}

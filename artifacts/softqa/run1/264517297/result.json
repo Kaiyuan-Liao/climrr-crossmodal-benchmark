@@ -1,0 +1,87 @@
+{
+  "item_id": "264517297",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "7234e730da9ef4bc576d7c07db9a31d89f5746ffafd1ddaecaeb950c20bf7ce2",
+  "n_sections": 15,
+  "paper_chars": 56388,
+  "truncated": false,
+  "model_seconds": 3.0,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-264517297-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "bdddc440e794b8d27eefb0d5c2e0cb4589ebc6c30926649c35ea1799daf4e0a6",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:33:29Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "264517297",
+      "paper_rel_path": "97/264517297.json",
+      "paper_sha256": "7234e730da9ef4bc576d7c07db9a31d89f5746ffafd1ddaecaeb950c20bf7ce2",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "Please note that the Canadian Forest Fire Weather Index (FWI) System consists of six components that account for the effects of fuel moisture and WEATHER conditions on fire behaviour, computed with noon air temperature, air relative humidity and wind speed, and 24-hour accumulated precipitation.",
+      "concept_hit": {
+        "term": "FWI",
+        "json_path": "$.general comments",
+        "section_idx": 1,
+        "span": [
+          2912,
+          2915
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Please note that the Canadian Forest Fire Weather Index (FWI) System consists of six components that account for the effects of fuel moisture and WEATHER conditions on fire behaviour, computed with noon air temperature, air relative humidity and wind speed, and 24-hour accumulated precipitation.",
+        "section_key": "specific comment #5",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer Fire Weather Index for grid cell R106C361 between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5, and how does the paper describe what the Fire Weather Index measures?",
+        "paper_side_fact": "The Canadian Forest Fire Weather Index system consists of six components that account for fuel moisture and weather conditions, computed from noon air temperature, relative humidity, wind speed, and 24‑hour precipitation.",
+        "table_side_needed": "The summer (June‑July‑August) Fire Weather Index values for grid cell R106C361 for the historical baseline period 1995‑2004 and the end‑century period 2085‑2094 under RCP8.5, showing the pattern of change.",
+        "paper_geography": "global",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index (FWI) definition",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage explains what the FWI metric represents, which is necessary to interpret the specific projected FWI values for a particular grid cell provided by the table.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.0
+}

@@ -1,0 +1,88 @@
+{
+  "item_id": "237554329",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "d05ef2096ed6d7fae1df4d0de8a9bca796d630a55af72d1e1172b0b84d1af1ed",
+  "n_sections": 7,
+  "paper_chars": 128175,
+  "truncated": true,
+  "model_seconds": 3.3,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-237554329-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "beea746154c330bf06fc6990c348809d96999fc14ed5b8b003d91c9bb7a3f90a",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:31:05Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "237554329",
+      "paper_rel_path": "29/237554329.json",
+      "paper_sha256": "d05ef2096ed6d7fae1df4d0de8a9bca796d630a55af72d1e1172b0b84d1af1ed",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "In many regions around the world, including the US, wildfires have had an increasing trend during recent decades in both the number and area of total large fires (Dennison et al., 2014;Barbero et al., 2015). In addition, weather with high fire potential has appeared more frequently (Yang et al., 2011;Jolly et al., 2015;Abatzoglou and Williams, 2016), leading to increasing concern about its adverse impact on air quality.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.discussion and conclusions",
+        "section_idx": 6,
+        "span": [
+          14371,
+          14389
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "In many regions around the world, including the US, wildfires have had an increasing trend during recent decades in both the number and area of total large fires (Dennison et al., 2014;Barbero et al., 2015). In addition, weather with high fire potential has appeared more frequently (Yang et al., 2011;Jolly et al., 2015;Abatzoglou and Williams, 2016), leading to increasing concern about its adverse impact on air quality.",
+        "section_key": "introduction",
+        "unit_id": "P-CELL-1",
+        "qa_type": "claim_to_region_identification",
+        "example_question": "The paper notes that fire potential has been increasing in the United States; which ClimRR grid cell shows the highest summer Fire Weather Index under RCP8.5, indicating the greatest fire danger?",
+        "paper_side_fact": "The paper states that weather with high fire potential has appeared more frequently in the US.",
+        "table_side_needed": "The summer (June‑July‑August) Fire Weather Index value for grid cell R106C361 comparing the 1995‑2004 baseline to the 2085‑2094 end‑century period under RCP8.5.",
+        "paper_geography": "United States",
+        "paper_geography_role": "contextual",
+        "paper_time": "recent decades",
+        "paper_scenario": "unknown",
+        "paper_concept": "fire potential / fire danger",
+        "concept_relation": "related",
+        "geography_relation": "different",
+        "link_rationale": "The paper discusses a general increase in fire potential across the US, while the unit provides a quantitative fire‑danger metric (Fire Weather Index) for a specific grid cell; linking them lets a question ask whether that location reflects the described trend.",
+        "unmatched_dimensions": [
+          "geography",
+          "scenario",
+          "time",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.3
+}

@@ -1,0 +1,92 @@
+{
+  "item_id": "238734785",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "414e900ee49d08f39a53ad4d4a12d683ddbdd59e4fbef0f9826ffd12a5837745",
+  "n_sections": 3,
+  "paper_chars": 30348,
+  "truncated": false,
+  "model_seconds": 1.9,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-238734785-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "cb164c78e866a883243787412f937397dc5305779eba8bcb0253eda28b3f4a85",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:31:10Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "238734785",
+      "paper_rel_path": "85/238734785.json",
+      "paper_sha256": "414e900ee49d08f39a53ad4d4a12d683ddbdd59e4fbef0f9826ffd12a5837745",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.background",
+        "section_idx": 1,
+        "span_start": 7060,
+        "span_end": 7393
+      },
+      "verbatim_passage": "The CFFDRS, with its subsystem Fire Weather Index (FWI) and its intermediate components, the Burning Index (BI) and its components of the NFRDS, the components of Mark 5, and the Keetch-Byram Drought Index, uses meteorological data such as maximum temperatures (dry bulb temperature) and total precipitation of the previous day [24].",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.background",
+        "section_idx": 1,
+        "span": [
+          7091,
+          7109
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The CFFDRS, with its subsystem Fire Weather Index (FWI) and its intermediate components, the Burning Index (BI) and its components of the NFRDS, the components of Mark 5, and the Keetch-Byram Drought Index, uses meteorological data such as maximum temperatures (dry bulb temperature) and total precipitation of the previous day [24].",
+        "section_key": "background",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer Fire Weather Index for the region and period shown in the table, and how does the paper explain the role of temperature and precipitation in driving that change?",
+        "paper_side_fact": "The Fire Weather Index (FWI) uses maximum temperature and total precipitation of the previous day as inputs.",
+        "table_side_needed": "The projected summer Fire Weather Index values (baseline vs. end-century) for the specific place and period indicated in the table unit.",
+        "paper_geography": "unknown",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The passage describes the variables that determine the Fire Weather Index, which matches the family of the table unit. A question can ask for the projected index change (from the table) and the paper’s explanation of the underlying meteorological drivers.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 1.9
+}

@@ -1,0 +1,87 @@
+{
+  "item_id": "96429060",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "2a092413b095f12bc031da9314b28fa8d766a602b1f8cf738a6f521fba8beaef",
+  "n_sections": 7,
+  "paper_chars": 34065,
+  "truncated": false,
+  "model_seconds": 2.4,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-96429060-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "33873de529f7f58e350ef27c5dd5183149b8789713c2123a1611851299be769d",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:35:05Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "96429060",
+      "paper_rel_path": "60/96429060.json",
+      "paper_sha256": "2a092413b095f12bc031da9314b28fa8d766a602b1f8cf738a6f521fba8beaef",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "Mean seasonal fire‑weather proved critical for fire activity in both regions, with minor influence of longer‑term antecedent water‑balance climatic conditions. Years with higher fire danger FWI values in summer corresponded to years with increased number of fires (total and large fires) and area burned, and vice versa.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          556,
+          574
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Mean seasonal fire‑weather proved critical for fire activity in both regions, with minor influence of longer‑term antecedent water‑balance climatic conditions. Years with higher fire danger FWI values in summer corresponded to years with increased number of fires (total and large fires) and area burned, and vice versa.",
+        "section_key": "discussion",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the table, how does the summer Fire Weather Index change in the future for the studied region, and what explanation does the paper give for why higher summer FWI leads to more fire activity?",
+        "paper_side_fact": "Higher summer Fire Weather Index values are associated with increased numbers of fires and larger area burned.",
+        "table_side_needed": "The projected change (increase or decrease) in the summer Fire Weather Index for the specified place and period under the given emissions scenario.",
+        "paper_geography": "both regions (southern Europe and Pacific western USA)",
+        "paper_geography_role": "contextual",
+        "paper_time": "summer season",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The paper explains that higher summer FWI values lead to more fires, which can be used to interpret any projected increase or decrease shown in the table for the same fire‑weather index family. The generic F‑FWI unit matches the paper's discussion of the index, allowing a pattern‑explanation question.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.4
+}

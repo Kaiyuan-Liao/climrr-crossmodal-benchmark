@@ -1,0 +1,95 @@
+{
+  "item_id": "6479124",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "2c51b407ce67ceda9f7d453d372652bc9a7ec9374787420f829dc597f3fff07b",
+  "n_sections": 6,
+  "paper_chars": 35683,
+  "truncated": false,
+  "model_seconds": 2.9,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-6479124-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "1fde54a01ea266c8d0e9a122663345567604b616d1bbcd886624ef98547a2ded",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:40:26Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "6479124",
+      "paper_rel_path": "24/6479124.json",
+      "paper_sha256": "2c51b407ce67ceda9f7d453d372652bc9a7ec9374787420f829dc597f3fff07b",
+      "arm": "extreme_heat_v1",
+      "evidence": null,
+      "verbatim_passage": "Summertime trends in 1600 hr LST ATs from 1964-1998 exhibit statistically significant increases in 9 of the 28 cities ( Figure 3). These increases, which can arise from a combination of higher temperatures and/or increasing humidity (Gaffen and Ross 1998, 1999;Knappenberger et al. 1996;Robinson 2000;Schwartzman et al. 1998), are concentrated in the southern United States. However, isolated increasing trends are also evident outside of this general region in San Francisco, California, and New York, New York.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.materials and methods",
+        "section_idx": 2,
+        "span": [
+          4168,
+          4178
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.results",
+        "section_idx": 3,
+        "span": [
+          3029,
+          3039
+        ]
+      },
+      "proposal": {
+        "passage": "Summertime trends in 1600 hr LST ATs from 1964-1998 exhibit statistically significant increases in 9 of the 28 cities ( Figure 3). These increases, which can arise from a combination of higher temperatures and/or increasing humidity (Gaffen and Ross 1998, 1999;Knappenberger et al. 1996;Robinson 2000;Schwartzman et al. 1998), are concentrated in the southern United States. However, isolated increasing trends are also evident outside of this general region in San Francisco, California, and New York, New York.",
+        "section_key": "results",
+        "unit_id": "P-STATE-1",
+        "qa_type": "claim_to_region_identification",
+        "example_question": "Which ClimRR unit provides the projected number of summer days with daily maximum heat index above 105 °F for the state that the paper identifies as having an increasing summer apparent temperature trend (San Francisco, California)?",
+        "paper_side_fact": "The paper reports statistically significant increases in summer apparent temperature trends for San Francisco, California.",
+        "table_side_needed": "The projected number of summer days with daily maximum heat index above 105 °F for California, comparing the historical baseline (1995‑2004) with the end‑century decade (2085‑2094) under RCP8.5.",
+        "paper_geography": "California (San Francisco)",
+        "paper_geography_role": "study_area",
+        "paper_time": "1964-1998",
+        "paper_scenario": "unknown",
+        "paper_concept": "summer apparent temperature (heat index) trends",
+        "concept_relation": "direct",
+        "geography_relation": "same",
+        "link_rationale": "The paper identifies California (specifically San Francisco) as experiencing rising summer heat stress, and the unit supplies a future projection of heat‑index days for the same state, linking observed historical trends with projected future heat‑index frequency.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.9
+}

@@ -1,0 +1,92 @@
+{
+  "item_id": "233705284",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "073c71cb43dbeb4a50181191ea265e37d52b475cbf1b54742eeafd06fecde14c",
+  "n_sections": 5,
+  "paper_chars": 12559,
+  "truncated": false,
+  "model_seconds": 2.8,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-233705284-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "445cb6bd652e164ffa82613c41ee92b1e55e26afef7394771ac766943a62409c",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:30:27Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "233705284",
+      "paper_rel_path": "84/233705284.json",
+      "paper_sha256": "073c71cb43dbeb4a50181191ea265e37d52b475cbf1b54742eeafd06fecde14c",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.conclusion: current and future global challenges",
+        "section_idx": 4,
+        "span_start": 0,
+        "span_end": 478
+      },
+      "verbatim_passage": "Contemporary increases in LCFs reported in the literature (and the trend in Figure 2) can result from higher lightning ignition efficiency due to increased fuel load or decreased fuel moisture [25,26], rather than increased lightning. Nonetheless, climate warming is expected to intensify lightning activity in many regions worldwide as a result of the strengthening of atmospheric potential energy available for convection, vertical wind shear, and convective instability [27].",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.lightning-caused fires in the iberian peninsula",
+        "section_idx": 3,
+        "span": [
+          437,
+          455
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Contemporary increases in LCFs reported in the literature (and the trend in Figure 2) can result from higher lightning ignition efficiency due to increased fuel load or decreased fuel moisture [25,26], rather than increased lightning. Nonetheless, climate warming is expected to intensify lightning activity in many regions worldwide as a result of the strengthening of atmospheric potential energy available for convection, vertical wind shear, and convective instability [27].",
+        "section_key": "conclusion: current and future global challenges",
+        "unit_id": "P-COUNTY-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR table, how does the summer Fire Weather Index in Stephens County, Oklahoma change from the historical baseline (1995‑2004) to the end‑century decade (2085‑2094) under RCP8.5, and what explanation does the paper give for such a pattern?",
+        "paper_side_fact": "The paper states that contemporary increases in lightning‑caused fires can result from higher lightning ignition efficiency due to more fuel load or lower fuel moisture, and that climate warming is expected to intensify lightning activity.",
+        "table_side_needed": "The projected change (increase or decrease) in the summer Fire Weather Index for Stephens County, Oklahoma between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5.",
+        "paper_geography": "unknown",
+        "paper_geography_role": "contextual",
+        "paper_time": "future",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "related",
+        "geography_relation": "different",
+        "link_rationale": "The passage explains mechanisms (lightning efficiency, fuel moisture, warming) that can drive changes in fire‑weather conditions, which directly relate to the Fire Weather Index projected for a specific region in the table. The question asks the table for the numeric pattern and the passage for the causal explanation.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": false,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.8
+}

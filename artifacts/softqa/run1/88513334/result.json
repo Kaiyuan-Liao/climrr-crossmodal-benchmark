@@ -1,0 +1,87 @@
+{
+  "item_id": "88513334",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "4be14b451cef9713a09a8a6045ac2980ddb37ae78d7088138c6c3b166d3ce70c",
+  "n_sections": 7,
+  "paper_chars": 92286,
+  "truncated": true,
+  "model_seconds": 3.4,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-88513334-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "628aed70b12afd0ff7e0aa71b853af5a5cee0314447e1eb585ce374c47b277ae",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:34:53Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "88513334",
+      "paper_rel_path": "34/88513334.json",
+      "paper_sha256": "4be14b451cef9713a09a8a6045ac2980ddb37ae78d7088138c6c3b166d3ce70c",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "Their model corroborated that the probability of fire occurrence, especially the length of elevated risk, has been increasing over time in that region. Moreover, through a second‑stage analysis they found a significant association with temperature anomalies and fire‑weather indices, which suggests that the increased likelihood of seeing more fire on the landscape than during “regular” years was related to a warming climate.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.burned area and fire frequency",
+        "section_idx": 5,
+        "span": [
+          2194,
+          2212
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Their model corroborated that the probability of fire occurrence, especially the length of elevated risk, has been increasing over time in that region. Moreover, through a second‑stage analysis they found a significant association with temperature anomalies and fire‑weather indices, which suggests that the increased likelihood of seeing more fire on the landscape than during “regular” years was related to a warming climate.",
+        "section_key": "fire occurrence",
+        "unit_id": "P-COUNTY-1",
+        "qa_type": "cross_location_comparison",
+        "example_question": "How does the projected change in the summer Fire Weather Index for Oklahoma (State Oklahoma, Stephens County) between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5 compare to the observed increase in fire‑weather indices associated with temperature anomalies in northwestern Ontario reported in the paper?",
+        "paper_side_fact": "The paper reports that fire occurrence risk has been increasing over time in northwestern Ontario and that this increase is significantly associated with temperature anomalies and higher fire‑weather indices.",
+        "table_side_needed": "The difference (or percent change) in the summer Fire Weather Index for the grid rows labelled State Oklahoma and NAME Stephens between the modeled historical baseline 1995‑2004 and the modeled end‑century decade 2085‑2094 under RCP8.5.",
+        "paper_geography": "northwestern Ontario",
+        "paper_geography_role": "study_area",
+        "paper_time": "over the study period (recent decades)",
+        "paper_scenario": "unknown",
+        "paper_concept": "fire‑weather index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The paper provides an explanation that rising temperatures drive higher fire‑weather indices in Ontario, which can be contrasted with the projected increase in fire‑weather index for Oklahoma given in the table, allowing a comparison of observed climate‑fire relationships with modeled future changes in a different region.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.4
+}

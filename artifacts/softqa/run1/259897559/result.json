@@ -1,0 +1,93 @@
+{
+  "item_id": "259897559",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "8767fe3c0b23cf5ae8746bf3a55db6e265bf0e81f3c79769b2484faba946fc79",
+  "n_sections": 7,
+  "paper_chars": 23255,
+  "truncated": false,
+  "model_seconds": 2.5,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-259897559-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "81b619bb08aab38847f13fa21e6eee6485ca7043c87bbc8d69e151fa6c26efd9",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:38:51Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "259897559",
+      "paper_rel_path": "59/259897559.json",
+      "paper_sha256": "8767fe3c0b23cf5ae8746bf3a55db6e265bf0e81f3c79769b2484faba946fc79",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span_start": 1347,
+        "span_end": 1574
+      },
+      "verbatim_passage": "The combination of elevated temperature and humidity obstructs the natural dissipation of heat through evaporation (sweating), disrupts the body's ability to cool down, and amplifies the health hazards associated with heat [8].",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.methods",
+        "section_idx": 3,
+        "span": [
+          1607,
+          1617
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The combination of elevated temperature and humidity obstructs the natural dissipation of heat through evaporation (sweating), disrupts the body's ability to cool down, and amplifies the health hazards associated with heat [8].",
+        "section_key": "introduction",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What pattern does the ClimRR table show for the projected heat index in California under RCP8.5, and how does the paper explain the health hazards associated with elevated temperature and humidity?",
+        "paper_side_fact": "Elevated temperature and humidity block heat loss by sweating, impair cooling, and increase health hazards.",
+        "table_side_needed": "The projected heat index values (or trend) for California for the historical baseline period and the end‑century decade 2085‑2094 under RCP8.5.",
+        "paper_geography": "Vietnam",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "health hazards of heat due to temperature and humidity",
+        "concept_relation": "related",
+        "geography_relation": "different",
+        "link_rationale": "The passage provides a mechanistic explanation of why higher heat‑related metrics (such as the heat index projected for California) would increase health risks, linking the table’s projected heat‑index pattern to the paper’s discussion of heat‑related health hazards.",
+        "unmatched_dimensions": [
+          "concept",
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.5
+}

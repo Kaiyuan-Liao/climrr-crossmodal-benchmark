@@ -1,0 +1,93 @@
+{
+  "item_id": "88523156",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "8de24ca86509a83b7827c584b2e27723f27c7d2557fdd7c96c44ac335a95c031",
+  "n_sections": 5,
+  "paper_chars": 52114,
+  "truncated": false,
+  "model_seconds": 5.3,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-88523156-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "6ae7d0811e9710b56d2e9e7c7701fc4318c64a12501628f18310b180b0b97c14",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:40:43Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "88523156",
+      "paper_rel_path": "56/88523156.json",
+      "paper_sha256": "8de24ca86509a83b7827c584b2e27723f27c7d2557fdd7c96c44ac335a95c031",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.mathematical background for approach",
+        "section_idx": 3,
+        "span_start": 19807,
+        "span_end": 20346
+      },
+      "verbatim_passage": "The Karachi data are clearly asymptotically independent. In fact these data exhibit negative association: days with highest temperature are days with lower humidity, and conversely, the days with highest humidity are days with lower temperatures. This negative association is to be expected as moisture in the air mitigates temperature. Despite this negative relationship, there is a need to characterize the relationship in the tail of these two variables as human health is adversely affected when both temperature and humidity are high.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.mathematical background for approach",
+        "section_idx": 3,
+        "span": [
+          19015,
+          19025
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The Karachi data are clearly asymptotically independent. In fact these data exhibit negative association: days with highest temperature are days with lower humidity, and conversely, the days with highest humidity are days with lower temperatures. This negative association is to be expected as moisture in the air mitigates temperature. Despite this negative relationship, there is a need to characterize the relationship in the tail of these two variables as human health is adversely affected when both temperature and humidity are high.",
+        "section_key": "Asymptotic Independence case: procedure and Karachi example",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What does the ClimRR table indicate about the projected summer heat index, and how does the paper explain the health risks associated with simultaneous high temperature and humidity in Karachi?",
+        "paper_side_fact": "The Karachi data show a negative association between temperature and humidity, but high values of both are harmful to human health.",
+        "table_side_needed": "The projected summer heat index values (or pattern) for the baseline and end‑century periods under the specified emissions scenario.",
+        "paper_geography": "Karachi, Pakistan",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "relationship between temperature and humidity (heat‑index related health impact)",
+        "concept_relation": "related",
+        "geography_relation": "different",
+        "link_rationale": "The table provides a quantitative projection of the heat‑index family, while the passage supplies an explanation of why simultaneous high temperature and humidity are hazardous, linking the concept of heat index to observed health risk mechanisms.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 5.3
+}

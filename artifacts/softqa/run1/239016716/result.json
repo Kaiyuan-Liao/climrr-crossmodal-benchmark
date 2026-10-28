@@ -1,0 +1,93 @@
+{
+  "item_id": "239016716",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "03ec25ed93c1ef398b824ec44a8caca9547e61c07f7041d20d6611973369c162",
+  "n_sections": 9,
+  "paper_chars": 51834,
+  "truncated": false,
+  "model_seconds": 2.2,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-239016716-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "3f81adbd4405a56afab4c9f94edfdfdf42e30f569ede204389766e073c34d4ad",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:31:13Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "239016716",
+      "paper_rel_path": "16/239016716.json",
+      "paper_sha256": "03ec25ed93c1ef398b824ec44a8caca9547e61c07f7041d20d6611973369c162",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span_start": 3339,
+        "span_end": 3527
+      },
+      "verbatim_passage": "Covariates include weather variables such as humidity, temperature, precipitation and meteorologically-based fire danger indices such as the Canadian Fire Weather Index (van Wagner, 1977).",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          3489,
+          3507
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Covariates include weather variables such as humidity, temperature, precipitation and meteorologically-based fire danger indices such as the Canadian Fire Weather Index (van Wagner, 1977).",
+        "section_key": "introduction",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected summer change in the Fire Weather Index according to the ClimRR table, and why is this index mentioned as an important covariate in wildfire prediction models?",
+        "paper_side_fact": "The passage states that fire danger indices such as the Canadian Fire Weather Index are used as covariates in wildfire models.",
+        "table_side_needed": "The projected summer Fire Weather Index values (or change) for the modeled historical baseline versus the end‑century decade under the specified scenario.",
+        "paper_geography": "unknown",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "fire weather index",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The passage explains why the Fire Weather Index is relevant for modeling wildfire risk, while the table provides the actual projected values of that same index, allowing a question that links the projection to its explanatory role.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.2
+}

@@ -1,0 +1,95 @@
+{
+  "item_id": "273875023",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "30744ec47c9aeb6543ae3d7ac1666580190ec2e1047b447ae1c8e527362f6d0f",
+  "n_sections": 10,
+  "paper_chars": 184239,
+  "truncated": true,
+  "model_seconds": 3.2,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-273875023-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "a526cccd7284f27eb369ec57fc4c916878befa8ca794a4cc82031fb89c1e4141",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:33:53Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "273875023",
+      "paper_rel_path": "23/273875023.json",
+      "paper_sha256": "30744ec47c9aeb6543ae3d7ac1666580190ec2e1047b447ae1c8e527362f6d0f",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "DFMC is a crucial input in nearly all wildfire risk assessment models (Matthews, 2013). For example, estimates of DFMC are integral to current operational fire prediction systems, including the Fire Weather Index (FWI) and the National Fire Danger Rating System (NFDRS) in the United States (Vitolo et al., 2020).",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.data",
+        "section_idx": 5,
+        "span": [
+          4104,
+          4122
+        ]
+      },
+      "place_hit": {
+        "term": "stephens",
+        "json_path": "$.data",
+        "section_idx": 5,
+        "span": [
+          24074,
+          24082
+        ]
+      },
+      "proposal": {
+        "passage": "DFMC is a crucial input in nearly all wildfire risk assessment models (Matthews, 2013). For example, estimates of DFMC are integral to current operational fire prediction systems, including the Fire Weather Index (FWI) and the National Fire Danger Rating System (NFDRS) in the United States (Vitolo et al., 2020).",
+        "section_key": "data",
+        "unit_id": "P-COUNTY-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the table, how does the summer Fire Weather Index in Oklahoma (Stephens County) change from the historical baseline to the end‑century under RCP8.5, and what explanation does the paper give for using the Fire Weather Index in U.S. fire prediction systems?",
+        "paper_side_fact": "Estimates of dead fuel moisture content are integral to operational fire prediction systems, including the Fire Weather Index (FWI) and the NFDRS in the United States.",
+        "table_side_needed": "the modeled summer Fire Weather Index values for the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) for the rows labelled State Oklahoma and NAME Stephens under RCP8.5, to determine the projected change.",
+        "paper_geography": "United States",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index (FWI) as a fire‑danger metric used in operational prediction systems",
+        "concept_relation": "direct",
+        "geography_relation": "contained_in",
+        "link_rationale": "The passage explains why the Fire Weather Index is employed in U.S. fire‑danger systems, providing a mechanistic explanation that can be linked to the projected FWI pattern for Oklahoma shown in the table.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.2
+}

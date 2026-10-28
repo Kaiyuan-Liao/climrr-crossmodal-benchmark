@@ -1,0 +1,93 @@
+{
+  "item_id": "221671377",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "85bd33c16c00e1b022f93f7bb05d15a120ac6db055aca832962fb44ace17026c",
+  "n_sections": 8,
+  "paper_chars": 41914,
+  "truncated": false,
+  "model_seconds": 2.1,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-221671377-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "1a4555ad39b9510976ca695b40b6777c8a45dfb1c8731c03e787189f6e6f7424",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:36:45Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "221671377",
+      "paper_rel_path": "77/221671377.json",
+      "paper_sha256": "85bd33c16c00e1b022f93f7bb05d15a120ac6db055aca832962fb44ace17026c",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.chirts-daily",
+        "section_idx": 3,
+        "span_start": 1559,
+        "span_end": 1851
+      },
+      "verbatim_passage": "Hourly temperature and dew point temperature from the ERA5 data set are used to estimate relative humidity (RH). These derived RH values, along with CHIRTS-daily, are used to calculate the Heat Index (HI) using the series of equations and rules provided by the National Weather Service (NWS).",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.chirts-daily",
+        "section_idx": 3,
+        "span": [
+          995,
+          1005
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Hourly temperature and dew point temperature from the ERA5 data set are used to estimate relative humidity (RH). These derived RH values, along with CHIRTS-daily, are used to calculate the Heat Index (HI) using the series of equations and rules provided by the National Weather Service (NWS).",
+        "section_key": "chirts-daily",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer heat index for the United States according to the ClimRR table, and how is the heat index calculated in the CHIRTS‑daily dataset?",
+        "paper_side_fact": "The passage states that ERA5 hourly temperature and dew point are used to estimate relative humidity, and together with CHIRTS‑daily they calculate the Heat Index using NWS equations.",
+        "table_side_needed": "Projected heat‑index values (or their change) for a specific region and period (e.g., summer 2085‑2094 under RCP8.5) from the ClimRR table.",
+        "paper_geography": "global",
+        "paper_geography_role": "data_source",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Heat Index",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The passage explains the methodology for deriving the heat index in the CHIRTS‑daily product, which is required to interpret any heat‑index projection shown in the ClimRR table for a given region and period.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.1
+}

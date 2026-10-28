@@ -1,0 +1,88 @@
+{
+  "item_id": "53050065",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "67d634a0411f24011fc3f356ed0f7bde1f98ec1404e1d9703417a02838c9de38",
+  "n_sections": 8,
+  "paper_chars": 55501,
+  "truncated": false,
+  "model_seconds": 3.1,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-53050065-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "57c17dec91e6a44e14db7b269732b407be186dcf997c110f1c00954481118931",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:34:12Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "53050065",
+      "paper_rel_path": "65/53050065.json",
+      "paper_sha256": "67d634a0411f24011fc3f356ed0f7bde1f98ec1404e1d9703417a02838c9de38",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "The Santa Rosa RAWS at 11:00 UTC 9 October reported a temperature of 32.8 • C, RH of 7%, E-NE wind gust of 27.3 ms −1 , Fosberg Fire Weather Index (FFWI) of 78, and 10-h dead fuel moisture (FM10) of 12.8% (Table 3). Similar observations of low humidity and FM10 accompanying high winds and FFWI were found at other stations (Table 3). These values of wind gusts, RH, FM10, or FFWI were typically in the bottom or top 1st percentiles for station hourly observations for the 20+ year observational record (Table 3).",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.dataset",
+        "section_idx": 3,
+        "span": [
+          1029,
+          1047
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The Santa Rosa RAWS at 11:00 UTC 9 October reported a temperature of 32.8 • C, RH of 7%, E-NE wind gust of 27.3 ms −1 , Fosberg Fire Weather Index (FFWI) of 78, and 10-h dead fuel moisture (FM10) of 12.8% (Table 3). Similar observations of low humidity and FM10 accompanying high winds and FFWI were found at other stations (Table 3). These values of wind gusts, RH, FM10, or FFWI were typically in the bottom or top 1st percentiles for station hourly observations for the 20+ year observational record (Table 3).",
+        "section_key": "meteorological conditions",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer Fire Weather Index for the United States under RCP8.5, and how does the paper explain the mechanisms that can lead to extreme FFWI values like those observed during the 2017 California fires?",
+        "paper_side_fact": "The Santa Rosa RAWS recorded an FFWI of 78, which was in the top 1st percentile of its 20‑year record, indicating an extreme fire‑weather condition.",
+        "table_side_needed": "Projected summer (June‑July‑August) Fire Weather Index values for the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5, showing the magnitude and direction of change.",
+        "paper_geography": "Santa Rosa, California",
+        "paper_geography_role": "study_area",
+        "paper_time": "October 2017",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fosberg Fire Weather Index (FFWI)",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage provides an observed example of an extreme fire‑weather index and explains the meteorological conditions (high temperature, low humidity, strong winds) that produce such values. The table unit supplies future projected summer FWI values, enabling a question that asks for the projected pattern and the paper’s mechanistic explanation of how such extreme FWI can arise.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.1
+}

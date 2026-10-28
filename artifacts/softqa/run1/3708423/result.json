@@ -1,0 +1,92 @@
+{
+  "item_id": "3708423",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "4407174115751344d32d2c049db90092df46311ef385926a8ff450e8247b8d53",
+  "n_sections": 7,
+  "paper_chars": 28906,
+  "truncated": false,
+  "model_seconds": 1.9,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-3708423-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "c1d51d39828b0a99450d63afd93a94c0de81fcdfdf0b6927bbb564ab5f96abcc",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:39:50Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "3708423",
+      "paper_rel_path": "23/3708423.json",
+      "paper_sha256": "4407174115751344d32d2c049db90092df46311ef385926a8ff450e8247b8d53",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.results",
+        "section_idx": 4,
+        "span_start": 2523,
+        "span_end": 2664
+      },
+      "verbatim_passage": "Notably, humidity and temperature measures such as apparent temperature and heat index (HI) were not universally analyzed within the studies.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.results",
+        "section_idx": 4,
+        "span": [
+          2599,
+          2609
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Notably, humidity and temperature measures such as apparent temperature and heat index (HI) were not universally analyzed within the studies.",
+        "section_key": "results",
+        "unit_id": "F-HEAT",
+        "qa_type": "cross_source_validation",
+        "example_question": "Did the systematic review find that heat index (HI) was commonly used as an exposure metric, and how does that observation compare to the heat index projections shown in the ClimRR table for historical and future periods?",
+        "paper_side_fact": "The passage states that heat index was not universally analyzed within the studies.",
+        "table_side_needed": "Projected heat index values (or pattern) for the historical baseline and future period as recorded in the ClimRR table.",
+        "paper_geography": "unknown",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The passage mentions heat index as an exposure metric, while the unit provides heat index projections, allowing a validation question that compares the paper's observation about metric usage with the table's quantitative projections.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 1.9
+}

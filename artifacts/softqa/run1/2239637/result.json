@@ -1,0 +1,101 @@
+{
+  "item_id": "2239637",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "314238d8f31fa3ccd665598fd2a395b508f74c7f6a6abdac907a8d570543f328",
+  "n_sections": 6,
+  "paper_chars": 33704,
+  "truncated": false,
+  "model_seconds": 2.6,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-2239637-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "e07c5319d63da6d829a1412480a1166c67f4ff04eea05e2bbe8d132357359a7f",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:36:48Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "2239637",
+      "paper_rel_path": "37/2239637.json",
+      "paper_sha256": "314238d8f31fa3ccd665598fd2a395b508f74c7f6a6abdac907a8d570543f328",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.preparedness for the extreme heat of 2011",
+        "section_idx": 3,
+        "span_start": 1092,
+        "span_end": 1469
+      },
+      "verbatim_passage": "For several other counties, heat wave definitions were tied to specific temperatures (examples: \"in the 90s\"; \"98°F day and 89°F night for a 18-hr period\"; \"3 consecutive days over 101°F\"); other definitions accounted for air moisture either explicitly or through the use of heat index as a trigger (\"temperatures above 95°F with humidity above 50%\"; \"heat index above 115°F\").",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.preparedness for the extreme heat of 2011",
+        "section_idx": 3,
+        "span": [
+          1367,
+          1377
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.introduction",
+        "section_idx": 1,
+        "span": [
+          2125,
+          2135
+        ]
+      },
+      "proposal": {
+        "passage": "For several other counties, heat wave definitions were tied to specific temperatures (examples: \"in the 90s\"; \"98°F day and 89°F night for a 18-hr period\"; \"3 consecutive days over 101°F\"); other definitions accounted for air moisture either explicitly or through the use of heat index as a trigger (\"temperatures above 95°F with humidity above 50%\"; \"heat index above 115°F\").",
+        "section_key": "preparedness for the extreme heat of 2011",
+        "unit_id": "P-STATE-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected number of summer days with daily maximum heat index above 105 °F for California under RCP 8.5, and how does the paper explain the relevance of heat‑index thresholds such as 115 °F for defining heat waves?",
+        "paper_side_fact": "The paper states that some counties define heat waves using a heat‑index threshold of 115 °F (or temperature with humidity).",
+        "table_side_needed": "The projected number of summer days with daily maximum heat index >105 °F for California for the baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP 8.5.",
+        "paper_geography": "United States",
+        "paper_geography_role": "contextual",
+        "paper_time": "2011",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index threshold used to define heat waves",
+        "concept_relation": "related",
+        "geography_relation": "different",
+        "link_rationale": "The passage explains why heat‑index thresholds are used to define heat‑wave events, providing a mechanistic rationale that helps interpret the significance of a projected increase in days above a heat‑index threshold for California in the future.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": false,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.6
+}

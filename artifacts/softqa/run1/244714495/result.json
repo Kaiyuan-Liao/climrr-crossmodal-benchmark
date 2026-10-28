@@ -1,0 +1,92 @@
+{
+  "item_id": "244714495",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "a335fbf2e6c78485c30ad32b32debd77032457dbdc88e554dca4f096b0cd0f24",
+  "n_sections": 13,
+  "paper_chars": 19883,
+  "truncated": false,
+  "model_seconds": 2.3,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-244714495-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "abba1dfe90af421db56a000367459ca126b11be205b8e0db286bcde1f4f97289",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:31:35Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "244714495",
+      "paper_rel_path": "95/244714495.json",
+      "paper_sha256": "a335fbf2e6c78485c30ad32b32debd77032457dbdc88e554dca4f096b0cd0f24",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.related work",
+        "section_idx": 3,
+        "span_start": 0,
+        "span_end": 260
+      },
+      "verbatim_passage": "Wildfire forecasting models have been created through several methods, but existing systems, such as the Canadian Forest Fire Weather Index System, rely on weather stations and closed-form mathematical equations to attain a fire risk probability (Wagner 1987).",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.related work",
+        "section_idx": 3,
+        "span": [
+          121,
+          139
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Wildfire forecasting models have been created through several methods, but existing systems, such as the Canadian Forest Fire Weather Index System, rely on weather stations and closed-form mathematical equations to attain a fire risk probability (Wagner 1987).",
+        "section_key": "related work",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, what is the projected change in the summer Fire Weather Index under RCP8.5, and how does the paper explain the role of the Canadian Forest Fire Weather Index System in fire risk assessment?",
+        "paper_side_fact": "The passage states that existing systems like the Canadian Forest Fire Weather Index System use weather stations and equations to provide a fire risk probability.",
+        "table_side_needed": "The projected difference (or percent change) in the summer Fire Weather Index between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5 for the relevant region.",
+        "paper_geography": "Canada",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The passage discusses the Canadian Fire Weather Index system, which is the same fire‑weather metric that the ClimRR table projects. Therefore the passage can serve as an explanation for any projected pattern shown in the table.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.3
+}

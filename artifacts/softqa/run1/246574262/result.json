@@ -1,0 +1,88 @@
+{
+  "item_id": "246574262",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "22aa0cbc19b6f999c86b64c94acf560c3b109ebdc36e1e35348f93cc71be8d08",
+  "n_sections": 7,
+  "paper_chars": 34743,
+  "truncated": false,
+  "model_seconds": 11.9,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-246574262-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "4d648399a3aaa24f63924f7ad8c33a11675aa79b5deb5590f262ccce3b1c991f",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:32:09Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "246574262",
+      "paper_rel_path": "62/246574262.json",
+      "paper_sha256": "22aa0cbc19b6f999c86b64c94acf560c3b109ebdc36e1e35348f93cc71be8d08",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "The Fire Weather Index (FWI) system was developed by the Canadian Forest Fire Danger Rating System (CFFDRS) in the seventies [28]. This indicator is used worldwide as a trustable indicator for the study of climate change effects in fire exposure [29]. The indicator is available on the EFFIS Copernicus website throughout Europe. The FWI is calculated daily by Méteo‑France for France via Arpège‑Climat 4.6 over the period of reference: 1959‑2007. The FWI data was downloaded from Drias's Méteo‑France platform and for the period 1973‑2007. The FWI is only available on a seasonal average from March to November. The higher the FWI is, the greater the probability of wildfire is.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.materials and methods",
+        "section_idx": 3,
+        "span": [
+          804,
+          822
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The Fire Weather Index (FWI) system was developed by the Canadian Forest Fire Danger Rating System (CFFDRS) in the seventies [28]. This indicator is used worldwide as a trustable indicator for the study of climate change effects in fire exposure [29]. The indicator is available on the EFFIS Copernicus website throughout Europe. The FWI is calculated daily by Méteo‑France for France via Arpège‑Climat 4.6 over the period of reference: 1959‑2007. The FWI data was downloaded from Drias's Méteo‑France platform and for the period 1973‑2007. The FWI is only available on a seasonal average from March to November. The higher the FWI is, the greater the probability of wildfire is.",
+        "section_key": "materials and methods",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What pattern does the table show for the summer Fire Weather Index in the indicated region and period, and how does the paper explain the link between higher FWI values and increased wildfire risk?",
+        "paper_side_fact": "The passage states that the Fire Weather Index is a meteorological fire‑danger index calculated seasonally, and higher values indicate a greater probability of wildfire.",
+        "table_side_needed": "The projected change (increase or decrease) of the summer Fire Weather Index for the specific place and period shown in the table (e.g., end‑century under RCP8.5).",
+        "paper_geography": "France",
+        "paper_geography_role": "study_area",
+        "paper_time": "summer (seasonal average March‑November)",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "Both the paper passage and the table side discuss the Fire Weather Index, a fire‑danger metric. The table provides a quantitative projection for a region, while the paper gives the mechanistic explanation that higher FWI values raise wildfire probability, allowing a combined question about the pattern and its explanation.",
+        "unmatched_dimensions": [
+          "geography",
+          "scenario",
+          "time",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 11.9
+}

@@ -1,0 +1,87 @@
+{
+  "item_id": "85229507",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "d1c742235803061140bfda7dfcff5db5756d5c52f34cec38d32faffc6cfc2505",
+  "n_sections": 14,
+  "paper_chars": 132975,
+  "truncated": true,
+  "model_seconds": 3.5,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-85229507-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "592fbff1e7de442129c0405475b1c19eeeb5de822089270ff4d7e2f9dac28f2b",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:34:49Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "85229507",
+      "paper_rel_path": "07/85229507.json",
+      "paper_sha256": "d1c742235803061140bfda7dfcff5db5756d5c52f34cec38d32faffc6cfc2505",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "We acquired fire weather variables for each fire from the 32‑km 2 North American Regional Reanalysis (NARR) dataset (Mesinger et al. 2006; Appendix A). For the 10‑day period starting on the detection date of each fire, we determined the maximum and mean values of the Fosberg fire weather index (FFWI; Fosberg 1978) and wind speed, and the number of days with FFWI above the 90th percentile and wind speed above 20 miles per hour.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.coarse-scale climate and weather data",
+        "section_idx": 6,
+        "span": [
+          4524,
+          4542
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "We acquired fire weather variables for each fire from the 32‑km 2 North American Regional Reanalysis (NARR) dataset (Mesinger et al. 2006; Appendix A). For the 10‑day period starting on the detection date of each fire, we determined the maximum and mean values of the Fosberg fire weather index (FFWI; Fosberg 1978) and wind speed, and the number of days with FFWI above the 90th percentile and wind speed above 20 miles per hour.",
+        "section_key": "coarse-scale climate and weather data",
+        "unit_id": "F-FWI",
+        "qa_type": "claim_to_region_identification",
+        "example_question": "Which ClimRR unit corresponds to the fire‑weather index (FFWI) that the authors used as a predictor of burn severity?",
+        "paper_side_fact": "The authors acquired fire weather variables, including maximum and mean values of the Fosberg fire weather index (FFWI), for each fire from the NARR dataset.",
+        "table_side_needed": "The table must provide the fire‑weather index family (F‑FWI) projection values for the relevant region and period.",
+        "paper_geography": "Northwest and Southwest regions of the United States",
+        "paper_geography_role": "study_area",
+        "paper_time": "1984‑2006",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fosberg fire weather index (FFWI) values",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The passage states that the study uses FFWI as a fire‑weather variable, which directly matches the fire‑weather index family represented by the F‑FWI unit; therefore the passage explains the relevance of that metric to the table side quantity.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "high"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.5
+}

@@ -1,0 +1,87 @@
+{
+  "item_id": "135076557",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "8108808fd6f0e1f3ad56eb96f807645f37b7c86ff374672c3e46c615bd682c43",
+  "n_sections": 7,
+  "paper_chars": 51110,
+  "truncated": false,
+  "model_seconds": 4.0,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-135076557-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "11c81d0885b2e8a02cd4bb83969ba6513ad809ff71e44fe253913d7aff61003f",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:35:28Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "135076557",
+      "paper_rel_path": "57/135076557.json",
+      "paper_sha256": "8108808fd6f0e1f3ad56eb96f807645f37b7c86ff374672c3e46c615bd682c43",
+      "arm": "extreme_heat_v1",
+      "evidence": null,
+      "verbatim_passage": "We defined health-relevant meteorological hazards as either present (above a hazard-specific, health-relevant threshold) or absent on each day during the warm season (May-September): (1) \"Excessive heat days\" are days with maximum heat indices greater than or equal to 95°F (35°C); (2) \"heavy rainfall days\" are days with liquid water equivalent precipitation greater than or equal to 1 inch (2.54 cm); (3) \"O3 exceedances\" are days with 8‑hr O3 maxima greater than or equal to 70 ppb; and (4) \"PM2.5 exceedances\" are days with 24‑hr mean PM2.5 concentrations greater than or equal to 35 μg/m3. The heat index threshold is based on the guideline criteria for issuance of heat advisories by the National Weather Service (NWS) for the region.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.materials and",
+        "section_idx": 3,
+        "span": [
+          1973,
+          1983
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "We defined health-relevant meteorological hazards as either present (above a hazard-specific, health-relevant threshold) or absent on each day during the warm season (May-September): (1) \"Excessive heat days\" are days with maximum heat indices greater than or equal to 95°F (35°C); (2) \"heavy rainfall days\" are days with liquid water equivalent precipitation greater than or equal to 1 inch (2.54 cm); (3) \"O3 exceedances\" are days with 8‑hr O3 maxima greater than or equal to 70 ppb; and (4) \"PM2.5 exceedances\" are days with 24‑hr mean PM2.5 concentrations greater than or equal to 35 μg/m3. The heat index threshold is based on the guideline criteria for issuance of heat advisories by the National Weather Service (NWS) for the region.",
+        "section_key": "materials and",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the table, what is the projected change in the summer heat‑index metric (e.g., number of days exceeding the heat‑advisory threshold) for the region represented by the unit, and how does the paper justify the use of the 95 °F threshold for defining excessive heat days?",
+        "paper_side_fact": "The paper defines excessive heat days as days with maximum heat index ≥ 95 °F, based on National Weather Service heat‑advisory criteria.",
+        "table_side_needed": "The projected difference between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) for the summer heat‑index metric (such as number of days exceeding the threshold) for the region covered by the unit.",
+        "paper_geography": "New England (Connecticut, Massachusetts, Rhode Island, Vermont, New Hampshire, Maine)",
+        "paper_geography_role": "study_area",
+        "paper_time": "warm season (May‑September) for the years 2009‑2014",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index / excessive heat days",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "Both the passage and the unit concern the heat‑index family. The passage explains why a specific heat‑index threshold (95 °F) is used, which can serve as an explanation for any projected pattern of heat‑index changes shown in the table. The table provides the projected change, while the paper provides the methodological rationale.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "low"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 4.0
+}

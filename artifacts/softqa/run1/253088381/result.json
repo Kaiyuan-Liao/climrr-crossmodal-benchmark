@@ -1,0 +1,100 @@
+{
+  "item_id": "253088381",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "6cb63e58408147b11c42236bd74cf7ce12c5756a6a8eeac28284a9334c200b31",
+  "n_sections": 18,
+  "paper_chars": 103493,
+  "truncated": true,
+  "model_seconds": 3.4,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-253088381-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "9251a116fec5c086b46b9f4ad9cfdb34a79b939d3f5d2a0ce8fbbb6f3f2ac12d",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:38:26Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "253088381",
+      "paper_rel_path": "81/253088381.json",
+      "paper_sha256": "6cb63e58408147b11c42236bd74cf7ce12c5756a6a8eeac28284a9334c200b31",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.pooled effects by different heat indicators, study designs, and locations-the",
+        "section_idx": 10,
+        "span_start": 4940,
+        "span_end": 5251
+      },
+      "verbatim_passage": "Basu et al. (2012) (Basu et al., 2012) found that older adults aged 65 years or older showed a higher % increase in excess risk of diabetes-related hospital admissions associated with per 5.6°C increase in ATmean (7.0%, 95% CI: 2.9-11.3%) compared to those aged 19-64 years from 2005 to 2008 in California, USA.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.public health impact and future steps",
+        "section_idx": 16,
+        "span": [
+          2418,
+          2428
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.ambient temperature and diabetes",
+        "section_idx": 9,
+        "span": [
+          390,
+          400
+        ]
+      },
+      "proposal": {
+        "passage": "Basu et al. (2012) (Basu et al., 2012) found that older adults aged 65 years or older showed a higher % increase in excess risk of diabetes-related hospital admissions associated with per 5.6°C increase in ATmean (7.0%, 95% CI: 2.9-11.3%) compared to those aged 19-64 years from 2005 to 2008 in California, USA.",
+        "section_key": "ambient temperature and diabetes",
+        "unit_id": "P-STATE-1",
+        "qa_type": "claim_to_region_identification",
+        "example_question": "According to the systematic review, which ClimRR unit quantifies the number of summer days with daily maximum heat index above 105 °F for the region where older adults were found to be especially vulnerable to heat?",
+        "paper_side_fact": "Older adults aged 65 years or older in California showed a higher percent increase in excess risk of diabetes‑related hospital admissions associated with a per 5.6 °C increase in apparent temperature from 2005 to 2008.",
+        "table_side_needed": "The projected number of summer days with daily maximum heat index above 105 °F for California, comparing the historical baseline 1995‑2004 with the end‑century decade 2085‑2094 under RCP8.5.",
+        "paper_geography": "California, USA",
+        "paper_geography_role": "study_area",
+        "paper_time": "2005‑2008",
+        "paper_scenario": "unknown",
+        "paper_concept": "excess risk of diabetes‑related hospital admissions associated with heat exposure (apparent temperature increase)",
+        "concept_relation": "related",
+        "geography_relation": "same",
+        "link_rationale": "The passage identifies California as a region where heat exposure increases diabetes risk, and the unit provides a heat‑index metric for the same region, enabling a question that links the vulnerability claim to the specific ClimRR heat‑index projection.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.5
+}

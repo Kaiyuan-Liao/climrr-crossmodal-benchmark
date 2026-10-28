@@ -1,0 +1,92 @@
+{
+  "item_id": "238725720",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "801c20d060281c7515a6aa7ccc73792f08ad6eb3c43725fff5d6303335a8ac34",
+  "n_sections": 17,
+  "paper_chars": 45359,
+  "truncated": false,
+  "model_seconds": 2.2,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-238725720-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "fc3e15a8969027975ad5fa8fa90685b1fffe709c19bf9f2203192de7c3c2bfbe",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:31:08Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "238725720",
+      "paper_rel_path": "20/238725720.json",
+      "paper_sha256": "801c20d060281c7515a6aa7ccc73792f08ad6eb3c43725fff5d6303335a8ac34",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span_start": 6829,
+        "span_end": 7222
+      },
+      "verbatim_passage": "Fire weather indices such as the Australian Forest Fire Danger Index [41], the Canadian Fire Weather Index [42] and the US Fosberg Fire Weather Index [43] all contain components describing temperature, humidity and wind speed. Empirical evidence confirms the usefulness of these indices as predictors of several aspects of fire behaviour, including rate of spread [43,44] and severity [36,45].",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          6917,
+          6935
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Fire weather indices such as the Australian Forest Fire Danger Index [41], the Canadian Fire Weather Index [42] and the US Fosberg Fire Weather Index [43] all contain components describing temperature, humidity and wind speed. Empirical evidence confirms the usefulness of these indices as predictors of several aspects of fire behaviour, including rate of spread [43,44] and severity [36,45].",
+        "section_key": "introduction",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer Fire Weather Index for the future period, and how does the paper explain why such an index is relevant for fire spread and severity?",
+        "paper_side_fact": "Fire weather indices (including the Canadian Fire Weather Index) are useful predictors of fire spread rate and severity.",
+        "table_side_needed": "The projected change (increase or decrease) in the summer Fire Weather Index for the future period compared to the historical baseline.",
+        "paper_geography": "Australia (Blue Mountains, New South Wales)",
+        "paper_geography_role": "study_area",
+        "paper_time": "October 2013",
+        "paper_scenario": "unknown",
+        "paper_concept": "fire weather index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage explains why fire‑weather indices matter for fire behaviour, which directly relates to the table’s projected fire‑weather index values. The question asks the model to combine the projected pattern with the paper’s mechanistic explanation.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "high"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.2
+}

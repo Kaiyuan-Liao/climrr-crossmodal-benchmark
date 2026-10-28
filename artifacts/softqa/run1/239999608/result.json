@@ -1,0 +1,87 @@
+{
+  "item_id": "239999608",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "49d1510d76712240037d1c23cc605271443e6deb79686245029a1a9a0f03612b",
+  "n_sections": 4,
+  "paper_chars": 82342,
+  "truncated": false,
+  "model_seconds": 3.6,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-239999608-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "593b50275f6e1a73c82d827d65377f234acfdbb82e81466cb21dad43e21ba395",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:31:23Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "239999608",
+      "paper_rel_path": "08/239999608.json",
+      "paper_sha256": "49d1510d76712240037d1c23cc605271443e6deb79686245029a1a9a0f03612b",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "Figure 1 is designed to show the potential teleconnection between Arctic SIC and regional fire weather (as described by FFWI) and hazards (as described by the MTBS burned area of large wildfires) over the western U.S.",
+      "concept_hit": {
+        "term": "FWI",
+        "json_path": "$.introduction",
+        "section_idx": 0,
+        "span": [
+          9983,
+          9986
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Figure 1 is designed to show the potential teleconnection between Arctic SIC and regional fire weather (as described by FFWI) and hazards (as described by the MTBS burned area of large wildfires) over the western U.S.",
+        "section_key": "overview",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What pattern does the ClimRR table show for the summer Fire Weather Index over the western United States, and how does the paper explain the physical mechanism behind that pattern?",
+        "paper_side_fact": "The passage states that Figure 1 illustrates a teleconnection between Arctic sea‑ice concentration and regional fire weather, measured by the Fosberg Fire Weather Index, over the western United States.",
+        "table_side_needed": "The modeled change (historical baseline vs. future period) in the summer Fire Weather Index for the western United States region (or its constituent grid cells) as recorded in the ClimRR table.",
+        "paper_geography": "western United States",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index (FFWI)",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage identifies FFWI as the fire‑weather metric used to assess the teleconnection, which matches the fire‑weather index family represented by the F‑FWI unit. The question can ask the table for the projected FWI pattern and the paper for the mechanistic explanation.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.6
+}

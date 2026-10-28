@@ -1,0 +1,92 @@
+{
+  "item_id": "231948602",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "964edb5bfb4b19fe4b95458a9bc8dc5c168450cccf43985107ec219adaf7a08b",
+  "n_sections": 13,
+  "paper_chars": 31476,
+  "truncated": false,
+  "model_seconds": 2.4,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-231948602-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "938b961a36d6f2ea33d74fb289294aa2594e546a957becf8a8395ef30cf002fc",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:37:03Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "231948602",
+      "paper_rel_path": "02/231948602.json",
+      "paper_sha256": "964edb5bfb4b19fe4b95458a9bc8dc5c168450cccf43985107ec219adaf7a08b",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.discussion",
+        "section_idx": 12,
+        "span_start": 712,
+        "span_end": 1132
+      },
+      "verbatim_passage": "Rural residents on average experienced a higher HI exposure than urban residents, even after controlling for differences in ambient conditions, particularly during rest time compared to non-rest time (1.22 vs. 0.10°C). This suggests that relative to urban residents, rural residents may experience heightened risk to dangerous HI exposure at a given ambient HI measured at a nearby WS, particularly during the nighttime.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.title",
+        "section_idx": 0,
+        "span": [
+          20,
+          30
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Rural residents on average experienced a higher HI exposure than urban residents, even after controlling for differences in ambient conditions, particularly during rest time compared to non-rest time (1.22 vs. 0.10°C). This suggests that relative to urban residents, rural residents may experience heightened risk to dangerous HI exposure at a given ambient HI measured at a nearby WS, particularly during the nighttime.",
+        "section_key": "discussion",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What future change in summer heat index does the ClimRR projection show, and how does the study explain the higher heat‑index exposure observed among rural residents compared to urban residents?",
+        "paper_side_fact": "Rural residents experienced higher heat‑index exposure than urban residents, especially at night, even after accounting for ambient conditions.",
+        "table_side_needed": "The projected pattern (increase, decrease, or magnitude of change) of summer heat index from the historical baseline to the end‑century decade under the relevant emissions scenario in the ClimRR table.",
+        "paper_geography": "Alabama (Birmingham and Wilcox County)",
+        "paper_geography_role": "study_area",
+        "paper_time": "summer of 2017",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index exposure",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The table provides a projected future pattern for heat index, while the paper offers a mechanistic explanation for why certain populations (rural residents) experience higher heat‑index values, allowing a question that links the projected pattern with the study’s explanatory findings.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.4
+}

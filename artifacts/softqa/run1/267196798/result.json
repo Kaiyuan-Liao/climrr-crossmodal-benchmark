@@ -1,0 +1,91 @@
+{
+  "item_id": "267196798",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "17c0543eb69082cbdd1e65c3bbc7b6f23fff405631127dc707c84b3211a3db91",
+  "n_sections": 10,
+  "paper_chars": 32291,
+  "truncated": false,
+  "model_seconds": 2.0,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-267196798-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "5a6e878fd3df61a76bfdd919828f007154968f902fa3b6fc39469fdd6ad91446",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:39:11Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "267196798",
+      "paper_rel_path": "98/267196798.json",
+      "paper_sha256": "17c0543eb69082cbdd1e65c3bbc7b6f23fff405631127dc707c84b3211a3db91",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span_start": 310,
+        "span_end": 485
+      },
+      "verbatim_passage": "Previous studies have employed Heat Index (HI) and Wet Bulb Globe Temperature (WBGT) metrics to understand extreme heat exposure, forming the basis for heat stress guidelines.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          341,
+          351
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Previous studies have employed Heat Index (HI) and Wet Bulb Globe Temperature (WBGT) metrics to understand extreme heat exposure, forming the basis for heat stress guidelines.",
+        "section_key": "abstract",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer Heat Index for the United States under RCP8.5, and how does the paper explain why the Heat Index is used to assess extreme heat exposure?",
+        "paper_side_fact": "The paper states that Heat Index (HI) and WBGT are used as metrics to understand extreme heat exposure.",
+        "table_side_needed": "The projected change (difference or percent change) in the summer Heat Index for the United States between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5.",
+        "paper_geography": "United States",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Heat Index",
+        "concept_relation": "direct",
+        "geography_relation": "same",
+        "link_rationale": "The unit describes a projected Heat Index change for the United States, and the paper discusses Heat Index as a key metric for assessing extreme heat, providing an explanatory context for why such a projection matters.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.0
+}

@@ -1,0 +1,93 @@
+{
+  "item_id": "253201868",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "9a15b351bdcc1c2f109842934ff1e47759182452dcf83cdc33694e1d14f99b5f",
+  "n_sections": 10,
+  "paper_chars": 49469,
+  "truncated": false,
+  "model_seconds": 2.4,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-253201868-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "3d6a1ed2379ff371b16e31a0f3865df722d57f430b5fb0c700dfebb8476a157e",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:32:55Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "253201868",
+      "paper_rel_path": "68/253201868.json",
+      "paper_sha256": "9a15b351bdcc1c2f109842934ff1e47759182452dcf83cdc33694e1d14f99b5f",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.fire weather indicators",
+        "section_idx": 3,
+        "span_start": 1994,
+        "span_end": 2387
+      },
+      "verbatim_passage": "Finally, two indices are calculated: the Fire Weather Index (FWI) represents fre intensity, combining ISI and BUI, and is often used as the main fre danger indicator (Padilla and Vega-García, 2011;Bedia et al., 2015;de Rigo et al., 2017); the Daily Severity Rating (DSR), an extension of the CFWIS, is a transformation of the daily FWI value, representing the effort required for suppression.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          729,
+          747
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Finally, two indices are calculated: the Fire Weather Index (FWI) represents fre intensity, combining ISI and BUI, and is often used as the main fre danger indicator (Padilla and Vega-García, 2011;Bedia et al., 2015;de Rigo et al., 2017); the Daily Severity Rating (DSR), an extension of the CFWIS, is a transformation of the daily FWI value, representing the effort required for suppression.",
+        "section_key": "fire weather indicators",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR table, what is the projected change in the summer Fire Weather Index for the grid cell R106C361 under RCP8.5, and how does the paper explain the role of the Fire Weather Index in assessing fire danger?",
+        "paper_side_fact": "The Fire Weather Index (FWI) represents fire intensity and is often used as the main fire danger indicator.",
+        "table_side_needed": "The projected summer (June‑July‑August) Fire Weather Index values for grid cell R106C361 for the historical baseline 1995‑2004 and the end‑century decade 2085‑2094 under RCP8.5, or the difference/pattern between them.",
+        "paper_geography": "global",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage defines the Fire Weather Index and its purpose, which directly matches the family‑level unit F‑FWI. The table provides a quantitative projection of that same index for a specific grid cell, allowing a question that links the definition with the projected pattern.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.4
+}

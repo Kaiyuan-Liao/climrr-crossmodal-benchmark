@@ -1,0 +1,101 @@
+{
+  "item_id": "257854681",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "ff6b0e7cd71d113fafdf57e6f6a7b128d9cfe2fcee7ff7b5db4d0962190b3cc6",
+  "n_sections": 8,
+  "paper_chars": 120135,
+  "truncated": true,
+  "model_seconds": 2.9,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-257854681-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "145fb4062cfd1cec4f2630ea522828a3104eec2416b36bedc369c3df3371ae53",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:38:38Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "257854681",
+      "paper_rel_path": "81/257854681.json",
+      "paper_sha256": "ff6b0e7cd71d113fafdf57e6f6a7b128d9cfe2fcee7ff7b5db4d0962190b3cc6",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.methods",
+        "section_idx": 3,
+        "span_start": 13895,
+        "span_end": 14319
+      },
+      "verbatim_passage": "Baseline Scenario (I): A scenario where NV is controlled on the basis of heat index or apparent temperature. Heat index is a function of indoor operative temperature and humidity (Heat Index-National Weather Service). The organization has defined low, moderate, and high caution levels for heat index where each level is defined as having an apparent temperature less than or equal to 32 • C, 39 • C and 46 • C respectively.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.methods",
+        "section_idx": 3,
+        "span": [
+          13968,
+          13978
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          8761,
+          8771
+        ]
+      },
+      "proposal": {
+        "passage": "Baseline Scenario (I): A scenario where NV is controlled on the basis of heat index or apparent temperature. Heat index is a function of indoor operative temperature and humidity (Heat Index-National Weather Service). The organization has defined low, moderate, and high caution levels for heat index where each level is defined as having an apparent temperature less than or equal to 32 • C, 39 • C and 46 • C respectively.",
+        "section_key": "methods",
+        "unit_id": "P-STATE-1",
+        "qa_type": "cross_location_comparison",
+        "example_question": "How does the number of summer days with a daily maximum heat index above 105 °F in California (as given by the table) compare to the heat‑index thresholds (32 °C, 39 °C, 46 °C) used to assess natural‑ventilation potential in New Delhi and Bangalore?",
+        "paper_side_fact": "The study defines low, moderate, and high heat‑index caution levels as apparent temperatures ≤ 32 °C, ≤ 39 °C, and ≤ 46 °C for evaluating natural‑ventilation potential.",
+        "table_side_needed": "The count of summer days with daily maximum heat index exceeding 105 °F for the California rows in the table.",
+        "paper_geography": "New Delhi and Bangalore",
+        "paper_geography_role": "study_area",
+        "paper_time": "August 2019 – July 2020",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index (apparent temperature) used for natural ventilation assessment",
+        "concept_relation": "related",
+        "geography_relation": "different",
+        "link_rationale": "Both the passage and the unit involve the heat‑index metric, but the passage applies it to Indian cities while the unit reports it for California; comparing them reveals regional differences in heat stress relevant to ventilation strategies.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.9
+}

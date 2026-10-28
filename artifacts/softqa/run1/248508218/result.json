@@ -1,0 +1,99 @@
+{
+  "item_id": "248508218",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "d4ef27437de76d85e7cf058304b51ff88878bfc696b8b9f8cfbd16ff1a498ec4",
+  "n_sections": 7,
+  "paper_chars": 15613,
+  "truncated": false,
+  "model_seconds": 2.3,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-248508218-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "54d3a44158c542cbdb2b9874350e5eefea9b8072a448e78038f509beb7c3f591",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:38:02Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "248508218",
+      "paper_rel_path": "18/248508218.json",
+      "paper_sha256": "d4ef27437de76d85e7cf058304b51ff88878bfc696b8b9f8cfbd16ff1a498ec4",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span_start": 156,
+        "span_end": 406
+      },
+      "verbatim_passage": "In the case of farmworkers in California's Central Valley Region, results show that an increase of the heat index from 95 • F to 100 • F can result in losses of agricultural productivity between 4 and 8%, depending on labor intensity of the crop (2).",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          259,
+          269
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          186,
+          196
+        ]
+      },
+      "proposal": {
+        "passage": "In the case of farmworkers in California's Central Valley Region, results show that an increase of the heat index from 95 • F to 100 • F can result in losses of agricultural productivity between 4 and 8%, depending on labor intensity of the crop (2).",
+        "section_key": "introduction",
+        "unit_id": "P-STATE-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, how does the number of summer days with daily maximum heat index above 105 °F in California change from the historical baseline to the end‑century under RCP 8.5, and how might this increase affect farmworker productivity as described in the paper?",
+        "paper_side_fact": "Increasing the heat index from 95 °F to 100 °F can cause a 4–8% loss in agricultural productivity for farmworkers in California's Central Valley.",
+        "table_side_needed": "The projected change (difference or trend) in the count of summer days where the daily maximum heat index exceeds 105 °F for California between the 1995‑2004 baseline and the 2085‑2094 end‑century period under RCP 8.5.",
+        "paper_geography": "California's Central Valley Region",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "related",
+        "geography_relation": "same",
+        "link_rationale": "The table provides a quantitative projection of how many more extreme‑heat days California will experience, which directly connects to the paper's claim that higher heat index values reduce farmworker productivity. Combining the projected increase in extreme‑heat days with the paper's explanation enables assessment of future productivity impacts.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.3
+}

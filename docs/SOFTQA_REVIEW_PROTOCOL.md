@@ -72,6 +72,19 @@ reaches a human only when **all fourteen** have passed. The agent locates the
 concept and place terms **anywhere in the paper** (first occurrence), not
 within the passage.
 
+*Implementation, agent v2* (`softqa_agent v2`, Track C run 2 onward). Item 4 is
+located in three steps, recorded as `passage_recovery`: `exact`; `normalized`
+(a length-preserving map of hyphen, quote and space variants plus whitespace
+collapse, with an index map back to the original, so the span is on the
+unnormalized string); `prefix_anchor` (the first 80 normalized characters found
+exactly once in the paper; the recovered passage is the single sentence that
+starts there, at most 900 characters, sharing at least 60% of its words with
+the proposal). In every case `verbatim_passage` is the **paper's own text** at
+`[span_start, span_end)` and the model's text is kept as `passage_as_proposed`;
+the reviewer judges paper fidelity against `verbatim_passage`. v2 also rejects
+before review a proposal whose `passage_type` is `background_or_definition` or
+`method_description` (cf. second-review trigger 9 for `cited_finding`).
+
 ## 4. Reviewer count
 
 For ordinary candidates:
@@ -173,3 +186,24 @@ LLM proposal (kept verbatim in `agent_record`); every reviewer edit is kept in
 From the ruling's *Do not do yet*: do not use agent confidence as a substitute
 for human review; do not approve only from the final QA without inspecting both
 source records; do not interpret “soft-constrained” as “unconstrained.”
+
+## 11. FWI hold on acceptance (COORDINATOR decision, D-033 addendum)
+
+*Implementation.* Candidates on **P-CELL-1** or **P-COUNTY-1**, and any
+candidate whose recorded table columns (`table_provenance.column_ids`) include
+the columns of records **IC-006, IC-008, IC-010** (`wildfire_summer_Hist`,
+`wildfire_summer_Endc`, `wildfire_summer_Dend`; indices 189, 191, 193) while
+those records remain `inferred_candidate`, may be proposed and reviewed but
+**cannot take `final_status: accepted` or `accepted_after_edit`** until the
+owner confirms the FWI column meanings (mentor brief, question 0).
+
+`softqa.acceptance_gate(record)` returns
+`{"status": "hold_owner_confirmation", "reason": ...}` for such a candidate, and
+`softqa.validate` refuses a record that carries either final status anyway.
+`hold_owner_confirmation` is a gate result, not a lifecycle status of schema v1
+(which is frozen); a held candidate keeps its pre-acceptance status and the
+reviewer's form is kept. The unit-id hold is unconditional in code: lifting it
+needs a logged decision and a code change, not only a status edit in
+`inferred_candidates.yaml`. A family-level F-FWI candidate is checked by its
+column ids once the table stage records them.
+

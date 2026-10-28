@@ -1,0 +1,86 @@
+{
+  "item_id": "236175367",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "3431eb74bad918b0adcd7dbb05f2596066e8a893639c9c2a7cb7abc711d60719",
+  "n_sections": 8,
+  "paper_chars": 22235,
+  "truncated": false,
+  "model_seconds": 2.6,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-236175367-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "ae16081229e9eb94b839ce4b647bcf735a6f420cb28c676594826a4dcb9b5fb6",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:30:53Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "236175367",
+      "paper_rel_path": "67/236175367.json",
+      "paper_sha256": "3431eb74bad918b0adcd7dbb05f2596066e8a893639c9c2a7cb7abc711d60719",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "CFWI, inferred to model future SAW fire risk (14), was evaluated in terms of area burned during SAW events. This index uses the daily weather conditions of noon (local standard time), relative humidity, 24-hour precipitation, and 10-m wind speed to estimate two sets of parameters: fine fuel moisture content (FFMC) and the fire weather index (FWI), which is a rating of potential fire intensity and considered an index of fire danger. FWI showed a slightly significant effect only for December.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.wind-dominated fires",
+        "section_idx": 3,
+        "span": [
+          1160,
+          1178
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "CFWI, inferred to model future SAW fire risk (14), was evaluated in terms of area burned during SAW events. This index uses the daily weather conditions of noon (local standard time), relative humidity, 24-hour precipitation, and 10-m wind speed to estimate two sets of parameters: fine fuel moisture content (FFMC) and the fire weather index (FWI), which is a rating of potential fire intensity and considered an index of fire danger. FWI showed a slightly significant effect only for December.",
+        "section_key": "RESULTS",
+        "unit_id": "F-FWI",
+        "qa_type": "cross_source_validation",
+        "example_question": "According to the paper, how significant was the Fire Weather Index (FWI) in explaining area burned during Santa Ana wind events, and does the ClimRR projection for the fire‑weather‑index family (F‑FWI) show a comparable level of significance for the same region and period?",
+        "paper_side_fact": "The fire weather index (FWI) showed a slightly significant effect only for December and was not a strong predictor for other months.",
+        "table_side_needed": "Projected values or statistical significance of the fire weather index (FWI) for the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) for the southern California region as recorded in the F‑FWI unit.",
+        "paper_geography": "southern California",
+        "paper_geography_role": "study_area",
+        "paper_time": "1948‑2018",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index (FWI) significance for area burned",
+        "concept_relation": "direct",
+        "geography_relation": "same",
+        "link_rationale": "The passage evaluates the relevance of FWI for explaining area burned in southern California, which directly corresponds to the fire‑weather‑index family provided by the F‑FWI unit. Comparing the paper's finding of limited significance with the table's projected FWI values enables a validation of whether the model projections align with observed historical relationships.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.6
+}

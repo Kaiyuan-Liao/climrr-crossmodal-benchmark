@@ -1,0 +1,86 @@
+{
+  "item_id": "88497530",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "891bb362666f8e00188d657f73cadc824a40573dcbbb53383c65417285169161",
+  "n_sections": 8,
+  "paper_chars": 24502,
+  "truncated": false,
+  "model_seconds": 2.3,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-88497530-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "d25871409b14cf49b19d852aeee71ebd487ba255cf3ce84efaf4db0f4ecba062",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:40:37Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "88497530",
+      "paper_rel_path": "30/88497530.json",
+      "paper_sha256": "891bb362666f8e00188d657f73cadc824a40573dcbbb53383c65417285169161",
+      "arm": "extreme_heat_v1",
+      "evidence": null,
+      "verbatim_passage": "HEI_0p25_2016 will also account for additional meteorological variables (e.g., near-surface relative humidity and wind speed) for computing non ETCCDI/ET-SCI indices, such as the Humidex [37,38], the Heat Index (HI) [39,40], and the Discomfort Index (DI) [41,42].",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.dataset availability and plans for future work",
+        "section_idx": 6,
+        "span": [
+          1622,
+          1632
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "HEI_0p25_2016 will also account for additional meteorological variables (e.g., near-surface relative humidity and wind speed) for computing non ETCCDI/ET-SCI indices, such as the Humidex [37,38], the Heat Index (HI) [39,40], and the Discomfort Index (DI) [41,42].",
+        "section_key": "dataset availability and plans for future work",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer Heat Index (HI) between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5 according to the ClimRR table, and how does the paper justify the inclusion of the Heat Index in the upcoming HEI_0p25_2016 dataset?",
+        "paper_side_fact": "The paper states that the upcoming HEI_0p25_2016 dataset will compute the Heat Index (HI) using additional variables such as relative humidity and wind speed.",
+        "table_side_needed": "The difference (or pattern) in the summer Heat Index values between the baseline period 1995‑2004 and the future period 2085‑2094 under RCP8.5, as recorded for the relevant grid cells or region in the ClimRR table.",
+        "paper_geography": "global",
+        "paper_geography_role": "data_source",
+        "paper_time": "future (post‑2016, implied for the new dataset)",
+        "paper_scenario": "unknown",
+        "paper_concept": "Heat Index (HI)",
+        "concept_relation": "direct",
+        "geography_relation": "same",
+        "link_rationale": "The passage explains why the Heat Index is being added to the new dataset, while the table provides the actual projected Heat Index values; together they allow a question that links the projected pattern with its scientific justification.",
+        "unmatched_dimensions": [
+          "scenario",
+          "time"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.3
+}

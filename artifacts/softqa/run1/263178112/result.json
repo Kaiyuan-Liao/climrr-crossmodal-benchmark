@@ -1,0 +1,92 @@
+{
+  "item_id": "263178112",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "9d9bd8fc262dde806f9f500f81e4e9ffcbb5a59f88846963366f4a9110081169",
+  "n_sections": 6,
+  "paper_chars": 27231,
+  "truncated": false,
+  "model_seconds": 2.6,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-263178112-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "99bd77926ce57dd2a8ad7513d4b47cb4d323d24ca0b4dfa0a273d2f117ca8471",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:39:02Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "263178112",
+      "paper_rel_path": "12/263178112.json",
+      "paper_sha256": "9d9bd8fc262dde806f9f500f81e4e9ffcbb5a59f88846963366f4a9110081169",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.discussion",
+        "section_idx": 5,
+        "span_start": 2945,
+        "span_end": 3198
+      },
+      "verbatim_passage": "Stimulants can increase heat production by increasing metabolic activity, and impair heat dissipation by reducing peripheral blood flow as well as the delayed the onset of diaphoresis (Freedman et al. 2005, Mills et al. 2004, Rusyniak and Sprague 2005).",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.methods",
+        "section_idx": 3,
+        "span": [
+          1375,
+          1385
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Stimulants can increase heat production by increasing metabolic activity, and impair heat dissipation by reducing peripheral blood flow as well as the delayed the onset of diaphoresis (Freedman et al. 2005, Mills et al. 2004, Rusyniak and Sprague 2005).",
+        "section_key": "discussion",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, how does the heat index change in California under RCP8.5, and what mechanisms does the paper give for why higher heat may increase emergency department visits for stimulant use?",
+        "paper_side_fact": "Stimulants can increase heat production by increasing metabolic activity, and impair heat dissipation by reducing peripheral blood flow and delaying diaphoresis.",
+        "table_side_needed": "The projected change (increase or pattern) in the heat index for California (rows labelled State California) comparing the historical baseline 1995‑2004 to the end‑century decade 2085‑2094 under RCP8.5.",
+        "paper_geography": "California",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat",
+        "concept_relation": "related",
+        "geography_relation": "same",
+        "link_rationale": "The passage provides a physiological explanation for why higher ambient heat could worsen health outcomes, which can be used to interpret any projected increase in heat index for California shown in the table.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.6
+}

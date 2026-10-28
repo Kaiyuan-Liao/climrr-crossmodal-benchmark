@@ -1,0 +1,88 @@
+{
+  "item_id": "262100323",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "2de54eeec5739699ba96ee1dc7bb7d5b28ee5b73556789e7aea30fea89f785d4",
+  "n_sections": 6,
+  "paper_chars": 31623,
+  "truncated": false,
+  "model_seconds": 2.2,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-262100323-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "28cc5927a695f27104406a1d6a3170401ea8bec1ebe00e189b786741389b77b6",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:38:58Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "262100323",
+      "paper_rel_path": "23/262100323.json",
+      "paper_sha256": "2de54eeec5739699ba96ee1dc7bb7d5b28ee5b73556789e7aea30fea89f785d4",
+      "arm": "extreme_heat_v1",
+      "evidence": null,
+      "verbatim_passage": "The estimates for AT, ET, and HI closely align with DBT, while more significant differences are observed in the maps for WBT and DP. The regional average r 2 values vary from 0.15 to 0.40, and the highest values are from HI and AT.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.methods",
+        "section_idx": 3,
+        "span": [
+          3111,
+          3121
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The estimates for AT, ET, and HI closely align with DBT, while more significant differences are observed in the maps for WBT and DP. The regional average r 2 values vary from 0.15 to 0.40, and the highest values are from HI and AT.",
+        "section_key": "results and discussion",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the climate projections, how does the summer heat index in California change from the historical baseline to the end‑century under RCP8.5, and what explanation does the paper give for the observed similarity between heat‑index‑based and dry‑bulb‑temperature‑based AC penetration estimates?",
+        "paper_side_fact": "The paper finds that heat‑index (HI) estimates align closely with dry‑bulb temperature (DBT) estimates, with HI having among the highest regression r² values.",
+        "table_side_needed": "The projected change (difference or pattern) in the summer heat index for California between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5.",
+        "paper_geography": "California",
+        "paper_geography_role": "study_area",
+        "paper_time": "2015‑2016",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "related",
+        "geography_relation": "unknown",
+        "link_rationale": "The paper explains why heat‑index metrics (including HI) perform similarly to DBT for estimating AC penetration, which can be used to interpret a projected pattern of heat‑index change from the climate table. The question requires both the table’s projected heat‑index change and the paper’s mechanistic explanation.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.2
+}

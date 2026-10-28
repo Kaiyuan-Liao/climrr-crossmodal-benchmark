@@ -1,0 +1,88 @@
+{
+  "item_id": "40987390",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "64f37b0b6d82cc5aaf97e8ea6c612383716e6dfee13e0bde7cda8ed4679080ec",
+  "n_sections": 7,
+  "paper_chars": 35610,
+  "truncated": false,
+  "model_seconds": 2.5,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-40987390-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "e65919be1aa03e4cf5a2fb0c25f1fc6e131ba47775a70cec62b52956a61518e5",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:39:56Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "40987390",
+      "paper_rel_path": "90/40987390.json",
+      "paper_sha256": "64f37b0b6d82cc5aaf97e8ea6c612383716e6dfee13e0bde7cda8ed4679080ec",
+      "arm": "extreme_heat_v1",
+      "evidence": null,
+      "verbatim_passage": "Heat index is a measure of how heat is felt by a person, in contrast to measured temperature. Weather data collected from 1973-2012 for 43 weather monitors across the state of Florida were obtained from the FCC. Heat index ( • F) was calculated using the standard Rothfusz equation and adjustments, which combine temperature and humidity into a single index [14].",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          416,
+          426
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Heat index is a measure of how heat is felt by a person, in contrast to measured temperature. Weather data collected from 1973-2012 for 43 weather monitors across the state of Florida were obtained from the FCC. Heat index ( • F) was calculated using the standard Rothfusz equation and adjustments, which combine temperature and humidity into a single index [14].",
+        "section_key": "experiment",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR table, how does the projected number of summer days with daily maximum heat index above 105 °F in California change from the historical baseline (1995‑2004) to the end‑century decade (2085‑2094) under RCP8.5, and how does the paper explain what the heat index measures and why it matters for health research?",
+        "paper_side_fact": "Heat index is a measure of how heat is felt, combining temperature and humidity into a single index.",
+        "table_side_needed": "The projected count (or change) of summer days with daily maximum heat index >105 °F for California, comparing the historical baseline period to the end‑century period under RCP8.5.",
+        "paper_geography": "Florida",
+        "paper_geography_role": "study_area",
+        "paper_time": "2005-2012",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "related",
+        "geography_relation": "different",
+        "link_rationale": "The paper provides an explanation of what the heat index quantifies, which can be used to interpret the ClimRR table’s projected heat‑index‑related metric for California. Although the geography and time periods differ, the shared concept of heat index links the two sources for a pattern‑to‑explanation question.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "low"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.5
+}

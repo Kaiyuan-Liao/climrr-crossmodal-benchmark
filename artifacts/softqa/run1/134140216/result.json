@@ -1,0 +1,100 @@
+{
+  "item_id": "134140216",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "d5be585aaea8102688ee6cd58c3ff8e51f020b64c92e2a7c9b9633894bce05bc",
+  "n_sections": 7,
+  "paper_chars": 70563,
+  "truncated": false,
+  "model_seconds": 2.8,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-134140216-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "8c993f898a89860ac761fa1f28fa91a6b112d85d9ddf43b2e1535b26d272bddc",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:35:22Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "134140216",
+      "paper_rel_path": "16/134140216.json",
+      "paper_sha256": "d5be585aaea8102688ee6cd58c3ff8e51f020b64c92e2a7c9b9633894bce05bc",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.climate projections and urban studies",
+        "section_idx": 4,
+        "span_start": 8117,
+        "span_end": 8320
+      },
+      "verbatim_passage": "Hayhoe et al. (2004) assessed CC impacts on a medium size area of interest in California (USA), where one of the four locations considered for extreme heat analyses is located in the city of Los Angeles.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.climate projections and urban studies",
+        "section_idx": 4,
+        "span": [
+          11244,
+          11254
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.climate projections and urban studies",
+        "section_idx": 4,
+        "span": [
+          8195,
+          8205
+        ]
+      },
+      "proposal": {
+        "passage": "Hayhoe et al. (2004) assessed CC impacts on a medium size area of interest in California (USA), where one of the four locations considered for extreme heat analyses is located in the city of Los Angeles.",
+        "section_key": "climate projections and urban studies",
+        "unit_id": "P-STATE-1",
+        "qa_type": "claim_to_region_identification",
+        "example_question": "According to the paper, extreme heat analyses have been performed for a location in California; which ClimRR unit provides the projected number of summer days with daily maximum heat index above 105 °F for California under RCP 8.5?",
+        "paper_side_fact": "Hayhoe et al. (2004) performed extreme heat analyses for a location in California (Los Angeles).",
+        "table_side_needed": "The projected number of summer days with daily maximum heat index above 105 °F for the rows labelled State California, comparing the modeled historical baseline 1995‑2004 with the modeled end‑century decade 2085‑2094 under RCP 8.5.",
+        "paper_geography": "California (USA)",
+        "paper_geography_role": "cited_study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "extreme heat analyses",
+        "concept_relation": "related",
+        "geography_relation": "same",
+        "link_rationale": "The paper cites a study that examined extreme heat in California, which is conceptually linked to the heat‑index metric represented by the table unit for California. The question asks the reader to identify the table entry that matches the region and a heat‑related metric.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.8
+}

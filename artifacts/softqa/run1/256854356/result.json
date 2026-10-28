@@ -1,0 +1,95 @@
+{
+  "item_id": "256854356",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "5bf8710a97eb63b8defc3d50076d9f0cbef76272572347f814f238ccf6fd4047",
+  "n_sections": 7,
+  "paper_chars": 39712,
+  "truncated": false,
+  "model_seconds": 2.3,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-256854356-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "164f5f0101c5860a59e03a548a2f46e3409bf50b97614f6c52cc2fc2275c6a12",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:38:31Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "256854356",
+      "paper_rel_path": "56/256854356.json",
+      "paper_sha256": "5bf8710a97eb63b8defc3d50076d9f0cbef76272572347f814f238ccf6fd4047",
+      "arm": "extreme_heat_v1",
+      "evidence": null,
+      "verbatim_passage": "Exposure to extreme heat can result in dehydration, insufficient uterine blood flow, systematic inflammation, and oxidative stress (Carolan-Olah and Frankowska, 2014; Dadvand et al., 2011; He et al., 2016; McElroy et al., 2021; Stan et al., 2013; Sun et al., 2019; Yang et al., 2021), thereby leading to poor pregnancy outcomes including PROM (Ha et al., 2018; Song et al., 2019a).",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          674,
+          684
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.title",
+        "section_idx": 0,
+        "span": [
+          80,
+          90
+        ]
+      },
+      "proposal": {
+        "passage": "Exposure to extreme heat can result in dehydration, insufficient uterine blood flow, systematic inflammation, and oxidative stress (Carolan-Olah and Frankowska, 2014; Dadvand et al., 2011; He et al., 2016; McElroy et al., 2021; Stan et al., 2013; Sun et al., 2019; Yang et al., 2021), thereby leading to poor pregnancy outcomes including PROM (Ha et al., 2018; Song et al., 2019a).",
+        "section_key": "introduction",
+        "unit_id": "P-STATE-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, how many more summer days with a daily maximum heat index above 105 °F are expected in California under RCP8.5, and what mechanisms does the study suggest could link such extreme heat to increased risk of premature rupture of membranes?",
+        "paper_side_fact": "Extreme heat can cause dehydration, reduced uterine blood flow, inflammation, and oxidative stress, which can lead to premature rupture of membranes.",
+        "table_side_needed": "The projected change (difference) in the number of summer days with daily maximum heat index >105 °F for California between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5.",
+        "paper_geography": "Southern California",
+        "paper_geography_role": "study_area",
+        "paper_time": "2008-2018",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index / extreme heat exposure",
+        "concept_relation": "related",
+        "geography_relation": "same",
+        "link_rationale": "The table provides a future projection of extreme heat days in California, while the passage explains how extreme heat physiologically increases PROM risk. Combining them allows a question about projected heat exposure and its health implications. The geography matches (California) and the concepts both involve heat index, though the metrics differ.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario",
+          "concept"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.3
+}

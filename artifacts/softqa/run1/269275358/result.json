@@ -1,0 +1,86 @@
+{
+  "item_id": "269275358",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "544885cd1b8d0a4b5bc1d346005612bc9cfa898cb9bc69015a754810a15cde71",
+  "n_sections": 13,
+  "paper_chars": 61219,
+  "truncated": false,
+  "model_seconds": 2.7,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-269275358-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "96961a87b7947c677bea24735191a4731e51c21a72502a3a568b5afd41c85997",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:39:22Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "269275358",
+      "paper_rel_path": "58/269275358.json",
+      "paper_sha256": "544885cd1b8d0a4b5bc1d346005612bc9cfa898cb9bc69015a754810a15cde71",
+      "arm": "extreme_heat_v1",
+      "evidence": null,
+      "verbatim_passage": "Heat wave magnitude, as measured by HWMId, was higher in 2011-2013 than at any other time in the 2004-2019 analytical period (Figure 4). The Southeast, Northeast and North Central survey units experienced ultra‑extreme (HWMId > 80) heat wave magnitudes during these three years.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.discussion",
+        "section_idx": 11,
+        "span": [
+          12922,
+          12932
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Heat wave magnitude, as measured by HWMId, was higher in 2011-2013 than at any other time in the 2004-2019 analytical period (Figure 4). The Southeast, Northeast and North Central survey units experienced ultra‑extreme (HWMId > 80) heat wave magnitudes during these three years.",
+        "section_key": "results",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What pattern does the ClimRR table show for the projected summer heat index, and how does the paper explain the observed ultra‑extreme heat wave magnitudes in Texas during 2011‑2013?",
+        "paper_side_fact": "Heat wave magnitude, measured by HWMId, was higher in 2011‑2013 than any other time in the 2004‑2019 period, with ultra‑extreme values (>80) in the Southeast, Northeast and North Central survey units.",
+        "table_side_needed": "The projected summer heat‑index values (or their change pattern) for the relevant period (baseline vs. future) from the ClimRR table.",
+        "paper_geography": "Texas (Southeast, Northeast, North Central survey units)",
+        "paper_geography_role": "study_area",
+        "paper_time": "2011‑2013 (within the 2004‑2019 study period)",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat wave magnitude (HWMId) / extreme heat",
+        "concept_relation": "related",
+        "geography_relation": "unknown",
+        "link_rationale": "The passage provides a concrete pattern of extreme heat in Texas, which can be compared to the heat‑index pattern projected in the ClimRR table; the paper also offers an explanation for why that extreme heat occurred, making it suitable for a pattern‑to‑explanation question.",
+        "unmatched_dimensions": [
+          "geography",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.7
+}

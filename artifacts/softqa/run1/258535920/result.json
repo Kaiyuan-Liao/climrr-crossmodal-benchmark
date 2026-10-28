@@ -1,0 +1,91 @@
+{
+  "item_id": "258535920",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "283af562a40148006e5272a99a0edbcf9279e82d422bf65cb323d1adbb4dc7c7",
+  "n_sections": 7,
+  "paper_chars": 56789,
+  "truncated": false,
+  "model_seconds": 2.6,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-258535920-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "a36ca5313c422e9a0c7c50cd92a52f0b3c7dce18df9bf8655e278671a4a4bd67",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:33:20Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "258535920",
+      "paper_rel_path": "20/258535920.json",
+      "paper_sha256": "283af562a40148006e5272a99a0edbcf9279e82d422bf65cb323d1adbb4dc7c7",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.results of fopi performances",
+        "section_idx": 5,
+        "span_start": 237,
+        "span_end": 422
+      },
+      "verbatim_passage": "Figure 5 confirms that, globally, FWI is a weak predictor of fire activity [15]. At most, in forested areas, correlation reaches 0.2. Correlation declines to 0.06 in fuellimited biomes.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          185,
+          203
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Figure 5 confirms that, globally, FWI is a weak predictor of fire activity [15]. At most, in forested areas, correlation reaches 0.2. Correlation declines to 0.06 in fuellimited biomes.",
+        "section_key": "results of fopi performances",
+        "unit_id": "P-CELL-1",
+        "qa_type": "cross_source_validation",
+        "example_question": "According to the paper, how does the Fire Weather Index perform as a predictor of fire activity, and what does the ClimRR projection for the summer Fire Weather Index at grid cell R106C361 indicate for the end‑century (2085‑2094) under RCP8.5 compared to the historical baseline (1995‑2004)?",
+        "paper_side_fact": "Globally, the Fire Weather Index is a weak predictor of fire activity, with correlations up to 0.2 in forests and as low as 0.06 in fuel‑limited biomes.",
+        "table_side_needed": "The projected change (difference or percent change) in the summer Fire Weather Index at grid cell R106C361 between the historical baseline 1995‑2004 and the end‑century decade 2085‑2094 under RCP8.5.",
+        "paper_geography": "global",
+        "paper_geography_role": "contextual",
+        "paper_time": "2020",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index as predictor of fire activity",
+        "concept_relation": "direct",
+        "geography_relation": "contains",
+        "link_rationale": "The paper provides a global assessment that the Fire Weather Index is a weak predictor of fire activity, while the unit gives a specific future projection for a single grid cell. Comparing the general statement with the localized projection allows validation of whether the weak predictive skill holds for that cell.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.6
+}

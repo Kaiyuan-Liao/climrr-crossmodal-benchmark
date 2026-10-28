@@ -1,0 +1,92 @@
+{
+  "item_id": "211267687",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "b6b27b6d57b2952a5ce1677a36c2d1964c1a1a326105a3dd6d4cc628a28db553",
+  "n_sections": 14,
+  "paper_chars": 85361,
+  "truncated": false,
+  "model_seconds": 2.6,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-211267687-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "e629877186294d6356aca5da4a69b454a4382b3f71e5242e536fc03df22598c4",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:36:17Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "211267687",
+      "paper_rel_path": "87/211267687.json",
+      "paper_sha256": "b6b27b6d57b2952a5ce1677a36c2d1964c1a1a326105a3dd6d4cc628a28db553",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.history of cardiac disease",
+        "section_idx": 10,
+        "span_start": 12379,
+        "span_end": 12597
+      },
+      "verbatim_passage": "There are several heat stress indices we will calculate based on the direct field measurement we will take. These will include the WBGT, the Universal Thermal Climate Index, the apparent temperature and the heat index.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.history of cardiac disease",
+        "section_idx": 10,
+        "span": [
+          12586,
+          12596
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "There are several heat stress indices we will calculate based on the direct field measurement we will take. These will include the WBGT, the Universal Thermal Climate Index, the apparent temperature and the heat index.",
+        "section_key": "derived values",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, how does the summer heat index change between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5, and what explanation does the paper give for why the heat index is an important metric for assessing heat strain in pregnant farmers in The Gambia?",
+        "paper_side_fact": "The study will calculate several heat stress indices, including the heat index, from field measurements.",
+        "table_side_needed": "The projected summer heat index values for the historical baseline period and the end‑century period under RCP8.5, showing the magnitude and direction of change.",
+        "paper_geography": "The Gambia",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The passage identifies the heat index as a key metric the study will measure, while the table provides projected changes in the same metric under a climate scenario. Linking them allows a question that asks for the projected pattern and the study’s rationale for focusing on that metric.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.7
+}

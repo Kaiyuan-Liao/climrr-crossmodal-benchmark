@@ -1,0 +1,92 @@
+{
+  "item_id": "999274",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "ccc828ae11a6b4f4f224b03d0bb422a3bf5febd4d8e711e79ca5144568307617",
+  "n_sections": 14,
+  "paper_chars": 47791,
+  "truncated": false,
+  "model_seconds": 2.4,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-999274-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "f7cf0c9f08a84f1f65bcb2dda7f3fa56ef006ccde61af6d1a5bd36042091b595",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:35:08Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "999274",
+      "paper_rel_path": "74/999274.json",
+      "paper_sha256": "ccc828ae11a6b4f4f224b03d0bb422a3bf5febd4d8e711e79ca5144568307617",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.discussion",
+        "section_idx": 12,
+        "span_start": 6993,
+        "span_end": 7129
+      },
+      "verbatim_passage": "Canadian Fire Weather Index was calculated for the study area using weather variables produced by the Regional Climate Model (RegCM v. 4",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.discussion",
+        "section_idx": 12,
+        "span": [
+          7002,
+          7020
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Canadian Fire Weather Index was calculated for the study area using weather variables produced by the Regional Climate Model (RegCM v. 4",
+        "section_key": "discussion",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the table, how does the summer Fire Weather Index change for the study area under future climate conditions, and how does the paper explain the relevance of this index?",
+        "paper_side_fact": "The Canadian Fire Weather Index was calculated for the study area using weather variables from the Regional Climate Model.",
+        "table_side_needed": "Projected summer Fire Weather Index values (or change) for the study area’s region for the historical baseline and the future decade under RCP8.5.",
+        "paper_geography": "San Diego County",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage states that the Fire Weather Index was computed for the study area, providing an explanation of why this index matters for fire risk. The table supplies the projected values of the same index, enabling a question that asks for the projected pattern together with the paper’s explanation.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario",
+          "geography"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.4
+}

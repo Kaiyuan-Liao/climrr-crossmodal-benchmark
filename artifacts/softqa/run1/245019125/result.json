@@ -1,0 +1,92 @@
+{
+  "item_id": "245019125",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "70d795de57f9c4332b1ce7b3c611bd45d3203d716a808d212eae43ed1bc370e0",
+  "n_sections": 6,
+  "paper_chars": 11756,
+  "truncated": false,
+  "model_seconds": 2.3,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-245019125-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "25fe20a14e029128242fecd8f0b8b88f168539cd74be8d459c175f837cd4e947",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:31:38Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "245019125",
+      "paper_rel_path": "25/245019125.json",
+      "paper_sha256": "70d795de57f9c4332b1ce7b3c611bd45d3203d716a808d212eae43ed1bc370e0",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.data and methods",
+        "section_idx": 3,
+        "span_start": 1258,
+        "span_end": 1810
+      },
+      "verbatim_passage": "First three components (FFMC, DMC and DC) are so-called \"fuel moisture codes\" and other three components (ISI, BUI and FWI) are called \"fire behaviour indices\" (Wagner 1987). Every code and index is represented by numerical value. All six components can contain own scale of relative values, but they are structured in way to indicate potential fire burning behaviour. With higher values of fuel moisture codes, the lower are the values of indices and vice versa. FWI (Fire weather index) is the result based on previous components calculation outputs.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          13,
+          31
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "First three components (FFMC, DMC and DC) are so-called \"fuel moisture codes\" and other three components (ISI, BUI and FWI) are called \"fire behaviour indices\" (Wagner 1987). Every code and index is represented by numerical value. All six components can contain own scale of relative values, but they are structured in way to indicate potential fire burning behaviour. With higher values of fuel moisture codes, the lower are the values of indices and vice versa. FWI (Fire weather index) is the result based on previous components calculation outputs.",
+        "section_key": "data and methods",
+        "unit_id": "P-COUNTY-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR table, what is the projected change in the summer Fire Weather Index for Oklahoma’s Stephens County under RCP8.5, and how does the paper explain what higher FWI values represent?",
+        "paper_side_fact": "The paper explains that the Fire Weather Index is derived from fuel‑moisture codes and that higher FWI values indicate greater fire danger.",
+        "table_side_needed": "The projected summer (June‑July‑August) Fire Weather Index value for the 2085‑2094 decade under RCP8.5 for the ClimRR rows labelled State Oklahoma, NAME Stephens, compared with the 1995‑2004 baseline.",
+        "paper_geography": "Bosnia and Herzegovina",
+        "paper_geography_role": "study_area",
+        "paper_time": "2010‑2020",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage provides a mechanistic description of what the Fire Weather Index measures, which can be used to interpret the projected FWI values for Oklahoma’s Stephens County shown in the table.",
+        "unmatched_dimensions": [
+          "geography",
+          "scenario",
+          "time"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.3
+}

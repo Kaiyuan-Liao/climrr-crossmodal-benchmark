@@ -1,0 +1,87 @@
+{
+  "item_id": "54692198",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "a05667687ded528e13ad5b18d4baae490e6822d8ed1c6596d577827c7602fb78",
+  "n_sections": 8,
+  "paper_chars": 34820,
+  "truncated": false,
+  "model_seconds": 2.7,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-54692198-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "d5faec35ff525e81bd9f6e69e582267e52f4e6410e1b3bfb55c56219bdc51718",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:34:17Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "54692198",
+      "paper_rel_path": "98/54692198.json",
+      "paper_sha256": "a05667687ded528e13ad5b18d4baae490e6822d8ed1c6596d577827c7602fb78",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "The results of the sensitivity study (Figs.7 and 8) prove that the rise of temperature, in case other parameters do not change, will lead to higher FWI values. This seems to have happened in Southern and Eastern Europe.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          177,
+          195
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The results of the sensitivity study (Figs.7 and 8) prove that the rise of temperature, in case other parameters do not change, will lead to higher FWI values. This seems to have happened in Southern and Eastern Europe.",
+        "section_key": "discussion",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What pattern of change in the Fire Weather Index does the paper report for Southern and Eastern Europe, and what does the ClimRR table show for the same fire‑weather index over the comparable period?",
+        "paper_side_fact": "The paper states that rising temperature, with other parameters unchanged, leads to higher FWI values, and this appears to have occurred in Southern and Eastern Europe.",
+        "table_side_needed": "The projected change (increase or decrease) in the fire‑weather index (FWI) for the relevant region(s) and period, as recorded in the ClimRR table.",
+        "paper_geography": "Southern and Eastern Europe",
+        "paper_geography_role": "study_area",
+        "paper_time": "approximately 1995 onwards (recent years)",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index (FWI)",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage explains a temperature‑driven increase in FWI, which directly corresponds to the pattern of change that the ClimRR table would provide for the fire‑weather index; pairing them enables a question that asks for the observed pattern and its explanation.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.7
+}

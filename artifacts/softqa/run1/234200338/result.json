@@ -1,0 +1,92 @@
+{
+  "item_id": "234200338",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "c0892b3d6e326182195dd95f616a0670a74e76ba63e7ae2947326c4a07c8be0a",
+  "n_sections": 9,
+  "paper_chars": 43308,
+  "truncated": false,
+  "model_seconds": 11.0,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-234200338-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "b1f36027f6cc795b62bca4dd37049d651aa9d288b777a915e2657162a7b68c8a",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:30:39Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "234200338",
+      "paper_rel_path": "38/234200338.json",
+      "paper_sha256": "c0892b3d6e326182195dd95f616a0670a74e76ba63e7ae2947326c4a07c8be0a",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.drivers of change in fire danger",
+        "section_idx": 7,
+        "span_start": 2807,
+        "span_end": 2912
+      },
+      "verbatim_passage": "All the components of the FWI increase through time, and therefore all contribute to the increase in FWI.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.indicators, data and scenarios",
+        "section_idx": 3,
+        "span": [
+          2397,
+          2415
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "All the components of the FWI increase through time, and therefore all contribute to the increase in FWI.",
+        "section_key": "changes in different components of fire danger",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the table, how does the summer Fire Weather Index change between the historical baseline and the end‑century decade under RCP8.5 for grid cell R106C361, and how does the paper explain this pattern?",
+        "paper_side_fact": "All the components of the FWI increase through time, and therefore all contribute to the increase in FWI.",
+        "table_side_needed": "The projected change (increase or decrease) in the summer Fire Weather Index for grid cell R106C361 between the 1995‑2004 baseline and the 2085‑2094 end‑century decade under RCP8.5.",
+        "paper_geography": "United Kingdom",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index (FWI)",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The paper states that the FWI components are rising over time, providing an explanation for any observed increase in the table’s projected FWI values for a specific location. The table supplies the quantitative pattern, while the passage supplies the mechanistic reasoning.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 11.0
+}

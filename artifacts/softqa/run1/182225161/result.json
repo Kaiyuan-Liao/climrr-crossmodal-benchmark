@@ -1,0 +1,92 @@
+{
+  "item_id": "182225161",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "3ecd6563670858f71fb794d1245b722053d644be6a60833c9a7a6f3013ff169f",
+  "n_sections": 5,
+  "paper_chars": 24439,
+  "truncated": false,
+  "model_seconds": 1.7,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-182225161-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "b8e95ef2291a84e4838038c8c4c764f882c548346853b1ee9ba2af822b9db3b9",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:35:53Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "182225161",
+      "paper_rel_path": "61/182225161.json",
+      "paper_sha256": "3ecd6563670858f71fb794d1245b722053d644be6a60833c9a7a6f3013ff169f",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.discussion and conclusions",
+        "section_idx": 4,
+        "span_start": 7686,
+        "span_end": 7968
+      },
+      "verbatim_passage": "While we limited this analysis to ground-truthing overnight minimum temperatures due to daytime temperature limitations, minimum temperatures are highly correlated with maximum temperatures and heat index in NYC and have similar association with warm-season natural cause mortality.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.discussion and conclusions",
+        "section_idx": 4,
+        "span": [
+          7880,
+          7890
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "While we limited this analysis to ground-truthing overnight minimum temperatures due to daytime temperature limitations, minimum temperatures are highly correlated with maximum temperatures and heat index in NYC and have similar association with warm-season natural cause mortality.",
+        "section_key": "limitations",
+        "unit_id": "F-HEAT",
+        "qa_type": "cross_source_validation",
+        "example_question": "Does the paper’s claim that heat index in NYC is highly correlated with minimum temperatures agree with the projected heat‑index pattern shown in the ClimRR heat‑index family unit?",
+        "paper_side_fact": "The paper states that in NYC the heat index is highly correlated with minimum temperatures and has a similar association with warm‑season mortality.",
+        "table_side_needed": "The projected heat‑index values (or pattern of change) for the historical baseline and future period in the ClimRR heat‑index family unit.",
+        "paper_geography": "NYC",
+        "paper_geography_role": "study_area",
+        "paper_time": "2009‑2010",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The paper discusses the relationship between heat index and temperature in NYC, while the table unit provides heat‑index projections for a generic location. Comparing the paper’s observed correlation with the projected pattern tests consistency across sources.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "high"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 1.7
+}

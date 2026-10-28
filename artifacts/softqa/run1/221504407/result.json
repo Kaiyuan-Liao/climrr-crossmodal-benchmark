@@ -1,0 +1,87 @@
+{
+  "item_id": "221504407",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "a3342e14fcd6c45de5a3831eddc22fc5dac739f8aebc5a920e41f9dcb546467e",
+  "n_sections": 7,
+  "paper_chars": 32462,
+  "truncated": false,
+  "model_seconds": 2.4,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-221504407-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "285018378fd0c81e01b5338566107bb5db94405dd8e4b4bcfa05236890038d5b",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:36:42Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "221504407",
+      "paper_rel_path": "07/221504407.json",
+      "paper_sha256": "a3342e14fcd6c45de5a3831eddc22fc5dac739f8aebc5a920e41f9dcb546467e",
+      "arm": "extreme_heat_v1",
+      "evidence": null,
+      "verbatim_passage": "We defined a heat wave as a duration and intensity combination of seven days prior to birth with a mean daily high heat index of 37 • C or higher. The heat index is a combined measure of the effect of heat and humidity (see next paragraph for a detailed definition) and is commonly used in humid climates where humidity further reduces the body's ability to thermoregulate. Based on the heat wave criterion used here, Minnesota sees anywhere from 0 to 5 heat waves per year.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.materials and methods",
+        "section_idx": 3,
+        "span": [
+          2979,
+          2989
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "We defined a heat wave as a duration and intensity combination of seven days prior to birth with a mean daily high heat index of 37 • C or higher. The heat index is a combined measure of the effect of heat and humidity (see next paragraph for a detailed definition) and is commonly used in humid climates where humidity further reduces the body's ability to thermoregulate. Based on the heat wave criterion used here, Minnesota sees anywhere from 0 to 5 heat waves per year.",
+        "section_key": "materials and methods",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, how does the summer heat index in Minnesota change from the historical baseline to the end‑century under RCP8.5, and what mechanism does the paper give for why higher heat index could increase preterm birth risk?",
+        "paper_side_fact": "The paper defines a heat wave as a seven‑day period with a mean daily high heat index of 37 °C or higher and notes that Minnesota experiences 0‑5 such heat waves per year.",
+        "table_side_needed": "Projected summer heat index values (or change) for Minnesota for the historical baseline period (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5.",
+        "paper_geography": "Minnesota",
+        "paper_geography_role": "study_area",
+        "paper_time": "2009‑2015",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "direct",
+        "geography_relation": "same",
+        "link_rationale": "The passage explains how elevated heat index (heat waves) may biologically increase the risk of preterm birth, while the table provides the projected magnitude of summer heat index for the same region under climate change; together they enable a question linking projected climate change to health impact.",
+        "unmatched_dimensions": [
+          "scenario",
+          "time",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.4
+}

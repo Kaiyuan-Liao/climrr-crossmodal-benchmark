@@ -1,0 +1,92 @@
+{
+  "item_id": "208224932",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "ebcac21d54c5e395f097973d9506a5368cb5dc4cad2ec75d6ecdbbd33d36db22",
+  "n_sections": 11,
+  "paper_chars": 83204,
+  "truncated": false,
+  "model_seconds": 3.0,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-208224932-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "5b1b296e196e605d8485751afd710375c926b48fb2dfcab02aadefb34d9f9cfa",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:29:19Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "208224932",
+      "paper_rel_path": "32/208224932.json",
+      "paper_sha256": "ebcac21d54c5e395f097973d9506a5368cb5dc4cad2ec75d6ecdbbd33d36db22",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.fire risk assessment and mapping",
+        "section_idx": 3,
+        "span_start": 516,
+        "span_end": 764
+      },
+      "verbatim_passage": "The former method, which assesses fire danger, has four main operating systems used around the world: Wildland Fire Assessment System (WFAS), Fire Weather Index (FWI), McArthur's Forest Fire Danger Rating System (FFDRS), and Russian Nesterov Index.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.fire risk assessment and mapping",
+        "section_idx": 3,
+        "span": [
+          658,
+          676
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The former method, which assesses fire danger, has four main operating systems used around the world: Wildland Fire Assessment System (WFAS), Fire Weather Index (FWI), McArthur's Forest Fire Danger Rating System (FFDRS), and Russian Nesterov Index.",
+        "section_key": "fire risk assessment and mapping",
+        "unit_id": "F-FWI",
+        "qa_type": "cross_source_validation",
+        "example_question": "According to the table, what is the projected change in the Fire Weather Index for the summer season under RCP8.5, and how does this relate to the paper’s statement that the Fire Weather Index is one of the primary systems used to assess fire danger?",
+        "paper_side_fact": "The paper states that the Fire Weather Index (FWI) is one of four main operating systems used worldwide to assess fire danger.",
+        "table_side_needed": "The projected historical baseline and end‑century (e.g., 2085‑2094) values of the Fire Weather Index for the summer months (June‑July‑August) under the RCP8.5 scenario, as recorded in the ClimRR table.",
+        "paper_geography": "worldwide",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index (fire‑weather index) as a fire‑danger assessment metric",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage identifies the Fire Weather Index as a key fire‑danger metric, and the table provides quantitative projections of that same metric, allowing a validation or comparison between the literature description and modeled future values.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.0
+}

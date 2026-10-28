@@ -1,0 +1,92 @@
+{
+  "item_id": "55070265",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "0779c19107e5daef44d9bfe4f17853a58c003a791160da8501bfb4ad2b88e9e3",
+  "n_sections": 7,
+  "paper_chars": 61445,
+  "truncated": false,
+  "model_seconds": 2.7,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-55070265-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "e3ca329324dd7c32da267e7c09e6a7b75ab3a1009f8df9e23045c1f1345701b8",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:34:23Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "55070265",
+      "paper_rel_path": "65/55070265.json",
+      "paper_sha256": "0779c19107e5daef44d9bfe4f17853a58c003a791160da8501bfb4ad2b88e9e3",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.materials and methods",
+        "section_idx": 3,
+        "span_start": 3939,
+        "span_end": 4147
+      },
+      "verbatim_passage": "When compared to FWI values in EUMED region given by Urbeita et al. [14], FWI values are seen to be more stable. The highest and lowest values were encountered twice for the average FWI between 1995 and 2010.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          1296,
+          1314
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "When compared to FWI values in EUMED region given by Urbeita et al. [14], FWI values are seen to be more stable. The highest and lowest values were encountered twice for the average FWI between 1995 and 2010.",
+        "section_key": "materials and methods",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What pattern does the ClimRR table show for the summer Fire Weather Index between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5, and how does the paper explain the observed stability of FWI values in the Mediterranean (EUMED) region?",
+        "paper_side_fact": "The paper states that FWI values in the EUMED region are more stable, with the highest and lowest average values each occurring twice between 1995 and 2010.",
+        "table_side_needed": "The projected summer Fire Weather Index values for the specified grid cell (or region) for the historical baseline period and the end‑century period under RCP8.5, showing the direction and magnitude of change.",
+        "paper_geography": "Antalya region",
+        "paper_geography_role": "study_area",
+        "paper_time": "1995-2010",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index (FWI)",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "Both the passage and the unit refer to the same fire‑weather metric (FWI). The passage provides an explanation of why FWI values have been stable in the Mediterranean, which can be paired with the table’s projected pattern of change for the same metric, allowing a question that links the observed stability to the projected future trend.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.7
+}

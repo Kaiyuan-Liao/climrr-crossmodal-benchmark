@@ -15,8 +15,10 @@ unless `--show-rationale` is given. Record the checklist judgments
 (`data/metadata/softqa/review_form_v1.yaml`) first, then re-run with the flag.
 
 Input: a `candidates.jsonl` from `scripts/litcollect/softqa_agent.py` (agent
-records, mapped onto `candidate_schema_v1.json` here) or a JSONL / JSON file of
-schema records. A null field prints as `pending: <stage>`.
+records, mapped onto `candidate_schema_v1.json` here), a JSONL / JSON file of
+schema records, or a frozen review batch (`{"candidates": [...]}`, e.g.
+`artifacts/softqa/review_batch_01.json`). A null field prints as
+`pending: <stage>`. Section 2 shows the acceptance gate (FWI hold, D-033 addendum).
 
 Writes a run record per view (the candidate id, the input file's SHA-256 and
 whether the rationale was shown): evidence that the review order was followed.
@@ -52,6 +54,8 @@ def load_records(path: Path) -> list[dict]:
     text = path.read_text(encoding="utf-8")
     try:
         obj = json.loads(text)
+        if isinstance(obj, dict) and isinstance(obj.get("candidates"), list):
+            obj = obj["candidates"]
         raw = obj if isinstance(obj, list) else [obj]
     except json.JSONDecodeError:
         raw = [json.loads(ln) for ln in text.splitlines() if ln.strip()]
@@ -81,8 +85,14 @@ def render(rec: dict, show_rationale: bool = False) -> str:
         out.append(f"  {f}: {val('paper_provenance', f, pp)}")
     out.append(f"  span [start,end): [{pp['span_start']}, {pp['span_end']})")
     out.append(f"  span_reslice_pass: {dv['span_reslice_pass']}")
+    if "passage_recovery" in agent:  # agent v2
+        out.append(f"  passage_recovery: {agent['passage_recovery']}")
     out.append("  verbatim passage:")
     out.append(f"    \"{pp['verbatim_passage']}\"")
+    proposed = agent.get("passage_as_proposed")
+    if proposed is not None and proposed != pp["verbatim_passage"]:
+        out.append("  passage as proposed by the model (differs from the paper's text):")
+        out.append(f"    \"{proposed}\"")
     out.append(f"  concept term located: {json.dumps(agent.get('concept_hit'), ensure_ascii=False)}")
     out.append(f"  place term located:   {json.dumps(agent.get('place_hit'), ensure_ascii=False)}")
     out.append("")
@@ -93,6 +103,8 @@ def render(rec: dict, show_rationale: bool = False) -> str:
     out.append("  deterministic checks:")
     for f in dv:
         out.append(f"    {f}: {val('deterministic_validation', f, dv)}")
+    gate = softqa.acceptance_gate(rec)
+    out.append(f"  acceptance gate: {gate['status']}" + (f" --- {gate['reason']}" if gate["reason"] else ""))
     out.append("")
 
     out += [SECTION_TITLES[2]]

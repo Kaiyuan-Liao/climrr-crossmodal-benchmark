@@ -1,0 +1,100 @@
+{
+  "item_id": "52875744",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "ac135e4d11b405d3633a338e38e4fce9c3433ffca26c7e6022bb4bf86921c70c",
+  "n_sections": 13,
+  "paper_chars": 21706,
+  "truncated": false,
+  "model_seconds": 2.2,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-52875744-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "2995e0137773e7b2ca53f01c4239da6723aba14349a88f76eeb4e3db78542d6e",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:40:07Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "52875744",
+      "paper_rel_path": "44/52875744.json",
+      "paper_sha256": "ac135e4d11b405d3633a338e38e4fce9c3433ffca26c7e6022bb4bf86921c70c",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span_start": 1163,
+        "span_end": 1248
+      },
+      "verbatim_passage": "the odds of AKI increased 47% for each 5-degree (˚F) increase in the heat index [11].",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          1232,
+          1242
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          857,
+          867
+        ]
+      },
+      "proposal": {
+        "passage": "the odds of AKI increased 47% for each 5-degree (˚F) increase in the heat index [11].",
+        "section_key": "introduction",
+        "unit_id": "P-STATE-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the table, how many summer days in California are projected to have a daily maximum heat index above 105 °F, and how does the paper explain the health relevance of high heat index values?",
+        "paper_side_fact": "The odds of acute kidney injury increase by 47% for each 5 °F rise in the heat index.",
+        "table_side_needed": "The projected number of summer days with daily maximum heat index above 105 °F in California for the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5.",
+        "paper_geography": "unknown",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "related",
+        "geography_relation": "unknown",
+        "link_rationale": "The table gives a quantitative measure of extreme heat days in California, while the paper provides a mechanistic explanation that higher heat index values raise AKI risk, linking the climate metric to health outcomes.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "low"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": false,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.2
+}

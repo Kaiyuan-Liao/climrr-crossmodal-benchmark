@@ -1,0 +1,92 @@
+{
+  "item_id": "17596913",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "23ccce543b9c1aad4535faac34eb86e97fec84b3746e312dea8cee28445f338e",
+  "n_sections": 13,
+  "paper_chars": 24924,
+  "truncated": false,
+  "model_seconds": 3.1,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-17596913-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "f0c9d925bce7fa715266a82f5102ae7f229aad2c3af819d86d172e18b5b981d6",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:35:51Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "17596913",
+      "paper_rel_path": "13/17596913.json",
+      "paper_sha256": "23ccce543b9c1aad4535faac34eb86e97fec84b3746e312dea8cee28445f338e",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.assessment of odds ratio of ed visit",
+        "section_idx": 6,
+        "span_start": 2187,
+        "span_end": 2462
+      },
+      "verbatim_passage": "Evidence for an additional heat wave impact (using the 95 th percentile threshold) is observed when using heat index (odds ratio = 1.46, 95% confidence interval: 1.26, 1.70) and SSC indicator (odds ratio = 1.25, 95% confidence interval: 1.09, 1.44) as the temperature metric.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          606,
+          616
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Evidence for an additional heat wave impact (using the 95 th percentile threshold) is observed when using heat index (odds ratio = 1.46, 95% confidence interval: 1.26, 1.70) and SSC indicator (odds ratio = 1.25, 95% confidence interval: 1.09, 1.44) as the temperature metric.",
+        "section_key": "assessment of odds ratio of ed visit",
+        "unit_id": "F-HEAT",
+        "qa_type": "cross_source_validation",
+        "example_question": "The study reports that higher heat index values are associated with increased odds of hyperthermia‑related emergency department visits; does the ClimRR projection of summer heat index under RCP8.5 show a comparable increase in heat index for the United States?",
+        "paper_side_fact": "The study found that using heat index as the temperature metric yielded an odds ratio of 1.46 for hyperthermia‑related ED visits during heat waves.",
+        "table_side_needed": "The projected change (increase or decrease) in summer heat index values between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5.",
+        "paper_geography": "United States",
+        "paper_geography_role": "study_area",
+        "paper_time": "2000-2010",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The paper provides empirical evidence that higher heat index is linked to greater hyperthermia risk, while the table gives projected future heat index changes; together they allow assessment of whether projected heat index increases could exacerbate the observed health risk.",
+        "unmatched_dimensions": [
+          "scenario",
+          "time",
+          "geography"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.1
+}

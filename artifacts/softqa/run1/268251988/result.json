@@ -1,0 +1,92 @@
+{
+  "item_id": "268251988",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "c856eb6ca177c2a86c71a32c74128d28ff52c899a9dc9f60128178ae9e7b8b22",
+  "n_sections": 7,
+  "paper_chars": 11248,
+  "truncated": false,
+  "model_seconds": 2.2,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-268251988-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "16dea553c9a8bc353633039b5950a929acf1d7cf6464af74ff828c8d9a22607f",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:39:19Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "268251988",
+      "paper_rel_path": "88/268251988.json",
+      "paper_sha256": "c856eb6ca177c2a86c71a32c74128d28ff52c899a9dc9f60128178ae9e7b8b22",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.efforts to characterize kidney function among latinx populations in the united states as a surrogate for ckdu",
+        "section_idx": 2,
+        "span_start": 274,
+        "span_end": 468
+      },
+      "verbatim_passage": "A study of predominantly Latinx agricultural workers in Florida found that heat index was significantly associated with odds of AKI after multivariable adjustment for individual characteristics.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.efforts to characterize kidney function among latinx populations in the united states as a surrogate for ckdu",
+        "section_idx": 2,
+        "span": [
+          349,
+          359
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "A study of predominantly Latinx agricultural workers in Florida found that heat index was significantly associated with odds of AKI after multivariable adjustment for individual characteristics.",
+        "section_key": "efforts to characterize kidney function among latinx populations in the united states as a surrogate for ckdu",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, how does the projected heat index change for the future period, and what does the Florida study suggest about the health implications of higher heat index?",
+        "paper_side_fact": "The study found that heat index was significantly associated with odds of AKI among Latinx agricultural workers in Florida.",
+        "table_side_needed": "The projected heat index values (or related metric such as number of hot days) for the historical baseline and the end‑century decade under a specified emissions scenario.",
+        "paper_geography": "Florida",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage provides a mechanistic explanation that higher heat index is linked to acute kidney injury, while the table supplies projected heat index trends; together they enable reasoning about future health risk patterns.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.2
+}

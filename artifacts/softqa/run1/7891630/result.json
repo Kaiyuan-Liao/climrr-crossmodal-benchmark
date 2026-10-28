@@ -1,0 +1,87 @@
+{
+  "item_id": "7891630",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "18e1f9d237128f4745f8d1fe9989d59c9a3f9a37301ead97152bdf86b6700657",
+  "n_sections": 10,
+  "paper_chars": 26105,
+  "truncated": false,
+  "model_seconds": 2.8,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-7891630-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "0c2f3eb4365062efa57b2698b6221009390fcb893738201c749c4c7db61de6ef",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:40:33Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "7891630",
+      "paper_rel_path": "30/7891630.json",
+      "paper_sha256": "18e1f9d237128f4745f8d1fe9989d59c9a3f9a37301ead97152bdf86b6700657",
+      "arm": "extreme_heat_v1",
+      "evidence": null,
+      "verbatim_passage": "The mean maximum temperature/heat index at LaGuardia International Airport during the study period was 81 °F with a maximum high temperature/heat index of 110 °F. The mean maximum temperature/heat index during the 56 extreme heat events was 98.5 °F.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          2268,
+          2278
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The mean maximum temperature/heat index at LaGuardia International Airport during the study period was 81 °F with a maximum high temperature/heat index of 110 °F. The mean maximum temperature/heat index during the 56 extreme heat events was 98.5 °F.",
+        "section_key": "weather data collection",
+        "unit_id": "F-HEAT",
+        "qa_type": "cross_source_validation",
+        "example_question": "The paper reports a mean maximum heat index of 98.5 °F during extreme heat events in NYC; does the ClimRR heat‑index projection for the historical baseline (or future decade) show a higher, lower, or similar magnitude?",
+        "paper_side_fact": "During the 56 extreme heat events the mean maximum heat index was 98.5 °F, with an overall study‑period mean of 81 °F and a maximum observed value of 110 °F.",
+        "table_side_needed": "The projected heat‑index value (e.g., mean, maximum, or percentile) for the relevant period (historical baseline 1995‑2004 or future decade 2085‑2094) from the ClimRR table.",
+        "paper_geography": "New York City",
+        "paper_geography_role": "study_area",
+        "paper_time": "1999‑2013",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index (maximum heat index)",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage gives observed heat‑index values for NYC, while the unit provides projected heat‑index values; comparing them checks whether the modelled projections are consistent with observed extremes.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.8
+}

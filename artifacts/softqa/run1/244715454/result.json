@@ -1,0 +1,100 @@
+{
+  "item_id": "244715454",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "47162fc7d63ec56709b48f315367f4eaa9578df10f052ffd58d2e735bb0c5adf",
+  "n_sections": 7,
+  "paper_chars": 76612,
+  "truncated": false,
+  "model_seconds": 2.9,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-244715454-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "43ec4d57733f7a4e46e4be501c1fcf5d3a9f7ba824a42e582a342a1f416f1658",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:37:47Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "244715454",
+      "paper_rel_path": "54/244715454.json",
+      "paper_sha256": "47162fc7d63ec56709b48f315367f4eaa9578df10f052ffd58d2e735bb0c5adf",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.illustrates (a.) daily maximum temperatures and (b",
+        "section_idx": 5,
+        "span_start": 4899,
+        "span_end": 5084
+      },
+      "verbatim_passage": "Similarly, moisture leftover from the remnants of Hurricane Laura combined with late summer sunshine to produce heat index values of 105 degrees or greater across much of the Mid-South.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.illustrates (a.) daily maximum temperatures and (b",
+        "section_idx": 5,
+        "span": [
+          5011,
+          5021
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.introduction",
+        "section_idx": 1,
+        "span": [
+          9836,
+          9846
+        ]
+      },
+      "proposal": {
+        "passage": "Similarly, moisture leftover from the remnants of Hurricane Laura combined with late summer sunshine to produce heat index values of 105 degrees or greater across much of the Mid-South.",
+        "section_key": "discussion",
+        "unit_id": "P-STATE-1",
+        "qa_type": "cross_location_comparison",
+        "example_question": "How does the projected number of summer days with daily maximum heat index above 105 °F for California compare to the number of such days that actually occurred across the Mid‑South during the August 2020 heat event described in the paper?",
+        "paper_side_fact": "The passage states that heat index values of 105 °F or greater occurred across much of the Mid‑South during the August 2020 heat event.",
+        "table_side_needed": "The projected number of summer days with daily maximum heat index above 105 °F for the rows labelled State California, comparing the historical baseline 1995‑2004 with the end‑century decade 2085‑2094 under RCP8.5.",
+        "paper_geography": "Mid-South",
+        "paper_geography_role": "contextual",
+        "paper_time": "August 2020",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index values above 105 °F",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The paper reports observed extreme heat index days in the Mid‑South, while the table provides projected extreme heat index days for California; comparing them allows a regional contrast of heat risk.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": false,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.9
+}

@@ -1,0 +1,99 @@
+{
+  "item_id": "247623438",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "6c021f38858a54c99967014fb8b1163b283d6b3a03faf5d79f1cfbda698ab9e2",
+  "n_sections": 9,
+  "paper_chars": 38994,
+  "truncated": false,
+  "model_seconds": 2.4,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-247623438-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "06d51ada29c8197656c6c7abaf0dab4c7a286bf4e2e736bf1354f4d91d3da80b",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:37:57Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "247623438",
+      "paper_rel_path": "38/247623438.json",
+      "paper_sha256": "6c021f38858a54c99967014fb8b1163b283d6b3a03faf5d79f1cfbda698ab9e2",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.meteorological and health impacts of the mitigation scenarios",
+        "section_idx": 6,
+        "span_start": 1671,
+        "span_end": 2005
+      },
+      "verbatim_passage": "The apparent temperature (National Oceanic and Atmospheric Administration 2021), which is the perceived temperature by humans and represents the combined impacts of thermal and moisture characteristics in the atmosphere (sometimes called the \"heat index\") is impacted more by a drop in temperature than a rise in dewpoint temperature.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.meteorological and health impacts of the mitigation scenarios",
+        "section_idx": 6,
+        "span": [
+          1914,
+          1924
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          468,
+          478
+        ]
+      },
+      "proposal": {
+        "passage": "The apparent temperature (National Oceanic and Atmospheric Administration 2021), which is the perceived temperature by humans and represents the combined impacts of thermal and moisture characteristics in the atmosphere (sometimes called the \"heat index\") is impacted more by a drop in temperature than a rise in dewpoint temperature.",
+        "section_key": "meteorological and health impacts of the mitigation scenarios",
+        "unit_id": "P-STATE-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the table, how many more summer days with a daily maximum heat index above 105 °F are projected for California under RCP8.5 compared to the historical baseline, and what mechanism described in the paper explains why albedo and tree‑cover interventions can mitigate this increase?",
+        "paper_side_fact": "The passage states that apparent temperature (heat index) is more affected by temperature changes than by dewpoint changes.",
+        "table_side_needed": "The projected number of summer days with daily maximum heat index >105 °F for California, comparing the 1995‑2004 baseline to the 2085‑2094 decade under RCP8.5.",
+        "paper_geography": "California",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index (apparent temperature)",
+        "concept_relation": "direct",
+        "geography_relation": "same",
+        "link_rationale": "The passage explains how reductions in temperature lower the heat index, directly relating to the table’s projection of how many days exceed a heat‑index threshold in California. This provides an explanatory mechanism for the projected pattern.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.4
+}

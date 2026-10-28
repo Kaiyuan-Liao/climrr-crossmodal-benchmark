@@ -1,0 +1,100 @@
+{
+  "item_id": "20729434",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "ba3b3f68892bd9f53281b6c2a49c72d4e78eaa54d40c7ca801b864c5d0b9ddbb",
+  "n_sections": 7,
+  "paper_chars": 35899,
+  "truncated": false,
+  "model_seconds": 2.0,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-20729434-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "6e9932acee4cafaa8b618d608c1675a6be54abf9d123d0739b932aa4fe05a918",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:36:07Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "20729434",
+      "paper_rel_path": "34/20729434.json",
+      "paper_sha256": "ba3b3f68892bd9f53281b6c2a49c72d4e78eaa54d40c7ca801b864c5d0b9ddbb",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.conclusion",
+        "section_idx": 6,
+        "span_start": 759,
+        "span_end": 857
+      },
+      "verbatim_passage": "Local heat warning systems typically include daily maximum temperature and heat index as criteria.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.conclusion",
+        "section_idx": 6,
+        "span": [
+          834,
+          844
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.discussion",
+        "section_idx": 5,
+        "span": [
+          1902,
+          1912
+        ]
+      },
+      "proposal": {
+        "passage": "Local heat warning systems typically include daily maximum temperature and heat index as criteria.",
+        "section_key": "discussion",
+        "unit_id": "P-STATE-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, how does the number of summer days with a daily maximum heat index above 105 °F in California change from the historical baseline to the end‑century under RCP8.5, and what explanation does the paper give for why the heat index is used in local warning systems?",
+        "paper_side_fact": "Local heat warning systems typically include daily maximum temperature and heat index as criteria.",
+        "table_side_needed": "The projected change (difference or ratio) in the number of summer days with daily maximum heat index >105 °F for California between the 1995‑2004 baseline and the 2085‑2094 end‑century under RCP8.5.",
+        "paper_geography": "Atlanta, Georgia",
+        "paper_geography_role": "study_area",
+        "paper_time": "1993‑2012",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The table provides a future projection of heat‑index days for California, while the paper mentions that heat index is a key metric in warning systems, offering an explanation of its relevance to health impacts. Combining the projection with the paper’s explanation creates a pattern‑to‑explanation question.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "low"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.0
+}

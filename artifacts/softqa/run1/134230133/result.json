@@ -1,0 +1,92 @@
+{
+  "item_id": "134230133",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "ae10e591aad8891bca65df400ed14cb6bf19e45f6db3dcb447aef372e71e16e5",
+  "n_sections": 7,
+  "paper_chars": 70888,
+  "truncated": false,
+  "model_seconds": 12.6,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-134230133-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "842e2a3366126730d1a75fd501fe7b877e104e0d3c84fd9390f8178320fd471d",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:28:21Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "134230133",
+      "paper_rel_path": "33/134230133.json",
+      "paper_sha256": "ae10e591aad8891bca65df400ed14cb6bf19e45f6db3dcb447aef372e71e16e5",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.canadian wildfire information system",
+        "section_idx": 3,
+        "span_start": 1743,
+        "span_end": 1853
+      },
+      "verbatim_passage": "Figure 3a illustrates the FWI of Canada (0 ≤ FWI ≤ 30) on 1 May 2016, a day before the Fort McMurray wildfire.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.canadian wildfire information system",
+        "section_idx": 3,
+        "span": [
+          7,
+          25
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Figure 3a illustrates the FWI of Canada (0 ≤ FWI ≤ 30) on 1 May 2016, a day before the Fort McMurray wildfire.",
+        "section_key": "canadian wildfire information system",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected summer Fire Weather Index for the grid cell R106C361 under RCP8.5, and how does the paper describe the role of the FWI in assessing fire danger in Canada?",
+        "paper_side_fact": "The passage states that Figure 3a shows the Fire Weather Index values across Canada on 1 May 2016, ranging from 0 to 30, before the Fort McMurray wildfire.",
+        "table_side_needed": "The modeled summer Fire Weather Index value (or change) for grid cell R106C361 for the end‑century decade 2085‑2094 under RCP8.5, to be compared with the historical baseline.",
+        "paper_geography": "Canada",
+        "paper_geography_role": "contextual",
+        "paper_time": "1 May 2016",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage explains what the Fire Weather Index measures and provides a concrete example for Canada, giving the necessary background to interpret the projected FWI values presented in the table for a specific grid cell.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 12.6
+}

@@ -1,0 +1,94 @@
+{
+  "item_id": "271774129",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "316a017bc32ac400a53901baf59adfcdf3f1bd2d3e1fe8ad8e8bf1e944d707ac",
+  "n_sections": 11,
+  "paper_chars": 31705,
+  "truncated": false,
+  "model_seconds": 2.4,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-271774129-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "16a66a4ae03920619c1c81d112bab4c39510bbffd5e5fe5bbcfc9c5ef272fb1c",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:39:32Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "271774129",
+      "paper_rel_path": "29/271774129.json",
+      "paper_sha256": "316a017bc32ac400a53901baf59adfcdf3f1bd2d3e1fe8ad8e8bf1e944d707ac",
+      "arm": "extreme_heat_v1",
+      "evidence": null,
+      "verbatim_passage": "The observed climatological frequency of summertime HHE (i.e., HI ≥ 105 °F, see \"Methods\" for the definition of HHE) shows the highest values in the SEUS, with a maximum occurring along its southern border. The observed frequency of HHE demonstrates large variability and exhibits a slightly increasing trend with a slope of 0.18 % per year during the period 1995‑2022.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.results",
+        "section_idx": 1,
+        "span": [
+          51,
+          61
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.results",
+        "section_idx": 1,
+        "span": [
+          1198,
+          1208
+        ]
+      },
+      "proposal": {
+        "passage": "The observed climatological frequency of summertime HHE (i.e., HI ≥ 105 °F, see \"Methods\" for the definition of HHE) shows the highest values in the SEUS, with a maximum occurring along its southern border. The observed frequency of HHE demonstrates large variability and exhibits a slightly increasing trend with a slope of 0.18 % per year during the period 1995‑2022.",
+        "section_key": "results",
+        "unit_id": "P-STATE-1",
+        "qa_type": "regional_contrast",
+        "example_question": "How does the observed trend in summer days with heat index ≥ 105 °F in the southeastern United States compare to the projected change for California under RCP8.5?",
+        "paper_side_fact": "The frequency of summer days with heat index ≥ 105 °F in the SEUS increased at a rate of 0.18 % per year from 1995 to 2022.",
+        "table_side_needed": "The projected change (e.g., percent change or absolute difference) in the number of summer days with heat index ≥ 105 °F for California under RCP8.5 between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094).",
+        "paper_geography": "southeastern United States (SEUS)",
+        "paper_geography_role": "study_area",
+        "paper_time": "1995‑2022",
+        "paper_scenario": "unknown",
+        "paper_concept": "frequency of summer days with heat index ≥ 105 °F",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The paper provides an observed increasing trend for heat‑index days in the SEUS, while the unit gives a projected future change for California. Contrasting these two regions highlights how heat‑index extremes may evolve differently across the United States.",
+        "unmatched_dimensions": [
+          "geography",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.4
+}

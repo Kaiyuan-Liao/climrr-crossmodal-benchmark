@@ -310,6 +310,36 @@
         }
       ],
       "already_read_note": "the 20 papers read twice and adjudicated in M4-WP4 (artifacts/literature/wp4_sample.json) stay in the list"
+    },
+    {
+      "filename": "review_batch_01.json",
+      "path": "artifacts/softqa/review_batch_01.json",
+      "role": "Track C review_batch_01 --- the 11 run-1 triage candidates for reviewer 1 (Kaiyuan Liao), candidate_schema_v1 records in candidate_id order; frozen before any review; not accepted QA",
+      "sha256": "1086991e25306ee19b7ba29102123fe516f670edd6524e8b1970102a7058f9c8",
+      "bytes": 132872,
+      "row_count": null,
+      "column_count": null,
+      "encoding_note": "UTF-8, LF line endings, no byte-order mark.",
+      "acquisition_date": "2026-10-28",
+      "storage_policy": "tracked in ordinary Git as an immutable object; a change is a new batch",
+      "tracked_in_git": true,
+      "decision_ref": "D-029, D-030, D-033",
+      "source_description": "built by scripts/freeze_softqa_review_batch.py from artifacts/softqa/run1/candidates_schema.jsonl",
+      "interpretation_notes": "no interpretation assigned; no column status, concept-map entry or compatibility rule changed",
+      "n_records": 11,
+      "candidate_ids": [
+        "C-199098498-01",
+        "C-226260658-01",
+        "C-236782701-01",
+        "C-245473445-01",
+        "C-247623438-01",
+        "C-247866001-01",
+        "C-247866001-02",
+        "C-253196482-01",
+        "C-254679818-01",
+        "C-4238342-01",
+        "C-5882914-01"
+      ]
     }
   ],
   "amendments": [
@@ -360,6 +390,12 @@
       "milestone": "Track C pre-run follow-up (COORDINATOR)",
       "change": "units_definitions_v1.json re-pinned: P-STATE-1's definition names its metric, 'number of summer days with daily maximum heat index above 105 °F' (the threshold is the metric name; no computed value, no direction). Previous SHA-256 61e4c7fe3af2c23430cdda0c62bf72ee7373c558c29c642d3543f4a00877fc82 (at 4fb887f). Encoding note updated (U+00B0). Every other entry unchanged.",
       "decision_ref": "D-033 (addendum)"
+    },
+    {
+      "date": "2026-10-28",
+      "milestone": "Track C run 1 ingest",
+      "change": "Added softqa_run1 to the diagnostics block (artifacts/softqa/run1/manifest.csv; softqa_agent v1 output, 243 papers, 193 proposals). A diagnostic and candidate pool, not accepted QA; prompt_user.txt and response.json not copied (SHA-256 in excluded_files.csv). Every other entry unchanged.",
+      "decision_ref": "D-029, D-030, D-033"
     }
   ],
   "external_corpora": [
@@ -551,6 +587,54 @@
         "run1_manifest_sha256": "74ba7d7c72e7920ac16e1cc7c49ab2543add316df37baf60ff3b52c10c2d125d"
       },
       "decision_ref": "D-025, D-026, D-027"
+    },
+    {
+      "diagnostic_id": "softqa_run1",
+      "role": "Track C run 1 (softqa_agent v1) --- a diagnostic and a candidate pool, not accepted QA; every candidate is llm_candidate -> deterministic_pass / rejected_pre_review; no human review, no table value; FWI is a fire-danger index, never fire occurrence",
+      "manifest_path": "artifacts/softqa/run1/manifest.csv",
+      "manifest_sha256": "c0c193695023d08435e4fed0451f4ef445aa429f68bb43780ab638bd5b26b3d9",
+      "n_files": 248,
+      "total_bytes": 3789681,
+      "log_path": "artifacts/softqa/softqa_run1.log",
+      "log_sha256": "01eb5b51c2642e619e0bd66591d8238475db3cf9f135bd76c62f161bec6b993d",
+      "source_tarball_sha256": "8a0e444996cc09a87c848aa9013e228d39a3f831e7a701519eb7db41f3654e3e",
+      "not_copied": {
+        "files": [
+          "prompt_user.txt",
+          "response.json"
+        ],
+        "reason": "prompt_user.txt holds the full paper text (the corpus stays external); response.json holds passages and model reasoning; SHA-256 of each kept in excluded_files.csv",
+        "excluded_files_csv_sha256": "1ef1b05d69239c87e751472045dd4e477a432954c788b2cfeea8f93df9142294"
+      },
+      "run": {
+        "host": "Polaris (Kaiyuan); login node `unknown` --- not recorded in the run outputs",
+        "python": "`unknown` --- not recorded in the run outputs",
+        "model": "gpt-oss-120b",
+        "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+        "start_utc": "2026-10-28T03:27:59Z",
+        "end_utc": "2026-10-28T03:40:48Z",
+        "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+        "agent_sha256": "159e2c5c4f00608da37b1bc85556fecfd82dbd2e1a5abfd10c59a2e46061397c",
+        "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+        "units_sha256_as_loaded": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+        "units_file_sha256": "0cf496a1854933cf96ebc9ef06c59ba29a15691bba574d87dd760f70019f282e",
+        "qa_types_sha256_as_loaded": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+        "qa_types_file_sha256": "bc425268fc9fc56a5727b80286a8402fb011c1a2817f4d880c2e7206df3e567d",
+        "hash_note": "the agent hashes json.dumps(obj, sort_keys=True), not the file bytes; both recorded",
+        "index_content_identity_sha256": "fbb4affb71622e07259182ec4922d1496b47fa09ad08396d6e4ceaa8eeb77a94"
+      },
+      "decision_ref": "D-029, D-030, D-033",
+      "locator_replay_v2": {
+        "path": "artifacts/softqa/run1_locator_replay_v2.json",
+        "sha256": "33bc04949b8e24d11e48c128725b4a8e5d376cc16d62295afb672f5be7056898",
+        "agent_sha256": "25a79a5b8bebbb67c8e080b05d08b736ee40ea62fbe3fc891d86cfab22f63b9c",
+        "recovery": {
+          "exact": 117,
+          "normalized": 8,
+          "prefix_anchor": 34,
+          "not_found": 34
+        }
+      }
     }
   ]
 }

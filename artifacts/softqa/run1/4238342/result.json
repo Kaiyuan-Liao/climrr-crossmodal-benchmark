@@ -1,0 +1,91 @@
+{
+  "item_id": "4238342",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "5cb9707908920be5112f5eb29cb4de08ea34362785752ec09a737cf48240185c",
+  "n_sections": 7,
+  "paper_chars": 31030,
+  "truncated": false,
+  "model_seconds": 2.3,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-4238342-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "002cebaedd5bba8bfceeabab6cf9e00714b80d64e84bd9b7afc6b3c0a029530e",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:39:59Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "4238342",
+      "paper_rel_path": "42/4238342.json",
+      "paper_sha256": "5cb9707908920be5112f5eb29cb4de08ea34362785752ec09a737cf48240185c",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span_start": 5348,
+        "span_end": 5711
+      },
+      "verbatim_passage": "Emergency alert systems such as the National Weather Service's Heat Index warnings do not acknowledge the effects of metabolic heat and exertion in direct sunlight, which account for much of the heat-related risks that outdoor workers face and can increase heat index values by as much as 15 degrees Fahrenheit (http://www.nws.noaa.gov/om/ heat/heat_index.shtml).",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          5411,
+          5421
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Emergency alert systems such as the National Weather Service's Heat Index warnings do not acknowledge the effects of metabolic heat and exertion in direct sunlight, which account for much of the heat-related risks that outdoor workers face and can increase heat index values by as much as 15 degrees Fahrenheit (http://www.nws.noaa.gov/om/ heat/heat_index.shtml).",
+        "section_key": "abstract",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, how does the summer heat index in California change from the historical baseline to the end‑century under RCP 8.5, and what explanation does the paper give for why higher heat‑index values increase health risks for outdoor workers?",
+        "paper_side_fact": "Emergency alert systems' heat index warnings do not consider metabolic heat and direct sunlight, which can raise heat index values by up to 15 °F.",
+        "table_side_needed": "The projected difference (or pattern) in summer heat index values for California between the 1995‑2004 historical baseline and the 2085‑2094 end‑century decade under RCP 8.5.",
+        "paper_geography": "California",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "direct",
+        "geography_relation": "same",
+        "link_rationale": "The passage explains how higher heat‑index values exacerbate health risks for outdoor workers, which directly relates to the projected increase in heat index for California in the table; the question asks for the projected pattern and the paper's mechanistic explanation.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.3
+}

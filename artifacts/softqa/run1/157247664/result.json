@@ -1,0 +1,92 @@
+{
+  "item_id": "157247664",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "8f4871c447c557916278781722f36c710419ae80fc74c7f994c1b38244d6406a",
+  "n_sections": 7,
+  "paper_chars": 29025,
+  "truncated": false,
+  "model_seconds": 4.1,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-157247664-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "43ba3337db89e4ef425a0f6d2f56f98c11790e1a8173eb49f01c64dd4b83c877",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:29:01Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "157247664",
+      "paper_rel_path": "64/157247664.json",
+      "paper_sha256": "8f4871c447c557916278781722f36c710419ae80fc74c7f994c1b38244d6406a",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.cffdrs",
+        "section_idx": 4,
+        "span_start": 9,
+        "span_end": 379
+      },
+      "verbatim_passage": "The FWI System (Van Wagner 1987; see Table 1) uses weather variables to assess the risk of fire ignition and spread. The system includes three indices (FFMC, DMC, and DC) that describe the moisture available in fuels of increasing depths and the FWI index, which provides a summary measure of the fire potential. For all indices, larger values indicate higher fire risk.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          1260,
+          1278
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The FWI System (Van Wagner 1987; see Table 1) uses weather variables to assess the risk of fire ignition and spread. The system includes three indices (FFMC, DMC, and DC) that describe the moisture available in fuels of increasing depths and the FWI index, which provides a summary measure of the fire potential. For all indices, larger values indicate higher fire risk.",
+        "section_key": "cffdrs",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer Fire Weather Index for the grid cell R106C361 under RCP8.5, and how does the paper explain the role of the Fire Weather Index system in assessing fire risk?",
+        "paper_side_fact": "The FWI System uses weather variables to assess fire ignition and spread, includes three moisture indices and the FWI index, and larger values indicate higher fire risk.",
+        "table_side_needed": "The summer (June‑July‑August) Fire Weather Index value (or its change) for grid cell R106C361 comparing the 1995‑2004 baseline to the 2085‑2094 end‑century decade under RCP8.5.",
+        "paper_geography": "western Canada",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The passage defines what the Fire Weather Index measures and why higher values mean greater fire risk, which provides the explanatory background needed to interpret the projected FWI values shown in the table for a specific grid cell and scenario.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "high"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 4.1
+}

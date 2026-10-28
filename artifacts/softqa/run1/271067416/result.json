@@ -1,0 +1,91 @@
+{
+  "item_id": "271067416",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "ac3f9386554b398e9504053247fcec0dfad6b0d1b8920cc2053d8e93345281bb",
+  "n_sections": 6,
+  "paper_chars": 41841,
+  "truncated": false,
+  "model_seconds": 1.7,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-271067416-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "08bc756bbd5b74b1b1ad292ddfc5b69cf3a389d15b9f82f0e1560aeabd15d7c5",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:33:38Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "271067416",
+      "paper_rel_path": "16/271067416.json",
+      "paper_sha256": "ac3f9386554b398e9504053247fcec0dfad6b0d1b8920cc2053d8e93345281bb",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.discussion and conclusions",
+        "section_idx": 5,
+        "span_start": 6461,
+        "span_end": 6584
+      },
+      "verbatim_passage": "Our research corroborates this and further delineates how the FWI and the SPEI climate indices differentially influence BA.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          426,
+          444
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Our research corroborates this and further delineates how the FWI and the SPEI climate indices differentially influence BA.",
+        "section_key": "discussion and conclusions",
+        "unit_id": "F-FWI",
+        "qa_type": "cross_source_validation",
+        "example_question": "According to the paper, the Fire Weather Index (FWI) influences burned area; does the ClimRR table show a similar projected influence of the FWI for the same global period?",
+        "paper_side_fact": "The paper states that the Fire Weather Index (FWI) influences burned area.",
+        "table_side_needed": "The projected change or pattern of the Fire Weather Index (FWI) for the modeled historical baseline and future period in the ClimRR table.",
+        "paper_geography": "global",
+        "paper_geography_role": "contextual",
+        "paper_time": "2001-2021",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index (FWI)",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "Both the paper and the unit refer to the Fire Weather Index as a fire‑danger metric. The question asks whether the projected FWI pattern in the table aligns with the paper's claim about its influence on burned area.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario"
+        ],
+        "confidence": "high"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 1.7
+}

@@ -1,0 +1,100 @@
+{
+  "item_id": "199381463",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "b21440cabafe6ca50ef17a5771bcfbad316d44c8ab52beed68a909b345f2fe61",
+  "n_sections": 8,
+  "paper_chars": 72023,
+  "truncated": false,
+  "model_seconds": 2.8,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-199381463-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "ac7db1d21138091ff80b3c32adc7ba2be6f7d9262705ae43f9460b9249603f51",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:36:00Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "199381463",
+      "paper_rel_path": "unknown/199381463.json",
+      "paper_sha256": "b21440cabafe6ca50ef17a5771bcfbad316d44c8ab52beed68a909b345f2fe61",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span_start": 3629,
+        "span_end": 3910
+      },
+      "verbatim_passage": "A recent study of 192 agricultural workers in Florida showed that the odds of acute kidney injury increased 37% for each 5-degree ( • F) increase in the heat index [52]. Sri Lankan agricultural workers are subjected to extreme heat and humid conditions with excessive perspiration.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          3782,
+          3792
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          4694,
+          4704
+        ]
+      },
+      "proposal": {
+        "passage": "A recent study of 192 agricultural workers in Florida showed that the odds of acute kidney injury increased 37% for each 5-degree ( • F) increase in the heat index [52]. Sri Lankan agricultural workers are subjected to extreme heat and humid conditions with excessive perspiration.",
+        "section_key": "introduction",
+        "unit_id": "P-STATE-1",
+        "qa_type": "cross_location_comparison",
+        "example_question": "According to the paper, how does the risk of acute kidney injury change with each 5‑degree increase in the heat index for agricultural workers in Florida, and how does this compare to the projected number of summer days with daily maximum heat index above 105 °F in California under RCP8.5?",
+        "paper_side_fact": "The odds of acute kidney injury increase 37% for each 5‑degree increase in the heat index among agricultural workers in Florida.",
+        "table_side_needed": "The projected number of summer (June‑July‑August) days with daily maximum heat index above 105 °F for California rows in the ClimRR table, comparing the historical baseline (1995‑2004) to the end‑century decade (2085‑2094) under RCP8.5.",
+        "paper_geography": "Florida",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "related",
+        "geography_relation": "different",
+        "link_rationale": "The paper provides an empirical relationship between heat‑index increases and kidney injury risk in Florida, while the table gives modeled heat‑index extremes for California. Both address heat‑index exposure, allowing a comparison of health risk implications across two different regions.",
+        "unmatched_dimensions": [
+          "geography",
+          "scenario",
+          "time"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": false,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.9
+}

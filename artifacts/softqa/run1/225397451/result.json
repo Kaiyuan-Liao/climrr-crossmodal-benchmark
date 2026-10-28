@@ -1,0 +1,92 @@
+{
+  "item_id": "225397451",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "d0eca4d6aa1c750a5974a5f8e6206188967e1230237081f11e38138d36c7cd4e",
+  "n_sections": 6,
+  "paper_chars": 27348,
+  "truncated": false,
+  "model_seconds": 2.3,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-225397451-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "3149585857adb181151e5bba59222c527a3b7fcea38894d65d991a835880f513",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:36:50Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "225397451",
+      "paper_rel_path": "51/225397451.json",
+      "paper_sha256": "d0eca4d6aa1c750a5974a5f8e6206188967e1230237081f11e38138d36c7cd4e",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span_start": 2388,
+        "span_end": 2711
+      },
+      "verbatim_passage": "Lobell et al [21] studied heat extremes in California and Nebraska using regional climate modeling, finding that mean heat index, which combines temperature and humidity, decreased less in irrigated areas than mean temperature, and that the peak heat index value, unlike peak temperature, did not decrease under irrigation.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          2506,
+          2516
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Lobell et al [21] studied heat extremes in California and Nebraska using regional climate modeling, finding that mean heat index, which combines temperature and humidity, decreased less in irrigated areas than mean temperature, and that the peak heat index value, unlike peak temperature, did not decrease under irrigation.",
+        "section_key": "introduction",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, how does the summer heat index change in the future under RCP8.5, and what mechanism does the paper give for this pattern?",
+        "paper_side_fact": "The paper reports that mean heat index decreased less in irrigated areas than mean temperature, and peak heat index did not decrease under irrigation.",
+        "table_side_needed": "The projected change (increase or decrease) in the summer heat index for the modeled historical baseline versus the end‑century decade under RCP8.5 as given by the F‑HEAT unit.",
+        "paper_geography": "California and Nebraska",
+        "paper_geography_role": "cited_study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage explains how irrigation can modify heat index values, providing a mechanistic explanation that can be linked to any projected heat‑index pattern shown in the table for the future scenario.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.3
+}

@@ -1,0 +1,86 @@
+{
+  "item_id": "243767055",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "bf40deca8d988a59436291190adda795e5541b714c94e2900b26024f72d878fb",
+  "n_sections": 15,
+  "paper_chars": 123783,
+  "truncated": true,
+  "model_seconds": 3.2,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-243767055-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "4c79811ea5092ca910322e947f8a9a3361549a7d53ea413fa9ed799b38e658b7",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:31:26Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "243767055",
+      "paper_rel_path": "55/243767055.json",
+      "paper_sha256": "bf40deca8d988a59436291190adda795e5541b714c94e2900b26024f72d878fb",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "the underlying map shows fire potential, measured by the linear trend in the number of days annually that exceeded the 95th percentile of the Fire Weather Index over the years 1979-2019.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.bat responses to burned versus unburned sites",
+        "section_idx": 4,
+        "span": [
+          7710,
+          7728
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "the underlying map shows fire potential, measured by the linear trend in the number of days annually that exceeded the 95th percentile of the Fire Weather Index over the years 1979-2019.",
+        "section_key": "bat responses to burned versus unburned sites",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR table, what is the projected change in the summer Fire Weather Index for grid cell R106C361 between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5, and how does the paper describe the way fire potential is measured using the Fire Weather Index?",
+        "paper_side_fact": "Fire potential is measured by the linear trend in the number of days per year that exceed the 95th percentile of the Fire Weather Index over 1979‑2019.",
+        "table_side_needed": "the numeric difference (or pattern of increase/decrease) in the summer Fire Weather Index for grid cell R106C361 between the historical baseline and the end‑century period under RCP8.5",
+        "paper_geography": "global",
+        "paper_geography_role": "contextual",
+        "paper_time": "1979-2019",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage explains how the Fire Weather Index is used to quantify fire potential, which directly relates to the unit that reports projected Fire Weather Index values for a specific grid cell. The question asks for the table’s projected change and the paper’s explanation of the index, linking the two sources.",
+        "unmatched_dimensions": [
+          "geography",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.2
+}

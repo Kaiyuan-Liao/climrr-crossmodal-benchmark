@@ -1,0 +1,91 @@
+{
+  "item_id": "34373293",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "30585a0c8b7d59b140077db53b8a99eba46b1794c353a5681ec6b93a80e6f16b",
+  "n_sections": 7,
+  "paper_chars": 21563,
+  "truncated": false,
+  "model_seconds": 2.2,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-34373293-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "06d18ecbcae1e4e3d32568183d4c32722dab4486ba64a1ebefbfec4fe3c74916",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:39:48Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "34373293",
+      "paper_rel_path": "93/34373293.json",
+      "paper_sha256": "30585a0c8b7d59b140077db53b8a99eba46b1794c353a5681ec6b93a80e6f16b",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.discussion",
+        "section_idx": 5,
+        "span_start": 1255,
+        "span_end": 1452
+      },
+      "verbatim_passage": "The average daily maximum temperature is 82 °F and 83 °F in July and August, respectively, with little humidity, which may account for the low knowledge and concern about working in hot conditions.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.discussion",
+        "section_idx": 5,
+        "span": [
+          160,
+          170
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The average daily maximum temperature is 82 °F and 83 °F in July and August, respectively, with little humidity, which may account for the low knowledge and concern about working in hot conditions.",
+        "section_key": "discussion",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What pattern does the ClimRR table show for summer heat‑index values in Oregon, and how does the paper explain the low level of heat‑related concern among Oregon farmworkers?",
+        "paper_side_fact": "The average daily maximum temperature in Oregon during July and August is 82‑83 °F with little humidity.",
+        "table_side_needed": "The projected change or pattern (e.g., increase, decrease, or magnitude) in summer heat‑index values for Oregon between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under a specified emissions scenario.",
+        "paper_geography": "Oregon",
+        "paper_geography_role": "study_area",
+        "paper_time": "July and August (summer)",
+        "paper_scenario": "unknown",
+        "paper_concept": "daily maximum temperature (heat)",
+        "concept_relation": "related",
+        "geography_relation": "same",
+        "link_rationale": "The passage provides contextual information about historically low heat conditions in Oregon, which can serve as an explanation for any projected increase or pattern in heat‑index values shown in the table for the same region.",
+        "unmatched_dimensions": [
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.3
+}

@@ -1,0 +1,92 @@
+{
+  "item_id": "55565874",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "4fe30d300e279a30cf3a59eeaaff0ff8d78d4fe501fee88790be0dfa9ff7cfdc",
+  "n_sections": 12,
+  "paper_chars": 53760,
+  "truncated": false,
+  "model_seconds": 3.1,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-55565874-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "81b4d6e030734842a348caa2d078400cde8afcf833b6bda4fba67dfbac1a2eaf",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:40:13Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "55565874",
+      "paper_rel_path": "74/55565874.json",
+      "paper_sha256": "4fe30d300e279a30cf3a59eeaaff0ff8d78d4fe501fee88790be0dfa9ff7cfdc",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span_start": 994,
+        "span_end": 1323
+      },
+      "verbatim_passage": "The health effects of heat are often described better by a combination of temperature and humidity, such as a heat index or wet bulb temperature. Due to the increase in humidity from irrigation and higher sea surface temperatures (SSTs), these indices have increased over the last decades even when extreme temperatures have not.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          1104,
+          1114
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The health effects of heat are often described better by a combination of temperature and humidity, such as a heat index or wet bulb temperature. Due to the increase in humidity from irrigation and higher sea surface temperatures (SSTs), these indices have increased over the last decades even when extreme temperatures have not.",
+        "section_key": "abstract",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, how does the summer heat index change between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5, and what mechanism does the paper give for this pattern in India?",
+        "paper_side_fact": "Heat index and wet bulb temperature have increased over recent decades in India because humidity has risen due to irrigation and higher sea‑surface temperatures, even though extreme temperatures have not increased.",
+        "table_side_needed": "The projected change (increase or decrease) in the summer heat index between the historical baseline and the end‑century decade under RCP8.5 (numeric value or direction).",
+        "paper_geography": "India",
+        "paper_geography_role": "study_area",
+        "paper_time": "recent decades",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The paper provides an explanation for why the heat index has risen in India, which can be linked to the projected change shown in the generic heat‑index unit; the question asks for the table pattern together with the paper's mechanistic explanation.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.1
+}

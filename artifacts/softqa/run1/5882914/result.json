@@ -1,0 +1,98 @@
+{
+  "item_id": "5882914",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "c87653cf414221b837a0c045dcf71fccb438ec532eadeb0c3461f00285c41199",
+  "n_sections": 4,
+  "paper_chars": 28083,
+  "truncated": false,
+  "model_seconds": 1.9,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-5882914-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "a3548de8073cb0be4b33e29baedc24258f8a64fb8ef772309598e3c95ad0b69f",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:40:19Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "5882914",
+      "paper_rel_path": "14/5882914.json",
+      "paper_sha256": "c87653cf414221b837a0c045dcf71fccb438ec532eadeb0c3461f00285c41199",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "section_idx": 0,
+        "span_start": 8176,
+        "span_end": 8280
+      },
+      "verbatim_passage": "the first heat wave definition (HWD_HI) is based on daily low and high heat index values (Robinson 2001)",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.introduction",
+        "section_idx": 0,
+        "span": [
+          8247,
+          8257
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.introduction",
+        "section_idx": 0,
+        "span": [
+          593,
+          603
+        ]
+      },
+      "proposal": {
+        "passage": "the first heat wave definition (HWD_HI) is based on daily low and high heat index values (Robinson 2001)",
+        "section_key": "characteristics of heat waves",
+        "unit_id": "P-STATE-1",
+        "qa_type": "regional_contrast",
+        "example_question": "How does the number of summer days with a daily maximum heat index above 105 °F in California compare to the use of daily high and low heat‑index values in defining heat waves for the eastern United States?",
+        "paper_side_fact": "The HWD_HI heat‑wave definition relies on daily low and high heat‑index values.",
+        "table_side_needed": "The projected count of summer days with daily maximum heat index >105 °F for California under the historical baseline and the 2085‑2094 decade under RCP8.5.",
+        "paper_geography": "eastern United States",
+        "paper_geography_role": "study_area",
+        "paper_time": "future (2057‑2059) projections",
+        "paper_scenario": "RCP8.5",
+        "paper_concept": "heat index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "Both the passage and the table unit refer to the same climate variable (heat index) but for different regions, enabling a contrast between how heat‑index thresholds are used in the eastern U.S. study and the projected heat‑index extremes in California.",
+        "unmatched_dimensions": [
+          "geography"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 1.9
+}

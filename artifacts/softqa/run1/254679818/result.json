@@ -1,0 +1,91 @@
+{
+  "item_id": "254679818",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "f1f3329f90e67608b6f4cf49ca08ad1f268777256fa86910a23dd83410acae50",
+  "n_sections": 8,
+  "paper_chars": 48195,
+  "truncated": false,
+  "model_seconds": 1.8,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-254679818-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "42e85d374dcac010b5d47427a02fc5db946dd953511a860bf4b2760545d261be",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:33:06Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "254679818",
+      "paper_rel_path": "18/254679818.json",
+      "paper_sha256": "f1f3329f90e67608b6f4cf49ca08ad1f268777256fa86910a23dd83410acae50",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.results",
+        "section_idx": 5,
+        "span_start": 11654,
+        "span_end": 11849
+      },
+      "verbatim_passage": "Regarding the correlation between BA and the covariates, there is a general tendency of a positive correlation between the BA and the mean FWI of the week prior to the fire initial date (FWI_WP).",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          576,
+          594
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Regarding the correlation between BA and the covariates, there is a general tendency of a positive correlation between the BA and the mean FWI of the week prior to the fire initial date (FWI_WP).",
+        "section_key": "results",
+        "unit_id": "F-FWI",
+        "qa_type": "cross_source_validation",
+        "example_question": "Does the table show a positive correlation between burned area and the mean Fire Weather Index of the week prior to fire ignition for Mediterranean Europe during 2006‑2019, matching the paper’s claim?",
+        "paper_side_fact": "The paper reports a general tendency of a positive correlation between burned area and the mean Fire Weather Index of the week prior to fire ignition.",
+        "table_side_needed": "A pattern indicating the sign (positive/negative) of the relationship between burned area and mean weekly FWI for the Mediterranean Europe region during the 2006‑2019 period.",
+        "paper_geography": "Mediterranean Europe",
+        "paper_geography_role": "study_area",
+        "paper_time": "2006-2019",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index (FWI)",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The paper’s statement about a positive BA‑FWI correlation can be validated against the table’s pattern for the same fire‑weather index family. Both sources refer to the same quantity (FWI) and can be compared for consistency.",
+        "unmatched_dimensions": [
+          "geography",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 1.8
+}

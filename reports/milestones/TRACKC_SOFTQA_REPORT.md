@@ -29,6 +29,7 @@ computing any table-side value, Track D design, merging, pushing.
 | **Freeze commit** | **`4fb887f`** --- schema, protocol, form, view, inputs, agent, tests, D-033, manifest pins. **Schema v1 and protocol v1 are frozen at `4fb887f`.** |
 | Report commit | `12145e0` (this report, fields 1--9, and the `PROJECT_STATE.md` refresh) |
 | Follow-up commit | the commit carrying the COORDINATOR's decisions (D-033 addendum) and the re-pinned units file (head SHA reported to the COORDINATOR). The schema, protocol, QA types, candidate list and agent are unchanged since `4fb887f` |
+| Run-1 ingest commit | the commit carrying run 1's ingest, review batch 01, agent v2 and the FWI hold (head SHA reported to the COORDINATOR); fields 10--15 below |
 | Remote | **not pushed, not merged** |
 
 ## 4. Data version and checksums
@@ -43,6 +44,12 @@ computing any table-side value, Track D design, merging, pushing.
 | `data/metadata/softqa/review_form_v1.yaml` | `804bd3c0f8344f24b3126cff4a1fe916ad0538c0c034cb289b1c9f1ad2eb3790` | 1,781 | pinned; `-text` |
 | **`scripts/litcollect/softqa_agent.py`** (as tracked) | **`159e2c5c4f00608da37b1bc85556fecfd82dbd2e1a5abfd10c59a2e46061397c`** | 18,552 | byte-identical to the delivered file (work package hash); scanner word exemption pinned to it |
 | `docs/SOFTQA_REVIEW_PROTOCOL.md` | `ab54f305fce942d092d486146c1779d82e0477cc9043f6e19450a04d61087a72` | | |
+| **`scripts/litcollect/softqa_agent.py` v2** (run-1 ingest commit) | **`25a79a5b8bebbb67c8e080b05d08b736ee40ea62fbe3fc891d86cfab22f63b9c`** | | byte-identical to the delivered v2; scanner exemption re-pinned; v1 `159e2c5c…397c` ran run 1 |
+| `docs/SOFTQA_REVIEW_PROTOCOL.md` (run-1 ingest commit) | `1fff24129b0f5db296b13f06a7ecf09049fa4ee097700ca2f539f6ecab089023` | | §3 v2 locator note and §11 FWI hold added (*implementation*); ruling text unchanged |
+| **run 1 `artifacts/softqa/run1/manifest.csv`** | **`c0c193695023d08435e4fed0451f4ef445aa429f68bb43780ab638bd5b26b3d9`** | 3,789,681 (248 files) | `data/manifest.json` → `diagnostics` / `softqa_run1` |
+| `softqa_run1.tar.gz` (delivered) | `8a0e444996cc09a87c848aa9013e228d39a3f831e7a701519eb7db41f3654e3e` | | not stored |
+| `artifacts/softqa/run1_locator_replay_v2.json` | `33bc04949b8e24d11e48c128725b4a8e5d376cc16d62295afb672f5be7056898` | | pinned in the `softqa_run1` entry |
+| **`artifacts/softqa/review_batch_01.json`** | **`1086991e25306ee19b7ba29102123fe516f670edd6524e8b1970102a7058f9c8`** | | `data/manifest.json` → `files`; 11 records |
 | `fire_weather_v1_place_candidates.txt` (read) | `122ee177f45dd98ecb76765a7ce0e8c543261694c5e991380ab94139d756a149` | | equals `place_candidates.json`; checked by the freeze script |
 | `extreme_heat_v1_place_candidates.txt` (read) | `eb28845e43bbd63875a8ac7b25f64fef9aabb07abde69a7ae75e14bb689c623c` | | idem |
 
@@ -219,34 +226,125 @@ below:
 
 ## 10. Validation performed
 
-**PENDING --- the Polaris run.** Pre-run gate at `4fb887f`: `pytest` 1056
-passed, 2 skipped (the `jsonschema` cross-checks, see 9g) in conda `climrr`;
-`verify_no_secrets_or_paths.py` 0 hits over 902 tracked files. Expected after
-the run: `agent.log` START line pins (units / QA-types / system-prompt / index
-hashes), every `candidates.jsonl` record mapped and validated.
+**Run 1 (agent v1, Polaris, 2026-10-28 03:27:59--03:40:48 Z, at `95e1ec8`).** Ingest:
+`scripts/ingest_softqa_run1.py`; record
+`reports/runs/20261028T041213Z_local_ingest_softqa_run1.{json,md}`. Generated doc:
+[`docs/SOFTQA_TRACKC_RUN1.md`](../../docs/SOFTQA_TRACKC_RUN1.md).
+
+| Check | Result |
+| --- | --- |
+| tarball SHA-256 | `8a0e4449…3e3e`, matches the work package |
+| log START line | `candidates=243 units=5 qa_types=6 model=gpt-oss-120b units_sha=5bb486ef6428 qa_sha=f0d0f07bf0fd system_sha=f2e493e179aa index=fbb4affb7162` --- every pin recomputed |
+| units hash | **as loaded** `5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92` = SHA-256 of `json.dumps(units, sort_keys=True)` of the tracked file; **file** `0cf496a1…282e`. The agent hashes the canonical dump, so the two differ by construction; both recorded |
+| QA-types hash | as loaded `f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75`; file `bc425268…567d` |
+| system prompt | `f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5` = v1's `SYSTEM_PROMPT` (every record) |
+| index | `fbb4affb…7a94` = LITCORPUS-02 content identity |
+| source commit | `95e1ec851f2ac703654df52ac1ccc9c3d777fcd7` on all 193 records |
+| logs | `agent.log` = `reports/softqa_run1.log`, byte-identical; 243 paper lines + START + DONE |
+| re-derivation | `candidates.jsonl` and `summary.json` rebuilt from the 243 `result.json` (agent's own aggregation) --- equal; DONE totals equal |
+| paper set | 243 directories = `trackc_candidates_v1.json` |
+| schema mapping | **193 / 193** map onto `candidate_schema_v1.json` and validate (`candidates_schema.jsonl`); table-side and human-review null with stage named |
+| not copied | 486 files (`prompt_user.txt`, `response.json` × 243) --- SHA-256 in `excluded_files.csv` |
+| rerun | ingest → replay → freeze re-run from scratch: byte-identical outputs |
+
+**Locator replay** (`scripts/softqa_replay_locator.py`, record
+`reports/runs/20261028T041215Z_local_softqa_replay_locator.{json,md}`): agent v2's
+`locate_passage` over all 193 proposals, sections rebuilt from `prompt_user.txt`
+(243 prompt hashes matched; 222 untruncated papers reproduce `paper_chars` and
+`n_sections`; the 16 untruncated papers held locally also equal their source JSON
+section for section --- scratch check, not in the script). **117 exact (= v1's
+passes), 8 normalized, 34 prefix_anchor, 34 not found**; 159 / 159 recovered spans
+re-slice to their text.
+
+**Gate (run-1 ingest commit).** `pytest` **1117 passed, 2 skipped** (the
+`jsonschema` cross-checks, 9g) in conda `climrr`, Python 3.11.16, raw-data hash
+test included; `verify_no_secrets_or_paths.py` 0 hits. Tests added: agent v2
+(locator cases, passage type, > 3 groups, prompt hash, replay on the synthetic
+run), run-1 ingest/counts/replay/batch, FWI hold.
 
 ## 11. Failures, rejected cases, and known limitations
 
-**PENDING --- the Polaris run** (counts of `rejected_pre_review` by reason,
-truncated papers, parse errors). Known before the run: 9a--9c.
+| Run 1 | n |
+| --- | --- |
+| papers / proposals | 243 / 193 |
+| papers with 0 proposals | **68** (1: 158, 2: 16, 3: 1) |
+| `deterministic_pass` / `rejected_pre_review` | 103 / 90 |
+| rejected on span re-slice (incl. combinations) | 76 |
+| rejected on concept location (incl. combinations) | 9 |
+| rejected on place location (incl. combinations) | **10** |
+| advisory `question_has_no_table_number` false | 16 pass, 25 rejected |
+| truncated papers / parse errors | 21 / 0 |
+
+**Diagnosis of the 76 re-slice failures (replay):** 8 typographic variants
+(U+2011 in all 8; curly quotes in 1; no U+202F found), 34 altered tails recovered
+by prefix anchoring (≥ 0.6 word overlap), 34 not found in the text the model
+saw. 11 of the 76 are in truncated papers, replayed against the 90,000 characters
+shown (the model saw no more).
+
+**Three work-package figures differ from the data** (recorded as computed, not
+adjusted): (i) papers with 0 proposals **68**, not 50 (158×1 + 16×2 + 1×3 = 193);
+(ii) place-check failures **10** incl. combinations, not 9 (8 alone, 1 with
+concept, 1 with span); (iii) "42 altered tail" --- the replay gives **34**
+prefix-anchor recoveries; 42 is the total recoverable (8 + 34). 8 + 34 + 34 = 76.
+
+**Known limitations.** (a) 5 proposed passages exceed the prompt's 700
+characters (737--797; one `deterministic_pass`, `C-239033445-01`): kept verbatim,
+flagged against the minimal-window premise of the ingest. (b) v2's prefix anchor
+measures overlap over the recovered sentence, so a genuine sentence followed by
+an appended foreign one is recovered as the first sentence alone (tested,
+documented); the reviewer sees both texts. (c) Replay `section_idx` is the
+ordinal among string sections, not the index's. (d) The `question_has_no_table_number`
+flag is crude (fires on thresholds quoted from the paper). (e) Run-1 host
+login node and Python version not recorded in the outputs (`unknown`).
 
 ## 12. Deviations from the approved plan
 
-**PENDING --- COORDINATOR review of 9d--9g** (supplementary schema blocks;
-invocation location; run record per view; built-in validator).
+- **9d--9g** still pending COORDINATOR review (unchanged).
+- **`hold_owner_confirmation` is a gate result, not a schema status**: schema
+  v1 is frozen, its `status` enum has no such value; `acceptance_gate` returns it
+  and `validate` refuses an accepted record on a held unit (protocol §11). The
+  unit-id hold is unconditional in code; lifting it needs a logged decision.
+- **Review view extended** (batch input, v2 `passage_recovery` /
+  `passage_as_proposed`, acceptance-gate line in section 2); **mapper v2** maps
+  v2's `passage_type` to `claim_or_passage_type` (v1 records unchanged in
+  content; mapper label now `softqa.map_trackc v2`).
+- Diagnostic id spelled `softqa_run1` as the work package names it (Track B uses
+  `TRACKB-SURVEY-RUN1`).
+- Reviewer forms prepared with `candidate_id` and `reviewer_role: reviewer_1`
+  only; not hash-pinned (they will be filled).
 
 ## 13. Open decisions and mentor questions
 
-9a, 9b and 9e decided by the COORDINATOR (field 9). **PENDING --- the mentor:
-confirmation of the FWI columns (brief question 0; gates `accepted` for
-P-CELL-1 / P-COUNTY-1), which QA types to keep and the reviewer** (item A).
+- **COORDINATOR:** the three work-package count discrepancies (field 11); the 5
+  over-window passages; whether F-FWI candidates fall under the FWI hold before
+  the table stage records their columns (now: checked by column ids only); 9d--9g.
+- **Mentor:** FWI column confirmation (brief question 0) --- gates acceptance of
+  `C-245473445-01` (P-COUNTY-1) and `C-247866001-01` (P-CELL-1); QA types to
+  keep; reviewer.
 
 ## 14. Proposed gate status
 
-**PENDING --- after the run and its ingest.**
+**Run 1: diagnostic and candidate pool --- ingested and verified; no gate
+proposed for QA** (nothing reviewed, nothing accepted). Run 2 pending.
 
 ## 15. Proposed next bounded objective
 
-**PENDING --- after the run.** Expected: Kaiyuan runs the agent on Polaris at a
-pinned commit; ingest `softqa/run1`; first-reviewer pass on a predeclared
-sample under the protocol; Track D design.
+1. **Reviewer 1 (Kaiyuan) reviews batch 01** (11 candidates,
+   `artifacts/softqa/review_batch_01.json`, forms in
+   `artifacts/softqa/review_batch_01_forms/`), evidence first, rationale after.
+2. **Run 2 on Polaris with agent v2** at the pinned commit of this package:
+
+```bash
+cd "$LITCOLLECT_ROOT_POLARIS"
+PYTHONPATH="$CLIMRR_REPO/src" python "$CLIMRR_REPO/scripts/litcollect/softqa_agent.py" \
+    --candidates "$CLIMRR_REPO/data/metadata/softqa/trackc_candidates_v1.json" \
+    --units "$CLIMRR_REPO/data/metadata/softqa/units_definitions_v1.json" \
+    --qa-types "$CLIMRR_REPO/data/metadata/softqa/qa_types_v1.json" \
+    --index index/full_705k_v2_filtered --out softqa/run2 \
+    --source-commit "$(git -C "$CLIMRR_REPO" rev-parse HEAD)"
+```
+
+   Expected START pins: `units_sha=5bb486ef6428 qa_sha=f0d0f07bf0fd
+   system_sha=a44181ee2344 index=fbb4affb7162`.
+3. After the review disposition: table-side values for the reviewed structure
+   (D-033 §3), next package. Track D design.

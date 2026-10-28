@@ -1,0 +1,87 @@
+{
+  "item_id": "244564378",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "bd5bdb0e308ee019af4c0cac08509e81774cad3006ac77ab5bc489c3e63db23d",
+  "n_sections": 6,
+  "paper_chars": 43020,
+  "truncated": false,
+  "model_seconds": 2.8,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-244564378-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "4b806b260190620d8c6d29fa2685e51320062d7496e2f32edc627258f23ccebd",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:31:32Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "244564378",
+      "paper_rel_path": "78/244564378.json",
+      "paper_sha256": "bd5bdb0e308ee019af4c0cac08509e81774cad3006ac77ab5bc489c3e63db23d",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "A fourfold increase in likelihood (PR > 4) in response to globally warming temperature is found in approximately 40% of the world's fire‑prone grid points. This corresponds to an increase in the magnitude of around 20%, ranging from 15.5% in DC to 25.5% in DMC. Such increases in the likelihood of extreme fire danger are particularly strong in temperate North America, Europe, Africa, Boreal, and Central Asia.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.methods and data",
+        "section_idx": 3,
+        "span": [
+          2536,
+          2554
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "A fourfold increase in likelihood (PR > 4) in response to globally warming temperature is found in approximately 40% of the world's fire‑prone grid points. This corresponds to an increase in the magnitude of around 20%, ranging from 15.5% in DC to 25.5% in DMC. Such increases in the likelihood of extreme fire danger are particularly strong in temperate North America, Europe, Africa, Boreal, and Central Asia.",
+        "section_key": "results",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, how does the summer Fire Weather Index change in temperate North America under RCP8.5, and what explanation does the paper give for this pattern?",
+        "paper_side_fact": "The paper reports a fourfold increase in the likelihood of extreme fire danger (FWI) under global warming, especially in temperate North America, Europe, Africa, Boreal, and Central Asia.",
+        "table_side_needed": "The projected change (e.g., probability ratio or percentage magnitude change) for the summer Fire Weather Index in temperate North America under the RCP8.5 scenario.",
+        "paper_geography": "temperate North America",
+        "paper_geography_role": "contextual",
+        "paper_time": "1980-2018",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index (likelihood/magnitude)",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage explains why fire‑weather danger is increasing in certain regions, which matches the pattern that the table would provide for the summer Fire Weather Index under RCP8.5 in those same regions.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.8
+}

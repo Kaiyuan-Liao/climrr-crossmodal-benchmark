@@ -1,0 +1,87 @@
+{
+  "item_id": "62898586",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "9592b0b2ec812330a47e83517662eec10f513f007f597db31a8540efc3e967c6",
+  "n_sections": 8,
+  "paper_chars": 47932,
+  "truncated": false,
+  "model_seconds": 3.5,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-62898586-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "9a2682b59930b3b0e9c30fe65a3ffcd76fd74c55ed25f2d4947f02683c23cc7e",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:34:41Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "62898586",
+      "paper_rel_path": "86/62898586.json",
+      "paper_sha256": "9592b0b2ec812330a47e83517662eec10f513f007f597db31a8540efc3e967c6",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "Figure 9 shows the mean, global Fire Weather Index (FWI) during January and July for all three datasets. The mean FWI is calculated from 1980 onwards, excluding 1979 as a moisture code equilibration year. We describe FWI seasonality according to selected fire regions defined by van der Werf et al. (2010), starting with the MERRA-based calculations. In January, FWI calculations are not active over the Boreal North America and Boreal Asia regions. Over Temperate North America and Europe, mean FWI values reflect only a small number of anomalous warm and snow‑free days during which the calculations were active. At low latitudes, the highest values based on MERRA are over Northern Hemisphere Africa, which contributes significantly to global emissions, when the ITCZ is displaced to the south.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          13,
+          31
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Figure 9 shows the mean, global Fire Weather Index (FWI) during January and July for all three datasets. The mean FWI is calculated from 1980 onwards, excluding 1979 as a moisture code equilibration year. We describe FWI seasonality according to selected fire regions defined by van der Werf et al. (2010), starting with the MERRA-based calculations. In January, FWI calculations are not active over the Boreal North America and Boreal Asia regions. Over Temperate North America and Europe, mean FWI values reflect only a small number of anomalous warm and snow‑free days during which the calculations were active. At low latitudes, the highest values based on MERRA are over Northern Hemisphere Africa, which contributes significantly to global emissions, when the ITCZ is displaced to the south.",
+        "section_key": "global fwi variability",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer Fire Weather Index for grid cell R106C361 between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5, and how does the paper explain the high fire‑weather index values observed at low latitudes?",
+        "paper_side_fact": "The paper reports that mean global FWI is highest at low latitudes over Northern Hemisphere Africa during the months shown, due to the southward displacement of the ITCZ.",
+        "table_side_needed": "The difference (or change) in summer Fire Weather Index between the historical baseline 1995‑2004 and the end‑century decade 2085‑2094 under RCP8.5 for the specific grid cell R106C361.",
+        "paper_geography": "Northern Hemisphere Africa",
+        "paper_geography_role": "contextual",
+        "paper_time": "historical (1980 onward)",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage provides an explanation for why FWI values are high in low‑latitude regions, which can be used to interpret a projected increase in FWI for a specific grid cell shown in the table. The table supplies the quantitative projection, while the paper supplies the mechanistic context.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 3.5
+}

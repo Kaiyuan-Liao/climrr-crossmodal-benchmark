@@ -1,0 +1,98 @@
+{
+  "item_id": "52215224",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "a597bdf2425f4d6505e2bf6321ac0f25e1aa9ee6478a24414a6a62f8aa0a5c7e",
+  "n_sections": 12,
+  "paper_chars": 71853,
+  "truncated": false,
+  "model_seconds": 2.0,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-52215224-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "2f035cc1333b560c1928239661b296505371651666d27a59cfc318c91292da98",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:40:05Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "52215224",
+      "paper_rel_path": "24/52215224.json",
+      "paper_sha256": "a597bdf2425f4d6505e2bf6321ac0f25e1aa9ee6478a24414a6a62f8aa0a5c7e",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span_start": 875,
+        "span_end": 1009
+      },
+      "verbatim_passage": "For example, parallels can currently be seen in California, where the occurrence of droughts and intense heat waves has increased [7].",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.background",
+        "section_idx": 3,
+        "span": [
+          9650,
+          9660
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          923,
+          933
+        ]
+      },
+      "proposal": {
+        "passage": "For example, parallels can currently be seen in California, where the occurrence of droughts and intense heat waves has increased [7].",
+        "section_key": "introduction",
+        "unit_id": "P-STATE-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the number of summer days with daily maximum heat index above 105 °F in California under RCP8.5, and how does the paper explain the recent increase in intense heat waves in the state?",
+        "paper_side_fact": "The paper states that droughts and intense heat waves have increased in California.",
+        "table_side_needed": "The projected number of summer days with daily maximum heat index above 105 °F for California comparing the 1995‑2004 baseline to the 2085‑2094 end‑century decade under RCP8.5.",
+        "paper_geography": "California",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "intense heat waves",
+        "concept_relation": "related",
+        "geography_relation": "same",
+        "link_rationale": "The passage notes a recent increase in intense heat waves in California, providing a qualitative explanation for climate stress. The table unit gives a quantitative projection of heat‑index days for the same region under a high‑emissions scenario, allowing the question to combine the observed pattern with the projected metric.",
+        "unmatched_dimensions": [
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.1
+}

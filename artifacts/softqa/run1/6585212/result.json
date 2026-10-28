@@ -1,0 +1,92 @@
+{
+  "item_id": "6585212",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "a24b79193b9c71225e2a88facbb7e27805a8a4fafa8f7f6ead152553ecf57641",
+  "n_sections": 7,
+  "paper_chars": 34498,
+  "truncated": false,
+  "model_seconds": 1.9,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-6585212-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "8e8c9973318ed41db88d86e77e2a3c8bffff217c54f03b25e9e9b2c72d6e19b6",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:40:28Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "6585212",
+      "paper_rel_path": "12/6585212.json",
+      "paper_sha256": "a24b79193b9c71225e2a88facbb7e27805a8a4fafa8f7f6ead152553ecf57641",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.materials and methods",
+        "section_idx": 3,
+        "span_start": 3230,
+        "span_end": 3445
+      },
+      "verbatim_passage": "We also considered apparent temperature and the heat index, a variation of the apparent temperature used by the National Weather Service [49,50]. These indices combine the influences of air temperature and humidity.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          660,
+          670
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "We also considered apparent temperature and the heat index, a variation of the apparent temperature used by the National Weather Service [49,50]. These indices combine the influences of air temperature and humidity.",
+        "section_key": "materials and methods",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, what is the projected change in the summer heat index, and how does the paper explain the role of the heat index in fluid and electrolyte imbalance emergency department visits?",
+        "paper_side_fact": "The study considered the heat index, which combines air temperature and humidity, as one of the temperature metrics.",
+        "table_side_needed": "The projected change (e.g., increase or decrease) in the summer heat index for the relevant period and scenario as recorded in the ClimRR table.",
+        "paper_geography": "Atlanta, Georgia, USA",
+        "paper_geography_role": "study_area",
+        "paper_time": "1993-2012",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The paper discusses the heat index as a metric that combines temperature and humidity and links it to dehydration outcomes, while the table provides projected future changes in the heat index. Pairing them allows a question that asks for the projected pattern and the paper's mechanistic explanation.",
+        "unmatched_dimensions": [
+          "geography",
+          "scenario",
+          "time"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 1.9
+}

@@ -1,0 +1,162 @@
+{
+  "item_id": "247866001",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "d66695a48ceff42cc50875832cd7756df54bc3dc8aad087debf228e785076708",
+  "n_sections": 16,
+  "paper_chars": 47033,
+  "truncated": false,
+  "model_seconds": 8.6,
+  "model_parse_error": null,
+  "n_groups_proposed": 2,
+  "n_deterministic_pass": 2,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-247866001-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "753925106ad4d6097ce4532c50cf9ff16b720033343d973c921f5207eedae796",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:32:44Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "247866001",
+      "paper_rel_path": "01/247866001.json",
+      "paper_sha256": "d66695a48ceff42cc50875832cd7756df54bc3dc8aad087debf228e785076708",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.temporally compounding events occurring within 1 year",
+        "section_idx": 5,
+        "span_start": 7619,
+        "span_end": 7749
+      },
+      "verbatim_passage": "In all regions, increases in FWI 99.9 events occur during the typical fire weather season (May to September; Fig. 6, A, C, and E).",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.future increasing frequency of extreme fire weather events",
+        "section_idx": 3,
+        "span": [
+          118,
+          136
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "In all regions, increases in FWI 99.9 events occur during the typical fire weather season (May to September; Fig. 6, A, C, and E).",
+        "section_key": "role of changes in the seasonality of extreme events",
+        "unit_id": "P-CELL-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer (June‑July‑August) Fire Weather Index at grid cell R106C361 between the historical baseline and the end‑century under RCP8.5, and how does the paper explain that this change occurs during the fire‑weather season?",
+        "paper_side_fact": "Increases in extreme fire weather index events occur during the typical fire weather season (May‑September).",
+        "table_side_needed": "The projected change (increase or pattern) in the summer Fire Weather Index at grid cell R106C361 between the 1995‑2004 baseline and the 2085‑2094 end‑century under RCP8.5.",
+        "paper_geography": "western United States",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "RCP8.5",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "direct",
+        "geography_relation": "contained_in",
+        "link_rationale": "The passage notes that fire‑weather index increases are tied to the fire season, which includes the summer months covered by the table unit. The table provides the quantitative summer FWI change for a specific grid cell, allowing the observed seasonal pattern to be linked to the paper’s explanation.",
+        "unmatched_dimensions": [
+          "time"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    },
+    {
+      "candidate_id": "C-247866001-02",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "753925106ad4d6097ce4532c50cf9ff16b720033343d973c921f5207eedae796",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:32:44Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "247866001",
+      "paper_rel_path": "01/247866001.json",
+      "paper_sha256": "d66695a48ceff42cc50875832cd7756df54bc3dc8aad087debf228e785076708",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.future increasing frequency of extreme fire weather events",
+        "section_idx": 3,
+        "span_start": 0,
+        "span_end": 258
+      },
+      "verbatim_passage": "To capture daily meteorological conditions that shape wildfire risk, we use a modified version of the Canadian Forest Fire Weather Index (FWI), calculated using daily maximum temperature, precipitation, relative humidity, and surface wind speed (30)(31)(32).",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.future increasing frequency of extreme fire weather events",
+        "section_idx": 3,
+        "span": [
+          118,
+          136
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "To capture daily meteorological conditions that shape wildfire risk, we use a modified version of the Canadian Forest Fire Weather Index (FWI), calculated using daily maximum temperature, precipitation, relative humidity, and surface wind speed (30)(31)(32).",
+        "section_key": "future increasing frequency of extreme fire weather events",
+        "unit_id": "F-FWI",
+        "qa_type": "cross_source_validation",
+        "example_question": "Does the table’s projection of fire‑weather index changes under RCP8.5 correspond to the paper’s description of using a modified Canadian Forest Fire Weather Index based on temperature, precipitation, humidity and wind?",
+        "paper_side_fact": "The paper uses a modified Canadian Forest Fire Weather Index calculated from daily temperature, precipitation, humidity, and wind to capture fire‑weather conditions.",
+        "table_side_needed": "The projected fire‑weather index values (or changes) for the historical baseline and the end‑century under RCP8.5 (for any region or the whole study domain).",
+        "paper_geography": "western United States",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "RCP8.5",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "direct",
+        "geography_relation": "same",
+        "link_rationale": "Both the passage and the table refer to the same fire‑weather index metric, so the table’s numbers can be validated against the paper’s methodological definition of the index.",
+        "unmatched_dimensions": [],
+        "confidence": "high"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 8.6
+}

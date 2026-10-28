@@ -1,0 +1,91 @@
+{
+  "item_id": "226260658",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "e46e4e69e7245c8420dd99d410266f16f7f5b142e1537d8bef10e46ac9fc9605",
+  "n_sections": 18,
+  "paper_chars": 42387,
+  "truncated": false,
+  "model_seconds": 2.5,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-226260658-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "5caa614d6e5b2872113e85bd96c7f9e14a3d3c7cfb6263bd661b54664ef93cd9",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:36:53Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "226260658",
+      "paper_rel_path": "58/226260658.json",
+      "paper_sha256": "e46e4e69e7245c8420dd99d410266f16f7f5b142e1537d8bef10e46ac9fc9605",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.variations in exposure and vulnerability metrics shape extreme heat risk calculations",
+        "section_idx": 11,
+        "span_start": 764,
+        "span_end": 942
+      },
+      "verbatim_passage": "Average heat index days per year will increase to a median value of 44.3 events across census tracts, an average bump of 11.6 more days per year than the current period (S4 Fig).",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.differences in extreme heat definitions",
+        "section_idx": 3,
+        "span": [
+          382,
+          392
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Average heat index days per year will increase to a median value of 44.3 events across census tracts, an average bump of 11.6 more days per year than the current period (S4 Fig).",
+        "section_key": "variations in exposure and vulnerability metrics shape extreme heat risk calculations",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR table, what is the projected change in the number of heat index days during summer in California, and how does the paper explain this pattern?",
+        "paper_side_fact": "The paper states that average heat index days per year will increase to a median of 44.3 events, an increase of 11.6 days per year compared to the current period.",
+        "table_side_needed": "The projected number (or change) of summer heat index days for California under the modeled historical baseline and future period, as recorded in the ClimRR heat‑index family table.",
+        "paper_geography": "California",
+        "paper_geography_role": "study_area",
+        "paper_time": "projected period 2040‑2059",
+        "paper_scenario": "RCP4.5",
+        "paper_concept": "heat index days",
+        "concept_relation": "direct",
+        "geography_relation": "same",
+        "link_rationale": "The passage provides a quantified increase in heat‑index days for California, which directly corresponds to the heat‑index family unit in the ClimRR table. The question can ask for the table‑side projected pattern and the paper’s explanation of why that pattern occurs.",
+        "unmatched_dimensions": [
+          "scenario",
+          "time"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.5
+}

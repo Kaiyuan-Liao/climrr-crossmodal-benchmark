@@ -1,0 +1,41 @@
+# Prepared for review_batch_01 (2026-10-28); NOT FILLED. Reviewer 1: Kaiyuan Liao.
+# View: python scripts/softqa_review_view.py --candidates artifacts/softqa/review_batch_01.json --candidate-id C-253196482-01
+# Soft-QA reviewer form, v1 (D-033; docs/SOFTQA_REVIEW_PROTOCOL.md).
+#
+# One form per reviewer per candidate. Fill `checklist` in the protocol's review
+# order BEFORE running scripts/softqa_review_view.py with --show-rationale.
+# Judgments 1-9 take: yes | no | unclear. For overclaim_check, yes = the QA
+# avoids implying stronger equivalence or causation than supported.
+# overall_disposition takes: accept | accept_with_edit | ambiguous | reject.
+
+form_version: review_form_v1
+
+identity:
+  candidate_id: C-253196482-01
+  reviewer_role: reviewer_1  # reviewer_1 | reviewer_2 | adjudicator
+  reviewer_id:
+  review_date:            # YYYY-MM-DD
+  rationale_seen_before_judgments:   # true | false
+
+checklist:
+  paper_fidelity:         # Does the passage actually state the paper-side fact?
+  table_fidelity:         # Is the table-side fact exactly supported by the recorded cells/computation?
+  concept_validity:       # Are the two sides sufficiently related for the QA type?
+  geography_validity:     # Are both locations represented accurately?
+  temporal_validity:      # Is the wording valid given the periods?
+  scenario_validity:      # Is scenario mismatch disclosed rather than silently equated?
+  question_validity:      # Is the question answerable from the recorded evidence?
+  answer_validity:        # Is the proposed answer correct?
+  overclaim_check:        # Does the QA avoid implying stronger equivalence or causation than supported?
+  overall_disposition:    # accept | accept_with_edit | ambiguous | reject
+
+escalation:
+  requests_escalation:    # true | false (second-review trigger 10)
+  second_review_triggers: []   # numbers 1-10 from protocol section 6 that apply
+
+edit:                     # only for accept_with_edit
+  edited_question:
+  edited_answer:
+  reason:
+
+notes:

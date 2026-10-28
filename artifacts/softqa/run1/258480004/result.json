@@ -1,0 +1,87 @@
+{
+  "item_id": "258480004",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "b966af7f63acf580b1fc3d5b4837fa24180fc61e56e74942b4d74e5c044e0ecc",
+  "n_sections": 7,
+  "paper_chars": 24665,
+  "truncated": false,
+  "model_seconds": 1.9,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-258480004-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "a2fcecc13c570f0f649c88edffc2e929204cea71c5f84937204646914fcec029",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:33:17Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "258480004",
+      "paper_rel_path": "04/258480004.json",
+      "paper_sha256": "b966af7f63acf580b1fc3d5b4837fa24180fc61e56e74942b4d74e5c044e0ecc",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "fire weather- Because local meteorological conditions are key drivers of wildfires, we derive a daily fire weather index known as the Keetch-Byram Drought Index (KBDI) as a principal input to the model. KBDI is a widely used tool to inform fire management decisions, such as fire suppression strategies. KBDI is calculated based on daily precipitation and maximum temperature data, with higher values indicating lower soil moisture, influencing the likelihood of ignition and spread of wildfire.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.data",
+        "section_idx": 3,
+        "span": [
+          2072,
+          2090
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "fire weather- Because local meteorological conditions are key drivers of wildfires, we derive a daily fire weather index known as the Keetch-Byram Drought Index (KBDI) as a principal input to the model. KBDI is a widely used tool to inform fire management decisions, such as fire suppression strategies. KBDI is calculated based on daily precipitation and maximum temperature data, with higher values indicating lower soil moisture, influencing the likelihood of ignition and spread of wildfire.",
+        "section_key": "data",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer Fire Weather Index for the grid cell R106C361 under RCP8.5, and how does the paper explain the role of the Keetch-Byram Drought Index in driving that pattern?",
+        "paper_side_fact": "The study derives a daily fire weather index (KBDI) from precipitation and temperature to represent fire weather conditions.",
+        "table_side_needed": "The projected summer Fire Weather Index value (or change) for grid cell R106C361 comparing the baseline 1995‑2004 to 2085‑2094 under RCP8.5.",
+        "paper_geography": "unknown",
+        "paper_geography_role": "data_source",
+        "paper_time": "historical and future (derived from climate model simulations)",
+        "paper_scenario": "unknown",
+        "paper_concept": "fire weather index (KBDI)",
+        "concept_relation": "direct",
+        "geography_relation": "same",
+        "link_rationale": "Both the passage and the unit refer to a fire‑weather index; the passage explains the physical basis (soil moisture, temperature, precipitation) that underlies the projected index values shown in the table.",
+        "unmatched_dimensions": [
+          "geography",
+          "scenario",
+          "time"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 1.9
+}

@@ -1,0 +1,99 @@
+{
+  "item_id": "134320823",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "aa24276334f188e4859b2d04a3c684d2b6835d2a479fb638ad976140685d9e04",
+  "n_sections": 6,
+  "paper_chars": 31537,
+  "truncated": false,
+  "model_seconds": 2.1,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-134320823-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "cbf580140ae697f5c065a68a282d5aedad706d50757c637c89831c5aba26de84",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:35:24Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "134320823",
+      "paper_rel_path": "23/134320823.json",
+      "paper_sha256": "aa24276334f188e4859b2d04a3c684d2b6835d2a479fb638ad976140685d9e04",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.background and introduction",
+        "section_idx": 2,
+        "span_start": 5052,
+        "span_end": 5202
+      },
+      "verbatim_passage": "The standard heat index value of 105 used to trigger an alert nationally does not work well in California due to local acclimation and drier climates.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.background and introduction",
+        "section_idx": 2,
+        "span": [
+          4830,
+          4840
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.background and introduction",
+        "section_idx": 2,
+        "span": [
+          163,
+          173
+        ]
+      },
+      "proposal": {
+        "passage": "The standard heat index value of 105 used to trigger an alert nationally does not work well in California due to local acclimation and drier climates.",
+        "section_key": "background and introduction",
+        "unit_id": "P-STATE-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR table, how many summer days with a daily maximum heat index above 105 °F are projected for California under RCP8.5, and what explanation does the paper give for why this heat‑index threshold may be unsuitable for California?",
+        "paper_side_fact": "The paper states that the standard heat index value of 105 °F used for alerts nationally does not work well in California.",
+        "table_side_needed": "The projected number of summer days (June‑August) with daily maximum heat index >105 °F for the state of California, comparing the historical baseline (1995‑2004) to the end‑century decade (2085‑2094) under RCP8.5.",
+        "paper_geography": "California",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index threshold of 105 °F",
+        "concept_relation": "direct",
+        "geography_relation": "same",
+        "link_rationale": "The table provides a quantitative projection of how often the 105 °F heat‑index threshold is exceeded in California, while the paper explains why that same threshold may be inappropriate for the region, linking the projected pattern to the paper's mechanistic explanation.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.1
+}

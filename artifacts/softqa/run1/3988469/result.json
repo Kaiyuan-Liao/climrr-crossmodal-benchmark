@@ -1,0 +1,92 @@
+{
+  "item_id": "3988469",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "bb105b903cb2fd2702c5fccb58d4ec2f3640c4d96324b09d2061844ba51ce8b4",
+  "n_sections": 8,
+  "paper_chars": 36348,
+  "truncated": false,
+  "model_seconds": 2.8,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-3988469-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "14b1abab52844f2090071f0acad48f3ad797c6d808de2b519fbce39b6341ae7a",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:39:53Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "3988469",
+      "paper_rel_path": "69/3988469.json",
+      "paper_sha256": "bb105b903cb2fd2702c5fccb58d4ec2f3640c4d96324b09d2061844ba51ce8b4",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.results",
+        "section_idx": 4,
+        "span_start": 2466,
+        "span_end": 2674
+      },
+      "verbatim_passage": "Other heat indices are the Humidex (used in Canada) and the National Weather Service (NWS) Heat Index in the U.S., both describing how hot the weather feels by combining the effects of heat and humidity [11].",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.results",
+        "section_idx": 4,
+        "span": [
+          747,
+          757
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Other heat indices are the Humidex (used in Canada) and the National Weather Service (NWS) Heat Index in the U.S., both describing how hot the weather feels by combining the effects of heat and humidity [11].",
+        "section_key": "results",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the heat index for future summers, and how does the paper explain the relevance of the heat index for construction workers?",
+        "paper_side_fact": "The paper states that the Humidex and the NWS Heat Index describe how hot the weather feels by combining heat and humidity.",
+        "table_side_needed": "The projected pattern or values of the heat index (e.g., magnitude or number of days) for the future decade compared to the historical baseline as recorded in the ClimRR table.",
+        "paper_geography": "U.S.",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The table provides a future versus historical projection for the heat index, while the passage defines the heat index and its importance for assessing heat stress in construction workers, linking the projected metric to its practical relevance.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.8
+}

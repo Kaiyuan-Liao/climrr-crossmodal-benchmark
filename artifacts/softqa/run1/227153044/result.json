@@ -1,0 +1,93 @@
+{
+  "item_id": "227153044",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "2a73eeb4563acb9422cfc40460093018794bed7465a2a59518f0f239040d986c",
+  "n_sections": 10,
+  "paper_chars": 33599,
+  "truncated": false,
+  "model_seconds": 2.8,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-227153044-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "3d37daf5dd383fb28fca73d36df785d3249f0026b1f6b6f59e074f43687e1c8a",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:30:13Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "227153044",
+      "paper_rel_path": "44/227153044.json",
+      "paper_sha256": "2a73eeb4563acb9422cfc40460093018794bed7465a2a59518f0f239040d986c",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.live plant samples",
+        "section_idx": 4,
+        "span_start": 1681,
+        "span_end": 2124
+      },
+      "verbatim_passage": "For each occasion, the Canadian fire weather index was computed based on the temperature, relative humidity, rainfall (over the past 24 h), and wind speed (Van Wagner & Forest, 1987) at the time that burning commenced. This index integrates drought and other atmospheric effects that are relevant to fire behavior and fuel moisture, and it was shown to be the best performing fire danger index in Mediterranean ecosystems (Sirca et al., 2018).",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.live plant samples",
+        "section_idx": 4,
+        "span": [
+          1713,
+          1731
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "For each occasion, the Canadian fire weather index was computed based on the temperature, relative humidity, rainfall (over the past 24 h), and wind speed (Van Wagner & Forest, 1987) at the time that burning commenced. This index integrates drought and other atmospheric effects that are relevant to fire behavior and fuel moisture, and it was shown to be the best performing fire danger index in Mediterranean ecosystems (Sirca et al., 2018).",
+        "section_key": "live plant samples",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, how does the summer Fire Weather Index in grid cell R106C361 change from the historical baseline (1995‑2004) to the end‑century decade (2085‑2094) under RCP8.5, and what explanation does the study give for why fire weather influences flammability?",
+        "paper_side_fact": "The study computed the Canadian fire weather index from temperature, relative humidity, rainfall, and wind speed, noting it integrates drought and atmospheric effects relevant to fire behavior and is the best performing fire danger index in Mediterranean ecosystems.",
+        "table_side_needed": "Projected summer Fire Weather Index values for grid cell R106C361 for the historical baseline period (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5, to determine the change.",
+        "paper_geography": "southern Cape coast of South Africa",
+        "paper_geography_role": "study_area",
+        "paper_time": "2018 (sampling occasions)",
+        "paper_scenario": "unknown",
+        "paper_concept": "Canadian fire weather index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage describes the fire‑weather index used to quantify fire‑danger conditions, which belongs to the same family as the table unit. The table provides projected changes in that index for a specific location, enabling a question that links the projected pattern with the mechanistic explanation of fire‑weather effects on flammability.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.8
+}

@@ -1,0 +1,92 @@
+{
+  "item_id": "254994199",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "29662226f224fa2935890f94fd3bf859cf458ec7e651e11e3c4be1129e3dc8da",
+  "n_sections": 9,
+  "paper_chars": 69472,
+  "truncated": false,
+  "model_seconds": 2.4,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-254994199-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "f1e1a6e7c8371fb7a8d4e4854eb921c3f4b0dfcfb368ca2b8d3a0e29d322ff29",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:33:09Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "254994199",
+      "paper_rel_path": "99/254994199.json",
+      "paper_sha256": "29662226f224fa2935890f94fd3bf859cf458ec7e651e11e3c4be1129e3dc8da",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.input predictors",
+        "section_idx": 3,
+        "span_start": 1121,
+        "span_end": 1350
+      },
+      "verbatim_passage": "We consider two additional fire danger predictors which have been shown to significantly correlate with fire activity (Abatzoglou and Kolden, 2013): 1,000-hr dead fuel moisture (FM1000), and the Fosberg Fire Weather Index (FFWI).",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.input predictors",
+        "section_idx": 3,
+        "span": [
+          1324,
+          1342
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "We consider two additional fire danger predictors which have been shown to significantly correlate with fire activity (Abatzoglou and Kolden, 2013): 1,000-hr dead fuel moisture (FM1000), and the Fosberg Fire Weather Index (FFWI).",
+        "section_key": "input predictors",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR table, how does the summer Fire Weather Index change between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5, and what driver does the paper identify as the dominant factor influencing fire activity in the western United States?",
+        "paper_side_fact": "The Fosberg Fire Weather Index (FFWI) is identified as a fire‑danger predictor that significantly correlates with fire activity.",
+        "table_side_needed": "The projected difference (or percent change) in the summer Fire Weather Index for the relevant region and period under RCP8.5, as recorded in the table for the fire‑weather‑index family.",
+        "paper_geography": "western United States",
+        "paper_geography_role": "study_area",
+        "paper_time": "1984‑2020",
+        "paper_scenario": "unknown",
+        "paper_concept": "fire weather index (FFWI)",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The table provides a future projection of the fire‑weather‑index metric, while the paper highlights that a specific fire‑weather index (FFWI) is a key predictor of fire activity, offering an explanation for any projected pattern.",
+        "unmatched_dimensions": [
+          "time",
+          "scenario",
+          "direction"
+        ],
+        "confidence": "low"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.4
+}

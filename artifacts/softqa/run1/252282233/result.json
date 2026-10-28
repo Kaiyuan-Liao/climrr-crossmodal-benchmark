@@ -1,0 +1,92 @@
+{
+  "item_id": "252282233",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "d8532686ab6c6de592ce7634d9f365b6f050aa172bc03c982fefef4f584c354c",
+  "n_sections": 22,
+  "paper_chars": 46909,
+  "truncated": false,
+  "model_seconds": 2.6,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-252282233-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "f374b9bf2dfc982863841e743b0f8bb898d31a9c347770dcaa7affead4af6dcc",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:38:20Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "252282233",
+      "paper_rel_path": "33/252282233.json",
+      "paper_sha256": "d8532686ab6c6de592ce7634d9f365b6f050aa172bc03c982fefef4f584c354c",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.background",
+        "section_idx": 2,
+        "span_start": 1313,
+        "span_end": 1444
+      },
+      "verbatim_passage": "The risk of HRI is unlikely to diminish in the future, as the frequency and intensity of heat events is projected to increase [10].",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          1389,
+          1399
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The risk of HRI is unlikely to diminish in the future, as the frequency and intensity of heat events is projected to increase [10].",
+        "section_key": "background",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projections, how does the summer heat index in California change from the historical baseline to the end‑century under RCP8.5, and what explanation does the paper give for this pattern?",
+        "paper_side_fact": "The paper states that the frequency and intensity of heat events are projected to increase in the future.",
+        "table_side_needed": "The projected change (increase or decrease) in the summer heat index for California between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094) under RCP8.5.",
+        "paper_geography": "Washington State",
+        "paper_geography_role": "contextual",
+        "paper_time": "future",
+        "paper_scenario": "unknown",
+        "paper_concept": "frequency and intensity of heat events",
+        "concept_relation": "related",
+        "geography_relation": "different",
+        "link_rationale": "The passage provides a qualitative explanation that heat events will become more frequent and intense, which can be used to explain a projected increase in the heat index for California shown in the ClimRR table.",
+        "unmatched_dimensions": [
+          "geography",
+          "scenario",
+          "time"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.6
+}

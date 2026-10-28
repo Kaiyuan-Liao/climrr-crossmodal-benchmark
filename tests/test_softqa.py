@@ -202,8 +202,23 @@ def test_deterministic_pass_with_a_failed_mechanical_check_is_inconsistent(schem
         softqa.validate(softqa.map_trackc(a, schema), schema)
 
 
+def _on_unit(unit: str) -> dict:
+    a = agent_record()
+    a["proposal"] = {**a["proposal"], "unit_id": unit}
+    return a
+
+
+def _accept(rec: dict, status: str = "accepted") -> dict:
+    rec["status"] = status
+    rec["human_review"].update(reviewer_1_id="R1", reviewer_1_date="2026-10-28", reviewer_1_disposition="accept",
+                               final_question="Q?", final_answer="A", final_status=status,
+                               requires_second_review=False)
+    return rec
+
+
 def test_accepted_requires_a_frozen_final_qa_and_edit_history_for_edits(schema):
-    rec = softqa.map_trackc(agent_record(), schema)
+    # P-STATE-1: not under the FWI hold, so only the lifecycle rules apply here.
+    rec = softqa.map_trackc(_on_unit("P-STATE-1"), schema)
     rec["status"] = "accepted"
     assert any("final_question" in e for e in softqa.consistency_errors(rec))
     hr = rec["human_review"]
@@ -218,6 +233,61 @@ def test_accepted_requires_a_frozen_final_qa_and_edit_history_for_edits(schema):
     softqa.validate(rec, schema)
     hr["requires_second_review"] = True
     assert any("second review" in e for e in softqa.consistency_errors(rec))
+
+
+# --- FWI hold (D-033 addendum) ------------------------------------------------
+
+@pytest.mark.parametrize("unit", ["P-CELL-1", "P-COUNTY-1"])
+@pytest.mark.parametrize("status", ["accepted", "accepted_after_edit"])
+def test_fwi_units_cannot_be_accepted_and_get_hold_owner_confirmation(schema, unit, status):
+    rec = softqa.map_trackc(_on_unit(unit), schema)
+    gate = softqa.acceptance_gate(rec)
+    assert gate["status"] == "hold_owner_confirmation" and unit in gate["reason"]
+    assert "IC-006" in gate["reason"] and "owner-confirmed" in gate["reason"]
+    _accept(rec, status)
+    rec["human_review"]["edit_history"] = [{"reviewer_id": "R1", "date": "2026-10-28", "field": "final_question",
+                                            "before": "Does the table agree with the paper?", "after": "Q?"}]
+    with pytest.raises(softqa.SchemaError, match="hold_owner_confirmation"):
+        softqa.validate(rec, schema)
+
+
+def test_the_hold_also_refuses_a_final_status_left_in_human_review_alone(schema):
+    rec = softqa.map_trackc(_on_unit("P-COUNTY-1"), schema)
+    rec["status"] = "human_review"
+    rec["human_review"]["final_status"] = "accepted"
+    assert any("hold_owner_confirmation" in e for e in softqa.consistency_errors(rec))
+
+
+def test_the_hold_does_not_block_review_or_other_units(schema):
+    rec = softqa.map_trackc(_on_unit("P-COUNTY-1"), schema)
+    rec["status"] = "human_review"
+    assert softqa.consistency_errors(rec) == []                 # proposed and reviewed: allowed
+    for unit in ("P-STATE-1", "F-HEAT", "F-FWI"):
+        r = softqa.map_trackc(_on_unit(unit), schema)
+        assert softqa.acceptance_gate(r) == {"status": "clear", "reason": None}
+        softqa.validate(_accept(r), schema)
+
+
+@pytest.mark.parametrize("col", ["wildfire_summer_Hist", "191", "wildfire_summer_Dend"])
+def test_any_unit_whose_columns_include_the_unconfirmed_fwi_columns_is_held(schema, col):
+    rec = softqa.map_trackc(_on_unit("F-FWI"), schema)
+    rec["table_provenance"]["column_ids"] = ["some_other_column", col]
+    gate = softqa.acceptance_gate(rec)
+    assert gate["status"] == "hold_owner_confirmation"
+    with pytest.raises(softqa.SchemaError, match="hold_owner_confirmation"):
+        softqa.validate(_accept(rec), schema)
+
+
+def test_the_hold_records_are_still_unconfirmed():
+    """If IC-006/008/010 are ever promoted, this fails: lifting the hold needs a logged decision."""
+    held = softqa.fwi_hold_columns()
+    assert set(held.values()) == {"IC-006", "IC-008", "IC-010"}
+    assert {"wildfire_summer_Hist", "wildfire_summer_Endc", "wildfire_summer_Dend", "189", "191", "193"} == set(held)
+
+
+def test_the_protocol_documents_the_fwi_hold():
+    text = PROTOCOL.read_text(encoding="utf-8")
+    assert "hold_owner_confirmation" in text and "IC-006" in text and "P-COUNTY-1" in text
 
 
 def test_builtin_validator_agrees_with_jsonschema(schema):

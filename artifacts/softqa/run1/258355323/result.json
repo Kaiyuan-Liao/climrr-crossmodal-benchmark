@@ -1,0 +1,99 @@
+{
+  "item_id": "258355323",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "0b719193fc694bbd1971f53553d32b403e066a2ce241cf1b336ec455f3d6f3b4",
+  "n_sections": 17,
+  "paper_chars": 59422,
+  "truncated": false,
+  "model_seconds": 2.5,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-258355323-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "8f5a5d57efcdbd3042d1dbfd1e1e14f23d2c6f9ab2549f5f180cb2e53e005f22",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:38:42Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "258355323",
+      "paper_rel_path": "23/258355323.json",
+      "paper_sha256": "0b719193fc694bbd1971f53553d32b403e066a2ce241cf1b336ec455f3d6f3b4",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span_start": 3495,
+        "span_end": 3708
+      },
+      "verbatim_passage": "In the United States, outdoor workers are expected to experience a three-to four-fold increase in the number of days with a heat index of above 100 °F (38 °C) by the mid-2000s (Dahl et al. 2019aDahl et al. 2019b).",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          3619,
+          3629
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          5212,
+          5222
+        ]
+      },
+      "proposal": {
+        "passage": "In the United States, outdoor workers are expected to experience a three-to four-fold increase in the number of days with a heat index of above 100 °F (38 °C) by the mid-2000s (Dahl et al. 2019aDahl et al. 2019b).",
+        "section_key": "Results",
+        "unit_id": "P-STATE-1",
+        "qa_type": "cross_location_comparison",
+        "example_question": "According to the ClimRR table, how many more summer days with a daily maximum heat index above 105 °F are projected for California under RCP8.5 compared to the historical baseline, and how does this projected increase relate to the three‑ to four‑fold rise in heat‑index days reported for outdoor workers in the United States?",
+        "paper_side_fact": "The paper states that outdoor workers in the United States are expected to experience a three‑ to four‑fold increase in days with a heat index above 100 °F by the mid‑2000s.",
+        "table_side_needed": "The projected difference in the number of summer days with daily maximum heat index above 105 °F for California between the 1995‑2004 baseline and the 2085‑2094 end‑century decade under RCP8.5.",
+        "paper_geography": "United States",
+        "paper_geography_role": "contextual",
+        "paper_time": "mid-2000s",
+        "paper_scenario": "unknown",
+        "paper_concept": "number of days with heat index above 100 °F",
+        "concept_relation": "related",
+        "geography_relation": "contains",
+        "link_rationale": "Both the paper and the table discuss changes in the frequency of high heat‑index days, allowing a comparison of a national trend reported in the literature with a region‑specific projection for California. This supports a cross‑location comparison question.",
+        "unmatched_dimensions": [
+          "scenario",
+          "threshold"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.5
+}

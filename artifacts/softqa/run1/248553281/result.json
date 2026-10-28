@@ -1,0 +1,92 @@
+{
+  "item_id": "248553281",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "55f3394328181db583d1773d0b8dc62c564935e4deac5ce4df1c5e29c76a2db2",
+  "n_sections": 7,
+  "paper_chars": 53300,
+  "truncated": false,
+  "model_seconds": 2.9,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-248553281-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "36ec3c458e66841c00f4ea1e6eb6c00090161646edf1cd0647193aaa08dd7fa5",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:32:47Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "248553281",
+      "paper_rel_path": "81/248553281.json",
+      "paper_sha256": "55f3394328181db583d1773d0b8dc62c564935e4deac5ce4df1c5e29c76a2db2",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.fire exclusion and the rise of modern western wildfires",
+        "section_idx": 3,
+        "span_start": 3036,
+        "span_end": 3389
+      },
+      "verbatim_passage": "A Time series of the annual mean fire weather index and B the annual maximum temperatures from 1980 to 2019 within seasonally dry coniferous forests. The fire weather index is a measure of potential fire intensity based on temperature, relative humidity, wind speed, and 24-h precipitation. Only the wildfire season from May through October was plotted.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.fire exclusion and the rise of modern western wildfires",
+        "section_idx": 3,
+        "span": [
+          3069,
+          3087
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "A Time series of the annual mean fire weather index and B the annual maximum temperatures from 1980 to 2019 within seasonally dry coniferous forests. The fire weather index is a measure of potential fire intensity based on temperature, relative humidity, wind speed, and 24-h precipitation. Only the wildfire season from May through October was plotted.",
+        "section_key": "fire exclusion and the rise of modern western wildfires",
+        "unit_id": "P-COUNTY-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer Fire Weather Index for Oklahoma (Stephens County) under RCP8.5, and how does the paper explain the physical drivers behind such a change?",
+        "paper_side_fact": "The fire weather index measures potential fire intensity based on temperature, relative humidity, wind speed, and precipitation, and the figure shows its annual mean from 1980 to 2019 for seasonally dry coniferous forests.",
+        "table_side_needed": "The modeled difference in the summer Fire Weather Index between the baseline (1995‑2004) and the end‑century decade (2085‑2094) for the rows labelled State Oklahoma and NAME Stephens under RCP8.5.",
+        "paper_geography": "seasonally dry coniferous forests in the western United States",
+        "paper_geography_role": "contextual",
+        "paper_time": "1980-2019",
+        "paper_scenario": "unknown",
+        "paper_concept": "fire weather index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage defines the fire weather index and links its variability to climate‑driven temperature and moisture changes, which can explain why the table would show an increase for Oklahoma under a high‑emissions scenario. The table provides the quantitative projection, while the passage supplies the mechanistic explanation.",
+        "unmatched_dimensions": [
+          "geography",
+          "scenario",
+          "time"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": false,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.9
+}

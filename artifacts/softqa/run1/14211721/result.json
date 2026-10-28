@@ -1,0 +1,92 @@
+{
+  "item_id": "14211721",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "8a5c1f8cdd4884fadaf82a57fbf60ce43e872fa81d35f895ce0da7babed35f2c",
+  "n_sections": 7,
+  "paper_chars": 41649,
+  "truncated": false,
+  "model_seconds": 2.0,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-14211721-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "0c863fce3e8d244dca7dc4cf055e6832c2e274182111604311be44e1283f5a28",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:35:35Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "14211721",
+      "paper_rel_path": "21/14211721.json",
+      "paper_sha256": "8a5c1f8cdd4884fadaf82a57fbf60ce43e872fa81d35f895ce0da7babed35f2c",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span_start": 4555,
+        "span_end": 4763
+      },
+      "verbatim_passage": "In the United States, the most commonly used index is apparent temperature (AT, also known as the Heat Index), a variable that combines temperature with humidity (and a minor wind correction) (Steadman 1984).",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          4653,
+          4663
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "In the United States, the most commonly used index is apparent temperature (AT, also known as the Heat Index), a variable that combines temperature with humidity (and a minor wind correction) (Steadman 1984).",
+        "section_key": "introduction",
+        "unit_id": "F-HEAT",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer heat index for a given region under RCP8.5, and why is the heat index considered an important metric for assessing heat‑related health impacts?",
+        "paper_side_fact": "The most commonly used index in the United States is apparent temperature (heat index), which combines temperature with humidity and a minor wind correction.",
+        "table_side_needed": "The projected pattern (e.g., increase, decrease, or magnitude) of the heat index for the specified region and period in the ClimRR table.",
+        "paper_geography": "United States",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index (apparent temperature)",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage defines the heat index, which directly matches the heat‑index family unit. A question can combine the table’s projected heat‑index pattern with the paper’s explanation of why the heat index matters for health outcomes.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.0
+}

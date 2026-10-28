@@ -1,0 +1,92 @@
+{
+  "item_id": "216286258",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "7ca22b349720594483caebd92e854fff7274632cc59f62b65c1e9295cd79ac05",
+  "n_sections": 8,
+  "paper_chars": 62743,
+  "truncated": false,
+  "model_seconds": 12.5,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-216286258-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "b576c2f3d7e722e9bb27520c76d49a79a7cc379f28d5af1c39869dea6bef2e4e",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:29:45Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "216286258",
+      "paper_rel_path": "58/216286258.json",
+      "paper_sha256": "7ca22b349720594483caebd92e854fff7274632cc59f62b65c1e9295cd79ac05",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.observed relationships between extreme autumn fire weather and area burned",
+        "section_idx": 5,
+        "span_start": 3416,
+        "span_end": 3768
+      },
+      "verbatim_passage": "The occurrence of autumn FWI 95 days has increased substantially in recent decades ( figure 3(A)). Over the 1979-2018 period, the regional average number of SON FWI 95 days exhibits a trend of +2.34 d/decade (p < 0.001). As a result, the mean number of days with extreme fire weather during the autumn season has more than doubled since the late 1970s.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.materials and methods",
+        "section_idx": 3,
+        "span": [
+          242,
+          260
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The occurrence of autumn FWI 95 days has increased substantially in recent decades ( figure 3(A)). Over the 1979-2018 period, the regional average number of SON FWI 95 days exhibits a trend of +2.34 d/decade (p < 0.001). As a result, the mean number of days with extreme fire weather during the autumn season has more than doubled since the late 1970s.",
+        "section_key": "observed relationships between extreme autumn fire weather and area burned",
+        "unit_id": "P-COUNTY-1",
+        "qa_type": "cross_location_comparison",
+        "example_question": "How does the projected increase in the summer Fire Weather Index for Oklahoma’s Stephens County under RCP8.5 compare to the observed increase in autumn extreme fire‑weather days in California over recent decades?",
+        "paper_side_fact": "The occurrence of autumn FWI 95 days has increased substantially in recent decades, with a trend of +2.34 days per decade and a more than doubling of extreme fire‑weather days since the late 1970s.",
+        "table_side_needed": "The projected change (difference between the 1995‑2004 baseline and the 2085‑2094 period) in the summer Fire Weather Index for the rows labelled State Oklahoma and NAME Stephens under RCP8.5.",
+        "paper_geography": "California",
+        "paper_geography_role": "study_area",
+        "paper_time": "1979‑2018 (observed recent decades) and future projection to end‑century",
+        "paper_scenario": "RCP8.5",
+        "paper_concept": "Fire Weather Index (FWI) extreme days",
+        "concept_relation": "related",
+        "geography_relation": "different",
+        "link_rationale": "Both the paper and the unit describe changes in the Fire Weather Index, allowing a comparison of how fire‑danger is projected to evolve in two distinct regions; the paper provides an observed increase in autumn FWI days for California, while the unit gives a modeled summer FWI change for Oklahoma, enabling a cross‑location comparison.",
+        "unmatched_dimensions": [
+          "concept",
+          "geography",
+          "time"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 12.5
+}

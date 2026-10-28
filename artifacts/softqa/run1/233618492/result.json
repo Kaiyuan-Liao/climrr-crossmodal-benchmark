@@ -1,0 +1,92 @@
+{
+  "item_id": "233618492",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "5c36d92838eb4393021a244d4b1209f18ffb05762986f04d36fb9d49ddef13b8",
+  "n_sections": 4,
+  "paper_chars": 164168,
+  "truncated": true,
+  "model_seconds": 2.8,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-233618492-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "ad5c69d3afd991e62ff88f49e01bb8e0b36810aaa58d16a470cde9fa80ddf6f1",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:30:24Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "233618492",
+      "paper_rel_path": "92/233618492.json",
+      "paper_sha256": "5c36d92838eb4393021a244d4b1209f18ffb05762986f04d36fb9d49ddef13b8",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "section_idx": 0,
+        "span_start": 509,
+        "span_end": 729
+      },
+      "verbatim_passage": "The aggregate effect of precipitation and temperature changes could be contrasted with composites of FFWI change, as in Fig. 4e for the S/NP 3 pattern, but the corresponding composite for the S/NP 1 pattern is not shown.",
+      "concept_hit": {
+        "term": "FWI",
+        "json_path": "$.introduction",
+        "section_idx": 0,
+        "span": [
+          19955,
+          19958
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "The aggregate effect of precipitation and temperature changes could be contrasted with composites of FFWI change, as in Fig. 4e for the S/NP 3 pattern, but the corresponding composite for the S/NP 1 pattern is not shown.",
+        "section_key": "introduction",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the fire‑weather index for the western United States under the S/NP 3 Arctic teleconnection pattern, and how does the paper explain the underlying mechanism?",
+        "paper_side_fact": "The passage states that composites of fire‑weather index (FFWI) change for the S/NP 3 pattern are shown in Fig. 4e, while the S/NP 1 composite is not shown.",
+        "table_side_needed": "The modeled change (difference) in the fire‑weather index for the western United States associated with the S/NP 3 Arctic teleconnection pattern (e.g., a spatial pattern or numeric value) as recorded in the ClimRR table.",
+        "paper_geography": "western United States",
+        "paper_geography_role": "study_area",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "fire‑weather index (FFWI)",
+        "concept_relation": "direct",
+        "geography_relation": "unknown",
+        "link_rationale": "The passage discusses a specific pattern of fire‑weather index change (FFWI) linked to an Arctic teleconnection, which directly matches the fire‑weather index family represented by the table unit, enabling a question that ties the table’s projected pattern to the paper’s mechanistic explanation.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "n/a",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.8
+}

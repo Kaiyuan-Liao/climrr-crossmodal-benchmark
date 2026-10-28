@@ -18,16 +18,17 @@ from pathlib import Path
 
 import duckdb
 
-GENERATOR_VERSION = "softqa_agent v1"
+GENERATOR_VERSION = "softqa_agent v2"
 
 SYSTEM_PROMPT = """You are helping build a benchmark that links statements in scientific papers to a table of climate projections (ClimRR). You will read ONE paper in full. You are given the DEFINITIONS of table-side objects called units (no numbers are given to you on purpose) and a list of permitted question types.
 
-Your task: find passages in THIS paper that could be paired with one of the units to form a question. For each pairing, return a group with:
-- "passage": an EXACT, verbatim copy of a contiguous passage from the paper (one to three sentences, at most 700 characters). Copy it character for character from the paper text; do not fix typos, do not merge sentences from different places.
+Your task: find passages in THIS paper that could be paired with one of the units to form a question. Only passages that state the paper's OWN finding, observation or projection about the quantity (or a clearly cited study's finding) qualify; definitions, lists of indices, method descriptions and general background do not. Return at most 3 groups. For each pairing, return a group with:
+- "passage": an EXACT, verbatim copy of a contiguous passage from the paper (one to three sentences, at most 700 characters). Copy it character for character from the paper text, including its hyphens, quotes and spacing; do not shorten, do not add "...", do not merge sentences from different places. Stop at the end of a sentence in the paper.
+- "passage_type": one of "own_finding", "own_projection", "cited_finding", "background_or_definition", "method_description".
 - "section_key": the section heading under which the passage appears (as given in the paper text).
 - "unit_id": one of the unit ids provided.
 - "qa_type": one of the permitted question types.
-- "example_question": one question a benchmark could ask, written so that answering it requires BOTH the paper passage and the table-side unit. Do not put any table number in it.
+- "example_question": one question a benchmark could ask, written so that it CANNOT be answered from the paper alone or from the table alone (for example: compare, validate, explain a difference, identify the region). Do not concatenate "what does the table say" with "what does the paper say". Do not put any table number in it.
 - "paper_side_fact": what the passage states, in one sentence, with no additions.
 - "table_side_needed": what value or pattern would have to be read from the table to answer (describe it; do NOT guess the value).
 - "paper_geography": the place the passage is about, as the paper names it, or "unknown".
@@ -86,20 +87,84 @@ def first_hit(text: str, term: str):
     return [m.start(), m.end()] if m else None
 
 
+_TRANS = {0x2010: "-", 0x2011: "-", 0x2012: "-", 0x2013: "-", 0x2014: "-", 0x2212: "-",
+          0x2018: "'", 0x2019: "'", 0x201C: '"', 0x201D: '"', 0x00A0: " ", 0x202F: " ", 0x2009: " ", 0x2007: " "}
+
+
+def norm_with_map(text: str):
+    """Length-preserving character normalization (hyphen/quote/space variants), then whitespace collapse with an index map."""
+    out, idx = [], []
+    prev_space = False
+    for i, ch in enumerate(text):
+        ch2 = _TRANS.get(ord(ch), ch)
+        if ch2.isspace():
+            if prev_space:
+                continue
+            ch2, prev_space = " ", True
+        else:
+            prev_space = False
+        out.append(ch2); idx.append(i)
+    return "".join(out), idx
+
+
+def norm_plain(text: str):
+    return norm_with_map(text)[0].strip()
+
+
+def locate_passage(passage: str, sections):
+    """Return (span dict, recovery method, recovered verbatim text) or (None, 'not_found', None).
+    Methods: exact | normalized | prefix_anchor (first 80 normalized chars found once; extended to the sentence end in the original)."""
+    if not passage or len(passage) < 20:
+        return None, "not_found", None
+    for s in sections:
+        i = s["text"].find(passage)
+        if i >= 0:
+            return {"json_path": f"$.{s['section_key']}", "section_idx": s["section_idx"], "span_start": i, "span_end": i + len(passage)}, "exact", passage
+    np_ = norm_plain(passage)
+    for s in sections:
+        nt, idx = norm_with_map(s["text"])
+        j = nt.find(np_)
+        if j >= 0 and np_:
+            a, b = idx[j], idx[j + len(np_) - 1] + 1
+            return {"json_path": f"$.{s['section_key']}", "section_idx": s["section_idx"], "span_start": a, "span_end": b}, "normalized", s["text"][a:b]
+    prefix = np_[:80]
+    if len(prefix) >= 60:
+        hits = []
+        for s in sections:
+            nt, idx = norm_with_map(s["text"])
+            k = nt.find(prefix)
+            if k >= 0 and nt.find(prefix, k + 1) < 0:
+                hits.append((s, idx[k], nt, idx))
+        if len(hits) == 1:
+            s, a, nt, idx = hits[0]
+            k = nt.find(prefix)
+            # the recovered passage is the ONE sentence that starts at the anchor: end at the first sentence
+            # terminator after the prefix; capped at 900 chars; and it must share most of its words with the proposal
+            m = re.compile(r"[.!?](?=\s|$)").search(nt, k + len(prefix))
+            end_n = m.end() if m else min(len(nt), k + len(np_))
+            b = idx[min(end_n, len(idx)) - 1] + 1
+            recovered = s["text"][a:b]
+            rw, pw = set(re.findall(r"\w+", norm_plain(recovered).lower())), set(re.findall(r"\w+", np_.lower()))
+            overlap = len(rw & pw) / max(1, len(rw))
+            if b - a <= 900 and overlap >= 0.6:
+                return {"json_path": f"$.{s['section_key']}", "section_idx": s["section_idx"], "span_start": a, "span_end": b}, "prefix_anchor", recovered
+    return None, "not_found", None
+
+
 def pre_review_check(group, sections, unit, place_terms):
     """Deterministic checks. Returns (status, checks dict, located fields)."""
     checks, located = {}, {}
     passage = group.get("passage") or ""
-    # 1. exact re-slice: prefer the named section, else any section
-    span = None
-    order = sorted(sections, key=lambda s: 0 if s["section_key"] == group.get("section_key") else 1)
-    for s in order:
-        idx = s["text"].find(passage) if passage else -1
-        if idx >= 0:
-            span = {"json_path": f"$.{s['section_key']}", "section_idx": s["section_idx"], "span_start": idx, "span_end": idx + len(passage)}
-            break
-    checks["span_reslice_pass"] = span is not None and len(passage) >= 20
+    # 1. locate the passage: exact, else normalized (typographic variants), else prefix-anchored to the sentence end.
+    span, recovery, verbatim = locate_passage(passage, sections)
+    checks["span_reslice_pass"] = span is not None
+    checks["passage_recovery"] = recovery
     located["evidence"] = span
+    located["verbatim_passage"] = verbatim
+    # 1b. passage type: background/method passages are not candidates
+    ptype = group.get("passage_type")
+    checks["passage_type"] = ptype
+    checks["passage_type_pass"] = ptype in ("own_finding", "own_projection", "cited_finding")
     # 2. concept term located anywhere in the paper (unit family surface terms)
     concept_hit = None
     for s in sections:
@@ -134,7 +199,7 @@ def pre_review_check(group, sections, unit, place_terms):
     checks["place_check_mode"] = "unit_place_in_paper" if rel in ("same", "contains", "contained_in") else ("paper_names_own_place" if rel == "different" else "n/a")
     checks["place_role_recorded"] = group.get("paper_geography_role") in {"study_area", "cited_study_area", "contextual", "affiliation", "person_or_citation", "data_source", "unknown"}
     # 4. provenance completeness of the proposal
-    required = ["passage", "section_key", "unit_id", "qa_type", "example_question", "paper_side_fact", "table_side_needed",
+    required = ["passage", "passage_type", "section_key", "unit_id", "qa_type", "example_question", "paper_side_fact", "table_side_needed",
                 "paper_geography", "paper_geography_role", "paper_time", "paper_scenario", "paper_concept", "concept_relation",
                 "geography_relation", "link_rationale", "unmatched_dimensions", "confidence"]
     missing = [k for k in required if k not in group]
@@ -142,7 +207,7 @@ def pre_review_check(group, sections, unit, place_terms):
     checks["missing_fields"] = missing
     # 5. no table number in the question (crude leakage guard: digits followed by units/percent in the question)
     checks["question_has_no_table_number"] = not re.search(r"\d+(\.\d+)?\s*(%|percent|days|°|degrees)", group.get("example_question", ""), re.I)
-    mandatory = ["span_reslice_pass", "concept_location_pass", "place_location_pass", "place_role_recorded", "proposal_fields_complete"]
+    mandatory = ["span_reslice_pass", "passage_type_pass", "concept_location_pass", "place_location_pass", "place_role_recorded", "proposal_fields_complete"]
     status = "deterministic_pass" if all(checks[k] for k in mandatory) else "rejected_pre_review"
     return status, checks, located
 
@@ -240,7 +305,8 @@ def main():
                 "endpoint": a.base_url, "prompt_hash": sha(SYSTEM_PROMPT + user), "system_prompt_sha256": sys_sha, "units_sha256": units_sha, "qa_types_sha256": qa_sha,
                 "generation_timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "source_commit": a.source_commit,
                 "paper_item_id": iid, "paper_rel_path": rel_path, "paper_sha256": sha256, "arm": c.get("arm"),
-                "evidence": located.get("evidence"), "verbatim_passage": g.get("passage"),
+                "evidence": located.get("evidence"), "verbatim_passage": located.get("verbatim_passage"), "passage_as_proposed": g.get("passage"),
+                "passage_recovery": checks.get("passage_recovery"),
                 "concept_hit": located.get("concept_hit"), "place_hit": located.get("place_hit"),
                 "proposal": g,
                 "table_values_visible_to_generator": False, "answer_visible_to_generator": False,

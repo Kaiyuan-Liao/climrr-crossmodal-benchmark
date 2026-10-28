@@ -1,0 +1,92 @@
+{
+  "item_id": "239033445",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "b9756912c31aa7a074c26b16832ae491175f5054e1a2b773944914d8695ac6ba",
+  "n_sections": 15,
+  "paper_chars": 35502,
+  "truncated": false,
+  "model_seconds": 2.3,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-239033445-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "09930e1764b415dd4be13dd3f777a31447391cdfc7c6246af917cb8b62a39452",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:37:30Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "239033445",
+      "paper_rel_path": "45/239033445.json",
+      "paper_sha256": "b9756912c31aa7a074c26b16832ae491175f5054e1a2b773944914d8695ac6ba",
+      "arm": "extreme_heat_v1",
+      "evidence": {
+        "json_path": "$.heat risk level classification",
+        "section_idx": 11,
+        "span_start": 0,
+        "span_end": 737
+      },
+      "verbatim_passage": "Hourly heat index classifications were compared across temperature sources (Figure 5), stratified by location and home environment (Figure 6), and time of day (Figures 7, 8). In general, owner, neighborhood, and weather station heat index classifications corresponded poorly with canine heat index risk classifications. Dogs had approximately 5-10% fewer hours in the \"Safe\" classification compared to all other sources. Weather station calculated heat index classifications overestimate the relative frequency of \"Safe\" hours recorded by dogs and do not account for any hours in either the \"Danger\" or \"Extreme Danger\" categories. In contrast, 8% of hours recorded by dogs were classified in the \"Danger\" or \"Extreme Danger\" categories.",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          970,
+          980
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Hourly heat index classifications were compared across temperature sources (Figure 5), stratified by location and home environment (Figure 6), and time of day (Figures 7, 8). In general, owner, neighborhood, and weather station heat index classifications corresponded poorly with canine heat index risk classifications. Dogs had approximately 5-10% fewer hours in the \"Safe\" classification compared to all other sources. Weather station calculated heat index classifications overestimate the relative frequency of \"Safe\" hours recorded by dogs and do not account for any hours in either the \"Danger\" or \"Extreme Danger\" categories. In contrast, 8% of hours recorded by dogs were classified in the \"Danger\" or \"Extreme Danger\" categories.",
+        "section_key": "heat risk level classification",
+        "unit_id": "F-HEAT",
+        "qa_type": "cross_source_validation",
+        "example_question": "Do the observed heat‑index risk classifications for pet dogs in central Alabama during July 2017 agree with the heat‑index projections for the historical baseline period in the ClimRR table?",
+        "paper_side_fact": "The study found that heat‑index risk classifications from owners, neighborhoods, and weather stations poorly matched the classifications derived from dogs' own temperature measurements, with dogs experiencing more \"Danger\" and \"Extreme Danger\" hours than indicated by the other sources.",
+        "table_side_needed": "The projected heat‑index values (or risk‑category frequencies) for the historical baseline period (1995‑2004) as recorded in the ClimRR table for the relevant season and scenario.",
+        "paper_geography": "central Alabama",
+        "paper_geography_role": "study_area",
+        "paper_time": "July 2017",
+        "paper_scenario": "unknown",
+        "paper_concept": "heat index risk classifications",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage provides an empirical pattern of heat‑index risk categories for dogs in a specific location and time, while the table supplies projected heat‑index values for a baseline period. Comparing the two allows validation of whether the observed pattern aligns with the modeled projections.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.3
+}

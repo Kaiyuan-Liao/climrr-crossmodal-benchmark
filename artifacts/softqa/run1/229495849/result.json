@@ -1,0 +1,92 @@
+{
+  "item_id": "229495849",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "31cd6aeb07897bc49e7ad65b67b18da54a968c61298ef3e635c059200e3d1dac",
+  "n_sections": 7,
+  "paper_chars": 12245,
+  "truncated": false,
+  "model_seconds": 2.1,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 1,
+  "n_rejected_pre_review": 0,
+  "candidates": [
+    {
+      "candidate_id": "C-229495849-01",
+      "track": "C",
+      "status": "deterministic_pass",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "25d1ca67df155010f8d7b666bc05358f0af29f1ac0650337c4045dea4b57c657",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:30:18Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "229495849",
+      "paper_rel_path": "49/229495849.json",
+      "paper_sha256": "31cd6aeb07897bc49e7ad65b67b18da54a968c61298ef3e635c059200e3d1dac",
+      "arm": "fire_weather_v1",
+      "evidence": {
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span_start": 411,
+        "span_end": 651
+      },
+      "verbatim_passage": "For example, the Canada's forest fire weather index system, which is currently the most developed and widely used in the world. It calculates the forest fire whether index(FWI) based on features such as temperature, humidity and wind speed.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.introduction",
+        "section_idx": 2,
+        "span": [
+          444,
+          462
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "For example, the Canada's forest fire weather index system, which is currently the most developed and widely used in the world. It calculates the forest fire whether index(FWI) based on features such as temperature, humidity and wind speed.",
+        "section_key": "introduction",
+        "unit_id": "F-FWI",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "What is the projected change in the summer Fire Weather Index for grid cell R106C361 under RCP8.5, and which meteorological variables does the paper say the index is based on?",
+        "paper_side_fact": "The paper says the Fire Weather Index is calculated based on temperature, humidity, and wind speed.",
+        "table_side_needed": "The projected difference (baseline 1995‑2004 vs. end‑century 2085‑2094) in the summer (June‑August) Fire Weather Index for grid cell R106C361 under RCP8.5.",
+        "paper_geography": "Canada",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The passage explains the meteorological variables that determine the Fire Weather Index, providing an explanation for any projected change shown in the table for a specific grid cell. This links the conceptual definition in the paper with the quantitative projection in the table.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": true,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "deterministic_pass",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.1
+}

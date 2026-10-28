@@ -1,0 +1,87 @@
+{
+  "item_id": "40462024",
+  "arm": "fire_weather_v1",
+  "paper_sha256": "3ec1c23671b259ca9cd4a56c24ecce46e6f315918c6156aa4d23f4f038d07313",
+  "n_sections": 6,
+  "paper_chars": 62750,
+  "truncated": false,
+  "model_seconds": 2.7,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-40462024-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "c7c14e51da42a21866ee79a6868f0d81f701365408549f95e8cc9f745a991a16",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:33:58Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "40462024",
+      "paper_rel_path": "24/40462024.json",
+      "paper_sha256": "3ec1c23671b259ca9cd4a56c24ecce46e6f315918c6156aa4d23f4f038d07313",
+      "arm": "fire_weather_v1",
+      "evidence": null,
+      "verbatim_passage": "Hafeeda et al., 2007 investigated the real-time application of sensors for the detection of the Forest Fire detection index in Columbia, Canada. The authors developed a data aggregation scheme-based Fire Weather Index (FWI) system.",
+      "concept_hit": {
+        "term": "fire weather index",
+        "json_path": "$.applications of wsn",
+        "section_idx": 4,
+        "span": [
+          14355,
+          14373
+        ]
+      },
+      "place_hit": null,
+      "proposal": {
+        "passage": "Hafeeda et al., 2007 investigated the real-time application of sensors for the detection of the Forest Fire detection index in Columbia, Canada. The authors developed a data aggregation scheme-based Fire Weather Index (FWI) system.",
+        "section_key": "forest monitoring",
+        "unit_id": "P-CELL-1",
+        "qa_type": "pattern_to_explanation",
+        "example_question": "According to the ClimRR projection for the summer Fire Weather Index at grid cell R106C361 under RCP8.5, what is the expected change between the historical baseline (1995‑2004) and the end‑century decade (2085‑2094), and how does the paper describe the use of a Fire Weather Index system for forest fire detection in Columbia, Canada?",
+        "paper_side_fact": "Hafeeda et al. (2007) investigated real‑time sensors for detecting the forest fire detection index in Columbia, Canada and developed a data‑aggregation scheme‑based Fire Weather Index (FWI) system.",
+        "table_side_needed": "the projected difference in the summer Fire Weather Index between the historical baseline 1995‑2004 and the future decade 2085‑2094 for grid cell R106C361 under scenario RCP8.5",
+        "paper_geography": "Columbia, Canada",
+        "paper_geography_role": "contextual",
+        "paper_time": "unknown",
+        "paper_scenario": "unknown",
+        "paper_concept": "Fire Weather Index (FWI) system for forest fire detection",
+        "concept_relation": "direct",
+        "geography_relation": "different",
+        "link_rationale": "The table provides a quantitative projection of the summer Fire Weather Index for a specific grid cell under RCP8.5, while the paper explains how a Fire Weather Index system is used for forest fire detection in Columbia, Canada. Pairing them enables a question that asks for the projected index change together with the paper's explanatory context.",
+        "unmatched_dimensions": [
+          "geography",
+          "time",
+          "scenario"
+        ],
+        "confidence": "medium"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "paper_names_own_place",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": true,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.7
+}

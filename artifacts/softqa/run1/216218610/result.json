@@ -1,0 +1,91 @@
+{
+  "item_id": "216218610",
+  "arm": "extreme_heat_v1",
+  "paper_sha256": "48754b70e494f60ffb6c0b13461680c9df61ff522571d2309a236a208d756988",
+  "n_sections": 16,
+  "paper_chars": 30673,
+  "truncated": false,
+  "model_seconds": 2.4,
+  "model_parse_error": null,
+  "n_groups_proposed": 1,
+  "n_deterministic_pass": 0,
+  "n_rejected_pre_review": 1,
+  "candidates": [
+    {
+      "candidate_id": "C-216218610-01",
+      "track": "C",
+      "status": "rejected_pre_review",
+      "generator_version": "softqa_agent v1",
+      "generator_model": "gpt-oss-120b",
+      "endpoint": "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1",
+      "prompt_hash": "9bce3e72198085d2fad92927640d4b70b52e757b1d8c12a9e1a65fab8cc5d133",
+      "system_prompt_sha256": "f2e493e179aa3619c8389e5c1756cce8f9a13693ddd586eae59138de33ee54f5",
+      "units_sha256": "5bb486ef642825f318a60b47c2a9ed093c5d5b6ad8160169e4f72e7f500b1b92",
+      "qa_types_sha256": "f0d0f07bf0fdefccc78e4778a5721b49fa8bbed8c0e2686fa952155a7e187e75",
+      "generation_timestamp": "2026-10-28T03:36:24Z",
+      "source_commit": "95e1ec851f2ac703654df52ac1ccc9c3d777fcd7",
+      "paper_item_id": "216218610",
+      "paper_rel_path": "10/216218610.json",
+      "paper_sha256": "48754b70e494f60ffb6c0b13461680c9df61ff522571d2309a236a208d756988",
+      "arm": "extreme_heat_v1",
+      "evidence": null,
+      "verbatim_passage": "In a 2 °C warmer world, the average U.S. crop worker will face heat extremes of 101.4 °F HI. In the top twenty high‑employment counties, the highest heat extremes are found in Imperial County, California, where they exceed the OSHA “very high/extreme” risk level (115 °F); the only counties with heat extremes below the OSHA risk levels (<90 °F) will be located in Oregon and Washington (Table 2).",
+      "concept_hit": {
+        "term": "heat index",
+        "json_path": "$.climate data",
+        "section_idx": 4,
+        "span": [
+          541,
+          551
+        ]
+      },
+      "place_hit": {
+        "term": "california",
+        "json_path": "$.abstract",
+        "section_idx": 1,
+        "span": [
+          2023,
+          2033
+        ]
+      },
+      "proposal": {
+        "passage": "In a 2 °C warmer world, the average U.S. crop worker will face heat extremes of 101.4 °F HI. In the top twenty high‑employment counties, the highest heat extremes are found in Imperial County, California, where they exceed the OSHA “very high/extreme” risk level (115 °F); the only counties with heat extremes below the OSHA risk levels (<90 °F) will be located in Oregon and Washington (Table 2).",
+        "section_key": "current and future heat extremes",
+        "unit_id": "P-STATE-1",
+        "qa_type": "cross_source_validation",
+        "example_question": "According to the paper, Imperial County, California experiences heat extremes above 105 °F in a 2 °C warmer world; does the ClimRR projection for California (P-STATE-1) show a comparable number of summer days with daily maximum heat index above 105 °F under RCP8.5?",
+        "paper_side_fact": "Imperial County, California experiences heat extremes above 105 °F (up to 115 °F) in a 2 °C warmer world.",
+        "table_side_needed": "The projected number of summer (June‑August) days with daily maximum heat index above 105 °F for the grid rows labelled State California under the end‑century decade 2085‑2094 compared to the historical baseline 1995‑2004, under RCP8.5.",
+        "paper_geography": "Imperial County, California",
+        "paper_geography_role": "study_area",
+        "paper_time": "future projection under 2 °C global warming (mid‑century)",
+        "paper_scenario": "RCP8.5",
+        "paper_concept": "heat index (heat extremes)",
+        "concept_relation": "direct",
+        "geography_relation": "same",
+        "link_rationale": "The paper reports that Imperial County will experience heat index values well above the 105 °F threshold, which directly corresponds to the ClimRR unit that quantifies the number of summer days exceeding that same heat‑index threshold for California. Comparing the two sources validates whether the modeled projection aligns with the paper’s claim.",
+        "unmatched_dimensions": [],
+        "confidence": "high"
+      },
+      "table_values_visible_to_generator": false,
+      "answer_visible_to_generator": false,
+      "pre_review_checks": {
+        "span_reslice_pass": false,
+        "concept_location_pass": true,
+        "place_location_pass": true,
+        "place_check_mode": "unit_place_in_paper",
+        "place_role_recorded": true,
+        "proposal_fields_complete": true,
+        "missing_fields": [],
+        "question_has_no_table_number": false,
+        "unit_id_known": true,
+        "qa_type_known": true
+      },
+      "pre_review_status": "rejected_pre_review",
+      "table_side": null,
+      "c_g_t_s_d_audit": null,
+      "human_review": null
+    }
+  ],
+  "elapsed_seconds": 2.4
+}
