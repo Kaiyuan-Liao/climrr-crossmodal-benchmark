@@ -1,0 +1,466 @@
+# Track D v1 --- table-grounded slot vocabularies (D-031, D-033, D-034).
+#
+# Every slot value a template may be filled with, and nothing else. Each value
+# carries a `source` (a dictionary line in data/metadata/dictionary_extracted.txt
+# quoted verbatim, a column index of data/raw/FullData.csv, an inferred-candidate
+# record, a concept-map entry, or a derivation rule) and an `authorization`:
+#
+#   verified            the column or passage is `verified_from_dictionary`
+#   owner_confirmed     a logged owner resolution (resolutions.yaml); none in v1
+#   inferred_candidate  an IC record (inferred_candidates.yaml): not verified,
+#                       not owner-confirmed
+#   our_reading         an EXECUTOR/prototype reading or derivation rule, recorded
+#                       with its assumption ids
+#   not_authorized      listed only so that its exclusion is visible; never filled
+#
+# This file assigns no meaning to any column. It changes no column status, no
+# concept-map entry and no compatibility rule. Column statuses are those of
+# artifacts/profiles/dictionary_coverage.json; a test checks that no value here
+# claims a status stronger than the coverage report records.
+#
+# Answer computation (src/climrr/templates.py) reads a concept column only if its
+# status is verified_from_dictionary or owner_confirmed. Anything weaker makes the
+# question `blocked_inferred_columns`. Location slots weaker than `verified` are
+# computed and tagged provisional --- owner decision 2026-10-28, D-034.
+
+schema_version: td-slots-v1
+authorized_by: [D-031, D-033, D-034]
+authorization_vocabulary: [verified, owner_confirmed, inferred_candidate, our_reading, not_authorized]
+
+sources:
+  dictionary_text: data/metadata/dictionary_extracted.txt
+  concept_map: data/metadata/concept_map.yaml
+  dictionary_concepts: data/metadata/dictionary_concepts.yaml
+  coverage: artifacts/profiles/dictionary_coverage.json
+  inferred_candidates: data/metadata/inferred_candidates.yaml
+  resolutions: data/metadata/resolutions.yaml
+  table: data/raw/FullData.csv
+
+# --- [CONCEPT] ---------------------------------------------------------------
+#
+# A concept value is a governed concept-map family plus one metric that realizes
+# it in the table. The family is the slot (mentor Q1, D-029: family-level object,
+# metric as provenance); the metric is named in the question text so the answer
+# is deterministic, and never becomes a retrieval term.
+concept:
+  governed:
+    - id: fire_weather_index
+      authorization: inferred_candidate
+      authorization_note: >-
+        inferred_candidate --- usable for question wording and retrieval only after
+        owner confirmation; NOT usable for answer computation. The summer seasonal
+        value, difference columns (189-193) are IC-006..IC-010; the question is item
+        0 of docs/MENTOR_BRIEF.md (D-033 addendum, item 2).
+      source: {kind: concept_map_entry, canonical_id: fire_weather_index, decision_id: D-018,
+               dictionary_lines: [292, 293]}
+      surface_forms:
+        - {term: fire weather index, source: {kind: concept_map_accepted_surface_term, canonical_id: fire_weather_index}, authorization: verified}
+        - {term: FWI, source: {kind: concept_map_accepted_surface_term, canonical_id: fire_weather_index}, authorization: verified}
+        - {term: fire-weather index, source: {kind: concept_map_additional_surface_term, canonical_id: fire_weather_index, decision_id: D-025}, authorization: verified}
+        - {term: canadian forest fire weather index, source: {kind: concept_map_additional_surface_term, canonical_id: fire_weather_index, decision_id: D-025}, authorization: verified}
+        - {term: canadian fwi, source: {kind: concept_map_additional_surface_term, canonical_id: fire_weather_index, decision_id: D-025}, authorization: verified}
+      caution: >-
+        A Fire Weather Index is a meteorological fire-danger index --- never a
+        wildfire, an ignition, a burned area or a probability of one.
+      metrics:
+        - metric_id: fwi_summer_seasonal_value
+          wording: seasonal value of the Fire Weather Index (FWI)
+          unit: null
+          unit_note: the dictionary states no unit for the seasonal value (IC-006 proposes "dimensionless index value", inferred)
+          season: summer
+          authorization: inferred_candidate
+          source: {kind: dictionary_line, line: 661, quote: "Wildfire_summer_hist Seasonal value – Historical"}
+          change_operation: change_column_value
+          change_operation_source: >-
+            P-CELL-1 / P-COUNTY-1 V.change (src/climrr/phenomenon.py VARIABLES,
+            fwi_summer_hist_to_end85); assumption A-DIR2
+          period_columns:
+            historical:   {index: 189, column: wildfire_summer_Hist, status: inferred_candidate, source: {kind: inferred_candidate_record, id: IC-006, line: 661, quote: "Wildfire_summer_hist Seasonal value – Historical"}, authorization: inferred_candidate}
+            mid_century:  {index: 190, column: wildfire_summer_Midc, status: inferred_candidate, source: {kind: inferred_candidate_record, id: IC-007, line: 662, quote: "Wildfire_summer_midc Seasonal value – Mid-Century RCP 8.5"}, authorization: inferred_candidate}
+            end_century:  {index: 191, column: wildfire_summer_Endc, status: inferred_candidate, source: {kind: inferred_candidate_record, id: IC-008, line: 663, quote: "Wildfire_summer_endc Seasonal value – End-Century RCP 8.5"}, authorization: inferred_candidate}
+          change_columns:
+            historical->mid_century: {index: 192, column: wildfire_summer_Dmid, status: inferred_candidate, source: {kind: inferred_candidate_record, id: IC-009, line: 664, quote: "Wildfire_summer_Dmid Difference between Mid-Century and Historical"}, authorization: inferred_candidate}
+            historical->end_century: {index: 193, column: wildfire_summer_Dend, status: inferred_candidate, source: {kind: inferred_candidate_record, id: IC-010, line: 665, quote: "Wildfire_summer_Dend Difference between End-Century and Historical"}, authorization: inferred_candidate}
+          verified_columns_not_used:
+            - index: 194
+              column: wildfire_summer_Pmid
+              status: verified_from_dictionary
+              source: {kind: dictionary_line, line: 666, quote: "Wildfire_summer_Pmid Percent Change between Mid-Century and Historical"}
+              authorization: verified
+              reason_not_used: >-
+                its field entry states no scenario (P-CELL-1 C.per_role
+                corroborating_change: unknown), so it cannot fill [SCENARIO]; and a
+                per-cell percent change may not be averaged (M1-WP3b criterion 7).
+                Open question for the COORDINATOR (report field 9).
+            - index: 195
+              column: wildfire_summer_Pend
+              status: verified_from_dictionary
+              source: {kind: dictionary_line, line: 667, quote: "Wildfire_summer_Pend Percent Change between End-Century and Historical"}
+              authorization: verified
+              reason_not_used: same as index 194
+      seasons_excluded:
+        - season: autumn
+          columns: [175, 176, 177, 178, 179]
+          status: partially_resolved
+          source: {kind: dictionary_line, line: 647, quote: "Wildfire_autumn_hist Seasonal value – Historical"}
+          authorization: not_authorized
+          reason: the value and difference columns are partially_resolved --- weaker than inferred_candidate
+        - season: spring
+          columns: [182, 183, 184, 185, 186]
+          status: partially_resolved
+          source: {kind: dictionary_line, line: 654, quote: "Wildfire_spring_hist Seasonal value – Historical"}
+          authorization: not_authorized
+          reason: as autumn
+        - season: winter
+          columns: [196, 197, 198, 199, 200]
+          status: partially_resolved
+          source: {kind: dictionary_line, line: 668, quote: "Wildfire_winter_hist Seasonal value – Historical"}
+          authorization: not_authorized
+          reason: as autumn
+
+    - id: heat_index
+      authorization: verified
+      source: {kind: concept_map_entry, canonical_id: heat_index, decision_id: D-018,
+               dictionary_lines: [390, 391]}
+      surface_forms:
+        - {term: heat index, source: {kind: concept_map_accepted_surface_term, canonical_id: heat_index}, authorization: verified}
+        - {term: heat-index, source: {kind: concept_map_additional_surface_term, canonical_id: heat_index, decision_id: D-025}, authorization: verified}
+        - {term: extended heat index, source: {kind: concept_map_additional_surface_term, canonical_id: heat_index, decision_id: D-025, status: approved_family_term}, authorization: verified, note: "collection and retrieval only; not a synonym of heat index"}
+      metric_note: >-
+        Four threshold metrics, all verified_from_dictionary (owner decision
+        2026-10-28, D-034: enumerate all four). The threshold appears in the question
+        text as the metric's name (D-033 addendum, item 4) and is never a retrieval
+        term. The metric-level concept-map entry heatindex_days_above_105F stays
+        `proposed`; nothing here approves it.
+      metrics:
+        - metric_id: heatindex_days_above_95F
+          wording: number of days with daily max heat index above 95 F
+          unit: days
+          season: summer
+          authorization: verified
+          source: {kind: dictionary_line, line: 679, quote: "heatindex_HIS_Day95 Number of Summer days with daily max heat index above 95 F -- Historical"}
+          change_operation: difference_of_horizon_values
+          change_operation_source: P-STATE-1 V.change (src/climrr/phenomenon.py, CHANGE_FROM_DIFFERENCE); assumption A-DIR1
+          period_columns:
+            historical:  {index: 240, column: heatindex_HIS_Day95, status: verified_from_dictionary, source: {kind: dictionary_line, line: 679, quote: "heatindex_HIS_Day95 Number of Summer days with daily max heat index above 95 F -- Historical"}, authorization: verified}
+            mid_century: {index: 246, column: heatindex_M85_Day95, status: verified_from_dictionary, source: {kind: dictionary_line, line: 685, quote: "heatindex_M85_Day95 Number of Summer days with daily max heat index above 95 F -- Mid-Century RCP8.5"}, authorization: verified}
+            end_century: {index: 252, column: heatindex_E85_Day95, status: verified_from_dictionary, source: {kind: dictionary_line, line: 694, quote: "heatindex_E85_Day95 Number of Summer days with daily max heat index above 95 F -- End-Century RCP8.5"}, authorization: verified}
+          change_columns: {}
+        - metric_id: heatindex_days_above_105F
+          wording: number of days with daily max heat index above 105 F
+          unit: days
+          season: summer
+          authorization: verified
+          source: {kind: dictionary_line, line: 680, quote: "heatindex_HIS_Day105 Number of Summer days with daily max heat index above 105 F -- Historical"}
+          change_operation: difference_of_horizon_values
+          change_operation_source: P-STATE-1 V.change (src/climrr/phenomenon.py, CHANGE_FROM_DIFFERENCE); assumption A-DIR1
+          period_columns:
+            historical:  {index: 241, column: heatindex_HIS_Day105, status: verified_from_dictionary, source: {kind: dictionary_line, line: 680, quote: "heatindex_HIS_Day105 Number of Summer days with daily max heat index above 105 F -- Historical"}, authorization: verified}
+            mid_century: {index: 247, column: heatindex_M85_Day105, status: verified_from_dictionary, source: {kind: dictionary_line, line: 686, quote: "heatindex_M85_Day105 Number of Summer days with daily max heat index above 105 F -- Mid-Century RCP8.5"}, authorization: verified}
+            end_century: {index: 253, column: heatindex_E85_Day105, status: verified_from_dictionary, source: {kind: dictionary_line, line: 695, quote: "heatindex_E85_Day105 Number of Summer days with daily max heat index above 105 F -- End-Century RCP8.5"}, authorization: verified}
+          change_columns: {}
+        - metric_id: heatindex_days_above_115F
+          wording: number of days with daily max heat index above 115 F
+          unit: days
+          season: summer
+          authorization: verified
+          source: {kind: dictionary_line, line: 681, quote: "heatindex_HIS_Day115 Number of Summer days with daily max heat index above 115 F -- Historical"}
+          change_operation: difference_of_horizon_values
+          change_operation_source: P-STATE-1 V.change (src/climrr/phenomenon.py, CHANGE_FROM_DIFFERENCE); assumption A-DIR1
+          period_columns:
+            historical:  {index: 242, column: heatindex_HIS_Day115, status: verified_from_dictionary, source: {kind: dictionary_line, line: 681, quote: "heatindex_HIS_Day115 Number of Summer days with daily max heat index above 115 F -- Historical"}, authorization: verified}
+            mid_century: {index: 248, column: heatindex_M85_Day115, status: verified_from_dictionary, source: {kind: dictionary_line, line: 687, quote: "heatindex_M85_Day115 Number of Summer days with daily max heat index above 115 F -- Mid-Century RCP8.5"}, authorization: verified}
+            end_century: {index: 254, column: heatindex_E85_Day115, status: verified_from_dictionary, source: {kind: dictionary_line, line: 696, quote: "heatindex_E85_Day115 Number of Summer days with daily max heat index above 115 F -- End-Century RCP8.5"}, authorization: verified}
+          change_columns: {}
+        - metric_id: heatindex_days_above_125F
+          wording: number of days with daily max heat index above 125 F
+          unit: days
+          season: summer
+          authorization: verified
+          source: {kind: dictionary_line, line: 682, quote: "heatindex_HIS_Day125 Number of Summer days with daily max heat index above 125 F -- Historical"}
+          change_operation: difference_of_horizon_values
+          change_operation_source: P-STATE-1 V.change (src/climrr/phenomenon.py, CHANGE_FROM_DIFFERENCE); assumption A-DIR1
+          period_columns:
+            historical:  {index: 243, column: heatindex_HIS_Day125, status: verified_from_dictionary, source: {kind: dictionary_line, line: 682, quote: "heatindex_HIS_Day125 Number of Summer days with daily max heat index above 125 F -- Historical"}, authorization: verified}
+            mid_century: {index: 249, column: heatindex_M85_Day125, status: verified_from_dictionary, source: {kind: dictionary_line, line: 688, quote: "heatindex_M85_Day125 Number of Summer days with daily max heat index above 125 F -- Mid-Century RCP8.5"}, authorization: verified}
+            end_century: {index: 255, column: heatindex_E85_Day125, status: verified_from_dictionary, source: {kind: dictionary_line, line: 697, quote: "heatindex_E85_Day125 Number of Summer days with daily max heat index above 125 F -- End-Century RCP8.5"}, authorization: verified}
+          change_columns: {}
+      metrics_excluded:
+        - metric: summer daily max heat index (DayMax)
+          columns: [238, 244, 250]
+          status: inferred_candidate
+          source: {kind: dictionary_line, line: 677, quote: "heatindex_HIS_DayMax Summer daily max heat index (daily high) -- Historical"}
+          authorization: not_authorized
+          reason: IC-001..IC-003; inferred_candidate columns are not used even as query terms (D-033)
+        - metric: summer seasonal max heat index (SeaMax)
+          columns: [239, 245, 251]
+          status: partially_resolved
+          source: {kind: dictionary_line, line: 678, quote: "heatindex_HIS_SeaMax Summer seasonal max heat index (seasonal high) -- Historical"}
+          authorization: not_authorized
+          reason: partially_resolved
+        - metric: change columns heatindex_C_*
+          columns: [256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267]
+          status: inferred_candidate (DMax) / partially_resolved (others)
+          source: {kind: dictionary_line, line: 697, quote: "heatindex_E85_Day125 Number of Summer days with daily max heat index above 125 F -- End-Century RCP8.5"}
+          authorization: not_authorized
+          reason: >-
+            not verified; the change is computed from the verified horizon columns
+            instead (P-STATE-1 rule)
+
+  # Visible exclusions: dictionary concepts with no governed concept-map family.
+  ungoverned:
+    - {name: temperature (annual / seasonal min and max), dictionary_concepts: [DC-001, DC-002], status: ungoverned --- excluded from v1, source: {kind: dictionary_concept, ids: [DC-001, DC-002]}, authorization: not_authorized}
+    - {name: precipitation, dictionary_concepts: [DC-003], status: ungoverned --- excluded from v1, source: {kind: dictionary_concept, ids: [DC-003]}, authorization: not_authorized}
+    - {name: wind speed, dictionary_concepts: [DC-004], status: ungoverned --- excluded from v1, source: {kind: dictionary_concept, ids: [DC-004]}, authorization: not_authorized}
+    - {name: consecutive days with no precipitation, dictionary_concepts: [DC-005], status: ungoverned --- excluded from v1, source: {kind: dictionary_concept, ids: [DC-005]}, authorization: not_authorized}
+    - {name: degree days (HDD / CDD), dictionary_concepts: [DC-006], status: ungoverned --- excluded from v1, source: {kind: dictionary_concept, ids: [DC-006]}, authorization: not_authorized}
+    - {name: FWI classes, dictionary_concepts: [DC-008], status: ungoverned --- excluded from v1 (no FWI-class column in the table), source: {kind: dictionary_concept, ids: [DC-008]}, authorization: not_authorized}
+
+# --- [LOCATION] --------------------------------------------------------------
+#
+# A location is a named set of rows (A-G3) --- never a boundary or a geometry.
+location:
+  cell:
+    column: {index: 1, column: Crossmodel, status: verified_from_dictionary}
+    source: {kind: dictionary_line, line: 455, quote: "Crossmodel Truncated name for \"Crossmodel_CellName\". Text ID for each cell in the polygon grid."}
+    authorization: verified
+    label_format: "R<row>C<col> --- the Crossmodel value as stored"
+    assumptions: [A-G0]
+    enumeration: the single cell of P-CELL-1
+    values:
+      - {label: R106C361, wording: grid cell R106C361, prototype: P-CELL-1, source: {kind: prototype_record, record_id: P-CELL-1, field: G.identifier}, authorization: verified}
+  county:
+    columns:
+      - {index: 3, column: State, status: inferred_candidate, ic: IC-012}
+      - {index: 2, column: NAME, status: inferred_candidate, ic: IC-011}
+    source: {kind: inferred_candidate_records, ids: [IC-011, IC-012]}
+    authorization: our_reading
+    authorization_note: >-
+      A county is the set of rows sharing a (State, NAME) label (A-G1, A-G3) --- the
+      reading P-COUNTY-1 uses. Computed and tagged provisional (D-034). The NAME
+      label is never a retrieval term.
+    assumptions: [A-G1, A-G3, A-AGG1]
+    enumeration: the single county of P-COUNTY-1
+    values:
+      - {label: "Oklahoma|Stephens", state: Oklahoma, name: Stephens, wording: "the cells labelled Stephens, Oklahoma", n_cells: 10, prototype: P-COUNTY-1, source: {kind: prototype_record, record_id: P-COUNTY-1, field: G.identifier}, authorization: our_reading}
+  state:
+    column: {index: 3, column: State, status: inferred_candidate, ic: IC-012}
+    source: {kind: inferred_candidate_record, id: IC-012}
+    authorization: inferred_candidate
+    authorization_note: >-
+      A state is the set of rows sharing a State label (A-G1, A-G3) --- the reading
+      P-STATE-1 uses. State is inferred_candidate (IC-012); owner decision
+      2026-10-28 (D-034): state-level answers are computed and tagged provisional;
+      the conflict with the literal Phase-C rule goes to the COORDINATOR.
+    assumptions: [A-G1, A-G3, A-AGG1]
+    enumeration_rule: >-
+      every distinct non-empty State label with at least min_cells rows. The 7 rows
+      with an empty State are not a state name and are excluded.
+    min_cells: 1
+    excluded:
+      - {label: "", n_cells: 7, reason: empty label --- not a state name (IC-012 alternatives_unresolved), source: {kind: table_column_values, column_index: 3, column: State}, authorization: not_authorized}
+    values:
+      - {label: "Alabama", n_cells: 934, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Alaska", n_cells: 10117, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Arizona", n_cells: 2007, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Arkansas", n_cells: 906, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "California", n_cells: 2831, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Colorado", n_cells: 1783, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Connecticut", n_cells: 92, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Delaware", n_cells: 39, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Florida", n_cells: 1165, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Georgia", n_cells: 1031, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Idaho", n_cells: 1430, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Illinois", n_cells: 955, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Indiana", n_cells: 599, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Iowa", n_cells: 931, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Kansas", n_cells: 1401, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Kentucky", n_cells: 684, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Louisiana", n_cells: 888, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Maine", n_cells: 601, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Maryland", n_cells: 212, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Massachusetts", n_cells: 183, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Michigan", n_cells: 1127, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Minnesota", n_cells: 1465, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Mississippi", n_cells: 846, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Missouri", n_cells: 1195, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Montana", n_cells: 2468, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Nebraska", n_cells: 1277, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Nevada", n_cells: 1859, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "New Hampshire", n_cells: 155, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "New Jersey", n_cells: 153, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "New Mexico", n_cells: 2095, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "New York", n_cells: 890, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "North Carolina", n_cells: 923, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "North Dakota", n_cells: 1214, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Ohio", n_cells: 711, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Oklahoma", n_cells: 1232, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Oregon", n_cells: 1641, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Pennsylvania", n_cells: 760, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Rhode Island", n_cells: 21, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "South Carolina", n_cells: 560, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "South Dakota", n_cells: 1299, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Tennessee", n_cells: 742, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Texas", n_cells: 4848, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Utah", n_cells: 1479, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Vermont", n_cells: 160, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Virginia", n_cells: 706, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Washington", n_cells: 1211, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "West Virginia", n_cells: 395, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Wisconsin", n_cells: 976, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+      - {label: "Wyoming", n_cells: 1630, source: {kind: table_column_values, column_index: 3, column: State}, authorization: inferred_candidate}
+
+# --- [PERIOD] ----------------------------------------------------------------
+period:
+  - id: historical
+    wording: the modeled historical period (1995-2004)
+    window: {start: 1995, end: 2004}
+    source: {kind: dictionary_line, line: 102, quote: "A historical period (1995 to 2004) is also modeled using GHG concentrations during this period."}
+    authorization: verified
+    note: a modeled baseline, never an observation
+    suffixes: {fire_weather_index: "_Hist", heat_index: "_HIS_"}
+    retrieval_terms: []
+  - id: mid_century
+    wording: mid-century (2045-2054)
+    window: {start: 2045, end: 2054}
+    source: {kind: dictionary_line, line: 101, quote: "Each RCP is modeled over a mid-century period (2045 to 2054)"}
+    authorization: verified
+    suffixes: {fire_weather_index: "_Midc", heat_index: "_M85_"}
+    retrieval_terms: [mid-century]
+  - id: end_century
+    wording: end-of-century (2085-2094)
+    window: {start: 2085, end: 2094}
+    source: {kind: dictionary_line, line: 101, quote: "end-of-century period (2085 to"}
+    authorization: verified
+    suffixes: {fire_weather_index: "_Endc", heat_index: "_E85_"}
+    retrieval_terms: [end-of-century]
+
+# --- [SCENARIO] --------------------------------------------------------------
+scenario:
+  - id: RCP4.5
+    wording: RCP4.5
+    source: {kind: dictionary_line, line: 99, quote: "RCP4.5: in this scenario, human GHG emissions peak around 2040, then decline."}
+    authorization: verified
+    realized_by: {fire_weather_index: [], heat_index: []}
+    note: >-
+      No column of either governed family realizes RCP4.5: the FWI field entries
+      name RCP 8.5 only (lines 662-663) and heat index is provided for RCP8.5 only
+      (lines 427-428). Templates needing RCP4.5 are not_computable in v1.
+    retrieval_terms: [RCP4.5]
+  - id: RCP8.5
+    wording: RCP8.5
+    source: {kind: dictionary_line, line: 100, quote: "RCP8.5: in this scenario, human GHG emissions continue to rise throughout the 21st century."}
+    authorization: verified
+    realized_by:
+      fire_weather_index: {mid_century: 662, end_century: 663}
+      heat_index: {mid_century: 686, end_century: 695}
+    retrieval_terms: [RCP8.5, RCP 8.5]
+  - id: historical_no_scenario
+    wording: null
+    source: {kind: dictionary_line, line: 102, quote: "A historical period (1995 to 2004) is also modeled using GHG concentrations during this period."}
+    authorization: verified
+    note: the historical period is a modeled baseline with no RCP; it never fills [SCENARIO]
+    retrieval_terms: []
+
+# --- [SEASON] ----------------------------------------------------------------
+season:
+  - id: summer
+    wording: summer (June, July, August)
+    source: {kind: dictionary_line, line: 348, quote: "summer (June, July, Aug)"}
+    authorization: verified
+    applies_to:
+      fire_weather_index: {source: {kind: dictionary_line, line: 661, quote: "Wildfire_summer_hist"}, columns_status: inferred_candidate}
+      heat_index: {source: {kind: dictionary_line, line: 403, quote: "we focused our efforts on summer months (June, July, and August)"}, columns_status: verified_from_dictionary}
+  - id: autumn
+    wording: autumn
+    source: {kind: dictionary_line, line: 348, quote: "autumn (Sep, Oct, Nov)"}
+    authorization: not_authorized
+    note: FWI only; its value columns are partially_resolved (excluded above); heat index has no autumn
+  - id: spring
+    wording: spring
+    source: {kind: dictionary_line, line: 348, quote: "spring (March, April, May)"}
+    authorization: not_authorized
+    note: as autumn
+  - id: winter
+    wording: winter
+    source: {kind: dictionary_line, line: 347, quote: "The seasons are segmented as winter (Dec, Jan,"}
+    authorization: not_authorized
+    note: as autumn
+
+# --- [STATISTIC] -------------------------------------------------------------
+#
+# Each statistic names a versioned derivation rule. DR-TD-001..003 and 005 reuse
+# the prototype arithmetic in src/climrr/phenomenon.py; 004, 006 and 007 are new.
+# Every mean is labelled with the M1-WP3b ruling's verbatim phrase.
+statistic:
+  - id: baseline_value
+    wording: value
+    rule_id: DR-TD-001
+    rule: >-
+      The [PERIOD_FROM] column's raw value (cell); otherwise the unweighted mean over
+      the member cells non-empty on every column the question reads, rounded to 15
+      places half-to-even (phenomenon.mean_from_total).
+    reuses: src/climrr/phenomenon.py V.per_column.aggregates.unweighted_mean
+    source: {kind: derivation_rule, rule_id: DR-TD-001}
+    authorization: our_reading
+    assumptions: [A-AGG1, A-G2]
+  - id: future_value
+    wording: value
+    rule_id: DR-TD-002
+    rule: as DR-TD-001, on the [PERIOD_TO] column
+    reuses: src/climrr/phenomenon.py V.per_column.aggregates.unweighted_mean
+    source: {kind: derivation_rule, rule_id: DR-TD-002}
+    authorization: our_reading
+    assumptions: [A-AGG1, A-G2]
+  - id: absolute_change
+    wording: absolute change
+    rule_id: DR-TD-003
+    rule: >-
+      Per member cell, the change by the metric's change_operation
+      (change_column_value where the pair has a change column, else [PERIOD_TO]
+      minus [PERIOD_FROM]), rounded to 15 places; then the unweighted mean over
+      cells (cell: the one value).
+    reuses: src/climrr/phenomenon.py change_value_of + unweighted_mean (V.change)
+    source: {kind: derivation_rule, rule_id: DR-TD-003}
+    authorization: our_reading
+    assumptions: [A-DIR1, A-AGG1, A-G2]
+  - id: percent_change
+    wording: percent change
+    rule_id: DR-TD-004
+    rule: >-
+      100 x DR-TD-003 / the [PERIOD_FROM] mean over the same member cells, rounded to
+      15 places. A zero denominator gives not_computable (zero_baseline). Never a mean
+      of per-cell percent changes (M1-WP3b criterion 7).
+    reuses: null
+    source: {kind: derivation_rule, rule_id: DR-TD-004}
+    authorization: our_reading
+    assumptions: [A-DIR1, A-AGG1, A-G2]
+  - id: direction
+    wording: direction of change
+    rule_id: DR-TD-005
+    rule: increase / decrease / no_change from the sign of DR-TD-003 (phenomenon.direction_of)
+    reuses: src/climrr/phenomenon.py D (direction_of)
+    source: {kind: derivation_rule, rule_id: DR-TD-005}
+    authorization: our_reading
+    assumptions: [A-DIR1]
+  - id: comparison
+    wording: larger
+    rule_id: DR-TD-006
+    rule: >-
+      Compare two signed values of one statistic: the larger, or `equal`. Signed, as
+      PR-1 ranks: a decrease is smaller than no change.
+    reuses: null
+    source: {kind: derivation_rule, rule_id: DR-TD-006}
+    authorization: our_reading
+    assumptions: [A-DIR1]
+  - id: extremum
+    wording: largest / smallest
+    rule_id: DR-TD-007
+    rule: >-
+      Over every enumerated state, the state(s) with the largest (or smallest)
+      signed statistic; ties reported as a sorted list; states where the statistic
+      is not_computable are excluded and counted.
+    reuses: null
+    source: {kind: derivation_rule, rule_id: DR-TD-007}
+    authorization: our_reading
+    assumptions: [A-DIR1, A-AGG1, A-G2, A-G3]

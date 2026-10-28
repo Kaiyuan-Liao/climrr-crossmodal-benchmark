@@ -1,0 +1,319 @@
+# Track D v1 --- table-grounded question templates (D-031, D-033, D-034).
+#
+# Mechanism after the WildfireGPT `QuestionTemplate` (docs/REFERENCES.md, D-032):
+# a template string with [SLOT] markers, a category type and a research method.
+# Kept: the mechanism, the three category types, the three research methods.
+# Replaced: random slot pools by the table-grounded vocabularies of slots_v1.yaml,
+# filled by exhaustive enumeration, never at random.
+#
+# answer_mode
+#   table_only        the answer is computed entirely from the table. Answerable
+#                     now (enumerated by scripts/generate_template_questions.py).
+#   table_plus_paper  a table value plus a paper-side statement. Needs a linked
+#                     passage (Track C agent, D-030) before it is a QA candidate.
+#   comparison        a table value at place B against a paper statement at place
+#                     A (mentor Q3). Needs a linked passage, as above.
+#
+# Markers. The work package's seven --- [CONCEPT] [LOCATION] [PERIOD_FROM]
+# [PERIOD_TO] [SCENARIO] [SEASON] [STATISTIC] --- and [CONCEPT_2] for
+# multi-concept templates. Three more, each the second member of a comparison:
+# [LOCATION_2], [PERIOD_TO_2], [SCENARIO_2].
+#
+# Retrieval-terms rule RT-1 (every template). Query terms come only from:
+#   * [CONCEPT] / [CONCEPT_2] --- the family's concept-map surface forms
+#     (accepted_surface_terms and additional terms whose usage includes
+#     retrieval), always;
+#   * [LOCATION] / [LOCATION_2] --- a state label; for a county, its State label
+#     only (the NAME label is our_reading and is never a query term); a grid
+#     cell contributes none;
+#   * [SCENARIO] / [SCENARIO_2] --- the scenario's retrieval_terms in slots_v1;
+#   * [PERIOD_FROM] / [PERIOD_TO] / [PERIOD_TO_2] --- the period's
+#     retrieval_terms in slots_v1 (historical contributes none).
+# Never: a heat-index threshold, a statistic word, a season word, a column
+# name, a cell id, or any term of an ungoverned concept. A question whose
+# concept is not authorized for answer computation has its terms recorded but
+# `retrieval_authorized: false` (D-033: no unverified column, even as a query
+# term).
+
+schema_version: td-templates-v1
+authorized_by: [D-031, D-033, D-034]
+slots_file: data/metadata/templates/slots_v1.yaml
+qa_types_file: data/metadata/softqa/qa_types_v1.json
+category_types: [fact_based, recommendation_seeking, hybrid]
+research_methods: [data_analysis, literature_review, both]
+answer_modes: [table_only, table_plus_paper, comparison]
+markers: [CONCEPT, CONCEPT_2, LOCATION, LOCATION_2, PERIOD_FROM, PERIOD_TO, PERIOD_TO_2, SCENARIO, SCENARIO_2, SEASON, STATISTIC]
+retrieval_terms_rule_id: RT-1
+
+# Period pairs (from -> to) a change can be stated over: both columns must exist
+# for the metric; historical -> mid, historical -> end, mid -> end.
+period_pairs:
+  - [historical, mid_century]
+  - [historical, end_century]
+  - [mid_century, end_century]
+
+templates:
+  # --- table_only: answerable now ----------------------------------------
+  - template_id: TD-T01
+    name: direction of change
+    text: "Under [SCENARIO], does the [CONCEPT] in [SEASON] in [LOCATION] increase or decrease between [PERIOD_FROM] and [PERIOD_TO]?"
+    category_type: fact_based
+    research_method: data_analysis
+    qa_type: pattern_to_explanation
+    qa_type_note: the table-side half of pattern_to_explanation (the pattern); TD-T12 adds the explanation
+    answer_mode: table_only
+    answerable_now: true
+    statistic: direction
+    required_slots: [CONCEPT, SEASON, LOCATION, PERIOD_FROM, PERIOD_TO, SCENARIO]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, LOCATION, SCENARIO, PERIOD_FROM, PERIOD_TO]}
+    enumeration: {locations: [cell, county, state], period_pairs: all, scenarios: [RCP8.5]}
+
+  - template_id: TD-T02
+    name: magnitude of change (absolute)
+    text: "By how much does the [CONCEPT] in [SEASON] in [LOCATION] change between [PERIOD_FROM] and [PERIOD_TO] under [SCENARIO] ([STATISTIC])?"
+    category_type: fact_based
+    research_method: data_analysis
+    qa_type: pattern_to_explanation
+    qa_type_note: table-side pattern only
+    answer_mode: table_only
+    answerable_now: true
+    statistic: absolute_change
+    required_slots: [CONCEPT, SEASON, LOCATION, PERIOD_FROM, PERIOD_TO, SCENARIO, STATISTIC]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, LOCATION, SCENARIO, PERIOD_FROM, PERIOD_TO]}
+    enumeration: {locations: [cell, county, state], period_pairs: all, scenarios: [RCP8.5]}
+
+  - template_id: TD-T03
+    name: magnitude of change (percent)
+    text: "What is the [STATISTIC] in the [CONCEPT] in [SEASON] in [LOCATION] between [PERIOD_FROM] and [PERIOD_TO] under [SCENARIO]?"
+    category_type: fact_based
+    research_method: data_analysis
+    qa_type: pattern_to_explanation
+    qa_type_note: table-side pattern only
+    answer_mode: table_only
+    answerable_now: true
+    statistic: percent_change
+    required_slots: [STATISTIC, CONCEPT, SEASON, LOCATION, PERIOD_FROM, PERIOD_TO, SCENARIO]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, LOCATION, SCENARIO, PERIOD_FROM, PERIOD_TO]}
+    enumeration: {locations: [cell, county, state], period_pairs: all, scenarios: [RCP8.5]}
+
+  - template_id: TD-T04
+    name: modeled historical baseline value
+    text: "What is the [CONCEPT] in [SEASON] in [LOCATION] for [PERIOD_FROM]?"
+    category_type: fact_based
+    research_method: data_analysis
+    qa_type: pattern_to_explanation
+    qa_type_note: table-side value only; the historical period is a modeled baseline, never an observation
+    answer_mode: table_only
+    answerable_now: true
+    statistic: baseline_value
+    required_slots: [CONCEPT, SEASON, LOCATION, PERIOD_FROM]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, LOCATION]}
+    enumeration: {locations: [cell, county, state], periods_from: [historical], scenarios: []}
+
+  - template_id: TD-T05
+    name: projected future value
+    text: "What is the [CONCEPT] in [SEASON] in [LOCATION] projected for [PERIOD_TO] under [SCENARIO]?"
+    category_type: fact_based
+    research_method: data_analysis
+    qa_type: pattern_to_explanation
+    qa_type_note: table-side value only
+    answer_mode: table_only
+    answerable_now: true
+    statistic: future_value
+    required_slots: [CONCEPT, SEASON, LOCATION, PERIOD_TO, SCENARIO]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, LOCATION, SCENARIO, PERIOD_TO]}
+    enumeration: {locations: [cell, county, state], periods_to: [mid_century, end_century], scenarios: [RCP8.5]}
+
+  - template_id: TD-T06
+    name: two scenarios, one place
+    text: "In [LOCATION], is the [STATISTIC] in the [CONCEPT] in [SEASON] between [PERIOD_FROM] and [PERIOD_TO] larger under [SCENARIO] or under [SCENARIO_2]?"
+    category_type: fact_based
+    research_method: data_analysis
+    qa_type: regional_contrast
+    qa_type_note: a scenario contrast at one place; no QA type names it exactly --- recorded for the mentor
+    answer_mode: table_only
+    answerable_now: true
+    statistic: absolute_change
+    comparison_rule: DR-TD-006
+    required_slots: [LOCATION, STATISTIC, CONCEPT, SEASON, PERIOD_FROM, PERIOD_TO, SCENARIO, SCENARIO_2]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, LOCATION, SCENARIO, SCENARIO_2, PERIOD_FROM, PERIOD_TO]}
+    enumeration: {locations: [cell, county, state], period_pairs: [[historical, mid_century], [historical, end_century]], scenario_pairs: [[RCP4.5, RCP8.5]]}
+    v1_note: no governed column realizes RCP4.5, so every fill is not_computable (no_column_realizes_scenario)
+
+  - template_id: TD-T07
+    name: two places, one scenario
+    text: "Under [SCENARIO], which shows the larger [STATISTIC] in the [CONCEPT] in [SEASON] between [PERIOD_FROM] and [PERIOD_TO]: [LOCATION] or [LOCATION_2]?"
+    category_type: fact_based
+    research_method: data_analysis
+    qa_type: regional_contrast
+    answer_mode: table_only
+    answerable_now: true
+    statistic: absolute_change
+    comparison_rule: DR-TD-006
+    required_slots: [SCENARIO, STATISTIC, CONCEPT, SEASON, PERIOD_FROM, PERIOD_TO, LOCATION, LOCATION_2]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, LOCATION, LOCATION_2, SCENARIO, PERIOD_FROM, PERIOD_TO]}
+    enumeration:
+      locations: [state_pair_with_anchor]
+      anchor_state: California
+      anchor_reason: the P-STATE-1 state; caps the pairs at (California, X) for every other enumerated state
+      period_pairs: all
+      scenarios: [RCP8.5]
+
+  - template_id: TD-T08
+    name: two periods, one place
+    text: "In [LOCATION] under [SCENARIO], is the [STATISTIC] in the [CONCEPT] in [SEASON] from [PERIOD_FROM] larger by [PERIOD_TO] or by [PERIOD_TO_2]?"
+    category_type: fact_based
+    research_method: data_analysis
+    qa_type: pattern_to_explanation
+    qa_type_note: a temporal contrast at one place; no QA type names it exactly --- recorded for the mentor
+    answer_mode: table_only
+    answerable_now: true
+    statistic: absolute_change
+    comparison_rule: DR-TD-006
+    required_slots: [LOCATION, SCENARIO, STATISTIC, CONCEPT, SEASON, PERIOD_FROM, PERIOD_TO, PERIOD_TO_2]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, LOCATION, SCENARIO, PERIOD_TO, PERIOD_TO_2]}
+    enumeration: {locations: [cell, county, state], period_triples: [[historical, mid_century, end_century]], scenarios: [RCP8.5]}
+
+  - template_id: TD-T09
+    name: two concepts, one place (multi-concept)
+    text: "In [LOCATION] under [SCENARIO], do the [CONCEPT] and the [CONCEPT_2] in [SEASON] both increase between [PERIOD_FROM] and [PERIOD_TO]?"
+    category_type: fact_based
+    research_method: data_analysis
+    qa_type: compound_risk_reasoning
+    qa_type_note: table-side half of compound_risk_reasoning; both concepts are governed families (D-033 allows multi-concept if every semantic slot is authorized)
+    answer_mode: table_only
+    answerable_now: true
+    statistic: direction
+    required_slots: [LOCATION, SCENARIO, CONCEPT, CONCEPT_2, SEASON, PERIOD_FROM, PERIOD_TO]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, CONCEPT_2, LOCATION, SCENARIO, PERIOD_FROM, PERIOD_TO]}
+    enumeration: {locations: [cell, county, state], concept_pairs: [[fire_weather_index, heat_index]], period_pairs: all, scenarios: [RCP8.5]}
+    v1_note: CONCEPT is fire_weather_index, whose columns are inferred_candidate, so every fill is blocked_inferred_columns
+
+  - template_id: TD-T10
+    name: claim to region (largest)
+    text: "Which state shows the largest [STATISTIC] in the [CONCEPT] in [SEASON] between [PERIOD_FROM] and [PERIOD_TO] under [SCENARIO]?"
+    category_type: fact_based
+    research_method: data_analysis
+    qa_type: claim_to_region_identification
+    qa_type_note: table-side region identification; the paper-side claim version is TD-T16
+    answer_mode: table_only
+    answerable_now: true
+    statistics: [absolute_change, percent_change]
+    extremum: largest
+    extremum_rule: DR-TD-007
+    required_slots: [STATISTIC, CONCEPT, SEASON, PERIOD_FROM, PERIOD_TO, SCENARIO]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, SCENARIO, PERIOD_FROM, PERIOD_TO]}
+    enumeration: {locations: [all_states], period_pairs: all, scenarios: [RCP8.5]}
+
+  - template_id: TD-T11
+    name: claim to region (smallest)
+    text: "Which state shows the smallest [STATISTIC] in the [CONCEPT] in [SEASON] between [PERIOD_FROM] and [PERIOD_TO] under [SCENARIO]?"
+    category_type: fact_based
+    research_method: data_analysis
+    qa_type: claim_to_region_identification
+    answer_mode: table_only
+    answerable_now: true
+    statistics: [absolute_change, percent_change]
+    extremum: smallest
+    extremum_rule: DR-TD-007
+    required_slots: [STATISTIC, CONCEPT, SEASON, PERIOD_FROM, PERIOD_TO, SCENARIO]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, SCENARIO, PERIOD_FROM, PERIOD_TO]}
+    enumeration: {locations: [all_states], period_pairs: all, scenarios: [RCP8.5]}
+
+  # --- need a linked passage (Track C agent) before they are QA candidates ---
+  - template_id: TD-T12
+    name: pattern to explanation
+    text: "How does the [CONCEPT] in [SEASON] in [LOCATION] change between [PERIOD_FROM] and [PERIOD_TO] under [SCENARIO], and what explanation does the linked passage give for that kind of change?"
+    category_type: hybrid
+    research_method: both
+    qa_type: pattern_to_explanation
+    answer_mode: table_plus_paper
+    answerable_now: false
+    needs: linked passage proposed by the Track C agent (D-030) and reviewed (D-033)
+    statistic: direction
+    required_slots: [CONCEPT, SEASON, LOCATION, PERIOD_FROM, PERIOD_TO, SCENARIO]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, LOCATION, SCENARIO, PERIOD_FROM, PERIOD_TO]}
+
+  - template_id: TD-T13
+    name: cross-source validation
+    text: "Does the linked passage's statement about the [CONCEPT] in [LOCATION] agree with the table's [STATISTIC] in [SEASON] between [PERIOD_FROM] and [PERIOD_TO] under [SCENARIO]?"
+    category_type: hybrid
+    research_method: both
+    qa_type: cross_source_validation
+    answer_mode: table_plus_paper
+    answerable_now: false
+    needs: linked passage proposed by the Track C agent (D-030) and reviewed (D-033)
+    statistic: direction
+    required_slots: [CONCEPT, LOCATION, STATISTIC, SEASON, PERIOD_FROM, PERIOD_TO, SCENARIO]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, LOCATION, SCENARIO, PERIOD_FROM, PERIOD_TO]}
+
+  - template_id: TD-T14
+    name: cross-location comparison (mentor Q3)
+    text: "The linked passage describes the [CONCEPT] at its own study area. How does the table's [STATISTIC] in [SEASON] in [LOCATION] between [PERIOD_FROM] and [PERIOD_TO] under [SCENARIO] compare with it?"
+    category_type: hybrid
+    research_method: both
+    qa_type: cross_location_comparison
+    answer_mode: comparison
+    answerable_now: false
+    needs: >-
+      linked passage at place A (Track C agent, D-030; reviewed, D-033); [LOCATION] is
+      place B. A differing granularity between A and B is a mandatory-second-reviewer
+      case (D-033).
+    statistic: absolute_change
+    required_slots: [CONCEPT, STATISTIC, SEASON, LOCATION, PERIOD_FROM, PERIOD_TO, SCENARIO]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, SCENARIO, PERIOD_FROM, PERIOD_TO]}
+    retrieval_note: place B is deliberately not a query term --- the passage is about place A
+
+  - template_id: TD-T15
+    name: regional contrast with explanation
+    text: "The table gives the [STATISTIC] in the [CONCEPT] in [SEASON] between [PERIOD_FROM] and [PERIOD_TO] under [SCENARIO] for [LOCATION] and [LOCATION_2]. How does the linked passage account for the contrast?"
+    category_type: hybrid
+    research_method: both
+    qa_type: regional_contrast
+    answer_mode: table_plus_paper
+    answerable_now: false
+    needs: linked passage proposed by the Track C agent (D-030) and reviewed (D-033)
+    statistic: absolute_change
+    required_slots: [STATISTIC, CONCEPT, SEASON, PERIOD_FROM, PERIOD_TO, SCENARIO, LOCATION, LOCATION_2]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, LOCATION, LOCATION_2, SCENARIO, PERIOD_FROM, PERIOD_TO]}
+
+  - template_id: TD-T16
+    name: claim to region (paper claim)
+    text: "The linked passage makes a claim about the [CONCEPT] in [SEASON]. Which state in the table fits that claim for the [STATISTIC] between [PERIOD_FROM] and [PERIOD_TO] under [SCENARIO]?"
+    category_type: hybrid
+    research_method: both
+    qa_type: claim_to_region_identification
+    answer_mode: table_plus_paper
+    answerable_now: false
+    needs: linked passage proposed by the Track C agent (D-030) and reviewed (D-033)
+    statistic: absolute_change
+    required_slots: [CONCEPT, SEASON, STATISTIC, PERIOD_FROM, PERIOD_TO, SCENARIO]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, SCENARIO, PERIOD_FROM, PERIOD_TO]}
+
+  - template_id: TD-T17
+    name: compound risk (two concepts with a passage)
+    text: "In [LOCATION] under [SCENARIO], the table gives the change in the [CONCEPT] and in the [CONCEPT_2] in [SEASON] between [PERIOD_FROM] and [PERIOD_TO]. What does the linked passage say about the two together?"
+    category_type: hybrid
+    research_method: both
+    qa_type: compound_risk_reasoning
+    answer_mode: table_plus_paper
+    answerable_now: false
+    needs: linked passage proposed by the Track C agent (D-030) and reviewed (D-033); multi-concept is a mandatory-second-reviewer case (D-033)
+    statistic: direction
+    required_slots: [LOCATION, SCENARIO, CONCEPT, CONCEPT_2, SEASON, PERIOD_FROM, PERIOD_TO]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, CONCEPT_2, LOCATION, SCENARIO, PERIOD_FROM, PERIOD_TO]}
+    v1_note: with fire_weather_index as CONCEPT it stays blocked until the FWI columns are owner-confirmed
+
+  - template_id: TD-T18
+    name: recommendation from a passage
+    text: "Given the table's [STATISTIC] in the [CONCEPT] in [SEASON] in [LOCATION] between [PERIOD_FROM] and [PERIOD_TO] under [SCENARIO], what response to that kind of change does the linked passage recommend?"
+    category_type: recommendation_seeking
+    research_method: literature_review
+    qa_type: pattern_to_explanation
+    qa_type_note: no QA type names recommendation-seeking; the table pattern plus the paper's response is the nearest --- recorded for the mentor
+    answer_mode: table_plus_paper
+    answerable_now: false
+    needs: linked passage proposed by the Track C agent (D-030) and reviewed (D-033)
+    statistic: direction
+    required_slots: [STATISTIC, CONCEPT, SEASON, LOCATION, PERIOD_FROM, PERIOD_TO, SCENARIO]
+    retrieval_terms_rule: {rule: RT-1, slots: [CONCEPT, LOCATION, SCENARIO, PERIOD_FROM, PERIOD_TO]}
