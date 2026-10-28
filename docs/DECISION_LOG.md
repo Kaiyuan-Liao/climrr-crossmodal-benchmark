@@ -1990,3 +1990,49 @@ code emits, and the next GUIDANCE packet still chooses.
   `data/manifest.json` (entry and amendment), `tests/test_softqa.py`,
   `docs/BRIDGE_ELIGIBILITY.md` §10, `docs/MENTOR_BRIEF.md`,
   `docs/PROJECT_STATE.md`, `reports/milestones/TRACKC_SOFTQA_REPORT.md`.
+
+## D-034 --- Track D v1 design: owner decisions on state geography and heat-index metrics
+
+- **Date:** 2026-10-28.
+- **Status:** **decided (owner), with one conflict escalated to the COORDINATOR.**
+- **Owner:** Kaiyuan Liao, asked by the EXECUTOR during the Track D v1 work
+  package (D-031, D-033) before any template was filled.
+- **Context.** The work package's Phase C says an answer is `not_computable` when
+  a slot is only `inferred_candidate`. `State` (index 3) is `inferred_candidate`
+  (IC-012), as is `NAME` (IC-011); only `Crossmodel` is verified. Read literally,
+  the rule blocks every state-level answer, P-STATE-1 included, yet the package
+  also asks for state-level enumeration and a P-STATE-1 reproduction. The
+  `heat_index` family is realized by four verified threshold metrics
+  (Day95 / 105 / 115 / 125; historical, mid-century RCP8.5 and end-century RCP8.5);
+  the package names none.
+- **Decision.**
+  1. **State (and county) locations are computed and tagged provisional.** The
+     location slot carries `inferred_candidate (IC-012)` (state) or `our_reading`
+     (county, IC-011 + IC-012, A-G1 / A-G3); the answer carries
+     `provisional: true` with the reason, as P-STATE-1 already does. The **concept**
+     gate is unchanged: a concept column that is not `verified_from_dictionary` or
+     `owner_confirmed` blocks the answer (`blocked_inferred_columns`) --- so every
+     FWI question is blocked (IC-006..IC-010).
+  2. **All four heat-index thresholds are enumerated.** Each is a verified column
+     set; the threshold is named in the question text as the metric's name (D-033
+     addendum, item 4) and is never a retrieval term. The metric-level concept-map
+     entry `heatindex_days_above_105F` stays `proposed`.
+- **Escalated.** Decision 1 departs from the literal Phase-C rule and from D-033's
+  "no unverified column, even as a query term" as applied to a geography column
+  (a state label is a query term under RT-1). Put to the COORDINATOR in
+  `reports/milestones/TRACKD_TEMPLATES_REPORT.md` field 9.
+- **Derivation rules recorded** (in `data/metadata/templates/slots_v1.yaml`):
+  DR-TD-001 baseline value, DR-TD-002 future value, DR-TD-003 absolute change and
+  DR-TD-005 direction reuse the prototype arithmetic (`src/climrr/phenomenon.py`);
+  **new:** DR-TD-004 percent change of the aggregate (zero denominator →
+  `not_computable`; never a mean of per-cell percent changes), DR-TD-006 signed
+  comparison, DR-TD-007 extremum over states (ties listed).
+- **Alternatives considered.** Block all state answers (literal rule) --- leaves
+  48 cell/county answers only and makes P-STATE-1 reproducible in audit mode
+  only; stop and escalate before building --- set aside by the owner.
+- **Consequences.** 3,138 of 3,186 computed answers are provisional. No column
+  status, concept-map entry or compatibility rule changes; no QA is accepted.
+- **Affected files:** `data/metadata/templates/slots_v1.yaml`,
+  `data/metadata/templates/templates_v1.yaml`, `src/climrr/templates.py`,
+  `docs/TEMPLATE_QUESTIONS_V1.md`, `docs/PROJECT_STATE.md`,
+  `reports/milestones/TRACKD_TEMPLATES_REPORT.md`.

@@ -28,3 +28,17 @@ a referenced archive is copied into the repository** unless an entry says so.
 
 **Not taken:** its random slot filling, its embedding retrieval, its
 news-style answer generation.
+
+**As used by Track D v1** (2026-10-28; `data/metadata/templates/`,
+`src/climrr/templates.py`; archive re-hashed on the Mac, same SHA-256):
+
+| From the archive | Track D v1 |
+| --- | --- |
+| `QuestionTemplate` dataclass: `template` string with `[SLOT]` markers, `category_type`, `research_method`, `topic_category`, `relevant_professions` | kept: `text` with `[SLOT]` markers, `category_type`, `research_method`; added `qa_type` (our six), `answer_mode`, `required_slots`, `retrieval_terms_rule`; **not kept:** `topic_category`, `relevant_professions` |
+| `CategoryType`: Fact-Based / Recommendation-Seeking / Hybrid | kept as `fact_based` / `recommendation_seeking` / `hybrid` |
+| `ResearchMethod`: Data Analysis / Literature Review / Both | kept as `data_analysis` / `literature_review` / `both` |
+| slot pools (`hazard_types`, `locations`, `time_periods`, …) filled with `random` | **replaced** by table-grounded vocabularies with a source and authorization per value (`slots_v1.yaml`), filled by exhaustive enumeration |
+| location lists chosen from news reports | **not taken**; locations are row sets of the table (cell / county / state) |
+| answers left to a model | **not taken**; every `table_only` answer is computed from `FullData.csv` |
+
+No file, string or template text from the archive is copied into the repository.

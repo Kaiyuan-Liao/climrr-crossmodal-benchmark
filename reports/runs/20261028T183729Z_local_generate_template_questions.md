@@ -1,0 +1,36 @@
+# Run record: 20261028T183729Z_local_generate_template_questions
+
+- **Result**: PASS
+- **UTC timestamp**: 2026-10-28T18:37:29.929080+00:00
+- **Git commit**: `7995cc3324c35535a2b9481db2ee83cb90098a54`
+- **Working tree dirty (tracked files)**: False
+- **Untracked files present**: 2
+- **Hostname**: ryous-MacBook-Pro-2.local
+- **Location**: local
+- **Python**: 3.11.16 (macOS-15.3-arm64-arm-64bit)
+- **pip freeze SHA-256**: `d9af804d5018f7022ae9f4db0bb83a8d57104d2ff6ff5676d912d896f952bf51`
+- **Pinned libraries (D-007)**: `pandas==3.0.5`, `numpy==2.4.6`, `pypdf==6.18.0`, `pyyaml==6.0.3`, `pytest==9.1.1`, `pypdfium2==5.13.0`
+- **Data path (repo-relative)**: `data/raw/FullData.csv`
+- **Data SHA-256**: `e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e`
+- **Output path**: `artifacts/templates/questions_v1.jsonl`
+
+## Config snapshot
+
+```json
+{
+  "slots_sha256": "d40f835e969cc0dac0ed7de3affd1ce4ef26152a56252f042b7dbdf889b47e10",
+  "templates_sha256": "5eb50916840cb21227845c255c95728807ec33fc74c9e258d889c0d7c8aa00f9",
+  "coverage_sha256": "2547e8df4ba809c67e7afe386739d905c4573d6b4f0478d8aeef4807135a4ce4",
+  "concept_map_sha256": "27f7a44deabf24c244f1222c28d17c5c43fd86b9c017d4634bf0eef00931d7b4",
+  "qa_types_sha256": "bc425268fc9fc56a5727b80286a8402fb011c1a2817f4d880c2e7206df3e567d",
+  "dictionary_text_sha256": "1d0fae06c6a5a9714fe890936d002cd0ac84829262465d4930d04acb400553da",
+  "model_calls": 0,
+  "retrieval_runs": 0
+}
+```
+
+## Result summary
+
+- `summary`: {'schema_version': 'td-questions-v1', 'n_templates': 18, 'n_templates_table_only': 11, 'n_templates_need_passage': 7, 'n_questions': 5217, 'by_answer_status': {'computed': 3186, 'not_computable': 498, 'blocked_inferred_columns': 1533}, 'by_template': {'TD-T01': 765, 'TD-T02': 765, 'TD-T03': 765, 'TD-T04': 255, 'TD-T05': 510, 'TD-T06': 510, 'TD-T07': 720, 'TD-T08': 255, 'TD-T09': 612, 'TD-T10': 30, 'TD-T11': 30}, 'by_template_and_status': {'TD-T01|blocked_inferred_columns': 153, 'TD-T01|computed': 612, 'TD-T02|blocked_inferred_columns': 153, 'TD-T02|computed': 612, 'TD-T03|blocked_inferred_columns': 153, 'TD-T03|computed': 522, 'TD-T03|not_computable': 90, 'TD-T04|blocked_inferred_columns': 51, 'TD-T04|computed': 204, 'TD-T05|blocked_inferred_columns': 102, 'TD-T05|computed': 408, 'TD-T06|blocked_inferred_columns': 102, 'TD-T06|not_computable': 408, 'TD-T07|blocked_inferred_columns': 144, 'TD-T07|computed': 576, 'TD-T08|blocked_inferred_columns': 51, 'TD-T08|computed': 204, 'TD-T09|blocked_inferred_columns': 612, 'TD-T10|blocked_inferred_columns': 6, 'TD-T10|computed': 24, 'TD-T11|blocked_inferred_columns': 6, 'TD-T11|computed': 24}, 'by_concept_family': {'fire_weather_index': 921, 'fire_weather_index+heat_index': 612, 'heat_index': 3684}, 'by_concept_family_and_status': {'fire_weather_index+heat_index|blocked_inferred_columns': 612, 'fire_weather_index|blocked_inferred_columns': 921, 'heat_index|computed': 3186, 'heat_index|not_computable': 498}, 'by_location_level': {'all_states': 60, 'cell': 87, 'county': 87, 'state': 4983}, 'by_location_level_and_status': {'all_states|blocked_inferred_columns': 12, 'all_states|computed': 48, 'cell|blocked_inferred_columns': 27, 'cell|computed': 48, 'cell|not_computable': 12, 'county|blocked_inferred_columns': 27, 'county|computed': 48, 'county|not_computable': 12, 'state|blocked_inferred_columns': 1467, 'state|computed': 3042, 'state|not_computable': 474}, 'not_computable_reasons': {'no_column_realizes_scenario': 408, 'zero_baseline': 90}, 'n_provisional': 3138, 'table_data_sha256': 'e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e', 'questions_file': {'path': 'artifacts/templates/questions_v1.jsonl', 'sha256': '28fcb3c322db649bfd2438a67a930f6c0ed06a28db6ca5b40041bfd9c1d7b100', 'bytes': 14099943, 'n_records': 5217, 'tracked_in_git': False, 'regenerate_with': 'python scripts/generate_template_questions.py'}}
+- `prototypes_all_equal`: True
+- `outputs`: {'data/metadata/templates/slots_v1.yaml': 'd40f835e969cc0dac0ed7de3affd1ce4ef26152a56252f042b7dbdf889b47e10', 'data/metadata/templates/templates_v1.yaml': '5eb50916840cb21227845c255c95728807ec33fc74c9e258d889c0d7c8aa00f9', 'artifacts/templates/questions_v1.jsonl (gitignored)': '28fcb3c322db649bfd2438a67a930f6c0ed06a28db6ca5b40041bfd9c1d7b100', 'artifacts/templates/questions_v1_sample.jsonl': '11cdf1f2c232f14b0bbc3a86748f4ca7d9f2d4e8d854f8eaed7f726ea5c6fa4f', 'artifacts/templates/questions_v1_summary.json': '9549076368510aadb3dfa4245ee380ed42253278bcf6a701f3b01fd8e0370ad7', 'artifacts/templates/prototype_reproduction_v1.json': 'f17d932b7173123eec742c90bc65a5222d61a2704e58e9fef472849fcab63168'}
