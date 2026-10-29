@@ -340,6 +340,38 @@
         "C-4238342-01",
         "C-5882914-01"
       ]
+    },
+    {
+      "filename": "nca_regions_v1.yaml",
+      "path": "data/metadata/geography/nca_regions_v1.yaml",
+      "role": "NCA5 state -> region map v1 (pilot P1, GUIDANCE re-anchor ruling 3, D-041) --- one region per State label and DC; fixed before any table pattern was computed; source_verification pending_kaiyuan",
+      "sha256": "3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41",
+      "bytes": 4721,
+      "row_count": null,
+      "column_count": null,
+      "encoding_note": "UTF-8, LF line endings, no byte-order mark. Pinned -text in .gitattributes (data/metadata/geography/**).",
+      "acquisition_date": "2026-10-29",
+      "storage_policy": "tracked in ordinary Git as an immutable object; membership is never edited to improve a pattern; a change is nca_regions_v2.yaml with its own decision",
+      "tracked_in_git": true,
+      "decision_ref": "D-041",
+      "source_description": "written by the EXECUTOR from knowledge of the NCA5 regional chapters 21-30 (USGCRP 2023, doi:10.7930/NCA5.2023); the NCA5 site did not resolve from this machine; verification by Kaiyuan pending (artifact named in the file)",
+      "interpretation_notes": "no interpretation assigned to any table column; the map says only which NCA5 region a State label belongs to; no column status, concept-map entry or compatibility rule changed"
+    },
+    {
+      "filename": "item_schema_v2.json",
+      "path": "data/metadata/benchmark/item_schema_v2.json",
+      "role": "Closed-book benchmark item schema v2 (JSON Schema 2020-12) --- pilot P1, GUIDANCE re-anchor ruling 2026-10-29 and D-035..D-041; frozen before any item is generated; not an item",
+      "sha256": "765631f16eeea5dadce1d9d3458942b15d8272531a2516a08ce7210f7ec852a7",
+      "bytes": 10958,
+      "row_count": null,
+      "column_count": null,
+      "encoding_note": "UTF-8, LF line endings, no byte-order mark. Pinned -text in .gitattributes (data/metadata/benchmark/**).",
+      "acquisition_date": "2026-10-29",
+      "storage_policy": "tracked in ordinary Git as an immutable object; a change is a new version with its own decision",
+      "tracked_in_git": true,
+      "decision_ref": "D-041",
+      "source_description": "written by the EXECUTOR from the pilot P1 work package field list and the GUIDANCE re-anchor ruling; validated by src/climrr/benchmark_items.py",
+      "interpretation_notes": "no interpretation assigned to any table column; no column status, concept-map entry or compatibility rule changed"
     }
   ],
   "amendments": [
@@ -396,6 +428,12 @@
       "milestone": "Track C run 1 ingest",
       "change": "Added softqa_run1 to the diagnostics block (artifacts/softqa/run1/manifest.csv; softqa_agent v1 output, 243 papers, 193 proposals). A diagnostic and candidate pool, not accepted QA; prompt_user.txt and response.json not copied (SHA-256 in excluded_files.csv). Every other entry unchanged.",
       "decision_ref": "D-029, D-030, D-033"
+    },
+    {
+      "date": "2026-10-29",
+      "milestone": "Pilot P1 (benchmark re-anchor)",
+      "change": "Added data/metadata/geography/nca_regions_v1.yaml (NCA5 state -> region map v1; source_verification pending_kaiyuan) and data/metadata/benchmark/item_schema_v2.json (closed-book item schema v2, frozen before any item). Every other entry unchanged.",
+      "decision_ref": "D-041"
     }
   ],
   "external_corpora": [

@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "climrr/benchmark/item_schema_v2.json",
+  "title": "ClimRR closed-book benchmark item v2",
+  "description": "Pilot P1 (D-041; GUIDANCE re-anchor ruling 2026-10-29; D-035..D-040). One closed-book item: a source-independent prompt, a reference answer decomposed into deterministic table patterns and span-provenanced literature statements, a grading rubric, guardrails, C/G/T/S/D as audit metadata only, generation provenance and the D-033 review lifecycle with Kaiyuan and mentor dispositions. The ENSURE sheet column 'What ENSURE Is Doing' maps to `system_task`. Validated by src/climrr/benchmark_items.py, which also enforces the rules a schema cannot express (evidence strength vs supports, leakage recomputation, the six validity conditions A-F).",
+  "type": "object",
+  "required": [
+    "schema_version", "item_id", "use_case_level", "capability_tested", "system_task", "reasoning_modalities",
+    "key_relationships", "evidence_needed", "desired_output_characteristics", "expected_knowledge_level",
+    "prompt", "source_independent_answerability", "source_independence_note", "source_leakage_check",
+    "reference_components", "reference_answer", "rubric", "guardrails", "c_g_t_s_d_audit", "generation", "review"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "benchmark_item_v2"},
+    "item_id": {"type": "string", "pattern": "^BI-[A-Z0-9]+-[0-9]{4}$"},
+    "use_case_level": {"type": "integer", "minimum": 1, "description": "rung of the hazard-projection ladder v1 (D-038, proposed): 1..8"},
+    "capability_tested": {"type": "string", "minLength": 1},
+    "system_task": {"type": "string", "minLength": 1, "description": "ENSURE sheet column 'What ENSURE Is Doing' (D-041)"},
+    "reasoning_modalities": {"enum": ["Hazard", "Text", "Hazard + Text"]},
+    "key_relationships": {"type": "string", "minLength": 1},
+    "evidence_needed": {"type": "string", "minLength": 1},
+    "desired_output_characteristics": {"type": "string", "minLength": 1},
+    "expected_knowledge_level": {"enum": ["general_climate_science", "specialist_climate_science"]},
+
+    "prompt": {"type": "string", "minLength": 1},
+    "source_independent_answerability": {"enum": ["yes", "borderline", "no"]},
+    "source_independence_note": {"type": "string", "minLength": 1},
+    "source_leakage_check": {
+      "type": "object",
+      "required": ["clmrr_named", "row_or_column_named", "paper_named", "hidden_exact_value_required", "according_to_phrase", "pass"],
+      "additionalProperties": true,
+      "properties": {
+        "clmrr_named": {"type": "boolean"},
+        "row_or_column_named": {"type": "boolean"},
+        "paper_named": {"type": "boolean"},
+        "hidden_exact_value_required": {"type": "boolean"},
+        "according_to_phrase": {"type": "boolean"},
+        "pass": {"type": "boolean"},
+        "flags": {"type": "array", "items": {"type": "string"}},
+        "check_version": {"type": "string"}
+      }
+    },
+
+    "reference_components": {
+      "type": "object",
+      "required": ["table_patterns", "literature_mechanisms", "literature_caveats"],
+      "additionalProperties": false,
+      "properties": {
+        "table_patterns": {"type": "array", "items": {"$ref": "#/$defs/table_pattern"}},
+        "literature_mechanisms": {"type": "array", "items": {"$ref": "#/$defs/literature_statement"}},
+        "literature_caveats": {"type": "array", "items": {"$ref": "#/$defs/literature_statement"}}
+      }
+    },
+    "reference_answer": {
+      "type": "object",
+      "required": ["table_pattern", "literature_interpretation", "integrated"],
+      "additionalProperties": false,
+      "properties": {
+        "table_pattern": {"type": ["string", "null"]},
+        "literature_interpretation": {"type": ["string", "null"]},
+        "integrated": {"type": "string", "minLength": 1}
+      }
+    },
+    "rubric": {
+      "type": "object",
+      "required": ["required_points", "acceptable_variants", "optional_points", "disallowed_claims", "fatal_errors"],
+      "additionalProperties": false,
+      "properties": {
+        "required_points": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "acceptable_variants": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "optional_points": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "disallowed_claims": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "fatal_errors": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "guardrails": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "c_g_t_s_d_audit": {"type": ["object", "null"], "description": "audit metadata only, never a gate (D-036; ruling action 14)"},
+    "generation": {
+      "type": "object",
+      "required": ["generator_version", "model", "prompt_hash", "timestamp", "inputs_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "generator_version": {"type": "string", "minLength": 1},
+        "model": {"type": ["string", "null"]},
+        "prompt_hash": {"type": ["string", "null"]},
+        "timestamp": {"type": "string", "minLength": 1},
+        "inputs_sha256": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": ["status", "history", "kaiyuan_disposition", "mentor_disposition", "final_frozen"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {"enum": ["llm_candidate", "deterministic_pass", "human_review", "accepted", "rejected_pre_review",
+                            "needs_second_review", "needs_adjudication", "rejected_human", "accepted_after_edit"]},
+        "history": {"type": "array", "items": {"type": "object"}},
+        "kaiyuan_disposition": {"type": ["object", "null"],
+                                "properties": {"disposition": {"enum": ["accept", "accept_after_edit", "reject", "needs_revision"]},
+                                               "date": {"type": "string"}, "notes": {"type": "string"}}},
+        "mentor_disposition": {"type": ["object", "null"],
+                               "properties": {"disposition": {"enum": ["accept", "accept_after_edit", "reject", "needs_revision"]},
+                                              "date": {"type": "string"}, "notes": {"type": "string"}}},
+        "final_frozen": {"type": ["object", "null"],
+                         "required": ["prompt", "reference_answer", "rubric"],
+                         "properties": {"prompt": {"type": "string"}, "reference_answer": {"type": "object"}, "rubric": {"type": "object"}}}
+      }
+    }
+  },
+
+  "$defs": {
+    "table_pattern": {
+      "description": "One deterministic table-side fact (ruling condition B); a record of artifacts/benchmark/table_patterns_v1.jsonl validates against this. Direction, value/range and relative magnitude are stored separately (ruling action 18).",
+      "type": "object",
+      "required": ["family", "season", "horizon", "scenario", "statistic", "geography_type", "geography", "direction",
+                   "computed_value_or_range", "rank", "relative_magnitude", "pattern_support_n", "pattern_robustness", "provenance"],
+      "additionalProperties": true,
+      "properties": {
+        "pattern_id": {"type": "string", "pattern": "^TP[0-9]+-[0-9]{5}$"},
+        "family": {"enum": ["heat_index", "fire_weather_index"]},
+        "season": {"type": "string", "minLength": 1},
+        "horizon": {"enum": ["mid", "end"]},
+        "scenario": {"enum": ["RCP8.5", "unstated_in_dictionary"]},
+        "statistic": {"enum": ["direction", "absolute_change", "percent_change", "seasonal_contrast"]},
+        "geography_type": {"enum": ["state", "nca_region", "multi_state_set", "cell_control"]},
+        "geography": {"type": "string", "minLength": 1},
+        "direction": {"enum": ["increase", "decrease", "no_change", "mixed", null]},
+        "computed_value_or_range": {"type": "object"},
+        "rank": {"type": ["object", "null"]},
+        "relative_magnitude": {
+          "type": ["object", "null"],
+          "required": ["class", "definition"],
+          "properties": {"class": {"enum": ["small", "moderate", "large"]}, "definition": {"type": "string", "minLength": 40}}
+        },
+        "pattern_support_n": {"type": "integer", "minimum": 0},
+        "pattern_robustness": {"enum": ["all_states_same_direction", "majority_same_direction", "mixed", null]},
+        "provenance": {
+          "type": "object",
+          "required": ["columns", "column_statuses", "row_rule", "derivation_rule_id", "code_version", "table_data_sha256"],
+          "properties": {
+            "columns": {"type": "array", "items": {"type": "object", "required": ["index", "column"]}},
+            "column_statuses": {"type": "object"},
+            "row_rule": {"type": "string", "minLength": 1},
+            "derivation_rule_id": {"type": "string", "minLength": 1},
+            "code_version": {"type": "string", "minLength": 1},
+            "table_data_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+          }
+        }
+      }
+    },
+    "literature_statement": {
+      "description": "One literature-derived sentence with exact span provenance (ruling condition C) and explicit evidence strength (condition D). Which paper supports which clause is kept per support.",
+      "type": "object",
+      "required": ["statement", "statement_type", "evidence_strength", "reference_scope", "supports"],
+      "additionalProperties": true,
+      "properties": {
+        "statement": {"type": "string", "minLength": 1},
+        "statement_type": {"enum": ["mechanism", "driver", "consensus", "caveat"]},
+        "evidence_strength": {"enum": ["multi_source_supported", "review_supported", "single_source_supported"]},
+        "reference_scope": {"enum": ["this_table_pattern_only", "regional_climate_expectation", "broad_consensus", "single_study_observation"]},
+        "supports": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["paper_item_id", "paper_sha256", "json_path", "span_start", "span_end", "verbatim_passage", "independence_note"],
+            "additionalProperties": true,
+            "properties": {
+              "paper_item_id": {"type": "string", "minLength": 1},
+              "paper_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              "json_path": {"type": "string", "pattern": "^\\$\\."},
+              "span_start": {"type": "integer", "minimum": 0},
+              "span_end": {"type": "integer", "minimum": 0},
+              "verbatim_passage": {"type": "string", "minLength": 1},
+              "independence_note": {"type": "string", "minLength": 1},
+              "is_review_or_synthesis": {"type": "boolean"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

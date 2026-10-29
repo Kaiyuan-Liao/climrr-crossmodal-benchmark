@@ -132,6 +132,10 @@ Track C (D-033) adds `scripts/litcollect/softqa_agent.py`, run on Polaris and ke
 byte-identical to the delivered file: its `agent.log`, per-paper `result.json` /
 `prompt_user.txt` / `response.json`, `candidates.jsonl` and `summary.json` are the
 run evidence.
+Pilot P1 (D-041) adds `scripts/litcollect/litstatement_agent.py`, run on Polaris and
+kept byte-identical to the file that runs (pinned in its test): its `agent.log`,
+per-paper `result.json` / `prompt_user.txt` / `response.json`, `statements.jsonl` and
+`summary.json` are the run evidence.
 
 ## Knowledge-refresh staging
 
