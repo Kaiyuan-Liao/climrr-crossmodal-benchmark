@@ -2036,3 +2036,180 @@ code emits, and the next GUIDANCE packet still chooses.
   `data/metadata/templates/templates_v1.yaml`, `src/climrr/templates.py`,
   `docs/TEMPLATE_QUESTIONS_V1.md`, `docs/PROJECT_STATE.md`,
   `reports/milestones/TRACKD_TEMPLATES_REPORT.md`.
+
+## D-035 --- Benchmark use case: closed-book evaluation
+
+- **Date:** 2026-10-29 (mentor meeting).
+- **Status:** **decided.**
+- **Owner:** **the mentor**, relayed by Kaiyuan Liao (owner-relayed, Kaiyuan's
+  words; `docs/MENTOR_BRIEF.md`, meeting log 2026-10-29).
+- **Mentor's use case, as relayed:** the benchmark question is given directly to
+  an LLM; the model answers from what it already knows; it receives **no table
+  and no papers**. Questions tied to "this paper" or "this table" are therefore
+  meaningless; general patterns are to be extracted from both sources and built
+  into open-ended QA.
+- **Decision.** Closed-book evaluation: the model under test receives only the
+  question. Questions must be answerable from general climate-science knowledge;
+  they never name the table, a cell, a paper, or "according to …". The two
+  sources supply the **answer key and its provenance**, not the question's
+  subject.
+- **Rationale.** The mentor's stated use case.
+- **Alternatives considered.** Open-book (table and/or passage supplied with the
+  question) --- not the mentor's use case.
+- **Consequences.** Every question form that names a source or a cell is out of
+  scope as question content (D-036, D-039). No QA is generated here.
+- **Affected files:** `docs/DECISION_LOG.md`, `docs/MENTOR_BRIEF.md`,
+  `docs/BENCHMARK_REDESIGN_2026-10-29.md`, `docs/PROJECT_STATE.md`.
+
+## D-036 --- Pivot to pattern-level open-ended QA
+
+- **Date:** 2026-10-29.
+- **Status:** **decided.**
+- **Owner:** **mentor direction**, relayed by Kaiyuan Liao.
+- **Context.** The four soft-QA examples shown 2026-10-28 were judged by the
+  mentor "not the type of question we want to build": all too specific to
+  concrete numbers and details of the table and the papers.
+- **Decision.**
+  - Items are built from **general patterns**.
+  - **Table side:** patterns derived deterministically at state / multi-state /
+    climate-region level (direction, magnitude class, seasonal and regional
+    contrasts, ranking, scenario and horizon), with column / row / rule
+    provenance.
+  - **Literature side:** statements (mechanisms, drivers, consensus, caveats)
+    extracted semantically and **aggregated across papers** --- a statement
+    supported by one paper is a citation, not a pattern --- with paper id +
+    verbatim span provenance.
+  - **Division of labour:** semantic understanding (LLM agents) does extraction
+    and synthesis; deterministic code guarantees that every table-side fact in
+    an answer key is exactly what the table shows; human review (Kaiyuan, then
+    the mentor) decides acceptance.
+  - **Claim-level compatibility (C/G/T/S/D) is retired as a gate** and kept only
+    as audit metadata where a literature statement is tied to a specific table
+    pattern (`docs/BRIDGE_ELIGIBILITY.md` §11).
+  - The four 2026-10-28 examples are recorded as
+    `rejected_by_mentor: too specific`. *Their candidate ids were not supplied
+    with the work package; they are recorded as a set until named.*
+- **Rationale.** Follows from D-035: a closed-book model cannot answer
+  cell-specific or paper-specific questions.
+- **Alternatives considered.** Continue cell/claim-level soft QA (Tracks C, D as
+  run) --- rejected by the mentor.
+- **Consequences.** Design in `docs/BENCHMARK_REDESIGN_2026-10-29.md`. No column
+  status, concept-map entry or governed family changes. No QA generated.
+- **Affected files:** `docs/DECISION_LOG.md`, `docs/MENTOR_BRIEF.md`,
+  `docs/BENCHMARK_REDESIGN_2026-10-29.md`, `docs/BRIDGE_ELIGIBILITY.md` §11,
+  `docs/PROJECT_STATE.md`.
+
+## D-037 --- Item schema adopts the ENSURE use-case fields
+
+- **Date:** 2026-10-29.
+- **Status:** **decided.**
+- **Owner:** Kaiyuan Liao and the COORDINATOR, on the mentor-supplied sheet
+  (D-040).
+- **Decision.** Each benchmark item carries:
+  `use_case` (the hazard-projection ladder, D-038); `prompt` (open-ended, no
+  source named); `reasoning_modalities` (`Hazard` / `Text` / `Hazard + Text`);
+  `key_relationships`; `evidence_needed`; `capability_tested`;
+  `desired_output_characteristics`; `reference_answer` (the sheet's
+  "illustrative output": table pattern + literature mechanism in plain
+  language); `rubric` (required elements with weights: direction, magnitude
+  class, region, mechanism, scenario/horizon handling, no-overclaim);
+  `guardrails` (item-specific, e.g. "RCP8.5 is one high-emissions scenario";
+  "modeled baseline, not observation"; "FWI is fire weather danger, not fire
+  occurrence"); `provenance` (table: columns, row-selection rule, derivation
+  rule id, computed values; literature: paper ids, SHA-256, spans, aggregation
+  count); `review` (the D-033 lifecycle reused:
+  `llm_candidate → deterministic_pass → human_review → accepted`, with
+  `rejected_*` exits).
+- **Owner defaults stated 2026-10-29 (Kaiyuan):** answers are free text graded
+  against a reference, not multiple choice; scenario names may appear if the
+  relationship is kept correct ("RCP8.5 is one case of a high-emissions
+  scenario"); no QA quota --- generate, sample representatives for human review,
+  design filters from feedback.
+- **Not mapped.** The sheet's column *What ENSURE Is Doing* has no D-037 field;
+  flagged in the design document §6, not added.
+- **Rationale.** Aligns the benchmark item with the mentor's ENSURE use-case
+  format.
+- **Alternatives considered.** Keep `candidate_schema_v1.json` as the item
+  record --- it is a claim-level soft-link record, not a closed-book item.
+- **Consequences.** A machine schema for D-037 is a later package; none is
+  written here. Worked illustrative item in the design document §2.1.
+- **Affected files:** `docs/DECISION_LOG.md`,
+  `docs/BENCHMARK_REDESIGN_2026-10-29.md`.
+
+## D-038 --- Hazard-projection use-case ladder v1
+
+- **Date:** 2026-10-29.
+- **Status:** **proposed** (COORDINATOR proposal, for mentor confirmation).
+- **Owner:** the COORDINATOR; confirmation by the mentor.
+- **Proposal.**
+  1. Hazard pattern identification (Hazard);
+  2. Hazard mechanism (Text);
+  3. Pattern + mechanism (Hazard + Text);
+  4. Regional comparison (Hazard, + Text);
+  5. Projection--literature consistency (Hazard + Text);
+  6. Compound hazards: fire weather and extreme heat (Hazard + Text);
+  7. Scenario and uncertainty (Text; Hazard only where the table has the
+     scenario --- for our families only RCP8.5 exists);
+  8. Exposure implications (Text; guardrail: hazard ≠ exposure ≠ risk).
+- **Rationale.** Mirrors the ENSURE sheet's capability ladder (D-040) for the
+  hazard-projection modalities this project has; infrastructure and graph
+  modalities are out of scope.
+- **Alternatives considered.** Adopt the ten ENSURE use cases as-is --- eight of
+  ten need infrastructure or graph data the project does not have.
+- **Consequences.** Rung assignment is a field (`use_case`, D-037); nothing is
+  generated under this entry.
+- **Affected files:** `docs/DECISION_LOG.md`,
+  `docs/BENCHMARK_REDESIGN_2026-10-29.md`, `docs/MENTOR_BRIEF.md`.
+
+## D-039 --- Re-purposing of tracks
+
+- **Date:** 2026-10-29.
+- **Status:** **decided.**
+- **Owner:** Kaiyuan Liao and the COORDINATOR, following D-035/D-036.
+- **Decision.**
+  - **Track D** machinery (slots, templates, deterministic answers) becomes the
+    **table-pattern extractor** at state / region level. Cell-level outputs are
+    retained only as provenance, never as question content.
+  - **Track C** machinery (agent + pre-check + schema) becomes the
+    **literature-statement extractor**: prompt rewritten to extract general
+    statements (mechanism / driver / consensus / caveat, with region and
+    scenario if stated), each with a verbatim span; statements are then
+    clustered across papers.
+  - The frozen place-candidate set (243) and LITCORPUS-02 (1,308) remain the
+    corpus; the three prototype units remain controls / provenance examples.
+  - **Track A-next and Track B are closed as superseded**; their outputs remain
+    evidence.
+  - **GUIDANCE is notified** that the charter's "bridge" (BLUEPRINT §M5) is
+    redefined at pattern level.
+- **Rationale.** Re-uses the provenance-carrying machinery already built for the
+  new pattern-level pipeline.
+- **Alternatives considered.** Rebuild from scratch --- discards tested
+  provenance machinery.
+- **Consequences.** No code changes under this entry; the rewritten agent prompt
+  and pattern extractor are later packages. `docs/BLUEPRINT.md` is not edited
+  here; the bridge redefinition is put to GUIDANCE (design document §6).
+- **Affected files:** `docs/DECISION_LOG.md`, `docs/PROJECT_STATE.md`,
+  `docs/BENCHMARK_REDESIGN_2026-10-29.md`.
+
+## D-040 --- External reference recorded: `ENSURE_Prompt Use Cases_v3.xlsx`
+
+- **Date:** supplied by the mentor 2026-10-29; hash computed 2026-10-29.
+- **Status:** **decided.**
+- **Owner:** Kaiyuan Liao (record); the mentor supplied the file.
+- **Decision.** Record the spreadsheet as an external reference.
+  - **File name as received:** `ENSURE_Prompt Use Cases_v3.xlsx` (with a space;
+    the work package wrote `ENSURE_Prompt_Use_Cases_v3.xlsx`).
+  - **SHA-256:**
+    `d3471bfc19294c1872b50add2d1f9e3b1c92d3e985a4b2af0c889ee6f754dee2`
+    (computed by the EXECUTOR on the Mac, 2026-10-29; 15,420 bytes).
+  - **Contents:** one sheet, ten use cases (Infrastructure Identification …
+    Resilience Decision Support); use-case names and column headers in
+    `docs/REFERENCES.md`.
+  - **Taken from it:** the item fields, per D-037; the idea of a capability
+    ladder (D-038).
+  - **Out of scope:** the infrastructure and graph modalities.
+- **Rationale.** The item schema derives from it; the source must be pinned.
+- **Alternatives considered.** None.
+- **Consequences.** **Nothing from the file is stored in the repository** except
+  this record and the `docs/REFERENCES.md` entry.
+- **Affected files:** `docs/DECISION_LOG.md`, `docs/REFERENCES.md`.

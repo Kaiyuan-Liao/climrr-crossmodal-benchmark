@@ -1,18 +1,34 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-10-27   Next meeting: not yet scheduled --- bring the items under *For the next meeting* below; the answer sheet is still outstanding
+Last updated: 2026-10-29   Next meeting: not yet scheduled --- bring the items under *For the next meeting* below
 
 ## Status in five lines
 
-1. **The table is pinned and partly interpreted**: 62,834 rows, 275 columns, read as text; 41 columns interpreted (21 stated by the dictionary, 20 reasoned and marked so). Nothing reasoned is confirmed --- **the answer sheet has still not been reviewed**, so all 20 stay `inferred_candidate`; the project proceeds on "our reading" (D-014), which promotes nothing.
-2. **The strict search found papers but no link.** 20 papers read twice and adjudicated gave **0 of 354** qualifying statement--unit pairs (D-027); the family-level survey separated three levels of coverage (D-028). Both remain recorded as diagnostics.
-3. **On 2026-10-22 you answered "good" to questions 1--3**: a family-level table-side object with the exact metric and scenario kept as provenance; state, multi-state or climate-region geography on the table side; and cross-location comparison as a question type. Question 4 (which further families to govern) was not discussed and stays open.
-4. **Your direction is now the governing principle (D-029):** soften the rules and use an LLM agent's semantic understanding to obtain soft-constrained QAs, with the table-side and paper-side sources recorded exactly so that a person can check each QA. Every LLM output is an `llm_candidate` until a deterministic check and a human review; nothing an LLM produces changes the concept map, column statuses or compatibility rules.
-5. **Next:** the two tracks you asked for --- **Track C**, LLM-assisted grouping of the 243 place-candidate papers into passage → unit → QA type → example QA (D-030), and **Track D**, table-grounded question templates whose answers are computed from the table (D-031). Both are at the design stage; **no QA has been generated yet**. The earlier unit-granularity diagnostic and literature survey are kept but deprioritized behind them.
+1. **On 2026-10-29 you redirected the benchmark.** The four soft-QA examples were too specific to the table's numbers and the papers' details; the benchmark is **closed-book** --- the model under test gets only the question, never the table or a paper (D-035).
+2. **New design: pattern-level open-ended QA (D-036).** Table-side patterns (direction, magnitude class, regional and seasonal contrasts, scenario and horizon) are derived deterministically at state / multi-state / climate-region level; literature statements (mechanisms, drivers, consensus, caveats) are extracted by an agent and aggregated across papers. The sources become the answer key and its provenance, not the question's subject. Design: [`BENCHMARK_REDESIGN_2026-10-29.md`](BENCHMARK_REDESIGN_2026-10-29.md).
+3. **Each item follows your ENSURE use-case sheet (D-037, D-040)** --- prompt, modalities, relationships, evidence, capability, desired output, reference answer, guardrails --- plus a rubric and exact provenance. An eight-rung hazard-projection ladder is **proposed** for your confirmation (D-038).
+4. **The table is still only partly interpreted**: 41 columns interpreted, 20 of them reasoned and unconfirmed. The FWI columns and `State` / `NAME` remain `inferred_candidate`, and table-side patterns depend on them --- so question 0 below still matters under the new design.
+5. **Next:** a pilot of about ten items for your review. **No QA has been generated or accepted yet.**
 
 ## What I need from this meeting
 
-> ### **For the next meeting**
+> ### **For the next meeting (after 2026-10-29)**
+>
+> **(a) Does the new item schema match what you want?** The fields of your ENSURE sheet, plus a reference
+> answer, a weighted rubric (direction, magnitude class, region, mechanism, scenario/horizon, no-overclaim),
+> item-specific guardrails and exact provenance --- design document §2, with one illustrative item. Also: does
+> the eight-rung ladder (§3) fit?
+>
+> **(b) Review of the first pilot QAs** (about ten), each with basic information on how it was built.
+>
+> **Also, from the design document §6:** may a mechanism supported by a single paper appear if it is marked
+> single-source? States only, or also NCA climate regions (which need a state → region map and its source)?
+>
+> **Carried, and still relevant under the new design** (table-side patterns depend on them): question 0 below
+> (FWI columns IC-006 -- IC-010); `State` / `NAME` (IC-011, IC-012); the FWI percent-change scenario. Item A
+> below is superseded by the redesign; items B and C stay open.
+
+> ### **Prepared for 2026-10-29 (list of 2026-10-27)**
 >
 > Questions 1--3 of the 2026-10-22 list were answered "good" (see the meeting log). Two items are carried and
 > two are new.
@@ -151,6 +167,7 @@ listed here so the whole question inventory stays in one place. Each is
 | 2026-09-10 | Q0 | There is no additional metadata for the table — no newer data dictionary, no assembly document or script, no release note. | R-001, D-010. **Q0 closed, answered negative.** Paraphrase, not verbatim. |
 | 2026-09-10 | Q1–Q18 | "We do not need to use all the fields. We could let an AI reason out what the columns mean and use the fields that are reliable or can be reasonably explained. Each row stands for one event, so those fields can be used to construct the event and then build the connection to the literature. She wants to see examples." | R-002, D-010 (**approved 2026-09-13, with the GUIDANCE ruling incorporated as D-011**). A direction, not a column meaning: **no per-column answer was given for any of Q1–Q18**, and none was recorded. "Each row stands for one event" is Kaiyuan's reading and is **still to be confirmed with you** — it is line 1 of every checklist in `MENTOR_EXAMPLES.md`. Paraphrase, not verbatim. |
 | 2026-09-17, 2026-09-24 | — | No review of the `MENTOR_EXAMPLES` answer sheet occurred. | R-003, D-014. **No line answered; no status changed.** Not an answer to any question --- recorded because the ruling requires the outcome to be recorded either way. |
+| 2026-10-29 | --- (four soft-QA examples shown) | The examples are "not the type of question we want to build" --- all too specific to concrete numbers and details of the table and the papers. Use case: the question goes directly to an LLM, which answers from what it knows, with no table and no papers; extract general patterns from both sources and build open-ended QA. She will review generated QAs with basic info. Shared `ENSURE_Prompt Use Cases_v3.xlsx`. | D-035, D-036, D-040 (D-037, D-038, D-039 follow). Owner-relayed by Kaiyuan. **Names no column; no status changed.** |
 | 2026-10-22 | Meeting questions 1--3 of the 2026-10-22 list (not inventory Q1--Q3) | Q1 (exact metric vs governed family-level quantity with metric and scenario as provenance): "good" --- family-level table-side object accepted. Q2 (state / multi-state / climate-region as table-side geography): "good" --- accepted. Q3 (cross-location comparison as a question type): "good" --- accepted. | D-029. Owner-relayed by Kaiyuan. **Names no column; no status changed.** Meeting question 4 not discussed; open. |
 
 ## Meeting log
@@ -308,6 +325,49 @@ carried.
 
 **Newly asked:** which QA types and which human check protocol the mentor wants
 for soft-constrained QAs.
+
+### 2026-10-29 — mentor meeting
+
+**Brought:** the four soft-QA examples (2026-10-28).
+
+**Outcome, as relayed by Kaiyuan** (owner-relayed, recorded in his words):
+
+- The four examples are **not the type of question we want to build** --- all
+  too specific to concrete numbers and details of the table and the papers.
+  Recorded as `rejected_by_mentor: too specific` (D-036).
+- **Use case, stated by the mentor:** the benchmark question is given directly
+  to an LLM; the model answers from what it already knows; it receives **no
+  table and no papers**. Questions tied to "this paper" or "this table" are
+  therefore meaningless; we should **extract general patterns from both sources
+  and build open-ended QA** (D-035, D-036).
+- The mentor will review generated QAs, with basic information, to judge
+  whether they are what is needed.
+- **Supplied:** `ENSURE_Prompt Use Cases_v3.xlsx` --- ten use cases, each with
+  prompt, modalities, relationships, evidence, capability, desired output,
+  illustrative output and guardrails. Pinned in
+  [`REFERENCES.md`](REFERENCES.md) (D-040); not stored in the repository.
+
+**Kaiyuan's defaults, stated 2026-10-29:** answers are free text graded against
+a reference, not multiple choice; scenario names may appear if the relationship
+is kept correct ("RCP8.5 is one case of a high-emissions scenario"); no QA
+quota --- generate, sample representatives for human review, design filters
+from feedback (D-037).
+
+**Carried from earlier, still relevant under the new design** (table-side
+patterns depend on them): FWI column confirmation (IC-006 -- IC-010; question
+0); `State` / `NAME` (IC-011, IC-012); the FWI percent-change scenario.
+
+**Follows:** item schema (D-037), hazard-projection ladder v1 (D-038,
+**proposed**, for your confirmation), re-purposing of Tracks C and D and
+closure of Track A-next and Track B (D-039). Design:
+[`BENCHMARK_REDESIGN_2026-10-29.md`](BENCHMARK_REDESIGN_2026-10-29.md).
+
+**No column status moved.** The answers name no column, so no record is made in
+`data/metadata/resolutions.yaml`. The identities of the four examples were not
+recorded with the notes.
+
+**Newly asked:** (a) does the new item schema match what you want; (b) review
+of the first pilot QAs.
 
 ---
 

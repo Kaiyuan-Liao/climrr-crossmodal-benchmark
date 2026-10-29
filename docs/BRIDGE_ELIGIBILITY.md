@@ -328,3 +328,16 @@ or comparison slot --- "query-only use is still semantic use".
 
 The C/G/T/S/D judgments are recorded on every candidate for audit but are not
 the acceptance gate in Tracks C and D.
+
+## 11. Status after D-036: compatibility rules are audit metadata, not an acceptance gate
+
+Under the pattern-level redesign (D-035, D-036,
+[`BENCHMARK_REDESIGN_2026-10-29.md`](BENCHMARK_REDESIGN_2026-10-29.md)) the
+C/G/T/S/D compatibility rules of §§1--9 are **not an acceptance gate** for
+benchmark items. They are recorded as audit metadata only where a literature
+statement is tied to a specific table pattern. Acceptance rests on deterministic
+traceability (every table-side fact in an answer key is what the table shows;
+every mechanism traces to ≥ 2 papers or is marked single-source) and human
+review (§10 lifecycle). Column governance is unchanged: an `inferred_candidate`
+column still blocks acceptance. The rules and their past results (M5-WP2,
+M5-WP4) remain evidence.

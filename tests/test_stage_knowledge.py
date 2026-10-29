@@ -149,3 +149,7 @@ def test_the_list_carries_the_run2_ruling():
 
 def test_the_list_carries_the_external_references():
     assert "docs/REFERENCES.md" in sk.KNOWLEDGE_FILES
+
+
+def test_the_list_carries_the_redesign_document():
+    assert "docs/BENCHMARK_REDESIGN_2026-10-29.md" in sk.KNOWLEDGE_FILES
