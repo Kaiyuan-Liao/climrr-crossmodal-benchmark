@@ -7,8 +7,10 @@ generated: **no item, pattern, statement or answer in this document comes from a
 run**, and every value in §2 is marked illustrative.
 
 **Status.** D-035, D-036, D-037, D-039, D-040 decided; **D-038 (the ladder)
-proposed**, for mentor confirmation. Next work package: a pilot of about ten
-items (§4), not started.
+proposed**, for mentor confirmation. **GUIDANCE re-anchor ruling 2026-10-29:
+PASS WITH ACTIONS (D-041)**, ~10-item pilot authorized. **Pilot P1 done**
+(schema v2, NCA5 map, table-pattern extractor, statement agent; no item yet);
+next: the Polaris statement run, then P2 (aggregation, synthesis, review).
 
 ---
 
@@ -35,92 +37,79 @@ Consequences:
   `rejected_by_mentor: too specific` (D-036): they were tied to concrete numbers
   and details of the table and the papers.
 
-## 2. What an item is (D-037)
+## 2. What an item is (D-037; schema v2, D-041)
 
-An item adopts the field set of the mentor-supplied ENSURE use-case sheet
-(`ENSURE_Prompt Use Cases_v3.xlsx`, D-040, [`REFERENCES.md`](REFERENCES.md)),
-plus answer-key, provenance and review fields.
+**Machine schema: [`data/metadata/benchmark/item_schema_v2.json`](../data/metadata/benchmark/item_schema_v2.json)**
+(pinned in `data/manifest.json`; validator `src/climrr/benchmark_items.py`). It
+keeps the D-037 field set of the mentor-supplied ENSURE use-case sheet
+(`ENSURE_Prompt Use Cases_v3.xlsx`, D-040, [`REFERENCES.md`](REFERENCES.md)) and
+adds the guardrails of the GUIDANCE re-anchor ruling
+([`BENCHMARK_REANCHOR_GUIDANCE_RULING.md`](BENCHMARK_REANCHOR_GUIDANCE_RULING.md),
+D-041). The sheet's column *What ENSURE Is Doing* maps to **`system_task`**.
 
-| Field | Content |
-| --- | --- |
-| `use_case` | the rung of the hazard-projection ladder (§3, D-038) |
-| `prompt` | open-ended question; names no source |
-| `reasoning_modalities` | `Hazard` / `Text` / `Hazard + Text` |
-| `key_relationships` | the relationship chain the item exercises (e.g. hazard metric → season → region → scenario → horizon → driver) |
-| `evidence_needed` | what a correct answer has to draw on |
-| `capability_tested` | what the item adds over lower rungs |
-| `desired_output_characteristics` | what a good answer looks like |
-| `reference_answer` | the sheet's "illustrative output": the table pattern plus the literature mechanism, in plain language |
-| `rubric` | required elements with weights: direction, magnitude class, region, mechanism, scenario/horizon handling, no-overclaim |
-| `guardrails` | item-specific limits (e.g. "RCP8.5 is one high-emissions scenario"; "modeled baseline, not observation"; "FWI is fire weather danger, not fire occurrence") |
-| `provenance` | table: columns, row-selection rule, derivation rule id, computed values; literature: paper ids, SHA-256, spans, aggregation count |
-| `review` | the D-033 lifecycle: `llm_candidate → deterministic_pass → human_review → accepted`, with `rejected_*` exits |
+| Group | Fields | Notes |
+| --- | --- | --- |
+| Identity / intent | `item_id`, `use_case_level` (ladder rung, D-038), `capability_tested`, `system_task`, `reasoning_modalities` (`Hazard` / `Text` / `Hazard + Text`), `key_relationships`, `evidence_needed`, `desired_output_characteristics`, `expected_knowledge_level` (`general_climate_science` / `specialist_climate_science`) | |
+| Prompt | `prompt`, `source_independent_answerability` (`yes` / `borderline` / `no`; only `yes` valid), `source_independence_note`, `source_leakage_check` {`clmrr_named`, `row_or_column_named`, `paper_named`, `hidden_exact_value_required`, `according_to_phrase`, `pass`} | the leakage check is recomputed by the validator; hits go to review |
+| Reference components | `table_patterns[]` (family, season, horizon, scenario, statistic, `geography_type` ∈ state / nca_region / multi_state_set / cell_control, geography, direction, `computed_value_or_range`, rank, `relative_magnitude` {class, definition} or null, `pattern_support_n`, `pattern_robustness`, provenance {columns, column_statuses, row_rule, derivation_rule_id, code_version, table_data_sha256}); `literature_mechanisms[]`, `literature_caveats[]` (statement, `statement_type`, `evidence_strength` ∈ multi_source / review / single_source, `reference_scope`, `supports[]` with paper id, SHA-256, JSON path, span, verbatim passage, independence note) | a table pattern is a record of `table_patterns_v1.jsonl` (deterministic); literature supports come from the statement agent |
+| Reference answer | `reference_answer` {`table_pattern`, `literature_interpretation`, `integrated`} | stored separately (ruling condition E) |
+| Grading | `rubric` {`required_points`, `acceptable_variants`, `optional_points`, `disallowed_claims`, `fatal_errors`}; `guardrails[]` | free-text answers graded against the reference |
+| Audit / provenance | `c_g_t_s_d_audit` (nullable; audit only), `generation` {generator_version, model, prompt_hash, timestamp, inputs_sha256} | |
+| Review | `review` {status (D-033 lifecycle), history, `kaiyuan_disposition`, `mentor_disposition`, `final_frozen` {prompt, reference_answer, rubric}} | accepted only with both dispositions and a frozen final (condition F) |
 
-The sheet's column *What ENSURE Is Doing* has no field of its own in D-037 (see
-§6).
+The validator's `validity` returns the ruling's six conditions A--F (source
+independence, deterministic table facts, provenance-backed literature, explicit
+evidence strength, decomposition, human acceptance); only an item meeting all six
+is benchmark-valid.
 
 ### 2.1 Worked item --- ILLUSTRATIVE, not generated
 
-> **Every value below is illustrative.** It shows the *shape* of an item. No
-> pattern was extracted, no paper was read, no number was computed, and nothing
-> here is an answer key. Bracketed `<…>` slots are filled only by the pipeline
-> (§4). The FWI columns are `inferred_candidate` (IC-006, IC-008, IC-010) and
-> `State` is `inferred_candidate` (IC-012), so an item of this kind **could not
-> reach `accepted` today** (D-033 addendum; mentor brief, question 0).
+> **Every value below is illustrative.** It shows the *shape* of a v2 item. No
+> item was generated, no paper was read, and nothing here is an answer key.
+> Bracketed `<…>` slots are filled only by the pipeline (§4). The FWI summer
+> value columns are `inferred_candidate` (IC-006..IC-010): a pattern on them is
+> `acceptance_blocked`, so an item of this kind **could not reach `accepted`
+> today**.
 
 ```yaml
-# ILLUSTRATIVE --- not generated, not an answer key
-item_id: ILLUSTRATIVE-0001
-use_case: 3  # Pattern + mechanism (D-038, proposed)
-prompt: >-
-  How is summer fire weather danger projected to change in California by the
-  late 21st century under a high-emissions scenario, and what drives that
-  change?
+# ILLUSTRATIVE --- not generated, not an answer key (schema v2)
+item_id: BI-ILLUS-0001
+use_case_level: 3            # Pattern + mechanism (D-038, proposed)
+system_task: <what the system does: retrieve the projected pattern, explain it>
 reasoning_modalities: Hazard + Text
-key_relationships: >-
-  fire weather index (summer) → state → high-emissions scenario → late-century
-  horizon → meteorological drivers
-evidence_needed: >-
-  projected direction and magnitude class of summer fire weather danger for the
-  region; the meteorological drivers named across the literature
-capability_tested: >-
-  joins a projected hazard pattern to its physical mechanism without treating
-  fire weather danger as fire occurrence
-desired_output_characteristics: >-
-  states direction and rough magnitude, names the scenario class and horizon,
-  explains the drivers, keeps hazard distinct from fire occurrence and from risk
-reference_answer: >-   # shape only
-  Summer fire weather danger in California is projected to <direction> by the
-  late 21st century under a high-emissions scenario (RCP8.5 is one such
-  scenario), a <magnitude class> change relative to a modeled historical
-  baseline. <Mechanism sentence(s), each traced to ≥ 2 papers or marked
-  single-source.> This describes meteorological fire danger, not whether fires
-  occur or what they burn.
-rubric:   # shape only; weights are illustrative
-  - {element: direction,         weight: <w>, required: "<direction> matches the table pattern"}
-  - {element: magnitude_class,   weight: <w>, required: "<magnitude class> matches the table pattern"}
-  - {element: region,            weight: <w>, required: "answer is about California / the stated region"}
-  - {element: mechanism,         weight: <w>, required: "names <driver cluster(s)> from the literature key"}
-  - {element: scenario_horizon,  weight: <w>, required: "treats the result as high-emissions, late-century; does not generalize to all scenarios"}
-  - {element: no_overclaim,      weight: <w>, required: "does not equate fire weather danger with fire occurrence, burned area or structure risk"}
-guardrails:
-  - RCP8.5 is one high-emissions scenario, not the only future.
-  - The historical value is a modeled baseline, not an observation.
-  - FWI is fire weather danger, not fire occurrence.
-provenance:
-  table:
-    columns: [wildfire_summer_Hist, wildfire_summer_Endc]  # indices 189, 191; inferred_candidate IC-006, IC-008
-    row_selection_rule: "State == 'California'"            # State inferred_candidate IC-012
-    derivation_rule_id: <DR-TD-003 / DR-TD-005 + magnitude-class rule, not yet defined>
-    computed_values: {baseline: <…>, future: <…>, change: <…>, direction: <…>, magnitude_class: <…>}
-  literature:
-    - cluster_id: <…>
-      aggregation_count: <n papers>
-      members:
-        - {paper_id: <…>, sha256: <…>, json_path: <…>, span: [<start>, <end>], passage: "<verbatim>"}
-review:
-  status: illustrative   # never entered the lifecycle
-  history: []
+expected_knowledge_level: general_climate_science
+prompt: >-
+  How is summer fire weather danger projected to change across the U.S.
+  Southwest by the late 21st century under a high-emissions scenario, and what
+  drives that change?
+source_independent_answerability: yes
+source_leakage_check: {clmrr_named: false, row_or_column_named: false, paper_named: false,
+                       hidden_exact_value_required: false, according_to_phrase: false, pass: true}
+reference_components:
+  table_patterns:            # records of artifacts/benchmark/table_patterns_v1.jsonl
+    - {pattern_id: <TP1-…>, family: fire_weather_index, season: summer, horizon: end, scenario: RCP8.5,
+       statistic: direction, geography_type: nca_region, geography: NCA5-SW, direction: <…>,
+       computed_value_or_range: <…>, rank: <…>, relative_magnitude: null, pattern_support_n: <…>,
+       pattern_robustness: <…>, acceptance_blocked: true}
+  literature_mechanisms:
+    - {statement: <…>, statement_type: mechanism, evidence_strength: <multi_source_supported | review_supported>,
+       reference_scope: regional_climate_expectation, supports: [<≥ 2 independent spans, or one review>]}
+  literature_caveats: [<…>]
+reference_answer:
+  table_pattern: <direction / relative standing, as the pattern states it>
+  literature_interpretation: <mechanism sentences, each traced to its supports>
+  integrated: >-
+    <…> Fire weather danger describes meteorological fire danger, not whether
+    fires occur. RCP8.5 is one high-emissions scenario, not the only future.
+rubric:
+  required_points: [direction, region, mechanism, scenario/horizon handled]
+  acceptable_variants: [<…>]
+  optional_points: [<…>]
+  disallowed_claims: [FWI equals fire occurrence or burned area]
+  fatal_errors: [<reverses the direction>]
+guardrails: [RCP8.5 is one high-emissions scenario, the historical value is a modeled baseline, FWI is fire danger not occurrence]
+c_g_t_s_d_audit: <audit only>
+review: {status: illustrative, kaiyuan_disposition: null, mentor_disposition: null, final_frozen: null}
 ```
 
 ## 3. The hazard-projection use-case ladder v1 (D-038, proposed)
@@ -213,30 +202,49 @@ cell joined to a single claim. GUIDANCE is notified (D-039).
 
 ## 6. Open questions
 
+Answers recorded 2026-10-29 from the GUIDANCE re-anchor ruling (D-041) and pilot
+P1 are marked **answered**; the rest stay open.
+
 **For the mentor**
 
-1. Does the item schema (§2) match what you want?
-2. Review of the first pilot items (next package, about ten).
+1. Does the item schema (§2) match what you want? --- *GUIDANCE accepted the
+   direction with additions (schema v2, §2); the mentor has not yet seen v2.*
+2. Review of the first pilot items (next package, about ten). --- *open;
+   GUIDANCE requires Kaiyuan and mentor acceptance of every pilot item.*
 3. Does the ladder (§3, D-038) fit, or should rungs be added, merged or dropped?
+   --- *open; GUIDANCE: span the ladder where evidence allows, no quota.*
 4. May a mechanism supported by a single paper appear in a reference answer if
-   it is marked single-source?
-5. Region granularity: states only, or also NCA climate regions? Regions need a
-   deterministic state → region map and a citable source for it.
+   it is marked single-source? --- **answered (ruling 2):** yes, labeled
+   `single_source_supported` and conservatively framed, never as consensus; a
+   core mechanism prefers ≥ 2 independent sources or one review/synthesis.
+5. Region granularity: states only, or also NCA climate regions? ---
+   **answered (ruling 3):** NCA regions, one pinned scheme with a tracked map
+   (`nca_regions_v1.yaml`; source verification pending Kaiyuan); other state
+   sets are `multi_state_set`.
 6. Still relevant under the new design (table-side patterns depend on them):
    confirmation of the FWI columns (IC-006 -- IC-010); `State` / `NAME`
-   (IC-011, IC-012); the FWI percent-change scenario.
+   (IC-011, IC-012); the FWI percent-change scenario. --- *open; FWI summer
+   value patterns are `acceptance_blocked`, state/region patterns provisional,
+   percent-change patterns carry `scenario: unstated_in_dictionary`.*
 
 **For GUIDANCE**
 
-7. Gate redefinition: the acceptance gate moves from claim-level compatibility
-   to deterministic traceability + human review; the bridge is redefined at
-   pattern level. Guardrails are requested.
-8. Whether single-source mechanisms may appear if marked (same as 4).
+7. Gate redefinition. --- **answered (D-041):** PASS WITH ACTIONS; the gate is
+   source-independent answerability + deterministic table facts +
+   provenance-backed literature + evidence strength + decomposition + human
+   acceptance (conditions A--F); C/G/T/S/D audit only.
+8. Whether single-source mechanisms may appear if marked. --- **answered**, as 4.
 
 **Not yet decided (needed before the pilot)**
 
-9. **Magnitude class** has no derivation rule: class boundaries (and whether
-   they are absolute or relative to baseline) must be defined and logged.
-10. The sheet's *What ENSURE Is Doing* column is not mapped to a D-037 field.
-11. The identities of the four 2026-10-28 examples were not given in the work
-    package; they are recorded as a set until named.
+9. **Magnitude class.** --- **answered (ruling 5):** relative terciles among U.S.
+   states, disclosed as relative, never an absolute threshold or the sole key;
+   implemented as DR-PT-005 with its degeneracy guards (`TABLE_PATTERNS_V1.md`).
+10. The sheet's *What ENSURE Is Doing* column. --- **answered (D-041):** field
+    `system_task`.
+11. The identities of the four 2026-10-28 examples. --- **ids attached** to D-036
+    (`C-247866001-01`, `C-199098498-02` with -01/-03, `C-226260658-01`,
+    `C-53050065-03`); `C-199098498-03` and `C-53050065-03` are not in
+    `softqa_run1` --- flagged to the COORDINATOR.
+12. **New:** per-cell percent-change columns are not averaged (D-042, owner;
+    for COORDINATOR / GUIDANCE confirmation).
