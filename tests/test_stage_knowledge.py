@@ -153,3 +153,8 @@ def test_the_list_carries_the_external_references():
 
 def test_the_list_carries_the_redesign_document():
     assert "docs/BENCHMARK_REDESIGN_2026-10-29.md" in sk.KNOWLEDGE_FILES
+
+
+def test_the_list_carries_the_reanchor_ruling():
+    """Pilot P1, Phase A: the GUIDANCE re-anchor ruling of 2026-10-29 (D-041)."""
+    assert "docs/BENCHMARK_REANCHOR_GUIDANCE_RULING.md" in sk.KNOWLEDGE_FILES

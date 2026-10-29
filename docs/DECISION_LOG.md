@@ -2089,6 +2089,13 @@ code emits, and the next GUIDANCE packet still chooses.
   - The four 2026-10-28 examples are recorded as
     `rejected_by_mentor: too specific`. *Their candidate ids were not supplied
     with the work package; they are recorded as a set until named.*
+  - **Ids attached (pilot P1, 2026-10-29, COORDINATOR):** `C-247866001-01`;
+    `C-199098498-02` (with -01 / -03); `C-226260658-01`; `C-53050065-03`. As
+    given. **Not all are in `softqa_run1`:** run 1 holds `C-247866001-01`,
+    `C-199098498-01`, `C-199098498-02`, `C-226260658-01` and `C-53050065-01`
+    only --- paper 199098498 has two candidates and paper 53050065 one, so
+    `C-199098498-03` and `C-53050065-03` do not exist there. Flagged to the
+    COORDINATOR; no id was substituted.
 - **Rationale.** Follows from D-035: a closed-book model cannot answer
   cell-specific or paper-specific questions.
 - **Alternatives considered.** Continue cell/claim-level soft QA (Tracks C, D as
@@ -2213,3 +2220,122 @@ code emits, and the next GUIDANCE packet still chooses.
 - **Consequences.** **Nothing from the file is stored in the repository** except
   this record and the `docs/REFERENCES.md` entry.
 - **Affected files:** `docs/DECISION_LOG.md`, `docs/REFERENCES.md`.
+
+## D-041 --- Benchmark objective re-anchored: GUIDANCE PASS WITH ACTIONS; pilot authorized
+
+- **Date:** 2026-10-29.
+- **Status:** **decided** (GUIDANCE ruling).
+- **Owner:** **GUIDANCE**; ruling tracked verbatim as
+  [`BENCHMARK_REANCHOR_GUIDANCE_RULING.md`](BENCHMARK_REANCHOR_GUIDANCE_RULING.md)
+  (SHA-256 `b72f045376c3859d5858d51b15a04bdc892bd61dc7dd0be940e7b4f46030dc8d`).
+- **Gate status:** **PASS WITH ACTIONS --- benchmark objective re-anchored.** The
+  mentor direction of 2026-10-22 / 2026-10-29 **supersedes the previous soft-QA
+  objective** (D-029; ruling action 1). The validity question is: *can a question
+  be answered from general climate-science knowledge, without exposing the table
+  or literature, while its reference answer remains fully grounded in
+  deterministic table patterns and auditable literature evidence?*
+- **The ruling's decision table, verbatim:**
+
+| Question | Ruling |
+|---|---|
+| Proposed benchmark-valid gate sufficient? | **Yes, with source-independent answerability and evidence-strength additions** |
+| Prompt may name the data/papers? | **No** |
+| Exact hidden values required for answer? | **Generally no** |
+| Table facts deterministic? | **Required** |
+| Literature mechanisms provenance-backed? | **Required** |
+| Human acceptance? | **Required** |
+| Pilot review by Kaiyuan + mentor? | **Yes** |
+| Single-source literature statement allowed? | **Yes, if explicitly marked and not framed as consensus** |
+| Core mechanism from one ordinary paper? | **Prefer no** |
+| One review/synthesis source sufficient for a core mechanism? | **Yes, if clearly a synthesis** |
+| NCA climate regions acceptable? | **Yes** |
+| State→region map tracked/cited/versioned? | **Required** |
+| Ad hoc region membership allowed? | **No** |
+| Additional schema guardrails? | **Yes — answerability, evidence strength, scope, grading tolerance, leakage, robustness** |
+| Relative terciles allowed? | **Yes, as disclosed relative descriptors** |
+| Treat “large” as absolute threshold? | **No** |
+| Store underlying value/range alongside tercile? | **Required** |
+| Use tercile as sole correctness target? | **No** |
+| ~10-item pilot now? | **Authorized** |
+| QA generation generally unrestricted? | **No — pilot only under this gate** |
+
+- **The six validity conditions** (all required; ruling §1):
+  - **A. Source-independent prompt** --- names no table, no paper, no hidden
+    row/column identifier, no obscure exact value; reasonably answerable from
+    general climate-science knowledge; `source_independent_answerability`
+    `yes | borderline | no`, only `yes` valid.
+  - **B. Deterministic table-side reference facts** --- approved columns,
+    explicit aggregation rule, recorded rows/states/regions, period, scenario,
+    season, statistic, computed value/range/rank, code/rule version; no LLM
+    inference creates a table fact.
+  - **C. Provenance-backed literature statements** --- paper ids, hashes, exact
+    passages, extracted statement, evidence-strength designation.
+  - **D. Explicit evidence strength** --- `multi_source_supported`,
+    `review_supported`, `single_source_supported` (and caveat), never presented
+    with equal epistemic strength.
+  - **E. Reference-answer decomposition** --- `table_pattern`,
+    `literature_interpretation`, integrated answer stored separately; a table
+    pattern is not a mechanism.
+  - **F. Human acceptance** --- Kaiyuan review, mentor review, final frozen
+    prompt / reference / rubric; mentor acceptance required for every pilot item.
+- **Standing rules.**
+  - **Single-source statements:** core mechanism / consensus claims need ≥ 2
+    independent sources or one explicit review/synthesis; single-source
+    statements only when labeled `single_source_supported` and conservatively
+    framed, never as consensus. Two papers citing the same study are not
+    automatically independent.
+  - **Regions:** one cited, version-pinned scheme --- NCA regions --- with a
+    tracked deterministic state → region map (`region_scheme_id`,
+    `region_scheme_name`, `region_scheme_version`, `source_citation`,
+    `state_to_region_map`, `map_sha256`), fixed before inspecting outcomes;
+    membership never hand-edited; other state sets are `multi_state_set`, never
+    "climate regions".
+  - **Terciles:** relative terciles are a disclosed relative descriptor among
+    U.S. states under the same family / season / horizon / scenario --- never an
+    absolute threshold, never the sole answer key; direction, value/range and
+    relative class stored separately; not used for a small population, many
+    ties, a degenerate distribution, weighting-sensitive grouping, or missing
+    states that move the cut points.
+  - C/G/T/S/D is kept as audit metadata only, never the validity gate.
+- **Pilot:** a ~10-item pilot is **authorized** under this gate; QA generation is
+  otherwise not unrestricted.
+- **Field mapping (this package):** the ENSURE sheet column *What ENSURE Is Doing*
+  (D-040) maps to item field **`system_task`** (resolves design §6 item 10).
+- **Consequences (pilot P1, this package):** item schema v2
+  (`data/metadata/benchmark/item_schema_v2.json`) and validator
+  (`src/climrr/benchmark_items.py`); NCA5 map
+  (`data/metadata/geography/nca_regions_v1.yaml`, pinned; **source verification
+  pending Kaiyuan** --- the NCA5 site did not resolve from the EXECUTOR's
+  machine); deterministic table-pattern extractor
+  (`scripts/extract_table_patterns.py`, rules DR-PT-001..008); literature-statement
+  agent (`scripts/litcollect/litstatement_agent.py`, not run). No item generated,
+  no model call; no column status, concept-map entry or compatibility rule
+  changed. Report `reports/milestones/PILOT_BENCHMARK_REPORT.md`.
+- **Affected files:** `docs/DECISION_LOG.md`,
+  `docs/BENCHMARK_REANCHOR_GUIDANCE_RULING.md`, `scripts/stage_knowledge.py`,
+  `docs/BENCHMARK_REDESIGN_2026-10-29.md`, `docs/PROJECT_STATE.md`.
+
+## D-042 --- Per-cell percent-change columns are not averaged in table patterns
+
+- **Date:** 2026-10-29.
+- **Status:** **decided** (owner); **for COORDINATOR / GUIDANCE confirmation.**
+- **Owner:** Kaiyuan Liao, on the EXECUTOR's escalation during pilot P1.
+- **Context.** The pilot P1 work package asked for state / NCA-region aggregates
+  as a cell mean, including the verified FWI percent-change columns 180--202
+  (Pmid / Pend, four seasons). The M1-WP3b GUIDANCE ruling (evidence check 3)
+  says: "Do not average identifiers, categorical labels, percentages, or
+  quantities for which a mean is not scientifically interpretable." Track D v1
+  excluded these columns for the same reason.
+- **Decision.** For the per-cell percent-change columns, **no central value** is
+  computed at state or region level (DR-PT-006): the pattern is the cells' sign
+  counts, the majority direction and the min--max over cells. Hence no rank, no
+  tercile and no largest-change season for them; each skip is recorded with its
+  reason. The heat-index and FWI-summer-value `percent_change` is unaffected: it
+  is DR-TD-004, a ratio of mean change to mean baseline, not a mean of
+  percentages.
+- **Alternatives considered.** A cell median as central value (a new rule; bends
+  the ruling's intent); the cell mean as the work package wrote (would override
+  M1-WP3b without GUIDANCE).
+- **Affected files:** `src/climrr/table_patterns.py`, `docs/TABLE_PATTERNS_V1.md`,
+  `reports/milestones/PILOT_BENCHMARK_REPORT.md`.
+
