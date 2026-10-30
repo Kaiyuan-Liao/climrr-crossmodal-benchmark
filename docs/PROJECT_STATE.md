@@ -47,6 +47,8 @@ session reasoning correctly from out-of-date facts and repeating them.
 - **Literature-statement agent** `scripts/litcollect/litstatement_agent.py` (v1,
   pinned in its test; system prompt `998640ac…38cc8`); **not run**. Polaris
   invocation in `src/climrr/litstatements.py`.
+- litstatement run 1 interrupted by Metis gateway timeouts (3/5 papers); agent
+  v2 adds Sophia vLLM host, retries; rerun pending (D-043).
 - **Flagged to the COORDINATOR:** rejected-example ids `C-199098498-03` and
   `C-53050065-03` are not in `softqa_run1`; D-042 needs confirmation; the
   NCA map needs Kaiyuan's source check before any region pattern is used in an

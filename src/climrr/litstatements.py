@@ -1,7 +1,7 @@
-"""Literature statements (pilot P1, D-039, D-041): the agent's output, read back.
+"""Literature statements (pilot P1, D-039, D-041, D-043): the agent's output, read back.
 
 `scripts/litcollect/litstatement_agent.py` (derived from `softqa_agent.py` v2, whose
-locator it imports) asks the model for up to eight **general statements** a paper
+locator it imports) asks the model for up to six **general statements** a paper
 supports about fire weather / fire danger indices or heat index / humid heat ---
 mechanism, driver, consensus, caveat or pattern --- each with a verbatim passage,
 and runs the deterministic pre-check: passage re-slice (exact → normalized →
@@ -23,16 +23,25 @@ column statuses or compatibility rules.
 its invocation is documented here, as for Track C). `$CLIMRR_REPO` is a checkout
 of the pinned commit; run from the litcollect root so `index/…` and the output
 directory stay relative and no absolute path lands in any output; the ALCF
-inference credential is in the environment variable the agent's `main` reads.
-`softqa_agent.py` must sit beside the agent (it does in the repository).
+inference credential is in the environment variable the agent's `main` reads
+(the same variable whichever `--base-url` is given). `softqa_agent.py` must sit beside the
+agent (it does in the repository).
 
-Run 1 --- the 243 frozen place candidates first:
+Run 1 --- the 243 frozen place candidates first, on Sophia vLLM (D-043; Metis
+remains the fallback when the Sophia job is down --- drop `--base-url` / `--model`,
+and use one host per run):
 
     cd "$LITCOLLECT_ROOT_POLARIS"
     PYTHONPATH="$CLIMRR_REPO/src" python "$CLIMRR_REPO/scripts/litcollect/litstatement_agent.py" \\
-        --candidates "$CLIMRR_REPO/data/metadata/softqa/trackc_candidates_v1.json" \\
-        --index index/full_705k_v2_filtered --out litstatements/run1 \\
-        --source-commit "$(git -C "$CLIMRR_REPO" rev-parse HEAD)"
+      --candidates "$CLIMRR_REPO/data/metadata/softqa/trackc_candidates_v1.json" \\
+      --index index/full_705k_v2_filtered --out litstatements/run1 \\
+      --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 --model openai/gpt-oss-120b \\
+      --sleep 2 --source-commit "$(git -C $CLIMRR_REPO rev-parse HEAD)" 2>&1 | tee -a reports/litstatements_run1.log
+
+Reusing `--out litstatements/run1` is intended: on start the agent moves each
+run-1 `result.json` that records an HTTP error (the Metis 504/502 papers) to
+`result.failed_<timestamp>.json` and processes that paper again; finished papers
+are skipped.
 
 Then, optionally, the full LITCORPUS-02 (1,308 items): a new frozen candidates
 file `data/metadata/benchmark/litstatement_candidates_litcorpus02_v1.json`, built
@@ -44,12 +53,18 @@ built here. The 243 already processed are skipped if the same `--out` is reused
 (restartable per paper).
 
 Defaults: Metis `gpt-oss-120b`, temperature 0, `--max-chars 90000` (a longer
-paper is truncated and flagged), `--max-tokens 6000`; the reasoning-field
-fallback of `call_model` applies. Restartable: a paper with `result.json` is
-skipped; `statements.jsonl` and `summary.json` are rebuilt from every
-`result.json` at the end of each invocation. Run evidence: `agent.log`, per-paper
-`result.json` / `prompt_user.txt` / `response.json`, `statements.jsonl`,
-`summary.json`.
+paper is truncated and flagged), `--max-tokens 3500`, `--timeout 300`,
+`--sleep 0`; the reasoning-field fallback of `call_model` applies. Every record,
+`result.json` and `summary.json` carries `base_url`, `model` and `endpoint_label`
+(`metis` / `sophia_vllm` / `other`). HTTP 5xx, connection errors, timeouts and
+empty or unparseable bodies are retried 3 times (10 s / 30 s / 60 s, `RETRY`
+lines); a paper that still fails, or gets a 4xx, has no `result.json` (`FAIL`
+line) and is appended to `failed_papers.txt`, so a restart retries it.
+Restartable: a paper with `result.json` is skipped; `statements.jsonl` and
+`summary.json` are rebuilt from every `result.json` at the end of each
+invocation. Run evidence: `agent.log`, per-paper `result.json` /
+`prompt_user.txt` / `response.json` (and any `result.failed_*.json`),
+`failed_papers.txt`, `statements.jsonl`, `summary.json`.
 """
 
 from __future__ import annotations
@@ -60,7 +75,7 @@ from pathlib import Path
 from climrr.paths import REPO_ROOT
 
 AGENT_PATH = REPO_ROOT / "scripts" / "litcollect" / "litstatement_agent.py"
-GENERATOR_VERSION = "litstatement_agent v1"
+GENERATOR_VERSION = "litstatement_agent v2"
 PASS = "deterministic_pass"
 
 

@@ -1,4 +1,4 @@
-"""Literature-statement agent --- `scripts/litcollect/litstatement_agent.py` v1 (pilot P1, D-041).
+"""Literature-statement agent --- `scripts/litcollect/litstatement_agent.py` v2 (pilot P1, D-041, D-043).
 
 Runs the pinned agent end to end against a local mock chat-completions server and
 a synthetic `build_index.py` index. Checks the deterministic pre-check: an exact
@@ -6,8 +6,12 @@ passage passes with the right `[start,end)`; a fabricated passage, a `background
 passage, an over-long passage, an unknown enum and a digit-heavy general statement
 are rejected; a digit-heavy `specific_result` passes; an `elsewhere_in_paper`
 scenario keeps its value only if its quote re-slices exactly, else `unsupported`;
-statements past eight are recorded and flagged; the reasoning-field fallback
+statements past six are recorded and flagged; the reasoning-field fallback
 parses; restart skips finished papers; no units or table values reach the model.
+v2: HTTP 5xx / connection errors / empty bodies are retried with `RETRY` lines; a
+paper whose attempts all fail gets no result.json and is listed in
+failed_papers.txt; a v1 result.json recording an HTTP error is migrated aside;
+`base_url` / `model` / `endpoint_label` are recorded.
 The Polaris invocation is in `src/climrr/litstatements.py`.
 """
 
@@ -20,6 +24,7 @@ import os
 import subprocess
 import sys
 import threading
+from datetime import datetime
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 import pytest
@@ -30,8 +35,8 @@ from climrr.paths import REPO_ROOT
 
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
 AGENT = ls.AGENT_PATH
-AGENT_SHA256 = "42efdafd9d956fccff9697793048988b03bac85acbaad9c6e0634df0f17114d9"
-SYSTEM_PROMPT_SHA256 = "998640ac2cfb53e5f8135a14a1d86686477c45dfa30d7e664b4960967e138cc8"
+AGENT_SHA256 = "f70edbb33929354c4a5a3d3786f72c49ad41d201032a778725f3d004a1d370d6"
+SYSTEM_PROMPT_SHA256 = "fbedadd25a8a6a048983f9ed3c49997c73c4de771e9f5d689dacd9f56cb01fff"
 
 MECH = "Higher temperatures and lower relative humidity dry fine fuels and raise the fire weather index in summer."
 BACKGROUND = "The fire weather index combines temperature, humidity, wind and precipitation into one rating."
@@ -67,15 +72,17 @@ REPLIES = {
              st(MECH, scenario="RCP8.5", ssrc="elsewhere_in_paper", squote="RCP 8.5 runs", sloc="methods"),     # 07 unsupported
              st(MECH, stype="speculation"),                                                    # 08 bad enum
              st(LONG),                                                                         # 09 > 700 chars
-             st(MECH, stype="caveat")],                                                        # 10 past eight
+             st(MECH, stype="caveat")],                                                        # 10 past six
     "5002": [],
     "5003": [st(HEAT, statement="Humidity amplifies heat-index increases under warming.", section="abstract")],
 }
 
 
 class _Mock:
-    def __init__(self):
+    def __init__(self, failures=()):
+        """`failures`: what the first calls return before a normal reply --- an HTTP status (int) or "empty"."""
         self.prompts: list[tuple[str, str]] = []
+        self.failures = list(failures)
         mock = self
 
         class H(BaseHTTPRequestHandler):
@@ -84,7 +91,14 @@ class _Mock:
                 system, user = body["messages"][0]["content"], body["messages"][1]["content"]
                 mock.prompts.append((system, user))
                 iid = user.split("PAPER (item ", 1)[1].split(";", 1)[0]
-                text = "Answer: " + json.dumps({"statements": REPLIES[iid]})
+                fail = mock.failures.pop(0) if mock.failures else None
+                if isinstance(fail, int):
+                    self.send_response(fail)
+                    self.send_header("Content-Length", "11")
+                    self.end_headers()
+                    self.wfile.write(b"Bad Gateway")
+                    return
+                text = "" if fail == "empty" else "Answer: " + json.dumps({"statements": REPLIES[iid]})
                 msg = {"role": "assistant", "content": None, "reasoning_content": text} if iid == "5003" else \
                     {"role": "assistant", "content": text}
                 out = json.dumps({"model": body["model"], "choices": [{"message": msg}]}).encode()
@@ -108,19 +122,25 @@ def _env():
 
 def _cmd(idx, cands, out, url):
     return [sys.executable, str(AGENT), "--index", str(idx), "--candidates", str(cands), "--out", str(out),
-            "--base-url", url, "--model", "mock-model", "--source-commit", "abc1234"]
+            "--base-url", url, "--model", "mock-model", "--source-commit", "abc1234", "--backoff", "0,0,0"]
 
 
 @pytest.fixture(scope="module")
-def run(tmp_path_factory):
+def index(tmp_path_factory):
     pytest.importorskip("duckdb")
-    base = tmp_path_factory.mktemp("litst")
+    base = tmp_path_factory.mktemp("litst_idx")
     src, idx = base / "src", base / "idx"
     (src / "00").mkdir(parents=True)
     for d, obj in DOCS.items():
         (src / "00" / f"{d}.json").write_text(json.dumps(obj), encoding="utf-8")
     subprocess.run([sys.executable, str(TOOLS / "build_index.py"), "--root", str(src), "--out", str(idx)],
                    check=True, capture_output=True)
+    return idx
+
+
+@pytest.fixture(scope="module")
+def run(tmp_path_factory, index):
+    base, idx = tmp_path_factory.mktemp("litst"), index
     cands, out = base / "cands.json", base / "out"
     cands.write_text(json.dumps(PAPERS), encoding="utf-8")
     mock = _Mock()
@@ -153,9 +173,10 @@ def test_the_agent_is_pinned():
 
 def test_version_and_system_prompt_hash():
     a = _agent()
-    assert a.GENERATOR_VERSION == ls.GENERATOR_VERSION == "litstatement_agent v1"
+    assert a.GENERATOR_VERSION == ls.GENERATOR_VERSION == "litstatement_agent v2"
     assert hashlib.sha256(a.SYSTEM_PROMPT.encode("utf-8")).hexdigest() == SYSTEM_PROMPT_SHA256
-    for phrase in ("GENERAL statements", "at most 8 statements", "never restate it as fire occurrence",
+    assert a.MAX_STATEMENTS == 6 and "at most 8 statements" not in a.SYSTEM_PROMPT
+    for phrase in ("GENERAL statements", "at most 6 statements", "never restate it as fire occurrence",
                    '"elsewhere_in_paper"', '"specific_result"', "at most 700 characters"):
         assert phrase in a.SYSTEM_PROMPT
 
@@ -206,10 +227,10 @@ def test_elsewhere_scenario_needs_an_exact_quote(run):
     assert lost["status"] == "deterministic_pass"            # a context field becomes unsupported; not a rejection
 
 
-def test_statements_past_eight_are_recorded_and_flagged(run):
+def test_statements_past_six_are_recorded_and_flagged(run):
     r = json.loads((run["out"] / "5001" / "result.json").read_text())
     assert r["n_statements_proposed"] == 10 and len(r["statements"]) == 10
-    assert [s["over_limit"] for s in r["statements"]] == [False] * 8 + [True] * 2
+    assert [s["over_limit"] for s in r["statements"]] == [False] * 6 + [True] * 4
 
 
 def test_reasoning_field_fallback_is_parsed(run):
@@ -257,3 +278,122 @@ def test_to_support_maps_a_passing_record(run):
     assert sup["span_end"] - sup["span_start"] == len(sup["verbatim_passage"]) and sup["json_path"] == "$.results"
     with pytest.raises(ValueError):
         ls.to_support(run["s"]["S-5001-02"], "x")
+
+
+# --- v2: endpoint, retries, migration (D-043) ----------------------------------------------------------
+
+
+def test_endpoint_label_is_derived_from_the_url():
+    a = _agent()
+    assert a.endpoint_label(a.DEFAULT_BASE_URL) == "metis"
+    assert a.endpoint_label("https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1") == "sophia_vllm"
+    assert a.endpoint_label("http://127.0.0.1:8000/v1") == "other"
+
+
+def test_the_default_host_is_still_metis_and_the_caps_are_v2():
+    text = AGENT.read_text(encoding="utf-8")
+    assert 'DEFAULT_BASE_URL = "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1"' in text
+    assert 'ap.add_argument("--base-url", default=DEFAULT_BASE_URL)' in text
+    assert 'ap.add_argument("--model", default="gpt-oss-120b")' in text
+    assert 'ap.add_argument("--max-tokens", type=int, default=3500)' in text
+    assert 'ap.add_argument("--timeout", type=int, default=300)' in text
+    assert _agent().BACKOFF_SECONDS == (10, 30, 60)
+
+
+def test_records_and_summary_carry_the_endpoint(run):
+    r = json.loads((run["out"] / "5001" / "result.json").read_text())
+    assert (r["base_url"], r["model"], r["endpoint_label"]) == (run["mock"].url, "mock-model", "other")
+    assert all(x["endpoint_label"] == "other" and x["base_url"] == run["mock"].url for x in r["statements"])
+    s = json.loads((run["out"] / "summary.json").read_text())
+    assert (s["base_url"], s["model"], s["endpoint_label"]) == (run["mock"].url, "mock-model", "other")
+    assert s["endpoints_in_results"] == {f"other mock-model {run['mock'].url}": 3}
+    log = (run["out"] / "agent.log").read_text()
+    assert f"endpoint_label=other base_url={run['mock'].url} model=mock-model" in log
+
+
+def _one_paper(tmp_path, index, failures, iid="5003"):
+    cands, out = tmp_path / "cands.json", tmp_path / "out"
+    cands.write_text(json.dumps([p for p in PAPERS if p["item_id"] == iid]), encoding="utf-8")
+    mock = _Mock(failures)
+    try:
+        proc = subprocess.run(_cmd(index, cands, out, mock.url), env=_env(), capture_output=True, text=True)
+    finally:
+        mock.server.shutdown()
+    assert proc.returncode == 0, proc.stderr
+    return out, mock, (out / "agent.log").read_text()
+
+
+def test_two_502s_then_success_gives_one_record(tmp_path, index):
+    out, mock, log = _one_paper(tmp_path, index, [502, 502])
+    assert len(mock.prompts) == 3
+    assert [l.split(" ", 1)[1] for l in log.splitlines() if " RETRY " in l] == [
+        "RETRY paper=5003 attempt=2 reason=HTTP 502 Bad Gateway", "RETRY paper=5003 attempt=3 reason=HTTP 502 Bad Gateway"]
+    r = json.loads((out / "5003" / "result.json").read_text())
+    assert r["model_attempts"] == 3 and len(r["statements"]) == 1 and r["statements"][0]["status"] == "deterministic_pass"
+    assert not (out / "failed_papers.txt").exists()
+
+
+def test_an_empty_body_is_retried(tmp_path, index):
+    out, mock, log = _one_paper(tmp_path, index, ["empty"])
+    assert "RETRY paper=5003 attempt=2 reason=empty body" in log
+    assert json.loads((out / "5003" / "result.json").read_text())["model_attempts"] == 2
+
+
+def test_four_502s_leave_no_result_and_list_the_paper(tmp_path, index):
+    out, mock, log = _one_paper(tmp_path, index, [502] * 4)
+    assert len(mock.prompts) == 4 and log.count(" RETRY ") == 3
+    assert "FAIL paper=5003 reason=HTTP 502 Bad Gateway" in log
+    assert not (out / "5003" / "result.json").exists()
+    assert (out / "failed_papers.txt").read_text() == "5003\n"
+    assert json.loads((out / "summary.json").read_text())["papers"] == 0
+
+
+def test_a_4xx_is_not_retried(tmp_path, index):
+    out, mock, log = _one_paper(tmp_path, index, [401])
+    assert len(mock.prompts) == 1 and " RETRY " not in log and "FAIL paper=5003 reason=HTTP 401" in log
+    assert not (out / "5003" / "result.json").exists()
+
+
+def test_a_connection_error_is_retried_then_failed(tmp_path, index):
+    mock = _Mock()
+    mock.server.shutdown()
+    mock.server.server_close()                                   # nothing listens on the port any more
+    cands, out = tmp_path / "cands.json", tmp_path / "out"
+    cands.write_text(json.dumps(PAPERS[2:]), encoding="utf-8")
+    proc = subprocess.run(_cmd(index, cands, out, mock.url), env=_env(), capture_output=True, text=True)
+    assert proc.returncode == 0, proc.stderr
+    log = (out / "agent.log").read_text()
+    assert log.count(" RETRY ") == 3 and "reason=URLError" in log and "FAIL paper=5003" in log
+    assert (out / "failed_papers.txt").read_text() == "5003\n"
+
+
+def test_an_http_error_result_is_migrated_and_reprocessed(tmp_path, index):
+    out = tmp_path / "out"
+    (out / "5003").mkdir(parents=True)
+    stale = {"item_id": "5003", "model_parse_error": "HTTP 504", "statements": [], "n_statements_proposed": 0}
+    (out / "5003" / "result.json").write_text(json.dumps(stale))
+    keep = {"item_id": "5002", "model_parse_error": None, "statements": [], "n_statements_proposed": 0}
+    (out / "5002").mkdir()
+    (out / "5002" / "result.json").write_text(json.dumps(keep))
+    out, mock, log = _one_paper(tmp_path, index, [])
+    assert "MIGRATED paper=5003" in log and "MIGRATED paper=5002" not in log
+    moved = list((out / "5003").glob("result.failed_*.json"))
+    assert len(moved) == 1 and json.loads(moved[0].read_text()) == stale
+    assert len(mock.prompts) == 1
+    assert json.loads((out / "5003" / "result.json").read_text())["n_deterministic_pass"] == 1
+    assert json.loads((out / "5002" / "result.json").read_text()) == keep
+
+
+def test_sleep_paces_papers(tmp_path, index):
+    cands, out = tmp_path / "cands.json", tmp_path / "out"
+    cands.write_text(json.dumps(PAPERS[1:]), encoding="utf-8")
+    mock = _Mock()
+    try:
+        proc = subprocess.run(_cmd(index, cands, out, mock.url) + ["--sleep", "2.5"], env=_env(), capture_output=True,
+                              text=True)
+    finally:
+        mock.server.shutdown()
+    assert proc.returncode == 0, proc.stderr
+    stamps = [datetime.strptime(l.split(" ", 1)[0], "%Y-%m-%dT%H:%M:%SZ")
+              for l in (out / "agent.log").read_text().splitlines() if " arm=" in l]
+    assert len(stamps) == 2 and (stamps[1] - stamps[0]).total_seconds() >= 2

@@ -2339,3 +2339,30 @@ code emits, and the next GUIDANCE packet still chooses.
 - **Affected files:** `src/climrr/table_patterns.py`, `docs/TABLE_PATTERNS_V1.md`,
   `reports/milestones/PILOT_BENCHMARK_REPORT.md`.
 
+
+## D-043 --- Inference host for literature-statement extraction
+
+- **Date:** 2026-10-29.
+- **Status:** **decided** (COORDINATOR).
+- **Context.** Run 1 of `scripts/litcollect/litstatement_agent.py` on Polaris
+  (2026-10-29, Metis `gpt-oss-120b`) produced correct output for paper 134230133
+  and then HTTP 504 / 502 on 3 of the next 4 papers. The Metis gateway appears to
+  cut connections at about 60 s; a full-paper call with gpt-oss-120b's reasoning
+  takes 25--40 s and sometimes longer. The same model is served on Sophia vLLM
+  (`/resource_server/sophia/vllm/v1`, model id `openai/gpt-oss-120b`, confirmed
+  via `/resource_server/sophia/jobs` on 2026-10-29).
+- **Decision.** The same model (`gpt-oss-120b`) is served from **Sophia vLLM**
+  instead of Metis for literature-statement extraction. **One model per run.**
+  `base_url`, `model` and `endpoint_label` (`metis` / `sophia_vllm` / `other`)
+  are recorded in every record, every `result.json` and `summary.json`. **Metis
+  remains the fallback** when the Sophia job is down. Agent v2 adds `--base-url`
+  / `--model` (default unchanged: Metis), retries on HTTP 5xx, connection errors,
+  timeouts and empty or unparseable bodies (3 retries, 10 / 30 / 60 s), no
+  `result.json` for a paper that still fails (listed in `failed_papers.txt`),
+  migration of run-1 HTTP-error results to `result.failed_<timestamp>.json`, at
+  most 6 statements (was 8), `max_tokens` 3500 and `--sleep` pacing.
+- **Proposed, not authorized.** A later cross-model extraction (Llama-3.1-70B) on
+  the same papers as a robustness check.
+- **Affected files:** `scripts/litcollect/litstatement_agent.py` (v2),
+  `src/climrr/litstatements.py`, `tests/test_litstatement_agent.py`,
+  `docs/PROJECT_STATE.md`.

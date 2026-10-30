@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Pilot P1 — literature-statement agent (D-039, D-041; GUIDANCE re-anchor ruling 2026-10-29).
+"""Pilot P1 — literature-statement agent v2 (D-039, D-041, D-043; GUIDANCE re-anchor ruling 2026-10-29).
 
-Derived from softqa_agent.py v2. For each paper: give the model the FULL paper text and ask for up to 8
+Derived from softqa_agent.py v2. For each paper: give the model the FULL paper text and ask for up to 6
 GENERAL statements the paper supports about fire weather / fire danger indices or heat index / humid heat
 (mechanism, driver, consensus, caveat, pattern), each with a verbatim passage. No table value, no unit
 definition and no computed answer is given to the model. Then the deterministic pre-check on every
@@ -13,12 +13,19 @@ passage is rejected; the statement may not carry a digit-heavy specific value un
 field becomes `unsupported` (recorded, not a rejection). Status: `llm_candidate` -> `deterministic_pass`
 or `rejected_pre_review`.
 
+v2 (D-043): the host is a flag (`--base-url`, `--model`; default Metis `gpt-oss-120b`, Sophia vLLM serves the same
+model) and `base_url`, `model`, `endpoint_label` are recorded in every record and in summary.json. A call that fails
+with HTTP 5xx, a connection error, a timeout or an empty / unparseable body is retried 3 times (10 s / 30 s / 60 s;
+`RETRY` lines); if every attempt fails, or the server answers 4xx, no result.json is written (`FAIL` line) and the id
+is appended to failed_papers.txt, so a restart retries it. On start, a result.json that records an HTTP error (a v1
+artefact) is moved to `result.failed_<timestamp>.json` (`MIGRATED` line). `--sleep` paces papers.
+
 Output per paper `result.json`; aggregate `statements.jsonl` + `summary.json`; `agent.log`. Restartable per
 paper (skips papers with result.json). Runs on Polaris with the ALCF inference credential in the environment
 (the variable the Track C agent reads). The invocation is documented in
 src/climrr/litstatements.py.
 """
-import argparse, hashlib, json, os, re, sys, time, urllib.error
+import argparse, hashlib, http.client, json, os, re, sys, time, urllib.error
 from pathlib import Path
 
 import duckdb
@@ -26,15 +33,17 @@ import duckdb
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from softqa_agent import call_model, locate_passage  # noqa: E402  (v2, pinned byte-identical)
 
-GENERATOR_VERSION = "litstatement_agent v1"
-MAX_STATEMENTS = 8
+GENERATOR_VERSION = "litstatement_agent v2"
+MAX_STATEMENTS = 6
 MAX_PASSAGE_CHARS = 700
+BACKOFF_SECONDS = (10, 30, 60)  # one retry after each
+DEFAULT_BASE_URL = "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1"
 #: The variables Track B/C read the ALCF credential from; names assembled so the secrets scan needs no exemption.
 CREDENTIAL_ENV = ("TOK" "EN", "ALCF_INFERENCE_" "TOK" "EN")
 
 SYSTEM_PROMPT = """You are helping build a closed-book climate-science benchmark. You will read ONE scientific paper in full. Your task: extract the GENERAL statements this paper supports about fire weather / fire danger indices (for example the Fire Weather Index) or about the heat index / humid heat. A statement is something a climate scientist could say in general terms: a physical mechanism, a driver, a consensus the paper reports, a caveat or limitation, or a spatial / seasonal / scenario pattern. A fire weather or fire danger index describes meteorological fire danger: never restate it as fire occurrence, ignition, burned area or damage. A modeled historical baseline is not an observation.
 
-Return at most 8 statements. Fewer honest statements are better than many weak ones. If the paper supports none, return {"statements": []}. Never invent passages or statements. For each statement return:
+Return at most 6 statements. Fewer honest statements are better than many weak ones. If the paper supports none, return {"statements": []}. Never invent passages or statements. For each statement return:
 - "statement": ONE sentence, general, in your own words, faithful to the passage; no numbers unless they are essential to the statement.
 - "statement_type": one of "mechanism", "driver", "consensus", "caveat", "pattern".
 - "passage": an EXACT, verbatim copy of the contiguous passage in the paper that supports the statement (one to three sentences, at most 700 characters). Copy it character for character, including hyphens, quotes and spacing; do not shorten, do not add "...", do not merge sentences from different places. Stop at the end of a sentence in the paper.
@@ -163,15 +172,65 @@ def pre_review_check(st, sections):
     return ("deterministic_pass" if not checks["failed"] else "rejected_pre_review"), checks, located
 
 
-def summarise(out: Path):
+def endpoint_label(base_url: str) -> str:
+    if "/metis/" in base_url: return "metis"
+    if "/sophia/vllm/" in base_url: return "sophia_vllm"
+    return "other"
+
+
+class ModelCallFailed(Exception):
+    """A failure that is not retried (HTTP 4xx)."""
+
+
+def call_with_retries(call, say, iid, backoff=BACKOFF_SECONDS):
+    """(resp, content, secs, attempts) from the first attempt that returns a non-empty body; retries HTTP 5xx,
+    connection errors, timeouts and empty / unparseable bodies. Raises ModelCallFailed with the last reason."""
+    reason = None
+    for attempt in range(1, len(backoff) + 2):
+        if attempt > 1:
+            say(f"RETRY paper={iid} attempt={attempt} reason={reason}")
+            time.sleep(backoff[attempt - 2])
+        try:
+            resp, content, secs = call()
+            if content and content.strip():
+                return resp, content, secs, attempt
+            reason = "empty body"
+        except urllib.error.HTTPError as e:
+            body = e.read().decode("utf-8", "replace")[:300].replace("\n", " ")
+            reason = f"HTTP {e.code} {body}".strip()
+            if e.code < 500:
+                raise ModelCallFailed(reason) from e
+        except (OSError, http.client.HTTPException) as e:  # URLError, timeouts, resets, incomplete reads
+            reason = f"{type(e).__name__}: {e}"
+        except (json.JSONDecodeError, KeyError, IndexError, TypeError) as e:
+            reason = f"unparseable body ({type(e).__name__}: {e})"
+    raise ModelCallFailed(reason)
+
+
+def migrate_http_failures(out: Path, say):
+    """Move each result.json that records an HTTP error aside so its paper is processed again."""
+    stamp = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
+    for p in sorted(out.glob("*/result.json")):
+        try:
+            r = json.loads(p.read_text())
+        except Exception:  # noqa: BLE001
+            continue
+        if str(r.get("model_parse_error") or "").startswith("HTTP "):
+            p.rename(p.with_name(f"result.failed_{stamp}.json"))
+            say(f"MIGRATED paper={p.parent.name}")
+
+
+def summarise(out: Path, endpoint=None):
     allr, summary = [], {"papers": 0, "papers_with_error": 0, "papers_over_limit": 0, "statements": 0, "deterministic_pass": 0,
-                         "rejected_pre_review": 0, "rejected_by_check": {}, "by_statement_type": {}, "by_passage_type": {},
+                         "rejected_pre_review": 0, **(endpoint or {}), "endpoints_in_results": {}, "rejected_by_check": {}, "by_statement_type": {}, "by_passage_type": {},
                          "by_generality": {}, "by_region_scope": {}, "by_recovery": {}, "scenario_check": {}, "time_check": {}}
     for p in sorted(out.glob("*/result.json")):
         r = json.loads(p.read_text())
         if "statements" not in r:
             summary["papers_with_error"] += 1; continue
         summary["papers"] += 1
+        ep = f"{r.get('endpoint_label')} {r.get('model')} {r.get('base_url')}"
+        summary["endpoints_in_results"][ep] = summary["endpoints_in_results"].get(ep, 0) + 1
         summary["papers_over_limit"] += int(r.get("n_statements_proposed", 0) > MAX_STATEMENTS)
         for x in r["statements"]:
             allr.append(x); summary["statements"] += 1; summary[x["status"]] += 1
@@ -195,11 +254,13 @@ def main():
     ap.add_argument("--candidates", required=True, help="JSON: [{item_id, arm}] or text file of ids (arm from --arm)")
     ap.add_argument("--arm", default=None)
     ap.add_argument("--out", required=True)
-    ap.add_argument("--base-url", default="https://inference-api.alcf.anl.gov/resource_server/metis/api/v1")
+    ap.add_argument("--base-url", default=DEFAULT_BASE_URL)
     ap.add_argument("--model", default="gpt-oss-120b")
-    ap.add_argument("--max-tokens", type=int, default=6000); ap.add_argument("--timeout", type=int, default=300)
+    ap.add_argument("--max-tokens", type=int, default=3500); ap.add_argument("--timeout", type=int, default=300)
     ap.add_argument("--max-chars", type=int, default=90000, help="truncate paper text beyond this (recorded)")
     ap.add_argument("--limit", type=int, default=0); ap.add_argument("--only", default=None)
+    ap.add_argument("--sleep", type=float, default=0, help="seconds between papers")
+    ap.add_argument("--backoff", default=",".join(map(str, BACKOFF_SECONDS)), help="retry waits, seconds")
     ap.add_argument("--source-commit", default="unknown")
     a = ap.parse_args()
     credential = next((os.environ[v] for v in CREDENTIAL_ENV if os.environ.get(v)), None)
@@ -218,10 +279,14 @@ def main():
         cands = [{"item_id": l.strip(), "arm": a.arm} for l in cands_raw.splitlines() if l.strip()]
     only = set(a.only.split(",")) if a.only else None
     sys_sha = sha(SYSTEM_PROMPT)
+    backoff = tuple(float(x) for x in a.backoff.split(","))
+    endpoint = {"base_url": a.base_url, "model": a.model, "endpoint_label": endpoint_label(a.base_url)}
     idx = Path(a.index)
     idx_summary = json.loads((idx / "index_summary.json").read_text())
     con = duckdb.connect(); con.execute("SET threads=2"); con.execute("SET memory_limit='3GB'")
-    say(f"START {GENERATOR_VERSION} candidates={len(cands)} model={a.model} system_sha={sys_sha[:12]} index={idx_summary.get('content_identity_sha256','')[:12]}")
+    say(f"START {GENERATOR_VERSION} candidates={len(cands)} endpoint_label={endpoint['endpoint_label']} base_url={a.base_url} model={a.model} system_sha={sys_sha[:12]} index={idx_summary.get('content_identity_sha256','')[:12]}")
+
+    migrate_http_failures(out, say)
 
     done = 0
     for c in cands:
@@ -230,6 +295,7 @@ def main():
         pdir = out / iid
         if (pdir / "result.json").exists(): continue
         if a.limit and done >= a.limit: break
+        if done and a.sleep: time.sleep(a.sleep)
         pdir.mkdir(parents=True, exist_ok=True)
         rows = con.execute(f"SELECT s.section_idx, s.section_key, s.text, d.rel_path, d.sha256 FROM read_parquet('{(idx/'sections').as_posix()}/*.parquet') s JOIN read_parquet('{(idx/'docs').as_posix()}/*.parquet') d USING(doc_id) WHERE s.doc_id = ? ORDER BY s.section_idx", [iid]).fetchall()
         if not rows:
@@ -242,14 +308,16 @@ def main():
         (pdir / "prompt_user.txt").write_text(user, encoding="utf-8")
         t0 = time.time()
         try:
-            resp, content, secs = call_model(a.base_url, a.model, credential, SYSTEM_PROMPT, user, a.max_tokens, a.timeout)
-            (pdir / "response.json").write_text(json.dumps(resp, indent=2, ensure_ascii=False))
-            obj = extract_statements(content); perr = None if obj else "no JSON object with 'statements' found"
-        except urllib.error.HTTPError as e:
-            body = e.read().decode("utf-8", "replace")[:1000]; (pdir / "model_error.txt").write_text(f"HTTP {e.code}\n{body}\n")
-            obj, perr, secs = None, f"HTTP {e.code}", None
-        except Exception as e:  # noqa: BLE001
-            (pdir / "model_error.txt").write_text(f"{type(e).__name__}: {e}\n"); obj, perr, secs = None, f"{type(e).__name__}: {e}", None
+            resp, content, secs, attempts = call_with_retries(
+                lambda: call_model(a.base_url, a.model, credential, SYSTEM_PROMPT, user, a.max_tokens, a.timeout), say, iid, backoff)
+        except ModelCallFailed as e:
+            (pdir / "model_error.txt").write_text(f"{e}\n")
+            with open(out / "failed_papers.txt", "a") as f: f.write(iid + "\n")
+            done += 1
+            say(f"FAIL paper={iid} reason={e}")
+            continue
+        (pdir / "response.json").write_text(json.dumps(resp, indent=2, ensure_ascii=False))
+        obj = extract_statements(content); perr = None if obj else "no JSON object with 'statements' found"
         proposed = (obj or {}).get("statements", []) if isinstance(obj, dict) else []
         proposed = proposed if isinstance(proposed, list) else []
         records = []
@@ -258,7 +326,7 @@ def main():
             status, checks, located = pre_review_check(st, sections)
             records.append({
                 "statement_id": f"S-{iid}-{si+1:02d}", "track": "C-statements", "status": status, "generator_version": GENERATOR_VERSION,
-                "generator_model": a.model, "endpoint": a.base_url, "prompt_hash": sha(SYSTEM_PROMPT + user), "system_prompt_sha256": sys_sha,
+                "generator_model": a.model, "endpoint": a.base_url, **endpoint, "prompt_hash": sha(SYSTEM_PROMPT + user), "system_prompt_sha256": sys_sha,
                 "generation_timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "source_commit": a.source_commit,
                 "paper_item_id": iid, "paper_rel_path": rel_path, "paper_sha256": sha256, "arm": c.get("arm"),
                 "evidence": located["evidence"], "verbatim_passage": located["verbatim_passage"], "passage_as_proposed": st.get("passage"),
@@ -268,8 +336,8 @@ def main():
                 "pre_review_checks": checks, "pre_review_status": status,
                 "aggregation": None, "evidence_strength": None, "human_review": None,
             })
-        result = {"item_id": iid, "arm": c.get("arm"), "paper_sha256": sha256, "n_sections": len(sections), "paper_chars": len(paper_text),
-                  "truncated": truncated, "model_seconds": secs, "model_parse_error": perr, "n_statements_proposed": len(proposed),
+        result = {"item_id": iid, "arm": c.get("arm"), **endpoint, "generator_version": GENERATOR_VERSION, "paper_sha256": sha256, "n_sections": len(sections), "paper_chars": len(paper_text),
+                  "truncated": truncated, "model_seconds": secs, "model_attempts": attempts, "model_parse_error": perr, "n_statements_proposed": len(proposed),
                   "n_deterministic_pass": sum(1 for x in records if x["status"] == "deterministic_pass"),
                   "n_rejected_pre_review": sum(1 for x in records if x["status"] == "rejected_pre_review"),
                   "statements": records, "elapsed_seconds": round(time.time() - t0, 1)}
@@ -277,7 +345,7 @@ def main():
         done += 1
         say(f"{iid} arm={c.get('arm')} chars={len(paper_text)}{' TRUNC' if truncated else ''} statements={result['n_statements_proposed']} pass={result['n_deterministic_pass']} reject={result['n_rejected_pre_review']} model_s={secs} err={perr}")
 
-    s = summarise(out)
+    s = summarise(out, endpoint)
     say(f"DONE papers={s['papers']} statements={s['statements']} pass={s['deterministic_pass']} reject={s['rejected_pre_review']}")
 
 
