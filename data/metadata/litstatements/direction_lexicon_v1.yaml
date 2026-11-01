@@ -1,0 +1,46 @@
+# Direction lexicon v1 --- pilot P2a, DR-LIT-AGG-1 v2 (D-045).
+#
+# Assigns a statement a lexical DIRECTION for the aggregation partition only. It
+# is a list of words, not a meaning assignment: a statement is `increase` if its
+# sentence contains a word or phrase from `increase` and none from `decrease`,
+# `decrease` in the converse case, and `unspecified` otherwise (no term, or terms
+# from both lists).
+#
+# Matching: the statement is lowercased and every character outside [a-z0-9] is
+# replaced by a space; a single word matches a whole word, a two-word phrase
+# matches two adjacent words. Matching runs BEFORE stopword removal and before the
+# lemmatizer. The work package named the base forms (increase / rise / higher /
+# intensify / more frequent; decrease / decline / lower / less frequent); the
+# inflected forms below are the EXECUTOR's spelling-out of those base forms.
+#
+# A change is a new version (direction_lexicon_v2.yaml), never an edit.
+
+version: direction_lexicon_v1
+conflict_rule: terms from both lists -> unspecified
+increase:
+  - increase
+  - increases
+  - increased
+  - increasing
+  - rise
+  - rises
+  - rising
+  - rose
+  - risen
+  - higher
+  - intensify
+  - intensifies
+  - intensified
+  - intensifying
+  - more frequent
+decrease:
+  - decrease
+  - decreases
+  - decreased
+  - decreasing
+  - decline
+  - declines
+  - declined
+  - declining
+  - lower
+  - less frequent

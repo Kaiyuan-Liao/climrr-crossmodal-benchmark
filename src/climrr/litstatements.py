@@ -65,6 +65,15 @@ Restartable: a paper with `result.json` is skipped; `statements.jsonl` and
 invocation. Run evidence: `agent.log`, per-paper `result.json` /
 `prompt_user.txt` / `response.json` (and any `result.failed_*.json`),
 `failed_papers.txt`, `statements.jsonl`, `summary.json`.
+
+Run 2 (agent v2, Sophia vLLM, at `7919bbf`) is ingested by
+`scripts/ingest_litstatements.py` (`litstatements_run2.py`; D-044). Its 21 parse
+errors all stopped at `finish_reason: length` at 3,500 completion tokens, so a
+re-run of those papers would need a larger `--max-tokens`; not authorized for
+the pilot (D-044). **Agent v3** (pilot P2a, not yet run) adds `raw_response`,
+`raw_reasoning` (only when the content fallback fired), their lengths,
+`content_fallback` and `finish_reason` to every `result.json`, text truncated to
+20,000 characters; the system prompt is unchanged.
 """
 
 from __future__ import annotations
@@ -75,7 +84,7 @@ from pathlib import Path
 from climrr.paths import REPO_ROOT
 
 AGENT_PATH = REPO_ROOT / "scripts" / "litcollect" / "litstatement_agent.py"
-GENERATOR_VERSION = "litstatement_agent v2"
+GENERATOR_VERSION = "litstatement_agent v3"
 PASS = "deterministic_pass"
 
 

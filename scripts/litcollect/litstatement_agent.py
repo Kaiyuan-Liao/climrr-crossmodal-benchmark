@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pilot P1 — literature-statement agent v2 (D-039, D-041, D-043; GUIDANCE re-anchor ruling 2026-10-29).
+"""Pilot P1 — literature-statement agent v3 (D-039, D-041, D-043; pilot P2a hygiene; GUIDANCE re-anchor ruling 2026-10-29).
 
 Derived from softqa_agent.py v2. For each paper: give the model the FULL paper text and ask for up to 6
 GENERAL statements the paper supports about fire weather / fire danger indices or heat index / humid heat
@@ -20,6 +20,12 @@ with HTTP 5xx, a connection error, a timeout or an empty / unparseable body is r
 is appended to failed_papers.txt, so a restart retries it. On start, a result.json that records an HTTP error (a v1
 artefact) is moved to `result.failed_<timestamp>.json` (`MIGRATED` line). `--sleep` paces papers.
 
+v3 (pilot P2a, agent hygiene; not yet run): every result.json also stores the raw model text --- `raw_response` (the
+message content) and, when the content fallback fired (empty content, so the reasoning field was parsed),
+`raw_reasoning` --- each truncated to 20,000 characters, with their full lengths and the choice's `finish_reason`, so a
+parse error can be inspected from result.json alone (run 2: all 21 parse errors stopped at `finish_reason: length`).
+The system prompt is unchanged.
+
 Output per paper `result.json`; aggregate `statements.jsonl` + `summary.json`; `agent.log`. Restartable per
 paper (skips papers with result.json). Runs on Polaris with the ALCF inference credential in the environment
 (the variable the Track C agent reads). The invocation is documented in
@@ -33,9 +39,10 @@ import duckdb
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from softqa_agent import call_model, locate_passage  # noqa: E402  (v2, pinned byte-identical)
 
-GENERATOR_VERSION = "litstatement_agent v2"
+GENERATOR_VERSION = "litstatement_agent v3"
 MAX_STATEMENTS = 6
 MAX_PASSAGE_CHARS = 700
+MAX_RAW_CHARS = 20000
 BACKOFF_SECONDS = (10, 30, 60)  # one retry after each
 DEFAULT_BASE_URL = "https://inference-api.alcf.anl.gov/resource_server/metis/api/v1"
 #: The variables Track B/C read the ALCF credential from; names assembled so the secrets scan needs no exemption.
@@ -170,6 +177,18 @@ def pre_review_check(st, sections):
     mandatory = ["fields_complete", "enums_valid", "span_reslice_pass", "passage_length_pass", "passage_type_pass", "statement_value_pass"]
     checks["failed"] = [k for k in mandatory if not checks[k]]
     return ("deterministic_pass" if not checks["failed"] else "rejected_pre_review"), checks, located
+
+
+def raw_fields(resp):
+    """The raw model text for result.json: content always, reasoning only when the content fallback fired; truncated."""
+    choice = ((resp or {}).get("choices") or [{}])[0]
+    msg = choice.get("message") or {}
+    content = msg.get("content") or ""
+    reasoning = msg.get("reasoning_content") or msg.get("reasoning") or ""
+    fallback = not content and bool(reasoning)
+    return {"raw_response": content[:MAX_RAW_CHARS], "raw_response_chars": len(content),
+            "raw_reasoning": reasoning[:MAX_RAW_CHARS] if fallback else None, "raw_reasoning_chars": len(reasoning) if fallback else None,
+            "content_fallback": fallback, "finish_reason": choice.get("finish_reason"), "raw_max_chars": MAX_RAW_CHARS}
 
 
 def endpoint_label(base_url: str) -> str:
@@ -340,7 +359,7 @@ def main():
                   "truncated": truncated, "model_seconds": secs, "model_attempts": attempts, "model_parse_error": perr, "n_statements_proposed": len(proposed),
                   "n_deterministic_pass": sum(1 for x in records if x["status"] == "deterministic_pass"),
                   "n_rejected_pre_review": sum(1 for x in records if x["status"] == "rejected_pre_review"),
-                  "statements": records, "elapsed_seconds": round(time.time() - t0, 1)}
+                  "statements": records, "elapsed_seconds": round(time.time() - t0, 1), **raw_fields(resp)}
         (pdir / "result.json").write_text(json.dumps(result, indent=2, ensure_ascii=False))
         done += 1
         say(f"{iid} arm={c.get('arm')} chars={len(paper_text)}{' TRUNC' if truncated else ''} statements={result['n_statements_proposed']} pass={result['n_deterministic_pass']} reject={result['n_rejected_pre_review']} model_s={secs} err={perr}")

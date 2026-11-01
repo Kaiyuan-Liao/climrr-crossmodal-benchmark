@@ -1,0 +1,616 @@
+{
+  "version": "litaggregate v1",
+  "rule": "DR-LIT-AGG-1 v2",
+  "threshold": 0.3,
+  "df_max_share": 0.15,
+  "inputs": {
+    "statements_ingested": {
+      "path": "artifacts/litstatements/run2/statements_ingested.jsonl",
+      "sha256": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81"
+    },
+    "papers_meta": {
+      "path": "artifacts/litstatements/run2/papers_meta.json",
+      "sha256": "ce5cdaa7d6e9b05a42b40f16ac1c93d04fd3f724c1735cdaa7f7e1aa0d130ef5"
+    }
+  },
+  "lexicons": {
+    "direction_lexicon": {
+      "path": "data/metadata/litstatements/direction_lexicon_v1.yaml",
+      "sha256": "745526dc9f6e8ea4397192a390efc2a394524a25cdcc4dd461143989be0235fd"
+    },
+    "stopwords": {
+      "path": "data/metadata/litstatements/stopwords_v1.yaml",
+      "sha256": "dfbe6668d7d8c918e5827faac6562881ddb4284583b487ccdfa3e88d9b5bfb99"
+    },
+    "concept_lexicon": {
+      "path": "data/metadata/litstatements/concept_lexicon_v1.yaml",
+      "sha256": "c131fb56543eb9e5ca9854ae93e8eb09daad4c7eca239f416d70169917318963"
+    },
+    "df_filter_dropped": {
+      "path": "data/metadata/litstatements/df_filter_dropped_v1.yaml",
+      "sha256": "e0e89fa270edc7c2628fbc5d8886c7bad5cfd3b66f7db89f364bb70d1796d469"
+    }
+  },
+  "clusters_file": {
+    "path": "artifacts/litstatements/run2/clusters_v1.jsonl",
+    "sha256": "11bc074c6ef0a04a953e18e90febc1cfaef2d6bb9b9b7ebb5cfb7b79dfed556a"
+  },
+  "entering_statements": 747,
+  "entering_by_arm": {
+    "extreme_heat_v1": 416,
+    "fire_weather_v1": 331
+  },
+  "entering_by_role": {
+    "core_candidate": 379,
+    "cited_candidate": 106,
+    "background_consensus_candidate": 262
+  },
+  "partitions": [
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "direction": "increase",
+      "n_statements": 28
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "direction": "unspecified",
+      "n_statements": 116
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "direction": "increase",
+      "n_statements": 43
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "direction": "unspecified",
+      "n_statements": 75
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "direction": "increase",
+      "n_statements": 3
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "direction": "unspecified",
+      "n_statements": 12
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "direction": "increase",
+      "n_statements": 8
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "direction": "decrease",
+      "n_statements": 4
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "direction": "unspecified",
+      "n_statements": 62
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "direction": "increase",
+      "n_statements": 28
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "direction": "decrease",
+      "n_statements": 5
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "direction": "unspecified",
+      "n_statements": 32
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "mechanism",
+      "direction": "increase",
+      "n_statements": 19
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "mechanism",
+      "direction": "decrease",
+      "n_statements": 1
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "mechanism",
+      "direction": "unspecified",
+      "n_statements": 82
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "direction": "increase",
+      "n_statements": 24
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "direction": "decrease",
+      "n_statements": 2
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "direction": "unspecified",
+      "n_statements": 80
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "consensus",
+      "direction": "unspecified",
+      "n_statements": 11
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "caveat",
+      "direction": "increase",
+      "n_statements": 4
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "caveat",
+      "direction": "unspecified",
+      "n_statements": 62
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "direction": "increase",
+      "n_statements": 13
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "direction": "decrease",
+      "n_statements": 2
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "direction": "unspecified",
+      "n_statements": 31
+    }
+  ],
+  "df_dropped": {
+    "extreme_heat_v1": {
+      "heat": 314,
+      "temperature": 234,
+      "index": 159,
+      "heat index": 143,
+      "humidity": 124
+    },
+    "fire_weather_v1": {
+      "fire": 265,
+      "weather": 144,
+      "fire weather": 118,
+      "index": 85,
+      "danger": 80,
+      "fire danger": 78,
+      "fuel": 71,
+      "moisture": 70,
+      "weather index": 64,
+      "temperature": 61,
+      "condition": 60,
+      "wind": 52,
+      "wildfire": 51
+    }
+  },
+  "clusters": 731,
+  "singletons": 721,
+  "by_strength": {
+    "multi_source_supported": 3,
+    "review_supported": 24,
+    "single_source_supported": 455,
+    "background_only": 249
+  },
+  "multi_source_supported": 3,
+  "multi_source_relies_on_diagnostic_pair": [
+    "LC-extreme_heat_v1-driver-071"
+  ],
+  "by_arm_type_strength": [
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "multi_source_supported": 0,
+      "review_supported": 5,
+      "single_source_supported": 54,
+      "background_only": 73
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "multi_source_supported": 2,
+      "review_supported": 6,
+      "single_source_supported": 80,
+      "background_only": 27
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "multi_source_supported": 1,
+      "review_supported": 3,
+      "single_source_supported": 6,
+      "background_only": 4
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "multi_source_supported": 0,
+      "review_supported": 3,
+      "single_source_supported": 49,
+      "background_only": 22
+    },
+    {
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "multi_source_supported": 0,
+      "review_supported": 1,
+      "single_source_supported": 59,
+      "background_only": 5
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "mechanism",
+      "multi_source_supported": 0,
+      "review_supported": 3,
+      "single_source_supported": 45,
+      "background_only": 54
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "multi_source_supported": 0,
+      "review_supported": 1,
+      "single_source_supported": 74,
+      "background_only": 31
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "consensus",
+      "multi_source_supported": 0,
+      "review_supported": 1,
+      "single_source_supported": 4,
+      "background_only": 6
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "caveat",
+      "multi_source_supported": 0,
+      "review_supported": 0,
+      "single_source_supported": 43,
+      "background_only": 23
+    },
+    {
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "multi_source_supported": 0,
+      "review_supported": 1,
+      "single_source_supported": 41,
+      "background_only": 4
+    }
+  ],
+  "largest": [
+    {
+      "cluster_id": "LC-extreme_heat_v1-mechanism-041",
+      "n_statements": 6,
+      "n_papers": 6,
+      "n_independent_papers": 6,
+      "evidence_strength": "background_only",
+      "direction": "unspecified",
+      "representative": "Apparent temperature combines air temperature and humidity to represent perceived heat stress.",
+      "representative_id": "LS-253088381-01"
+    },
+    {
+      "cluster_id": "LC-extreme_heat_v1-mechanism-035",
+      "n_statements": 3,
+      "n_papers": 3,
+      "n_independent_papers": 3,
+      "evidence_strength": "background_only",
+      "direction": "unspecified",
+      "representative": "The Thornthwaite method computes potential evaporation using the Monthly Thornthwaite Heat Index, which is calculated from mean monthly temperature.",
+      "representative_id": "LS-239052352-02"
+    },
+    {
+      "cluster_id": "LC-extreme_heat_v1-mechanism-062",
+      "n_statements": 3,
+      "n_papers": 3,
+      "n_independent_papers": 3,
+      "evidence_strength": "background_only",
+      "direction": "unspecified",
+      "representative": "The heat index combines air temperature and relative humidity to represent how hot conditions feel to the human body.",
+      "representative_id": "LS-34148006-01"
+    },
+    {
+      "cluster_id": "LC-extreme_heat_v1-consensus-010",
+      "n_statements": 2,
+      "n_papers": 2,
+      "n_independent_papers": 2,
+      "evidence_strength": "multi_source_supported",
+      "direction": "unspecified",
+      "representative": "Daymet data have been shown to accurately represent mean heat index at weather stations, providing reliable humidity‑adjusted temperature information for epidemiological studies.",
+      "representative_id": "LS-259831216-02"
+    },
+    {
+      "cluster_id": "LC-extreme_heat_v1-driver-006",
+      "n_statements": 2,
+      "n_papers": 2,
+      "n_independent_papers": 2,
+      "evidence_strength": "multi_source_supported",
+      "direction": "increase",
+      "representative": "Higher heat index values are associated with increased odds of acute kidney injury among agricultural workers.",
+      "representative_id": "LS-199381463-01"
+    },
+    {
+      "cluster_id": "LC-extreme_heat_v1-driver-007",
+      "n_statements": 2,
+      "n_papers": 2,
+      "n_independent_papers": 2,
+      "evidence_strength": "single_source_supported",
+      "direction": "increase",
+      "representative": "Global warming is expected to increase the frequency of extreme heat events, raising heat exposure for agricultural workers.",
+      "representative_id": "LS-199381463-04"
+    },
+    {
+      "cluster_id": "LC-extreme_heat_v1-driver-071",
+      "n_statements": 2,
+      "n_papers": 2,
+      "n_independent_papers": 2,
+      "evidence_strength": "multi_source_supported",
+      "direction": "unspecified",
+      "representative": "In the studied Malaysian region, relative humidity has a stronger influence on monthly pan evaporation than solar radiation or wind speed.",
+      "representative_id": "LS-239052352-03"
+    },
+    {
+      "cluster_id": "LC-extreme_heat_v1-mechanism-079",
+      "n_statements": 2,
+      "n_papers": 2,
+      "n_independent_papers": 2,
+      "evidence_strength": "background_only",
+      "direction": "unspecified",
+      "representative": "The Wet‑Bulb Globe Temperature (WBGT) is a commonly used occupational heat‑stress index that combines wet‑bulb temperature, globe temperature, and shaded air temperature in a weighted sum.",
+      "representative_id": "LS-237371886-02"
+    },
+    {
+      "cluster_id": "LC-extreme_heat_v1-mechanism-082",
+      "n_statements": 2,
+      "n_papers": 2,
+      "n_independent_papers": 2,
+      "evidence_strength": "background_only",
+      "direction": "unspecified",
+      "representative": "Evaporation is driven by heat energy supply and vapor pressure gradient, which depend on air temperature, solar radiation, relative humidity, wind speed, and atmospheric pressure.",
+      "representative_id": "LS-239052352-01"
+    },
+    {
+      "cluster_id": "LC-extreme_heat_v1-mechanism-093",
+      "n_statements": 2,
+      "n_papers": 2,
+      "n_independent_papers": 2,
+      "evidence_strength": "single_source_supported",
+      "direction": "unspecified",
+      "representative": "The SPEI calculation uses a heat index derived from monthly mean temperature to estimate potential evapotranspiration.",
+      "representative_id": "LS-251560337-01"
+    }
+  ],
+  "sensitivity": [
+    {
+      "measure": "cosine",
+      "threshold": 0.2,
+      "clusters": 699,
+      "singletons": 674,
+      "multi_source_clusters": 10,
+      "largest": 17,
+      "clusters_over_25": 0
+    },
+    {
+      "measure": "cosine",
+      "threshold": 0.25,
+      "clusters": 722,
+      "singletons": 712,
+      "multi_source_clusters": 3,
+      "largest": 14,
+      "clusters_over_25": 0
+    },
+    {
+      "measure": "cosine",
+      "threshold": 0.3,
+      "clusters": 731,
+      "singletons": 721,
+      "multi_source_clusters": 3,
+      "largest": 6,
+      "clusters_over_25": 0
+    },
+    {
+      "measure": "cosine",
+      "threshold": 0.35,
+      "clusters": 735,
+      "singletons": 725,
+      "multi_source_clusters": 2,
+      "largest": 4,
+      "clusters_over_25": 0
+    },
+    {
+      "measure": "cosine",
+      "threshold": 0.4,
+      "clusters": 737,
+      "singletons": 729,
+      "multi_source_clusters": 2,
+      "largest": 4,
+      "clusters_over_25": 0
+    },
+    {
+      "measure": "cosine",
+      "threshold": 0.5,
+      "clusters": 744,
+      "singletons": 741,
+      "multi_source_clusters": 1,
+      "largest": 2,
+      "clusters_over_25": 0
+    },
+    {
+      "measure": "jaccard",
+      "threshold": 0.2,
+      "clusters": 706,
+      "singletons": 690,
+      "multi_source_clusters": 6,
+      "largest": 20,
+      "clusters_over_25": 0
+    },
+    {
+      "measure": "jaccard",
+      "threshold": 0.25,
+      "clusters": 721,
+      "singletons": 708,
+      "multi_source_clusters": 3,
+      "largest": 13,
+      "clusters_over_25": 0
+    },
+    {
+      "measure": "jaccard",
+      "threshold": 0.3,
+      "clusters": 733,
+      "singletons": 723,
+      "multi_source_clusters": 2,
+      "largest": 4,
+      "clusters_over_25": 0
+    },
+    {
+      "measure": "jaccard",
+      "threshold": 0.35,
+      "clusters": 737,
+      "singletons": 729,
+      "multi_source_clusters": 2,
+      "largest": 4,
+      "clusters_over_25": 0
+    },
+    {
+      "measure": "jaccard",
+      "threshold": 0.4,
+      "clusters": 741,
+      "singletons": 736,
+      "multi_source_clusters": 2,
+      "largest": 3,
+      "clusters_over_25": 0
+    },
+    {
+      "measure": "jaccard",
+      "threshold": 0.5,
+      "clusters": 745,
+      "singletons": 743,
+      "multi_source_clusters": 1,
+      "largest": 2,
+      "clusters_over_25": 0
+    }
+  ],
+  "rule_v1_degeneracy": [
+    {
+      "threshold": 0.25,
+      "concept_lexicon_merge": true,
+      "clusters": 54,
+      "singletons": 33,
+      "multi_source_clusters": 21,
+      "largest": 114,
+      "five_largest": [
+        114,
+        81,
+        78,
+        70,
+        60
+      ]
+    },
+    {
+      "threshold": 0.25,
+      "concept_lexicon_merge": false,
+      "clusters": 593,
+      "singletons": 551,
+      "multi_source_clusters": 25,
+      "largest": 63,
+      "five_largest": [
+        63,
+        14,
+        10,
+        8,
+        7
+      ]
+    },
+    {
+      "threshold": 0.35,
+      "concept_lexicon_merge": true,
+      "clusters": 54,
+      "singletons": 33,
+      "multi_source_clusters": 21,
+      "largest": 114,
+      "five_largest": [
+        114,
+        81,
+        78,
+        70,
+        60
+      ]
+    },
+    {
+      "threshold": 0.35,
+      "concept_lexicon_merge": false,
+      "clusters": 691,
+      "singletons": 675,
+      "multi_source_clusters": 5,
+      "largest": 35,
+      "five_largest": [
+        35,
+        7,
+        3,
+        3,
+        2
+      ]
+    },
+    {
+      "threshold": 0.45,
+      "concept_lexicon_merge": true,
+      "clusters": 54,
+      "singletons": 33,
+      "multi_source_clusters": 21,
+      "largest": 114,
+      "five_largest": [
+        114,
+        81,
+        78,
+        70,
+        60
+      ]
+    },
+    {
+      "threshold": 0.45,
+      "concept_lexicon_merge": false,
+      "clusters": 721,
+      "singletons": 713,
+      "multi_source_clusters": 2,
+      "largest": 16,
+      "five_largest": [
+        16,
+        6,
+        2,
+        2,
+        2
+      ]
+    }
+  ]
+}

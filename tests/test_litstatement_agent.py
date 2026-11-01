@@ -1,4 +1,4 @@
-"""Literature-statement agent --- `scripts/litcollect/litstatement_agent.py` v2 (pilot P1, D-041, D-043).
+"""Literature-statement agent --- `scripts/litcollect/litstatement_agent.py` v3 (pilot P1, D-041, D-043; pilot P2a).
 
 Runs the pinned agent end to end against a local mock chat-completions server and
 a synthetic `build_index.py` index. Checks the deterministic pre-check: an exact
@@ -12,6 +12,8 @@ v2: HTTP 5xx / connection errors / empty bodies are retried with `RETRY` lines; 
 paper whose attempts all fail gets no result.json and is listed in
 failed_papers.txt; a v1 result.json recording an HTTP error is migrated aside;
 `base_url` / `model` / `endpoint_label` are recorded.
+v3: result.json stores `raw_response`, and `raw_reasoning` only when the content
+fallback fired, truncated to 20,000 characters, with `finish_reason`.
 The Polaris invocation is in `src/climrr/litstatements.py`.
 """
 
@@ -35,7 +37,7 @@ from climrr.paths import REPO_ROOT
 
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
 AGENT = ls.AGENT_PATH
-AGENT_SHA256 = "f70edbb33929354c4a5a3d3786f72c49ad41d201032a778725f3d004a1d370d6"
+AGENT_SHA256 = "fd0e1dc391d46c691ab3b0b0d0190ba009f47a6e69e0eb6f0ececec441b6a9ea"  # v3; v2 (run 2) was f70edbb3…1d370d6
 SYSTEM_PROMPT_SHA256 = "fbedadd25a8a6a048983f9ed3c49997c73c4de771e9f5d689dacd9f56cb01fff"
 
 MECH = "Higher temperatures and lower relative humidity dry fine fuels and raise the fire weather index in summer."
@@ -173,7 +175,7 @@ def test_the_agent_is_pinned():
 
 def test_version_and_system_prompt_hash():
     a = _agent()
-    assert a.GENERATOR_VERSION == ls.GENERATOR_VERSION == "litstatement_agent v2"
+    assert a.GENERATOR_VERSION == ls.GENERATOR_VERSION == "litstatement_agent v3"
     assert hashlib.sha256(a.SYSTEM_PROMPT.encode("utf-8")).hexdigest() == SYSTEM_PROMPT_SHA256
     assert a.MAX_STATEMENTS == 6 and "at most 8 statements" not in a.SYSTEM_PROMPT
     for phrase in ("GENERAL statements", "at most 6 statements", "never restate it as fire occurrence",
@@ -397,3 +399,30 @@ def test_sleep_paces_papers(tmp_path, index):
     stamps = [datetime.strptime(l.split(" ", 1)[0], "%Y-%m-%dT%H:%M:%SZ")
               for l in (out / "agent.log").read_text().splitlines() if " arm=" in l]
     assert len(stamps) == 2 and (stamps[1] - stamps[0]).total_seconds() >= 2
+
+
+# --- v3: raw model text (pilot P2a) -------------------------------------------------------------------
+
+
+def test_v3_stores_the_raw_content(run):
+    r = json.loads((run["out"] / "5001" / "result.json").read_text())
+    assert r["raw_response"].startswith('Answer: {"statements": [') and r["raw_response_chars"] == len(r["raw_response"])
+    assert r["raw_reasoning"] is None and r["raw_reasoning_chars"] is None and r["content_fallback"] is False
+    assert r["raw_max_chars"] == 20000 and "finish_reason" in r
+
+
+def test_v3_stores_the_reasoning_only_when_the_fallback_fired(run):
+    r = json.loads((run["out"] / "5003" / "result.json").read_text())
+    assert r["raw_response"] == "" and r["content_fallback"] is True
+    assert r["raw_reasoning"].startswith('Answer: {"statements": [') and r["raw_reasoning_chars"] == len(r["raw_reasoning"])
+
+
+def test_v3_raw_text_is_truncated_and_the_finish_reason_kept():
+    a = _agent()
+    long = "x" * 25000
+    f = a.raw_fields({"choices": [{"finish_reason": "length", "message": {"content": long, "reasoning": "r" * 30}}]})
+    assert len(f["raw_response"]) == 20000 and f["raw_response_chars"] == 25000 and f["finish_reason"] == "length"
+    assert f["raw_reasoning"] is None                                 # content present: the fallback did not fire
+    g = a.raw_fields({"choices": [{"message": {"content": None, "reasoning_content": long}}]})
+    assert g["content_fallback"] is True and len(g["raw_reasoning"]) == 20000 and g["raw_reasoning_chars"] == 25000
+    assert a.raw_fields({})["raw_response"] == ""

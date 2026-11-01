@@ -2366,3 +2366,117 @@ code emits, and the next GUIDANCE packet still chooses.
 - **Affected files:** `scripts/litcollect/litstatement_agent.py` (v2),
   `src/climrr/litstatements.py`, `tests/test_litstatement_agent.py`,
   `docs/PROJECT_STATE.md`.
+
+## D-044 --- Run 2 accepted as the literature-statement evidence for the pilot
+
+- **Date:** 2026-11-01.
+- **Status:** **decided** (COORDINATOR).
+- **Context.** Run 2 of `scripts/litcollect/litstatement_agent.py` v2 (SHA-256
+  `f70edbb33929354c4a5a3d3786f72c49ad41d201032a778725f3d004a1d370d6`; system prompt
+  `fbedadd25a8a6a048983f9ed3c49997c73c4de771e9f5d689dacd9f56cb01fff`) ran on Polaris
+  against Sophia vLLM `openai/gpt-oss-120b` at source commit `7919bbf`, over the 243
+  frozen place-candidate papers (2026-10-30, 00:16--01:43 UTC; 10 RETRY lines, 0 FAIL).
+  Delivered as `litstatements_run2_evidence.tar.gz`
+  (`7d9077392ceb961035790a9dc3c89d9a825aabe56bca5ce0184ad674b9ffc414`):
+  `statements.jsonl` `26ba676c004adb0bdb7018b0e748b30f0d8eee0225c968e48786fecb2742a15f`,
+  `summary.json` `4da75e2d4cd3ba700afb6b13ecfe206bd8d1d531f6d7eed5e0a75d5ae1cf9a78`.
+  243 papers, 1,018 statements, 485 `deterministic_pass`, 533 rejected
+  (`passage_type_pass` 340, `span_reslice_pass` 129, `statement_value_pass` 90,
+  `enums_valid` 84, `passage_length_pass` 7; a statement may fail several), 0 papers
+  with error, endpoint `sophia_vllm openai/gpt-oss-120b` on all 243 records. All
+  reproduced from the files by the ingest.
+- **Decision.** Run 2 is **the literature-statement evidence for the pilot**,
+  ingested into `artifacts/litstatements/run2/` (`manifest.json`; `prompt_user.txt`
+  and `response.json` not copied, hashed). **Run 1** (Metis, interrupted by gateway
+  timeouts, D-043; 2 papers with output) is **superseded**: recorded in the manifest,
+  never ingested. The **21 parse-error papers** are recorded (ids in
+  `run2_parse_error_ids.txt`); **no second pass for the pilot**. Statement ids
+  `LS-<item_id>-<nn>`. **Evidence roles:** `core_candidate` (pass; passage_type
+  own_finding / own_projection / review_synthesis), `cited_candidate` (pass;
+  cited_finding), `background_consensus_candidate` (rejected only by
+  `passage_type_pass` --- a background passage --- and the passage re-sliced),
+  `unusable` (everything else). Counts: 379 / 106 / 262 / 271.
+- **Observed at ingest (EXECUTOR).** All 21 parse errors ended with
+  `finish_reason: length` at 3,500 completion tokens (the `--max-tokens` cap); the
+  raw text is in the delivered `response.json`, which was read for counts only. The
+  corpus index has no author, year or venue field. Two item ids (239052352,
+  257056592) are one byte-identical paper; three more pairs share a title section.
+- **Affected files:** `src/climrr/litstatements_run2.py`, `scripts/ingest_litstatements.py`,
+  `artifacts/litstatements/run2/`, `tests/test_litstatements_run2.py`,
+  `docs/LITSTATEMENTS_RUN2.md`, `docs/PROJECT_STATE.md`,
+  `reports/milestones/PILOT_BENCHMARK_REPORT.md`.
+
+## D-045 --- Deterministic aggregation and seeding rules v1
+
+- **Date:** 2026-11-01.
+- **Status:** **decided** (COORDINATOR; the aggregation rule as revised by the
+  COORDINATOR ruling of 2026-11-01); **GUIDANCE to be notified in the P2 packet.**
+- **Context.** The work package's first aggregation rule (DR-LIT-AGG-1: Jaccard >=
+  0.35 on unigrams plus a merge of two statements sharing >= 2 of the arm's 60 most
+  frequent tokens) **degenerated** on run 2: `fire` + `weather` or `heat` +
+  `temperature` joined almost any pair, so the 24 arm x type x direction partitions
+  became 54 clusters at every threshold (0.25 / 0.35 / 0.45), the largest of 114
+  different mechanism statements; without the merge, Jaccard gave 691 clusters, 675
+  singletons. The EXECUTOR stopped and escalated; Kaiyuan relayed the COORDINATOR
+  ruling the same day.
+- **Decision --- the rules.**
+  - **DR-LIT-IND-1 (independence).** Two papers are independent when their ids differ
+    and --- authors unavailable --- basis `assumed_independent_distinct_ids`,
+    `author_check: unavailable`; authors available --- no shared author surname +
+    initial. The corpus index has no author field, so every check is `unavailable`.
+    Equal file hash and equal title are recorded as diagnostics, not used.
+  - **DR-LIT-AGG-1 v2 (aggregation).** Only core / cited / background_consensus
+    candidates enter. Partition arm x statement_type x direction (direction lexical,
+    `direction_lexicon_v1.yaml`). Tokens: lowercase content unigrams and bigrams after
+    `stopwords_v1.yaml` and the crude lemmatizer (`-ing` > 5 chars, `-ed` > 4, `-s` not
+    `-ss` > 3). Per-arm document-frequency filter: a gram in more than 15 % of the arm's
+    entering statements is dropped (`df_filter_dropped_v1.yaml`). Similarity: cosine of
+    IDF-weighted binary vectors. Union-find at **cosine >= 0.30**. **No concept-lexicon
+    merge** (`concept_lexicon_v1.yaml` is a frequency table only). Grid 0.20--0.50 for
+    cosine and for Jaccard on the filtered grams reported; a cluster > 25 is reported,
+    the rule is not changed again. Singletons are expected; semantic merging of
+    paraphrases is **P2b**, agent-proposed with recorded rationale and human-checked,
+    never code.
+  - **Evidence strength.** `multi_source_supported`: >= 2 independent papers with core
+    or cited statements in the same v2 cluster; else `review_supported`: a
+    review_synthesis member; else `single_source_supported`: one paper contributes core
+    or cited statements; else `background_only`.
+  - **DR-SEED-1 (seeds).** A seed per table pattern; clusters paired by family (heat_index
+    <-> `extreme_heat_v1`, fire_weather_index <-> `fire_weather_v1`) and direction
+    (equal, or `unspecified`); `geography_relevant` if a member's region names the
+    pattern's state, its NCA5 region, a regional contrast's covered region, "United
+    States" / "US" / "CONUS" / "contiguous", or the scope is global / national, else
+    `geography_other` (listed). Rank: strength, relevant first, independent papers.
+    `eligible_for_pilot`: pattern not `acceptance_blocked`, and >= 1
+    `multi_source_supported` mechanism / driver cluster that is geography_relevant. If
+    fewer than 10 seeds are eligible, the pilot may use single-source clusters labelled
+    as such for some items (GUIDANCE ruling).
+- **EXECUTOR choices inside the rules (recorded, for COORDINATOR confirmation).**
+  Inflected forms spelled out in the direction lexicon; terms from both lists ->
+  `unspecified`. Bigrams join tokens adjacent after stopword removal. The
+  representative statement uses the v2 cosine (the work package said Jaccard). Place
+  matching removes periods first ("U.S." = "US"); whole words; no gazetteer. Cluster
+  rank ties: more statements, then id. `use_case_level`, first that applies: regional
+  contrast with a cluster -> 4; mechanism / driver cluster -> 3; caveat cluster naming a
+  scenario -> 7; else 1. A `not_computable` pattern is not eligible (it has no value).
+  Seed order: more eligible clusters, then the top-three cluster keys, then pattern id.
+  The provisional State label (IC-012) is carried as a blocker but does not remove
+  eligibility (D-034).
+- **Result (P2a).** 747 statements entering; **731 clusters, 721 singletons**; 3
+  `multi_source_supported`, 24 `review_supported`, 455 `single_source_supported`, 249
+  `background_only`; no cluster > 25 at any grid threshold. 2,812 seeds; **1,316
+  eligible under DR-SEED-1 as written, but 1,292 of them only through
+  `LC-extreme_heat_v1-driver-071`**, whose two papers are the byte-identical pair and
+  which is relevant to every heat-index pattern through a "national" scope (Malaysia);
+  **24 eligible without it** (Florida heat-index seeds, through a heat-index /
+  acute-kidney-injury cluster). FWI: 1,404 seeds, 352 acceptance-blocked, 0 eligible.
+  **Escalated to the COORDINATOR:** whether a byte-identical paper under two ids may
+  count as two independent sources, and whether a non-U.S. national scope should make
+  a cluster relevant to U.S. patterns.
+- **Affected files:** `src/climrr/litaggregate.py`, `src/climrr/itemseeds.py`,
+  `src/climrr/p2a_review.py`, `src/climrr/xlsxlite.py`, `scripts/aggregate_litstatements.py`,
+  `scripts/build_item_seeds.py`, `scripts/build_p2a_review.py`,
+  `data/metadata/litstatements/` (four files), `artifacts/litstatements/run2/clusters_v1*`,
+  `artifacts/benchmark/item_seeds_v1_summary.json`,
+  `artifacts/benchmark/review/P2a_seeds_v1.csv`, `tests/test_litaggregate.py`,
+  `tests/test_itemseeds.py`, `docs/LITSTATEMENTS_RUN2.md`.
