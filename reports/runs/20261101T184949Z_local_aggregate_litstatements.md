@@ -1,0 +1,50 @@
+# Run record: 20261101T184949Z_local_aggregate_litstatements
+
+- **Result**: PASS
+- **UTC timestamp**: 2026-11-01T18:49:49.531132+00:00
+- **Git commit**: `feac6465b55c8f985f9cf403983ffbea293b40e2`
+- **Working tree dirty (tracked files)**: False
+- **Untracked files present**: 2
+- **Hostname**: ryous-MacBook-Pro-2.local
+- **Location**: local
+- **Python**: 3.11.16 (macOS-15.3-arm64-arm-64bit)
+- **pip freeze SHA-256**: `d9af804d5018f7022ae9f4db0bb83a8d57104d2ff6ff5676d912d896f952bf51`
+- **Pinned libraries (D-007)**: `pandas==3.0.5`, `numpy==2.4.6`, `pypdf==6.18.0`, `pyyaml==6.0.3`, `pytest==9.1.1`, `pypdfium2==5.13.0`
+- **Data path (repo-relative)**: `artifacts/litstatements/run2/statements_ingested.jsonl`
+- **Data SHA-256**: `b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81`
+- **Output path**: `artifacts/litstatements/run2/clusters_v1.jsonl`
+
+## Config snapshot
+
+```json
+{
+  "rule": "DR-LIT-AGG-1 v2",
+  "threshold": 0.3,
+  "grid": [
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.5
+  ],
+  "df_max_share": 0.15,
+  "lexicon_top": 60,
+  "version": "litaggregate v1",
+  "model_calls": 0
+}
+```
+
+## Result summary
+
+- `rule`: DR-LIT-AGG-1 v2
+- `threshold`: 0.3
+- `entering_statements`: 747
+- `clusters`: 731
+- `singletons`: 721
+- `by_strength`: {'multi_source_supported': 3, 'review_supported': 24, 'single_source_supported': 455, 'background_only': 249}
+- `multi_source_relies_on_diagnostic_pair`: ['LC-extreme_heat_v1-driver-071']
+- `clusters_sha256`: 11bc074c6ef0a04a953e18e90febc1cfaef2d6bb9b9b7ebb5cfb7b79dfed556a
+- `summary_sha256`: cf5c7cea1a880c44ec194749a4742a74bf65456a19c71516f757431e4d039e7a
+- `lexicons`: {'direction_lexicon': '745526dc9f6e8ea4397192a390efc2a394524a25cdcc4dd461143989be0235fd', 'stopwords': 'dfbe6668d7d8c918e5827faac6562881ddb4284583b487ccdfa3e88d9b5bfb99', 'concept_lexicon': 'c131fb56543eb9e5ca9854ae93e8eb09daad4c7eca239f416d70169917318963', 'df_filter_dropped': 'e0e89fa270edc7c2628fbc5d8886c7bad5cfd3b66f7db89f364bb70d1796d469'}
+- `grid_thresholds_with_cluster_over_25`: []

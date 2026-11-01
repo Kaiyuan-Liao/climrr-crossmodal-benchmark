@@ -223,3 +223,135 @@ artifact named in the file. (2) **D-042** needs COORDINATOR / GUIDANCE
 confirmation. (3) Two rejected-example ids are not in `softqa_run1`. (4) The
 robustness enum names states but is also used with cells as the unit (DR-PT-003).
 (5) The tercile weighting guard is not tested (field 8).
+
+---
+
+# Pilot P2a --- literature-statement run 2, cross-paper aggregation, item seeds
+
+Authorized by D-041 (pilot of ~10 items) and D-036 / D-039 (statements aggregated
+across papers; single source only if labelled). Decisions taken in the package:
+**D-044** (run 2 is the pilot's literature-statement evidence) and **D-045**
+(aggregation and seeding rules v1; the aggregation rule revised by the COORDINATOR
+ruling of 2026-11-01 after the first rule degenerated). **No model call. No item
+generated. Nothing accepted.** No column status, concept-map entry or compatibility
+rule changed. Fields 10--15.
+
+## 10. Commits and evidence runs
+
+| | |
+| --- | --- |
+| Branch | `work/meeting-2026-10-22`, from head `7919bbf` |
+| **Build commit** | **`feac646`**: modules, scripts, tests, lexicons, the ingested run, clusters, seed summary, SEEDS CSV, doc, D-044, D-045, state |
+| **Evidence runs** | at `feac646`, **`git_dirty: false`** (untracked = the preceding records of the same sequence): `reports/runs/20261101T184947Z_local_ingest_litstatements`, `…184949Z_local_aggregate_litstatements`, `…184950Z_local_build_item_seeds`, `…184951Z_local_build_p2a_review` (`.json` / `.md`). Every tracked output byte-identical; the gitignored seeds file and workbook too |
+| Report commit | the commit carrying this section, the run records and `PROJECT_STATE.md` |
+| Remote | **not pushed, not merged** |
+
+## 11. Data and checksums
+
+| Object | SHA-256 | Notes |
+| --- | --- | --- |
+| `litstatements_run2_evidence.tar.gz` (read, outside the repo) | `7d9077392ceb961035790a9dc3c89d9a825aabe56bca5ce0184ad674b9ffc414` | equals the work package |
+| run-2 `statements.jsonl` / `summary.json` | `26ba676c…2a15f` / `4da75e2d…a9cf9a78` | equal the work package; `statements.jsonl` re-derived from the 243 `result.json` |
+| **`artifacts/litstatements/run2/manifest.json`** | **`6ff23183444ffdde86d5d012fa38c1d2a5a0c49392c5602af35fd49f9dd01f77`** | every ingested file's SHA-256; 486 excluded files hashed |
+| `statements_ingested.jsonl` | `b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81` | 1,018 records, ids `LS-<item_id>-<nn>`, evidence roles |
+| **`clusters_v1.jsonl`** | **`11bc074c6ef0a04a953e18e90febc1cfaef2d6bb9b9b7ebb5cfb7b79dfed556a`** | 731 clusters |
+| `clusters_v1_summary.json` | `cf5c7cea1a880c44ec194749a4742a74bf65456a19c71516f757431e4d039e7a` | |
+| `direction_lexicon_v1.yaml` / `stopwords_v1.yaml` | `745526dc9f6e8ea4397192a390efc2a394524a25cdcc4dd461143989be0235fd` / `dfbe6668d7d8c918e5827faac6562881ddb4284583b487ccdfa3e88d9b5bfb99` | hand-written |
+| `concept_lexicon_v1.yaml` / `df_filter_dropped_v1.yaml` | `c131fb56543eb9e5ca9854ae93e8eb09daad4c7eca239f416d70169917318963` / `e0e89fa270edc7c2628fbc5d8886c7bad5cfd3b66f7db89f364bb70d1796d469` | generated; test re-derives |
+| **`item_seeds_v1.jsonl`** | **`3764eba645c84008453678b236e610a7ee2dff105404946c92e90ae3093beb32`** | **gitignored** (58 MB), pinned in `item_seeds_v1_summary.json` (`c274c66022abfcfb3fc3e6a7210e6a25ce1340955e2258d95de579e70413ce53`) |
+| `P2a_seeds_v1.csv` (tracked) / workbook (gitignored) | `a4adae65c2ab7f55fed79d61ad10830b900599d6e433afe61977fa277f898055` / `503cb32cb75e60c2d2eae01e8a932775631ee9f2e5357ee64b7850266a0ec096` | |
+| `docs/LITSTATEMENTS_RUN2.md` (generated) | `7061075af0024545cf8a9569627565f0f4ef87f45e48af203eca866e59fa34dc` | test: equals a re-render |
+| **`litstatement_agent.py` v3** | **`fd0e1dc391d46c691ab3b0b0d0190ba009f47a6e69e0eb6f0ececec441b6a9ea`** | pinned in its test; system prompt unchanged `fbedadd2…cb01fff`; **not run** |
+
+Read and unchanged: `table_patterns_v1.jsonl` (`ed3c2154…f3b0`), `nca_regions_v1.yaml`
+(`3141b122…9a41`), `softqa_agent.py` v2.
+
+## 12. Work completed
+
+- **Phase A --- ingest.** Every run-2 fact the work package states reproduced from the
+  files (243 papers; 1,018 statements; 485 / 533; the five per-check counts; 0 errors;
+  endpoint on all 243; agent and prompt hashes; source commit; both logs identical).
+  Copied byte-identical; `prompt_user.txt` / `response.json` hashed, not copied.
+  Roles: **core 379, cited 106, background-consensus 262, unusable 271.** Run 1 recorded
+  as superseded (6 paper directories: 2 with statements, 3 HTTP errors, 1 prompt only).
+  Independence metadata: the corpus index has **no author, year or venue field**.
+- **Phase B --- aggregation.** The work package's rule degenerated (54 clusters at
+  every threshold, largest 114); the EXECUTOR stopped and escalated; **DR-LIT-AGG-1 v2**
+  implemented per the COORDINATOR ruling.
+- **Phase C --- seeds.** DR-SEED-1 over all 2,812 patterns; geography-match audit.
+- **Phase D --- review.** Workbook (OVERVIEW, SEEDS 1,316 rows, CLUSTERS 27, STATEMENTS
+  1,018, PARSE_ERRORS 21, Legend) written by a stdlib writer (`src/climrr/xlsxlite.py`;
+  no dependency added; checked to open in openpyxl outside the project environment).
+- **Phase E --- agent v3.** `raw_response`, `raw_reasoning` (fallback only),
+  lengths, `content_fallback`, `finish_reason` in every `result.json`; 3 new tests.
+- **Phase F.** D-044, D-045, the generated doc, `KNOWLEDGE_FILES`, state, this section.
+
+## 13. Methods and rules that affect scientific meaning
+
+| Rule | What it does |
+| --- | --- |
+| Evidence roles (D-044) | core = pass + own_finding / own_projection / review_synthesis; cited = pass + cited_finding; background-consensus = rejected only for a background passage that re-sliced; else unusable |
+| **DR-LIT-IND-1** | distinct ids + no shared author surname/initial; authors absent -> `assumed_independent_distinct_ids`. Equal-hash / equal-title pairs recorded as diagnostics, not used |
+| **DR-LIT-AGG-1 v2** | arm x type x lexical direction; unigrams + bigrams; per-arm DF filter > 15 %; IDF cosine; union-find at 0.30; no lexicon merge |
+| Evidence strength | multi (>= 2 independent papers with core/cited) > review (review_synthesis member) > single (one core/cited paper) > background_only |
+| **DR-SEED-1** | family and direction (or `unspecified`) match; geography relevant by place name, U.S. term, or global/national scope; rank by strength, relevance, independent papers; eligible = not blocked + >= 1 relevant multi-source mechanism/driver cluster |
+
+EXECUTOR choices inside these rules (listed in D-045 for confirmation): inflected
+direction forms, both-lists -> `unspecified`; representative by cosine (the work
+package said Jaccard); periods removed before place matching; rank tie-breaks;
+`use_case_level` precedence 4 > 3 > 7 > 1; `not_computable` patterns not eligible; the
+seed order.
+
+## 14. Results
+
+**Clusters (v2, cosine 0.30).** 747 statements enter; **731 clusters, 721 singletons**:
+multi-source **3**, review 24, single 455, background-only 249. Multi-source:
+`LC-extreme_heat_v1-driver-006` (heat index and acute kidney injury; Florida),
+`LC-extreme_heat_v1-consensus-010` (Daymet represents station heat index; two cited
+findings), `LC-extreme_heat_v1-driver-071` (Malaysian pan evaporation --- **the two
+papers are one byte-identical file**). No FWI cluster is multi-source.
+
+| measure | 0.20 | 0.25 | **0.30** | 0.35 | 0.40 | 0.50 |
+| --- | --- | --- | --- | --- | --- | --- |
+| cosine: clusters / singletons / multi / largest | 699 / 674 / 10 / 17 | 722 / 712 / 3 / 14 | 731 / 721 / 3 / 6 | 735 / 725 / 2 / 4 | 737 / 729 / 2 / 4 | 744 / 741 / 1 / 2 |
+| jaccard: clusters / singletons / multi / largest | 706 / 690 / 6 / 20 | 721 / 708 / 3 / 13 | 733 / 723 / 2 / 4 | 737 / 729 / 2 / 4 | 741 / 736 / 2 / 3 | 745 / 743 / 1 / 2 |
+
+No cluster exceeds 25 statements at any threshold. Arm x type x strength and the ten
+largest clusters: `docs/LITSTATEMENTS_RUN2.md` §4.
+
+**Seeds.** 2,812 (heat 1,408, FWI 1,404). Levels (first that applies): 3: 2,784; 4: 28.
+**Eligible under DR-SEED-1 as written: 1,316** (all heat index; 1,300 level 3, 16 level 4)
+--- but **1,292 only through `driver-071`**, relevant to every heat pattern by its
+"national" (Malaysia) scope; **24 eligible without it** (the Florida state heat-index
+patterns, through `driver-006`). FWI: 352 acceptance-blocked, 1,052 not blocked, **0
+eligible** (no multi-source FWI cluster). 92 `not_computable` patterns kept out. The
+ten highest-ranked eligible seeds are all Florida heat-index patterns (`TP1-00017`,
+`-00075`, `-00133`, `-00191`, `-00249`, `-00307`, `-00365`, `-00423`, `-00481`,
+`-00539`), each with the same three clusters; listed in full in the doc §5.
+
+**Parse errors.** 21, all `finish_reason: length` at 3,500 completion tokens.
+
+**Validation.** `pytest`: **1,319 tests collected; 1,317 passed, 2 skipped** (the two
+pre-existing skips); new or changed test files: `test_litstatements_run2.py` (23),
+`test_litaggregate.py` (34), `test_itemseeds.py` (18), `test_litstatement_agent.py`
+(32). Secrets and paths scan: **0 hits**.
+
+## 15. Escalations and limitations
+
+1. **First aggregation rule degenerate** --- resolved by the COORDINATOR ruling
+   (DR-LIT-AGG-1 v2), logged in D-045 and the doc.
+2. **Duplicate paper counted as two independent sources** (239052352 = 257056592,
+   byte-identical): DR-LIT-IND-1 as written calls them independent; the cluster it makes
+   multi-source supplies 1,292 of the 1,316 eligible seeds. **For the COORDINATOR.**
+3. **Non-U.S. national scope is U.S.-relevant** under DR-SEED-1 (191 clusters are relevant
+   only by scope); name matching has no gazetteer ("Sierra Nevada" -> Nevada, "Brazil and
+   Southeast Asia" -> Southeast). **For the COORDINATOR.**
+4. **The eligible clusters are weak for the ladder**: a health-outcome association, a
+   dataset-validation statement (two cited findings, possibly one cited study), the
+   duplicate. With fewer than 10 sound multi-source seeds, the pilot will need
+   single-source clusters labelled as such (GUIDANCE ruling) or P2b semantic merges.
+5. **Parse errors** are truncations at the `--max-tokens` cap; a re-run would need a larger cap
+   (not authorized, D-044). The work package's limitation "no raw text for
+   parse errors" holds for `result.json` only: `response.json` has it.
+6. Some extreme-heat statements concern the Thornthwaite heat index (a PET parameter),
+   not humid heat; lexical rules cannot separate them.
