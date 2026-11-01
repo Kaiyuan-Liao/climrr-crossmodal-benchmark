@@ -1,0 +1,52 @@
+# Run record: 20261101T235302Z_local_build_item_seeds_v2
+
+- **Result**: PASS
+- **UTC timestamp**: 2026-11-01T23:53:02.323404+00:00
+- **Git commit**: `c1bb5e3c323a58077f471cd4aed44ea86c813f10`
+- **Working tree dirty (tracked files)**: False
+- **Untracked files present**: 2
+- **Hostname**: ryous-MacBook-Pro-2.local
+- **Location**: local
+- **Python**: 3.11.16 (macOS-15.3-arm64-arm-64bit)
+- **pip freeze SHA-256**: `d9af804d5018f7022ae9f4db0bb83a8d57104d2ff6ff5676d912d896f952bf51`
+- **Pinned libraries (D-007)**: `pandas==3.0.5`, `numpy==2.4.6`, `pypdf==6.18.0`, `pyyaml==6.0.3`, `pytest==9.1.1`, `pypdfium2==5.13.0`
+- **Data path (repo-relative)**: `artifacts/benchmark/table_patterns_v1.jsonl`
+- **Data SHA-256**: `ed3c2154818fc363e982b17e0dcb9bb1a2d2ca25e18de97fda6d353974bbf3b0`
+- **Output path**: `artifacts/benchmark/item_seeds_v2.jsonl`
+
+## Config snapshot
+
+```json
+{
+  "rule": "DR-SEED-1 v2",
+  "decisions": [
+    "D-046",
+    "D-047",
+    "D-048"
+  ],
+  "version": "itemseeds v2",
+  "geo_version": "litgeo v1",
+  "independence_sha256": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+  "exclusions_sha256": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+  "nca_map_sha256": "3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41",
+  "model_calls": 0
+}
+```
+
+## Result summary
+
+- `clusters_v1b_by_strength`: {'multi_source_supported': 2, 'review_supported': 24, 'single_source_supported': 456, 'background_only': 249}
+- `clusters_v1b_strength_changed`: 1
+- `region_string_classification`: {'rows_by_class': {'us_national': 15, 'state': 27, 'nca': 5, 'global': 6, 'other': 91, 'unknown': 3}, 'distinct_strings_by_class': {'us_national': 13, 'state': 27, 'nca': 5, 'global': 6, 'other': 84, 'unknown': 2}, 'statements_by_class': {'us_national': 77, 'state': 119, 'nca': 5, 'global': 118, 'other': 228, 'unknown': 200}, 'other_examples': ['Canada', 'southeastern United States', 'western United States', 'United States', 'Europe', 'Greece', 'India', 'United Kingdom', 'south eastern Ontario, Canada', 'eastern United States']}
+- `seeds`: 2812
+- `eligible`: 2368
+- `eligible_v1`: 1316
+- `eligible_by_family`: {'fire_weather_index': 1052, 'heat_index': 1316}
+- `eligible_by_level`: {3: 2344, 4: 24}
+- `eligible_heat_index_by_level`: {3: 1300, 4: 16}
+- `fwi`: {'seeds': 1404, 'acceptance_blocked': 352, 'eligible': 1052}
+- `statement_geography`: {'entering_statements': 747, 'by_class': {'us_national': 77, 'state': 119, 'nca': 5, 'global': 118, 'other': 228, 'unknown': 200}, 'named_state_or_nca_region': 124, 'named_state_or_nca_region_by_role': {'background': 18, 'cited': 20, 'core': 86}, 'relevant_to_at_least_one_pattern': 312, 'relevant_to_at_least_one_state_or_region_pattern': 312, 'states_named': {'Alabama': 9, 'Alaska': 5, 'Arizona': 2, 'California': 54, 'Connecticut': 2, 'Florida': 9, 'Georgia': 7, 'Michigan': 3, 'Minnesota': 6, 'New Hampshire': 4, 'New York': 6, 'North Carolina': 1, 'Oklahoma': 2, 'Oregon': 2, 'Tennessee': 1, 'Texas': 1, 'Washington': 6}, 'nca_regions_named': {'Alaska': 5, 'Midwest': 2, 'Northeast': 1, 'Northwest': 1, 'Southeast': 1, 'Southwest': 1}, 'us_gazetteer_string_but_subnational_or_local': 50}
+- `clusters_v1b_sha256`: 76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354
+- `region_strings_sha256`: b0ea4960fd1bfb08918f48abe1ac619ccf90609a4b9fe1ff0906719a6c2d2bdb
+- `seeds_sha256`: 3123dd3463f23555601d1e64edc172e2977e2fc6df3adbb08a74b5df41be9d50
+- `summary_sha256`: c9dd606f274d80a1f1c1d8a61d9cfa784e5b46f201f7804d491aa8804944e611

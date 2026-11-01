@@ -158,3 +158,9 @@ def test_the_list_carries_the_redesign_document():
 def test_the_list_carries_the_reanchor_ruling():
     """Pilot P1, Phase A: the GUIDANCE re-anchor ruling of 2026-10-29 (D-041)."""
     assert "docs/BENCHMARK_REANCHOR_GUIDANCE_RULING.md" in sk.KNOWLEDGE_FILES
+
+
+def test_the_list_carries_the_p2b_design_and_shortlist():
+    """Pilot P2b-prep, Phase E."""
+    for f in ("docs/PILOT_P2B_DESIGN.md", "artifacts/benchmark/pilot_shortlist_v1.csv"):
+        assert f in sk.KNOWLEDGE_FILES

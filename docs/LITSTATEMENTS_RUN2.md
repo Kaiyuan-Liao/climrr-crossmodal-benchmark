@@ -306,3 +306,100 @@ content fallback fired --- in every `result.json`, truncated to 20,000 character
 - Direction is lexical: a statement such as "lower humidity raises fire danger" has terms from both lists and is
   `unspecified`.
 
+## 8. Pilot P2b-prep: independence v2, geography v2, seeds v2 (D-046, D-047, D-048)
+
+*Same generator, from `independence_v2.json`, `clusters_v1b_summary.json`, `item_seeds_v2_summary.json` and
+`artifacts/litgroups/partitions_v1_summary.json`.* Sections 1--7 are the P2a record (v1 rules) and stay as they were.
+
+### 8.1 Independence (DR-LIT-IND-1 v2, D-046)
+
+243 papers -> **239 canonical papers**. Identical `paper_sha256` -> one paper;
+identical normalized title (lowercase, punctuation / whitespace collapsed) -> `possible_duplicate`, counted as one.
+
+| merged group | canonical id | basis |
+| --- | --- | --- |
+| 221671377, 256835585 | 221671377 | possible_duplicate_title |
+| 237554329, 239696378 | 237554329 | possible_duplicate_title |
+| 239052352, 257056592 | 239052352 | same_paper_sha256 |
+| 243767055, 257108685 | 243767055 | possible_duplicate_title |
+
+The 221671377 / 256835585 "title" is an institutional line (a Geological Survey centre name), so that pair may be
+two papers; the rule counts it as one.
+
+**Clusters v1b** (the v1 clusters, same members and ids, strengths under v2):
+
+| strength | v1 | v1b |
+| --- | --- | --- |
+| multi_source_supported | 3 | 2 |
+| review_supported | 24 | 24 |
+| single_source_supported | 455 | 456 |
+| background_only | 249 | 249 |
+
+Changed: `LC-extreme_heat_v1-driver-071` multi_source_supported -> single_source_supported.
+
+### 8.2 Geography (DR-SEED-1 v2 geography, D-047)
+
+Scope alone is relevant only when `global`; national / continental only with a U.S. gazetteer match; subnational /
+local only with a state or NCA5 region name as a whole phrase, after the exclusions in
+`data/metadata/geography/region_match_exclusions_v1.yaml`. Every distinct (region string, scope) with its classification
+and the rule that fired: `artifacts/litstatements/run2/region_strings_v1.csv`.
+
+| classification | distinct strings | region x scope rows | statements |
+| --- | --- | --- | --- |
+| us_national | 13 | 15 | 77 |
+| state | 27 | 27 | 119 |
+| nca | 5 | 5 | 5 |
+| global | 6 | 6 | 118 |
+| other | 84 | 91 | 228 |
+| unknown | 2 | 3 | 200 |
+
+Most frequent `other` strings: "Canada"; "southeastern United States"; "western United States"; "United States"; "Europe".
+50 statements carry a U.S.-wide string under a subnational / local scope
+and are `other` under the rule (observed, not changed).
+
+Statements relevant to >= 1 pattern: **312** of 747;
+naming a state or NCA5 region: **124**.
+
+Distinct statements per arm x type (`us_relevant` = us_national + state + nca):
+
+| arm | type | entering | us_national | state | nca | us_relevant | global | other | unknown |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| extreme_heat_v1 | mechanism | 144 | 19 | 13 | 1 | 33 | 21 | 24 | 66 |
+| extreme_heat_v1 | driver | 118 | 12 | 27 | 1 | 40 | 14 | 41 | 23 |
+| extreme_heat_v1 | consensus | 15 | 2 | 1 | 0 | 3 | 5 | 4 | 3 |
+| extreme_heat_v1 | caveat | 74 | 12 | 17 | 0 | 29 | 6 | 14 | 25 |
+| extreme_heat_v1 | pattern | 65 | 13 | 17 | 0 | 30 | 4 | 23 | 8 |
+| fire_weather_v1 | mechanism | 102 | 5 | 16 | 0 | 21 | 18 | 34 | 29 |
+| fire_weather_v1 | driver | 106 | 8 | 14 | 0 | 22 | 31 | 32 | 21 |
+| fire_weather_v1 | consensus | 11 | 0 | 0 | 0 | 0 | 4 | 4 | 3 |
+| fire_weather_v1 | caveat | 66 | 2 | 7 | 1 | 10 | 7 | 28 | 21 |
+| fire_weather_v1 | pattern | 46 | 4 | 7 | 2 | 13 | 8 | 24 | 1 |
+
+### 8.3 Seeds v2 (D-048)
+
+Eligible = not acceptance-blocked, computed, and >= 1 geography-relevant mechanism / driver statement of any strength.
+
+|  | count |
+| --- | --- |
+| seeds | 2812 |
+| eligible (v2) | 2368 |
+| eligible (v1, D-045) | 1316 |
+| eligible fire_weather_index | 1052 |
+| eligible heat_index | 1316 |
+| eligible heat index, level 3 | 1300 |
+| eligible heat index, level 4 | 16 |
+| FWI acceptance-blocked | 352 |
+
+Eligible heat-index seeds by geography: Alabama 24; Alaska 18; Arizona 24; Arkansas 24; California 24; Colorado 20; Connecticut 20; Delaware 20; Florida 24; Georgia 24; Idaho 20; Illinois 24; Indiana 24; Iowa 24; Kansas 24; Kentucky 24; Louisiana 24; Maine 18; Maryland 24; Massachusetts 20; Michigan 24; Minnesota 24; Mississippi 24; Missouri 24; Montana 20; Nebraska 24; Nevada 22; New Hampshire 18; New Jersey 20; New Mexico 20; New York 20; North Carolina 24; North Dakota 24; Ohio 24; Oklahoma 24; Oregon 24; Pennsylvania 20; Rhode Island 20; South Carolina 24; South Dakota 24; Tennessee 24; Texas 24; Utah 20; Vermont 18; Virginia 24; Washington 20; West Virginia 24; Wisconsin 24; Wyoming 20; cell_control:R106C361 20; nca_region:NCA5-AK 18; nca_region:NCA5-MW 24; nca_region:NCA5-NE 24; nca_region:NCA5-NGP 24; nca_region:NCA5-NW 24; nca_region:NCA5-SE 24; nca_region:NCA5-SGP 24; nca_region:NCA5-SW 24; nca_region:all_covered_nca5_regions 16.
+
+Grouping-agent partitions: 11 over 747 statements; split: `extreme_heat_v1.mechanism.increase` (28 of 144); `extreme_heat_v1.mechanism.unspecified` (116 of 144).
+
+### 8.4 Limitations (v2)
+
+- **Eligibility is near-universal**: a U.S.-national or global mechanism / driver statement is relevant to every U.S.
+  pattern, so every computed heat-index pattern and every unblocked FWI pattern is eligible; ranking separates seeds.
+- **The highest-strength relevant statements are not hazard mechanisms**: the review-supported cluster that tops most
+  heat-index seeds is about heat-vulnerability indices, and most state-named statements are health or exposure findings.
+- The whole-phrase rule drops U.S.-wide strings under a subnational scope and directional adjectives
+  ("southeastern" is not "Southeast"); "Georgia" is matched to the state and flagged ambiguous.
+

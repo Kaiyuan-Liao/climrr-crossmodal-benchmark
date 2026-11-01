@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pilot P2a Phases D and F: the review workbook, the SEEDS CSV and the generated docs/LITSTATEMENTS_RUN2.md.
+"""Pilot P2a Phases D and F: the review workbook, the SEEDS CSV and the generated docs/LITSTATEMENTS_RUN2.md (section 8: P2b-prep).
 
 Reads the run-2 ingest (`artifacts/litstatements/run2/`), `clusters_v1.jsonl` and its
 summary, `item_seeds_v1.jsonl` (gitignored; checked against the hash in its summary) and
@@ -28,7 +28,7 @@ from climrr.xlsxlite import write_xlsx  # noqa: E402
 
 
 def main() -> int:
-    man, meta, perr, cs, ss, agent_sha = rv.doc_inputs()
+    man, meta, perr, cs, ss, agent_sha, v2 = rv.doc_inputs()
     if sha256_file(sd.SEEDS_PATH) != ss["seeds_file"]["sha256"]:
         raise SystemExit("item_seeds_v1.jsonl differs from the hash in its summary; rerun scripts/build_item_seeds.py")
     if sha256_file(la.CLUSTERS_PATH) != cs["clusters_file"]["sha256"]:
@@ -41,7 +41,7 @@ def main() -> int:
     write_xlsx(rv.WORKBOOK_PATH, sheets)
     seed_rows = next(rows for name, rows, _ in sheets if name == "SEEDS")
     rv.SEEDS_CSV_PATH.write_text(rv.seeds_csv(seed_rows), encoding="utf-8")
-    rv.DOC_PATH.write_text(rv.render_doc(man, meta, perr, cs, ss, agent_sha), encoding="utf-8")
+    rv.DOC_PATH.write_text(rv.render_doc(man, meta, perr, cs, ss, agent_sha, v2), encoding="utf-8")
 
     result = {"sheets": {name: len(rows) - 1 for name, rows, _ in sheets},
               "workbook_sha256": sha256_file(rv.WORKBOOK_PATH), "seeds_csv_sha256": sha256_file(rv.SEEDS_CSV_PATH),

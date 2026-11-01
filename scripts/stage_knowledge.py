@@ -78,6 +78,8 @@ KNOWLEDGE_FILES = (
     "docs/BENCHMARK_REDESIGN_2026-10-29.md",
     "docs/BENCHMARK_REANCHOR_GUIDANCE_RULING.md",
     "docs/LITSTATEMENTS_RUN2.md",
+    "docs/PILOT_P2B_DESIGN.md",
+    "artifacts/benchmark/pilot_shortlist_v1.csv",
 )
 
 DEST_DIR = REPO_ROOT / "refresh_knowledge"
