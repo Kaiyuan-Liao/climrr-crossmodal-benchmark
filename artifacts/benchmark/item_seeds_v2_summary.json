@@ -1,0 +1,570 @@
+{
+  "version": "itemseeds v2",
+  "rule": "DR-SEED-1 v2",
+  "decisions": [
+    "D-046",
+    "D-047",
+    "D-048"
+  ],
+  "inputs": {
+    "table_patterns": {
+      "path": "artifacts/benchmark/table_patterns_v1.jsonl",
+      "sha256": "ed3c2154818fc363e982b17e0dcb9bb1a2d2ca25e18de97fda6d353974bbf3b0"
+    },
+    "statements_ingested": {
+      "path": "artifacts/litstatements/run2/statements_ingested.jsonl",
+      "sha256": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81"
+    },
+    "clusters_v1b": {
+      "path": "artifacts/litstatements/run2/clusters_v1b.jsonl",
+      "sha256": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354"
+    },
+    "independence_v2": {
+      "path": "artifacts/litstatements/run2/independence_v2.json",
+      "sha256": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d"
+    },
+    "nca_map": {
+      "path": "data/metadata/geography/nca_regions_v1.yaml",
+      "sha256": "3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41"
+    },
+    "exclusions": {
+      "path": "data/metadata/geography/region_match_exclusions_v1.yaml",
+      "sha256": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f"
+    }
+  },
+  "seeds_file": {
+    "path": "artifacts/benchmark/item_seeds_v2.jsonl",
+    "sha256": "3123dd3463f23555601d1e64edc172e2977e2fc6df3adbb08a74b5df41be9d50",
+    "gitignored": true
+  },
+  "region_strings_file": {
+    "path": "artifacts/litstatements/run2/region_strings_v1.csv",
+    "sha256": "b0ea4960fd1bfb08918f48abe1ac619ccf90609a4b9fe1ff0906719a6c2d2bdb",
+    "rows_region_x_scope": 147,
+    "distinct_region_strings": 133
+  },
+  "region_string_classification": {
+    "rows_by_class": {
+      "us_national": 15,
+      "state": 27,
+      "nca": 5,
+      "global": 6,
+      "other": 91,
+      "unknown": 3
+    },
+    "distinct_strings_by_class": {
+      "us_national": 13,
+      "state": 27,
+      "nca": 5,
+      "global": 6,
+      "other": 84,
+      "unknown": 2
+    },
+    "statements_by_class": {
+      "us_national": 77,
+      "state": 119,
+      "nca": 5,
+      "global": 118,
+      "other": 228,
+      "unknown": 200
+    },
+    "other_examples": [
+      "Canada",
+      "southeastern United States",
+      "western United States",
+      "United States",
+      "Europe",
+      "Greece",
+      "India",
+      "United Kingdom",
+      "south eastern Ontario, Canada",
+      "eastern United States"
+    ]
+  },
+  "statement_geography": {
+    "entering_statements": 747,
+    "by_class": {
+      "us_national": 77,
+      "state": 119,
+      "nca": 5,
+      "global": 118,
+      "other": 228,
+      "unknown": 200
+    },
+    "named_state_or_nca_region": 124,
+    "named_state_or_nca_region_by_role": {
+      "background": 18,
+      "cited": 20,
+      "core": 86
+    },
+    "relevant_to_at_least_one_pattern": 312,
+    "relevant_to_at_least_one_state_or_region_pattern": 312,
+    "states_named": {
+      "Alabama": 9,
+      "Alaska": 5,
+      "Arizona": 2,
+      "California": 54,
+      "Connecticut": 2,
+      "Florida": 9,
+      "Georgia": 7,
+      "Michigan": 3,
+      "Minnesota": 6,
+      "New Hampshire": 4,
+      "New York": 6,
+      "North Carolina": 1,
+      "Oklahoma": 2,
+      "Oregon": 2,
+      "Tennessee": 1,
+      "Texas": 1,
+      "Washington": 6
+    },
+    "nca_regions_named": {
+      "Alaska": 5,
+      "Midwest": 2,
+      "Northeast": 1,
+      "Northwest": 1,
+      "Southeast": 1,
+      "Southwest": 1
+    },
+    "us_gazetteer_string_but_subnational_or_local": 50,
+    "by_arm_type": [
+      {
+        "arm": "extreme_heat_v1",
+        "statement_type": "mechanism",
+        "entering": 144,
+        "us_national": 19,
+        "state": 13,
+        "nca": 1,
+        "global": 21,
+        "other": 24,
+        "unknown": 66,
+        "us_relevant_distinct": 33,
+        "relevant_to_some_pattern": 54
+      },
+      {
+        "arm": "extreme_heat_v1",
+        "statement_type": "driver",
+        "entering": 118,
+        "us_national": 12,
+        "state": 27,
+        "nca": 1,
+        "global": 14,
+        "other": 41,
+        "unknown": 23,
+        "us_relevant_distinct": 40,
+        "relevant_to_some_pattern": 54
+      },
+      {
+        "arm": "extreme_heat_v1",
+        "statement_type": "consensus",
+        "entering": 15,
+        "us_national": 2,
+        "state": 1,
+        "nca": 0,
+        "global": 5,
+        "other": 4,
+        "unknown": 3,
+        "us_relevant_distinct": 3,
+        "relevant_to_some_pattern": 8
+      },
+      {
+        "arm": "extreme_heat_v1",
+        "statement_type": "caveat",
+        "entering": 74,
+        "us_national": 12,
+        "state": 17,
+        "nca": 0,
+        "global": 6,
+        "other": 14,
+        "unknown": 25,
+        "us_relevant_distinct": 29,
+        "relevant_to_some_pattern": 33
+      },
+      {
+        "arm": "extreme_heat_v1",
+        "statement_type": "pattern",
+        "entering": 65,
+        "us_national": 13,
+        "state": 17,
+        "nca": 0,
+        "global": 4,
+        "other": 23,
+        "unknown": 8,
+        "us_relevant_distinct": 30,
+        "relevant_to_some_pattern": 31
+      },
+      {
+        "arm": "fire_weather_v1",
+        "statement_type": "mechanism",
+        "entering": 102,
+        "us_national": 5,
+        "state": 16,
+        "nca": 0,
+        "global": 18,
+        "other": 34,
+        "unknown": 29,
+        "us_relevant_distinct": 21,
+        "relevant_to_some_pattern": 39
+      },
+      {
+        "arm": "fire_weather_v1",
+        "statement_type": "driver",
+        "entering": 106,
+        "us_national": 8,
+        "state": 14,
+        "nca": 0,
+        "global": 31,
+        "other": 32,
+        "unknown": 21,
+        "us_relevant_distinct": 22,
+        "relevant_to_some_pattern": 52
+      },
+      {
+        "arm": "fire_weather_v1",
+        "statement_type": "consensus",
+        "entering": 11,
+        "us_national": 0,
+        "state": 0,
+        "nca": 0,
+        "global": 4,
+        "other": 4,
+        "unknown": 3,
+        "us_relevant_distinct": 0,
+        "relevant_to_some_pattern": 4
+      },
+      {
+        "arm": "fire_weather_v1",
+        "statement_type": "caveat",
+        "entering": 66,
+        "us_national": 2,
+        "state": 7,
+        "nca": 1,
+        "global": 7,
+        "other": 28,
+        "unknown": 21,
+        "us_relevant_distinct": 10,
+        "relevant_to_some_pattern": 17
+      },
+      {
+        "arm": "fire_weather_v1",
+        "statement_type": "pattern",
+        "entering": 46,
+        "us_national": 4,
+        "state": 7,
+        "nca": 2,
+        "global": 8,
+        "other": 24,
+        "unknown": 1,
+        "us_relevant_distinct": 13,
+        "relevant_to_some_pattern": 20
+      }
+    ]
+  },
+  "seeds": 2812,
+  "eligible": 2368,
+  "eligible_v1": 1316,
+  "eligible_by_family": {
+    "fire_weather_index": 1052,
+    "heat_index": 1316
+  },
+  "eligible_by_level": {
+    "3": 2344,
+    "4": 24
+  },
+  "eligible_levels_applicable": {
+    "1": 2368,
+    "3": 2368,
+    "4": 24,
+    "7": 1316
+  },
+  "eligible_by_kind": {
+    "regional_contrast": 24,
+    "seasonal_contrast": 116,
+    "single": 2228
+  },
+  "eligible_by_geography_type": {
+    "cell_control": 38,
+    "nca_region": 354,
+    "state": 1976
+  },
+  "eligible_by_best_strength": {
+    "multi_source_supported": 24,
+    "review_supported": 1972,
+    "single_source_supported": 372
+  },
+  "eligible_heat_index_by_level": {
+    "3": 1300,
+    "4": 16
+  },
+  "eligible_heat_index_by_state": {
+    "Alabama": 24,
+    "Alaska": 18,
+    "Arizona": 24,
+    "Arkansas": 24,
+    "California": 24,
+    "Colorado": 20,
+    "Connecticut": 20,
+    "Delaware": 20,
+    "Florida": 24,
+    "Georgia": 24,
+    "Idaho": 20,
+    "Illinois": 24,
+    "Indiana": 24,
+    "Iowa": 24,
+    "Kansas": 24,
+    "Kentucky": 24,
+    "Louisiana": 24,
+    "Maine": 18,
+    "Maryland": 24,
+    "Massachusetts": 20,
+    "Michigan": 24,
+    "Minnesota": 24,
+    "Mississippi": 24,
+    "Missouri": 24,
+    "Montana": 20,
+    "Nebraska": 24,
+    "Nevada": 22,
+    "New Hampshire": 18,
+    "New Jersey": 20,
+    "New Mexico": 20,
+    "New York": 20,
+    "North Carolina": 24,
+    "North Dakota": 24,
+    "Ohio": 24,
+    "Oklahoma": 24,
+    "Oregon": 24,
+    "Pennsylvania": 20,
+    "Rhode Island": 20,
+    "South Carolina": 24,
+    "South Dakota": 24,
+    "Tennessee": 24,
+    "Texas": 24,
+    "Utah": 20,
+    "Vermont": 18,
+    "Virginia": 24,
+    "Washington": 20,
+    "West Virginia": 24,
+    "Wisconsin": 24,
+    "Wyoming": 20,
+    "cell_control:R106C361": 20,
+    "nca_region:NCA5-AK": 18,
+    "nca_region:NCA5-MW": 24,
+    "nca_region:NCA5-NE": 24,
+    "nca_region:NCA5-NGP": 24,
+    "nca_region:NCA5-NW": 24,
+    "nca_region:NCA5-SE": 24,
+    "nca_region:NCA5-SGP": 24,
+    "nca_region:NCA5-SW": 24,
+    "nca_region:all_covered_nca5_regions": 16
+  },
+  "eligible_fwi_by_state": {
+    "Alabama": 18,
+    "Alaska": 18,
+    "Arizona": 18,
+    "Arkansas": 18,
+    "California": 18,
+    "Colorado": 18,
+    "Connecticut": 18,
+    "Delaware": 18,
+    "Florida": 18,
+    "Georgia": 18,
+    "Idaho": 18,
+    "Illinois": 18,
+    "Indiana": 18,
+    "Iowa": 18,
+    "Kansas": 18,
+    "Kentucky": 18,
+    "Louisiana": 18,
+    "Maine": 18,
+    "Maryland": 18,
+    "Massachusetts": 18,
+    "Michigan": 18,
+    "Minnesota": 18,
+    "Mississippi": 18,
+    "Missouri": 18,
+    "Montana": 18,
+    "Nebraska": 18,
+    "Nevada": 18,
+    "New Hampshire": 18,
+    "New Jersey": 18,
+    "New Mexico": 18,
+    "New York": 18,
+    "North Carolina": 18,
+    "North Dakota": 18,
+    "Ohio": 18,
+    "Oklahoma": 18,
+    "Oregon": 18,
+    "Pennsylvania": 18,
+    "Rhode Island": 18,
+    "South Carolina": 18,
+    "South Dakota": 18,
+    "Tennessee": 18,
+    "Texas": 18,
+    "Utah": 18,
+    "Vermont": 18,
+    "Virginia": 18,
+    "Washington": 18,
+    "West Virginia": 18,
+    "Wisconsin": 18,
+    "Wyoming": 18,
+    "cell_control:R106C361": 18,
+    "nca_region:NCA5-AK": 18,
+    "nca_region:NCA5-MW": 18,
+    "nca_region:NCA5-NE": 18,
+    "nca_region:NCA5-NGP": 18,
+    "nca_region:NCA5-NW": 18,
+    "nca_region:NCA5-SE": 18,
+    "nca_region:NCA5-SGP": 18,
+    "nca_region:NCA5-SW": 18,
+    "nca_region:all_covered_nca5_regions": 8
+  },
+  "eligible_heat_index_with_specific_match": 564,
+  "fwi": {
+    "seeds": 1404,
+    "acceptance_blocked": 352,
+    "eligible": 1052
+  },
+  "not_computable_excluded": 92,
+  "top_eligible": [
+    {
+      "seed_id": "SD2-TP1-00017",
+      "seed_rank_key": 1,
+      "use_case_level": 3,
+      "pattern_summary": "TP1-00017 single heat_index heatindex_days_above_95F; state Florida; summer mid (2045-2054) RCP8.5; direction: increase; value 42.446924207364807 days; range 33.566664899999995..50.499999870000000 over cells",
+      "best_explaining_strength": "multi_source_supported",
+      "n_relevant_explaining": 71,
+      "n_relevant_explaining_specific": 5,
+      "top_statements": [
+        "Heat index is significantly associated with higher odds of acute kidney injury among Latinx agricultural workers in Florida.",
+        "Higher heat index values are associated with increased odds of acute kidney injury among agricultural workers.",
+        "Heat index or apparent temperature is calculated in some studies by incorporating humidity with temperature measurements."
+      ]
+    },
+    {
+      "seed_id": "SD2-TP1-00075",
+      "seed_rank_key": 2,
+      "use_case_level": 3,
+      "pattern_summary": "TP1-00075 single heat_index heatindex_days_above_95F; state Florida; summer mid (2045-2054) RCP8.5; absolute_change: increase; value 42.446924207364807 days; range 33.566664899999995..50.499999870000000 over cells",
+      "best_explaining_strength": "multi_source_supported",
+      "n_relevant_explaining": 71,
+      "n_relevant_explaining_specific": 5,
+      "top_statements": [
+        "Heat index is significantly associated with higher odds of acute kidney injury among Latinx agricultural workers in Florida.",
+        "Higher heat index values are associated with increased odds of acute kidney injury among agricultural workers.",
+        "Heat index or apparent temperature is calculated in some studies by incorporating humidity with temperature measurements."
+      ]
+    },
+    {
+      "seed_id": "SD2-TP1-00133",
+      "seed_rank_key": 3,
+      "use_case_level": 3,
+      "pattern_summary": "TP1-00133 single heat_index heatindex_days_above_95F; state Florida; summer mid (2045-2054) RCP8.5; percent_change: increase; value 164.999638795980674 percent; range 33.566664899999995..50.499999870000000 over cells",
+      "best_explaining_strength": "multi_source_supported",
+      "n_relevant_explaining": 71,
+      "n_relevant_explaining_specific": 5,
+      "top_statements": [
+        "Heat index is significantly associated with higher odds of acute kidney injury among Latinx agricultural workers in Florida.",
+        "Higher heat index values are associated with increased odds of acute kidney injury among agricultural workers.",
+        "Heat index or apparent temperature is calculated in some studies by incorporating humidity with temperature measurements."
+      ]
+    },
+    {
+      "seed_id": "SD2-TP1-00191",
+      "seed_rank_key": 4,
+      "use_case_level": 3,
+      "pattern_summary": "TP1-00191 single heat_index heatindex_days_above_95F; state Florida; summer end (2085-2094) RCP8.5; direction: increase; value 63.239656769167382 days; range 56.933331329999995..68.500000830000005 over cells",
+      "best_explaining_strength": "multi_source_supported",
+      "n_relevant_explaining": 71,
+      "n_relevant_explaining_specific": 5,
+      "top_statements": [
+        "Heat index is significantly associated with higher odds of acute kidney injury among Latinx agricultural workers in Florida.",
+        "Higher heat index values are associated with increased odds of acute kidney injury among agricultural workers.",
+        "Heat index or apparent temperature is calculated in some studies by incorporating humidity with temperature measurements."
+      ]
+    },
+    {
+      "seed_id": "SD2-TP1-00249",
+      "seed_rank_key": 5,
+      "use_case_level": 3,
+      "pattern_summary": "TP1-00249 single heat_index heatindex_days_above_95F; state Florida; summer end (2085-2094) RCP8.5; absolute_change: increase; value 63.239656769167382 days; range 56.933331329999995..68.500000830000005 over cells",
+      "best_explaining_strength": "multi_source_supported",
+      "n_relevant_explaining": 71,
+      "n_relevant_explaining_specific": 5,
+      "top_statements": [
+        "Heat index is significantly associated with higher odds of acute kidney injury among Latinx agricultural workers in Florida.",
+        "Higher heat index values are associated with increased odds of acute kidney injury among agricultural workers.",
+        "Heat index or apparent temperature is calculated in some studies by incorporating humidity with temperature measurements."
+      ]
+    },
+    {
+      "seed_id": "SD2-TP1-00307",
+      "seed_rank_key": 6,
+      "use_case_level": 3,
+      "pattern_summary": "TP1-00307 single heat_index heatindex_days_above_95F; state Florida; summer end (2085-2094) RCP8.5; percent_change: increase; value 245.825126775238937 percent; range 56.933331329999995..68.500000830000005 over cells",
+      "best_explaining_strength": "multi_source_supported",
+      "n_relevant_explaining": 71,
+      "n_relevant_explaining_specific": 5,
+      "top_statements": [
+        "Heat index is significantly associated with higher odds of acute kidney injury among Latinx agricultural workers in Florida.",
+        "Higher heat index values are associated with increased odds of acute kidney injury among agricultural workers.",
+        "Heat index or apparent temperature is calculated in some studies by incorporating humidity with temperature measurements."
+      ]
+    },
+    {
+      "seed_id": "SD2-TP1-00365",
+      "seed_rank_key": 7,
+      "use_case_level": 3,
+      "pattern_summary": "TP1-00365 single heat_index heatindex_days_above_105F; state Florida; summer mid (2045-2054) RCP8.5; direction: increase; value 13.007811163261803 days; range 5.833333090000000..23.766665890000002 over cells",
+      "best_explaining_strength": "multi_source_supported",
+      "n_relevant_explaining": 71,
+      "n_relevant_explaining_specific": 5,
+      "top_statements": [
+        "Heat index is significantly associated with higher odds of acute kidney injury among Latinx agricultural workers in Florida.",
+        "Higher heat index values are associated with increased odds of acute kidney injury among agricultural workers.",
+        "Heat index or apparent temperature is calculated in some studies by incorporating humidity with temperature measurements."
+      ]
+    },
+    {
+      "seed_id": "SD2-TP1-00423",
+      "seed_rank_key": 8,
+      "use_case_level": 3,
+      "pattern_summary": "TP1-00423 single heat_index heatindex_days_above_105F; state Florida; summer mid (2045-2054) RCP8.5; absolute_change: increase; value 13.007811163261803 days; range 5.833333090000000..23.766665890000002 over cells",
+      "best_explaining_strength": "multi_source_supported",
+      "n_relevant_explaining": 71,
+      "n_relevant_explaining_specific": 5,
+      "top_statements": [
+        "Heat index is significantly associated with higher odds of acute kidney injury among Latinx agricultural workers in Florida.",
+        "Higher heat index values are associated with increased odds of acute kidney injury among agricultural workers.",
+        "Heat index or apparent temperature is calculated in some studies by incorporating humidity with temperature measurements."
+      ]
+    },
+    {
+      "seed_id": "SD2-TP1-00481",
+      "seed_rank_key": 9,
+      "use_case_level": 3,
+      "pattern_summary": "TP1-00481 single heat_index heatindex_days_above_105F; state Florida; summer mid (2045-2054) RCP8.5; percent_change: increase; value 2382.720121920755660 percent; range 5.833333090000000..23.766665890000002 over cells",
+      "best_explaining_strength": "multi_source_supported",
+      "n_relevant_explaining": 71,
+      "n_relevant_explaining_specific": 5,
+      "top_statements": [
+        "Heat index is significantly associated with higher odds of acute kidney injury among Latinx agricultural workers in Florida.",
+        "Higher heat index values are associated with increased odds of acute kidney injury among agricultural workers.",
+        "Heat index or apparent temperature is calculated in some studies by incorporating humidity with temperature measurements."
+      ]
+    },
+    {
+      "seed_id": "SD2-TP1-00539",
+      "seed_rank_key": 10,
+      "use_case_level": 3,
+      "pattern_summary": "TP1-00539 single heat_index heatindex_days_above_105F; state Florida; summer end (2085-2094) RCP8.5; direction: increase; value 60.966094410266094 days; range 51.333333330000002..69.233334319999993 over cells",
+      "best_explaining_strength": "multi_source_supported",
+      "n_relevant_explaining": 71,
+      "n_relevant_explaining_specific": 5,
+      "top_statements": [
+        "Heat index is significantly associated with higher odds of acute kidney injury among Latinx agricultural workers in Florida.",
+        "Higher heat index values are associated with increased odds of acute kidney injury among agricultural workers.",
+        "Heat index or apparent temperature is calculated in some studies by incorporating humidity with temperature measurements."
+      ]
+    }
+  ]
+}

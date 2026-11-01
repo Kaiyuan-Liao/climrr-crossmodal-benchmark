@@ -29,6 +29,18 @@ and conservative: a hit fails the prompt and goes to review, it never edits it.
 - `according_to_phrase`: "according to", "this/the table", "this/the dataset",
   "this/the paper", "this/the study", "in the table".
 
+**Synthesis post-checks** (`synthesis_post_checks`, pilot P2b-prep; run by
+`scripts/litcollect/litsynth_agent.py` on every synthesized item). Against the seed
+packet (`synthpackets.py`): every number in the reference answer and the rubric traces
+to a pattern value the packet gives (exact string or a rounded form it lists; scenario
+names and ordinals are not numbers); every table-pattern sentence is tagged with a
+packet pattern id; every literature sentence cites >= 1 packet group id, and one resting
+only on single-source groups is marked hedged and carries a hedge word; the prompt
+passes `leakage_check` and names no internal id, identifier-like name or packet source
+string (column, paper id); the reference texts pass `text_leakage` (ClimRR, column
+names, identifier-like names, "according to" / "the table" / "the paper", "et al.",
+years in parentheses, corpus and internal ids); schema v2 and `consistency_errors`.
+
 Nothing here calls a model, reads table values, or touches the concept map,
 column statuses or compatibility rules.
 """
@@ -298,3 +310,106 @@ def validity(item: dict, columns: list[str] | None = None) -> dict:
     result = {k: {"met": not v, "reasons": v} for k, v in out.items()}
     result["benchmark_valid"] = all(v["met"] for v in result.values())
     return result
+
+
+# --- synthesis post-checks (pilot P2b-prep; litsynth_agent.py) ---------------------------------
+
+SYNTH_CHECK_VERSION = "synthesis_post_checks v1"
+INTERNAL_ID_RE = re.compile(r"\b(?:LS|LG|LC|SD[12]|PK|BI)-[A-Za-z0-9_-]+|\bTP\d+-\d+\b")
+COLUMN_LIKE_RE = re.compile(r"\b[A-Za-z][A-Za-z0-9]*_[A-Za-z0-9_]+\b")  # an identifier such as heatindex_HIS_Day95
+SCENARIO_NAME_RE = re.compile(r"\b(?:RCP|SSP)\s?\d(?:\.\d)?(?:\s?-\s?\d(?:\.\d)?)?\b|\bCMIP\d\b", re.I)
+WEIGHT_PREFIX_RE = re.compile(r"^\[w=\d+\]\s*")  # litsynth_agent writes a required point's weight as "[w=2] point"
+ORDINAL_RE = re.compile(r"\b\d+(?:st|nd|rd|th)\b", re.I)
+NUMBER_RE = re.compile(r"\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?")
+HEDGE_RE = re.compile(r"\b(?:one|a single|a|an individual) (?:study|paper|analysis)\b|\bsuggests?\b|\bmay\b|\bmight\b|\bcould\b"
+                      r"|\blimited evidence\b|\bsome evidence\b|\btentative(?:ly)?\b|\breportedly\b", re.I)
+
+
+def reference_numbers(text: str) -> list[str]:
+    """Numbers in a reference text, after removing scenario names (RCP8.5, SSP5-8.5, CMIP6) and ordinals (21st);
+    thousands separators dropped."""
+    stripped = ORDINAL_RE.sub(" ", SCENARIO_NAME_RE.sub(" ", text))
+    return [m.group(0).replace(",", "") for m in NUMBER_RE.finditer(stripped)]
+
+
+def text_leakage(text: str, columns: list[str] | None = None, forbidden: list[str] = ()) -> list[str]:
+    """Source-leakage flags for a reference text (the prompt uses `leakage_check`, which also flags exact values)."""
+    cols = columns if columns is not None else column_names()
+    checked = {c.lower() for c in cols if c not in GENERIC_COLUMN_NAMES}
+    flags = []
+    if CLIMRR_RE.search(text):
+        flags.append("ClimRR named")
+    flags += [f"column name: {t}" for t in sorted({t for t in TOKEN_RE.findall(text) if t.lower() in checked})]
+    flags += [f"identifier-like name: {t}" for t in sorted(set(COLUMN_LIKE_RE.findall(text)))]
+    flags += [f"source phrase: {a}" for a in ACCORDING_RE.findall(text)]
+    if ET_AL_RE.search(text):
+        flags.append("'et al.'")
+    flags += [f"year in parentheses {y!r}" for y in YEAR_PAREN_RE.findall(text)]
+    flags += [f"corpus id: {t}" for t in CORPUS_ID_RE.findall(text)]
+    flags += [f"internal id: {t}" for t in INTERNAL_ID_RE.findall(text)]
+    flags += [f"packet source string: {s}" for s in forbidden if re.search(rf"(?<![A-Za-z0-9_]){re.escape(s)}(?![A-Za-z0-9_])", text)]
+    return flags
+
+
+def _sentences(xs) -> list[dict]:
+    return [x for x in xs if isinstance(x, dict) and isinstance(x.get("sentence"), str)] if isinstance(xs, list) else []
+
+
+def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns: list[str] | None = None) -> dict:
+    """Deterministic checks on a synthesized item (pilot P2b). `tagged` is the model's decomposed reference answer:
+    {"table_pattern": [{sentence, pattern_ids}], "literature_interpretation": [{sentence, group_ids, hedged}],
+    "integrated": str}; `checks_input` comes from the seed packet. Returns {pass, reasons, checks, check_version}."""
+    cols = columns if columns is not None else column_names()
+    reasons: list[str] = []
+    tp_s, lit_s = _sentences(tagged.get("table_pattern")), _sentences(tagged.get("literature_interpretation"))
+    integrated = tagged.get("integrated") if isinstance(tagged.get("integrated"), str) else ""
+    if len(tp_s) != len(tagged.get("table_pattern") or []) or len(lit_s) != len(tagged.get("literature_interpretation") or []):
+        reasons.append("reference_answer: a tagged sentence is not an object with a 'sentence' string")
+    allowed = {a.lstrip("+-") for a in checks_input["allowed_numbers"]}
+    pattern_ids, strengths = set(checks_input["pattern_ids"]), checks_input["group_strength"]
+
+    texts = [("table_pattern", s["sentence"]) for s in tp_s] + [("literature_interpretation", s["sentence"]) for s in lit_s] + \
+            [("integrated", integrated)]
+    rub = item.get("rubric") or {}
+    texts_rubric = [(f"rubric.{k}", WEIGHT_PREFIX_RE.sub("", t)) for k, v in rub.items() if isinstance(v, list) for t in v if isinstance(t, str)]
+    untraced = sorted({(w, n) for w, t in texts + texts_rubric for n in reference_numbers(t) if n not in allowed})
+    reasons += [f"{w}: number {n} does not trace to a pattern value in the packet" for w, n in untraced]
+
+    if checks_input["pattern_ids"] and not tp_s:
+        reasons.append("reference_answer.table_pattern: no sentence while the packet has a table pattern")
+    for i, s in enumerate(tp_s):
+        ids = s.get("pattern_ids") if isinstance(s.get("pattern_ids"), list) else []
+        if not ids:
+            reasons.append(f"table_pattern[{i}]: no pattern id")
+        reasons += [f"table_pattern[{i}]: pattern id {p} not in the packet" for p in ids if p not in pattern_ids]
+    if strengths and not lit_s:
+        reasons.append("reference_answer.literature_interpretation: no sentence while the packet has literature groups")
+    for i, s in enumerate(lit_s):
+        ids = s.get("group_ids") if isinstance(s.get("group_ids"), list) else []
+        if not ids:
+            reasons.append(f"literature_interpretation[{i}]: cites no group id")
+        bad = [g for g in ids if g not in strengths]
+        reasons += [f"literature_interpretation[{i}]: group id {g} not in the packet" for g in bad]
+        good = [g for g in ids if g in strengths]
+        if good and all(strengths[g] == "single_source_supported" for g in good):
+            if s.get("hedged") is not True:
+                reasons.append(f"literature_interpretation[{i}]: rests only on single-source groups but is not marked hedged")
+            if not HEDGE_RE.search(s["sentence"]):
+                reasons.append(f"literature_interpretation[{i}]: rests only on single-source groups but carries no hedge word")
+
+    leak = leakage_check(item.get("prompt") or "", cols)
+    if not leak["pass"]:
+        reasons += [f"prompt leakage: {f}" for f in leak["flags"]]
+    prompt_extra = [f for f in text_leakage(item.get("prompt") or "", cols, checks_input.get("forbidden_strings", []))
+                    if f.startswith(("internal id", "identifier-like", "packet source"))]
+    reasons += [f"prompt leakage: {f}" for f in prompt_extra]
+    for w, t in texts:
+        reasons += [f"{w} leakage: {f}" for f in text_leakage(t, cols, checks_input.get("forbidden_strings", []))]
+
+    schema = schema_errors(item)
+    reasons += [f"schema: {e}" for e in schema]
+    if not schema:
+        reasons += [f"consistency: {e}" for e in consistency_errors(item, cols)]
+    return {"check_version": SYNTH_CHECK_VERSION, "pass": not reasons, "reasons": reasons,
+            "checks": {"numbers_untraced": [n for _, n in untraced], "prompt_leakage": leak, "schema_errors": schema,
+                       "n_table_sentences": len(tp_s), "n_literature_sentences": len(lit_s)}}

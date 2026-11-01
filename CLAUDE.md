@@ -136,6 +136,10 @@ Pilot P1 (D-041) adds `scripts/litcollect/litstatement_agent.py`, run on Polaris
 kept byte-identical to the file that runs (pinned in its test): its `agent.log`,
 per-paper `result.json` / `prompt_user.txt` / `response.json`, `statements.jsonl` and
 `summary.json` are the run evidence.
+Pilot P2b (D-048) adds `scripts/litcollect/litgroup_agent.py` and `litsynth_agent.py`, run on
+Polaris and kept byte-identical to the files that run (pinned in their tests): their
+`agent.log`, per-partition / per-seed `result.json` or item file, `prompt_user.txt`,
+`response.json`, `groups.jsonl` / `items.jsonl` and `summary.json` are the run evidence.
 
 ## Knowledge-refresh staging
 

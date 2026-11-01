@@ -1,0 +1,41 @@
+# Region-string match exclusions v1 (pilot P2b-prep; DR-SEED-1 v2 geography, D-047).
+#
+# A literature statement's `region` string (as the extraction model wrote it) makes the
+# statement relevant to a state or NCA5-region table pattern, under a subnational / local
+# scope, only when the string contains the state or region name as a whole phrase
+# (src/climrr/litgeo.py). Some whole-phrase matches are not that place. Each entry below
+# names a phrase; before a blocked name is matched, every occurrence of the phrase is
+# masked out of the string, so the blocked name can still match elsewhere in the same
+# string ("Kansas City, Kansas" still names Kansas).
+#
+# Matching is on the normalized string: periods removed, lowercased, every other
+# character outside [a-z0-9] a space, whitespace collapsed. Phrases are normalized the
+# same way ("Washington, D.C." -> "washington dc").
+#
+# `source`: `ruling` --- named in the COORDINATOR ruling of 2026-11-01 (D-047);
+# `data` --- found in the run-2 region strings (artifacts/litstatements/run2/region_strings_v1.csv);
+# `gazetteer_collision` --- a state name inside another state's name (not observed in run 2).
+#
+# `allowed` lists phrases the ruling confirms DO name the place (no masking; recorded so a
+# reader does not add them as exclusions).
+#
+# `ambiguous` lists strings the rule matches but that may name a different place; they are
+# matched (the rule is not changed) and flagged in the inspection CSV for the human check.
+
+version: region_match_exclusions_v1
+decision: D-047
+
+exclusions:
+  - {phrase: "Sierra Nevada", blocks: [Nevada], source: ruling, note: "mountain range, mostly in California"}
+  - {phrase: "Nevada County", blocks: [Nevada], source: ruling, note: "a county of California"}
+  - {phrase: "Washington, D.C.", blocks: [Washington], source: ruling}
+  - {phrase: "Washington DC", blocks: [Washington], source: ruling}
+  - {phrase: "Kansas City", blocks: [Kansas, Missouri], source: ruling, note: "the city alone matches neither state"}
+  - {phrase: "Southeast Asia", blocks: [Southeast], source: data, note: "run 2: 'Brazil and Southeast Asia' (LS-55364237-01)"}
+  - {phrase: "West Virginia", blocks: [Virginia], source: gazetteer_collision}
+
+allowed:
+  - {phrase: "New York City", names: "New York", source: ruling}
+
+ambiguous:
+  - {string: "Georgia", may_be: "the country Georgia", source: data, note: "run 2: two subnational statements (LS-259831216-01, LS-34373293-02); matched to the state under the rule"}

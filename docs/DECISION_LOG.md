@@ -2480,3 +2480,94 @@ code emits, and the next GUIDANCE packet still chooses.
   `artifacts/benchmark/item_seeds_v1_summary.json`,
   `artifacts/benchmark/review/P2a_seeds_v1.csv`, `tests/test_litaggregate.py`,
   `tests/test_itemseeds.py`, `docs/LITSTATEMENTS_RUN2.md`.
+
+## D-046 --- DR-LIT-IND-1 v2: paper independence
+
+- **Date:** 2026-11-01.
+- **Status:** **decided** (COORDINATOR ruling of 2026-11-01, relayed by Kaiyuan; answers the D-045
+  escalation on the byte-identical pair).
+- **Context.** Under DR-LIT-IND-1 (D-045) two ids were independent whenever they differed; 1,292 of the
+  1,316 P2a-eligible seeds were eligible only through `LC-extreme_heat_v1-driver-071`, whose two papers
+  (239052352, 257056592) are one byte-identical file.
+- **Decision.** Identical `paper_sha256` -> **one paper**. Identical normalized title (lowercase,
+  punctuation / whitespace collapsed) -> **`possible_duplicate`, counted as one**. Otherwise
+  `assumed_independent_distinct_ids` (no author field in the corpus index).
+- **Implementation (EXECUTOR).** `src/climrr/litindependence.py`; the relation is closed transitively and
+  each paper gets a `canonical_id` (smallest item id of its group). Titles are read from the run-2
+  tarball's `prompt_user.txt` `[SECTION: title]` (`scripts/build_independence_v2.py`, tarball checked against
+  its D-044 pin) and stored as hashes only. Normalization: lowercase, `[\W_]+` -> one space.
+- **Result.** 243 papers -> **239 canonical**: one same-SHA-256 group (239052352 / 257056592) and three more
+  same-title groups (221671377 / 256835585; 237554329 / 239696378; 243767055 / 257108685) --- the same four
+  pairs the D-045 diagnostics listed. Observed: the 221671377 / 256835585 "title" is an institutional line
+  ("... Geological Survey Earth Resources Observation and Science (EROS) Center"), so that pair may be two
+  papers; under the rule it counts as one. `clusters_v1b` (the v1 clusters, same members, strengths under
+  v2): multi-source **2** (was 3; `LC-extreme_heat_v1-driver-071` is now single-source), review 24, single 456,
+  background-only 249.
+- **Affected files:** `src/climrr/litindependence.py`, `scripts/build_independence_v2.py`,
+  `artifacts/litstatements/run2/independence_v2.json`, `artifacts/litstatements/run2/clusters_v1b*`,
+  `tests/test_litindependence.py`.
+
+## D-047 --- DR-SEED-1 v2 geography
+
+- **Date:** 2026-11-01.
+- **Status:** **decided** (COORDINATOR ruling of 2026-11-01; answers the D-045 escalation on non-U.S.
+  national scopes).
+- **Decision.** A statement's `region_scope` alone makes it relevant only when `global`. `national` /
+  `continental`: relevant only if the region string matches a U.S. gazetteer (United States, U.S., US, USA,
+  CONUS, contiguous / continental United States, North America). `subnational` / `local`: relevant only if
+  the region string contains the pattern's state name or NCA5 region name as a whole phrase, with an
+  exclusion list `data/metadata/geography/region_match_exclusions_v1.yaml` (ruling: "Sierra Nevada",
+  "Nevada County", "Washington, D.C." / "Washington DC" not Washington state; "New York City" -> New York;
+  "Kansas City" matches neither Kansas nor Missouri by the city alone; plus what the data shows).
+- **Implementation (EXECUTOR).** `src/climrr/litgeo.py`. Classification per (region string, scope):
+  `us_national`, `state:<name>`, `nca:<name>`, `global`, `other`, `unknown` (empty / `unknown` region, or
+  scope `unknown`); the rule that fired is recorded. Matching on normalized strings (periods removed,
+  lowercase, non-alphanumerics -> space); an exclusion phrase is masked before the names it blocks are
+  matched. Exclusions added from the data: "Southeast Asia" (blocks NCA5 Southeast); as a gazetteer
+  collision, "West Virginia" (blocks Virginia). "Georgia" (two subnational statements) is matched to the
+  state and flagged `ambiguous` (it may be the country). An NCA5-region pattern matches its region name
+  only, not its member states' names (as in v1).
+- **Result.** 747 entering statements: us_national 77, state 119, nca 5, global 118, other 228, unknown 200
+  (148 distinct region x scope rows, 133 distinct strings; inspection file
+  `artifacts/litstatements/run2/region_strings_v1.csv`). **Observed, not changed:** 50 statements carry a
+  U.S.-wide string under a subnational / local scope ("United States" 8, "western United States" 10,
+  "southeastern United States" 13, "contiguous US" 4, ...) and are `other` under the rule; "southeastern" /
+  "Northeastern" are not the whole phrases "Southeast" / "Northeast".
+- **Affected files:** `src/climrr/litgeo.py`, `data/metadata/geography/region_match_exclusions_v1.yaml`,
+  `artifacts/litstatements/run2/region_strings_v1.csv`, `tests/test_litgeo.py`.
+
+## D-048 --- Grouping and eligibility v2; D-045 choices confirmed
+
+- **Date:** 2026-11-01.
+- **Status:** **decided** (COORDINATOR ruling of 2026-11-01).
+- **Decision.**
+  - Clusters v1 (DR-LIT-AGG-1 v2) are a **lexical baseline kept as diagnostic evidence**. Grouping for the
+    pilot is **agent-proposed and human-checked** (`scripts/litcollect/litgroup_agent.py` v1).
+  - **Eligibility** = the pattern is not acceptance-blocked, it is computed, and >= 1 geography-relevant
+    (D-047) **mechanism / driver statement of any strength** pairs with it. **Strength ranks, it does not
+    gate.**
+  - The EXECUTOR choices listed in D-045 are **accepted**. (The ruling counts five; the EXECUTOR reads them as
+    D-045 lists them: direction-lexicon inflections with both-lists -> `unspecified`; bigrams of tokens
+    adjacent after stopword removal; the representative statement by v2 cosine; place matching with periods
+    removed, whole words; and the ranking / seeding details --- rank tie-breaks, `use_case_level` precedence,
+    `not_computable` not eligible, seed order, IC-012 carried as non-blocking. Place matching is superseded
+    for seeding by D-047, and the seed rank and levels by the v2 choices below.)
+- **Implementation (EXECUTOR; choices recorded for COORDINATOR confirmation).** `src/climrr/itemseeds_v2.py`:
+  family and direction pairing kept from DR-SEED-1; entering statements are the core / cited /
+  background-consensus candidates; strength = the statement's `clusters_v1b` strength. Statement rank:
+  strength, then basis (state > NCA5 region > us_national > global), role, id. Seed rank: best strength among
+  relevant mechanism / driver statements, then more of them matched by a state / region name, then more
+  independent (D-046) core / cited papers, then more such statements, then pattern id. Levels: 4 (regional
+  contrast with a relevant mechanism / driver), 3, 7 (a relevant caveat naming a scenario), and **1 for every
+  computed pattern** (v1 used 1 only as a fallback).
+- **Result.** 2,812 seeds; **2,368 eligible** (v1: 1,316): heat index **1,316** (level 3: 1,300; level 4: 16) ---
+  every computed heat-index pattern except the not-computable ones --- and FWI **1,052** (every FWI pattern not
+  acceptance-blocked). Eligibility is near-universal because a U.S.-national or global mechanism / driver
+  statement is relevant to every U.S. pattern; ranking, not eligibility, now separates seeds. 312 statements
+  are relevant to >= 1 pattern; 124 name a state or NCA5 region.
+- **Affected files:** `src/climrr/itemseeds_v2.py`, `scripts/build_item_seeds_v2.py`,
+  `artifacts/benchmark/item_seeds_v2_summary.json`, `src/climrr/litgroups.py`,
+  `scripts/build_group_partitions.py`, `artifacts/litgroups/partitions_v1*`,
+  `scripts/litcollect/litgroup_agent.py`, `src/climrr/synthpackets.py`, `scripts/build_synth_packets.py`,
+  `scripts/litcollect/litsynth_agent.py`, `src/climrr/benchmark_items.py`, `src/climrr/pilot_shortlist.py`,
+  `scripts/pilot_shortlist.py`, `artifacts/benchmark/pilot_shortlist_v1*`, `docs/PILOT_P2B_DESIGN.md`.
