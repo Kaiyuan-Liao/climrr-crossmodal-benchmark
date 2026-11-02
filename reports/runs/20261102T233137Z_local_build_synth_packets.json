@@ -1,0 +1,316 @@
+{
+  "run_id": "20261102T233137Z_local_build_synth_packets",
+  "name": "build_synth_packets",
+  "utc_timestamp": "2026-11-02T23:31:37.930467+00:00",
+  "git_commit": "30955423c99751aab22d21ff7a62c9dbc8d9c724",
+  "git_dirty": false,
+  "untracked_files": 0,
+  "hostname": "ryous-MacBook-Pro-2.local",
+  "location": "local",
+  "user": "liaokaiyuan",
+  "python_version": "3.11.16",
+  "pinned_libraries": [
+    {
+      "name": "pandas",
+      "pinned_version": "3.0.5",
+      "imported_version": "3.0.5",
+      "matches_pin": true
+    },
+    {
+      "name": "numpy",
+      "pinned_version": "2.4.6",
+      "imported_version": "2.4.6",
+      "matches_pin": true
+    },
+    {
+      "name": "pypdf",
+      "pinned_version": "6.18.0",
+      "imported_version": "6.18.0",
+      "matches_pin": true
+    },
+    {
+      "name": "pyyaml",
+      "pinned_version": "6.0.3",
+      "imported_version": "6.0.3",
+      "matches_pin": true
+    },
+    {
+      "name": "pytest",
+      "pinned_version": "9.1.1",
+      "imported_version": "9.1.1",
+      "matches_pin": true
+    },
+    {
+      "name": "pypdfium2",
+      "pinned_version": "5.13.0",
+      "imported_version": "5.13.0",
+      "matches_pin": true
+    }
+  ],
+  "platform": "macOS-15.3-arm64-arm-64bit",
+  "pip_freeze_sha256": "d9af804d5018f7022ae9f4db0bb83a8d57104d2ff6ff5676d912d896f952bf51",
+  "config_snapshot": {
+    "version": "synthpackets v3a",
+    "rank_rule": "DR-SEED-RANK-3",
+    "descriptor_rule": "DR-DESC-1",
+    "geography": "litgeo v2",
+    "select": [
+      "SD2-TP1-00018",
+      "SD2-TP1-00069",
+      "SD2-TP1-00071",
+      "SD2-TP1-00271",
+      "SD2-TP1-00460",
+      "SD2-TP1-00589",
+      "SD2-TP1-02785",
+      "SD2-TP1-02787",
+      "SD2-TP1-02789",
+      "SD2-TP1-00075"
+    ],
+    "dispositions": "data/metadata/benchmark/group_dispositions_v1a.csv",
+    "dispositions_applied": {
+      "dispositions_version": "group_dispositions_v1a",
+      "counts": {
+        "accept": 45,
+        "exclude_from_rung7": 40,
+        "merge_with:LG-extreme_heat_v1-mechanism-c1-021": 2,
+        "not_about_family": 12,
+        "reject": 3,
+        "relabel:hazard_change_mechanism": 1,
+        "relabel:hazard_definition_or_measurement": 1,
+        "relabel:impact_or_exposure": 4,
+        "relabel:method_or_data": 2
+      },
+      "kaiyuan_overrides": 0,
+      "merged": {
+        "LG-extreme_heat_v1-mechanism-c1-021": [
+          "LG-extreme_heat_v1-mechanism-c2-001",
+          "LG-extreme_heat_v1-mechanism-c3-001"
+        ]
+      },
+      "relabelled": [
+        "LG-extreme_heat_v1-caveat-c1-015",
+        "LG-extreme_heat_v1-caveat-c1-025",
+        "LG-extreme_heat_v1-driver-c1-002",
+        "LG-extreme_heat_v1-driver-c2-003",
+        "LG-extreme_heat_v1-mechanism-c1-010",
+        "LG-extreme_heat_v1-mechanism-c1-030",
+        "LG-extreme_heat_v1-mechanism-c3-002",
+        "LG-extreme_heat_v1-pattern-c2-002"
+      ],
+      "groups_in_arm_without_disposition": {
+        "extreme_heat_v1": 44,
+        "fire_weather_v1": 88
+      }
+    },
+    "undisposed_candidates": [],
+    "selection": "data/metadata/benchmark/pilot_selection_v1.yaml",
+    "max_passage": 400,
+    "max_groups": {
+      "driver": 10,
+      "context": 4,
+      "caveat": 4
+    },
+    "inputs_sha256": {
+      "item_seeds_v2": "3123dd3463f23555601d1e64edc172e2977e2fc6df3adbb08a74b5df41be9d50",
+      "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+      "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+      "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+      "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+      "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+      "pilot_selection": "c9f090297fd1beacbd524e33f571e275b2205f6e2b99687955999e3577f516fa",
+      "group_dispositions": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+      "descriptor_rules": "5c2090a77e0424d43603c9766c8925cee50a3b8fd31f24351334adbf82934650"
+    },
+    "model_calls": 0
+  },
+  "data_path": "artifacts/litgroups/run2/groups_enriched.jsonl",
+  "data_sha256": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+  "output_path": "artifacts/benchmark/synth_packets/manifest.json",
+  "result_summary": {
+    "packets": [
+      {
+        "packet_id": "PK-SD2-TP1-00018",
+        "item_id": "BI-P2B-0001",
+        "seed_id": "SD2-TP1-00018",
+        "level": 1,
+        "groups": 0,
+        "groups_driver": 0,
+        "groups_context": 0,
+        "groups_caveat": 0,
+        "excluded_groups": 0,
+        "excluded_by_disposition": 0,
+        "excluded_no_disposition": 0,
+        "top3_labels": [],
+        "sha256": "d7780499eecaabcecb7d8eaf90897f69f9f244c0a8ae6ab5b15d3f38bed980e1"
+      },
+      {
+        "packet_id": "PK-SD2-TP1-00069",
+        "item_id": "BI-P2B-0002",
+        "seed_id": "SD2-TP1-00069",
+        "level": 1,
+        "groups": 0,
+        "groups_driver": 0,
+        "groups_context": 0,
+        "groups_caveat": 0,
+        "excluded_groups": 0,
+        "excluded_by_disposition": 0,
+        "excluded_no_disposition": 0,
+        "top3_labels": [],
+        "sha256": "39fadca55d09f815a31561ba6dc4f99beee89a6e1e085b37a09a37dce4befbf8"
+      },
+      {
+        "packet_id": "PK-SD2-TP1-00071",
+        "item_id": "BI-P2B-0003",
+        "seed_id": "SD2-TP1-00071",
+        "level": 3,
+        "groups": 12,
+        "groups_driver": 8,
+        "groups_context": 4,
+        "groups_caveat": 0,
+        "excluded_groups": 49,
+        "excluded_by_disposition": 5,
+        "excluded_no_disposition": 0,
+        "top3_labels": [
+          "Observed increase in heat\u2011wave and drought frequency",
+          "global warming increases heatwave frequency and intensity",
+          "urban heat island intensifies due to nighttime conditions and reduced moisture"
+        ],
+        "sha256": "556d89245085ea081ea61fdafe29f598c0f4b0f1037b425a437ce34e623ed7c6"
+      },
+      {
+        "packet_id": "PK-SD2-TP1-00271",
+        "item_id": "BI-P2B-0004",
+        "seed_id": "SD2-TP1-00271",
+        "level": 3,
+        "groups": 11,
+        "groups_driver": 8,
+        "groups_context": 3,
+        "groups_caveat": 0,
+        "excluded_groups": 44,
+        "excluded_by_disposition": 5,
+        "excluded_no_disposition": 0,
+        "top3_labels": [
+          "Observed increase in heat\u2011wave and drought frequency",
+          "global warming increases heatwave frequency and intensity",
+          "urban heat island intensifies due to nighttime conditions and reduced moisture"
+        ],
+        "sha256": "1197fb5420920d2f490129f3c33556c9dc1d04be64a8c43335acd760f0dd29fe"
+      },
+      {
+        "packet_id": "PK-SD2-TP1-00460",
+        "item_id": "BI-P2B-0005",
+        "seed_id": "SD2-TP1-00460",
+        "level": 3,
+        "groups": 11,
+        "groups_driver": 8,
+        "groups_context": 3,
+        "groups_caveat": 0,
+        "excluded_groups": 47,
+        "excluded_by_disposition": 5,
+        "excluded_no_disposition": 0,
+        "top3_labels": [
+          "Observed increase in heat\u2011wave and drought frequency",
+          "global warming increases heatwave frequency and intensity",
+          "urban heat island intensifies due to nighttime conditions and reduced moisture"
+        ],
+        "sha256": "222c1f5a886ba70e66977216a0ef8c354580d3dbbadae980a503795dae14f172"
+      },
+      {
+        "packet_id": "PK-SD2-TP1-00589",
+        "item_id": "BI-P2B-0006",
+        "seed_id": "SD2-TP1-00589",
+        "level": 3,
+        "groups": 11,
+        "groups_driver": 8,
+        "groups_context": 3,
+        "groups_caveat": 0,
+        "excluded_groups": 46,
+        "excluded_by_disposition": 5,
+        "excluded_no_disposition": 0,
+        "top3_labels": [
+          "Observed increase in heat\u2011wave and drought frequency",
+          "global warming increases heatwave frequency and intensity",
+          "urban heat island intensifies due to nighttime conditions and reduced moisture"
+        ],
+        "sha256": "23f3c05f8bfc394bae395dab8de7c4eb26202f6c5a8bbbecb7cbf58161987da0"
+      },
+      {
+        "packet_id": "PK-SD2-TP1-02785",
+        "item_id": "BI-P2B-0007",
+        "seed_id": "SD2-TP1-02785",
+        "level": 4,
+        "groups": 11,
+        "groups_driver": 8,
+        "groups_context": 3,
+        "groups_caveat": 0,
+        "excluded_groups": 43,
+        "excluded_by_disposition": 5,
+        "excluded_no_disposition": 0,
+        "top3_labels": [
+          "Observed increase in heat\u2011wave and drought frequency",
+          "global warming increases heatwave frequency and intensity",
+          "urban heat island intensifies due to nighttime conditions and reduced moisture"
+        ],
+        "sha256": "5f453e2ca161312111ce19b89e476af35e852f83e4c4c4df0b7005c6d5b5e758"
+      },
+      {
+        "packet_id": "PK-SD2-TP1-02787",
+        "item_id": "BI-P2B-0008",
+        "seed_id": "SD2-TP1-02787",
+        "level": 4,
+        "groups": 11,
+        "groups_driver": 8,
+        "groups_context": 3,
+        "groups_caveat": 0,
+        "excluded_groups": 43,
+        "excluded_by_disposition": 5,
+        "excluded_no_disposition": 0,
+        "top3_labels": [
+          "Observed increase in heat\u2011wave and drought frequency",
+          "global warming increases heatwave frequency and intensity",
+          "urban heat island intensifies due to nighttime conditions and reduced moisture"
+        ],
+        "sha256": "5bf0a861df71504113c6f5e60b6044e494ef6d5a8856b61a0cd94fce03f57534"
+      },
+      {
+        "packet_id": "PK-SD2-TP1-02789",
+        "item_id": "BI-P2B-0009",
+        "seed_id": "SD2-TP1-02789",
+        "level": 4,
+        "groups": 11,
+        "groups_driver": 8,
+        "groups_context": 3,
+        "groups_caveat": 0,
+        "excluded_groups": 43,
+        "excluded_by_disposition": 5,
+        "excluded_no_disposition": 0,
+        "top3_labels": [
+          "Observed increase in heat\u2011wave and drought frequency",
+          "global warming increases heatwave frequency and intensity",
+          "urban heat island intensifies due to nighttime conditions and reduced moisture"
+        ],
+        "sha256": "2cb3bfebab3a2cc57fbf46f51610fcb01466023c4f7b768bb8629319cdff5066"
+      },
+      {
+        "packet_id": "PK-SD2-TP1-00075",
+        "item_id": "BI-P2B-0010",
+        "seed_id": "SD2-TP1-00075",
+        "level": 7,
+        "groups": 13,
+        "groups_driver": 8,
+        "groups_context": 3,
+        "groups_caveat": 2,
+        "excluded_groups": 45,
+        "excluded_by_disposition": 17,
+        "excluded_no_disposition": 0,
+        "top3_labels": [
+          "Observed increase in heat\u2011wave and drought frequency",
+          "global warming increases heatwave frequency and intensity",
+          "urban heat island intensifies due to nighttime conditions and reduced moisture"
+        ],
+        "sha256": "25229d45578c578cd454a9b8c7998eb6c5859242ba879c2731a7c16bc985499f"
+      }
+    ]
+  },
+  "passed": true
+}
