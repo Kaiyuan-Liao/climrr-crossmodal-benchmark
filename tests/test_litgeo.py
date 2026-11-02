@@ -1,4 +1,4 @@
-"""Geography of literature statements v2 (DR-SEED-1 v2 geography, D-047; pilot P2b-prep)."""
+"""Geography of literature statements: rules v1 (D-047, frozen) and v2 (D-047a amendment; pilot P2b-fix)."""
 
 from __future__ import annotations
 
@@ -11,7 +11,8 @@ from climrr import itemseeds as sd
 from climrr import itemseeds_v2 as s2
 from climrr import litgeo as lg
 
-GZ = lg.Gazetteer(sd.nca_map())
+GZ = lg.Gazetteer(sd.nca_map(), version="v1")
+GZ2 = lg.Gazetteer(sd.nca_map())
 
 
 @pytest.mark.parametrize("region,scope,expected", [
@@ -87,3 +88,67 @@ def test_the_frozen_region_string_csv():
         assert lg.classify(r["region"], r["region_scope"], GZ)["classification"] == r["classification"]
     s = json.loads(s2.SUMMARY_PATH.read_text(encoding="utf-8"))["region_string_classification"]
     assert s["statements_by_class"] == {"us_national": 77, "state": 119, "nca": 5, "global": 118, "other": 228, "unknown": 200}
+
+
+# --- v2 (D-047a) ---------------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize("region,scope,expected,qualifier", [
+    ("United States", "subnational", "us_national", None),            # a U.S. name is U.S.-wide regardless of scope
+    ("United States", "national", "us_national", None),
+    ("United States", "global", "us_national", None),
+    ("U.S.", "local", "us_national", None),
+    ("contiguous US", "subnational", "us_national", None),
+    ("CONUS", "continental", "us_national", None),
+    ("conterminous United States", "continental", "us_national", None),
+    ("the lower 48", "unknown", "us_national", None),
+    ("southeastern United States", "subnational", "us_subregion", "southeastern"),
+    ("western US", "continental", "us_subregion", "western"),          # was us_national under v1
+    ("the U.S. Southwest", "national", "us_subregion", "southwest"),
+    ("Upper Midwestern United States", "subnational", "us_subregion", "upper midwestern"),
+    ("dry ecoregions of the United States", "subnational", "us_subregion", "dry ecoregions"),
+    ("northern and central US Rocky Mountains", "subnational", "us_subregion", "northern and central rocky mountains"),
+    ("Southwest United States", "subnational", "nca:Southwest", None),  # a state / NCA5 name under subnational still wins
+    ("north-central Minnesota, USA", "subnational", "state:Minnesota", None),
+    ("Houston, TX, USA", "subnational", "us_national", None),          # a city is not a directional / regional qualifier
+    ("Australia, Canada, United States", "continental", "us_national", None),
+    ("Canada and the continental United States", "continental", "us_national", None),
+    ("North America", "continental", "us_national", None),             # D-047 kept: not a U.S. name, scope-gated
+    ("North America", "subnational", "other", None),
+    ("Malaysia", "national", "other", None),
+    ("unknown", "global", "global", None),
+    ("unknown", "local", "unknown", None),
+    ("Sierra Nevada", "subnational", "other", None),
+])
+def test_classification_v2(region, scope, expected, qualifier):
+    g = lg.classify(region, scope, GZ2)
+    assert (g["classification"], g["qualifier"]) == (expected, qualifier)
+
+
+def test_us_subregion_is_relevant_to_every_us_pattern_below_state_and_nca():
+    tx = {"state": ["Texas"], "nca_region": ["Southern Great Plains"]}
+    assert lg.relevance(lg.classify("western United States", "subnational", GZ2), tx) == "us_subregion"
+    assert lg.BASIS_ORDER == ("state", "nca_region", "us_subregion", "us_national", "global")
+    assert lg.classify("western United States", "subnational", GZ2)["rule"] == "us_name:United States +qualifier"
+
+
+def test_an_unknown_rule_version_is_refused():
+    with pytest.raises(ValueError):
+        lg.Gazetteer(sd.nca_map(), version="v3")
+
+
+def test_the_region_string_csv_v2_and_the_recovered_drops():
+    rows = list(csv.DictReader(open(lg_v2_csv(), encoding="utf-8")))
+    assert sum(int(r["count"]) for r in rows) == 747 and len(rows) == 147
+    for r in rows:
+        g, g1 = lg.classify(r["region"], r["region_scope"], GZ2), lg.classify(r["region"], r["region_scope"], GZ)
+        assert (g["classification"], g["qualifier"] or "", g1["classification"]) == (r["classification"], r["qualifier"], r["classification_v1"])
+    s = json.loads(lg_v2_csv().with_name("region_strings_v2_summary.json").read_text(encoding="utf-8"))
+    assert s["statements_by_class"] == {"us_national": 81, "us_subregion": 46, "state": 119, "nca": 5, "global": 118,
+                                        "other": 178, "unknown": 200}
+    assert s["d047_drops"]["dropped_under_v1"] == 50 and s["d047_drops"]["recovered_under_v2"] == 50
+    assert s["d047_drops"]["recovered_by_class"] == {"us_national": 13, "us_subregion": 37}
+
+
+def lg_v2_csv():
+    return s2.REGION_CSV_PATH.with_name("region_strings_v2.csv")

@@ -51,7 +51,7 @@ def main() -> int:
     r2.write_json(li.CLUSTERS_V1B_SUMMARY_PATH, v1b_summary)
 
     nca = sd.nca_map()
-    gz = lg.Gazetteer(nca)
+    gz = lg.Gazetteer(nca, version="v1")  # D-047 as built; D-047a (v2) is applied in the packets
     ent = la.entering(records)
     region_rows = lg.region_rows(ent, gz)
     with open(s2.REGION_CSV_PATH, "w", encoding="utf-8", newline="") as f:

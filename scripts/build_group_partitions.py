@@ -4,7 +4,7 @@
 Reads `artifacts/litstatements/run2/statements_ingested.jsonl`, `independence_v2.json`
 and the pinned NCA5 map. Writes `artifacts/litgroups/partitions_v1.jsonl` (tracked; read by
 `scripts/litcollect/litgroup_agent.py` on Polaris) and `partitions_v1_summary.json`.
-Rules: `src/climrr/litgroups.py`. Deterministic; no model call, no table value.
+Rules: `src/climrr/litgroups.py`; the split's region class is the D-047 (v1) geography, as frozen. Deterministic; no model call, no table value.
 """
 
 from __future__ import annotations
@@ -29,7 +29,7 @@ from climrr.runrecord import write_run_record  # noqa: E402
 def main() -> int:
     records = sd.read_jsonl(r2.INGESTED_PATH)
     indep = json.loads(li.INDEPENDENCE_PATH.read_text(encoding="utf-8"))
-    parts = lgr.build_partitions(records, indep, lg.Gazetteer(sd.nca_map()))
+    parts = lgr.build_partitions(records, indep, lg.Gazetteer(sd.nca_map(), version="v1"))
     r2.write_jsonl(lgr.PARTITIONS_PATH, parts)
     summary = lgr.summarise_partitions(parts)
     summary["partitions_file"] = {"path": "artifacts/litgroups/partitions_v1.jsonl", "sha256": sha256_file(lgr.PARTITIONS_PATH)}

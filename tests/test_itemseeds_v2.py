@@ -9,7 +9,7 @@ from climrr import itemseeds_v2 as s2
 from climrr import litgeo as lg
 
 NCA = sd.nca_map()
-GZ = lg.Gazetteer(NCA)
+GZ = lg.Gazetteer(NCA, version="v1")  # the seeds are built under D-047 as frozen
 
 
 def _row(sid, stype, region, scope, strength="background_only", role="background_consensus_candidate", direction="unspecified",

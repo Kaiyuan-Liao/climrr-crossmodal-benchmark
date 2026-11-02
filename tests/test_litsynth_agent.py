@@ -29,7 +29,7 @@ from climrr.paths import REPO_ROOT
 
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
 AGENT = TOOLS / "litsynth_agent.py"
-AGENT_SHA256 = "38edf0748f04ac8807ff0339b287f7b952f524772a2c8366c2553dc45041134b"
+AGENT_SHA256 = "3b6c7ca9d7837df2592b72efd8927280734f7cc09132603db4bd8e7111b1f65f"
 SYSTEM_PROMPT_SHA256 = "8750154045817aeff187674d67efef3b0560947de10c381bc85c9bf0e077ccd9"
 NCA = sd.nca_map()
 EX = {p["pattern_id"]: p for p in tp.read_jsonl(tp.EXAMPLES_PATH)}
@@ -47,6 +47,7 @@ def _m(sid, paper, passage, role="core_candidate", scenario="unknown"):
 
 def _g(gid, stype, strength, members, label=None):
     return {"group_id": gid, "kind": "group" if label else "singleton", "statement_type": stype, "label": label,
+            "role": "caveat" if stype == "caveat" else "driver", "claim_about": "other" if stype == "caveat" else "hazard_change_mechanism",
             "group_strength_run": strength, "strength_in_packet": strength, "n_members_run": len(members), "names_scenario": False,
             "n_specific": 0, "members": members}
 

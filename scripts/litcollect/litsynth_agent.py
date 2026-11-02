@@ -25,12 +25,16 @@ Output: `<out>/items/<seed_id>.json` (+ `<out>/raw/<seed_id>/{prompt_user.txt, r
 `--model`, `--sleep` as in litstatement_agent v3 (imported); `--max-tokens` default 6000. A parse failure is written as an
 item stub with `review.status: rejected_pre_review` and the parse error.
 
-Polaris invocation (Sophia vLLM, D-043; run from the repo clone on Eagle at a pinned commit, which provides `climrr`;
-the ALCF credential in the environment; first check the environment: `python -c "import yaml, duckdb"`):
+Polaris invocation (Sophia vLLM, D-043). Run from the execution clone on Eagle (`$CLIMRR_REPO_ROOT`,
+docs/SOPHIA_RUNBOOK.md) checked out at the pinned commit that carries the packets and provides `climrr`; output
+under the litcollect root (`$LITCOLLECT_ROOT_POLARIS`, config key `litcollect_root_polaris`), never in the clone; the
+ALCF credential in the environment; first check the environment: `python -c "import yaml, duckdb"`:
 
+    bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
+    cd "$CLIMRR_REPO_ROOT"
     python scripts/litcollect/litsynth_agent.py \\
         --packets artifacts/benchmark/synth_packets \\
-        --out <EAGLE_LITCOLLECT_ROOT>/litsynth/run1 \\
+        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run1" \\
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \\
         --model openai/gpt-oss-120b --sleep 5 --source-commit <PINNED_SHA>
 """

@@ -1,9 +1,10 @@
-"""Grouping agent `scripts/litcollect/litgroup_agent.py` v1 and its input partitions (pilot P2b-prep; D-048).
+"""Grouping agent `scripts/litcollect/litgroup_agent.py` v2 and its input partitions (pilot P2b; D-048, D-049).
 
 Runs the agent end to end against a local mock chat-completions server on three synthetic
 partitions: a clean grouping, one whose reply repeats an id (the partition fails and writes no
 group), and one whose label carries a digit no member has (the group fails, the partition
-passes). Checks that the model sees local ids and sentences only (no statement id, no paper
+passes). v2: every group and singleton carries `claim_about`; a value outside the enum fails
+that record only. Checks that the model sees local ids and sentences only (no statement id, no paper
 id), strengths under D-046, group numbering, restart, and the pins.
 """
 
@@ -26,8 +27,11 @@ from climrr.paths import REPO_ROOT
 
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
 AGENT = TOOLS / "litgroup_agent.py"
-AGENT_SHA256 = "52bdc46ebef6d7c4fe9a1bb6b31533909baadf9d274d415fa0728105475aa73e"
-TEMPLATE_SHA256 = "ca7fec4c7b9b1736d561e73da7ad3d268b7adb4d56d61bf81b76bc181c51bfc9"
+AGENT_SHA256 = "09edaa4e09826af7d9abf79714dc72bc4e98a5e5c9712e587bd00cbfea22f961"
+TEMPLATE_SHA256 = "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7"
+#: The filled system prompts (template with each arm's family phrase), recorded in D-049.
+FILLED_SHA256 = {"extreme_heat_v1": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+                 "fire_weather_v1": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7"}
 
 
 def _meta(sid, paper, role="core_candidate", pt="own_finding", canon=None):
@@ -55,11 +59,15 @@ PARTS = [
      "meta": {"S001": _meta("LS-8001-01", "8001", pt="review_synthesis"), "S002": _meta("LS-8002-01", "8002", "background_consensus_candidate", "background")}},
 ]
 REPLIES = {
-    "extreme_heat_v1.driver": {"groups": [{"label": "Humidity raises the heat index.", "member_ids": ["S001", "S002"], "rationale": "Same driver."},
-                                          {"label": "Moist air raises the heat index.", "member_ids": ["S004"], "rationale": "x"}],
-                               "singletons": ["S003"]},
-    "extreme_heat_v1.caveat": {"groups": [{"label": "Uncertainty.", "member_ids": ["S001", "S002"], "rationale": "x"}], "singletons": ["S002"]},
-    "fire_weather_v1.driver": {"groups": [{"label": "3 factors raise fire danger.", "member_ids": ["S001", "S002"], "rationale": "x"}], "singletons": []},
+    "extreme_heat_v1.driver": {"groups": [{"label": "Humidity raises the heat index.", "member_ids": ["S001", "S002"], "rationale": "Same driver.",
+                                           "claim_about": "hazard_change_mechanism"},
+                                          {"label": "Moist air raises the heat index.", "member_ids": ["S004"], "rationale": "x",
+                                           "claim_about": "heat_mechanism"}],                    # outside the enum
+                               "singletons": [{"id": "S003", "claim_about": "impact_or_exposure"}]},
+    "extreme_heat_v1.caveat": {"groups": [{"label": "Uncertainty.", "member_ids": ["S001", "S002"], "rationale": "x", "claim_about": "other"}],
+                               "singletons": [{"id": "S002", "claim_about": "other"}]},
+    "fire_weather_v1.driver": {"groups": [{"label": "3 factors raise fire danger.", "member_ids": ["S001", "S002"], "rationale": "x",
+                                           "claim_about": "hazard_change_mechanism"}], "singletons": []},
 }
 
 
@@ -128,8 +136,15 @@ def test_the_agent_is_pinned():
 
 def test_the_system_prompt_is_the_ruling_text():
     a = _agent()
-    assert a.GENERATOR_VERSION == "litgroup_agent v1"
+    assert a.GENERATOR_VERSION == "litgroup_agent v2"
     assert hashlib.sha256(a.SYSTEM_PROMPT_TEMPLATE.encode("utf-8")).hexdigest() == TEMPLATE_SHA256
+    for arm, h in FILLED_SHA256.items():
+        assert hashlib.sha256(a.system_prompt(lgr.FAMILY_PHRASE[arm]).encode("utf-8")).hexdigest() == h
+    assert a.CLAIM_ABOUT == ("hazard_change_mechanism", "hazard_definition_or_measurement", "impact_or_exposure", "method_or_data", "other")
+    for c in a.CLAIM_ABOUT:
+        assert f"- {c}: " in a.SYSTEM_PROMPT_TEMPLATE
+    assert ("hazard_change_mechanism: why or how the hazard quantity itself changes — e.g. humidity, temperature, circulation, "
+            "land surface") in a.SYSTEM_PROMPT_TEMPLATE
     assert a.SYSTEM_PROMPT_TEMPLATE.startswith("You are grouping sentences that each state a general claim about <family>.")
     assert a.SYSTEM_PROMPT_TEMPLATE.endswith("Every input id appears exactly once.")
     assert "/eagl" + "e/" not in AGENT.read_text(encoding="utf-8") and "/User" + "s/" not in AGENT.read_text(encoding="utf-8")
@@ -150,6 +165,16 @@ def test_a_clean_partition_yields_groups_singletons_and_d046_strengths(run):
     assert b["kind"] == "group" and b["checks"]["single_member"] and b["evidence_strength"] == "single_source_supported"
     assert c["kind"] == "singleton" and c["label"] is None and c["evidence_strength"] == "background_only"
     assert a["status"] == "deterministic_pass" and a["model"] == "mock-model" and len(a["prompt_hash"]) == 64
+    assert a["claim_about"] == "hazard_change_mechanism" and c["claim_about"] == "impact_or_exposure" and c["status"] == "deterministic_pass"
+
+
+def test_a_claim_about_outside_the_enum_fails_that_record_only(run):
+    g = {x["group_id"]: x for x in run["groups"]}
+    b = g["LG-extreme_heat_v1-driver-002"]
+    assert b["claim_about"] == "heat_mechanism" and b["status"] == "deterministic_fail" and b["checks"]["failed"] == ["claim_about_pass"]
+    s = run["summary"]
+    assert s["claim_about_fail"] == 1 and s["by_claim_about"]["hazard_change_mechanism"] == 2 and s["by_claim_about"]["impact_or_exposure"] == 1
+    assert s["groups_label_fail"] == 1                                       # the fire label digit only, not the claim failure
 
 
 def test_a_repeated_id_fails_the_partition_and_writes_no_group(run):
@@ -163,7 +188,7 @@ def test_a_label_digit_absent_from_members_fails_the_group_only(run):
     [g] = [x for x in run["groups"] if x["partition_id"] == "fire_weather_v1.driver"]
     assert g["status"] == "deterministic_fail" and g["checks"]["label_digits_not_in_members"] == ["3"]
     assert g["evidence_strength"] == "review_supported"
-    assert run["summary"]["partitions_pass"] == 2 and run["summary"]["groups_label_fail"] == 1
+    assert run["summary"]["partitions_pass"] == 2
 
 
 def test_raw_text_is_kept(run):
@@ -195,3 +220,9 @@ def test_the_frozen_partitions():
     for p in parts:
         assert set(p["statements"][0]) == {"local_id", "sentence"}
         assert [s["local_id"] for s in p["statements"]] == sorted(p["meta"])
+        assert all(s["sentence"].strip() for s in p["statements"])
+    # self-contained for the Polaris run: every entering statement once, with its id and sentence, at the pinned hash
+    ids = [m["statement_id"] for p in parts for m in p["meta"].values()]
+    assert len(ids) == len(set(ids)) == 747
+    summary = json.loads(lgr.PARTITIONS_SUMMARY_PATH.read_text(encoding="utf-8"))
+    assert sha256_file(lgr.PARTITIONS_PATH) == summary["partitions_file"]["sha256"]

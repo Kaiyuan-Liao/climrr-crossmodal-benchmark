@@ -1,7 +1,9 @@
 # Pilot P2b --- grouping, synthesis, packets, post-checks and shortlist (design)
 
 **Status.** P2b-prep built on `work/meeting-2026-10-22` (D-046, D-047, D-048; authorized by D-041 and the
-COORDINATOR rulings of 2026-11-01). **No model call has been made; no item exists.** The two agents below
+COORDINATOR rulings of 2026-11-01); **P2b-fix** (D-047a, D-049, D-050, DR-SEED-RANK-2; section 8) amends the
+geography, the grouping agent (v2) and the packets, and fixes the ten pilot seeds. **No model call has been made; no
+item exists.** The two agents below
 are pinned in their tests and wait for a Polaris run. Nothing here changes a column status, the concept map or a
 compatibility rule.
 
@@ -16,7 +18,7 @@ run-2 statements (D-044) ── independence v2 (D-046) ── geography v2 (D-0
                                                                                    items ── post-checks ── review
 ```
 
-## 2. Grouping agent --- `scripts/litcollect/litgroup_agent.py` v1
+## 2. Grouping agent --- `scripts/litcollect/litgroup_agent.py` v1 (v2 since P2b-fix: section 8)
 
 - **Input.** `artifacts/litgroups/partitions_v1.jsonl` (`scripts/build_group_partitions.py`,
   `src/climrr/litgroups.py`): arm x statement_type over the 747 core / cited / background-consensus statements.
@@ -54,7 +56,8 @@ A packet is built per selected seed, at the level the shortlist gives it, in thr
 | `provenance` | no | the full pattern record; per member the paper SHA-256, json path, span and the full passage; the item frame (level, modality) |
 | `checks_input` | no | pattern ids, group ids and strengths, allowed numbers, forbidden strings (the pattern's columns, the packet's paper ids) |
 
-**Groups in a packet** (EXECUTOR choice, for confirmation): >= 1 member geography-relevant to the pattern
+*Superseded by DR-SEED-RANK-2 (section 8) for the packets; kept as the P2b-prep record.* **Groups in a packet**
+(EXECUTOR choice, for confirmation): >= 1 member geography-relevant to the pattern
 (D-047); type mechanism / driver / consensus / caveat (schema v2 has no `pattern` literature type); strength over
 the relevant members not `background_only` (schema v2 has no such strength); only relevant members carried and
 the strength recomputed over them; ranked by strength, named-place members, size; at most 10 mechanism / driver /
@@ -108,23 +111,28 @@ statements, because the strength-first rank puts the same U.S.-national statemen
 Kaiyuan runs each step on Polaris (Sophia vLLM, `openai/gpt-oss-120b`, D-043) from the Eagle clone at a pinned
 commit, and copies back the small evidence.
 
-1. **Grouping run.** `python -c "import yaml, duckdb"`; then
+1. **Grouping run** (agent v2). From the Eagle execution clone at the pinned commit; output under the litcollect
+   root (`LITCOLLECT_ROOT_POLARIS`, config key `litcollect_root_polaris`), never in the clone:
    ```
+   bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
+   cd "$CLIMRR_REPO_ROOT" && python -c "import yaml, duckdb"
    python scripts/litcollect/litgroup_agent.py --partitions artifacts/litgroups/partitions_v1.jsonl \
-       --out <EAGLE_LITCOLLECT_ROOT>/litgroups/run1 \
+       --out "$LITCOLLECT_ROOT_POLARIS/litgroups/run1" \
        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
        --model openai/gpt-oss-120b --sleep 5 --source-commit <PINNED_SHA>
    ```
    Deliver `litgroups/run1` (groups.jsonl, summary.json, agent.log, per-partition files) as a tarball.
 2. **Ingest and human check of the groups** (a following package): verify the tarball, freeze `groups.jsonl`, review
    labels and merges; a failed partition is re-run with `--only`.
-3. **Kaiyuan selects 10 of the 20 shortlisted seeds.**
-4. **Packets** (local): `python scripts/build_synth_packets.py --groups <groups.jsonl> --select <10 seed ids>`;
-   commit and push the packets.
-5. **Synthesis run.**
+3. **Kaiyuan selects 10 of the 20 shortlisted seeds** --- done: `pilot_selection_v1.yaml` (D-050).
+4. **Packets** (local): `python scripts/build_synth_packets.py --groups <groups.jsonl>` (the selection is the
+   default `--selection`); commit and push the packets.
+5. **Synthesis run.** From the Eagle execution clone at the commit carrying the packets:
    ```
+   bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
+   cd "$CLIMRR_REPO_ROOT"
    python scripts/litcollect/litsynth_agent.py --packets artifacts/benchmark/synth_packets \
-       --out <EAGLE_LITCOLLECT_ROOT>/litsynth/run1 \
+       --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run1" \
        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
        --model openai/gpt-oss-120b --sleep 5 --source-commit <PINNED_SHA>
    ```
@@ -136,6 +144,41 @@ commit, and copies back the small evidence.
 - `deterministic_fail` vs schema v2's `rejected_pre_review` (section 4).
 - The EXECUTOR choices in D-048 (seed rank, levels with 1 always applicable), section 3 (packet groups, rounding) and
   section 5 (fill order, control cell, regional contrasts uncapped).
-- D-047 as written drops 50 U.S.-wide statements with a subnational scope and directional adjectives ("southeastern").
+- ~~D-047 as written drops 50 U.S.-wide statements~~ --- answered by D-047a (all 50 recovered; section 8).
 - Most named-place heat-index statements are health / exposure findings rather than hazard mechanisms (hazard !=
   exposure != risk); the grouping run and the human check will show how much mechanism evidence remains.
+
+## 8. P2b-fix (2026-11-01, second set of COORDINATOR rulings)
+
+- **Geography v2 (D-047a).** `litgeo` v2 (default; v1 kept byte-for-byte for the frozen P2b-prep artifacts). A
+  string naming the United States (United States, U.S., US, USA, contiguous / continental / conterminous United
+  States, CONUS, lower 48) is U.S.-wide **regardless of scope**: with a directional or regional qualifier ->
+  **`us_subregion`** (qualifier recorded, no mapping to states), else `us_national`. Under a subnational / local
+  scope a state / NCA5 name still wins. `us_subregion` is relevant to every U.S. pattern, ranked below `state` /
+  `nca_region`, above `us_national`. Inspection file `artifacts/litstatements/run2/region_strings_v2.csv` (+
+  `_summary.json`): 747 statements --- us_national 81, **us_subregion 46**, state 119, nca 5, global 118, other 178,
+  unknown 200; **all 50 D-047 drops recovered** (13 us_national, 37 us_subregion); 9 statements that were
+  us_national ("western United States" under a continental / national scope, "Western U.S.", "southern United
+  States", "western US") are now us_subregion.
+- **Grouping agent v2 (D-049).** Every group and singleton carries `claim_about` (hazard_change_mechanism,
+  hazard_definition_or_measurement, impact_or_exposure, method_or_data, other), defined one line each in the prompt;
+  singletons are `{id, claim_about}`; a value outside the enum fails that record (kept, flagged). Template
+  `ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7`; filled: heat
+  `2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311`, fire
+  `1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7`. Code never infers the claim type.
+- **Packets v2 (DR-SEED-RANK-2).** Relevance is recomputed per pattern under geography v2 (the seed file's v1
+  relevance is kept as `n_relevant_statements_seed_file_v1`). Mechanism / driver / consensus groups:
+  `hazard_change_mechanism` -> driver (<= 10), `hazard_definition_or_measurement` -> context (<= 4), the rest
+  excluded; caveat groups only at rung 7 (<= 4, scenario-naming first). Order: relevance class, claim type, strength,
+  more canonical papers, group id. Every excluded candidate is in `excluded_groups` with its reason (claim type,
+  caveat outside rung 7, over the cap). Members carry `region_class` and the `region_qualifier`; the model view shows
+  each group's `role` and `claim_about` and a member's qualifier.
+- **Pilot selection (D-050).** `data/metadata/benchmark/pilot_selection_v1.yaml` (manifest-pinned): Kaiyuan's ten
+  seeds in order with rungs (1, 1, 3, 3, 3, 3, 4, 4, 4, 7) and the nine exclusions with reasons;
+  `build_synth_packets.py --selection` builds exactly these ten, item ids `BI-P2B-0001..0010`.
+- **Open points.** (a) SD2-TP1-00017 is on the shortlist but neither selected nor excluded with a reason. (b) Level-1
+  packets still carry no group (the work package's "rungs 1--7" is read as the filter for the rungs that carry
+  literature). (c) Caveat groups at rung 7 are not filtered by `claim_about`. (d) A `us_subregion` statement is
+  relevant to every U.S. pattern by the ruling, so "western United States" statements rank above U.S.-national ones
+  for Georgia or Alabama. (e) "Houston, TX, USA" is `us_national` (a city is not a directional / regional
+  qualifier). (f) "North America" stays scope-gated (D-047): it does not name the United States.

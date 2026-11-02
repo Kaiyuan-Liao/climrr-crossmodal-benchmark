@@ -2571,3 +2571,86 @@ code emits, and the next GUIDANCE packet still chooses.
   `scripts/litcollect/litgroup_agent.py`, `src/climrr/synthpackets.py`, `scripts/build_synth_packets.py`,
   `scripts/litcollect/litsynth_agent.py`, `src/climrr/benchmark_items.py`, `src/climrr/pilot_shortlist.py`,
   `scripts/pilot_shortlist.py`, `artifacts/benchmark/pilot_shortlist_v1*`, `docs/PILOT_P2B_DESIGN.md`.
+
+## D-047a --- DR-SEED-1 v2 geography amended: U.S. names regardless of scope; `us_subregion`
+
+- **Date:** 2026-11-01.
+- **Status:** **decided** (COORDINATOR ruling of 2026-11-01, second set; answers the D-047 observation that 50
+  U.S.-wide statements with a subnational / local scope were `other`).
+- **Decision.** A region string naming the United States ("United States", "U.S.", "US", "USA", "contiguous /
+  continental US", "CONUS", "lower 48") is `us_national` **regardless of scope**. A string naming the U.S. with a
+  directional or regional qualifier ("southeastern United States", "western US", "the U.S. Southwest" ...) is a new
+  class **`us_subregion`** with the `qualifier` recorded; relevant to every U.S. pattern; ranked below `state` /
+  `nca`, above `us_national`; the qualifier is carried into packets and the workbook. **No qualifier-to-state
+  mapping.**
+- **Implementation (EXECUTOR; choices recorded for COORDINATOR confirmation).** `src/climrr/litgeo.py` v2 (default;
+  `Gazetteer(..., version="v1")` keeps D-047 byte-for-byte, so `region_strings_v1.csv`, `item_seeds_v2.jsonl` and
+  `partitions_v1.jsonl` stay reproducible --- checked byte-identical). U.S. names also include "conterminous United
+  States". The qualifier is the string minus every U.S. name and the national-extent words (contiguous, continental,
+  conterminous, entire, whole, mainland), function words trimmed from its ends; it is a qualifier when it holds a
+  word of a closed directional list (north ... southwestern, central, midwest(ern), upper, interior) or regional
+  list (region(s), ecoregion(s), coast(al), gulf, plains, mountain(s), rocky / rockies, basin, valley, desert, lakes,
+  appalachia(n)). Order: under a subnational / local scope a whole-phrase state / NCA5 name still wins (D-047); then
+  a U.S. name; then the D-047 rules. Choices: "North America" is not a U.S. name and stays scope-gated (national /
+  continental -> `us_national`, as D-047); a remainder without a listed word is `us_national` ("Houston, TX, USA",
+  "Australia, Canada, United States").
+- **Result.** `scripts/build_region_strings_v2.py` -> `artifacts/litstatements/run2/region_strings_v2.csv` (147
+  region x scope rows, 133 strings; the v1 classification beside each) and `region_strings_v2_summary.json`. 747
+  entering statements: us_national **81**, us_subregion **46**, state 119, nca 5, global 118, other **178**, unknown
+  200. **All 50 D-047 drops are recovered** (13 `us_national`, 37 `us_subregion`); 9 statements move
+  `us_national` -> `us_subregion`. Qualifiers: western 18, southeastern 16, eastern 5, and seven with one statement
+  each. *Observed:* D-047 and the P2b-prep state say 148 region x scope rows; the CSV and its summary have 147.
+- **Affected files:** `src/climrr/litgeo.py`, `src/climrr/itemseeds_v2.py` (v1 class lists),
+  `scripts/build_item_seeds_v2.py`, `scripts/build_group_partitions.py` (v1 pinned), `scripts/build_region_strings_v2.py`,
+  `artifacts/litstatements/run2/region_strings_v2*`, `src/climrr/synthpackets.py`, `tests/test_litgeo.py`.
+
+## D-049 --- Claim type is a human-checked semantic tag assigned by the grouping agent; code never infers it
+
+- **Date:** 2026-11-01.
+- **Status:** **decided** (COORDINATOR ruling of 2026-11-01, second set; answers the P2b-prep flag that most
+  named-place heat statements are health / exposure findings).
+- **Decision.** Every group and singleton of the grouping run carries `claim_about` in {`hazard_change_mechanism`,
+  `hazard_definition_or_measurement`, `impact_or_exposure`, `method_or_data`, `other`}, defined one line each in the
+  prompt. It is assigned by the agent and checked by a human; **code never infers it**. Deterministic check: the
+  value is in the enum. With it, **DR-SEED-RANK-2** (same ruling): statements / groups on a seed are ordered by
+  relevance class (state > nca > us_subregion > us_national > global), then claim type
+  (hazard_change_mechanism > hazard_definition_or_measurement > other), then strength, then n_papers; packets for
+  rungs 1--7 take `hazard_change_mechanism` groups as drivers (<= 10) and `hazard_definition_or_measurement` as
+  context (<= 4), exclude `impact_or_exposure`, `method_or_data`, `other` and record them in `excluded_groups`;
+  rung 7 adds caveat-type groups.
+- **Implementation (EXECUTOR).** `scripts/litcollect/litgroup_agent.py` **v2** (SHA-256
+  `09edaa4e09826af7d9abf79714dc72bc4e98a5e5c9712e587bd00cbfea22f961`, pinned in its test): the v1 prompt with the
+  tag and its definitions inserted before the JSON spec; singletons returned as `{id, claim_about}`; a value outside
+  the enum fails that record only (kept, flagged; the partition still passes); `summary.json` counts by claim type.
+  Prompt hashes: template `ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7`; filled, heat
+  `2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311`, fire
+  `1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7`. `src/climrr/synthpackets.py` v2 implements
+  DR-SEED-RANK-2. Choices, for confirmation: n_papers = canonical (D-046) papers among the group's relevant members;
+  a level-1 packet still carries no group (the filter applies to the rungs that carry literature); caveat groups at
+  rung 7 are not filtered by claim type, scenario-naming caveats first; the excluded list also records groups over a
+  cap; a group whose `claim_about` is outside the enum is excluded with that value as its reason; relevance is
+  recomputed in the packets under D-047a (the seed file keeps D-047). `litsynth_agent.py` v1: docstring paths only
+  (SHA-256 `3b6c7ca9d7837df2592b72efd8927280734f7cc09132603db4bd8e7111b1f65f`; system prompt unchanged).
+- **Affected files:** `scripts/litcollect/litgroup_agent.py`, `scripts/litcollect/litsynth_agent.py`,
+  `src/climrr/synthpackets.py`, `scripts/build_synth_packets.py`, `tests/test_litgroup_agent.py`,
+  `tests/test_litsynth_agent.py`, `tests/test_synthpackets.py`, `docs/PILOT_P2B_DESIGN.md`.
+
+## D-050 --- Pilot seed selection v1
+
+- **Date:** 2026-11-01.
+- **Status:** **decided** (owner decision, Kaiyuan, 2026-11-01).
+- **Decision.** Ten seeds of `pilot_shortlist_v1.csv`, in this order, at these rungs: SD2-TP1-00018 (1),
+  SD2-TP1-00069 (1), SD2-TP1-00071 (3), SD2-TP1-00271 (3), SD2-TP1-00460 (3), SD2-TP1-00589 (3), SD2-TP1-02785 (4),
+  SD2-TP1-02787 (4), SD2-TP1-02789 (4), SD2-TP1-00075 (7). Excluded from the shortlist: **duplicate quantity** ---
+  SD2-TP1-00011, SD2-TP1-00076; **percent change on a near-zero baseline** --- SD2-TP1-00129, 00329, 00518, 00647,
+  02786, 02788, 02790.
+- **Implementation (EXECUTOR).** `data/metadata/benchmark/pilot_selection_v1.yaml` (SHA-256
+  `c9f090297fd1beacbd524e33f571e275b2205f6e2b99687955999e3577f516fa`, pinned in `data/manifest.json`; it records the
+  shortlist's hash); `src/climrr/pilot_selection.py` checks it against the pin and the shortlist (rungs = shortlist
+  levels; selected, excluded and unlisted cover the shortlist exactly). `scripts/build_synth_packets.py --selection`
+  builds exactly these ten (`BI-P2B-0001..0010`). The one-line reasons of the selected seeds are EXECUTOR
+  descriptions from the shortlist rows, for Kaiyuan's confirmation. **Flagged:** SD2-TP1-00017 (Florida, rung 7,
+  direction) is on the shortlist but neither selected nor excluded with a reason; it is listed as
+  `not_selected_no_reason_recorded`, no reason assigned.
+- **Affected files:** `data/metadata/benchmark/pilot_selection_v1.yaml`, `data/manifest.json`,
+  `src/climrr/pilot_selection.py`, `scripts/build_synth_packets.py`, `tests/test_pilot_selection.py`.

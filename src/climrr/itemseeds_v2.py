@@ -2,7 +2,9 @@
 
 Changes from v1 (`itemseeds.py`, D-045), by the COORDINATOR rulings of 2026-11-01:
 
-- **Geography** (D-047): each statement is classified by `litgeo.classify` and is relevant to
+- **Geography** (D-047): each statement is classified by `litgeo.classify` (rule version v1; the
+  builder passes `Gazetteer(..., version="v1")`, so the P2b-prep seeds stay reproducible --- the D-047a
+  amendment, v2, is applied downstream in the synthesis packets) and is relevant to
   a pattern by `litgeo.relevance` --- a scope alone is relevant only when `global`; a
   non-U.S. national scope no longer makes a statement relevant.
 - **Eligibility** (D-048): the pattern is not `acceptance_blocked`, it is computed, and >= 1
@@ -55,7 +57,7 @@ SEEDS_PATH = REPO_ROOT / "artifacts" / "benchmark" / "item_seeds_v2.jsonl"
 SUMMARY_PATH = REPO_ROOT / "artifacts" / "benchmark" / "item_seeds_v2_summary.json"
 REGION_CSV_PATH = la.r2.ART / "region_strings_v1.csv"
 ROLE_ORDER = {r: i for i, r in enumerate(la.ENTERING_ROLES)}
-BASIS_RANK = {b: i for i, b in enumerate(lg.BASIS_ORDER)}
+BASIS_RANK = {b: i for i, b in enumerate(lg.BASIS_ORDER)}  # v2 order; v1 bases keep their relative order
 ROLE_SHORT = {"core_candidate": "core", "cited_candidate": "cited", "background_consensus_candidate": "background"}
 EXPLAINING = sd.EXPLAINING
 TOP_STATEMENTS = 30
@@ -133,7 +135,7 @@ class Pairing:
             "pattern_summary": sd.summary_line(p), "pattern": p,
             "n_relevant_statements": len(rel),
             "n_relevant_by_role": {k: sum(r["role"] == k for _, r, _ in rel) for k in ("core", "cited", "background")},
-            "n_relevant_by_basis": {b: sum(x == b for _, _, x in rel) for b in lg.BASIS_ORDER},
+            "n_relevant_by_basis": {b: sum(x == b for _, _, x in rel) for b in lg.BASIS_ORDER_V1},
             "n_relevant_explaining": len(expl),
             "n_relevant_explaining_by_role": {k: sum(r["role"] == k for _, r, _ in expl) for k in ("core", "cited", "background")},
             "n_relevant_explaining_specific": sum(b in ("state", "nca_region") for _, _, b in expl),
@@ -184,13 +186,13 @@ def statement_geography(rows: list[dict], seeds: list[dict]) -> dict:
             rs = [r for r in rows if r["arm"] == arm and r["statement_type"] == t]
             cls = Counter(r["geo"]["class"] for r in rs)
             table.append({"arm": arm, "statement_type": t, "entering": len(rs),
-                          **{c: cls.get(c, 0) for c in lg.CLASSES},
+                          **{c: cls.get(c, 0) for c in lg.CLASSES_V1},
                           "us_relevant_distinct": sum(r["geo"]["class"] in ("us_national", "state", "nca") for r in rs),
                           "relevant_to_some_pattern": sum(r["statement_id"] in relevant_any for r in rs)})
     named = [r for r in rows if r["geo"]["class"] in ("state", "nca")]
     return {
         "entering_statements": len(rows),
-        "by_class": {c: sum(r["geo"]["class"] == c for r in rows) for c in lg.CLASSES},
+        "by_class": {c: sum(r["geo"]["class"] == c for r in rows) for c in lg.CLASSES_V1},
         "named_state_or_nca_region": len(named),
         "named_state_or_nca_region_by_role": dict(sorted(Counter(r["role"] for r in named).items())),
         "relevant_to_at_least_one_pattern": len(relevant_any),
@@ -220,9 +222,9 @@ def summarise(seeds: list[dict], rows: list[dict], region_rows: list[dict], v1_s
         "region_strings_file": {"path": "artifacts/litstatements/run2/region_strings_v1.csv", "sha256": sha256_file(REGION_CSV_PATH),
                                 "rows_region_x_scope": len(region_rows), "distinct_region_strings": len({r["region"] for r in region_rows})},
         "region_string_classification": {
-            "rows_by_class": {c: cls_strings.get(c, 0) for c in lg.CLASSES},
-            "distinct_strings_by_class": {c: len({r["region"] for r in region_rows if r["class"] == c}) for c in lg.CLASSES},
-            "statements_by_class": {c: sum(r["count"] for r in region_rows if r["class"] == c) for c in lg.CLASSES},
+            "rows_by_class": {c: cls_strings.get(c, 0) for c in lg.CLASSES_V1},
+            "distinct_strings_by_class": {c: len({r["region"] for r in region_rows if r["class"] == c}) for c in lg.CLASSES_V1},
+            "statements_by_class": {c: sum(r["count"] for r in region_rows if r["class"] == c) for c in lg.CLASSES_V1},
             "other_examples": [r["region"] for r in sorted((r for r in region_rows if r["class"] == "other"),
                                                            key=lambda r: (-r["count"], r["region"]))][:10]},
         "statement_geography": statement_geography(rows, seeds),

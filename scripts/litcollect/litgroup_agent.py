@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pilot P2b — literature-statement grouping agent v1 (D-048; COORDINATOR rulings 2026-11-01).
+"""Pilot P2b — literature-statement grouping agent v2 (D-048, D-049; COORDINATOR rulings 2026-11-01).
 
 Input: `artifacts/litgroups/partitions_v1.jsonl` (`scripts/build_group_partitions.py`): one partition = arm x
 statement_type over the core / cited / background_consensus statements of litstatements run 2, split
@@ -7,12 +7,18 @@ deterministically where over 120 statements. One model call per partition. The m
 and sentences only** --- no passage, no paper id (statement ids LS-<item_id>-<nn> carry it, so they are not sent),
 no table. It returns groups of sentences that make the same claim and singletons. Temperature 0.
 
+v2 (D-049): every group and every singleton carries `claim_about` in `CLAIM_ABOUT` (hazard_change_mechanism,
+hazard_definition_or_measurement, impact_or_exposure, method_or_data, other), defined one line each in the prompt.
+Claim type is a human-checked semantic tag assigned by the model; code never infers it. Singletons are returned as
+`{id, claim_about}` objects.
+
 Deterministic checks per partition: the JSON parses; every returned id exists in the partition and appears exactly
 once across groups and singletons, and every input id appears (else the partition is `deterministic_fail` and none
 of its groups is written to groups.jsonl); no group is empty. Per group: a label holds no digit sequence that is not in
 a member sentence (else the group is `deterministic_fail`, kept and flagged). Recorded, not gating: label words that
-are neither in a member sentence nor a function word; a rationale over 25 words. A group whose members come from one
-paper only is still a group. Singletons become one-member records (kind `singleton`, no label).
+are neither in a member sentence nor a function word; a rationale over 25 words. Per group and per singleton:
+`claim_about` is a value of `CLAIM_ABOUT` (else that record is `deterministic_fail`, kept and flagged). A group whose
+members come from one paper only is still a group. Singletons become one-member records (kind `singleton`, no label).
 
 Strength per group (D-045 definitions, D-046 independence --- the canonical paper id travels in the partition's
 `meta`, never sent): `multi_source_supported` (>= 2 canonical papers among core / cited members), else
@@ -21,16 +27,20 @@ Strength per group (D-045 definitions, D-046 independence --- the canonical pape
 
 Output: per partition `<out>/<partition_id>/result.json` (+ `prompt_user.txt`, `response.json`; raw model text
 in result.json as in litstatement_agent v3), aggregate `groups.jsonl` (group_id `LG-<arm>-<type>-<nnn>`, numbered per
-arm x type over its partitions in file order, groups then singletons) and `summary.json`; `agent.log`. Restartable
-per partition (skips partitions with result.json). Retries, backoff, `--base-url`, `--model`, `--sleep` as in
-litstatement_agent v3 (imported); `--max-tokens` default 6000.
+arm x type over its partitions in file order, groups then singletons; each with `claim_about`) and `summary.json`
+(with counts by `claim_about`); `agent.log`. Restartable per partition (skips partitions with result.json). Retries,
+backoff, `--base-url`, `--model`, `--sleep` as in litstatement_agent v3 (imported); `--max-tokens` default 6000.
 
-Polaris invocation (Sophia vLLM, D-043; the repo clone on Eagle at a pinned commit; the ALCF credential in the
-environment):
+Polaris invocation (Sophia vLLM, D-043). Run from the execution clone on Eagle (`$CLIMRR_REPO_ROOT`,
+docs/SOPHIA_RUNBOOK.md) checked out at the pinned commit, which holds the tracked input; output under the litcollect
+root (`$LITCOLLECT_ROOT_POLARIS`, config key `litcollect_root_polaris`), never in the clone; the ALCF credential in
+the environment; first check the environment: `python -c "import yaml, duckdb"`:
 
+    bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
+    cd "$CLIMRR_REPO_ROOT"
     python scripts/litcollect/litgroup_agent.py \\
         --partitions artifacts/litgroups/partitions_v1.jsonl \\
-        --out <EAGLE_LITCOLLECT_ROOT>/litgroups/run1 \\
+        --out "$LITCOLLECT_ROOT_POLARIS/litgroups/run1" \\
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \\
         --model openai/gpt-oss-120b --sleep 5 --source-commit <PINNED_SHA>
 """
@@ -42,12 +52,19 @@ from softqa_agent import call_model  # noqa: E402  (v2, pinned byte-identical)
 from litstatement_agent import (  # noqa: E402  (v3)
     BACKOFF_SECONDS, CREDENTIAL_ENV, DEFAULT_BASE_URL, ModelCallFailed, call_with_retries, endpoint_label, raw_fields, sha)
 
-GENERATOR_VERSION = "litgroup_agent v1"
+GENERATOR_VERSION = "litgroup_agent v2"
 MAX_RATIONALE_WORDS = 25
 
-SYSTEM_PROMPT_TEMPLATE = """You are grouping sentences that each state a general claim about <family>. Put sentences that make the same claim — the same mechanism, driver, caveat or consensus — into one group. Do not merge sentences that differ in direction, in the quantity involved, or in the causal factor. Return JSON: groups: [{label: one short neutral sentence naming the shared claim, using only words that appear in the member sentences or common function words; member_ids: [...]; rationale: ≤25 words}], singletons: [ids]. Every input id appears exactly once."""
+SYSTEM_PROMPT_TEMPLATE = """You are grouping sentences that each state a general claim about <family>. Put sentences that make the same claim — the same mechanism, driver, caveat or consensus — into one group. Do not merge sentences that differ in direction, in the quantity involved, or in the causal factor. Tag every group and every singleton with claim_about, exactly one of:
+- hazard_change_mechanism: why or how the hazard quantity itself changes — e.g. humidity, temperature, circulation, land surface;
+- hazard_definition_or_measurement: what the index is or how it is measured;
+- impact_or_exposure: consequences for people, health, economy, infrastructure;
+- method_or_data: datasets, models, methods;
+- other: none of the above.
+Return JSON: groups: [{label: one short neutral sentence naming the shared claim, using only words that appear in the member sentences or common function words; member_ids: [...]; rationale: ≤25 words; claim_about: one of the five values}], singletons: [{id: ..., claim_about: one of the five values}]. Every input id appears exactly once."""
 
 STRENGTHS = ("multi_source_supported", "review_supported", "single_source_supported", "background_only")
+CLAIM_ABOUT = ("hazard_change_mechanism", "hazard_definition_or_measurement", "impact_or_exposure", "method_or_data", "other")
 CORE_OR_CITED = ("core_candidate", "cited_candidate")
 FUNCTION_WORDS = frozenset("""a an the and or but nor of in on at to for from by with without within into onto over under
 between among about as than then that this these those which who whom whose what when where while how why is are was were
@@ -89,7 +106,8 @@ def extract_groups(content: str):
 
 
 def check_partition(obj, part: dict):
-    """(checks, groups, singletons): groups = [{member_ids, label, rationale, checks}] with local ids."""
+    """(checks, groups, singletons): groups = [{member_ids, label, rationale, claim_about, checks}], singletons =
+    [{id, claim_about, checks}], with local ids."""
     known = [s["local_id"] for s in part["statements"]]
     sentence = {s["local_id"]: s["sentence"] for s in part["statements"]}
     checks = {"parse_pass": isinstance(obj, dict) and isinstance(obj.get("groups"), list)}
@@ -99,9 +117,13 @@ def check_partition(obj, part: dict):
             g = g if isinstance(g, dict) else {}
             ids = g.get("member_ids") if isinstance(g.get("member_ids"), list) else []
             groups.append({"member_ids": [str(i) for i in ids], "label": str(g.get("label") or ""),
-                           "rationale": str(g.get("rationale") or "")})
-        singles = [str(i) for i in obj.get("singletons") or [] if not isinstance(i, (dict, list))]
-    returned = [i for g in groups for i in g["member_ids"]] + singles
+                           "rationale": str(g.get("rationale") or ""), "claim_about": g.get("claim_about")})
+        for i in obj.get("singletons") or []:
+            if isinstance(i, dict):
+                singles.append({"id": str(i.get("id")), "claim_about": i.get("claim_about")})
+            elif not isinstance(i, list):
+                singles.append({"id": str(i), "claim_about": None})
+    returned = [i for g in groups for i in g["member_ids"]] + [x["id"] for x in singles]
     counts = {i: returned.count(i) for i in set(returned)}
     checks["unknown_ids"] = sorted(i for i in counts if i not in sentence)
     checks["duplicate_ids"] = sorted(i for i, n in counts.items() if n > 1)
@@ -119,8 +141,12 @@ def check_partition(obj, part: dict):
                                                              if w not in member_words and w not in FUNCTION_WORDS}),
                        "rationale_words": len(g["rationale"].split()),
                        "rationale_over_limit": len(g["rationale"].split()) > MAX_RATIONALE_WORDS,
-                       "single_member": len(g["member_ids"]) == 1}
-        g["checks"]["failed"] = [k for k in ("label_present", "label_digit_pass") if not g["checks"][k]]
+                       "single_member": len(g["member_ids"]) == 1,
+                       "claim_about_pass": g["claim_about"] in CLAIM_ABOUT}
+        g["checks"]["failed"] = [k for k in ("label_present", "label_digit_pass", "claim_about_pass") if not g["checks"][k]]
+    for x in singles:
+        ok = x["claim_about"] in CLAIM_ABOUT
+        x["checks"] = {"claim_about_pass": ok, "failed": [] if ok else ["claim_about_pass"]}
     checks["failed"] = [k for k in ("parse_pass", "ids_exactly_once_pass", "no_empty_group_pass") if not checks[k]]
     return checks, groups, singles
 
@@ -136,14 +162,14 @@ def strength(meta: list[dict]) -> str:
     return "background_only"
 
 
-def group_record(kind, local_ids, part, label, rationale, gchecks, common):
+def group_record(kind, local_ids, part, label, rationale, claim_about, gchecks, common):
     meta = [part["meta"][i] for i in local_ids]
     roles = {}
     for m in meta: roles[m["evidence_role"]] = roles.get(m["evidence_role"], 0) + 1
     return {"group_id": None, "kind": kind, "arm": part["arm"], "statement_type": part["statement_type"],
             "partition_id": part["partition_id"], "split_by": part["split_by"],
             "member_ids": [m["statement_id"] for m in meta], "member_local_ids": local_ids,
-            "label": label, "rationale": rationale, "n_members": len(meta),
+            "label": label, "rationale": rationale, "claim_about": claim_about, "n_members": len(meta),
             "papers": sorted({m["paper_item_id"] for m in meta}), "canonical_papers": sorted({m["canonical_paper"] for m in meta}),
             "n_independent_core_cited_papers": len({m["canonical_paper"] for m in meta if m["evidence_role"] in CORE_OR_CITED}),
             "role_counts": dict(sorted(roles.items())), "evidence_strength": strength(meta),
@@ -158,7 +184,9 @@ def summarise(out: Path, parts: list, endpoint=None):
     summary = {"generator_version": GENERATOR_VERSION, **(endpoint or {}), "partitions_in_file": len(parts),
                "partitions_done": 0, "partitions_pass": 0, "partitions_fail": [], "groups": 0, "singletons": 0,
                "groups_label_fail": 0, "by_strength": {s: 0 for s in STRENGTHS}, "groups_by_strength": {s: 0 for s in STRENGTHS},
-               "statements_grouped": 0, "endpoints_in_results": {}, "system_prompt_template_sha256": sha(SYSTEM_PROMPT_TEMPLATE)}
+               "statements_grouped": 0, "by_claim_about": {c: 0 for c in CLAIM_ABOUT}, "groups_by_claim_about": {c: 0 for c in CLAIM_ABOUT},
+               "statements_by_claim_about": {c: 0 for c in CLAIM_ABOUT}, "claim_about_fail": 0,
+               "endpoints_in_results": {}, "system_prompt_template_sha256": sha(SYSTEM_PROMPT_TEMPLATE)}
     results = []
     for p in sorted(out.glob("*/result.json")):
         r = json.loads(p.read_text())
@@ -180,9 +208,15 @@ def summarise(out: Path, parts: list, endpoint=None):
             records.append(g)
             summary["by_strength"][g["evidence_strength"]] += 1
             summary["statements_grouped"] += g["n_members"]
+            if g["claim_about"] in CLAIM_ABOUT:
+                summary["by_claim_about"][g["claim_about"]] += 1
+                summary["statements_by_claim_about"][g["claim_about"]] += g["n_members"]
+                if g["kind"] == "group": summary["groups_by_claim_about"][g["claim_about"]] += 1
+            else:
+                summary["claim_about_fail"] += 1
             if g["kind"] == "group":
                 summary["groups"] += 1; summary["groups_by_strength"][g["evidence_strength"]] += 1
-                summary["groups_label_fail"] += g["status"] == "deterministic_fail"
+                summary["groups_label_fail"] += any(k != "claim_about_pass" for k in g["checks"]["failed"])
             else:
                 summary["singletons"] += 1
     with open(out / "groups.jsonl", "w", encoding="utf-8") as f:
@@ -251,8 +285,9 @@ def main():
         status = "deterministic_pass" if not checks["failed"] else "deterministic_fail"
         records = []
         if status == "deterministic_pass":
-            records = [group_record("group", g["member_ids"], part, g["label"], g["rationale"], g["checks"], common) for g in groups]
-            records += [group_record("singleton", [i], part, None, None, None, common) for i in singles]
+            records = [group_record("group", g["member_ids"], part, g["label"], g["rationale"], g["claim_about"], g["checks"], common)
+                       for g in groups]
+            records += [group_record("singleton", [x["id"]], part, None, None, x["claim_about"], x["checks"], common) for x in singles]
         result = {"partition_id": pid, "arm": part["arm"], "statement_type": part["statement_type"], "split_by": part["split_by"],
                   "n_statements": part["n_statements"], **common, "status": status, "checks": checks,
                   "groups_as_returned": groups, "singletons_as_returned": singles, "groups": records,

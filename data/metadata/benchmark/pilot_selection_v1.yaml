@@ -1,0 +1,49 @@
+# Pilot seed selection v1 (pilot P2b-fix; D-050).
+#
+# Owner decision: Kaiyuan selected these ten of the twenty seeds of the pilot shortlist
+# (artifacts/benchmark/pilot_shortlist_v1.csv) on 2026-11-01, in this order, each at the rung
+# named. scripts/build_synth_packets.py --selection builds exactly these ten packets, item ids
+# BI-P2B-0001 .. BI-P2B-0010 in this order. Pinned by SHA-256 in data/manifest.json; a change is
+# pilot_selection_v2.yaml with its own decision.
+#
+# `reason`: one line on what the seed contributes, written by the EXECUTOR from the shortlist
+# row (place, threshold, horizon, statistic) for Kaiyuan's confirmation; the selection and the
+# order are Kaiyuan's. The exclusion reasons are Kaiyuan's (relayed in the work package).
+#
+# No value is computed here and no column is interpreted.
+
+version: pilot_selection_v1
+decision: D-050
+selected_by: Kaiyuan
+date: "2026-11-01"
+shortlist:
+  path: artifacts/benchmark/pilot_shortlist_v1.csv
+  sha256: 948ad24ecad1bf65c34e5d59d980825754d1bdb13d22f61c1e78fc52a825867a
+
+selected:
+  - {order: 1, seed_id: SD2-TP1-00018, rung: 1, reason: "Georgia, days above 95 F, mid-century: direction of change only (pattern identification)"}
+  - {order: 2, seed_id: SD2-TP1-00069, rung: 1, reason: "Arizona, days above 95 F, mid-century: absolute change with a relative tercile (pattern identification)"}
+  - {order: 3, seed_id: SD2-TP1-00071, rung: 3, reason: "California, days above 95 F, mid-century, absolute change: pattern + mechanism"}
+  - {order: 4, seed_id: SD2-TP1-00271, rung: 3, reason: "New York, days above 95 F, end of century, absolute change: pattern + mechanism"}
+  - {order: 5, seed_id: SD2-TP1-00460, rung: 3, reason: "Washington, days above 105 F, mid-century, absolute change: pattern + mechanism at a small change"}
+  - {order: 6, seed_id: SD2-TP1-00589, rung: 3, reason: "Alabama, days above 105 F, end of century, absolute change: pattern + mechanism at a large change"}
+  - {order: 7, seed_id: SD2-TP1-02785, rung: 4, reason: "NCA5 regions ranked, days above 95 F, mid-century, absolute change: regional comparison"}
+  - {order: 8, seed_id: SD2-TP1-02787, rung: 4, reason: "NCA5 regions ranked, days above 95 F, end of century, absolute change: regional comparison"}
+  - {order: 9, seed_id: SD2-TP1-02789, rung: 4, reason: "NCA5 regions ranked, days above 105 F, mid-century, absolute change: regional comparison"}
+  - {order: 10, seed_id: SD2-TP1-00075, rung: 7, reason: "Florida, days above 95 F, mid-century, absolute change: scenario and uncertainty"}
+
+excluded_from_shortlist:
+  - {seed_id: SD2-TP1-00011, reason: duplicate_quantity, note: "same quantity as SD2-TP1-00069 (Arizona, days above 95 F, mid-century)"}
+  - {seed_id: SD2-TP1-00076, reason: duplicate_quantity, note: "same quantity as SD2-TP1-00018 (Georgia, days above 95 F, mid-century)"}
+  - {seed_id: SD2-TP1-00129, reason: percent_change_near_zero_baseline}
+  - {seed_id: SD2-TP1-00329, reason: percent_change_near_zero_baseline}
+  - {seed_id: SD2-TP1-00518, reason: percent_change_near_zero_baseline}
+  - {seed_id: SD2-TP1-00647, reason: percent_change_near_zero_baseline}
+  - {seed_id: SD2-TP1-02786, reason: percent_change_near_zero_baseline}
+  - {seed_id: SD2-TP1-02788, reason: percent_change_near_zero_baseline}
+  - {seed_id: SD2-TP1-02790, reason: percent_change_near_zero_baseline}
+
+# On the shortlist, neither selected nor listed with a reason in the owner decision (flagged to
+# Kaiyuan; no reason is assigned here).
+not_selected_no_reason_recorded:
+  - SD2-TP1-00017
