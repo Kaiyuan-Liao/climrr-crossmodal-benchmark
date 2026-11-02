@@ -1,4 +1,4 @@
-"""Seed packets for the item-synthesis agent (pilot P2b; D-041, D-048, D-047a, D-049, D-050; DR-SEED-RANK-2).
+"""Seed packets for the item-synthesis agent (pilot P2b; D-041, D-048, D-047a, D-049, D-050, D-053--D-055; DR-SEED-RANK-3).
 
 One packet per seed of the pilot selection (`data/metadata/benchmark/pilot_selection_v1.yaml`, D-050), at the
 rung the selection names, built deterministically from the seed's pattern (`item_seeds_v2.jsonl`) and the
@@ -15,7 +15,13 @@ grouping agent's `groups.jsonl` (v2, every record with a `claim_about`, D-049). 
   sees: the full pattern records, and per group member its paper SHA-256, json path, span
   and the full verbatim passage.
 - `checks_input` --- what the deterministic post-checks (`benchmark_items.synthesis_post_checks`)
-  compare against: pattern ids, group ids and strengths, allowed numbers, forbidden strings.
+  compare against: pattern ids, group ids and strengths, allowed numbers, allowed descriptors, exact values,
+  forbidden strings.
+
+**Descriptors** (v3, DR-DESC-1, D-055): every pattern in `model_view` carries `allowed_descriptors`
+(`pattern_descriptors.descriptors`): the pattern-level words the graded text may use. Their phrases go into
+`checks_input.allowed_descriptors`, and the digits they hold into the allowed numbers. `checks_input.exact_values`
+lists the decimal forms of the pattern values, which belong to provenance only.
 
 **Rounding** (EXECUTOR): a value is shown to one decimal place (half up); the allowed
 numbers are that form, the nearest integer, and the exact stored string, without sign.
@@ -25,8 +31,8 @@ numbers are that form, the nearest integer, and the exact stored string, without
 (`relevant_basis`). It is recomputed here from the pattern, not read from the seed file, whose
 relevance is the D-047 (v1) geography as frozen.
 
-**Groups in a packet** (DR-SEED-RANK-2, COORDINATOR 2026-11-01; EXECUTOR details recorded for
-confirmation): a group is a candidate when >= 1 member is relevant, its type is mechanism /
+**Groups in a packet** (DR-SEED-RANK-2, COORDINATOR 2026-11-01; v3: DR-SEED-RANK-3 and the D-053 dispositions,
+2026-11-02; EXECUTOR details recorded for confirmation): a group is a candidate when >= 1 member is relevant, its type is mechanism /
 driver / consensus / caveat (schema v2 has no `pattern` literature type), and its strength over
 the **relevant** members is not `background_only` (schema v2 has no such strength). Only relevant
 members are carried; `strength_in_packet` is recomputed over them (D-045 definitions, D-046
@@ -35,15 +41,19 @@ independence) beside the run's group strength. A candidate's role, by its `claim
 - a mechanism / driver / consensus group: `hazard_change_mechanism` -> **driver** (at most 10);
   `hazard_definition_or_measurement` -> **context** (at most 4); `impact_or_exposure`,
   `method_or_data`, `other` (or a value outside the enum) -> excluded;
-- a caveat group: **caveat** at rung 7 only (at most 4, scenario-naming caveats first; its
-  `claim_about` is carried, not filtered); excluded at other rungs.
+- a caveat group: **caveat** at rung 7 only (at most 4), and only with `claim_about` in
+  {hazard_change_mechanism, hazard_definition_or_measurement} (v3, D-054) and no `exclude_from_rung7`
+  disposition; excluded at other rungs.
 
-Order within a role: best relevance basis among the relevant members (state > nca_region >
-us_subregion > us_national > global), then claim type (hazard_change_mechanism >
-hazard_definition_or_measurement > other), then `strength_in_packet`, then more canonical papers
-among the relevant members, then group id. Every excluded candidate is listed with its reason in
-the packet's `excluded_groups` (claim type, caveat outside rung 7, or over the cap). A level-1
-packet (pattern only) carries no group and lists none.
+Dispositions (D-053, `litgroups.apply_dispositions`, applied before the packets): a `not_about_family` or
+`reject` group, or one merged into another, is excluded; a relabel changes the claim type the role is read from.
+
+Order within a role (DR-SEED-RANK-3, D-054): (1) place-named --- a relevant member names the seed's state or NCA
+region (basis `state` / `nca_region`) --- first; (2) `strength_in_packet` (multi > review > single); (3) best
+relevance basis among the relevant members (us_subregion > us_national > global); (4) more canonical papers among
+the relevant members; (5) group id. Every excluded candidate is listed with its reason in the packet's
+`excluded_groups` (disposition, merge, claim type, caveat outside rung 7, caveat claim type, or over the cap). A
+level-1 packet (pattern only) carries no group and lists none.
 
 No model call; no table value computed here (values are copied from the pattern).
 """
@@ -53,21 +63,24 @@ from __future__ import annotations
 import re
 from decimal import ROUND_HALF_UP, Decimal
 
+from climrr import benchmark_items as bi
 from climrr import itemseeds as sd
 from climrr import litaggregate as la
 from climrr import litgeo as lg
 from climrr import litindependence as li
+from climrr import pattern_descriptors as pd
 from climrr.checksums import sha256_file
 from climrr.paths import REPO_ROOT
 
-VERSION = "synthpackets v2"
-RANK_RULE = "DR-SEED-RANK-2"
+VERSION = "synthpackets v3"
+RANK_RULE = "DR-SEED-RANK-3"
 PACKETS_DIR = REPO_ROOT / "artifacts" / "benchmark" / "synth_packets"
 MAX_PASSAGE = 400
 MAX_DRIVER_GROUPS, MAX_CONTEXT_GROUPS, MAX_CAVEAT_GROUPS = 10, 4, 4
 DRIVER_CLAIM, CONTEXT_CLAIM = "hazard_change_mechanism", "hazard_definition_or_measurement"
-CLAIM_RANK = {DRIVER_CLAIM: 0, CONTEXT_CLAIM: 1}  # every other value ranks 2
 CAVEAT_LEVELS = (7,)
+CAVEAT_CLAIMS = (DRIVER_CLAIM, CONTEXT_CLAIM)
+PLACE_NAMED = ("state", "nca_region")
 BASIS_RANK = {b: i for i, b in enumerate(lg.BASIS_ORDER)}
 PACKET_TYPES = ("mechanism", "driver", "consensus", "caveat")
 SCHEMA_STRENGTHS = ("multi_source_supported", "review_supported", "single_source_supported")
@@ -264,9 +277,9 @@ def relevant_basis(p: dict, rows: list[dict], nca: dict) -> dict:
 
 
 def rank_key(x: dict) -> tuple:
-    """DR-SEED-RANK-2: relevance basis, claim type, strength, more papers, group id."""
-    return (x["best_basis_rank"], CLAIM_RANK.get(x["claim_about"], 2), sd.STRENGTH_ORDER[x["strength_in_packet"]],
-            -x["n_papers"], x["group_id"])
+    """DR-SEED-RANK-3: place-named first, strength, relevance basis, more papers, group id."""
+    return (x["best_basis"] not in PLACE_NAMED, sd.STRENGTH_ORDER[x["strength_in_packet"]], x["best_basis_rank"], -x["n_papers"],
+            x["group_id"])
 
 
 def packet_groups(level: int, groups: list[dict], by_statement: dict, seed_basis: dict, geo: dict | None = None
@@ -299,24 +312,35 @@ def packet_groups(level: int, groups: list[dict], by_statement: dict, seed_basis
             continue
         scen = g["statement_type"] == "caveat" and any(m["scenario"] not in la.UNNAMED and m["scenario"] for m in members)
         claim = g.get("claim_about")
-        if g["statement_type"] == "caveat":
-            role = "caveat" if level in CAVEAT_LEVELS else None
+        if g.get("disposition_exclude"):
+            role, why = None, g["disposition_exclude"]
+        elif g["statement_type"] == "caveat":
+            if level not in CAVEAT_LEVELS:
+                role, why = None, "caveat_outside_rung_7"
+            elif g.get("exclude_from_rung7"):
+                role, why = None, "disposition:exclude_from_rung7"
+            elif claim not in CAVEAT_CLAIMS:
+                role, why = None, f"caveat_claim_about:{claim}"
+            else:
+                role, why = "caveat", None
         else:
             role = {DRIVER_CLAIM: "driver", CONTEXT_CLAIM: "context"}.get(claim)
+            why = None if role else f"claim_about:{claim}"
         picked.append({"group_id": g["group_id"], "kind": g["kind"], "statement_type": g["statement_type"], "claim_about": claim,
-                       "role": role, "label": g["label"] if g["kind"] == "group" else None,
+                       "role": role, "excluded_reason": why, "label": g["label"] if g["kind"] == "group" else None,
+                       "claim_about_source": g.get("claim_about_source", "agent"), "disposition": g.get("disposition"),
+                       **({"merged_from": g["merged_from"]} if g.get("merged_from") else {}),
                        "group_strength_run": g["evidence_strength"], "strength_in_packet": st, "n_members_run": g["n_members"],
                        "names_scenario": scen, "n_specific": sum(m["basis"] in ("state", "nca_region") for m in members),
                        "best_basis": min((m["basis"] for m in members), key=BASIS_RANK.get),
                        "best_basis_rank": min(BASIS_RANK[m["basis"]] for m in members),
                        "n_papers": len({m["canonical_paper"] for m in members}), "members": members})
     excluded = [{"group_id": x["group_id"], "statement_type": x["statement_type"], "claim_about": x["claim_about"],
-                 "reason": "caveat_outside_rung_7" if x["statement_type"] == "caveat" else f"claim_about:{x['claim_about']}"}
+                 "reason": x["excluded_reason"]}
                 for x in sorted(picked, key=lambda x: x["group_id"]) if x["role"] is None]
     out = []
-    for role, cap, key in (("driver", MAX_DRIVER_GROUPS, rank_key), ("context", MAX_CONTEXT_GROUPS, rank_key),
-                           ("caveat", MAX_CAVEAT_GROUPS, lambda x: (not x["names_scenario"],) + rank_key(x))):
-        ranked = sorted((x for x in picked if x["role"] == role), key=key)
+    for role, cap in (("driver", MAX_DRIVER_GROUPS), ("context", MAX_CONTEXT_GROUPS), ("caveat", MAX_CAVEAT_GROUPS)):
+        ranked = sorted((x for x in picked if x["role"] == role), key=rank_key)
         out += ranked[:cap]
         excluded += [{"group_id": x["group_id"], "statement_type": x["statement_type"], "claim_about": x["claim_about"],
                       "reason": f"over_cap:{role}"} for x in ranked[cap:]]
@@ -337,12 +361,12 @@ def _model_group(g: dict) -> dict:
 
 
 def build_packet(seed: dict, level: int, item_id: str, groups: list[dict], by_statement: dict, rows: list[dict], nca: dict,
-                 inputs_sha256: dict, selection: dict | None = None) -> dict:
+                 inputs_sha256: dict, selection: dict | None = None, rules: dict | None = None) -> dict:
     """`level`: the rung the item is built at (the selection's). `rows`: `itemseeds_v2.statement_table` with the v2 gazetteer."""
     basis = relevant_basis(seed["pattern"], rows, nca)
     geo = {r["statement_id"]: r["geo"] for r in rows}
     pg, excluded = packet_groups(level, groups, by_statement, basis, geo)
-    pk = assemble_packet(seed["seed_id"], seed["pattern"], level, item_id, pg, nca, inputs_sha256, excluded)
+    pk = assemble_packet(seed["seed_id"], seed["pattern"], level, item_id, pg, nca, inputs_sha256, excluded, rules)
     pk["relevance"] = {"geography": lg.VERSION, "n_relevant_statements": len(basis),
                        "by_basis": {b: sum(x == b for x in basis.values()) for b in lg.BASIS_ORDER},
                        "n_relevant_statements_seed_file_v1": len(seed["relevant_statement_ids"])}
@@ -351,19 +375,33 @@ def build_packet(seed: dict, level: int, item_id: str, groups: list[dict], by_st
     return pk
 
 
+def exact_values(p: dict) -> list[str]:
+    """The decimal forms (stored and one-decimal) of the pattern's values: provenance only (D-055)."""
+    v = p["computed_value_or_range"]
+    vals = [v.get("value"), v.get("mean_from"), v.get("mean_to"), (v.get("range") or {}).get("min"), (v.get("range") or {}).get("max")]
+    vals += [r.get("value") for r in v.get("regions_ordered") or []]
+    return sorted({f for x in vals if x is not None for f in number_forms(x) if "." in f})
+
+
 def assemble_packet(seed_id: str, p: dict, lvl: int, item_id: str, pg: list[dict], nca: dict, inputs_sha256: dict,
-                    excluded: list[dict] | None = None) -> dict:
-    """The packet for one pattern and its chosen groups (`packet_groups` records)."""
+                    excluded: list[dict] | None = None, rules: dict | None = None) -> dict:
+    """The packet for one pattern and its chosen groups (`packet_groups` records). `rules`: DR-DESC-1 (default: the
+    pinned `descriptor_rules_v1.yaml`)."""
+    rules = rules or pd.load_rules()
     text, shown, allowed = render_pattern(p, nca)
+    descr = pd.descriptors(p, rules)
+    phrases = pd.phrases(descr)
+    allowed |= {n for ph in phrases for n in bi.reference_numbers(ph)}          # scenario names are not numbers
     name, modality, desc = LEVEL_TEXT[lvl]
     cols = sorted({c["column"] for c in p["provenance"]["columns"]})
     paper_ids = sorted({m["paper_item_id"] for g in pg for m in g["members"]})
     return {
-        "packet_id": f"PK-{seed_id}", "version": VERSION, "rank_rule": RANK_RULE, "item_id": item_id, "seed_id": seed_id,
+        "packet_id": f"PK-{seed_id}", "version": VERSION, "rank_rule": RANK_RULE, "descriptor_rule": rules["rule"],
+        "descriptor_rules_sha256": rules["sha256"], "item_id": item_id, "seed_id": seed_id,
         "use_case_level": lvl,
         "model_view": {
             "use_case_level": lvl, "rung": f"{lvl}. {name}: {desc}", "reasoning_modalities": modality,
-            "patterns": [{"pattern_id": p["pattern_id"], "text": text, "values_shown": shown}],
+            "patterns": [{"pattern_id": p["pattern_id"], "text": text, "values_shown": shown, "allowed_descriptors": descr}],
             "groups": [_model_group(g) for g in pg],
             "allowed_numbers": sorted(allowed, key=lambda s: (len(s), s)),
             "guardrails": list(GUARDRAILS), "item_fields": list(ITEM_FIELDS),
@@ -372,7 +410,8 @@ def assemble_packet(seed_id: str, p: dict, lvl: int, item_id: str, pg: list[dict
                                                                       "level_name": name}},
         "checks_input": {"pattern_ids": [p["pattern_id"]],
                          "group_strength": {g["group_id"]: g["strength_in_packet"] for g in pg},
-                         "allowed_numbers": sorted(allowed), "forbidden_strings": cols + paper_ids,
+                         "allowed_numbers": sorted(allowed), "allowed_descriptors": phrases, "exact_values": exact_values(p),
+                         "forbidden_strings": cols + paper_ids,
                          "level": lvl},
         "excluded_groups": list(excluded or []),
         "inputs_sha256": inputs_sha256,

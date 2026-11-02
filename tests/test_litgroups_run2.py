@@ -124,10 +124,13 @@ def test_strength_follows_the_definitions(enriched):
 def test_packets_match_their_manifest_and_the_rank_rule(packets, enriched):
     assert [x["item_id"] for x in PM["packets"]] == [f"BI-P2B-{i:04d}" for i in range(1, 11)]
     assert PM["inputs_sha256"]["groups"] == sha256_file(g2.ENRICHED_PATH)
+    assert PM["inputs_sha256"]["group_dispositions"] == sha256_file(lgr.DISPOSITIONS_PATH)
+    disp = lgr.load_dispositions()
     by_id = {g["group_id"]: g for g in enriched}
     for x, pk in zip(PM["packets"], packets):
         assert sha256_file(spk.PACKETS_DIR / f"{x['packet_id']}.json") == x["sha256"]
-        assert pk["item_id"] == x["item_id"] and pk["rank_rule"] == "DR-SEED-RANK-2"
+        assert pk["item_id"] == x["item_id"] and pk["rank_rule"] == "DR-SEED-RANK-3" and pk["descriptor_rule"] == "DR-DESC-1"
+        assert pk["model_view"]["patterns"][0]["allowed_descriptors"]["direction"] == "increase"
         gs = pk["provenance"]["groups"]
         roles = [g["role"] for g in gs]
         if pk["use_case_level"] == 1:
@@ -137,12 +140,16 @@ def test_packets_match_their_manifest_and_the_rank_rule(packets, enriched):
         assert ("caveat" in roles) == (pk["use_case_level"] == 7)
         for g in gs:
             assert g["group_id"] in by_id
-            assert g["claim_about"] == by_id[g["group_id"]]["claim_about"]
+            d = disp.get(g["group_id"])
+            assert g["claim_about"] == (d["arg"] if d and d["kind"] == "relabel" else by_id[g["group_id"]]["claim_about"])
+            assert not (d and d["kind"] in ("not_about_family", "reject", "merge_with"))     # D-053
             if g["role"] == "driver":
                 assert g["claim_about"] == "hazard_change_mechanism"
             if g["role"] == "context":
                 assert g["claim_about"] == "hazard_definition_or_measurement"
-        for role in ("driver", "context"):
+            if g["role"] == "caveat":                                                       # D-054
+                assert g["claim_about"] in spk.CAVEAT_CLAIMS and not (d and d["kind"] == "exclude_from_rung7")
+        for role in ("driver", "context", "caveat"):
             keys = [spk.rank_key(g) for g in gs if g["role"] == role]
             assert keys == sorted(keys)
         for mg in pk["model_view"]["groups"]:

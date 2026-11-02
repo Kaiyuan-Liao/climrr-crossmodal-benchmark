@@ -1,7 +1,9 @@
 {
   "packet_id": "PK-SD2-TP1-00271",
-  "version": "synthpackets v2",
-  "rank_rule": "DR-SEED-RANK-2",
+  "version": "synthpackets v3",
+  "rank_rule": "DR-SEED-RANK-3",
+  "descriptor_rule": "DR-DESC-1",
+  "descriptor_rules_sha256": "5c2090a77e0424d43603c9766c8925cee50a3b8fd31f24351334adbf82934650",
   "item_id": "BI-P2B-0004",
   "seed_id": "SD2-TP1-00271",
   "use_case_level": 3,
@@ -22,67 +24,28 @@
             "39.5"
           ],
           "tercile": "small"
+        },
+        "allowed_descriptors": {
+          "pattern_id": "TP1-00271",
+          "rule": "DR-DESC-1",
+          "rules_sha256": "5c2090a77e0424d43603c9766c8925cee50a3b8fd31f24351334adbf82934650",
+          "direction": "increase",
+          "horizon": "by the end of the century (2085–2094)",
+          "scenario": "under RCP8.5, one high-emissions scenario",
+          "quantity": "days with a dangerous heat index (above 95 °F)",
+          "magnitude_class": "from rare or no such days to about 11 days",
+          "magnitude_note": "baseline mean below 1 day per season: low-baseline phrase, no ratio class",
+          "magnitude_also_allowed": [],
+          "anchor_pair": "from about 0 to about 11 days",
+          "anchors": [
+            "about 0 days",
+            "about 11 days"
+          ],
+          "tercile": "small relative to other U.S. states (lower tercile; a relative descriptor among states for the same quantity, season, horizon and scenario, not an absolute threshold)"
         }
       }
     ],
     "groups": [
-      {
-        "group_id": "LG-extreme_heat_v1-driver-c1-007",
-        "role": "driver",
-        "statement_type": "driver",
-        "claim_about": "hazard_change_mechanism",
-        "label": "Prolonged heat increases fire or wildfire risk",
-        "evidence_strength": "single_source_supported",
-        "independent_papers": 1,
-        "members": [
-          {
-            "statement": "Warm‑spells that cause earlier spring snow melt can increase wildfire activity in the western United States.",
-            "passage": "warm-spells have induced earlier spring snow melt, which in turn increase western US forest wildfire activity 63 .",
-            "passage_truncated": false,
-            "paper_id": "53109236",
-            "region": "western US",
-            "region_qualifier": "western"
-          }
-        ]
-      },
-      {
-        "group_id": "LG-extreme_heat_v1-driver-c2-011",
-        "role": "driver",
-        "statement_type": "driver",
-        "claim_about": "hazard_change_mechanism",
-        "label": "A numerical experiment reducing dew point temperature by 0.75 °C, representing the projected humidity decline, leads to a decrease in runoff that could increase the probability of large fires in the northern and central Rocky Mountains by 13 to 60 %.",
-        "evidence_strength": "single_source_supported",
-        "independent_papers": 1,
-        "members": [
-          {
-            "statement": "A numerical experiment reducing dew point temperature by 0.75 °C, representing the projected humidity decline, leads to a decrease in runoff that could increase the probability of large fires in the northern and central Rocky Mountains by 13 to 60 %.",
-            "passage": "It could also increase the probability of large fires in the northern and central US Rocky Mountains by 13 to 60 %.",
-            "passage_truncated": false,
-            "paper_id": "16807122",
-            "region": "northern and central US Rocky Mountains",
-            "region_qualifier": "northern and central rocky mountains"
-          }
-        ]
-      },
-      {
-        "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
-        "role": "driver",
-        "statement_type": "mechanism",
-        "claim_about": "hazard_change_mechanism",
-        "label": "humidity magnifies heat stress and its effect grows with temperature",
-        "evidence_strength": "single_source_supported",
-        "independent_papers": 1,
-        "members": [
-          {
-            "statement": "The magnifying effect of relative humidity on heat stress grows with increasing temperature, so that even unchanged or lower humidity can cause greater discomfort at higher temperatures.",
-            "passage": "at similar or lower humidity, the magnifying power of humidity increases with increasing T, i.e. similar or lower relative humidity levels will still cause greater human discomfort at higher temperatures.",
-            "passage_truncated": false,
-            "paper_id": "239996006",
-            "region": "southeastern United States",
-            "region_qualifier": "southeastern"
-          }
-        ]
-      },
       {
         "group_id": "LG-extreme_heat_v1-driver-c1-008",
         "role": "driver",
@@ -104,81 +67,6 @@
             "passage": "Air mass stagnation events, which increase O3 production and will increase in frequency as weather conditions favorable to heat waves increase (CCSP 2008), are another important indicator.",
             "passage_truncated": false,
             "paper_id": "5838629",
-            "region": "United States"
-          }
-        ]
-      },
-      {
-        "group_id": "LG-extreme_heat_v1-driver-c2-004",
-        "role": "driver",
-        "statement_type": "driver",
-        "claim_about": "hazard_change_mechanism",
-        "label": "drought and high temperatures increase wildfire risk",
-        "evidence_strength": "single_source_supported",
-        "independent_papers": 1,
-        "members": [
-          {
-            "statement": "Forest ecosystems are highly vulnerable to combined drought and temperature extremes, which can elevate fire risk.",
-            "passage": "Forests are very vulnerable to drought and temperature extremes.",
-            "passage_truncated": false,
-            "paper_id": "216423734",
-            "region": "unknown"
-          },
-          {
-            "statement": "Extremely high temperatures can create conditions that increase the likelihood of extensive wildfires.",
-            "passage": "These conditions can have dire impacts on human and livestock health and crops, while also setting the stage for potentially extensive wildfires.",
-            "passage_truncated": false,
-            "paper_id": "221671377",
-            "region": "unknown"
-          },
-          {
-            "statement": "Drought conditions can increase the likelihood and severity of wildfires, as evidenced by historical fire events linked to drought periods.",
-            "passage": "Drought conditions during the summer of 1988 contributed to widespread forest fires in Yellowstone National Park, which resulted in evacuations of campgrounds and seasonal visitor accommodations being closed four weeks earlier than normal [41].",
-            "passage_truncated": false,
-            "paper_id": "216423734",
-            "region": "United States"
-          }
-        ]
-      },
-      {
-        "group_id": "LG-extreme_heat_v1-driver-c1-001",
-        "role": "driver",
-        "statement_type": "driver",
-        "claim_about": "hazard_change_mechanism",
-        "label": "Humidity raises heat‑index values or humid heatwave occurrence",
-        "evidence_strength": "single_source_supported",
-        "independent_papers": 1,
-        "members": [
-          {
-            "statement": "Including humidity in heatwave definitions leads to an increase in humid heatwave occurrence over broader areas of the United States.",
-            "passage": "The inclusion of humidity in temperature calculations led to an increase in humid heatwaves over broader areas, suggesting humidity played a significant role in the humid heatwaves (Russo et al 2017).",
-            "passage_truncated": false,
-            "paper_id": "269932944",
-            "region": "United States"
-          }
-        ]
-      },
-      {
-        "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
-        "role": "driver",
-        "statement_type": "mechanism",
-        "claim_about": "hazard_change_mechanism",
-        "label": "Soil moisture changes evaporative cooling and humidity, altering heatwave intensity",
-        "evidence_strength": "single_source_supported",
-        "independent_papers": 1,
-        "members": [
-          {
-            "statement": "Soil moisture deficits reduce evaporative cooling, increasing sensible heat flux and intensifying temperature‑only heatwaves.",
-            "passage": "If interpreting this as the impacts of soil moisture on heatwave, during temperature-only heatwaves, soil with lower moisture content and limited evaporation can heat up more readily, leading to increased sensible heat flux from the surface to the atmosphere.This can potentially intensify the warming of the lower atmosphere, contributing to the elevated temperatures characteristics of such heatwav",
-            "passage_truncated": true,
-            "paper_id": "269932944",
-            "region": "United States"
-          },
-          {
-            "statement": "Higher soil moisture enhances latent heat flux, raising atmospheric humidity and potentially strengthening humid heatwave conditions.",
-            "passage": "Although enhanced latent heat flux reduces air temperature, this excess evaporation would increase air humidity, potentially contributing to enhanced humid heatwave conditions (Matthews et al 2022).",
-            "passage_truncated": false,
-            "paper_id": "269932944",
             "region": "United States"
           }
         ]
@@ -269,6 +157,87 @@
         ]
       },
       {
+        "group_id": "LG-extreme_heat_v1-driver-c2-011",
+        "role": "driver",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "label": "A numerical experiment reducing dew point temperature by 0.75 °C, representing the projected humidity decline, leads to a decrease in runoff that could increase the probability of large fires in the northern and central Rocky Mountains by 13 to 60 %.",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "A numerical experiment reducing dew point temperature by 0.75 °C, representing the projected humidity decline, leads to a decrease in runoff that could increase the probability of large fires in the northern and central Rocky Mountains by 13 to 60 %.",
+            "passage": "It could also increase the probability of large fires in the northern and central US Rocky Mountains by 13 to 60 %.",
+            "passage_truncated": false,
+            "paper_id": "16807122",
+            "region": "northern and central US Rocky Mountains",
+            "region_qualifier": "northern and central rocky mountains"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+        "role": "driver",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "label": "humidity magnifies heat stress and its effect grows with temperature",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "The magnifying effect of relative humidity on heat stress grows with increasing temperature, so that even unchanged or lower humidity can cause greater discomfort at higher temperatures.",
+            "passage": "at similar or lower humidity, the magnifying power of humidity increases with increasing T, i.e. similar or lower relative humidity levels will still cause greater human discomfort at higher temperatures.",
+            "passage_truncated": false,
+            "paper_id": "239996006",
+            "region": "southeastern United States",
+            "region_qualifier": "southeastern"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-driver-c1-001",
+        "role": "driver",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "label": "Humidity raises heat‑index values or humid heatwave occurrence",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Including humidity in heatwave definitions leads to an increase in humid heatwave occurrence over broader areas of the United States.",
+            "passage": "The inclusion of humidity in temperature calculations led to an increase in humid heatwaves over broader areas, suggesting humidity played a significant role in the humid heatwaves (Russo et al 2017).",
+            "passage_truncated": false,
+            "paper_id": "269932944",
+            "region": "United States"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
+        "role": "driver",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "label": "Soil moisture changes evaporative cooling and humidity, altering heatwave intensity",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Soil moisture deficits reduce evaporative cooling, increasing sensible heat flux and intensifying temperature‑only heatwaves.",
+            "passage": "If interpreting this as the impacts of soil moisture on heatwave, during temperature-only heatwaves, soil with lower moisture content and limited evaporation can heat up more readily, leading to increased sensible heat flux from the surface to the atmosphere.This can potentially intensify the warming of the lower atmosphere, contributing to the elevated temperatures characteristics of such heatwav",
+            "passage_truncated": true,
+            "paper_id": "269932944",
+            "region": "United States"
+          },
+          {
+            "statement": "Higher soil moisture enhances latent heat flux, raising atmospheric humidity and potentially strengthening humid heatwave conditions.",
+            "passage": "Although enhanced latent heat flux reduces air temperature, this excess evaporation would increase air humidity, potentially contributing to enhanced humid heatwave conditions (Matthews et al 2022).",
+            "passage_truncated": false,
+            "paper_id": "269932944",
+            "region": "United States"
+          }
+        ]
+      },
+      {
         "group_id": "LG-extreme_heat_v1-consensus-c1-005",
         "role": "driver",
         "statement_type": "consensus",
@@ -287,41 +256,20 @@
         ]
       },
       {
-        "group_id": "LG-extreme_heat_v1-driver-c1-002",
-        "role": "context",
-        "statement_type": "driver",
-        "claim_about": "hazard_definition_or_measurement",
-        "label": "Heat‑index and related temperature metrics are used as proxies or primary measures",
-        "evidence_strength": "multi_source_supported",
-        "independent_papers": 4,
+        "group_id": "LG-extreme_heat_v1-mechanism-c1-020",
+        "role": "driver",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "label": "Minimum air temperature reflects the amount of overnight cooling, with higher minima indicating reduced cooling and greater heat stress.",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
         "members": [
           {
-            "statement": "Minimum temperatures are highly correlated with heat index in NYC, making them a useful proxy for humid heat exposure.",
-            "passage": "While we limited this analysis to ground-truthing overnight minimum temperatures due to daytime temperature limitations, minimum temperatures are highly correlated with maximum temperatures and heat index in NYC and have similar association with warm-season natural cause mortality. 31 The frequency of extreme warm overnight temperatures is increasing more rapidly than extreme daytime temperatures ",
-            "passage_truncated": true,
-            "paper_id": "182225161",
-            "region": "New York City"
-          },
-          {
-            "statement": "The study defines extreme heat for workplace exposure as the 95th‑percentile of the daily maximum Heat Index during the May‑September growing season and the frequency of three‑day heat waves above this level.",
-            "passage": "we used daytime statistics -the 95 th -percentile of the MJJAS daily maximum HI and the frequency of 3-day heat waves above this level -as our measure of extreme heat.",
+            "statement": "Minimum air temperature reflects the amount of overnight cooling, with higher minima indicating reduced cooling and greater heat stress.",
+            "passage": "heat-trapping urban environments may intensify heat stress by preventing overnight cooling, which is indicated by minimum air temperature [58,80].",
             "passage_truncated": false,
-            "paper_id": "216218610",
-            "region": "United States"
-          },
-          {
-            "statement": "Maximum heat index was used as the primary weather metric because it provided the best model fit compared to other weather metrics.",
-            "passage": "Maximum heat index was used as our primary weather metric, based on a previous analysis of non-external cause mortality in NYC that showed heat index gave the best model fit compared to other weather metrics [16].",
-            "passage_truncated": false,
-            "paper_id": "7891630",
-            "region": "New York City"
-          },
-          {
-            "statement": "Apparent temperature (heat index) that combines temperature and humidity is recommended as an indicator to track for assessing heat‑related health impacts.",
-            "passage": "We recommend the following indicators to track for temperature: maximum temperature, minimum temperatures, and apparent temperature.",
-            "passage_truncated": false,
-            "paper_id": "5838629",
-            "region": "United States"
+            "paper_id": "6585212",
+            "region": "unknown"
           }
         ]
       },
@@ -440,19 +388,26 @@
         ]
       },
       {
-        "group_id": "LG-extreme_heat_v1-driver-c2-003",
+        "group_id": "LG-extreme_heat_v1-mechanism-c1-022",
         "role": "context",
-        "statement_type": "driver",
+        "statement_type": "mechanism",
         "claim_about": "hazard_definition_or_measurement",
-        "label": "heat index (or apparent temperature) correlates with health outcomes",
+        "label": "heat‑index thresholds are used to define heat‑wave events",
         "evidence_strength": "single_source_supported",
         "independent_papers": 1,
         "members": [
           {
-            "statement": "Heat index values and heat‑related mortality rates are higher in urban cores than in surrounding suburban or rural areas.",
-            "passage": "The heat index and heat-related mortality rates are higher in the urban core than in surrounding areas (27).",
+            "statement": "Some county heat‑wave definitions incorporate the heat index as a trigger, such as using a heat‑index threshold above 115 °F.",
+            "passage": "other definitions accounted for air moisture either explicitly or through the use of heat index as a trigger (\"temperatures above 95°F with humidity above 50%\"; \"heat index above 115°F\").",
             "passage_truncated": false,
-            "paper_id": "14009044",
+            "paper_id": "2239637",
+            "region": "United States"
+          },
+          {
+            "statement": "County heat‑wave definitions sometimes combine temperature and humidity thresholds, for example requiring temperatures above 95 °F together with humidity above 50 %.",
+            "passage": "other definitions accounted for air moisture either explicitly or through the use of heat index as a trigger (\"temperatures above 95°F with humidity above 50%\"; \"heat index above 115°F\").",
+            "passage_truncated": false,
+            "paper_id": "2239637",
             "region": "United States"
           }
         ]
@@ -604,120 +559,15 @@
     ],
     "groups": [
       {
-        "group_id": "LG-extreme_heat_v1-driver-c1-007",
-        "kind": "group",
-        "statement_type": "driver",
-        "claim_about": "hazard_change_mechanism",
-        "role": "driver",
-        "label": "Prolonged heat increases fire or wildfire risk",
-        "group_strength_run": "multi_source_supported",
-        "strength_in_packet": "single_source_supported",
-        "n_members_run": 3,
-        "names_scenario": false,
-        "n_specific": 0,
-        "best_basis": "us_subregion",
-        "best_basis_rank": 2,
-        "n_papers": 1,
-        "members": [
-          {
-            "statement_id": "LS-53109236-03",
-            "statement": "Warm‑spells that cause earlier spring snow melt can increase wildfire activity in the western United States.",
-            "paper_item_id": "53109236",
-            "canonical_paper": "53109236",
-            "paper_sha256": "f33f69f4a36065a1c4975b10960d7b632cf4d0fbe9e48b46f50e69e0d71aa1cb",
-            "json_path": "$.usage notes",
-            "span_start": 958,
-            "span_end": 1072,
-            "verbatim_passage": "warm-spells have induced earlier spring snow melt, which in turn increase western US forest wildfire activity 63 .",
-            "evidence_role": "cited_candidate",
-            "passage_type": "cited_finding",
-            "region": "western US",
-            "scenario": "unknown",
-            "basis": "us_subregion",
-            "region_class": "us_subregion",
-            "region_qualifier": "western"
-          }
-        ]
-      },
-      {
-        "group_id": "LG-extreme_heat_v1-driver-c2-011",
-        "kind": "singleton",
-        "statement_type": "driver",
-        "claim_about": "hazard_change_mechanism",
-        "role": "driver",
-        "label": null,
-        "group_strength_run": "single_source_supported",
-        "strength_in_packet": "single_source_supported",
-        "n_members_run": 1,
-        "names_scenario": false,
-        "n_specific": 0,
-        "best_basis": "us_subregion",
-        "best_basis_rank": 2,
-        "n_papers": 1,
-        "members": [
-          {
-            "statement_id": "LS-16807122-04",
-            "statement": "A numerical experiment reducing dew point temperature by 0.75 °C, representing the projected humidity decline, leads to a decrease in runoff that could increase the probability of large fires in the northern and central Rocky Mountains by 13 to 60 %.",
-            "paper_item_id": "16807122",
-            "canonical_paper": "16807122",
-            "paper_sha256": "9b49a1ececd4a460eeab7f5e4c66da01193bbf641f09fbf1b61201a57f4a7ce0",
-            "json_path": "$.abstract",
-            "span_start": 1997,
-            "span_end": 2112,
-            "verbatim_passage": "It could also increase the probability of large fires in the northern and central US Rocky Mountains by 13 to 60 %.",
-            "evidence_role": "core_candidate",
-            "passage_type": "own_finding",
-            "region": "northern and central US Rocky Mountains",
-            "scenario": "unknown",
-            "basis": "us_subregion",
-            "region_class": "us_subregion",
-            "region_qualifier": "northern and central rocky mountains"
-          }
-        ]
-      },
-      {
-        "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
-        "kind": "group",
-        "statement_type": "mechanism",
-        "claim_about": "hazard_change_mechanism",
-        "role": "driver",
-        "label": "humidity magnifies heat stress and its effect grows with temperature",
-        "group_strength_run": "multi_source_supported",
-        "strength_in_packet": "single_source_supported",
-        "n_members_run": 3,
-        "names_scenario": false,
-        "n_specific": 0,
-        "best_basis": "us_subregion",
-        "best_basis_rank": 2,
-        "n_papers": 1,
-        "members": [
-          {
-            "statement_id": "LS-239996006-02",
-            "statement": "The magnifying effect of relative humidity on heat stress grows with increasing temperature, so that even unchanged or lower humidity can cause greater discomfort at higher temperatures.",
-            "paper_item_id": "239996006",
-            "canonical_paper": "239996006",
-            "paper_sha256": "4bb60fe9aae3fde11d0b3cc7db90b67c97c0342c2c0c798fa8f0c838fb31e83f",
-            "json_path": "$.results",
-            "span_start": 2047,
-            "span_end": 2251,
-            "verbatim_passage": "at similar or lower humidity, the magnifying power of humidity increases with increasing T, i.e. similar or lower relative humidity levels will still cause greater human discomfort at higher temperatures.",
-            "evidence_role": "core_candidate",
-            "passage_type": "own_finding",
-            "region": "southeastern United States",
-            "scenario": "unknown",
-            "basis": "us_subregion",
-            "region_class": "us_subregion",
-            "region_qualifier": "southeastern"
-          }
-        ]
-      },
-      {
         "group_id": "LG-extreme_heat_v1-driver-c1-008",
         "kind": "group",
         "statement_type": "driver",
         "claim_about": "hazard_change_mechanism",
         "role": "driver",
+        "excluded_reason": null,
         "label": "Observed increase in heat‑wave and drought frequency",
+        "claim_about_source": "agent",
+        "disposition": "accept",
         "group_strength_run": "multi_source_supported",
         "strength_in_packet": "multi_source_supported",
         "n_members_run": 4,
@@ -766,174 +616,15 @@
         ]
       },
       {
-        "group_id": "LG-extreme_heat_v1-driver-c2-004",
-        "kind": "group",
-        "statement_type": "driver",
-        "claim_about": "hazard_change_mechanism",
-        "role": "driver",
-        "label": "drought and high temperatures increase wildfire risk",
-        "group_strength_run": "multi_source_supported",
-        "strength_in_packet": "single_source_supported",
-        "n_members_run": 7,
-        "names_scenario": false,
-        "n_specific": 0,
-        "best_basis": "us_national",
-        "best_basis_rank": 3,
-        "n_papers": 2,
-        "members": [
-          {
-            "statement_id": "LS-216423734-03",
-            "statement": "Forest ecosystems are highly vulnerable to combined drought and temperature extremes, which can elevate fire risk.",
-            "paper_item_id": "216423734",
-            "canonical_paper": "216423734",
-            "paper_sha256": "5364344ddd5182ec11e201527a2cdd7e643e849885d61f433e76abe91ef2f069",
-            "json_path": "$.drought and land management",
-            "span_start": 6185,
-            "span_end": 6249,
-            "verbatim_passage": "Forests are very vulnerable to drought and temperature extremes.",
-            "evidence_role": "cited_candidate",
-            "passage_type": "cited_finding",
-            "region": "unknown",
-            "scenario": "unknown",
-            "basis": "global",
-            "region_class": "global",
-            "region_qualifier": null
-          },
-          {
-            "statement_id": "LS-221671377-03",
-            "statement": "Extremely high temperatures can create conditions that increase the likelihood of extensive wildfires.",
-            "paper_item_id": "221671377",
-            "canonical_paper": "221671377",
-            "paper_sha256": "85bd33c16c00e1b022f93f7bb05d15a120ac6db055aca832962fb44ace17026c",
-            "json_path": "$.methods",
-            "span_start": 14098,
-            "span_end": 14243,
-            "verbatim_passage": "These conditions can have dire impacts on human and livestock health and crops, while also setting the stage for potentially extensive wildfires.",
-            "evidence_role": "background_consensus_candidate",
-            "passage_type": "background",
-            "region": "unknown",
-            "scenario": "unknown",
-            "basis": "global",
-            "region_class": "global",
-            "region_qualifier": null
-          },
-          {
-            "statement_id": "LS-216423734-02",
-            "statement": "Drought conditions can increase the likelihood and severity of wildfires, as evidenced by historical fire events linked to drought periods.",
-            "paper_item_id": "216423734",
-            "canonical_paper": "216423734",
-            "paper_sha256": "5364344ddd5182ec11e201527a2cdd7e643e849885d61f433e76abe91ef2f069",
-            "json_path": "$.drought and land management",
-            "span_start": 3112,
-            "span_end": 3356,
-            "verbatim_passage": "Drought conditions during the summer of 1988 contributed to widespread forest fires in Yellowstone National Park, which resulted in evacuations of campgrounds and seasonal visitor accommodations being closed four weeks earlier than normal [41].",
-            "evidence_role": "cited_candidate",
-            "passage_type": "cited_finding",
-            "region": "United States",
-            "scenario": "unknown",
-            "basis": "us_national",
-            "region_class": "us_national",
-            "region_qualifier": null
-          }
-        ]
-      },
-      {
-        "group_id": "LG-extreme_heat_v1-driver-c1-001",
-        "kind": "group",
-        "statement_type": "driver",
-        "claim_about": "hazard_change_mechanism",
-        "role": "driver",
-        "label": "Humidity raises heat‑index values or humid heatwave occurrence",
-        "group_strength_run": "multi_source_supported",
-        "strength_in_packet": "single_source_supported",
-        "n_members_run": 2,
-        "names_scenario": false,
-        "n_specific": 0,
-        "best_basis": "us_national",
-        "best_basis_rank": 3,
-        "n_papers": 1,
-        "members": [
-          {
-            "statement_id": "LS-269932944-05",
-            "statement": "Including humidity in heatwave definitions leads to an increase in humid heatwave occurrence over broader areas of the United States.",
-            "paper_item_id": "269932944",
-            "canonical_paper": "269932944",
-            "paper_sha256": "8224f7567beb54ba8510d97f97c89ffde3eeaa1a29fb754caf965091f873e3c9",
-            "json_path": "$.discussion",
-            "span_start": 652,
-            "span_end": 852,
-            "verbatim_passage": "The inclusion of humidity in temperature calculations led to an increase in humid heatwaves over broader areas, suggesting humidity played a significant role in the humid heatwaves (Russo et al 2017).",
-            "evidence_role": "core_candidate",
-            "passage_type": "own_finding",
-            "region": "United States",
-            "scenario": "unknown",
-            "basis": "us_national",
-            "region_class": "us_national",
-            "region_qualifier": null
-          }
-        ]
-      },
-      {
-        "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
-        "kind": "group",
-        "statement_type": "mechanism",
-        "claim_about": "hazard_change_mechanism",
-        "role": "driver",
-        "label": "Soil moisture changes evaporative cooling and humidity, altering heatwave intensity",
-        "group_strength_run": "single_source_supported",
-        "strength_in_packet": "single_source_supported",
-        "n_members_run": 2,
-        "names_scenario": false,
-        "n_specific": 0,
-        "best_basis": "us_national",
-        "best_basis_rank": 3,
-        "n_papers": 1,
-        "members": [
-          {
-            "statement_id": "LS-269932944-01",
-            "statement": "Soil moisture deficits reduce evaporative cooling, increasing sensible heat flux and intensifying temperature‑only heatwaves.",
-            "paper_item_id": "269932944",
-            "canonical_paper": "269932944",
-            "paper_sha256": "8224f7567beb54ba8510d97f97c89ffde3eeaa1a29fb754caf965091f873e3c9",
-            "json_path": "$.results",
-            "span_start": 3205,
-            "span_end": 3614,
-            "verbatim_passage": "If interpreting this as the impacts of soil moisture on heatwave, during temperature-only heatwaves, soil with lower moisture content and limited evaporation can heat up more readily, leading to increased sensible heat flux from the surface to the atmosphere.This can potentially intensify the warming of the lower atmosphere, contributing to the elevated temperatures characteristics of such heatwave events.",
-            "evidence_role": "core_candidate",
-            "passage_type": "own_finding",
-            "region": "United States",
-            "scenario": "unknown",
-            "basis": "us_national",
-            "region_class": "us_national",
-            "region_qualifier": null
-          },
-          {
-            "statement_id": "LS-269932944-02",
-            "statement": "Higher soil moisture enhances latent heat flux, raising atmospheric humidity and potentially strengthening humid heatwave conditions.",
-            "paper_item_id": "269932944",
-            "canonical_paper": "269932944",
-            "paper_sha256": "8224f7567beb54ba8510d97f97c89ffde3eeaa1a29fb754caf965091f873e3c9",
-            "json_path": "$.results",
-            "span_start": 4894,
-            "span_end": 5092,
-            "verbatim_passage": "Although enhanced latent heat flux reduces air temperature, this excess evaporation would increase air humidity, potentially contributing to enhanced humid heatwave conditions (Matthews et al 2022).",
-            "evidence_role": "core_candidate",
-            "passage_type": "own_finding",
-            "region": "United States",
-            "scenario": "unknown",
-            "basis": "us_national",
-            "region_class": "us_national",
-            "region_qualifier": null
-          }
-        ]
-      },
-      {
         "group_id": "LG-extreme_heat_v1-driver-c2-001",
         "kind": "group",
         "statement_type": "driver",
         "claim_about": "hazard_change_mechanism",
         "role": "driver",
+        "excluded_reason": null,
         "label": "global warming increases heatwave frequency and intensity",
+        "claim_about_source": "agent",
+        "disposition": "accept",
         "group_strength_run": "multi_source_supported",
         "strength_in_packet": "multi_source_supported",
         "n_members_run": 4,
@@ -1023,7 +714,10 @@
         "statement_type": "mechanism",
         "claim_about": "hazard_change_mechanism",
         "role": "driver",
+        "excluded_reason": null,
         "label": "urban heat island intensifies due to nighttime conditions and reduced moisture",
+        "claim_about_source": "agent",
+        "disposition": "accept",
         "group_strength_run": "multi_source_supported",
         "strength_in_packet": "multi_source_supported",
         "n_members_run": 5,
@@ -1126,12 +820,189 @@
         ]
       },
       {
+        "group_id": "LG-extreme_heat_v1-driver-c2-011",
+        "kind": "singleton",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": null,
+        "claim_about_source": "agent",
+        "disposition": null,
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "us_subregion",
+        "best_basis_rank": 2,
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS-16807122-04",
+            "statement": "A numerical experiment reducing dew point temperature by 0.75 °C, representing the projected humidity decline, leads to a decrease in runoff that could increase the probability of large fires in the northern and central Rocky Mountains by 13 to 60 %.",
+            "paper_item_id": "16807122",
+            "canonical_paper": "16807122",
+            "paper_sha256": "9b49a1ececd4a460eeab7f5e4c66da01193bbf641f09fbf1b61201a57f4a7ce0",
+            "json_path": "$.abstract",
+            "span_start": 1997,
+            "span_end": 2112,
+            "verbatim_passage": "It could also increase the probability of large fires in the northern and central US Rocky Mountains by 13 to 60 %.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "northern and central US Rocky Mountains",
+            "scenario": "unknown",
+            "basis": "us_subregion",
+            "region_class": "us_subregion",
+            "region_qualifier": "northern and central rocky mountains"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+        "kind": "group",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "humidity magnifies heat stress and its effect grows with temperature",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 3,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "us_subregion",
+        "best_basis_rank": 2,
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS-239996006-02",
+            "statement": "The magnifying effect of relative humidity on heat stress grows with increasing temperature, so that even unchanged or lower humidity can cause greater discomfort at higher temperatures.",
+            "paper_item_id": "239996006",
+            "canonical_paper": "239996006",
+            "paper_sha256": "4bb60fe9aae3fde11d0b3cc7db90b67c97c0342c2c0c798fa8f0c838fb31e83f",
+            "json_path": "$.results",
+            "span_start": 2047,
+            "span_end": 2251,
+            "verbatim_passage": "at similar or lower humidity, the magnifying power of humidity increases with increasing T, i.e. similar or lower relative humidity levels will still cause greater human discomfort at higher temperatures.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "southeastern United States",
+            "scenario": "unknown",
+            "basis": "us_subregion",
+            "region_class": "us_subregion",
+            "region_qualifier": "southeastern"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-driver-c1-001",
+        "kind": "group",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "Humidity raises heat‑index values or humid heatwave occurrence",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 2,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "us_national",
+        "best_basis_rank": 3,
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS-269932944-05",
+            "statement": "Including humidity in heatwave definitions leads to an increase in humid heatwave occurrence over broader areas of the United States.",
+            "paper_item_id": "269932944",
+            "canonical_paper": "269932944",
+            "paper_sha256": "8224f7567beb54ba8510d97f97c89ffde3eeaa1a29fb754caf965091f873e3c9",
+            "json_path": "$.discussion",
+            "span_start": 652,
+            "span_end": 852,
+            "verbatim_passage": "The inclusion of humidity in temperature calculations led to an increase in humid heatwaves over broader areas, suggesting humidity played a significant role in the humid heatwaves (Russo et al 2017).",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "United States",
+            "scenario": "unknown",
+            "basis": "us_national",
+            "region_class": "us_national",
+            "region_qualifier": null
+          }
+        ]
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
+        "kind": "group",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "Soil moisture changes evaporative cooling and humidity, altering heatwave intensity",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 2,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "us_national",
+        "best_basis_rank": 3,
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS-269932944-01",
+            "statement": "Soil moisture deficits reduce evaporative cooling, increasing sensible heat flux and intensifying temperature‑only heatwaves.",
+            "paper_item_id": "269932944",
+            "canonical_paper": "269932944",
+            "paper_sha256": "8224f7567beb54ba8510d97f97c89ffde3eeaa1a29fb754caf965091f873e3c9",
+            "json_path": "$.results",
+            "span_start": 3205,
+            "span_end": 3614,
+            "verbatim_passage": "If interpreting this as the impacts of soil moisture on heatwave, during temperature-only heatwaves, soil with lower moisture content and limited evaporation can heat up more readily, leading to increased sensible heat flux from the surface to the atmosphere.This can potentially intensify the warming of the lower atmosphere, contributing to the elevated temperatures characteristics of such heatwave events.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "United States",
+            "scenario": "unknown",
+            "basis": "us_national",
+            "region_class": "us_national",
+            "region_qualifier": null
+          },
+          {
+            "statement_id": "LS-269932944-02",
+            "statement": "Higher soil moisture enhances latent heat flux, raising atmospheric humidity and potentially strengthening humid heatwave conditions.",
+            "paper_item_id": "269932944",
+            "canonical_paper": "269932944",
+            "paper_sha256": "8224f7567beb54ba8510d97f97c89ffde3eeaa1a29fb754caf965091f873e3c9",
+            "json_path": "$.results",
+            "span_start": 4894,
+            "span_end": 5092,
+            "verbatim_passage": "Although enhanced latent heat flux reduces air temperature, this excess evaporation would increase air humidity, potentially contributing to enhanced humid heatwave conditions (Matthews et al 2022).",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "United States",
+            "scenario": "unknown",
+            "basis": "us_national",
+            "region_class": "us_national",
+            "region_qualifier": null
+          }
+        ]
+      },
+      {
         "group_id": "LG-extreme_heat_v1-consensus-c1-005",
         "kind": "group",
         "statement_type": "consensus",
         "claim_about": "hazard_change_mechanism",
         "role": "driver",
+        "excluded_reason": null,
         "label": "heat event frequency and intensity projected to increase, occupational illness risk will not diminish",
+        "claim_about_source": "agent",
+        "disposition": "accept",
         "group_strength_run": "single_source_supported",
         "strength_in_packet": "single_source_supported",
         "n_members_run": 1,
@@ -1162,91 +1033,40 @@
         ]
       },
       {
-        "group_id": "LG-extreme_heat_v1-driver-c1-002",
-        "kind": "group",
-        "statement_type": "driver",
-        "claim_about": "hazard_definition_or_measurement",
-        "role": "context",
-        "label": "Heat‑index and related temperature metrics are used as proxies or primary measures",
-        "group_strength_run": "multi_source_supported",
-        "strength_in_packet": "multi_source_supported",
-        "n_members_run": 5,
+        "group_id": "LG-extreme_heat_v1-mechanism-c1-020",
+        "kind": "singleton",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": null,
+        "claim_about_source": "agent",
+        "disposition": null,
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
         "names_scenario": false,
-        "n_specific": 2,
-        "best_basis": "state",
-        "best_basis_rank": 0,
-        "n_papers": 4,
+        "n_specific": 0,
+        "best_basis": "global",
+        "best_basis_rank": 4,
+        "n_papers": 1,
         "members": [
           {
-            "statement_id": "LS-182225161-01",
-            "statement": "Minimum temperatures are highly correlated with heat index in NYC, making them a useful proxy for humid heat exposure.",
-            "paper_item_id": "182225161",
-            "canonical_paper": "182225161",
-            "paper_sha256": "3ecd6563670858f71fb794d1245b722053d644be6a60833c9a7a6f3013ff169f",
-            "json_path": "$.discussion and conclusions",
-            "span_start": 7686,
-            "span_end": 8122,
-            "verbatim_passage": "While we limited this analysis to ground-truthing overnight minimum temperatures due to daytime temperature limitations, minimum temperatures are highly correlated with maximum temperatures and heat index in NYC and have similar association with warm-season natural cause mortality. 31 The frequency of extreme warm overnight temperatures is increasing more rapidly than extreme daytime temperatures in the United States (graph 32,33 ).",
-            "evidence_role": "core_candidate",
-            "passage_type": "own_finding",
-            "region": "New York City",
-            "scenario": "unknown",
-            "basis": "state",
-            "region_class": "state",
-            "region_qualifier": null
-          },
-          {
-            "statement_id": "LS-216218610-06",
-            "statement": "The study defines extreme heat for workplace exposure as the 95th‑percentile of the daily maximum Heat Index during the May‑September growing season and the frequency of three‑day heat waves above this level.",
-            "paper_item_id": "216218610",
-            "canonical_paper": "216218610",
-            "paper_sha256": "48754b70e494f60ffb6c0b13461680c9df61ff522571d2309a236a208d756988",
-            "json_path": "$.climate data",
-            "span_start": 1287,
-            "span_end": 1454,
-            "verbatim_passage": "we used daytime statistics -the 95 th -percentile of the MJJAS daily maximum HI and the frequency of 3-day heat waves above this level -as our measure of extreme heat.",
-            "evidence_role": "core_candidate",
-            "passage_type": "own_finding",
-            "region": "United States",
-            "scenario": "unknown",
-            "basis": "us_national",
-            "region_class": "us_national",
-            "region_qualifier": null
-          },
-          {
-            "statement_id": "LS-7891630-01",
-            "statement": "Maximum heat index was used as the primary weather metric because it provided the best model fit compared to other weather metrics.",
-            "paper_item_id": "7891630",
-            "canonical_paper": "7891630",
-            "paper_sha256": "18e1f9d237128f4745f8d1fe9989d59c9a3f9a37301ead97152bdf86b6700657",
+            "statement_id": "LS-6585212-06",
+            "statement": "Minimum air temperature reflects the amount of overnight cooling, with higher minima indicating reduced cooling and greater heat stress.",
+            "paper_item_id": "6585212",
+            "canonical_paper": "6585212",
+            "paper_sha256": "a24b79193b9c71225e2a88facbb7e27805a8a4fafa8f7f6ead152553ecf57641",
             "json_path": "$.discussion",
-            "span_start": 388,
-            "span_end": 601,
-            "verbatim_passage": "Maximum heat index was used as our primary weather metric, based on a previous analysis of non-external cause mortality in NYC that showed heat index gave the best model fit compared to other weather metrics [16].",
-            "evidence_role": "core_candidate",
-            "passage_type": "own_finding",
-            "region": "New York City",
+            "span_start": 9726,
+            "span_end": 9872,
+            "verbatim_passage": "heat-trapping urban environments may intensify heat stress by preventing overnight cooling, which is indicated by minimum air temperature [58,80].",
+            "evidence_role": "cited_candidate",
+            "passage_type": "cited_finding",
+            "region": "unknown",
             "scenario": "unknown",
-            "basis": "state",
-            "region_class": "state",
-            "region_qualifier": null
-          },
-          {
-            "statement_id": "LS-5838629-06",
-            "statement": "Apparent temperature (heat index) that combines temperature and humidity is recommended as an indicator to track for assessing heat‑related health impacts.",
-            "paper_item_id": "5838629",
-            "canonical_paper": "5838629",
-            "paper_sha256": "e11032fb59db4250a8562dfba97e961feee24186a931f6ec3d037270405f4606",
-            "json_path": "$.results",
-            "span_start": 3288,
-            "span_end": 3420,
-            "verbatim_passage": "We recommend the following indicators to track for temperature: maximum temperature, minimum temperatures, and apparent temperature.",
-            "evidence_role": "core_candidate",
-            "passage_type": "own_finding",
-            "region": "United States",
-            "scenario": "unknown",
-            "basis": "us_national",
-            "region_class": "us_national",
+            "basis": "global",
+            "region_class": "global",
             "region_qualifier": null
           }
         ]
@@ -1257,10 +1077,17 @@
         "statement_type": "mechanism",
         "claim_about": "hazard_definition_or_measurement",
         "role": "context",
+        "excluded_reason": null,
         "label": "heat index combines temperature and humidity as a perceived‑heat metric",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "merged_from": [
+          "LG-extreme_heat_v1-mechanism-c2-001",
+          "LG-extreme_heat_v1-mechanism-c3-001"
+        ],
         "group_strength_run": "multi_source_supported",
         "strength_in_packet": "review_supported",
-        "n_members_run": 14,
+        "n_members_run": 44,
         "names_scenario": false,
         "n_specific": 1,
         "best_basis": "state",
@@ -1491,7 +1318,10 @@
         "statement_type": "mechanism",
         "claim_about": "hazard_definition_or_measurement",
         "role": "context",
+        "excluded_reason": null,
         "label": "Apparent temperature rises with temperature and humidity and exceeds air temperature alone",
+        "claim_about_source": "agent",
+        "disposition": "accept",
         "group_strength_run": "single_source_supported",
         "strength_in_packet": "single_source_supported",
         "n_members_run": 3,
@@ -1522,15 +1352,18 @@
         ]
       },
       {
-        "group_id": "LG-extreme_heat_v1-driver-c2-003",
+        "group_id": "LG-extreme_heat_v1-mechanism-c1-022",
         "kind": "group",
-        "statement_type": "driver",
+        "statement_type": "mechanism",
         "claim_about": "hazard_definition_or_measurement",
         "role": "context",
-        "label": "heat index (or apparent temperature) correlates with health outcomes",
-        "group_strength_run": "multi_source_supported",
+        "excluded_reason": null,
+        "label": "heat‑index thresholds are used to define heat‑wave events",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "single_source_supported",
         "strength_in_packet": "single_source_supported",
-        "n_members_run": 5,
+        "n_members_run": 2,
         "names_scenario": false,
         "n_specific": 0,
         "best_basis": "us_national",
@@ -1538,17 +1371,35 @@
         "n_papers": 1,
         "members": [
           {
-            "statement_id": "LS-14009044-02",
-            "statement": "Heat index values and heat‑related mortality rates are higher in urban cores than in surrounding suburban or rural areas.",
-            "paper_item_id": "14009044",
-            "canonical_paper": "14009044",
-            "paper_sha256": "b9533caafbf52fc07adcb3430da93485e95be839ac8ca9a60d7d9d6d1940b0a2",
-            "json_path": "$.uncertainties of vulnerability and adaptive capabilities",
-            "span_start": 8008,
-            "span_end": 8116,
-            "verbatim_passage": "The heat index and heat-related mortality rates are higher in the urban core than in surrounding areas (27).",
-            "evidence_role": "cited_candidate",
-            "passage_type": "cited_finding",
+            "statement_id": "LS-2239637-01",
+            "statement": "Some county heat‑wave definitions incorporate the heat index as a trigger, such as using a heat‑index threshold above 115 °F.",
+            "paper_item_id": "2239637",
+            "canonical_paper": "2239637",
+            "paper_sha256": "314238d8f31fa3ccd665598fd2a395b508f74c7f6a6abdac907a8d570543f328",
+            "json_path": "$.preparedness for the extreme heat of 2011",
+            "span_start": 1282,
+            "span_end": 1469,
+            "verbatim_passage": "other definitions accounted for air moisture either explicitly or through the use of heat index as a trigger (\"temperatures above 95°F with humidity above 50%\"; \"heat index above 115°F\").",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "United States",
+            "scenario": "unknown",
+            "basis": "us_national",
+            "region_class": "us_national",
+            "region_qualifier": null
+          },
+          {
+            "statement_id": "LS-2239637-02",
+            "statement": "County heat‑wave definitions sometimes combine temperature and humidity thresholds, for example requiring temperatures above 95 °F together with humidity above 50 %.",
+            "paper_item_id": "2239637",
+            "canonical_paper": "2239637",
+            "paper_sha256": "314238d8f31fa3ccd665598fd2a395b508f74c7f6a6abdac907a8d570543f328",
+            "json_path": "$.preparedness for the extreme heat of 2011",
+            "span_start": 1282,
+            "span_end": 1469,
+            "verbatim_passage": "other definitions accounted for air moisture either explicitly or through the use of heat index as a trigger (\"temperatures above 95°F with humidity above 50%\"; \"heat index above 115°F\").",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
             "region": "United States",
             "scenario": "unknown",
             "basis": "us_national",
@@ -1569,20 +1420,18 @@
       "TP1-00271"
     ],
     "group_strength": {
-      "LG-extreme_heat_v1-driver-c1-007": "single_source_supported",
-      "LG-extreme_heat_v1-driver-c2-011": "single_source_supported",
-      "LG-extreme_heat_v1-mechanism-c2-003": "single_source_supported",
       "LG-extreme_heat_v1-driver-c1-008": "multi_source_supported",
-      "LG-extreme_heat_v1-driver-c2-004": "single_source_supported",
-      "LG-extreme_heat_v1-driver-c1-001": "single_source_supported",
-      "LG-extreme_heat_v1-mechanism-c1-003": "single_source_supported",
       "LG-extreme_heat_v1-driver-c2-001": "multi_source_supported",
       "LG-extreme_heat_v1-mechanism-c1-024": "multi_source_supported",
+      "LG-extreme_heat_v1-driver-c2-011": "single_source_supported",
+      "LG-extreme_heat_v1-mechanism-c2-003": "single_source_supported",
+      "LG-extreme_heat_v1-driver-c1-001": "single_source_supported",
+      "LG-extreme_heat_v1-mechanism-c1-003": "single_source_supported",
       "LG-extreme_heat_v1-consensus-c1-005": "single_source_supported",
-      "LG-extreme_heat_v1-driver-c1-002": "multi_source_supported",
+      "LG-extreme_heat_v1-mechanism-c1-020": "single_source_supported",
       "LG-extreme_heat_v1-mechanism-c1-021": "review_supported",
       "LG-extreme_heat_v1-mechanism-c1-001": "single_source_supported",
-      "LG-extreme_heat_v1-driver-c2-003": "single_source_supported"
+      "LG-extreme_heat_v1-mechanism-c1-022": "single_source_supported"
     },
     "allowed_numbers": [
       "0",
@@ -1604,22 +1453,41 @@
       "888",
       "95"
     ],
+    "allowed_descriptors": [
+      "increase",
+      "by the end of the century (2085–2094)",
+      "under RCP8.5, one high-emissions scenario",
+      "days with a dangerous heat index (above 95 °F)",
+      "from rare or no such days to about 11 days",
+      "from about 0 to about 11 days",
+      "small relative to other U.S. states (lower tercile; a relative descriptor among states for the same quantity, season, horizon and scenario, not an absolute threshold)",
+      "about 0 days",
+      "about 11 days"
+    ],
+    "exact_values": [
+      "0.2",
+      "0.202777779628378",
+      "0.3",
+      "0.300000000000000",
+      "10.990202698288288",
+      "11.0",
+      "11.192980477916667",
+      "11.2",
+      "39.466666139999998",
+      "39.5"
+    ],
     "forbidden_strings": [
       "heatindex_E85_Day95",
       "heatindex_HIS_Day95",
       "121201574",
       "128765172",
       "14006228",
-      "14009044",
       "16807122",
-      "182225161",
       "199098498",
       "199381463",
       "201658056",
-      "216218610",
-      "216423734",
       "221504407",
-      "221671377",
+      "2239637",
       "230583145",
       "235602877",
       "237371886",
@@ -1631,10 +1499,10 @@
       "269945312",
       "32695834",
       "34148006",
-      "53109236",
       "5838629",
       "62829390",
       "6479124",
+      "6585212",
       "7891630",
       "9917590"
     ],
@@ -1662,7 +1530,7 @@
     {
       "group_id": "LG-extreme_heat_v1-caveat-c1-015",
       "statement_type": "caveat",
-      "claim_about": "hazard_change_mechanism",
+      "claim_about": "method_or_data",
       "reason": "caveat_outside_rung_7"
     },
     {
@@ -1675,7 +1543,7 @@
       "group_id": "LG-extreme_heat_v1-caveat-c1-018",
       "statement_type": "caveat",
       "claim_about": "hazard_change_mechanism",
-      "reason": "caveat_outside_rung_7"
+      "reason": "disposition:not_about_family"
     },
     {
       "group_id": "LG-extreme_heat_v1-caveat-c1-019",
@@ -1744,6 +1612,12 @@
       "reason": "claim_about:impact_or_exposure"
     },
     {
+      "group_id": "LG-extreme_heat_v1-driver-c1-002",
+      "statement_type": "driver",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
       "group_id": "LG-extreme_heat_v1-driver-c1-004",
       "statement_type": "driver",
       "claim_about": "impact_or_exposure",
@@ -1754,6 +1628,12 @@
       "statement_type": "driver",
       "claim_about": "method_or_data",
       "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c1-007",
+      "statement_type": "driver",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "disposition:not_about_family"
     },
     {
       "group_id": "LG-extreme_heat_v1-driver-c1-009",
@@ -1772,6 +1652,18 @@
       "statement_type": "driver",
       "claim_about": "impact_or_exposure",
       "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c2-003",
+      "statement_type": "driver",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c2-004",
+      "statement_type": "driver",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "disposition:not_about_family"
     },
     {
       "group_id": "LG-extreme_heat_v1-driver-c2-005",
@@ -1808,6 +1700,12 @@
       "statement_type": "mechanism",
       "claim_about": "impact_or_exposure",
       "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-004",
+      "statement_type": "mechanism",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "disposition:not_about_family"
     },
     {
       "group_id": "LG-extreme_heat_v1-mechanism-c1-007",
@@ -1868,24 +1766,6 @@
       "statement_type": "mechanism",
       "claim_about": "impact_or_exposure",
       "reason": "claim_about:impact_or_exposure"
-    },
-    {
-      "group_id": "LG-extreme_heat_v1-mechanism-c1-004",
-      "statement_type": "mechanism",
-      "claim_about": "hazard_change_mechanism",
-      "reason": "over_cap:driver"
-    },
-    {
-      "group_id": "LG-extreme_heat_v1-mechanism-c1-020",
-      "statement_type": "mechanism",
-      "claim_about": "hazard_change_mechanism",
-      "reason": "over_cap:driver"
-    },
-    {
-      "group_id": "LG-extreme_heat_v1-mechanism-c1-022",
-      "statement_type": "mechanism",
-      "claim_about": "hazard_definition_or_measurement",
-      "reason": "over_cap:context"
     }
   ],
   "inputs_sha256": {
@@ -1895,7 +1775,9 @@
     "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
     "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
     "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
-    "pilot_selection": "c9f090297fd1beacbd524e33f571e275b2205f6e2b99687955999e3577f516fa"
+    "pilot_selection": "c9f090297fd1beacbd524e33f571e275b2205f6e2b99687955999e3577f516fa",
+    "group_dispositions": "71f0777727be7beba483cd00cb33c6677ed86c0213ecc26cc081940273d40b82",
+    "descriptor_rules": "5c2090a77e0424d43603c9766c8925cee50a3b8fd31f24351334adbf82934650"
   },
   "relevance": {
     "geography": "litgeo v2",

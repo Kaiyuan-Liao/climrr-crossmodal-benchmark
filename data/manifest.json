@@ -388,6 +388,38 @@
       "decision_ref": "D-050",
       "source_description": "owner decision (Kaiyuan, 2026-11-01) relayed in the P2b-fix work package; written into the file by the EXECUTOR; the one-line reasons for the selected seeds are EXECUTOR descriptions for Kaiyuan's confirmation",
       "interpretation_notes": "no interpretation assigned to any table column; no column status, concept-map entry or compatibility rule changed"
+    },
+    {
+      "filename": "group_dispositions_v1.csv",
+      "path": "data/metadata/benchmark/group_dispositions_v1.csv",
+      "role": "Group dispositions v1 --- one row per reviewed heat-arm group of grouping run 2 (107 groups): accept, relabel:<claim_about>, not_about_family, reject, merge_with:<group_id>, exclude_from_rung7, with the proposal's reason and Kaiyuan's override column (empty in v1); applied by src/climrr/litgroups.apply_dispositions when scripts/build_synth_packets.py builds the packets",
+      "sha256": "71f0777727be7beba483cd00cb33c6677ed86c0213ecc26cc081940273d40b82",
+      "bytes": 29313,
+      "row_count": 107,
+      "column_count": 10,
+      "encoding_note": "UTF-8, CRLF line endings as received, no byte-order mark; one header row. Pinned -text in .gitattributes (data/metadata/benchmark/**).",
+      "acquisition_date": "2026-11-02",
+      "storage_policy": "tracked in ordinary Git as an immutable object; a change is group_dispositions_v2.csv with its own decision",
+      "tracked_in_git": true,
+      "decision_ref": "D-053",
+      "source_description": "COORDINATOR proposal P2b_groups_dispositions_proposed_v1.csv, confirmed by Kaiyuan 2026-11-02 as proposed; copied byte-identical by the EXECUTOR",
+      "interpretation_notes": "no interpretation assigned to any table column; no column status, concept-map entry or compatibility rule changed"
+    },
+    {
+      "filename": "descriptor_rules_v1.yaml",
+      "path": "data/metadata/benchmark/descriptor_rules_v1.yaml",
+      "role": "Pattern-level descriptor rules v1 (DR-DESC-1) --- direction words, magnitude classes from mean_to / mean_from, low-baseline phrase, anchor rounding, tercile, regional ranking, horizon, scenario and quantity phrases; read by src/climrr/pattern_descriptors.py into every seed packet's allowed_descriptors",
+      "sha256": "5c2090a77e0424d43603c9766c8925cee50a3b8fd31f24351334adbf82934650",
+      "bytes": 3697,
+      "row_count": null,
+      "column_count": null,
+      "encoding_note": "UTF-8, LF line endings, no byte-order mark (U+00B0, U+2013). Pinned -text in .gitattributes (data/metadata/benchmark/**).",
+      "acquisition_date": "2026-11-02",
+      "storage_policy": "tracked in ordinary Git as an immutable object; a change is descriptor_rules_v2.yaml with its own decision",
+      "tracked_in_git": true,
+      "decision_ref": "D-055",
+      "source_description": "thresholds and phrases from the COORDINATOR work package P2b-final-prep (2026-11-02); written into the file by the EXECUTOR, details marked EXECUTOR recorded for confirmation",
+      "interpretation_notes": "no interpretation assigned to any table column; no column status, concept-map entry or compatibility rule changed"
     }
   ],
   "amendments": [
@@ -456,6 +488,12 @@
       "milestone": "Pilot P2b-fix",
       "change": "Added data/metadata/benchmark/pilot_selection_v1.yaml (pilot seed selection v1, owner decision). Every other entry unchanged.",
       "decision_ref": "D-050"
+    },
+    {
+      "date": "2026-11-02",
+      "milestone": "Pilot P2b-final-prep",
+      "change": "Added data/metadata/benchmark/group_dispositions_v1.csv (group dispositions v1, COORDINATOR proposal confirmed by Kaiyuan) and data/metadata/benchmark/descriptor_rules_v1.yaml (DR-DESC-1 descriptor rules v1). Every other entry unchanged.",
+      "decision_ref": "D-053, D-055"
     }
   ],
   "external_corpora": [

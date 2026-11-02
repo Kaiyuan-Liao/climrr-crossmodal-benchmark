@@ -1,0 +1,71 @@
+# Pattern-level descriptors v1 (DR-DESC-1; pilot P2b-final-prep; D-055).
+#
+# The words a synthesized item's graded text (reference answer, rubric) may use for a table pattern.
+# src/climrr/pattern_descriptors.py computes them from the pattern record's stored values and writes them
+# into every seed packet as `allowed_descriptors`; the synthesis agent copies them, and the post-checks
+# trace every number and number-word in the graded text to them or to a packet value. Exact values stay in
+# the item's reference_components provenance (D-055). Pinned by SHA-256 in data/manifest.json; a change is
+# descriptor_rules_v2.yaml with its own decision.
+#
+# Thresholds and phrases: COORDINATOR work package P2b-final-prep (2026-11-02). Marked EXECUTOR: a detail
+# the work package does not fix, recorded for confirmation.
+#
+# No column is interpreted and no table value is computed here: the ratio is of two values the pattern
+# already stores (mean_to / mean_from).
+
+version: descriptor_rules_v1
+rule: DR-DESC-1
+decision: D-055
+
+direction_words:
+  increase: increase
+  decrease: decrease
+  no_change: no change
+
+magnitude:
+  ratio: mean_to / mean_from            # future / modeled historical baseline, both from the pattern record
+  # EXECUTOR: the first class whose [lower, upper) holds the ratio; "roughly tripling" includes 3.5 (the work
+  # package's last class is "> 3.5").
+  classes:
+    - {upper: 1.25, increase: "a slight increase"}
+    - {lower: 1.25, upper: 1.75, increase: "a moderate increase (about half again as many)", also_allowed: ["about half again as many"]}
+    - {lower: 1.75, upper: 2.5, increase: "roughly doubling"}
+    - {lower: 2.5, upper: 3.5, increase: "roughly tripling", inclusive_upper: true}
+    - {lower: 3.5, increase: "more than tripling"}
+  # EXECUTOR: the work package words the first class "a slight increase/decrease" and the others for an
+  # increase only; a decrease (ratio < 1) would always fall in the first class, so no class is emitted for a
+  # decrease until a rule is set (no pilot packet has one).
+  decrease_class: none
+  low_baseline:
+    below: 1                            # baseline mean < 1 day per season
+    # EXECUTOR reading of "<class>": the future anchor, rendered as below ("about 11 days").
+    phrase: "from rare or no such days to {future_anchor}"
+
+anchor:
+  rounding: python_round_to_integer     # round(float(value)): the work package names round()
+  pair: "from about {from} to about {to} {unit}"
+  single: "about {n} {unit}"            # both ends also listed on their own
+  unit_singular_at: 1                   # "about 1 day"
+
+tercile:
+  words: {small: lower tercile, moderate: middle tercile, large: upper tercile}
+  # D-041: a disclosed relative descriptor among U.S. states, never an absolute threshold, never the sole answer key.
+  phrase: "{class} relative to other U.S. states ({tercile}; a relative descriptor among states for the same quantity, season, horizon and scenario, not an absolute threshold)"
+
+regional:
+  ranking: names of the ranked regions, largest first (DR-PT-004 order)
+  largest: "the largest {direction}: {region}"
+  smallest: "the smallest {direction}: {region}"
+  magnitude: none                       # EXECUTOR: a regional-contrast pattern stores no baseline mean
+
+horizon:
+  mid: "by mid-century ({window})"
+  end: "by the end of the century ({window})"
+  window_dash: "–"                      # en dash, as the work package writes it
+
+scenario:
+  RCP8.5: "under RCP8.5, one high-emissions scenario"
+
+quantity:
+  # The prompt names the quantity in general words a closed-book reader can answer; the threshold stays.
+  heatindex_days: "days with a dangerous heat index (above {threshold} °F)"

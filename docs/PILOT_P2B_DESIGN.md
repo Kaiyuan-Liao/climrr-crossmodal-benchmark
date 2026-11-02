@@ -260,3 +260,69 @@ commit, and copies back the small evidence.
   groups even for New York and Northeast patterns (open point 8d, now visible). (c) Packets 0004--0010 carry nearly
   the same driver set: the literature varies little by seed. (d) `n_papers` counts background members: the second-
   largest group has 12 papers and is `single_source_supported`.
+
+## 11. Final prep: dispositions, DR-SEED-RANK-3, DR-DESC-1, synthesis agent v3 (P2b-final-prep, D-053--D-055, 2026-11-02)
+
+- **Synthesis run 0 (smoke test; superseded by agent v3).** Polaris `litsynth/run0_rung1`, synthesis agent v2, Sophia
+  `gpt-oss-120b`, `reasoning_effort=low`, 2026-11-02 18:13 UTC: 2 rung-1 items, **both `rejected_pre_review`**. The only
+  failing check was `numbers_untraced`: the model wrote rounded values not in the packet ("15", "44", "40"; "12", "8")
+  and other values as number-words ("sixteen", "forty-five", "twenty-four"), which post-checks v1 did not detect.
+  Prompt leakage passed on both; schema valid. Not ingested; recorded here only.
+- **Dispositions (D-053).** `data/metadata/benchmark/group_dispositions_v1.csv` --- the COORDINATOR proposal
+  `P2b_groups_dispositions_proposed_v1.csv`, confirmed by Kaiyuan 2026-11-02 as proposed, copied byte-identical
+  (SHA-256 `71f07777…3d40b82`, CRLF as received; manifest-pinned). 107 heat-arm groups: accept 44,
+  exclude_from_rung7 40, not_about_family 11, relabel 7 (impact_or_exposure 3, method_or_data 2,
+  hazard_change_mechanism 1, hazard_definition_or_measurement 1), reject 3, merge_with 2 (both into
+  `LG-extreme_heat_v1-mechanism-c1-021`). Kaiyuan's column is empty everywhere (0 overrides).
+  `litgroups.apply_dispositions` applies them when the packets are built (`groups_enriched.jsonl` is unchanged):
+  relabel -> `claim_about` replaced, `claim_about_source: reviewer`; not_about_family / reject -> excluded from every
+  packet of the arm (`excluded_groups` reason `disposition:<kind>`); merge_with -> members unioned into the target,
+  strength and paper counts recomputed (D-045 / D-046; `merged_from`, `evidence_strength_before_merge`), the source
+  excluded as `merged_into:<target>`; exclude_from_rung7 -> excluded from caveat slots. Fire-arm groups untouched.
+  **Not in the file:** 44 of the 151 heat-arm groups and every singleton (unchanged). No unlisted *group* reaches a
+  packet; three heat singletons do (below).
+- **DR-SEED-RANK-3 and the caveat filter (D-054).** Caveat slots accept only `claim_about` in {hazard_change_mechanism,
+  hazard_definition_or_measurement} (excluded otherwise as `caveat_claim_about:<x>`). Order within every role:
+  (1) place-named (a relevant member's basis is the seed's state or NCA region) first; (2) strength (multi > review >
+  single); (3) relevance class (us_subregion > us_national > global); (4) canonical papers; (5) group id. The
+  scenario-naming priority for caveats (v2) and the claim-type tier are dropped: the work package's order is complete.
+- **Descriptors (DR-DESC-1, D-055).** `src/climrr/pattern_descriptors.py`, rules `descriptor_rules_v1.yaml`
+  (SHA-256 `5c2090a7…934650`, manifest-pinned). Each packet pattern carries `allowed_descriptors`; their phrases are
+  `checks_input.allowed_descriptors` and their digits join the allowed numbers (scenario names stripped, so "RCP8.5"
+  adds no "8" or "5"); `checks_input.exact_values` lists the decimal forms of the pattern values (provenance only).
+  EXECUTOR details, recorded for confirmation: class intervals `[lower, upper)`, 3.5 in "roughly tripling"; no class for
+  a decrease (the work package's "a slight decrease" would cover every decrease); the low-baseline "<class>" read as
+  the future anchor ("from rare or no such days to about 11 days"); anchors by Python `round()` as named (half-even at
+  an exact .5); a regional contrast stores no baseline mean, so it has ranking words but no magnitude class or anchors;
+  "about 0 days" can occur (Washington 105 °F, Alaska example) and is listed as written.
+- **Synthesis agent v3** (`litsynth_agent.py` SHA-256 `d582c008…4dac`; system prompt `d5805e5d…0272`; corrective prompt
+  unchanged). Pattern-level reference and rubric in the packet's descriptors; exact values only in
+  `reference_components` (attached by code); any number copied as digits from the descriptors or pattern values; no
+  number-words outside a copied descriptor; no rounding, ratio or range of the model's own; quantity named in general
+  words with its threshold; required points = direction, magnitude class, region, mechanism (where groups exist),
+  scenario / horizon handling, no-overclaim; numbers only as optional points; single-source hedged and tagged; no
+  horizon years the packet does not state. Corrective retry: parse failure only (unchanged).
+- **Post-checks v2** (`benchmark_items.synthesis_post_checks`): numbers traced in the prompt as well as the reference
+  answer and rubric, against pattern values and descriptor digits; number-words (one ... ninety-nine, hundred,
+  thousand, "-fold", twice, double, triple, half, with inflections) must lie inside an allowed descriptor phrase ("one
+  study / paper / analysis" and "one high-emissions scenario" exempt); `exact_value_in_graded_text` for any exact
+  pattern value with a decimal in the reference answer or rubric; leakage and group-id checks kept.
+- **Packets v3** (synthpackets v3; `manifest.json` records the disposition counts, merges, relabels and the groups
+  without a disposition). Rung 1 (0001, 0002): no group. Attached groups and the top three labels:
+
+  | item | seed | rung | groups (driver / context / caveat) | top three labels |
+  | --- | --- | --- | --- | --- |
+  | 0003 | SD2-TP1-00071 California | 3 | 14 (10 / 4 / 0) | Observed increase in heat‑wave and drought frequency; Indoor temperature rises faster when ambient temperature is higher …; global warming increases heatwave frequency and intensity |
+  | 0004 | SD2-TP1-00271 New York | 3 | 12 (9 / 3 / 0) | Observed increase in heat‑wave and drought frequency; global warming increases heatwave frequency and intensity; urban heat island intensifies due to nighttime conditions and reduced moisture |
+  | 0005 | SD2-TP1-00460 Washington | 3 | 12 (9 / 3 / 0) | as 0004 |
+  | 0006 | SD2-TP1-00589 Alabama | 3 | 12 (9 / 3 / 0) | as 0004 |
+  | 0007--0009 | SD2-TP1-02785 / 02787 / 02789 NCA5 regions | 4 | 12 (9 / 3 / 0) | as 0004 |
+  | 0010 | SD2-TP1-00075 Florida | 7 | 14 (9 / 3 / 2) | as 0004 |
+
+  Rung-7 caveats (0010): `LG-extreme_heat_v1-caveat-c1-026` (review_supported) and `…-caveat-c1-024`
+  (single_source_supported), both hazard_definition_or_measurement.
+- **Flagged.** (a) Three heat singletons are attached with no disposition (singletons were not in the file):
+  `LG-extreme_heat_v1-driver-c2-011` (a dew-point reduction experiment with runoff and fire wording; in eight packets),
+  `…-mechanism-c1-020` (minimum temperature and overnight cooling; eight packets) and `…-mechanism-c1-010` (indoor
+  temperature of a building; 0003, second). (b) Packets 0004--0010 still share nearly one driver set. (c) The rung-7
+  caveat `…-caveat-c1-024` label carries "80 °F", which is not an allowed number: copied, it fails post-checks v2.

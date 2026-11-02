@@ -40,6 +40,11 @@ passes `leakage_check` and names no internal id, identifier-like name or packet 
 string (column, paper id); the reference texts pass `text_leakage` (ClimRR, column
 names, identifier-like names, "according to" / "the table" / "the paper", "et al.",
 years in parentheses, corpus and internal ids); schema v2 and `consistency_errors`.
+v2 (pilot P2b-final-prep; D-055): numbers are traced in the prompt too, and against the packet's
+`allowed_descriptors` (DR-DESC-1) as well as its pattern values; number-words (one ... ninety-nine,
+hundred, thousand, "-fold", twice, double, triple, half) must lie inside an allowed descriptor phrase
+("one study" and "one high-emissions scenario" excepted); and the reference answer and rubric carry no
+exact pattern value with a decimal (`exact_value_in_graded_text`): exact values belong to provenance.
 
 Nothing here calls a model, reads table values, or touches the concept map,
 column statuses or compatibility rules.
@@ -314,13 +319,22 @@ def validity(item: dict, columns: list[str] | None = None) -> dict:
 
 # --- synthesis post-checks (pilot P2b-prep; litsynth_agent.py) ---------------------------------
 
-SYNTH_CHECK_VERSION = "synthesis_post_checks v1"
+SYNTH_CHECK_VERSION = "synthesis_post_checks v2"
 INTERNAL_ID_RE = re.compile(r"\b(?:LS|LG|LC|SD[12]|PK|BI)-[A-Za-z0-9_-]+|\bTP\d+-\d+\b")
 COLUMN_LIKE_RE = re.compile(r"\b[A-Za-z][A-Za-z0-9]*_[A-Za-z0-9_]+\b")  # an identifier such as heatindex_HIS_Day95
 SCENARIO_NAME_RE = re.compile(r"\b(?:RCP|SSP)\s?\d(?:\.\d)?(?:\s?-\s?\d(?:\.\d)?)?\b|\bCMIP\d\b", re.I)
 WEIGHT_PREFIX_RE = re.compile(r"^\[w=\d+\]\s*")  # litsynth_agent writes a required point's weight as "[w=2] point"
 ORDINAL_RE = re.compile(r"\b\d+(?:st|nd|rd|th)\b", re.I)
 NUMBER_RE = re.compile(r"\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?")
+_ONES = "one|two|three|four|five|six|seven|eight|nine"
+_TEENS = "ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen"
+_TENS = "twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety"
+# v2 (D-055): number-words --- one ... ninety-nine, hundred, thousand, "-fold", twice, double, triple, half (with their
+# inflections: doubling, tripled, halved ...)
+NUMBER_WORD_RE = re.compile(rf"\b(?:(?:{_TENS})(?:[-\s](?:{_ONES}))?|{_TEENS}|{_ONES}|hundreds?|thousands?|twice|doubl\w*|tripl\w*"
+                            rf"|hal(?:f|ves|ved|ving)|\w+-fold|(?:{_ONES}|{_TEENS}|several|many)fold)\b", re.I)
+# a number-word inside these is not a quantity: the single-source hedge and the scenario wording of the guardrails
+NUMBER_WORD_EXEMPT_RE = re.compile(r"\bone (?:study|paper|analysis)\b|\bone high-emissions scenario\b", re.I)
 HEDGE_RE = re.compile(r"\b(?:one|a single|a|an individual) (?:study|paper|analysis)\b|\bsuggests?\b|\bmay\b|\bmight\b|\bcould\b"
                       r"|\blimited evidence\b|\bsome evidence\b|\btentative(?:ly)?\b|\breportedly\b", re.I)
 
@@ -330,6 +344,18 @@ def reference_numbers(text: str) -> list[str]:
     thousands separators dropped."""
     stripped = ORDINAL_RE.sub(" ", SCENARIO_NAME_RE.sub(" ", text))
     return [m.group(0).replace(",", "") for m in NUMBER_RE.finditer(stripped)]
+
+
+def untraced_number_words(text: str, phrases: list[str]) -> list[str]:
+    """Number-words in `text` not inside an occurrence of an allowed phrase (case-insensitive) or an exempt phrase."""
+    spans = [m.span() for m in NUMBER_WORD_EXEMPT_RE.finditer(text)]
+    low = text.lower()
+    for ph in phrases:
+        ph, i = ph.lower(), 0
+        while ph and (i := low.find(ph, i)) >= 0:
+            spans.append((i, i + len(ph)))
+            i += 1
+    return [m.group(0) for m in NUMBER_WORD_RE.finditer(text) if not any(a <= m.start() and m.end() <= b for a, b in spans)]
 
 
 def text_leakage(text: str, columns: list[str] | None = None, forbidden: list[str] = ()) -> list[str]:
@@ -365,15 +391,23 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
     integrated = tagged.get("integrated") if isinstance(tagged.get("integrated"), str) else ""
     if len(tp_s) != len(tagged.get("table_pattern") or []) or len(lit_s) != len(tagged.get("literature_interpretation") or []):
         reasons.append("reference_answer: a tagged sentence is not an object with a 'sentence' string")
-    allowed = {a.lstrip("+-") for a in checks_input["allowed_numbers"]}
+    phrases = list(checks_input.get("allowed_descriptors") or [])
+    allowed = {a.lstrip("+-") for a in checks_input["allowed_numbers"]} | {n for ph in phrases for n in reference_numbers(ph)}
+    exact = set(checks_input.get("exact_values") or [a for a in allowed if "." in a])
     pattern_ids, strengths = set(checks_input["pattern_ids"]), checks_input["group_strength"]
 
     texts = [("table_pattern", s["sentence"]) for s in tp_s] + [("literature_interpretation", s["sentence"]) for s in lit_s] + \
             [("integrated", integrated)]
     rub = item.get("rubric") or {}
     texts_rubric = [(f"rubric.{k}", WEIGHT_PREFIX_RE.sub("", t)) for k, v in rub.items() if isinstance(v, list) for t in v if isinstance(t, str)]
-    untraced = sorted({(w, n) for w, t in texts + texts_rubric for n in reference_numbers(t) if n not in allowed})
-    reasons += [f"{w}: number {n} does not trace to a pattern value in the packet" for w, n in untraced]
+    graded = texts + texts_rubric
+    every = [("prompt", item.get("prompt") or "")] + graded
+    untraced = sorted({(w, n) for w, t in every for n in reference_numbers(t) if n not in allowed})
+    reasons += [f"{w}: number {n} does not trace to a pattern value or allowed descriptor in the packet" for w, n in untraced]
+    words = sorted({(w, x) for w, t in every for x in untraced_number_words(t, phrases)})
+    reasons += [f"{w}: number-word {x!r} does not trace to an allowed descriptor in the packet" for w, x in words]
+    exact_hits = sorted({(w, n) for w, t in graded for n in reference_numbers(t) if n in exact})
+    reasons += [f"{w}: exact_value_in_graded_text {n} (exact values belong to provenance)" for w, n in exact_hits]
 
     if checks_input["pattern_ids"] and not tp_s:
         reasons.append("reference_answer.table_pattern: no sentence while the packet has a table pattern")
@@ -411,5 +445,6 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
     if not schema:
         reasons += [f"consistency: {e}" for e in consistency_errors(item, cols)]
     return {"check_version": SYNTH_CHECK_VERSION, "pass": not reasons, "reasons": reasons,
-            "checks": {"numbers_untraced": [n for _, n in untraced], "prompt_leakage": leak, "schema_errors": schema,
+            "checks": {"numbers_untraced": [n for _, n in untraced], "number_words_untraced": [x for _, x in words],
+                       "exact_values_in_graded_text": [n for _, n in exact_hits], "prompt_leakage": leak, "schema_errors": schema,
                        "n_table_sentences": len(tp_s), "n_literature_sentences": len(lit_s)}}

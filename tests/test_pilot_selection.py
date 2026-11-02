@@ -1,4 +1,4 @@
-"""Pilot seed selection v1 (D-050) and the packets built from it (pilot P2b-fix; DR-SEED-RANK-2, D-047a, D-049)."""
+"""Pilot seed selection v1 (D-050) and the packets built from it (pilot P2b-fix; D-047a, D-049; v3: DR-SEED-RANK-3)."""
 
 from __future__ import annotations
 
@@ -74,7 +74,7 @@ def packets():
     by_statement = spk.statement_lookup(records, indep)
     # synthetic grouping output: every statement a singleton, its claim type fixed by its statement type
     claim = {"mechanism": "hazard_change_mechanism", "driver": "impact_or_exposure", "consensus": "hazard_definition_or_measurement",
-             "caveat": "method_or_data", "pattern": "other"}
+             "caveat": "hazard_definition_or_measurement", "pattern": "other"}
     groups = [{"group_id": f"LG-{r['arm']}-{r['statement_type']}-{n:03d}", "kind": "singleton", "statement_type": r["statement_type"],
                "label": None, "evidence_strength": r["cluster_strength"], "n_members": 1, "member_ids": [r["statement_id"]],
                "claim_about": claim[r["statement_type"]]} for n, r in enumerate(rows, 1)]
@@ -106,5 +106,5 @@ def test_packet_relevance_includes_the_recovered_us_subregion_statements(packets
     p = packets["SD2-TP1-00589"]                 # Alabama: southeastern-U.S. statements now count (v1: `other`)
     assert p["relevance"]["geography"] == "litgeo v2" and p["relevance"]["by_basis"]["us_subregion"] > 0
     assert p["relevance"]["n_relevant_statements"] > p["relevance"]["n_relevant_statements_seed_file_v1"]
-    ranks = [spk.BASIS_RANK[g["best_basis"]] for g in p["provenance"]["groups"] if g["role"] == "driver"]
-    assert ranks == sorted(ranks)                # relevance class first (DR-SEED-RANK-2)
+    keys = [spk.rank_key(g) for g in p["provenance"]["groups"] if g["role"] == "driver"]
+    assert keys == sorted(keys)                  # DR-SEED-RANK-3

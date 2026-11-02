@@ -1,4 +1,4 @@
-"""Item-synthesis agent `scripts/litcollect/litsynth_agent.py` v2 and the post-checks (pilot P2b-prep; D-051).
+"""Item-synthesis agent `scripts/litcollect/litsynth_agent.py` v3 and the post-checks v2 (pilot P2b-final-prep; D-051, D-055).
 
 Two hand-written packets (real example patterns TP1-00009 Alabama and TP1-00010 Alaska; synthetic
 literature groups with consistent spans) against a local mock server: the Alabama reply is a
@@ -7,11 +7,13 @@ the source, uses a number the packet does not give, cites a group not in the pac
 single-source claim without a hedge, and is written as `rejected_pre_review` with the reasons.
 v2: `reasoning_effort` and `max_tokens` 16000 in the request body; one corrective turn on a reply
 with no item JSON, which can recover the item or leave it a parse-failure stub; a post-check
-failure is not retried.
+failure is not retried. v3 / post-checks v2 (D-055): the clean reply is pattern-level (descriptors, no exact value);
+number-words, rounded or decimal values in the graded text fail, a copied descriptor such as "roughly tripling" passes.
 """
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import importlib.util
 import json
@@ -32,8 +34,8 @@ from climrr.paths import REPO_ROOT
 
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
 AGENT = TOOLS / "litsynth_agent.py"
-AGENT_SHA256 = "a40909efb593520ef06e7ce03cae01227de0b16eb69dcfd54b9a2c8c41f8cc21"
-SYSTEM_PROMPT_SHA256 = "8750154045817aeff187674d67efef3b0560947de10c381bc85c9bf0e077ccd9"
+AGENT_SHA256 = "d582c008fa689f06fba4ed4e994238654f9d2bbc97e92c99a4ae9ed1604b4dac"
+SYSTEM_PROMPT_SHA256 = "d5805e5dcdcbaac56b05f26f3aef6ebff58d3bf106c9313df36eeb71507e0272"
 NCA = sd.nca_map()
 EX = {p["pattern_id"]: p for p in tp.read_jsonl(tp.EXAMPLES_PATH)}
 PASS_A = "Higher humidity at a given temperature raises the heat index, so moister summers bring more days of dangerous humid heat."
@@ -66,13 +68,13 @@ def packet(pid, item_id):
 
 
 def good_reply(pk):
-    v = pk["model_view"]["patterns"][0]["values_shown"]
+    d = pk["model_view"]["patterns"][0]["allowed_descriptors"]
     return {
-        "prompt": "How is the number of summer days with a dangerously high heat index projected to change in Alabama by "
+        "prompt": "How is the number of summer days with a dangerous heat index (above 95 °F) projected to change in Alabama by "
                   "mid-century under a high-emissions scenario, and what drives that change?",
         "reference_answer": {
-            "table_pattern": [{"sentence": f"Summer days with a daily maximum heat index above 95 °F increase in Alabama by mid-century "
-                                           f"(2045-2054) under RCP8.5, from a mean of {v['mean_from']} to {v['mean_to']} days.",
+            "table_pattern": [{"sentence": f"Summer {d['quantity']} {d['direction']} in Alabama {d['horizon']} {d['scenario']}: "
+                                           f"{d['magnitude_class']}.",
                                "pattern_ids": ["TP1-00009"]}],
             "literature_interpretation": [
                 {"sentence": "Higher humidity at a given temperature raises the heat index.", "group_ids": ["LG-extreme_heat_v1-driver-001"], "hedged": False},
@@ -81,7 +83,7 @@ def good_reply(pk):
                           "consistent with warmer, moister summers."},
         "rubric": {"required_points": [{"point": "states that the number of days increases", "weight": 3},
                                        {"point": "names humidity as a driver", "weight": 2}],
-                   "acceptable_variants": ["more frequent dangerous humid heat"], "optional_points": ["urban heat"],
+                   "acceptable_variants": ["more frequent dangerous humid heat"], "optional_points": ["urban heat", d["anchor_pair"]],
                    "disallowed_claims": ["RCP8.5 is a forecast"], "fatal_errors": ["says the number of days decreases"]},
         "guardrails": ["RCP8.5 is one high-emissions scenario, not a forecast and not the only plausible future."],
         "source_independent_answerability": "yes", "source_independence_note": "A general regional climate question.",
@@ -166,13 +168,17 @@ def test_the_agent_is_pinned():
 
 def test_the_system_prompt():
     a = _agent()
-    assert a.GENERATOR_VERSION == "litsynth_agent v2"
+    assert a.GENERATOR_VERSION == "litsynth_agent v3"
     assert a.CORRECTIVE_PROMPT == ('Your reply did not contain a JSON object with the keys "prompt" and "reference_answer". '
                                    "Return the complete JSON object.")
     assert hashlib.sha256(a.SYSTEM_PROMPT.encode("utf-8")).hexdigest() == SYSTEM_PROMPT_SHA256
     for phrase in ("Use ONLY facts in the packet", "closed-book question", "must NOT name or hint at any table", '"according to"',
                    "tagged with the pattern id", "must be hedged", "never present a single-source claim as consensus",
-                   "a Fire Weather Index is meteorological fire danger, never fire occurrence", "hazard is not exposure"):
+                   "a Fire Weather Index is meteorological fire danger, never fire occurrence", "hazard is not exposure",
+                   "graded at the PATTERN level", "Never put a decimal number or an exact pattern value", "AS DIGITS",
+                   '"allowed_descriptors"', 'Never write a number as a word ("sixteen", "forty-five", "twice", "double", "triple", "half"',
+                   "Do not state horizon years unless the packet states them", "the threshold stays",
+                   'A specific number may appear only under "optional_points"', "must be hedged"):
         assert phrase in a.SYSTEM_PROMPT
     text = AGENT.read_text(encoding="utf-8")
     assert "/eagl" + "e/" not in text and "/User" + "s/" not in text
@@ -185,7 +191,8 @@ def test_only_the_model_view_is_sent(run):
         assert body["temperature"] == 0 and body["max_tokens"] == 16000 and body["reasoning_effort"] == "low"
         assert len(body["messages"]) == 2                                  # a post-check failure is not retried
         assert "paper_sha256" not in user and "span_start" not in user and "heatindex_HIS" not in user and "LS-700" not in user
-        assert "checks_input" not in user and "provenance" not in user
+        assert "checks_input" not in user and "provenance" not in user and "exact_values" not in user
+        assert '"allowed_descriptors"' in user and '"magnitude_class"' in user
 
 
 def test_a_clean_item_passes_and_validates(run):
@@ -265,3 +272,62 @@ def test_text_leakage_flags():
     assert "corpus id: LIT-000123" in flags and "internal id: LG-x-driver-001" in flags and "internal id: TP1-00009" in flags
     assert "packet source string: 7001" in flags
     assert bi.text_leakage("Mid-century (2045-2054) brings more humid heat.", columns=[]) == []
+
+
+# --- post-checks v2 (D-055) on the hand-written packet ----------------------------------------------------
+
+
+def _tripling_packet():
+    p = copy.deepcopy(EX["TP1-00009"])
+    p["computed_value_or_range"] = dict(p["computed_value_or_range"], mean_from="15.783252490397672", mean_to="44.933818281416101")
+    return spk.assemble_packet("SD2-TP1-00009", p, 3, "BI-P2B-0001", GROUPS, NCA, {})
+
+
+def _checked(reply, pk):
+    a = _agent()
+    common = {"model": "m", "prompt_hash": "0" * 64, "generation_timestamp": "2026-11-02T00:00:00Z", "packet_sha256": "0" * 64,
+              "system_prompt_sha256": "0" * 64}
+    item, tagged = a.assemble(reply, pk, common, bi.column_names())
+    return bi.synthesis_post_checks(item, tagged, pk["checks_input"])
+
+
+def _with_table_sentence(pk, sentence):
+    r = good_reply(pk)
+    r["reference_answer"]["table_pattern"] = [{"sentence": sentence, "pattern_ids": ["TP1-00009"]}]
+    return r
+
+
+def test_post_checks_v2_pass_a_copied_descriptor():
+    pk = _tripling_packet()
+    d = pk["model_view"]["patterns"][0]["allowed_descriptors"]
+    assert d["magnitude_class"] == "roughly tripling" and d["anchor_pair"] == "from about 16 to about 45 days"
+    res = _checked(good_reply(pk), pk)
+    assert res["pass"], res["reasons"]
+    assert res["check_version"] == "synthesis_post_checks v2" and res["checks"]["number_words_untraced"] == []
+
+
+@pytest.mark.parametrize("sentence,needle", [
+    ("Dangerous heat-index days rise from sixteen to forty-five days by mid-century.", "number-word 'forty-five'"),
+    ("Dangerous heat-index days roughly triple by mid-century.", "number-word 'triple'"),
+    ("Dangerous heat-index days rise twice as fast by mid-century.", "number-word 'twice'"),
+    ("Dangerous heat-index days rise threefold by mid-century.", "number-word 'threefold'"),
+    ("Dangerous heat-index days rise from about 15 to about 44 days.", "number 15 does not trace"),
+    ("Dangerous heat-index days rise from 15.8 to 44.9 days.", "exact_value_in_graded_text 44.9"),
+    ("Dangerous heat-index days rise to 44.933818281416101 days.", "exact_value_in_graded_text 44.933818281416101"),
+])
+def test_post_checks_v2_fail_number_words_rounding_and_exact_values(sentence, needle):
+    pk = _tripling_packet()
+    res = _checked(_with_table_sentence(pk, sentence), pk)
+    assert not res["pass"] and any(needle in r for r in res["reasons"]), res["reasons"]
+
+
+def test_post_checks_v2_trace_the_prompt_and_the_rubric_and_exempt_the_hedge():
+    pk = _tripling_packet()
+    r = good_reply(pk)
+    r["prompt"] = r["prompt"].replace("projected to change", "projected to change over the next fifty years")
+    r["rubric"]["required_points"].append({"point": "says the count roughly doubles", "weight": 1})
+    res = _checked(r, pk)
+    assert "prompt: number-word 'fifty' does not trace to an allowed descriptor in the packet" in res["reasons"]
+    assert any("rubric.required_points: number-word 'doubles'" in x for x in res["reasons"])
+    assert bi.untraced_number_words("One study reports more humid heat under RCP8.5, one high-emissions scenario.", []) == []
+    assert bi.untraced_number_words("Days rise by about half again as many.", ["about half again as many"]) == []

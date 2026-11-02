@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pilot P2b — item-synthesis agent v2 (D-041, D-048, D-051; COORDINATOR rulings 2026-11-01).
+"""Pilot P2b — item-synthesis agent v3 (D-041, D-048, D-051, D-055; COORDINATOR rulings 2026-11-01 and 2026-11-02).
 
 Input: a directory of seed packets `PK-<seed_id>.json` (`scripts/build_synth_packets.py`). One model call per packet,
 temperature 0. The model sees the packet's `model_view` only: the table pattern in plain words with its values, the
@@ -32,6 +32,13 @@ no JSON object with 'prompt' and 'reference_answer' --- on a parse failure only;
 post-checks is not retried. `model_attempts` (turns), `corrective_retry_used`, per turn `finish_reason`,
 `content_chars`, `reasoning_chars` go into `review.history[0]`; the first turn's raw text into `first_turn`.
 
+v3 (D-055, pattern-level grading; run 0 --- two rung-1 items, both rejected_pre_review on numbers_untraced
+only --- superseded): the system prompt asks for a pattern-level reference answer and rubric in the packet's
+`allowed_descriptors` (DR-DESC-1); numbers only as digits copied from the descriptors or pattern values; no
+number-words outside a copied descriptor; no exact value in the reference answer or rubric (provenance only); the
+quantity named in general words with its threshold; specific numbers only as optional rubric points. The post-checks
+are `synthesis_post_checks` v2 (number-words, `exact_value_in_graded_text`). Everything else as v2.
+
 Polaris invocation (Sophia vLLM, D-043). Run from the execution clone on Eagle (`$CLIMRR_REPO_ROOT`,
 docs/SOPHIA_RUNBOOK.md) checked out at the pinned commit that carries the packets and provides `climrr`; output
 under the litcollect root (`$LITCOLLECT_ROOT_POLARIS`, config key `litcollect_root_polaris`), never in the clone; the
@@ -57,19 +64,23 @@ from litstatement_agent import (  # noqa: E402  (v3)
 from litgroup_agent import DEFAULT_MAX_TOKENS, REASONING_EFFORTS, call_turn, turn_stats  # noqa: E402  (v3)
 from climrr import benchmark_items as bi  # noqa: E402
 
-GENERATOR_VERSION = "litsynth_agent v2"
+GENERATOR_VERSION = "litsynth_agent v3"
 CORRECTIVE_PROMPT = ("Your reply did not contain a JSON object with the keys \"prompt\" and \"reference_answer\". "
                      "Return the complete JSON object.")
 
-SYSTEM_PROMPT = """You write ONE closed-book benchmark item for climate scientists from a SEED PACKET. The packet holds (a) table patterns: deterministic facts about modeled climate projections, in plain words, with their values; (b) groups of literature statements: each group has an id, a label, an evidence strength, and member statements with their supporting passages and paper ids; (c) the use-case rung, the guardrails and the numbers you may use. Use ONLY facts in the packet. Add no fact, number, place, mechanism, scenario or source that is not in it.
+SYSTEM_PROMPT = """You write ONE closed-book benchmark item for climate scientists from a SEED PACKET. The packet holds (a) table patterns: deterministic facts about modeled climate projections, in plain words, with their values and, for each pattern, "allowed_descriptors": the pattern-level words (direction, magnitude class, coarse anchors, relative tercile, regional ranking, horizon, scenario and quantity phrases) computed by code; (b) groups of literature statements: each group has an id, a label, an evidence strength, and member statements with their supporting passages and paper ids; (c) the use-case rung, the guardrails and the numbers you may use. Use ONLY facts in the packet. Add no fact, number, place, mechanism, scenario or source that is not in it.
+
+The item is graded at the PATTERN level: direction, magnitude class, region, horizon and scenario, mechanism. Exact values are NOT graded: they are attached to the item as provenance by code, never by you. Never put a decimal number or an exact pattern value in "reference_answer" or "rubric".
+
+NUMBERS. Any number in "prompt", "reference_answer" or "rubric" must be copied AS DIGITS from the pattern's "allowed_descriptors" or from the packet's pattern values (for example the heat-index threshold, or "about 16 days" when it is an allowed anchor). Never write a number as a word ("sixteen", "forty-five", "twice", "double", "triple", "half", "threefold"), except inside an allowed descriptor phrase copied verbatim (for example "roughly tripling" or "about half again as many" when the packet lists it). Do not round a value yourself, and do not state a ratio, percentage or range the packet does not list. Do not state horizon years unless the packet states them; prefer the packet's horizon phrase (for example "by mid-century (2045–2054)") and scenario phrase (for example "under RCP8.5, one high-emissions scenario") exactly as given.
 
 Return ONE JSON object with exactly these keys:
-- "prompt": a closed-book question that a well-informed climate scientist could answer from general knowledge. It asks about the general pattern and its drivers at the state or region level the packet names, for the season, horizon and scenario the packet names. It must NOT name or hint at any table, dataset, data portal, paper, study, author, column, variable name or grid cell, and must not say "according to", "the table", "the data", "the paper" or "the study". It must not require recalling an exact number: ask for direction, rough size, ranking or contrast.
+- "prompt": a closed-book question that a well-informed climate scientist could answer from general knowledge. It asks about the general pattern and its drivers at the state or region level the packet names, for the season, horizon and scenario the packet names. It names the quantity in general words a closed-book reader can answer, using the pattern's "quantity" descriptor (for the heat index: "days with a dangerous heat index (above 95 °F)" or "(above 105 °F)" --- the threshold stays, because it defines the quantity). It must NOT name or hint at any table, dataset, data portal, paper, study, author, column, variable name or grid cell, and must not say "according to", "the table", "the data", "the paper" or "the study". It must not require recalling an exact number: ask for direction, rough size, ranking or contrast, and the drivers.
 - "reference_answer": {
-  "table_pattern": [{"sentence": "...", "pattern_ids": ["..."]}] --- each sentence states what a pattern shows and is tagged with the pattern id(s) it comes from; copy numbers exactly as the packet gives them, or state the range, direction or tercile the packet discloses;
+  "table_pattern": [{"sentence": "...", "pattern_ids": ["..."]}] --- each sentence states what a pattern shows, in the pattern's allowed descriptors (direction, magnitude class or low-baseline phrase, place or regional ranking with largest / smallest, relative tercile where given, horizon and scenario phrases), and is tagged with the pattern id(s) it comes from;
   "literature_interpretation": [{"sentence": "...", "group_ids": ["..."], "hedged": true or false}] --- each sentence rests on the group(s) it cites. A sentence that rests only on single_source_supported groups must be hedged (for example "one study reports ...", "... may ...") and marked "hedged": true; never present a single-source claim as consensus. If the packet has no groups, return [];
   "integrated": "a short paragraph that combines the two, in the same terms, with no new fact" }
-- "rubric": {"required_points": [{"point": "...", "weight": 1, 2 or 3}], "acceptable_variants": ["..."], "optional_points": ["..."], "disallowed_claims": ["..."], "fatal_errors": ["..."]}
+- "rubric": {"required_points": [{"point": "...", "weight": 1, 2 or 3}], "acceptable_variants": ["..."], "optional_points": ["..."], "disallowed_claims": ["..."], "fatal_errors": ["..."]}. The required points are pattern-level: the direction; the magnitude class (or the low-baseline phrase); the place, or for a regional contrast the ranking (largest / smallest); the mechanism, where the packet has groups; the handling of the scenario and horizon (one high-emissions scenario, not a forecast); and no overclaim (no exact number demanded, no single-source claim as consensus, hazard not exposure). A specific number may appear only under "optional_points", and only as an allowed anchor copied as digits.
 - "guardrails": the packet guardrails that apply to this item, verbatim or made more specific.
 - "source_independent_answerability": "yes", "borderline" or "no" --- could a well-informed climate scientist answer without the packet's sources?
 - "source_independence_note": one sentence explaining that judgement.

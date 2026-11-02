@@ -2734,3 +2734,66 @@ code emits, and the next GUIDANCE packet still chooses.
   `scripts/build_p2b_groups_review.py`, `scripts/build_synth_packets.py`, `tests/test_litgroups_run2.py`,
   `artifacts/litgroups/run2/`, `artifacts/benchmark/synth_packets/`, `artifacts/benchmark/review/P2b_groups_v1.csv`,
   `docs/PILOT_P2B_DESIGN.md`, `docs/PROJECT_STATE.md`, `reports/milestones/PILOT_BENCHMARK_REPORT.md`.
+
+## D-053 --- Group dispositions v1
+
+- **Date:** 2026-11-02.
+- **Status:** **decided** (COORDINATOR proposal, **confirmed by Kaiyuan 2026-11-02 as proposed**).
+- **Context.** Grouping run 2 (D-052) deferred cross-chunk merging and claim-type checks to human review; the heat
+  packets' top drivers included fire statements tagged `hazard_change_mechanism`.
+- **Decision.** `data/metadata/benchmark/group_dispositions_v1.csv` (byte-identical copy of
+  `P2b_groups_dispositions_proposed_v1.csv`, SHA-256 `71f0777727be7beba483cd00cb33c6677ed86c0213ecc26cc081940273d40b82`;
+  manifest-pinned) is applied when the packets are built; the groups file stays immutable evidence. Vocabulary:
+  `accept` (unchanged); `relabel:<claim_about>` (tag replaced, `claim_about_source: reviewer`); `not_about_family`,
+  `reject` (excluded from every packet of the arm, reason recorded); `merge_with:<group_id>` (members unioned into the
+  target, strength and independence recomputed under D-045 / D-046, merged ids recorded); `exclude_from_rung7`
+  (excluded from caveat slots). Kaiyuan's column overrides the proposal where filled (empty everywhere in v1).
+  Applied to the eight heat packets with groups; fire-arm groups untouched.
+- **Counts.** 107 heat groups: accept 44, exclude_from_rung7 40, not_about_family 11, relabel 7, reject 3,
+  merge_with 2 (into `LG-extreme_heat_v1-mechanism-c1-021`).
+- **Recorded, for the COORDINATOR.** 44 of the 151 heat-arm groups and all singletons have no row and are unchanged;
+  no unlisted group reaches a packet, but three heat singletons do (`LG-extreme_heat_v1-driver-c2-011`,
+  `…-mechanism-c1-020`, `…-mechanism-c1-010`; `docs/PILOT_P2B_DESIGN.md` §11).
+- **Affected files:** `data/metadata/benchmark/group_dispositions_v1.csv`, `data/manifest.json`,
+  `src/climrr/litgroups.py`, `src/climrr/synthpackets.py`, `scripts/build_synth_packets.py`, tests.
+
+## D-054 --- DR-SEED-RANK-3 and the rung-7 caveat filter
+
+- **Date:** 2026-11-02.
+- **Status:** **decided** (COORDINATOR work package P2b-final-prep).
+- **Decision.** Caveat slots (rung 7) accept only `claim_about` in {`hazard_change_mechanism`,
+  `hazard_definition_or_measurement`}; others are excluded as `caveat_claim_about:<value>`. Attachment order within a
+  role (DR-SEED-RANK-3): (1) place-named for the seed's state or NCA region; (2) evidence strength (multi > review >
+  single > background); (3) relevance class (us_subregion > us_national > global); (4) n_papers; (5) group id.
+  Supersedes DR-SEED-RANK-2 (relevance class first, then claim type).
+- **Recorded (EXECUTOR).** The order applies to the driver, context and caveat roles alike; v2's scenario-naming
+  priority for caveats is not kept. Place-named = a relevant member's basis is `state` or `nca_region`.
+- **Affected files:** `src/climrr/synthpackets.py` (v3), `tests/test_synthpackets.py`, `tests/test_pilot_selection.py`,
+  `tests/test_litgroups_run2.py`.
+
+## D-055 --- Pattern-level grading
+
+- **Date:** 2026-11-02.
+- **Status:** **decided** (COORDINATOR, 2026-11-02). Implements the mentor's "not too specific" direction (D-035,
+  D-036) and the ruling's disclosed-descriptor rule (D-041).
+- **Context.** Synthesis run 0 (agent v2; Polaris `litsynth/run0_rung1`, 2026-11-02 18:13 UTC; 2 rung-1 items) rejected
+  both items on `numbers_untraced` only: rounded values not in the packet ("15", "44", "40"; "12", "8") and
+  number-words ("sixteen", "forty-five", "twenty-four") the v1 checker did not detect. Run 0 is superseded by agent v3.
+- **Decision.** Exact values are provenance-only (`reference_components`); the graded text (reference answer, rubric)
+  uses code-generated descriptors (DR-DESC-1, `data/metadata/benchmark/descriptor_rules_v1.yaml`, SHA-256
+  `5c2090a77e0424d43603c9766c8925cee50a3b8fd31f24351334adbf82934650`): direction word; magnitude class from mean_to /
+  mean_from (< 1.25 slight, 1.25--1.75 moderate "about half again as many", 1.75--2.5 roughly doubling, 2.5--3.5 roughly
+  tripling, > 3.5 more than tripling); baseline < 1 day -> "from rare or no such days to …"; a coarse anchor pair by
+  `round()`; the tercile descriptor; regional ranking with largest / smallest; horizon and scenario phrases. Number-words
+  are checked. Synthesis agent v3 (`litsynth_agent.py` SHA-256
+  `d582c008fa689f06fba4ed4e994238654f9d2bbc97e92c99a4ae9ed1604b4dac`, system prompt
+  `d5805e5dcdcbaac56b05f26f3aef6ebff58d3bf106c9313df36eeb71507e0272`) and post-checks v2 (number-words,
+  `exact_value_in_graded_text`).
+- **Recorded (EXECUTOR), for confirmation.** Class intervals `[lower, upper)` with 3.5 in "roughly tripling"; no class for
+  a decrease; "<class>" in the low-baseline phrase read as the future anchor; Python `round()` (half-even at .5); no
+  magnitude class or anchors for a regional contrast (no baseline mean stored); "one study / paper / analysis" and
+  "one high-emissions scenario" exempt from the number-word check; numbers in the prompt are traced too.
+- **Affected files:** `data/metadata/benchmark/descriptor_rules_v1.yaml`, `data/manifest.json`,
+  `src/climrr/pattern_descriptors.py`, `src/climrr/synthpackets.py`, `src/climrr/benchmark_items.py`,
+  `scripts/litcollect/litsynth_agent.py`, `scripts/build_synth_packets.py`, `artifacts/benchmark/synth_packets/`,
+  `docs/PILOT_P2B_DESIGN.md`, `docs/PROJECT_STATE.md`, tests.

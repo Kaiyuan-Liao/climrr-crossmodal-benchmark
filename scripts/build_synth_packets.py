@@ -7,11 +7,15 @@ manifest pin and against the shortlist it was chosen from), `artifacts/benchmark
 (`artifacts/litgroups/run2/groups_enriched.jsonl`: agent v3, with `claim_about`; D-052), `statements_ingested.jsonl`,
 `clusters_v1b.jsonl` and `independence_v2.json`. Builds **exactly the selected seeds**, in the selection's order
 and at its rungs: `<out>/PK-<seed_id>.json` with item id `BI-P2B-<nnnn>` (the file name `litsynth_agent.py`
-reads), and a `manifest.json` with each packet's SHA-256. Relevance under the D-047a geography (`litgeo` v2); groups by
-DR-SEED-RANK-2. Rules: `src/climrr/synthpackets.py`. Deterministic; no model call, no table value computed.
+reads), and a `manifest.json` with each packet's SHA-256. Relevance under the D-047a geography (`litgeo` v2); the group
+dispositions (`data/metadata/benchmark/group_dispositions_v1.csv`, manifest-pinned; D-053) applied to the groups first;
+groups by DR-SEED-RANK-3 with the rung-7 caveat filter (D-054); pattern descriptors by DR-DESC-1
+(`descriptor_rules_v1.yaml`, manifest-pinned; D-055). Rules: `src/climrr/synthpackets.py`. Deterministic; no model
+call, no table value computed.
 
     python scripts/build_synth_packets.py --groups artifacts/litgroups/run2/groups_enriched.jsonl \\
-        [--selection data/metadata/benchmark/pilot_selection_v1.yaml] [--out artifacts/benchmark/synth_packets]
+        [--selection data/metadata/benchmark/pilot_selection_v1.yaml] [--dispositions data/metadata/benchmark/group_dispositions_v1.csv] \\
+        [--out artifacts/benchmark/synth_packets]
 """
 
 from __future__ import annotations
@@ -30,6 +34,7 @@ from climrr import litgeo as lg  # noqa: E402
 from climrr import litgroups as lgr  # noqa: E402
 from climrr import litindependence as li  # noqa: E402
 from climrr import litstatements_run2 as r2  # noqa: E402
+from climrr import pattern_descriptors as pd  # noqa: E402
 from climrr import pilot_selection as psel  # noqa: E402
 from climrr import synthpackets as spk  # noqa: E402
 from climrr.checksums import sha256_file  # noqa: E402
@@ -41,6 +46,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--groups", required=True, type=Path)
     ap.add_argument("--selection", type=Path, default=psel.SELECTION_PATH, help="pilot selection YAML (manifest-pinned)")
+    ap.add_argument("--dispositions", type=Path, default=lgr.DISPOSITIONS_PATH, help="group dispositions CSV (manifest-pinned)")
     ap.add_argument("--out", type=Path, default=spk.PACKETS_DIR)
     a = ap.parse_args()
     sel = psel.load(a.selection)
@@ -62,26 +68,38 @@ def main() -> int:
     gz = lg.Gazetteer(nca)  # v2 (D-047a)
     by_statement = spk.statement_lookup(records, indep)
     rows = s2.statement_table(records, sd.read_jsonl(li.CLUSTERS_V1B_PATH), indep, gz)
-    groups = lgr.read_groups(a.groups)
-    hashes = spk.inputs_hashes(s2.SEEDS_PATH, a.groups, a.selection)
+    disp = lgr.load_dispositions(a.dispositions)
+    groups = lgr.apply_dispositions(lgr.read_groups(a.groups), disp)
+    rules = pd.load_rules()
+    hashes = {**spk.inputs_hashes(s2.SEEDS_PATH, a.groups, a.selection), "group_dispositions": sha256_file(a.dispositions),
+              "descriptor_rules": rules["sha256"]}
     a.out.mkdir(parents=True, exist_ok=True)
     index = []
     for x in chosen:
         sid = x["seed_id"]
         pk = spk.build_packet(seeds[sid], x["rung"], f"BI-P2B-{x['order']:04d}", groups, by_statement, rows, nca, hashes,
-                              selection={"file": repo_relative(a.selection), "decision": sel["decision"], **x})
+                              selection={"file": repo_relative(a.selection), "decision": sel["decision"], **x}, rules=rules)
         path = a.out / f"{pk['packet_id']}.json"
         r2.write_json(path, pk)
         roles = [g["role"] for g in pk["model_view"]["groups"]]
         index.append({"packet_id": pk["packet_id"], "item_id": pk["item_id"], "seed_id": sid, "level": pk["use_case_level"],
                       "groups": len(roles), **{f"groups_{r}": roles.count(r) for r in ("driver", "context", "caveat")},
-                      "excluded_groups": len(pk["excluded_groups"]), "sha256": sha256_file(path)})
+                      "excluded_groups": len(pk["excluded_groups"]),
+                      "excluded_by_disposition": sum(e["reason"].startswith(("disposition:", "merged_into:")) for e in pk["excluded_groups"]),
+                      "top3_labels": [g["label"] for g in pk["model_view"]["groups"][:3]], "sha256": sha256_file(path)})
     manifest_path = a.out / "manifest.json"
-    r2.write_json(manifest_path, {"version": spk.VERSION, "rank_rule": spk.RANK_RULE, "geography": lg.VERSION,
-                                         "inputs_sha256": hashes, "packets": index})
+    applied = {"dispositions_version": lgr.DISPOSITIONS_VERSION, "counts": lgr.disposition_counts(disp),
+               "kaiyuan_overrides": sum(d["source"] == "kaiyuan" for d in disp.values()),
+               "merged": {g["group_id"]: g["merged_from"] for g in groups if g.get("merged_from")},
+               "relabelled": sorted(g["group_id"] for g in groups if g["claim_about_source"] == "reviewer"),
+               "groups_in_arm_without_disposition": {arm: sum(g["arm"] == arm and g["kind"] == "group" and g["group_id"] not in disp
+                                                              for g in groups) for arm in sorted({g["arm"] for g in groups})}}
+    r2.write_json(manifest_path, {"version": spk.VERSION, "rank_rule": spk.RANK_RULE, "descriptor_rule": rules["rule"],
+                                  "geography": lg.VERSION, "dispositions": applied, "inputs_sha256": hashes, "packets": index})
     rec = write_run_record(
         "build_synth_packets", result_summary={"packets": index}, passed=True, data_path=a.groups, output_path=manifest_path,
-        config_snapshot={"version": spk.VERSION, "rank_rule": spk.RANK_RULE, "geography": lg.VERSION, "select": select,
+        config_snapshot={"version": spk.VERSION, "rank_rule": spk.RANK_RULE, "descriptor_rule": rules["rule"], "geography": lg.VERSION,
+                         "select": select, "dispositions": repo_relative(a.dispositions), "dispositions_applied": applied,
                          "selection": repo_relative(a.selection), "max_passage": spk.MAX_PASSAGE,
                          "max_groups": {"driver": spk.MAX_DRIVER_GROUPS, "context": spk.MAX_CONTEXT_GROUPS,
                                         "caveat": spk.MAX_CAVEAT_GROUPS}, "inputs_sha256": hashes, "model_calls": 0},
