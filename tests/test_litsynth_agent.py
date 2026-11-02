@@ -1,10 +1,13 @@
-"""Item-synthesis agent `scripts/litcollect/litsynth_agent.py` v1 and the post-checks (pilot P2b-prep).
+"""Item-synthesis agent `scripts/litcollect/litsynth_agent.py` v2 and the post-checks (pilot P2b-prep; D-051).
 
 Two hand-written packets (real example patterns TP1-00009 Alabama and TP1-00010 Alaska; synthetic
 literature groups with consistent spans) against a local mock server: the Alabama reply is a
 clean item that passes every post-check and validates against schema v2; the Alaska reply leaks
 the source, uses a number the packet does not give, cites a group not in the packet and states a
 single-source claim without a hedge, and is written as `rejected_pre_review` with the reasons.
+v2: `reasoning_effort` and `max_tokens` 16000 in the request body; one corrective turn on a reply
+with no item JSON, which can recover the item or leave it a parse-failure stub; a post-check
+failure is not retried.
 """
 
 from __future__ import annotations
@@ -29,7 +32,7 @@ from climrr.paths import REPO_ROOT
 
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
 AGENT = TOOLS / "litsynth_agent.py"
-AGENT_SHA256 = "3b6c7ca9d7837df2592b72efd8927280734f7cc09132603db4bd8e7111b1f65f"
+AGENT_SHA256 = "a40909efb593520ef06e7ce03cae01227de0b16eb69dcfd54b9a2c8c41f8cc21"
 SYSTEM_PROMPT_SHA256 = "8750154045817aeff187674d67efef3b0560947de10c381bc85c9bf0e077ccd9"
 NCA = sd.nca_map()
 EX = {p["pattern_id"]: p for p in tp.read_jsonl(tp.EXAMPLES_PATH)}
@@ -98,6 +101,8 @@ def bad_reply(pk):
 
 
 class _Mock:
+    """`replies[key]` is the reply object, or a list of reply texts by turn."""
+
     def __init__(self, replies):
         self.calls = []
         mock = self
@@ -108,7 +113,8 @@ class _Mock:
                 user = body["messages"][1]["content"]
                 mock.calls.append(body)
                 key = "TP1-00009" if "Pattern TP1-00009" in user else "TP1-00010"
-                text = "Here is the item: " + json.dumps(replies[key])
+                r = replies[key]
+                text = r[len(body["messages"]) // 2 - 1] if isinstance(r, list) else "Here is the item: " + json.dumps(r)
                 out = json.dumps({"choices": [{"message": {"role": "assistant", "content": text}, "finish_reason": "stop"}]}).encode()
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")
@@ -148,7 +154,7 @@ def run(tmp_path_factory):
 def _agent():
     pytest.importorskip("duckdb")
     sys.path.insert(0, str(TOOLS))
-    spec = importlib.util.spec_from_file_location("litsynth_agent_v1", AGENT)
+    spec = importlib.util.spec_from_file_location("litsynth_agent_v2", AGENT)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
@@ -160,7 +166,9 @@ def test_the_agent_is_pinned():
 
 def test_the_system_prompt():
     a = _agent()
-    assert a.GENERATOR_VERSION == "litsynth_agent v1"
+    assert a.GENERATOR_VERSION == "litsynth_agent v2"
+    assert a.CORRECTIVE_PROMPT == ('Your reply did not contain a JSON object with the keys "prompt" and "reference_answer". '
+                                   "Return the complete JSON object.")
     assert hashlib.sha256(a.SYSTEM_PROMPT.encode("utf-8")).hexdigest() == SYSTEM_PROMPT_SHA256
     for phrase in ("Use ONLY facts in the packet", "closed-book question", "must NOT name or hint at any table", '"according to"',
                    "tagged with the pattern id", "must be hedged", "never present a single-source claim as consensus",
@@ -174,7 +182,8 @@ def test_only_the_model_view_is_sent(run):
     assert len(run["mock"].calls) == 2
     for body in run["mock"].calls:
         user = body["messages"][1]["content"]
-        assert body["temperature"] == 0 and body["max_tokens"] == 6000
+        assert body["temperature"] == 0 and body["max_tokens"] == 16000 and body["reasoning_effort"] == "low"
+        assert len(body["messages"]) == 2                                  # a post-check failure is not retried
         assert "paper_sha256" not in user and "span_start" not in user and "heatindex_HIS" not in user and "LS-700" not in user
         assert "checks_input" not in user and "provenance" not in user
 
@@ -205,7 +214,41 @@ def test_a_bad_item_is_rejected_with_its_reasons(run):
                    "prompt leakage: ClimRR named", "prompt leakage: column name: heatindex_M85_Day95", "source phrase: According to",
                    "'et al.'", "year in parentheses"):
         assert needle in joined, needle
-    assert run["summary"] == {**run["summary"], "items": 2, "deterministic_pass": 1, "deterministic_fail": 1}
+    assert run["summary"] == {**run["summary"], "items": 2, "deterministic_pass": 1, "deterministic_fail": 1, "corrective_retry_used": 0,
+                              "reasoning_effort": "low", "max_tokens": 16000}
+    h = run["items"]["BI-P2B-0001"]["review"]["history"][0]
+    assert h["model_attempts"] == 1 and h["corrective_retry_used"] is False and h["reasoning_effort_applied"] is True
+    assert h["finish_reason"] == "stop" and h["content_chars"] > 0 and h["reasoning_chars"] == 0
+
+
+@pytest.mark.parametrize("second", ["good", "bad"])
+def test_a_reply_without_the_item_gets_one_corrective_turn(tmp_path, second):
+    pytest.importorskip("duckdb")
+    pdir, out = tmp_path / "packets", tmp_path / "out"
+    pdir.mkdir()
+    pk = packet("TP1-00009", "BI-P2B-0001")
+    (pdir / f"{pk['packet_id']}.json").write_text(json.dumps(pk), encoding="utf-8")
+    texts = ["I will think about this.", json.dumps(good_reply(pk)) if second == "good" else "Still thinking."]
+    mock = _Mock({"TP1-00009": texts})
+    try:
+        p = subprocess.run([sys.executable, str(AGENT), "--packets", str(pdir), "--out", str(out), "--base-url", mock.url,
+                            "--model", "mock-model", "--source-commit", "abc1234", "--backoff", "0,0,0"],
+                           env={**os.environ, "TOK" + "EN": "test-value"}, capture_output=True, text=True)
+    finally:
+        mock.server.shutdown()
+    assert p.returncode == 0, p.stderr
+    assert len(mock.calls) == 2
+    msgs = mock.calls[1]["messages"]
+    assert [m["role"] for m in msgs] == ["system", "user", "assistant", "user"] and msgs[2]["content"] == texts[0]
+    assert msgs[3]["content"].startswith("Your reply did not contain a JSON object")
+    it = json.loads((out / "items" / f"{pk['seed_id']}.json").read_text())
+    h = it["review"]["history"][0]
+    assert h["corrective_retry_used"] is True and h["model_attempts"] == 2 and h["first_turn"]["raw_response"] == texts[0]
+    if second == "good":
+        assert it["review"]["status"] == "deterministic_pass" and h["reasons"] == []
+    else:
+        assert it["review"]["status"] == "rejected_pre_review" and h["reasons"][0].startswith("parse: ") and "(corrective turn)" in h["reasons"][0]
+    assert json.loads((out / "summary.json").read_text())["corrective_retry_used"] == 1
 
 
 # --- post-check units ---------------------------------------------------------------------------------

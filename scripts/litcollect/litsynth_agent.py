@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pilot P2b — item-synthesis agent v1 (D-041, D-048; COORDINATOR rulings 2026-11-01).
+"""Pilot P2b — item-synthesis agent v2 (D-041, D-048, D-051; COORDINATOR rulings 2026-11-01).
 
 Input: a directory of seed packets `PK-<seed_id>.json` (`scripts/build_synth_packets.py`). One model call per packet,
 temperature 0. The model sees the packet's `model_view` only: the table pattern in plain words with its values, the
@@ -22,8 +22,15 @@ kept in `review.history[0]`.
 
 Output: `<out>/items/<seed_id>.json` (+ `<out>/raw/<seed_id>/{prompt_user.txt, response.json}`), `items.jsonl`,
 `summary.json`, `agent.log`. Restartable per packet (skips packets with an item file). Retries, backoff, `--base-url`,
-`--model`, `--sleep` as in litstatement_agent v3 (imported); `--max-tokens` default 6000. A parse failure is written as an
-item stub with `review.status: rejected_pre_review` and the parse error.
+`--model`, `--sleep` as in litstatement_agent v3 (imported). A parse failure is written as an item stub with
+`review.status: rejected_pre_review` and the parse error.
+
+v2 (D-051; the budget and retry of litgroup_agent v3, no chunking): `--reasoning-effort {low,medium,high}` (default
+low) sent as `reasoning_effort`, retried once without it on HTTP 400 (`reasoning_effort_applied: false`);
+`--max-tokens` default 16000. One corrective turn in the same conversation (`CORRECTIVE_PROMPT`) when the reply holds
+no JSON object with 'prompt' and 'reference_answer' --- on a parse failure only; an item that parses and fails the
+post-checks is not retried. `model_attempts` (turns), `corrective_retry_used`, per turn `finish_reason`,
+`content_chars`, `reasoning_chars` go into `review.history[0]`; the first turn's raw text into `first_turn`.
 
 Polaris invocation (Sophia vLLM, D-043). Run from the execution clone on Eagle (`$CLIMRR_REPO_ROOT`,
 docs/SOPHIA_RUNBOOK.md) checked out at the pinned commit that carries the packets and provides `climrr`; output
@@ -36,7 +43,8 @@ ALCF credential in the environment; first check the environment: `python -c "imp
         --packets artifacts/benchmark/synth_packets \\
         --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run1" \\
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \\
-        --model openai/gpt-oss-120b --sleep 5 --source-commit <PINNED_SHA>
+        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \\
+        --sleep 5 --source-commit <PINNED_SHA>
 """
 import argparse, json, os, re, sys, time
 from pathlib import Path
@@ -44,12 +52,14 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(HERE.parents[1] / "src"))
-from softqa_agent import call_model  # noqa: E402  (v2, pinned byte-identical)
 from litstatement_agent import (  # noqa: E402  (v3)
-    BACKOFF_SECONDS, CREDENTIAL_ENV, DEFAULT_BASE_URL, ModelCallFailed, call_with_retries, endpoint_label, raw_fields, sha)
+    BACKOFF_SECONDS, CREDENTIAL_ENV, DEFAULT_BASE_URL, ModelCallFailed, endpoint_label, raw_fields, sha)
+from litgroup_agent import DEFAULT_MAX_TOKENS, REASONING_EFFORTS, call_turn, turn_stats  # noqa: E402  (v3)
 from climrr import benchmark_items as bi  # noqa: E402
 
-GENERATOR_VERSION = "litsynth_agent v1"
+GENERATOR_VERSION = "litsynth_agent v2"
+CORRECTIVE_PROMPT = ("Your reply did not contain a JSON object with the keys \"prompt\" and \"reference_answer\". "
+                     "Return the complete JSON object.")
 
 SYSTEM_PROMPT = """You write ONE closed-book benchmark item for climate scientists from a SEED PACKET. The packet holds (a) table patterns: deterministic facts about modeled climate projections, in plain words, with their values; (b) groups of literature statements: each group has an id, a label, an evidence strength, and member statements with their supporting passages and paper ids; (c) the use-case rung, the guardrails and the numbers you may use. Use ONLY facts in the packet. Add no fact, number, place, mechanism, scenario or source that is not in it.
 
@@ -170,7 +180,7 @@ def finish(item: dict, tagged: dict, packet: dict, common: dict, columns, parse_
     return item
 
 
-def summarise(out: Path, endpoint=None):
+def summarise(out: Path, endpoint=None, budget=None):
     items = [json.loads(p.read_text()) for p in sorted((out / "items").glob("*.json"))]
     with open(out / "items.jsonl", "w", encoding="utf-8") as f:
         for it in items: f.write(json.dumps(it, ensure_ascii=False, sort_keys=True) + "\n")
@@ -179,10 +189,15 @@ def summarise(out: Path, endpoint=None):
         for r in it["review"]["history"][0]["reasons"]:
             key = r.split(":")[0]
             reasons[key] = reasons.get(key, 0) + 1
-    s = {"generator_version": GENERATOR_VERSION, **(endpoint or {}), "system_prompt_sha256": sha(SYSTEM_PROMPT), "items": len(items),
+    hist = [it["review"]["history"][0] for it in items]
+    s = {"generator_version": GENERATOR_VERSION, **(endpoint or {}), **(budget or {}), "system_prompt_sha256": sha(SYSTEM_PROMPT),
+         "corrective_prompt_sha256": sha(CORRECTIVE_PROMPT), "items": len(items),
          "deterministic_pass": sum(it["review"]["status"] == "deterministic_pass" for it in items),
          "deterministic_fail": sum(it["review"]["status"] != "deterministic_pass" for it in items),
          "fail_reasons_by_kind": dict(sorted(reasons.items())),
+         "corrective_retry_used": sum(bool(h.get("corrective_retry_used")) for h in hist),
+         "reasoning_effort_not_applied": sum(h.get("reasoning_effort_applied") is False for h in hist),
+         "finish_reasons": {k: sum(str(h.get("finish_reason")) == k for h in hist) for k in sorted({str(h.get("finish_reason")) for h in hist})},
          "by_level": {str(k): sum(it["use_case_level"] == k for it in items) for k in sorted({it["use_case_level"] for it in items})}}
     (out / "summary.json").write_text(json.dumps(s, indent=2))
     return s
@@ -194,7 +209,8 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--base-url", default=DEFAULT_BASE_URL)
     ap.add_argument("--model", default="gpt-oss-120b")
-    ap.add_argument("--max-tokens", type=int, default=6000); ap.add_argument("--timeout", type=int, default=300)
+    ap.add_argument("--max-tokens", type=int, default=DEFAULT_MAX_TOKENS); ap.add_argument("--timeout", type=int, default=300)
+    ap.add_argument("--reasoning-effort", choices=REASONING_EFFORTS, default="low")
     ap.add_argument("--limit", type=int, default=0); ap.add_argument("--only", default=None, help="seed ids, comma-separated")
     ap.add_argument("--sleep", type=float, default=0, help="seconds between packets")
     ap.add_argument("--backoff", default=",".join(map(str, BACKOFF_SECONDS)), help="retry waits, seconds")
@@ -213,8 +229,9 @@ def main():
     only = set(a.only.split(",")) if a.only else None
     backoff = tuple(float(x) for x in a.backoff.split(","))
     endpoint = {"base_url": a.base_url, "model": a.model, "endpoint_label": endpoint_label(a.base_url)}
+    budget = {"reasoning_effort": a.reasoning_effort, "max_tokens": a.max_tokens}
     columns = bi.column_names()
-    say(f"START {GENERATOR_VERSION} packets={len(paths)} endpoint_label={endpoint['endpoint_label']} base_url={a.base_url} model={a.model} system_sha={sha(SYSTEM_PROMPT)[:12]}")
+    say(f"START {GENERATOR_VERSION} packets={len(paths)} endpoint_label={endpoint['endpoint_label']} base_url={a.base_url} model={a.model} reasoning_effort={a.reasoning_effort} max_tokens={a.max_tokens} system_sha={sha(SYSTEM_PROMPT)[:12]}")
 
     done = 0
     for path in paths:
@@ -229,10 +246,11 @@ def main():
         rdir = out / "raw" / sid; rdir.mkdir(parents=True, exist_ok=True)
         user = "SEED PACKET:\n" + json.dumps(packet["model_view"], indent=1, ensure_ascii=False)
         (rdir / "prompt_user.txt").write_text(user, encoding="utf-8")
+        messages = [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": user}]
         t0 = time.time()
         try:
-            resp, content, secs, attempts = call_with_retries(
-                lambda: call_model(a.base_url, a.model, credential, SYSTEM_PROMPT, user, a.max_tokens, a.timeout), say, sid, backoff)
+            resp, content, secs, attempts, applied = call_turn(a.base_url, a.model, credential, messages, a.max_tokens, a.timeout,
+                                                               a.reasoning_effort, say, sid, backoff)
         except ModelCallFailed as e:
             (rdir / "model_error.txt").write_text(f"{e}\n")
             with open(out / "failed_packets.txt", "a") as f: f.write(sid + "\n")
@@ -240,12 +258,34 @@ def main():
             say(f"FAIL seed={sid} reason={e}")
             continue
         (rdir / "response.json").write_text(json.dumps(resp, indent=2, ensure_ascii=False))
-        common = {"generator_version": GENERATOR_VERSION, **endpoint, "temperature": 0, "system_prompt_sha256": sha(SYSTEM_PROMPT),
-                  "prompt_hash": sha(SYSTEM_PROMPT + user), "packet_sha256": sha(raw), "source_commit": a.source_commit,
-                  "generation_timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "model_seconds": secs,
-                  "model_attempts": attempts, **raw_fields(resp)}
         obj = extract_item(content)
         perr = None if obj else "no JSON object with 'prompt' and 'reference_answer' found"
+        turns = [{"turn": 1, **turn_stats(resp), "http_attempts": attempts, "model_seconds": secs}]
+        first_turn, corrective_error = None, None
+        if not obj:
+            (rdir / "prompt_corrective.txt").write_text(CORRECTIVE_PROMPT, encoding="utf-8")
+            first_turn = {"model_parse_error": perr, **raw_fields(resp)}
+            say(f"CORRECTIVE seed={sid}")
+            try:
+                resp2, content2, secs2, attempts2, _ = call_turn(
+                    a.base_url, a.model, credential,
+                    messages + [{"role": "assistant", "content": content}, {"role": "user", "content": CORRECTIVE_PROMPT}],
+                    a.max_tokens, a.timeout, a.reasoning_effort if applied else None, say, sid, backoff)
+            except ModelCallFailed as e:
+                corrective_error = str(e)
+                say(f"CORRECTIVE_FAIL seed={sid} reason={e}")
+            else:
+                (rdir / "response_corrective.json").write_text(json.dumps(resp2, indent=2, ensure_ascii=False))
+                resp, secs = resp2, secs + secs2
+                turns.append({"turn": 2, **turn_stats(resp2), "http_attempts": attempts2, "model_seconds": secs2})
+                obj = extract_item(content2)
+                perr = None if obj else "no JSON object with 'prompt' and 'reference_answer' found (corrective turn)"
+        common = {"generator_version": GENERATOR_VERSION, **endpoint, "temperature": 0, **budget, "reasoning_effort_applied": applied,
+                  "system_prompt_sha256": sha(SYSTEM_PROMPT), "corrective_prompt_sha256": sha(CORRECTIVE_PROMPT),
+                  "prompt_hash": sha(SYSTEM_PROMPT + user), "packet_sha256": sha(raw), "source_commit": a.source_commit,
+                  "generation_timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "model_seconds": secs,
+                  "model_attempts": len(turns), "corrective_retry_used": first_turn is not None, "turns": turns,
+                  "first_turn": first_turn, "corrective_error": corrective_error, **turn_stats(resp), **raw_fields(resp)}
         item, tagged = assemble(obj or {}, packet, common, columns)
         item = finish(item, tagged, packet, common, columns, perr)
         ipath.write_text(json.dumps(item, indent=2, ensure_ascii=False))
@@ -253,7 +293,7 @@ def main():
         reasons = item["review"]["history"][0]["reasons"]
         say(f"{sid} level={item['use_case_level']} status={item['review']['status']} reasons={len(reasons)} model_s={secs} elapsed={round(time.time() - t0, 1)} err={perr}")
 
-    s = summarise(out, endpoint)
+    s = summarise(out, endpoint, budget)
     say(f"DONE items={s['items']} pass={s['deterministic_pass']} fail={s['deterministic_fail']}")
 
 

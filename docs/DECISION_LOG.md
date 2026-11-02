@@ -2654,3 +2654,48 @@ code emits, and the next GUIDANCE packet still chooses.
   `not_selected_no_reason_recorded`, no reason assigned.
 - **Affected files:** `data/metadata/benchmark/pilot_selection_v1.yaml`, `data/manifest.json`,
   `src/climrr/pilot_selection.py`, `scripts/build_synth_packets.py`, `tests/test_pilot_selection.py`.
+
+## D-051 --- Grouping agent budget and chunking
+
+- **Date:** 2026-11-01.
+- **Status:** **decided** (COORDINATOR, 2026-11-01).
+- **Context.** Grouping run 1 (`litgroup_agent` v2; Sophia vLLM, `openai/gpt-oss-120b`, 2026-11-02 00:48 UTC,
+  `litgroups/run1`): 11 partitions, 2 pass, 9 fail. Every partition of >= 46 statements ended with
+  `finish_reason=length`, no content and >= 20,000 characters of reasoning: the `max_tokens` cap of 6,000 was spent on
+  reasoning. The 28-statement partition finished (`stop`) but failed `ids_exactly_once_pass`. The partitions of 11
+  and 15 statements passed. **Run 1 is superseded (budget)**; its output stays on Eagle as evidence, not ingested.
+- **Decision.** `reasoning_effort` low; `max_tokens` 16000; chunks of <= 40 statements; one corrective retry; no
+  merging across chunks by code.
+- **Implementation (EXECUTOR).** `scripts/litcollect/litgroup_agent.py` **v3** (SHA-256 `e094aa5cbd4b981042fe07f165afc5d83ba77000ca718f185bcecee325d845f4`, pinned in its test):
+  `--reasoning-effort {low,medium,high}` (default low) sent as `reasoning_effort` in the chat-completions body; on
+  HTTP 400 the call is retried once without it and the record says `reasoning_effort_applied: false`; `--max-tokens`
+  default 16000; both in every record and in `summary.json`. `--chunk-size` default 40: members ordered by region
+  class (state, nca, us_subregion, us_national, global, other, unknown; anything else last), then statement id, cut
+  into ceil(n / 40) consecutive chunks whose sizes differ by at most one; chunk id `<partition>.c<k>` (every partition
+  has at least `.c1`); one call per chunk; group ids `LG-<arm>-<type>-c<k>-<nnn>`, numbered per arm x type x chunk
+  index over the partitions in file order. The 11 partitions of `partitions_v1.jsonl` give **23 chunks** (28 -> 1;
+  116, 118, 102, 106 -> 3 each; 74, 65, 66, 46 -> 2 each; 15, 11 -> 1 each). Corrective retry: when a reply parses
+  but fails `ids_exactly_once_pass`, one follow-up turn in the same conversation ("These ids are missing: [...].
+  These ids appear more than once: [...]. Return the complete corrected JSON with every id exactly once.", SHA-256
+  `5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6`), the checks re-run on the second reply; still failing -> `deterministic_fail`. Recorded: `model_attempts`
+  (model turns, 1 or 2), `corrective_retry_used`, the first turn's checks and raw text (`first_turn`), and per turn
+  `finish_reason`, `content_chars`, `reasoning_chars`. System prompt unchanged (template
+  `ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7`; filled heat
+  `2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311`, fire
+  `1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7`). `scripts/litcollect/litsynth_agent.py` **v2**
+  (SHA-256 `a40909efb593520ef06e7ce03cae01227de0b16eb69dcfd54b9a2c8c41f8cc21`): the same budget flags and corrective turn, no chunking; system prompt unchanged
+  (`8750154045817aeff187674d67efef3b0560947de10c381bc85c9bf0e077ccd9`). The chat call is local to `litgroup_agent`
+  (`call_chat`, `call_turn`), because `softqa_agent.call_model` is pinned byte-identical and takes neither a message
+  list nor `reasoning_effort`.
+- **Owner answers (Kaiyuan, 2026-11-01, in the EXECUTOR session).** (1) The grouping corrective turn fires only for a
+  reply that **parsed**; a reply with no JSON (for example cut off at `max_tokens`) is a fail, not retried with "every
+  id missing". (2) The synthesis corrective turn fires **on a parse failure only** ("Your reply did not contain a
+  JSON object with the keys "prompt" and "reference_answer". Return the complete JSON object.", SHA-256 `256db051b3ddfa93d893e4573a2e818ecd4623d96ddac0aaebdba932c6e2a01a`); an
+  item that parses and fails the post-checks is not retried, so the model is never told what the leakage or number
+  checks caught.
+- **Limitations, recorded.** Groups are not merged across chunks; the reviewer may merge, and a merge pass would be a
+  separate decision. The chunk order uses the `region_class` stored in `partitions_v1.jsonl`, which is geography v1
+  (no `us_subregion` value occurs there). The corrective message names missing and repeated ids only; an id not in
+  the input is reported in the checks but not in the message.
+- **Affected files:** `scripts/litcollect/litgroup_agent.py`, `scripts/litcollect/litsynth_agent.py`,
+  `tests/test_litgroup_agent.py`, `tests/test_litsynth_agent.py`, `docs/PILOT_P2B_DESIGN.md`, `docs/PROJECT_STATE.md`.

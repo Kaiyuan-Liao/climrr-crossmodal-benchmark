@@ -18,7 +18,7 @@ run-2 statements (D-044) ── independence v2 (D-046) ── geography v2 (D-0
                                                                                    items ── post-checks ── review
 ```
 
-## 2. Grouping agent --- `scripts/litcollect/litgroup_agent.py` v1 (v2 since P2b-fix: section 8)
+## 2. Grouping agent --- `scripts/litcollect/litgroup_agent.py` v1 (v2 since P2b-fix: section 8; v3: section 9)
 
 - **Input.** `artifacts/litgroups/partitions_v1.jsonl` (`scripts/build_group_partitions.py`,
   `src/climrr/litgroups.py`): arm x statement_type over the 747 core / cited / background-consensus statements.
@@ -67,7 +67,7 @@ consensus groups and 4 caveat groups (scenario-naming first). A level-1 packet c
 and the exact stored string, plus the threshold, the horizon years, the robustness counts, the tercile's number of
 states and the ranks.
 
-## 4. Synthesis agent --- `scripts/litcollect/litsynth_agent.py` v1
+## 4. Synthesis agent --- `scripts/litcollect/litsynth_agent.py` v1 (v2: section 9)
 
 - **System prompt** (stored verbatim; SHA-256 `8750154045817aeff187674d67efef3b0560947de10c381bc85c9bf0e077ccd9`):
   a closed-book prompt naming no table, dataset, paper, column, cell or "according to", about the general pattern
@@ -111,19 +111,20 @@ statements, because the strength-first rank puts the same U.S.-national statemen
 Kaiyuan runs each step on Polaris (Sophia vLLM, `openai/gpt-oss-120b`, D-043) from the Eagle clone at a pinned
 commit, and copies back the small evidence.
 
-1. **Grouping run** (agent v2). From the Eagle execution clone at the pinned commit; output under the litcollect
+1. **Grouping run** (agent v3; run 1 at v2 superseded, section 9). From the Eagle execution clone at the pinned commit; output under the litcollect
    root (`LITCOLLECT_ROOT_POLARIS`, config key `litcollect_root_polaris`), never in the clone:
    ```
    bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
    cd "$CLIMRR_REPO_ROOT" && python -c "import yaml, duckdb"
    python scripts/litcollect/litgroup_agent.py --partitions artifacts/litgroups/partitions_v1.jsonl \
-       --out "$LITCOLLECT_ROOT_POLARIS/litgroups/run1" \
+       --out "$LITCOLLECT_ROOT_POLARIS/litgroups/run2" \
        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
-       --model openai/gpt-oss-120b --sleep 5 --source-commit <PINNED_SHA>
+       --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --chunk-size 40 \
+       --sleep 5 --source-commit <PINNED_SHA>
    ```
-   Deliver `litgroups/run1` (groups.jsonl, summary.json, agent.log, per-partition files) as a tarball.
+   Deliver `litgroups/run2` (groups.jsonl, summary.json, agent.log, per-chunk files) as a tarball.
 2. **Ingest and human check of the groups** (a following package): verify the tarball, freeze `groups.jsonl`, review
-   labels and merges; a failed partition is re-run with `--only`.
+   labels and merges (including across chunks of one partition); a failed chunk is re-run with `--only <chunk_id>`.
 3. **Kaiyuan selects 10 of the 20 shortlisted seeds** --- done: `pilot_selection_v1.yaml` (D-050).
 4. **Packets** (local): `python scripts/build_synth_packets.py --groups <groups.jsonl>` (the selection is the
    default `--selection`); commit and push the packets.
@@ -134,7 +135,8 @@ commit, and copies back the small evidence.
    python scripts/litcollect/litsynth_agent.py --packets artifacts/benchmark/synth_packets \
        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run1" \
        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
-       --model openai/gpt-oss-120b --sleep 5 --source-commit <PINNED_SHA>
+       --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \
+       --sleep 5 --source-commit <PINNED_SHA>
    ```
 6. **Ingest, review workbook** (a following package): items with their post-check reasons go to Kaiyuan, then the
    mentor (D-041 condition F).
@@ -182,3 +184,25 @@ commit, and copies back the small evidence.
   relevant to every U.S. pattern by the ruling, so "western United States" statements rank above U.S.-national ones
   for Georgia or Alabama. (e) "Houston, TX, USA" is `us_national` (a city is not a directional / regional
   qualifier). (f) "North America" stays scope-gated (D-047): it does not name the United States.
+
+## 9. Grouping run 1 and the v3 agents (D-051, 2026-11-01)
+
+- **Run 1 outcome** (`litgroup_agent` v2; Sophia vLLM, `openai/gpt-oss-120b`, 2026-11-02 00:48 UTC,
+  `litgroups/run1`): 11 partitions, **2 pass, 9 fail**. Every partition of >= 46 statements (116, 118, 74, 65, 102,
+  106, 66, 46) ended `finish_reason=length` with no content and >= 20,000 characters of reasoning: the `max_tokens` cap of 6,000
+  went to reasoning. The 28-statement partition finished (`stop`) and failed `ids_exactly_once_pass`. The 11- and
+  15-statement partitions passed. **Superseded (budget)**; the output stays on Eagle as evidence and is not ingested.
+- **`litgroup_agent` v3** (`e094aa5c…45f4`): `--reasoning-effort` (default low) sent as `reasoning_effort`, retried
+  once without it on HTTP 400 (`reasoning_effort_applied: false`); `--max-tokens` default 16000; `--chunk-size`
+  default 40 --- members ordered by region class (state, nca, us_subregion, us_national, global, other, unknown), then
+  statement id, cut into near-equal consecutive chunks `<partition>.c<k>`, one call each; group ids
+  `LG-<arm>-<type>-c<k>-<nnn>`. At 40 the 11 partitions give **23 chunks** (sizes 28 | 39 39 38 | 40 39 39 | 15 |
+  37 37 | 33 32 | 34 34 34 | 36 35 35 | 11 | 33 33 | 23 23). One corrective turn when a parsed reply fails
+  `ids_exactly_once_pass` (missing and repeated ids named); a reply that does not parse is not retried. Every record
+  carries the budget, `model_attempts`, `corrective_retry_used`, `finish_reason`, `content_chars`, `reasoning_chars`.
+  System prompt unchanged.
+- **`litsynth_agent` v2** (`a40909ef…cc21`): the same budget flags; one corrective turn on a parse failure only (an
+  item that fails the post-checks is not retried). System prompt unchanged.
+- **Limitations.** No merge across chunks by code: a claim split over two chunks gives two groups, which the
+  reviewer may merge; a code merge pass would be a separate decision. Chunk order uses the partitions' stored region
+  class (geography v1).
