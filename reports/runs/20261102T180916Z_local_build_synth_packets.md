@@ -1,0 +1,58 @@
+# Run record: 20261102T180916Z_local_build_synth_packets
+
+- **Result**: PASS
+- **UTC timestamp**: 2026-11-02T18:09:16.156053+00:00
+- **Git commit**: `7a8b46b5c7cc9cd37824b315ee71c8a3685c9708`
+- **Working tree dirty (tracked files)**: False
+- **Untracked files present**: 2
+- **Hostname**: ryous-MacBook-Pro-2.local
+- **Location**: local
+- **Python**: 3.11.16 (macOS-15.3-arm64-arm-64bit)
+- **pip freeze SHA-256**: `d9af804d5018f7022ae9f4db0bb83a8d57104d2ff6ff5676d912d896f952bf51`
+- **Pinned libraries (D-007)**: `pandas==3.0.5`, `numpy==2.4.6`, `pypdf==6.18.0`, `pyyaml==6.0.3`, `pytest==9.1.1`, `pypdfium2==5.13.0`
+- **Data path (repo-relative)**: `artifacts/litgroups/run2/groups_enriched.jsonl`
+- **Data SHA-256**: `924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a`
+- **Output path**: `artifacts/benchmark/synth_packets/manifest.json`
+
+## Config snapshot
+
+```json
+{
+  "version": "synthpackets v2",
+  "rank_rule": "DR-SEED-RANK-2",
+  "geography": "litgeo v2",
+  "select": [
+    "SD2-TP1-00018",
+    "SD2-TP1-00069",
+    "SD2-TP1-00071",
+    "SD2-TP1-00271",
+    "SD2-TP1-00460",
+    "SD2-TP1-00589",
+    "SD2-TP1-02785",
+    "SD2-TP1-02787",
+    "SD2-TP1-02789",
+    "SD2-TP1-00075"
+  ],
+  "selection": "data/metadata/benchmark/pilot_selection_v1.yaml",
+  "max_passage": 400,
+  "max_groups": {
+    "driver": 10,
+    "context": 4,
+    "caveat": 4
+  },
+  "inputs_sha256": {
+    "item_seeds_v2": "3123dd3463f23555601d1e64edc172e2977e2fc6df3adbb08a74b5df41be9d50",
+    "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+    "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+    "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+    "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+    "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+    "pilot_selection": "c9f090297fd1beacbd524e33f571e275b2205f6e2b99687955999e3577f516fa"
+  },
+  "model_calls": 0
+}
+```
+
+## Result summary
+
+- `packets`: [{'packet_id': 'PK-SD2-TP1-00018', 'item_id': 'BI-P2B-0001', 'seed_id': 'SD2-TP1-00018', 'level': 1, 'groups': 0, 'groups_driver': 0, 'groups_context': 0, 'groups_caveat': 0, 'excluded_groups': 0, 'sha256': '81dd864252beda16f578241f48411bcba761a7f3d52c836161d488e1ccb5bf56'}, {'packet_id': 'PK-SD2-TP1-00069', 'item_id': 'BI-P2B-0002', 'seed_id': 'SD2-TP1-00069', 'level': 1, 'groups': 0, 'groups_driver': 0, 'groups_context': 0, 'groups_caveat': 0, 'excluded_groups': 0, 'sha256': 'f497db12dcea971d281e9103a7547eba8f212fd9d6bc4db85d73427bfbb1cba9'}, {'packet_id': 'PK-SD2-TP1-00071', 'item_id': 'BI-P2B-0003', 'seed_id': 'SD2-TP1-00071', 'level': 3, 'groups': 14, 'groups_driver': 10, 'groups_context': 4, 'groups_caveat': 0, 'excluded_groups': 47, 'sha256': 'fa7634218a3d4a59cf21add39985aef75394ab621e4045e7cefef44ed8f62c87'}, {'packet_id': 'PK-SD2-TP1-00271', 'item_id': 'BI-P2B-0004', 'seed_id': 'SD2-TP1-00271', 'level': 3, 'groups': 14, 'groups_driver': 10, 'groups_context': 4, 'groups_caveat': 0, 'excluded_groups': 41, 'sha256': '3e8da27fe2017ef2874b9c3b2086d5bd44dc1dc0b8d1f828b3613ee7d5f6e1fd'}, {'packet_id': 'PK-SD2-TP1-00460', 'item_id': 'BI-P2B-0005', 'seed_id': 'SD2-TP1-00460', 'level': 3, 'groups': 14, 'groups_driver': 10, 'groups_context': 4, 'groups_caveat': 0, 'excluded_groups': 44, 'sha256': '8d3689f3913920e7bf10b6310c8414a8584b5ca7859fc29a95ce3ed0d34d9909'}, {'packet_id': 'PK-SD2-TP1-00589', 'item_id': 'BI-P2B-0006', 'seed_id': 'SD2-TP1-00589', 'level': 3, 'groups': 14, 'groups_driver': 10, 'groups_context': 4, 'groups_caveat': 0, 'excluded_groups': 43, 'sha256': '39d14e426f6a44e78710dadc0eef36a6fdf83001c2bb56059913aa1c1b67ab66'}, {'packet_id': 'PK-SD2-TP1-02785', 'item_id': 'BI-P2B-0007', 'seed_id': 'SD2-TP1-02785', 'level': 4, 'groups': 14, 'groups_driver': 10, 'groups_context': 4, 'groups_caveat': 0, 'excluded_groups': 40, 'sha256': 'e2a41e460cb8f193a49c92298125411f2d436d1841293746b33f058790a638df'}, {'packet_id': 'PK-SD2-TP1-02787', 'item_id': 'BI-P2B-0008', 'seed_id': 'SD2-TP1-02787', 'level': 4, 'groups': 14, 'groups_driver': 10, 'groups_context': 4, 'groups_caveat': 0, 'excluded_groups': 40, 'sha256': '1e276ab7d1ba8d48df5488080a5eb8e71b4903067a9acf18b384db296be71a88'}, {'packet_id': 'PK-SD2-TP1-02789', 'item_id': 'BI-P2B-0009', 'seed_id': 'SD2-TP1-02789', 'level': 4, 'groups': 14, 'groups_driver': 10, 'groups_context': 4, 'groups_caveat': 0, 'excluded_groups': 40, 'sha256': '2dbf6f5a95b67045f91cbe90cd3bd9e8bee681b36ef5a4ce99504cdf292c096c'}, {'packet_id': 'PK-SD2-TP1-00075', 'item_id': 'BI-P2B-0010', 'seed_id': 'SD2-TP1-00075', 'level': 7, 'groups': 18, 'groups_driver': 10, 'groups_context': 4, 'groups_caveat': 4, 'excluded_groups': 40, 'sha256': 'ed0de53642a683826ec9311706db7e8a4d13709cc4578c7057ef314d6b7d93cb'}]

@@ -370,8 +370,9 @@ Fields 16--19.
 | | |
 | --- | --- |
 | Branch | `work/meeting-2026-10-22`, from head `7676e53` |
-| Build commit | the commit carrying the ingest, packets, workbook builder, tests, D-052 and this section |
-| Evidence runs | `ingest_litgroups`, `build_synth_packets`, `build_p2b_groups_review` re-run at the build commit with a clean tree (records in `reports/runs/`, committed in the following commit); outputs byte-identical |
+| **Build commit** | **`7a8b46b`**: modules, scripts, tests, the ingested run, enriched groups, packets, GROUPS CSV, D-052, design section 10, this section, state |
+| **Evidence runs** | at `7a8b46b`, **`git_dirty: false`**: `reports/runs/20261102T180915Z_local_ingest_litgroups`, `…180916Z_local_build_synth_packets`, `…180916Z_local_build_p2b_groups_review` (`.json` / `.md`). Every tracked output byte-identical; the gitignored workbook too (`a5395e11…c3ff`) |
+| Report commit | the commit carrying the run records and this table |
 | Remote | **pushed** (the Eagle clone must fetch the packets); not merged |
 
 ## 17. Data and checksums
@@ -415,8 +416,8 @@ same configuration); **239 groups, 155 singletons, 747 statements once**; 0 labe
 | BI-P2B-0009 | SD2-TP1-02789 | 4 | 10 / 4 / 0 | 4 | 40 |
 | BI-P2B-0010 | SD2-TP1-00075 | 7 | 10 / 4 / 4 | 4 | 40 |
 
-**Validation.** `pytest` and the secrets / paths scan: see the build commit's gate (section 16 run records);
-new test file `tests/test_litgroups_run2.py` (7).
+**Validation.** `pytest`: **1,447 passed, 2 skipped** (the two pre-existing skips); new test file
+`tests/test_litgroups_run2.py` (7). Secrets and paths scan: **0 hits**.
 
 ## 19. Escalations and limitations
 
