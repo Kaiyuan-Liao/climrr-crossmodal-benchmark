@@ -45,6 +45,9 @@ v2 (pilot P2b-final-prep; D-055): numbers are traced in the prompt too, and agai
 hundred, thousand, "-fold", twice, double, triple, half) must lie inside an allowed descriptor phrase
 ("one study" and "one high-emissions scenario" excepted); and the reference answer and rubric carry no
 exact pattern value with a decimal (`exact_value_in_graded_text`): exact values belong to provenance.
+v2.2 (D-055b): number-words start at "two" --- "one", "a", "an", "once", "single" are never numeric
+("twenty-one" still is); "has been reported" is a hedge word. `format_class_only` tells the synthesis
+agent whether every failure reason is a format failure (one corrective turn, D-055b).
 
 Nothing here calls a model, reads table values, or touches the concept map,
 column statuses or compatibility rules.
@@ -319,7 +322,7 @@ def validity(item: dict, columns: list[str] | None = None) -> dict:
 
 # --- synthesis post-checks (pilot P2b-prep; litsynth_agent.py) ---------------------------------
 
-SYNTH_CHECK_VERSION = "synthesis_post_checks v2.1"
+SYNTH_CHECK_VERSION = "synthesis_post_checks v2.2"
 INTERNAL_ID_RE = re.compile(r"\b(?:LS|LG|LC|SD[12]|PK|BI)-[A-Za-z0-9_-]+|\bTP\d+-\d+\b")
 COLUMN_LIKE_RE = re.compile(r"\b[A-Za-z][A-Za-z0-9]*_[A-Za-z0-9_]+\b")  # an identifier such as heatindex_HIS_Day95
 SCENARIO_NAME_RE = re.compile(r"\b(?:RCP|SSP)\s?\d(?:\.\d)?(?:\s?-\s?\d(?:\.\d)?)?\b|\bCMIP\d\b", re.I)
@@ -327,16 +330,16 @@ WEIGHT_PREFIX_RE = re.compile(r"^\[w=\d+\]\s*")  # litsynth_agent writes a requi
 ORDINAL_RE = re.compile(r"\b\d+(?:st|nd|rd|th)\b", re.I)
 NUMBER_RE = re.compile(r"\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?")
 _ONES = "one|two|three|four|five|six|seven|eight|nine"
+_ONES_FROM_TWO = "two|three|four|five|six|seven|eight|nine"
 _TEENS = "ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen"
 _TENS = "twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety"
 # v2 (D-055): number-words --- one ... ninety-nine, hundred, thousand, "-fold", twice, double, triple, half (with their
-# inflections: doubling, tripled, halved ...)
-NUMBER_WORD_RE = re.compile(rf"\b(?:(?:{_TENS})(?:[-\s](?:{_ONES}))?|{_TEENS}|{_ONES}|hundreds?|thousands?|twice|doubl\w*|tripl\w*"
-                            rf"|hal(?:f|ves|ved|ving)|\w+-fold|(?:{_ONES}|{_TEENS}|several|many)fold)\b", re.I)
-# a number-word inside these is not a quantity: the single-source hedge and the scenario wording of the guardrails
-NUMBER_WORD_EXEMPT_RE = re.compile(r"\bone (?:study|paper|analysis)\b|\bone high-emissions scenario\b", re.I)
+# inflections: doubling, tripled, halved ...). v2.2 (D-055b): a standalone number-word starts at "two"; "one" (and "a",
+# "an", "once", "single") is never numeric --- run 1 rejected 7 items on "one high-emissions scenario"
+NUMBER_WORD_RE = re.compile(rf"\b(?:(?:{_TENS})(?:[-\s](?:{_ONES}))?|{_TEENS}|{_ONES_FROM_TWO}|hundreds?|thousands?|twice|doubl\w*"
+                            rf"|tripl\w*|hal(?:f|ves|ved|ving)|\w+-fold|(?:{_ONES_FROM_TWO}|{_TEENS}|several|many)fold)\b", re.I)
 HEDGE_RE = re.compile(r"\b(?:one|a single|a|an individual) (?:study|paper|analysis)\b|\bsuggests?\b|\bmay\b|\bmight\b|\bcould\b"
-                      r"|\blimited evidence\b|\bsome evidence\b|\btentative(?:ly)?\b|\breportedly\b", re.I)
+                      r"|\blimited evidence\b|\bsome evidence\b|\btentative(?:ly)?\b|\breportedly\b|\bhas been reported\b", re.I)
 
 
 def reference_numbers(text: str) -> list[str]:
@@ -384,8 +387,8 @@ def untraced_numbers(text: str, allowed: set[str], lit: tuple[set[str], set[str]
 
 
 def untraced_number_words(text: str, phrases: list[str]) -> list[str]:
-    """Number-words in `text` not inside an occurrence of an allowed phrase (case-insensitive) or an exempt phrase."""
-    spans = [m.span() for m in NUMBER_WORD_EXEMPT_RE.finditer(text)]
+    """Number-words in `text` not inside an occurrence of an allowed phrase (case-insensitive)."""
+    spans = []
     low = text.lower()
     for ph in phrases:
         ph, i = ph.lower(), 0
@@ -507,3 +510,56 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
                        "rubric_points_without_source_ids": sum(not (isinstance(r, dict) and r.get("source_ids"))
                                                                for r in tagged.get("rubric_points") or []),
                        "n_table_sentences": len(tp_s), "n_literature_sentences": len(lit_s)}}
+
+
+# --- format-class failures (D-055b; litsynth_agent v3.2 corrective turn) ---------------------------------
+
+_WORD_VALUES = {w: i for i, w in enumerate(_ONES.split("|"), 1)} | {w: i for i, w in enumerate(_TEENS.split("|"), 10)} | \
+               {w: 10 * i for i, w in enumerate(_TENS.split("|"), 2)} | {"hundred": 100, "thousand": 1000, "twice": 2}
+_FORMAT_NUMBER_RE = re.compile(r"^[^:]+: number (\S+) does not trace to a pattern value or allowed descriptor in the packet$")
+_FORMAT_REASON_RES = (re.compile(r"^[^:]+: number-word '.*' does not trace to an allowed descriptor in the packet$"),
+                      re.compile(r"^[^:]+: exact_value_in_graded_text \S+ \(exact values belong to provenance\)$"),
+                      re.compile(r"^literature_interpretation\[\d+\]: rests only on single-source groups but "
+                                 r"(?:is not marked hedged|carries no hedge word)$"))
+
+
+def number_word_value(word: str) -> float | None:
+    """The value of a number-word NUMBER_WORD_RE matches ("forty-five" 45, "tripling" 3, "threefold" 3, "halved" 0.5);
+    None for "several" / "many" fold."""
+    w = word.lower().replace(" ", "-")
+    if w.endswith("fold"):
+        return number_word_value(w[:-4].rstrip("-"))
+    if w.startswith("doubl"):
+        return 2.0
+    if w.startswith("tripl"):
+        return 3.0
+    if w.startswith("hal"):
+        return 0.5
+    w = re.sub(r"s$", "", w) if w in ("hundreds", "thousands") else w
+    parts = w.split("-")
+    if all(x in _WORD_VALUES for x in parts):
+        return float(sum(_WORD_VALUES[x] for x in parts))
+    return None
+
+
+def descriptor_values(phrases: list[str]) -> set[float]:
+    """Numeric values the allowed descriptors state, as digits or as number-words."""
+    vals = {float(n) for ph in phrases for n in reference_numbers(ph)}
+    vals |= {v for ph in phrases for m in NUMBER_WORD_RE.finditer(ph) if (v := number_word_value(m.group(0))) is not None}
+    return vals
+
+
+def format_class_only(reasons: list[str], allowed_descriptors: list[str]) -> bool:
+    """D-055b: True when there is at least one reason and every reason is a format failure --- `exact_value_in_graded_text`,
+    an untraced number-word, a missing hedge (flag or word), or an untraced number whose value an allowed descriptor
+    states under another form (digits "16.0" for "about 16 days", "3" for "roughly tripling"). Anything else (leakage,
+    an untraced fact or id, schema, consistency, parse) is not."""
+    vals = descriptor_values(allowed_descriptors)
+
+    def fmt(r: str) -> bool:
+        if any(x.match(r) for x in _FORMAT_REASON_RES):
+            return True
+        m = _FORMAT_NUMBER_RE.match(r)
+        return bool(m) and float(m.group(1)) in vals
+
+    return bool(reasons) and all(fmt(r) for r in reasons)

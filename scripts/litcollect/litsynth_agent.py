@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pilot P2b — item-synthesis agent v3.1 (D-041, D-048, D-051, D-055, D-055a; COORDINATOR rulings 2026-11-01 and 2026-11-02).
+"""Pilot P2b — item-synthesis agent v3.2 (D-041, D-048, D-051, D-055, D-055a, D-055b; COORDINATOR rulings 2026-11-01 and 2026-11-02).
 
 Input: a directory of seed packets `PK-<seed_id>.json` (`scripts/build_synth_packets.py`). One model call per packet,
 temperature 0. The model sees the packet's `model_view` only: the table pattern in plain words with its values, the
@@ -45,6 +45,20 @@ copied exactly into a literature sentence tagged with that group or a rubric poi
 item keeps the rubric as strings (schema v2); the tagged points go into `review.history[0].reference_answer_tagged
 .rubric_points`. Post-checks `synthesis_post_checks` v2.1. Everything else as v3.
 
+v3.2 (D-055b; synthesis run 1 --- agent v3.1, `litsynth/run1`, ten packets, all rejected_pre_review --- superseded):
+the system prompt forbids any numeral with a decimal point and any exact pattern value in every rubric list; to tell the
+grader exact values are not required it uses the fixed sentence `NOT_REQUIRED_SENTENCE`; magnitude language is copied
+verbatim from `allowed_descriptors` ("roughly tripling", never "threefold"); a literature sentence resting only on
+single-source groups carries one of the listed hedge words. Post-checks `synthesis_post_checks` v2.2 ("one" is not a
+number-word). Format-class corrective turn: when the item parses and every post-check failure reason is a format failure
+(`benchmark_items.format_class_only`: `exact_value_in_graded_text`, an untraced number-word, a missing hedge, or an
+untraced number an allowed descriptor states under another form), one more turn in the same conversation
+(`FORMAT_CORRECTIVE_PROMPT`, the reasons listed) asks for the complete corrected JSON with the facts unchanged, and every
+check runs again on the reply. Any other failure (leakage, an untraced fact or id, schema, consistency) gets no turn.
+`review.history[0]` holds the final check result and `corrective_turn_used`, `corrective_class` ("format" or null) and
+`first_check` (the result that triggered the turn, with the first reply's raw text); an unparseable or failed corrective
+reply keeps the first item, rejected_pre_review, with a `format corrective:` reason.
+
 Polaris invocation (Sophia vLLM, D-043). Run from the execution clone on Eagle (`$CLIMRR_REPO_ROOT`,
 docs/SOPHIA_RUNBOOK.md) checked out at the pinned commit that carries the packets and provides `climrr`; output
 under the litcollect root (`$LITCOLLECT_ROOT_POLARIS`, config key `litcollect_root_polaris`), never in the clone; the
@@ -54,7 +68,7 @@ ALCF credential in the environment; first check the environment: `python -c "imp
     cd "$CLIMRR_REPO_ROOT"
     python scripts/litcollect/litsynth_agent.py \\
         --packets artifacts/benchmark/synth_packets \\
-        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run1" \\
+        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run2" \\
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \\
         --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \\
         --sleep 5 --source-commit <PINNED_SHA>
@@ -70,23 +84,35 @@ from litstatement_agent import (  # noqa: E402  (v3)
 from litgroup_agent import DEFAULT_MAX_TOKENS, REASONING_EFFORTS, call_turn, turn_stats  # noqa: E402  (v3)
 from climrr import benchmark_items as bi  # noqa: E402
 
-GENERATOR_VERSION = "litsynth_agent v3.1"
+GENERATOR_VERSION = "litsynth_agent v3.2"
 CORRECTIVE_PROMPT = ("Your reply did not contain a JSON object with the keys \"prompt\" and \"reference_answer\". "
                      "Return the complete JSON object.")
+NOT_REQUIRED_SENTENCE = "Exact values are not required; any statement consistent with the magnitude class counts."
+HEDGE_WORDS = ('"one study"', '"a single study"', '"suggests"', '"has been reported"')
+FORMAT_CORRECTIVE_PROMPT = ("Your item failed these format checks:\n{reasons}\nReturn the complete corrected JSON object. Keep "
+                            "every fact, pattern id, group id and source id unchanged; change only the wording the checks name. "
+                            "Copy magnitude language verbatim from \"allowed_descriptors\"; put no numeral with a decimal point "
+                            "and no exact pattern value in \"reference_answer\" or \"rubric\" (to say exact values are not "
+                            f"required, write: \"{NOT_REQUIRED_SENTENCE}\"); give every literature sentence that rests only on "
+                            f"single-source groups one of the hedge words {', '.join(HEDGE_WORDS)}.")
+
+
+def format_corrective_prompt(reasons: list[str]) -> str:
+    return FORMAT_CORRECTIVE_PROMPT.replace("{reasons}", "\n".join(f"- {r}" for r in reasons))
 
 SYSTEM_PROMPT = """You write ONE closed-book benchmark item for climate scientists from a SEED PACKET. The packet holds (a) table patterns: deterministic facts about modeled climate projections, in plain words, with their values and, for each pattern, "allowed_descriptors": the pattern-level words (direction, magnitude class, coarse anchors, relative tercile, regional ranking, horizon, scenario and quantity phrases) computed by code; (b) groups of literature statements: each group has an id, a label, an evidence strength, and member statements with their supporting passages and paper ids; (c) the use-case rung, the guardrails and the numbers you may use. Use ONLY facts in the packet. Add no fact, number, place, mechanism, scenario or source that is not in it.
 
 The item is graded at the PATTERN level: direction, magnitude class, region, horizon and scenario, mechanism. Exact values are NOT graded: they are attached to the item as provenance by code, never by you. Never put a decimal number or an exact pattern value in "reference_answer" or "rubric".
 
-NUMBERS. Any number in "prompt", "reference_answer" or "rubric" must be copied AS DIGITS from the pattern's "allowed_descriptors" or from the packet's pattern values (for example the heat-index threshold, or "about 16 days" when it is an allowed anchor). Never write a number as a word ("sixteen", "forty-five", "twice", "double", "triple", "half", "threefold"), except inside an allowed descriptor phrase copied verbatim (for example "roughly tripling" or "about half again as many" when the packet lists it). Do not round a value yourself, and do not state a ratio, percentage or range the packet does not list. Do not state horizon years unless the packet states them; prefer the packet's horizon phrase (for example "by mid-century (2045–2054)") and scenario phrase (for example "under RCP8.5, one high-emissions scenario") exactly as given. One exception for literature: a number (or number-word) that a group's label or member statement states, for example a threshold such as "80 °F", may be copied exactly as written there into a "literature_interpretation" sentence whose "group_ids" include that group, or into a rubric point whose "source_ids" include that group --- nowhere else.
+NUMBERS. Any number in "prompt", "reference_answer" or "rubric" must be copied AS DIGITS from the pattern's "allowed_descriptors" or from the packet's pattern values (for example the heat-index threshold, or "about 16 days" when it is an allowed anchor). Never write a number as a word ("sixteen", "forty-five", "twice", "double", "triple", "half", "threefold"), except inside an allowed descriptor phrase copied verbatim (for example "roughly tripling" or "about half again as many" when the packet lists it). Copy magnitude language VERBATIM from "allowed_descriptors": write "roughly tripling", never "threefold", "triples" or "three times". Do not round a value yourself, and do not state a ratio, percentage or range the packet does not list. Do not state horizon years unless the packet states them; prefer the packet's horizon phrase (for example "by mid-century (2045–2054)") and scenario phrase (for example "under RCP8.5, one high-emissions scenario") exactly as given. One exception for literature: a number (or number-word) that a group's label or member statement states, for example a threshold such as "80 °F", may be copied exactly as written there into a "literature_interpretation" sentence whose "group_ids" include that group, or into a rubric point whose "source_ids" include that group --- nowhere else.
 
 Return ONE JSON object with exactly these keys:
 - "prompt": a closed-book question that a well-informed climate scientist could answer from general knowledge. It asks about the general pattern and its drivers at the state or region level the packet names, for the season, horizon and scenario the packet names. It names the quantity in general words a closed-book reader can answer, using the pattern's "quantity" descriptor (for the heat index: "days with a dangerous heat index (above 95 °F)" or "(above 105 °F)" --- the threshold stays, because it defines the quantity). It must NOT name or hint at any table, dataset, data portal, paper, study, author, column, variable name or grid cell, and must not say "according to", "the table", "the data", "the paper" or "the study". It must not require recalling an exact number: ask for direction, rough size, ranking or contrast, and the drivers.
 - "reference_answer": {
   "table_pattern": [{"sentence": "...", "pattern_ids": ["..."]}] --- each sentence states what a pattern shows, in the pattern's allowed descriptors (direction, magnitude class or low-baseline phrase, place or regional ranking with largest / smallest, relative tercile where given, horizon and scenario phrases), and is tagged with the pattern id(s) it comes from;
-  "literature_interpretation": [{"sentence": "...", "group_ids": ["..."], "hedged": true or false}] --- each sentence rests on the group(s) it cites. A sentence that rests only on single_source_supported groups must be hedged (for example "one study reports ...", "... may ...") and marked "hedged": true; never present a single-source claim as consensus. If the packet has no groups, return [];
+  "literature_interpretation": [{"sentence": "...", "group_ids": ["..."], "hedged": true or false}] --- each sentence rests on the group(s) it cites. A sentence that rests only on single_source_supported groups must be hedged and marked "hedged": true, and it must contain one of these hedge words: "one study", "a single study", "suggests", "has been reported" (for example "one study reports ..."); never present a single-source claim as consensus. If the packet has no groups, return [];
   "integrated": "a short paragraph that combines the two, in the same terms, with no new fact" }
-- "rubric": {"required_points": [{"point": "...", "weight": 1, 2 or 3, "source_ids": ["..."]}], "acceptable_variants": ["..."], "optional_points": [{"point": "...", "source_ids": ["..."]}], "disallowed_claims": ["..."], "fatal_errors": ["..."]}. Every required and optional point MUST carry "source_ids": the pattern id(s) and / or group id(s) from the packet that the point rests on. The required points are pattern-level: the direction; the magnitude class (or the low-baseline phrase); the place, or for a regional contrast the ranking (largest / smallest); the mechanism, where the packet has groups; the handling of the scenario and horizon (one high-emissions scenario, not a forecast); and no overclaim (no exact number demanded, no single-source claim as consensus, hazard not exposure). A specific number may appear only under "optional_points", and only as an allowed anchor copied as digits --- except a literature number under the exception above, in a point whose "source_ids" include its group.
+- "rubric": {"required_points": [{"point": "...", "weight": 1, 2 or 3, "source_ids": ["..."]}], "acceptable_variants": ["..."], "optional_points": [{"point": "...", "source_ids": ["..."]}], "disallowed_claims": ["..."], "fatal_errors": ["..."]}. Every required and optional point MUST carry "source_ids": the pattern id(s) and / or group id(s) from the packet that the point rests on. The required points are pattern-level: the direction; the magnitude class (or the low-baseline phrase); the place, or for a regional contrast the ranking (largest / smallest); the mechanism, where the packet has groups; the handling of the scenario and horizon (one high-emissions scenario, not a forecast); and no overclaim (no exact number demanded, no single-source claim as consensus, hazard not exposure). A specific number may appear only under "optional_points", and only as an allowed anchor copied as digits --- except a literature number under the exception above, in a point whose "source_ids" include its group. The rubric must contain NO numeral with a decimal point and NO exact pattern value at all, in any of its lists ("required_points", "acceptable_variants", "optional_points", "disallowed_claims", "fatal_errors") --- not even to tell the grader not to require it. To tell the grader that exact values are not required, write exactly: "Exact values are not required; any statement consistent with the magnitude class counts.".
 - "guardrails": the packet guardrails that apply to this item, verbatim or made more specific.
 - "source_independent_answerability": "yes", "borderline" or "no" --- could a well-informed climate scientist answer without the packet's sources?
 - "source_independence_note": one sentence explaining that judgement.
@@ -190,11 +216,13 @@ def assemble(obj: dict, packet: dict, common: dict, columns) -> tuple[dict, dict
     return item, {**tagged, "rubric_required_weights": weights, "rubric_points": points}
 
 
-def finish(item: dict, tagged: dict, packet: dict, common: dict, columns, parse_error=None) -> dict:
+def finish(item: dict, tagged: dict, packet: dict, common: dict, columns, parse_error=None, extra_reasons=()) -> dict:
     if parse_error:
         res = {"check_version": bi.SYNTH_CHECK_VERSION, "pass": False, "reasons": [f"parse: {parse_error}"], "checks": {}}
     else:
         res = bi.synthesis_post_checks(item, tagged, packet["checks_input"], columns)
+    if extra_reasons:
+        res = {**res, "pass": False, "reasons": res["reasons"] + list(extra_reasons)}
     item["review"]["status"] = "deterministic_pass" if res["pass"] else "rejected_pre_review"
     item["review"]["history"] = [{"event": "deterministic_pass" if res["pass"] else "deterministic_fail", "reasons": res["reasons"],
                                   "check_version": res["check_version"], "checks": res["checks"], "reference_answer_tagged": tagged,
@@ -213,11 +241,14 @@ def summarise(out: Path, endpoint=None, budget=None):
             reasons[key] = reasons.get(key, 0) + 1
     hist = [it["review"]["history"][0] for it in items]
     s = {"generator_version": GENERATOR_VERSION, **(endpoint or {}), **(budget or {}), "system_prompt_sha256": sha(SYSTEM_PROMPT),
-         "corrective_prompt_sha256": sha(CORRECTIVE_PROMPT), "items": len(items),
+         "corrective_prompt_sha256": sha(CORRECTIVE_PROMPT), "format_corrective_prompt_sha256": sha(FORMAT_CORRECTIVE_PROMPT),
+         "items": len(items),
          "deterministic_pass": sum(it["review"]["status"] == "deterministic_pass" for it in items),
          "deterministic_fail": sum(it["review"]["status"] != "deterministic_pass" for it in items),
          "fail_reasons_by_kind": dict(sorted(reasons.items())),
          "corrective_retry_used": sum(bool(h.get("corrective_retry_used")) for h in hist),
+         "format_corrective_used": sum(bool(h.get("corrective_turn_used")) for h in hist),
+         "format_corrective_pass": sum(bool(h.get("corrective_turn_used")) and h["event"] == "deterministic_pass" for h in hist),
          "reasoning_effort_not_applied": sum(h.get("reasoning_effort_applied") is False for h in hist),
          "finish_reasons": {k: sum(str(h.get("finish_reason")) == k for h in hist) for k in sorted({str(h.get("finish_reason")) for h in hist})},
          "by_level": {str(k): sum(it["use_case_level"] == k for it in items) for k in sorted({it["use_case_level"] for it in items})}}
@@ -283,6 +314,7 @@ def main():
         obj = extract_item(content)
         perr = None if obj else "no JSON object with 'prompt' and 'reference_answer' found"
         turns = [{"turn": 1, **turn_stats(resp), "http_attempts": attempts, "model_seconds": secs}]
+        convo = messages + [{"role": "assistant", "content": content}]
         first_turn, corrective_error = None, None
         if not obj:
             (rdir / "prompt_corrective.txt").write_text(CORRECTIVE_PROMPT, encoding="utf-8")
@@ -299,6 +331,7 @@ def main():
             else:
                 (rdir / "response_corrective.json").write_text(json.dumps(resp2, indent=2, ensure_ascii=False))
                 resp, secs = resp2, secs + secs2
+                convo += [{"role": "user", "content": CORRECTIVE_PROMPT}, {"role": "assistant", "content": content2}]
                 turns.append({"turn": 2, **turn_stats(resp2), "http_attempts": attempts2, "model_seconds": secs2})
                 obj = extract_item(content2)
                 perr = None if obj else "no JSON object with 'prompt' and 'reference_answer' found (corrective turn)"
@@ -307,9 +340,38 @@ def main():
                   "prompt_hash": sha(SYSTEM_PROMPT + user), "packet_sha256": sha(raw), "source_commit": a.source_commit,
                   "generation_timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "model_seconds": secs,
                   "model_attempts": len(turns), "corrective_retry_used": first_turn is not None, "turns": turns,
-                  "first_turn": first_turn, "corrective_error": corrective_error, **turn_stats(resp), **raw_fields(resp)}
+                  "first_turn": first_turn, "corrective_error": corrective_error, "corrective_turn_used": False,
+                  "corrective_class": None, "first_check": None, **turn_stats(resp), **raw_fields(resp)}
         item, tagged = assemble(obj or {}, packet, common, columns)
         item = finish(item, tagged, packet, common, columns, perr)
+        h = item["review"]["history"][0]
+        if not perr and bi.format_class_only(h["reasons"], packet["checks_input"].get("allowed_descriptors") or []):
+            fprompt = format_corrective_prompt(h["reasons"])
+            (rdir / "prompt_format_corrective.txt").write_text(fprompt, encoding="utf-8")
+            first_check = {**{k: h[k] for k in ("event", "reasons", "check_version", "checks", "reference_answer_tagged")}, **raw_fields(resp)}
+            say(f"FORMAT_CORRECTIVE seed={sid} reasons={len(h['reasons'])}")
+            obj3, ferr = None, None
+            try:
+                resp3, content3, secs3, attempts3, _ = call_turn(
+                    a.base_url, a.model, credential, convo + [{"role": "user", "content": fprompt}],
+                    a.max_tokens, a.timeout, a.reasoning_effort if applied else None, say, sid, backoff)
+            except ModelCallFailed as e:
+                ferr = f"model call failed: {e}"
+                say(f"FORMAT_CORRECTIVE_FAIL seed={sid} reason={e}")
+            else:
+                (rdir / "response_format_corrective.json").write_text(json.dumps(resp3, indent=2, ensure_ascii=False))
+                resp, secs = resp3, secs + secs3
+                turns.append({"turn": len(turns) + 1, **turn_stats(resp3), "http_attempts": attempts3, "model_seconds": secs3})
+                obj3 = extract_item(content3)
+                ferr = None if obj3 else "no JSON object with 'prompt' and 'reference_answer' found"
+            common = {**common, "model_seconds": secs, "model_attempts": len(turns), "turns": turns, "corrective_turn_used": True,
+                      "corrective_class": "format", "first_check": first_check,
+                      "format_corrective_prompt_sha256": sha(fprompt), **turn_stats(resp), **raw_fields(resp)}
+            if obj3:
+                item, tagged = assemble(obj3, packet, common, columns)
+                item = finish(item, tagged, packet, common, columns)
+            else:                                                  # keep the first item, rejected, with the turn's failure
+                item = finish(item, tagged, packet, common, columns, extra_reasons=[f"format corrective: {ferr}"])
         ipath.write_text(json.dumps(item, indent=2, ensure_ascii=False))
         done += 1
         reasons = item["review"]["history"][0]["reasons"]

@@ -12,6 +12,10 @@ number-words, rounded or decimal values in the graded text fail, a copied descri
 v3.1 / post-checks v2.1 (D-055a), on the real Florida rung-7 packet (v3a): "80 °F" passes in a literature sentence or a
 rubric point that cites `LG-extreme_heat_v1-caveat-c1-024` (whose label and statement state it), and fails when another
 group is cited, when the point has no `source_ids`, or in a table-pattern sentence.
+v3.2 / post-checks v2.2 (D-055b): "one" is not a number-word ("one high-emissions scenario", "one study" pass anywhere;
+"two" still traced); "has been reported" is a hedge; the fixed not-required sentence passes in every rubric list; a reply
+whose failures are all format-class gets one corrective turn and every check runs again; a leakage failure mixed with
+format failures gets none; an unparseable corrective reply keeps the first item, rejected.
 """
 
 from __future__ import annotations
@@ -37,8 +41,9 @@ from climrr.paths import REPO_ROOT
 
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
 AGENT = TOOLS / "litsynth_agent.py"
-AGENT_SHA256 = "10abc0c5eea05683722158967272e7f5bd63034238737f5ac63466e65b01e59f"
-SYSTEM_PROMPT_SHA256 = "675e22886251031e99f5c14dda8ae6b97428a520cef04c61df80b681bdc96b07"
+AGENT_SHA256 = "f5778fbf54ea44794d40086b997a504971812fe8a4481f7fedefae5f6d4b8b5e"
+FORMAT_CORRECTIVE_PROMPT_SHA256 = "919f52cb2612c6f7544a2d62f4488231a16092376e43ebef03e4a23ca7066d20"
+SYSTEM_PROMPT_SHA256 = "9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715"
 NCA = sd.nca_map()
 EX = {p["pattern_id"]: p for p in tp.read_jsonl(tp.EXAMPLES_PATH)}
 PASS_A = "Higher humidity at a given temperature raises the heat index, so moister summers bring more days of dangerous humid heat."
@@ -171,10 +176,11 @@ def test_the_agent_is_pinned():
 
 def test_the_system_prompt():
     a = _agent()
-    assert a.GENERATOR_VERSION == "litsynth_agent v3.1"
+    assert a.GENERATOR_VERSION == "litsynth_agent v3.2"
     assert a.CORRECTIVE_PROMPT == ('Your reply did not contain a JSON object with the keys "prompt" and "reference_answer". '
                                    "Return the complete JSON object.")
     assert hashlib.sha256(a.SYSTEM_PROMPT.encode("utf-8")).hexdigest() == SYSTEM_PROMPT_SHA256
+    assert hashlib.sha256(a.FORMAT_CORRECTIVE_PROMPT.encode("utf-8")).hexdigest() == FORMAT_CORRECTIVE_PROMPT_SHA256
     for phrase in ("Use ONLY facts in the packet", "closed-book question", "must NOT name or hint at any table", '"according to"',
                    "tagged with the pattern id", "must be hedged", "never present a single-source claim as consensus",
                    "a Fire Weather Index is meteorological fire danger, never fire occurrence", "hazard is not exposure",
@@ -182,7 +188,11 @@ def test_the_system_prompt():
                    '"allowed_descriptors"', 'Never write a number as a word ("sixteen", "forty-five", "twice", "double", "triple", "half"',
                    "Do not state horizon years unless the packet states them", "the threshold stays",
                    'A specific number may appear only under "optional_points"', "must be hedged",
-                   'Every required and optional point MUST carry "source_ids"', 'a threshold such as "80 °F"'):
+                   'Every required and optional point MUST carry "source_ids"', 'a threshold such as "80 °F"',
+                   'Copy magnitude language VERBATIM from "allowed_descriptors": write "roughly tripling", never "threefold"',
+                   'The rubric must contain NO numeral with a decimal point and NO exact pattern value at all, in any of its lists',
+                   'write exactly: "' + a.NOT_REQUIRED_SENTENCE + '"',
+                   'one of these hedge words: "one study", "a single study", "suggests", "has been reported"'):
         assert phrase in a.SYSTEM_PROMPT
     text = AGENT.read_text(encoding="utf-8")
     assert "/eagl" + "e/" not in text and "/User" + "s/" not in text
@@ -307,7 +317,7 @@ def test_post_checks_v2_pass_a_copied_descriptor():
     assert d["magnitude_class"] == "roughly tripling" and d["anchor_pair"] == "from about 16 to about 45 days"
     res = _checked(good_reply(pk), pk)
     assert res["pass"], res["reasons"]
-    assert res["check_version"] == "synthesis_post_checks v2.1" and res["checks"]["number_words_untraced"] == []
+    assert res["check_version"] == "synthesis_post_checks v2.2" and res["checks"]["number_words_untraced"] == []
 
 
 @pytest.mark.parametrize("sentence,needle", [
@@ -415,3 +425,120 @@ def test_literature_trace_normalises_spellings_and_keeps_units():
     assert bi.untraced_numbers("below 80", set(), lit) == []                        # stated, with or without its unit
     assert bi.untraced_numbers("below 80 °C", set(), lit) == ["80"] and bi.untraced_numbers("below 81 °F", set(), lit) == ["81"]
     assert "ninety" in lit[2] and bi.literature_trace(["H"], texts) == (set(), set(), set())
+
+
+# --- v3.2 / post-checks v2.2 (D-055b) ---------------------------------------------------------------------
+
+SCEN = "under RCP8.5, one high-emissions scenario"
+
+
+def test_post_checks_v2_2_one_is_not_a_number_word():
+    pk = _tripling_packet()
+    r = good_reply(pk)
+    r["prompt"] = r["prompt"].replace("under a high-emissions scenario", "under one high-emissions scenario")
+    r["reference_answer"]["integrated"] += " This is one high-emissions scenario, not a forecast."
+    r["reference_answer"]["literature_interpretation"][1]["sentence"] = "One study suggests that urban surfaces may add to local humid heat."
+    for k in ("disallowed_claims", "fatal_errors", "acceptable_variants"):
+        r["rubric"][k].append("treats one high-emissions scenario as a forecast")
+    r["rubric"]["required_points"].append({"point": "says the projection is one high-emissions scenario, not a forecast", "weight": 1})
+    res = _checked(r, pk)
+    assert res["pass"], res["reasons"]
+    assert res["check_version"] == "synthesis_post_checks v2.2"
+    assert bi.untraced_number_words("One study, a single study, an analysis, once, one high‑emissions scenario", []) == []
+    assert bi.untraced_number_words("two studies and twenty-one days", []) == ["two", "twenty-one"]
+    assert bi.untraced_number_words("doubles, threefold, half", []) == ["doubles", "threefold", "half"]
+
+
+def test_post_checks_v2_2_two_is_still_traced():
+    pk = _tripling_packet()
+    res = _checked(_with_table_sentence(pk, "Dangerous heat-index days rise for two reasons by mid-century."), pk)
+    assert "table_pattern: number-word 'two' does not trace to an allowed descriptor in the packet" in res["reasons"]
+
+
+def test_post_checks_v2_2_has_been_reported_is_a_hedge_and_the_fixed_sentence_passes():
+    pk = _tripling_packet()
+    a = _agent()
+    r = good_reply(pk)
+    r["reference_answer"]["literature_interpretation"][1]["sentence"] = "It has been reported that urban surfaces add to local humid heat."
+    r["rubric"]["optional_points"].append(a.NOT_REQUIRED_SENTENCE)
+    r["rubric"]["disallowed_claims"].append(a.NOT_REQUIRED_SENTENCE)
+    res = _checked(r, pk)
+    assert res["pass"], res["reasons"]
+
+
+def test_format_class_only():
+    d = ["roughly tripling", "from about 16 to about 45 days", "about half again as many"]
+    num = "rubric.optional_points: number {} does not trace to a pattern value or allowed descriptor in the packet"
+    fmt = ["integrated: number-word 'threefold' does not trace to an allowed descriptor in the packet",
+           "rubric.disallowed_claims: exact_value_in_graded_text 44.9 (exact values belong to provenance)",
+           "literature_interpretation[1]: rests only on single-source groups but is not marked hedged",
+           "literature_interpretation[1]: rests only on single-source groups but carries no hedge word",
+           num.format("16.0"), num.format("3"), num.format("0.5")]
+    assert bi.format_class_only(fmt, d)
+    assert not bi.format_class_only([], d)
+    assert not bi.format_class_only([num.format("17")], d)                        # a number no descriptor states
+    for other in ("integrated leakage: ClimRR named", "prompt leakage: exact value: 12.5%", "table_pattern[0]: pattern id TP1-9 not in the packet",
+                  "literature_interpretation[0]: group id LG-x not in the packet", "schema: x", "consistency: x", "parse: x"):
+        assert not bi.format_class_only(fmt + [other], d), other
+    assert [bi.number_word_value(w) for w in ("forty-five", "tripling", "threefold", "halved", "twice", "several-fold")] == [45, 3, 3, .5, 2, None]
+
+
+def _format_reply(pk, leak=False):
+    r = good_reply(pk)
+    r["reference_answer"]["integrated"] = "Dangerous humid-heat days rise threefold in Alabama by mid-century."
+    if leak:
+        r["reference_answer"]["integrated"] += " ClimRR shows this."
+    r["rubric"]["disallowed_claims"].append("requires the exact values 15.8 and 44.9")
+    return r
+
+
+def _run_agent(tmp_path, pk, texts):
+    pdir, out = tmp_path / "packets", tmp_path / "out"
+    pdir.mkdir()
+    (pdir / f"{pk['packet_id']}.json").write_text(json.dumps(pk), encoding="utf-8")
+    mock = _Mock({"TP1-00009": texts})
+    try:
+        p = subprocess.run([sys.executable, str(AGENT), "--packets", str(pdir), "--out", str(out), "--base-url", mock.url,
+                            "--model", "mock-model", "--source-commit", "abc1234", "--backoff", "0,0,0"],
+                           env={**os.environ, "TOK" + "EN": "test-value"}, capture_output=True, text=True)
+    finally:
+        mock.server.shutdown()
+    assert p.returncode == 0, p.stderr
+    it = json.loads((out / "items" / f"{pk['seed_id']}.json").read_text())
+    return mock, it, json.loads((out / "summary.json").read_text())
+
+
+@pytest.mark.parametrize("second", ["good", "unparseable"])
+def test_format_only_failures_get_one_corrective_turn(tmp_path, second):
+    pytest.importorskip("duckdb")
+    pk = _tripling_packet()
+    texts = [json.dumps(_format_reply(pk)), json.dumps(good_reply(pk)) if second == "good" else "Still thinking."]
+    mock, it, summary = _run_agent(tmp_path, pk, texts)
+    assert len(mock.calls) == 2
+    msgs = mock.calls[1]["messages"]
+    assert [m["role"] for m in msgs] == ["system", "user", "assistant", "user"] and msgs[2]["content"] == texts[0]
+    assert msgs[3]["content"].startswith("Your item failed these format checks:\n- ")
+    assert "number-word 'threefold'" in msgs[3]["content"] and "exact_value_in_graded_text 44.9" in msgs[3]["content"]
+    h = it["review"]["history"][0]
+    assert h["corrective_turn_used"] is True and h["corrective_class"] == "format" and h["model_attempts"] == 2
+    assert h["corrective_retry_used"] is False and h["first_check"]["event"] == "deterministic_fail"
+    assert h["first_check"]["raw_response"] == texts[0] and bi.format_class_only(h["first_check"]["reasons"], pk["checks_input"]["allowed_descriptors"])
+    if second == "good":
+        assert it["review"]["status"] == "deterministic_pass" and h["reasons"] == [] and h["raw_response"] == texts[1]
+        assert summary["format_corrective_used"] == 1 and summary["format_corrective_pass"] == 1
+    else:
+        assert it["review"]["status"] == "rejected_pre_review"
+        assert h["reasons"][:-1] == h["first_check"]["reasons"] and h["reasons"][-1].startswith("format corrective: no JSON object")
+        assert it["reference_answer"]["integrated"].startswith("Dangerous humid-heat days rise threefold")
+        assert summary["format_corrective_used"] == 1 and summary["format_corrective_pass"] == 0
+
+
+def test_a_leakage_failure_mixed_with_format_failures_gets_no_turn(tmp_path):
+    pytest.importorskip("duckdb")
+    pk = _tripling_packet()
+    mock, it, summary = _run_agent(tmp_path, pk, [json.dumps(_format_reply(pk, leak=True)), json.dumps(good_reply(pk))])
+    assert len(mock.calls) == 1
+    h = it["review"]["history"][0]
+    assert it["review"]["status"] == "rejected_pre_review" and h["corrective_turn_used"] is False and h["corrective_class"] is None
+    assert "integrated leakage: ClimRR named" in h["reasons"] and any("threefold" in r for r in h["reasons"])
+    assert summary["format_corrective_used"] == 0

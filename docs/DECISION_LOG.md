@@ -2839,3 +2839,31 @@ code emits, and the next GUIDANCE packet still chooses.
   exception stated in the prompt.
 - **Affected files:** `src/climrr/benchmark_items.py`, `src/climrr/synthpackets.py`,
   `scripts/litcollect/litsynth_agent.py`, `docs/PILOT_P2B_DESIGN.md`, tests.
+
+## D-055b --- Post-checks v2.2 and the format-class corrective turn
+
+- **Date:** 2026-11-02.
+- **Status:** **decided** (COORDINATOR, 2026-11-02, after synthesis run 1). Amends D-055 and D-055a.
+- **Context.** Synthesis run 1 (agent v3.1, `litsynth/run1`, 23:35 UTC): 10 of 10 `rejected_pre_review`, no leakage,
+  schema or untraced-fact failure; every reason was a format failure, 7 of them a checker false positive ("one
+  high-emissions scenario"). Recorded in `PILOT_P2B_DESIGN.md` section 13; superseded.
+- **Decision.** (1) Number-words start at "two"; "one", "a", "an", "once", "single" are never numeric; "twice",
+  "double", "triple", "-fold", "half" stay. (2) Prompt v3.2: no numeral with a decimal point and no pattern value in any
+  rubric list; the fixed sentence "Exact values are not required; any statement consistent with the magnitude class
+  counts."; magnitude language verbatim from `allowed_descriptors`; hedge words listed ("one study", "a single study",
+  "suggests", "has been reported"). (3) When every failure reason is in the format class {`exact_value_in_graded_text`,
+  untraced number-word, untraced number that an allowed descriptor states in another form, missing hedge}, one
+  corrective turn lists the reasons and asks for the complete corrected JSON with facts unchanged; all checks re-run.
+  Any other failure: no turn, `rejected_pre_review`. `corrective_turn_used`, `corrective_class: format` and both check
+  results are recorded in `review.history`.
+- **Recorded (EXECUTOR).** `synthesis_post_checks` v2.2 (`NUMBER_WORD_RE` without standalone "one"; the v2 exemption
+  regex is removed as moot; `HEDGE_RE` adds "has been reported"); `benchmark_items.format_class_only`. "Another form":
+  the untraced number's value equals a number the descriptors state as digits or as a number-word ("3" / "roughly
+  tripling"; "half" = 0.5) --- for confirmation. "Missing hedge" covers both the flag and the word. An item that does not
+  parse never gets the format turn (the parse turn of v2 is separate; both can occur). `review.history[0]` is the final
+  check result and carries `first_check` (the result that triggered the turn, with the first reply's raw text); an
+  unparseable or failed corrective reply keeps the first item with a `format corrective:` reason. Summary:
+  `format_corrective_used`, `format_corrective_pass`. Agent v3.2 `litsynth_agent.py` SHA-256 `f5778fbf54ea44794d40086b997a504971812fe8a4481f7fedefae5f6d4b8b5e`, system prompt
+  `9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715`, format-corrective template `919f52cb2612c6f7544a2d62f4488231a16092376e43ebef03e4a23ca7066d20`. Run 2 writes `litsynth/run2`.
+- **Affected files:** `src/climrr/benchmark_items.py`, `scripts/litcollect/litsynth_agent.py`,
+  `docs/PILOT_P2B_DESIGN.md`, tests.

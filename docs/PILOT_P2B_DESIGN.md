@@ -341,3 +341,26 @@ nighttime conditions and reduced moisture". Post-checks v2.1 (D-055a) let a lite
 cites a group copy a number its label or members state --- so the rung-7 caveat's "80 °F" (flag (c) above) passes when
 `…-caveat-c1-024` is cited and fails otherwise or in a table-pattern sentence; packets carry `checks_input.group_texts`
 for this, and the synthesis agent v3.1 asks for `source_ids` on every required and optional rubric point.
+
+## 13. Synthesis run 1 and agent v3.2 (D-055b, 2026-11-02)
+
+**Run 1** (agent v3.1, Polaris `litsynth/run1`, Sophia gpt-oss-120b, reasoning low, 2026-11-02 23:35 UTC; recorded
+from the COORDINATOR's summary, not ingested; **superseded by v3.2**): 10 packets v3a, 10 `rejected_pre_review`, 0
+leakage flags, 0 schema errors, 0 untraced facts; one HTTP 502 recovered by retry. Reasons: (a) `number-word 'one'` in
+rubric / integrated text, 7 hits, all from the guardrail phrase "one high-emissions scenario" --- a checker false
+positive; (b) `exact_value_in_graded_text` in `rubric.disallowed_claims` / `rubric.optional_points`, 9 hits (the exact
+values cited to tell the grader not to require them); (c) "threefold" in `integrated` once; (d) one
+`literature_interpretation` sentence resting on single-source groups without a hedge. Post-checks **v2.2**: number-words
+start at "two" ("one", "a", "an", "once", "single" are never numeric; "twenty-one", "twice", "double", "triple",
+"-fold", "half" still are); "has been reported" is a hedge word. Agent **v3.2** (`litsynth_agent.py` `f5778fbf…8b5e`,
+system prompt `9c79f452…5715`, format-corrective template `919f52cb…6d20`): no numeral with a decimal point
+and no exact pattern value in any rubric list; the fixed sentence "Exact values are not required; any statement
+consistent with the magnitude class counts." to say so (it holds no number, so every check passes it); magnitude
+language verbatim from `allowed_descriptors`; the four hedge words listed. **Format-class corrective turn (D-055b):**
+when every post-check reason is a format failure (`benchmark_items.format_class_only`), one more turn lists the reasons
+and asks for the complete corrected JSON with the facts unchanged; all checks run again. Any other reason (leakage,
+untraced fact or id, schema, consistency, parse) gets no turn. EXECUTOR reading for confirmation: "a number that appears
+in `allowed_descriptors` under another form" = an untraced number whose numeric value equals a number the descriptors
+state as digits ("16.0" for "about 16 days") or as a number-word ("3" for "roughly tripling", "0.5" for "half"); the
+"half again" in "about half again as many" is read as 0.5, not 1.5. Allowed anchors ("about 16 days") stay allowed as
+optional rubric points: they are descriptors, not exact pattern values. Next: synthesis run 2, `litsynth/run2`.
