@@ -1,0 +1,77 @@
+{
+  "generator_version": "litgroup_agent v3",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "chunk_size": 40,
+  "partitions_in_file": 11,
+  "chunks_in_file": 23,
+  "chunks_per_partition": {
+    "extreme_heat_v1.mechanism.increase": 1,
+    "extreme_heat_v1.mechanism.unspecified": 3,
+    "extreme_heat_v1.driver": 3,
+    "extreme_heat_v1.consensus": 1,
+    "extreme_heat_v1.caveat": 2,
+    "extreme_heat_v1.pattern": 2,
+    "fire_weather_v1.mechanism": 3,
+    "fire_weather_v1.driver": 3,
+    "fire_weather_v1.consensus": 1,
+    "fire_weather_v1.caveat": 2,
+    "fire_weather_v1.pattern": 2
+  },
+  "cross_chunk_merge": "not done by code (D-051)",
+  "chunks_done": 23,
+  "chunks_pass": 23,
+  "chunks_fail": [],
+  "corrective_retry_used": 15,
+  "corrective_retry_pass": 15,
+  "reasoning_effort_not_applied": 0,
+  "finish_reasons": {
+    "stop": 23
+  },
+  "groups": 239,
+  "singletons": 155,
+  "groups_label_fail": 0,
+  "by_strength": {
+    "multi_source_supported": 79,
+    "review_supported": 12,
+    "single_source_supported": 216,
+    "background_only": 87
+  },
+  "groups_by_strength": {
+    "multi_source_supported": 79,
+    "review_supported": 7,
+    "single_source_supported": 118,
+    "background_only": 35
+  },
+  "statements_grouped": 747,
+  "by_claim_about": {
+    "hazard_change_mechanism": 131,
+    "hazard_definition_or_measurement": 85,
+    "impact_or_exposure": 89,
+    "method_or_data": 70,
+    "other": 19
+  },
+  "groups_by_claim_about": {
+    "hazard_change_mechanism": 81,
+    "hazard_definition_or_measurement": 57,
+    "impact_or_exposure": 57,
+    "method_or_data": 38,
+    "other": 6
+  },
+  "statements_by_claim_about": {
+    "hazard_change_mechanism": 247,
+    "hazard_definition_or_measurement": 205,
+    "impact_or_exposure": 146,
+    "method_or_data": 128,
+    "other": 21
+  },
+  "claim_about_fail": 0,
+  "endpoints_in_results": {
+    "sophia_vllm openai/gpt-oss-120b https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1": 23
+  },
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6"
+}

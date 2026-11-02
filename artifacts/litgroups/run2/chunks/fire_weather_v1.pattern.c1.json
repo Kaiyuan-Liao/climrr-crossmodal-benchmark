@@ -1,0 +1,1397 @@
+{
+  "partition_id": "fire_weather_v1.pattern",
+  "chunk_index": 1,
+  "n_chunks": 2,
+  "arm": "fire_weather_v1",
+  "statement_type": "pattern",
+  "split_by": [],
+  "partition_n_statements": 46,
+  "n_statements": 23,
+  "local_ids": [
+    "S018",
+    "S029",
+    "S032",
+    "S034",
+    "S040",
+    "S043",
+    "S045",
+    "S027",
+    "S028",
+    "S003",
+    "S020",
+    "S026",
+    "S035",
+    "S007",
+    "S017",
+    "S019",
+    "S021",
+    "S022",
+    "S024",
+    "S025",
+    "S039",
+    "S001",
+    "S002"
+  ],
+  "generator_version": "litgroup_agent v3",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "fire_weather_v1.pattern.c1",
+  "model_attempts": 2,
+  "corrective_retry_used": true,
+  "finish_reason": "stop",
+  "content_chars": 2995,
+  "reasoning_chars": 284,
+  "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "prompt_hash": "dd416516f6f12ec2963145d7f51984dd38d59f547e1c6e217144e33830c9a1b6",
+  "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+  "generation_timestamp": "2026-11-02T01:26:58Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S001",
+        "S029",
+        "S027"
+      ],
+      "label": "fire season lengthening under anthropogenic forcing",
+      "rationale": "All state that fire season length or danger is projected to increase due to climate change.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "lengthening"
+        ],
+        "rationale_words": 16,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S020",
+        "S026",
+        "S028",
+        "S034"
+      ],
+      "label": "extreme fire‑weather conditions measured by high percentiles",
+      "rationale": "Each notes that extreme fire‑weather events or indices exceed high percentile thresholds.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "high",
+          "measured"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S043",
+        "S035"
+      ],
+      "label": "HDW describes seasonal and synoptic fire danger",
+      "rationale": "Both describe what the HDW index measures and when it is high.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "danger",
+          "describes",
+          "seasonal"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S021",
+        "S022",
+        "S007",
+        "S019"
+      ],
+      "label": "model performance and predictive skill for fire‑weather indices",
+      "rationale": "All discuss evaluation, bias, or skill of models or methods for fire‑weather indices.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S024",
+        "S025",
+        "S039"
+      ],
+      "label": "global Fire Weather Index performance and drivers",
+      "rationale": "Each addresses how the FWI relates to fire activity or climate drivers worldwide.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "drivers",
+          "performance"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S032"
+      ],
+      "label": "late‑season fire‑weather conditions increase burned area",
+      "rationale": "Specifies that late‑season favorable conditions cause peaks in burned area.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "increase"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S003"
+      ],
+      "label": "geographic migration of severe fire danger across the US",
+      "rationale": "Describes spatial shift in timing and location of fire danger.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "migration",
+          "us"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S040",
+        "S045"
+      ],
+      "label": "projected changes to Santa Ana fire characteristics",
+      "rationale": "Both refer to future changes in Santa Ana humidity, wind, and frequency.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "changes",
+          "characteristics"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S018"
+      ],
+      "label": "increasing heat‑wave frequency and intensity in California",
+      "rationale": "States climate‑driven rise in heat‑wave occurrence.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "heat",
+          "wave"
+        ],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S017"
+      ],
+      "label": "rising extreme drought will expand fire onto normally wet lands",
+      "rationale": "Links projected extreme drought to more fire on wet landscapes.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "drought",
+          "expand",
+          "rising"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S002"
+      ],
+      "label": "favorable 2015 western Canada conditions for wildfires",
+      "rationale": "Describes warm, dry conditions that made 2015 fire‑season favorable.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-157247664-03",
+        "LS-273287103-05",
+        "LS-273287103-03"
+      ],
+      "member_local_ids": [
+        "S001",
+        "S029",
+        "S027"
+      ],
+      "label": "fire season lengthening under anthropogenic forcing",
+      "rationale": "All state that fire season length or danger is projected to increase due to climate change.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 3,
+      "papers": [
+        "157247664",
+        "273287103"
+      ],
+      "canonical_papers": [
+        "157247664",
+        "273287103"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "cited_candidate": 2,
+        "core_candidate": 1
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "lengthening"
+        ],
+        "rationale_words": 16,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2995,
+      "reasoning_chars": 284,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "dd416516f6f12ec2963145d7f51984dd38d59f547e1c6e217144e33830c9a1b6",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:26:58Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-247866001-03",
+        "LS-268380986-04",
+        "LS-273287103-04",
+        "LS-53050065-03"
+      ],
+      "member_local_ids": [
+        "S020",
+        "S026",
+        "S028",
+        "S034"
+      ],
+      "label": "extreme fire‑weather conditions measured by high percentiles",
+      "rationale": "Each notes that extreme fire‑weather events or indices exceed high percentile thresholds.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 4,
+      "papers": [
+        "247866001",
+        "268380986",
+        "273287103",
+        "53050065"
+      ],
+      "canonical_papers": [
+        "247866001",
+        "268380986",
+        "273287103",
+        "53050065"
+      ],
+      "n_independent_core_cited_papers": 4,
+      "role_counts": {
+        "cited_candidate": 1,
+        "core_candidate": 3
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "high",
+          "measured"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2995,
+      "reasoning_chars": 284,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "dd416516f6f12ec2963145d7f51984dd38d59f547e1c6e217144e33830c9a1b6",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:26:58Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-73563338-02",
+        "LS-53362758-05"
+      ],
+      "member_local_ids": [
+        "S043",
+        "S035"
+      ],
+      "label": "HDW describes seasonal and synoptic fire danger",
+      "rationale": "Both describe what the HDW index measures and when it is high.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 2,
+      "papers": [
+        "53362758",
+        "73563338"
+      ],
+      "canonical_papers": [
+        "53362758",
+        "73563338"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "danger",
+          "describes",
+          "seasonal"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2995,
+      "reasoning_chars": 284,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "dd416516f6f12ec2963145d7f51984dd38d59f547e1c6e217144e33830c9a1b6",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:26:58Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-253201868-04",
+        "LS-253201868-06",
+        "LS-221664018-03",
+        "LS-247649715-04"
+      ],
+      "member_local_ids": [
+        "S021",
+        "S022",
+        "S007",
+        "S019"
+      ],
+      "label": "model performance and predictive skill for fire‑weather indices",
+      "rationale": "All discuss evaluation, bias, or skill of models or methods for fire‑weather indices.",
+      "claim_about": "method_or_data",
+      "n_members": 4,
+      "papers": [
+        "221664018",
+        "247649715",
+        "253201868"
+      ],
+      "canonical_papers": [
+        "221664018",
+        "247649715",
+        "253201868"
+      ],
+      "n_independent_core_cited_papers": 3,
+      "role_counts": {
+        "core_candidate": 4
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2995,
+      "reasoning_chars": 284,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "dd416516f6f12ec2963145d7f51984dd38d59f547e1c6e217144e33830c9a1b6",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:26:58Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-258535920-04",
+        "LS-268308343-04",
+        "LS-55364237-03"
+      ],
+      "member_local_ids": [
+        "S024",
+        "S025",
+        "S039"
+      ],
+      "label": "global Fire Weather Index performance and drivers",
+      "rationale": "Each addresses how the FWI relates to fire activity or climate drivers worldwide.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 3,
+      "papers": [
+        "258535920",
+        "268308343",
+        "55364237"
+      ],
+      "canonical_papers": [
+        "258535920",
+        "268308343",
+        "55364237"
+      ],
+      "n_independent_core_cited_papers": 3,
+      "role_counts": {
+        "cited_candidate": 1,
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "drivers",
+          "performance"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2995,
+      "reasoning_chars": 284,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "dd416516f6f12ec2963145d7f51984dd38d59f547e1c6e217144e33830c9a1b6",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:26:58Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-52839166-06"
+      ],
+      "member_local_ids": [
+        "S032"
+      ],
+      "label": "late‑season fire‑weather conditions increase burned area",
+      "rationale": "Specifies that late‑season favorable conditions cause peaks in burned area.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "52839166"
+      ],
+      "canonical_papers": [
+        "52839166"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "increase"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2995,
+      "reasoning_chars": 284,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "dd416516f6f12ec2963145d7f51984dd38d59f547e1c6e217144e33830c9a1b6",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:26:58Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-203252492-05"
+      ],
+      "member_local_ids": [
+        "S003"
+      ],
+      "label": "geographic migration of severe fire danger across the US",
+      "rationale": "Describes spatial shift in timing and location of fire danger.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "203252492"
+      ],
+      "canonical_papers": [
+        "203252492"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "migration",
+          "us"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2995,
+      "reasoning_chars": 284,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "dd416516f6f12ec2963145d7f51984dd38d59f547e1c6e217144e33830c9a1b6",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:26:58Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-56076970-03",
+        "LS-89025663-05"
+      ],
+      "member_local_ids": [
+        "S040",
+        "S045"
+      ],
+      "label": "projected changes to Santa Ana fire characteristics",
+      "rationale": "Both refer to future changes in Santa Ana humidity, wind, and frequency.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 2,
+      "papers": [
+        "56076970",
+        "89025663"
+      ],
+      "canonical_papers": [
+        "56076970",
+        "89025663"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "changes",
+          "characteristics"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2995,
+      "reasoning_chars": 284,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "dd416516f6f12ec2963145d7f51984dd38d59f547e1c6e217144e33830c9a1b6",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:26:58Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-246347702-04"
+      ],
+      "member_local_ids": [
+        "S018"
+      ],
+      "label": "increasing heat‑wave frequency and intensity in California",
+      "rationale": "States climate‑driven rise in heat‑wave occurrence.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "246347702"
+      ],
+      "canonical_papers": [
+        "246347702"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "heat",
+          "wave"
+        ],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2995,
+      "reasoning_chars": 284,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "dd416516f6f12ec2963145d7f51984dd38d59f547e1c6e217144e33830c9a1b6",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:26:58Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-239696378-05"
+      ],
+      "member_local_ids": [
+        "S017"
+      ],
+      "label": "rising extreme drought will expand fire onto normally wet lands",
+      "rationale": "Links projected extreme drought to more fire on wet landscapes.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "239696378"
+      ],
+      "canonical_papers": [
+        "237554329"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "drought",
+          "expand",
+          "rising"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2995,
+      "reasoning_chars": 284,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "dd416516f6f12ec2963145d7f51984dd38d59f547e1c6e217144e33830c9a1b6",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:26:58Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-16316827-06"
+      ],
+      "member_local_ids": [
+        "S002"
+      ],
+      "label": "favorable 2015 western Canada conditions for wildfires",
+      "rationale": "Describes warm, dry conditions that made 2015 fire‑season favorable.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "16316827"
+      ],
+      "canonical_papers": [
+        "16316827"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2995,
+      "reasoning_chars": 284,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "dd416516f6f12ec2963145d7f51984dd38d59f547e1c6e217144e33830c9a1b6",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:26:58Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 2965,
+      "reasoning_chars": 4007,
+      "http_attempts": 1,
+      "model_seconds": 8.4
+    },
+    {
+      "turn": 2,
+      "finish_reason": "stop",
+      "content_chars": 2995,
+      "reasoning_chars": 284,
+      "http_attempts": 1,
+      "model_seconds": 5.2
+    }
+  ],
+  "first_turn": {
+    "checks": {
+      "parse_pass": true,
+      "unknown_ids": [
+        "S004"
+      ],
+      "duplicate_ids": [
+        "S003"
+      ],
+      "missing_ids": [],
+      "empty_groups": 0,
+      "ids_exactly_once_pass": false,
+      "no_empty_group_pass": true,
+      "failed": [
+        "ids_exactly_once_pass"
+      ]
+    },
+    "groups_as_returned": [
+      {
+        "member_ids": [
+          "S001",
+          "S029",
+          "S027"
+        ],
+        "label": "fire season lengthening under anthropogenic forcing",
+        "rationale": "All state that fire season length or danger is projected to increase due to climate change.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "lengthening"
+          ],
+          "rationale_words": 16,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S020",
+          "S026",
+          "S028",
+          "S034"
+        ],
+        "label": "extreme fire‑weather conditions measured by high percentiles",
+        "rationale": "Each notes that extreme fire‑weather events or indices exceed high percentile thresholds.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "high",
+            "measured"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S043",
+          "S035"
+        ],
+        "label": "HDW describes seasonal and synoptic fire danger",
+        "rationale": "Both describe what the HDW index measures and when it is high.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "danger",
+            "describes",
+            "seasonal"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S021",
+          "S022",
+          "S007",
+          "S019"
+        ],
+        "label": "model performance and predictive skill for fire‑weather indices",
+        "rationale": "All discuss evaluation, bias, or skill of models or methods for fire‑weather indices.",
+        "claim_about": "method_or_data",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 13,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S024",
+          "S025",
+          "S039"
+        ],
+        "label": "global Fire Weather Index performance and drivers",
+        "rationale": "Each addresses how the FWI relates to fire activity or climate drivers worldwide.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "drivers",
+            "performance"
+          ],
+          "rationale_words": 13,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S032"
+        ],
+        "label": "late‑season fire‑weather conditions increase burned area",
+        "rationale": "Specifies that late‑season favorable conditions cause peaks in burned area.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "increase"
+          ],
+          "rationale_words": 10,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S003"
+        ],
+        "label": "geographic migration of severe fire danger across the US",
+        "rationale": "Describes spatial shift in timing and location of fire danger.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "migration",
+            "us"
+          ],
+          "rationale_words": 10,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S040",
+          "S045"
+        ],
+        "label": "projected changes to Santa Ana fire characteristics",
+        "rationale": "Both refer to future changes in Santa Ana humidity, wind, and frequency.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "changes",
+            "characteristics"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S018"
+        ],
+        "label": "increasing heat‑wave frequency and intensity in California",
+        "rationale": "States climate‑driven rise in heat‑wave occurrence.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "heat",
+            "wave"
+          ],
+          "rationale_words": 6,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S017"
+        ],
+        "label": "rising extreme drought will expand fire onto normally wet lands",
+        "rationale": "Links projected extreme drought to more fire on wet landscapes.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "drought",
+            "expand",
+            "rising"
+          ],
+          "rationale_words": 10,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "singletons_as_returned": [
+      {
+        "id": "S002",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S003",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S004",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"fire season lengthening under anthropogenic forcing\",\n      \"member_ids\": [\"S001\", \"S029\", \"S027\"],\n      \"rationale\": \"All state that fire season length or danger is projected to increase due to climate change.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"extreme fire‑weather conditions measured by high percentiles\",\n      \"member_ids\": [\"S020\", \"S026\", \"S028\", \"S034\"],\n      \"rationale\": \"Each notes that extreme fire‑weather events or indices exceed high percentile thresholds.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"HDW describes seasonal and synoptic fire danger\",\n      \"member_ids\": [\"S043\", \"S035\"],\n      \"rationale\": \"Both describe what the HDW index measures and when it is high.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"model performance and predictive skill for fire‑weather indices\",\n      \"member_ids\": [\"S021\", \"S022\", \"S007\", \"S019\"],\n      \"rationale\": \"All discuss evaluation, bias, or skill of models or methods for fire‑weather indices.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"global Fire Weather Index performance and drivers\",\n      \"member_ids\": [\"S024\", \"S025\", \"S039\"],\n      \"rationale\": \"Each addresses how the FWI relates to fire activity or climate drivers worldwide.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"late‑season fire‑weather conditions increase burned area\",\n      \"member_ids\": [\"S032\"],\n      \"rationale\": \"Specifies that late‑season favorable conditions cause peaks in burned area.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"geographic migration of severe fire danger across the US\",\n      \"member_ids\": [\"S003\"],\n      \"rationale\": \"Describes spatial shift in timing and location of fire danger.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"projected changes to Santa Ana fire characteristics\",\n      \"member_ids\": [\"S040\", \"S045\"],\n      \"rationale\": \"Both refer to future changes in Santa Ana humidity, wind, and frequency.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"increasing heat‑wave frequency and intensity in California\",\n      \"member_ids\": [\"S018\"],\n      \"rationale\": \"States climate‑driven rise in heat‑wave occurrence.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"rising extreme drought will expand fire onto normally wet lands\",\n      \"member_ids\": [\"S017\"],\n      \"rationale\": \"Links projected extreme drought to more fire on wet landscapes.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    }\n  ],\n  \"singletons\": [\n    {\n      \"id\": \"S002\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"id\": \"S003\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"id\": \"S004\",\n      \"claim_about\": \"other\"\n    }\n  ]\n}",
+    "raw_response_chars": 2965,
+    "raw_reasoning": null,
+    "raw_reasoning_chars": null,
+    "content_fallback": false,
+    "finish_reason": "stop",
+    "raw_max_chars": 20000
+  },
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 13.600000000000001,
+  "model_parse_error": null,
+  "elapsed_seconds": 13.6,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"fire season lengthening under anthropogenic forcing\",\n      \"member_ids\": [\"S001\", \"S029\", \"S027\"],\n      \"rationale\": \"All state that fire season length or danger is projected to increase due to climate change.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"extreme fire‑weather conditions measured by high percentiles\",\n      \"member_ids\": [\"S020\", \"S026\", \"S028\", \"S034\"],\n      \"rationale\": \"Each notes that extreme fire‑weather events or indices exceed high percentile thresholds.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"HDW describes seasonal and synoptic fire danger\",\n      \"member_ids\": [\"S043\", \"S035\"],\n      \"rationale\": \"Both describe what the HDW index measures and when it is high.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"model performance and predictive skill for fire‑weather indices\",\n      \"member_ids\": [\"S021\", \"S022\", \"S007\", \"S019\"],\n      \"rationale\": \"All discuss evaluation, bias, or skill of models or methods for fire‑weather indices.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"global Fire Weather Index performance and drivers\",\n      \"member_ids\": [\"S024\", \"S025\", \"S039\"],\n      \"rationale\": \"Each addresses how the FWI relates to fire activity or climate drivers worldwide.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"late‑season fire‑weather conditions increase burned area\",\n      \"member_ids\": [\"S032\"],\n      \"rationale\": \"Specifies that late‑season favorable conditions cause peaks in burned area.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"geographic migration of severe fire danger across the US\",\n      \"member_ids\": [\"S003\"],\n      \"rationale\": \"Describes spatial shift in timing and location of fire danger.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"projected changes to Santa Ana fire characteristics\",\n      \"member_ids\": [\"S040\", \"S045\"],\n      \"rationale\": \"Both refer to future changes in Santa Ana humidity, wind, and frequency.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"increasing heat‑wave frequency and intensity in California\",\n      \"member_ids\": [\"S018\"],\n      \"rationale\": \"States climate‑driven rise in heat‑wave occurrence.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"rising extreme drought will expand fire onto normally wet lands\",\n      \"member_ids\": [\"S017\"],\n      \"rationale\": \"Links projected extreme drought to more fire on wet landscapes.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"favorable 2015 western Canada conditions for wildfires\",\n      \"member_ids\": [\"S002\"],\n      \"rationale\": \"Describes warm, dry conditions that made 2015 fire‑season favorable.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    }\n  ],\n  \"singletons\": []\n}",
+  "raw_response_chars": 2995,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

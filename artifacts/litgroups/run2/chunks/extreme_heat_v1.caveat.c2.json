@@ -1,0 +1,3183 @@
+{
+  "partition_id": "extreme_heat_v1.caveat",
+  "chunk_index": 2,
+  "n_chunks": 2,
+  "arm": "extreme_heat_v1",
+  "statement_type": "caveat",
+  "split_by": [],
+  "partition_n_statements": 74,
+  "n_statements": 37,
+  "local_ids": [
+    "S015",
+    "S016",
+    "S024",
+    "S025",
+    "S032",
+    "S042",
+    "S053",
+    "S055",
+    "S057",
+    "S067",
+    "S068",
+    "S073",
+    "S001",
+    "S007",
+    "S008",
+    "S009",
+    "S020",
+    "S022",
+    "S023",
+    "S028",
+    "S029",
+    "S030",
+    "S033",
+    "S034",
+    "S036",
+    "S039",
+    "S043",
+    "S045",
+    "S048",
+    "S049",
+    "S052",
+    "S059",
+    "S062",
+    "S065",
+    "S066",
+    "S071",
+    "S074"
+  ],
+  "generator_version": "litgroup_agent v3",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "extreme_heat_v1.caveat.c2",
+  "model_attempts": 2,
+  "corrective_retry_used": true,
+  "finish_reason": "stop",
+  "content_chars": 7103,
+  "reasoning_chars": 4884,
+  "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+  "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+  "generation_timestamp": "2026-11-02T01:22:06Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S045",
+        "S065"
+      ],
+      "label": "Heat index omits wind, solar or metabolic factors",
+      "rationale": "Both note that the index excludes important variables such as wind, solar radiation, or metabolic heat.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "factors",
+          "omits"
+        ],
+        "rationale_words": 16,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S001",
+        "S036",
+        "S062"
+      ],
+      "label": "Temperature‑only indices may be more appropriate",
+      "rationale": "Each argues that using temperature alone (or choosing metrics) can be preferable to the heat index in some contexts.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 19,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S028",
+        "S022",
+        "S071"
+      ],
+      "label": "Fixed or high thresholds miss early health impacts; relative thresholds preferred",
+      "rationale": "All discuss that absolute/high thresholds can miss harmful events and that relative thresholds are better.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "early",
+          "fixed",
+          "high",
+          "miss",
+          "preferred"
+        ],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S015",
+        "S016",
+        "S053",
+        "S059"
+      ],
+      "label": "Missing or inaccurate measurements bias heat‑related results",
+      "rationale": "Each mentions that omission or error in wind, radiation, humidity, or heat‑index measurements leads to biased associations.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "bias",
+          "missing",
+          "results"
+        ],
+        "rationale_words": 17,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S008",
+        "S009"
+      ],
+      "label": "Statistical downscaling underestimates variance and may violate stationarity",
+      "rationale": "Both describe downscaling methods that underestimate extremes and assume stationarity that may not hold.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "underestimates",
+          "violate"
+        ],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S068",
+        "S066"
+      ],
+      "label": "Key uncertainties in projected heat‑wave mortality",
+      "rationale": "Each identifies major sources of uncertainty—scenario, risk assumptions, definition, or limited calibration range.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "key",
+          "uncertainties"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S055",
+        "S067"
+      ],
+      "label": "Rising humidity increases heat‑wave severity despite stable max temperature",
+      "rationale": "Both point to increasing wet‑bulb or humidity‑related indices as drivers of greater heat stress.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "despite",
+          "increases",
+          "max",
+          "rising",
+          "stable"
+        ],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S073"
+      ],
+      "label": "Joint extremes of temperature and humidity matter for health risk",
+      "rationale": "Highlights that high‑temperature/high‑humidity extremes can occur even when variables are negatively correlated.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "matter"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S033"
+      ],
+      "label": "Combined extreme heat and humidity cause production and livestock losses",
+      "rationale": "Links high heat‑wave and humidity to severe economic and animal‑health impacts.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "heat"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S029",
+        "S030"
+      ],
+      "label": "Inadequate cooling or HVAC capacity leads to heat‑related illness",
+      "rationale": "Both describe how insufficient cooling infrastructure causes dizziness, fatigue, fainting, or heat stroke.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "illness",
+          "leads",
+          "related"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S048"
+      ],
+      "label": "Acclimatization provides limited protection during rapid heat waves",
+      "rationale": "States physiological adaptation cannot keep pace with quickly rising temperatures.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "waves"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S020"
+      ],
+      "label": "Smartphone app can monitor high heat‑index risk",
+      "rationale": "Describes a tool for tracking weather conditions and heat‑index risk.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "app"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S039"
+      ],
+      "label": "Concurrent fire danger, power shutoffs, and poor air quality force hospital evacuations",
+      "rationale": "Notes combined hazards impede health‑service operations.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S043"
+      ],
+      "label": "Sports events should be postponed when wet‑bulb exceeds 28 °C",
+      "rationale": "Guidance to avoid health risk from high wet‑bulb temperatures during outdoor competition.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "postponed"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S057"
+      ],
+      "label": "Heat‑wave days not linked to increased Medicare spending",
+      "rationale": "Finds no statistical association between heat‑wave frequency and Medicare costs.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "heat",
+          "increased",
+          "linked",
+          "wave"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S024"
+      ],
+      "label": "No comprehensive health‑temperature relationships established for Africa",
+      "rationale": "States a knowledge gap for apparent temperature and health effects in Africa.",
+      "claim_about": "other",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S042"
+      ],
+      "label": "Germination declines above optimum temperature despite seed viability",
+      "rationale": "Indicates processes beyond simple heat mortality affect germination.",
+      "claim_about": "other",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "declines",
+          "despite",
+          "temperature"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S052"
+      ],
+      "label": "THI simulations show strengths and limitations",
+      "rationale": "Evaluates a temperature‑humidity index approach.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 5,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S032"
+      ],
+      "label": "Heat index calculated per trimester to study birth outcomes",
+      "rationale": "Describes a methodological choice for seasonal analysis of birth outcomes.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "study"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S007"
+      ],
+      "label": "Heat‑wave defined by temperature staying above a threshold",
+      "rationale": "Provides a common definition relying on daily temperature data.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "above",
+          "staying"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S074"
+      ],
+      "label": "Isolines of joint exceedance do not convey impact, need additional information",
+      "rationale": "States that rarity maps lack practical impact information.",
+      "claim_about": "other",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "need"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S023"
+      ],
+      "label": "Study compares indoor apparent temperature to symptom bands for health risk estimation",
+      "rationale": "Methodological comparison of indoor apparent temperature to official symptom bands.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "compares",
+          "estimation",
+          "risk"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S049"
+      ],
+      "label": "Night‑time minimum temperature rise not considered, affecting heat stress",
+      "rationale": "Notes omission of rising night‑time temps that impair physiological cooling.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "affecting",
+          "considered",
+          "rise",
+          "temperature"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S034"
+      ],
+      "label": "Thornthwaite PET model overestimates PET responses to warming",
+      "rationale": "Methodological issue causing spurious drought‑index trends under warming.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "overestimates"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S025"
+      ],
+      "label": "Hyperthermia visits often occur in lower heat‑index risk categories, suggesting thresholds miss risk",
+      "rationale": "Observes many emergency visits under “lower” or “moderate” index categories.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "miss",
+          "occur",
+          "often"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-252325972-01",
+        "LS-4238342-02"
+      ],
+      "member_local_ids": [
+        "S045",
+        "S065"
+      ],
+      "label": "Heat index omits wind, solar or metabolic factors",
+      "rationale": "Both note that the index excludes important variables such as wind, solar radiation, or metabolic heat.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 2,
+      "papers": [
+        "252325972",
+        "4238342"
+      ],
+      "canonical_papers": [
+        "252325972",
+        "4238342"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 2
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "factors",
+          "omits"
+        ],
+        "rationale_words": 16,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-121201574-02",
+        "LS-237371886-03",
+        "LS-3988469-03"
+      ],
+      "member_local_ids": [
+        "S001",
+        "S036",
+        "S062"
+      ],
+      "label": "Temperature‑only indices may be more appropriate",
+      "rationale": "Each argues that using temperature alone (or choosing metrics) can be preferable to the heat index in some contexts.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 3,
+      "papers": [
+        "121201574",
+        "237371886",
+        "3988469"
+      ],
+      "canonical_papers": [
+        "121201574",
+        "237371886",
+        "3988469"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "cited_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 19,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-226260658-05",
+        "LS-216218610-02",
+        "LS-85563488-06"
+      ],
+      "member_local_ids": [
+        "S028",
+        "S022",
+        "S071"
+      ],
+      "label": "Fixed or high thresholds miss early health impacts; relative thresholds preferred",
+      "rationale": "All discuss that absolute/high thresholds can miss harmful events and that relative thresholds are better.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 3,
+      "papers": [
+        "216218610",
+        "226260658",
+        "85563488"
+      ],
+      "canonical_papers": [
+        "216218610",
+        "226260658",
+        "85563488"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "background_consensus_candidate": 2,
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "early",
+          "fixed",
+          "high",
+          "miss",
+          "preferred"
+        ],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-16732189-03",
+        "LS-16732189-06",
+        "LS-266658220-05",
+        "LS-34373293-04"
+      ],
+      "member_local_ids": [
+        "S015",
+        "S016",
+        "S053",
+        "S059"
+      ],
+      "label": "Missing or inaccurate measurements bias heat‑related results",
+      "rationale": "Each mentions that omission or error in wind, radiation, humidity, or heat‑index measurements leads to biased associations.",
+      "claim_about": "method_or_data",
+      "n_members": 4,
+      "papers": [
+        "16732189",
+        "266658220",
+        "34373293"
+      ],
+      "canonical_papers": [
+        "16732189",
+        "266658220",
+        "34373293"
+      ],
+      "n_independent_core_cited_papers": 3,
+      "role_counts": {
+        "core_candidate": 4
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "bias",
+          "missing",
+          "results"
+        ],
+        "rationale_words": 17,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-134140216-04",
+        "LS-134140216-05"
+      ],
+      "member_local_ids": [
+        "S008",
+        "S009"
+      ],
+      "label": "Statistical downscaling underestimates variance and may violate stationarity",
+      "rationale": "Both describe downscaling methods that underestimate extremes and assume stationarity that may not hold.",
+      "claim_about": "method_or_data",
+      "n_members": 2,
+      "papers": [
+        "134140216"
+      ],
+      "canonical_papers": [
+        "134140216"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "underestimates",
+          "violate"
+        ],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-5882914-04",
+        "LS-52875744-03"
+      ],
+      "member_local_ids": [
+        "S068",
+        "S066"
+      ],
+      "label": "Key uncertainties in projected heat‑wave mortality",
+      "rationale": "Each identifies major sources of uncertainty—scenario, risk assumptions, definition, or limited calibration range.",
+      "claim_about": "method_or_data",
+      "n_members": 2,
+      "papers": [
+        "52875744",
+        "5882914"
+      ],
+      "canonical_papers": [
+        "52875744",
+        "5882914"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "key",
+          "uncertainties"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-272709236-05",
+        "LS-55565874-03"
+      ],
+      "member_local_ids": [
+        "S055",
+        "S067"
+      ],
+      "label": "Rising humidity increases heat‑wave severity despite stable max temperature",
+      "rationale": "Both point to increasing wet‑bulb or humidity‑related indices as drivers of greater heat stress.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 2,
+      "papers": [
+        "272709236",
+        "55565874"
+      ],
+      "canonical_papers": [
+        "272709236",
+        "55565874"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "despite",
+          "increases",
+          "max",
+          "rising",
+          "stable"
+        ],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-88523156-03"
+      ],
+      "member_local_ids": [
+        "S073"
+      ],
+      "label": "Joint extremes of temperature and humidity matter for health risk",
+      "rationale": "Highlights that high‑temperature/high‑humidity extremes can occur even when variables are negatively correlated.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "88523156"
+      ],
+      "canonical_papers": [
+        "88523156"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "matter"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-233254364-06"
+      ],
+      "member_local_ids": [
+        "S033"
+      ],
+      "label": "Combined extreme heat and humidity cause production and livestock losses",
+      "rationale": "Links high heat‑wave and humidity to severe economic and animal‑health impacts.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "233254364"
+      ],
+      "canonical_papers": [
+        "233254364"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "heat"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-229479546-02",
+        "LS-229479546-03"
+      ],
+      "member_local_ids": [
+        "S029",
+        "S030"
+      ],
+      "label": "Inadequate cooling or HVAC capacity leads to heat‑related illness",
+      "rationale": "Both describe how insufficient cooling infrastructure causes dizziness, fatigue, fainting, or heat stroke.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 2,
+      "papers": [
+        "229479546"
+      ],
+      "canonical_papers": [
+        "229479546"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "illness",
+          "leads",
+          "related"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-258355323-05"
+      ],
+      "member_local_ids": [
+        "S048"
+      ],
+      "label": "Acclimatization provides limited protection during rapid heat waves",
+      "rationale": "States physiological adaptation cannot keep pace with quickly rising temperatures.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "258355323"
+      ],
+      "canonical_papers": [
+        "258355323"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "waves"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-214074018-02"
+      ],
+      "member_local_ids": [
+        "S020"
+      ],
+      "label": "Smartphone app can monitor high heat‑index risk",
+      "rationale": "Describes a tool for tracking weather conditions and heat‑index risk.",
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "214074018"
+      ],
+      "canonical_papers": [
+        "214074018"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "app"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-244715454-03"
+      ],
+      "member_local_ids": [
+        "S039"
+      ],
+      "label": "Concurrent fire danger, power shutoffs, and poor air quality force hospital evacuations",
+      "rationale": "Notes combined hazards impede health‑service operations.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "244715454"
+      ],
+      "canonical_papers": [
+        "244715454"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-252233222-05"
+      ],
+      "member_local_ids": [
+        "S043"
+      ],
+      "label": "Sports events should be postponed when wet‑bulb exceeds 28 °C",
+      "rationale": "Guidance to avoid health risk from high wet‑bulb temperatures during outdoor competition.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "252233222"
+      ],
+      "canonical_papers": [
+        "252233222"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "postponed"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-273222129-04"
+      ],
+      "member_local_ids": [
+        "S057"
+      ],
+      "label": "Heat‑wave days not linked to increased Medicare spending",
+      "rationale": "Finds no statistical association between heat‑wave frequency and Medicare costs.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "273222129"
+      ],
+      "canonical_papers": [
+        "273222129"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "heat",
+          "increased",
+          "linked",
+          "wave"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-220978205-05"
+      ],
+      "member_local_ids": [
+        "S024"
+      ],
+      "label": "No comprehensive health‑temperature relationships established for Africa",
+      "rationale": "States a knowledge gap for apparent temperature and health effects in Africa.",
+      "claim_about": "other",
+      "n_members": 1,
+      "papers": [
+        "220978205"
+      ],
+      "canonical_papers": [
+        "220978205"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-247429769-05"
+      ],
+      "member_local_ids": [
+        "S042"
+      ],
+      "label": "Germination declines above optimum temperature despite seed viability",
+      "rationale": "Indicates processes beyond simple heat mortality affect germination.",
+      "claim_about": "other",
+      "n_members": 1,
+      "papers": [
+        "247429769"
+      ],
+      "canonical_papers": [
+        "247429769"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "declines",
+          "despite",
+          "temperature"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-263911499-01"
+      ],
+      "member_local_ids": [
+        "S052"
+      ],
+      "label": "THI simulations show strengths and limitations",
+      "rationale": "Evaluates a temperature‑humidity index approach.",
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "263911499"
+      ],
+      "canonical_papers": [
+        "263911499"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 5,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-231958002-01"
+      ],
+      "member_local_ids": [
+        "S032"
+      ],
+      "label": "Heat index calculated per trimester to study birth outcomes",
+      "rationale": "Describes a methodological choice for seasonal analysis of birth outcomes.",
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "231958002"
+      ],
+      "canonical_papers": [
+        "231958002"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "study"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-134140216-03"
+      ],
+      "member_local_ids": [
+        "S007"
+      ],
+      "label": "Heat‑wave defined by temperature staying above a threshold",
+      "rationale": "Provides a common definition relying on daily temperature data.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "134140216"
+      ],
+      "canonical_papers": [
+        "134140216"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "above",
+          "staying"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-88523156-06"
+      ],
+      "member_local_ids": [
+        "S074"
+      ],
+      "label": "Isolines of joint exceedance do not convey impact, need additional information",
+      "rationale": "States that rarity maps lack practical impact information.",
+      "claim_about": "other",
+      "n_members": 1,
+      "papers": [
+        "88523156"
+      ],
+      "canonical_papers": [
+        "88523156"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "need"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-220978205-04"
+      ],
+      "member_local_ids": [
+        "S023"
+      ],
+      "label": "Study compares indoor apparent temperature to symptom bands for health risk estimation",
+      "rationale": "Methodological comparison of indoor apparent temperature to official symptom bands.",
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "220978205"
+      ],
+      "canonical_papers": [
+        "220978205"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "compares",
+          "estimation",
+          "risk"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-260770449-06"
+      ],
+      "member_local_ids": [
+        "S049"
+      ],
+      "label": "Night‑time minimum temperature rise not considered, affecting heat stress",
+      "rationale": "Notes omission of rising night‑time temps that impair physiological cooling.",
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "260770449"
+      ],
+      "canonical_papers": [
+        "260770449"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "affecting",
+          "considered",
+          "rise",
+          "temperature"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-236205648-02"
+      ],
+      "member_local_ids": [
+        "S034"
+      ],
+      "label": "Thornthwaite PET model overestimates PET responses to warming",
+      "rationale": "Methodological issue causing spurious drought‑index trends under warming.",
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "236205648"
+      ],
+      "canonical_papers": [
+        "236205648"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "overestimates"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "caveat",
+      "partition_id": "extreme_heat_v1.caveat",
+      "chunk_id": "extreme_heat_v1.caveat.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-221152097-03"
+      ],
+      "member_local_ids": [
+        "S025"
+      ],
+      "label": "Hyperthermia visits often occur in lower heat‑index risk categories, suggesting thresholds miss risk",
+      "rationale": "Observes many emergency visits under “lower” or “moderate” index categories.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "221152097"
+      ],
+      "canonical_papers": [
+        "221152097"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "miss",
+          "occur",
+          "often"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "18f36c7238fb7b87da43b9e9089fffb1c596fc0b83e0b654e77635de169404cd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:06Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 8606,
+      "reasoning_chars": 6984,
+      "http_attempts": 1,
+      "model_seconds": 20.8
+    },
+    {
+      "turn": 2,
+      "finish_reason": "stop",
+      "content_chars": 7103,
+      "reasoning_chars": 4884,
+      "http_attempts": 1,
+      "model_seconds": 19.0
+    }
+  ],
+  "first_turn": {
+    "checks": {
+      "parse_pass": true,
+      "unknown_ids": [
+        "S079"
+      ],
+      "duplicate_ids": [
+        "S001",
+        "S007",
+        "S008",
+        "S009",
+        "S015",
+        "S016",
+        "S020",
+        "S022",
+        "S024",
+        "S028",
+        "S029",
+        "S030",
+        "S032",
+        "S033",
+        "S036",
+        "S039",
+        "S042",
+        "S045",
+        "S048",
+        "S052",
+        "S053",
+        "S055",
+        "S057",
+        "S059",
+        "S062",
+        "S065",
+        "S066",
+        "S067",
+        "S068",
+        "S071",
+        "S073",
+        "S074"
+      ],
+      "missing_ids": [],
+      "empty_groups": 0,
+      "ids_exactly_once_pass": false,
+      "no_empty_group_pass": true,
+      "failed": [
+        "ids_exactly_once_pass"
+      ]
+    },
+    "groups_as_returned": [
+      {
+        "member_ids": [
+          "S045",
+          "S065"
+        ],
+        "label": "Heat index omits wind, solar or metabolic factors",
+        "rationale": "Both note that the index excludes important variables like wind, solar radiation, or metabolic heat.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "factors",
+            "omits"
+          ],
+          "rationale_words": 15,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S001",
+          "S036",
+          "S062"
+        ],
+        "label": "Simple temperature‑only indices may be preferable",
+        "rationale": "All argue that using temperature alone (or choosing metrics) can be more appropriate than heat‑index in some contexts.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "preferable"
+          ],
+          "rationale_words": 18,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S028",
+          "S022",
+          "S071"
+        ],
+        "label": "Thresholds often too high or need relative approach",
+        "rationale": "Each discusses that fixed or high thresholds miss early health impacts and that relative thresholds are better.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "approach",
+            "high",
+            "need",
+            "often",
+            "too"
+          ],
+          "rationale_words": 17,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S015",
+          "S016",
+          "S053",
+          "S059"
+        ],
+        "label": "Missing or inaccurate measurements bias results",
+        "rationale": "All mention that omission or error in measuring wind, radiation, humidity, or heat index leads to biased associations.",
+        "claim_about": "method_or_data",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "bias",
+            "missing",
+            "results"
+          ],
+          "rationale_words": 18,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S008",
+          "S009"
+        ],
+        "label": "Statistical downscaling underestimates extremes",
+        "rationale": "Both describe downscaling methods that underestimate variance and may violate stationarity.",
+        "claim_about": "method_or_data",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "extremes",
+            "underestimates"
+          ],
+          "rationale_words": 11,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S068",
+          "S066"
+        ],
+        "label": "Uncertainty in projected heat‑wave mortality",
+        "rationale": "Each identifies key sources of uncertainty—scenario, risk assumptions, definition, or limited calibration range.",
+        "claim_about": "method_or_data",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 13,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S055",
+          "S067"
+        ],
+        "label": "Increasing humidity raises heat‑wave severity despite stable max temperature",
+        "rationale": "Both point to rising heat‑stress indices or wet‑bulb temperatures as drivers of greater severity.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "despite",
+            "increasing",
+            "max",
+            "raises",
+            "stable"
+          ],
+          "rationale_words": 14,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S073"
+        ],
+        "label": "Joint extremes of temperature and humidity matter for health risk",
+        "rationale": "Highlights that high‑temperature/high‑humidity extremes can occur even when variables are negatively correlated.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "matter"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S033"
+        ],
+        "label": "Extreme heat and humidity cause production and livestock losses",
+        "rationale": "Links combined heat‑wave and humidity to severe economic and animal health impacts.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "heat"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S029",
+          "S030"
+        ],
+        "label": "Inadequate cooling or HVAC capacity leads to health problems",
+        "rationale": "Both describe how insufficient cooling infrastructure causes heat‑related illness.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "health",
+            "leads",
+            "problems"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S048"
+        ],
+        "label": "Acclimatization provides limited protection during rapid heat waves",
+        "rationale": "States physiological adaptation cannot keep pace with quickly rising temperatures.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "waves"
+          ],
+          "rationale_words": 10,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S020"
+        ],
+        "label": "Smartphone app can monitor heat‑index risk",
+        "rationale": "Describes a tool for tracking weather conditions and heat‑index risk.",
+        "claim_about": "method_or_data",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "app"
+          ],
+          "rationale_words": 10,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S039"
+        ],
+        "label": "Concurrent fire danger, power shutoffs, and poor air quality force hospital evacuations",
+        "rationale": "Notes combined hazards impede health services.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 6,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S043"
+        ],
+        "label": "Sports events should be postponed when wet‑bulb exceeds 28 °C",
+        "rationale": "Guidance to avoid health risk from high wet‑bulb temperatures.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "postponed"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S057"
+        ],
+        "label": "Heat‑wave days not linked to increased Medicare spending",
+        "rationale": "Finds no statistical association between heat‑wave frequency and Medicare costs.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "heat",
+            "increased",
+            "linked",
+            "wave"
+          ],
+          "rationale_words": 10,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S024"
+        ],
+        "label": "No comprehensive health‑temperature relationships established for Africa",
+        "rationale": "States a knowledge gap for apparent temperature and health effects in Africa.",
+        "claim_about": "other",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S042"
+        ],
+        "label": "Germination declines above optimum temperature despite seed viability",
+        "rationale": "Indicates processes beyond simple heat mortality affect germination.",
+        "claim_about": "other",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "declines",
+            "despite",
+            "temperature"
+          ],
+          "rationale_words": 8,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S052"
+        ],
+        "label": "THI simulations show strengths and limitations",
+        "rationale": "Evaluates a temperature‑humidity index approach.",
+        "claim_about": "method_or_data",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 5,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S032"
+        ],
+        "label": "Heat index calculated per trimester to study birth outcomes",
+        "rationale": "Describes a methodological choice for seasonal analysis.",
+        "claim_about": "method_or_data",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "study"
+          ],
+          "rationale_words": 7,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S007"
+        ],
+        "label": "Heat‑wave defined by temperature staying above a threshold",
+        "rationale": "Provides a common definition relying on daily temperature data.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "above",
+            "staying"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S074"
+        ],
+        "label": "Isolines of joint exceedance do not convey impact, need additional info",
+        "rationale": "States that rarity maps lack practical impact information.",
+        "claim_about": "other",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "info",
+            "need"
+          ],
+          "rationale_words": 8,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "singletons_as_returned": [
+      {
+        "id": "S001",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S007",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S008",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S009",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S015",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S016",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S020",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S022",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S023",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S024",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S025",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S028",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S029",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S030",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S032",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S033",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S034",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S036",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S039",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S042",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S045",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S048",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S049",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S052",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S053",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S055",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S057",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S059",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S062",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S065",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S066",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S067",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S068",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S071",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S073",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S074",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S079",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"Heat index omits wind, solar or metabolic factors\",\n      \"member_ids\": [\"S045\", \"S065\"],\n      \"rationale\": \"Both note that the index excludes important variables like wind, solar radiation, or metabolic heat.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Simple temperature‑only indices may be preferable\",\n      \"member_ids\": [\"S001\", \"S036\", \"S062\"],\n      \"rationale\": \"All argue that using temperature alone (or choosing metrics) can be more appropriate than heat‑index in some contexts.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Thresholds often too high or need relative approach\",\n      \"member_ids\": [\"S028\", \"S022\", \"S071\"],\n      \"rationale\": \"Each discusses that fixed or high thresholds miss early health impacts and that relative thresholds are better.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Missing or inaccurate measurements bias results\",\n      \"member_ids\": [\"S015\", \"S016\", \"S053\", \"S059\"],\n      \"rationale\": \"All mention that omission or error in measuring wind, radiation, humidity, or heat index leads to biased associations.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Statistical downscaling underestimates extremes\",\n      \"member_ids\": [\"S008\", \"S009\"],\n      \"rationale\": \"Both describe downscaling methods that underestimate variance and may violate stationarity.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Uncertainty in projected heat‑wave mortality\",\n      \"member_ids\": [\"S068\", \"S066\"],\n      \"rationale\": \"Each identifies key sources of uncertainty—scenario, risk assumptions, definition, or limited calibration range.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Increasing humidity raises heat‑wave severity despite stable max temperature\",\n      \"member_ids\": [\"S055\", \"S067\"],\n      \"rationale\": \"Both point to rising heat‑stress indices or wet‑bulb temperatures as drivers of greater severity.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Joint extremes of temperature and humidity matter for health risk\",\n      \"member_ids\": [\"S073\"],\n      \"rationale\": \"Highlights that high‑temperature/high‑humidity extremes can occur even when variables are negatively correlated.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Extreme heat and humidity cause production and livestock losses\",\n      \"member_ids\": [\"S033\"],\n      \"rationale\": \"Links combined heat‑wave and humidity to severe economic and animal health impacts.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"Inadequate cooling or HVAC capacity leads to health problems\",\n      \"member_ids\": [\"S029\", \"S030\"],\n      \"rationale\": \"Both describe how insufficient cooling infrastructure causes heat‑related illness.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"Acclimatization provides limited protection during rapid heat waves\",\n      \"member_ids\": [\"S048\"],\n      \"rationale\": \"States physiological adaptation cannot keep pace with quickly rising temperatures.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"Smartphone app can monitor heat‑index risk\",\n      \"member_ids\": [\"S020\"],\n      \"rationale\": \"Describes a tool for tracking weather conditions and heat‑index risk.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Concurrent fire danger, power shutoffs, and poor air quality force hospital evacuations\",\n      \"member_ids\": [\"S039\"],\n      \"rationale\": \"Notes combined hazards impede health services.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"Sports events should be postponed when wet‑bulb exceeds 28 °C\",\n      \"member_ids\": [\"S043\"],\n      \"rationale\": \"Guidance to avoid health risk from high wet‑bulb temperatures.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"Heat‑wave days not linked to increased Medicare spending\",\n      \"member_ids\": [\"S057\"],\n      \"rationale\": \"Finds no statistical association between heat‑wave frequency and Medicare costs.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"No comprehensive health‑temperature relationships established for Africa\",\n      \"member_ids\": [\"S024\"],\n      \"rationale\": \"States a knowledge gap for apparent temperature and health effects in Africa.\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"label\": \"Germination declines above optimum temperature despite seed viability\",\n      \"member_ids\": [\"S042\"],\n      \"rationale\": \"Indicates processes beyond simple heat mortality affect germination.\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"label\": \"THI simulations show strengths and limitations\",\n      \"member_ids\": [\"S052\"],\n      \"rationale\": \"Evaluates a temperature‑humidity index approach.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Heat index calculated per trimester to study birth outcomes\",\n      \"member_ids\": [\"S032\"],\n      \"rationale\": \"Describes a methodological choice for seasonal analysis.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Heat‑wave defined by temperature staying above a threshold\",\n      \"member_ids\": [\"S007\"],\n      \"rationale\": \"Provides a common definition relying on daily temperature data.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Isolines of joint exceedance do not convey impact, need additional info\",\n      \"member_ids\": [\"S074\"],\n      \"rationale\": \"States that rarity maps lack practical impact information.\",\n      \"claim_about\": \"other\"\n    }\n  ],\n  \"singletons\": [\n    {\n      \"id\": \"S001\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"id\": \"S007\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"id\": \"S008\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S009\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S015\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S016\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S020\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S022\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"id\": \"S023\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S024\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"id\": \"S025\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"id\": \"S028\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"id\": \"S029\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"id\": \"S030\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"id\": \"S032\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S033\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"id\": \"S034\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S036\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"id\": \"S039\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"id\": \"S042\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"id\": \"S045\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"id\": \"S048\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"id\": \"S049\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S052\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S053\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S055\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"id\": \"S057\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"id\": \"S059\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S062\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"id\": \"S065\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"id\": \"S066\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S067\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"id\": \"S068\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S071\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"id\": \"S073\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"id\": \"S074\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"id\": \"S079\",\n      \"claim_about\": \"other\"\n    }\n  ]\n}",
+    "raw_response_chars": 8606,
+    "raw_reasoning": null,
+    "raw_reasoning_chars": null,
+    "content_fallback": false,
+    "finish_reason": "stop",
+    "raw_max_chars": 20000
+  },
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 39.8,
+  "model_parse_error": null,
+  "elapsed_seconds": 40.4,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"Heat index omits wind, solar or metabolic factors\",\n      \"member_ids\": [\"S045\", \"S065\"],\n      \"rationale\": \"Both note that the index excludes important variables such as wind, solar radiation, or metabolic heat.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Temperature‑only indices may be more appropriate\",\n      \"member_ids\": [\"S001\", \"S036\", \"S062\"],\n      \"rationale\": \"Each argues that using temperature alone (or choosing metrics) can be preferable to the heat index in some contexts.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Fixed or high thresholds miss early health impacts; relative thresholds preferred\",\n      \"member_ids\": [\"S028\", \"S022\", \"S071\"],\n      \"rationale\": \"All discuss that absolute/high thresholds can miss harmful events and that relative thresholds are better.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Missing or inaccurate measurements bias heat‑related results\",\n      \"member_ids\": [\"S015\", \"S016\", \"S053\", \"S059\"],\n      \"rationale\": \"Each mentions that omission or error in wind, radiation, humidity, or heat‑index measurements leads to biased associations.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Statistical downscaling underestimates variance and may violate stationarity\",\n      \"member_ids\": [\"S008\", \"S009\"],\n      \"rationale\": \"Both describe downscaling methods that underestimate extremes and assume stationarity that may not hold.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Key uncertainties in projected heat‑wave mortality\",\n      \"member_ids\": [\"S068\", \"S066\"],\n      \"rationale\": \"Each identifies major sources of uncertainty—scenario, risk assumptions, definition, or limited calibration range.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Rising humidity increases heat‑wave severity despite stable max temperature\",\n      \"member_ids\": [\"S055\", \"S067\"],\n      \"rationale\": \"Both point to increasing wet‑bulb or humidity‑related indices as drivers of greater heat stress.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Joint extremes of temperature and humidity matter for health risk\",\n      \"member_ids\": [\"S073\"],\n      \"rationale\": \"Highlights that high‑temperature/high‑humidity extremes can occur even when variables are negatively correlated.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Combined extreme heat and humidity cause production and livestock losses\",\n      \"member_ids\": [\"S033\"],\n      \"rationale\": \"Links high heat‑wave and humidity to severe economic and animal‑health impacts.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"Inadequate cooling or HVAC capacity leads to heat‑related illness\",\n      \"member_ids\": [\"S029\", \"S030\"],\n      \"rationale\": \"Both describe how insufficient cooling infrastructure causes dizziness, fatigue, fainting, or heat stroke.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"Acclimatization provides limited protection during rapid heat waves\",\n      \"member_ids\": [\"S048\"],\n      \"rationale\": \"States physiological adaptation cannot keep pace with quickly rising temperatures.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"Smartphone app can monitor high heat‑index risk\",\n      \"member_ids\": [\"S020\"],\n      \"rationale\": \"Describes a tool for tracking weather conditions and heat‑index risk.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Concurrent fire danger, power shutoffs, and poor air quality force hospital evacuations\",\n      \"member_ids\": [\"S039\"],\n      \"rationale\": \"Notes combined hazards impede health‑service operations.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"Sports events should be postponed when wet‑bulb exceeds 28 °C\",\n      \"member_ids\": [\"S043\"],\n      \"rationale\": \"Guidance to avoid health risk from high wet‑bulb temperatures during outdoor competition.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"Heat‑wave days not linked to increased Medicare spending\",\n      \"member_ids\": [\"S057\"],\n      \"rationale\": \"Finds no statistical association between heat‑wave frequency and Medicare costs.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"No comprehensive health‑temperature relationships established for Africa\",\n      \"member_ids\": [\"S024\"],\n      \"rationale\": \"States a knowledge gap for apparent temperature and health effects in Africa.\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"label\": \"Germination declines above optimum temperature despite seed viability\",\n      \"member_ids\": [\"S042\"],\n      \"rationale\": \"Indicates processes beyond simple heat mortality affect germination.\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"label\": \"THI simulations show strengths and limitations\",\n      \"member_ids\": [\"S052\"],\n      \"rationale\": \"Evaluates a temperature‑humidity index approach.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Heat index calculated per trimester to study birth outcomes\",\n      \"member_ids\": [\"S032\"],\n      \"rationale\": \"Describes a methodological choice for seasonal analysis of birth outcomes.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Heat‑wave defined by temperature staying above a threshold\",\n      \"member_ids\": [\"S007\"],\n      \"rationale\": \"Provides a common definition relying on daily temperature data.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Isolines of joint exceedance do not convey impact, need additional information\",\n      \"member_ids\": [\"S074\"],\n      \"rationale\": \"States that rarity maps lack practical impact information.\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"label\": \"Study compares indoor apparent temperature to symptom bands for health risk estimation\",\n      \"member_ids\": [\"S023\"],\n      \"rationale\": \"Methodological comparison of indoor apparent temperature to official symptom bands.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Night‑time minimum temperature rise not considered, affecting heat stress\",\n      \"member_ids\": [\"S049\"],\n      \"rationale\": \"Notes omission of rising night‑time temps that impair physiological cooling.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Thornthwaite PET model overestimates PET responses to warming\",\n      \"member_ids\": [\"S034\"],\n      \"rationale\": \"Methodological issue causing spurious drought‑index trends under warming.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Hyperthermia visits often occur in lower heat‑index risk categories, suggesting thresholds miss risk\",\n      \"member_ids\": [\"S025\"],\n      \"rationale\": \"Observes many emergency visits under “lower” or “moderate” index categories.\",\n      \"claim_about\": \"impact_or_exposure\"\n    }\n  ],\n  \"singletons\": []\n}",
+  "raw_response_chars": 7103,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

@@ -206,3 +206,57 @@ commit, and copies back the small evidence.
 - **Limitations.** No merge across chunks by code: a claim split over two chunks gives two groups, which the
   reviewer may merge; a code merge pass would be a separate decision. Chunk order uses the partitions' stored region
   class (geography v1).
+
+## 10. Grouping run 2, ingest and packets (P2b-ingest, D-052, 2026-11-02)
+
+- **Run-2 outcome** (`litgroup_agent` v3 `e094aa5c…d845f4`; template `ac135f00…2ae7`; corrective template
+  `5d052853…54b6`; `reasoning_effort=low`, `max_tokens=16000`, `chunk_size=40`, temperature 0; Sophia vLLM
+  `openai/gpt-oss-120b` on all 23 chunks; source commit `7676e53`; 2026-11-02 01:17--06:10 UTC). Tarball
+  `litgroups_run2_evidence.tar.gz` `a90ad7f0…2eb`; `groups.jsonl` `fc5ceea5…b4ce`; `summary.json` `0253c687…c5`.
+  11 partitions, **23 chunks, 23 pass, 0 fail**, every `finish_reason=stop`. **Corrective turns 15**: 12 chunks passed
+  on the first invocation; **3 passed on a second attempt with identical configuration** (same prompt hash, local
+  ids, budget, endpoint, templates, source commit): `extreme_heat_v1.driver.c1`, `extreme_heat_v1.driver.c2`,
+  `fire_weather_v1.mechanism.c2`, each first failing `ids_exactly_once_pass` after its corrective turn (missing /
+  duplicate / unknown ids 1 / 32 / 0, 1 / 0 / 0, 2 / 0 / 0), kept as `chunks/<id>.failed_attempt1.json`. **239 groups,
+  155 singletons, 747 statements each exactly once**; 0 label-digit fails, 0 `claim_about` fails. Run 1 (agent v2)
+  superseded (budget, D-051), recorded only.
+- **Ingest** (`scripts/ingest_litgroups.py`, `src/climrr/litgroups_run2.py`) -> `artifacts/litgroups/run2/`: the run
+  files, both logs (`agent.log` = `litgroups_run2.log`), 23 chunk results + 3 failed first attempts; prompts and raw
+  responses hashed in `manifest.json` (76 files), not copied. `groups_enriched.jsonl`: every record with its members
+  resolved through the partition's local ids to `LS-` ids (paper, canonical paper, evidence role, passage type,
+  region, **geography v2** class and qualifier, statement), `n_papers`, `n_independent_papers` (D-046, all members),
+  `evidence_strength` recomputed (D-045 / D-048) and equal to the agent's for all 394, `claim_about` (the agent's),
+  `region_classes`, `partition`, `chunk`, `is_singleton`. **105 of the 239 groups have one member** (the model returned
+  a labelled one-member group; the agent's `single_member` check is recorded, not gating): 134 groups have >= 2
+  members. `is_singleton` follows the agent's `kind`.
+- **Groups (>= 1 member, `kind: group`) by arm x claim_about x strength** (multi / review / single / background):
+
+  | arm | hazard_change_mechanism | hazard_definition_or_measurement | impact_or_exposure | method_or_data | other |
+  | --- | --- | --- | --- | --- | --- |
+  | extreme heat | 15 / 0 / 17 / 4 | 6 / 1 / 15 / 9 | 15 / 3 / 32 / 3 | 8 / 2 / 10 / 5 | 0 / 1 / 3 / 2 |
+  | fire weather | 20 / 0 / 22 / 3 | 10 / 0 / 9 / 7 | 1 / 0 / 3 / 0 | 4 / 0 / 7 / 2 | --- |
+
+  Multi-source `hazard_change_mechanism` groups: **heat 15, fire weather 20**. The largest group
+  (`LG-extreme_heat_v1-mechanism-c1-021`, "heat index combines temperature and humidity as a perceived‑heat metric",
+  14 papers) is a definition; of the ten largest, two are mechanism groups.
+- **Packets** (`scripts/build_synth_packets.py --groups artifacts/litgroups/run2/groups_enriched.jsonl`, the selection
+  `pilot_selection_v1.yaml`; synthpackets v2, DR-SEED-RANK-2): ten packets `PK-<seed_id>.json`, item ids
+  `BI-P2B-0001..0010`, and `manifest.json` (each packet's SHA-256). *The work package named the files
+  `BI-P2B-<nnnn>.json`; `litsynth_agent.py` v2 (pinned byte-identical) reads `PK-*.json`, so the file names are kept
+  and the item id is inside each packet and in the manifest.* Rung 1 (0001, 0002): no group. Rungs 3 / 4 / 7: 10
+  mechanism (driver) + 4 definition (context) groups each, and 4 caveat groups at rung 7 (0010); 4--5 multi-source
+  per packet; 40--47 excluded with reasons.
+- **Review workbook** (`scripts/build_p2b_groups_review.py`, `src/climrr/p2b_review.py`):
+  `artifacts/benchmark/review/P2b_groups_v1.xlsx` (gitignored; OVERVIEW, GROUPS 239, SINGLETONS 155, PACKETS 116
+  attachments, Legend) and the tracked `P2b_groups_v1.csv` (GROUPS). Reviewer columns `kaiyuan_disposition`
+  (accept_group / split / merge_with / mislabelled_claim_about / reject) and `note` on GROUPS and SINGLETONS.
+  Cross-chunk merging is deferred to this review (D-052).
+- **Flagged for the reviewer.** (a) The heat-index packets' top drivers include fire statements from the heat arm
+  tagged `hazard_change_mechanism` ("Prolonged heat increases fire or wildfire risk", `LG-extreme_heat_v1-driver-c1-007`;
+  a Rocky Mountains large-fire experiment, `…-driver-c2-011`; "drought and high temperatures increase wildfire risk",
+  `…-driver-c2-004`), and building / indoor-temperature singletons: candidates for `mislabelled_claim_about` or
+  `reject`. (b) Relevance class ranks first (DR-SEED-RANK-2), so single-source `us_subregion` statements ("western
+  US", "northern and central US Rocky Mountains", "southeastern United States") rank above U.S.-national multi-source
+  groups even for New York and Northeast patterns (open point 8d, now visible). (c) Packets 0004--0010 carry nearly
+  the same driver set: the literature varies little by seed. (d) `n_papers` counts background members: the second-
+  largest group has 12 papers and is `single_source_supported`.

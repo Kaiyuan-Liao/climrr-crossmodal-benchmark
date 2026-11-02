@@ -1,0 +1,985 @@
+{
+  "partition_id": "fire_weather_v1.mechanism",
+  "chunk_index": 3,
+  "n_chunks": 3,
+  "arm": "fire_weather_v1",
+  "statement_type": "mechanism",
+  "split_by": [],
+  "partition_n_statements": 102,
+  "n_statements": 34,
+  "local_ids": [
+    "S072",
+    "S077",
+    "S078",
+    "S084",
+    "S102",
+    "S013",
+    "S014",
+    "S015",
+    "S016",
+    "S017",
+    "S028",
+    "S030",
+    "S031",
+    "S032",
+    "S034",
+    "S040",
+    "S054",
+    "S055",
+    "S057",
+    "S058",
+    "S061",
+    "S062",
+    "S071",
+    "S073",
+    "S074",
+    "S075",
+    "S079",
+    "S082",
+    "S083",
+    "S085",
+    "S089",
+    "S090",
+    "S092",
+    "S093"
+  ],
+  "generator_version": "litgroup_agent v3",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "fire_weather_v1.mechanism.c3",
+  "model_attempts": 1,
+  "corrective_retry_used": false,
+  "finish_reason": "stop",
+  "content_chars": 2390,
+  "reasoning_chars": 6556,
+  "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "prompt_hash": "97c204c90b78de825640734f61f4e6475a47705ff5c4f2868c91583b393a94d0",
+  "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+  "generation_timestamp": "2026-11-02T01:24:33Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S072",
+        "S084",
+        "S082",
+        "S083",
+        "S092",
+        "S055",
+        "S058",
+        "S034"
+      ],
+      "label": "Temperature, humidity and wind increase fire hazard by drying fuels and raising fire‑weather indices",
+      "rationale": "All describe how heat, low humidity or wind dry fuels or raise indices.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "drying",
+          "fuels",
+          "hazard",
+          "increase",
+          "indices",
+          "raising"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S077",
+        "S078",
+        "S017",
+        "S061"
+      ],
+      "label": "Higher fuel moisture reduces ignition likelihood and fire size",
+      "rationale": "Each links fuel moisture content to ease of ignition or maximum fire size.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S028",
+        "S040",
+        "S054",
+        "S075",
+        "S089",
+        "S090"
+      ],
+      "label": "Canadian Fire Weather Index system links weather variables to fire danger",
+      "rationale": "All define or describe the Canadian FWI and its weather inputs.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "danger",
+          "variables"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S014",
+        "S015"
+      ],
+      "label": "ERC and BI quantify fire intensity based on fuel moisture and wind",
+      "rationale": "Both explain what the Energy Release Component and Burning Index measure.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "based",
+          "intensity",
+          "quantify",
+          "wind"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S030",
+        "S031"
+      ],
+      "label": "EFBI aggregates atmospheric factors to assess convective fire behaviour",
+      "rationale": "Both describe the EFBI’s principle and its assumption about atmospheric conditions.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "assess"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S102",
+        "S057",
+        "S062",
+        "S079",
+        "S073",
+        "S074",
+        "S071"
+      ],
+      "label": "Fire‑danger indices are derived from climate models, statistical methods or sensor data",
+      "rationale": "Each mentions a dataset, model, algorithm or sensor used to produce fire‑risk information.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "data",
+          "methods",
+          "sensor",
+          "statistical"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S013",
+        "S085",
+        "S093"
+      ],
+      "label": "Large fires can modify weather and cause ecological impacts",
+      "rationale": "All discuss consequences of intense fires on atmosphere or vegetation.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "cause",
+          "ecological",
+          "impacts",
+          "large",
+          "modify"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [
+    {
+      "id": "S016",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S032",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "mechanism",
+      "partition_id": "fire_weather_v1.mechanism",
+      "chunk_id": "fire_weather_v1.mechanism.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-3642757-02",
+        "LS-54692198-01",
+        "LS-53362758-01",
+        "LS-53362758-03",
+        "LS-73563338-01",
+        "LS-254994199-02",
+        "LS-258480004-01",
+        "LS-238734785-01"
+      ],
+      "member_local_ids": [
+        "S072",
+        "S084",
+        "S082",
+        "S083",
+        "S092",
+        "S055",
+        "S058",
+        "S034"
+      ],
+      "label": "Temperature, humidity and wind increase fire hazard by drying fuels and raising fire‑weather indices",
+      "rationale": "All describe how heat, low humidity or wind dry fuels or raise indices.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 8,
+      "papers": [
+        "238734785",
+        "254994199",
+        "258480004",
+        "3642757",
+        "53362758",
+        "54692198",
+        "73563338"
+      ],
+      "canonical_papers": [
+        "238734785",
+        "254994199",
+        "258480004",
+        "3642757",
+        "53362758",
+        "54692198",
+        "73563338"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "background_consensus_candidate": 6,
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "drying",
+          "fuels",
+          "hazard",
+          "increase",
+          "indices",
+          "raising"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2390,
+      "reasoning_chars": 6556,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "97c204c90b78de825640734f61f4e6475a47705ff5c4f2868c91583b393a94d0",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:33Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "mechanism",
+      "partition_id": "fire_weather_v1.mechanism",
+      "chunk_id": "fire_weather_v1.mechanism.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-52918429-01",
+        "LS-52918429-03",
+        "LS-216455846-01",
+        "LS-258582171-04"
+      ],
+      "member_local_ids": [
+        "S077",
+        "S078",
+        "S017",
+        "S061"
+      ],
+      "label": "Higher fuel moisture reduces ignition likelihood and fire size",
+      "rationale": "Each links fuel moisture content to ease of ignition or maximum fire size.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 4,
+      "papers": [
+        "216455846",
+        "258582171",
+        "52918429"
+      ],
+      "canonical_papers": [
+        "216455846",
+        "258582171",
+        "52918429"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "background_consensus_candidate": 2,
+        "cited_candidate": 1,
+        "core_candidate": 1
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2390,
+      "reasoning_chars": 6556,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "97c204c90b78de825640734f61f4e6475a47705ff5c4f2868c91583b393a94d0",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:33Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "mechanism",
+      "partition_id": "fire_weather_v1.mechanism",
+      "chunk_id": "fire_weather_v1.mechanism.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-234410613-01",
+        "LS-245019125-01",
+        "LS-254679818-03",
+        "LS-49549549-02",
+        "LS-59342086-01",
+        "LS-59342086-05"
+      ],
+      "member_local_ids": [
+        "S028",
+        "S040",
+        "S054",
+        "S075",
+        "S089",
+        "S090"
+      ],
+      "label": "Canadian Fire Weather Index system links weather variables to fire danger",
+      "rationale": "All define or describe the Canadian FWI and its weather inputs.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 6,
+      "papers": [
+        "234410613",
+        "245019125",
+        "254679818",
+        "49549549",
+        "59342086"
+      ],
+      "canonical_papers": [
+        "234410613",
+        "245019125",
+        "254679818",
+        "49549549",
+        "59342086"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "background_consensus_candidate": 3,
+        "core_candidate": 3
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "danger",
+          "variables"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2390,
+      "reasoning_chars": 6556,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "97c204c90b78de825640734f61f4e6475a47705ff5c4f2868c91583b393a94d0",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:33Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "mechanism",
+      "partition_id": "fire_weather_v1.mechanism",
+      "chunk_id": "fire_weather_v1.mechanism.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-203252492-01",
+        "LS-203252492-02"
+      ],
+      "member_local_ids": [
+        "S014",
+        "S015"
+      ],
+      "label": "ERC and BI quantify fire intensity based on fuel moisture and wind",
+      "rationale": "Both explain what the Energy Release Component and Burning Index measure.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 2,
+      "papers": [
+        "203252492"
+      ],
+      "canonical_papers": [
+        "203252492"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 2
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "based",
+          "intensity",
+          "quantify",
+          "wind"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2390,
+      "reasoning_chars": 6556,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "97c204c90b78de825640734f61f4e6475a47705ff5c4f2868c91583b393a94d0",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:33Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "mechanism",
+      "partition_id": "fire_weather_v1.mechanism",
+      "chunk_id": "fire_weather_v1.mechanism.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-236603625-01",
+        "LS-236603625-02"
+      ],
+      "member_local_ids": [
+        "S030",
+        "S031"
+      ],
+      "label": "EFBI aggregates atmospheric factors to assess convective fire behaviour",
+      "rationale": "Both describe the EFBI’s principle and its assumption about atmospheric conditions.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 2,
+      "papers": [
+        "236603625"
+      ],
+      "canonical_papers": [
+        "236603625"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 2
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "assess"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2390,
+      "reasoning_chars": 6556,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "97c204c90b78de825640734f61f4e6475a47705ff5c4f2868c91583b393a94d0",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:33Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "mechanism",
+      "partition_id": "fire_weather_v1.mechanism",
+      "chunk_id": "fire_weather_v1.mechanism.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-999274-04",
+        "LS-255372301-06",
+        "LS-258582171-05",
+        "LS-52918429-06",
+        "LS-3642757-05",
+        "LS-40462024-02",
+        "LS-273875023-05"
+      ],
+      "member_local_ids": [
+        "S102",
+        "S057",
+        "S062",
+        "S079",
+        "S073",
+        "S074",
+        "S071"
+      ],
+      "label": "Fire‑danger indices are derived from climate models, statistical methods or sensor data",
+      "rationale": "Each mentions a dataset, model, algorithm or sensor used to produce fire‑risk information.",
+      "claim_about": "method_or_data",
+      "n_members": 7,
+      "papers": [
+        "255372301",
+        "258582171",
+        "273875023",
+        "3642757",
+        "40462024",
+        "52918429",
+        "999274"
+      ],
+      "canonical_papers": [
+        "255372301",
+        "258582171",
+        "273875023",
+        "3642757",
+        "40462024",
+        "52918429",
+        "999274"
+      ],
+      "n_independent_core_cited_papers": 5,
+      "role_counts": {
+        "background_consensus_candidate": 2,
+        "cited_candidate": 1,
+        "core_candidate": 4
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "data",
+          "methods",
+          "sensor",
+          "statistical"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2390,
+      "reasoning_chars": 6556,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "97c204c90b78de825640734f61f4e6475a47705ff5c4f2868c91583b393a94d0",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:33Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "mechanism",
+      "partition_id": "fire_weather_v1.mechanism",
+      "chunk_id": "fire_weather_v1.mechanism.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-16316827-05",
+        "LS-54897364-02",
+        "LS-85229507-01"
+      ],
+      "member_local_ids": [
+        "S013",
+        "S085",
+        "S093"
+      ],
+      "label": "Large fires can modify weather and cause ecological impacts",
+      "rationale": "All discuss consequences of intense fires on atmosphere or vegetation.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 3,
+      "papers": [
+        "16316827",
+        "54897364",
+        "85229507"
+      ],
+      "canonical_papers": [
+        "16316827",
+        "54897364",
+        "85229507"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "cited_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "cause",
+          "ecological",
+          "impacts",
+          "large",
+          "modify"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2390,
+      "reasoning_chars": 6556,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "97c204c90b78de825640734f61f4e6475a47705ff5c4f2868c91583b393a94d0",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:33Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "mechanism",
+      "partition_id": "fire_weather_v1.mechanism",
+      "chunk_id": "fire_weather_v1.mechanism.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-208224932-03"
+      ],
+      "member_local_ids": [
+        "S016"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "208224932"
+      ],
+      "canonical_papers": [
+        "208224932"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2390,
+      "reasoning_chars": 6556,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "97c204c90b78de825640734f61f4e6475a47705ff5c4f2868c91583b393a94d0",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:33Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "mechanism",
+      "partition_id": "fire_weather_v1.mechanism",
+      "chunk_id": "fire_weather_v1.mechanism.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-236603625-03"
+      ],
+      "member_local_ids": [
+        "S032"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "236603625"
+      ],
+      "canonical_papers": [
+        "236603625"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2390,
+      "reasoning_chars": 6556,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "97c204c90b78de825640734f61f4e6475a47705ff5c4f2868c91583b393a94d0",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:33Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 2390,
+      "reasoning_chars": 6556,
+      "http_attempts": 1,
+      "model_seconds": 12.8
+    }
+  ],
+  "first_turn": null,
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 12.8,
+  "model_parse_error": null,
+  "elapsed_seconds": 12.8,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"Temperature, humidity and wind increase fire hazard by drying fuels and raising fire‑weather indices\",\n      \"member_ids\": [\"S072\", \"S084\", \"S082\", \"S083\", \"S092\", \"S055\", \"S058\", \"S034\"],\n      \"rationale\": \"All describe how heat, low humidity or wind dry fuels or raise indices.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Higher fuel moisture reduces ignition likelihood and fire size\",\n      \"member_ids\": [\"S077\", \"S078\", \"S017\", \"S061\"],\n      \"rationale\": \"Each links fuel moisture content to ease of ignition or maximum fire size.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Canadian Fire Weather Index system links weather variables to fire danger\",\n      \"member_ids\": [\"S028\", \"S040\", \"S054\", \"S075\", \"S089\", \"S090\"],\n      \"rationale\": \"All define or describe the Canadian FWI and its weather inputs.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"ERC and BI quantify fire intensity based on fuel moisture and wind\",\n      \"member_ids\": [\"S014\", \"S015\"],\n      \"rationale\": \"Both explain what the Energy Release Component and Burning Index measure.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"EFBI aggregates atmospheric factors to assess convective fire behaviour\",\n      \"member_ids\": [\"S030\", \"S031\"],\n      \"rationale\": \"Both describe the EFBI’s principle and its assumption about atmospheric conditions.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Fire‑danger indices are derived from climate models, statistical methods or sensor data\",\n      \"member_ids\": [\"S102\", \"S057\", \"S062\", \"S079\", \"S073\", \"S074\", \"S071\"],\n      \"rationale\": \"Each mentions a dataset, model, algorithm or sensor used to produce fire‑risk information.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Large fires can modify weather and cause ecological impacts\",\n      \"member_ids\": [\"S013\", \"S085\", \"S093\"],\n      \"rationale\": \"All discuss consequences of intense fires on atmosphere or vegetation.\",\n      \"claim_about\": \"impact_or_exposure\"\n    }\n  ],\n  \"singletons\": [\n    {\n      \"id\": \"S016\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"id\": \"S032\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    }\n  ]\n}",
+  "raw_response_chars": 2390,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

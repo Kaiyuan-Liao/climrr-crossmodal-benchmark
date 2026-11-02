@@ -1,0 +1,1051 @@
+{
+  "partition_id": "extreme_heat_v1.consensus",
+  "chunk_index": 1,
+  "n_chunks": 1,
+  "arm": "extreme_heat_v1",
+  "statement_type": "consensus",
+  "split_by": [],
+  "partition_n_statements": 15,
+  "n_statements": 15,
+  "local_ids": [
+    "S014",
+    "S002",
+    "S010",
+    "S004",
+    "S007",
+    "S008",
+    "S011",
+    "S013",
+    "S001",
+    "S005",
+    "S006",
+    "S012",
+    "S003",
+    "S009",
+    "S015"
+  ],
+  "generator_version": "litgroup_agent v3",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "extreme_heat_v1.consensus.c1",
+  "model_attempts": 1,
+  "corrective_retry_used": false,
+  "finish_reason": "stop",
+  "content_chars": 2255,
+  "reasoning_chars": 5372,
+  "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "prompt_hash": "f61d25d3b0b9264e66ac621a89be9f54ad87bb90990862cd0b77cb6f3a124ebd",
+  "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+  "generation_timestamp": "2026-11-02T01:20:40Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S014",
+        "S001"
+      ],
+      "label": "heat index used for warnings and surveillance",
+      "rationale": "Both sentences describe operational use of heat‑index thresholds for advisories and surveillance.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S010",
+        "S009"
+      ],
+      "label": "daymet dataset accurately represents mean heat index",
+      "rationale": "Both note Daymet’s accurate representation of mean heat index for studies.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "represents"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S005",
+        "S006"
+      ],
+      "label": "apparent temperature best predicts mortality and composite indices give similar risk",
+      "rationale": "Both discuss mortality prediction performance of apparent temperature and composite indices.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "best",
+          "give",
+          "predicts"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S003"
+      ],
+      "label": "daily maximum or mean temperature/AT shows stronger health relationships than minima",
+      "rationale": "",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "health",
+          "shows"
+        ],
+        "rationale_words": 0,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S007"
+      ],
+      "label": "heat event frequency and intensity projected to increase, occupational illness risk will not diminish",
+      "rationale": "",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "event"
+        ],
+        "rationale_words": 0,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S008"
+      ],
+      "label": "extreme heat events projected to increase, attributed to anthropogenic climate change",
+      "rationale": "",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 0,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S011"
+      ],
+      "label": "heat indices reliable indicators of climate warming impacts on vineyards",
+      "rationale": "",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 0,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S013"
+      ],
+      "label": "extreme heat events defined as hotter/more humid than normal",
+      "rationale": "",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 0,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S015"
+      ],
+      "label": "both cold and hot extremes affect human health outcomes",
+      "rationale": "",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 0,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [
+    {
+      "id": "S002",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S004",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S012",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "partition_id": "extreme_heat_v1.consensus",
+      "chunk_id": "extreme_heat_v1.consensus.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-6585212-02",
+        "LS-135076557-05"
+      ],
+      "member_local_ids": [
+        "S014",
+        "S001"
+      ],
+      "label": "heat index used for warnings and surveillance",
+      "rationale": "Both sentences describe operational use of heat‑index thresholds for advisories and surveillance.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 2,
+      "papers": [
+        "135076557",
+        "6585212"
+      ],
+      "canonical_papers": [
+        "135076557",
+        "6585212"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2255,
+      "reasoning_chars": 5372,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "f61d25d3b0b9264e66ac621a89be9f54ad87bb90990862cd0b77cb6f3a124ebd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "partition_id": "extreme_heat_v1.consensus",
+      "chunk_id": "extreme_heat_v1.consensus.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-263178112-02",
+        "LS-259831216-02"
+      ],
+      "member_local_ids": [
+        "S010",
+        "S009"
+      ],
+      "label": "daymet dataset accurately represents mean heat index",
+      "rationale": "Both note Daymet’s accurate representation of mean heat index for studies.",
+      "claim_about": "method_or_data",
+      "n_members": 2,
+      "papers": [
+        "259831216",
+        "263178112"
+      ],
+      "canonical_papers": [
+        "259831216",
+        "263178112"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "cited_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "represents"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2255,
+      "reasoning_chars": 5372,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "f61d25d3b0b9264e66ac621a89be9f54ad87bb90990862cd0b77cb6f3a124ebd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "partition_id": "extreme_heat_v1.consensus",
+      "chunk_id": "extreme_heat_v1.consensus.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-20316935-04",
+        "LS-20316935-06"
+      ],
+      "member_local_ids": [
+        "S005",
+        "S006"
+      ],
+      "label": "apparent temperature best predicts mortality and composite indices give similar risk",
+      "rationale": "Both discuss mortality prediction performance of apparent temperature and composite indices.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 2,
+      "papers": [
+        "20316935"
+      ],
+      "canonical_papers": [
+        "20316935"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "best",
+          "give",
+          "predicts"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2255,
+      "reasoning_chars": 5372,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "f61d25d3b0b9264e66ac621a89be9f54ad87bb90990862cd0b77cb6f3a124ebd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "partition_id": "extreme_heat_v1.consensus",
+      "chunk_id": "extreme_heat_v1.consensus.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-14211721-02"
+      ],
+      "member_local_ids": [
+        "S003"
+      ],
+      "label": "daily maximum or mean temperature/AT shows stronger health relationships than minima",
+      "rationale": "",
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "14211721"
+      ],
+      "canonical_papers": [
+        "14211721"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "review_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "health",
+          "shows"
+        ],
+        "rationale_words": 0,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2255,
+      "reasoning_chars": 5372,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "f61d25d3b0b9264e66ac621a89be9f54ad87bb90990862cd0b77cb6f3a124ebd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "partition_id": "extreme_heat_v1.consensus",
+      "chunk_id": "extreme_heat_v1.consensus.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-252282233-04"
+      ],
+      "member_local_ids": [
+        "S007"
+      ],
+      "label": "heat event frequency and intensity projected to increase, occupational illness risk will not diminish",
+      "rationale": "",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "252282233"
+      ],
+      "canonical_papers": [
+        "252282233"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "event"
+        ],
+        "rationale_words": 0,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2255,
+      "reasoning_chars": 5372,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "f61d25d3b0b9264e66ac621a89be9f54ad87bb90990862cd0b77cb6f3a124ebd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "partition_id": "extreme_heat_v1.consensus",
+      "chunk_id": "extreme_heat_v1.consensus.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-257322431-04"
+      ],
+      "member_local_ids": [
+        "S008"
+      ],
+      "label": "extreme heat events projected to increase, attributed to anthropogenic climate change",
+      "rationale": "",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "257322431"
+      ],
+      "canonical_papers": [
+        "257322431"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 0,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2255,
+      "reasoning_chars": 5372,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "f61d25d3b0b9264e66ac621a89be9f54ad87bb90990862cd0b77cb6f3a124ebd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "partition_id": "extreme_heat_v1.consensus",
+      "chunk_id": "extreme_heat_v1.consensus.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-272709236-04"
+      ],
+      "member_local_ids": [
+        "S011"
+      ],
+      "label": "heat indices reliable indicators of climate warming impacts on vineyards",
+      "rationale": "",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "272709236"
+      ],
+      "canonical_papers": [
+        "272709236"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 0,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2255,
+      "reasoning_chars": 5372,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "f61d25d3b0b9264e66ac621a89be9f54ad87bb90990862cd0b77cb6f3a124ebd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "partition_id": "extreme_heat_v1.consensus",
+      "chunk_id": "extreme_heat_v1.consensus.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-32695834-03"
+      ],
+      "member_local_ids": [
+        "S013"
+      ],
+      "label": "extreme heat events defined as hotter/more humid than normal",
+      "rationale": "",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "32695834"
+      ],
+      "canonical_papers": [
+        "32695834"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 0,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2255,
+      "reasoning_chars": 5372,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "f61d25d3b0b9264e66ac621a89be9f54ad87bb90990862cd0b77cb6f3a124ebd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "partition_id": "extreme_heat_v1.consensus",
+      "chunk_id": "extreme_heat_v1.consensus.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-9653264-05"
+      ],
+      "member_local_ids": [
+        "S015"
+      ],
+      "label": "both cold and hot extremes affect human health outcomes",
+      "rationale": "",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "9653264"
+      ],
+      "canonical_papers": [
+        "9653264"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "review_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 0,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2255,
+      "reasoning_chars": 5372,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "f61d25d3b0b9264e66ac621a89be9f54ad87bb90990862cd0b77cb6f3a124ebd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "partition_id": "extreme_heat_v1.consensus",
+      "chunk_id": "extreme_heat_v1.consensus.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-14211721-01"
+      ],
+      "member_local_ids": [
+        "S002"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "14211721"
+      ],
+      "canonical_papers": [
+        "14211721"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2255,
+      "reasoning_chars": 5372,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "f61d25d3b0b9264e66ac621a89be9f54ad87bb90990862cd0b77cb6f3a124ebd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "partition_id": "extreme_heat_v1.consensus",
+      "chunk_id": "extreme_heat_v1.consensus.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-14421869-04"
+      ],
+      "member_local_ids": [
+        "S004"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "14421869"
+      ],
+      "canonical_papers": [
+        "14421869"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2255,
+      "reasoning_chars": 5372,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "f61d25d3b0b9264e66ac621a89be9f54ad87bb90990862cd0b77cb6f3a124ebd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "consensus",
+      "partition_id": "extreme_heat_v1.consensus",
+      "chunk_id": "extreme_heat_v1.consensus.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-273222129-05"
+      ],
+      "member_local_ids": [
+        "S012"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "273222129"
+      ],
+      "canonical_papers": [
+        "273222129"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "review_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2255,
+      "reasoning_chars": 5372,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "f61d25d3b0b9264e66ac621a89be9f54ad87bb90990862cd0b77cb6f3a124ebd",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:40Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 2255,
+      "reasoning_chars": 5372,
+      "http_attempts": 1,
+      "model_seconds": 10.5
+    }
+  ],
+  "first_turn": null,
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 10.5,
+  "model_parse_error": null,
+  "elapsed_seconds": 11.0,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"heat index used for warnings and surveillance\",\n      \"member_ids\": [\"S014\", \"S001\"],\n      \"rationale\": \"Both sentences describe operational use of heat‑index thresholds for advisories and surveillance.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"daymet dataset accurately represents mean heat index\",\n      \"member_ids\": [\"S010\", \"S009\"],\n      \"rationale\": \"Both note Daymet’s accurate representation of mean heat index for studies.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"apparent temperature best predicts mortality and composite indices give similar risk\",\n      \"member_ids\": [\"S005\", \"S006\"],\n      \"rationale\": \"Both discuss mortality prediction performance of apparent temperature and composite indices.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"daily maximum or mean temperature/AT shows stronger health relationships than minima\",\n      \"member_ids\": [\"S003\"],\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"heat event frequency and intensity projected to increase, occupational illness risk will not diminish\",\n      \"member_ids\": [\"S007\"],\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"extreme heat events projected to increase, attributed to anthropogenic climate change\",\n      \"member_ids\": [\"S008\"],\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"heat indices reliable indicators of climate warming impacts on vineyards\",\n      \"member_ids\": [\"S011\"],\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"extreme heat events defined as hotter/more humid than normal\",\n      \"member_ids\": [\"S013\"],\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"both cold and hot extremes affect human health outcomes\",\n      \"member_ids\": [\"S015\"],\n      \"claim_about\": \"impact_or_exposure\"\n    }\n  ],\n  \"singletons\": [\n    {\n      \"id\": \"S002\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"id\": \"S004\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"id\": \"S012\",\n      \"claim_about\": \"impact_or_exposure\"\n    }\n  ]\n}",
+  "raw_response_chars": 2255,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

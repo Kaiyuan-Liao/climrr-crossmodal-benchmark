@@ -1,0 +1,1011 @@
+{
+  "partition_id": "extreme_heat_v1.driver",
+  "chunk_index": 2,
+  "n_chunks": 3,
+  "arm": "extreme_heat_v1",
+  "statement_type": "driver",
+  "split_by": [],
+  "partition_n_statements": 118,
+  "n_statements": 39,
+  "local_ids": [
+    "S005",
+    "S015",
+    "S023",
+    "S029",
+    "S030",
+    "S042",
+    "S054",
+    "S065",
+    "S075",
+    "S093",
+    "S094",
+    "S095",
+    "S115",
+    "S116",
+    "S001",
+    "S003",
+    "S004",
+    "S006",
+    "S008",
+    "S009",
+    "S010",
+    "S014",
+    "S022",
+    "S024",
+    "S025",
+    "S026",
+    "S027",
+    "S028",
+    "S032",
+    "S036",
+    "S037",
+    "S039",
+    "S044",
+    "S046",
+    "S049",
+    "S053",
+    "S058",
+    "S067",
+    "S072"
+  ],
+  "generator_version": "litgroup_agent v3",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "extreme_heat_v1.driver.c2",
+  "model_attempts": 2,
+  "corrective_retry_used": true,
+  "finish_reason": "stop",
+  "content_chars": 2738,
+  "reasoning_chars": 2321,
+  "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "prompt_hash": "a5c247a85c57630eb86a4bac8adc7de1461434a4e5beae881e8dfb55a7ab8ef7",
+  "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+  "generation_timestamp": "2026-11-02T01:19:53Z",
+  "status": "deterministic_fail",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [
+      "S053"
+    ],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": false,
+    "no_empty_group_pass": true,
+    "failed": [
+      "ids_exactly_once_pass"
+    ]
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S005",
+        "S042",
+        "S029",
+        "S015"
+      ],
+      "label": "climate warming increases heat‑wave frequency and intensity",
+      "rationale": "All state that global warming raises frequency/intensity of heat events.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "increases",
+          "wave"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S054",
+        "S032",
+        "S014",
+        "S004"
+      ],
+      "label": "higher humidity worsens humid‑heat stress",
+      "rationale": "Each notes humidity amplifies heat stress or discomfort.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "higher",
+          "worsens"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S003",
+        "S009",
+        "S006",
+        "S039",
+        "S115"
+      ],
+      "label": "heat index is used as a measure of heat stress",
+      "rationale": "Sentences describe the heat index definition, calculation, or relevance.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "measure",
+          "stress",
+          "used"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S093",
+        "S094",
+        "S095"
+      ],
+      "label": "health risk thresholds vary with local climate and acclimatization",
+      "rationale": "All discuss how temperature‑related health risk depends on regional climate or acclimatization.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "acclimatization",
+          "thresholds",
+          "vary"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S023",
+        "S030",
+        "S022",
+        "S058",
+        "S027",
+        "S036"
+      ],
+      "label": "higher temperature and drought raise wildfire risk",
+      "rationale": "Each links warm or dry conditions to increased fire likelihood or severity.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "raise",
+          "wildfire"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S065",
+        "S075",
+        "S044",
+        "S046",
+        "S116"
+      ],
+      "label": "remote sensing, models and datasets improve assessment of heat‑related hazards",
+      "rationale": "Sentences describe data sources, models, or methods for evaluating heat or fire hazards.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "assessment",
+          "datasets",
+          "heat",
+          "related",
+          "remote",
+          "sensing"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S024",
+        "S025"
+      ],
+      "label": "genetic heat index applied to forest conservation and carbon product valuation",
+      "rationale": "Both refer to the Genetic Heat Index for biodiversity and market uses.",
+      "claim_about": "other",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "applied",
+          "product",
+          "valuation"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S049",
+        "S067"
+      ],
+      "label": "relative humidity dominates pan‑evaporation estimates",
+      "rationale": "Both report humidity as the strongest influence on evaporation calculations.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "dominates"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [
+    {
+      "id": "S001",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S008",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S010",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S026",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S028",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S037",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S072",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "groups": [],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 4509,
+      "reasoning_chars": 4299,
+      "http_attempts": 1,
+      "model_seconds": 13.0
+    },
+    {
+      "turn": 2,
+      "finish_reason": "stop",
+      "content_chars": 2738,
+      "reasoning_chars": 2321,
+      "http_attempts": 1,
+      "model_seconds": 10.1
+    }
+  ],
+  "first_turn": {
+    "checks": {
+      "parse_pass": true,
+      "unknown_ids": [
+        "S011",
+        "S012",
+        "S013",
+        "S016",
+        "S017",
+        "S018",
+        "S019",
+        "S020",
+        "S021",
+        "S038",
+        "S040",
+        "S041",
+        "S043",
+        "S045",
+        "S048",
+        "S050",
+        "S051",
+        "S052",
+        "S055",
+        "S056",
+        "S057",
+        "S059",
+        "S060",
+        "S061",
+        "S062",
+        "S063",
+        "S064",
+        "S066",
+        "S068",
+        "S069",
+        "S070",
+        "S071"
+      ],
+      "duplicate_ids": [
+        "S003",
+        "S032",
+        "S036",
+        "S054",
+        "S058",
+        "S115"
+      ],
+      "missing_ids": [
+        "S116"
+      ],
+      "empty_groups": 0,
+      "ids_exactly_once_pass": false,
+      "no_empty_group_pass": true,
+      "failed": [
+        "ids_exactly_once_pass"
+      ]
+    },
+    "groups_as_returned": [
+      {
+        "member_ids": [
+          "S005",
+          "S042",
+          "S029",
+          "S015"
+        ],
+        "label": "climate warming increases heat‑wave frequency and intensity",
+        "rationale": "All state that global warming raises frequency/intensity of heat events.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "increases",
+            "wave"
+          ],
+          "rationale_words": 10,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S054",
+          "S032",
+          "S014",
+          "S004"
+        ],
+        "label": "higher humidity worsens humid‑heat stress",
+        "rationale": "Each notes humidity amplifies heat stress or discomfort.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "higher",
+            "worsens"
+          ],
+          "rationale_words": 8,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S003",
+          "S009",
+          "S006",
+          "S039",
+          "S115"
+        ],
+        "label": "heat index is used as a measure of heat stress",
+        "rationale": "Sentences describe the heat index definition, calculation, or relevance.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "measure",
+            "stress",
+            "used"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S093",
+          "S094",
+          "S095"
+        ],
+        "label": "health risk thresholds vary with local climate and acclimatization",
+        "rationale": "All discuss how temperature‑related health risk depends on regional climate or acclimatization.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "acclimatization",
+            "thresholds",
+            "vary"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S023",
+          "S030",
+          "S022",
+          "S058",
+          "S027",
+          "S036"
+        ],
+        "label": "higher temperature and drought raise wildfire risk",
+        "rationale": "Each links warm or dry conditions to increased fire likelihood or severity.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "raise",
+            "wildfire"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S065",
+          "S075",
+          "S044",
+          "S046",
+          "S115"
+        ],
+        "label": "remote sensing, models and datasets improve assessment of heat‑related hazards",
+        "rationale": "Sentences describe data sources, models, or methods for evaluating heat or fire hazards.",
+        "claim_about": "method_or_data",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "assessment",
+            "datasets",
+            "remote",
+            "sensing"
+          ],
+          "rationale_words": 13,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S024",
+          "S025"
+        ],
+        "label": "genetic heat index applied to forest conservation and carbon product valuation",
+        "rationale": "Both refer to the Genetic Heat Index for biodiversity and market uses.",
+        "claim_about": "other",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "applied",
+            "product",
+            "valuation"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S049",
+          "S067"
+        ],
+        "label": "relative humidity dominates pan‑evaporation estimates",
+        "rationale": "Both report humidity as the strongest influence on evaporation calculations.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "dominates"
+          ],
+          "rationale_words": 10,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "singletons_as_returned": [
+      {
+        "id": "S001",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S003",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S008",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S010",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S011",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S012",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S013",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S016",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S017",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S018",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S019",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S020",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S021",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S026",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S028",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S032",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S036",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S037",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S038",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S040",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S041",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S043",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S045",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S048",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S050",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S051",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S052",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S053",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S054",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S055",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S056",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S057",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S058",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S059",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S060",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S061",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S062",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S063",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S064",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S066",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S068",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S069",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S070",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S071",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S072",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"climate warming increases heat‑wave frequency and intensity\",\n      \"member_ids\": [\"S005\", \"S042\", \"S029\", \"S015\"],\n      \"rationale\": \"All state that global warming raises frequency/intensity of heat events.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"higher humidity worsens humid‑heat stress\",\n      \"member_ids\": [\"S054\", \"S032\", \"S014\", \"S004\"],\n      \"rationale\": \"Each notes humidity amplifies heat stress or discomfort.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"heat index is used as a measure of heat stress\",\n      \"member_ids\": [\"S003\", \"S009\", \"S006\", \"S039\", \"S115\"],\n      \"rationale\": \"Sentences describe the heat index definition, calculation, or relevance.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"health risk thresholds vary with local climate and acclimatization\",\n      \"member_ids\": [\"S093\", \"S094\", \"S095\"],\n      \"rationale\": \"All discuss how temperature‑related health risk depends on regional climate or acclimatization.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"higher temperature and drought raise wildfire risk\",\n      \"member_ids\": [\"S023\", \"S030\", \"S022\", \"S058\", \"S027\", \"S036\"],\n      \"rationale\": \"Each links warm or dry conditions to increased fire likelihood or severity.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"remote sensing, models and datasets improve assessment of heat‑related hazards\",\n      \"member_ids\": [\"S065\", \"S075\", \"S044\", \"S046\", \"S115\"],\n      \"rationale\": \"Sentences describe data sources, models, or methods for evaluating heat or fire hazards.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"genetic heat index applied to forest conservation and carbon product valuation\",\n      \"member_ids\": [\"S024\", \"S025\"],\n      \"rationale\": \"Both refer to the Genetic Heat Index for biodiversity and market uses.\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"label\": \"relative humidity dominates pan‑evaporation estimates\",\n      \"member_ids\": [\"S049\", \"S067\"],\n      \"rationale\": \"Both report humidity as the strongest influence on evaporation calculations.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    }\n  ],\n  \"singletons\": [\n    {\"id\": \"S001\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S003\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S008\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S010\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S011\", \"claim_about\": \"other\"},\n    {\"id\": \"S012\", \"claim_about\": \"other\"},\n    {\"id\": \"S013\", \"claim_about\": \"other\"},\n    {\"id\": \"S016\", \"claim_about\": \"other\"},\n    {\"id\": \"S017\", \"claim_about\": \"other\"},\n    {\"id\": \"S018\", \"claim_about\": \"other\"},\n    {\"id\": \"S019\", \"claim_about\": \"other\"},\n    {\"id\": \"S020\", \"claim_about\": \"other\"},\n    {\"id\": \"S021\", \"claim_about\": \"other\"},\n    {\"id\": \"S026\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S028\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S032\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S036\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S037\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S038\", \"claim_about\": \"other\"},\n    {\"id\": \"S040\", \"claim_about\": \"other\"},\n    {\"id\": \"S041\", \"claim_about\": \"other\"},\n    {\"id\": \"S043\", \"claim_about\": \"other\"},\n    {\"id\": \"S045\", \"claim_about\": \"other\"},\n    {\"id\": \"S048\", \"claim_about\": \"other\"},\n    {\"id\": \"S050\", \"claim_about\": \"other\"},\n    {\"id\": \"S051\", \"claim_about\": \"other\"},\n    {\"id\": \"S052\", \"claim_about\": \"other\"},\n    {\"id\": \"S053\", \"claim_about\": \"other\"},\n    {\"id\": \"S054\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S055\", \"claim_about\": \"other\"},\n    {\"id\": \"S056\", \"claim_about\": \"other\"},\n    {\"id\": \"S057\", \"claim_about\": \"other\"},\n    {\"id\": \"S058\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S059\", \"claim_about\": \"other\"},\n    {\"id\": \"S060\", \"claim_about\": \"other\"},\n    {\"id\": \"S061\", \"claim_about\": \"other\"},\n    {\"id\": \"S062\", \"claim_about\": \"other\"},\n    {\"id\": \"S063\", \"claim_about\": \"other\"},\n    {\"id\": \"S064\", \"claim_about\": \"other\"},\n    {\"id\": \"S066\", \"claim_about\": \"other\"},\n    {\"id\": \"S068\", \"claim_about\": \"other\"},\n    {\"id\": \"S069\", \"claim_about\": \"other\"},\n    {\"id\": \"S070\", \"claim_about\": \"other\"},\n    {\"id\": \"S071\", \"claim_about\": \"other\"},\n    {\"id\": \"S072\", \"claim_about\": \"impact_or_exposure\"}\n  ]\n}",
+    "raw_response_chars": 4509,
+    "raw_reasoning": null,
+    "raw_reasoning_chars": null,
+    "content_fallback": false,
+    "finish_reason": "stop",
+    "raw_max_chars": 20000
+  },
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 23.1,
+  "model_parse_error": null,
+  "elapsed_seconds": 24.3,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"climate warming increases heat‑wave frequency and intensity\",\n      \"member_ids\": [\"S005\", \"S042\", \"S029\", \"S015\"],\n      \"rationale\": \"All state that global warming raises frequency/intensity of heat events.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"higher humidity worsens humid‑heat stress\",\n      \"member_ids\": [\"S054\", \"S032\", \"S014\", \"S004\"],\n      \"rationale\": \"Each notes humidity amplifies heat stress or discomfort.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"heat index is used as a measure of heat stress\",\n      \"member_ids\": [\"S003\", \"S009\", \"S006\", \"S039\", \"S115\"],\n      \"rationale\": \"Sentences describe the heat index definition, calculation, or relevance.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"health risk thresholds vary with local climate and acclimatization\",\n      \"member_ids\": [\"S093\", \"S094\", \"S095\"],\n      \"rationale\": \"All discuss how temperature‑related health risk depends on regional climate or acclimatization.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"higher temperature and drought raise wildfire risk\",\n      \"member_ids\": [\"S023\", \"S030\", \"S022\", \"S058\", \"S027\", \"S036\"],\n      \"rationale\": \"Each links warm or dry conditions to increased fire likelihood or severity.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"remote sensing, models and datasets improve assessment of heat‑related hazards\",\n      \"member_ids\": [\"S065\", \"S075\", \"S044\", \"S046\", \"S116\"],\n      \"rationale\": \"Sentences describe data sources, models, or methods for evaluating heat or fire hazards.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"genetic heat index applied to forest conservation and carbon product valuation\",\n      \"member_ids\": [\"S024\", \"S025\"],\n      \"rationale\": \"Both refer to the Genetic Heat Index for biodiversity and market uses.\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"label\": \"relative humidity dominates pan‑evaporation estimates\",\n      \"member_ids\": [\"S049\", \"S067\"],\n      \"rationale\": \"Both report humidity as the strongest influence on evaporation calculations.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    }\n  ],\n  \"singletons\": [\n    {\"id\": \"S001\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S008\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S010\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S026\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S028\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S037\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S072\", \"claim_about\": \"impact_or_exposure\"}\n  ]\n}",
+  "raw_response_chars": 2738,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

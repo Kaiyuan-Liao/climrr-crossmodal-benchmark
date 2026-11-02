@@ -1,0 +1,2566 @@
+{
+  "partition_id": "extreme_heat_v1.pattern",
+  "chunk_index": 2,
+  "n_chunks": 2,
+  "arm": "extreme_heat_v1",
+  "statement_type": "pattern",
+  "split_by": [],
+  "partition_n_statements": 65,
+  "n_statements": 32,
+  "local_ids": [
+    "S057",
+    "S001",
+    "S003",
+    "S004",
+    "S008",
+    "S014",
+    "S015",
+    "S016",
+    "S020",
+    "S021",
+    "S026",
+    "S027",
+    "S028",
+    "S030",
+    "S037",
+    "S038",
+    "S044",
+    "S045",
+    "S053",
+    "S054",
+    "S055",
+    "S056",
+    "S059",
+    "S060",
+    "S011",
+    "S012",
+    "S018",
+    "S033",
+    "S034",
+    "S039",
+    "S062",
+    "S065"
+  ],
+  "generator_version": "litgroup_agent v3",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "extreme_heat_v1.pattern.c2",
+  "model_attempts": 2,
+  "corrective_retry_used": true,
+  "finish_reason": "stop",
+  "content_chars": 6025,
+  "reasoning_chars": 527,
+  "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+  "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+  "generation_timestamp": "2026-11-02T01:23:24Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S027",
+        "S039"
+      ],
+      "label": "humidity amplifies heat stress and cooling demand",
+      "rationale": "Both note that modest humidity increases discomfort or makes humidity‑based metrics more relevant.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S026",
+        "S028"
+      ],
+      "label": "apparent temperature rises faster than air temperature even as humidity falls",
+      "rationale": "Both describe future projections where apparent temperature outpaces air temperature despite declining RH.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "falls",
+          "faster",
+          "rises"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S033",
+        "S034",
+        "S059",
+        "S060"
+      ],
+      "label": "heat‑wave frequency, intensity and duration are projected to increase",
+      "rationale": "All state that heat‑wave occurrence or characteristics will grow in the future.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S008",
+        "S038"
+      ],
+      "label": "early‑season heat raises emergency‑department visits",
+      "rationale": "Both link spring/shoulder‑season heat to higher health‑care usage because of lack of preparedness.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "raises"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S003",
+        "S004"
+      ],
+      "label": "high‑vulnerability areas experience more excessive heat days or illness",
+      "rationale": "Both describe greater heat‑related risk in vulnerable or rarely hot regions.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "areas",
+          "days"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S016",
+        "S054"
+      ],
+      "label": "high heat index combined with low precipitation drives drought and vegetation dieback",
+      "rationale": "Both connect elevated heat index/PET with drought severity and ecosystem impacts.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "combined",
+          "drives",
+          "vegetation"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S044"
+      ],
+      "label": "soil moisture has limited effect on humid heatwaves except in some U.S. regions",
+      "rationale": "Single statement about soil‑moisture influence on humid heatwaves.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "effect"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S014"
+      ],
+      "label": "Genetic Heat Index identifies hottest genetic‑rarity patches",
+      "rationale": "Describes purpose of a specific heat‑related index.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "identifies"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S015"
+      ],
+      "label": "high apparent temperature increases mental‑disorder ED visits for males",
+      "rationale": "Specific health impact of apparent temperature on male patients.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "ed",
+          "increases",
+          "males"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S011"
+      ],
+      "label": "about ten percent of agriculture‑related deaths are heat‑induced",
+      "rationale": "Quantifies agricultural fatalities linked to heat.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "deaths"
+        ],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S012"
+      ],
+      "label": "heat‑related injury or death occurs early for new employees or during heat waves",
+      "rationale": "Describes timing of heat‑related occupational injuries.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "early",
+          "occurs",
+          "waves"
+        ],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S018"
+      ],
+      "label": "indoor cooling during heat waves raises electricity use and grid emissions",
+      "rationale": "Links cooling demand to energy consumption feedback.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "use"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S045"
+      ],
+      "label": "DEHI trend rises in warm months while EC trend rises in winter",
+      "rationale": "Notes seasonal trends of two heat‑related indices.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "months",
+          "rises",
+          "warm"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S053"
+      ],
+      "label": "potential evapotranspiration increases with temperature in Iraq",
+      "rationale": "Reports PET rise alongside temperature growth.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "evapotranspiration",
+          "potential"
+        ],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S055"
+      ],
+      "label": "extreme summer temperatures in Baghdad coincide with less rain and more dust storms",
+      "rationale": "Links very high temps to reduced precipitation and dust events.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "coincide",
+          "extreme",
+          "rain"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S056"
+      ],
+      "label": "humidity projected to rise in India, strengthening heat‑wave temperatures",
+      "rationale": "Projects increasing humidity and its effect on heat‑wave intensity.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "projected",
+          "rise",
+          "strengthening",
+          "wave"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S001"
+      ],
+      "label": "high WBGT values indicate consistently high heat stress",
+      "rationale": "States that WBGT >30 °C reflects strong heat stress.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "indicate"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S020",
+        "S021"
+      ],
+      "label": "fires in Thailand raise particulate air pollution in December–April",
+      "rationale": "Both describe seasonal fire activity and associated PM10 increases.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "raise"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S037"
+      ],
+      "label": "1 °C rise above 19 °C raises all‑cause hospitalizations by 0.8 % within days",
+      "rationale": "Quantifies health impact of a temperature increase.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "raises"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S062"
+      ],
+      "label": "cold weather events lower medical usage rates",
+      "rationale": "Notes reduced health‑care usage during cold periods.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S065"
+      ],
+      "label": "high heat‑humidity index before delivery shortens gestation",
+      "rationale": "Associates pre‑delivery heat‑humidity with reduced gestational age.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "gestation",
+          "shortens"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S057",
+        "S030"
+      ],
+      "label": "minimum temperatures rise faster than maximum, shrinking diurnal range and affecting fire weather",
+      "rationale": "Both describe heat‑related metrics increasing faster than air temperature, influencing fire risk and heat stress.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "affecting",
+          "rise",
+          "shrinking"
+        ],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-239996006-04",
+        "LS-262100323-05"
+      ],
+      "member_local_ids": [
+        "S027",
+        "S039"
+      ],
+      "label": "humidity amplifies heat stress and cooling demand",
+      "rationale": "Both note that modest humidity increases discomfort or makes humidity‑based metrics more relevant.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 2,
+      "papers": [
+        "239996006",
+        "262100323"
+      ],
+      "canonical_papers": [
+        "239996006",
+        "262100323"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-239996006-03",
+        "LS-239996006-05"
+      ],
+      "member_local_ids": [
+        "S026",
+        "S028"
+      ],
+      "label": "apparent temperature rises faster than air temperature even as humidity falls",
+      "rationale": "Both describe future projections where apparent temperature outpaces air temperature despite declining RH.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 2,
+      "papers": [
+        "239996006"
+      ],
+      "canonical_papers": [
+        "239996006"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "falls",
+          "faster",
+          "rises"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-252233222-06",
+        "LS-252325972-03",
+        "LS-5882914-02",
+        "LS-5882914-03"
+      ],
+      "member_local_ids": [
+        "S033",
+        "S034",
+        "S059",
+        "S060"
+      ],
+      "label": "heat‑wave frequency, intensity and duration are projected to increase",
+      "rationale": "All state that heat‑wave occurrence or characteristics will grow in the future.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 4,
+      "papers": [
+        "252233222",
+        "252325972",
+        "5882914"
+      ],
+      "canonical_papers": [
+        "252233222",
+        "252325972",
+        "5882914"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "cited_candidate": 1,
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-16732189-04",
+        "LS-260770449-04"
+      ],
+      "member_local_ids": [
+        "S008",
+        "S038"
+      ],
+      "label": "early‑season heat raises emergency‑department visits",
+      "rationale": "Both link spring/shoulder‑season heat to higher health‑care usage because of lack of preparedness.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 2,
+      "papers": [
+        "16732189",
+        "260770449"
+      ],
+      "canonical_papers": [
+        "16732189",
+        "260770449"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "raises"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-135076557-04",
+        "LS-14009044-03"
+      ],
+      "member_local_ids": [
+        "S003",
+        "S004"
+      ],
+      "label": "high‑vulnerability areas experience more excessive heat days or illness",
+      "rationale": "Both describe greater heat‑related risk in vulnerable or rarely hot regions.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 2,
+      "papers": [
+        "135076557",
+        "14009044"
+      ],
+      "canonical_papers": [
+        "135076557",
+        "14009044"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "cited_candidate": 1,
+        "core_candidate": 1
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "areas",
+          "days"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-220302054-04",
+        "LS-54211421-05"
+      ],
+      "member_local_ids": [
+        "S016",
+        "S054"
+      ],
+      "label": "high heat index combined with low precipitation drives drought and vegetation dieback",
+      "rationale": "Both connect elevated heat index/PET with drought severity and ecosystem impacts.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 2,
+      "papers": [
+        "220302054",
+        "54211421"
+      ],
+      "canonical_papers": [
+        "220302054",
+        "54211421"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "combined",
+          "drives",
+          "vegetation"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-269932944-06"
+      ],
+      "member_local_ids": [
+        "S044"
+      ],
+      "label": "soil moisture has limited effect on humid heatwaves except in some U.S. regions",
+      "rationale": "Single statement about soil‑moisture influence on humid heatwaves.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "269932944"
+      ],
+      "canonical_papers": [
+        "269932944"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "effect"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-218505968-02"
+      ],
+      "member_local_ids": [
+        "S014"
+      ],
+      "label": "Genetic Heat Index identifies hottest genetic‑rarity patches",
+      "rationale": "Describes purpose of a specific heat‑related index.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "218505968"
+      ],
+      "canonical_papers": [
+        "218505968"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "identifies"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-218864547-05"
+      ],
+      "member_local_ids": [
+        "S015"
+      ],
+      "label": "high apparent temperature increases mental‑disorder ED visits for males",
+      "rationale": "Specific health impact of apparent temperature on male patients.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "218864547"
+      ],
+      "canonical_papers": [
+        "218864547"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "ed",
+          "increases",
+          "males"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-214074018-03"
+      ],
+      "member_local_ids": [
+        "S011"
+      ],
+      "label": "about ten percent of agriculture‑related deaths are heat‑induced",
+      "rationale": "Quantifies agricultural fatalities linked to heat.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "214074018"
+      ],
+      "canonical_papers": [
+        "214074018"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "deaths"
+        ],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-214074018-04"
+      ],
+      "member_local_ids": [
+        "S012"
+      ],
+      "label": "heat‑related injury or death occurs early for new employees or during heat waves",
+      "rationale": "Describes timing of heat‑related occupational injuries.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "214074018"
+      ],
+      "canonical_papers": [
+        "214074018"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "early",
+          "occurs",
+          "waves"
+        ],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-229479546-04"
+      ],
+      "member_local_ids": [
+        "S018"
+      ],
+      "label": "indoor cooling during heat waves raises electricity use and grid emissions",
+      "rationale": "Links cooling demand to energy consumption feedback.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "229479546"
+      ],
+      "canonical_papers": [
+        "229479546"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "use"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-269945312-04"
+      ],
+      "member_local_ids": [
+        "S045"
+      ],
+      "label": "DEHI trend rises in warm months while EC trend rises in winter",
+      "rationale": "Notes seasonal trends of two heat‑related indices.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "269945312"
+      ],
+      "canonical_papers": [
+        "269945312"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "months",
+          "rises",
+          "warm"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-54211421-04"
+      ],
+      "member_local_ids": [
+        "S053"
+      ],
+      "label": "potential evapotranspiration increases with temperature in Iraq",
+      "rationale": "Reports PET rise alongside temperature growth.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "54211421"
+      ],
+      "canonical_papers": [
+        "54211421"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "evapotranspiration",
+          "potential"
+        ],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-54211421-06"
+      ],
+      "member_local_ids": [
+        "S055"
+      ],
+      "label": "extreme summer temperatures in Baghdad coincide with less rain and more dust storms",
+      "rationale": "Links very high temps to reduced precipitation and dust events.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "54211421"
+      ],
+      "canonical_papers": [
+        "54211421"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "coincide",
+          "extreme",
+          "rain"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-55565874-05"
+      ],
+      "member_local_ids": [
+        "S056"
+      ],
+      "label": "humidity projected to rise in India, strengthening heat‑wave temperatures",
+      "rationale": "Projects increasing humidity and its effect on heat‑wave intensity.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "55565874"
+      ],
+      "canonical_papers": [
+        "55565874"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "projected",
+          "rise",
+          "strengthening",
+          "wave"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-121324578-01"
+      ],
+      "member_local_ids": [
+        "S001"
+      ],
+      "label": "high WBGT values indicate consistently high heat stress",
+      "rationale": "States that WBGT >30 °C reflects strong heat stress.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "121324578"
+      ],
+      "canonical_papers": [
+        "121324578"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "indicate"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-231958002-02",
+        "LS-231958002-03"
+      ],
+      "member_local_ids": [
+        "S020",
+        "S021"
+      ],
+      "label": "fires in Thailand raise particulate air pollution in December–April",
+      "rationale": "Both describe seasonal fire activity and associated PM10 increases.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 2,
+      "papers": [
+        "231958002"
+      ],
+      "canonical_papers": [
+        "231958002"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "raise"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-259897559-04"
+      ],
+      "member_local_ids": [
+        "S037"
+      ],
+      "label": "1 °C rise above 19 °C raises all‑cause hospitalizations by 0.8 % within days",
+      "rationale": "Quantifies health impact of a temperature increase.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "259897559"
+      ],
+      "canonical_papers": [
+        "259897559"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "raises"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-78204577-03"
+      ],
+      "member_local_ids": [
+        "S062"
+      ],
+      "label": "cold weather events lower medical usage rates",
+      "rationale": "Notes reduced health‑care usage during cold periods.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "78204577"
+      ],
+      "canonical_papers": [
+        "78204577"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-9653264-01"
+      ],
+      "member_local_ids": [
+        "S065"
+      ],
+      "label": "high heat‑humidity index before delivery shortens gestation",
+      "rationale": "Associates pre‑delivery heat‑humidity with reduced gestational age.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "9653264"
+      ],
+      "canonical_papers": [
+        "9653264"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "gestation",
+          "shortens"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-5838629-02",
+        "LS-246243282-03"
+      ],
+      "member_local_ids": [
+        "S057",
+        "S030"
+      ],
+      "label": "minimum temperatures rise faster than maximum, shrinking diurnal range and affecting fire weather",
+      "rationale": "Both describe heat‑related metrics increasing faster than air temperature, influencing fire risk and heat stress.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 2,
+      "papers": [
+        "246243282",
+        "5838629"
+      ],
+      "canonical_papers": [
+        "246243282",
+        "5838629"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "cited_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "affecting",
+          "rise",
+          "shrinking"
+        ],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "82bd8538fb6170bb7bc00de90aa06b2a0d81dca111c2c2dc0d95698245d5a833",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:23:24Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 5675,
+      "reasoning_chars": 3762,
+      "http_attempts": 1,
+      "model_seconds": 11.1
+    },
+    {
+      "turn": 2,
+      "finish_reason": "stop",
+      "content_chars": 6025,
+      "reasoning_chars": 527,
+      "http_attempts": 1,
+      "model_seconds": 8.9
+    }
+  ],
+  "first_turn": {
+    "checks": {
+      "parse_pass": true,
+      "unknown_ids": [],
+      "duplicate_ids": [],
+      "missing_ids": [
+        "S057",
+        "S030"
+      ],
+      "empty_groups": 0,
+      "ids_exactly_once_pass": false,
+      "no_empty_group_pass": true,
+      "failed": [
+        "ids_exactly_once_pass"
+      ]
+    },
+    "groups_as_returned": [
+      {
+        "member_ids": [
+          "S027",
+          "S039"
+        ],
+        "label": "humidity amplifies heat stress and cooling demand",
+        "rationale": "Both note that modest humidity increases discomfort or makes humidity‑based metrics more relevant.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 13,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S026",
+          "S028"
+        ],
+        "label": "apparent temperature rises faster than air temperature even as humidity falls",
+        "rationale": "Both describe future projections where apparent temperature outpaces air temperature despite declining RH.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "falls",
+            "faster",
+            "rises"
+          ],
+          "rationale_words": 13,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S033",
+          "S034",
+          "S059",
+          "S060"
+        ],
+        "label": "heat‑wave frequency, intensity and duration are projected to increase",
+        "rationale": "All state that heat‑wave occurrence or characteristics will grow in the future.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S008",
+          "S038"
+        ],
+        "label": "early‑season heat raises emergency‑department visits",
+        "rationale": "Both link spring/shoulder‑season heat to higher health‑care usage because of lack of preparedness.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "raises"
+          ],
+          "rationale_words": 13,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S003",
+          "S004"
+        ],
+        "label": "high‑vulnerability areas experience more excessive heat days or illness",
+        "rationale": "Both describe greater heat‑related risk in vulnerable or rarely hot regions.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "areas",
+            "days"
+          ],
+          "rationale_words": 11,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S016",
+          "S054"
+        ],
+        "label": "high heat index combined with low precipitation drives drought and vegetation dieback",
+        "rationale": "Both connect elevated heat index/PET with drought severity and ecosystem impacts.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "combined",
+            "drives",
+            "vegetation"
+          ],
+          "rationale_words": 11,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S044"
+        ],
+        "label": "soil moisture has limited effect on humid heatwaves except in some U.S. regions",
+        "rationale": "Single statement about soil‑moisture influence on humid heatwaves.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "effect"
+          ],
+          "rationale_words": 8,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S014"
+        ],
+        "label": "Genetic Heat Index identifies hottest genetic‑rarity patches",
+        "rationale": "Describes purpose of a specific heat‑related index.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "identifies"
+          ],
+          "rationale_words": 7,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S015"
+        ],
+        "label": "high apparent temperature increases mental‑disorder ED visits for males",
+        "rationale": "Specific health impact of apparent temperature on male patients.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "ed",
+            "increases",
+            "males"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S011"
+        ],
+        "label": "about ten percent of agriculture‑related deaths are heat‑induced",
+        "rationale": "Quantifies agricultural fatalities linked to heat.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "deaths"
+          ],
+          "rationale_words": 6,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S012"
+        ],
+        "label": "heat‑related injury or death occurs early for new employees or during heat waves",
+        "rationale": "Describes timing of heat‑related occupational injuries.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "early",
+            "occurs",
+            "waves"
+          ],
+          "rationale_words": 6,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S018"
+        ],
+        "label": "indoor cooling during heat waves raises electricity use and grid emissions",
+        "rationale": "Links cooling demand to energy consumption feedback.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "use"
+          ],
+          "rationale_words": 7,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S045"
+        ],
+        "label": "DEHI trend rises in warm months while EC trend rises in winter",
+        "rationale": "Notes seasonal trends of two heat‑related indices.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "months",
+            "rises",
+            "warm"
+          ],
+          "rationale_words": 7,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S053"
+        ],
+        "label": "potential evapotranspiration increases with temperature in Iraq",
+        "rationale": "Reports PET rise alongside temperature growth.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "evapotranspiration",
+            "potential"
+          ],
+          "rationale_words": 6,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S055"
+        ],
+        "label": "extreme summer temperatures in Baghdad coincide with less rain and more dust storms",
+        "rationale": "Links very high temps to reduced precipitation and dust events.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "coincide",
+            "extreme",
+            "rain"
+          ],
+          "rationale_words": 10,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S056"
+        ],
+        "label": "humidity projected to rise in India, strengthening heat‑wave temperatures",
+        "rationale": "Projects increasing humidity and its effect on heat‑wave intensity.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "projected",
+            "rise",
+            "strengthening",
+            "wave"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S001"
+        ],
+        "label": "high WBGT values indicate consistently high heat stress",
+        "rationale": "States that WBGT >30 °C reflects strong heat stress.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "indicate"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S020",
+          "S021"
+        ],
+        "label": "fires in Thailand raise particulate air pollution in December–April",
+        "rationale": "Both describe seasonal fire activity and associated PM10 increases.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "raise"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S037"
+        ],
+        "label": "1 °C rise above 19 °C raises all‑cause hospitalizations by 0.8 % within days",
+        "rationale": "Quantifies health impact of a temperature increase.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "raises"
+          ],
+          "rationale_words": 7,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S062"
+        ],
+        "label": "cold weather events lower medical usage rates",
+        "rationale": "Notes reduced health‑care usage during cold periods.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 7,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S065"
+        ],
+        "label": "high heat‑humidity index before delivery shortens gestation",
+        "rationale": "Associates pre‑delivery heat‑humidity with reduced gestational age.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "gestation",
+            "shortens"
+          ],
+          "rationale_words": 7,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "singletons_as_returned": [],
+    "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"humidity amplifies heat stress and cooling demand\",\n      \"member_ids\": [\"S027\", \"S039\"],\n      \"rationale\": \"Both note that modest humidity increases discomfort or makes humidity‑based metrics more relevant.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"apparent temperature rises faster than air temperature even as humidity falls\",\n      \"member_ids\": [\"S026\", \"S028\"],\n      \"rationale\": \"Both describe future projections where apparent temperature outpaces air temperature despite declining RH.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"heat‑wave frequency, intensity and duration are projected to increase\",\n      \"member_ids\": [\"S033\", \"S034\", \"S059\", \"S060\"],\n      \"rationale\": \"All state that heat‑wave occurrence or characteristics will grow in the future.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"early‑season heat raises emergency‑department visits\",\n      \"member_ids\": [\"S008\", \"S038\"],\n      \"rationale\": \"Both link spring/shoulder‑season heat to higher health‑care usage because of lack of preparedness.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"high‑vulnerability areas experience more excessive heat days or illness\",\n      \"member_ids\": [\"S003\", \"S004\"],\n      \"rationale\": \"Both describe greater heat‑related risk in vulnerable or rarely hot regions.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"high heat index combined with low precipitation drives drought and vegetation dieback\",\n      \"member_ids\": [\"S016\", \"S054\"],\n      \"rationale\": \"Both connect elevated heat index/PET with drought severity and ecosystem impacts.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"soil moisture has limited effect on humid heatwaves except in some U.S. regions\",\n      \"member_ids\": [\"S044\"],\n      \"rationale\": \"Single statement about soil‑moisture influence on humid heatwaves.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Genetic Heat Index identifies hottest genetic‑rarity patches\",\n      \"member_ids\": [\"S014\"],\n      \"rationale\": \"Describes purpose of a specific heat‑related index.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"high apparent temperature increases mental‑disorder ED visits for males\",\n      \"member_ids\": [\"S015\"],\n      \"rationale\": \"Specific health impact of apparent temperature on male patients.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"about ten percent of agriculture‑related deaths are heat‑induced\",\n      \"member_ids\": [\"S011\"],\n      \"rationale\": \"Quantifies agricultural fatalities linked to heat.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"heat‑related injury or death occurs early for new employees or during heat waves\",\n      \"member_ids\": [\"S012\"],\n      \"rationale\": \"Describes timing of heat‑related occupational injuries.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"indoor cooling during heat waves raises electricity use and grid emissions\",\n      \"member_ids\": [\"S018\"],\n      \"rationale\": \"Links cooling demand to energy consumption feedback.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"DEHI trend rises in warm months while EC trend rises in winter\",\n      \"member_ids\": [\"S045\"],\n      \"rationale\": \"Notes seasonal trends of two heat‑related indices.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"potential evapotranspiration increases with temperature in Iraq\",\n      \"member_ids\": [\"S053\"],\n      \"rationale\": \"Reports PET rise alongside temperature growth.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"extreme summer temperatures in Baghdad coincide with less rain and more dust storms\",\n      \"member_ids\": [\"S055\"],\n      \"rationale\": \"Links very high temps to reduced precipitation and dust events.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"humidity projected to rise in India, strengthening heat‑wave temperatures\",\n      \"member_ids\": [\"S056\"],\n      \"rationale\": \"Projects increasing humidity and its effect on heat‑wave intensity.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"high WBGT values indicate consistently high heat stress\",\n      \"member_ids\": [\"S001\"],\n      \"rationale\": \"States that WBGT >30 °C reflects strong heat stress.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"fires in Thailand raise particulate air pollution in December–April\",\n      \"member_ids\": [\"S020\", \"S021\"],\n      \"rationale\": \"Both describe seasonal fire activity and associated PM10 increases.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"1 °C rise above 19 °C raises all‑cause hospitalizations by 0.8 % within days\",\n      \"member_ids\": [\"S037\"],\n      \"rationale\": \"Quantifies health impact of a temperature increase.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"cold weather events lower medical usage rates\",\n      \"member_ids\": [\"S062\"],\n      \"rationale\": \"Notes reduced health‑care usage during cold periods.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"high heat‑humidity index before delivery shortens gestation\",\n      \"member_ids\": [\"S065\"],\n      \"rationale\": \"Associates pre‑delivery heat‑humidity with reduced gestational age.\",\n      \"claim_about\": \"impact_or_exposure\"\n    }\n  ],\n  \"singletons\": []\n}",
+    "raw_response_chars": 5675,
+    "raw_reasoning": null,
+    "raw_reasoning_chars": null,
+    "content_fallback": false,
+    "finish_reason": "stop",
+    "raw_max_chars": 20000
+  },
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 20.0,
+  "model_parse_error": null,
+  "elapsed_seconds": 19.9,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"humidity amplifies heat stress and cooling demand\",\n      \"member_ids\": [\"S027\", \"S039\"],\n      \"rationale\": \"Both note that modest humidity increases discomfort or makes humidity‑based metrics more relevant.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"apparent temperature rises faster than air temperature even as humidity falls\",\n      \"member_ids\": [\"S026\", \"S028\"],\n      \"rationale\": \"Both describe future projections where apparent temperature outpaces air temperature despite declining RH.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"heat‑wave frequency, intensity and duration are projected to increase\",\n      \"member_ids\": [\"S033\", \"S034\", \"S059\", \"S060\"],\n      \"rationale\": \"All state that heat‑wave occurrence or characteristics will grow in the future.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"early‑season heat raises emergency‑department visits\",\n      \"member_ids\": [\"S008\", \"S038\"],\n      \"rationale\": \"Both link spring/shoulder‑season heat to higher health‑care usage because of lack of preparedness.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"high‑vulnerability areas experience more excessive heat days or illness\",\n      \"member_ids\": [\"S003\", \"S004\"],\n      \"rationale\": \"Both describe greater heat‑related risk in vulnerable or rarely hot regions.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"high heat index combined with low precipitation drives drought and vegetation dieback\",\n      \"member_ids\": [\"S016\", \"S054\"],\n      \"rationale\": \"Both connect elevated heat index/PET with drought severity and ecosystem impacts.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"soil moisture has limited effect on humid heatwaves except in some U.S. regions\",\n      \"member_ids\": [\"S044\"],\n      \"rationale\": \"Single statement about soil‑moisture influence on humid heatwaves.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Genetic Heat Index identifies hottest genetic‑rarity patches\",\n      \"member_ids\": [\"S014\"],\n      \"rationale\": \"Describes purpose of a specific heat‑related index.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"high apparent temperature increases mental‑disorder ED visits for males\",\n      \"member_ids\": [\"S015\"],\n      \"rationale\": \"Specific health impact of apparent temperature on male patients.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"about ten percent of agriculture‑related deaths are heat‑induced\",\n      \"member_ids\": [\"S011\"],\n      \"rationale\": \"Quantifies agricultural fatalities linked to heat.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"heat‑related injury or death occurs early for new employees or during heat waves\",\n      \"member_ids\": [\"S012\"],\n      \"rationale\": \"Describes timing of heat‑related occupational injuries.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"indoor cooling during heat waves raises electricity use and grid emissions\",\n      \"member_ids\": [\"S018\"],\n      \"rationale\": \"Links cooling demand to energy consumption feedback.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"DEHI trend rises in warm months while EC trend rises in winter\",\n      \"member_ids\": [\"S045\"],\n      \"rationale\": \"Notes seasonal trends of two heat‑related indices.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"potential evapotranspiration increases with temperature in Iraq\",\n      \"member_ids\": [\"S053\"],\n      \"rationale\": \"Reports PET rise alongside temperature growth.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"extreme summer temperatures in Baghdad coincide with less rain and more dust storms\",\n      \"member_ids\": [\"S055\"],\n      \"rationale\": \"Links very high temps to reduced precipitation and dust events.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"humidity projected to rise in India, strengthening heat‑wave temperatures\",\n      \"member_ids\": [\"S056\"],\n      \"rationale\": \"Projects increasing humidity and its effect on heat‑wave intensity.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"high WBGT values indicate consistently high heat stress\",\n      \"member_ids\": [\"S001\"],\n      \"rationale\": \"States that WBGT >30 °C reflects strong heat stress.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"fires in Thailand raise particulate air pollution in December–April\",\n      \"member_ids\": [\"S020\", \"S021\"],\n      \"rationale\": \"Both describe seasonal fire activity and associated PM10 increases.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"1 °C rise above 19 °C raises all‑cause hospitalizations by 0.8 % within days\",\n      \"member_ids\": [\"S037\"],\n      \"rationale\": \"Quantifies health impact of a temperature increase.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"cold weather events lower medical usage rates\",\n      \"member_ids\": [\"S062\"],\n      \"rationale\": \"Notes reduced health‑care usage during cold periods.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"high heat‑humidity index before delivery shortens gestation\",\n      \"member_ids\": [\"S065\"],\n      \"rationale\": \"Associates pre‑delivery heat‑humidity with reduced gestational age.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"minimum temperatures rise faster than maximum, shrinking diurnal range and affecting fire weather\",\n      \"member_ids\": [\"S057\", \"S030\"],\n      \"rationale\": \"Both describe heat‑related metrics increasing faster than air temperature, influencing fire risk and heat stress.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    }\n  ],\n  \"singletons\": []\n}",
+  "raw_response_chars": 6025,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

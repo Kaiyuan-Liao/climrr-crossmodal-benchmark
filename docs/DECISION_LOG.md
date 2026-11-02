@@ -2699,3 +2699,38 @@ code emits, and the next GUIDANCE packet still chooses.
   the input is reported in the checks but not in the message.
 - **Affected files:** `scripts/litcollect/litgroup_agent.py`, `scripts/litcollect/litsynth_agent.py`,
   `tests/test_litgroup_agent.py`, `tests/test_litsynth_agent.py`, `docs/PILOT_P2B_DESIGN.md`, `docs/PROJECT_STATE.md`.
+
+## D-052 --- Grouping run 2 accepted as the pilot's literature grouping
+
+- **Date:** 2026-11-02.
+- **Status:** **decided** (COORDINATOR, 2026-11-02).
+- **Context.** Grouping run 2 (`litgroup_agent` v3, SHA-256 `e094aa5cbd4b981042fe07f165afc5d83ba77000ca718f185bcecee325d845f4`;
+  Sophia vLLM, `openai/gpt-oss-120b`; source commit `7676e53319b3b7a5962b0b431c5457837e7c37ba`; `reasoning_effort=low`,
+  `max_tokens=16000`, `chunk_size=40`), delivered as `litgroups_run2_evidence.tar.gz`
+  (`a90ad7f011424db37082ea692b1987c9a7697d399ef20c1737afa8535374e2eb`): `groups.jsonl`
+  `fc5ceea5b57a7d0bcfc9fe7f88de5f171aaebd60b4ce1afeb51acd179d4b558a`, `summary.json`
+  `0253c687deb304d0a3a72e6755d6fe5a39815932e680977e11834c4bbf4ab5c5`; system-prompt template
+  `ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7`, corrective template
+  `5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6`. 11 partitions, 23 chunks, 23 pass, 0 fail;
+  15 corrective turns; 239 groups, 155 singletons, 747 statements each exactly once.
+- **Decision.** Run 2 is the pilot's literature grouping. **Three chunks passed on a second attempt with identical
+  configuration** (`extreme_heat_v1.driver.c1`, `extreme_heat_v1.driver.c2`, `fire_weather_v1.mechanism.c2`; the
+  first attempts failed `ids_exactly_once_pass` after their corrective turn and are kept as
+  `chunks/<id>.failed_attempt1.json`, recorded in the manifest's `second_attempt_chunks`). **Cross-chunk merging is
+  deferred to human review** (Kaiyuan, `P2b_groups_v1.xlsx`, disposition `merge_with`). Run 1 stays superseded (budget,
+  D-051).
+- **Implementation (EXECUTOR).** `scripts/ingest_litgroups.py`, `src/climrr/litgroups_run2.py` ->
+  `artifacts/litgroups/run2/` (`manifest.json` `36931849a2de42d9931bbd491b2fc95ba0c71ba9ac0b3b0aa42be54b0bda80d0`;
+  `groups_enriched.jsonl` `924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a`); packets
+  `artifacts/benchmark/synth_packets/` (`manifest.json` `80af2d0dbe3c9601f06246c621d430ae4c7b1f7e4318fbecdec8e7d5558611c1`);
+  workbook `scripts/build_p2b_groups_review.py`, `src/climrr/p2b_review.py`.
+- **Recorded, for the COORDINATOR.** (1) 105 of the 239 groups have one member (the model's labelled one-member groups;
+  the agent's `single_member` check is not gating); `is_singleton` follows the agent's `kind`. (2) The packets keep the
+  file name `PK-<seed_id>.json` (what the pinned `litsynth_agent.py` reads); the item id `BI-P2B-<nnnn>` is inside each
+  packet and in `manifest.json` (the work package named the files `BI-P2B-<nnnn>.json`; the builder's `index.json` is now
+  `manifest.json`). (3) Heat-arm fire statements tagged `hazard_change_mechanism` lead the heat packets' drivers; the
+  claim tag is the agent's (D-049) and is for the human check, not for code.
+- **Affected files:** `src/climrr/litgroups_run2.py`, `src/climrr/p2b_review.py`, `scripts/ingest_litgroups.py`,
+  `scripts/build_p2b_groups_review.py`, `scripts/build_synth_packets.py`, `tests/test_litgroups_run2.py`,
+  `artifacts/litgroups/run2/`, `artifacts/benchmark/synth_packets/`, `artifacts/benchmark/review/P2b_groups_v1.csv`,
+  `docs/PILOT_P2B_DESIGN.md`, `docs/PROJECT_STATE.md`, `reports/milestones/PILOT_BENCHMARK_REPORT.md`.

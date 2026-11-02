@@ -1,0 +1,5024 @@
+{
+  "partition_id": "extreme_heat_v1.pattern",
+  "chunk_index": 1,
+  "n_chunks": 2,
+  "arm": "extreme_heat_v1",
+  "statement_type": "pattern",
+  "split_by": [],
+  "partition_n_statements": 65,
+  "n_statements": 33,
+  "local_ids": [
+    "S002",
+    "S005",
+    "S010",
+    "S013",
+    "S019",
+    "S025",
+    "S029",
+    "S035",
+    "S041",
+    "S042",
+    "S047",
+    "S048",
+    "S049",
+    "S050",
+    "S052",
+    "S063",
+    "S064",
+    "S006",
+    "S007",
+    "S009",
+    "S017",
+    "S022",
+    "S023",
+    "S024",
+    "S032",
+    "S040",
+    "S043",
+    "S046",
+    "S058",
+    "S061",
+    "S031",
+    "S036",
+    "S051"
+  ],
+  "generator_version": "litgroup_agent v3",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "extreme_heat_v1.pattern.c1",
+  "model_attempts": 2,
+  "corrective_retry_used": true,
+  "finish_reason": "stop",
+  "content_chars": 2969,
+  "reasoning_chars": 2409,
+  "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+  "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+  "generation_timestamp": "2026-11-02T01:22:59Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S035",
+        "S046"
+      ],
+      "label": "humidity adds information beyond temperature",
+      "rationale": "Both note that including humidity changes the heat‑index pattern compared to temperature alone.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S019",
+        "S025"
+      ],
+      "label": "rural areas experience higher heat‑index values than urban",
+      "rationale": "Both report higher individually experienced heat‑index or temperature values for rural subjects versus urban ones.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "areas"
+        ],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S048",
+        "S050"
+      ],
+      "label": "low humidity reduces heat‑index values",
+      "rationale": "Both attribute lower heat‑index values in Oregon to low humidity conditions.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "reduces"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S005",
+        "S042",
+        "S049",
+        "S063",
+        "S064"
+      ],
+      "label": "higher heat‑index linked to adverse health outcomes",
+      "rationale": "All describe health impacts that increase when heat‑index values are higher.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "adverse",
+          "health",
+          "linked",
+          "outcomes"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S022",
+        "S023",
+        "S024"
+      ],
+      "label": "cooling‑center coverage lower where heat‑index is higher or latitude is higher",
+      "rationale": "Each relates population coverage of cooling centers to heat‑index or latitude differences.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S006",
+        "S007"
+      ],
+      "label": "irrigation loss raises heat‑wave indices",
+      "rationale": "Both state that loss of irrigation increases frequency, duration, or intensity of heat‑wave metrics.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "raises"
+        ],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S032",
+        "S043"
+      ],
+      "label": "humid heatwave events have longer duration and larger area",
+      "rationale": "Both report that humid heatwaves last longer and cover more area than conventional heatwaves.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "area"
+        ],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [
+    {
+      "id": "S002",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S010",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S013",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S017",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S029",
+      "claim_about": "method_or_data",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S031",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S036",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S041",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S047",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S052",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S058",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S061",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S009",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S040",
+      "claim_about": "method_or_data",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S051",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-256854356-03",
+        "LS-272852900-05"
+      ],
+      "member_local_ids": [
+        "S035",
+        "S046"
+      ],
+      "label": "humidity adds information beyond temperature",
+      "rationale": "Both note that including humidity changes the heat‑index pattern compared to temperature alone.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 2,
+      "papers": [
+        "256854356",
+        "272852900"
+      ],
+      "canonical_papers": [
+        "256854356",
+        "272852900"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "cited_candidate": 1,
+        "core_candidate": 1
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-231948602-02",
+        "LS-239033445-04"
+      ],
+      "member_local_ids": [
+        "S019",
+        "S025"
+      ],
+      "label": "rural areas experience higher heat‑index values than urban",
+      "rationale": "Both report higher individually experienced heat‑index or temperature values for rural subjects versus urban ones.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 2,
+      "papers": [
+        "231948602",
+        "239033445"
+      ],
+      "canonical_papers": [
+        "231948602",
+        "239033445"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "areas"
+        ],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-34373293-01",
+        "LS-34373293-03"
+      ],
+      "member_local_ids": [
+        "S048",
+        "S050"
+      ],
+      "label": "low humidity reduces heat‑index values",
+      "rationale": "Both attribute lower heat‑index values in Oregon to low humidity conditions.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 2,
+      "papers": [
+        "34373293"
+      ],
+      "canonical_papers": [
+        "34373293"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "reduces"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-14421869-05",
+        "LS-268251988-03",
+        "LS-34373293-02",
+        "LS-7891630-05",
+        "LS-7891630-06"
+      ],
+      "member_local_ids": [
+        "S005",
+        "S042",
+        "S049",
+        "S063",
+        "S064"
+      ],
+      "label": "higher heat‑index linked to adverse health outcomes",
+      "rationale": "All describe health impacts that increase when heat‑index values are higher.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 5,
+      "papers": [
+        "14421869",
+        "268251988",
+        "34373293",
+        "7891630"
+      ],
+      "canonical_papers": [
+        "14421869",
+        "268251988",
+        "34373293",
+        "7891630"
+      ],
+      "n_independent_core_cited_papers": 4,
+      "role_counts": {
+        "cited_candidate": 2,
+        "core_candidate": 3
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "adverse",
+          "health",
+          "linked",
+          "outcomes"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-233741363-01",
+        "LS-233741363-02",
+        "LS-233741363-05"
+      ],
+      "member_local_ids": [
+        "S022",
+        "S023",
+        "S024"
+      ],
+      "label": "cooling‑center coverage lower where heat‑index is higher or latitude is higher",
+      "rationale": "Each relates population coverage of cooling centers to heat‑index or latitude differences.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 3,
+      "papers": [
+        "233741363"
+      ],
+      "canonical_papers": [
+        "233741363"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 3
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-154971876-02",
+        "LS-154971876-05"
+      ],
+      "member_local_ids": [
+        "S006",
+        "S007"
+      ],
+      "label": "irrigation loss raises heat‑wave indices",
+      "rationale": "Both state that loss of irrigation increases frequency, duration, or intensity of heat‑wave metrics.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 2,
+      "papers": [
+        "154971876"
+      ],
+      "canonical_papers": [
+        "154971876"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "raises"
+        ],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-250039675-06",
+        "LS-269932944-03"
+      ],
+      "member_local_ids": [
+        "S032",
+        "S043"
+      ],
+      "label": "humid heatwave events have longer duration and larger area",
+      "rationale": "Both report that humid heatwaves last longer and cover more area than conventional heatwaves.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 2,
+      "papers": [
+        "250039675",
+        "269932944"
+      ],
+      "canonical_papers": [
+        "250039675",
+        "269932944"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "area"
+        ],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-134320823-03"
+      ],
+      "member_local_ids": [
+        "S002"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "134320823"
+      ],
+      "canonical_papers": [
+        "134320823"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-211047583-03"
+      ],
+      "member_local_ids": [
+        "S010"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "211047583"
+      ],
+      "canonical_papers": [
+        "211047583"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-216160812-03"
+      ],
+      "member_local_ids": [
+        "S013"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "216160812"
+      ],
+      "canonical_papers": [
+        "216160812"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-221504407-02"
+      ],
+      "member_local_ids": [
+        "S017"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "221504407"
+      ],
+      "canonical_papers": [
+        "221504407"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-241620747-04"
+      ],
+      "member_local_ids": [
+        "S029"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "241620747"
+      ],
+      "canonical_papers": [
+        "241620747"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-248185344-01"
+      ],
+      "member_local_ids": [
+        "S031"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "248185344"
+      ],
+      "canonical_papers": [
+        "248185344"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-258358501-03"
+      ],
+      "member_local_ids": [
+        "S036"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "258358501"
+      ],
+      "canonical_papers": [
+        "258358501"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-267654759-02"
+      ],
+      "member_local_ids": [
+        "S041"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "267654759"
+      ],
+      "canonical_papers": [
+        "267654759"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-32695834-04"
+      ],
+      "member_local_ids": [
+        "S047"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "32695834"
+      ],
+      "canonical_papers": [
+        "32695834"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-40987390-04"
+      ],
+      "member_local_ids": [
+        "S052"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "40987390"
+      ],
+      "canonical_papers": [
+        "40987390"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-5838629-04"
+      ],
+      "member_local_ids": [
+        "S058"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "5838629"
+      ],
+      "canonical_papers": [
+        "5838629"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-6479124-03"
+      ],
+      "member_local_ids": [
+        "S061"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "6479124"
+      ],
+      "canonical_papers": [
+        "6479124"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-16807122-01"
+      ],
+      "member_local_ids": [
+        "S009"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "16807122"
+      ],
+      "canonical_papers": [
+        "16807122"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-267196798-03"
+      ],
+      "member_local_ids": [
+        "S040"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "267196798"
+      ],
+      "canonical_papers": [
+        "267196798"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "pattern",
+      "partition_id": "extreme_heat_v1.pattern",
+      "chunk_id": "extreme_heat_v1.pattern.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-3708423-05"
+      ],
+      "member_local_ids": [
+        "S051"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "3708423"
+      ],
+      "canonical_papers": [
+        "3708423"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "review_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3519afd810369227cf05706ef69cedeeaa41e5529763e45753d1468f7e505a68",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:22:59Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 17422,
+      "reasoning_chars": 6405,
+      "http_attempts": 1,
+      "model_seconds": 37.4
+    },
+    {
+      "turn": 2,
+      "finish_reason": "stop",
+      "content_chars": 2969,
+      "reasoning_chars": 2409,
+      "http_attempts": 1,
+      "model_seconds": 9.5
+    }
+  ],
+  "first_turn": {
+    "checks": {
+      "parse_pass": true,
+      "unknown_ids": [
+        "S060",
+        "S062",
+        "S067",
+        "S068",
+        "S069",
+        "S070",
+        "S071",
+        "S072",
+        "S073",
+        "S074",
+        "S075",
+        "S076",
+        "S077",
+        "S078",
+        "S079",
+        "S080",
+        "S081",
+        "S082",
+        "S083",
+        "S084",
+        "S085",
+        "S086",
+        "S087",
+        "S088",
+        "S089",
+        "S090",
+        "S091",
+        "S092",
+        "S093",
+        "S094",
+        "S095",
+        "S096",
+        "S097",
+        "S098",
+        "S099",
+        "S100",
+        "S101",
+        "S102",
+        "S103",
+        "S104",
+        "S105",
+        "S106",
+        "S107",
+        "S108",
+        "S109",
+        "S110",
+        "S111",
+        "S112",
+        "S113",
+        "S114",
+        "S115",
+        "S116",
+        "S117",
+        "S118",
+        "S119",
+        "S120",
+        "S121",
+        "S122",
+        "S123",
+        "S124",
+        "S125",
+        "S126",
+        "S127",
+        "S128",
+        "S129",
+        "S130",
+        "S131",
+        "S132",
+        "S133",
+        "S134",
+        "S135",
+        "S136",
+        "S137",
+        "S138",
+        "S139",
+        "S140",
+        "S141",
+        "S142",
+        "S143",
+        "S144",
+        "S145",
+        "S146",
+        "S147",
+        "S148",
+        "S149",
+        "S150",
+        "S151",
+        "S152",
+        "S153",
+        "S154",
+        "S155",
+        "S156",
+        "S157",
+        "S158",
+        "S159",
+        "S160",
+        "S161",
+        "S162",
+        "S163",
+        "S164",
+        "S165",
+        "S166",
+        "S167",
+        "S168",
+        "S169",
+        "S170",
+        "S171",
+        "S172",
+        "S173",
+        "S174",
+        "S175",
+        "S176",
+        "S177",
+        "S178",
+        "S179",
+        "S180",
+        "S181",
+        "S182",
+        "S183",
+        "S184",
+        "S185",
+        "S186",
+        "S187",
+        "S188",
+        "S189",
+        "S190",
+        "S191",
+        "S192",
+        "S193",
+        "S194",
+        "S195",
+        "S196",
+        "S197",
+        "S198",
+        "S199",
+        "S200",
+        "S201",
+        "S202",
+        "S203",
+        "S204",
+        "S205",
+        "S206",
+        "S207",
+        "S208",
+        "S209",
+        "S210",
+        "S211",
+        "S212",
+        "S213",
+        "S214",
+        "S215",
+        "S216",
+        "S217",
+        "S218",
+        "S219",
+        "S220",
+        "S221",
+        "S222",
+        "S223",
+        "S224",
+        "S225",
+        "S226",
+        "S227",
+        "S228",
+        "S229",
+        "S230",
+        "S231",
+        "S232",
+        "S233",
+        "S234",
+        "S235",
+        "S236",
+        "S237",
+        "S238",
+        "S239",
+        "S240",
+        "S241",
+        "S242",
+        "S243",
+        "S244",
+        "S245",
+        "S246",
+        "S247",
+        "S248",
+        "S249",
+        "S250",
+        "S251",
+        "S252",
+        "S253",
+        "S254",
+        "S255",
+        "S256",
+        "S257",
+        "S258",
+        "S259",
+        "S260",
+        "S261",
+        "S262",
+        "S263",
+        "S264",
+        "S265",
+        "S266",
+        "S267",
+        "S268",
+        "S269",
+        "S270",
+        "S271",
+        "S272",
+        "S273",
+        "S274",
+        "S275",
+        "S276",
+        "S277",
+        "S278",
+        "S279",
+        "S280",
+        "S281",
+        "S282",
+        "S283",
+        "S284",
+        "S285",
+        "S286",
+        "S287",
+        "S288",
+        "S289",
+        "S290",
+        "S291",
+        "S292",
+        "S293",
+        "S294",
+        "S295",
+        "S296",
+        "S297",
+        "S298",
+        "S299",
+        "S300",
+        "S301",
+        "S302",
+        "S303",
+        "S304",
+        "S305",
+        "S306",
+        "S307",
+        "S308",
+        "S309",
+        "S310",
+        "S311",
+        "S312",
+        "S313",
+        "S314",
+        "S315",
+        "S316",
+        "S317",
+        "S318",
+        "S319",
+        "S320",
+        "S321",
+        "S322",
+        "S323",
+        "S324",
+        "S325",
+        "S326",
+        "S327",
+        "S328",
+        "S329",
+        "S330",
+        "S331",
+        "S332",
+        "S333",
+        "S334",
+        "S335",
+        "S336",
+        "S337",
+        "S338",
+        "S339",
+        "S340",
+        "S341",
+        "S342",
+        "S343",
+        "S344",
+        "S345",
+        "S346",
+        "S347",
+        "S348",
+        "S349",
+        "S350",
+        "S351",
+        "S352",
+        "S353",
+        "S354",
+        "S355",
+        "S356",
+        "S357",
+        "S358",
+        "S359",
+        "S360",
+        "S361",
+        "S362",
+        "S363",
+        "S364",
+        "S365",
+        "S366",
+        "S367",
+        "S368",
+        "S369",
+        "S370",
+        "S371",
+        "S372",
+        "S373",
+        "S374",
+        "S375",
+        "S376",
+        "S377",
+        "S378",
+        "S379",
+        "S380",
+        "S381",
+        "S382",
+        "S383",
+        "S384",
+        "S385",
+        "S386",
+        "S387",
+        "S388",
+        "S389",
+        "S390",
+        "S391",
+        "S392",
+        "S393",
+        "S394",
+        "S395",
+        "S396",
+        "S397",
+        "S398",
+        "S399",
+        "S400"
+      ],
+      "duplicate_ids": [
+        "S063",
+        "S064"
+      ],
+      "missing_ids": [
+        "S009",
+        "S032",
+        "S040",
+        "S043",
+        "S051"
+      ],
+      "empty_groups": 0,
+      "ids_exactly_once_pass": false,
+      "no_empty_group_pass": true,
+      "failed": [
+        "ids_exactly_once_pass"
+      ]
+    },
+    "groups_as_returned": [
+      {
+        "member_ids": [
+          "S035",
+          "S046"
+        ],
+        "label": "humidity adds information beyond temperature",
+        "rationale": "Both note that including humidity changes the heat‑index pattern compared to temperature alone.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 13,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S019",
+          "S025"
+        ],
+        "label": "rural areas experience higher heat‑index values than urban",
+        "rationale": "Both report higher individually experienced heat‑index or temperature values for rural subjects versus urban ones.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "areas"
+          ],
+          "rationale_words": 15,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S048",
+          "S050"
+        ],
+        "label": "low humidity reduces heat‑index values",
+        "rationale": "Both attribute lower heat‑index values in Oregon to low humidity conditions.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "reduces"
+          ],
+          "rationale_words": 11,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S005",
+          "S042",
+          "S049",
+          "S063",
+          "S064"
+        ],
+        "label": "higher heat‑index linked to adverse health outcomes",
+        "rationale": "All describe health impacts that increase when heat‑index values are higher.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "adverse",
+            "health",
+            "linked",
+            "outcomes"
+          ],
+          "rationale_words": 11,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S022",
+          "S023",
+          "S024"
+        ],
+        "label": "cooling‑center coverage lower where heat‑index is higher or latitude is higher",
+        "rationale": "Each relates population coverage of cooling centers to heat‑index or latitude differences.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S006",
+          "S007"
+        ],
+        "label": "irrigation loss raises heat‑wave indices",
+        "rationale": "Both state that loss of irrigation increases frequency, duration, or intensity of heat‑wave metrics.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "raises"
+          ],
+          "rationale_words": 14,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "singletons_as_returned": [
+      {
+        "id": "S002",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S010",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S013",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S017",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S029",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S031",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S036",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S041",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S047",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S052",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S058",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S060",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S061",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S062",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S063",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S064",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S067",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S068",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S069",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S070",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S071",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S072",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S073",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S074",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S075",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S076",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S077",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S078",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S079",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S080",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S081",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S082",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S083",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S084",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S085",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S086",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S087",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S088",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S089",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S090",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S091",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S092",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S093",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S094",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S095",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S096",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S097",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S098",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S099",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S100",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S101",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S102",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S103",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S104",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S105",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S106",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S107",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S108",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S109",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S110",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S111",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S112",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S113",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S114",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S115",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S116",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S117",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S118",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S119",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S120",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S121",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S122",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S123",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S124",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S125",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S126",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S127",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S128",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S129",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S130",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S131",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S132",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S133",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S134",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S135",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S136",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S137",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S138",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S139",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S140",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S141",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S142",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S143",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S144",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S145",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S146",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S147",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S148",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S149",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S150",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S151",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S152",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S153",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S154",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S155",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S156",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S157",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S158",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S159",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S160",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S161",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S162",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S163",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S164",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S165",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S166",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S167",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S168",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S169",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S170",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S171",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S172",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S173",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S174",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S175",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S176",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S177",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S178",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S179",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S180",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S181",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S182",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S183",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S184",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S185",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S186",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S187",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S188",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S189",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S190",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S191",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S192",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S193",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S194",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S195",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S196",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S197",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S198",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S199",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S200",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S201",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S202",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S203",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S204",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S205",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S206",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S207",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S208",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S209",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S210",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S211",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S212",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S213",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S214",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S215",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S216",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S217",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S218",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S219",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S220",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S221",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S222",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S223",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S224",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S225",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S226",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S227",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S228",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S229",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S230",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S231",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S232",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S233",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S234",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S235",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S236",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S237",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S238",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S239",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S240",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S241",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S242",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S243",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S244",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S245",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S246",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S247",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S248",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S249",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S250",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S251",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S252",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S253",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S254",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S255",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S256",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S257",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S258",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S259",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S260",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S261",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S262",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S263",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S264",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S265",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S266",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S267",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S268",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S269",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S270",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S271",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S272",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S273",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S274",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S275",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S276",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S277",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S278",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S279",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S280",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S281",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S282",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S283",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S284",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S285",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S286",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S287",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S288",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S289",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S290",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S291",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S292",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S293",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S294",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S295",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S296",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S297",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S298",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S299",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S300",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S301",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S302",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S303",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S304",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S305",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S306",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S307",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S308",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S309",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S310",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S311",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S312",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S313",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S314",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S315",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S316",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S317",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S318",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S319",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S320",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S321",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S322",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S323",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S324",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S325",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S326",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S327",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S328",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S329",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S330",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S331",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S332",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S333",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S334",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S335",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S336",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S337",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S338",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S339",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S340",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S341",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S342",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S343",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S344",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S345",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S346",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S347",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S348",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S349",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S350",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S351",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S352",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S353",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S354",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S355",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S356",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S357",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S358",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S359",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S360",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S361",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S362",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S363",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S364",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S365",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S366",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S367",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S368",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S369",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S370",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S371",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S372",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S373",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S374",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S375",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S376",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S377",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S378",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S379",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S380",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S381",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S382",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S383",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S384",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S385",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S386",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S387",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S388",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S389",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S390",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S391",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S392",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S393",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S394",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S395",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S396",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S397",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S398",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S399",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S400",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"humidity adds information beyond temperature\",\n      \"member_ids\": [\"S035\", \"S046\"],\n      \"rationale\": \"Both note that including humidity changes the heat‑index pattern compared to temperature alone.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"rural areas experience higher heat‑index values than urban\",\n      \"member_ids\": [\"S019\", \"S025\"],\n      \"rationale\": \"Both report higher individually experienced heat‑index or temperature values for rural subjects versus urban ones.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"low humidity reduces heat‑index values\",\n      \"member_ids\": [\"S048\", \"S050\"],\n      \"rationale\": \"Both attribute lower heat‑index values in Oregon to low humidity conditions.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"higher heat‑index linked to adverse health outcomes\",\n      \"member_ids\": [\"S005\", \"S042\", \"S049\", \"S063\", \"S064\"],\n      \"rationale\": \"All describe health impacts that increase when heat‑index values are higher.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"cooling‑center coverage lower where heat‑index is higher or latitude is higher\",\n      \"member_ids\": [\"S022\", \"S023\", \"S024\"],\n      \"rationale\": \"Each relates population coverage of cooling centers to heat‑index or latitude differences.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"irrigation loss raises heat‑wave indices\",\n      \"member_ids\": [\"S006\", \"S007\"],\n      \"rationale\": \"Both state that loss of irrigation increases frequency, duration, or intensity of heat‑wave metrics.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    }\n  ],\n  \"singletons\": [\n    {\"id\": \"S002\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S010\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S013\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S017\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S029\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S031\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S036\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S041\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S047\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S052\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S058\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S060\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S061\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S062\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S063\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S064\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S067\", \"claim_about\": \"other\"},\n    {\"id\": \"S068\", \"claim_about\": \"other\"},\n    {\"id\": \"S069\", \"claim_about\": \"other\"},\n    {\"id\": \"S070\", \"claim_about\": \"other\"},\n    {\"id\": \"S071\", \"claim_about\": \"other\"},\n    {\"id\": \"S072\", \"claim_about\": \"other\"},\n    {\"id\": \"S073\", \"claim_about\": \"other\"},\n    {\"id\": \"S074\", \"claim_about\": \"other\"},\n    {\"id\": \"S075\", \"claim_about\": \"other\"},\n    {\"id\": \"S076\", \"claim_about\": \"other\"},\n    {\"id\": \"S077\", \"claim_about\": \"other\"},\n    {\"id\": \"S078\", \"claim_about\": \"other\"},\n    {\"id\": \"S079\", \"claim_about\": \"other\"},\n    {\"id\": \"S080\", \"claim_about\": \"other\"},\n    {\"id\": \"S081\", \"claim_about\": \"other\"},\n    {\"id\": \"S082\", \"claim_about\": \"other\"},\n    {\"id\": \"S083\", \"claim_about\": \"other\"},\n    {\"id\": \"S084\", \"claim_about\": \"other\"},\n    {\"id\": \"S085\", \"claim_about\": \"other\"},\n    {\"id\": \"S086\", \"claim_about\": \"other\"},\n    {\"id\": \"S087\", \"claim_about\": \"other\"},\n    {\"id\": \"S088\", \"claim_about\": \"other\"},\n    {\"id\": \"S089\", \"claim_about\": \"other\"},\n    {\"id\": \"S090\", \"claim_about\": \"other\"},\n    {\"id\": \"S091\", \"claim_about\": \"other\"},\n    {\"id\": \"S092\", \"claim_about\": \"other\"},\n    {\"id\": \"S093\", \"claim_about\": \"other\"},\n    {\"id\": \"S094\", \"claim_about\": \"other\"},\n    {\"id\": \"S095\", \"claim_about\": \"other\"},\n    {\"id\": \"S096\", \"claim_about\": \"other\"},\n    {\"id\": \"S097\", \"claim_about\": \"other\"},\n    {\"id\": \"S098\", \"claim_about\": \"other\"},\n    {\"id\": \"S099\", \"claim_about\": \"other\"},\n    {\"id\": \"S100\", \"claim_about\": \"other\"},\n    {\"id\": \"S101\", \"claim_about\": \"other\"},\n    {\"id\": \"S102\", \"claim_about\": \"other\"},\n    {\"id\": \"S103\", \"claim_about\": \"other\"},\n    {\"id\": \"S104\", \"claim_about\": \"other\"},\n    {\"id\": \"S105\", \"claim_about\": \"other\"},\n    {\"id\": \"S106\", \"claim_about\": \"other\"},\n    {\"id\": \"S107\", \"claim_about\": \"other\"},\n    {\"id\": \"S108\", \"claim_about\": \"other\"},\n    {\"id\": \"S109\", \"claim_about\": \"other\"},\n    {\"id\": \"S110\", \"claim_about\": \"other\"},\n    {\"id\": \"S111\", \"claim_about\": \"other\"},\n    {\"id\": \"S112\", \"claim_about\": \"other\"},\n    {\"id\": \"S113\", \"claim_about\": \"other\"},\n    {\"id\": \"S114\", \"claim_about\": \"other\"},\n    {\"id\": \"S115\", \"claim_about\": \"other\"},\n    {\"id\": \"S116\", \"claim_about\": \"other\"},\n    {\"id\": \"S117\", \"claim_about\": \"other\"},\n    {\"id\": \"S118\", \"claim_about\": \"other\"},\n    {\"id\": \"S119\", \"claim_about\": \"other\"},\n    {\"id\": \"S120\", \"claim_about\": \"other\"},\n    {\"id\": \"S121\", \"claim_about\": \"other\"},\n    {\"id\": \"S122\", \"claim_about\": \"other\"},\n    {\"id\": \"S123\", \"claim_about\": \"other\"},\n    {\"id\": \"S124\", \"claim_about\": \"other\"},\n    {\"id\": \"S125\", \"claim_about\": \"other\"},\n    {\"id\": \"S126\", \"claim_about\": \"other\"},\n    {\"id\": \"S127\", \"claim_about\": \"other\"},\n    {\"id\": \"S128\", \"claim_about\": \"other\"},\n    {\"id\": \"S129\", \"claim_about\": \"other\"},\n    {\"id\": \"S130\", \"claim_about\": \"other\"},\n    {\"id\": \"S131\", \"claim_about\": \"other\"},\n    {\"id\": \"S132\", \"claim_about\": \"other\"},\n    {\"id\": \"S133\", \"claim_about\": \"other\"},\n    {\"id\": \"S134\", \"claim_about\": \"other\"},\n    {\"id\": \"S135\", \"claim_about\": \"other\"},\n    {\"id\": \"S136\", \"claim_about\": \"other\"},\n    {\"id\": \"S137\", \"claim_about\": \"other\"},\n    {\"id\": \"S138\", \"claim_about\": \"other\"},\n    {\"id\": \"S139\", \"claim_about\": \"other\"},\n    {\"id\": \"S140\", \"claim_about\": \"other\"},\n    {\"id\": \"S141\", \"claim_about\": \"other\"},\n    {\"id\": \"S142\", \"claim_about\": \"other\"},\n    {\"id\": \"S143\", \"claim_about\": \"other\"},\n    {\"id\": \"S144\", \"claim_about\": \"other\"},\n    {\"id\": \"S145\", \"claim_about\": \"other\"},\n    {\"id\": \"S146\", \"claim_about\": \"other\"},\n    {\"id\": \"S147\", \"claim_about\": \"other\"},\n    {\"id\": \"S148\", \"claim_about\": \"other\"},\n    {\"id\": \"S149\", \"claim_about\": \"other\"},\n    {\"id\": \"S150\", \"claim_about\": \"other\"},\n    {\"id\": \"S151\", \"claim_about\": \"other\"},\n    {\"id\": \"S152\", \"claim_about\": \"other\"},\n    {\"id\": \"S153\", \"claim_about\": \"other\"},\n    {\"id\": \"S154\", \"claim_about\": \"other\"},\n    {\"id\": \"S155\", \"claim_about\": \"other\"},\n    {\"id\": \"S156\", \"claim_about\": \"other\"},\n    {\"id\": \"S157\", \"claim_about\": \"other\"},\n    {\"id\": \"S158\", \"claim_about\": \"other\"},\n    {\"id\": \"S159\", \"claim_about\": \"other\"},\n    {\"id\": \"S160\", \"claim_about\": \"other\"},\n    {\"id\": \"S161\", \"claim_about\": \"other\"},\n    {\"id\": \"S162\", \"claim_about\": \"other\"},\n    {\"id\": \"S163\", \"claim_about\": \"other\"},\n    {\"id\": \"S164\", \"claim_about\": \"other\"},\n    {\"id\": \"S165\", \"claim_about\": \"other\"},\n    {\"id\": \"S166\", \"claim_about\": \"other\"},\n    {\"id\": \"S167\", \"claim_about\": \"other\"},\n    {\"id\": \"S168\", \"claim_about\": \"other\"},\n    {\"id\": \"S169\", \"claim_about\": \"other\"},\n    {\"id\": \"S170\", \"claim_about\": \"other\"},\n    {\"id\": \"S171\", \"claim_about\": \"other\"},\n    {\"id\": \"S172\", \"claim_about\": \"other\"},\n    {\"id\": \"S173\", \"claim_about\": \"other\"},\n    {\"id\": \"S174\", \"claim_about\": \"other\"},\n    {\"id\": \"S175\", \"claim_about\": \"other\"},\n    {\"id\": \"S176\", \"claim_about\": \"other\"},\n    {\"id\": \"S177\", \"claim_about\": \"other\"},\n    {\"id\": \"S178\", \"claim_about\": \"other\"},\n    {\"id\": \"S179\", \"claim_about\": \"other\"},\n    {\"id\": \"S180\", \"claim_about\": \"other\"},\n    {\"id\": \"S181\", \"claim_about\": \"other\"},\n    {\"id\": \"S182\", \"claim_about\": \"other\"},\n    {\"id\": \"S183\", \"claim_about\": \"other\"},\n    {\"id\": \"S184\", \"claim_about\": \"other\"},\n    {\"id\": \"S185\", \"claim_about\": \"other\"},\n    {\"id\": \"S186\", \"claim_about\": \"other\"},\n    {\"id\": \"S187\", \"claim_about\": \"other\"},\n    {\"id\": \"S188\", \"claim_about\": \"other\"},\n    {\"id\": \"S189\", \"claim_about\": \"other\"},\n    {\"id\": \"S190\", \"claim_about\": \"other\"},\n    {\"id\": \"S191\", \"claim_about\": \"other\"},\n    {\"id\": \"S192\", \"claim_about\": \"other\"},\n    {\"id\": \"S193\", \"claim_about\": \"other\"},\n    {\"id\": \"S194\", \"claim_about\": \"other\"},\n    {\"id\": \"S195\", \"claim_about\": \"other\"},\n    {\"id\": \"S196\", \"claim_about\": \"other\"},\n    {\"id\": \"S197\", \"claim_about\": \"other\"},\n    {\"id\": \"S198\", \"claim_about\": \"other\"},\n    {\"id\": \"S199\", \"claim_about\": \"other\"},\n    {\"id\": \"S200\", \"claim_about\": \"other\"},\n    {\"id\": \"S201\", \"claim_about\": \"other\"},\n    {\"id\": \"S202\", \"claim_about\": \"other\"},\n    {\"id\": \"S203\", \"claim_about\": \"other\"},\n    {\"id\": \"S204\", \"claim_about\": \"other\"},\n    {\"id\": \"S205\", \"claim_about\": \"other\"},\n    {\"id\": \"S206\", \"claim_about\": \"other\"},\n    {\"id\": \"S207\", \"claim_about\": \"other\"},\n    {\"id\": \"S208\", \"claim_about\": \"other\"},\n    {\"id\": \"S209\", \"claim_about\": \"other\"},\n    {\"id\": \"S210\", \"claim_about\": \"other\"},\n    {\"id\": \"S211\", \"claim_about\": \"other\"},\n    {\"id\": \"S212\", \"claim_about\": \"other\"},\n    {\"id\": \"S213\", \"claim_about\": \"other\"},\n    {\"id\": \"S214\", \"claim_about\": \"other\"},\n    {\"id\": \"S215\", \"claim_about\": \"other\"},\n    {\"id\": \"S216\", \"claim_about\": \"other\"},\n    {\"id\": \"S217\", \"claim_about\": \"other\"},\n    {\"id\": \"S218\", \"claim_about\": \"other\"},\n    {\"id\": \"S219\", \"claim_about\": \"other\"},\n    {\"id\": \"S220\", \"claim_about\": \"other\"},\n    {\"id\": \"S221\", \"claim_about\": \"other\"},\n    {\"id\": \"S222\", \"claim_about\": \"other\"},\n    {\"id\": \"S223\", \"claim_about\": \"other\"},\n    {\"id\": \"S224\", \"claim_about\": \"other\"},\n    {\"id\": \"S225\", \"claim_about\": \"other\"},\n    {\"id\": \"S226\", \"claim_about\": \"other\"},\n    {\"id\": \"S227\", \"claim_about\": \"other\"},\n    {\"id\": \"S228\", \"claim_about\": \"other\"},\n    {\"id\": \"S229\", \"claim_about\": \"other\"},\n    {\"id\": \"S230\", \"claim_about\": \"other\"},\n    {\"id\": \"S231\", \"claim_about\": \"other\"},\n    {\"id\": \"S232\", \"claim_about\": \"other\"},\n    {\"id\": \"S233\", \"claim_about\": \"other\"},\n    {\"id\": \"S234\", \"claim_about\": \"other\"},\n    {\"id\": \"S235\", \"claim_about\": \"other\"},\n    {\"id\": \"S236\", \"claim_about\": \"other\"},\n    {\"id\": \"S237\", \"claim_about\": \"other\"},\n    {\"id\": \"S238\", \"claim_about\": \"other\"},\n    {\"id\": \"S239\", \"claim_about\": \"other\"},\n    {\"id\": \"S240\", \"claim_about\": \"other\"},\n    {\"id\": \"S241\", \"claim_about\": \"other\"},\n    {\"id\": \"S242\", \"claim_about\": \"other\"},\n    {\"id\": \"S243\", \"claim_about\": \"other\"},\n    {\"id\": \"S244\", \"claim_about\": \"other\"},\n    {\"id\": \"S245\", \"claim_about\": \"other\"},\n    {\"id\": \"S246\", \"claim_about\": \"other\"},\n    {\"id\": \"S247\", \"claim_about\": \"other\"},\n    {\"id\": \"S248\", \"claim_about\": \"other\"},\n    {\"id\": \"S249\", \"claim_about\": \"other\"},\n    {\"id\": \"S250\", \"claim_about\": \"other\"},\n    {\"id\": \"S251\", \"claim_about\": \"other\"},\n    {\"id\": \"S252\", \"claim_about\": \"other\"},\n    {\"id\": \"S253\", \"claim_about\": \"other\"},\n    {\"id\": \"S254\", \"claim_about\": \"other\"},\n    {\"id\": \"S255\", \"claim_about\": \"other\"},\n    {\"id\": \"S256\", \"claim_about\": \"other\"},\n    {\"id\": \"S257\", \"claim_about\": \"other\"},\n    {\"id\": \"S258\", \"claim_about\": \"other\"},\n    {\"id\": \"S259\", \"claim_about\": \"other\"},\n    {\"id\": \"S260\", \"claim_about\": \"other\"},\n    {\"id\": \"S261\", \"claim_about\": \"other\"},\n    {\"id\": \"S262\", \"claim_about\": \"other\"},\n    {\"id\": \"S263\", \"claim_about\": \"other\"},\n    {\"id\": \"S264\", \"claim_about\": \"other\"},\n    {\"id\": \"S265\", \"claim_about\": \"other\"},\n    {\"id\": \"S266\", \"claim_about\": \"other\"},\n    {\"id\": \"S267\", \"claim_about\": \"other\"},\n    {\"id\": \"S268\", \"claim_about\": \"other\"},\n    {\"id\": \"S269\", \"claim_about\": \"other\"},\n    {\"id\": \"S270\", \"claim_about\": \"other\"},\n    {\"id\": \"S271\", \"claim_about\": \"other\"},\n    {\"id\": \"S272\", \"claim_about\": \"other\"},\n    {\"id\": \"S273\", \"claim_about\": \"other\"},\n    {\"id\": \"S274\", \"claim_about\": \"other\"},\n    {\"id\": \"S275\", \"claim_about\": \"other\"},\n    {\"id\": \"S276\", \"claim_about\": \"other\"},\n    {\"id\": \"S277\", \"claim_about\": \"other\"},\n    {\"id\": \"S278\", \"claim_about\": \"other\"},\n    {\"id\": \"S279\", \"claim_about\": \"other\"},\n    {\"id\": \"S280\", \"claim_about\": \"other\"},\n    {\"id\": \"S281\", \"claim_about\": \"other\"},\n    {\"id\": \"S282\", \"claim_about\": \"other\"},\n    {\"id\": \"S283\", \"claim_about\": \"other\"},\n    {\"id\": \"S284\", \"claim_about\": \"other\"},\n    {\"id\": \"S285\", \"claim_about\": \"other\"},\n    {\"id\": \"S286\", \"claim_about\": \"other\"},\n    {\"id\": \"S287\", \"claim_about\": \"other\"},\n    {\"id\": \"S288\", \"claim_about\": \"other\"},\n    {\"id\": \"S289\", \"claim_about\": \"other\"},\n    {\"id\": \"S290\", \"claim_about\": \"other\"},\n    {\"id\": \"S291\", \"claim_about\": \"other\"},\n    {\"id\": \"S292\", \"claim_about\": \"other\"},\n    {\"id\": \"S293\", \"claim_about\": \"other\"},\n    {\"id\": \"S294\", \"claim_about\": \"other\"},\n    {\"id\": \"S295\", \"claim_about\": \"other\"},\n    {\"id\": \"S296\", \"claim_about\": \"other\"},\n    {\"id\": \"S297\", \"claim_about\": \"other\"},\n    {\"id\": \"S298\", \"claim_about\": \"other\"},\n    {\"id\": \"S299\", \"claim_about\": \"other\"},\n    {\"id\": \"S300\", \"claim_about\": \"other\"},\n    {\"id\": \"S301\", \"claim_about\": \"other\"},\n    {\"id\": \"S302\", \"claim_about\": \"other\"},\n    {\"id\": \"S303\", \"claim_about\": \"other\"},\n    {\"id\": \"S304\", \"claim_about\": \"other\"},\n    {\"id\": \"S305\", \"claim_about\": \"other\"},\n    {\"id\": \"S306\", \"claim_about\": \"other\"},\n    {\"id\": \"S307\", \"claim_about\": \"other\"},\n    {\"id\": \"S308\", \"claim_about\": \"other\"},\n    {\"id\": \"S309\", \"claim_about\": \"other\"},\n    {\"id\": \"S310\", \"claim_about\": \"other\"},\n    {\"id\": \"S311\", \"claim_about\": \"other\"},\n    {\"id\": \"S312\", \"claim_about\": \"other\"},\n    {\"id\": \"S313\", \"claim_about\": \"other\"},\n    {\"id\": \"S314\", \"claim_about\": \"other\"},\n    {\"id\": \"S315\", \"claim_about\": \"other\"},\n    {\"id\": \"S316\", \"claim_about\": \"other\"},\n    {\"id\": \"S317\", \"claim_about\": \"other\"},\n    {\"id\": \"S318\", \"claim_about\": \"other\"},\n    {\"id\": \"S319\", \"claim_about\": \"other\"},\n    {\"id\": \"S320\", \"claim_about\": \"other\"},\n    {\"id\": \"S321\", \"claim_about\": \"other\"},\n    {\"id\": \"S322\", \"claim_about\": \"other\"},\n    {\"id\": \"S323\", \"claim_about\": \"other\"},\n    {\"id\": \"S324\", \"claim_about\": \"other\"},\n    {\"id\": \"S325\", \"claim_about\": \"other\"},\n    {\"id\": \"S326\", \"claim_about\": \"other\"},\n    {\"id\": \"S327\", \"claim_about\": \"other\"},\n    {\"id\": \"S328\", \"claim_about\": \"other\"},\n    {\"id\": \"S329\", \"claim_about\": \"other\"},\n    {\"id\": \"S330\", \"claim_about\": \"other\"},\n    {\"id\": \"S331\", \"claim_about\": \"other\"},\n    {\"id\": \"S332\", \"claim_about\": \"other\"},\n    {\"id\": \"S333\", \"claim_about\": \"other\"},\n    {\"id\": \"S334\", \"claim_about\": \"other\"},\n    {\"id\": \"S335\", \"claim_about\": \"other\"},\n    {\"id\": \"S336\", \"claim_about\": \"other\"},\n    {\"id\": \"S337\", \"claim_about\": \"other\"},\n    {\"id\": \"S338\", \"claim_about\": \"other\"},\n    {\"id\": \"S339\", \"claim_about\": \"other\"},\n    {\"id\": \"S340\", \"claim_about\": \"other\"},\n    {\"id\": \"S341\", \"claim_about\": \"other\"},\n    {\"id\": \"S342\", \"claim_about\": \"other\"},\n    {\"id\": \"S343\", \"claim_about\": \"other\"},\n    {\"id\": \"S344\", \"claim_about\": \"other\"},\n    {\"id\": \"S345\", \"claim_about\": \"other\"},\n    {\"id\": \"S346\", \"claim_about\": \"other\"},\n    {\"id\": \"S347\", \"claim_about\": \"other\"},\n    {\"id\": \"S348\", \"claim_about\": \"other\"},\n    {\"id\": \"S349\", \"claim_about\": \"other\"},\n    {\"id\": \"S350\", \"claim_about\": \"other\"},\n    {\"id\": \"S351\", \"claim_about\": \"other\"},\n    {\"id\": \"S352\", \"claim_about\": \"other\"},\n    {\"id\": \"S353\", \"claim_about\": \"other\"},\n    {\"id\": \"S354\", \"claim_about\": \"other\"},\n    {\"id\": \"S355\", \"claim_about\": \"other\"},\n    {\"id\": \"S356\", \"claim_about\": \"other\"},\n    {\"id\": \"S357\", \"claim_about\": \"other\"},\n    {\"id\": \"S358\", \"claim_about\": \"other\"},\n    {\"id\": \"S359\", \"claim_about\": \"other\"},\n    {\"id\": \"S360\", \"claim_about\": \"other\"},\n    {\"id\": \"S361\", \"claim_about\": \"other\"},\n    {\"id\": \"S362\", \"claim_about\": \"other\"},\n    {\"id\": \"S363\", \"claim_about\": \"other\"},\n    {\"id\": \"S364\", \"claim_about\": \"other\"},\n    {\"id\": \"S365\", \"claim_about\": \"other\"},\n    {\"id\": \"S366\", \"claim_about\": \"other\"},\n    {\"id\": \"S367\", \"claim_about\": \"other\"},\n    {\"id\": \"S368\", \"claim_about\": \"other\"},\n    {\"id\": \"S369\", \"claim_about\": \"other\"},\n    {\"id\": \"S370\", \"claim_about\": \"other\"},\n    {\"id\": \"S371\", \"claim_about\": \"other\"},\n    {\"id\": \"S372\", \"claim_about\": \"other\"},\n    {\"id\": \"S373\", \"claim_about\": \"other\"},\n    {\"id\": \"S374\", \"claim_about\": \"other\"},\n    {\"id\": \"S375\", \"claim_about\": \"other\"},\n    {\"id\": \"S376\", \"claim_about\": \"other\"},\n    {\"id\": \"S377\", \"claim_about\": \"other\"},\n    {\"id\": \"S378\", \"claim_about\": \"other\"},\n    {\"id\": \"S379\", \"claim_about\": \"other\"},\n    {\"id\": \"S380\", \"claim_about\": \"other\"},\n    {\"id\": \"S381\", \"claim_about\": \"other\"},\n    {\"id\": \"S382\", \"claim_about\": \"other\"},\n    {\"id\": \"S383\", \"claim_about\": \"other\"},\n    {\"id\": \"S384\", \"claim_about\": \"other\"},\n    {\"id\": \"S385\", \"claim_about\": \"other\"},\n    {\"id\": \"S386\", \"claim_about\": \"other\"},\n    {\"id\": \"S387\", \"claim_about\": \"other\"},\n    {\"id\": \"S388\", \"claim_about\": \"other\"},\n    {\"id\": \"S389\", \"claim_about\": \"other\"},\n    {\"id\": \"S390\", \"claim_about\": \"other\"},\n    {\"id\": \"S391\", \"claim_about\": \"other\"},\n    {\"id\": \"S392\", \"claim_about\": \"other\"},\n    {\"id\": \"S393\", \"claim_about\": \"other\"},\n    {\"id\": \"S394\", \"claim_about\": \"other\"},\n    {\"id\": \"S395\", \"claim_about\": \"other\"},\n    {\"id\": \"S396\", \"claim_about\": \"other\"},\n    {\"id\": \"S397\", \"claim_about\": \"other\"},\n    {\"id\": \"S398\", \"claim_about\": \"other\"},\n    {\"id\": \"S399\", \"claim_about\": \"other\"},\n    {\"id\": \"S400\", \"claim_about\": \"other\"}\n  ]\n}",
+    "raw_response_chars": 17422,
+    "raw_reasoning": null,
+    "raw_reasoning_chars": null,
+    "content_fallback": false,
+    "finish_reason": "stop",
+    "raw_max_chars": 20000
+  },
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 46.9,
+  "model_parse_error": null,
+  "elapsed_seconds": 47.4,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"humidity adds information beyond temperature\",\n      \"member_ids\": [\"S035\", \"S046\"],\n      \"rationale\": \"Both note that including humidity changes the heat‑index pattern compared to temperature alone.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"rural areas experience higher heat‑index values than urban\",\n      \"member_ids\": [\"S019\", \"S025\"],\n      \"rationale\": \"Both report higher individually experienced heat‑index or temperature values for rural subjects versus urban ones.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"low humidity reduces heat‑index values\",\n      \"member_ids\": [\"S048\", \"S050\"],\n      \"rationale\": \"Both attribute lower heat‑index values in Oregon to low humidity conditions.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"higher heat‑index linked to adverse health outcomes\",\n      \"member_ids\": [\"S005\", \"S042\", \"S049\", \"S063\", \"S064\"],\n      \"rationale\": \"All describe health impacts that increase when heat‑index values are higher.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"cooling‑center coverage lower where heat‑index is higher or latitude is higher\",\n      \"member_ids\": [\"S022\", \"S023\", \"S024\"],\n      \"rationale\": \"Each relates population coverage of cooling centers to heat‑index or latitude differences.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"irrigation loss raises heat‑wave indices\",\n      \"member_ids\": [\"S006\", \"S007\"],\n      \"rationale\": \"Both state that loss of irrigation increases frequency, duration, or intensity of heat‑wave metrics.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"humid heatwave events have longer duration and larger area\",\n      \"member_ids\": [\"S032\", \"S043\"],\n      \"rationale\": \"Both report that humid heatwaves last longer and cover more area than conventional heatwaves.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    }\n  ],\n  \"singletons\": [\n    {\"id\": \"S002\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S010\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S013\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S017\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S029\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S031\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S036\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S041\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S047\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S052\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S058\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S061\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S009\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S040\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S051\", \"claim_about\": \"impact_or_exposure\"}\n  ]\n}",
+  "raw_response_chars": 2969,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

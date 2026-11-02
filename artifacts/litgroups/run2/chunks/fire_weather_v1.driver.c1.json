@@ -1,0 +1,1550 @@
+{
+  "partition_id": "fire_weather_v1.driver",
+  "chunk_index": 1,
+  "n_chunks": 3,
+  "arm": "fire_weather_v1",
+  "statement_type": "driver",
+  "split_by": [],
+  "partition_n_statements": 106,
+  "n_statements": 36,
+  "local_ids": [
+    "S005",
+    "S026",
+    "S027",
+    "S038",
+    "S039",
+    "S057",
+    "S058",
+    "S085",
+    "S086",
+    "S088",
+    "S103",
+    "S104",
+    "S105",
+    "S106",
+    "S020",
+    "S040",
+    "S049",
+    "S050",
+    "S056",
+    "S067",
+    "S068",
+    "S082",
+    "S001",
+    "S002",
+    "S003",
+    "S004",
+    "S010",
+    "S016",
+    "S023",
+    "S035",
+    "S036",
+    "S041",
+    "S044",
+    "S045",
+    "S046",
+    "S047"
+  ],
+  "generator_version": "litgroup_agent v3",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "fire_weather_v1.driver.c1",
+  "model_attempts": 2,
+  "corrective_retry_used": true,
+  "finish_reason": "stop",
+  "content_chars": 2375,
+  "reasoning_chars": 792,
+  "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+  "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+  "generation_timestamp": "2026-11-02T01:24:53Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S005",
+        "S049",
+        "S056",
+        "S106",
+        "S050"
+      ],
+      "label": "warming temperatures increase fire risk and severity",
+      "rationale": "All state that higher temperatures (or warmer summers) drive more frequent/intense fires.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "risk"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S039",
+        "S058",
+        "S045",
+        "S047",
+        "S085"
+      ],
+      "label": "humidity and vapor pressure deficit affect fire risk",
+      "rationale": "Each links humidity or vapor pressure deficit to increased or decreased wildfire risk.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "affect"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S026",
+        "S057",
+        "S088",
+        "S105",
+        "S003"
+      ],
+      "label": "strong winds are a primary driver of fire danger and spread",
+      "rationale": "All describe wind speed (especially Santa Ana) as a key factor for ignition or spread.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S001",
+        "S023"
+      ],
+      "label": "warmer climate increases lightning, raising fire risk",
+      "rationale": "Both claim temperature rise boosts lightning activity, which elevates wildfire risk.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "increases",
+          "warmer"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S103",
+        "S020",
+        "S016",
+        "S044",
+        "S046",
+        "S010",
+        "S068"
+      ],
+      "label": "fire weather indices (FWI and components) predict burned area",
+      "rationale": "Each discusses the definition, calibration, or predictive power of fire weather indices.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "predict"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S040",
+        "S082",
+        "S041"
+      ],
+      "label": "climate change increases extreme fire‑weather frequency",
+      "rationale": "All note that climate change raises the occurrence of extreme fire‑weather events.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "increases"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [
+    {
+      "id": "S038",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S067",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S002",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S004",
+      "claim_about": "method_or_data",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S035",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S036",
+      "claim_about": "other",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S086",
+      "claim_about": "method_or_data",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S104",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S027",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-154777913-02",
+        "LS-247866001-01",
+        "LS-255372301-01",
+        "LS-999274-03",
+        "LS-248553281-02"
+      ],
+      "member_local_ids": [
+        "S005",
+        "S049",
+        "S056",
+        "S106",
+        "S050"
+      ],
+      "label": "warming temperatures increase fire risk and severity",
+      "rationale": "All state that higher temperatures (or warmer summers) drive more frequent/intense fires.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 5,
+      "papers": [
+        "154777913",
+        "247866001",
+        "248553281",
+        "255372301",
+        "999274"
+      ],
+      "canonical_papers": [
+        "154777913",
+        "247866001",
+        "248553281",
+        "255372301",
+        "999274"
+      ],
+      "n_independent_core_cited_papers": 3,
+      "role_counts": {
+        "background_consensus_candidate": 2,
+        "cited_candidate": 1,
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "risk"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-246347702-05",
+        "LS-255372301-04",
+        "LS-247649715-02",
+        "LS-247649715-06",
+        "LS-52839166-01"
+      ],
+      "member_local_ids": [
+        "S039",
+        "S058",
+        "S045",
+        "S047",
+        "S085"
+      ],
+      "label": "humidity and vapor pressure deficit affect fire risk",
+      "rationale": "Each links humidity or vapor pressure deficit to increased or decreased wildfire risk.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 5,
+      "papers": [
+        "246347702",
+        "247649715",
+        "255372301",
+        "52839166"
+      ],
+      "canonical_papers": [
+        "246347702",
+        "247649715",
+        "255372301",
+        "52839166"
+      ],
+      "n_independent_core_cited_papers": 3,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "cited_candidate": 1,
+        "core_candidate": 3
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "affect"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-236175367-01",
+        "LS-255372301-03",
+        "LS-53050065-06",
+        "LS-999274-02",
+        "LS-14300-05"
+      ],
+      "member_local_ids": [
+        "S026",
+        "S057",
+        "S088",
+        "S105",
+        "S003"
+      ],
+      "label": "strong winds are a primary driver of fire danger and spread",
+      "rationale": "All describe wind speed (especially Santa Ana) as a key factor for ignition or spread.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 5,
+      "papers": [
+        "14300",
+        "236175367",
+        "255372301",
+        "53050065",
+        "999274"
+      ],
+      "canonical_papers": [
+        "14300",
+        "236175367",
+        "255372301",
+        "53050065",
+        "999274"
+      ],
+      "n_independent_core_cited_papers": 4,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "core_candidate": 4
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-134230133-02",
+        "LS-233705284-03"
+      ],
+      "member_local_ids": [
+        "S001",
+        "S023"
+      ],
+      "label": "warmer climate increases lightning, raising fire risk",
+      "rationale": "Both claim temperature rise boosts lightning activity, which elevates wildfire risk.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 2,
+      "papers": [
+        "134230133",
+        "233705284"
+      ],
+      "canonical_papers": [
+        "134230133",
+        "233705284"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "cited_candidate": 1,
+        "core_candidate": 1
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "increases",
+          "warmer"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-89025663-01",
+        "LS-229495849-03",
+        "LS-221664018-02",
+        "LS-247649715-01",
+        "LS-247649715-03",
+        "LS-208499235-02",
+        "LS-268380986-02"
+      ],
+      "member_local_ids": [
+        "S103",
+        "S020",
+        "S016",
+        "S044",
+        "S046",
+        "S010",
+        "S068"
+      ],
+      "label": "fire weather indices (FWI and components) predict burned area",
+      "rationale": "Each discusses the definition, calibration, or predictive power of fire weather indices.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 7,
+      "papers": [
+        "208499235",
+        "221664018",
+        "229495849",
+        "247649715",
+        "268380986",
+        "89025663"
+      ],
+      "canonical_papers": [
+        "208499235",
+        "221664018",
+        "229495849",
+        "247649715",
+        "268380986",
+        "89025663"
+      ],
+      "n_independent_core_cited_papers": 4,
+      "role_counts": {
+        "background_consensus_candidate": 2,
+        "cited_candidate": 1,
+        "core_candidate": 4
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "predict"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-246522870-01",
+        "LS-3642757-01",
+        "LS-246522870-04"
+      ],
+      "member_local_ids": [
+        "S040",
+        "S082",
+        "S041"
+      ],
+      "label": "climate change increases extreme fire‑weather frequency",
+      "rationale": "All note that climate change raises the occurrence of extreme fire‑weather events.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 3,
+      "papers": [
+        "246522870",
+        "3642757"
+      ],
+      "canonical_papers": [
+        "246522870",
+        "3642757"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "cited_candidate": 2
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "increases"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-246347702-03"
+      ],
+      "member_local_ids": [
+        "S038"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "246347702"
+      ],
+      "canonical_papers": [
+        "246347702"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-268380986-01"
+      ],
+      "member_local_ids": [
+        "S067"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "268380986"
+      ],
+      "canonical_papers": [
+        "268380986"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-134230133-06"
+      ],
+      "member_local_ids": [
+        "S002"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "134230133"
+      ],
+      "canonical_papers": [
+        "134230133"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-154007324-01"
+      ],
+      "member_local_ids": [
+        "S004"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "154007324"
+      ],
+      "canonical_papers": [
+        "154007324"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-239696378-03"
+      ],
+      "member_local_ids": [
+        "S035"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "239696378"
+      ],
+      "canonical_papers": [
+        "237554329"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-244714495-01"
+      ],
+      "member_local_ids": [
+        "S036"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "other",
+      "n_members": 1,
+      "papers": [
+        "244714495"
+      ],
+      "canonical_papers": [
+        "244714495"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-52839166-04"
+      ],
+      "member_local_ids": [
+        "S086"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "52839166"
+      ],
+      "canonical_papers": [
+        "52839166"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-90592727-02"
+      ],
+      "member_local_ids": [
+        "S104"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "90592727"
+      ],
+      "canonical_papers": [
+        "90592727"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS-236175367-05"
+      ],
+      "member_local_ids": [
+        "S027"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "236175367"
+      ],
+      "canonical_papers": [
+        "236175367"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "cf3522b3e7366582c3213eecb6975555d3310975d51b24efb72200576f9caf22",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:24:53Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 2323,
+      "reasoning_chars": 5589,
+      "http_attempts": 1,
+      "model_seconds": 10.8
+    },
+    {
+      "turn": 2,
+      "finish_reason": "stop",
+      "content_chars": 2375,
+      "reasoning_chars": 792,
+      "http_attempts": 1,
+      "model_seconds": 4.9
+    }
+  ],
+  "first_turn": {
+    "checks": {
+      "parse_pass": true,
+      "unknown_ids": [],
+      "duplicate_ids": [],
+      "missing_ids": [
+        "S027"
+      ],
+      "empty_groups": 0,
+      "ids_exactly_once_pass": false,
+      "no_empty_group_pass": true,
+      "failed": [
+        "ids_exactly_once_pass"
+      ]
+    },
+    "groups_as_returned": [
+      {
+        "member_ids": [
+          "S005",
+          "S049",
+          "S056",
+          "S106",
+          "S050"
+        ],
+        "label": "warming temperatures increase fire risk and severity",
+        "rationale": "All state that higher temperatures (or warmer summers) drive more frequent/intense fires.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "risk"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S039",
+          "S058",
+          "S045",
+          "S047",
+          "S085"
+        ],
+        "label": "lower humidity (or higher specific humidity) affects fire risk",
+        "rationale": "Each links humidity or vapor pressure deficit to increased or decreased wildfire risk.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "affects",
+            "lower"
+          ],
+          "rationale_words": 13,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S026",
+          "S057",
+          "S088",
+          "S105",
+          "S003"
+        ],
+        "label": "strong winds are a primary driver of fire danger and spread",
+        "rationale": "All describe wind speed (especially Santa Ana) as a key factor for ignition or spread.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 15,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S001",
+          "S023"
+        ],
+        "label": "warmer climate increases lightning, raising fire risk",
+        "rationale": "Both claim temperature rise boosts lightning activity, which elevates wildfire risk.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "increases",
+            "warmer"
+          ],
+          "rationale_words": 11,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S103",
+          "S020",
+          "S016",
+          "S044",
+          "S046",
+          "S010",
+          "S068"
+        ],
+        "label": "fire weather indices (FWI and components) predict burned area",
+        "rationale": "Each discusses the definition, calibration, or predictive power of fire weather indices.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "predict"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S040",
+          "S082",
+          "S041"
+        ],
+        "label": "climate change increases extreme fire‑weather frequency",
+        "rationale": "All note that climate change raises the occurrence of extreme fire‑weather events.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "increases"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "singletons_as_returned": [
+      {
+        "id": "S038",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S067",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S002",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S004",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S035",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S036",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S086",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S104",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"warming temperatures increase fire risk and severity\",\n      \"member_ids\": [\"S005\", \"S049\", \"S056\", \"S106\", \"S050\"],\n      \"rationale\": \"All state that higher temperatures (or warmer summers) drive more frequent/intense fires.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"lower humidity (or higher specific humidity) affects fire risk\",\n      \"member_ids\": [\"S039\", \"S058\", \"S045\", \"S047\", \"S085\"],\n      \"rationale\": \"Each links humidity or vapor pressure deficit to increased or decreased wildfire risk.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"strong winds are a primary driver of fire danger and spread\",\n      \"member_ids\": [\"S026\", \"S057\", \"S088\", \"S105\", \"S003\"],\n      \"rationale\": \"All describe wind speed (especially Santa Ana) as a key factor for ignition or spread.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"warmer climate increases lightning, raising fire risk\",\n      \"member_ids\": [\"S001\", \"S023\"],\n      \"rationale\": \"Both claim temperature rise boosts lightning activity, which elevates wildfire risk.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"fire weather indices (FWI and components) predict burned area\",\n      \"member_ids\": [\"S103\", \"S020\", \"S016\", \"S044\", \"S046\", \"S010\", \"S068\"],\n      \"rationale\": \"Each discusses the definition, calibration, or predictive power of fire weather indices.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"climate change increases extreme fire‑weather frequency\",\n      \"member_ids\": [\"S040\", \"S082\", \"S041\"],\n      \"rationale\": \"All note that climate change raises the occurrence of extreme fire‑weather events.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    }\n  ],\n  \"singletons\": [\n    {\"id\": \"S038\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S067\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S002\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S004\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S035\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S036\", \"claim_about\": \"other\"},\n    {\"id\": \"S086\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S104\", \"claim_about\": \"hazard_change_mechanism\"}\n  ]\n}",
+    "raw_response_chars": 2323,
+    "raw_reasoning": null,
+    "raw_reasoning_chars": null,
+    "content_fallback": false,
+    "finish_reason": "stop",
+    "raw_max_chars": 20000
+  },
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 15.700000000000001,
+  "model_parse_error": null,
+  "elapsed_seconds": 15.8,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"warming temperatures increase fire risk and severity\",\n      \"member_ids\": [\"S005\", \"S049\", \"S056\", \"S106\", \"S050\"],\n      \"rationale\": \"All state that higher temperatures (or warmer summers) drive more frequent/intense fires.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"humidity and vapor pressure deficit affect fire risk\",\n      \"member_ids\": [\"S039\", \"S058\", \"S045\", \"S047\", \"S085\"],\n      \"rationale\": \"Each links humidity or vapor pressure deficit to increased or decreased wildfire risk.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"strong winds are a primary driver of fire danger and spread\",\n      \"member_ids\": [\"S026\", \"S057\", \"S088\", \"S105\", \"S003\"],\n      \"rationale\": \"All describe wind speed (especially Santa Ana) as a key factor for ignition or spread.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"warmer climate increases lightning, raising fire risk\",\n      \"member_ids\": [\"S001\", \"S023\"],\n      \"rationale\": \"Both claim temperature rise boosts lightning activity, which elevates wildfire risk.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"fire weather indices (FWI and components) predict burned area\",\n      \"member_ids\": [\"S103\", \"S020\", \"S016\", \"S044\", \"S046\", \"S010\", \"S068\"],\n      \"rationale\": \"Each discusses the definition, calibration, or predictive power of fire weather indices.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"climate change increases extreme fire‑weather frequency\",\n      \"member_ids\": [\"S040\", \"S082\", \"S041\"],\n      \"rationale\": \"All note that climate change raises the occurrence of extreme fire‑weather events.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    }\n  ],\n  \"singletons\": [\n    {\"id\": \"S038\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S067\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S002\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S004\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S035\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S036\", \"claim_about\": \"other\"},\n    {\"id\": \"S086\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S104\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S027\", \"claim_about\": \"hazard_change_mechanism\"}\n  ]\n}",
+  "raw_response_chars": 2375,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

@@ -1,0 +1,1669 @@
+{
+  "partition_id": "extreme_heat_v1.mechanism.unspecified",
+  "chunk_index": 1,
+  "n_chunks": 3,
+  "arm": "extreme_heat_v1",
+  "statement_type": "mechanism",
+  "split_by": [
+    "direction=unspecified"
+  ],
+  "partition_n_statements": 116,
+  "n_statements": 39,
+  "local_ids": [
+    "S040",
+    "S049",
+    "S074",
+    "S099",
+    "S100",
+    "S110",
+    "S111",
+    "S113",
+    "S114",
+    "S004",
+    "S015",
+    "S020",
+    "S021",
+    "S022",
+    "S023",
+    "S038",
+    "S039",
+    "S048",
+    "S050",
+    "S051",
+    "S092",
+    "S093",
+    "S106",
+    "S109",
+    "S116",
+    "S006",
+    "S041",
+    "S042",
+    "S043",
+    "S044",
+    "S054",
+    "S055",
+    "S058",
+    "S062",
+    "S087",
+    "S091",
+    "S094",
+    "S107",
+    "S108"
+  ],
+  "generator_version": "litgroup_agent v3",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "extreme_heat_v1.mechanism.unspecified.c1",
+  "model_attempts": 2,
+  "corrective_retry_used": true,
+  "finish_reason": "stop",
+  "content_chars": 4050,
+  "reasoning_chars": 1024,
+  "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "prompt_hash": "a6e758944ca25c3836e0153c4595c1c16e0bd57101998e42e3c645a5fb33dcbb",
+  "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+  "generation_timestamp": "2026-11-02T01:18:03Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S074",
+        "S110",
+        "S021",
+        "S022",
+        "S092",
+        "S116",
+        "S087",
+        "S091",
+        "S004",
+        "S050",
+        "S062",
+        "S108",
+        "S109",
+        "S111"
+      ],
+      "label": "heat index combines temperature and humidity as a perceived‑heat metric",
+      "rationale": "All state that the heat index (or apparent temperature) is calculated from air temperature and relative humidity to represent how hot it feels.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 23,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S038",
+        "S039"
+      ],
+      "label": "heat‑index thresholds are used to define heat‑wave events",
+      "rationale": "Both describe county or heat‑wave definitions that require the heat index or combined temperature‑humidity thresholds.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "define",
+          "events",
+          "used"
+        ],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S106",
+        "S093",
+        "S094",
+        "S015"
+      ],
+      "label": "high heat index increases health or agricultural risk",
+      "rationale": "Each links high temperature‑humidity (heat index) to greater risk of illness, heatstroke, or reduced irrigation effectiveness.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "agricultural",
+          "health",
+          "increases"
+        ],
+        "rationale_words": 16,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S006",
+        "S058",
+        "S041",
+        "S042",
+        "S043"
+      ],
+      "label": "urban heat island intensifies due to nighttime conditions and reduced moisture",
+      "rationale": "All explain mechanisms (nighttime, low moisture, vegetation) that amplify urban heat compared with surrounding areas.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "due",
+          "nighttime"
+        ],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S054",
+        "S055",
+        "S107"
+      ],
+      "label": "evaporation and evapotranspiration are driven by temperature‑based heat indices",
+      "rationale": "Each describes how evaporation or ET calculations rely on temperature‑derived heat‑index values.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "based",
+          "indices"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S048"
+      ],
+      "label": "overly clustered cooling centers reduce population coverage",
+      "rationale": "States a specific effect of cooling‑center placement on service reach.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "coverage",
+          "overly"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S099",
+        "S100"
+      ],
+      "label": "magnetic grains record heating events via thermal remanent magnetization",
+      "rationale": "Both discuss how heating alters magnetic grains and preserves thermal history.",
+      "claim_about": "other",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S113",
+        "S114",
+        "S020"
+      ],
+      "label": "fire risk rises when windspeed coincides with dryness or low humidity",
+      "rationale": "Each links combined wind‑dryness or low humidity conditions to heightened fire danger.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "low",
+          "rises"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S040"
+      ],
+      "label": "relative heat‑wave events are defined by a 95th percentile temperature threshold",
+      "rationale": "Specifies a statistical definition for heat‑wave events.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "threshold"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S049"
+      ],
+      "label": "houses in Los Angeles heat up faster due to higher ambient temperature and solar gains",
+      "rationale": "Attributes building heat‑up speed to local temperature, solar gain, and insulation differences.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "due",
+          "faster",
+          "temperature"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S023"
+      ],
+      "label": "heat vulnerability index is computed using principal component analysis",
+      "rationale": "Describes a method for creating a heat‑vulnerability index.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "computed"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S051"
+      ],
+      "label": "WBGT combines wet‑bulb, globe and shaded air temperatures as an occupational heat‑stress index",
+      "rationale": "Defines the Wet‑Bulb Globe Temperature index composition.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "temperatures"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S044"
+      ],
+      "label": "microclimate varies spatially, requiring local measurements for accurate heat‑stress assessment",
+      "rationale": "Emphasizes need for fine‑scale data to assess heat stress.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "requiring",
+          "varies"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "partition_id": "extreme_heat_v1.mechanism.unspecified",
+      "chunk_id": "extreme_heat_v1.mechanism.unspecified.c1",
+      "split_by": [
+        "direction=unspecified"
+      ],
+      "member_ids": [
+        "LS-256854356-01",
+        "LS-6585212-01",
+        "LS-199098498-01",
+        "LS-201658056-01",
+        "LS-34148006-01",
+        "LS-9917590-02",
+        "LS-269945312-01",
+        "LS-32695834-01",
+        "LS-121201574-01",
+        "LS-237371886-01",
+        "LS-248185344-06",
+        "LS-62829390-01",
+        "LS-6479124-01",
+        "LS-7891630-03"
+      ],
+      "member_local_ids": [
+        "S074",
+        "S110",
+        "S021",
+        "S022",
+        "S092",
+        "S116",
+        "S087",
+        "S091",
+        "S004",
+        "S050",
+        "S062",
+        "S108",
+        "S109",
+        "S111"
+      ],
+      "label": "heat index combines temperature and humidity as a perceived‑heat metric",
+      "rationale": "All state that the heat index (or apparent temperature) is calculated from air temperature and relative humidity to represent how hot it feels.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 14,
+      "papers": [
+        "121201574",
+        "199098498",
+        "201658056",
+        "237371886",
+        "248185344",
+        "256854356",
+        "269945312",
+        "32695834",
+        "34148006",
+        "62829390",
+        "6479124",
+        "6585212",
+        "7891630",
+        "9917590"
+      ],
+      "canonical_papers": [
+        "121201574",
+        "199098498",
+        "201658056",
+        "237371886",
+        "248185344",
+        "256854356",
+        "269945312",
+        "32695834",
+        "34148006",
+        "62829390",
+        "6479124",
+        "6585212",
+        "7891630",
+        "9917590"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "background_consensus_candidate": 12,
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 23,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 4050,
+      "reasoning_chars": 1024,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "a6e758944ca25c3836e0153c4595c1c16e0bd57101998e42e3c645a5fb33dcbb",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:18:03Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "partition_id": "extreme_heat_v1.mechanism.unspecified",
+      "chunk_id": "extreme_heat_v1.mechanism.unspecified.c1",
+      "split_by": [
+        "direction=unspecified"
+      ],
+      "member_ids": [
+        "LS-2239637-01",
+        "LS-2239637-02"
+      ],
+      "member_local_ids": [
+        "S038",
+        "S039"
+      ],
+      "label": "heat‑index thresholds are used to define heat‑wave events",
+      "rationale": "Both describe county or heat‑wave definitions that require the heat index or combined temperature‑humidity thresholds.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 2,
+      "papers": [
+        "2239637"
+      ],
+      "canonical_papers": [
+        "2239637"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "define",
+          "events",
+          "used"
+        ],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 4050,
+      "reasoning_chars": 1024,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "a6e758944ca25c3836e0153c4595c1c16e0bd57101998e42e3c645a5fb33dcbb",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:18:03Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "partition_id": "extreme_heat_v1.mechanism.unspecified",
+      "chunk_id": "extreme_heat_v1.mechanism.unspecified.c1",
+      "split_by": [
+        "direction=unspecified"
+      ],
+      "member_ids": [
+        "LS-5838629-01",
+        "LS-34148006-05",
+        "LS-34373293-05",
+        "LS-154971876-01"
+      ],
+      "member_local_ids": [
+        "S106",
+        "S093",
+        "S094",
+        "S015"
+      ],
+      "label": "high heat index increases health or agricultural risk",
+      "rationale": "Each links high temperature‑humidity (heat index) to greater risk of illness, heatstroke, or reduced irrigation effectiveness.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 4,
+      "papers": [
+        "154971876",
+        "34148006",
+        "34373293",
+        "5838629"
+      ],
+      "canonical_papers": [
+        "154971876",
+        "34148006",
+        "34373293",
+        "5838629"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "background_consensus_candidate": 2,
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "agricultural",
+          "health",
+          "increases"
+        ],
+        "rationale_words": 16,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 4050,
+      "reasoning_chars": 1024,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "a6e758944ca25c3836e0153c4595c1c16e0bd57101998e42e3c645a5fb33dcbb",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:18:03Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "partition_id": "extreme_heat_v1.mechanism.unspecified",
+      "chunk_id": "extreme_heat_v1.mechanism.unspecified.c1",
+      "split_by": [
+        "direction=unspecified"
+      ],
+      "member_ids": [
+        "LS-128765172-04",
+        "LS-246243282-05",
+        "LS-230583145-02",
+        "LS-230583145-03",
+        "LS-230583145-04"
+      ],
+      "member_local_ids": [
+        "S006",
+        "S058",
+        "S041",
+        "S042",
+        "S043"
+      ],
+      "label": "urban heat island intensifies due to nighttime conditions and reduced moisture",
+      "rationale": "All explain mechanisms (nighttime, low moisture, vegetation) that amplify urban heat compared with surrounding areas.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 5,
+      "papers": [
+        "128765172",
+        "230583145",
+        "246243282"
+      ],
+      "canonical_papers": [
+        "128765172",
+        "230583145",
+        "246243282"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "cited_candidate": 1,
+        "core_candidate": 3
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "due",
+          "nighttime"
+        ],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 4050,
+      "reasoning_chars": 1024,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "a6e758944ca25c3836e0153c4595c1c16e0bd57101998e42e3c645a5fb33dcbb",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:18:03Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "partition_id": "extreme_heat_v1.mechanism.unspecified",
+      "chunk_id": "extreme_heat_v1.mechanism.unspecified.c1",
+      "split_by": [
+        "direction=unspecified"
+      ],
+      "member_ids": [
+        "LS-239052352-01",
+        "LS-239052352-02",
+        "LS-62816422-01"
+      ],
+      "member_local_ids": [
+        "S054",
+        "S055",
+        "S107"
+      ],
+      "label": "evaporation and evapotranspiration are driven by temperature‑based heat indices",
+      "rationale": "Each describes how evaporation or ET calculations rely on temperature‑derived heat‑index values.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 3,
+      "papers": [
+        "239052352",
+        "62816422"
+      ],
+      "canonical_papers": [
+        "239052352",
+        "62816422"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 3
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "based",
+          "indices"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 4050,
+      "reasoning_chars": 1024,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "a6e758944ca25c3836e0153c4595c1c16e0bd57101998e42e3c645a5fb33dcbb",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:18:03Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "partition_id": "extreme_heat_v1.mechanism.unspecified",
+      "chunk_id": "extreme_heat_v1.mechanism.unspecified.c1",
+      "split_by": [
+        "direction=unspecified"
+      ],
+      "member_ids": [
+        "LS-233741363-04"
+      ],
+      "member_local_ids": [
+        "S048"
+      ],
+      "label": "overly clustered cooling centers reduce population coverage",
+      "rationale": "States a specific effect of cooling‑center placement on service reach.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "233741363"
+      ],
+      "canonical_papers": [
+        "233741363"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "coverage",
+          "overly"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 4050,
+      "reasoning_chars": 1024,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "a6e758944ca25c3836e0153c4595c1c16e0bd57101998e42e3c645a5fb33dcbb",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:18:03Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "partition_id": "extreme_heat_v1.mechanism.unspecified",
+      "chunk_id": "extreme_heat_v1.mechanism.unspecified.c1",
+      "split_by": [
+        "direction=unspecified"
+      ],
+      "member_ids": [
+        "LS-4618685-01",
+        "LS-4618685-04"
+      ],
+      "member_local_ids": [
+        "S099",
+        "S100"
+      ],
+      "label": "magnetic grains record heating events via thermal remanent magnetization",
+      "rationale": "Both discuss how heating alters magnetic grains and preserves thermal history.",
+      "claim_about": "other",
+      "n_members": 2,
+      "papers": [
+        "4618685"
+      ],
+      "canonical_papers": [
+        "4618685"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 4050,
+      "reasoning_chars": 1024,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "a6e758944ca25c3836e0153c4595c1c16e0bd57101998e42e3c645a5fb33dcbb",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:18:03Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "partition_id": "extreme_heat_v1.mechanism.unspecified",
+      "chunk_id": "extreme_heat_v1.mechanism.unspecified.c1",
+      "split_by": [
+        "direction=unspecified"
+      ],
+      "member_ids": [
+        "LS-88523156-01",
+        "LS-88523156-05",
+        "LS-16807122-05"
+      ],
+      "member_local_ids": [
+        "S113",
+        "S114",
+        "S020"
+      ],
+      "label": "fire risk rises when windspeed coincides with dryness or low humidity",
+      "rationale": "Each links combined wind‑dryness or low humidity conditions to heightened fire danger.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 3,
+      "papers": [
+        "16807122",
+        "88523156"
+      ],
+      "canonical_papers": [
+        "16807122",
+        "88523156"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "low",
+          "rises"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 4050,
+      "reasoning_chars": 1024,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "a6e758944ca25c3836e0153c4595c1c16e0bd57101998e42e3c645a5fb33dcbb",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:18:03Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "partition_id": "extreme_heat_v1.mechanism.unspecified",
+      "chunk_id": "extreme_heat_v1.mechanism.unspecified.c1",
+      "split_by": [
+        "direction=unspecified"
+      ],
+      "member_ids": [
+        "LS-226260658-04"
+      ],
+      "member_local_ids": [
+        "S040"
+      ],
+      "label": "relative heat‑wave events are defined by a 95th percentile temperature threshold",
+      "rationale": "Specifies a statistical definition for heat‑wave events.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "226260658"
+      ],
+      "canonical_papers": [
+        "226260658"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "threshold"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 4050,
+      "reasoning_chars": 1024,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "a6e758944ca25c3836e0153c4595c1c16e0bd57101998e42e3c645a5fb33dcbb",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:18:03Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "partition_id": "extreme_heat_v1.mechanism.unspecified",
+      "chunk_id": "extreme_heat_v1.mechanism.unspecified.c1",
+      "split_by": [
+        "direction=unspecified"
+      ],
+      "member_ids": [
+        "LS-235602877-03"
+      ],
+      "member_local_ids": [
+        "S049"
+      ],
+      "label": "houses in Los Angeles heat up faster due to higher ambient temperature and solar gains",
+      "rationale": "Attributes building heat‑up speed to local temperature, solar gain, and insulation differences.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "235602877"
+      ],
+      "canonical_papers": [
+        "235602877"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "due",
+          "faster",
+          "temperature"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 4050,
+      "reasoning_chars": 1024,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "a6e758944ca25c3836e0153c4595c1c16e0bd57101998e42e3c645a5fb33dcbb",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:18:03Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "partition_id": "extreme_heat_v1.mechanism.unspecified",
+      "chunk_id": "extreme_heat_v1.mechanism.unspecified.c1",
+      "split_by": [
+        "direction=unspecified"
+      ],
+      "member_ids": [
+        "LS-201658056-03"
+      ],
+      "member_local_ids": [
+        "S023"
+      ],
+      "label": "heat vulnerability index is computed using principal component analysis",
+      "rationale": "Describes a method for creating a heat‑vulnerability index.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "201658056"
+      ],
+      "canonical_papers": [
+        "201658056"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "review_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "computed"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 4050,
+      "reasoning_chars": 1024,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "a6e758944ca25c3836e0153c4595c1c16e0bd57101998e42e3c645a5fb33dcbb",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:18:03Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "partition_id": "extreme_heat_v1.mechanism.unspecified",
+      "chunk_id": "extreme_heat_v1.mechanism.unspecified.c1",
+      "split_by": [
+        "direction=unspecified"
+      ],
+      "member_ids": [
+        "LS-237371886-02"
+      ],
+      "member_local_ids": [
+        "S051"
+      ],
+      "label": "WBGT combines wet‑bulb, globe and shaded air temperatures as an occupational heat‑stress index",
+      "rationale": "Defines the Wet‑Bulb Globe Temperature index composition.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "237371886"
+      ],
+      "canonical_papers": [
+        "237371886"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "temperatures"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 4050,
+      "reasoning_chars": 1024,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "a6e758944ca25c3836e0153c4595c1c16e0bd57101998e42e3c645a5fb33dcbb",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:18:03Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "mechanism",
+      "partition_id": "extreme_heat_v1.mechanism.unspecified",
+      "chunk_id": "extreme_heat_v1.mechanism.unspecified.c1",
+      "split_by": [
+        "direction=unspecified"
+      ],
+      "member_ids": [
+        "LS-231948602-06"
+      ],
+      "member_local_ids": [
+        "S044"
+      ],
+      "label": "microclimate varies spatially, requiring local measurements for accurate heat‑stress assessment",
+      "rationale": "Emphasizes need for fine‑scale data to assess heat stress.",
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "231948602"
+      ],
+      "canonical_papers": [
+        "231948602"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "review_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "requiring",
+          "varies"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 4050,
+      "reasoning_chars": 1024,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "a6e758944ca25c3836e0153c4595c1c16e0bd57101998e42e3c645a5fb33dcbb",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:18:03Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 3225,
+      "reasoning_chars": 2872,
+      "http_attempts": 1,
+      "model_seconds": 8.0
+    },
+    {
+      "turn": 2,
+      "finish_reason": "stop",
+      "content_chars": 4050,
+      "reasoning_chars": 1024,
+      "http_attempts": 1,
+      "model_seconds": 7.0
+    }
+  ],
+  "first_turn": {
+    "checks": {
+      "parse_pass": true,
+      "unknown_ids": [],
+      "duplicate_ids": [],
+      "missing_ids": [
+        "S023",
+        "S051",
+        "S044"
+      ],
+      "empty_groups": 0,
+      "ids_exactly_once_pass": false,
+      "no_empty_group_pass": true,
+      "failed": [
+        "ids_exactly_once_pass"
+      ]
+    },
+    "groups_as_returned": [
+      {
+        "member_ids": [
+          "S074",
+          "S110",
+          "S021",
+          "S022",
+          "S092",
+          "S116",
+          "S087",
+          "S091",
+          "S004",
+          "S050",
+          "S062",
+          "S108",
+          "S109",
+          "S111"
+        ],
+        "label": "heat index combines temperature and humidity as a perceived‑heat metric",
+        "rationale": "All state that the heat index (or apparent temperature) is calculated from air temperature and relative humidity to represent how hot it feels.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 23,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S038",
+          "S039"
+        ],
+        "label": "heat‑index thresholds are used to define heat‑wave events",
+        "rationale": "Both describe county or heat‑wave definitions that require the heat index or combined temperature‑humidity thresholds.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "define",
+            "events",
+            "used"
+          ],
+          "rationale_words": 15,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S106",
+          "S093",
+          "S094",
+          "S015"
+        ],
+        "label": "high heat index increases health or agricultural risk",
+        "rationale": "Each links high temperature‑humidity (heat index) to greater risk of illness, heatstroke, or reduced irrigation effectiveness.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "agricultural",
+            "health",
+            "increases"
+          ],
+          "rationale_words": 16,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S006",
+          "S058",
+          "S041",
+          "S042",
+          "S043"
+        ],
+        "label": "urban heat island intensifies due to nighttime conditions and reduced moisture",
+        "rationale": "All explain mechanisms (nighttime, low moisture, vegetation) that amplify urban heat compared with surrounding areas.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "due",
+            "nighttime"
+          ],
+          "rationale_words": 15,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S054",
+          "S055",
+          "S107"
+        ],
+        "label": "evaporation and evapotranspiration are driven by temperature‑based heat indices",
+        "rationale": "Each describes how evaporation or ET calculations rely on temperature‑derived heat‑index values.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "based",
+            "indices"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S048"
+        ],
+        "label": "overly clustered cooling centers reduce population coverage",
+        "rationale": "States a specific effect of cooling‑center placement on service reach.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "coverage",
+            "overly"
+          ],
+          "rationale_words": 10,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S099",
+          "S100"
+        ],
+        "label": "magnetic grains record heating events via thermal remanent magnetization",
+        "rationale": "Both discuss how heating alters magnetic grains and preserves thermal history.",
+        "claim_about": "other",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 11,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S113",
+          "S114",
+          "S020"
+        ],
+        "label": "fire risk rises when windspeed coincides with dryness or low humidity",
+        "rationale": "Each links combined wind‑dryness or low humidity conditions to heightened fire danger.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "low",
+            "rises"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S040"
+        ],
+        "label": "relative heat‑wave events are defined by a 95th percentile temperature threshold",
+        "rationale": "Specifies a statistical definition for heat‑wave events.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "threshold"
+          ],
+          "rationale_words": 7,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S049"
+        ],
+        "label": "houses in Los Angeles heat up faster due to higher ambient temperature and solar gains",
+        "rationale": "Attributes building heat‑up speed to local temperature, solar gain, and insulation differences.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "due",
+            "faster",
+            "temperature"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "singletons_as_returned": [],
+    "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"heat index combines temperature and humidity as a perceived‑heat metric\",\n      \"member_ids\": [\"S074\",\"S110\",\"S021\",\"S022\",\"S092\",\"S116\",\"S087\",\"S091\",\"S004\",\"S050\",\"S062\",\"S108\",\"S109\",\"S111\"],\n      \"rationale\": \"All state that the heat index (or apparent temperature) is calculated from air temperature and relative humidity to represent how hot it feels.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"heat‑index thresholds are used to define heat‑wave events\",\n      \"member_ids\": [\"S038\",\"S039\"],\n      \"rationale\": \"Both describe county or heat‑wave definitions that require the heat index or combined temperature‑humidity thresholds.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"high heat index increases health or agricultural risk\",\n      \"member_ids\": [\"S106\",\"S093\",\"S094\",\"S015\"],\n      \"rationale\": \"Each links high temperature‑humidity (heat index) to greater risk of illness, heatstroke, or reduced irrigation effectiveness.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"urban heat island intensifies due to nighttime conditions and reduced moisture\",\n      \"member_ids\": [\"S006\",\"S058\",\"S041\",\"S042\",\"S043\"],\n      \"rationale\": \"All explain mechanisms (nighttime, low moisture, vegetation) that amplify urban heat compared with surrounding areas.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"evaporation and evapotranspiration are driven by temperature‑based heat indices\",\n      \"member_ids\": [\"S054\",\"S055\",\"S107\"],\n      \"rationale\": \"Each describes how evaporation or ET calculations rely on temperature‑derived heat‑index values.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"overly clustered cooling centers reduce population coverage\",\n      \"member_ids\": [\"S048\"],\n      \"rationale\": \"States a specific effect of cooling‑center placement on service reach.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"magnetic grains record heating events via thermal remanent magnetization\",\n      \"member_ids\": [\"S099\",\"S100\"],\n      \"rationale\": \"Both discuss how heating alters magnetic grains and preserves thermal history.\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"label\": \"fire risk rises when windspeed coincides with dryness or low humidity\",\n      \"member_ids\": [\"S113\",\"S114\",\"S020\"],\n      \"rationale\": \"Each links combined wind‑dryness or low humidity conditions to heightened fire danger.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"relative heat‑wave events are defined by a 95th percentile temperature threshold\",\n      \"member_ids\": [\"S040\"],\n      \"rationale\": \"Specifies a statistical definition for heat‑wave events.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"houses in Los Angeles heat up faster due to higher ambient temperature and solar gains\",\n      \"member_ids\": [\"S049\"],\n      \"rationale\": \"Attributes building heat‑up speed to local temperature, solar gain, and insulation differences.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    }\n  ],\n  \"singletons\": []\n}",
+    "raw_response_chars": 3225,
+    "raw_reasoning": null,
+    "raw_reasoning_chars": null,
+    "content_fallback": false,
+    "finish_reason": "stop",
+    "raw_max_chars": 20000
+  },
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 15.0,
+  "model_parse_error": null,
+  "elapsed_seconds": 15.1,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"heat index combines temperature and humidity as a perceived‑heat metric\",\n      \"member_ids\": [\"S074\",\"S110\",\"S021\",\"S022\",\"S092\",\"S116\",\"S087\",\"S091\",\"S004\",\"S050\",\"S062\",\"S108\",\"S109\",\"S111\"],\n      \"rationale\": \"All state that the heat index (or apparent temperature) is calculated from air temperature and relative humidity to represent how hot it feels.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"heat‑index thresholds are used to define heat‑wave events\",\n      \"member_ids\": [\"S038\",\"S039\"],\n      \"rationale\": \"Both describe county or heat‑wave definitions that require the heat index or combined temperature‑humidity thresholds.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"high heat index increases health or agricultural risk\",\n      \"member_ids\": [\"S106\",\"S093\",\"S094\",\"S015\"],\n      \"rationale\": \"Each links high temperature‑humidity (heat index) to greater risk of illness, heatstroke, or reduced irrigation effectiveness.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"urban heat island intensifies due to nighttime conditions and reduced moisture\",\n      \"member_ids\": [\"S006\",\"S058\",\"S041\",\"S042\",\"S043\"],\n      \"rationale\": \"All explain mechanisms (nighttime, low moisture, vegetation) that amplify urban heat compared with surrounding areas.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"evaporation and evapotranspiration are driven by temperature‑based heat indices\",\n      \"member_ids\": [\"S054\",\"S055\",\"S107\"],\n      \"rationale\": \"Each describes how evaporation or ET calculations rely on temperature‑derived heat‑index values.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"overly clustered cooling centers reduce population coverage\",\n      \"member_ids\": [\"S048\"],\n      \"rationale\": \"States a specific effect of cooling‑center placement on service reach.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"magnetic grains record heating events via thermal remanent magnetization\",\n      \"member_ids\": [\"S099\",\"S100\"],\n      \"rationale\": \"Both discuss how heating alters magnetic grains and preserves thermal history.\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"label\": \"fire risk rises when windspeed coincides with dryness or low humidity\",\n      \"member_ids\": [\"S113\",\"S114\",\"S020\"],\n      \"rationale\": \"Each links combined wind‑dryness or low humidity conditions to heightened fire danger.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"relative heat‑wave events are defined by a 95th percentile temperature threshold\",\n      \"member_ids\": [\"S040\"],\n      \"rationale\": \"Specifies a statistical definition for heat‑wave events.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"houses in Los Angeles heat up faster due to higher ambient temperature and solar gains\",\n      \"member_ids\": [\"S049\"],\n      \"rationale\": \"Attributes building heat‑up speed to local temperature, solar gain, and insulation differences.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"heat vulnerability index is computed using principal component analysis\",\n      \"member_ids\": [\"S023\"],\n      \"rationale\": \"Describes a method for creating a heat‑vulnerability index.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"WBGT combines wet‑bulb, globe and shaded air temperatures as an occupational heat‑stress index\",\n      \"member_ids\": [\"S051\"],\n      \"rationale\": \"Defines the Wet‑Bulb Globe Temperature index composition.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"microclimate varies spatially, requiring local measurements for accurate heat‑stress assessment\",\n      \"member_ids\": [\"S044\"],\n      \"rationale\": \"Emphasizes need for fine‑scale data to assess heat stress.\",\n      \"claim_about\": \"method_or_data\"\n    }\n  ],\n  \"singletons\": []\n}",
+  "raw_response_chars": 4050,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

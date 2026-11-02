@@ -1,0 +1,1660 @@
+{
+  "partition_id": "fire_weather_v1.pattern",
+  "chunk_index": 2,
+  "n_chunks": 2,
+  "arm": "fire_weather_v1",
+  "statement_type": "pattern",
+  "split_by": [],
+  "partition_n_statements": 46,
+  "n_statements": 23,
+  "local_ids": [
+    "S005",
+    "S006",
+    "S008",
+    "S009",
+    "S010",
+    "S011",
+    "S012",
+    "S013",
+    "S014",
+    "S015",
+    "S016",
+    "S023",
+    "S030",
+    "S031",
+    "S033",
+    "S036",
+    "S037",
+    "S038",
+    "S041",
+    "S042",
+    "S044",
+    "S046",
+    "S004"
+  ],
+  "generator_version": "litgroup_agent v3",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "fire_weather_v1.pattern.c2",
+  "model_attempts": 1,
+  "corrective_retry_used": false,
+  "finish_reason": "stop",
+  "content_chars": 4670,
+  "reasoning_chars": 2422,
+  "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+  "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+  "generation_timestamp": "2026-11-02T01:27:12Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S005",
+        "S016",
+        "S031",
+        "S036",
+        "S037"
+      ],
+      "label": "Fire danger indices have increased",
+      "rationale": "All state rising values or frequency of fire‑danger indices over recent decades.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S010",
+        "S011"
+      ],
+      "label": "Arctic/sea‑ice teleconnections influence fire weather",
+      "rationale": "Both describe Arctic‑driven teleconnections or sea‑ice loss driving fire‑weather conditions.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "teleconnections"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S044"
+      ],
+      "label": "Methodology using ensemble forecasts to predict extreme fire‑weather",
+      "rationale": "Describes a forecasting method and confidence criteria.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "extreme",
+          "forecasts",
+          "methodology",
+          "using"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S004"
+      ],
+      "label": "Short‑term fire risk maps use dynamic variables",
+      "rationale": "Explains a mapping approach that incorporates rapidly changing inputs.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "use"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S046"
+      ],
+      "label": "Projected extreme fire seasons for San Diego County",
+      "rationale": "Provides a future projection based on fire‑weather indices.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "projected"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S033"
+      ],
+      "label": "Seasonal fuel‑moisture minimum coincides with large fires",
+      "rationale": "Links the timing of low fuel moisture to occurrence of large fires.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S042"
+      ],
+      "label": "Drought Code peaks in September then declines",
+      "rationale": "Describes the seasonal pattern of a fire‑danger code.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S041"
+      ],
+      "label": "Fire ignition occurs when FWI is very high",
+      "rationale": "Notes that high fire‑weather index values accompany ignition events.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "occurs"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S038"
+      ],
+      "label": "Breakpoints in European FWI align with temperature breakpoints",
+      "rationale": "Shows correspondence between fire‑weather index changes and temperature records.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "align"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S013"
+      ],
+      "label": "No significant spring fire‑weather trend in the UK",
+      "rationale": "Reports lack of a statistical trend over four decades.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S023"
+      ],
+      "label": "Fire seasons lengthen in Canada as climate warms",
+      "rationale": "States that warming leads to longer fire seasons.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S030"
+      ],
+      "label": "Extreme fire weather raises mean wildfire severity",
+      "rationale": "Links extreme fire‑weather conditions to higher severity outcomes.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "raises"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S009"
+      ],
+      "label": "Drier fall conditions increase human‑caused spring fires but not area burned",
+      "rationale": "Describes a causal link to ignition type without larger burned area.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "increase"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S015"
+      ],
+      "label": "Potential evaporation–wildfire probability relationship varies regionally",
+      "rationale": "Notes spatial heterogeneity in fire‑weather response.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "probability",
+          "regionally",
+          "varies"
+        ],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S008"
+      ],
+      "label": "Predictability of fire danger differs among biomes",
+      "rationale": "Compares predictability windows across forest, savanna, shrubland.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "biomes",
+          "differs"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S014"
+      ],
+      "label": "Seasonal distribution of hazardous fire weather in England",
+      "rationale": "Describes where and when high fire danger occurs seasonally.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "distribution",
+          "seasonal"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S006"
+      ],
+      "label": "Winter snow‑cover loss on Norwegian heathlands extends snow‑free period, raising ignition risk",
+      "rationale": "Explains how reduced snow cover changes ground conditions for fire.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "extends",
+          "loss",
+          "raising",
+          "risk"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S012"
+      ],
+      "label": "Fire danger increase greatest in summer but risk not highest due to ignition timing",
+      "rationale": "Highlights mismatch between index magnitude and actual risk timing.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-208499235-01",
+        "LS-239027554-05",
+        "LS-49549549-01",
+        "LS-54692198-02",
+        "LS-54692198-03"
+      ],
+      "member_local_ids": [
+        "S005",
+        "S016",
+        "S031",
+        "S036",
+        "S037"
+      ],
+      "label": "Fire danger indices have increased",
+      "rationale": "All state rising values or frequency of fire‑danger indices over recent decades.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 5,
+      "papers": [
+        "208499235",
+        "239027554",
+        "49549549",
+        "54692198"
+      ],
+      "canonical_papers": [
+        "208499235",
+        "239027554",
+        "49549549",
+        "54692198"
+      ],
+      "n_independent_core_cited_papers": 4,
+      "role_counts": {
+        "cited_candidate": 1,
+        "core_candidate": 4
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-233618492-02",
+        "LS-233618492-05"
+      ],
+      "member_local_ids": [
+        "S010",
+        "S011"
+      ],
+      "label": "Arctic/sea‑ice teleconnections influence fire weather",
+      "rationale": "Both describe Arctic‑driven teleconnections or sea‑ice loss driving fire‑weather conditions.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 2,
+      "papers": [
+        "233618492"
+      ],
+      "canonical_papers": [
+        "233618492"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1,
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "teleconnections"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-73563338-06"
+      ],
+      "member_local_ids": [
+        "S044"
+      ],
+      "label": "Methodology using ensemble forecasts to predict extreme fire‑weather",
+      "rationale": "Describes a forecasting method and confidence criteria.",
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "73563338"
+      ],
+      "canonical_papers": [
+        "73563338"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "extreme",
+          "forecasts",
+          "methodology",
+          "using"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-208224932-05"
+      ],
+      "member_local_ids": [
+        "S004"
+      ],
+      "label": "Short‑term fire risk maps use dynamic variables",
+      "rationale": "Explains a mapping approach that incorporates rapidly changing inputs.",
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "208224932"
+      ],
+      "canonical_papers": [
+        "208224932"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "use"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-999274-05"
+      ],
+      "member_local_ids": [
+        "S046"
+      ],
+      "label": "Projected extreme fire seasons for San Diego County",
+      "rationale": "Provides a future projection based on fire‑weather indices.",
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "999274"
+      ],
+      "canonical_papers": [
+        "999274"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "projected"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-52918429-05"
+      ],
+      "member_local_ids": [
+        "S033"
+      ],
+      "label": "Seasonal fuel‑moisture minimum coincides with large fires",
+      "rationale": "Links the timing of low fuel moisture to occurrence of large fires.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "52918429"
+      ],
+      "canonical_papers": [
+        "52918429"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-62898586-04"
+      ],
+      "member_local_ids": [
+        "S042"
+      ],
+      "label": "Drought Code peaks in September then declines",
+      "rationale": "Describes the seasonal pattern of a fire‑danger code.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "62898586"
+      ],
+      "canonical_papers": [
+        "62898586"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-59342086-02"
+      ],
+      "member_local_ids": [
+        "S041"
+      ],
+      "label": "Fire ignition occurs when FWI is very high",
+      "rationale": "Notes that high fire‑weather index values accompany ignition events.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "59342086"
+      ],
+      "canonical_papers": [
+        "59342086"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "occurs"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-54692198-06"
+      ],
+      "member_local_ids": [
+        "S038"
+      ],
+      "label": "Breakpoints in European FWI align with temperature breakpoints",
+      "rationale": "Shows correspondence between fire‑weather index changes and temperature records.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "54692198"
+      ],
+      "canonical_papers": [
+        "54692198"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "align"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-236782701-04"
+      ],
+      "member_local_ids": [
+        "S013"
+      ],
+      "label": "No significant spring fire‑weather trend in the UK",
+      "rationale": "Reports lack of a statistical trend over four decades.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "236782701"
+      ],
+      "canonical_papers": [
+        "236782701"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-254097328-02"
+      ],
+      "member_local_ids": [
+        "S023"
+      ],
+      "label": "Fire seasons lengthen in Canada as climate warms",
+      "rationale": "States that warming leads to longer fire seasons.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "254097328"
+      ],
+      "canonical_papers": [
+        "254097328"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-3642757-03"
+      ],
+      "member_local_ids": [
+        "S030"
+      ],
+      "label": "Extreme fire weather raises mean wildfire severity",
+      "rationale": "Links extreme fire‑weather conditions to higher severity outcomes.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "3642757"
+      ],
+      "canonical_papers": [
+        "3642757"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "raises"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-225676276-06"
+      ],
+      "member_local_ids": [
+        "S009"
+      ],
+      "label": "Drier fall conditions increase human‑caused spring fires but not area burned",
+      "rationale": "Describes a causal link to ignition type without larger burned area.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "225676276"
+      ],
+      "canonical_papers": [
+        "225676276"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "increase"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-239016716-02"
+      ],
+      "member_local_ids": [
+        "S015"
+      ],
+      "label": "Potential evaporation–wildfire probability relationship varies regionally",
+      "rationale": "Notes spatial heterogeneity in fire‑weather response.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "239016716"
+      ],
+      "canonical_papers": [
+        "239016716"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "probability",
+          "regionally",
+          "varies"
+        ],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-221664018-04"
+      ],
+      "member_local_ids": [
+        "S008"
+      ],
+      "label": "Predictability of fire danger differs among biomes",
+      "rationale": "Compares predictability windows across forest, savanna, shrubland.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "221664018"
+      ],
+      "canonical_papers": [
+        "221664018"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "biomes",
+          "differs"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-236782701-05"
+      ],
+      "member_local_ids": [
+        "S014"
+      ],
+      "label": "Seasonal distribution of hazardous fire weather in England",
+      "rationale": "Describes where and when high fire danger occurs seasonally.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "236782701"
+      ],
+      "canonical_papers": [
+        "236782701"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "distribution",
+          "seasonal"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-216455846-03"
+      ],
+      "member_local_ids": [
+        "S006"
+      ],
+      "label": "Winter snow‑cover loss on Norwegian heathlands extends snow‑free period, raising ignition risk",
+      "rationale": "Explains how reduced snow cover changes ground conditions for fire.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "216455846"
+      ],
+      "canonical_papers": [
+        "216455846"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "extends",
+          "loss",
+          "raising",
+          "risk"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "pattern",
+      "partition_id": "fire_weather_v1.pattern",
+      "chunk_id": "fire_weather_v1.pattern.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-234200338-05"
+      ],
+      "member_local_ids": [
+        "S012"
+      ],
+      "label": "Fire danger increase greatest in summer but risk not highest due to ignition timing",
+      "rationale": "Highlights mismatch between index magnitude and actual risk timing.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "234200338"
+      ],
+      "canonical_papers": [
+        "234200338"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "2328197d5584b1b87163869f2d426af96d95871e0713b942c79ac4b93a96d86d",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:27:12Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 4670,
+      "reasoning_chars": 2422,
+      "http_attempts": 1,
+      "model_seconds": 8.9
+    }
+  ],
+  "first_turn": null,
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 8.9,
+  "model_parse_error": null,
+  "elapsed_seconds": 8.9,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"Fire danger indices have increased\",\n      \"member_ids\": [\"S005\", \"S016\", \"S031\", \"S036\", \"S037\"],\n      \"rationale\": \"All state rising values or frequency of fire‑danger indices over recent decades.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Arctic/sea‑ice teleconnections influence fire weather\",\n      \"member_ids\": [\"S010\", \"S011\"],\n      \"rationale\": \"Both describe Arctic‑driven teleconnections or sea‑ice loss driving fire‑weather conditions.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Methodology using ensemble forecasts to predict extreme fire‑weather\",\n      \"member_ids\": [\"S044\"],\n      \"rationale\": \"Describes a forecasting method and confidence criteria.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Short‑term fire risk maps use dynamic variables\",\n      \"member_ids\": [\"S004\"],\n      \"rationale\": \"Explains a mapping approach that incorporates rapidly changing inputs.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Projected extreme fire seasons for San Diego County\",\n      \"member_ids\": [\"S046\"],\n      \"rationale\": \"Provides a future projection based on fire‑weather indices.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Seasonal fuel‑moisture minimum coincides with large fires\",\n      \"member_ids\": [\"S033\"],\n      \"rationale\": \"Links the timing of low fuel moisture to occurrence of large fires.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Drought Code peaks in September then declines\",\n      \"member_ids\": [\"S042\"],\n      \"rationale\": \"Describes the seasonal pattern of a fire‑danger code.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Fire ignition occurs when FWI is very high\",\n      \"member_ids\": [\"S041\"],\n      \"rationale\": \"Notes that high fire‑weather index values accompany ignition events.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Breakpoints in European FWI align with temperature breakpoints\",\n      \"member_ids\": [\"S038\"],\n      \"rationale\": \"Shows correspondence between fire‑weather index changes and temperature records.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"No significant spring fire‑weather trend in the UK\",\n      \"member_ids\": [\"S013\"],\n      \"rationale\": \"Reports lack of a statistical trend over four decades.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Fire seasons lengthen in Canada as climate warms\",\n      \"member_ids\": [\"S023\"],\n      \"rationale\": \"States that warming leads to longer fire seasons.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Extreme fire weather raises mean wildfire severity\",\n      \"member_ids\": [\"S030\"],\n      \"rationale\": \"Links extreme fire‑weather conditions to higher severity outcomes.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"Drier fall conditions increase human‑caused spring fires but not area burned\",\n      \"member_ids\": [\"S009\"],\n      \"rationale\": \"Describes a causal link to ignition type without larger burned area.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"Potential evaporation–wildfire probability relationship varies regionally\",\n      \"member_ids\": [\"S015\"],\n      \"rationale\": \"Notes spatial heterogeneity in fire‑weather response.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Predictability of fire danger differs among biomes\",\n      \"member_ids\": [\"S008\"],\n      \"rationale\": \"Compares predictability windows across forest, savanna, shrubland.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Seasonal distribution of hazardous fire weather in England\",\n      \"member_ids\": [\"S014\"],\n      \"rationale\": \"Describes where and when high fire danger occurs seasonally.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Winter snow‑cover loss on Norwegian heathlands extends snow‑free period, raising ignition risk\",\n      \"member_ids\": [\"S006\"],\n      \"rationale\": \"Explains how reduced snow cover changes ground conditions for fire.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Fire danger increase greatest in summer but risk not highest due to ignition timing\",\n      \"member_ids\": [\"S012\"],\n      \"rationale\": \"Highlights mismatch between index magnitude and actual risk timing.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    }\n  ],\n  \"singletons\": []\n}",
+  "raw_response_chars": 4670,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

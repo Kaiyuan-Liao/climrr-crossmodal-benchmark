@@ -1,0 +1,2827 @@
+{
+  "partition_id": "fire_weather_v1.driver",
+  "chunk_index": 2,
+  "n_chunks": 3,
+  "arm": "fire_weather_v1",
+  "statement_type": "driver",
+  "split_by": [],
+  "partition_n_statements": 106,
+  "n_statements": 35,
+  "local_ids": [
+    "S048",
+    "S059",
+    "S060",
+    "S061",
+    "S063",
+    "S066",
+    "S070",
+    "S072",
+    "S073",
+    "S074",
+    "S075",
+    "S077",
+    "S078",
+    "S081",
+    "S094",
+    "S095",
+    "S097",
+    "S006",
+    "S011",
+    "S014",
+    "S015",
+    "S017",
+    "S018",
+    "S021",
+    "S022",
+    "S024",
+    "S025",
+    "S029",
+    "S031",
+    "S032",
+    "S033",
+    "S034",
+    "S037",
+    "S042",
+    "S043"
+  ],
+  "generator_version": "litgroup_agent v3",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "fire_weather_v1.driver.c2",
+  "model_attempts": 2,
+  "corrective_retry_used": true,
+  "finish_reason": "stop",
+  "content_chars": 2905,
+  "reasoning_chars": 3725,
+  "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+  "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+  "generation_timestamp": "2026-11-02T01:25:28Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S066",
+        "S042"
+      ],
+      "label": "Fire‑weather variables positively correlate with fire occurrence",
+      "rationale": "Both state a positive relationship between fire‑weather metrics and fire activity.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "correlate",
+          "occurrence"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S072",
+        "S073",
+        "S074",
+        "S075"
+      ],
+      "label": "Fire‑weather indices are strong predictors of lightning‑ignited wildfire risk",
+      "rationale": "All describe fire‑weather indices (FWI, FFMC, etc.) predicting lightning‑ignited ignitions.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S060",
+        "S043",
+        "S024"
+      ],
+      "label": "Warming and drying climate increase wildfire frequency and danger",
+      "rationale": "Each links higher temperature / lower humidity from climate change to more fires or higher danger.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 16,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S014",
+        "S015"
+      ],
+      "label": "Intense Sirocco events drive extreme fire events in Tunisia",
+      "rationale": "Both attribute extreme fire activity and burned‑area variability to strong Sirocco winds.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "drive"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S032",
+        "S033"
+      ],
+      "label": "Meteorological covariates and fire‑weather indices are common predictors in wildfire models",
+      "rationale": "Each lists humidity, temperature, precipitation, VPD, etc., as key model predictors.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "common"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [
+    {
+      "id": "S048",
+      "claim_about": "method_or_data",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S059",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S061",
+      "claim_about": "method_or_data",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S063",
+      "claim_about": "method_or_data",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S070",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S077",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S078",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S081",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S094",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S095",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S097",
+      "claim_about": "method_or_data",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S006",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S011",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S017",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S018",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S021",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S022",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S025",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S029",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S031",
+      "claim_about": "method_or_data",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S034",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S037",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-264517297-02",
+        "LS-246574262-02"
+      ],
+      "member_local_ids": [
+        "S066",
+        "S042"
+      ],
+      "label": "Fire‑weather variables positively correlate with fire occurrence",
+      "rationale": "Both state a positive relationship between fire‑weather metrics and fire activity.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 2,
+      "papers": [
+        "246574262",
+        "264517297"
+      ],
+      "canonical_papers": [
+        "246574262",
+        "264517297"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "correlate",
+          "occurrence"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-272690099-01",
+        "LS-272690099-02",
+        "LS-272690099-03",
+        "LS-272690099-05"
+      ],
+      "member_local_ids": [
+        "S072",
+        "S073",
+        "S074",
+        "S075"
+      ],
+      "label": "Fire‑weather indices are strong predictors of lightning‑ignited wildfire risk",
+      "rationale": "All describe fire‑weather indices (FWI, FFMC, etc.) predicting lightning‑ignited ignitions.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 4,
+      "papers": [
+        "272690099"
+      ],
+      "canonical_papers": [
+        "272690099"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 4
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-257108685-02",
+        "LS-246574262-04",
+        "LS-234200338-01"
+      ],
+      "member_local_ids": [
+        "S060",
+        "S043",
+        "S024"
+      ],
+      "label": "Warming and drying climate increase wildfire frequency and danger",
+      "rationale": "Each links higher temperature / lower humidity from climate change to more fires or higher danger.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 3,
+      "papers": [
+        "234200338",
+        "246574262",
+        "257108685"
+      ],
+      "canonical_papers": [
+        "234200338",
+        "243767055",
+        "246574262"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "background_consensus_candidate": 2,
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 16,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-219922422-01",
+        "LS-219922422-02"
+      ],
+      "member_local_ids": [
+        "S014",
+        "S015"
+      ],
+      "label": "Intense Sirocco events drive extreme fire events in Tunisia",
+      "rationale": "Both attribute extreme fire activity and burned‑area variability to strong Sirocco winds.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 2,
+      "papers": [
+        "219922422"
+      ],
+      "canonical_papers": [
+        "219922422"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "drive"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-239016716-01",
+        "LS-239016716-03"
+      ],
+      "member_local_ids": [
+        "S032",
+        "S033"
+      ],
+      "label": "Meteorological covariates and fire‑weather indices are common predictors in wildfire models",
+      "rationale": "Each lists humidity, temperature, precipitation, VPD, etc., as key model predictors.",
+      "claim_about": "method_or_data",
+      "n_members": 2,
+      "papers": [
+        "239016716"
+      ],
+      "canonical_papers": [
+        "239016716"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "common"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-247778393-04"
+      ],
+      "member_local_ids": [
+        "S048"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "247778393"
+      ],
+      "canonical_papers": [
+        "247778393"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-257108685-01"
+      ],
+      "member_local_ids": [
+        "S059"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "257108685"
+      ],
+      "canonical_papers": [
+        "243767055"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-258480004-04"
+      ],
+      "member_local_ids": [
+        "S061"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "258480004"
+      ],
+      "canonical_papers": [
+        "258480004"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-258535920-05"
+      ],
+      "member_local_ids": [
+        "S063"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "258535920"
+      ],
+      "canonical_papers": [
+        "258535920"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-271067416-01"
+      ],
+      "member_local_ids": [
+        "S070"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "271067416"
+      ],
+      "canonical_papers": [
+        "271067416"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-273855287-02"
+      ],
+      "member_local_ids": [
+        "S077"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "273855287"
+      ],
+      "canonical_papers": [
+        "273855287"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-273855287-04"
+      ],
+      "member_local_ids": [
+        "S078"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "273855287"
+      ],
+      "canonical_papers": [
+        "273855287"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-273875023-04"
+      ],
+      "member_local_ids": [
+        "S081"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "273875023"
+      ],
+      "canonical_papers": [
+        "273875023"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-55319732-01"
+      ],
+      "member_local_ids": [
+        "S094"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "55319732"
+      ],
+      "canonical_papers": [
+        "55319732"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-55319732-02"
+      ],
+      "member_local_ids": [
+        "S095"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "55319732"
+      ],
+      "canonical_papers": [
+        "55319732"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-62898586-02"
+      ],
+      "member_local_ids": [
+        "S097"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "62898586"
+      ],
+      "canonical_papers": [
+        "62898586"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-157247664-05"
+      ],
+      "member_local_ids": [
+        "S006"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "157247664"
+      ],
+      "canonical_papers": [
+        "157247664"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-216455846-02"
+      ],
+      "member_local_ids": [
+        "S011"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "216455846"
+      ],
+      "canonical_papers": [
+        "216455846"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-225676276-01"
+      ],
+      "member_local_ids": [
+        "S017"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "225676276"
+      ],
+      "canonical_papers": [
+        "225676276"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-227153044-01"
+      ],
+      "member_local_ids": [
+        "S018"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "227153044"
+      ],
+      "canonical_papers": [
+        "227153044"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-233618492-01"
+      ],
+      "member_local_ids": [
+        "S021"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "233618492"
+      ],
+      "canonical_papers": [
+        "233618492"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-233705284-02"
+      ],
+      "member_local_ids": [
+        "S022"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "233705284"
+      ],
+      "canonical_papers": [
+        "233705284"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-234200338-04"
+      ],
+      "member_local_ids": [
+        "S025"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "234200338"
+      ],
+      "canonical_papers": [
+        "234200338"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-236782701-01"
+      ],
+      "member_local_ids": [
+        "S029"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "236782701"
+      ],
+      "canonical_papers": [
+        "236782701"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-238734785-06"
+      ],
+      "member_local_ids": [
+        "S031"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "238734785"
+      ],
+      "canonical_papers": [
+        "238734785"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-239027554-03"
+      ],
+      "member_local_ids": [
+        "S034"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "239027554"
+      ],
+      "canonical_papers": [
+        "239027554"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "fire_weather_v1",
+      "statement_type": "driver",
+      "partition_id": "fire_weather_v1.driver",
+      "chunk_id": "fire_weather_v1.driver.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS-245019125-03"
+      ],
+      "member_local_ids": [
+        "S037"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "245019125"
+      ],
+      "canonical_papers": [
+        "245019125"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "system_prompt_sha256": "1134a3083df2cd7d340d741b93e598455b8799c839389b3f9b1f634c54e4b7c7",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "3aaed188db187c6fb5e089f28b8cbcf2037cff04f963569379dab0f4fd5332ad",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:25:28Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 6490,
+      "reasoning_chars": 7652,
+      "http_attempts": 1,
+      "model_seconds": 18.9
+    },
+    {
+      "turn": 2,
+      "finish_reason": "stop",
+      "content_chars": 2905,
+      "reasoning_chars": 3725,
+      "http_attempts": 1,
+      "model_seconds": 10.0
+    }
+  ],
+  "first_turn": {
+    "checks": {
+      "parse_pass": true,
+      "unknown_ids": [
+        "S023",
+        "S044",
+        "S045",
+        "S046",
+        "S047",
+        "S049",
+        "S050",
+        "S051",
+        "S052",
+        "S053",
+        "S054",
+        "S055",
+        "S056",
+        "S057",
+        "S058",
+        "S062",
+        "S064",
+        "S065",
+        "S067",
+        "S068",
+        "S069",
+        "S071",
+        "S076",
+        "S079",
+        "S080",
+        "S082",
+        "S083",
+        "S084",
+        "S085",
+        "S086",
+        "S087",
+        "S088",
+        "S089",
+        "S090",
+        "S091",
+        "S092",
+        "S093",
+        "S096",
+        "S098",
+        "S099"
+      ],
+      "duplicate_ids": [
+        "S042",
+        "S043",
+        "S048",
+        "S059",
+        "S060",
+        "S061",
+        "S063",
+        "S066",
+        "S070",
+        "S072",
+        "S073",
+        "S074",
+        "S075",
+        "S077",
+        "S078",
+        "S081",
+        "S094",
+        "S095",
+        "S097"
+      ],
+      "missing_ids": [],
+      "empty_groups": 0,
+      "ids_exactly_once_pass": false,
+      "no_empty_group_pass": true,
+      "failed": [
+        "ids_exactly_once_pass"
+      ]
+    },
+    "groups_as_returned": [
+      {
+        "member_ids": [
+          "S066",
+          "S042"
+        ],
+        "label": "Fire weather variables positively correlate with fire occurrence",
+        "rationale": "Both sentences state a positive relationship between fire‑weather metrics and fire activity.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "correlate",
+            "occurrence"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S072",
+          "S073",
+          "S074",
+          "S075"
+        ],
+        "label": "Fire weather indices are strong predictors of lightning‑ignited wildfire risk",
+        "rationale": "All describe fire‑weather indices (FWI, FFMC, etc.) predicting lightning‑ignited ignitions.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 10,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S060",
+          "S043",
+          "S024"
+        ],
+        "label": "Warming and drying climate increases wildfire frequency and danger",
+        "rationale": "Each links higher temperature / lower humidity from climate change to more fires or higher danger.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "increases"
+          ],
+          "rationale_words": 16,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S014",
+          "S015"
+        ],
+        "label": "Intense Sirocco events drive burned‑area variability in Tunisia",
+        "rationale": "Both attribute extreme fire events and inter‑annual burned area to strong Sirocco winds.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "drive"
+          ],
+          "rationale_words": 13,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S031",
+          "S023"
+        ],
+        "label": "Combining soil moisture with vapor pressure deficit improves wildfire prediction",
+        "rationale": "Each reports that adding satellite‑derived soil moisture to VPD raises predictive skill.",
+        "claim_about": "method_or_data",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "prediction"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S032",
+          "S033"
+        ],
+        "label": "Meteorological covariates and fire‑weather indices are commonly used as predictors in wildfire models",
+        "rationale": "Both list humidity, temperature, precipitation, VPD, etc., as key model predictors.",
+        "claim_about": "method_or_data",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 11,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "singletons_as_returned": [
+      {
+        "id": "S048",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S059",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S061",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S063",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S070",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S077",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S078",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S081",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S094",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S095",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S097",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S006",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S011",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S017",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S018",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S021",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S022",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S025",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S029",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S034",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S037",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S042",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S043",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S044",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S045",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S046",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S047",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S048",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S049",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S050",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S051",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S052",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S053",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S054",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S055",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S056",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S057",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S058",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S059",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S060",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S061",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S062",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S063",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S064",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S065",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S066",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S067",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S068",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S069",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S070",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S071",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S072",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S073",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S074",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S075",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S076",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S077",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S078",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S079",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S080",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S081",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S082",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S083",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S084",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S085",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S086",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S087",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S088",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S089",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S090",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S091",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S092",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S093",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S094",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S095",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S096",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S097",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S098",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S099",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"Fire weather variables positively correlate with fire occurrence\",\n      \"member_ids\": [\"S066\", \"S042\"],\n      \"rationale\": \"Both sentences state a positive relationship between fire‑weather metrics and fire activity.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Fire weather indices are strong predictors of lightning‑ignited wildfire risk\",\n      \"member_ids\": [\"S072\", \"S073\", \"S074\", \"S075\"],\n      \"rationale\": \"All describe fire‑weather indices (FWI, FFMC, etc.) predicting lightning‑ignited ignitions.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Warming and drying climate increases wildfire frequency and danger\",\n      \"member_ids\": [\"S060\", \"S043\", \"S024\"],\n      \"rationale\": \"Each links higher temperature / lower humidity from climate change to more fires or higher danger.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Intense Sirocco events drive burned‑area variability in Tunisia\",\n      \"member_ids\": [\"S014\", \"S015\"],\n      \"rationale\": \"Both attribute extreme fire events and inter‑annual burned area to strong Sirocco winds.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Combining soil moisture with vapor pressure deficit improves wildfire prediction\",\n      \"member_ids\": [\"S031\", \"S023\"],\n      \"rationale\": \"Each reports that adding satellite‑derived soil moisture to VPD raises predictive skill.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"Meteorological covariates and fire‑weather indices are commonly used as predictors in wildfire models\",\n      \"member_ids\": [\"S032\", \"S033\"],\n      \"rationale\": \"Both list humidity, temperature, precipitation, VPD, etc., as key model predictors.\",\n      \"claim_about\": \"method_or_data\"\n    }\n  ],\n  \"singletons\": [\n    {\"id\": \"S048\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S059\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S061\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S063\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S070\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S077\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S078\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S081\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S094\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S095\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S097\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S006\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S011\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S017\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S018\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S021\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S022\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S025\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S029\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S034\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S037\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S042\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S043\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S044\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S045\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S046\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S047\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S048\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S049\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S050\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S051\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S052\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S053\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S054\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S055\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S056\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S057\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S058\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S059\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S060\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S061\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S062\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S063\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S064\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S065\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S066\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S067\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S068\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S069\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S070\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S071\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S072\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S073\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S074\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S075\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S076\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S077\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S078\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S079\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S080\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S081\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S082\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S083\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S084\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S085\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S086\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S087\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S088\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S089\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S090\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S091\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S092\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S093\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S094\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S095\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S096\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S097\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S098\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S099\", \"claim_about\": \"method_or_data\"}\n  ]\n}",
+    "raw_response_chars": 6490,
+    "raw_reasoning": null,
+    "raw_reasoning_chars": null,
+    "content_fallback": false,
+    "finish_reason": "stop",
+    "raw_max_chars": 20000
+  },
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 28.9,
+  "model_parse_error": null,
+  "elapsed_seconds": 29.6,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"Fire‑weather variables positively correlate with fire occurrence\",\n      \"member_ids\": [\"S066\", \"S042\"],\n      \"rationale\": \"Both state a positive relationship between fire‑weather metrics and fire activity.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Fire‑weather indices are strong predictors of lightning‑ignited wildfire risk\",\n      \"member_ids\": [\"S072\", \"S073\", \"S074\", \"S075\"],\n      \"rationale\": \"All describe fire‑weather indices (FWI, FFMC, etc.) predicting lightning‑ignited ignitions.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"Warming and drying climate increase wildfire frequency and danger\",\n      \"member_ids\": [\"S060\", \"S043\", \"S024\"],\n      \"rationale\": \"Each links higher temperature / lower humidity from climate change to more fires or higher danger.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Intense Sirocco events drive extreme fire events in Tunisia\",\n      \"member_ids\": [\"S014\", \"S015\"],\n      \"rationale\": \"Both attribute extreme fire activity and burned‑area variability to strong Sirocco winds.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"Meteorological covariates and fire‑weather indices are common predictors in wildfire models\",\n      \"member_ids\": [\"S032\", \"S033\"],\n      \"rationale\": \"Each lists humidity, temperature, precipitation, VPD, etc., as key model predictors.\",\n      \"claim_about\": \"method_or_data\"\n    }\n  ],\n  \"singletons\": [\n    {\"id\": \"S048\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S059\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S061\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S063\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S070\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S077\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S078\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S081\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S094\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S095\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S097\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S006\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S011\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S017\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S018\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S021\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S022\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S025\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S029\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S031\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S034\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S037\", \"claim_about\": \"hazard_change_mechanism\"}\n  ]\n}",
+  "raw_response_chars": 2905,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

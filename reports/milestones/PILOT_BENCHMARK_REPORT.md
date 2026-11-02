@@ -355,3 +355,78 @@ pre-existing skips); new or changed test files: `test_litstatements_run2.py` (23
    parse errors" holds for `result.json` only: `response.json` has it.
 6. Some extreme-heat statements concern the Thornthwaite heat index (a PET parameter),
    not humid heat; lexical rules cannot separate them.
+
+---
+
+# Pilot P2b --- literature grouping (run 2 ingest), synthesis packets, groups review
+
+Authorized by D-041, D-048--D-051; decision taken in the package: **D-052** (run 2 is the pilot's literature
+grouping). **No model call in this package. No item generated. Nothing accepted.** No column status, concept-map
+entry or compatibility rule changed. Design: [`docs/PILOT_P2B_DESIGN.md`](../../docs/PILOT_P2B_DESIGN.md) section 10.
+Fields 16--19.
+
+## 16. Commits and evidence runs
+
+| | |
+| --- | --- |
+| Branch | `work/meeting-2026-10-22`, from head `7676e53` |
+| Build commit | the commit carrying the ingest, packets, workbook builder, tests, D-052 and this section |
+| Evidence runs | `ingest_litgroups`, `build_synth_packets`, `build_p2b_groups_review` re-run at the build commit with a clean tree (records in `reports/runs/`, committed in the following commit); outputs byte-identical |
+| Remote | **pushed** (the Eagle clone must fetch the packets); not merged |
+
+## 17. Data and checksums
+
+| Object | SHA-256 | Notes |
+| --- | --- | --- |
+| `litgroups_run2_evidence.tar.gz` (read, outside the repo) | `a90ad7f011424db37082ea692b1987c9a7697d399ef20c1737afa8535374e2eb` | equals the work package |
+| run-2 `groups.jsonl` / `summary.json` | `fc5ceea5…b4ce` / `0253c687…c5` | equal the work package; `groups.jsonl` re-derived from the 23 chunk results |
+| `litgroup_agent.py` v3 | `e094aa5c…d845f4` | equal at `7676e53` and at the build commit |
+| **`artifacts/litgroups/run2/manifest.json`** | **`36931849a2de42d9931bbd491b2fc95ba0c71ba9ac0b3b0aa42be54b0bda80d0`** | 31 ingested files, 2 derived, 76 excluded (hashed) |
+| `groups_enriched.jsonl` / summary | `924a7b0d…a70a` / `a7d48b97…1d` | 394 records |
+| **`artifacts/benchmark/synth_packets/manifest.json`** | **`80af2d0dbe3c9601f06246c621d430ae4c7b1f7e4318fbecdec8e7d5558611c1`** | ten packets with their SHA-256 |
+| `P2b_groups_v1.csv` (tracked) | `0c635250c127fb0de36d5abb85ce1f616bfeff889f44cd0c86b7b0b384e24084` | the GROUPS sheet |
+
+## 18. Results
+
+**Run 2.** 11 partitions, 23 chunks, **23 pass**, all `finish_reason=stop`; 15 corrective turns (12 passed on the
+first invocation; `extreme_heat_v1.driver.c1`, `.driver.c2`, `fire_weather_v1.mechanism.c2` passed on a second attempt,
+same configuration); **239 groups, 155 singletons, 747 statements once**; 0 label-digit and 0 `claim_about` fails.
+105 of the 239 groups have one member.
+
+**Groups by arm x claim_about** (multi / review / single / background):
+
+| arm | hazard_change_mechanism | hazard_definition_or_measurement | impact_or_exposure | method_or_data | other |
+| --- | --- | --- | --- | --- | --- |
+| extreme heat | 15 / 0 / 17 / 4 | 6 / 1 / 15 / 9 | 15 / 3 / 32 / 3 | 8 / 2 / 10 / 5 | 0 / 1 / 3 / 2 |
+| fire weather | 20 / 0 / 22 / 3 | 10 / 0 / 9 / 7 | 1 / 0 / 3 / 0 | 4 / 0 / 7 / 2 | --- |
+
+**Packets** (DR-SEED-RANK-2; driver / context / caveat; multi-source among them; excluded):
+
+| item | seed | rung | groups | multi | excluded |
+| --- | --- | --- | --- | --- | --- |
+| BI-P2B-0001 | SD2-TP1-00018 | 1 | 0 / 0 / 0 | 0 | 0 |
+| BI-P2B-0002 | SD2-TP1-00069 | 1 | 0 / 0 / 0 | 0 | 0 |
+| BI-P2B-0003 | SD2-TP1-00071 | 3 | 10 / 4 / 0 | 5 | 47 |
+| BI-P2B-0004 | SD2-TP1-00271 | 3 | 10 / 4 / 0 | 4 | 41 |
+| BI-P2B-0005 | SD2-TP1-00460 | 3 | 10 / 4 / 0 | 4 | 44 |
+| BI-P2B-0006 | SD2-TP1-00589 | 3 | 10 / 4 / 0 | 4 | 43 |
+| BI-P2B-0007 | SD2-TP1-02785 | 4 | 10 / 4 / 0 | 4 | 40 |
+| BI-P2B-0008 | SD2-TP1-02787 | 4 | 10 / 4 / 0 | 4 | 40 |
+| BI-P2B-0009 | SD2-TP1-02789 | 4 | 10 / 4 / 0 | 4 | 40 |
+| BI-P2B-0010 | SD2-TP1-00075 | 7 | 10 / 4 / 4 | 4 | 40 |
+
+**Validation.** `pytest` and the secrets / paths scan: see the build commit's gate (section 16 run records);
+new test file `tests/test_litgroups_run2.py` (7).
+
+## 19. Escalations and limitations
+
+1. **Claim tags in the heat packets.** Fire statements from the heat arm tagged `hazard_change_mechanism` lead the
+   drivers of heat-index packets ("Prolonged heat increases fire or wildfire risk"; a Rocky Mountains large-fire
+   experiment; "drought and high temperatures increase wildfire risk"). The tag is the agent's (D-049); the human check
+   decides. **For Kaiyuan before or alongside the synthesis run.**
+2. **Relevance before strength** (DR-SEED-RANK-2): single-source `us_subregion` statements rank above national
+   multi-source groups for Northeast and Southeast patterns (P2b-fix open point d).
+3. **Little variation across seeds**: packets 0004--0010 carry nearly the same driver groups.
+4. **105 one-member labelled groups**; no cross-chunk merging by code (D-051, D-052).
+5. **Packet file names** stay `PK-<seed_id>.json` (the pinned synthesis agent reads them); item ids `BI-P2B-<nnnn>`
+   are in the packets and the manifest.

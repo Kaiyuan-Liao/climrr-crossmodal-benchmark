@@ -1,0 +1,247 @@
+{
+  "packet_id": "PK-SD2-TP1-00069",
+  "version": "synthpackets v2",
+  "rank_rule": "DR-SEED-RANK-2",
+  "item_id": "BI-P2B-0002",
+  "seed_id": "SD2-TP1-00069",
+  "use_case_level": 1,
+  "model_view": {
+    "use_case_level": 1,
+    "rung": "1. Hazard pattern identification: Identify a projected hazard pattern (direction, rough size, ranking) for a place, season, horizon and scenario.",
+    "reasoning_modalities": "Hazard",
+    "patterns": [
+      {
+        "pattern_id": "TP1-00069",
+        "text": "Pattern TP1-00069 (single place). Place: the U.S. state of Arizona (NCA5 region: Southwest). Quantity: number of days with daily maximum heat index above 95 °F. Season: summer. Horizon: mid-century (2045-2054), compared with the modeled historical baseline. Scenario: RCP8.5 (one high-emissions scenario; not a forecast and not the only plausible future). Statistic: change of the mean (future minus modeled historical baseline). Direction: increase. Value: +10.3 days. Mean: 13.9 days in the modeled historical baseline, 24.2 days at mid-century. Range of the change per grid cell: 0.0 to 27.1 days. Robustness: 1976 of 2007 grid cells change in the same direction as the mean (majority_same_direction). Relative magnitude: moderate (middle tercile, by signed value, among 49 U.S. states for this quantity, season, horizon, scenario and statistic; a relative descriptor among states, not an absolute threshold).",
+        "values_shown": {
+          "value": "10.3",
+          "mean_from": "13.9",
+          "mean_to": "24.2",
+          "range": [
+            "0.0",
+            "27.1"
+          ],
+          "tercile": "moderate"
+        }
+      }
+    ],
+    "groups": [],
+    "allowed_numbers": [
+      "0",
+      "10",
+      "14",
+      "24",
+      "27",
+      "49",
+      "95",
+      "0.0",
+      "10.3",
+      "13.9",
+      "1976",
+      "2007",
+      "2045",
+      "2054",
+      "24.2",
+      "27.1",
+      "0.000000000000000",
+      "10.271200803886398",
+      "13.932170738594918",
+      "24.203371542481315",
+      "27.133333200000003"
+    ],
+    "guardrails": [
+      "A modeled historical baseline is model output for a past period, not an observation.",
+      "A Fire Weather Index is a meteorological fire-danger index; it is never fire occurrence, ignition, burned area or damage.",
+      "RCP8.5 is one high-emissions scenario, not a forecast and not the only plausible future.",
+      "Hazard is not exposure, and exposure is not risk."
+    ],
+    "item_fields": [
+      "prompt",
+      "reference_answer.table_pattern",
+      "reference_answer.literature_interpretation",
+      "reference_answer.integrated",
+      "rubric.required_points",
+      "rubric.acceptable_variants",
+      "rubric.optional_points",
+      "rubric.disallowed_claims",
+      "rubric.fatal_errors",
+      "guardrails",
+      "source_independent_answerability",
+      "source_independence_note",
+      "capability_tested",
+      "system_task",
+      "key_relationships",
+      "evidence_needed",
+      "desired_output_characteristics",
+      "expected_knowledge_level"
+    ]
+  },
+  "provenance": {
+    "patterns": [
+      {
+        "acceptance_blocked": false,
+        "acceptance_blocked_by": [],
+        "authorization": "verified",
+        "cautions": [],
+        "computed_value_or_range": {
+          "cell_direction_counts": {
+            "decrease": 0,
+            "increase": 1976,
+            "no_change": 31
+          },
+          "mean_from": "13.932170738594918",
+          "mean_to": "24.203371542481315",
+          "n_cells_empty": 0,
+          "n_cells_used": 2007,
+          "range": {
+            "max": "27.133333200000003",
+            "min": "0.000000000000000",
+            "over": "cells"
+          },
+          "unit": "days",
+          "value": "10.271200803886398",
+          "value_is": "absolute_change",
+          "value_reason": null
+        },
+        "direction": "increase",
+        "family": "heat_index",
+        "geography": "Arizona",
+        "geography_type": "state",
+        "horizon": "mid",
+        "horizon_window": "2045-2054",
+        "metric": "heatindex_days_above_95F",
+        "metric_wording": "number of days with daily max heat index above 95 F",
+        "pattern_id": "TP1-00069",
+        "pattern_kind": "single",
+        "pattern_robustness": "majority_same_direction",
+        "pattern_support_n": 2007,
+        "provenance": {
+          "code_version": "table_patterns v1 (src/climrr/table_patterns.py sha256 c5948f7e0ef85b73)",
+          "column_sources": {
+            "heatindex_HIS_Day95": {
+              "kind": "dictionary_line",
+              "line": 679,
+              "quote": "heatindex_HIS_Day95 Number of Summer days with daily max heat index above 95 F -- Historical"
+            },
+            "heatindex_M85_Day95": {
+              "kind": "dictionary_line",
+              "line": 685,
+              "quote": "heatindex_M85_Day95 Number of Summer days with daily max heat index above 95 F -- Mid-Century RCP8.5"
+            }
+          },
+          "column_statuses": {
+            "heatindex_HIS_Day95": "verified_from_dictionary",
+            "heatindex_M85_Day95": "verified_from_dictionary"
+          },
+          "columns": [
+            {
+              "column": "heatindex_HIS_Day95",
+              "index": 240
+            },
+            {
+              "column": "heatindex_M85_Day95",
+              "index": 246
+            }
+          ],
+          "derivation_rule_id": "DR-TD-003 @ DR-PT-001",
+          "member_cells_sha256": "eac237b78fe2430548583c866d57d5a5b0da52a7ea8e1397e7ad9400e8bee700",
+          "member_rows": 2007,
+          "row_rule": "State == 'Arizona'",
+          "table_data_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e"
+        },
+        "provisional": true,
+        "provisional_reasons": [
+          "location_inferred_candidate: State label IC-012 (A-G1, A-G3; D-034)",
+          "unweighted_mean: provisional aggregation rule for representation validation"
+        ],
+        "rank": {
+          "of": 49,
+          "order": "descending signed value (DR-PT-004)",
+          "rank": 23,
+          "tied_with": 0
+        },
+        "relative_magnitude": {
+          "class": "moderate",
+          "definition": "moderate = middle tercile, by signed value, among the 49 U.S. State labels in the table with a computed value for family=heat_index, metric=heatindex_days_above_95F, season=summer, horizon=mid (2045-2054), scenario=RCP8.5, statistic=absolute_change (DR-PT-005); a relative descriptor among states, not an absolute threshold"
+        },
+        "relative_magnitude_skipped_reason": null,
+        "robustness_share": "1976/2007",
+        "robustness_unit": "cell",
+        "scenario": "RCP8.5",
+        "season": "summer",
+        "statistic": "absolute_change",
+        "status": "computed"
+      }
+    ],
+    "groups": [],
+    "item_frame": {
+      "use_case_level": 1,
+      "reasoning_modalities": "Hazard",
+      "level_name": "Hazard pattern identification"
+    }
+  },
+  "checks_input": {
+    "pattern_ids": [
+      "TP1-00069"
+    ],
+    "group_strength": {},
+    "allowed_numbers": [
+      "0",
+      "0.0",
+      "0.000000000000000",
+      "10",
+      "10.271200803886398",
+      "10.3",
+      "13.9",
+      "13.932170738594918",
+      "14",
+      "1976",
+      "2007",
+      "2045",
+      "2054",
+      "24",
+      "24.2",
+      "24.203371542481315",
+      "27",
+      "27.1",
+      "27.133333200000003",
+      "49",
+      "95"
+    ],
+    "forbidden_strings": [
+      "heatindex_HIS_Day95",
+      "heatindex_M85_Day95"
+    ],
+    "level": 1
+  },
+  "excluded_groups": [],
+  "inputs_sha256": {
+    "item_seeds_v2": "3123dd3463f23555601d1e64edc172e2977e2fc6df3adbb08a74b5df41be9d50",
+    "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+    "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+    "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+    "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+    "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+    "pilot_selection": "c9f090297fd1beacbd524e33f571e275b2205f6e2b99687955999e3577f516fa"
+  },
+  "relevance": {
+    "geography": "litgeo v2",
+    "n_relevant_statements": 134,
+    "by_basis": {
+      "state": 2,
+      "nca_region": 1,
+      "us_subregion": 20,
+      "us_national": 62,
+      "global": 49
+    },
+    "n_relevant_statements_seed_file_v1": 109
+  },
+  "selection": {
+    "file": "data/metadata/benchmark/pilot_selection_v1.yaml",
+    "decision": "D-050",
+    "order": 2,
+    "seed_id": "SD2-TP1-00069",
+    "rung": 1,
+    "reason": "Arizona, days above 95 F, mid-century: absolute change with a relative tercile (pattern identification)"
+  }
+}

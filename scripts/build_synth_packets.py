@@ -3,13 +3,14 @@
 
 Reads the pilot selection (`data/metadata/benchmark/pilot_selection_v1.yaml`, D-050; checked against its
 manifest pin and against the shortlist it was chosen from), `artifacts/benchmark/item_seeds_v2.jsonl`
-(gitignored; checked against its pin; the pattern records), the grouping run's `groups.jsonl` (agent v2,
-with `claim_about`), `statements_ingested.jsonl`, `clusters_v1b.jsonl` and `independence_v2.json`. Builds
-**exactly the selected seeds**, in the selection's order and at its rungs: `<out>/PK-<seed_id>.json` with
-item id `BI-P2B-<nnnn>`, and an `index.json`. Relevance under the D-047a geography (`litgeo` v2); groups by
+(gitignored; checked against its pin; the pattern records), the grouping run's groups
+(`artifacts/litgroups/run2/groups_enriched.jsonl`: agent v3, with `claim_about`; D-052), `statements_ingested.jsonl`,
+`clusters_v1b.jsonl` and `independence_v2.json`. Builds **exactly the selected seeds**, in the selection's order
+and at its rungs: `<out>/PK-<seed_id>.json` with item id `BI-P2B-<nnnn>` (the file name `litsynth_agent.py`
+reads), and a `manifest.json` with each packet's SHA-256. Relevance under the D-047a geography (`litgeo` v2); groups by
 DR-SEED-RANK-2. Rules: `src/climrr/synthpackets.py`. Deterministic; no model call, no table value computed.
 
-    python scripts/build_synth_packets.py --groups <litgroups run1>/groups.jsonl \\
+    python scripts/build_synth_packets.py --groups artifacts/litgroups/run2/groups_enriched.jsonl \\
         [--selection data/metadata/benchmark/pilot_selection_v1.yaml] [--out artifacts/benchmark/synth_packets]
 """
 
@@ -75,10 +76,11 @@ def main() -> int:
         index.append({"packet_id": pk["packet_id"], "item_id": pk["item_id"], "seed_id": sid, "level": pk["use_case_level"],
                       "groups": len(roles), **{f"groups_{r}": roles.count(r) for r in ("driver", "context", "caveat")},
                       "excluded_groups": len(pk["excluded_groups"]), "sha256": sha256_file(path)})
-    r2.write_json(a.out / "index.json", {"version": spk.VERSION, "rank_rule": spk.RANK_RULE, "geography": lg.VERSION,
+    manifest_path = a.out / "manifest.json"
+    r2.write_json(manifest_path, {"version": spk.VERSION, "rank_rule": spk.RANK_RULE, "geography": lg.VERSION,
                                          "inputs_sha256": hashes, "packets": index})
     rec = write_run_record(
-        "build_synth_packets", result_summary={"packets": index}, passed=True, data_path=a.groups, output_path=a.out / "index.json",
+        "build_synth_packets", result_summary={"packets": index}, passed=True, data_path=a.groups, output_path=manifest_path,
         config_snapshot={"version": spk.VERSION, "rank_rule": spk.RANK_RULE, "geography": lg.VERSION, "select": select,
                          "selection": repo_relative(a.selection), "max_passage": spk.MAX_PASSAGE,
                          "max_groups": {"driver": spk.MAX_DRIVER_GROUPS, "context": spk.MAX_CONTEXT_GROUPS,

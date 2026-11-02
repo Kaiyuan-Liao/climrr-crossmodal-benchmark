@@ -1,0 +1,2474 @@
+{
+  "partition_id": "extreme_heat_v1.driver",
+  "chunk_index": 3,
+  "n_chunks": 3,
+  "arm": "extreme_heat_v1",
+  "statement_type": "driver",
+  "split_by": [],
+  "partition_n_statements": 118,
+  "n_statements": 39,
+  "local_ids": [
+    "S073",
+    "S074",
+    "S078",
+    "S079",
+    "S083",
+    "S084",
+    "S085",
+    "S086",
+    "S087",
+    "S090",
+    "S091",
+    "S103",
+    "S106",
+    "S107",
+    "S108",
+    "S117",
+    "S017",
+    "S018",
+    "S031",
+    "S038",
+    "S041",
+    "S045",
+    "S047",
+    "S052",
+    "S056",
+    "S057",
+    "S059",
+    "S062",
+    "S063",
+    "S064",
+    "S066",
+    "S070",
+    "S076",
+    "S077",
+    "S088",
+    "S098",
+    "S100",
+    "S111",
+    "S114"
+  ],
+  "generator_version": "litgroup_agent v3",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "extreme_heat_v1.driver.c3",
+  "model_attempts": 2,
+  "corrective_retry_used": true,
+  "finish_reason": "stop",
+  "content_chars": 3266,
+  "reasoning_chars": 3823,
+  "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+  "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+  "generation_timestamp": "2026-11-02T01:20:23Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S074",
+        "S070",
+        "S017"
+      ],
+      "label": "heat index and similar multivariate indices are defined from temperature and humidity",
+      "rationale": "All describe the heat‑index or related indices as a combination of temperature and humidity for measurement.",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "defined",
+          "similar"
+        ],
+        "rationale_words": 16,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S106",
+        "S107",
+        "S066"
+      ],
+      "label": "heat‑index based definitions produce fewer heat‑wave days than temperature‑only definitions",
+      "rationale": "Each notes that including humidity via the heat‑index changes projected heat‑wave counts.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "fewer",
+          "produce"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S031",
+        "S117",
+        "S091",
+        "S062",
+        "S090",
+        "S087",
+        "S108",
+        "S111",
+        "S114"
+      ],
+      "label": "higher heat‑index (or apparent temperature) values are linked to increased health impacts",
+      "rationale": "All associate higher heat‑index or apparent temperature with greater morbidity, mortality, or health‑service use.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S079",
+        "S084"
+      ],
+      "label": "forecast skill for temperature or humid‑heat extremes relies on sea‑surface temperature or temperature forecasts",
+      "rationale": "Both state that predictability of humid heat depends on SST or temperature forecast skill.",
+      "claim_about": "method_or_data",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "forecast",
+          "relies",
+          "skill"
+        ],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S083",
+        "S103",
+        "S086"
+      ],
+      "label": "increasing humid‑heat stress is driven by rising humidity from water sources",
+      "rationale": "Each attributes greater humid heat stress to added atmospheric moisture from lakes, irrigation, or evapotranspiration.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "driven",
+          "rising",
+          "sources"
+        ],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S041",
+        "S056"
+      ],
+      "label": "urban heat island raises temperatures and vulnerability to heat waves",
+      "rationale": "Both describe how urban heat islands increase local temperature and health risk.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "vulnerability"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S052",
+        "S059",
+        "S064"
+      ],
+      "label": "higher temperatures drive fire intensity, season length and related impacts",
+      "rationale": "All link higher temperature to stronger or longer fire activity.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "drive",
+          "higher",
+          "impacts",
+          "length",
+          "related"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S076",
+        "S077",
+        "S038"
+      ],
+      "label": "high temperature and humidity increase animal heat stress and affect dairy production",
+      "rationale": "Each reports animal health or productivity effects from heat and humidity.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "affect",
+          "high",
+          "temperature"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [
+    {
+      "id": "S073",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S078",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S085",
+      "claim_about": "other",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S018",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S045",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S047",
+      "claim_about": "other",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S057",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S063",
+      "claim_about": "method_or_data",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S088",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S098",
+      "claim_about": "other",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S100",
+      "claim_about": "other",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-260770449-03",
+        "LS-258358501-05",
+        "LS-211267687-01"
+      ],
+      "member_local_ids": [
+        "S074",
+        "S070",
+        "S017"
+      ],
+      "label": "heat index and similar multivariate indices are defined from temperature and humidity",
+      "rationale": "All describe the heat‑index or related indices as a combination of temperature and humidity for measurement.",
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 3,
+      "papers": [
+        "211267687",
+        "258358501",
+        "260770449"
+      ],
+      "canonical_papers": [
+        "211267687",
+        "258358501",
+        "260770449"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "background_consensus_candidate": 2,
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "defined",
+          "similar"
+        ],
+        "rationale_words": 16,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-5882914-01",
+        "LS-5882914-05",
+        "LS-256854356-02"
+      ],
+      "member_local_ids": [
+        "S106",
+        "S107",
+        "S066"
+      ],
+      "label": "heat‑index based definitions produce fewer heat‑wave days than temperature‑only definitions",
+      "rationale": "Each notes that including humidity via the heat‑index changes projected heat‑wave counts.",
+      "claim_about": "method_or_data",
+      "n_members": 3,
+      "papers": [
+        "256854356",
+        "5882914"
+      ],
+      "canonical_papers": [
+        "256854356",
+        "5882914"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "core_candidate": 2
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "fewer",
+          "produce"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-229479546-01",
+        "LS-88523156-02",
+        "LS-32695834-02",
+        "LS-253088381-02",
+        "LS-273222129-02",
+        "LS-272850847-02",
+        "LS-6479124-02",
+        "LS-78204577-01",
+        "LS-85563488-02"
+      ],
+      "member_local_ids": [
+        "S031",
+        "S117",
+        "S091",
+        "S062",
+        "S090",
+        "S087",
+        "S108",
+        "S111",
+        "S114"
+      ],
+      "label": "higher heat‑index (or apparent temperature) values are linked to increased health impacts",
+      "rationale": "All associate higher heat‑index or apparent temperature with greater morbidity, mortality, or health‑service use.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 9,
+      "papers": [
+        "229479546",
+        "253088381",
+        "272850847",
+        "273222129",
+        "32695834",
+        "6479124",
+        "78204577",
+        "85563488",
+        "88523156"
+      ],
+      "canonical_papers": [
+        "229479546",
+        "253088381",
+        "272850847",
+        "273222129",
+        "32695834",
+        "6479124",
+        "78204577",
+        "85563488",
+        "88523156"
+      ],
+      "n_independent_core_cited_papers": 8,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "cited_candidate": 2,
+        "core_candidate": 6
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-266658220-04",
+        "LS-271774129-04"
+      ],
+      "member_local_ids": [
+        "S079",
+        "S084"
+      ],
+      "label": "forecast skill for temperature or humid‑heat extremes relies on sea‑surface temperature or temperature forecasts",
+      "rationale": "Both state that predictability of humid heat depends on SST or temperature forecast skill.",
+      "claim_about": "method_or_data",
+      "n_members": 2,
+      "papers": [
+        "266658220",
+        "271774129"
+      ],
+      "canonical_papers": [
+        "266658220",
+        "271774129"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "forecast",
+          "relies",
+          "skill"
+        ],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-269945312-03",
+        "LS-55565874-02",
+        "LS-272709236-02"
+      ],
+      "member_local_ids": [
+        "S083",
+        "S103",
+        "S086"
+      ],
+      "label": "increasing humid‑heat stress is driven by rising humidity from water sources",
+      "rationale": "Each attributes greater humid heat stress to added atmospheric moisture from lakes, irrigation, or evapotranspiration.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 3,
+      "papers": [
+        "269945312",
+        "272709236",
+        "55565874"
+      ],
+      "canonical_papers": [
+        "269945312",
+        "272709236",
+        "55565874"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "driven",
+          "rising",
+          "sources"
+        ],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-235602877-04",
+        "LS-250039675-04"
+      ],
+      "member_local_ids": [
+        "S041",
+        "S056"
+      ],
+      "label": "urban heat island raises temperatures and vulnerability to heat waves",
+      "rationale": "Both describe how urban heat islands increase local temperature and health risk.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 2,
+      "papers": [
+        "235602877",
+        "250039675"
+      ],
+      "canonical_papers": [
+        "235602877",
+        "250039675"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "background_consensus_candidate": 1,
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "vulnerability"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-247429769-03",
+        "LS-252233222-01",
+        "LS-256835585-03"
+      ],
+      "member_local_ids": [
+        "S052",
+        "S059",
+        "S064"
+      ],
+      "label": "higher temperatures drive fire intensity, season length and related impacts",
+      "rationale": "All link higher temperature to stronger or longer fire activity.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 3,
+      "papers": [
+        "247429769",
+        "252233222",
+        "256835585"
+      ],
+      "canonical_papers": [
+        "221671377",
+        "247429769",
+        "252233222"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "background_consensus_candidate": 2,
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "drive",
+          "higher",
+          "impacts",
+          "length",
+          "related"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-263911499-05",
+        "LS-263911499-06",
+        "LS-233254364-04"
+      ],
+      "member_local_ids": [
+        "S076",
+        "S077",
+        "S038"
+      ],
+      "label": "high temperature and humidity increase animal heat stress and affect dairy production",
+      "rationale": "Each reports animal health or productivity effects from heat and humidity.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 3,
+      "papers": [
+        "233254364",
+        "263911499"
+      ],
+      "canonical_papers": [
+        "233254364",
+        "263911499"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "cited_candidate": 2,
+        "core_candidate": 1
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "affect",
+          "high",
+          "temperature"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-260770449-01"
+      ],
+      "member_local_ids": [
+        "S073"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "260770449"
+      ],
+      "canonical_papers": [
+        "260770449"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-266658220-01"
+      ],
+      "member_local_ids": [
+        "S078"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "266658220"
+      ],
+      "canonical_papers": [
+        "266658220"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-272709236-01"
+      ],
+      "member_local_ids": [
+        "S085"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "other",
+      "n_members": 1,
+      "papers": [
+        "272709236"
+      ],
+      "canonical_papers": [
+        "272709236"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-214074018-01"
+      ],
+      "member_local_ids": [
+        "S018"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "214074018"
+      ],
+      "canonical_papers": [
+        "214074018"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-237371886-04"
+      ],
+      "member_local_ids": [
+        "S045"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "237371886"
+      ],
+      "canonical_papers": [
+        "237371886"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-238848756-03"
+      ],
+      "member_local_ids": [
+        "S047"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "other",
+      "n_members": 1,
+      "papers": [
+        "238848756"
+      ],
+      "canonical_papers": [
+        "238848756"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-250039675-05"
+      ],
+      "member_local_ids": [
+        "S057"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "250039675"
+      ],
+      "canonical_papers": [
+        "250039675"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "review_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-253088381-04"
+      ],
+      "member_local_ids": [
+        "S063"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "253088381"
+      ],
+      "canonical_papers": [
+        "253088381"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-272852900-02"
+      ],
+      "member_local_ids": [
+        "S088"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "272852900"
+      ],
+      "canonical_papers": [
+        "272852900"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-4238342-03"
+      ],
+      "member_local_ids": [
+        "S098"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "other",
+      "n_members": 1,
+      "papers": [
+        "4238342"
+      ],
+      "canonical_papers": [
+        "4238342"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "extreme_heat_v1",
+      "statement_type": "driver",
+      "partition_id": "extreme_heat_v1.driver",
+      "chunk_id": "extreme_heat_v1.driver.c3",
+      "split_by": [],
+      "member_ids": [
+        "LS-4618685-05"
+      ],
+      "member_local_ids": [
+        "S100"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "other",
+      "n_members": 1,
+      "papers": [
+        "4618685"
+      ],
+      "canonical_papers": [
+        "4618685"
+      ],
+      "n_independent_core_cited_papers": 0,
+      "role_counts": {
+        "background_consensus_candidate": 1
+      },
+      "evidence_strength": "background_only",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "system_prompt_sha256": "2c4a1dd0fa2c89db0096878f01c0be02e0e731df5f99f6580bdb4cb9356df311",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_hash": "e1e06b9a2dd21913201ba4a9ee05f2258a7ae433f2414e15a795e9b9317de0bf",
+      "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+      "generation_timestamp": "2026-11-02T01:20:23Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 6332,
+      "reasoning_chars": 3576,
+      "http_attempts": 1,
+      "model_seconds": 14.2
+    },
+    {
+      "turn": 2,
+      "finish_reason": "stop",
+      "content_chars": 3266,
+      "reasoning_chars": 3823,
+      "http_attempts": 1,
+      "model_seconds": 10.5
+    }
+  ],
+  "first_turn": {
+    "checks": {
+      "parse_pass": true,
+      "unknown_ids": [
+        "S080",
+        "S081",
+        "S082",
+        "S089",
+        "S092",
+        "S093",
+        "S094",
+        "S095",
+        "S096",
+        "S097",
+        "S099",
+        "S101",
+        "S102",
+        "S104",
+        "S105",
+        "S109",
+        "S110",
+        "S112",
+        "S113",
+        "S115",
+        "S116",
+        "S118",
+        "S119"
+      ],
+      "duplicate_ids": [
+        "S031",
+        "S041",
+        "S052",
+        "S056",
+        "S059",
+        "S062",
+        "S064",
+        "S066",
+        "S070",
+        "S076",
+        "S077",
+        "S078",
+        "S079",
+        "S083",
+        "S084",
+        "S085",
+        "S086",
+        "S087",
+        "S090",
+        "S091",
+        "S098",
+        "S100",
+        "S103",
+        "S106",
+        "S107",
+        "S108",
+        "S111",
+        "S114",
+        "S117"
+      ],
+      "missing_ids": [],
+      "empty_groups": 0,
+      "ids_exactly_once_pass": false,
+      "no_empty_group_pass": true,
+      "failed": [
+        "ids_exactly_once_pass"
+      ]
+    },
+    "groups_as_returned": [
+      {
+        "member_ids": [
+          "S074",
+          "S070",
+          "S017"
+        ],
+        "label": "heat index derived from temperature and humidity is used as a predictor",
+        "rationale": "All describe the heat index or similar multivariate indices combining temperature and humidity for assessment.",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 15,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S106",
+          "S107",
+          "S066"
+        ],
+        "label": "heat‑index based definitions give fewer heat‑wave days than temperature‑only definitions",
+        "rationale": "Discuss how definition choice, especially inclusion of humidity, changes projected heat‑wave counts.",
+        "claim_about": "method_or_data",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "fewer",
+            "give"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S031",
+          "S117",
+          "S091",
+          "S062"
+        ],
+        "label": "higher heat‑index values are linked to increased health impacts",
+        "rationale": "Each links higher heat‑index or apparent temperature to greater morbidity or health‑service use.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 13,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S079",
+          "S084"
+        ],
+        "label": "forecast skill for temperature or humid heat extremes relies on sea‑surface temperature or temperature forecasts",
+        "rationale": "Both note that temperature‑related forecasts (including humid heat) depend on SST or temperature predictability.",
+        "claim_about": "method_or_data",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "forecast",
+            "relies",
+            "skill"
+          ],
+          "rationale_words": 14,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S083",
+          "S103",
+          "S086"
+        ],
+        "label": "increasing humid heat stress is driven by rising humidity from water sources",
+        "rationale": "All attribute greater humid heat stress to increased humidity from lakes, irrigation, or evapotranspiration.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "driven",
+            "rising",
+            "sources"
+          ],
+          "rationale_words": 14,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S041",
+          "S056"
+        ],
+        "label": "urban heat island raises temperatures and vulnerability to heat waves",
+        "rationale": "Both state that urban heat islands increase local temperatures and health risk.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "vulnerability"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S052",
+          "S059",
+          "S064"
+        ],
+        "label": "temperature drives fire intensity and season length",
+        "rationale": "Each links higher temperatures to stronger or longer fire activity.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "drives",
+            "length"
+          ],
+          "rationale_words": 10,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S076",
+          "S077"
+        ],
+        "label": "high temperature and humidity increase animal heat stress and affect milk production",
+        "rationale": "Both describe animal health and productivity responses to heat and humidity.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "affect",
+            "high",
+            "temperature"
+          ],
+          "rationale_words": 11,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "singletons_as_returned": [
+      {
+        "id": "S073",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S078",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S083",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S084",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S085",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S087",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S090",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S098",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S100",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S103",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S108",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S111",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S114",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S018",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S031",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S038",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S041",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S045",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S047",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S052",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S056",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S057",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S059",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S062",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S063",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S064",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S066",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S070",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S076",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S077",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S078",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S079",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S080",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S081",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S082",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S083",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S084",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S085",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S086",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S087",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S088",
+        "claim_about": "hazard_definition_or_measurement",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S089",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S090",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S091",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S092",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S093",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S094",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S095",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S096",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S097",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S098",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S099",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S100",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S101",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S102",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S103",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S104",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S105",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S106",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S107",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S108",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S109",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S110",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S111",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S112",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S113",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S114",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S115",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S116",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S117",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S118",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S119",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"heat index derived from temperature and humidity is used as a predictor\",\n      \"member_ids\": [\"S074\", \"S070\", \"S017\"],\n      \"rationale\": \"All describe the heat index or similar multivariate indices combining temperature and humidity for assessment.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"heat‑index based definitions give fewer heat‑wave days than temperature‑only definitions\",\n      \"member_ids\": [\"S106\", \"S107\", \"S066\"],\n      \"rationale\": \"Discuss how definition choice, especially inclusion of humidity, changes projected heat‑wave counts.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"higher heat‑index values are linked to increased health impacts\",\n      \"member_ids\": [\"S031\", \"S117\", \"S091\", \"S062\"],\n      \"rationale\": \"Each links higher heat‑index or apparent temperature to greater morbidity or health‑service use.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"forecast skill for temperature or humid heat extremes relies on sea‑surface temperature or temperature forecasts\",\n      \"member_ids\": [\"S079\", \"S084\"],\n      \"rationale\": \"Both note that temperature‑related forecasts (including humid heat) depend on SST or temperature predictability.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"increasing humid heat stress is driven by rising humidity from water sources\",\n      \"member_ids\": [\"S083\", \"S103\", \"S086\"],\n      \"rationale\": \"All attribute greater humid heat stress to increased humidity from lakes, irrigation, or evapotranspiration.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"urban heat island raises temperatures and vulnerability to heat waves\",\n      \"member_ids\": [\"S041\", \"S056\"],\n      \"rationale\": \"Both state that urban heat islands increase local temperatures and health risk.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"temperature drives fire intensity and season length\",\n      \"member_ids\": [\"S052\", \"S059\", \"S064\"],\n      \"rationale\": \"Each links higher temperatures to stronger or longer fire activity.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"high temperature and humidity increase animal heat stress and affect milk production\",\n      \"member_ids\": [\"S076\", \"S077\"],\n      \"rationale\": \"Both describe animal health and productivity responses to heat and humidity.\",\n      \"claim_about\": \"impact_or_exposure\"\n    }\n  ],\n  \"singletons\": [\n    {\"id\": \"S073\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S078\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S083\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S084\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S085\", \"claim_about\": \"other\"},\n    {\"id\": \"S087\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S090\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S098\", \"claim_about\": \"other\"},\n    {\"id\": \"S100\", \"claim_about\": \"other\"},\n    {\"id\": \"S103\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S108\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S111\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S114\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S018\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S031\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S038\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S041\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S045\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S047\", \"claim_about\": \"other\"},\n    {\"id\": \"S052\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S056\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S057\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S059\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S062\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S063\", \"claim_about\": \"other\"},\n    {\"id\": \"S064\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S066\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S070\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S076\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S077\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S078\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S079\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S080\", \"claim_about\": \"other\"},\n    {\"id\": \"S081\", \"claim_about\": \"other\"},\n    {\"id\": \"S082\", \"claim_about\": \"other\"},\n    {\"id\": \"S083\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S084\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S085\", \"claim_about\": \"other\"},\n    {\"id\": \"S086\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S087\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S088\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S089\", \"claim_about\": \"other\"},\n    {\"id\": \"S090\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S091\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S092\", \"claim_about\": \"other\"},\n    {\"id\": \"S093\", \"claim_about\": \"other\"},\n    {\"id\": \"S094\", \"claim_about\": \"other\"},\n    {\"id\": \"S095\", \"claim_about\": \"other\"},\n    {\"id\": \"S096\", \"claim_about\": \"other\"},\n    {\"id\": \"S097\", \"claim_about\": \"other\"},\n    {\"id\": \"S098\", \"claim_about\": \"other\"},\n    {\"id\": \"S099\", \"claim_about\": \"other\"},\n    {\"id\": \"S100\", \"claim_about\": \"other\"},\n    {\"id\": \"S101\", \"claim_about\": \"other\"},\n    {\"id\": \"S102\", \"claim_about\": \"other\"},\n    {\"id\": \"S103\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S104\", \"claim_about\": \"other\"},\n    {\"id\": \"S105\", \"claim_about\": \"other\"},\n    {\"id\": \"S106\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S107\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S108\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S109\", \"claim_about\": \"other\"},\n    {\"id\": \"S110\", \"claim_about\": \"other\"},\n    {\"id\": \"S111\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S112\", \"claim_about\": \"other\"},\n    {\"id\": \"S113\", \"claim_about\": \"other\"},\n    {\"id\": \"S114\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S115\", \"claim_about\": \"other\"},\n    {\"id\": \"S116\", \"claim_about\": \"other\"},\n    {\"id\": \"S117\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S118\", \"claim_about\": \"other\"},\n    {\"id\": \"S119\", \"claim_about\": \"other\"}\n  ]\n}",
+    "raw_response_chars": 6332,
+    "raw_reasoning": null,
+    "raw_reasoning_chars": null,
+    "content_fallback": false,
+    "finish_reason": "stop",
+    "raw_max_chars": 20000
+  },
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 24.7,
+  "model_parse_error": null,
+  "elapsed_seconds": 25.3,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"heat index and similar multivariate indices are defined from temperature and humidity\",\n      \"member_ids\": [\"S074\", \"S070\", \"S017\"],\n      \"rationale\": \"All describe the heat‑index or related indices as a combination of temperature and humidity for measurement.\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"label\": \"heat‑index based definitions produce fewer heat‑wave days than temperature‑only definitions\",\n      \"member_ids\": [\"S106\", \"S107\", \"S066\"],\n      \"rationale\": \"Each notes that including humidity via the heat‑index changes projected heat‑wave counts.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"higher heat‑index (or apparent temperature) values are linked to increased health impacts\",\n      \"member_ids\": [\"S031\", \"S117\", \"S091\", \"S062\", \"S090\", \"S087\", \"S108\", \"S111\", \"S114\"],\n      \"rationale\": \"All associate higher heat‑index or apparent temperature with greater morbidity, mortality, or health‑service use.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"forecast skill for temperature or humid‑heat extremes relies on sea‑surface temperature or temperature forecasts\",\n      \"member_ids\": [\"S079\", \"S084\"],\n      \"rationale\": \"Both state that predictability of humid heat depends on SST or temperature forecast skill.\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"label\": \"increasing humid‑heat stress is driven by rising humidity from water sources\",\n      \"member_ids\": [\"S083\", \"S103\", \"S086\"],\n      \"rationale\": \"Each attributes greater humid heat stress to added atmospheric moisture from lakes, irrigation, or evapotranspiration.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"urban heat island raises temperatures and vulnerability to heat waves\",\n      \"member_ids\": [\"S041\", \"S056\"],\n      \"rationale\": \"Both describe how urban heat islands increase local temperature and health risk.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"higher temperatures drive fire intensity, season length and related impacts\",\n      \"member_ids\": [\"S052\", \"S059\", \"S064\"],\n      \"rationale\": \"All link higher temperature to stronger or longer fire activity.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"high temperature and humidity increase animal heat stress and affect dairy production\",\n      \"member_ids\": [\"S076\", \"S077\", \"S038\"],\n      \"rationale\": \"Each reports animal health or productivity effects from heat and humidity.\",\n      \"claim_about\": \"impact_or_exposure\"\n    }\n  ],\n  \"singletons\": [\n    {\"id\": \"S073\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S078\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S085\", \"claim_about\": \"other\"},\n    {\"id\": \"S018\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S045\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S047\", \"claim_about\": \"other\"},\n    {\"id\": \"S057\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S063\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S088\", \"claim_about\": \"hazard_definition_or_measurement\"},\n    {\"id\": \"S098\", \"claim_about\": \"other\"},\n    {\"id\": \"S100\", \"claim_about\": \"other\"}\n  ]\n}",
+  "raw_response_chars": 3266,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

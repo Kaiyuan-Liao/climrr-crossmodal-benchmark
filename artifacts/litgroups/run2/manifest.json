@@ -1,0 +1,1001 @@
+{
+  "run": "run2",
+  "diagnostic_id": "litgroups_run2",
+  "decision": "D-052",
+  "tarball": {
+    "name": "litgroups_run2_evidence.tar.gz",
+    "sha256": "a90ad7f011424db37082ea692b1987c9a7697d399ef20c1737afa8535374e2eb"
+  },
+  "generator": {
+    "version": "litgroup_agent v3",
+    "agent_path": "scripts/litcollect/litgroup_agent.py",
+    "agent_sha256": "e094aa5cbd4b981042fe07f165afc5d83ba77000ca718f185bcecee325d845f4",
+    "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+    "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6"
+  },
+  "budget": {
+    "reasoning_effort": "low",
+    "max_tokens": 16000,
+    "chunk_size": 40,
+    "temperature": 0
+  },
+  "endpoint": {
+    "endpoint_label": "sophia_vllm",
+    "model": "openai/gpt-oss-120b",
+    "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+    "chunks": 23
+  },
+  "source_commit": "7676e53319b3b7a5962b0b431c5457837e7c37ba",
+  "partitions": {
+    "path": "artifacts/litgroups/partitions_v1.jsonl",
+    "sha256": "e8d2bb45301244bf84a4c706a8be6ad3ceba4e1cdd4b09670ad46cedcd8e0f8b"
+  },
+  "counts": {
+    "partitions": 11,
+    "chunks": 23,
+    "chunks_pass": 23,
+    "chunks_fail": 0,
+    "corrective_retry_used": 15,
+    "corrective_passed_first_attempt": 12,
+    "groups": 239,
+    "singletons": 155,
+    "statements": 747
+  },
+  "corrective_chunks": [
+    "extreme_heat_v1.caveat.c1",
+    "extreme_heat_v1.caveat.c2",
+    "extreme_heat_v1.driver.c1",
+    "extreme_heat_v1.driver.c2",
+    "extreme_heat_v1.driver.c3",
+    "extreme_heat_v1.mechanism.increase.c1",
+    "extreme_heat_v1.mechanism.unspecified.c1",
+    "extreme_heat_v1.pattern.c1",
+    "extreme_heat_v1.pattern.c2",
+    "fire_weather_v1.caveat.c1",
+    "fire_weather_v1.caveat.c2",
+    "fire_weather_v1.driver.c1",
+    "fire_weather_v1.driver.c2",
+    "fire_weather_v1.mechanism.c2",
+    "fire_weather_v1.pattern.c1"
+  ],
+  "corrective_passed_first_attempt": [
+    "extreme_heat_v1.caveat.c1",
+    "extreme_heat_v1.caveat.c2",
+    "extreme_heat_v1.driver.c3",
+    "extreme_heat_v1.mechanism.increase.c1",
+    "extreme_heat_v1.mechanism.unspecified.c1",
+    "extreme_heat_v1.pattern.c1",
+    "extreme_heat_v1.pattern.c2",
+    "fire_weather_v1.caveat.c1",
+    "fire_weather_v1.caveat.c2",
+    "fire_weather_v1.driver.c1",
+    "fire_weather_v1.driver.c2",
+    "fire_weather_v1.pattern.c1"
+  ],
+  "second_attempt_chunks": [
+    {
+      "chunk_id": "extreme_heat_v1.driver.c1",
+      "first_attempt": {
+        "generation_timestamp": "2026-11-02T01:19:22Z",
+        "status": "deterministic_fail",
+        "failed": [
+          "ids_exactly_once_pass"
+        ],
+        "missing_ids": 1,
+        "duplicate_ids": 32,
+        "unknown_ids": 0,
+        "corrective_retry_used": true,
+        "model_attempts": 2,
+        "finish_reason": "stop",
+        "first_turn_failed": [
+          "ids_exactly_once_pass"
+        ]
+      },
+      "second_attempt": {
+        "generation_timestamp": "2026-11-02T06:10:19Z",
+        "status": "deterministic_pass",
+        "corrective_retry_used": true,
+        "model_attempts": 2,
+        "finish_reason": "stop"
+      },
+      "same_configuration": true,
+      "same_configuration_fields": [
+        "generator_version",
+        "base_url",
+        "model",
+        "endpoint_label",
+        "temperature",
+        "reasoning_effort",
+        "max_tokens",
+        "chunk_size",
+        "system_prompt_sha256",
+        "system_prompt_template_sha256",
+        "corrective_template_sha256",
+        "prompt_hash",
+        "source_commit",
+        "local_ids"
+      ]
+    },
+    {
+      "chunk_id": "extreme_heat_v1.driver.c2",
+      "first_attempt": {
+        "generation_timestamp": "2026-11-02T01:19:53Z",
+        "status": "deterministic_fail",
+        "failed": [
+          "ids_exactly_once_pass"
+        ],
+        "missing_ids": 1,
+        "duplicate_ids": 0,
+        "unknown_ids": 0,
+        "corrective_retry_used": true,
+        "model_attempts": 2,
+        "finish_reason": "stop",
+        "first_turn_failed": [
+          "ids_exactly_once_pass"
+        ]
+      },
+      "second_attempt": {
+        "generation_timestamp": "2026-11-02T06:10:35Z",
+        "status": "deterministic_pass",
+        "corrective_retry_used": true,
+        "model_attempts": 2,
+        "finish_reason": "stop"
+      },
+      "same_configuration": true,
+      "same_configuration_fields": [
+        "generator_version",
+        "base_url",
+        "model",
+        "endpoint_label",
+        "temperature",
+        "reasoning_effort",
+        "max_tokens",
+        "chunk_size",
+        "system_prompt_sha256",
+        "system_prompt_template_sha256",
+        "corrective_template_sha256",
+        "prompt_hash",
+        "source_commit",
+        "local_ids"
+      ]
+    },
+    {
+      "chunk_id": "fire_weather_v1.mechanism.c2",
+      "first_attempt": {
+        "generation_timestamp": "2026-11-02T01:24:15Z",
+        "status": "deterministic_fail",
+        "failed": [
+          "ids_exactly_once_pass"
+        ],
+        "missing_ids": 0,
+        "duplicate_ids": 13,
+        "unknown_ids": 0,
+        "corrective_retry_used": true,
+        "model_attempts": 2,
+        "finish_reason": "stop",
+        "first_turn_failed": [
+          "ids_exactly_once_pass"
+        ]
+      },
+      "second_attempt": {
+        "generation_timestamp": "2026-11-02T06:10:51Z",
+        "status": "deterministic_pass",
+        "corrective_retry_used": true,
+        "model_attempts": 2,
+        "finish_reason": "stop"
+      },
+      "same_configuration": true,
+      "same_configuration_fields": [
+        "generator_version",
+        "base_url",
+        "model",
+        "endpoint_label",
+        "temperature",
+        "reasoning_effort",
+        "max_tokens",
+        "chunk_size",
+        "system_prompt_sha256",
+        "system_prompt_template_sha256",
+        "corrective_template_sha256",
+        "prompt_hash",
+        "source_commit",
+        "local_ids"
+      ]
+    }
+  ],
+  "cross_chunk_merge": "not done; deferred to human review (D-051, D-052)",
+  "log": {
+    "invocations": 4,
+    "start_utc": "2026-11-02T01:17:26Z",
+    "end_utc": "2026-11-02T06:10:51Z",
+    "corrective_lines": 18,
+    "done_lines": [
+      {
+        "chunks": "23",
+        "pass": "20",
+        "fail": "3",
+        "corrective": "15",
+        "groups": "213",
+        "singletons": "132"
+      },
+      {
+        "chunks": "21",
+        "pass": "21",
+        "fail": "0",
+        "corrective": "13",
+        "groups": "223",
+        "singletons": "139"
+      },
+      {
+        "chunks": "22",
+        "pass": "22",
+        "fail": "0",
+        "corrective": "14",
+        "groups": "232",
+        "singletons": "141"
+      },
+      {
+        "chunks": "23",
+        "pass": "23",
+        "fail": "0",
+        "corrective": "15",
+        "groups": "239",
+        "singletons": "155"
+      }
+    ]
+  },
+  "groups_sha256": "fc5ceea5b57a7d0bcfc9fe7f88de5f171aaebd60b4ce1afeb51acd179d4b558a",
+  "summary_sha256": "0253c687deb304d0a3a72e6755d6fe5a39815932e680977e11834c4bbf4ab5c5",
+  "superseded_runs": [
+    {
+      "run": "run1",
+      "generator_version": "litgroup_agent v2",
+      "reason": "budget",
+      "decision": "D-051",
+      "note": "max_tokens 6000 spent on reasoning; every partition >= 46 statements finish_reason=length",
+      "observed": {
+        "generator_version": "litgroup_agent v2",
+        "partitions_in_file": 11,
+        "partitions_pass": 2,
+        "partitions_fail": 9,
+        "groups": 10,
+        "singletons": 7,
+        "files": [
+          {
+            "path": "litgroups/run1/agent.log",
+            "sha256": "def6cad1acdce5372e0fbfd0f1cf568898770f356cb210d75a970994109325a4",
+            "bytes": 2338
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.caveat/prompt_user.txt",
+            "sha256": "761af2bbda7752c93872aa57791272586936097761b987f12cc3ccbf33690f15",
+            "bytes": 12605
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.caveat/response.json",
+            "sha256": "44d1ecc19cdfbd63146d7de06b1d6fd64959aae1ea48168c3e66cda6f3c77e99",
+            "bytes": 31999
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.caveat/result.json",
+            "sha256": "2d0a48870c89b70f0aba0e1aa4c6053f1b67e826821394e974176181bf27e120",
+            "bytes": 22839
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.consensus/prompt_user.txt",
+            "sha256": "75dad271a7f05f22537c6fbef9a1f73ba9ef4ff863ba208804ebea23e7aa8dd5",
+            "bytes": 2672
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.consensus/response.json",
+            "sha256": "fa9b5b2e917584484af1ab94435f81c897c19b879cce70e75b687eafe9aacdb8",
+            "bytes": 12601
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.consensus/result.json",
+            "sha256": "0ef12092563bc39daea00f5512dca8992ef306de0162655214a74c2b47ac6bf2",
+            "bytes": 26082
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.driver/prompt_user.txt",
+            "sha256": "0a185db81bd20fd920b2322e2890de6ec625c68df80c7fd6630d9939f5f6dfec",
+            "bytes": 18322
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.driver/response.json",
+            "sha256": "890a8948b6dbe0d76c5caf1211460d5c585d7d04394c2e78e91932031ee6d74a",
+            "bytes": 30234
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.driver/result.json",
+            "sha256": "4de110f84eeff4c881c5f1cd48cc164875ef81c31640ec1a8972d2a7c4c0547f",
+            "bytes": 23521
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.mechanism.increase/prompt_user.txt",
+            "sha256": "ed7cc2d7da9622e27b7c5bf095bd73e71761493fdb3b6ad0eeaeb3dfecb574e4",
+            "bytes": 4306
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.mechanism.increase/response.json",
+            "sha256": "2ad5d57326c0a58ac401116f31d3889c9ca2d228f94c763fd17b0dc0ebc71c3d",
+            "bytes": 20337
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.mechanism.increase/result.json",
+            "sha256": "2b0dd5929e14810ce2a6b9801a000fdcfdea29aa6a8dddde147aae5764fe2a1c",
+            "bytes": 8543
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.mechanism.unspecified/prompt_user.txt",
+            "sha256": "3a5e75bcbbf41ea4cdec194e85d6f61649a64ed2655dcec4af375026990fbc74",
+            "bytes": 17984
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.mechanism.unspecified/response.json",
+            "sha256": "9ada7812c12e154edc83e102767ec9040fd2b7421b3bcdb9dc80ee81f7cf9326",
+            "bytes": 29541
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.mechanism.unspecified/result.json",
+            "sha256": "cd699288f87ff1aaad2f9bccfff1d806fd634e66377e1dc644510af3a6dbf5e3",
+            "bytes": 23456
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.pattern/prompt_user.txt",
+            "sha256": "afdec2131fb87e8131ca8b51266530e5d073bdbc9d5b31b5d455ed091a488257",
+            "bytes": 10082
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.pattern/response.json",
+            "sha256": "b61ed6ef3bcf746367b71af222a3167bca478f315f9fc56e38fb114ba2d7715d",
+            "bytes": 30126
+          },
+          {
+            "path": "litgroups/run1/extreme_heat_v1.pattern/result.json",
+            "sha256": "f970bd7e5356994121f98e336944fa8ba1cbbe19d4efaa034c9ec8b6c029d9b2",
+            "bytes": 22676
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.caveat/prompt_user.txt",
+            "sha256": "c2231a46d727a011796d2da56ff9ae75c062cebd03cd5c300cf7fed9a23f9e96",
+            "bytes": 11171
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.caveat/response.json",
+            "sha256": "2ce10919445c259236926170d8faf48252e46437e407c9252fb6a97e71fd26e9",
+            "bytes": 30278
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.caveat/result.json",
+            "sha256": "816ef09d90ef6e142bd32503f95443eca0fcf207c22092f2cc8007b83bdeeff5",
+            "bytes": 22776
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.consensus/prompt_user.txt",
+            "sha256": "1181db45e5aad028797db3fab89586e517bac2231c7bbc64bc2958fab30421b9",
+            "bytes": 1730
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.consensus/response.json",
+            "sha256": "cfb0fb7260613c63c3185fc0686eb590ee3fd0ef3fc3fe29a14e1fab06c7b148",
+            "bytes": 9108
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.consensus/result.json",
+            "sha256": "eb2f9d3fbad32c2862d7f8e4b4e01533eab4c3fa5c3a8049dec75f605a994861",
+            "bytes": 19531
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.driver/prompt_user.txt",
+            "sha256": "28bfe4e06dbe4fda696249b20a67de92c99d813b3e9eae6e71c17dda2532d57d",
+            "bytes": 17070
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.driver/response.json",
+            "sha256": "1240809231fb19f6187c439b5a764decb905c0ff53a4ce0130bd05f58bba0648",
+            "bytes": 29399
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.driver/result.json",
+            "sha256": "27c57b7a98dc20140e12ab181a5e2927a0dc78be2fc054785be229b5858128d2",
+            "bytes": 23175
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.mechanism/prompt_user.txt",
+            "sha256": "1c730c58e613fb2d9e214a570f286ba946e4d010b5280ec58ea458e97d69a510",
+            "bytes": 16814
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.mechanism/response.json",
+            "sha256": "e5adf5973fbe940c71b91e56aaece669f4379cf7cc436d2df775264b69d008ff",
+            "bytes": 31436
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.mechanism/result.json",
+            "sha256": "79040ffcdf27eafa5bbcc3fbc8abac2204642122f848fa51f60282424878bb7e",
+            "bytes": 23374
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.pattern/prompt_user.txt",
+            "sha256": "38993d95c1b145e5627341babdbbaf36d8a0361a4e6fcad5fe19d46e6536a025",
+            "bytes": 7914
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.pattern/response.json",
+            "sha256": "66030f09183acaf30aaa0bb142ceda4ce22478bad9412ab68fe7c0050caf0d0a",
+            "bytes": 29172
+          },
+          {
+            "path": "litgroups/run1/fire_weather_v1.pattern/result.json",
+            "sha256": "c044c6309aed36e6e748a4ac5875a182868447fee7a8bf7c3f00b233d72db77a",
+            "bytes": 22452
+          },
+          {
+            "path": "litgroups/run1/groups.jsonl",
+            "sha256": "f8f9e00ada94dc197480b4fc43148553e5f9d46b35a35b4a8ee5f0416cf3a611",
+            "bytes": 25688
+          },
+          {
+            "path": "litgroups/run1/summary.json",
+            "sha256": "34f44384fbc5bd6ee844337422f27cdb95b069b76cf575701dbb73ec7c9e44b3",
+            "bytes": 3269
+          }
+        ]
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "groups.jsonl",
+      "sha256": "fc5ceea5b57a7d0bcfc9fe7f88de5f171aaebd60b4ce1afeb51acd179d4b558a",
+      "bytes": 711911
+    },
+    {
+      "path": "summary.json",
+      "sha256": "0253c687deb304d0a3a72e6755d6fe5a39815932e680977e11834c4bbf4ab5c5",
+      "bytes": 2330
+    },
+    {
+      "path": "agent.log",
+      "sha256": "511d02985cb4287da19e2d80d5de2f506850f270a0a90f457894c30954b0d85e",
+      "bytes": 7513
+    },
+    {
+      "path": "litgroups_run1.log",
+      "sha256": "def6cad1acdce5372e0fbfd0f1cf568898770f356cb210d75a970994109325a4",
+      "bytes": 2338
+    },
+    {
+      "path": "litgroups_run2.log",
+      "sha256": "511d02985cb4287da19e2d80d5de2f506850f270a0a90f457894c30954b0d85e",
+      "bytes": 7513
+    },
+    {
+      "path": "chunks/extreme_heat_v1.caveat.c1.json",
+      "sha256": "8cf0630483c1a8121ee9f52aac7f2b59715bac888b31a44b735e676e819690e0",
+      "bytes": 147320
+    },
+    {
+      "path": "chunks/extreme_heat_v1.caveat.c2.json",
+      "sha256": "86e6c8af26abf4c6416f41aa5e0d614f3ac2e35950291af012b0e0197a50ad1e",
+      "bytes": 118405
+    },
+    {
+      "path": "chunks/extreme_heat_v1.consensus.c1.json",
+      "sha256": "93cf0ab9ccda947919294c856e9a03f91f943239493f54d8a69e4802c2b661ce",
+      "bytes": 36613
+    },
+    {
+      "path": "chunks/extreme_heat_v1.driver.c1.failed_attempt1.json",
+      "sha256": "38c23291a41e58102618dc5ec00ea87cd0bf52a2933d92354eb69fe883ae862b",
+      "bytes": 46238
+    },
+    {
+      "path": "chunks/extreme_heat_v1.driver.c1.json",
+      "sha256": "034cc629985eda6fc82ef83e4bfc1480124a8a0c0a04b7567b84c52b7f1b13e8",
+      "bytes": 66057
+    },
+    {
+      "path": "chunks/extreme_heat_v1.driver.c2.failed_attempt1.json",
+      "sha256": "af664d9684e9f5c479151569015f1f541e03a9098ad250ac5ca6f32c41996abe",
+      "bytes": 32644
+    },
+    {
+      "path": "chunks/extreme_heat_v1.driver.c2.json",
+      "sha256": "a9abf4853e71a72d79922eaef08718e66299e2f9d2e01c997d981a20e94ed87d",
+      "bytes": 51227
+    },
+    {
+      "path": "chunks/extreme_heat_v1.driver.c3.json",
+      "sha256": "1f779e9d28c91dd8924e7ee5d384ad61f6c37c6cda721d094264db389e678f4e",
+      "bytes": 82091
+    },
+    {
+      "path": "chunks/extreme_heat_v1.mechanism.increase.c1.json",
+      "sha256": "b706f47fcb94bde9c80fddaaf5cf6f1327b84ed9e9e96847f36e8d076087bb07",
+      "bytes": 66419
+    },
+    {
+      "path": "chunks/extreme_heat_v1.mechanism.unspecified.c1.json",
+      "sha256": "2489270e7387c6d8e5563c96ea0bd0e7c9eb4a42027e715de03d9c2d8709fde7",
+      "bytes": 61721
+    },
+    {
+      "path": "chunks/extreme_heat_v1.mechanism.unspecified.c2.json",
+      "sha256": "83c25b0e3315e068151fb565de41c31cbb3b1120c6d484497c0d7c379f0b6e22",
+      "bytes": 45683
+    },
+    {
+      "path": "chunks/extreme_heat_v1.mechanism.unspecified.c3.json",
+      "sha256": "276700b17fd7ef63d464d2c17279708c99a0008170772987ccb4113b724203f9",
+      "bytes": 23670
+    },
+    {
+      "path": "chunks/extreme_heat_v1.pattern.c1.json",
+      "sha256": "488f33a42bad58d7a5a3826780ba8a31ff095aad8632ecb78a57587b6203ad98",
+      "bytes": 145345
+    },
+    {
+      "path": "chunks/extreme_heat_v1.pattern.c2.json",
+      "sha256": "a362242d00c4b9ffb236945c70c01e679f82b0c3684647cda98ad80cf70c757e",
+      "bytes": 96976
+    },
+    {
+      "path": "chunks/fire_weather_v1.caveat.c1.json",
+      "sha256": "a28c6d5c9c8d14387e4638a6b2b3ad1d7f7ef700feb677cdbab61ac02fd0e3db",
+      "bytes": 84193
+    },
+    {
+      "path": "chunks/fire_weather_v1.caveat.c2.json",
+      "sha256": "157241fad5a4f033aedf6cca817471b5636643701ba6baf18a59909227f3c16c",
+      "bytes": 47035
+    },
+    {
+      "path": "chunks/fire_weather_v1.consensus.c1.json",
+      "sha256": "575711f27c7da99d56db06cd5e794334a91b58975e784f536a3d434e2cca05ec",
+      "bytes": 23224
+    },
+    {
+      "path": "chunks/fire_weather_v1.driver.c1.json",
+      "sha256": "5c8763215bece1d1a3cc1247324c4497bd278f3b07623dac9522f1467cf92617",
+      "bytes": 52492
+    },
+    {
+      "path": "chunks/fire_weather_v1.driver.c2.json",
+      "sha256": "20916388f3bd7c07ed2bf9c7110c594fecba327a51fd6b5c20319a1b36f32a04",
+      "bytes": 93082
+    },
+    {
+      "path": "chunks/fire_weather_v1.driver.c3.json",
+      "sha256": "1b84be99c8c3bdd06636f8639cadc2dd009959d8204d5bd85f9a169b0f4bcdd4",
+      "bytes": 59916
+    },
+    {
+      "path": "chunks/fire_weather_v1.mechanism.c1.json",
+      "sha256": "89f7de2ae690983b793a8dc3b83b04ced70b2f0d16898dfde7803b510b4aee9d",
+      "bytes": 38544
+    },
+    {
+      "path": "chunks/fire_weather_v1.mechanism.c2.failed_attempt1.json",
+      "sha256": "3bb235aafce07af21ee4587ababa2d80eb3f67a806fc69ad38ffd29d038ccdce",
+      "bytes": 63544
+    },
+    {
+      "path": "chunks/fire_weather_v1.mechanism.c2.json",
+      "sha256": "a906bd69932ebd5be4e9c451848040d47d0f43b5aac5657779b2c599784c8d70",
+      "bytes": 65804
+    },
+    {
+      "path": "chunks/fire_weather_v1.mechanism.c3.json",
+      "sha256": "92b186b5ba59bf8b78aaeb40a9ac6ce972b696e74f5b9ccd5b623d949a301baf",
+      "bytes": 33103
+    },
+    {
+      "path": "chunks/fire_weather_v1.pattern.c1.json",
+      "sha256": "d897a017a9461e783882d20d34f0b504b52f08ace52d3bb34f484988674f5bea",
+      "bytes": 50910
+    },
+    {
+      "path": "chunks/fire_weather_v1.pattern.c2.json",
+      "sha256": "519b299958e79a5ac5c45f44d34a7ebeb691175648300c76af79c965b9d5cbf5",
+      "bytes": 60207
+    }
+  ],
+  "derived_files": [
+    {
+      "path": "groups_enriched.jsonl",
+      "sha256": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+      "bytes": 1210196
+    },
+    {
+      "path": "groups_enriched_summary.json",
+      "sha256": "a7d48b972127babb8a84b6c4553e9bfc391bb3ecebc123c77a6b98b954a1f51d",
+      "bytes": 6725
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": "litgroups/run2/extreme_heat_v1.caveat.c1/prompt_corrective.txt",
+      "sha256": "6326c0a1c1d6f2dfd224afe69e0219607f3fff5766d484d48b22a8f013f41c87",
+      "bytes": 314
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.caveat.c1/prompt_user.txt",
+      "sha256": "57491e9d44e89c0cad652692f0fac6a040ec3eae713678ac28d1738aa82b649f",
+      "bytes": 6453
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.caveat.c1/response.json",
+      "sha256": "59f12a56ff6d3bcb9fde2e19091b923949a9b371512a28e8188f70ee98d1be56",
+      "bytes": 17985
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.caveat.c1/response_corrective.json",
+      "sha256": "543babab502ea691b5198e25b495cc58385a07429b9e58d9c6f87ca9bee9e11f",
+      "bytes": 12485
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.caveat.c2/prompt_corrective.txt",
+      "sha256": "8e5a18aee2740709ec504da0ddeaa2b9f8f9d10049501a40aa8d88b5bf62c137",
+      "bytes": 316
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.caveat.c2/prompt_user.txt",
+      "sha256": "ee5d987e88164bb877f94b3937a0ffa7fc125ea0bbcb7915b143463a008a8133",
+      "bytes": 6167
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.caveat.c2/response.json",
+      "sha256": "c53e5b2762eb1aaee0497d10952854680628ab55bce8ecd09bf260be2d9b28ac",
+      "bytes": 17777
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.caveat.c2/response_corrective.json",
+      "sha256": "38591580720df13811c9d5205da073404c284bc4ef8ca99fcbf77479d0a6c491",
+      "bytes": 13810
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.consensus.c1/prompt_user.txt",
+      "sha256": "e70f734f5af612e9addf3bd321baeb23cb062b1cb10e16258ba0a3b3863e5cc6",
+      "bytes": 2672
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.consensus.c1/response.json",
+      "sha256": "a652b62b21edabe754328843a04b2d7c00a222a3b85536ca5a8f985f01e0356d",
+      "bytes": 9042
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.driver.c1/prompt_corrective.txt",
+      "sha256": "df1ff5cdd5df8ee1ffb06b21fe118fb082f05c36c2f34e5f77f6bec54b67b9f9",
+      "bytes": 130
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.driver.c1/prompt_user.txt",
+      "sha256": "4655348bf643f01f763559690e9c9673ec282af01ad45e9e7d00f17d946d02b1",
+      "bytes": 6526
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.driver.c1/response.json",
+      "sha256": "37d6949d58e6f61a4d6a72f5a9a07c6b07327d0f6266e3c9463260a803825570",
+      "bytes": 12240
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.driver.c1/response_corrective.json",
+      "sha256": "c2093572c4c019acb79e6ece66240700c5da4b9be6f3cdbca445e407d8e9b658",
+      "bytes": 5207
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.driver.c2/prompt_corrective.txt",
+      "sha256": "c062324ead682db3901db55f60d55f7064cfc4479dcc8e1481b703044f57dd5c",
+      "bytes": 130
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.driver.c2/prompt_user.txt",
+      "sha256": "0c06f96cdf161e6bcdd273872e87bb62db05d9d28da95df1a606c934d3110810",
+      "bytes": 5861
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.driver.c2/response.json",
+      "sha256": "2886f7e71cf7c7b5c1284188e9b4edf6a06152eb8d6c7b526f51f6c2be01c8f8",
+      "bytes": 10020
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.driver.c2/response_corrective.json",
+      "sha256": "33b02c9e537c056e6a25a8c9c409412275554680be070c37af3cbfdafb6a441f",
+      "bytes": 4936
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.driver.c3/prompt_corrective.txt",
+      "sha256": "b081587450575b7000f80ffdb5a87d3949826d42639d19b02a3759065b45d883",
+      "bytes": 298
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.driver.c3/prompt_user.txt",
+      "sha256": "7bf9b234dbf6207b067836a6b36a91f9e804f2f54f1a94f6a8d946e582e00768",
+      "bytes": 5964
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.driver.c3/response.json",
+      "sha256": "29367131bcaa7f63ace80f3349ddbca7f24bd6c5c08f8b3bad67a97c9c5c831d",
+      "bytes": 11949
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.driver.c3/response_corrective.json",
+      "sha256": "b525b6ab1befbd44ab045f7ed766e7bdea9efe1cfe541405f4b899463d187a64",
+      "bytes": 8591
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.mechanism.increase.c1/prompt_corrective.txt",
+      "sha256": "f2e96040ea8ce5c8f7b9dc37ababe0677b7b6872732d06de2a1197aa1ee10f5c",
+      "bytes": 208
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.mechanism.increase.c1/prompt_user.txt",
+      "sha256": "9d591d5ede112b70dfb0f2a449ebc83d7c55a9697ab61d7a15284e35c282092a",
+      "bytes": 4306
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.mechanism.increase.c1/response.json",
+      "sha256": "d35a15705a30ceb24dac91fcb3635e709773607dc8aa01f3788d02ecf0cdf54f",
+      "bytes": 8435
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.mechanism.increase.c1/response_corrective.json",
+      "sha256": "0a76e1db5aaf6a9be0860af4cf25411a7d0b153ad25ce2086392c1666f7df321",
+      "bytes": 4618
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.mechanism.unspecified.c1/prompt_corrective.txt",
+      "sha256": "a7c0ede3673924f508d63df2e63a5bf2f8497879efc068f667ab9d8a2e34220a",
+      "bytes": 142
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.mechanism.unspecified.c1/prompt_user.txt",
+      "sha256": "d482aeccd1e935c65a26907c3fa7ce49eb24401060332472406cb5c75c6768c0",
+      "bytes": 6249
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.mechanism.unspecified.c1/response.json",
+      "sha256": "1ae492cf22e8a31c9e3b09d07a90a22cac01bcfe6d18e1ccfabc8611c619029f",
+      "bytes": 7524
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.mechanism.unspecified.c1/response_corrective.json",
+      "sha256": "b346ef3a53334a9fc3e94f5b9a0d318b92990823a475299fd411c6a517d6c715",
+      "bytes": 6544
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.mechanism.unspecified.c2/prompt_user.txt",
+      "sha256": "9252f2b9538b71c1b67fb1d8c4c02c8d85cd9ce7260f631aa53fb9b2d4e66e02",
+      "bytes": 5826
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.mechanism.unspecified.c2/response.json",
+      "sha256": "6d86799936d9099cdf49070e5319f75b6c19dca6e14eab5f838e6f7a0bd0551d",
+      "bytes": 8992
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.mechanism.unspecified.c3/prompt_user.txt",
+      "sha256": "47544cdedca7e6a0152d7301cccdcad43a9573f644747cfdf31e09f7f7c24af6",
+      "bytes": 5938
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.mechanism.unspecified.c3/response.json",
+      "sha256": "ab943a7cdfd0be836fbcbc142987b6a391d15c4ea9825092dc19ffa23eaea121",
+      "bytes": 8448
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.pattern.c1/prompt_corrective.txt",
+      "sha256": "fb7e8a45f424a7f48bdc73a14b9956779495c88405e4c4db50cb2f1f9192baf6",
+      "bytes": 164
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.pattern.c1/prompt_user.txt",
+      "sha256": "113e1031ffda4383eeafbef2355e92a8ebab534f9c433c89443bdb63e44850de",
+      "bytes": 5084
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.pattern.c1/response.json",
+      "sha256": "d62aebb7c1000684a46b7dfb094101e137b225f2999ca09fa2b866bd72b402cf",
+      "bytes": 28370
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.pattern.c1/response_corrective.json",
+      "sha256": "fab93d38e30e390dad16b75ef877f0b2b1f741117e8631f09a9e81db5ec189a0",
+      "bytes": 6828
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.pattern.c2/prompt_corrective.txt",
+      "sha256": "7cf92f71c594654b5e4929cac2f647d164026935fcccc64438753b3ac37dddaf",
+      "bytes": 136
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.pattern.c2/prompt_user.txt",
+      "sha256": "5b63ec2738ba486893546c26b6077541455fc6b09651ec0e6fd480a6af50e451",
+      "bytes": 5013
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.pattern.c2/response.json",
+      "sha256": "0733ef079dfef2c1cfeac09c845fcff1c0bb858b6f7882d663be03f744a6b108",
+      "bytes": 11095
+    },
+    {
+      "path": "litgroups/run2/extreme_heat_v1.pattern.c2/response_corrective.json",
+      "sha256": "5ac44ccc3872362e50edf791994351f40f3cc3056c595f6b10fd8d7f29efb47b",
+      "bytes": 8190
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.caveat.c1/prompt_corrective.txt",
+      "sha256": "ac97b10a1b49866ce08b5a4ecbe70a2216e5009d4343f3fd45d1db4ae2741ff1",
+      "bytes": 142
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.caveat.c1/prompt_user.txt",
+      "sha256": "dce16149f94ed88cb7dd8488304d14d92d7d5537380c258729bb162a80511db3",
+      "bytes": 5668
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.caveat.c1/response.json",
+      "sha256": "b051dce7a8ac60971cd3e23852278e2a07220af06c5998b894eaff354c1bb1e4",
+      "bytes": 8711
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.caveat.c1/response_corrective.json",
+      "sha256": "66b9c3c45caabdc30df1306d3c250a86c1719b8feb68565761bcf7790e3ece9b",
+      "bytes": 8317
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.caveat.c2/prompt_corrective.txt",
+      "sha256": "9ecc1e5e015d462fc75dca584fbd791ae57f4985823805059f044b3ab3ebf8ea",
+      "bytes": 166
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.caveat.c2/prompt_user.txt",
+      "sha256": "70a8d1af626337730b5e4e82bf583b609d2215b9b165b339d77676c50c23174a",
+      "bytes": 5518
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.caveat.c2/response.json",
+      "sha256": "93ec7eec74b229654ecbe6825ffe2a4d0edb74374006ec7c4a7c7bfef832d294",
+      "bytes": 10872
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.caveat.c2/response_corrective.json",
+      "sha256": "cfc33edd5a866d66c441f140e1f7d947fcda0df9d2565b4c8d36ec8cf525b39b",
+      "bytes": 3992
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.consensus.c1/prompt_user.txt",
+      "sha256": "3b39068fcaa570aff5f8ac60e8b225162c3dd62844f02339b0c86744622b37ca",
+      "bytes": 1730
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.consensus.c1/response.json",
+      "sha256": "9972a896fd6afafff13fa1337afb13f8bde774ce4de3e1801399930affdd295f",
+      "bytes": 4820
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.driver.c1/prompt_corrective.txt",
+      "sha256": "bc2d5732afbe398a56bfb6bd3191bab38cd8844e5ac73c0c9bf831da2613cf61",
+      "bytes": 130
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.driver.c1/prompt_user.txt",
+      "sha256": "6a7b500e4aac7f44bcc81bb3fdccf9ba4a33550d25c3ffe6187973096a531039",
+      "bytes": 5532
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.driver.c1/response.json",
+      "sha256": "f0061f5f4b0c9fb8d0fd923f5c22252dcec52eecf113ab36afa9d42d795aed78",
+      "bytes": 9412
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.driver.c1/response_corrective.json",
+      "sha256": "e1a71f4172a484e4e687c2652a439d2df02286d6320b1ba9db680277663ab3d5",
+      "bytes": 4504
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.driver.c2/prompt_corrective.txt",
+      "sha256": "877a048aacced3ce8f9d0c1a28e291248bb50826b4210aa38ff15460e0981aa6",
+      "bytes": 238
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.driver.c2/prompt_user.txt",
+      "sha256": "3309e406760b5ec93d2a818a03c6d6492276bfe118c026ca28ae09ace2a69760",
+      "bytes": 5867
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.driver.c2/response.json",
+      "sha256": "8178b0c17ae46b6348d122b05f2f5cdb7b474c3fb46d6bf5f2d5934207a9392e",
+      "bytes": 16221
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.driver.c2/response_corrective.json",
+      "sha256": "e3c492796271dca2e68b19da0f7dd2ec643900ec77872f01fb2cb38150c51e3e",
+      "bytes": 8126
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.driver.c3/prompt_user.txt",
+      "sha256": "c66549a79448374eb513c58ec43877bf51a4c1fc97b23b6663bc258878dddd88",
+      "bytes": 5700
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.driver.c3/response.json",
+      "sha256": "1e80e37aac3ce6b271cbcbd7187cfd54ea058003d25d34fba851dfccffc7c35a",
+      "bytes": 9317
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.mechanism.c1/prompt_user.txt",
+      "sha256": "afaa06352202409ba1c17e5c4d03e8e0da2f01c0428df92a2fa5f01eed263e53",
+      "bytes": 5554
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.mechanism.c1/response.json",
+      "sha256": "8ac2c875b039e926fbf9047437ae64e87d2a7568d8aeffc29c6cb90c5509cf13",
+      "bytes": 10076
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.mechanism.c2/prompt_corrective.txt",
+      "sha256": "6d13f505ec364c8ab9bf0250ce7a8d9fd570124d303bf3fd385e435f8ba7b1e8",
+      "bytes": 178
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.mechanism.c2/prompt_user.txt",
+      "sha256": "4dc4ba801dadf525f46ce98b02e1c631ae477d874cfadc0f852aa727efc46cfd",
+      "bytes": 5295
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.mechanism.c2/response.json",
+      "sha256": "d01003fc17398593ed8433ab83d4fd05404eac6fab0853ccfabd28d5f86d777c",
+      "bytes": 7048
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.mechanism.c2/response_corrective.json",
+      "sha256": "d0f7daee20e1105c32e135147f9fcf509d76c00c45d2a6bb190f9dc406bee897",
+      "bytes": 7947
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.mechanism.c3/prompt_user.txt",
+      "sha256": "9917d0de91eb7c515d1481418de1cddc4e3702cd3d84f90b63cc1a3ad95fa8d4",
+      "bytes": 5994
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.mechanism.c3/response.json",
+      "sha256": "7931d3f0bb2a8c079b9141427316ebccfe7ecd2e4d4daf50f6a26363b1c01555",
+      "bytes": 10615
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.pattern.c1/prompt_corrective.txt",
+      "sha256": "fc5d6d31ff15daae55088c418c1b2cfa2d22af0a5ee68b5f751b9be29fffe0e1",
+      "bytes": 130
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.pattern.c1/prompt_user.txt",
+      "sha256": "53f696fb69932446626a9659850d1cbfd06841327710d892c68371df0b5cb4b6",
+      "bytes": 4246
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.pattern.c1/response.json",
+      "sha256": "cd048d4c778afe3080c55fe2faca2c4f84e285e9facef77fc21b91ec1081c2ea",
+      "bytes": 8425
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.pattern.c1/response_corrective.json",
+      "sha256": "18fc4470d35e461eac6f3ea16a48b79200695bc4c0184e1a7f06506cd32a1adb",
+      "bytes": 4632
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.pattern.c2/prompt_user.txt",
+      "sha256": "6d11c121896444e7c61e11f444b4bc52c98bbf1f81803b80bfa0ca3edd70bd7c",
+      "bytes": 3683
+    },
+    {
+      "path": "litgroups/run2/fire_weather_v1.pattern.c2/response.json",
+      "sha256": "b66138aaccb01a67a05b922c59fa27fad32a9b0c82ad8f604637654eca3d45d7",
+      "bytes": 8645
+    }
+  ],
+  "ingested_at": "2026-11-02T18:03:00Z",
+  "ingested_by": "EXECUTOR"
+}
