@@ -326,3 +326,18 @@ commit, and copies back the small evidence.
   `…-mechanism-c1-020` (minimum temperature and overnight cooling; eight packets) and `…-mechanism-c1-010` (indoor
   temperature of a building; 0003, second). (b) Packets 0004--0010 still share nearly one driver set. (c) The rung-7
   caveat `…-caveat-c1-024` label carries "80 °F", which is not an allowed number: copied, it fails post-checks v2.
+
+## 12. Hotfix: dispositions v1a, no-disposition rule, literature-number rule (D-053a, D-055a, 2026-11-02)
+
+The three singletons flagged in section 11 now have dispositions (`group_dispositions_v1a.csv`, v1 plus three rows;
+v1 kept): `…-driver-c2-011` `not_about_family` (excluded from all eight packets), `…-mechanism-c1-010`
+`relabel:impact_or_exposure` (excluded from 0003 as `claim_about:impact_or_exposure`), `…-mechanism-c1-020` `accept`
+(a driver in all eight). The builder now excludes any would-be-attached group or singleton without a disposition
+(`no_disposition`) and lists it in the manifest's `undisposed_candidates`: 0 in packets v3a. Packets v3a (synthpackets
+v3a; `manifest.json` SHA-256 `86b02cd0…b84c`): 0003 California 12 (8 / 4 / 0); 0004--0009 11 (8 / 3 / 0); 0010
+Florida 13 (8 / 3 / 2); top three labels in every packet with groups: "Observed increase in heat‑wave and drought
+frequency"; "global warming increases heatwave frequency and intensity"; "urban heat island intensifies due to
+nighttime conditions and reduced moisture". Post-checks v2.1 (D-055a) let a literature sentence or rubric point that
+cites a group copy a number its label or members state --- so the rung-7 caveat's "80 °F" (flag (c) above) passes when
+`…-caveat-c1-024` is cited and fails otherwise or in a table-pattern sentence; packets carry `checks_input.group_texts`
+for this, and the synthesis agent v3.1 asks for `source_ids` on every required and optional rubric point.

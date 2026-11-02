@@ -14,10 +14,12 @@ evidence role, passage type) travels beside the sentences in `meta` and is never
 `litgroup_agent.py` reads this file on Polaris; its `groups.jsonl` is read back here by
 `read_groups` for the synthesis packets.
 
-**Dispositions** (D-053): `data/metadata/benchmark/group_dispositions_v1.csv` (manifest-pinned) holds one row per
+**Dispositions** (D-053, D-053a): `data/metadata/benchmark/group_dispositions_v1a.csv` (manifest-pinned; v1 plus three
+singleton rows, v1 kept unchanged) holds one row per
 reviewed group --- `accept`, `relabel:<claim_about>`, `not_about_family`, `reject`, `merge_with:<group_id>`,
 `exclude_from_rung7`; Kaiyuan's column overrides the proposal where filled. `apply_dispositions` applies them when the
-packets are built; the groups file itself is immutable evidence. A group not in the file is unchanged.
+packets are built; the groups file itself is immutable evidence. A group not in the file is unchanged here, with
+`disposition` None; the packet builder excludes it (`no_disposition`, D-053a).
 
 No model call, no table value; no concept-map, column-status or compatibility change.
 """
@@ -118,8 +120,8 @@ def read_groups(path: Path) -> list[dict]:
 
 # --- group dispositions (pilot P2b-final-prep; D-053) ---------------------------------------------
 
-DISPOSITIONS_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "group_dispositions_v1.csv"
-DISPOSITIONS_VERSION = "group_dispositions_v1"
+DISPOSITIONS_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "group_dispositions_v1a.csv"
+DISPOSITIONS_VERSION = "group_dispositions_v1a"
 DISPOSITION_KINDS = ("accept", "relabel", "not_about_family", "reject", "merge_with", "exclude_from_rung7")
 EXCLUDING = ("not_about_family", "reject")
 CLAIM_ABOUT = ("hazard_change_mechanism", "hazard_definition_or_measurement", "impact_or_exposure", "method_or_data", "other")

@@ -77,7 +77,7 @@ def packets():
              "caveat": "hazard_definition_or_measurement", "pattern": "other"}
     groups = [{"group_id": f"LG-{r['arm']}-{r['statement_type']}-{n:03d}", "kind": "singleton", "statement_type": r["statement_type"],
                "label": None, "evidence_strength": r["cluster_strength"], "n_members": 1, "member_ids": [r["statement_id"]],
-               "claim_about": claim[r["statement_type"]]} for n, r in enumerate(rows, 1)]
+               "claim_about": claim[r["statement_type"]], "disposition": "accept"} for n, r in enumerate(rows, 1)]
     return {x["seed_id"]: spk.build_packet(seeds[x["seed_id"]], x["rung"], f"BI-P2B-{x['order']:04d}", groups, by_statement, rows, nca, {})
             for x in psel.selected(sel)}
 

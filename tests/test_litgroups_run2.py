@@ -125,6 +125,8 @@ def test_packets_match_their_manifest_and_the_rank_rule(packets, enriched):
     assert [x["item_id"] for x in PM["packets"]] == [f"BI-P2B-{i:04d}" for i in range(1, 11)]
     assert PM["inputs_sha256"]["groups"] == sha256_file(g2.ENRICHED_PATH)
     assert PM["inputs_sha256"]["group_dispositions"] == sha256_file(lgr.DISPOSITIONS_PATH)
+    assert PM["version"] == "synthpackets v3a" and PM["dispositions"]["dispositions_version"] == "group_dispositions_v1a"
+    assert PM["undisposed_candidates"] == [] and all(x["excluded_no_disposition"] == 0 for x in PM["packets"])   # D-053a
     disp = lgr.load_dispositions()
     by_id = {g["group_id"]: g for g in enriched}
     for x, pk in zip(PM["packets"], packets):
@@ -141,6 +143,7 @@ def test_packets_match_their_manifest_and_the_rank_rule(packets, enriched):
         for g in gs:
             assert g["group_id"] in by_id
             d = disp.get(g["group_id"])
+            assert d is not None                                                            # D-053a
             assert g["claim_about"] == (d["arg"] if d and d["kind"] == "relabel" else by_id[g["group_id"]]["claim_about"])
             assert not (d and d["kind"] in ("not_about_family", "reject", "merge_with"))     # D-053
             if g["role"] == "driver":

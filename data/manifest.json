@@ -406,6 +406,22 @@
       "interpretation_notes": "no interpretation assigned to any table column; no column status, concept-map entry or compatibility rule changed"
     },
     {
+      "filename": "group_dispositions_v1a.csv",
+      "path": "data/metadata/benchmark/group_dispositions_v1a.csv",
+      "role": "Group dispositions v1a --- group_dispositions_v1.csv byte-for-byte (its first 29313 bytes) plus three appended rows for the heat singletons that reached packets v3 with no disposition (LG-extreme_heat_v1-driver-c2-011 not_about_family, LG-extreme_heat_v1-mechanism-c1-010 relabel:impact_or_exposure, LG-extreme_heat_v1-mechanism-c1-020 accept); 110 rows; supersedes v1 for the packets (v1a); applied by src/climrr/litgroups.apply_dispositions",
+      "sha256": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+      "bytes": 29837,
+      "row_count": 110,
+      "column_count": 10,
+      "encoding_note": "UTF-8, CRLF line endings (as v1), no byte-order mark; one header row; label empty for the three singletons (they have no label). Pinned -text in .gitattributes (data/metadata/benchmark/**).",
+      "acquisition_date": "2026-11-02",
+      "storage_policy": "tracked in ordinary Git as an immutable object; group_dispositions_v1.csv is kept unchanged as the evidence for packets v3; a change is a new file with its own decision",
+      "tracked_in_git": true,
+      "decision_ref": "D-053a",
+      "source_description": "COORDINATOR 2026-11-02 hotfix work package (three rows with their reasons, Kaiyuan-confirmed); rows written by the EXECUTOR; group fields copied from groups_enriched.jsonl",
+      "interpretation_notes": "no interpretation assigned to any table column; no column status, concept-map entry or compatibility rule changed"
+    },
+    {
       "filename": "descriptor_rules_v1.yaml",
       "path": "data/metadata/benchmark/descriptor_rules_v1.yaml",
       "role": "Pattern-level descriptor rules v1 (DR-DESC-1) --- direction words, magnitude classes from mean_to / mean_from, low-baseline phrase, anchor rounding, tercile, regional ranking, horizon, scenario and quantity phrases; read by src/climrr/pattern_descriptors.py into every seed packet's allowed_descriptors",
@@ -494,6 +510,12 @@
       "milestone": "Pilot P2b-final-prep",
       "change": "Added data/metadata/benchmark/group_dispositions_v1.csv (group dispositions v1, COORDINATOR proposal confirmed by Kaiyuan) and data/metadata/benchmark/descriptor_rules_v1.yaml (DR-DESC-1 descriptor rules v1). Every other entry unchanged.",
       "decision_ref": "D-053, D-055"
+    },
+    {
+      "date": "2026-11-02",
+      "milestone": "Pilot P2b hotfix",
+      "change": "Added data/metadata/benchmark/group_dispositions_v1a.csv (group dispositions v1 plus three singleton rows). Every other entry unchanged.",
+      "decision_ref": "D-053a"
     }
   ],
   "external_corpora": [

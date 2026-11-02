@@ -1,5 +1,6 @@
-"""Seed packets for the synthesis agent (pilot P2b-prep; v3 P2b-final-prep): rendering, allowed numbers, group selection
-(DR-SEED-RANK-3, the rung-7 caveat filter, the D-053 dispositions), pattern descriptors (DR-DESC-1)."""
+"""Seed packets for the synthesis agent (pilot P2b-prep; v3 P2b-final-prep; v3a hotfix): rendering, allowed numbers, group
+selection (DR-SEED-RANK-3, the rung-7 caveat filter, the D-053 / D-053a dispositions, the no-disposition rule), pattern
+descriptors (DR-DESC-1)."""
 
 from __future__ import annotations
 
@@ -56,9 +57,10 @@ def _rec(sid, paper, role="core_candidate", scen="unknown", pt="own_finding"):
             "scenario": {"value": scen}}
 
 
-def _g(gid, stype, members, claim, kind="singleton", strength="single_source_supported"):
+def _g(gid, stype, members, claim, kind="singleton", strength="single_source_supported", disposition="accept"):
     return {"group_id": gid, "kind": kind, "statement_type": stype, "label": "x" if kind == "group" else None,
-            "evidence_strength": strength, "n_members": len(members), "member_ids": members, "claim_about": claim}
+            "evidence_strength": strength, "n_members": len(members), "member_ids": members, "claim_about": claim,
+            "disposition": disposition}
 
 
 def test_packet_groups_drop_pattern_types_background_only_and_irrelevant_members():
@@ -124,10 +126,25 @@ def test_dispositions_exclude_relabel_and_keep_caveats_out_of_rung_7():
     by = {k: _rec(k, str(n)) for n, k in enumerate("ABCDE", 1)}
     basis = {k: "us_national" for k in by}
     pg, ex = spk.packet_groups(7, applied, by, basis)
-    assert [(g["group_id"], g["role"], g["claim_about_source"]) for g in pg] == [
-        ("LG-d-03", "driver", "reviewer"), ("LG-c-02", "caveat", "agent")]
+    assert [(g["group_id"], g["role"], g["claim_about_source"]) for g in pg] == [("LG-d-03", "driver", "reviewer")]
     assert {(x["group_id"], x["reason"]) for x in ex} == {
-        ("LG-d-01", "disposition:not_about_family"), ("LG-d-02", "disposition:reject"), ("LG-c-01", "disposition:exclude_from_rung7")}
+        ("LG-d-01", "disposition:not_about_family"), ("LG-d-02", "disposition:reject"), ("LG-c-01", "disposition:exclude_from_rung7"),
+        ("LG-c-02", "no_disposition")}                                                       # D-053a: not in the file
+    disp["LG-c-02"] = {"disposition": "accept", "kind": "accept", "arg": None}
+    pg, _ = spk.packet_groups(7, lgr.apply_dispositions(groups, disp), by, basis)
+    assert [(g["group_id"], g["role"]) for g in pg] == [("LG-d-03", "driver"), ("LG-c-02", "caveat")]
+
+
+def test_an_undisposed_candidate_is_skipped_and_the_next_one_attached():
+    groups = [_g(f"LG-d-{i:02d}", "driver", [f"S{i}"], "hazard_change_mechanism", disposition=None if i in (0, 11) else "accept")
+              for i in range(12)] + [_g("LG-x-00", "driver", ["T0"], "hazard_definition_or_measurement", disposition=None)]
+    by = {**{f"S{i}": _rec(f"S{i}", str(100 + i)) for i in range(12)}, "T0": _rec("T0", "200")}
+    basis = {k: "us_national" for k in by}
+    pg, ex = spk.packet_groups(3, groups, by, basis)
+    assert [g["group_id"] for g in pg] == [f"LG-d-{i:02d}" for i in range(1, 11)]          # LG-d-10 moves up into the cap
+    assert [(x["group_id"], x["reason"]) for x in ex] == [("LG-d-00", "no_disposition"), ("LG-d-11", "over_cap:driver"),
+                                                         ("LG-x-00", "no_disposition")]
+    assert spk.packet_groups(1, groups, by, basis) == ([], [])
 
 
 def test_dr_seed_rank_2_caps_record_the_overflow():
@@ -231,15 +248,24 @@ def test_descriptors_of_a_regional_contrast():
 
 
 def test_the_dispositions_are_pinned_and_read_as_proposed():
-    entry = load_entry("group_dispositions_v1.csv", MANIFEST_PATH)
-    assert entry["decision_ref"] == "D-053" and sha256_file(lgr.DISPOSITIONS_PATH) == entry["sha256"]
-    assert entry["sha256"] == "71f0777727be7beba483cd00cb33c6677ed86c0213ecc26cc081940273d40b82"
+    v1 = load_entry("group_dispositions_v1.csv", MANIFEST_PATH)
+    assert v1["sha256"] == "71f0777727be7beba483cd00cb33c6677ed86c0213ecc26cc081940273d40b82"
+    v1_path = lgr.DISPOSITIONS_PATH.with_name("group_dispositions_v1.csv")
+    assert sha256_file(v1_path) == v1["sha256"] and len(lgr.load_dispositions(v1_path)) == 107      # v1 kept unchanged
+    entry = load_entry("group_dispositions_v1a.csv", MANIFEST_PATH)
+    assert entry["decision_ref"] == "D-053a" and sha256_file(lgr.DISPOSITIONS_PATH) == entry["sha256"]
+    assert entry["sha256"] == "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd"
+    assert lgr.DISPOSITIONS_PATH.read_bytes().startswith(v1_path.read_bytes())                    # v1a = v1 + three rows
     disp = lgr.load_dispositions()
-    assert len(disp) == 107 and all(d["source"] == "proposed" for d in disp.values())
+    assert len(disp) == 110 and all(d["source"] == "proposed" for d in disp.values())
     assert lgr.disposition_counts(disp) == {
-        "accept": 44, "exclude_from_rung7": 40, "merge_with:LG-extreme_heat_v1-mechanism-c1-021": 2, "not_about_family": 11,
+        "accept": 45, "exclude_from_rung7": 40, "merge_with:LG-extreme_heat_v1-mechanism-c1-021": 2, "not_about_family": 12,
         "reject": 3, "relabel:hazard_change_mechanism": 1, "relabel:hazard_definition_or_measurement": 1,
-        "relabel:impact_or_exposure": 3, "relabel:method_or_data": 2}
+        "relabel:impact_or_exposure": 4, "relabel:method_or_data": 2}
+    assert {k: disp[k]["disposition"] for k in ("LG-extreme_heat_v1-driver-c2-011", "LG-extreme_heat_v1-mechanism-c1-010",
+                                                 "LG-extreme_heat_v1-mechanism-c1-020")} == {
+        "LG-extreme_heat_v1-driver-c2-011": "not_about_family", "LG-extreme_heat_v1-mechanism-c1-010": "relabel:impact_or_exposure",
+        "LG-extreme_heat_v1-mechanism-c1-020": "accept"}
 
 
 def test_parse_disposition():

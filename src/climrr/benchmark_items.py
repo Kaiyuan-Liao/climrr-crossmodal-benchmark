@@ -319,7 +319,7 @@ def validity(item: dict, columns: list[str] | None = None) -> dict:
 
 # --- synthesis post-checks (pilot P2b-prep; litsynth_agent.py) ---------------------------------
 
-SYNTH_CHECK_VERSION = "synthesis_post_checks v2"
+SYNTH_CHECK_VERSION = "synthesis_post_checks v2.1"
 INTERNAL_ID_RE = re.compile(r"\b(?:LS|LG|LC|SD[12]|PK|BI)-[A-Za-z0-9_-]+|\bTP\d+-\d+\b")
 COLUMN_LIKE_RE = re.compile(r"\b[A-Za-z][A-Za-z0-9]*_[A-Za-z0-9_]+\b")  # an identifier such as heatindex_HIS_Day95
 SCENARIO_NAME_RE = re.compile(r"\b(?:RCP|SSP)\s?\d(?:\.\d)?(?:\s?-\s?\d(?:\.\d)?)?\b|\bCMIP\d\b", re.I)
@@ -344,6 +344,43 @@ def reference_numbers(text: str) -> list[str]:
     thousands separators dropped."""
     stripped = ORDINAL_RE.sub(" ", SCENARIO_NAME_RE.sub(" ", text))
     return [m.group(0).replace(",", "") for m in NUMBER_RE.finditer(stripped)]
+
+
+# v2.1 (D-055a): a number in a literature sentence tagged with group ids, or in a rubric point whose source_ids name
+# groups, may trace to those groups' label or member statements instead, compared after this normalisation
+UNIT_NUMBER_RE = re.compile(rf"({NUMBER_RE.pattern})(\s?°[FC]\b)?")
+
+
+def normalise_number_text(text: str) -> str:
+    """Whitespace (incl. narrow no-break space) collapsed; ℉ / ℃ / º° spellings to '°F' / '°C'; '80°F', '80 ° F' -> '80 °F'."""
+    t = text.replace("℉", "°F").replace("℃", "°C").replace("º", "°")
+    t = re.sub(r"\s+", " ", t)
+    return re.sub(r"(\d)\s?°\s?([FC])\b", r"\1 °\2", t)
+
+
+def literature_tokens(text: str) -> list[tuple[str, str]]:
+    """[(number, number with its °F / °C unit, or the number alone)] in normalised `text`, after the scenario names and
+    ordinals `reference_numbers` removes."""
+    stripped = ORDINAL_RE.sub(" ", SCENARIO_NAME_RE.sub(" ", normalise_number_text(text)))
+    return [(m.group(1).replace(",", ""), m.group(1).replace(",", "") + (m.group(2) or "")) for m in UNIT_NUMBER_RE.finditer(stripped)]
+
+
+def literature_trace(group_ids, group_texts: dict) -> tuple[set[str], set[str], set[str]]:
+    """(bare numbers, numbers with units, lower-case number-words) stated in the label or member statements of the
+    cited groups that are in the packet."""
+    src = [t for g in group_ids if g in group_texts for t in group_texts[g]]
+    toks = [x for t in src for x in literature_tokens(t)]
+    words = {m.group(0).lower() for t in src for m in NUMBER_WORD_RE.finditer(normalise_number_text(t))}
+    return {n for n, _ in toks}, {u for _, u in toks}, words
+
+
+def untraced_numbers(text: str, allowed: set[str], lit: tuple[set[str], set[str], set[str]] | None = None) -> list[str]:
+    """Numbers in `text` not in `allowed` (v2). With `lit` (v2.1, a group-tagged sentence or rubric point): a number with a
+    °F / °C unit also passes when the cited groups state it with that unit, a bare number when they state it at all."""
+    if lit is None:
+        return [n for n in reference_numbers(text) if n not in allowed]
+    bare, with_unit, _ = lit
+    return [n for n, u in literature_tokens(text) if n not in allowed and not (u in with_unit if u != n else n in bare)]
 
 
 def untraced_number_words(text: str, phrases: list[str]) -> list[str]:
@@ -384,7 +421,13 @@ def _sentences(xs) -> list[dict]:
 def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns: list[str] | None = None) -> dict:
     """Deterministic checks on a synthesized item (pilot P2b). `tagged` is the model's decomposed reference answer:
     {"table_pattern": [{sentence, pattern_ids}], "literature_interpretation": [{sentence, group_ids, hedged}],
-    "integrated": str}; `checks_input` comes from the seed packet. Returns {pass, reasons, checks, check_version}."""
+    "integrated": str, "rubric_points": [{field, point, source_ids}]}; `checks_input` comes from the seed packet. Returns
+    {pass, reasons, checks, check_version}.
+
+    v2.1 (D-055a): a number or number-word in a literature sentence tagged with group ids, or in a rubric point whose
+    `source_ids` name groups, also passes when it appears in those groups' label or member statements
+    (`checks_input.group_texts`; `literature_trace`). Table-pattern sentences, the integrated paragraph, the prompt and
+    rubric text without group source ids keep the v2 rule."""
     cols = columns if columns is not None else column_names()
     reasons: list[str] = []
     tp_s, lit_s = _sentences(tagged.get("table_pattern")), _sentences(tagged.get("literature_interpretation"))
@@ -402,9 +445,22 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
     texts_rubric = [(f"rubric.{k}", WEIGHT_PREFIX_RE.sub("", t)) for k, v in rub.items() if isinstance(v, list) for t in v if isinstance(t, str)]
     graded = texts + texts_rubric
     every = [("prompt", item.get("prompt") or "")] + graded
-    untraced = sorted({(w, n) for w, t in every for n in reference_numbers(t) if n not in allowed})
+    group_texts = checks_input.get("group_texts") or {}
+    point_ids: dict = {}
+    for r in tagged.get("rubric_points") or []:
+        if isinstance(r, dict) and isinstance(r.get("point"), str) and isinstance(r.get("source_ids"), list):
+            point_ids.setdefault((f"rubric.{r.get('field')}", r["point"]), []).extend(r["source_ids"])
+    cites = [s.get("group_ids") if isinstance(s.get("group_ids"), list) else [] for s in lit_s]
+    lit = {}                                                       # index into `every` -> literature_trace of its groups
+    for i, (w, t) in enumerate(every):
+        gids = cites[i - 1 - len(tp_s)] if w == "literature_interpretation" else point_ids.get((w, t), [])
+        gids = [g for g in gids if isinstance(g, str) and g in group_texts]
+        if gids:
+            lit[i] = literature_trace(gids, group_texts)
+    untraced = sorted({(w, n) for i, (w, t) in enumerate(every) for n in untraced_numbers(t, allowed, lit.get(i))})
     reasons += [f"{w}: number {n} does not trace to a pattern value or allowed descriptor in the packet" for w, n in untraced]
-    words = sorted({(w, x) for w, t in every for x in untraced_number_words(t, phrases)})
+    words = sorted({(w, x) for i, (w, t) in enumerate(every) for x in untraced_number_words(t, phrases)
+                    if i not in lit or x.lower() not in lit[i][2]})
     reasons += [f"{w}: number-word {x!r} does not trace to an allowed descriptor in the packet" for w, x in words]
     exact_hits = sorted({(w, n) for w, t in graded for n in reference_numbers(t) if n in exact})
     reasons += [f"{w}: exact_value_in_graded_text {n} (exact values belong to provenance)" for w, n in exact_hits]
@@ -447,4 +503,7 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
     return {"check_version": SYNTH_CHECK_VERSION, "pass": not reasons, "reasons": reasons,
             "checks": {"numbers_untraced": [n for _, n in untraced], "number_words_untraced": [x for _, x in words],
                        "exact_values_in_graded_text": [n for _, n in exact_hits], "prompt_leakage": leak, "schema_errors": schema,
+                       "texts_traced_to_literature": [every[i][0] for i in sorted(lit)],
+                       "rubric_points_without_source_ids": sum(not (isinstance(r, dict) and r.get("source_ids"))
+                                                               for r in tagged.get("rubric_points") or []),
                        "n_table_sentences": len(tp_s), "n_literature_sentences": len(lit_s)}}

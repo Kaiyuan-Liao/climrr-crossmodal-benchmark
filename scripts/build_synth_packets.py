@@ -8,13 +8,15 @@ manifest pin and against the shortlist it was chosen from), `artifacts/benchmark
 `clusters_v1b.jsonl` and `independence_v2.json`. Builds **exactly the selected seeds**, in the selection's order
 and at its rungs: `<out>/PK-<seed_id>.json` with item id `BI-P2B-<nnnn>` (the file name `litsynth_agent.py`
 reads), and a `manifest.json` with each packet's SHA-256. Relevance under the D-047a geography (`litgeo` v2); the group
-dispositions (`data/metadata/benchmark/group_dispositions_v1.csv`, manifest-pinned; D-053) applied to the groups first;
+dispositions (`data/metadata/benchmark/group_dispositions_v1a.csv`, manifest-pinned; D-053, D-053a) applied to the groups
+first, and a group or singleton that would be attached with no disposition excluded as `no_disposition` and listed in
+the manifest's `undisposed_candidates` (D-053a);
 groups by DR-SEED-RANK-3 with the rung-7 caveat filter (D-054); pattern descriptors by DR-DESC-1
 (`descriptor_rules_v1.yaml`, manifest-pinned; D-055). Rules: `src/climrr/synthpackets.py`. Deterministic; no model
 call, no table value computed.
 
     python scripts/build_synth_packets.py --groups artifacts/litgroups/run2/groups_enriched.jsonl \\
-        [--selection data/metadata/benchmark/pilot_selection_v1.yaml] [--dispositions data/metadata/benchmark/group_dispositions_v1.csv] \\
+        [--selection data/metadata/benchmark/pilot_selection_v1.yaml] [--dispositions data/metadata/benchmark/group_dispositions_v1a.csv] \\
         [--out artifacts/benchmark/synth_packets]
 """
 
@@ -74,7 +76,7 @@ def main() -> int:
     hashes = {**spk.inputs_hashes(s2.SEEDS_PATH, a.groups, a.selection), "group_dispositions": sha256_file(a.dispositions),
               "descriptor_rules": rules["sha256"]}
     a.out.mkdir(parents=True, exist_ok=True)
-    index = []
+    index, undisposed = [], {}
     for x in chosen:
         sid = x["seed_id"]
         pk = spk.build_packet(seeds[sid], x["rung"], f"BI-P2B-{x['order']:04d}", groups, by_statement, rows, nca, hashes,
@@ -86,20 +88,32 @@ def main() -> int:
                       "groups": len(roles), **{f"groups_{r}": roles.count(r) for r in ("driver", "context", "caveat")},
                       "excluded_groups": len(pk["excluded_groups"]),
                       "excluded_by_disposition": sum(e["reason"].startswith(("disposition:", "merged_into:")) for e in pk["excluded_groups"]),
+                      "excluded_no_disposition": sum(e["reason"] == "no_disposition" for e in pk["excluded_groups"]),
                       "top3_labels": [g["label"] for g in pk["model_view"]["groups"][:3]], "sha256": sha256_file(path)})
+        for e in pk["excluded_groups"]:
+            if e["reason"] == "no_disposition":
+                undisposed.setdefault(e["group_id"], []).append(pk["packet_id"])
     manifest_path = a.out / "manifest.json"
-    applied = {"dispositions_version": lgr.DISPOSITIONS_VERSION, "counts": lgr.disposition_counts(disp),
+    by_id = {g["group_id"]: g for g in groups}
+    undisposed_list = [{"group_id": gid, "kind": by_id[gid]["kind"], "statement_type": by_id[gid]["statement_type"],
+                        "claim_about": by_id[gid].get("claim_about"),
+                        "label": by_id[gid]["label"] if by_id[gid]["kind"] == "group" else None,
+                        "member_statements": [m["statement"] for m in by_id[gid].get("members", [])], "packets": pids}
+                       for gid, pids in sorted(undisposed.items())]
+    applied = {"dispositions_version": a.dispositions.stem, "counts": lgr.disposition_counts(disp),
                "kaiyuan_overrides": sum(d["source"] == "kaiyuan" for d in disp.values()),
                "merged": {g["group_id"]: g["merged_from"] for g in groups if g.get("merged_from")},
                "relabelled": sorted(g["group_id"] for g in groups if g["claim_about_source"] == "reviewer"),
                "groups_in_arm_without_disposition": {arm: sum(g["arm"] == arm and g["kind"] == "group" and g["group_id"] not in disp
                                                               for g in groups) for arm in sorted({g["arm"] for g in groups})}}
     r2.write_json(manifest_path, {"version": spk.VERSION, "rank_rule": spk.RANK_RULE, "descriptor_rule": rules["rule"],
-                                  "geography": lg.VERSION, "dispositions": applied, "inputs_sha256": hashes, "packets": index})
+                                  "geography": lg.VERSION, "dispositions": applied, "undisposed_candidates": undisposed_list,
+                                  "inputs_sha256": hashes, "packets": index})
     rec = write_run_record(
         "build_synth_packets", result_summary={"packets": index}, passed=True, data_path=a.groups, output_path=manifest_path,
         config_snapshot={"version": spk.VERSION, "rank_rule": spk.RANK_RULE, "descriptor_rule": rules["rule"], "geography": lg.VERSION,
                          "select": select, "dispositions": repo_relative(a.dispositions), "dispositions_applied": applied,
+                         "undisposed_candidates": [x["group_id"] for x in undisposed_list],
                          "selection": repo_relative(a.selection), "max_passage": spk.MAX_PASSAGE,
                          "max_groups": {"driver": spk.MAX_DRIVER_GROUPS, "context": spk.MAX_CONTEXT_GROUPS,
                                         "caveat": spk.MAX_CAVEAT_GROUPS}, "inputs_sha256": hashes, "model_calls": 0},

@@ -2797,3 +2797,45 @@ code emits, and the next GUIDANCE packet still chooses.
   `src/climrr/pattern_descriptors.py`, `src/climrr/synthpackets.py`, `src/climrr/benchmark_items.py`,
   `scripts/litcollect/litsynth_agent.py`, `scripts/build_synth_packets.py`, `artifacts/benchmark/synth_packets/`,
   `docs/PILOT_P2B_DESIGN.md`, `docs/PROJECT_STATE.md`, tests.
+
+## D-053a --- Group dispositions v1a and the no-disposition rule
+
+- **Date:** 2026-11-02.
+- **Status:** **decided** (COORDINATOR, 2026-11-02, P2b hotfix; Kaiyuan-confirmed). Amends D-053.
+- **Context.** Packets v3 attached three heat singletons that had no disposition (D-053, recorded).
+- **Decision.** (1) Three rows appended: `LG-extreme_heat_v1-driver-c2-011` `not_about_family` ("dew-point experiment
+  on runoff and fire; fire statement in heat arm"); `LG-extreme_heat_v1-mechanism-c1-010` `relabel:impact_or_exposure`
+  ("indoor building temperature: exposure"); `LG-extreme_heat_v1-mechanism-c1-020` `accept` ("rising minimum
+  temperature as heat-stress mechanism; reviewer to confirm"). (2) The packet builder excludes any group or singleton
+  that would be attached but has no disposition, with reason `no_disposition`, in the packet's `excluded_groups` and
+  in the packet manifest's `undisposed_candidates` (ids, labels, member statements, packets) for the next review round.
+- **Recorded (EXECUTOR).** The file is `data/metadata/benchmark/group_dispositions_v1a.csv` (SHA-256
+  `af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd`, 110 rows, manifest-pinned): v1 byte-for-byte plus
+  the three rows (CRLF, label empty for the singletons). v1 is kept unchanged, as its storage policy requires and as
+  the evidence for packets v3. "Would be attached": the candidate has a role and lies within its role's cap after the
+  undisposed candidates ranked above it are skipped; the next disposed candidate takes the place; undisposed
+  candidates beyond the cap stay `over_cap:<role>`. Packets v3a: `undisposed_candidates` = 0.
+- **Affected files:** `data/metadata/benchmark/group_dispositions_v1a.csv`, `data/manifest.json`,
+  `src/climrr/litgroups.py`, `src/climrr/synthpackets.py` (v3a), `scripts/build_synth_packets.py`,
+  `artifacts/benchmark/synth_packets/`, tests.
+
+## D-055a --- Literature-number rule (post-checks v2.1)
+
+- **Date:** 2026-11-02.
+- **Status:** **decided** (COORDINATOR, 2026-11-02, P2b hotfix). Amends D-055.
+- **Decision.** A number (digits or number-word) in a reference sentence tagged with group ids, or in a rubric
+  point that cites group ids, passes if it appears verbatim in that group's label or any member statement (whitespace,
+  ° and ℉ / °F spellings normalised). In table-pattern sentences and untagged text the v2 rule stands. Rubric points
+  carry `source_ids` (pattern or group ids); the prompt requires them.
+- **Recorded (EXECUTOR).** `synthesis_post_checks` v2.1; packets v3a carry `checks_input.group_texts` (label and member
+  statements per attached group). Only cited ids that are attached groups count. A number written with °F / °C passes
+  only if the group states it with the same unit; a bare number passes if the group states it at all. The integrated
+  paragraph, the prompt, `acceptable_variants`, `disallowed_claims` and `fatal_errors` are untagged (v2 rule).
+  `source_ids` apply to required and optional points; a point without them is not a failure in itself (the v2 rule
+  applies; counted in `checks.rubric_points_without_source_ids`). The exact-value check is unchanged. Synthesis agent
+  v3.1 (`litsynth_agent.py` SHA-256 `10abc0c5eea05683722158967272e7f5bd63034238737f5ac63466e65b01e59f`, system prompt
+  `675e22886251031e99f5c14dda8ae6b97428a520cef04c61df80b681bdc96b07`): rubric points as objects with `source_ids`
+  (flattened to strings in the schema-v2 item; tagged points kept in `review.history[0]`), and the literature
+  exception stated in the prompt.
+- **Affected files:** `src/climrr/benchmark_items.py`, `src/climrr/synthpackets.py`,
+  `scripts/litcollect/litsynth_agent.py`, `docs/PILOT_P2B_DESIGN.md`, tests.

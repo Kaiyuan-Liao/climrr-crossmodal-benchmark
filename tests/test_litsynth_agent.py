@@ -9,6 +9,9 @@ v2: `reasoning_effort` and `max_tokens` 16000 in the request body; one correctiv
 with no item JSON, which can recover the item or leave it a parse-failure stub; a post-check
 failure is not retried. v3 / post-checks v2 (D-055): the clean reply is pattern-level (descriptors, no exact value);
 number-words, rounded or decimal values in the graded text fail, a copied descriptor such as "roughly tripling" passes.
+v3.1 / post-checks v2.1 (D-055a), on the real Florida rung-7 packet (v3a): "80 °F" passes in a literature sentence or a
+rubric point that cites `LG-extreme_heat_v1-caveat-c1-024` (whose label and statement state it), and fails when another
+group is cited, when the point has no `source_ids`, or in a table-pattern sentence.
 """
 
 from __future__ import annotations
@@ -34,8 +37,8 @@ from climrr.paths import REPO_ROOT
 
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
 AGENT = TOOLS / "litsynth_agent.py"
-AGENT_SHA256 = "d582c008fa689f06fba4ed4e994238654f9d2bbc97e92c99a4ae9ed1604b4dac"
-SYSTEM_PROMPT_SHA256 = "d5805e5dcdcbaac56b05f26f3aef6ebff58d3bf106c9313df36eeb71507e0272"
+AGENT_SHA256 = "10abc0c5eea05683722158967272e7f5bd63034238737f5ac63466e65b01e59f"
+SYSTEM_PROMPT_SHA256 = "675e22886251031e99f5c14dda8ae6b97428a520cef04c61df80b681bdc96b07"
 NCA = sd.nca_map()
 EX = {p["pattern_id"]: p for p in tp.read_jsonl(tp.EXAMPLES_PATH)}
 PASS_A = "Higher humidity at a given temperature raises the heat index, so moister summers bring more days of dangerous humid heat."
@@ -168,7 +171,7 @@ def test_the_agent_is_pinned():
 
 def test_the_system_prompt():
     a = _agent()
-    assert a.GENERATOR_VERSION == "litsynth_agent v3"
+    assert a.GENERATOR_VERSION == "litsynth_agent v3.1"
     assert a.CORRECTIVE_PROMPT == ('Your reply did not contain a JSON object with the keys "prompt" and "reference_answer". '
                                    "Return the complete JSON object.")
     assert hashlib.sha256(a.SYSTEM_PROMPT.encode("utf-8")).hexdigest() == SYSTEM_PROMPT_SHA256
@@ -178,7 +181,8 @@ def test_the_system_prompt():
                    "graded at the PATTERN level", "Never put a decimal number or an exact pattern value", "AS DIGITS",
                    '"allowed_descriptors"', 'Never write a number as a word ("sixteen", "forty-five", "twice", "double", "triple", "half"',
                    "Do not state horizon years unless the packet states them", "the threshold stays",
-                   'A specific number may appear only under "optional_points"', "must be hedged"):
+                   'A specific number may appear only under "optional_points"', "must be hedged",
+                   'Every required and optional point MUST carry "source_ids"', 'a threshold such as "80 °F"'):
         assert phrase in a.SYSTEM_PROMPT
     text = AGENT.read_text(encoding="utf-8")
     assert "/eagl" + "e/" not in text and "/User" + "s/" not in text
@@ -303,7 +307,7 @@ def test_post_checks_v2_pass_a_copied_descriptor():
     assert d["magnitude_class"] == "roughly tripling" and d["anchor_pair"] == "from about 16 to about 45 days"
     res = _checked(good_reply(pk), pk)
     assert res["pass"], res["reasons"]
-    assert res["check_version"] == "synthesis_post_checks v2" and res["checks"]["number_words_untraced"] == []
+    assert res["check_version"] == "synthesis_post_checks v2.1" and res["checks"]["number_words_untraced"] == []
 
 
 @pytest.mark.parametrize("sentence,needle", [
@@ -331,3 +335,83 @@ def test_post_checks_v2_trace_the_prompt_and_the_rubric_and_exempt_the_hedge():
     assert any("rubric.required_points: number-word 'doubles'" in x for x in res["reasons"])
     assert bi.untraced_number_words("One study reports more humid heat under RCP8.5, one high-emissions scenario.", []) == []
     assert bi.untraced_number_words("Days rise by about half again as many.", ["about half again as many"]) == []
+
+
+# --- post-checks v2.1: the literature-number rule (D-055a) on the real Florida rung-7 packet -------------------
+
+CAVEAT_80F = "LG-extreme_heat_v1-caveat-c1-024"
+FLORIDA = spk.PACKETS_DIR / "PK-SD2-TP1-00075.json"
+
+
+def _florida_reply(pk, cite=CAVEAT_80F, point_ids=(CAVEAT_80F,)):
+    d = pk["model_view"]["patterns"][0]["allowed_descriptors"]
+    point = {"point": "notes that one study may not compute the heat index below 80 °F", "weight": 1}
+    if point_ids is not None:
+        point["source_ids"] = list(point_ids)
+    return {
+        "prompt": "How is the number of summer days with a dangerous heat index (above 95 °F) projected to change in Florida by "
+                  "mid-century under a high-emissions scenario, and what limits that projection?",
+        "reference_answer": {
+            "table_pattern": [{"sentence": f"Summer {d['quantity']} {d['direction']} in Florida {d['horizon']} {d['scenario']}: "
+                                           f"{d['magnitude_class']}.", "pattern_ids": ["TP1-00075"]}],
+            "literature_interpretation": [
+                {"sentence": "One study notes that the heat index may not be computed when apparent temperature is below 80 °F.",
+                 "group_ids": [cite], "hedged": True}],
+            "integrated": "Dangerous humid-heat days become more common in Florida by mid-century under a high-emissions scenario."},
+        "rubric": {"required_points": [{"point": "states that the number of days increases", "weight": 3, "source_ids": ["TP1-00075"]},
+                                       point],
+                   "acceptable_variants": [], "optional_points": [{"point": d["anchor_pair"], "source_ids": ["TP1-00075"]}],
+                   "disallowed_claims": ["RCP8.5 is a forecast"], "fatal_errors": ["says the number of days decreases"]},
+        "guardrails": ["RCP8.5 is one high-emissions scenario, not a forecast and not the only plausible future."],
+        "source_independent_answerability": "yes", "source_independence_note": "A general regional climate question.",
+        "capability_tested": "states a pattern and its limits", "system_task": "explains the projected change and its caveat",
+        "key_relationships": "heat index, threshold, scenario", "evidence_needed": "direction of change; caveat",
+        "desired_output_characteristics": "direction, caveat", "expected_knowledge_level": "general_climate_science"}
+
+
+@pytest.fixture(scope="module")
+def florida():
+    pk = json.loads(FLORIDA.read_text(encoding="utf-8"))
+    assert pk["version"] == "synthpackets v3a" and CAVEAT_80F in pk["checks_input"]["group_strength"]
+    assert "80" not in pk["checks_input"]["allowed_numbers"]                     # not a pattern number: v2 would reject it
+    assert any("80\u202f°F" in t for t in pk["checks_input"]["group_texts"][CAVEAT_80F])
+    return pk
+
+
+def _number_reasons(res, n="80"):
+    return [r for r in res["reasons"] if f"number {n} " in r]
+
+
+def test_post_checks_v2_1_allow_80f_where_the_caveat_is_cited(florida):
+    res = _checked(_florida_reply(florida), florida)
+    assert res["pass"], res["reasons"]
+    assert res["checks"]["texts_traced_to_literature"] == ["literature_interpretation", "rubric.required_points"]
+    assert res["checks"]["rubric_points_without_source_ids"] == 0
+
+
+def test_post_checks_v2_1_reject_80f_without_the_caveat(florida):
+    other = "LG-extreme_heat_v1-mechanism-c1-024"                                # in the packet, but does not state 80 °F
+    res = _checked(_florida_reply(florida, cite=other, point_ids=(other,)), florida)
+    assert _number_reasons(res) == [
+        "literature_interpretation: number 80 does not trace to a pattern value or allowed descriptor in the packet",
+        "rubric.required_points: number 80 does not trace to a pattern value or allowed descriptor in the packet"]
+    res = _checked(_florida_reply(florida, point_ids=None), florida)            # the point carries no source_ids
+    assert _number_reasons(res) == ["rubric.required_points: number 80 does not trace to a pattern value or allowed descriptor in the packet"]
+    assert res["checks"]["rubric_points_without_source_ids"] == 1
+
+
+def test_post_checks_v2_1_keep_the_v2_rule_in_table_sentences(florida):
+    r = _florida_reply(florida)
+    r["reference_answer"]["table_pattern"].append({"sentence": "Days with a heat index above 80 °F increase.",
+                                                   "pattern_ids": ["TP1-00075"], "group_ids": [CAVEAT_80F]})
+    res = _checked(r, florida)
+    assert _number_reasons(res) == ["table_pattern: number 80 does not trace to a pattern value or allowed descriptor in the packet"]
+
+
+def test_literature_trace_normalises_spellings_and_keeps_units():
+    texts = {"G": ["Not applied below 80\u202f°F; ninety studies agree."]}
+    lit = bi.literature_trace(["G"], texts)
+    assert bi.untraced_numbers("below 80℉", set(), lit) == [] and bi.untraced_numbers("below 80 ° F", set(), lit) == []
+    assert bi.untraced_numbers("below 80", set(), lit) == []                        # stated, with or without its unit
+    assert bi.untraced_numbers("below 80 °C", set(), lit) == ["80"] and bi.untraced_numbers("below 81 °F", set(), lit) == ["81"]
+    assert "ninety" in lit[2] and bi.literature_trace(["H"], texts) == (set(), set(), set())

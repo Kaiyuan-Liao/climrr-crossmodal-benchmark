@@ -1,4 +1,5 @@
-"""Seed packets for the item-synthesis agent (pilot P2b; D-041, D-048, D-047a, D-049, D-050, D-053--D-055; DR-SEED-RANK-3).
+"""Seed packets for the item-synthesis agent (pilot P2b; D-041, D-048, D-047a, D-049, D-050, D-053--D-055, D-053a, D-055a;
+DR-SEED-RANK-3).
 
 One packet per seed of the pilot selection (`data/metadata/benchmark/pilot_selection_v1.yaml`, D-050), at the
 rung the selection names, built deterministically from the seed's pattern (`item_seeds_v2.jsonl`) and the
@@ -16,7 +17,8 @@ grouping agent's `groups.jsonl` (v2, every record with a `claim_about`, D-049). 
   and the full verbatim passage.
 - `checks_input` --- what the deterministic post-checks (`benchmark_items.synthesis_post_checks`)
   compare against: pattern ids, group ids and strengths, allowed numbers, allowed descriptors, exact values,
-  forbidden strings.
+  forbidden strings, and (v3a, D-055a) `group_texts` --- per attached group its label and member statements, which a
+  number in a sentence or rubric point citing that group may be traced to.
 
 **Descriptors** (v3, DR-DESC-1, D-055): every pattern in `model_view` carries `allowed_descriptors`
 (`pattern_descriptors.descriptors`): the pattern-level words the graded text may use. Their phrases go into
@@ -47,12 +49,17 @@ independence) beside the run's group strength. A candidate's role, by its `claim
 
 Dispositions (D-053, `litgroups.apply_dispositions`, applied before the packets): a `not_about_family` or
 `reject` group, or one merged into another, is excluded; a relabel changes the claim type the role is read from.
+v3a (D-053a): a group or singleton with no disposition (`disposition` None) that would otherwise be attached --- it
+has a role and is within its role's cap after the undisposed ones above it are skipped --- is excluded as
+`no_disposition`, and the next disposed candidate takes its place; `scripts/build_synth_packets.py` lists these in
+the manifest as `undisposed_candidates` for the next review round.
 
 Order within a role (DR-SEED-RANK-3, D-054): (1) place-named --- a relevant member names the seed's state or NCA
 region (basis `state` / `nca_region`) --- first; (2) `strength_in_packet` (multi > review > single); (3) best
 relevance basis among the relevant members (us_subregion > us_national > global); (4) more canonical papers among
 the relevant members; (5) group id. Every excluded candidate is listed with its reason in the packet's
-`excluded_groups` (disposition, merge, claim type, caveat outside rung 7, caveat claim type, or over the cap). A
+`excluded_groups` (disposition, merge, claim type, caveat outside rung 7, caveat claim type, no disposition, or over the
+cap). A
 level-1 packet (pattern only) carries no group and lists none.
 
 No model call; no table value computed here (values are copied from the pattern).
@@ -72,7 +79,7 @@ from climrr import pattern_descriptors as pd
 from climrr.checksums import sha256_file
 from climrr.paths import REPO_ROOT
 
-VERSION = "synthpackets v3"
+VERSION = "synthpackets v3a"
 RANK_RULE = "DR-SEED-RANK-3"
 PACKETS_DIR = REPO_ROOT / "artifacts" / "benchmark" / "synth_packets"
 MAX_PASSAGE = 400
@@ -340,10 +347,15 @@ def packet_groups(level: int, groups: list[dict], by_statement: dict, seed_basis
                 for x in sorted(picked, key=lambda x: x["group_id"]) if x["role"] is None]
     out = []
     for role, cap in (("driver", MAX_DRIVER_GROUPS), ("context", MAX_CONTEXT_GROUPS), ("caveat", MAX_CAVEAT_GROUPS)):
-        ranked = sorted((x for x in picked if x["role"] == role), key=rank_key)
-        out += ranked[:cap]
-        excluded += [{"group_id": x["group_id"], "statement_type": x["statement_type"], "claim_about": x["claim_about"],
-                      "reason": f"over_cap:{role}"} for x in ranked[cap:]]
+        kept = []
+        for x in sorted((x for x in picked if x["role"] == role), key=rank_key):
+            if len(kept) < cap and x["disposition"] is not None:
+                kept.append(x)
+                continue
+            why = f"over_cap:{role}" if len(kept) >= cap else "no_disposition"                  # D-053a
+            excluded.append({"group_id": x["group_id"], "statement_type": x["statement_type"], "claim_about": x["claim_about"],
+                             "reason": why})
+        out += kept
     return out, excluded
 
 
@@ -412,6 +424,8 @@ def assemble_packet(seed_id: str, p: dict, lvl: int, item_id: str, pg: list[dict
                          "group_strength": {g["group_id"]: g["strength_in_packet"] for g in pg},
                          "allowed_numbers": sorted(allowed), "allowed_descriptors": phrases, "exact_values": exact_values(p),
                          "forbidden_strings": cols + paper_ids,
+                         "group_texts": {g["group_id"]: ([g["label"]] if g["label"] else []) + [m["statement"] for m in g["members"]]
+                                         for g in pg},
                          "level": lvl},
         "excluded_groups": list(excluded or []),
         "inputs_sha256": inputs_sha256,
