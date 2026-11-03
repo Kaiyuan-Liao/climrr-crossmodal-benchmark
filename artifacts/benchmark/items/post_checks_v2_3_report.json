@@ -1,0 +1,159 @@
+{
+  "check_version": "synthesis_post_checks v2.3",
+  "baseline_version": "synthesis_post_checks v2.2",
+  "report_only": true,
+  "items_modified": 0,
+  "patterns": [
+    "\\b(the|this|our) (model|projection|modeled projection|data|dataset|table) (shows?|indicates?|projects?|suggests?)\\b",
+    "\\bmodeled projection shows\\b"
+  ],
+  "current_items": [
+    {
+      "item_id": "BI-P2B-0001",
+      "run": "1f175da",
+      "v2_2_pass": true,
+      "v2_3_pass": true,
+      "v2_3_new_reasons": [],
+      "hit": false
+    },
+    {
+      "item_id": "BI-P2B-0002",
+      "run": "1f175da",
+      "v2_2_pass": true,
+      "v2_3_pass": false,
+      "v2_3_new_reasons": [
+        "integrated leakage: source phrase (v2.3): The modeled projection shows"
+      ],
+      "hit": true
+    },
+    {
+      "item_id": "BI-P2B-0003",
+      "run": "1f175da",
+      "v2_2_pass": true,
+      "v2_3_pass": false,
+      "v2_3_new_reasons": [
+        "integrated leakage: source phrase (v2.3): The model shows"
+      ],
+      "hit": true
+    },
+    {
+      "item_id": "BI-P2B-0004",
+      "run": "1f175da",
+      "v2_2_pass": true,
+      "v2_3_pass": false,
+      "v2_3_new_reasons": [
+        "integrated leakage: source phrase (v2.3): The model shows"
+      ],
+      "hit": true
+    },
+    {
+      "item_id": "BI-P2B-0005",
+      "run": "1f175da",
+      "v2_2_pass": true,
+      "v2_3_pass": false,
+      "v2_3_new_reasons": [
+        "table_pattern leakage: source phrase (v2.3): The projection shows",
+        "integrated leakage: source phrase (v2.3): The model projects"
+      ],
+      "hit": true
+    },
+    {
+      "item_id": "BI-P2B-0006",
+      "run": "1f175da",
+      "v2_2_pass": true,
+      "v2_3_pass": true,
+      "v2_3_new_reasons": [],
+      "hit": false
+    },
+    {
+      "item_id": "BI-P2B-0007",
+      "run": "1f175da",
+      "v2_2_pass": true,
+      "v2_3_pass": false,
+      "v2_3_new_reasons": [
+        "integrated leakage: source phrase (v2.3): The modeled projection shows"
+      ],
+      "hit": true
+    },
+    {
+      "item_id": "BI-P2B-0008",
+      "run": "1f175da",
+      "v2_2_pass": true,
+      "v2_3_pass": false,
+      "v2_3_new_reasons": [
+        "table_pattern leakage: source phrase (v2.3): The projection shows"
+      ],
+      "hit": true
+    },
+    {
+      "item_id": "BI-P2B-0009",
+      "run": "1f175da",
+      "v2_2_pass": true,
+      "v2_3_pass": true,
+      "v2_3_new_reasons": [],
+      "hit": false
+    },
+    {
+      "item_id": "BI-P2B-0010",
+      "run": "157c96c",
+      "v2_2_pass": true,
+      "v2_3_pass": true,
+      "v2_3_new_reasons": [],
+      "hit": false
+    }
+  ],
+  "items_hit": [
+    "BI-P2B-0002",
+    "BI-P2B-0003",
+    "BI-P2B-0004",
+    "BI-P2B-0005",
+    "BI-P2B-0007",
+    "BI-P2B-0008"
+  ],
+  "superseded_items": [
+    {
+      "item_id": "BI-P2B-0010",
+      "run": "1f175da",
+      "v2_2_pass": true,
+      "v2_3_pass": true,
+      "v2_3_new_reasons": [],
+      "hit": false
+    }
+  ],
+  "coordinator_proposed_texts": [
+    {
+      "item_id": "BI-P2B-0001",
+      "prompt": [],
+      "reference_integrated": []
+    },
+    {
+      "item_id": "BI-P2B-0003",
+      "prompt": [],
+      "reference_integrated": []
+    },
+    {
+      "item_id": "BI-P2B-0006",
+      "prompt": [],
+      "reference_integrated": []
+    },
+    {
+      "item_id": "BI-P2B-0007",
+      "prompt": [],
+      "reference_integrated": []
+    },
+    {
+      "item_id": "BI-P2B-0010",
+      "prompt": [],
+      "reference_integrated": [
+        "source phrase: in the table"
+      ]
+    }
+  ],
+  "coordinator_proposed_hits": [
+    "BI-P2B-0010"
+  ],
+  "inputs": {
+    "items_index_sha256": "b583ca3e36e793b5901fe843c9cc8dc50d91a9b9691301e12c1d24e7cd16c804",
+    "coordinator_edits_sha256": "98bae42677f5cc5727527f865657c53e3bcfae2b2c3a4e183a1126b2c4efff86"
+  }
+}

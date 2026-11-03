@@ -1,0 +1,144 @@
+# Sentence-support check of the COORDINATOR-proposed texts (P2b_coordinator_edits_2026-11-03.yaml) against each
+# item's cited groups and table pattern. EXECUTOR reading, 2026-11-03 (mentor-export package section D): every clause of
+# the edited reference answer (an exact substring of it), what supports it, and a verdict. The mentor sheet's
+# "Paper side" and "Original passages" are built from `members` here (the member statements the answer uses).
+#
+# Verdicts:
+#   supported                          the cited group / pattern states it (member statement AND verbatim passage)
+#   partially_supported                a part is supported; the note names what is not
+#   not_supported_by_verbatim_passage  only a member's paraphrase states it; the recorded verbatim passage does not
+#   supported_by_uncited_packet_group  supported by a group in the item's packet that the item does not cite
+#   guardrail                          a framing guardrail (item guardrails; data dictionary), not an evidence claim
+# Group and statement ids are the packet's (v3a at 1f175da for 0001-0009, v3b at 157c96c for 0010).
+support_map_version: mentor_support_map v1
+by: EXECUTOR
+date: "2026-11-03"
+items:
+  - item_id: BI-P2B-0001
+    table_only: true
+    groups: []
+    clauses:
+      - text: "In Georgia, the number of summer days with a dangerous heat index (above 95 °F) is projected to increase by mid-century (2045–2054) under RCP8.5, roughly tripling relative to the modeled historical baseline."
+        support: [TP1-00018]
+        verdict: supported
+        note: "mean 15.8 -> 44.9 days over 1,031 cells, every cell increases; 'roughly tripling' is the packet's DR-DESC-1 descriptor (ratio 2.8)"
+      - text: "RCP8.5 is one high-emissions scenario, not a forecast, and the baseline is model output, not an observation."
+        support: [guardrails, "dictionary_extracted.txt:101-102"]
+        verdict: guardrail
+        note: "the dictionary: 'A historical period (1995 to 2004) is also modeled'"
+  - item_id: BI-P2B-0003
+    groups:
+      - group_id: LG-extreme_heat_v1-driver-c1-008
+        members: [LS-199098498-04, LS-158091651-01]
+      - group_id: LG-extreme_heat_v1-mechanism-c1-024
+        members: [LS-128765172-04, LS-246243282-05]
+    clauses:
+      - text: "California is projected to see a moderate increase (about half again as many) in summer days with a dangerous heat index (above 95 °F) by mid-century (2045–2054) under RCP8.5, one high-emissions scenario."
+        support: [TP1-00071]
+        verdict: supported
+        note: "mean 15.4 -> 24.4 days over 2,827 cells; descriptors 'a moderate increase (about half again as many)' and the middle tercile among 49 State labels (rank 25)"
+      - text: "The main driver is large-scale warming rather than changes in regional atmospheric circulation"
+        support: [LG-extreme_heat_v1-driver-c1-008/LS-199098498-04]
+        verdict: not_supported_by_verbatim_passage
+        note: "only the paraphrase of LS-199098498-04 says it. Its recorded passage (prefix_anchor recovery) is 'Identifying the climatological processes responsible ... is beyond the scope of this study.'; the claim is a finding that paper cites (Schoof et al. 2019), present only in the extraction agent's passage_as_proposed (with an ellipsis), not verified against the paper text. One paper (cited_candidate), although the group counts 4; no other member states it. LG-extreme_heat_v1-driver-c2-001 is in the packet (not cited by the item) and supports warming -> more frequent / intense heat waves, but neither 'main' nor 'rather than circulation'"
+      - text: "land–atmosphere feedbacks that sustain heat waves in the Southwest add to it"
+        support: [LG-extreme_heat_v1-driver-c1-008/LS-158091651-01]
+        verdict: partially_supported
+        note: "the passage: feedbacks 'appear to be a stronger factor for heat wave maintenance at southern latitudes, but the NCEP model seems to misrepresent those feedbacks, particularly over the Southwest'. A forecast-skill finding of one paper: it does not say the feedbacks add to the projected change, nor that they sustain heat waves in the Southwest specifically; unhedged here"
+      - text: "one study suggests that night-time intensification of the urban heat island under calm, clear conditions contributes locally"
+        support: [LG-extreme_heat_v1-mechanism-c1-024/LS-128765172-04, LG-extreme_heat_v1-mechanism-c1-024/LS-246243282-05]
+        verdict: partially_supported
+        note: "LS-128765172-04 (background, citing others): the UHI 'is most noticeable at night and under synoptic high pressure systems with calm conditions and clear skies'; LS-246243282-05: simulated CUHI intensified during a heat wave (lower moisture, reduced wind; the passage does not say night). Neither says the UHI contributes to the projected change. Relevance: the table quantity is the daily maximum heat index, the passages concern night-time heat"
+  - item_id: BI-P2B-0006
+    groups:
+      - group_id: LG-extreme_heat_v1-driver-c2-001
+        members: [LS-14006228-04, LS-235602877-05, LS-221504407-03, LS-199381463-04]
+      - group_id: LG-extreme_heat_v1-driver-c1-008
+        members: [LS-199098498-04]
+      - group_id: LG-extreme_heat_v1-mechanism-c2-003
+        members: [LS-239996006-02]
+      - group_id: LG-extreme_heat_v1-mechanism-c1-024
+        members: [LS-128765172-04]
+    clauses:
+      - text: "In Alabama, summer days with a dangerous heat index (above 105 °F) are projected to increase by the end of the century (2085–2094) under RCP8.5, more than tripling."
+        support: [TP1-00589]
+        verdict: supported
+        note: "mean 1.4 -> 45.2 days over 934 cells; 'more than tripling' is the packet's DR-DESC-1 descriptor. The ratio is about 33 from a baseline of about 1 day: the descriptor is literally true and understates the change"
+      - text: "The rise is driven primarily by large-scale warming, which increases the frequency, intensity and duration of heat waves."
+        support: [LG-extreme_heat_v1-driver-c2-001, LG-extreme_heat_v1-driver-c1-008/LS-199098498-04]
+        verdict: partially_supported
+        note: "warming increasing heat-wave frequency and intensity: LG-extreme_heat_v1-driver-c2-001, 4 papers ('duration' only in LS-14006228-04). 'primarily' rests on LS-199098498-04, whose recorded passage does not state it (see BI-P2B-0003)"
+      - text: "Because the heat index combines temperature and humidity"
+        support: [LG-extreme_heat_v1-mechanism-c1-021]
+        verdict: supported_by_uncited_packet_group
+        note: "not in a group the item cites; the packet's context group LG-extreme_heat_v1-mechanism-c1-021 ('heat index combines temperature and humidity as a perceived-heat metric', review_supported, 11 papers) states it"
+      - text: "one study suggests the magnifying effect of humidity on heat stress grows as temperatures rise"
+        support: [LG-extreme_heat_v1-mechanism-c2-003/LS-239996006-02]
+        verdict: supported
+        note: "single study, hedged"
+      - text: "urban heat-island effects add to night-time heat in cities."
+        support: [LG-extreme_heat_v1-mechanism-c1-024/LS-128765172-04]
+        verdict: supported
+        note: "'the UHI is most noticeable at night' (one paper of the group's 3, background, citing others); unhedged. Relevance as in BI-P2B-0003: the quantity is the daily maximum heat index"
+  - item_id: BI-P2B-0007
+    groups:
+      - group_id: LG-extreme_heat_v1-driver-c1-008
+        members: [LS-199098498-04, LS-158091651-01]
+      - group_id: LG-extreme_heat_v1-mechanism-c2-003
+        members: [LS-239996006-02]
+    clauses:
+      - text: "By mid-century (2045–2054) under RCP8.5, one high-emissions scenario, summer days with a dangerous heat index (above 95 °F) increase in every NCA5 climate region, with the largest increase in the Southeast and the smallest in Alaska."
+        support: [TP1-02785]
+        verdict: partially_supported
+        note: "largest Southeast (+27.0 days), smallest Alaska: supported. 'every NCA5 climate region' overstates: the table covers 8 of the 10 NCA5 regions (U.S. Caribbean and Hawai'i / U.S.-Affiliated Pacific Islands have no State label in it), and Alaska's increase is +0.0085 days (0.0 at one decimal) --- an increase in sign only"
+      - text: "The increases are driven by large-scale warming"
+        support: [LG-extreme_heat_v1-driver-c1-008/LS-199098498-04]
+        verdict: not_supported_by_verbatim_passage
+        note: "as in BI-P2B-0003: only the paraphrase of LS-199098498-04. LG-extreme_heat_v1-driver-c2-001 is in the packet but not cited by the item"
+      - text: "land–atmosphere feedbacks are a stronger factor for heat-wave maintenance at southern latitudes"
+        support: [LG-extreme_heat_v1-driver-c1-008/LS-158091651-01]
+        verdict: supported
+        note: "the passage: 'Land-atmosphere feedbacks appear to be a stronger factor for heat wave maintenance at southern latitudes'. One paper (the group counts 3), and the source's 'appear to' is dropped, so the clause is unhedged; a forecast-skill finding, not tied to the projected change"
+      - text: "one study suggests that humidity magnifies heat stress more as temperatures rise."
+        support: [LG-extreme_heat_v1-mechanism-c2-003/LS-239996006-02]
+        verdict: supported
+        note: "single study, hedged"
+  - item_id: BI-P2B-0010
+    groups:
+      - group_id: LG-extreme_heat_v1-driver-c2-001
+        members: [LS-14006228-04, LS-235602877-05, LS-221504407-03, LS-199381463-04]
+      - group_id: LG-extreme_heat_v1-driver-c1-008
+        members: [LS-199098498-04]
+      - group_id: LG-extreme_heat_v1-mechanism-c2-003
+        members: [LS-239996006-02]
+      - group_id: LG-extreme_heat_v1-pattern-c2-003
+        members: [LS-5882914-02]
+    clauses:
+      - text: "Under RCP8.5, one high-emissions scenario, Florida's summer days with a dangerous heat index (above 95 °F) are projected to roughly triple by mid-century (2045–2054)."
+        support: [TP1-00075]
+        verdict: supported
+        note: "mean 25.7 -> 68.2 days over 1,165 cells; 'roughly tripling' is the packet's DR-DESC-1 descriptor (ratio 2.65); rank 1 of 49 State labels"
+      - text: "The main driver is large-scale warming, which raises heat-wave frequency, intensity and duration"
+        support: [LG-extreme_heat_v1-driver-c2-001, LG-extreme_heat_v1-driver-c1-008/LS-199098498-04]
+        verdict: partially_supported
+        note: "as in BI-P2B-0006: the warming -> heat-wave clause is LG-extreme_heat_v1-driver-c2-001 (4 papers); 'main driver' rests on LS-199098498-04, whose recorded passage does not state it"
+      - text: "one study suggests that humidity's magnifying effect on heat stress grows with temperature."
+        support: [LG-extreme_heat_v1-mechanism-c2-003/LS-239996006-02]
+        verdict: supported
+        note: "single study, hedged"
+      - text: "The size of the change depends on the emissions pathway"
+        support: [LG-extreme_heat_v1-pattern-c2-003/LS-5882914-02]
+        verdict: partially_supported
+        note: "a generalisation from one study's heat-wave duration result (the extraction agent's region tag: eastern United States) to the size of the change in days above 95 °F heat index, which no cited source states"
+      - text: "one study reports heat-wave duration about one day longer under RCP8.5 than under the moderate RCP4.5 scenario"
+        support: [LG-extreme_heat_v1-pattern-c2-003/LS-5882914-02]
+        verdict: supported
+        note: "the passage: 'Average heat wave durations estimated under the RCP8.5 scenario were almost 1 day longer than under the RCP4.5 scenario, regardless of the heat wave definition used'. Single study, hedged; heat-wave duration, not the table quantity; region eastern United States, not Florida specifically"
+      - text: "no moderate-scenario projection of this quantity is available in the table used here, so the contrast rests on the literature alone."
+        support: ["dictionary_extracted.txt:679-700"]
+        verdict: supported
+        note: "the dictionary lists heat-index columns for Historical, Mid-Century RCP8.5 and End-Century RCP8.5 only; no RCP4.5 heat-index column. Leakage: 'the table' is a source phrase under the existing reference-text check (leakage_check v1 ACCORDING_RE, in every post-check version)"
+      - text: "RCP8.5 should be read as one plausible high-emissions future, not a forecast."
+        support: [guardrails]
+        verdict: guardrail
+        note: ""

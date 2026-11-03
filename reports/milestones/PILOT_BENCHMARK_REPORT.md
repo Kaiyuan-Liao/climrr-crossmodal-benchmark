@@ -515,3 +515,114 @@ three new tests in `tests/test_synthpackets.py`, one in `tests/test_litsynth_age
    COORDINATOR notes accept one of them (0004, `…-driver-c1-008`).
 5. **Two HTTP retries** in run 2, not one; both recovered on the second attempt.
 6. FWI column confirmation remains open (no FWI item in the pilot).
+
+# Mentor export --- synthesis run 3, items index, post-checks v2.3, lint v1a, workbook v2, mentor sheet
+
+COORDINATOR work package "Mentor review export: five pilot items" (2026-11-03). **No model call. No item accepted,
+nothing frozen**; the COORDINATOR texts are recorded as proposals for Kaiyuan. No new decision: run 3 is the
+regeneration D-056 / D-054a set up. Fields 26--31.
+
+## 26. Commits and evidence runs
+
+| | |
+| --- | --- |
+| Branch | `work/meeting-2026-10-22`, from head `157c96c` |
+| **Build commit** | the commit carrying the modules, scripts, tests, the ingested run 3, the index, the reports, the workbook v2 CSV, the COORDINATOR edits, the support map, the mentor `.md`, state and this section |
+| **Evidence runs** | at the build commit, clean tree: `ingest_litsynth_run3`, `lint_item_rubrics` (v1a), `recheck_items_v2_3`, `build_p2b_items_review_v2`, `build_mentor_pilot_items` (records in the following commit) |
+| Remote | **not pushed** (the Wednesday freeze package pushes) |
+
+## 27. Data and checksums
+
+| Object | SHA-256 | Notes |
+| --- | --- | --- |
+| `litsynth_run3_evidence.tar.gz` (read, outside the repo) | `10dc8a43c7fafcab5b53a097304c5f563ca4bcbbac574cf47efce5071f8ddc54` | equals the work package |
+| run-3 `items.jsonl` / `summary.json` | `792eebe9…f896` / `17c7138f…2a2a` | `items.jsonl` equals the work package; = the per-item file |
+| packets v3b (what run 3 read) | manifest `09ca030a…72c7`; `PK-SD2-TP1-00075.json` `9ec338d6…79ee` | read from Git at `157c96c` |
+| **`artifacts/benchmark/items/run3/manifest.json`** | **`edb48bfc7d873afe71c75fa251d71981e4508117c5c9f9cf4993d8f53b89916f`** | 3 copied files, 1 item, 2 excluded (hashed) |
+| `items/run3/items/BI-P2B-0010.json` | `421ad1069533835a8af69abedd21529d7b503173901ef7b89b70baf793ff55de` | human_review |
+| `artifacts/benchmark/items/index.json` | `b583ca3e36e793b5901fe843c9cc8dc50d91a9b9691301e12c1d24e7cd16c804` | 10 items; 1 superseded |
+| `post_checks_v2_3_report.json` | `970f22396e2739597f8ac28011e42c0744bf883809e052853b2efa6183688539` | report only |
+| `rubric_lint_v1a.json` | `183bcdd057ef0fcdc6e6aba1841a307eaa1d44c9444f7b33d542d24fd9e3de33` | report only; v1 unchanged (`5b5cf722…8d31`) |
+| `P2b_items_review_v2.csv` (tracked) | `d5e5b7497e604af55cb6ea238982b4ec9aed64b74bd7a7176e8548629278cf46` | ITEMS sheet of the v2 workbook |
+| `P2b_coordinator_edits_2026-11-03.yaml` | `98bae42677f5cc5727527f865657c53e3bcfae2b2c3a4e183a1126b2c4efff86` | section D verbatim; pinned |
+| `P2b_mentor_support_map_v1.yaml` | `e3638e13eb4d12dc4f3aa6338d36edebfb1e7cdefd7cf5c6f9eee6d59c3bb291` | EXECUTOR reading |
+| **`MENTOR_PILOT_ITEMS_2026-11-05.md`** | **`8420ec304e9bd8232282581e09ebf3af214ae5a857afe58d0c44d1990244b5fb`** | same content as the gitignored `.xlsx` |
+
+## 28. Methods and readings for the COORDINATOR
+
+- **Items index** (new; the package names one, none existed): `artifacts/benchmark/items/index.json`, per item every
+  ingested version with `index_status` `current` / `superseded_by_<run>`; no run-2 file changes.
+- **Post-checks v2.3 is opt-in.** `synthesis_post_checks` at its default is still v2.2, because the frozen agent v3.2 calls
+  it and runs 2 and 3 are reproduced with it. v2.3 adds the two patterns, matched case-insensitively ("The model shows"),
+  on the prompt and the reference texts, the scope v2.2 checks. A match inside an earlier match is flagged once.
+- **Lint v1a** replaces `allowed_numbers` with `allowed[ _]numbers` and `exact values are not required` with
+  `exact (?:numeric )?values are not required`.
+- **Workbook v2 is a new file**: the v1 workbook was open in Excel (lock file present) when this package ran. `edit_origin`
+  sits after `edited_reference_integrated`.
+- **Mentor sheet.** Column 1 holds `#` and the item id (one column, so six columns match the six widths). The table side
+  is generated from the item's table pattern and the dictionary's period sentence (lines 101--102); the regional item's
+  per-region means and cells come from `table_patterns_v1.jsonl` (pinned). Paper side and passages: the groups and member
+  statements in the support map, checked against the packet and the item's citations; passages verbatim from
+  `statements.jsonl` (none exceeds 700 characters). **One addition beyond the specification:** under the
+  `LS-199098498-04` passage, a bracketed provenance note quoting the extraction agent's unverified continuation
+  (`passage_as_proposed`). Without it, the mentor would see a passage that does not contain the claim it is cited for.
+  Kaiyuan may drop it.
+
+## 29. Results
+
+**Run 3.** 1 item (BI-P2B-0010, rung 7), `deterministic_pass` on the first turn, 0 leakage flags, no HTTP retry; post-checks
+v2.2 reproduced. Its five literature sentences cite `…-driver-c1-008`, `…-driver-c2-001`, `…-mechanism-c1-024`,
+`…-mechanism-c2-003` and the scenario caveat `…-pattern-c2-003`, all hedged "One study ...". Lint v1a: 5 flags (3
+`hedge_strength_mismatch` on multi-source groups, 1 `required_single_source_only` on the scenario-contrast point, 1
+generation constraint).
+
+**Post-checks v2.3** (report only; v2.2 still passes on all ten): BI-P2B-0002 "The modeled projection shows"; 0003 "The
+model shows"; 0004 "The model shows"; 0005 "The projection shows" (table sentence) and "The model projects"; 0007 "The
+modeled projection shows"; 0008 "The projection shows" (table sentence). 0001, 0006, 0009 and 0010 (run 3) have no hit;
+the superseded run-2 0010 has none either.
+
+**Lint v1a:** 31 flags (generation_constraint 18, hedge_strength_mismatch 9, required_single_source_only 2,
+rung1_prompt_mechanism 1, required_tercile 1); against v1, the only run-2 change is 0007 +2 (the two lines D-056 recorded).
+
+**Sentence-support check of the COORDINATOR texts** (support map; 22 clauses: 11 supported, 2 guardrails, 6 partially
+supported, 2 not supported by a verbatim passage, 1 supported only by an uncited packet group):
+
+| item | clause | verdict | why |
+| --- | --- | --- | --- |
+| 0003 | "The main driver is large-scale warming rather than changes in regional atmospheric circulation" | **not supported by a verbatim passage** | only `LS-199098498-04`'s paraphrase; its recorded passage (prefix anchor) is "Identifying the climatological processes responsible … is beyond the scope of this study."; the claim, a citation of Schoof et al. (2019), is in the agent's unverified `passage_as_proposed` only; one paper, though the group counts 4 |
+| 0003 | "land–atmosphere feedbacks that sustain heat waves in the Southwest add to it" | partially | `LS-158091651-01`: "a stronger factor for heat wave maintenance at southern latitudes", a forecast model "misrepresent[s]" them over the Southwest; a forecast-skill result, nothing on the projected change |
+| 0003 | "one study suggests that night-time intensification of the urban heat island under calm, clear conditions contributes locally" | partially | UHI "most noticeable at night … calm conditions and clear skies" (background); intensification during a heat wave in a second paper (no night); no contribution to the change stated; the table quantity is the daily *maximum* heat index |
+| 0006 | "The rise is driven primarily by large-scale warming, which increases the frequency, intensity and duration of heat waves." | partially | warming -> heat waves: `…-driver-c2-001` (4 papers); "primarily" rests on `LS-199098498-04` (as above) |
+| 0006 | "Because the heat index combines temperature and humidity" | uncited packet group | `…-mechanism-c1-021` (context, review-supported, 11 papers) is in the packet, not cited by the item |
+| 0007 | "… increase in every NCA5 climate region, with the largest increase in the Southeast and the smallest in Alaska." | partially | largest / smallest supported; the table covers 8 of 10 NCA5 regions (no U.S. Caribbean, no Hawai'i / USAPI); Alaska +0.0085 days |
+| 0007 | "The increases are driven by large-scale warming" | **not supported by a verbatim passage** | `LS-199098498-04` only; `…-driver-c2-001` is in the packet but not cited |
+| 0010 | "The main driver is large-scale warming, which raises heat-wave frequency, intensity and duration" | partially | as 0006 |
+| 0010 | "The size of the change depends on the emissions pathway" | partially | generalises one study's heat-wave *duration* result (eastern United States) to the size of the change |
+
+The three clauses the package names: **"rather than changes in regional atmospheric circulation"**: not supported by a
+verbatim passage (above). **"stronger factor … at southern latitudes"** (0007): verbatim in `LS-158091651-01` ("appear
+to be a stronger factor for heat wave maintenance at southern latitudes"), one paper, unhedged in the text, a
+forecast-skill finding. **"about one day longer"** (0010): verbatim in `LS-5882914-02` ("almost 1 day longer than under
+the RCP4.5 scenario"), single study, heat-wave duration, eastern United States. Further notes (supported clauses): 0006
+"more than tripling" is the descriptor for a ratio of about 33 (1.4 -> 45.2 days); 0010 "no moderate-scenario projection
+… in the table used here" is true (no RCP4.5 heat-index column in the dictionary), but "in the table" trips the existing
+source-phrase check.
+
+**Validation.** See the evidence commit (pytest count, scanner).
+
+## 30. Escalations
+
+1. **`LS-199098498-04` is the only support for "large-scale warming is the main / primary driver"** (0003, 0006, 0007,
+   0010): its recorded passage does not contain the claim. Options are Kaiyuan's or the COORDINATOR's: verify the
+   continuation against the paper text on Polaris (not on this machine), or cite `…-driver-c2-001` and drop "main /
+   primarily / rather than circulation".
+2. **Group `…-driver-c1-008`** is labelled "Observed increase in heat-wave and drought frequency" but its members are
+   heterogeneous (large-scale warming, land–atmosphere feedbacks, ozone stagnation, California droughts); its
+   multi-source count does not back any single claim drawn from it.
+3. 0007 "every NCA5 climate region"; 0010 "in the table used here" (a leakage phrase); 0006 "more than tripling" for about
+   33-fold.
+
+## 31. Limitations
+
+Nothing is frozen; `final_frozen` is null for every item. The support map is one reader's judgement (EXECUTOR). FWI
+column confirmation remains open (no FWI item in the pilot).

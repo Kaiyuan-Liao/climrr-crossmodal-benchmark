@@ -1,0 +1,138 @@
+{
+  "run": "run3",
+  "diagnostic_id": "litsynth_run3",
+  "decision": "D-056",
+  "tarball": {
+    "name": "litsynth_run3_evidence.tar.gz",
+    "sha256": "10dc8a43c7fafcab5b53a097304c5f563ca4bcbbac574cf47efce5071f8ddc54"
+  },
+  "generator": {
+    "version": "litsynth_agent v3.2",
+    "agent_path": "scripts/litcollect/litsynth_agent.py",
+    "agent_sha256": "f5778fbf54ea44794d40086b997a504971812fe8a4481f7fedefae5f6d4b8b5e",
+    "system_prompt_sha256": "9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715",
+    "format_corrective_template_sha256": "919f52cb2612c6f7544a2d62f4488231a16092376e43ebef03e4a23ca7066d20"
+  },
+  "endpoint": {
+    "endpoint_label": "sophia_vllm",
+    "model": "openai/gpt-oss-120b",
+    "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1"
+  },
+  "budget": {
+    "reasoning_effort": "low",
+    "max_tokens": 16000,
+    "temperature": 0
+  },
+  "source_commit": "157c96cffbe28b95554210efb0e8d455f62dba43",
+  "packets": {
+    "version": "synthpackets v3b",
+    "path": "artifacts/benchmark/synth_packets",
+    "at_commit": "157c96cffbe28b95554210efb0e8d455f62dba43",
+    "manifest_sha256": "09ca030a5e4de913b1a6efb29943c84754de796a4a3987f300e72083e7f172c7",
+    "only": "PK-SD2-TP1-00075.json",
+    "packet_sha256": "9ec338d64e963521d86de13a0ab6c8a40dadad9b69ad5079694abf3b685379ee"
+  },
+  "counts": {
+    "items": 1,
+    "deterministic_pass": 1,
+    "deterministic_fail": 0,
+    "leakage_flags": 0,
+    "corrective_retry_used": 0,
+    "format_corrective_used": 0,
+    "format_corrective_pass": 0
+  },
+  "items": [
+    {
+      "item_id": "BI-P2B-0010",
+      "seed_id": "SD2-TP1-00075",
+      "use_case_level": 7,
+      "packet_sha256": "9ec338d64e963521d86de13a0ab6c8a40dadad9b69ad5079694abf3b685379ee",
+      "corrective_turn_used": false
+    }
+  ],
+  "log": {
+    "start_utc": "2026-11-03T06:35:52Z",
+    "end_utc": "2026-11-03T06:38:12Z",
+    "done": [
+      "items=1 pass=1 fail=0"
+    ]
+  },
+  "items_sha256": "792eebe914fc71713293d6f56c065cee54962657b1730a755c253bf02387f896",
+  "summary_sha256": "17c7138f6d93be77cc2da0e2a8a29e878d669b7969bd70c4ac442a6467994a2a",
+  "checks_reproduced": true,
+  "checks": {
+    "checks_reproduced": true,
+    "check_version": "synthesis_post_checks v2.2",
+    "items": [
+      {
+        "item_id": "BI-P2B-0010",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": null
+      }
+    ]
+  },
+  "item_schema": {
+    "path": "data/metadata/benchmark/item_schema_v2.json",
+    "sha256": "765631f16eeea5dadce1d9d3458942b15d8272531a2516a08ce7210f7ec852a7"
+  },
+  "lifecycle": {
+    "status": "human_review",
+    "from": "deterministic_pass",
+    "rule": "D-033",
+    "decision": "D-056",
+    "kaiyuan_disposition": null,
+    "mentor_disposition": null,
+    "final_frozen": null,
+    "note": "items/<item_id>.json = the delivered record + this step; items.jsonl is the run's file, byte-identical"
+  },
+  "supersedes": [
+    {
+      "item_id": "BI-P2B-0010",
+      "run": "run2",
+      "path": "run2/items/BI-P2B-0010.json",
+      "index_status": "superseded_by_run3",
+      "note": "the run-2 file is unchanged; the index records the supersession"
+    }
+  ],
+  "files": [
+    {
+      "path": "items.jsonl",
+      "sha256": "792eebe914fc71713293d6f56c065cee54962657b1730a755c253bf02387f896",
+      "bytes": 29791
+    },
+    {
+      "path": "summary.json",
+      "sha256": "17c7138f6d93be77cc2da0e2a8a29e878d669b7969bd70c4ac442a6467994a2a",
+      "bytes": 849
+    },
+    {
+      "path": "agent.log",
+      "sha256": "92b84792c2a49731c821d062b2356308b345dc31622116ccb21e2df829e88c9a",
+      "bytes": 412
+    }
+  ],
+  "items_ingested": [
+    {
+      "item_id": "BI-P2B-0010",
+      "path": "items/BI-P2B-0010.json",
+      "sha256": "421ad1069533835a8af69abedd21529d7b503173901ef7b89b70baf793ff55de",
+      "status": "human_review",
+      "schema_valid": true
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": "litsynth/run3/raw/SD2-TP1-00075/prompt_user.txt",
+      "sha256": "630c50f056f3ae7968f99f23e55c04641cbe1f339dbb0f97fba1630406c402de",
+      "bytes": 26381
+    },
+    {
+      "path": "litsynth/run3/raw/SD2-TP1-00075/response.json",
+      "sha256": "c4fa0f27305b6786eded2780e92d492198d2dfcbf5ce1c7cc47fb4f433c26cef",
+      "bytes": 7539
+    }
+  ],
+  "ingested_at": "2026-11-03T18:41:49Z",
+  "ingested_by": "EXECUTOR"
+}

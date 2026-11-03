@@ -224,8 +224,8 @@ LEGEND = [["field", "meaning"],
           ["evidence strength", "multi_source_supported: >= 2 independent papers (DR-LIT-IND-1 v2) among core / cited members; "
                                 "review_supported: a review_synthesis member; single_source_supported: one paper (D-045, D-048)"],
           ["leakage_check", "leakage_check v1 on the prompt (ClimRR named, column / cell, paper, hidden exact value, 'according to')"],
-          ["lint_flags", rl.VERSION + ": the reviewer's checklist; no item was edited. Rules: "
-                         + "; ".join(f"{r} = {d}" for r, d in rl.RULES.items())],
+          ["lint_flags", rl.VERSION_V1 + ": the reviewer's checklist; no item was edited. Rules: "
+                         + "; ".join(f"{r} = {d}" for r, d in rl.rules(rl.VERSION_V1).items())],
           ["coordinator_disposition / notes", f"from {COORDINATOR_NOTES_PATH.name}, verbatim"],
           ["kaiyuan_disposition", "accept | accept_with_edits | reject | regenerate (a reviewer vocabulary; schema v2's disposition enum is "
                                   "accept / accept_after_edit / reject / needs_revision --- the next package maps it)"],
@@ -259,3 +259,82 @@ def inputs() -> tuple:
 
 
 items_csv = p2a.seeds_csv
+
+
+# --- v2 (mentor-export package, 2026-11-03) --------------------------------------------------------------------------
+# The same workbook over the *current* items of the items index (run 2 for 0001-0009, run 3 for 0010), with rubric lint
+# v1a, the COORDINATOR notes column unchanged, and the COORDINATOR-proposed texts written into `edited_prompt` /
+# `edited_reference_integrated` with a new column `edit_origin` = coordinator_proposed (recorded, not frozen). v1 and its
+# CSV are kept as built.
+
+WORKBOOK_V2_PATH = REVIEW_DIR / "P2b_items_review_v2.xlsx"
+ITEMS_CSV_V2_PATH = REVIEW_DIR / "P2b_items_review_v2.csv"
+LINT_V1A_PATH = s2.ART.parent / "rubric_lint_v1a.json"
+EDIT_ORIGIN_COL = "edit_origin"
+EDITED_COLS = {"edited_prompt": "edited_prompt", "edited_reference_integrated": "edited_reference_integrated"}
+
+
+def item_rows_v2(items: list[dict], packets: dict, lint: dict, notes: dict, edits: dict) -> list[list]:
+    """`item_rows` with `edit_origin` after `edited_reference_integrated` and the proposed texts filled in."""
+    rows = item_rows(items, packets, lint, notes)
+    at = rows[0].index("edited_reference_integrated") + 1
+    out = [rows[0][:at] + [EDIT_ORIGIN_COL] + rows[0][at:]]
+    for r in rows[1:]:
+        e = edits.get(r[0])
+        r = list(r)
+        if e:
+            for col, key in EDITED_COLS.items():
+                r[rows[0].index(col)] = e[key]
+        out.append(r[:at] + [e["edit_origin"] if e else ""] + r[at:])
+    return out
+
+
+def overview_rows_v2(man2: dict, man3: dict, index: dict, lint: dict, notes: dict, items: list[dict], edits: dict) -> list[list]:
+    rows = overview_rows(man2, lint, notes, items)
+    rows += [["run 3 (BI-P2B-0010 only)", f"{man3['generator']['version']} on {man3['packets']['version']} "
+                                          f"({man3['packets']['only']}, at {man3['source_commit'][:7]}); "
+                                          f"{man3['counts']['deterministic_pass']} / {man3['counts']['items']} deterministic_pass, "
+                                          f"{man3['counts']['leakage_flags']} leakage flags, no corrective turn; checks reproduced "
+                                          f"{man3['checks_reproduced']}"],
+             ["run 3 tarball sha256", man3["tarball"]["sha256"]],
+             ["items index", "; ".join(f"{x['item_id']}: {x['current']['run']}" for x in index["items"])
+              + "; superseded: " + ", ".join(f"{x['item_id']} {v['run']} ({v['index_status']})" for x in index["items"]
+                                            for v in x["versions"] if v["index_status"] != "current")],
+             ["COORDINATOR-proposed edits", f"{len(edits)} items ({', '.join(edits)}): edited_prompt and edited_reference_integrated, "
+                                            "edit_origin = coordinator_proposed; recorded, not frozen (Kaiyuan confirms or rewrites)"]]
+    return rows
+
+
+LEGEND_V2 = [r for r in LEGEND if r[0] != "lint_flags"] + [
+    ["lint_flags", rl.VERSION + ": the reviewer's checklist; no item was edited. Rules: "
+                   + "; ".join(f"{r} = {d}" for r, d in rl.rules(rl.VERSION).items())],
+    ["edit_origin", "coordinator_proposed: the edited_prompt / edited_reference_integrated cells hold the COORDINATOR's proposed "
+                    "texts (2026-11-03), not yet confirmed; empty: no edit proposed"],
+    ["BI-P2B-0010", "the row is the run-3 version (packets v3b); the COORDINATOR notes column is unchanged and refers to the "
+                    "run-2 version it superseded"],
+]
+
+
+def inputs_v2() -> tuple:
+    """(run-2 manifest, run-3 manifest, items index, current items in id order, {item_id: packet}, lint v1a, notes,
+    {item_id: file sha256})."""
+    from climrr import litsynth_run3 as s3
+    load = lambda p: json.loads(Path(p).read_text(encoding="utf-8"))  # noqa: E731
+    index = load(s3.INDEX_PATH)
+    items = s3.current_items()
+    packets = {it["item_id"]: s2.packet_for_item(it) for it in items}
+    item_sha = {x["item_id"]: x["current"]["sha256"] for x in index["items"]}
+    return (load(s2.MANIFEST_PATH), load(s3.MANIFEST_PATH), index, items, packets, load(LINT_V1A_PATH), read_coordinator_notes(),
+            item_sha)
+
+
+def workbook_sheets_v2(man2: dict, man3: dict, index: dict, items: list[dict], packets: dict, lint: dict, notes: dict,
+                       item_sha: dict, edits: dict) -> list[tuple]:
+    v1 = {name: widths for name, _, widths in workbook_sheets(man2, items, packets, lint, notes, item_sha)}
+    at = ITEMS_HEADER.index("edited_reference_integrated") + 1
+    return [("OVERVIEW", overview_rows_v2(man2, man3, index, lint, notes, items, edits), v1["OVERVIEW"]),
+            ("ITEMS", item_rows_v2(items, packets, lint, notes, edits), v1["ITEMS"][:at] + [22] + v1["ITEMS"][at:]),
+            ("PROVENANCE", provenance_rows(items, packets, item_sha), v1["PROVENANCE"]),
+            ("GROUPS_CITED", group_rows(items, packets), v1["GROUPS_CITED"]),
+            ("LINT", lint_rows(lint), v1["LINT"]),
+            ("Legend", LEGEND_V2, v1["Legend"])]

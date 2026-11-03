@@ -124,7 +124,7 @@ def test_the_lint_report_rebuilds_and_edits_nothing(items):
     report = json.loads((s2.ART / "rubric_lint_v1.json").read_text(encoding="utf-8"))
     strengths = {it["item_id"]: s2.packet_at_source(it["review"]["history"][0]["seed_id"])[0]["checks_input"]["group_strength"]
                  for it in items}
-    again = rl.lint(items, strengths)
+    again = rl.lint(items, strengths, rl.VERSION_V1)
     assert {k: report[k] for k in again} == again and report["edits_made"] == 0
     assert report["totals"]["all"] == 25 and [x["n_flags"] for x in report["items"]] == [2, 3, 2, 4, 2, 2, 1, 7, 1, 1]
 

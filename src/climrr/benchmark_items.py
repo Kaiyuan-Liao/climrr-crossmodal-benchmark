@@ -323,6 +323,13 @@ def validity(item: dict, columns: list[str] | None = None) -> dict:
 # --- synthesis post-checks (pilot P2b-prep; litsynth_agent.py) ---------------------------------
 
 SYNTH_CHECK_VERSION = "synthesis_post_checks v2.2"
+# v2.3 (mentor-export package, 2026-11-03): v2.2 plus `MODEL_SOURCE_RES` --- a reference text or prompt that cites the
+# model, projection, data or table as its source ("The model shows ..."). Opt-in (`check_version=`): the default stays
+# v2.2, which the frozen litsynth_agent v3.2 runs and runs 2 and 3 are reproduced with; v2.3 was a report-only re-run.
+SYNTH_CHECK_VERSION_V23 = "synthesis_post_checks v2.3"
+SYNTH_CHECK_VERSIONS = (SYNTH_CHECK_VERSION, SYNTH_CHECK_VERSION_V23)
+MODEL_SOURCE_RES = (re.compile(r"\b(the|this|our) (model|projection|modeled projection|data|dataset|table) (shows?|indicates?|projects?|suggests?)\b", re.I),
+                    re.compile(r"\bmodeled projection shows\b", re.I))
 INTERNAL_ID_RE = re.compile(r"\b(?:LS|LG|LC|SD[12]|PK|BI)-[A-Za-z0-9_-]+|\bTP\d+-\d+\b")
 COLUMN_LIKE_RE = re.compile(r"\b[A-Za-z][A-Za-z0-9]*_[A-Za-z0-9_]+\b")  # an identifier such as heatindex_HIS_Day95
 SCENARIO_NAME_RE = re.compile(r"\b(?:RCP|SSP)\s?\d(?:\.\d)?(?:\s?-\s?\d(?:\.\d)?)?\b|\bCMIP\d\b", re.I)
@@ -417,11 +424,25 @@ def text_leakage(text: str, columns: list[str] | None = None, forbidden: list[st
     return flags
 
 
+def model_source_flags(text: str) -> list[str]:
+    """v2.3: the phrases citing the model / projection / data / table as the source; a match inside an earlier pattern's
+    match ("The modeled projection shows" hits both patterns) is flagged once. Case-insensitive."""
+    spans: list[tuple[int, int]] = []
+    out = []
+    for rx in MODEL_SOURCE_RES:
+        for m in rx.finditer(text):
+            if not any(a <= m.start() and m.end() <= b for a, b in spans):
+                spans.append(m.span())
+                out.append(f"source phrase (v2.3): {m.group(0)}")
+    return out
+
+
 def _sentences(xs) -> list[dict]:
     return [x for x in xs if isinstance(x, dict) and isinstance(x.get("sentence"), str)] if isinstance(xs, list) else []
 
 
-def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns: list[str] | None = None) -> dict:
+def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns: list[str] | None = None,
+                          check_version: str = SYNTH_CHECK_VERSION) -> dict:
     """Deterministic checks on a synthesized item (pilot P2b). `tagged` is the model's decomposed reference answer:
     {"table_pattern": [{sentence, pattern_ids}], "literature_interpretation": [{sentence, group_ids, hedged}],
     "integrated": str, "rubric_points": [{field, point, source_ids}]}; `checks_input` comes from the seed packet. Returns
@@ -430,7 +451,11 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
     v2.1 (D-055a): a number or number-word in a literature sentence tagged with group ids, or in a rubric point whose
     `source_ids` name groups, also passes when it appears in those groups' label or member statements
     (`checks_input.group_texts`; `literature_trace`). Table-pattern sentences, the integrated paragraph, the prompt and
-    rubric text without group source ids keep the v2 rule."""
+    rubric text without group source ids keep the v2 rule.
+
+    v2.3 (`check_version=SYNTH_CHECK_VERSION_V23`): also `model_source_flags` on the prompt and the reference texts."""
+    if check_version not in SYNTH_CHECK_VERSIONS:
+        raise ItemError(f"unknown post-check version {check_version!r}")
     cols = columns if columns is not None else column_names()
     reasons: list[str] = []
     tp_s, lit_s = _sentences(tagged.get("table_pattern")), _sentences(tagged.get("literature_interpretation"))
@@ -498,12 +523,14 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
     reasons += [f"prompt leakage: {f}" for f in prompt_extra]
     for w, t in texts:
         reasons += [f"{w} leakage: {f}" for f in text_leakage(t, cols, checks_input.get("forbidden_strings", []))]
+    if check_version == SYNTH_CHECK_VERSION_V23:
+        reasons += [f"{w} leakage: {f}" for w, t in [("prompt", item.get("prompt") or "")] + texts for f in model_source_flags(t)]
 
     schema = schema_errors(item)
     reasons += [f"schema: {e}" for e in schema]
     if not schema:
         reasons += [f"consistency: {e}" for e in consistency_errors(item, cols)]
-    return {"check_version": SYNTH_CHECK_VERSION, "pass": not reasons, "reasons": reasons,
+    return {"check_version": check_version, "pass": not reasons, "reasons": reasons,
             "checks": {"numbers_untraced": [n for _, n in untraced], "number_words_untraced": [x for _, x in words],
                        "exact_values_in_graded_text": [n for _, n in exact_hits], "prompt_leakage": leak, "schema_errors": schema,
                        "texts_traced_to_literature": [every[i][0] for i in sorted(lit)],

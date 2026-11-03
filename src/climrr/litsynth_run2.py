@@ -96,10 +96,19 @@ def git_blob(commit: str, rel: str) -> bytes:
     return subprocess.run(["git", "show", f"{commit}:{rel}"], cwd=REPO_ROOT, capture_output=True, check=True).stdout
 
 
-def packet_at_source(seed_id: str) -> tuple[dict, str]:
-    """(the v3a packet the run read, its SHA-256), from the source commit --- not the working tree, which carries v3b."""
-    blob = git_blob(SOURCE_COMMIT, f"{PACKETS_REL}/PK-{seed_id}.json")
+def packet_at_source(seed_id: str, commit: str = SOURCE_COMMIT) -> tuple[dict, str]:
+    """(the packet the run read, its SHA-256), from the run's source commit (default run 2's, packets v3a) --- not the
+    working tree, which carries v3b."""
+    blob = git_blob(commit, f"{PACKETS_REL}/PK-{seed_id}.json")
     return json.loads(blob.decode("utf-8")), hashlib.sha256(blob).hexdigest()
+
+
+def packet_for_item(item: dict) -> dict:
+    """The packet an item was built from: read at the item's own `source_commit`, checked against its packet SHA-256."""
+    h = item["review"]["history"][0]
+    packet, sha = packet_at_source(h["seed_id"], h["source_commit"])
+    _check(sha == h["packet_sha256"], f"{item['item_id']}: packet at {h['source_commit'][:7]} differs from the item's packet hash")
+    return packet
 
 
 def read_items(path: Path) -> list[dict]:
@@ -237,7 +246,7 @@ def _as_candidate(item: dict) -> dict:
     return x
 
 
-def reproduce_checks(items: list[dict], columns: list[str] | None = None) -> dict:
+def reproduce_checks(items: list[dict], columns: list[str] | None = None, commit: str = SOURCE_COMMIT) -> dict:
     """Per item: (a) the item re-assembled by the pinned agent from its final raw response equals the delivered item
     (review aside); (b) `synthesis_post_checks` v2.2 on the delivered item and its v3a packet equals the recorded final check;
     (c) for a format-corrective item, the same on the first reply equals the recorded `first_check`. Raises on a difference."""
@@ -245,7 +254,7 @@ def reproduce_checks(items: list[dict], columns: list[str] | None = None) -> dic
     out = []
     for it in items:
         h = it["review"]["history"][0]
-        packet, _ = packet_at_source(h["seed_id"])
+        packet, _ = packet_at_source(h["seed_id"], commit)
         common = {k: h[k] for k in ("model", "prompt_hash", "generation_timestamp", "packet_sha256", "system_prompt_sha256")}
         obj = agent.extract_item(h["raw_response"])
         _check(len(h["raw_response"]) == h["raw_response_chars"], f"{it['item_id']}: raw response truncated")
@@ -279,7 +288,7 @@ def excluded_files(src: Path) -> list[dict]:
             for p in sorted((_run(src) / "raw").rglob("*")) if p.is_file()]
 
 
-def human_review_item(item: dict, at: str) -> dict:
+def human_review_item(item: dict, at: str, note: str = HUMAN_REVIEW_NOTE, by: str = "EXECUTOR (scripts/ingest_litsynth.py)") -> dict:
     """The D-033 lifecycle step deterministic_pass -> human_review; nothing else changes."""
     _check(item["review"]["status"] == "deterministic_pass", f"{item['item_id']}: status {item['review']['status']}")
     x = copy.deepcopy(item)
@@ -288,7 +297,7 @@ def human_review_item(item: dict, at: str) -> dict:
     x["review"]["mentor_disposition"] = None
     x["review"]["final_frozen"] = None
     x["review"]["history"].append({"event": "human_review", "from_status": "deterministic_pass", "decision": DECISION, "at": at,
-                                   "by": "EXECUTOR (scripts/ingest_litsynth.py)", "note": HUMAN_REVIEW_NOTE})
+                                   "by": by, "note": note})
     return x
 
 
