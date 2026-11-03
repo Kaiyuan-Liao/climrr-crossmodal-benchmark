@@ -626,3 +626,98 @@ source-phrase check.
 
 Nothing is frozen; `final_frozen` is null for every item. The support map is one reader's judgement (EXECUTOR). FWI
 column confirmation remains open (no FWI item in the pilot).
+
+# Mentor sheet v2 --- provenance correction LS-199098498-04, DR-DESC-1 v2, edited answers v2
+
+COORDINATOR work package "Mentor sheet v2" (2026-11-03). **No model call. Nothing frozen.** Decisions D-057, D-055c.
+
+## 32. Commits and evidence runs
+
+| | |
+| --- | --- |
+| Branch | `work/meeting-2026-10-22`, from head `ffafe31` |
+| **Build commit** | __BUILD__: corrections v1, descriptor rules v2, manifest, modules, scripts, tests, the edits v2, the support map v2, the overlay record, the workbook v3 CSV, the mentor `.md` and checks, docs |
+| **Evidence runs** | __RUNS__ |
+| Remote | pushed at the end of the package (authorized) |
+
+## 33. Data and checksums
+
+| Object | SHA-256 | Notes |
+| --- | --- | --- |
+| **`data/metadata/benchmark/provenance_corrections_v1.yaml`** | **`ea981346b7fa271da1ee2ecadce125b9502cbac2caee31d74b653653c06282f1`** | manifest-pinned; one record, `LS-199098498-04` |
+| **`data/metadata/benchmark/descriptor_rules_v2.yaml`** | **`1e5554150b160f994009167d99f4a4afe79645cc55b26829e916c47777ce2ab7`** | manifest-pinned; v1 `5c2090a7…4650` unchanged |
+| `artifacts/litstatements/corrections/provenance_corrections_v1_applied.json` | `9bbd39d924ab3314929b6fc54c2d67244ebfc76efe1d4ddf61ede85491d5e3c5` | overlay record; 0 files modified |
+| `P2b_coordinator_edits_2026-11-03_v2.yaml` | `a1b011d4179c9c57eb3a05911e15b6264a84bde6726c43a9c673faf729c19ebf` | section C verbatim; pinned |
+| `P2b_mentor_support_map_v2.yaml` | `bde0db83e8704e70b20c1960e18c04aa12b21393e516580d64ef1c537982fd3d` | EXECUTOR reading |
+| `P2b_items_review_v3.csv` (tracked) | `39346e18b454c6586e758a9b78ffda1e7c5da73a8c80483e405a6361ef64fac3` | ITEMS sheet of the v3 workbook (`.xlsx` gitignored) |
+| `MENTOR_PILOT_ITEMS_2026-11-05_v2_checks.json` | `f1c883cf3588e4e608d82ea880c4394b68e80aff98df27b70756c103da090d25` | leakage v2.3, verdicts, descriptors v2 |
+| **`MENTOR_PILOT_ITEMS_2026-11-05.md`** | **`8362d765d8292f29aa8a6fd2a3d463d730c93dfe9b319ae3894776ea0766da22`** | v2; same content as the gitignored `.xlsx`; v1 (`8420ec30…b5fb`) stays in Git at `37c7037` |
+
+## 34. Methods and readings for the COORDINATOR
+
+- **Re-slice: `pending_polaris`.** The run-2 local paper copy holds only the agent's passages, and neither configured
+  corpus root on this machine holds `98/199098498.json`. `reslice_correction` reads the raw paper JSON, checks its SHA-256
+  against the recorded `945df7b9…5218`, and finds the corrected passage exactly (offsets in the section string, as the
+  index and the agent's `evidence` count them); it also confirms the original span. The Polaris one-liner is in
+  `PILOT_P2B_DESIGN.md` section 15.
+- **`provenance_corrections_applied` is an overlay, not an item edit.** The item files are pinned by their run manifests
+  and the items index; rewriting them would break the ingest evidence. The record is in the overlay file;
+  `p2b_mentor_v2.item_with_corrections` returns the overlaid item. For confirmation.
+- **The original passage type was already `cited_finding`** (role `cited_candidate`), so the correction changes the
+  passage, not the strength inputs.
+- **Workbook v3 is a new file**; v2 (built with the v1 texts) is kept as built, as v1 was. Questions for items 1, 2, 3, 5
+  are the v1 questions (the work package gives none); item 1 is v1 in full.
+- **Sentence support.** The v2 edits cite `…-driver-c2-001` for 0003 and 0007 and `…-mechanism-c1-021` for 0006 --- packet
+  groups the generated items do not cite; the paper side lists them, marked "cited by the edited answer, not by the
+  generated item" (`added_by_edit` in the support map). The bracketed continuation note of v1 is removed.
+- **DR-DESC-1 v2 readings** (D-055c): v2 class before v1's low-baseline phrase; increase only; `round(value, 1)`.
+
+## 35. Results
+
+**Correction.** `LS-199098498-04` overlaid; reslice **`pending_polaris`**. `…-driver-c1-008`: `multi_source_supported`
+before and after --- group file (3 core / cited papers of 4: 158091651, 199098498, 5838629) and all eight packets (0003,
+0007--0009: 3 papers; 0004--0006, 0010: 2 cited papers, 199098498 and 5838629). Items with `provenance_corrections_applied:
+[LS-199098498-04]`: **0003--0010**.
+
+**Descriptors v2.** 0006: `magnitude_class` "rising from rare to common", `anchor_pair` "from about 1 day to about 45
+days" (baseline 1.351 -> 45.239 days, ratio 33.5). 0007: `negligible_regions: [Alaska]` (+0.0085 days), `smallest`
+"essentially no change: Alaska", `largest` "the largest increase: Southeast". 0001, 0003, 0010 unchanged from v1.
+
+**Leakage v2.3 on the v2 texts:** 0 hits (10 texts).
+
+**Sentence-support check v2** (27 clauses: 17 supported, 2 guardrails, 5 partially supported, 3 supported by a packet group
+the generated item does not cite, **0 not supported by a verbatim passage**; 8 clauses --- 6 supported, 2 partially --- rest
+on the corrected passage and so on the Polaris re-slice):
+
+| item | clause | verdict | why |
+| --- | --- | --- | --- |
+| 0003 | "Warming is the main driver" | partially | warming as a driver: `…-driver-c2-001` + the corrected passage; "main" rests on one paper relaying a cited finding, unhedged in this lead clause (hedged in the next) |
+| 0003 | "One study suggests that land–atmosphere feedbacks appear to be a stronger factor in sustaining heat waves in the Southwest." | partially | the passage says "at southern latitudes"; the Southwest is where the forecast model *misrepresents* the feedbacks; forecast-skill finding |
+| 0010 | "Warming is the main driver" | partially | as 0003 |
+| 0010 | "The change is scenario-dependent" | partially | generalises one study's heat-wave duration result to the table quantity |
+| 0010 | "one study of the eastern United States reports heat-wave duration almost one day longer …" | partially | duration result verbatim; "eastern United States" is the extraction agent's region tag, not in the passage |
+| 0003 | "global warming is expected to increase the frequency, intensity and duration of heat waves" | uncited packet group | `…-driver-c2-001`; full clause = `LS-14006228-04` (review) |
+| 0006 | "Because the heat index combines temperature and humidity" | uncited packet group | `…-mechanism-c1-021` (definition; two background passages) |
+| 0007 | "global warming is expected to raise heat-wave frequency, intensity and duration" | uncited packet group | `…-driver-c2-001` |
+
+The two v1 "not supported by a verbatim passage" clauses are gone (the corrected passage states the claim, hedged and
+attributed); the urban-heat-island clauses (partial in v1) are removed; 0007 "every NCA5 climate region" and 0010 "in
+the table used here" are fixed.
+
+**Validation.** __VALIDATION__
+
+## 36. Escalations
+
+1. **Re-slice pending on Polaris** (one line, `PILOT_P2B_DESIGN.md` section 15). Until it returns `exact`, eight clauses (six
+   supported) rest on a passage verified by grep, not by offsets.
+2. **Five clauses partially supported** (table above), for Kaiyuan before Thursday: in particular "Warming is the main
+   driver" (0003, 0010) states unhedged what one paper relays, and 0003's "in the Southwest" is not what the passage says.
+3. **`…-driver-c1-008` multi-source by rule, not by claim** (escalation 2 of section 30 stands): in four packets it is two
+   cited papers saying different things.
+4. **DR-DESC-1 v2 edge case**: "baseline < 2 days" alone labels a small change from a small baseline "rising from rare
+   to common" (D-055c); no pilot item has one.
+
+## 37. Limitations
+
+Nothing is frozen; `final_frozen` is null for every item; the packets are v1-descriptor packets. The support map v2 is one
+reader's judgement (EXECUTOR).

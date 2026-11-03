@@ -1,0 +1,183 @@
+# Sentence-support check v2 of the COORDINATOR-proposed texts v2 (P2b_coordinator_edits_2026-11-03_v2.yaml) against
+# each item's packet groups and table pattern, with the reviewer-verified provenance correction of LS-199098498-04
+# applied (D-057; data/metadata/benchmark/provenance_corrections_v1.yaml). EXECUTOR reading, 2026-11-03 (mentor sheet v2
+# package, section C): every clause of the edited reference answer (an exact substring of it), what supports it, and a
+# verdict. The mentor sheet's "Paper side" and "Original passages" are built from `groups` / `members` here.
+#
+# Verdicts (as v1):
+#   supported                          the group / pattern states it (member statement AND verbatim passage)
+#   partially_supported                a part is supported; the note names what is not
+#   not_supported_by_verbatim_passage  only a member's paraphrase states it; the recorded verbatim passage does not
+#   supported_by_uncited_packet_group  supported by a group in the item's packet that the generated item does not cite
+#                                      (the v2 edit cites it: `added_by_edit` on the group)
+#   guardrail                          a framing guardrail (item guardrails; data dictionary), not an evidence claim
+# `conditional_on`: the corrected passage's re-slice (pending on Polaris until the one-line check runs; D-057).
+# Group and statement ids are the packet's (v3a at 1f175da for 0001-0009, v3b at 157c96c for 0010).
+support_map_version: mentor_support_map v2
+supersedes: P2b_mentor_support_map_v1.yaml
+edits: P2b_coordinator_edits_2026-11-03_v2.yaml
+corrections: provenance_corrections_v1.yaml
+by: EXECUTOR
+date: "2026-11-03"
+items:
+  - item_id: BI-P2B-0001
+    table_only: true
+    groups: []
+    clauses:
+      - text: "In Georgia, the number of summer days with a dangerous heat index (above 95 °F) is projected to increase by mid-century (2045–2054) under RCP8.5, roughly tripling relative to the modeled historical baseline."
+        support: [TP1-00018]
+        verdict: supported
+        note: "unchanged from v1: mean 15.8 -> 44.9 days over 1,031 cells, every cell increases; 'roughly tripling' is DR-DESC-1 (v1 and v2 agree; ratio 2.8)"
+      - text: "RCP8.5 is one high-emissions scenario, not a forecast, and the baseline is model output, not an observation."
+        support: [guardrails, "dictionary_extracted.txt:101-102"]
+        verdict: guardrail
+        note: "the dictionary: 'A historical period (1995 to 2004) is also modeled'"
+  - item_id: BI-P2B-0003
+    groups:
+      - group_id: LG-extreme_heat_v1-driver-c1-008
+        members: [LS-199098498-04, LS-158091651-01]
+      - group_id: LG-extreme_heat_v1-driver-c2-001
+        added_by_edit: true
+        members: [LS-14006228-04, LS-235602877-05, LS-221504407-03, LS-199381463-04]
+    clauses:
+      - text: "California is projected to see a moderate increase (about half again as many) in summer days with a dangerous heat index (above 95 °F) by mid-century (2045–2054) under RCP8.5, one high-emissions scenario."
+        support: [TP1-00071]
+        verdict: supported
+        note: "unchanged from v1: mean 15.4 -> 24.4 days over 2,827 cells; DR-DESC-1 'a moderate increase (about half again as many)' (v1 and v2 agree)"
+      - text: "Warming is the main driver"
+        support: [LG-extreme_heat_v1-driver-c1-008/LS-199098498-04, LG-extreme_heat_v1-driver-c2-001]
+        verdict: partially_supported
+        conditional_on: "LS-199098498-04 re-slice (pending_polaris)"
+        note: "warming as a driver: LG-extreme_heat_v1-driver-c2-001 (4 papers; in the packet, not cited by the generated item) and the corrected passage. 'main' rests on the corrected passage of one paper relaying a cited finding (Schoof et al. 2019), and this lead clause states it unhedged; the clause after the colon hedges it ('one study, citing earlier CMIP5 work')"
+      - text: "one study, citing earlier CMIP5 work, identifies large-scale warming rather than changes in regional circulation as the primary driver of future changes in extreme heat"
+        support: [LG-extreme_heat_v1-driver-c1-008/LS-199098498-04]
+        verdict: supported
+        conditional_on: "LS-199098498-04 re-slice (pending_polaris)"
+        note: "the corrected passage (D-057): '... in CMIP5 projections ... finds that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat (Schoof et al 2019).' One paper, cited_finding; hedged and attributed. The passage says 'recent work'; 'earlier' is relative to the citing paper"
+      - text: "global warming is expected to increase the frequency, intensity and duration of heat waves"
+        support: [LG-extreme_heat_v1-driver-c2-001]
+        verdict: supported_by_uncited_packet_group
+        note: "LG-extreme_heat_v1-driver-c2-001 is in the packet and cited by the v2 edit, not by the generated item. The full clause is one passage (LS-14006228-04, review_synthesis: 'the frequency, intensity and duration of heatwaves are likely to increase'); frequency also LS-221504407-03 and LS-199381463-04 (expected / predicted), frequency and intensity LS-235602877-05 (observed, past tense)"
+      - text: "One study suggests that land–atmosphere feedbacks appear to be a stronger factor in sustaining heat waves in the Southwest."
+        support: [LG-extreme_heat_v1-driver-c1-008/LS-158091651-01]
+        verdict: partially_supported
+        note: "hedged now. The passage: feedbacks 'appear to be a stronger factor for heat wave maintenance at southern latitudes, but the NCEP model seems to misrepresent those feedbacks, particularly over the Southwest United States, leading to poor skill in that region'. It names southern latitudes, not the Southwest: the Southwest is where the forecast model misrepresents the feedbacks. A forecast-skill finding, not tied to the projected change"
+  - item_id: BI-P2B-0006
+    groups:
+      - group_id: LG-extreme_heat_v1-driver-c2-001
+        members: [LS-14006228-04, LS-235602877-05, LS-221504407-03, LS-199381463-04]
+      - group_id: LG-extreme_heat_v1-driver-c1-008
+        members: [LS-199098498-04]
+      - group_id: LG-extreme_heat_v1-mechanism-c1-021
+        added_by_edit: true
+        members: [LS-199098498-01, LS-269945312-01]
+      - group_id: LG-extreme_heat_v1-mechanism-c2-003
+        members: [LS-239996006-02]
+    clauses:
+      - text: "In Alabama, summer days with a dangerous heat index (above 105 °F) are projected to rise from rare — about 1 day per summer in the modeled historical baseline — to about 45 days by the end of the century (2085–2094) under RCP8.5, one high-emissions scenario."
+        support: [TP1-00589, "DR-DESC-1 v2"]
+        verdict: supported
+        note: "mean 1.4 -> 45.2 days over 934 cells, every cell increases; DR-DESC-1 v2 'rising from rare to common', 'from about 1 day to about 45 days' (ratio 33.5, baseline 1.4 days). The v1 'more than tripling' that understated it is gone. 'about 1 day' / 'about 45 days' are also v1 anchors in the frozen packet"
+      - text: "The rise is driven by warming"
+        support: [LG-extreme_heat_v1-driver-c2-001, LG-extreme_heat_v1-driver-c1-008/LS-199098498-04]
+        verdict: supported
+        conditional_on: "LS-199098498-04 re-slice (pending_polaris)"
+        note: "no 'main' or 'primarily' any more; warming as a driver: LG-extreme_heat_v1-driver-c2-001 (4 papers) and the corrected passage"
+      - text: "global warming is expected to increase the frequency, intensity and duration of heat waves"
+        support: [LG-extreme_heat_v1-driver-c2-001]
+        verdict: supported
+        note: "the full clause is one passage (LS-14006228-04, review_synthesis: 'the frequency, intensity and duration of heatwaves are likely to increase'); frequency in 3 more papers, intensity in LS-235602877-05 (past tense). 'duration' rests on the one review passage"
+      - text: "one study, citing earlier CMIP5 work, identifies large-scale warming rather than regional circulation change as the primary driver of future changes in extreme heat"
+        support: [LG-extreme_heat_v1-driver-c1-008/LS-199098498-04]
+        verdict: supported
+        conditional_on: "LS-199098498-04 re-slice (pending_polaris)"
+        note: "the corrected passage (D-057); see BI-P2B-0003"
+      - text: "Because the heat index combines temperature and humidity"
+        support: [LG-extreme_heat_v1-mechanism-c1-021]
+        verdict: supported_by_uncited_packet_group
+        note: "LG-extreme_heat_v1-mechanism-c1-021 (review_supported in this packet, 11 papers) is in the packet and cited by the v2 edit, not by the generated item. LS-199098498-01: 'the heat index ... combines temperature and relative humidity'; LS-269945312-01: 'a metric that combines air temperature and relative humidity'. A definition (both passages background)"
+      - text: "one study suggests the magnifying effect of humidity on heat stress grows as temperatures rise."
+        support: [LG-extreme_heat_v1-mechanism-c2-003/LS-239996006-02]
+        verdict: supported
+        note: "single study, hedged"
+  - item_id: BI-P2B-0007
+    groups:
+      - group_id: LG-extreme_heat_v1-driver-c1-008
+        members: [LS-199098498-04, LS-158091651-01]
+      - group_id: LG-extreme_heat_v1-driver-c2-001
+        added_by_edit: true
+        members: [LS-14006228-04, LS-235602877-05, LS-221504407-03, LS-199381463-04]
+      - group_id: LG-extreme_heat_v1-mechanism-c2-003
+        members: [LS-239996006-02]
+    clauses:
+      - text: "By mid-century (2045–2054) under RCP8.5, one high-emissions scenario, summer days with a dangerous heat index (above 95 °F) increase in the eight NCA5 climate regions covered, with the largest increase in the Southeast and essentially no change in Alaska."
+        support: [TP1-02785, "DR-DESC-1 v2"]
+        verdict: supported
+        note: "the eight regions with a State label in the table, all with a positive change; largest Southeast (+27.0 days); Alaska +0.0085 days (0.0 at one decimal): DR-DESC-1 v2 negligible_regions [Alaska], 'essentially no change: Alaska'. 'increase in the eight' includes Alaska's increase in sign only; the clause says so by naming it 'essentially no change'. The two regions not covered are named on the Table side"
+      - text: "The increases are driven by warming"
+        support: [LG-extreme_heat_v1-driver-c1-008/LS-199098498-04, LG-extreme_heat_v1-driver-c2-001]
+        verdict: supported
+        conditional_on: "LS-199098498-04 re-slice (pending_polaris)"
+        note: "the corrected passage (cited group) and LG-extreme_heat_v1-driver-c2-001 (in the packet; cited by the v2 edit, not by the generated item)"
+      - text: "global warming is expected to raise heat-wave frequency, intensity and duration"
+        support: [LG-extreme_heat_v1-driver-c2-001]
+        verdict: supported_by_uncited_packet_group
+        note: "as in BI-P2B-0003: in the packet, cited by the v2 edit, not by the generated item; the full clause is LS-14006228-04"
+      - text: "one study, citing earlier CMIP5 work, identifies large-scale warming rather than regional circulation change as the primary driver of future changes in extreme heat"
+        support: [LG-extreme_heat_v1-driver-c1-008/LS-199098498-04]
+        verdict: supported
+        conditional_on: "LS-199098498-04 re-slice (pending_polaris)"
+        note: "the corrected passage (D-057); see BI-P2B-0003"
+      - text: "One study finds that land–atmosphere feedbacks appear to be a stronger factor for heat-wave maintenance at southern latitudes"
+        support: [LG-extreme_heat_v1-driver-c1-008/LS-158091651-01]
+        verdict: supported
+        note: "verbatim in the passage ('appear to be a stronger factor for heat wave maintenance at southern latitudes'), now hedged and attributed. A forecast-skill finding of one paper, not tied to the projected change"
+      - text: "one study suggests that humidity magnifies heat stress more as temperatures rise."
+        support: [LG-extreme_heat_v1-mechanism-c2-003/LS-239996006-02]
+        verdict: supported
+        note: "single study, hedged"
+  - item_id: BI-P2B-0010
+    groups:
+      - group_id: LG-extreme_heat_v1-driver-c2-001
+        members: [LS-14006228-04, LS-235602877-05, LS-221504407-03, LS-199381463-04]
+      - group_id: LG-extreme_heat_v1-driver-c1-008
+        members: [LS-199098498-04]
+      - group_id: LG-extreme_heat_v1-mechanism-c2-003
+        members: [LS-239996006-02]
+      - group_id: LG-extreme_heat_v1-pattern-c2-003
+        members: [LS-5882914-02]
+    clauses:
+      - text: "Under RCP8.5, one high-emissions scenario, Florida's summer days with a dangerous heat index (above 95 °F) are projected to roughly triple by mid-century (2045–2054)."
+        support: [TP1-00075]
+        verdict: supported
+        note: "unchanged from v1: mean 25.7 -> 68.2 days over 1,165 cells; 'roughly tripling' (v1 and v2 agree; ratio 2.65)"
+      - text: "Warming is the main driver"
+        support: [LG-extreme_heat_v1-driver-c2-001, LG-extreme_heat_v1-driver-c1-008/LS-199098498-04]
+        verdict: partially_supported
+        conditional_on: "LS-199098498-04 re-slice (pending_polaris)"
+        note: "as in BI-P2B-0003: 'main' rests on the corrected passage of one paper relaying a cited finding, unhedged in this lead clause and hedged in the next"
+      - text: "global warming is expected to raise heat-wave frequency, intensity and duration"
+        support: [LG-extreme_heat_v1-driver-c2-001]
+        verdict: supported
+        note: "the full clause is one passage (LS-14006228-04, review_synthesis); frequency in 3 more papers"
+      - text: "one study, citing earlier CMIP5 work, identifies large-scale warming rather than regional circulation change as the primary driver of future changes in extreme heat"
+        support: [LG-extreme_heat_v1-driver-c1-008/LS-199098498-04]
+        verdict: supported
+        conditional_on: "LS-199098498-04 re-slice (pending_polaris)"
+        note: "the corrected passage (D-057); see BI-P2B-0003"
+      - text: "one study suggests that humidity's magnifying effect on heat stress grows with temperature."
+        support: [LG-extreme_heat_v1-mechanism-c2-003/LS-239996006-02]
+        verdict: supported
+        note: "single study, hedged"
+      - text: "The change is scenario-dependent"
+        support: [LG-extreme_heat_v1-pattern-c2-003/LS-5882914-02]
+        verdict: partially_supported
+        note: "as v1's 'The size of the change depends on the emissions pathway': a generalisation from one study's heat-wave duration result to the change in days above 95 °F heat index, which no cited source states"
+      - text: "one study of the eastern United States reports heat-wave duration almost one day longer under RCP8.5 than under the moderate RCP4.5 scenario."
+        support: [LG-extreme_heat_v1-pattern-c2-003/LS-5882914-02]
+        verdict: partially_supported
+        note: "the duration result is verbatim ('Average heat wave durations estimated under the RCP8.5 scenario were almost 1 day longer than under the RCP4.5 scenario, regardless of the heat wave definition used'). 'of the eastern United States' is the extraction agent's region tag (proposal.region), not in the recorded passage and not verified against the paper text. Heat-wave duration, not the table quantity"
+      - text: "RCP8.5 should be read as one plausible high-emissions future, not a forecast."
+        support: [guardrails]
+        verdict: guardrail
+        note: ""

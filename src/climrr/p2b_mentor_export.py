@@ -281,10 +281,12 @@ def mentor_rows(items: dict, edit_records: dict, smap: dict) -> list[list]:
     return rows
 
 
-def render_md(rows: list[list], readme: list[list] = README_LINES) -> str:
-    out = ["# Pilot items for mentor review --- 2026-11-05", "",
-           "Five pilot benchmark items. Question and reference answer are COORDINATOR-proposed edits, not yet frozen. "
-           "Same content as `MENTOR_PILOT_ITEMS_2026-11-05.xlsx` (sheets ITEMS and README).", "", "## README", ""]
+MD_INTRO = ("Five pilot benchmark items. Question and reference answer are COORDINATOR-proposed edits, not yet frozen. "
+            "Same content as `MENTOR_PILOT_ITEMS_2026-11-05.xlsx` (sheets ITEMS and README).")
+
+
+def render_md(rows: list[list], readme: list[list] = README_LINES, intro: str = MD_INTRO) -> str:
+    out = ["# Pilot items for mentor review --- 2026-11-05", "", intro, "", "## README", ""]
     out += [f"- **{k}.** {v}" for k, v in readme]
     for r in rows[1:]:
         n, iid = r[0].split("\n")
@@ -299,5 +301,5 @@ def render_md(rows: list[list], readme: list[list] = README_LINES) -> str:
     return "\n".join(out).rstrip() + "\n"
 
 
-def sheets(rows: list[list]) -> list[tuple]:
-    return [("ITEMS", rows, MENTOR_WIDTHS), ("README", [list(x) for x in README_LINES], [32, 120])]
+def sheets(rows: list[list], readme: list[list] = README_LINES) -> list[tuple]:
+    return [("ITEMS", rows, MENTOR_WIDTHS), ("README", [list(x) for x in readme], [32, 120])]

@@ -420,3 +420,42 @@ the pushed head of this package:
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
         --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \
         --sleep 5 --source-commit <PINNED_SHA>
+
+## 15. Entailment gap, provenance correction, DR-DESC-1 v2, mentor sheet v2 (D-057, D-055c, 2026-11-03)
+
+**The entailment gap.** The literature-statement pre-check (agent v2, `softqa_agent.locate_passage`) verifies that the
+proposed passage *exists* in the paper --- exact, normalized or prefix-anchor re-slice --- not that it *entails* the
+statement. A prefix-anchor recovery keeps the one sentence at the anchor; when the agent's proposed passage ran on (with
+an ellipsis) to the sentence that carries the claim, the recorded passage can pass and still not contain it.
+`LS-199098498-04` is the case found: its recorded passage is "... is beyond the scope of this study.", while the claim
+(large-scale warming, rather than regional circulation, as the primary driver) is in a later sentence of the same section,
+relaying Schoof et al. (2019). **A reviewer entailment step is now part of item review** (D-057; for the GUIDANCE packet).
+
+**Provenance corrections (D-057).** `data/metadata/benchmark/provenance_corrections_v1.yaml` (pinned) holds reviewer-verified
+corrections; `climrr.litstatements.apply_provenance_corrections` overlays them --- statements, groups, packets and item files
+are unchanged --- and `reslice_correction` measures the corrected passage exactly in the raw paper JSON (whose string
+values are the index's section text). The paper is not on the Mac, so the re-slice is **`pending_polaris`**; from the
+litcollect root, at the pushed commit:
+
+    PYTHONPATH="$CLIMRR_REPO/src" python -c 'import json; from climrr import litstatements as ls; c = ls.load_provenance_corrections()[0]; print(json.dumps(ls.reslice_correction(c, open("sources/full_705k_v2_filtered/98/199098498.json", "rb").read())))'
+
+Expected: `"paper_sha256_match": true`, `"reslice": "exact"`, `"occurrences": 1`, `"original_reslices": true`, and the
+offsets in section "late century results". `scripts/apply_provenance_corrections.py` writes the overlay record
+(`artifacts/litstatements/corrections/provenance_corrections_v1_applied.json`): `LG-extreme_heat_v1-driver-c1-008` stays
+`multi_source_supported` (the member was `cited_finding` before and after) in the group file and in all eight packets that
+carry it; items 0003--0010 get `provenance_corrections_applied: [LS-199098498-04]` (overlay).
+
+**DR-DESC-1 v2 (D-055c).** `descriptor_rules_v2.yaml`: "rising from rare to common" for an increase with ratio > 10 or a
+baseline below 2 days, with its own anchor pair; negligible regions in a regional contrast. Packets stay v1. Mentor items:
+0006 "rising from rare to common", "from about 1 day to about 45 days"; 0007 "essentially no change: Alaska".
+
+**Edited answers v2 and the mentor sheet v2.** `P2b_coordinator_edits_2026-11-03_v2.yaml` (pinned; edit_origin
+`coordinator_proposed_v2`); workbook `P2b_items_review_v3` (v1 and v2 kept as built); support map v2 (EXECUTOR reading);
+`MENTOR_PILOT_ITEMS_2026-11-05.md` rebuilt (`scripts/build_mentor_pilot_items.py`, `src/climrr/p2b_mentor_v2.py`): the
+corrected passage with a one-line note, no prefix-anchor continuation note, the paper side may list a packet group the
+edit cites and the generated item does not, the table side names the two NCA5 regions a regional contrast does not
+cover and the v2 descriptor; README v1 plus one line.
+
+**For the GUIDANCE packet** (a running list; this package opens it):
+
+1. Pre-check verifies passage existence, not entailment; a reviewer entailment step is now part of item review (D-057).

@@ -6,6 +6,12 @@ relative-tercile descriptor (D-041), for a regional contrast the ranking with "l
 horizon, scenario and quantity phrases. Rules and thresholds: `data/metadata/benchmark/descriptor_rules_v1.yaml`,
 read only when its bytes match the manifest pin.
 
+**v2** (`descriptor_rules_v2.yaml`, D-055c) adds, when the rules carry them, the "rising from rare to common" class
+(an increase with ratio > 10 or a baseline below 2 days; its own anchor pair) and `negligible_regions` for a regional
+contrast (a region whose change rounds to 0.0 days; `smallest` then says "essentially no change"). With v1 rules the
+output is v1's, unchanged: the seed packets stay v1 (frozen for the pilot); v2 serves the edited texts and the mentor
+sheet.
+
 `phrases` flattens a descriptor record into the strings the post-checks accept (`checks_input.allowed_descriptors`).
 
 No model call; no table value computed beyond the ratio of two values the pattern stores.
@@ -24,6 +30,7 @@ from climrr.manifest import MANIFEST_PATH, load_entry
 from climrr.paths import REPO_ROOT
 
 RULES_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "descriptor_rules_v1.yaml"
+RULES_V2_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "descriptor_rules_v2.yaml"
 _THRESHOLD = re.compile(r"above (\d+) F\b")
 
 
@@ -55,6 +62,24 @@ def _unit(n: int, unit: str, rules: dict) -> str:
     return unit[:-1] if unit.endswith("s") and n == rules["anchor"]["unit_singular_at"] else unit
 
 
+def _rare_end(n: int, unit: str, r2: dict, rules: dict) -> str:
+    return r2["end_zero"] if n == 0 else r2["end"].format(n=n, unit=_unit(n, unit, rules)).strip()
+
+
+def rare_to_common(mf: str, mt: str, direction: str, rules: dict) -> bool:
+    """v2: an increase with mean_to / mean_from > the ratio bound, or a baseline below the day bound."""
+    r2 = rules["magnitude"].get("rare_to_common")
+    if not r2 or direction != "increase":
+        return False
+    a, b = Decimal(mf), Decimal(mt)
+    return a < Decimal(str(r2["baseline_below"])) or (a > 0 and b / a > Decimal(str(r2["ratio_above"])))
+
+
+def negligible(value: str, rules: dict) -> bool:
+    n = rules["regional"].get("negligible")
+    return bool(n) and round(float(value), n["decimals"]) == n["rounds_to"]
+
+
 def descriptors(p: dict, rules: dict) -> dict:
     """The DR-DESC-1 descriptor record for pattern `p`."""
     v = p["computed_value_or_range"]
@@ -74,6 +99,11 @@ def descriptors(p: dict, rules: dict) -> dict:
                    largest=rules["regional"]["largest"].format(direction=out["direction"], region=names[0]) if names else None,
                    smallest=rules["regional"]["smallest"].format(direction=out["direction"], region=names[-1]) if names else None,
                    magnitude_note="no magnitude class: a regional contrast stores no baseline mean")
+        if rules["regional"].get("negligible"):
+            neg = [r["name"] for r in ranked if negligible(r["value"], rules)]
+            out["negligible_regions"] = neg
+            if neg:
+                out["smallest"] = rules["regional"]["negligible"]["smallest"].format(regions=", ".join(neg))
         return out
     mf, mt = v.get("mean_from"), v.get("mean_to")
     if mf is not None and mt is not None:
@@ -81,7 +111,14 @@ def descriptors(p: dict, rules: dict) -> dict:
         a, b = anchor(mf), anchor(mt)
         out["anchor_pair"] = rules["anchor"]["pair"].format(**{"from": a, "to": b, "unit": _unit(b, unit, rules)}).strip()
         out["anchors"] = [rules["anchor"]["single"].format(n=n, unit=_unit(n, unit, rules)).strip() for n in (a, b)]
-        if Decimal(mf) < Decimal(str(rules["magnitude"]["low_baseline"]["below"])):
+        if rare_to_common(mf, mt, p["direction"], rules):
+            r2 = rules["magnitude"]["rare_to_common"]
+            out["magnitude_class"] = r2["class"]
+            out["anchor_pair"] = r2["pair"].format(**{"from": _rare_end(a, unit, r2, rules), "to": _rare_end(b, unit, r2, rules)})
+            out["anchors"] = [_rare_end(n, unit, r2, rules) for n in (a, b)]
+            out["magnitude_note"] = (f"rising from rare to common (D-055c): ratio {Decimal(mt) / Decimal(mf):.1f}" if Decimal(mf) > 0
+                                     else "rising from rare to common (D-055c): baseline 0") + f", baseline {float(mf):.1f} days"
+        elif Decimal(mf) < Decimal(str(rules["magnitude"]["low_baseline"]["below"])):
             out["magnitude_class"] = rules["magnitude"]["low_baseline"]["phrase"].format(future_anchor=out["anchors"][1])
             out["magnitude_note"] = "baseline mean below 1 day per season: low-baseline phrase, no ratio class"
         else:

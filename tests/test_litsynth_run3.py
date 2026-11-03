@@ -174,11 +174,14 @@ def test_support_map_clauses_are_verbatim_and_cited():
     assert verdicts.count("not_supported_by_verbatim_passage") == 2 and verdicts.count("supported_by_uncited_packet_group") == 1
 
 
-def test_mentor_md_rebuilds(current):
+def test_mentor_md_v1_rebuilds(current):
+    # the tracked Markdown is v2 since the mentor sheet v2 package (tests/test_mentor_v2.py); v1 is compared with the file
+    # as committed at the mentor-export build 37c7037
     _need(sd.PATTERNS_PATH, "artifacts/benchmark/table_patterns_v1.jsonl")
     rows = mx.mentor_rows({it["item_id"]: it for it in current}, mx.edits(), mx.support_map())
     assert rows[0] == mx.MENTOR_HEADER and len(rows) == 6
-    assert mx.render_md(rows) == mx.MENTOR_MD_PATH.read_text(encoding="utf-8")
+    rel = mx.MENTOR_MD_PATH.relative_to(mx.REPO_ROOT).as_posix()
+    assert mx.render_md(rows) == s2.git_blob("37c7037", rel).decode("utf-8")
     assert rows[1][4] == "none — table-only item (pattern identification)"
     assert all("State label provisional (IC-012)" in r[3] for r in rows[1:])
 

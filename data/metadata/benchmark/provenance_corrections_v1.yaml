@@ -1,0 +1,30 @@
+# Reviewer-verified provenance corrections v1 (D-057; mentor sheet v2 package, 2026-11-03).
+#
+# A record replaces the verbatim passage (and passage type) of one literature statement where a reviewer has shown,
+# against the stored paper text, that the passage the extraction agent recorded does not contain the statement's claim
+# and another passage of the same paper does. The statements file (artifacts/litstatements/run2/statements.jsonl,
+# statements_ingested.jsonl) and the groups file (artifacts/litgroups/run2/groups_enriched.jsonl) stay immutable:
+# a correction is an overlay, applied by climrr.litstatements.apply_provenance_corrections, and the original passage
+# is kept here and in every overlaid record.
+#
+# Texts verbatim from the COORDINATOR work package "Mentor sheet v2" (section A). The corrected passage's offsets are
+# not stated here: they are measured by re-slicing it in the paper's own text (climrr.litstatements.reslice_correction)
+# and recorded beside the overlay, not in this file. Pinned by SHA-256 in data/manifest.json; a change is
+# provenance_corrections_v2.yaml (or a v1a) with its own decision.
+
+version: provenance_corrections_v1
+decision: D-057
+corrections:
+  - statement_id: LS-199098498-04
+    paper_item_id: "199098498"
+    paper_sha256: 945df7b916b7dd75924142fbb7d1542afa08cb36da06df37f135849d9ad15218
+    original_passage: "Identifying the climatological processes responsible for the increases in the frequency of high heat index days we identify is beyond the scope of this study."
+    original_passage_type: cited_finding
+    original_evidence: {json_path: "$.late century results", section_idx: 8, span_start: 4443, span_end: 4601}
+    original_recovery: prefix_anchor
+    corrected_passage: "However, recent work examining changes in the frequency of different types of extreme heat days (considering both temperature and humidity) in CMIP5 projections after using a multivariate quantile mapping approach similar to the MACA methodology finds that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat (Schoof et al 2019)."
+    corrected_passage_type: cited_finding
+    corrected_section_key: late century results
+    verified_by: "Kaiyuan (grep of the stored paper JSON on Polaris, 2026-11-03), COORDINATOR"
+    method: "full-text search of sources/full_705k_v2_filtered/98/199098498.json"
+    reason: "agent passage did not contain the claim; the claim is the paper relaying Schoof et al. 2019"

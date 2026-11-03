@@ -2951,3 +2951,60 @@ code emits, and the next GUIDANCE packet still chooses.
 - **Affected files:** `src/climrr/synthpackets.py` (v3b), `scripts/build_synth_packets.py` (`--expect-changed`),
   `artifacts/benchmark/synth_packets/`, `tests/test_synthpackets.py`, `tests/test_litgroups_run2.py`,
   `tests/test_litsynth_agent.py`, `docs/PILOT_P2B_DESIGN.md`.
+
+## D-057 --- Reviewer-verified provenance correction of LS-199098498-04; entailment is a review step
+
+- **Date:** 2026-11-03.
+- **Status:** **decided** (COORDINATOR, 2026-11-03; work package "Mentor sheet v2", section A). Verification by Kaiyuan.
+- **Context.** The mentor-export sentence-support check (`PILOT_BENCHMARK_REPORT.md` sections 29--30) found that
+  `LS-199098498-04` ("large-scale warming, rather than changes in regional atmospheric circulation, is identified as the
+  primary driver ...") carried a recorded passage, recovered by prefix anchor, that does not contain the claim ("...
+  is beyond the scope of this study."). The statement passed the deterministic pre-check, which verifies that a passage
+  exists in the paper, not that it entails the statement. Kaiyuan searched the stored paper JSON on Polaris
+  (`sources/full_705k_v2_filtered/98/199098498.json`, 2026-11-03) and found the claim in section "late century results",
+  where the paper relays Schoof et al. (2019).
+- **Decision.** (1) A reviewer-verified correction is a record in `data/metadata/benchmark/provenance_corrections_v1.yaml`
+  (manifest-pinned): statement and paper id, original passage and type as recorded, corrected passage verbatim and its
+  type (`cited_finding`) and section key, verifier, method, reason. First record: `LS-199098498-04`. (2) Corrections are an
+  overlay (`climrr.litstatements.apply_provenance_corrections`): the statements and groups files stay immutable, and the
+  original passage is kept in every overlaid record. (3) The corrected passage must re-slice exactly in the paper text;
+  where the paper is not on the machine, `reslice: pending_polaris` and a one-line Polaris check. (4) Items citing a
+  corrected statement record `provenance_corrections_applied` in `reference_components`. (5) **For the GUIDANCE packet:**
+  "pre-check verifies passage existence, not entailment; a reviewer entailment step is now part of item review."
+- **Recorded (EXECUTOR).** Corrections file SHA-256 `ea981346b7fa271da1ee2ecadce125b9502cbac2caee31d74b653653c06282f1`.
+  The paper is not on this machine (neither configured corpus root holds it): **`reslice: pending_polaris`**, offsets null;
+  the command is in the `climrr.litstatements` docstring and in the overlay output. The original passage type was already
+  `cited_finding` (evidence role `cited_candidate`), so the role does not change: `LG-extreme_heat_v1-driver-c1-008`
+  stays **`multi_source_supported`** in the group file (core / cited papers 158091651, 199098498, 5838629) and in every
+  packet that carries it (0003--0010); in the packets for 0004, 0005, 0006 and 0010 that rests on two cited papers
+  (199098498, 5838629), and the "primary driver" claim itself is one paper relaying one cited study --- hence "one
+  study, citing earlier CMIP5 work" in the v2 answers. `provenance_corrections_applied` is applied as an overlay too:
+  the item files are hash-pinned by their run manifests and the items index, so they are not rewritten; the per-item
+  record is `artifacts/litstatements/corrections/provenance_corrections_v1_applied.json` (items 0003--0010) and
+  `p2b_mentor_v2.item_with_corrections` returns the overlaid item --- for confirmation.
+- **Affected files:** `data/metadata/benchmark/provenance_corrections_v1.yaml`, `data/manifest.json`,
+  `src/climrr/litstatements.py`, `src/climrr/p2b_mentor_v2.py`, `scripts/apply_provenance_corrections.py`,
+  `docs/PILOT_P2B_DESIGN.md` section 15, tests.
+
+## D-055c --- DR-DESC-1 v2: "rising from rare to common" and negligible regions
+
+- **Date:** 2026-11-03.
+- **Status:** **decided** (COORDINATOR, 2026-11-03; work package "Mentor sheet v2", section B). Amends D-055.
+- **Context.** DR-DESC-1 v1 described Alabama's 105 °F days (BI-P2B-0006; 1.4 -> 45.2 days, ratio about 33) as "more than
+  tripling", literally true and a large understatement; the regional item (0007) called Alaska (+0.0085 days) the
+  "smallest increase".
+- **Decision.** `descriptor_rules_v2.yaml`: an increase with ratio > 10 or a baseline below 2 days ->
+  `magnitude_class: "rising from rare to common"`, `anchor_pair` "from about N day(s) to about M days" (N, M rounded; 1
+  is "about 1 day", 0 "essentially none"). A regional contrast's region whose change rounds to 0.0 days ->
+  `negligible_regions`, and `smallest` = "essentially no change: <region>". The packets are **not** rebuilt (frozen for
+  the pilot); v2 descriptors serve the edited texts and the mentor sheet only.
+- **Recorded (EXECUTOR).** Rules v2 SHA-256 `1e5554150b160f994009167d99f4a4afe79645cc55b26829e916c47777ce2ab7` (v1
+  unchanged; with v1 rules the code reproduces every packet's `allowed_descriptors`). **0006:** "rising from rare to
+  common", "from about 1 day to about 45 days" (ratio 33.5, baseline 1.4 days; v1 "more than tripling"). **0007:**
+  `negligible_regions: [Alaska]`, "essentially no change: Alaska" (largest: Southeast). 0001, 0003, 0010 unchanged.
+  Readings for confirmation: the v2 class takes precedence over v1's low-baseline phrase (< 1 day) and applies to an
+  increase only; "rounds to 0.0" is `round(value, 1)`; several negligible regions are joined in ranking order. **Edge
+  case:** "baseline < 2 days" alone also catches a small change from a small baseline (e.g. 1.5 -> 2.0 days), where
+  "common" would overstate; no pilot item has one, and no guard was added.
+- **Affected files:** `data/metadata/benchmark/descriptor_rules_v2.yaml`, `data/manifest.json`,
+  `src/climrr/pattern_descriptors.py`, `docs/PILOT_P2B_DESIGN.md` section 15, tests.
