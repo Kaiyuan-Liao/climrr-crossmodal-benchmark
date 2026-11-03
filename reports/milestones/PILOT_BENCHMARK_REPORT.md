@@ -527,8 +527,8 @@ regeneration D-056 / D-054a set up. Fields 26--31.
 | | |
 | --- | --- |
 | Branch | `work/meeting-2026-10-22`, from head `157c96c` |
-| **Build commit** | the commit carrying the modules, scripts, tests, the ingested run 3, the index, the reports, the workbook v2 CSV, the COORDINATOR edits, the support map, the mentor `.md`, state and this section |
-| **Evidence runs** | at the build commit, clean tree: `ingest_litsynth_run3`, `lint_item_rubrics` (v1a), `recheck_items_v2_3`, `build_p2b_items_review_v2`, `build_mentor_pilot_items` (records in the following commit) |
+| **Build commit** | **`37c7037`**: modules, scripts, tests, the ingested run 3, the index, the reports, the workbook v2 CSV, the COORDINATOR edits, the support map, the mentor `.md`, state and this section |
+| **Evidence runs** | at `37c7037`, **`git_dirty: false`**: `reports/runs/20261103T185038Z_local_ingest_litsynth_run3`, `…185038Z_local_lint_item_rubrics`, `…185039Z_local_recheck_items_v2_3`, `…185039Z_local_build_p2b_items_review_v2`, `…185040Z_local_build_mentor_pilot_items` (`.json` / `.md`). Every tracked output byte-identical; the gitignored workbooks too (v2 `94d6cf5b…a9ee`, mentor `ad2c7424…8f79`) |
 | Remote | **not pushed** (the Wednesday freeze package pushes) |
 
 ## 27. Data and checksums
@@ -608,7 +608,7 @@ the RCP4.5 scenario"), single study, heat-wave duration, eastern United States. 
 … in the table used here" is true (no RCP4.5 heat-index column in the dictionary), but "in the table" trips the existing
 source-phrase check.
 
-**Validation.** See the evidence commit (pytest count, scanner).
+**Validation.** `pytest`: **1,510 passed, 2 skipped** (the two pre-existing skips); new `tests/test_litsynth_run3.py` (12); `tests/test_litsynth_run2.py` lint rebuild pinned to v1. Secrets and paths scan: **0 hits**.
 
 ## 30. Escalations
 
