@@ -636,8 +636,8 @@ COORDINATOR work package "Mentor sheet v2" (2026-11-03). **No model call. Nothin
 | | |
 | --- | --- |
 | Branch | `work/meeting-2026-10-22`, from head `ffafe31` |
-| **Build commit** | __BUILD__: corrections v1, descriptor rules v2, manifest, modules, scripts, tests, the edits v2, the support map v2, the overlay record, the workbook v3 CSV, the mentor `.md` and checks, docs |
-| **Evidence runs** | __RUNS__ |
+| **Build commit** | **`7825fcf`**: corrections v1, descriptor rules v2, manifest, modules, scripts, tests, the edits v2, the support map v2, the overlay record, the workbook v3 CSV, the mentor `.md` and checks, docs |
+| **Evidence runs** | at `7825fcf`, **`git_dirty: false`**: `reports/runs/20261103T232845Z_local_apply_provenance_corrections`, `…232845Z_local_build_p2b_items_review_v3`, `…232846Z_local_build_mentor_pilot_items`; every tracked output byte-identical to the build |
 | Remote | pushed at the end of the package (authorized) |
 
 ## 33. Data and checksums
@@ -704,7 +704,7 @@ The two v1 "not supported by a verbatim passage" clauses are gone (the corrected
 attributed); the urban-heat-island clauses (partial in v1) are removed; 0007 "every NCA5 climate region" and 0010 "in
 the table used here" are fixed.
 
-**Validation.** __VALIDATION__
+**Validation.** `pytest`: **1,524 passed, 2 skipped** (the two pre-existing skips); new `tests/test_mentor_v2.py` (14); `tests/test_litsynth_run3.py` v1 mentor test now compares with the v1 `.md` at `37c7037`. Secrets and paths scan: 0 hits.
 
 ## 36. Escalations
 
