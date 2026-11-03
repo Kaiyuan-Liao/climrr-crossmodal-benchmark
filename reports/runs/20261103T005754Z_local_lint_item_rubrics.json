@@ -1,0 +1,127 @@
+{
+  "run_id": "20261103T005754Z_local_lint_item_rubrics",
+  "name": "lint_item_rubrics",
+  "utc_timestamp": "2026-11-03T00:57:54.041948+00:00",
+  "git_commit": "6ca9a93ec563fd02e52d8c72c4f23efd53ac9daf",
+  "git_dirty": false,
+  "untracked_files": 2,
+  "hostname": "ryous-MacBook-Pro-2.local",
+  "location": "local",
+  "user": "liaokaiyuan",
+  "python_version": "3.11.16",
+  "pinned_libraries": [
+    {
+      "name": "pandas",
+      "pinned_version": "3.0.5",
+      "imported_version": "3.0.5",
+      "matches_pin": true
+    },
+    {
+      "name": "numpy",
+      "pinned_version": "2.4.6",
+      "imported_version": "2.4.6",
+      "matches_pin": true
+    },
+    {
+      "name": "pypdf",
+      "pinned_version": "6.18.0",
+      "imported_version": "6.18.0",
+      "matches_pin": true
+    },
+    {
+      "name": "pyyaml",
+      "pinned_version": "6.0.3",
+      "imported_version": "6.0.3",
+      "matches_pin": true
+    },
+    {
+      "name": "pytest",
+      "pinned_version": "9.1.1",
+      "imported_version": "9.1.1",
+      "matches_pin": true
+    },
+    {
+      "name": "pypdfium2",
+      "pinned_version": "5.13.0",
+      "imported_version": "5.13.0",
+      "matches_pin": true
+    }
+  ],
+  "platform": "macOS-15.3-arm64-arm-64bit",
+  "pip_freeze_sha256": "d9af804d5018f7022ae9f4db0bb83a8d57104d2ff6ff5676d912d896f952bf51",
+  "config_snapshot": {
+    "version": "rubric_lint v1",
+    "rules": {
+      "generation_constraint": "a rubric line that is a generation constraint, not a grading criterion (pattern: allowed descriptors|allowed_numbers|decimal number|exact values are not required|multi.source supported|cite a|not in the packet|not provided in the packet, case-insensitive)",
+      "required_single_source_only": "a required point whose source ids are only single_source_supported groups",
+      "hedge_strength_mismatch": "a literature sentence tagged only with multi_source_supported groups that says 'one study' / 'a single study'",
+      "rung1_prompt_mechanism": "a rung-1 prompt that asks about a driver, mechanism or cause",
+      "required_tercile": "a required point that names a tercile"
+    },
+    "model_calls": 0,
+    "items_modified": 0
+  },
+  "data_path": "artifacts/benchmark/items/run2/manifest.json",
+  "data_sha256": "c9c6bc9bc1a4f19d94e7a5e9c9514c34c9a3ad18b60dc97a11b87df2b84d60e9",
+  "output_path": "artifacts/benchmark/items/run2/rubric_lint_v1.json",
+  "result_summary": {
+    "lint_sha256": "5b5cf722f54ad8bc7f790a6591f467f69c3cb963e6d26cec9529835e1d7d8d31",
+    "totals": {
+      "generation_constraint": 16,
+      "required_single_source_only": 1,
+      "hedge_strength_mismatch": 6,
+      "rung1_prompt_mechanism": 1,
+      "required_tercile": 1,
+      "all": 25
+    },
+    "per_item": {
+      "BI-P2B-0001": {
+        "n_flags": 2,
+        "generation_constraint": 2
+      },
+      "BI-P2B-0002": {
+        "n_flags": 3,
+        "generation_constraint": 1,
+        "rung1_prompt_mechanism": 1,
+        "required_tercile": 1
+      },
+      "BI-P2B-0003": {
+        "n_flags": 2,
+        "generation_constraint": 1,
+        "hedge_strength_mismatch": 1
+      },
+      "BI-P2B-0004": {
+        "n_flags": 4,
+        "generation_constraint": 2,
+        "hedge_strength_mismatch": 2
+      },
+      "BI-P2B-0005": {
+        "n_flags": 2,
+        "generation_constraint": 2
+      },
+      "BI-P2B-0006": {
+        "n_flags": 2,
+        "generation_constraint": 1,
+        "hedge_strength_mismatch": 1
+      },
+      "BI-P2B-0007": {
+        "n_flags": 1,
+        "required_single_source_only": 1
+      },
+      "BI-P2B-0008": {
+        "n_flags": 7,
+        "generation_constraint": 5,
+        "hedge_strength_mismatch": 2
+      },
+      "BI-P2B-0009": {
+        "n_flags": 1,
+        "generation_constraint": 1
+      },
+      "BI-P2B-0010": {
+        "n_flags": 1,
+        "generation_constraint": 1
+      }
+    }
+  },
+  "passed": true
+}

@@ -445,8 +445,8 @@ Design: [`docs/PILOT_P2B_DESIGN.md`](../../docs/PILOT_P2B_DESIGN.md) section 14.
 | | |
 | --- | --- |
 | Branch | `work/meeting-2026-10-22`, from head `1f175da` |
-| **Build commit** | **`BUILD_SHA_TBD`**: modules, scripts, tests, the ingested run, lint report, ITEMS CSV, COORDINATOR notes, packets v3b, D-056, D-054a, design section 14, this section, state, mentor brief |
-| **Evidence runs** | at the build commit, `git_dirty: false`: `ingest_litsynth`, `lint_item_rubrics`, `build_p2b_items_review`, `build_synth_packets` (`reports/runs/`, `.json` / `.md`); every tracked output byte-identical |
+| **Build commit** | **`6ca9a93`**: modules, scripts, tests, the ingested run, lint report, ITEMS CSV, COORDINATOR notes, packets v3b, D-056, D-054a, design section 14, this section, state, mentor brief |
+| **Evidence runs** | at `6ca9a93`, **`git_dirty: false`**: `reports/runs/20261103T005753Z_local_ingest_litsynth`, `…005754Z_local_lint_item_rubrics`, `…005754Z_local_build_p2b_items_review`, `…005755Z_local_build_synth_packets` (`.json` / `.md`). Every tracked output byte-identical (`changed_packets: []`); the gitignored workbook too (`b329f9ef…08b8`) |
 | Report commit | the commit carrying the run records and the filled SHAs |
 | Remote | **pushed** (the Eagle clone needs packets v3b for run 3); not merged |
 
