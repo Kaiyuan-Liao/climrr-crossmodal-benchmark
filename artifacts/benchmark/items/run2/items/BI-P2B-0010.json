@@ -1,0 +1,683 @@
+{
+  "schema_version": "benchmark_item_v2",
+  "item_id": "BI-P2B-0010",
+  "use_case_level": 7,
+  "capability_tested": "scenario reasoning",
+  "system_task": "generate benchmark item",
+  "reasoning_modalities": "Hazard + Text",
+  "key_relationships": "hazard‑driver‑scenario",
+  "evidence_needed": "pattern and literature drivers",
+  "desired_output_characteristics": "concise",
+  "expected_knowledge_level": "general_climate_science",
+  "prompt": "How is the summer frequency of days with a dangerous heat index (above 95 °F) expected to change in Florida by mid-century under RCP8.5, and what are the primary physical drivers of this change?",
+  "source_independent_answerability": "yes",
+  "source_independence_note": "A climate‑trained scientist can infer the direction, magnitude class, and drivers of heat‑index changes for Florida under a high‑emissions scenario without consulting the specific packet.",
+  "source_leakage_check": {
+    "clmrr_named": false,
+    "row_or_column_named": false,
+    "paper_named": false,
+    "hidden_exact_value_required": false,
+    "according_to_phrase": false,
+    "pass": true,
+    "flags": [],
+    "check_version": "leakage_check v1"
+  },
+  "reference_components": {
+    "table_patterns": [
+      {
+        "acceptance_blocked": false,
+        "acceptance_blocked_by": [],
+        "authorization": "verified",
+        "cautions": [],
+        "computed_value_or_range": {
+          "cell_direction_counts": {
+            "decrease": 0,
+            "increase": 1165,
+            "no_change": 0
+          },
+          "mean_from": "25.725464926532189",
+          "mean_to": "68.172389133896996",
+          "n_cells_empty": 0,
+          "n_cells_used": 1165,
+          "range": {
+            "max": "50.499999870000000",
+            "min": "33.566664899999995",
+            "over": "cells"
+          },
+          "unit": "days",
+          "value": "42.446924207364807",
+          "value_is": "absolute_change",
+          "value_reason": null
+        },
+        "direction": "increase",
+        "family": "heat_index",
+        "geography": "Florida",
+        "geography_type": "state",
+        "horizon": "mid",
+        "horizon_window": "2045-2054",
+        "metric": "heatindex_days_above_95F",
+        "metric_wording": "number of days with daily max heat index above 95 F",
+        "pattern_id": "TP1-00075",
+        "pattern_kind": "single",
+        "pattern_robustness": "all_states_same_direction",
+        "pattern_support_n": 1165,
+        "provenance": {
+          "code_version": "table_patterns v1 (src/climrr/table_patterns.py sha256 c5948f7e0ef85b73)",
+          "column_sources": {
+            "heatindex_HIS_Day95": {
+              "kind": "dictionary_line",
+              "line": 679,
+              "quote": "heatindex_HIS_Day95 Number of Summer days with daily max heat index above 95 F -- Historical"
+            },
+            "heatindex_M85_Day95": {
+              "kind": "dictionary_line",
+              "line": 685,
+              "quote": "heatindex_M85_Day95 Number of Summer days with daily max heat index above 95 F -- Mid-Century RCP8.5"
+            }
+          },
+          "column_statuses": {
+            "heatindex_HIS_Day95": "verified_from_dictionary",
+            "heatindex_M85_Day95": "verified_from_dictionary"
+          },
+          "columns": [
+            {
+              "column": "heatindex_HIS_Day95",
+              "index": 240
+            },
+            {
+              "column": "heatindex_M85_Day95",
+              "index": 246
+            }
+          ],
+          "derivation_rule_id": "DR-TD-003 @ DR-PT-001",
+          "member_cells_sha256": "e0d70552658989dafa982b75fc6c7369583027d794d273713af966e0c10d9a1b",
+          "member_rows": 1165,
+          "row_rule": "State == 'Florida'",
+          "table_data_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e"
+        },
+        "provisional": true,
+        "provisional_reasons": [
+          "location_inferred_candidate: State label IC-012 (A-G1, A-G3; D-034)",
+          "unweighted_mean: provisional aggregation rule for representation validation"
+        ],
+        "rank": {
+          "of": 49,
+          "order": "descending signed value (DR-PT-004)",
+          "rank": 1,
+          "tied_with": 0
+        },
+        "relative_magnitude": {
+          "class": "large",
+          "definition": "large = upper tercile, by signed value, among the 49 U.S. State labels in the table with a computed value for family=heat_index, metric=heatindex_days_above_95F, season=summer, horizon=mid (2045-2054), scenario=RCP8.5, statistic=absolute_change (DR-PT-005); a relative descriptor among states, not an absolute threshold"
+        },
+        "relative_magnitude_skipped_reason": null,
+        "robustness_share": "1165/1165",
+        "robustness_unit": "cell",
+        "scenario": "RCP8.5",
+        "season": "summer",
+        "statistic": "absolute_change",
+        "status": "computed"
+      }
+    ],
+    "literature_mechanisms": [
+      {
+        "statement": "Observed increase in heat‑wave and drought frequency",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-extreme_heat_v1-driver-c1-008",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "199098498",
+            "paper_sha256": "945df7b916b7dd75924142fbb7d1542afa08cb36da06df37f135849d9ad15218",
+            "json_path": "$.late century results",
+            "span_start": 4443,
+            "span_end": 4601,
+            "verbatim_passage": "Identifying the climatological processes responsible for the increases in the frequency of high heat index days we identify is beyond the scope of this study.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 199098498",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-199098498-04",
+            "evidence_role": "cited_candidate"
+          },
+          {
+            "paper_item_id": "5838629",
+            "paper_sha256": "e11032fb59db4250a8562dfba97e961feee24186a931f6ec3d037270405f4606",
+            "json_path": "$.results",
+            "span_start": 1155,
+            "span_end": 1343,
+            "verbatim_passage": "Air mass stagnation events, which increase O3 production and will increase in frequency as weather conditions favorable to heat waves increase (CCSP 2008), are another important indicator.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 5838629",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-5838629-03",
+            "evidence_role": "cited_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "global warming increases heatwave frequency and intensity",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-extreme_heat_v1-driver-c2-001",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "14006228",
+            "paper_sha256": "802cc7b80c67735e86e9740ca72bba6361cedf5d9a330ab2236ea6a901115d8d",
+            "json_path": "$.discussion",
+            "span_start": 4074,
+            "span_end": 4177,
+            "verbatim_passage": "As global warming continues, the frequency, intensity and duration of heatwaves are likely to increase.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 14006228",
+            "is_review_or_synthesis": true,
+            "statement_id": "LS-14006228-04",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "221504407",
+            "paper_sha256": "a3342e14fcd6c45de5a3831eddc22fc5dac739f8aebc5a920e41f9dcb546467e",
+            "json_path": "$.conclusion",
+            "span_start": 0,
+            "span_end": 220,
+            "verbatim_passage": "The occurrence of heat events is expected to increase due to the worsening effects of anthropogenic global warming [60]. This will be seen in both higher mean annual temperatures and in the frequency of heat shocks [37].",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 221504407",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-221504407-03",
+            "evidence_role": "cited_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "urban heat island intensifies due to nighttime conditions and reduced moisture",
+        "statement_type": "mechanism",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-extreme_heat_v1-mechanism-c1-024",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "246243282",
+            "paper_sha256": "56cdb85730fcda26ac9db10ee5d8fd12b3d5bc45de1c773738c373ddcd17079e",
+            "json_path": "$.impact on temperature and heat waves",
+            "span_start": 15725,
+            "span_end": 15937,
+            "verbatim_passage": "In general, simulated CUHI values during a heat wave have intensified extensively relative to pre-heat wave conditions, mostly due to the lower moisture and reduced wind speed in urban areas during the heat wave.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 246243282",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-246243282-05",
+            "evidence_role": "cited_candidate"
+          },
+          {
+            "paper_item_id": "230583145",
+            "paper_sha256": "38441232d336742c14573a17de45acbe8c89099dd093da3e309244a5fb9bad1d",
+            "json_path": "$.discussion and conclusions on the mitigation potential of gi",
+            "span_start": 1070,
+            "span_end": 1322,
+            "verbatim_passage": "During the daytime, evapotranspiration is the main cooling mechanism, however its impact on the surface energy budget may not be enough to compensate and counterbalance heat fluxes due to advection and sensible heat released by the impervious surfaces.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 230583145",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-230583145-02",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "230583145",
+            "paper_sha256": "38441232d336742c14573a17de45acbe8c89099dd093da3e309244a5fb9bad1d",
+            "json_path": "$.the impact of increased green infrastructure on health",
+            "span_start": 12800,
+            "span_end": 13033,
+            "verbatim_passage": "During excessive temperature and drought conditions, trees may close their stomata while the surface temperature of leaves increases, contributing more sensible heat to the atmosphere and increasing the ambient temperature [150,151].",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 230583145",
+            "is_review_or_synthesis": true,
+            "statement_id": "LS-230583145-03",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "230583145",
+            "paper_sha256": "38441232d336742c14573a17de45acbe8c89099dd093da3e309244a5fb9bad1d",
+            "json_path": "$.discussion and conclusions on the mitigation potential of gi",
+            "span_start": 372,
+            "span_end": 561,
+            "verbatim_passage": "During the night, the maximum ambient temperature decrease corresponding to a GI rise of 80% may not exceed 2.3 • C, while the temperature drop for a GI increase by 20% is close to 0.5 • C.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 230583145",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-230583145-04",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "humidity magnifies heat stress and its effect grows with temperature",
+        "statement_type": "mechanism",
+        "evidence_strength": "single_source_supported",
+        "reference_scope": "single_study_observation",
+        "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "239996006",
+            "paper_sha256": "4bb60fe9aae3fde11d0b3cc7db90b67c97c0342c2c0c798fa8f0c838fb31e83f",
+            "json_path": "$.results",
+            "span_start": 2047,
+            "span_end": 2251,
+            "verbatim_passage": "at similar or lower humidity, the magnifying power of humidity increases with increasing T, i.e. similar or lower relative humidity levels will still cause greater human discomfort at higher temperatures.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 239996006",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-239996006-02",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      }
+    ],
+    "literature_caveats": []
+  },
+  "reference_answer": {
+    "table_pattern": "In Florida, summer days with a dangerous heat index (above 95 °F) are projected to increase roughly tripling by mid-century (2045–2054) under RCP8.5, one high-emissions scenario.",
+    "literature_interpretation": "Large‑scale warming is identified as the primary driver of future increases in extreme heat index days. Global warming is expected to increase the frequency, intensity, and duration of heatwaves, further elevating heat‑stress risk. Urban heat island effects intensify at night under high‑pressure, calm, clear‑sky conditions, adding to the rise in dangerous heat‑index days. One study suggests that the magnifying effect of relative humidity on heat stress grows with higher temperatures, so even unchanged humidity can worsen perceived heat.",
+    "integrated": "Florida is expected to see a roughly tripling of summer days with a dangerous heat index (above 95 °F) by mid-century under RCP8.5. This increase is driven mainly by large‑scale warming that raises heat‑wave frequency and intensity, with additional contributions from urban heat island amplification at night and the heightened impact of humidity on perceived heat."
+  },
+  "rubric": {
+    "required_points": [
+      "[w=3] Direction: increase",
+      "[w=3] Magnitude class: roughly tripling",
+      "[w=2] Place: Florida (largest increase among states for this metric)",
+      "[w=2] Horizon and scenario phrasing: by mid-century (2045–2054) under RCP8.5, one high-emissions scenario",
+      "[w=3] Mechanism: large‑scale warming identified as primary driver"
+    ],
+    "optional_points": [
+      "Mention of humidity’s amplifying effect on heat stress"
+    ],
+    "acceptable_variants": [
+      "Any answer stating an increase and roughly tripling magnitude for Florida in summer under RCP8.5 by mid-century is acceptable.",
+      "Citing large‑scale warming, heat‑wave intensification, or urban heat island effects as drivers satisfies the mechanism requirement."
+    ],
+    "disallowed_claims": [
+      "Providing exact numeric changes such as 42 days or 68 days.",
+      "Stating that the projection is a forecast or the only possible future.",
+      "Confusing hazard with exposure or risk."
+    ],
+    "fatal_errors": [
+      "Including decimal numbers not present in allowed descriptors.",
+      "Mischaracterizing RCP8.5 as a forecast."
+    ]
+  },
+  "guardrails": [
+    "A modeled historical baseline is model output for a past period, not an observation.",
+    "RCP8.5 is one high-emissions scenario, not a forecast and not the only plausible future.",
+    "Hazard is not exposure, and exposure is not risk."
+  ],
+  "c_g_t_s_d_audit": null,
+  "generation": {
+    "generator_version": "litsynth_agent v3.2",
+    "model": "openai/gpt-oss-120b",
+    "prompt_hash": "ad95cea25029f5e658340b26c847d1225a9e9a53b258a547452f601dee43e460",
+    "timestamp": "2026-11-03T00:04:21Z",
+    "inputs_sha256": {
+      "packet": "25229d45578c578cd454a9b8c7998eb6c5859242ba879c2731a7c16bc985499f",
+      "system_prompt": "9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715",
+      "item_seeds_v2": "3123dd3463f23555601d1e64edc172e2977e2fc6df3adbb08a74b5df41be9d50",
+      "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+      "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+      "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+      "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+      "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+      "pilot_selection": "c9f090297fd1beacbd524e33f571e275b2205f6e2b99687955999e3577f516fa",
+      "group_dispositions": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+      "descriptor_rules": "5c2090a77e0424d43603c9766c8925cee50a3b8fd31f24351334adbf82934650"
+    }
+  },
+  "review": {
+    "status": "human_review",
+    "history": [
+      {
+        "event": "deterministic_pass",
+        "reasons": [],
+        "check_version": "synthesis_post_checks v2.2",
+        "checks": {
+          "numbers_untraced": [],
+          "number_words_untraced": [],
+          "exact_values_in_graded_text": [],
+          "prompt_leakage": {
+            "clmrr_named": false,
+            "row_or_column_named": false,
+            "paper_named": false,
+            "hidden_exact_value_required": false,
+            "according_to_phrase": false,
+            "pass": true,
+            "flags": [],
+            "check_version": "leakage_check v1"
+          },
+          "schema_errors": [],
+          "texts_traced_to_literature": [
+            "literature_interpretation",
+            "literature_interpretation",
+            "literature_interpretation",
+            "literature_interpretation",
+            "rubric.required_points",
+            "rubric.optional_points"
+          ],
+          "rubric_points_without_source_ids": 0,
+          "n_table_sentences": 1,
+          "n_literature_sentences": 4
+        },
+        "reference_answer_tagged": {
+          "table_pattern": [
+            {
+              "sentence": "In Florida, summer days with a dangerous heat index (above 95 °F) are projected to increase roughly tripling by mid-century (2045–2054) under RCP8.5, one high-emissions scenario.",
+              "pattern_ids": [
+                "TP1-00075"
+              ]
+            }
+          ],
+          "literature_interpretation": [
+            {
+              "sentence": "Large‑scale warming is identified as the primary driver of future increases in extreme heat index days.",
+              "group_ids": [
+                "LG-extreme_heat_v1-driver-c1-008"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "Global warming is expected to increase the frequency, intensity, and duration of heatwaves, further elevating heat‑stress risk.",
+              "group_ids": [
+                "LG-extreme_heat_v1-driver-c2-001"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "Urban heat island effects intensify at night under high‑pressure, calm, clear‑sky conditions, adding to the rise in dangerous heat‑index days.",
+              "group_ids": [
+                "LG-extreme_heat_v1-mechanism-c1-024"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "One study suggests that the magnifying effect of relative humidity on heat stress grows with higher temperatures, so even unchanged humidity can worsen perceived heat.",
+              "group_ids": [
+                "LG-extreme_heat_v1-mechanism-c2-003"
+              ],
+              "hedged": true
+            }
+          ],
+          "integrated": "Florida is expected to see a roughly tripling of summer days with a dangerous heat index (above 95 °F) by mid-century under RCP8.5. This increase is driven mainly by large‑scale warming that raises heat‑wave frequency and intensity, with additional contributions from urban heat island amplification at night and the heightened impact of humidity on perceived heat.",
+          "rubric_required_weights": [
+            {
+              "point": "Direction: increase",
+              "weight": 3
+            },
+            {
+              "point": "Magnitude class: roughly tripling",
+              "weight": 3
+            },
+            {
+              "point": "Place: Florida (largest increase among states for this metric)",
+              "weight": 2
+            },
+            {
+              "point": "Horizon and scenario phrasing: by mid-century (2045–2054) under RCP8.5, one high-emissions scenario",
+              "weight": 2
+            },
+            {
+              "point": "Mechanism: large‑scale warming identified as primary driver",
+              "weight": 3
+            }
+          ],
+          "rubric_points": [
+            {
+              "field": "required_points",
+              "point": "Direction: increase",
+              "source_ids": [
+                "TP1-00075"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Magnitude class: roughly tripling",
+              "source_ids": [
+                "TP1-00075"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Place: Florida (largest increase among states for this metric)",
+              "source_ids": [
+                "TP1-00075"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Horizon and scenario phrasing: by mid-century (2045–2054) under RCP8.5, one high-emissions scenario",
+              "source_ids": [
+                "TP1-00075"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Mechanism: large‑scale warming identified as primary driver",
+              "source_ids": [
+                "LG-extreme_heat_v1-driver-c1-008"
+              ]
+            },
+            {
+              "field": "optional_points",
+              "point": "Mention of humidity’s amplifying effect on heat stress",
+              "source_ids": [
+                "LG-extreme_heat_v1-mechanism-c2-003"
+              ]
+            }
+          ]
+        },
+        "seed_id": "SD2-TP1-00075",
+        "packet_id": "PK-SD2-TP1-00075",
+        "generator_version": "litsynth_agent v3.2",
+        "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+        "model": "openai/gpt-oss-120b",
+        "endpoint_label": "sophia_vllm",
+        "temperature": 0,
+        "reasoning_effort": "low",
+        "max_tokens": 16000,
+        "reasoning_effort_applied": true,
+        "system_prompt_sha256": "9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715",
+        "corrective_prompt_sha256": "256db051b3ddfa93d893e4573a2e818ecd4623d96ddac0aaebdba932c6e2a01a",
+        "prompt_hash": "ad95cea25029f5e658340b26c847d1225a9e9a53b258a547452f601dee43e460",
+        "packet_sha256": "25229d45578c578cd454a9b8c7998eb6c5859242ba879c2731a7c16bc985499f",
+        "source_commit": "1f175dac7801b3d27ca7ed1961debe88e22b4dc6",
+        "generation_timestamp": "2026-11-03T00:04:21Z",
+        "model_seconds": 76.9,
+        "model_attempts": 2,
+        "corrective_retry_used": false,
+        "turns": [
+          {
+            "turn": 1,
+            "finish_reason": "stop",
+            "content_chars": 4618,
+            "reasoning_chars": 953,
+            "http_attempts": 1,
+            "model_seconds": 68.2
+          },
+          {
+            "turn": 2,
+            "finish_reason": "stop",
+            "content_chars": 4642,
+            "reasoning_chars": 1334,
+            "http_attempts": 1,
+            "model_seconds": 8.7
+          }
+        ],
+        "first_turn": null,
+        "corrective_error": null,
+        "corrective_turn_used": true,
+        "corrective_class": "format",
+        "first_check": {
+          "event": "deterministic_fail",
+          "reasons": [
+            "literature_interpretation[3]: rests only on single-source groups but carries no hedge word"
+          ],
+          "check_version": "synthesis_post_checks v2.2",
+          "checks": {
+            "numbers_untraced": [],
+            "number_words_untraced": [],
+            "exact_values_in_graded_text": [],
+            "prompt_leakage": {
+              "clmrr_named": false,
+              "row_or_column_named": false,
+              "paper_named": false,
+              "hidden_exact_value_required": false,
+              "according_to_phrase": false,
+              "pass": true,
+              "flags": [],
+              "check_version": "leakage_check v1"
+            },
+            "schema_errors": [],
+            "texts_traced_to_literature": [
+              "literature_interpretation",
+              "literature_interpretation",
+              "literature_interpretation",
+              "literature_interpretation",
+              "rubric.required_points",
+              "rubric.optional_points"
+            ],
+            "rubric_points_without_source_ids": 0,
+            "n_table_sentences": 1,
+            "n_literature_sentences": 4
+          },
+          "reference_answer_tagged": {
+            "table_pattern": [
+              {
+                "sentence": "In Florida, summer days with a dangerous heat index (above 95 °F) are projected to increase roughly tripling by mid-century (2045–2054) under RCP8.5, one high-emissions scenario.",
+                "pattern_ids": [
+                  "TP1-00075"
+                ]
+              }
+            ],
+            "literature_interpretation": [
+              {
+                "sentence": "Large‑scale warming is identified as the primary driver of future increases in extreme heat index days.",
+                "group_ids": [
+                  "LG-extreme_heat_v1-driver-c1-008"
+                ],
+                "hedged": false
+              },
+              {
+                "sentence": "Global warming is expected to increase the frequency, intensity, and duration of heatwaves, further elevating heat‑stress risk.",
+                "group_ids": [
+                  "LG-extreme_heat_v1-driver-c2-001"
+                ],
+                "hedged": false
+              },
+              {
+                "sentence": "Urban heat island effects intensify at night under high‑pressure, calm, clear‑sky conditions, adding to the rise in dangerous heat‑index days.",
+                "group_ids": [
+                  "LG-extreme_heat_v1-mechanism-c1-024"
+                ],
+                "hedged": false
+              },
+              {
+                "sentence": "The magnifying effect of relative humidity on heat stress grows with higher temperatures, so even unchanged humidity can worsen perceived heat.",
+                "group_ids": [
+                  "LG-extreme_heat_v1-mechanism-c2-003"
+                ],
+                "hedged": true
+              }
+            ],
+            "integrated": "Florida is expected to see a roughly tripling of summer days with a dangerous heat index (above 95 °F) by mid-century under RCP8.5. This increase is driven mainly by large‑scale warming that raises heat‑wave frequency and intensity, with additional contributions from urban heat island amplification at night and the heightened impact of humidity on perceived heat.",
+            "rubric_required_weights": [
+              {
+                "point": "Direction: increase",
+                "weight": 3
+              },
+              {
+                "point": "Magnitude class: roughly tripling",
+                "weight": 3
+              },
+              {
+                "point": "Place: Florida (largest increase among states for this metric)",
+                "weight": 2
+              },
+              {
+                "point": "Horizon and scenario phrasing: by mid-century (2045–2054) under RCP8.5, one high-emissions scenario",
+                "weight": 2
+              },
+              {
+                "point": "Mechanism: large‑scale warming identified as primary driver",
+                "weight": 3
+              }
+            ],
+            "rubric_points": [
+              {
+                "field": "required_points",
+                "point": "Direction: increase",
+                "source_ids": [
+                  "TP1-00075"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Magnitude class: roughly tripling",
+                "source_ids": [
+                  "TP1-00075"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Place: Florida (largest increase among states for this metric)",
+                "source_ids": [
+                  "TP1-00075"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Horizon and scenario phrasing: by mid-century (2045–2054) under RCP8.5, one high-emissions scenario",
+                "source_ids": [
+                  "TP1-00075"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Mechanism: large‑scale warming identified as primary driver",
+                "source_ids": [
+                  "LG-extreme_heat_v1-driver-c1-008"
+                ]
+              },
+              {
+                "field": "optional_points",
+                "point": "Mention of humidity’s amplifying effect on heat stress",
+                "source_ids": [
+                  "LG-extreme_heat_v1-mechanism-c2-003"
+                ]
+              }
+            ]
+          },
+          "raw_response": "{\n  \"prompt\": \"How is the summer frequency of days with a dangerous heat index (above 95 °F) expected to change in Florida by mid-century under RCP8.5, and what are the primary physical drivers of this change?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"In Florida, summer days with a dangerous heat index (above 95 °F) are projected to increase roughly tripling by mid-century (2045–2054) under RCP8.5, one high-emissions scenario.\",\n        \"pattern_ids\": [\"TP1-00075\"]\n      }\n    ],\n    \"literature_interpretation\": [\n      {\n        \"sentence\": \"Large‑scale warming is identified as the primary driver of future increases in extreme heat index days.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"Global warming is expected to increase the frequency, intensity, and duration of heatwaves, further elevating heat‑stress risk.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c2-001\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"Urban heat island effects intensify at night under high‑pressure, calm, clear‑sky conditions, adding to the rise in dangerous heat‑index days.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-mechanism-c1-024\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"The magnifying effect of relative humidity on heat stress grows with higher temperatures, so even unchanged humidity can worsen perceived heat.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-mechanism-c2-003\"],\n        \"hedged\": true\n      }\n    ],\n    \"integrated\": \"Florida is expected to see a roughly tripling of summer days with a dangerous heat index (above 95 °F) by mid-century under RCP8.5. This increase is driven mainly by large‑scale warming that raises heat‑wave frequency and intensity, with additional contributions from urban heat island amplification at night and the heightened impact of humidity on perceived heat.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"Direction: increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00075\"]\n      },\n      {\n        \"point\": \"Magnitude class: roughly tripling\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00075\"]\n      },\n      {\n        \"point\": \"Place: Florida (largest increase among states for this metric)\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00075\"]\n      },\n      {\n        \"point\": \"Horizon and scenario phrasing: by mid-century (2045–2054) under RCP8.5, one high-emissions scenario\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00075\"]\n      },\n      {\n        \"point\": \"Mechanism: large‑scale warming identified as primary driver\",\n        \"weight\": 3,\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"]\n      }\n    ],\n    \"acceptable_variants\": [\n      \"Any answer stating an increase and roughly tripling magnitude for Florida in summer under RCP8.5 by mid-century is acceptable.\",\n      \"Citing large‑scale warming, heat‑wave intensification, or urban heat island effects as drivers satisfies the mechanism requirement.\"\n    ],\n    \"optional_points\": [\n      {\n        \"point\": \"Mention of humidity’s amplifying effect on heat stress\",\n        \"source_ids\": [\"LG-extreme_heat_v1-mechanism-c2-003\"]\n      }\n    ],\n    \"disallowed_claims\": [\n      \"Providing exact numeric changes such as 42 days or 68 days.\",\n      \"Stating that the projection is a forecast or the only possible future.\",\n      \"Confusing hazard with exposure or risk.\"\n    ],\n    \"fatal_errors\": [\n      \"Including decimal numbers not present in allowed descriptors.\",\n      \"Mischaracterizing RCP8.5 as a forecast.\"\n    ],\n    \"acceptable_variants_note\": \"Exact values are not required; any statement consistent with the magnitude class counts.\"\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"RCP8.5 is one high-emissions scenario, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\"\n  ],\n  \"source_independent_answerability\": \"yes\",\n  \"source_independence_note\": \"A climate‑trained scientist can infer the direction, magnitude class, and drivers of heat‑index changes for Florida under a high‑emissions scenario without consulting the specific packet.\",\n  \"capability_tested\": \"scenario reasoning\",\n  \"system_task\": \"generate benchmark item\",\n  \"key_relationships\": \"hazard‑driver‑scenario\",\n  \"evidence_needed\": \"pattern and literature drivers\",\n  \"desired_output_characteristics\": \"concise\",\n  \"expected_knowledge_level\": \"general_climate_science\"\n}",
+          "raw_response_chars": 4618,
+          "raw_reasoning": null,
+          "raw_reasoning_chars": null,
+          "content_fallback": false,
+          "finish_reason": "stop",
+          "raw_max_chars": 20000
+        },
+        "finish_reason": "stop",
+        "content_chars": 4642,
+        "reasoning_chars": 1334,
+        "raw_response": "{\n  \"prompt\": \"How is the summer frequency of days with a dangerous heat index (above 95 °F) expected to change in Florida by mid-century under RCP8.5, and what are the primary physical drivers of this change?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"In Florida, summer days with a dangerous heat index (above 95 °F) are projected to increase roughly tripling by mid-century (2045–2054) under RCP8.5, one high-emissions scenario.\",\n        \"pattern_ids\": [\"TP1-00075\"]\n      }\n    ],\n    \"literature_interpretation\": [\n      {\n        \"sentence\": \"Large‑scale warming is identified as the primary driver of future increases in extreme heat index days.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"Global warming is expected to increase the frequency, intensity, and duration of heatwaves, further elevating heat‑stress risk.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c2-001\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"Urban heat island effects intensify at night under high‑pressure, calm, clear‑sky conditions, adding to the rise in dangerous heat‑index days.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-mechanism-c1-024\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"One study suggests that the magnifying effect of relative humidity on heat stress grows with higher temperatures, so even unchanged humidity can worsen perceived heat.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-mechanism-c2-003\"],\n        \"hedged\": true\n      }\n    ],\n    \"integrated\": \"Florida is expected to see a roughly tripling of summer days with a dangerous heat index (above 95 °F) by mid-century under RCP8.5. This increase is driven mainly by large‑scale warming that raises heat‑wave frequency and intensity, with additional contributions from urban heat island amplification at night and the heightened impact of humidity on perceived heat.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"Direction: increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00075\"]\n      },\n      {\n        \"point\": \"Magnitude class: roughly tripling\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00075\"]\n      },\n      {\n        \"point\": \"Place: Florida (largest increase among states for this metric)\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00075\"]\n      },\n      {\n        \"point\": \"Horizon and scenario phrasing: by mid-century (2045–2054) under RCP8.5, one high-emissions scenario\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00075\"]\n      },\n      {\n        \"point\": \"Mechanism: large‑scale warming identified as primary driver\",\n        \"weight\": 3,\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"]\n      }\n    ],\n    \"acceptable_variants\": [\n      \"Any answer stating an increase and roughly tripling magnitude for Florida in summer under RCP8.5 by mid-century is acceptable.\",\n      \"Citing large‑scale warming, heat‑wave intensification, or urban heat island effects as drivers satisfies the mechanism requirement.\"\n    ],\n    \"optional_points\": [\n      {\n        \"point\": \"Mention of humidity’s amplifying effect on heat stress\",\n        \"source_ids\": [\"LG-extreme_heat_v1-mechanism-c2-003\"]\n      }\n    ],\n    \"disallowed_claims\": [\n      \"Providing exact numeric changes such as 42 days or 68 days.\",\n      \"Stating that the projection is a forecast or the only possible future.\",\n      \"Confusing hazard with exposure or risk.\"\n    ],\n    \"fatal_errors\": [\n      \"Including decimal numbers not present in allowed descriptors.\",\n      \"Mischaracterizing RCP8.5 as a forecast.\"\n    ],\n    \"acceptable_variants_note\": \"Exact values are not required; any statement consistent with the magnitude class counts.\"\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"RCP8.5 is one high-emissions scenario, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\"\n  ],\n  \"source_independent_answerability\": \"yes\",\n  \"source_independence_note\": \"A climate‑trained scientist can infer the direction, magnitude class, and drivers of heat‑index changes for Florida under a high‑emissions scenario without consulting the specific packet.\",\n  \"capability_tested\": \"scenario reasoning\",\n  \"system_task\": \"generate benchmark item\",\n  \"key_relationships\": \"hazard‑driver‑scenario\",\n  \"evidence_needed\": \"pattern and literature drivers\",\n  \"desired_output_characteristics\": \"concise\",\n  \"expected_knowledge_level\": \"general_climate_science\"\n}",
+        "raw_response_chars": 4642,
+        "raw_reasoning": null,
+        "raw_reasoning_chars": null,
+        "content_fallback": false,
+        "raw_max_chars": 20000,
+        "format_corrective_prompt_sha256": "251a7699c8d12eedf5cb7d47d89d237394b695e948f0128fcdbf1c9c87072105"
+      },
+      {
+        "event": "human_review",
+        "from_status": "deterministic_pass",
+        "decision": "D-056",
+        "at": "2026-11-03T00:44:46Z",
+        "by": "EXECUTOR (scripts/ingest_litsynth.py)",
+        "note": "entered human review (D-033 lifecycle; D-056): Kaiyuan in artifacts/benchmark/review/P2b_items_review_v1.xlsx, then the mentor; edits are recorded in review.final_frozen"
+      }
+    ],
+    "kaiyuan_disposition": null,
+    "mentor_disposition": null,
+    "final_frozen": null
+  }
+}

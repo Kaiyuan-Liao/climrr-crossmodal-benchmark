@@ -1,7 +1,7 @@
 {
   "packet_id": "PK-SD2-TP1-00075",
-  "version": "synthpackets v3a",
-  "rank_rule": "DR-SEED-RANK-3",
+  "version": "synthpackets v3b",
+  "rank_rule": "DR-SEED-RANK-3a",
   "descriptor_rule": "DR-DESC-1",
   "descriptor_rules_sha256": "5c2090a77e0424d43603c9766c8925cee50a3b8fd31f24351334adbf82934650",
   "item_id": "BI-P2B-0010",
@@ -10,6 +10,7 @@
   "model_view": {
     "use_case_level": 7,
     "rung": "7. Scenario and uncertainty: State the projected pattern and what the scenario and the evidence do and do not support.",
+    "rung_instruction": "Rung 7: the prompt must ask how the projected change depends on the emissions scenario and what uncertainties or caveats apply. The reference answer must state that RCP8.5 is one high-emissions scenario and, where the caveat groups support it, contrast it with the moderate scenario they name; state no scenario contrast the groups do not support.",
     "reasoning_modalities": "Hazard + Text",
     "patterns": [
       {
@@ -383,6 +384,33 @@
             "passage_truncated": false,
             "paper_id": "2239637",
             "region": "United States"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-pattern-c2-003",
+        "role": "caveat",
+        "statement_type": "caveat",
+        "claim_about": "hazard_change_mechanism",
+        "label": "heat‑wave frequency, intensity and duration are projected to increase",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Average heat‑wave duration is projected to be about one day longer under the high‑emission RCP8.5 scenario than under the moderate RCP4.5 scenario, regardless of the heat‑wave definition used.",
+            "passage": "Average heat wave durations estimated under the RCP8.5 scenario were almost 1 day longer than under the RCP4.5 scenario, regardless of the heat wave definition used (Table 3).",
+            "passage_truncated": false,
+            "paper_id": "5882914",
+            "region": "eastern United States",
+            "region_qualifier": "eastern"
+          },
+          {
+            "statement": "Heat‑wave frequency in 2057‑2059 is projected to be 3.5–6.4 times higher than in the baseline period of 2002‑2004.",
+            "passage": "We estimated that heat waves will be 3.5-6.4 times more frequent in 2057-2059 than in 2002-2004 and that excess mortality attributable to heat waves would be 7.5-19.0 times higher.",
+            "passage_truncated": false,
+            "paper_id": "5882914",
+            "region": "eastern United States",
+            "region_qualifier": "eastern"
           }
         ]
       },
@@ -1364,6 +1392,65 @@
         ]
       },
       {
+        "group_id": "LG-extreme_heat_v1-pattern-c2-003",
+        "kind": "group",
+        "statement_type": "caveat",
+        "claim_about": "hazard_change_mechanism",
+        "statement_type_run": "pattern",
+        "scenario_slot": true,
+        "role": "caveat",
+        "excluded_reason": null,
+        "label": "heat‑wave frequency, intensity and duration are projected to increase",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 4,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "us_subregion",
+        "best_basis_rank": 2,
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS-5882914-02",
+            "statement": "Average heat‑wave duration is projected to be about one day longer under the high‑emission RCP8.5 scenario than under the moderate RCP4.5 scenario, regardless of the heat‑wave definition used.",
+            "paper_item_id": "5882914",
+            "canonical_paper": "5882914",
+            "paper_sha256": "c87653cf414221b837a0c045dcf71fccb438ec532eadeb0c3461f00285c41199",
+            "json_path": "$.characteristics of heat waves",
+            "span_start": 704,
+            "span_end": 879,
+            "verbatim_passage": "Average heat wave durations estimated under the RCP8.5 scenario were almost 1 day longer than under the RCP4.5 scenario, regardless of the heat wave definition used (Table 3).",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "eastern United States",
+            "scenario": "RCP8.5 and RCP4.5",
+            "basis": "us_subregion",
+            "region_class": "us_subregion",
+            "region_qualifier": "eastern"
+          },
+          {
+            "statement_id": "LS-5882914-03",
+            "statement": "Heat‑wave frequency in 2057‑2059 is projected to be 3.5–6.4 times higher than in the baseline period of 2002‑2004.",
+            "paper_item_id": "5882914",
+            "canonical_paper": "5882914",
+            "paper_sha256": "c87653cf414221b837a0c045dcf71fccb438ec532eadeb0c3461f00285c41199",
+            "json_path": "$.discussion",
+            "span_start": 0,
+            "span_end": 180,
+            "verbatim_passage": "We estimated that heat waves will be 3.5-6.4 times more frequent in 2057-2059 than in 2002-2004 and that excess mortality attributable to heat waves would be 7.5-19.0 times higher.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "eastern United States",
+            "scenario": "unknown",
+            "basis": "us_subregion",
+            "region_class": "us_subregion",
+            "region_qualifier": "eastern"
+          }
+        ]
+      },
+      {
         "group_id": "LG-extreme_heat_v1-caveat-c1-026",
         "kind": "group",
         "statement_type": "caveat",
@@ -1464,6 +1551,7 @@
       "LG-extreme_heat_v1-mechanism-c1-021": "review_supported",
       "LG-extreme_heat_v1-mechanism-c1-001": "single_source_supported",
       "LG-extreme_heat_v1-mechanism-c1-022": "single_source_supported",
+      "LG-extreme_heat_v1-pattern-c2-003": "single_source_supported",
       "LG-extreme_heat_v1-caveat-c1-026": "review_supported",
       "LG-extreme_heat_v1-caveat-c1-024": "single_source_supported"
     },
@@ -1537,6 +1625,7 @@
       "34148006",
       "3708423",
       "5838629",
+      "5882914",
       "62829390",
       "6479124",
       "6585212",
@@ -1605,6 +1694,11 @@
         "heat‑index thresholds are used to define heat‑wave events",
         "Some county heat‑wave definitions incorporate the heat index as a trigger, such as using a heat‑index threshold above 115 °F.",
         "County heat‑wave definitions sometimes combine temperature and humidity thresholds, for example requiring temperatures above 95 °F together with humidity above 50 %."
+      ],
+      "LG-extreme_heat_v1-pattern-c2-003": [
+        "heat‑wave frequency, intensity and duration are projected to increase",
+        "Average heat‑wave duration is projected to be about one day longer under the high‑emission RCP8.5 scenario than under the moderate RCP4.5 scenario, regardless of the heat‑wave definition used.",
+        "Heat‑wave frequency in 2057‑2059 is projected to be 3.5–6.4 times higher than in the baseline period of 2002‑2004."
       ],
       "LG-extreme_heat_v1-caveat-c1-026": [
         "Heat index is used as a primary exposure metric in some studies but not universally",

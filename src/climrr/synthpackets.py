@@ -1,5 +1,5 @@
-"""Seed packets for the item-synthesis agent (pilot P2b; D-041, D-048, D-047a, D-049, D-050, D-053--D-055, D-053a, D-055a;
-DR-SEED-RANK-3).
+"""Seed packets for the item-synthesis agent (pilot P2b; D-041, D-048, D-047a, D-049, D-050, D-053--D-055, D-053a, D-055a,
+D-054a; DR-SEED-RANK-3, DR-SEED-RANK-3a).
 
 One packet per seed of the pilot selection (`data/metadata/benchmark/pilot_selection_v1.yaml`, D-050), at the
 rung the selection names, built deterministically from the seed's pattern (`item_seeds_v2.jsonl`) and the
@@ -47,6 +47,17 @@ independence) beside the run's group strength. A candidate's role, by its `claim
   {hazard_change_mechanism, hazard_definition_or_measurement} (v3, D-054) and no `exclude_from_rung7`
   disposition; excluded at other rungs.
 
+**Rung 7, scenario caveats** (v3b, DR-SEED-RANK-3a, D-054a): the caveat slots are filled **first** by groups of any
+statement type --- `pattern` included --- whose carried (relevant) member statements name an emissions scenario
+(`SCENARIO_CAVEAT_RE`, the ruling's pattern as written), with `claim_about` in the two caveat claims, ranked by the v3
+order; then by caveat-type groups as before. Such a group takes a caveat slot instead of a driver or context slot
+(`scenario_slot: true`), and, since schema v2's literature `statement_type` has no `pattern` value, it is carried with
+`statement_type: caveat` and its run type in `statement_type_run` (EXECUTOR reading, for confirmation). An
+`exclude_from_rung7` disposition still keeps a group out of every caveat slot. A rung-7 packet's `model_view` carries the
+`rung_instruction` (scenario dependence and caveats; RCP8.5 as one high-emissions scenario, contrasted with a moderate
+scenario where the groups support it): a packet field, so the agent and its system prompt are unchanged. v3b changes
+rung-7 packets only: a packet at another rung is built exactly as in v3a and keeps the v3a stamp and rank rule.
+
 Dispositions (D-053, `litgroups.apply_dispositions`, applied before the packets): a `not_about_family` or
 `reject` group, or one merged into another, is excluded; a relabel changes the claim type the role is read from.
 v3a (D-053a): a group or singleton with no disposition (`disposition` None) that would otherwise be attached --- it
@@ -79,8 +90,18 @@ from climrr import pattern_descriptors as pd
 from climrr.checksums import sha256_file
 from climrr.paths import REPO_ROOT
 
-VERSION = "synthpackets v3a"
+VERSION = "synthpackets v3b"
 RANK_RULE = "DR-SEED-RANK-3"
+#: v3b (D-054a) changes rung-7 packets only; a packet at any other rung keeps the version and rank rule it was built with.
+LEVEL_VERSION = {7: (VERSION, "DR-SEED-RANK-3a")}
+UNCHANGED_VERSION = "synthpackets v3a"
+SCENARIO_CAVEAT_RE = re.compile(r"RCP|SSP|emissions scenario|high-emissions|moderate")  # D-054a, as written
+RUNG_INSTRUCTION = {
+    7: ("Rung 7: the prompt must ask how the projected change depends on the emissions scenario and what uncertainties or "
+        "caveats apply. The reference answer must state that RCP8.5 is one high-emissions scenario and, where the caveat "
+        "groups support it, contrast it with the moderate scenario they name; state no scenario contrast the groups do not "
+        "support."),
+}
 PACKETS_DIR = REPO_ROOT / "artifacts" / "benchmark" / "synth_packets"
 MAX_PASSAGE = 400
 MAX_DRIVER_GROUPS, MAX_CONTEXT_GROUPS, MAX_CAVEAT_GROUPS = 10, 4, 4
@@ -298,7 +319,7 @@ def packet_groups(level: int, groups: list[dict], by_statement: dict, seed_basis
     geo = geo or {}
     picked = []
     for g in groups:
-        if g["statement_type"] not in PACKET_TYPES:
+        if g["statement_type"] not in PACKET_TYPES and level not in CAVEAT_LEVELS:
             continue
         rel = [sid for sid in g["member_ids"] if sid in seed_basis]
         if not rel:
@@ -319,8 +340,18 @@ def packet_groups(level: int, groups: list[dict], by_statement: dict, seed_basis
             continue
         scen = g["statement_type"] == "caveat" and any(m["scenario"] not in la.UNNAMED and m["scenario"] for m in members)
         claim = g.get("claim_about")
+        names_emissions = level in CAVEAT_LEVELS and any(SCENARIO_CAVEAT_RE.search(m["statement"] or "") for m in members)
+        if g["statement_type"] not in PACKET_TYPES and not names_emissions:
+            continue
+        scenario_slot = names_emissions and claim in CAVEAT_CLAIMS and not g.get("exclude_from_rung7") \
+            and not g.get("disposition_exclude")
         if g.get("disposition_exclude"):
             role, why = None, g["disposition_exclude"]
+        elif scenario_slot:
+            role, why = "caveat", None
+        elif g["statement_type"] not in PACKET_TYPES:
+            role, why = None, ("disposition:exclude_from_rung7" if g.get("exclude_from_rung7")
+                               else f"scenario_caveat_claim_about:{claim}")
         elif g["statement_type"] == "caveat":
             if level not in CAVEAT_LEVELS:
                 role, why = None, "caveat_outside_rung_7"
@@ -333,7 +364,9 @@ def packet_groups(level: int, groups: list[dict], by_statement: dict, seed_basis
         else:
             role = {DRIVER_CLAIM: "driver", CONTEXT_CLAIM: "context"}.get(claim)
             why = None if role else f"claim_about:{claim}"
-        picked.append({"group_id": g["group_id"], "kind": g["kind"], "statement_type": g["statement_type"], "claim_about": claim,
+        picked.append({"group_id": g["group_id"], "kind": g["kind"],
+                       "statement_type": "caveat" if scenario_slot else g["statement_type"], "claim_about": claim,
+                       **({"statement_type_run": g["statement_type"], "scenario_slot": True} if scenario_slot else {}),
                        "role": role, "excluded_reason": why, "label": g["label"] if g["kind"] == "group" else None,
                        "claim_about_source": g.get("claim_about_source", "agent"), "disposition": g.get("disposition"),
                        **({"merged_from": g["merged_from"]} if g.get("merged_from") else {}),
@@ -348,7 +381,8 @@ def packet_groups(level: int, groups: list[dict], by_statement: dict, seed_basis
     out = []
     for role, cap in (("driver", MAX_DRIVER_GROUPS), ("context", MAX_CONTEXT_GROUPS), ("caveat", MAX_CAVEAT_GROUPS)):
         kept = []
-        for x in sorted((x for x in picked if x["role"] == role), key=rank_key):
+        key = (lambda x: (not x.get("scenario_slot"), *rank_key(x))) if role == "caveat" else rank_key   # D-054a: scenario first
+        for x in sorted((x for x in picked if x["role"] == role), key=key):
             if len(kept) < cap and x["disposition"] is not None:
                 kept.append(x)
                 continue
@@ -407,12 +441,14 @@ def assemble_packet(seed_id: str, p: dict, lvl: int, item_id: str, pg: list[dict
     name, modality, desc = LEVEL_TEXT[lvl]
     cols = sorted({c["column"] for c in p["provenance"]["columns"]})
     paper_ids = sorted({m["paper_item_id"] for g in pg for m in g["members"]})
+    version, rank_rule = LEVEL_VERSION.get(lvl, (UNCHANGED_VERSION, RANK_RULE))
     return {
-        "packet_id": f"PK-{seed_id}", "version": VERSION, "rank_rule": RANK_RULE, "descriptor_rule": rules["rule"],
+        "packet_id": f"PK-{seed_id}", "version": version, "rank_rule": rank_rule, "descriptor_rule": rules["rule"],
         "descriptor_rules_sha256": rules["sha256"], "item_id": item_id, "seed_id": seed_id,
         "use_case_level": lvl,
         "model_view": {
-            "use_case_level": lvl, "rung": f"{lvl}. {name}: {desc}", "reasoning_modalities": modality,
+            "use_case_level": lvl, "rung": f"{lvl}. {name}: {desc}",
+            **({"rung_instruction": RUNG_INSTRUCTION[lvl]} if lvl in RUNG_INSTRUCTION else {}), "reasoning_modalities": modality,
             "patterns": [{"pattern_id": p["pattern_id"], "text": text, "values_shown": shown, "allowed_descriptors": descr}],
             "groups": [_model_group(g) for g in pg],
             "allowed_numbers": sorted(allowed, key=lambda s: (len(s), s)),

@@ -11,13 +11,17 @@ reads), and a `manifest.json` with each packet's SHA-256. Relevance under the D-
 dispositions (`data/metadata/benchmark/group_dispositions_v1a.csv`, manifest-pinned; D-053, D-053a) applied to the groups
 first, and a group or singleton that would be attached with no disposition excluded as `no_disposition` and listed in
 the manifest's `undisposed_candidates` (D-053a);
-groups by DR-SEED-RANK-3 with the rung-7 caveat filter (D-054); pattern descriptors by DR-DESC-1
-(`descriptor_rules_v1.yaml`, manifest-pinned; D-055). Rules: `src/climrr/synthpackets.py`. Deterministic; no model
-call, no table value computed.
+groups by DR-SEED-RANK-3 with the rung-7 caveat filter (D-054) and, at rung 7, the scenario caveats first
+(DR-SEED-RANK-3a, D-054a); pattern descriptors by DR-DESC-1 (`descriptor_rules_v1.yaml`, manifest-pinned; D-055).
+Rules: `src/climrr/synthpackets.py`. Deterministic; no model call, no table value computed.
+
+`--expect-changed PK-a,PK-b` (packets v3b: `PK-SD2-TP1-00075`): every packet is built in memory and compared with the
+file on disk first; unless exactly the named packets differ, nothing is written. The run record lists the packets that
+changed and the SHA-256 of the manifest replaced (not the manifest, so that a rebuild stays byte-identical).
 
     python scripts/build_synth_packets.py --groups artifacts/litgroups/run2/groups_enriched.jsonl \\
         [--selection data/metadata/benchmark/pilot_selection_v1.yaml] [--dispositions data/metadata/benchmark/group_dispositions_v1a.csv] \\
-        [--out artifacts/benchmark/synth_packets]
+        [--out artifacts/benchmark/synth_packets] [--expect-changed PK-SD2-TP1-00075]
 """
 
 from __future__ import annotations
@@ -50,6 +54,7 @@ def main() -> int:
     ap.add_argument("--selection", type=Path, default=psel.SELECTION_PATH, help="pilot selection YAML (manifest-pinned)")
     ap.add_argument("--dispositions", type=Path, default=lgr.DISPOSITIONS_PATH, help="group dispositions CSV (manifest-pinned)")
     ap.add_argument("--out", type=Path, default=spk.PACKETS_DIR)
+    ap.add_argument("--expect-changed", default=None, help="packet ids, comma-separated: fail unless exactly these change")
     a = ap.parse_args()
     sel = psel.load(a.selection)
     errs = psel.check(sel)
@@ -76,11 +81,19 @@ def main() -> int:
     hashes = {**spk.inputs_hashes(s2.SEEDS_PATH, a.groups, a.selection), "group_dispositions": sha256_file(a.dispositions),
               "descriptor_rules": rules["sha256"]}
     a.out.mkdir(parents=True, exist_ok=True)
-    index, undisposed = [], {}
-    for x in chosen:
-        sid = x["seed_id"]
-        pk = spk.build_packet(seeds[sid], x["rung"], f"BI-P2B-{x['order']:04d}", groups, by_statement, rows, nca, hashes,
+    built = [spk.build_packet(seeds[x["seed_id"]], x["rung"], f"BI-P2B-{x['order']:04d}", groups, by_statement, rows, nca, hashes,
                               selection={"file": repo_relative(a.selection), "decision": sel["decision"], **x}, rules=rules)
+             for x in chosen]
+    text = lambda pk: json.dumps(pk, indent=2, ensure_ascii=False) + "\n"  # noqa: E731  (as r2.write_json)
+    changed = [pk["packet_id"] for pk in built if not (a.out / f"{pk['packet_id']}.json").exists()
+               or (a.out / f"{pk['packet_id']}.json").read_text(encoding="utf-8") != text(pk)]
+    if a.expect_changed is not None and sorted(changed) != sorted(a.expect_changed.split(",")):
+        raise SystemExit(f"packets that would change: {changed}; expected exactly {a.expect_changed}; nothing written")
+    manifest_path = a.out / "manifest.json"
+    previous_manifest = sha256_file(manifest_path) if manifest_path.exists() else None
+    index, undisposed = [], {}
+    for x, pk in zip(chosen, built):
+        sid = x["seed_id"]
         path = a.out / f"{pk['packet_id']}.json"
         r2.write_json(path, pk)
         roles = [g["role"] for g in pk["model_view"]["groups"]]
@@ -93,7 +106,6 @@ def main() -> int:
         for e in pk["excluded_groups"]:
             if e["reason"] == "no_disposition":
                 undisposed.setdefault(e["group_id"], []).append(pk["packet_id"])
-    manifest_path = a.out / "manifest.json"
     by_id = {g["group_id"]: g for g in groups}
     undisposed_list = [{"group_id": gid, "kind": by_id[gid]["kind"], "statement_type": by_id[gid]["statement_type"],
                         "claim_about": by_id[gid].get("claim_about"),
@@ -110,7 +122,8 @@ def main() -> int:
                                   "geography": lg.VERSION, "dispositions": applied, "undisposed_candidates": undisposed_list,
                                   "inputs_sha256": hashes, "packets": index})
     rec = write_run_record(
-        "build_synth_packets", result_summary={"packets": index}, passed=True, data_path=a.groups, output_path=manifest_path,
+        "build_synth_packets", result_summary={"packets": index, "changed_packets": changed, "replaced_manifest_sha256": previous_manifest,
+                                             "manifest_sha256": sha256_file(manifest_path)}, passed=True, data_path=a.groups, output_path=manifest_path,
         config_snapshot={"version": spk.VERSION, "rank_rule": spk.RANK_RULE, "descriptor_rule": rules["rule"], "geography": lg.VERSION,
                          "select": select, "dispositions": repo_relative(a.dispositions), "dispositions_applied": applied,
                          "undisposed_candidates": [x["group_id"] for x in undisposed_list],

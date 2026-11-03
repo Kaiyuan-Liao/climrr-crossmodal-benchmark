@@ -315,3 +315,72 @@ def test_a_merge_unions_members_and_recomputes_strength():
     with pytest.raises(ValueError, match="itself excluded or merged"):
         lgr.apply_dispositions(groups, {"LG-s": {"disposition": "merge_with:LG-t", "kind": "merge_with", "arg": "LG-t"},
                                         "LG-t": {"disposition": "reject", "kind": "reject", "arg": None}})
+
+
+# --- packets v3b: rung-7 scenario caveats first (DR-SEED-RANK-3a, D-054a) -----------------------------------------
+
+
+def _named(sid, paper, text):
+    r = _rec(sid, paper)
+    r["proposal"]["statement"] = text
+    return r
+
+
+def test_rung_7_fills_caveat_slots_with_scenario_naming_groups_of_any_type_first():
+    groups = [_g("LG-p-01", "pattern", ["A"], "hazard_change_mechanism", "group"),                 # names RCP8.5 / RCP4.5
+              _g("LG-p-02", "pattern", ["B"], "impact_or_exposure", "group"),                      # names a scenario, wrong claim
+              _g("LG-p-03", "pattern", ["C"], "hazard_change_mechanism", "group"),                 # names no scenario
+              _g("LG-c-01", "caveat", ["D"], "hazard_definition_or_measurement", strength="multi_source_supported"),
+              _g("LG-d-01", "mechanism", ["E"], "hazard_change_mechanism"),                        # a scenario-naming driver
+              _g("LG-d-02", "driver", ["F"], "hazard_change_mechanism"),                           # names a scenario, excluded from rung 7
+              _g("LG-d-03", "driver", ["G"], "hazard_change_mechanism")]
+    groups[5]["exclude_from_rung7"] = True
+    by = {"A": _named("A", "1", "Heat waves last longer under RCP8.5 than under the moderate RCP4.5 scenario."),
+          "B": _named("B", "2", "Mortality rises under SSP5-8.5."), "C": _named("C", "3", "Heat waves become more frequent."),
+          "D": _named("D", "4", "The heat index is masked below a threshold."), "E": _named("E", "5", "Warming is larger in high-emissions runs."),
+          "F": _named("F", "6", "Warming under RCP8.5 drives more hot days."), "G": _named("G", "7", "Warming drives more hot days.")}
+    basis = {k: "us_national" for k in by}
+    pg, ex = spk.packet_groups(7, groups, by, basis)
+    caveats = [g for g in pg if g["role"] == "caveat"]
+    assert [g["group_id"] for g in caveats] == ["LG-d-01", "LG-p-01", "LG-c-01"]        # scenario groups first, then caveats
+    assert [(g["statement_type"], g.get("statement_type_run"), g.get("scenario_slot")) for g in caveats] == [
+        ("caveat", "mechanism", True), ("caveat", "pattern", True), ("caveat", None, None)]
+    assert [g["group_id"] for g in pg if g["role"] == "driver"] == ["LG-d-02", "LG-d-03"]   # exclude_from_rung7 keeps it a driver
+    assert ("LG-p-02", "scenario_caveat_claim_about:impact_or_exposure") in {(x["group_id"], x["reason"]) for x in ex}
+    assert "LG-p-03" not in {x["group_id"] for x in ex} | {g["group_id"] for g in pg}     # a pattern group naming none: dropped
+    pg3, ex3 = spk.packet_groups(3, groups, by, basis)                                    # other rungs: v3a, unchanged
+    assert [g["group_id"] for g in pg3] == ["LG-d-01", "LG-d-02", "LG-d-03"] and not any(g.get("scenario_slot") for g in pg3)
+    assert "LG-p-01" not in {x["group_id"] for x in ex3}
+
+
+def test_only_a_rung_7_packet_carries_the_instruction_and_the_v3b_stamp():
+    g = {"group_id": "LG-a-driver-001", "kind": "group", "statement_type": "driver", "label": "Humidity raises the heat index.",
+         "role": "driver", "claim_about": "hazard_change_mechanism", "group_strength_run": "single_source_supported",
+         "strength_in_packet": "single_source_supported", "n_members_run": 1, "names_scenario": False, "n_specific": 1,
+         "members": [_member("LS-7001-01", "7001")]}
+    p3 = spk.assemble_packet("SD2-TP1-00009", EX["TP1-00009"], 3, "BI-P2B-0001", [g], NCA, {})
+    p7 = spk.assemble_packet("SD2-TP1-00009", EX["TP1-00009"], 7, "BI-P2B-0001", [g], NCA, {})
+    assert (p3["version"], p3["rank_rule"], "rung_instruction" in p3["model_view"]) == ("synthpackets v3a", "DR-SEED-RANK-3", False)
+    assert (p7["version"], p7["rank_rule"]) == ("synthpackets v3b", "DR-SEED-RANK-3a")
+    ins = p7["model_view"]["rung_instruction"]
+    assert "depends on the emissions scenario" in ins and "RCP8.5 is one high-emissions scenario" in ins and "moderate" in ins
+    assert list(p7["model_view"])[:3] == ["use_case_level", "rung", "rung_instruction"]
+
+
+def test_packets_v3b_change_only_the_rung_7_packet():
+    import hashlib
+    import subprocess
+    pm = json.loads((spk.PACKETS_DIR / "manifest.json").read_text(encoding="utf-8"))
+    v3a = json.loads(subprocess.run(["git", "show", "1f175dac7801b3d27ca7ed1961debe88e22b4dc6:artifacts/benchmark/synth_packets/manifest.json"],
+                                    cwd=spk.REPO_ROOT, capture_output=True, check=True).stdout)
+    assert hashlib.sha256(json.dumps(v3a, indent=2, ensure_ascii=False).encode() + b"\n").hexdigest().startswith("86b02cd0")
+    old = {x["packet_id"]: x["sha256"] for x in v3a["packets"]}
+    assert pm["version"] == "synthpackets v3b"
+    for x in pm["packets"]:
+        assert sha256_file(spk.PACKETS_DIR / f"{x['packet_id']}.json") == x["sha256"]
+        assert (x["sha256"] != old[x["packet_id"]]) == (x["packet_id"] == "PK-SD2-TP1-00075")
+    pk = json.loads((spk.PACKETS_DIR / "PK-SD2-TP1-00075.json").read_text(encoding="utf-8"))
+    cav = [g for g in pk["provenance"]["groups"] if g["role"] == "caveat"]
+    assert [g["group_id"] for g in cav] == ["LG-extreme_heat_v1-pattern-c2-003", "LG-extreme_heat_v1-caveat-c1-026",
+                                            "LG-extreme_heat_v1-caveat-c1-024"]
+    assert [g["strength_in_packet"] for g in cav] == ["single_source_supported", "review_supported", "single_source_supported"]

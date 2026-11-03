@@ -2,10 +2,9 @@
 
 **Status.** P2b-prep built on `work/meeting-2026-10-22` (D-046, D-047, D-048; authorized by D-041 and the
 COORDINATOR rulings of 2026-11-01); **P2b-fix** (D-047a, D-049, D-050, DR-SEED-RANK-2; section 8) amends the
-geography, the grouping agent (v2) and the packets, and fixes the ten pilot seeds. **No model call has been made; no
-item exists.** The two agents below
-are pinned in their tests and wait for a Polaris run. Nothing here changes a column status, the concept map or a
-compatibility rule.
+geography, the grouping agent (v2) and the packets, and fixes the ten pilot seeds. *(Written before any model
+call; later sections record the runs.)* **Since P2b-ingest-items (section 14, D-056): ten pilot items exist, all in
+`human_review`; none is accepted.** Nothing here changes a column status, the concept map or a compatibility rule.
 
 ## 1. Where P2b sits
 
@@ -364,3 +363,60 @@ in `allowed_descriptors` under another form" = an untraced number whose numeric 
 state as digits ("16.0" for "about 16 days") or as a number-word ("3" for "roughly tripling", "0.5" for "half"); the
 "half again" in "about half again as many" is read as 0.5, not 1.5. Allowed anchors ("about 16 days") stay allowed as
 optional rubric points: they are descriptors, not exact pattern values. Next: synthesis run 2, `litsynth/run2`.
+
+## 14. Synthesis runs 0--2, ingest, item review workbook, rung-7 fix (P2b-ingest-items; D-056, D-054a, 2026-11-02)
+
+**Runs 0--2** (Polaris, Sophia `openai/gpt-oss-120b`, reasoning low, max_tokens 16000; delivered together as
+`litsynth_runs012_evidence.tar.gz`, `00c90934…aac1`, verified):
+
+| run | agent | packets | items | pass | outcome |
+| --- | --- | --- | --- | --- | --- |
+| `run0_rung1` | v2 | v2 (rung 1 only) | 2 | 0 | superseded: number formatting (D-055; section 11) |
+| `run1` | v3.1 | v3a | 10 | 0 | superseded: format checks (D-055b; section 13) |
+| **`run2`** | **v3.2** | **v3a** | **10** | **10** | **the pilot item set (D-056)**; 0 leakage flags; format corrective turn on 0001, 0002, 0006, 0008, 0009, 0010, all passing; two HTTP retries recovered (02787 HTTP 502, 00069 RemoteDisconnected) |
+
+**Ingest** (`scripts/ingest_litsynth.py`, `src/climrr/litsynth_run2.py` -> `artifacts/benchmark/items/run2/`, manifest
+`c9c6bc9b…60e9`). Every stated fact re-derived; every packet SHA-256 equal to packets v3a at the source commit `1f175da`
+(the working tree now holds v3b, so the v3a packets are read from Git). `checks_reproduced: true` in three parts: the
+pinned agent re-assembles each item from its final raw response to the delivered item; post-checks v2.2 on the item and
+its packet equal the recorded result; for the six corrective items, the first reply's check equals `first_check`.
+`items.jsonl` is copied byte-identical; `items/<item_id>.json` are the delivered records with the D-033 lifecycle step
+(`deterministic_pass` -> `human_review`, a `human_review` history event, dispositions and `final_frozen` null), each
+schema-v2 valid. *`items.jsonl` has sorted keys, so its rubric order differs from the per-item files; the checks'
+`texts_traced_to_literature` follows the per-item order, which the reproduction uses.*
+
+**Rubric lint v1** (`scripts/lint_item_rubrics.py`; report only; `rubric_lint_v1.json`): 25 flags ---
+generation_constraint 16, hedge_strength_mismatch 6, required_single_source_only 1 (0007, humidity), rung1_prompt_mechanism
+1 (0002, "main drivers"), required_tercile 1 (0002). Per item: 0001 2, 0002 3, 0003 2, 0004 4, 0005 2, 0006 2, 0007 1,
+0008 7, 0009 1, 0010 1. The six hedge flags are "One study reports / suggests" on `…-driver-c1-008`, `…-driver-c2-001`
+and `…-mechanism-c1-024`, multi-source in their packets. The literal pattern misses 0007's "Exact numeric values are not
+required…" and "…allowed numbers" (with a space) --- named by the COORDINATOR notes, so the reviewer sees them there.
+
+**Item review workbook** (`scripts/build_p2b_items_review.py`, `src/climrr/p2b_items_review.py`):
+`artifacts/benchmark/review/P2b_items_review_v1.xlsx` (gitignored) with OVERVIEW, ITEMS (GUIDANCE field order;
+COORDINATOR disposition and notes; reviewer columns `kaiyuan_disposition` accept / accept_with_edits / reject /
+regenerate, `edited_prompt`, `edited_reference_table` / `_literature` / `_integrated`, `edited_rubric_required` /
+`_optional` / `_fatal`, `kaiyuan_note`, `mentor_disposition`, `mentor_note`), PROVENANCE, GROUPS_CITED (4 groups across
+the ten items), LINT, Legend; the tracked `P2b_items_review_v1.csv` (ITEMS). The `edited_*` cells become
+`review.final_frozen` in the next package. COORDINATOR notes: accept_with_edits 9, regenerate 1 (0010).
+
+**Rung-7 fix (DR-SEED-RANK-3a, D-054a; synthpackets v3b).** At rung 7 the caveat slots take, first, groups of any
+statement type whose carried members name an emissions scenario, with a caveat claim type, in the v3 order; then the
+caveat groups. The packet carries `model_view.rung_instruction` (the agent and its system prompt unchanged). Rebuilt with
+`--expect-changed PK-SD2-TP1-00075`: only that packet changed (`9ec338d6…79ee`; manifest `09ca030a…72c7`). Its caveat
+slots: **`LG-extreme_heat_v1-pattern-c2-003`** (single_source_supported here: two relevant members from paper 5882914,
+one of them the RCP8.5 vs RCP4.5 heat-wave-duration statement), `…-caveat-c1-026` (review_supported), `…-caveat-c1-024`
+(single_source_supported). A scenario-slot group is carried as `statement_type: caveat` (`statement_type_run: pattern`):
+schema v2 has no `pattern` literature type and the frozen agent copies the packet's type (EXECUTOR reading, D-054a).
+
+**Run 3** (0010 only; the agent's `--only` takes seed ids, so no staging directory is needed), from the Eagle clone at
+the pushed head of this package:
+
+    bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
+    cd "$CLIMRR_REPO_ROOT"
+    python scripts/litcollect/litsynth_agent.py \
+        --packets artifacts/benchmark/synth_packets --only SD2-TP1-00075 \
+        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run3" \
+        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
+        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \
+        --sleep 5 --source-commit <PINNED_SHA>

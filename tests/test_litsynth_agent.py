@@ -16,6 +16,9 @@ v3.2 / post-checks v2.2 (D-055b): "one" is not a number-word ("one high-emission
 "two" still traced); "has been reported" is a hedge; the fixed not-required sentence passes in every rubric list; a reply
 whose failures are all format-class gets one corrective turn and every check runs again; a leakage failure mixed with
 format failures gets none; an unparseable corrective reply keeps the first item, rejected.
+Packets v3b (D-054a; the agent unchanged): on the real Florida rung-7 packet, a reply that cites the scenario caveat
+`LG-extreme_heat_v1-pattern-c2-003` (typed `pattern` in the run, carried as a caveat) for the RCP8.5 vs RCP4.5 contrast,
+hedged, passes every post-check and schema v2, and the group lands in `literature_caveats`.
 """
 
 from __future__ import annotations
@@ -382,7 +385,7 @@ def _florida_reply(pk, cite=CAVEAT_80F, point_ids=(CAVEAT_80F,)):
 @pytest.fixture(scope="module")
 def florida():
     pk = json.loads(FLORIDA.read_text(encoding="utf-8"))
-    assert pk["version"] == "synthpackets v3a" and CAVEAT_80F in pk["checks_input"]["group_strength"]
+    assert pk["version"] == "synthpackets v3b" and CAVEAT_80F in pk["checks_input"]["group_strength"]
     assert "80" not in pk["checks_input"]["allowed_numbers"]                     # not a pattern number: v2 would reject it
     assert any("80\u202f°F" in t for t in pk["checks_input"]["group_texts"][CAVEAT_80F])
     return pk
@@ -542,3 +545,27 @@ def test_a_leakage_failure_mixed_with_format_failures_gets_no_turn(tmp_path):
     assert it["review"]["status"] == "rejected_pre_review" and h["corrective_turn_used"] is False and h["corrective_class"] is None
     assert "integrated leakage: ClimRR named" in h["reasons"] and any("threefold" in r for r in h["reasons"])
     assert summary["format_corrective_used"] == 0
+
+
+SCENARIO_CAVEAT = "LG-extreme_heat_v1-pattern-c2-003"
+
+
+def test_packets_v3b_a_scenario_caveat_reply_passes_and_is_a_literature_caveat(florida):
+    assert florida["rank_rule"] == "DR-SEED-RANK-3a" and "rung_instruction" in florida["model_view"]
+    g = next(x for x in florida["provenance"]["groups"] if x["group_id"] == SCENARIO_CAVEAT)
+    assert (g["role"], g["statement_type"], g["statement_type_run"]) == ("caveat", "caveat", "pattern")
+    r = _florida_reply(florida)
+    r["prompt"] = ("How does the projected change in summer days with a dangerous heat index (above 95 °F) in Florida by mid-century "
+                   "depend on the emissions scenario, and what caveats apply?")
+    r["reference_answer"]["literature_interpretation"].append(
+        {"sentence": "One study reports that heat-wave duration is projected to be about one day longer under the high-emission "
+                     "RCP8.5 scenario than under the moderate RCP4.5 scenario.", "group_ids": [SCENARIO_CAVEAT], "hedged": True})
+    r["rubric"]["optional_points"].append({"point": "contrasts RCP8.5 with the moderate RCP4.5 scenario", "source_ids": [SCENARIO_CAVEAT]})
+    res = _checked(r, florida)
+    assert res["pass"], res["reasons"]
+    a = _agent()
+    common = {"model": "m", "prompt_hash": "0" * 64, "generation_timestamp": "2026-11-02T00:00:00Z", "packet_sha256": "0" * 64,
+              "system_prompt_sha256": "0" * 64}
+    item, _ = a.assemble(r, florida, common, bi.column_names())
+    assert [s["group_id"] for s in item["reference_components"]["literature_caveats"]] == [CAVEAT_80F, SCENARIO_CAVEAT]
+    assert bi.schema_errors(item) == []

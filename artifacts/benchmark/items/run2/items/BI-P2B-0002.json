@@ -1,0 +1,491 @@
+{
+  "schema_version": "benchmark_item_v2",
+  "item_id": "BI-P2B-0002",
+  "use_case_level": 1,
+  "capability_tested": "hazard pattern identification",
+  "system_task": "generate closed‑book benchmark item",
+  "reasoning_modalities": "Hazard",
+  "key_relationships": "hazard‑scenario‑region",
+  "evidence_needed": "modeled climate projection",
+  "desired_output_characteristics": "concise, pattern‑focused",
+  "expected_knowledge_level": "general_climate_science",
+  "prompt": "How is the summer hazard of days with a dangerous heat index (above 95 °F) projected to change in Arizona by mid-century under RCP8.5, and what are the main drivers of this change?",
+  "source_independent_answerability": "yes",
+  "source_independence_note": "A climate scientist familiar with projected heat‑index trends can answer the direction, size class, region, horizon and scenario without consulting the specific packet.",
+  "source_leakage_check": {
+    "clmrr_named": false,
+    "row_or_column_named": false,
+    "paper_named": false,
+    "hidden_exact_value_required": false,
+    "according_to_phrase": false,
+    "pass": true,
+    "flags": [],
+    "check_version": "leakage_check v1"
+  },
+  "reference_components": {
+    "table_patterns": [
+      {
+        "acceptance_blocked": false,
+        "acceptance_blocked_by": [],
+        "authorization": "verified",
+        "cautions": [],
+        "computed_value_or_range": {
+          "cell_direction_counts": {
+            "decrease": 0,
+            "increase": 1976,
+            "no_change": 31
+          },
+          "mean_from": "13.932170738594918",
+          "mean_to": "24.203371542481315",
+          "n_cells_empty": 0,
+          "n_cells_used": 2007,
+          "range": {
+            "max": "27.133333200000003",
+            "min": "0.000000000000000",
+            "over": "cells"
+          },
+          "unit": "days",
+          "value": "10.271200803886398",
+          "value_is": "absolute_change",
+          "value_reason": null
+        },
+        "direction": "increase",
+        "family": "heat_index",
+        "geography": "Arizona",
+        "geography_type": "state",
+        "horizon": "mid",
+        "horizon_window": "2045-2054",
+        "metric": "heatindex_days_above_95F",
+        "metric_wording": "number of days with daily max heat index above 95 F",
+        "pattern_id": "TP1-00069",
+        "pattern_kind": "single",
+        "pattern_robustness": "majority_same_direction",
+        "pattern_support_n": 2007,
+        "provenance": {
+          "code_version": "table_patterns v1 (src/climrr/table_patterns.py sha256 c5948f7e0ef85b73)",
+          "column_sources": {
+            "heatindex_HIS_Day95": {
+              "kind": "dictionary_line",
+              "line": 679,
+              "quote": "heatindex_HIS_Day95 Number of Summer days with daily max heat index above 95 F -- Historical"
+            },
+            "heatindex_M85_Day95": {
+              "kind": "dictionary_line",
+              "line": 685,
+              "quote": "heatindex_M85_Day95 Number of Summer days with daily max heat index above 95 F -- Mid-Century RCP8.5"
+            }
+          },
+          "column_statuses": {
+            "heatindex_HIS_Day95": "verified_from_dictionary",
+            "heatindex_M85_Day95": "verified_from_dictionary"
+          },
+          "columns": [
+            {
+              "column": "heatindex_HIS_Day95",
+              "index": 240
+            },
+            {
+              "column": "heatindex_M85_Day95",
+              "index": 246
+            }
+          ],
+          "derivation_rule_id": "DR-TD-003 @ DR-PT-001",
+          "member_cells_sha256": "eac237b78fe2430548583c866d57d5a5b0da52a7ea8e1397e7ad9400e8bee700",
+          "member_rows": 2007,
+          "row_rule": "State == 'Arizona'",
+          "table_data_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e"
+        },
+        "provisional": true,
+        "provisional_reasons": [
+          "location_inferred_candidate: State label IC-012 (A-G1, A-G3; D-034)",
+          "unweighted_mean: provisional aggregation rule for representation validation"
+        ],
+        "rank": {
+          "of": 49,
+          "order": "descending signed value (DR-PT-004)",
+          "rank": 23,
+          "tied_with": 0
+        },
+        "relative_magnitude": {
+          "class": "moderate",
+          "definition": "moderate = middle tercile, by signed value, among the 49 U.S. State labels in the table with a computed value for family=heat_index, metric=heatindex_days_above_95F, season=summer, horizon=mid (2045-2054), scenario=RCP8.5, statistic=absolute_change (DR-PT-005); a relative descriptor among states, not an absolute threshold"
+        },
+        "relative_magnitude_skipped_reason": null,
+        "robustness_share": "1976/2007",
+        "robustness_unit": "cell",
+        "scenario": "RCP8.5",
+        "season": "summer",
+        "statistic": "absolute_change",
+        "status": "computed"
+      }
+    ],
+    "literature_mechanisms": [],
+    "literature_caveats": []
+  },
+  "reference_answer": {
+    "table_pattern": "In Arizona, summer days with a dangerous heat index (above 95 °F) are projected to increase by mid-century (2045–2054) under RCP8.5, one high-emissions scenario, representing a moderate increase (about half again as many) and placing the state in the middle tercile relative to other U.S. states.",
+    "literature_interpretation": null,
+    "integrated": "The modeled projection shows that Arizona will experience more summer days with a dangerous heat index (above 95 °F) by mid-century under RCP8.5, with a moderate increase that puts the state in the middle tercile among U.S. states, reflecting the high‑emissions forcing driving hotter conditions."
+  },
+  "rubric": {
+    "required_points": [
+      "[w=3] Direction: increase",
+      "[w=2] Magnitude class: a moderate increase (about half again as many)",
+      "[w=2] Place: Arizona (state level)",
+      "[w=2] Horizon and scenario phrasing: by mid-century (2045–2054) under RCP8.5, one high-emissions scenario",
+      "[w=2] Relative ranking: middle tercile among U.S. states for this quantity, season, horizon and scenario",
+      "[w=1] Hazard is described, not exposure or risk"
+    ],
+    "optional_points": [
+      "Anchor phrase: from about 14 to about 24 days"
+    ],
+    "acceptable_variants": [
+      "Any statement that correctly identifies an increase, a moderate rise (about half again as many), Arizona, the mid‑century horizon, the RCP8.5 high‑emissions scenario, and the middle‑tercile ranking."
+    ],
+    "disallowed_claims": [
+      "Stating the exact numeric increase or exact future mean.",
+      "Claiming Arizona will have the largest increase among states.",
+      "Presenting the projection as a forecast or certainty.",
+      "Confusing the heat‑index hazard with exposure or risk."
+    ],
+    "fatal_errors": [
+      "Including any number not listed in the allowed descriptors.",
+      "Mischaracterizing RCP8.5 as a forecast or the only possible future.",
+      "Describing the modeled historical baseline as an observation."
+    ]
+  },
+  "guardrails": [
+    "A modeled historical baseline is model output for a past period, not an observation.",
+    "A Fire Weather Index is a meteorological fire-danger index; it is never fire occurrence, ignition, burned area or damage.",
+    "RCP8.5 is one high-emissions scenario, not a forecast and not the only plausible future.",
+    "Hazard is not exposure, and exposure is not risk."
+  ],
+  "c_g_t_s_d_audit": null,
+  "generation": {
+    "generator_version": "litsynth_agent v3.2",
+    "model": "openai/gpt-oss-120b",
+    "prompt_hash": "4cc29d6cf11a110bcb015a088bebdfbd8e21c3b743f4bdf3baeb1c7f92b244b5",
+    "timestamp": "2026-11-03T00:00:51Z",
+    "inputs_sha256": {
+      "packet": "39fadca55d09f815a31561ba6dc4f99beee89a6e1e085b37a09a37dce4befbf8",
+      "system_prompt": "9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715",
+      "item_seeds_v2": "3123dd3463f23555601d1e64edc172e2977e2fc6df3adbb08a74b5df41be9d50",
+      "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+      "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+      "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+      "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+      "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+      "pilot_selection": "c9f090297fd1beacbd524e33f571e275b2205f6e2b99687955999e3577f516fa",
+      "group_dispositions": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+      "descriptor_rules": "5c2090a77e0424d43603c9766c8925cee50a3b8fd31f24351334adbf82934650"
+    }
+  },
+  "review": {
+    "status": "human_review",
+    "history": [
+      {
+        "event": "deterministic_pass",
+        "reasons": [],
+        "check_version": "synthesis_post_checks v2.2",
+        "checks": {
+          "numbers_untraced": [],
+          "number_words_untraced": [],
+          "exact_values_in_graded_text": [],
+          "prompt_leakage": {
+            "clmrr_named": false,
+            "row_or_column_named": false,
+            "paper_named": false,
+            "hidden_exact_value_required": false,
+            "according_to_phrase": false,
+            "pass": true,
+            "flags": [],
+            "check_version": "leakage_check v1"
+          },
+          "schema_errors": [],
+          "texts_traced_to_literature": [],
+          "rubric_points_without_source_ids": 0,
+          "n_table_sentences": 1,
+          "n_literature_sentences": 0
+        },
+        "reference_answer_tagged": {
+          "table_pattern": [
+            {
+              "sentence": "In Arizona, summer days with a dangerous heat index (above 95 °F) are projected to increase by mid-century (2045–2054) under RCP8.5, one high-emissions scenario, representing a moderate increase (about half again as many) and placing the state in the middle tercile relative to other U.S. states.",
+              "pattern_ids": [
+                "TP1-00069"
+              ]
+            }
+          ],
+          "literature_interpretation": [],
+          "integrated": "The modeled projection shows that Arizona will experience more summer days with a dangerous heat index (above 95 °F) by mid-century under RCP8.5, with a moderate increase that puts the state in the middle tercile among U.S. states, reflecting the high‑emissions forcing driving hotter conditions.",
+          "rubric_required_weights": [
+            {
+              "point": "Direction: increase",
+              "weight": 3
+            },
+            {
+              "point": "Magnitude class: a moderate increase (about half again as many)",
+              "weight": 2
+            },
+            {
+              "point": "Place: Arizona (state level)",
+              "weight": 2
+            },
+            {
+              "point": "Horizon and scenario phrasing: by mid-century (2045–2054) under RCP8.5, one high-emissions scenario",
+              "weight": 2
+            },
+            {
+              "point": "Relative ranking: middle tercile among U.S. states for this quantity, season, horizon and scenario",
+              "weight": 2
+            },
+            {
+              "point": "Hazard is described, not exposure or risk",
+              "weight": 1
+            }
+          ],
+          "rubric_points": [
+            {
+              "field": "required_points",
+              "point": "Direction: increase",
+              "source_ids": [
+                "TP1-00069"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Magnitude class: a moderate increase (about half again as many)",
+              "source_ids": [
+                "TP1-00069"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Place: Arizona (state level)",
+              "source_ids": [
+                "TP1-00069"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Horizon and scenario phrasing: by mid-century (2045–2054) under RCP8.5, one high-emissions scenario",
+              "source_ids": [
+                "TP1-00069"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Relative ranking: middle tercile among U.S. states for this quantity, season, horizon and scenario",
+              "source_ids": [
+                "TP1-00069"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Hazard is described, not exposure or risk",
+              "source_ids": [
+                "TP1-00069"
+              ]
+            },
+            {
+              "field": "optional_points",
+              "point": "Anchor phrase: from about 14 to about 24 days",
+              "source_ids": [
+                "TP1-00069"
+              ]
+            }
+          ]
+        },
+        "seed_id": "SD2-TP1-00069",
+        "packet_id": "PK-SD2-TP1-00069",
+        "generator_version": "litsynth_agent v3.2",
+        "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+        "model": "openai/gpt-oss-120b",
+        "endpoint_label": "sophia_vllm",
+        "temperature": 0,
+        "reasoning_effort": "low",
+        "max_tokens": 16000,
+        "reasoning_effort_applied": true,
+        "system_prompt_sha256": "9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715",
+        "corrective_prompt_sha256": "256db051b3ddfa93d893e4573a2e818ecd4623d96ddac0aaebdba932c6e2a01a",
+        "prompt_hash": "4cc29d6cf11a110bcb015a088bebdfbd8e21c3b743f4bdf3baeb1c7f92b244b5",
+        "packet_sha256": "39fadca55d09f815a31561ba6dc4f99beee89a6e1e085b37a09a37dce4befbf8",
+        "source_commit": "1f175dac7801b3d27ca7ed1961debe88e22b4dc6",
+        "generation_timestamp": "2026-11-03T00:00:51Z",
+        "model_seconds": 15.1,
+        "model_attempts": 2,
+        "corrective_retry_used": false,
+        "turns": [
+          {
+            "turn": 1,
+            "finish_reason": "stop",
+            "content_chars": 4024,
+            "reasoning_chars": 833,
+            "http_attempts": 1,
+            "model_seconds": 8.2
+          },
+          {
+            "turn": 2,
+            "finish_reason": "stop",
+            "content_chars": 3987,
+            "reasoning_chars": 298,
+            "http_attempts": 2,
+            "model_seconds": 6.9
+          }
+        ],
+        "first_turn": null,
+        "corrective_error": null,
+        "corrective_turn_used": true,
+        "corrective_class": "format",
+        "first_check": {
+          "event": "deterministic_fail",
+          "reasons": [
+            "rubric.disallowed_claims: exact_value_in_graded_text 10.3 (exact values belong to provenance)",
+            "rubric.disallowed_claims: exact_value_in_graded_text 24.2 (exact values belong to provenance)"
+          ],
+          "check_version": "synthesis_post_checks v2.2",
+          "checks": {
+            "numbers_untraced": [],
+            "number_words_untraced": [],
+            "exact_values_in_graded_text": [
+              "10.3",
+              "24.2"
+            ],
+            "prompt_leakage": {
+              "clmrr_named": false,
+              "row_or_column_named": false,
+              "paper_named": false,
+              "hidden_exact_value_required": false,
+              "according_to_phrase": false,
+              "pass": true,
+              "flags": [],
+              "check_version": "leakage_check v1"
+            },
+            "schema_errors": [],
+            "texts_traced_to_literature": [],
+            "rubric_points_without_source_ids": 0,
+            "n_table_sentences": 1,
+            "n_literature_sentences": 0
+          },
+          "reference_answer_tagged": {
+            "table_pattern": [
+              {
+                "sentence": "In Arizona, summer days with a dangerous heat index (above 95 °F) are projected to increase by mid-century (2045–2054) under RCP8.5, one high-emissions scenario, representing a moderate increase (about half again as many) and placing the state in the middle tercile relative to other U.S. states.",
+                "pattern_ids": [
+                  "TP1-00069"
+                ]
+              }
+            ],
+            "literature_interpretation": [],
+            "integrated": "The modeled projection shows that Arizona will experience more summer days with a dangerous heat index (above 95 °F) by mid-century under RCP8.5, with a moderate increase that puts the state in the middle tercile among U.S. states, reflecting the high‑emissions forcing driving hotter conditions.",
+            "rubric_required_weights": [
+              {
+                "point": "Direction: increase",
+                "weight": 3
+              },
+              {
+                "point": "Magnitude class: a moderate increase (about half again as many)",
+                "weight": 2
+              },
+              {
+                "point": "Place: Arizona (state level)",
+                "weight": 2
+              },
+              {
+                "point": "Horizon and scenario phrasing: by mid-century (2045–2054) under RCP8.5, one high-emissions scenario",
+                "weight": 2
+              },
+              {
+                "point": "Relative ranking: middle tercile among U.S. states for this quantity, season, horizon and scenario",
+                "weight": 2
+              },
+              {
+                "point": "Hazard is described, not exposure or risk",
+                "weight": 1
+              }
+            ],
+            "rubric_points": [
+              {
+                "field": "required_points",
+                "point": "Direction: increase",
+                "source_ids": [
+                  "TP1-00069"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Magnitude class: a moderate increase (about half again as many)",
+                "source_ids": [
+                  "TP1-00069"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Place: Arizona (state level)",
+                "source_ids": [
+                  "TP1-00069"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Horizon and scenario phrasing: by mid-century (2045–2054) under RCP8.5, one high-emissions scenario",
+                "source_ids": [
+                  "TP1-00069"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Relative ranking: middle tercile among U.S. states for this quantity, season, horizon and scenario",
+                "source_ids": [
+                  "TP1-00069"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Hazard is described, not exposure or risk",
+                "source_ids": [
+                  "TP1-00069"
+                ]
+              },
+              {
+                "field": "optional_points",
+                "point": "Anchor phrase: from about 14 to about 24 days",
+                "source_ids": [
+                  "TP1-00069"
+                ]
+              }
+            ]
+          },
+          "raw_response": "{\n  \"prompt\": \"How is the summer hazard of days with a dangerous heat index (above 95 °F) projected to change in Arizona by mid-century under RCP8.5, and what are the main drivers of this change?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"In Arizona, summer days with a dangerous heat index (above 95 °F) are projected to increase by mid-century (2045–2054) under RCP8.5, one high-emissions scenario, representing a moderate increase (about half again as many) and placing the state in the middle tercile relative to other U.S. states.\",\n        \"pattern_ids\": [\"TP1-00069\"]\n      }\n    ],\n    \"literature_interpretation\": [],\n    \"integrated\": \"The modeled projection shows that Arizona will experience more summer days with a dangerous heat index (above 95 °F) by mid-century under RCP8.5, with a moderate increase that puts the state in the middle tercile among U.S. states, reflecting the high‑emissions forcing driving hotter conditions.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"Direction: increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00069\"]\n      },\n      {\n        \"point\": \"Magnitude class: a moderate increase (about half again as many)\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00069\"]\n      },\n      {\n        \"point\": \"Place: Arizona (state level)\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00069\"]\n      },\n      {\n        \"point\": \"Horizon and scenario phrasing: by mid-century (2045–2054) under RCP8.5, one high-emissions scenario\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00069\"]\n      },\n      {\n        \"point\": \"Relative ranking: middle tercile among U.S. states for this quantity, season, horizon and scenario\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00069\"]\n      },\n      {\n        \"point\": \"Hazard is described, not exposure or risk\",\n        \"weight\": 1,\n        \"source_ids\": [\"TP1-00069\"]\n      }\n    ],\n    \"acceptable_variants\": [\n      \"Any statement that correctly identifies an increase, a moderate rise (about half again as many), Arizona, the mid‑century horizon, the RCP8.5 high‑emissions scenario, and the middle‑tercile ranking.\"\n    ],\n    \"optional_points\": [\n      {\n        \"point\": \"Anchor phrase: from about 14 to about 24 days\",\n        \"weight\": 1,\n        \"source_ids\": [\"TP1-00069\"]\n      }\n    ],\n    \"disallowed_claims\": [\n      \"Stating the exact numeric increase (e.g., +10.3 days) or exact future mean (e.g., 24.2 days).\",\n      \"Claiming Arizona will have the largest increase among states.\",\n      \"Presenting the projection as a forecast or certainty.\",\n      \"Confusing the heat‑index hazard with exposure or risk.\"\n    ],\n    \"fatal_errors\": [\n      \"Including any number not listed in the allowed descriptors.\",\n      \"Mischaracterizing RCP8.5 as a forecast or the only possible future.\",\n      \"Describing the modeled historical baseline as an observation.\"\n    ],\n    \"note\": \"Exact values are not required; any statement consistent with the magnitude class counts.\"\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"A Fire Weather Index is a meteorological fire-danger index; it is never fire occurrence, ignition, burned area or damage.\",\n    \"RCP8.5 is one high-emissions scenario, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\"\n  ],\n  \"source_independent_answerability\": \"yes\",\n  \"source_independence_note\": \"A climate scientist familiar with projected heat‑index trends can answer the direction, size class, region, horizon and scenario without consulting the specific packet.\",\n  \"capability_tested\": \"hazard pattern identification\",\n  \"system_task\": \"generate closed‑book benchmark item\",\n  \"key_relationships\": \"hazard‑scenario‑region\",\n  \"evidence_needed\": \"modeled climate projection\",\n  \"desired_output_characteristics\": \"concise, pattern‑focused\",\n  \"expected_knowledge_level\": \"general_climate_science\"\n}",
+          "raw_response_chars": 4024,
+          "raw_reasoning": null,
+          "raw_reasoning_chars": null,
+          "content_fallback": false,
+          "finish_reason": "stop",
+          "raw_max_chars": 20000
+        },
+        "finish_reason": "stop",
+        "content_chars": 3987,
+        "reasoning_chars": 298,
+        "raw_response": "{\n  \"prompt\": \"How is the summer hazard of days with a dangerous heat index (above 95 °F) projected to change in Arizona by mid-century under RCP8.5, and what are the main drivers of this change?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"In Arizona, summer days with a dangerous heat index (above 95 °F) are projected to increase by mid-century (2045–2054) under RCP8.5, one high-emissions scenario, representing a moderate increase (about half again as many) and placing the state in the middle tercile relative to other U.S. states.\",\n        \"pattern_ids\": [\"TP1-00069\"]\n      }\n    ],\n    \"literature_interpretation\": [],\n    \"integrated\": \"The modeled projection shows that Arizona will experience more summer days with a dangerous heat index (above 95 °F) by mid-century under RCP8.5, with a moderate increase that puts the state in the middle tercile among U.S. states, reflecting the high‑emissions forcing driving hotter conditions.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"Direction: increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00069\"]\n      },\n      {\n        \"point\": \"Magnitude class: a moderate increase (about half again as many)\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00069\"]\n      },\n      {\n        \"point\": \"Place: Arizona (state level)\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00069\"]\n      },\n      {\n        \"point\": \"Horizon and scenario phrasing: by mid-century (2045–2054) under RCP8.5, one high-emissions scenario\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00069\"]\n      },\n      {\n        \"point\": \"Relative ranking: middle tercile among U.S. states for this quantity, season, horizon and scenario\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00069\"]\n      },\n      {\n        \"point\": \"Hazard is described, not exposure or risk\",\n        \"weight\": 1,\n        \"source_ids\": [\"TP1-00069\"]\n      }\n    ],\n    \"acceptable_variants\": [\n      \"Any statement that correctly identifies an increase, a moderate rise (about half again as many), Arizona, the mid‑century horizon, the RCP8.5 high‑emissions scenario, and the middle‑tercile ranking.\"\n    ],\n    \"optional_points\": [\n      {\n        \"point\": \"Anchor phrase: from about 14 to about 24 days\",\n        \"weight\": 1,\n        \"source_ids\": [\"TP1-00069\"]\n      }\n    ],\n    \"disallowed_claims\": [\n      \"Stating the exact numeric increase or exact future mean.\",\n      \"Claiming Arizona will have the largest increase among states.\",\n      \"Presenting the projection as a forecast or certainty.\",\n      \"Confusing the heat‑index hazard with exposure or risk.\"\n    ],\n    \"fatal_errors\": [\n      \"Including any number not listed in the allowed descriptors.\",\n      \"Mischaracterizing RCP8.5 as a forecast or the only possible future.\",\n      \"Describing the modeled historical baseline as an observation.\"\n    ],\n    \"note\": \"Exact values are not required; any statement consistent with the magnitude class counts.\"\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"A Fire Weather Index is a meteorological fire-danger index; it is never fire occurrence, ignition, burned area or damage.\",\n    \"RCP8.5 is one high-emissions scenario, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\"\n  ],\n  \"source_independent_answerability\": \"yes\",\n  \"source_independence_note\": \"A climate scientist familiar with projected heat‑index trends can answer the direction, size class, region, horizon and scenario without consulting the specific packet.\",\n  \"capability_tested\": \"hazard pattern identification\",\n  \"system_task\": \"generate closed‑book benchmark item\",\n  \"key_relationships\": \"hazard‑scenario‑region\",\n  \"evidence_needed\": \"modeled climate projection\",\n  \"desired_output_characteristics\": \"concise, pattern‑focused\",\n  \"expected_knowledge_level\": \"general_climate_science\"\n}",
+        "raw_response_chars": 3987,
+        "raw_reasoning": null,
+        "raw_reasoning_chars": null,
+        "content_fallback": false,
+        "raw_max_chars": 20000,
+        "format_corrective_prompt_sha256": "bd44328cedbfa728630d849639e3516193cf621ce686b44807a2343ebcb65aba"
+      },
+      {
+        "event": "human_review",
+        "from_status": "deterministic_pass",
+        "decision": "D-056",
+        "at": "2026-11-03T00:44:46Z",
+        "by": "EXECUTOR (scripts/ingest_litsynth.py)",
+        "note": "entered human review (D-033 lifecycle; D-056): Kaiyuan in artifacts/benchmark/review/P2b_items_review_v1.xlsx, then the mentor; edits are recorded in review.final_frozen"
+      }
+    ],
+    "kaiyuan_disposition": null,
+    "mentor_disposition": null,
+    "final_frozen": null
+  }
+}

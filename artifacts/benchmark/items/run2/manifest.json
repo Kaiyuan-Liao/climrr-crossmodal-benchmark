@@ -1,0 +1,771 @@
+{
+  "run": "run2",
+  "diagnostic_id": "litsynth_run2",
+  "decision": "D-056",
+  "tarball": {
+    "name": "litsynth_runs012_evidence.tar.gz",
+    "sha256": "00c909340bd08d61331e1eb6515da0b2bf375627b63d7491456c740949ebaac1"
+  },
+  "generator": {
+    "version": "litsynth_agent v3.2",
+    "agent_path": "scripts/litcollect/litsynth_agent.py",
+    "agent_sha256": "f5778fbf54ea44794d40086b997a504971812fe8a4481f7fedefae5f6d4b8b5e",
+    "system_prompt_sha256": "9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715",
+    "format_corrective_template_sha256": "919f52cb2612c6f7544a2d62f4488231a16092376e43ebef03e4a23ca7066d20"
+  },
+  "endpoint": {
+    "endpoint_label": "sophia_vllm",
+    "model": "openai/gpt-oss-120b",
+    "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1"
+  },
+  "budget": {
+    "reasoning_effort": "low",
+    "max_tokens": 16000,
+    "temperature": 0
+  },
+  "source_commit": "1f175dac7801b3d27ca7ed1961debe88e22b4dc6",
+  "packets": {
+    "version": "synthpackets v3a",
+    "path": "artifacts/benchmark/synth_packets",
+    "at_commit": "1f175dac7801b3d27ca7ed1961debe88e22b4dc6",
+    "manifest_sha256": "86b02cd00f333249b91e49bca3d4ce4b40f33d1bea30bb76463875d392b8b84c"
+  },
+  "counts": {
+    "items": 10,
+    "deterministic_pass": 10,
+    "deterministic_fail": 0,
+    "leakage_flags": 0,
+    "corrective_retry_used": 0,
+    "format_corrective_used": 6,
+    "format_corrective_pass": 6
+  },
+  "items": [
+    {
+      "item_id": "BI-P2B-0001",
+      "seed_id": "SD2-TP1-00018",
+      "use_case_level": 1,
+      "packet_sha256": "d7780499eecaabcecb7d8eaf90897f69f9f244c0a8ae6ab5b15d3f38bed980e1",
+      "corrective_turn_used": true
+    },
+    {
+      "item_id": "BI-P2B-0002",
+      "seed_id": "SD2-TP1-00069",
+      "use_case_level": 1,
+      "packet_sha256": "39fadca55d09f815a31561ba6dc4f99beee89a6e1e085b37a09a37dce4befbf8",
+      "corrective_turn_used": true
+    },
+    {
+      "item_id": "BI-P2B-0003",
+      "seed_id": "SD2-TP1-00071",
+      "use_case_level": 3,
+      "packet_sha256": "556d89245085ea081ea61fdafe29f598c0f4b0f1037b425a437ce34e623ed7c6",
+      "corrective_turn_used": false
+    },
+    {
+      "item_id": "BI-P2B-0004",
+      "seed_id": "SD2-TP1-00271",
+      "use_case_level": 3,
+      "packet_sha256": "1197fb5420920d2f490129f3c33556c9dc1d04be64a8c43335acd760f0dd29fe",
+      "corrective_turn_used": false
+    },
+    {
+      "item_id": "BI-P2B-0005",
+      "seed_id": "SD2-TP1-00460",
+      "use_case_level": 3,
+      "packet_sha256": "222c1f5a886ba70e66977216a0ef8c354580d3dbbadae980a503795dae14f172",
+      "corrective_turn_used": false
+    },
+    {
+      "item_id": "BI-P2B-0006",
+      "seed_id": "SD2-TP1-00589",
+      "use_case_level": 3,
+      "packet_sha256": "23f3c05f8bfc394bae395dab8de7c4eb26202f6c5a8bbbecb7cbf58161987da0",
+      "corrective_turn_used": true
+    },
+    {
+      "item_id": "BI-P2B-0007",
+      "seed_id": "SD2-TP1-02785",
+      "use_case_level": 4,
+      "packet_sha256": "5f453e2ca161312111ce19b89e476af35e852f83e4c4c4df0b7005c6d5b5e758",
+      "corrective_turn_used": false
+    },
+    {
+      "item_id": "BI-P2B-0008",
+      "seed_id": "SD2-TP1-02787",
+      "use_case_level": 4,
+      "packet_sha256": "5bf0a861df71504113c6f5e60b6044e494ef6d5a8856b61a0cd94fce03f57534",
+      "corrective_turn_used": true
+    },
+    {
+      "item_id": "BI-P2B-0009",
+      "seed_id": "SD2-TP1-02789",
+      "use_case_level": 4,
+      "packet_sha256": "2cb3bfebab3a2cc57fbf46f51610fcb01466023c4f7b768bb8629319cdff5066",
+      "corrective_turn_used": true
+    },
+    {
+      "item_id": "BI-P2B-0010",
+      "seed_id": "SD2-TP1-00075",
+      "use_case_level": 7,
+      "packet_sha256": "25229d45578c578cd454a9b8c7998eb6c5859242ba879c2731a7c16bc985499f",
+      "corrective_turn_used": true
+    }
+  ],
+  "format_corrective_items": [
+    "BI-P2B-0001",
+    "BI-P2B-0002",
+    "BI-P2B-0006",
+    "BI-P2B-0008",
+    "BI-P2B-0009",
+    "BI-P2B-0010"
+  ],
+  "http_retries_recovered": [
+    {
+      "seed_id": "SD2-TP1-00069",
+      "reason": "RemoteDisconnected: Remote end closed connection without res"
+    },
+    {
+      "seed_id": "SD2-TP1-02787",
+      "reason": "HTTP 502 <html>"
+    }
+  ],
+  "log": {
+    "start_utc": "2026-11-03T00:00:16Z",
+    "end_utc": "2026-11-03T00:12:45Z",
+    "done": [
+      "items=10 pass=10 fail=0"
+    ]
+  },
+  "items_sha256": "b0e0c60ff007ce1542c04534cdb1a89bad36aafe26d95f6cbfa5a6090c308bb8",
+  "summary_sha256": "8908314133ca38630d2b691e0c503f17e54c9b0b4eb5a48ad1932939fb89b0cc",
+  "checks_reproduced": true,
+  "checks": {
+    "checks_reproduced": true,
+    "check_version": "synthesis_post_checks v2.2",
+    "items": [
+      {
+        "item_id": "BI-P2B-0001",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": [
+          "rubric.disallowed_claims: exact_value_in_graded_text 15.8 (exact values belong to provenance)",
+          "rubric.disallowed_claims: exact_value_in_graded_text 44.9 (exact values belong to provenance)"
+        ]
+      },
+      {
+        "item_id": "BI-P2B-0002",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": [
+          "rubric.disallowed_claims: exact_value_in_graded_text 10.3 (exact values belong to provenance)",
+          "rubric.disallowed_claims: exact_value_in_graded_text 24.2 (exact values belong to provenance)"
+        ]
+      },
+      {
+        "item_id": "BI-P2B-0003",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": null
+      },
+      {
+        "item_id": "BI-P2B-0010",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": [
+          "literature_interpretation[3]: rests only on single-source groups but carries no hedge word"
+        ]
+      },
+      {
+        "item_id": "BI-P2B-0004",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": null
+      },
+      {
+        "item_id": "BI-P2B-0005",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": null
+      },
+      {
+        "item_id": "BI-P2B-0006",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": [
+          "rubric.acceptable_variants: number-word 'tripling' does not trace to an allowed descriptor in the packet",
+          "rubric.disallowed_claims: exact_value_in_graded_text 43.9 (exact values belong to provenance)"
+        ]
+      },
+      {
+        "item_id": "BI-P2B-0007",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": null
+      },
+      {
+        "item_id": "BI-P2B-0008",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": [
+          "rubric.optional_points: exact_value_in_graded_text 0.0 (exact values belong to provenance)"
+        ]
+      },
+      {
+        "item_id": "BI-P2B-0009",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": [
+          "rubric.optional_points: exact_value_in_graded_text 0.0 (exact values belong to provenance)",
+          "rubric.optional_points: exact_value_in_graded_text 16.7 (exact values belong to provenance)"
+        ]
+      }
+    ]
+  },
+  "item_schema": {
+    "path": "data/metadata/benchmark/item_schema_v2.json",
+    "sha256": "765631f16eeea5dadce1d9d3458942b15d8272531a2516a08ce7210f7ec852a7"
+  },
+  "lifecycle": {
+    "status": "human_review",
+    "from": "deterministic_pass",
+    "rule": "D-033",
+    "decision": "D-056",
+    "kaiyuan_disposition": null,
+    "mentor_disposition": null,
+    "final_frozen": null,
+    "note": "items/<item_id>.json = the delivered record + this step; items.jsonl is the run's file, byte-identical"
+  },
+  "superseded_runs": [
+    {
+      "run": "run0_rung1",
+      "generator_version": "litsynth_agent v2",
+      "reason": "number formatting",
+      "decision": "D-055",
+      "note": "2 rung-1 items, both rejected_pre_review on numbers_untraced (rounded values, number-words)",
+      "observed": {
+        "generator_version": "litsynth_agent v2",
+        "system_prompt_sha256": "8750154045817aeff187674d67efef3b0560947de10c381bc85c9bf0e077ccd9",
+        "items": 2,
+        "deterministic_pass": 0,
+        "deterministic_fail": 2,
+        "fail_reasons_by_kind": {
+          "rubric.acceptable_variants": 4,
+          "rubric.optional_points": 1
+        },
+        "files": [
+          {
+            "path": "litsynth/run0_rung1/agent.log",
+            "sha256": "85e601d31b20b23428848fef1aa85a5f6db485550ae298e866c813fbca9a5449",
+            "bytes": 521
+          },
+          {
+            "path": "litsynth/run0_rung1/items/SD2-TP1-00018.json",
+            "sha256": "a8814a4467bc6d56ebc705164c7e442e343c31203c86e2a32b91cad7c724784b",
+            "bytes": 15070
+          },
+          {
+            "path": "litsynth/run0_rung1/items/SD2-TP1-00069.json",
+            "sha256": "afc59aca68bdc2e34027210f646a66b66c9aa0dae038075571999b1d5a1fcb04",
+            "bytes": 15676
+          },
+          {
+            "path": "litsynth/run0_rung1/items.jsonl",
+            "sha256": "642b3c2f76e6abbac9de22c169e1bee63590348fdccc107088806c7825932b22",
+            "bytes": 26242
+          },
+          {
+            "path": "litsynth/run0_rung1/raw/SD2-TP1-00018/prompt_user.txt",
+            "sha256": "a3d6ccbafd650516bc096931e3d0140dd1d42ecc5143ac4c5d2fee375958f445",
+            "bytes": 2235
+          },
+          {
+            "path": "litsynth/run0_rung1/raw/SD2-TP1-00018/response.json",
+            "sha256": "2f96820da7c99b8a8beca92dd4f7fe63f6ebc5d2545700ba8841d2b3cf33e176",
+            "bytes": 4910
+          },
+          {
+            "path": "litsynth/run0_rung1/raw/SD2-TP1-00069/prompt_user.txt",
+            "sha256": "765b4e93dbffd93519415042a72e7863e4fe1b02b6ef22f3d44fc282847c7725",
+            "bytes": 2598
+          },
+          {
+            "path": "litsynth/run0_rung1/raw/SD2-TP1-00069/response.json",
+            "sha256": "e2d6ca798cb566e9c4c097f6b04ce4436cc59d899aa63dd23418fc3208f380b5",
+            "bytes": 6172
+          },
+          {
+            "path": "litsynth/run0_rung1/summary.json",
+            "sha256": "148576c27a7bcaf025447bc195bcde8e1e929d027c5a19c42325f1628409cb1e",
+            "bytes": 752
+          }
+        ]
+      }
+    },
+    {
+      "run": "run1",
+      "generator_version": "litsynth_agent v3.1",
+      "reason": "format checks",
+      "decision": "D-055b",
+      "note": "10 items, all rejected_pre_review on format checks only (7 of them the 'one' false positive)",
+      "observed": {
+        "generator_version": "litsynth_agent v3.1",
+        "system_prompt_sha256": "675e22886251031e99f5c14dda8ae6b97428a520cef04c61df80b681bdc96b07",
+        "items": 10,
+        "deterministic_pass": 0,
+        "deterministic_fail": 10,
+        "fail_reasons_by_kind": {
+          "integrated": 2,
+          "literature_interpretation[3]": 1,
+          "rubric.disallowed_claims": 3,
+          "rubric.optional_points": 6,
+          "rubric.required_points": 6
+        },
+        "files": [
+          {
+            "path": "litsynth/run1/agent.log",
+            "sha256": "e02da1c74154f7bfc0577fc25e0d21ceef9d61c9e6373c09adfa89aba41c0816",
+            "bytes": 1891
+          },
+          {
+            "path": "litsynth/run1/items/SD2-TP1-00018.json",
+            "sha256": "626f8e131832ae1a8bbff040522cc4688be963b7013c551eb8446df868dbc7fd",
+            "bytes": 16783
+          },
+          {
+            "path": "litsynth/run1/items/SD2-TP1-00069.json",
+            "sha256": "65b4f9d2a2ba218509bcf1384881b29ac2ea6c99bc3d5072a6f7b8af4e1009e3",
+            "bytes": 17828
+          },
+          {
+            "path": "litsynth/run1/items/SD2-TP1-00071.json",
+            "sha256": "3e8796615b3fb41ac5c8c86c917849bda6f74d3bc4dfcc8ccd63ddb10d96e134",
+            "bytes": 32024
+          },
+          {
+            "path": "litsynth/run1/items/SD2-TP1-00075.json",
+            "sha256": "b2f26550acfb5290017eb01103f16c88d6dae4f0a26d090d476707ddcc539c38",
+            "bytes": 25186
+          },
+          {
+            "path": "litsynth/run1/items/SD2-TP1-00271.json",
+            "sha256": "f1de1f2f7d56887c7d9461550438a1cbd65b503c13a743ca89303ab31ebe7d00",
+            "bytes": 32911
+          },
+          {
+            "path": "litsynth/run1/items/SD2-TP1-00460.json",
+            "sha256": "06ceed9f081746bb16badd3c09342c56e4499b063bd9cf61f456343f1e44d1eb",
+            "bytes": 23422
+          },
+          {
+            "path": "litsynth/run1/items/SD2-TP1-00589.json",
+            "sha256": "10089a4c918bdc24d234a205b1ff33ff5f859fa2e025150bf29bdc14df581646",
+            "bytes": 23779
+          },
+          {
+            "path": "litsynth/run1/items/SD2-TP1-02785.json",
+            "sha256": "10317bc46a0390bb39e6e11876a09f2a9460ed2cbd79d93e0bed50fff7c7a33b",
+            "bytes": 26830
+          },
+          {
+            "path": "litsynth/run1/items/SD2-TP1-02787.json",
+            "sha256": "0eb365b6e688f0b703205eaa9f12620bb6689f08e454d310321b5c891917eaa0",
+            "bytes": 27252
+          },
+          {
+            "path": "litsynth/run1/items/SD2-TP1-02789.json",
+            "sha256": "23b746022775bd0cfdeee566ddd628314543e0a5f491780d730e96189729d1f8",
+            "bytes": 26008
+          },
+          {
+            "path": "litsynth/run1/items.jsonl",
+            "sha256": "5c0c97a9d2cc31724d9f81c9b4f493bf00a0c670a86e7dad95ff676aceecf15a",
+            "bytes": 207513
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-00018/prompt_user.txt",
+            "sha256": "6f80f4cfc7bd540cf2ce9ea0e903efb5e7624562a3c181043658eed2a35b0d26",
+            "bytes": 2862
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-00018/response.json",
+            "sha256": "b6b71f241c3ce8221613ee2be1e3182a25c7f8bf367bb247d0ad03edfc2f3309",
+            "bytes": 4935
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-00069/prompt_user.txt",
+            "sha256": "05662efbec36eeaecfc5b5b12b102e03fa44335a817d840cd682e2c83ff36e04",
+            "bytes": 3460
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-00069/response.json",
+            "sha256": "19ecd69e10413a2a1d09fa59a37ea058312ac200425a53bfa391963818a3b7a5",
+            "bytes": 6017
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-00071/prompt_user.txt",
+            "sha256": "378b150ce9799560b036c93ce914b97def4e7803326acfbe72b4f2e10158e45a",
+            "bytes": 25509
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-00071/response.json",
+            "sha256": "466f8b7694831541aa27d160beab19c5090800dd0525648cafb1f295128c0ab9",
+            "bytes": 7893
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-00075/prompt_user.txt",
+            "sha256": "10dfc8f95a7d795c9aba858d15fcb3597db3fdd97fd9b5ff2baa045e8c5f8240",
+            "bytes": 24608
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-00075/response.json",
+            "sha256": "5698e39f8ade2afc8acebd7c2d6a626e3887543b05e1f5482d329e3d47c40231",
+            "bytes": 6655
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-00271/prompt_user.txt",
+            "sha256": "c9335083339836803ebb585d25a3a1036c307003a4cf89bac2bf1a020a7d8cbf",
+            "bytes": 23450
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-00271/response.json",
+            "sha256": "53040a120783aef7e5aed0f7277f806aa16fdbfce7bb6b37949bb4e46347ea2a",
+            "bytes": 6884
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-00460/prompt_user.txt",
+            "sha256": "6bfcfcad21acf482638bff66ae29f798c2456253848f03b2b0e13e1ffda81796",
+            "bytes": 22863
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-00460/response.json",
+            "sha256": "55ec64c6c4ff018368258a86da5709c1af3125939b80cbb5f3b3ddbc3608a391",
+            "bytes": 6957
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-00589/prompt_user.txt",
+            "sha256": "ca3f1e2da861a871c4dcd2315c24adf54ba41b18dfe406c6aecbd74e6ca46e77",
+            "bytes": 22836
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-00589/response.json",
+            "sha256": "ab9e43b7c9deaeb116b69132a254a3ba78e14fd572b3ebeb2474670ed3c84ce0",
+            "bytes": 6716
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-02785/prompt_user.txt",
+            "sha256": "d0f522062525ee4913763a06106f01fe2f1095e26aea9627874467d73160d7a0",
+            "bytes": 24128
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-02785/response.json",
+            "sha256": "b1a61cbffe23d8fb38bd62c82b5d28416894b63e44186f1323f89c4851550621",
+            "bytes": 7311
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-02787/prompt_user.txt",
+            "sha256": "16f8fda44b952e90d423517515ea3edd3c2fa4fb4adf917e195338443d643db8",
+            "bytes": 24199
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-02787/response.json",
+            "sha256": "57ab53c11e48006ff1e56d61e5f74c4c1126cd15ffebde91739e33091e6faec7",
+            "bytes": 7272
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-02789/prompt_user.txt",
+            "sha256": "284c10d14000a50c672aef053903a1cdb5a75e9804e7198706dd937ca7933750",
+            "bytes": 24136
+          },
+          {
+            "path": "litsynth/run1/raw/SD2-TP1-02789/response.json",
+            "sha256": "e7ffda75e56b33c0a9c55d8ff8f6adc16fe14d29e7edb45272285c66f6c65300",
+            "bytes": 7205
+          },
+          {
+            "path": "litsynth/run1/summary.json",
+            "sha256": "8690cb9668e9863ec50a2f913ad46a9b8e08826c93d97cbf1590660001081530",
+            "bytes": 884
+          }
+        ]
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "items.jsonl",
+      "sha256": "b0e0c60ff007ce1542c04534cdb1a89bad36aafe26d95f6cbfa5a6090c308bb8",
+      "bytes": 259876
+    },
+    {
+      "path": "summary.json",
+      "sha256": "8908314133ca38630d2b691e0c503f17e54c9b0b4eb5a48ad1932939fb89b0cc",
+      "bytes": 888
+    },
+    {
+      "path": "agent.log",
+      "sha256": "85e9c78ddfa6c6424047676dd91145cc245eda2992d3cd8c6ccc998a56dd0111",
+      "bytes": 2200
+    },
+    {
+      "path": "litsynth_run2_items.md",
+      "sha256": "9edeaa4f3c35ede17552fcb90b1403c3e6fe29fe9e1739356ecf95cf0c70f2b1",
+      "bytes": 31421
+    },
+    {
+      "path": "superseded/litsynth_run0_rung1.log",
+      "sha256": "85e601d31b20b23428848fef1aa85a5f6db485550ae298e866c813fbca9a5449",
+      "bytes": 521
+    },
+    {
+      "path": "superseded/run0_rung1_summary.json",
+      "sha256": "148576c27a7bcaf025447bc195bcde8e1e929d027c5a19c42325f1628409cb1e",
+      "bytes": 752
+    },
+    {
+      "path": "superseded/litsynth_run1.log",
+      "sha256": "e02da1c74154f7bfc0577fc25e0d21ceef9d61c9e6373c09adfa89aba41c0816",
+      "bytes": 1891
+    },
+    {
+      "path": "superseded/run1_summary.json",
+      "sha256": "8690cb9668e9863ec50a2f913ad46a9b8e08826c93d97cbf1590660001081530",
+      "bytes": 884
+    }
+  ],
+  "items_ingested": [
+    {
+      "item_id": "BI-P2B-0001",
+      "path": "items/BI-P2B-0001.json",
+      "sha256": "03b49f1a72ac694d852fe680ca5cd7cb01ff8bd77b2c28d38225c935b791d9e7",
+      "status": "human_review",
+      "schema_valid": true
+    },
+    {
+      "item_id": "BI-P2B-0002",
+      "path": "items/BI-P2B-0002.json",
+      "sha256": "e2330ede9d52a948af5ca4d668da6b436ac152a661d29a67ec62076e0c628811",
+      "status": "human_review",
+      "schema_valid": true
+    },
+    {
+      "item_id": "BI-P2B-0003",
+      "path": "items/BI-P2B-0003.json",
+      "sha256": "825532bcb130438f1796a57da14336128534be130ac4fa6342a33c9e1eb8e740",
+      "status": "human_review",
+      "schema_valid": true
+    },
+    {
+      "item_id": "BI-P2B-0004",
+      "path": "items/BI-P2B-0004.json",
+      "sha256": "b4eecd80826d617e44e0753898a6c8cbe4cfb56232db825bbf7afff943c875f1",
+      "status": "human_review",
+      "schema_valid": true
+    },
+    {
+      "item_id": "BI-P2B-0005",
+      "path": "items/BI-P2B-0005.json",
+      "sha256": "31d4d4ddd466404b2c7916846f3a24db87301aae2e239291c45d85cfe012f591",
+      "status": "human_review",
+      "schema_valid": true
+    },
+    {
+      "item_id": "BI-P2B-0006",
+      "path": "items/BI-P2B-0006.json",
+      "sha256": "78f1d9309ab6ecee03582a1591d321840b8e1d03851eb345f62cca0751fc13be",
+      "status": "human_review",
+      "schema_valid": true
+    },
+    {
+      "item_id": "BI-P2B-0007",
+      "path": "items/BI-P2B-0007.json",
+      "sha256": "9a35b197dd323c27d1afd106ae508c6f9000ca58aa425cffc74382778c0154be",
+      "status": "human_review",
+      "schema_valid": true
+    },
+    {
+      "item_id": "BI-P2B-0008",
+      "path": "items/BI-P2B-0008.json",
+      "sha256": "7a378fd3ef29de6a14aff7348617aa4ace5981a7b7a082ac3fbff61b02cc7144",
+      "status": "human_review",
+      "schema_valid": true
+    },
+    {
+      "item_id": "BI-P2B-0009",
+      "path": "items/BI-P2B-0009.json",
+      "sha256": "28f33d49cc1747ee47b78caba64c3aa8609dca35a482d092d84f2051a1c912b8",
+      "status": "human_review",
+      "schema_valid": true
+    },
+    {
+      "item_id": "BI-P2B-0010",
+      "path": "items/BI-P2B-0010.json",
+      "sha256": "11c4139cd03061f23cbee949880a9966db1f1d8592ff74197da3180382555853",
+      "status": "human_review",
+      "schema_valid": true
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00018/prompt_format_corrective.txt",
+      "sha256": "c33974aac2f03453db5b80f6f8efb74fb313550776b0b8916008399fa7854f49",
+      "bytes": 831
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00018/prompt_user.txt",
+      "sha256": "6f80f4cfc7bd540cf2ce9ea0e903efb5e7624562a3c181043658eed2a35b0d26",
+      "bytes": 2862
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00018/response.json",
+      "sha256": "df884e97fc3719997aa2fa34209afc7447fe7caa8e1109a99c98431c372302b3",
+      "bytes": 6855
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00018/response_format_corrective.json",
+      "sha256": "a8a6ccb5d79b0a11ae3a4267782c8d1504701716b9bc5914fbfe45e983c28864",
+      "bytes": 5209
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00069/prompt_format_corrective.txt",
+      "sha256": "bd44328cedbfa728630d849639e3516193cf621ce686b44807a2343ebcb65aba",
+      "bytes": 831
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00069/prompt_user.txt",
+      "sha256": "05662efbec36eeaecfc5b5b12b102e03fa44335a817d840cd682e2c83ff36e04",
+      "bytes": 3460
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00069/response.json",
+      "sha256": "d1557646b1245ef9e8a820f54518a11143b53eaa1f02dffbfc162e87b7ce8b61",
+      "bytes": 6210
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00069/response_format_corrective.json",
+      "sha256": "2694129580eeb51ae598634fb0cfe6f53c82d893de3842f48033612121375986",
+      "bytes": 5627
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00071/prompt_user.txt",
+      "sha256": "378b150ce9799560b036c93ce914b97def4e7803326acfbe72b4f2e10158e45a",
+      "bytes": 25509
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00071/response.json",
+      "sha256": "f017c9a211f8d38ff0bd70919a9d71218f37474f973c13dd51f3f94b2ca4ee3b",
+      "bytes": 7687
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00075/prompt_format_corrective.txt",
+      "sha256": "251a7699c8d12eedf5cb7d47d89d237394b695e948f0128fcdbf1c9c87072105",
+      "bytes": 732
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00075/prompt_user.txt",
+      "sha256": "10dfc8f95a7d795c9aba858d15fcb3597db3fdd97fd9b5ff2baa045e8c5f8240",
+      "bytes": 24608
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00075/response.json",
+      "sha256": "2cdb04273be8984b1bc9fbe83b702239a05736045ebdd18672d7af5d70eed1a5",
+      "bytes": 6969
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00075/response_format_corrective.json",
+      "sha256": "2ea748d8366594baffe5853df262a6bb896920910b19f5b84d911bf201995c3e",
+      "bytes": 7381
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00271/prompt_user.txt",
+      "sha256": "c9335083339836803ebb585d25a3a1036c307003a4cf89bac2bf1a020a7d8cbf",
+      "bytes": 23450
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00271/response.json",
+      "sha256": "91918af1014c5975a1647f2808673415c4c551b79aaf309cd8b44fe2d26508d0",
+      "bytes": 6517
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00460/prompt_user.txt",
+      "sha256": "6bfcfcad21acf482638bff66ae29f798c2456253848f03b2b0e13e1ffda81796",
+      "bytes": 22863
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00460/response.json",
+      "sha256": "67152636a092cc2de19f32111b3f190bc64532c3044dde42148f854217f06e98",
+      "bytes": 6555
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00589/prompt_format_corrective.txt",
+      "sha256": "f061f9fb2d5c615ad2bdcc27adfea49885f2fc2d99c9725c2608800e51efe267",
+      "bytes": 842
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00589/prompt_user.txt",
+      "sha256": "ca3f1e2da861a871c4dcd2315c24adf54ba41b18dfe406c6aecbd74e6ca46e77",
+      "bytes": 22836
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00589/response.json",
+      "sha256": "6737c4fd77e806b160df80235f583c4221d4bf6681d17437c15a84cae0e62269",
+      "bytes": 7489
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-00589/response_format_corrective.json",
+      "sha256": "e320016b96c16d68af3dbcdfd155e0ffab4721ed8fe890cbca505e988f0f4528",
+      "bytes": 6636
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-02785/prompt_user.txt",
+      "sha256": "d0f522062525ee4913763a06106f01fe2f1095e26aea9627874467d73160d7a0",
+      "bytes": 24128
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-02785/response.json",
+      "sha256": "92dff8a8618ae46723a1d4bd2aa47e29e028e8a500eb3e76a2390ae7e6489493",
+      "bytes": 6939
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-02787/prompt_format_corrective.txt",
+      "sha256": "b297e553c6145597f19156d7d211558b53e884a75ded756a65b64d0f23e56cfd",
+      "bytes": 732
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-02787/prompt_user.txt",
+      "sha256": "16f8fda44b952e90d423517515ea3edd3c2fa4fb4adf917e195338443d643db8",
+      "bytes": 24199
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-02787/response.json",
+      "sha256": "452e26f55ea7bf837cd4dd8ab716b31dd321f643e768b4b35657188f8ccf599c",
+      "bytes": 7197
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-02787/response_format_corrective.json",
+      "sha256": "6ee0f2bc72248acf02eb23bc1ed01c6623d4c31c6cba71d0b5dc214b2fbbee2a",
+      "bytes": 6220
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-02789/prompt_format_corrective.txt",
+      "sha256": "c965d3190bd9e18e4a9e56b35745aed11b107f46a7912bcf62953eee8e3561ca",
+      "bytes": 826
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-02789/prompt_user.txt",
+      "sha256": "284c10d14000a50c672aef053903a1cdb5a75e9804e7198706dd937ca7933750",
+      "bytes": 24136
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-02789/response.json",
+      "sha256": "5c4c277adaf92bf6228ac91c0828daf45fc1a3b41960a93eac8611a86be1791c",
+      "bytes": 7103
+    },
+    {
+      "path": "litsynth/run2/raw/SD2-TP1-02789/response_format_corrective.json",
+      "sha256": "79fad6df67cecc478e6eb98a3628fe573701f0dfa0b4df81bb778f4d117f55d6",
+      "bytes": 6460
+    }
+  ],
+  "ingested_at": "2026-11-03T00:44:46Z",
+  "ingested_by": "EXECUTOR"
+}

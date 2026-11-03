@@ -125,13 +125,15 @@ def test_packets_match_their_manifest_and_the_rank_rule(packets, enriched):
     assert [x["item_id"] for x in PM["packets"]] == [f"BI-P2B-{i:04d}" for i in range(1, 11)]
     assert PM["inputs_sha256"]["groups"] == sha256_file(g2.ENRICHED_PATH)
     assert PM["inputs_sha256"]["group_dispositions"] == sha256_file(lgr.DISPOSITIONS_PATH)
-    assert PM["version"] == "synthpackets v3a" and PM["dispositions"]["dispositions_version"] == "group_dispositions_v1a"
+    assert PM["version"] == "synthpackets v3b" and PM["dispositions"]["dispositions_version"] == "group_dispositions_v1a"
     assert PM["undisposed_candidates"] == [] and all(x["excluded_no_disposition"] == 0 for x in PM["packets"])   # D-053a
     disp = lgr.load_dispositions()
     by_id = {g["group_id"]: g for g in enriched}
     for x, pk in zip(PM["packets"], packets):
         assert sha256_file(spk.PACKETS_DIR / f"{x['packet_id']}.json") == x["sha256"]
-        assert pk["item_id"] == x["item_id"] and pk["rank_rule"] == "DR-SEED-RANK-3" and pk["descriptor_rule"] == "DR-DESC-1"
+        assert pk["item_id"] == x["item_id"] and pk["descriptor_rule"] == "DR-DESC-1"
+        assert (pk["version"], pk["rank_rule"]) == (("synthpackets v3b", "DR-SEED-RANK-3a") if pk["use_case_level"] == 7
+                                                    else ("synthpackets v3a", "DR-SEED-RANK-3"))     # D-054a: rung 7 only
         assert pk["model_view"]["patterns"][0]["allowed_descriptors"]["direction"] == "increase"
         gs = pk["provenance"]["groups"]
         roles = [g["role"] for g in gs]
@@ -150,10 +152,11 @@ def test_packets_match_their_manifest_and_the_rank_rule(packets, enriched):
                 assert g["claim_about"] == "hazard_change_mechanism"
             if g["role"] == "context":
                 assert g["claim_about"] == "hazard_definition_or_measurement"
-            if g["role"] == "caveat":                                                       # D-054
+            if g["role"] == "caveat":                                                       # D-054, D-054a
                 assert g["claim_about"] in spk.CAVEAT_CLAIMS and not (d and d["kind"] == "exclude_from_rung7")
+                assert g["statement_type"] == "caveat" and (g.get("scenario_slot") or by_id[g["group_id"]]["statement_type"] == "caveat")
         for role in ("driver", "context", "caveat"):
-            keys = [spk.rank_key(g) for g in gs if g["role"] == role]
+            keys = [(not g.get("scenario_slot"), *spk.rank_key(g)) for g in gs if g["role"] == role]
             assert keys == sorted(keys)
         for mg in pk["model_view"]["groups"]:
             assert all(len(m["passage"]) <= spk.MAX_PASSAGE for m in mg["members"])

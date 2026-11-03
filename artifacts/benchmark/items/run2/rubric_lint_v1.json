@@ -1,0 +1,340 @@
+{
+  "version": "rubric_lint v1",
+  "rules": {
+    "generation_constraint": "a rubric line that is a generation constraint, not a grading criterion (pattern: allowed descriptors|allowed_numbers|decimal number|exact values are not required|multi.source supported|cite a|not in the packet|not provided in the packet, case-insensitive)",
+    "required_single_source_only": "a required point whose source ids are only single_source_supported groups",
+    "hedge_strength_mismatch": "a literature sentence tagged only with multi_source_supported groups that says 'one study' / 'a single study'",
+    "rung1_prompt_mechanism": "a rung-1 prompt that asks about a driver, mechanism or cause",
+    "required_tercile": "a required point that names a tercile"
+  },
+  "edits_made": 0,
+  "items": [
+    {
+      "item_id": "BI-P2B-0001",
+      "use_case_level": 1,
+      "n_flags": 2,
+      "counts": {
+        "generation_constraint": 2,
+        "required_single_source_only": 0,
+        "hedge_strength_mismatch": 0,
+        "rung1_prompt_mechanism": 0,
+        "required_tercile": 0
+      },
+      "flags": [
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.disallowed_claims",
+          "index": 2,
+          "text": "Attributing the change to a specific mechanism not provided in the packet.",
+          "detail": "matches 'not provided in the packet'"
+        },
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.fatal_errors",
+          "index": 0,
+          "text": "Including decimal numbers or exact values not in allowed descriptors.",
+          "detail": "matches 'decimal number'"
+        }
+      ]
+    },
+    {
+      "item_id": "BI-P2B-0002",
+      "use_case_level": 1,
+      "n_flags": 3,
+      "counts": {
+        "generation_constraint": 1,
+        "required_single_source_only": 0,
+        "hedge_strength_mismatch": 0,
+        "rung1_prompt_mechanism": 1,
+        "required_tercile": 1
+      },
+      "flags": [
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.fatal_errors",
+          "index": 0,
+          "text": "Including any number not listed in the allowed descriptors.",
+          "detail": "matches 'allowed descriptors'"
+        },
+        {
+          "rule": "rung1_prompt_mechanism",
+          "field": "prompt",
+          "index": null,
+          "text": "How is the summer hazard of days with a dangerous heat index (above 95 °F) projected to change in Arizona by mid-century under RCP8.5, and what are the main drivers of this change?",
+          "detail": "matches 'driver'"
+        },
+        {
+          "rule": "required_tercile",
+          "field": "rubric.required_points",
+          "index": 4,
+          "text": "[w=2] Relative ranking: middle tercile among U.S. states for this quantity, season, horizon and scenario",
+          "detail": null
+        }
+      ]
+    },
+    {
+      "item_id": "BI-P2B-0003",
+      "use_case_level": 3,
+      "n_flags": 2,
+      "counts": {
+        "generation_constraint": 1,
+        "required_single_source_only": 0,
+        "hedge_strength_mismatch": 1,
+        "rung1_prompt_mechanism": 0,
+        "required_tercile": 0
+      },
+      "flags": [
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.fatal_errors",
+          "index": 0,
+          "text": "Including numbers not listed in allowed descriptors or allowed_numbers",
+          "detail": "matches 'allowed descriptors'"
+        },
+        {
+          "rule": "hedge_strength_mismatch",
+          "field": "reference_answer.literature_interpretation",
+          "index": 2,
+          "text": "One study suggests that urban heat‑island effects intensify at night under high‑pressure, calm, clear‑sky conditions, adding to the regional heat‑index rise.",
+          "detail": "LG-extreme_heat_v1-mechanism-c1-024 (multi_source_supported)"
+        }
+      ]
+    },
+    {
+      "item_id": "BI-P2B-0004",
+      "use_case_level": 3,
+      "n_flags": 4,
+      "counts": {
+        "generation_constraint": 2,
+        "required_single_source_only": 0,
+        "hedge_strength_mismatch": 2,
+        "rung1_prompt_mechanism": 0,
+        "required_tercile": 0
+      },
+      "flags": [
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.acceptable_variants",
+          "index": 0,
+          "text": "Any phrasing that conveys the same direction, magnitude class, place, horizon, scenario, and driver using the allowed descriptors.",
+          "detail": "matches 'allowed descriptors'"
+        },
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.fatal_errors",
+          "index": 0,
+          "text": "Using numbers not listed in allowed_numbers or allowed_descriptors.",
+          "detail": "matches 'allowed_numbers'"
+        },
+        {
+          "rule": "hedge_strength_mismatch",
+          "field": "reference_answer.literature_interpretation",
+          "index": 0,
+          "text": "One study reports that large‑scale warming, rather than changes in regional atmospheric circulation, is identified as the primary driver of future increases in extreme heat index days.",
+          "detail": "LG-extreme_heat_v1-driver-c1-008 (multi_source_supported)"
+        },
+        {
+          "rule": "hedge_strength_mismatch",
+          "field": "reference_answer.literature_interpretation",
+          "index": 1,
+          "text": "One study suggests that global warming is expected to increase the frequency, intensity, and duration of heatwaves, further elevating heat‑stress risk.",
+          "detail": "LG-extreme_heat_v1-driver-c2-001 (multi_source_supported)"
+        }
+      ]
+    },
+    {
+      "item_id": "BI-P2B-0005",
+      "use_case_level": 3,
+      "n_flags": 2,
+      "counts": {
+        "generation_constraint": 2,
+        "required_single_source_only": 0,
+        "hedge_strength_mismatch": 0,
+        "rung1_prompt_mechanism": 0,
+        "required_tercile": 0
+      },
+      "flags": [
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.disallowed_claims",
+          "index": 0,
+          "text": "Exact numeric values beyond the allowed descriptors.",
+          "detail": "matches 'allowed descriptors'"
+        },
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.fatal_errors",
+          "index": 0,
+          "text": "Using numbers not listed in allowed descriptors.",
+          "detail": "matches 'allowed descriptors'"
+        }
+      ]
+    },
+    {
+      "item_id": "BI-P2B-0006",
+      "use_case_level": 3,
+      "n_flags": 2,
+      "counts": {
+        "generation_constraint": 1,
+        "required_single_source_only": 0,
+        "hedge_strength_mismatch": 1,
+        "rung1_prompt_mechanism": 0,
+        "required_tercile": 0
+      },
+      "flags": [
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.fatal_errors",
+          "index": 0,
+          "text": "Using numbers not listed in allowed descriptors or allowed_numbers.",
+          "detail": "matches 'allowed descriptors'"
+        },
+        {
+          "rule": "hedge_strength_mismatch",
+          "field": "reference_answer.literature_interpretation",
+          "index": 0,
+          "text": "One study reports that large‑scale warming, rather than changes in regional atmospheric circulation, is identified as the primary driver of future increases in extreme heat index days.",
+          "detail": "LG-extreme_heat_v1-driver-c1-008 (multi_source_supported)"
+        }
+      ]
+    },
+    {
+      "item_id": "BI-P2B-0007",
+      "use_case_level": 4,
+      "n_flags": 1,
+      "counts": {
+        "generation_constraint": 0,
+        "required_single_source_only": 1,
+        "hedge_strength_mismatch": 0,
+        "rung1_prompt_mechanism": 0,
+        "required_tercile": 0
+      },
+      "flags": [
+        {
+          "rule": "required_single_source_only",
+          "field": "rubric.required_points",
+          "index": 4,
+          "text": "Acknowledge that humidity can magnify heat stress (hedged single‑source claim)",
+          "detail": "LG-extreme_heat_v1-mechanism-c2-003"
+        }
+      ]
+    },
+    {
+      "item_id": "BI-P2B-0008",
+      "use_case_level": 4,
+      "n_flags": 7,
+      "counts": {
+        "generation_constraint": 5,
+        "required_single_source_only": 0,
+        "hedge_strength_mismatch": 2,
+        "rung1_prompt_mechanism": 0,
+        "required_tercile": 0
+      },
+      "flags": [
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.required_points",
+          "index": 4,
+          "text": "[w=3] Cite a multi‑source supported driver that large‑scale warming is the primary cause of the increase.",
+          "detail": "matches 'Cite a'"
+        },
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.required_points",
+          "index": 5,
+          "text": "[w=3] Cite a multi‑source supported driver that global warming will raise heat‑wave frequency and intensity.",
+          "detail": "matches 'Cite a'"
+        },
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.required_points",
+          "index": 6,
+          "text": "[w=1] Exact values are not required; any statement consistent with the magnitude class counts.",
+          "detail": "matches 'Exact values are not required'"
+        },
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.acceptable_variants",
+          "index": 0,
+          "text": "Any phrasing that conveys the same direction, ranking, horizon, scenario, and drivers using the allowed descriptors.",
+          "detail": "matches 'allowed descriptors'"
+        },
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.fatal_errors",
+          "index": 0,
+          "text": "Using numbers not listed in allowed_numbers.",
+          "detail": "matches 'allowed_numbers'"
+        },
+        {
+          "rule": "hedge_strength_mismatch",
+          "field": "reference_answer.literature_interpretation",
+          "index": 0,
+          "text": "One study reports that large‑scale warming is identified as the primary driver of future increases in extreme heat index days.",
+          "detail": "LG-extreme_heat_v1-driver-c1-008 (multi_source_supported)"
+        },
+        {
+          "rule": "hedge_strength_mismatch",
+          "field": "reference_answer.literature_interpretation",
+          "index": 1,
+          "text": "One study suggests that global warming is expected to raise the frequency, intensity, and duration of heatwaves, further elevating heat‑stress risk.",
+          "detail": "LG-extreme_heat_v1-driver-c2-001 (multi_source_supported)"
+        }
+      ]
+    },
+    {
+      "item_id": "BI-P2B-0009",
+      "use_case_level": 4,
+      "n_flags": 1,
+      "counts": {
+        "generation_constraint": 1,
+        "required_single_source_only": 0,
+        "hedge_strength_mismatch": 0,
+        "rung1_prompt_mechanism": 0,
+        "required_tercile": 0
+      },
+      "flags": [
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.fatal_errors",
+          "index": 0,
+          "text": "Including numbers not listed in allowed_numbers or allowed_descriptors",
+          "detail": "matches 'allowed_numbers'"
+        }
+      ]
+    },
+    {
+      "item_id": "BI-P2B-0010",
+      "use_case_level": 7,
+      "n_flags": 1,
+      "counts": {
+        "generation_constraint": 1,
+        "required_single_source_only": 0,
+        "hedge_strength_mismatch": 0,
+        "rung1_prompt_mechanism": 0,
+        "required_tercile": 0
+      },
+      "flags": [
+        {
+          "rule": "generation_constraint",
+          "field": "rubric.fatal_errors",
+          "index": 0,
+          "text": "Including decimal numbers not present in allowed descriptors.",
+          "detail": "matches 'decimal number'"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "generation_constraint": 16,
+    "required_single_source_only": 1,
+    "hedge_strength_mismatch": 6,
+    "rung1_prompt_mechanism": 1,
+    "required_tercile": 1,
+    "all": 25
+  },
+  "inputs": {
+    "items_manifest_sha256": "c9c6bc9bc1a4f19d94e7a5e9c9514c34c9a3ad18b60dc97a11b87df2b84d60e9",
+    "packets": "synthpackets v3a at 1f175dac7801b3d27ca7ed1961debe88e22b4dc6"
+  }
+}

@@ -1,0 +1,441 @@
+{
+  "schema_version": "benchmark_item_v2",
+  "item_id": "BI-P2B-0004",
+  "use_case_level": 3,
+  "capability_tested": "pattern_and_mechanism",
+  "system_task": "generate_closed_book_item",
+  "reasoning_modalities": "Hazard + Text",
+  "key_relationships": "pattern_to_mechanism",
+  "evidence_needed": "pattern_and_multi_source_driver",
+  "desired_output_characteristics": "concise_and_factual",
+  "expected_knowledge_level": "general_climate_science",
+  "prompt": "How is the summer frequency of days with a dangerous heat index (above 95 °F) expected to change in New York by the end of the century under RCP8.5, and what are the main physical drivers of this change?",
+  "source_independent_answerability": "yes",
+  "source_independence_note": "A climate scientist can answer the direction and drivers from general knowledge of climate warming without needing the specific packet.",
+  "source_leakage_check": {
+    "clmrr_named": false,
+    "row_or_column_named": false,
+    "paper_named": false,
+    "hidden_exact_value_required": false,
+    "according_to_phrase": false,
+    "pass": true,
+    "flags": [],
+    "check_version": "leakage_check v1"
+  },
+  "reference_components": {
+    "table_patterns": [
+      {
+        "acceptance_blocked": false,
+        "acceptance_blocked_by": [],
+        "authorization": "verified",
+        "cautions": [],
+        "computed_value_or_range": {
+          "cell_direction_counts": {
+            "decrease": 0,
+            "increase": 888,
+            "no_change": 0
+          },
+          "mean_from": "0.202777779628378",
+          "mean_to": "11.192980477916667",
+          "n_cells_empty": 2,
+          "n_cells_used": 888,
+          "range": {
+            "max": "39.466666139999998",
+            "min": "0.300000000000000",
+            "over": "cells"
+          },
+          "unit": "days",
+          "value": "10.990202698288288",
+          "value_is": "absolute_change",
+          "value_reason": null
+        },
+        "direction": "increase",
+        "family": "heat_index",
+        "geography": "New York",
+        "geography_type": "state",
+        "horizon": "end",
+        "horizon_window": "2085-2094",
+        "metric": "heatindex_days_above_95F",
+        "metric_wording": "number of days with daily max heat index above 95 F",
+        "pattern_id": "TP1-00271",
+        "pattern_kind": "single",
+        "pattern_robustness": "all_states_same_direction",
+        "pattern_support_n": 888,
+        "provenance": {
+          "code_version": "table_patterns v1 (src/climrr/table_patterns.py sha256 c5948f7e0ef85b73)",
+          "column_sources": {
+            "heatindex_E85_Day95": {
+              "kind": "dictionary_line",
+              "line": 694,
+              "quote": "heatindex_E85_Day95 Number of Summer days with daily max heat index above 95 F -- End-Century RCP8.5"
+            },
+            "heatindex_HIS_Day95": {
+              "kind": "dictionary_line",
+              "line": 679,
+              "quote": "heatindex_HIS_Day95 Number of Summer days with daily max heat index above 95 F -- Historical"
+            }
+          },
+          "column_statuses": {
+            "heatindex_E85_Day95": "verified_from_dictionary",
+            "heatindex_HIS_Day95": "verified_from_dictionary"
+          },
+          "columns": [
+            {
+              "column": "heatindex_HIS_Day95",
+              "index": 240
+            },
+            {
+              "column": "heatindex_E85_Day95",
+              "index": 252
+            }
+          ],
+          "derivation_rule_id": "DR-TD-003 @ DR-PT-001",
+          "member_cells_sha256": "09c08341a41ba3cef9ff1c03378837b9ba76fbb25812c2d1b8885479485aa06c",
+          "member_rows": 890,
+          "row_rule": "State == 'New York'",
+          "table_data_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e"
+        },
+        "provisional": true,
+        "provisional_reasons": [
+          "location_inferred_candidate: State label IC-012 (A-G1, A-G3; D-034)",
+          "unweighted_mean: provisional aggregation rule for representation validation"
+        ],
+        "rank": {
+          "of": 49,
+          "order": "descending signed value (DR-PT-004)",
+          "rank": 44,
+          "tied_with": 0
+        },
+        "relative_magnitude": {
+          "class": "small",
+          "definition": "small = lower tercile, by signed value, among the 49 U.S. State labels in the table with a computed value for family=heat_index, metric=heatindex_days_above_95F, season=summer, horizon=end (2085-2094), scenario=RCP8.5, statistic=absolute_change (DR-PT-005); a relative descriptor among states, not an absolute threshold"
+        },
+        "relative_magnitude_skipped_reason": null,
+        "robustness_share": "888/888",
+        "robustness_unit": "cell",
+        "scenario": "RCP8.5",
+        "season": "summer",
+        "statistic": "absolute_change",
+        "status": "computed"
+      }
+    ],
+    "literature_mechanisms": [
+      {
+        "statement": "Observed increase in heat‑wave and drought frequency",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-extreme_heat_v1-driver-c1-008",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "199098498",
+            "paper_sha256": "945df7b916b7dd75924142fbb7d1542afa08cb36da06df37f135849d9ad15218",
+            "json_path": "$.late century results",
+            "span_start": 4443,
+            "span_end": 4601,
+            "verbatim_passage": "Identifying the climatological processes responsible for the increases in the frequency of high heat index days we identify is beyond the scope of this study.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 199098498",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-199098498-04",
+            "evidence_role": "cited_candidate"
+          },
+          {
+            "paper_item_id": "5838629",
+            "paper_sha256": "e11032fb59db4250a8562dfba97e961feee24186a931f6ec3d037270405f4606",
+            "json_path": "$.results",
+            "span_start": 1155,
+            "span_end": 1343,
+            "verbatim_passage": "Air mass stagnation events, which increase O3 production and will increase in frequency as weather conditions favorable to heat waves increase (CCSP 2008), are another important indicator.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 5838629",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-5838629-03",
+            "evidence_role": "cited_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "global warming increases heatwave frequency and intensity",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-extreme_heat_v1-driver-c2-001",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "14006228",
+            "paper_sha256": "802cc7b80c67735e86e9740ca72bba6361cedf5d9a330ab2236ea6a901115d8d",
+            "json_path": "$.discussion",
+            "span_start": 4074,
+            "span_end": 4177,
+            "verbatim_passage": "As global warming continues, the frequency, intensity and duration of heatwaves are likely to increase.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 14006228",
+            "is_review_or_synthesis": true,
+            "statement_id": "LS-14006228-04",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "221504407",
+            "paper_sha256": "a3342e14fcd6c45de5a3831eddc22fc5dac739f8aebc5a920e41f9dcb546467e",
+            "json_path": "$.conclusion",
+            "span_start": 0,
+            "span_end": 220,
+            "verbatim_passage": "The occurrence of heat events is expected to increase due to the worsening effects of anthropogenic global warming [60]. This will be seen in both higher mean annual temperatures and in the frequency of heat shocks [37].",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 221504407",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-221504407-03",
+            "evidence_role": "cited_candidate"
+          }
+        ]
+      }
+    ],
+    "literature_caveats": []
+  },
+  "reference_answer": {
+    "table_pattern": "In New York, summer days with a dangerous heat index (above 95 °F) are projected to increase, moving from about 0 days to about 11 days by the end of the century (2085–2094) under RCP8.5, one high-emissions scenario.",
+    "literature_interpretation": "One study reports that large‑scale warming, rather than changes in regional atmospheric circulation, is identified as the primary driver of future increases in extreme heat index days. One study suggests that global warming is expected to increase the frequency, intensity, and duration of heatwaves, further elevating heat‑stress risk.",
+    "integrated": "The model shows that New York will see an increase from about 0 to about 11 summer days with a dangerous heat index (above 95 °F) by the end of the century under RCP8.5. This rise is driven primarily by large‑scale warming associated with global climate change, which amplifies heat‑wave frequency and intensity."
+  },
+  "rubric": {
+    "required_points": [
+      "[w=3] State that the direction is an increase.",
+      "[w=3] Describe the magnitude class as moving from rare or no such days to about 11 days.",
+      "[w=2] Identify New York as the place (single state).",
+      "[w=2] Mention the horizon phrase by the end of the century (2085–2094).",
+      "[w=2] Mention the scenario phrase under RCP8.5, one high-emissions scenario.",
+      "[w=3] Explain that large‑scale warming is the primary physical driver."
+    ],
+    "optional_points": [
+      "Note that global warming is expected to increase heat‑wave frequency and intensity."
+    ],
+    "acceptable_variants": [
+      "Any phrasing that conveys the same direction, magnitude class, place, horizon, scenario, and driver using the allowed descriptors."
+    ],
+    "disallowed_claims": [
+      "Providing exact numeric values beyond the allowed anchors.",
+      "Presenting a single‑source claim as consensus without hedging."
+    ],
+    "fatal_errors": [
+      "Using numbers not listed in allowed_numbers or allowed_descriptors.",
+      "Mischaracterizing RCP8.5 as a forecast or the only future."
+    ]
+  },
+  "guardrails": [
+    "A modeled historical baseline is model output for a past period, not an observation.",
+    "RCP8.5 is one high-emissions scenario, not a forecast and not the only plausible future.",
+    "Hazard is not exposure, and exposure is not risk."
+  ],
+  "c_g_t_s_d_audit": null,
+  "generation": {
+    "generator_version": "litsynth_agent v3.2",
+    "model": "openai/gpt-oss-120b",
+    "prompt_hash": "89743aff864a89a4b4e167d237469bf2bbff6e877ffd832b5972c2ed86765b6c",
+    "timestamp": "2026-11-03T00:04:42Z",
+    "inputs_sha256": {
+      "packet": "1197fb5420920d2f490129f3c33556c9dc1d04be64a8c43335acd760f0dd29fe",
+      "system_prompt": "9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715",
+      "item_seeds_v2": "3123dd3463f23555601d1e64edc172e2977e2fc6df3adbb08a74b5df41be9d50",
+      "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+      "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+      "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+      "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+      "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+      "pilot_selection": "c9f090297fd1beacbd524e33f571e275b2205f6e2b99687955999e3577f516fa",
+      "group_dispositions": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+      "descriptor_rules": "5c2090a77e0424d43603c9766c8925cee50a3b8fd31f24351334adbf82934650"
+    }
+  },
+  "review": {
+    "status": "human_review",
+    "history": [
+      {
+        "event": "deterministic_pass",
+        "reasons": [],
+        "check_version": "synthesis_post_checks v2.2",
+        "checks": {
+          "numbers_untraced": [],
+          "number_words_untraced": [],
+          "exact_values_in_graded_text": [],
+          "prompt_leakage": {
+            "clmrr_named": false,
+            "row_or_column_named": false,
+            "paper_named": false,
+            "hidden_exact_value_required": false,
+            "according_to_phrase": false,
+            "pass": true,
+            "flags": [],
+            "check_version": "leakage_check v1"
+          },
+          "schema_errors": [],
+          "texts_traced_to_literature": [
+            "literature_interpretation",
+            "literature_interpretation",
+            "rubric.required_points",
+            "rubric.optional_points"
+          ],
+          "rubric_points_without_source_ids": 0,
+          "n_table_sentences": 1,
+          "n_literature_sentences": 2
+        },
+        "reference_answer_tagged": {
+          "table_pattern": [
+            {
+              "sentence": "In New York, summer days with a dangerous heat index (above 95 °F) are projected to increase, moving from about 0 days to about 11 days by the end of the century (2085–2094) under RCP8.5, one high-emissions scenario.",
+              "pattern_ids": [
+                "TP1-00271"
+              ]
+            }
+          ],
+          "literature_interpretation": [
+            {
+              "sentence": "One study reports that large‑scale warming, rather than changes in regional atmospheric circulation, is identified as the primary driver of future increases in extreme heat index days.",
+              "group_ids": [
+                "LG-extreme_heat_v1-driver-c1-008"
+              ],
+              "hedged": true
+            },
+            {
+              "sentence": "One study suggests that global warming is expected to increase the frequency, intensity, and duration of heatwaves, further elevating heat‑stress risk.",
+              "group_ids": [
+                "LG-extreme_heat_v1-driver-c2-001"
+              ],
+              "hedged": true
+            }
+          ],
+          "integrated": "The model shows that New York will see an increase from about 0 to about 11 summer days with a dangerous heat index (above 95 °F) by the end of the century under RCP8.5. This rise is driven primarily by large‑scale warming associated with global climate change, which amplifies heat‑wave frequency and intensity.",
+          "rubric_required_weights": [
+            {
+              "point": "State that the direction is an increase.",
+              "weight": 3
+            },
+            {
+              "point": "Describe the magnitude class as moving from rare or no such days to about 11 days.",
+              "weight": 3
+            },
+            {
+              "point": "Identify New York as the place (single state).",
+              "weight": 2
+            },
+            {
+              "point": "Mention the horizon phrase by the end of the century (2085–2094).",
+              "weight": 2
+            },
+            {
+              "point": "Mention the scenario phrase under RCP8.5, one high-emissions scenario.",
+              "weight": 2
+            },
+            {
+              "point": "Explain that large‑scale warming is the primary physical driver.",
+              "weight": 3
+            }
+          ],
+          "rubric_points": [
+            {
+              "field": "required_points",
+              "point": "State that the direction is an increase.",
+              "source_ids": [
+                "TP1-00271"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Describe the magnitude class as moving from rare or no such days to about 11 days.",
+              "source_ids": [
+                "TP1-00271"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Identify New York as the place (single state).",
+              "source_ids": [
+                "TP1-00271"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Mention the horizon phrase by the end of the century (2085–2094).",
+              "source_ids": [
+                "TP1-00271"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Mention the scenario phrase under RCP8.5, one high-emissions scenario.",
+              "source_ids": [
+                "TP1-00271"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Explain that large‑scale warming is the primary physical driver.",
+              "source_ids": [
+                "LG-extreme_heat_v1-driver-c1-008"
+              ]
+            },
+            {
+              "field": "optional_points",
+              "point": "Note that global warming is expected to increase heat‑wave frequency and intensity.",
+              "source_ids": [
+                "LG-extreme_heat_v1-driver-c2-001"
+              ]
+            }
+          ]
+        },
+        "seed_id": "SD2-TP1-00271",
+        "packet_id": "PK-SD2-TP1-00271",
+        "generator_version": "litsynth_agent v3.2",
+        "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+        "model": "openai/gpt-oss-120b",
+        "endpoint_label": "sophia_vllm",
+        "temperature": 0,
+        "reasoning_effort": "low",
+        "max_tokens": 16000,
+        "reasoning_effort_applied": true,
+        "system_prompt_sha256": "9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715",
+        "corrective_prompt_sha256": "256db051b3ddfa93d893e4573a2e818ecd4623d96ddac0aaebdba932c6e2a01a",
+        "prompt_hash": "89743aff864a89a4b4e167d237469bf2bbff6e877ffd832b5972c2ed86765b6c",
+        "packet_sha256": "1197fb5420920d2f490129f3c33556c9dc1d04be64a8c43335acd760f0dd29fe",
+        "source_commit": "1f175dac7801b3d27ca7ed1961debe88e22b4dc6",
+        "generation_timestamp": "2026-11-03T00:04:42Z",
+        "model_seconds": 7.7,
+        "model_attempts": 1,
+        "corrective_retry_used": false,
+        "turns": [
+          {
+            "turn": 1,
+            "finish_reason": "stop",
+            "content_chars": 4167,
+            "reasoning_chars": 977,
+            "http_attempts": 1,
+            "model_seconds": 7.7
+          }
+        ],
+        "first_turn": null,
+        "corrective_error": null,
+        "corrective_turn_used": false,
+        "corrective_class": null,
+        "first_check": null,
+        "finish_reason": "stop",
+        "content_chars": 4167,
+        "reasoning_chars": 977,
+        "raw_response": "{\n  \"prompt\": \"How is the summer frequency of days with a dangerous heat index (above 95 °F) expected to change in New York by the end of the century under RCP8.5, and what are the main physical drivers of this change?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"In New York, summer days with a dangerous heat index (above 95 °F) are projected to increase, moving from about 0 days to about 11 days by the end of the century (2085–2094) under RCP8.5, one high-emissions scenario.\",\n        \"pattern_ids\": [\"TP1-00271\"]\n      }\n    ],\n    \"literature_interpretation\": [\n      {\n        \"sentence\": \"One study reports that large‑scale warming, rather than changes in regional atmospheric circulation, is identified as the primary driver of future increases in extreme heat index days.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"],\n        \"hedged\": true\n      },\n      {\n        \"sentence\": \"One study suggests that global warming is expected to increase the frequency, intensity, and duration of heatwaves, further elevating heat‑stress risk.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c2-001\"],\n        \"hedged\": true\n      }\n    ],\n    \"integrated\": \"The model shows that New York will see an increase from about 0 to about 11 summer days with a dangerous heat index (above 95 °F) by the end of the century under RCP8.5. This rise is driven primarily by large‑scale warming associated with global climate change, which amplifies heat‑wave frequency and intensity.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"State that the direction is an increase.\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00271\"]\n      },\n      {\n        \"point\": \"Describe the magnitude class as moving from rare or no such days to about 11 days.\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00271\"]\n      },\n      {\n        \"point\": \"Identify New York as the place (single state).\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00271\"]\n      },\n      {\n        \"point\": \"Mention the horizon phrase by the end of the century (2085–2094).\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00271\"]\n      },\n      {\n        \"point\": \"Mention the scenario phrase under RCP8.5, one high-emissions scenario.\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00271\"]\n      },\n      {\n        \"point\": \"Explain that large‑scale warming is the primary physical driver.\",\n        \"weight\": 3,\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"]\n      }\n    ],\n    \"acceptable_variants\": [\n      \"Any phrasing that conveys the same direction, magnitude class, place, horizon, scenario, and driver using the allowed descriptors.\"\n    ],\n    \"optional_points\": [\n      {\n        \"point\": \"Note that global warming is expected to increase heat‑wave frequency and intensity.\",\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c2-001\"]\n      }\n    ],\n    \"disallowed_claims\": [\n      \"Providing exact numeric values beyond the allowed anchors.\",\n      \"Presenting a single‑source claim as consensus without hedging.\"\n    ],\n    \"fatal_errors\": [\n      \"Using numbers not listed in allowed_numbers or allowed_descriptors.\",\n      \"Mischaracterizing RCP8.5 as a forecast or the only future.\"\n    ],\n    \"note\": \"Exact values are not required; any statement consistent with the magnitude class counts.\"\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"RCP8.5 is one high-emissions scenario, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\"\n  ],\n  \"source_independent_answerability\": \"yes\",\n  \"source_independence_note\": \"A climate scientist can answer the direction and drivers from general knowledge of climate warming without needing the specific packet.\",\n  \"capability_tested\": \"pattern_and_mechanism\",\n  \"system_task\": \"generate_closed_book_item\",\n  \"key_relationships\": \"pattern_to_mechanism\",\n  \"evidence_needed\": \"pattern_and_multi_source_driver\",\n  \"desired_output_characteristics\": \"concise_and_factual\",\n  \"expected_knowledge_level\": \"general_climate_science\"\n}",
+        "raw_response_chars": 4167,
+        "raw_reasoning": null,
+        "raw_reasoning_chars": null,
+        "content_fallback": false,
+        "raw_max_chars": 20000
+      },
+      {
+        "event": "human_review",
+        "from_status": "deterministic_pass",
+        "decision": "D-056",
+        "at": "2026-11-03T00:44:46Z",
+        "by": "EXECUTOR (scripts/ingest_litsynth.py)",
+        "note": "entered human review (D-033 lifecycle; D-056): Kaiyuan in artifacts/benchmark/review/P2b_items_review_v1.xlsx, then the mentor; edits are recorded in review.final_frozen"
+      }
+    ],
+    "kaiyuan_disposition": null,
+    "mentor_disposition": null,
+    "final_frozen": null
+  }
+}

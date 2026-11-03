@@ -1,0 +1,447 @@
+{
+  "schema_version": "benchmark_item_v2",
+  "item_id": "BI-P2B-0005",
+  "use_case_level": 3,
+  "capability_tested": "Pattern and mechanism reasoning",
+  "system_task": "Generate a closed‑book benchmark item",
+  "reasoning_modalities": "Hazard + Text",
+  "key_relationships": "Pattern → driver",
+  "evidence_needed": "Pattern description and multi‑source driver literature",
+  "desired_output_characteristics": "Concise, fact‑based",
+  "expected_knowledge_level": "general_climate_science",
+  "prompt": "In the state of Washington, how is the summer number of days with a dangerous heat index (above 105 °F) expected to change by mid-century under RCP8.5, and what are the main physical drivers of this change?",
+  "source_independent_answerability": "yes",
+  "source_independence_note": "A climate scientist can answer the direction and drivers from general knowledge of warming impacts without needing the specific packet.",
+  "source_leakage_check": {
+    "clmrr_named": false,
+    "row_or_column_named": false,
+    "paper_named": false,
+    "hidden_exact_value_required": false,
+    "according_to_phrase": false,
+    "pass": true,
+    "flags": [],
+    "check_version": "leakage_check v1"
+  },
+  "reference_components": {
+    "table_patterns": [
+      {
+        "acceptance_blocked": false,
+        "acceptance_blocked_by": [],
+        "authorization": "verified",
+        "cautions": [],
+        "computed_value_or_range": {
+          "cell_direction_counts": {
+            "decrease": 0,
+            "increase": 1035,
+            "no_change": 167
+          },
+          "mean_from": "0.040848586023295",
+          "mean_to": "0.821907931730449",
+          "n_cells_empty": 9,
+          "n_cells_used": 1202,
+          "range": {
+            "max": "4.633333460000000",
+            "min": "0.000000000000000",
+            "over": "cells"
+          },
+          "unit": "days",
+          "value": "0.781059345707155",
+          "value_is": "absolute_change",
+          "value_reason": null
+        },
+        "direction": "increase",
+        "family": "heat_index",
+        "geography": "Washington",
+        "geography_type": "state",
+        "horizon": "mid",
+        "horizon_window": "2045-2054",
+        "metric": "heatindex_days_above_105F",
+        "metric_wording": "number of days with daily max heat index above 105 F",
+        "pattern_id": "TP1-00460",
+        "pattern_kind": "single",
+        "pattern_robustness": "majority_same_direction",
+        "pattern_support_n": 1202,
+        "provenance": {
+          "code_version": "table_patterns v1 (src/climrr/table_patterns.py sha256 c5948f7e0ef85b73)",
+          "column_sources": {
+            "heatindex_HIS_Day105": {
+              "kind": "dictionary_line",
+              "line": 680,
+              "quote": "heatindex_HIS_Day105 Number of Summer days with daily max heat index above 105 F -- Historical"
+            },
+            "heatindex_M85_Day105": {
+              "kind": "dictionary_line",
+              "line": 686,
+              "quote": "heatindex_M85_Day105 Number of Summer days with daily max heat index above 105 F -- Mid-Century RCP8.5"
+            }
+          },
+          "column_statuses": {
+            "heatindex_HIS_Day105": "verified_from_dictionary",
+            "heatindex_M85_Day105": "verified_from_dictionary"
+          },
+          "columns": [
+            {
+              "column": "heatindex_HIS_Day105",
+              "index": 241
+            },
+            {
+              "column": "heatindex_M85_Day105",
+              "index": 247
+            }
+          ],
+          "derivation_rule_id": "DR-TD-003 @ DR-PT-001",
+          "member_cells_sha256": "91cbe4bc03ec38ec50403b105d77b6cecd958538dbf33657548a39585afc66fc",
+          "member_rows": 1211,
+          "row_rule": "State == 'Washington'",
+          "table_data_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e"
+        },
+        "provisional": true,
+        "provisional_reasons": [
+          "location_inferred_candidate: State label IC-012 (A-G1, A-G3; D-034)",
+          "unweighted_mean: provisional aggregation rule for representation validation"
+        ],
+        "rank": {
+          "of": 49,
+          "order": "descending signed value (DR-PT-004)",
+          "rank": 37,
+          "tied_with": 0
+        },
+        "relative_magnitude": {
+          "class": "small",
+          "definition": "small = lower tercile, by signed value, among the 49 U.S. State labels in the table with a computed value for family=heat_index, metric=heatindex_days_above_105F, season=summer, horizon=mid (2045-2054), scenario=RCP8.5, statistic=absolute_change (DR-PT-005); a relative descriptor among states, not an absolute threshold"
+        },
+        "relative_magnitude_skipped_reason": null,
+        "robustness_share": "1035/1202",
+        "robustness_unit": "cell",
+        "scenario": "RCP8.5",
+        "season": "summer",
+        "statistic": "absolute_change",
+        "status": "computed"
+      }
+    ],
+    "literature_mechanisms": [
+      {
+        "statement": "Observed increase in heat‑wave and drought frequency",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-extreme_heat_v1-driver-c1-008",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "199098498",
+            "paper_sha256": "945df7b916b7dd75924142fbb7d1542afa08cb36da06df37f135849d9ad15218",
+            "json_path": "$.late century results",
+            "span_start": 4443,
+            "span_end": 4601,
+            "verbatim_passage": "Identifying the climatological processes responsible for the increases in the frequency of high heat index days we identify is beyond the scope of this study.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 199098498",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-199098498-04",
+            "evidence_role": "cited_candidate"
+          },
+          {
+            "paper_item_id": "5838629",
+            "paper_sha256": "e11032fb59db4250a8562dfba97e961feee24186a931f6ec3d037270405f4606",
+            "json_path": "$.results",
+            "span_start": 1155,
+            "span_end": 1343,
+            "verbatim_passage": "Air mass stagnation events, which increase O3 production and will increase in frequency as weather conditions favorable to heat waves increase (CCSP 2008), are another important indicator.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 5838629",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-5838629-03",
+            "evidence_role": "cited_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "global warming increases heatwave frequency and intensity",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-extreme_heat_v1-driver-c2-001",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "14006228",
+            "paper_sha256": "802cc7b80c67735e86e9740ca72bba6361cedf5d9a330ab2236ea6a901115d8d",
+            "json_path": "$.discussion",
+            "span_start": 4074,
+            "span_end": 4177,
+            "verbatim_passage": "As global warming continues, the frequency, intensity and duration of heatwaves are likely to increase.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 14006228",
+            "is_review_or_synthesis": true,
+            "statement_id": "LS-14006228-04",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "221504407",
+            "paper_sha256": "a3342e14fcd6c45de5a3831eddc22fc5dac739f8aebc5a920e41f9dcb546467e",
+            "json_path": "$.conclusion",
+            "span_start": 0,
+            "span_end": 220,
+            "verbatim_passage": "The occurrence of heat events is expected to increase due to the worsening effects of anthropogenic global warming [60]. This will be seen in both higher mean annual temperatures and in the frequency of heat shocks [37].",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 221504407",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-221504407-03",
+            "evidence_role": "cited_candidate"
+          }
+        ]
+      }
+    ],
+    "literature_caveats": []
+  },
+  "reference_answer": {
+    "table_pattern": "The projection shows an increase, from about 0 days to about 1 day, in summer days with a dangerous heat index (above 105 °F) in Washington by mid-century (2045–2054) under RCP8.5, one high-emissions scenario.",
+    "literature_interpretation": "Large‑scale warming is identified as the primary driver of future increases in extreme heat index days, and rising greenhouse‑gas‑induced warming is expected to raise heat‑wave frequency, intensity, and duration.",
+    "integrated": "The model projects that Washington will see an increase, from about 0 to about 1 summer day with a heat index above 105 °F by mid-century under RCP8.5. This change is driven chiefly by large‑scale warming associated with anthropogenic greenhouse‑gas emissions, which raises the frequency, intensity, and duration of heatwaves."
+  },
+  "rubric": {
+    "required_points": [
+      "[w=3] Direction: increase",
+      "[w=2] Magnitude class: from about 0 days to about 1 day (low‑baseline phrase)",
+      "[w=2] Place: Washington (state)",
+      "[w=1] Horizon phrase: by mid-century (2045–2054)",
+      "[w=1] Scenario phrase: under RCP8.5, one high-emissions scenario",
+      "[w=3] Mechanism: large‑scale warming is the primary driver of increased extreme heat index days",
+      "[w=2] Mechanism: global warming raises heat‑wave frequency, intensity, and duration"
+    ],
+    "optional_points": [
+      "Mention that the projected change is small relative to other U.S. states (lower tercile)."
+    ],
+    "acceptable_variants": [
+      "Any statement that captures the increase direction and the small‑magnitude class without giving exact numbers."
+    ],
+    "disallowed_claims": [
+      "Exact numeric values beyond the allowed descriptors.",
+      "Attributing the change to a single study as consensus.",
+      "Stating that the projection is a forecast rather than a scenario‑based outcome."
+    ],
+    "fatal_errors": [
+      "Using numbers not listed in allowed descriptors.",
+      "Mischaracterizing RCP8.5 as a forecast."
+    ]
+  },
+  "guardrails": [
+    "A modeled historical baseline is model output for a past period, not an observation.",
+    "RCP8.5 is one high-emissions scenario, not a forecast and not the only plausible future.",
+    "Hazard is not exposure, and exposure is not risk."
+  ],
+  "c_g_t_s_d_audit": null,
+  "generation": {
+    "generator_version": "litsynth_agent v3.2",
+    "model": "openai/gpt-oss-120b",
+    "prompt_hash": "4d903b34cf2d6eda0d0cbfe8f53d36ca50fd6a3839e3ee9ef4b62cbbbc0b8b7a",
+    "timestamp": "2026-11-03T00:04:56Z",
+    "inputs_sha256": {
+      "packet": "222c1f5a886ba70e66977216a0ef8c354580d3dbbadae980a503795dae14f172",
+      "system_prompt": "9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715",
+      "item_seeds_v2": "3123dd3463f23555601d1e64edc172e2977e2fc6df3adbb08a74b5df41be9d50",
+      "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+      "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+      "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+      "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+      "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+      "pilot_selection": "c9f090297fd1beacbd524e33f571e275b2205f6e2b99687955999e3577f516fa",
+      "group_dispositions": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+      "descriptor_rules": "5c2090a77e0424d43603c9766c8925cee50a3b8fd31f24351334adbf82934650"
+    }
+  },
+  "review": {
+    "status": "human_review",
+    "history": [
+      {
+        "event": "deterministic_pass",
+        "reasons": [],
+        "check_version": "synthesis_post_checks v2.2",
+        "checks": {
+          "numbers_untraced": [],
+          "number_words_untraced": [],
+          "exact_values_in_graded_text": [],
+          "prompt_leakage": {
+            "clmrr_named": false,
+            "row_or_column_named": false,
+            "paper_named": false,
+            "hidden_exact_value_required": false,
+            "according_to_phrase": false,
+            "pass": true,
+            "flags": [],
+            "check_version": "leakage_check v1"
+          },
+          "schema_errors": [],
+          "texts_traced_to_literature": [
+            "literature_interpretation",
+            "rubric.required_points",
+            "rubric.required_points"
+          ],
+          "rubric_points_without_source_ids": 0,
+          "n_table_sentences": 1,
+          "n_literature_sentences": 1
+        },
+        "reference_answer_tagged": {
+          "table_pattern": [
+            {
+              "sentence": "The projection shows an increase, from about 0 days to about 1 day, in summer days with a dangerous heat index (above 105 °F) in Washington by mid-century (2045–2054) under RCP8.5, one high-emissions scenario.",
+              "pattern_ids": [
+                "TP1-00460"
+              ]
+            }
+          ],
+          "literature_interpretation": [
+            {
+              "sentence": "Large‑scale warming is identified as the primary driver of future increases in extreme heat index days, and rising greenhouse‑gas‑induced warming is expected to raise heat‑wave frequency, intensity, and duration.",
+              "group_ids": [
+                "LG-extreme_heat_v1-driver-c1-008",
+                "LG-extreme_heat_v1-driver-c2-001"
+              ],
+              "hedged": false
+            }
+          ],
+          "integrated": "The model projects that Washington will see an increase, from about 0 to about 1 summer day with a heat index above 105 °F by mid-century under RCP8.5. This change is driven chiefly by large‑scale warming associated with anthropogenic greenhouse‑gas emissions, which raises the frequency, intensity, and duration of heatwaves.",
+          "rubric_required_weights": [
+            {
+              "point": "Direction: increase",
+              "weight": 3
+            },
+            {
+              "point": "Magnitude class: from about 0 days to about 1 day (low‑baseline phrase)",
+              "weight": 2
+            },
+            {
+              "point": "Place: Washington (state)",
+              "weight": 2
+            },
+            {
+              "point": "Horizon phrase: by mid-century (2045–2054)",
+              "weight": 1
+            },
+            {
+              "point": "Scenario phrase: under RCP8.5, one high-emissions scenario",
+              "weight": 1
+            },
+            {
+              "point": "Mechanism: large‑scale warming is the primary driver of increased extreme heat index days",
+              "weight": 3
+            },
+            {
+              "point": "Mechanism: global warming raises heat‑wave frequency, intensity, and duration",
+              "weight": 2
+            }
+          ],
+          "rubric_points": [
+            {
+              "field": "required_points",
+              "point": "Direction: increase",
+              "source_ids": [
+                "TP1-00460"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Magnitude class: from about 0 days to about 1 day (low‑baseline phrase)",
+              "source_ids": [
+                "TP1-00460"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Place: Washington (state)",
+              "source_ids": [
+                "TP1-00460"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Horizon phrase: by mid-century (2045–2054)",
+              "source_ids": [
+                "TP1-00460"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Scenario phrase: under RCP8.5, one high-emissions scenario",
+              "source_ids": [
+                "TP1-00460"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Mechanism: large‑scale warming is the primary driver of increased extreme heat index days",
+              "source_ids": [
+                "LG-extreme_heat_v1-driver-c1-008"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Mechanism: global warming raises heat‑wave frequency, intensity, and duration",
+              "source_ids": [
+                "LG-extreme_heat_v1-driver-c2-001"
+              ]
+            },
+            {
+              "field": "optional_points",
+              "point": "Mention that the projected change is small relative to other U.S. states (lower tercile).",
+              "source_ids": [
+                "TP1-00460"
+              ]
+            }
+          ]
+        },
+        "seed_id": "SD2-TP1-00460",
+        "packet_id": "PK-SD2-TP1-00460",
+        "generator_version": "litsynth_agent v3.2",
+        "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+        "model": "openai/gpt-oss-120b",
+        "endpoint_label": "sophia_vllm",
+        "temperature": 0,
+        "reasoning_effort": "low",
+        "max_tokens": 16000,
+        "reasoning_effort_applied": true,
+        "system_prompt_sha256": "9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715",
+        "corrective_prompt_sha256": "256db051b3ddfa93d893e4573a2e818ecd4623d96ddac0aaebdba932c6e2a01a",
+        "prompt_hash": "4d903b34cf2d6eda0d0cbfe8f53d36ca50fd6a3839e3ee9ef4b62cbbbc0b8b7a",
+        "packet_sha256": "222c1f5a886ba70e66977216a0ef8c354580d3dbbadae980a503795dae14f172",
+        "source_commit": "1f175dac7801b3d27ca7ed1961debe88e22b4dc6",
+        "generation_timestamp": "2026-11-03T00:04:56Z",
+        "model_seconds": 8.5,
+        "model_attempts": 1,
+        "corrective_retry_used": false,
+        "turns": [
+          {
+            "turn": 1,
+            "finish_reason": "stop",
+            "content_chars": 4141,
+            "reasoning_chars": 1022,
+            "http_attempts": 1,
+            "model_seconds": 8.5
+          }
+        ],
+        "first_turn": null,
+        "corrective_error": null,
+        "corrective_turn_used": false,
+        "corrective_class": null,
+        "first_check": null,
+        "finish_reason": "stop",
+        "content_chars": 4141,
+        "reasoning_chars": 1022,
+        "raw_response": "{\n  \"prompt\": \"In the state of Washington, how is the summer number of days with a dangerous heat index (above 105 °F) expected to change by mid-century under RCP8.5, and what are the main physical drivers of this change?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"The projection shows an increase, from about 0 days to about 1 day, in summer days with a dangerous heat index (above 105 °F) in Washington by mid-century (2045–2054) under RCP8.5, one high-emissions scenario.\",\n        \"pattern_ids\": [\"TP1-00460\"]\n      }\n    ],\n    \"literature_interpretation\": [\n      {\n        \"sentence\": \"Large‑scale warming is identified as the primary driver of future increases in extreme heat index days, and rising greenhouse‑gas‑induced warming is expected to raise heat‑wave frequency, intensity, and duration.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c1-008\", \"LG-extreme_heat_v1-driver-c2-001\"],\n        \"hedged\": false\n      }\n    ],\n    \"integrated\": \"The model projects that Washington will see an increase, from about 0 to about 1 summer day with a heat index above 105 °F by mid-century under RCP8.5. This change is driven chiefly by large‑scale warming associated with anthropogenic greenhouse‑gas emissions, which raises the frequency, intensity, and duration of heatwaves.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"Direction: increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00460\"]\n      },\n      {\n        \"point\": \"Magnitude class: from about 0 days to about 1 day (low‑baseline phrase)\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00460\"]\n      },\n      {\n        \"point\": \"Place: Washington (state)\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00460\"]\n      },\n      {\n        \"point\": \"Horizon phrase: by mid-century (2045–2054)\",\n        \"weight\": 1,\n        \"source_ids\": [\"TP1-00460\"]\n      },\n      {\n        \"point\": \"Scenario phrase: under RCP8.5, one high-emissions scenario\",\n        \"weight\": 1,\n        \"source_ids\": [\"TP1-00460\"]\n      },\n      {\n        \"point\": \"Mechanism: large‑scale warming is the primary driver of increased extreme heat index days\",\n        \"weight\": 3,\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"]\n      },\n      {\n        \"point\": \"Mechanism: global warming raises heat‑wave frequency, intensity, and duration\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c2-001\"]\n      }\n    ],\n    \"acceptable_variants\": [\n      \"Any statement that captures the increase direction and the small‑magnitude class without giving exact numbers.\"\n    ],\n    \"optional_points\": [\n      {\n        \"point\": \"Mention that the projected change is small relative to other U.S. states (lower tercile).\",\n        \"source_ids\": [\"TP1-00460\"]\n      }\n    ],\n    \"disallowed_claims\": [\n      \"Exact numeric values beyond the allowed descriptors.\",\n      \"Attributing the change to a single study as consensus.\",\n      \"Stating that the projection is a forecast rather than a scenario‑based outcome.\"\n    ],\n    \"fatal_errors\": [\n      \"Using numbers not listed in allowed descriptors.\",\n      \"Mischaracterizing RCP8.5 as a forecast.\"\n    ],\n    \"note\": \"Exact values are not required; any statement consistent with the magnitude class counts.\"\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"RCP8.5 is one high-emissions scenario, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\"\n  ],\n  \"source_independent_answerability\": \"yes\",\n  \"source_independence_note\": \"A climate scientist can answer the direction and drivers from general knowledge of warming impacts without needing the specific packet.\",\n  \"capability_tested\": \"Pattern and mechanism reasoning\",\n  \"system_task\": \"Generate a closed‑book benchmark item\",\n  \"key_relationships\": \"Pattern → driver\",\n  \"evidence_needed\": \"Pattern description and multi‑source driver literature\",\n  \"desired_output_characteristics\": \"Concise, fact‑based\",\n  \"expected_knowledge_level\": \"general_climate_science\"\n}",
+        "raw_response_chars": 4141,
+        "raw_reasoning": null,
+        "raw_reasoning_chars": null,
+        "content_fallback": false,
+        "raw_max_chars": 20000
+      },
+      {
+        "event": "human_review",
+        "from_status": "deterministic_pass",
+        "decision": "D-056",
+        "at": "2026-11-03T00:44:46Z",
+        "by": "EXECUTOR (scripts/ingest_litsynth.py)",
+        "note": "entered human review (D-033 lifecycle; D-056): Kaiyuan in artifacts/benchmark/review/P2b_items_review_v1.xlsx, then the mentor; edits are recorded in review.final_frozen"
+      }
+    ],
+    "kaiyuan_disposition": null,
+    "mentor_disposition": null,
+    "final_frozen": null
+  }
+}

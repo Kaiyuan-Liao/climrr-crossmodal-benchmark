@@ -1,0 +1,495 @@
+{
+  "schema_version": "benchmark_item_v2",
+  "item_id": "BI-P2B-0007",
+  "use_case_level": 4,
+  "capability_tested": "regional comparison and driver explanation",
+  "system_task": "generate benchmark item",
+  "reasoning_modalities": "Hazard + Text",
+  "key_relationships": "hazard change ↔ climate warming & feedbacks",
+  "evidence_needed": "pattern data + multi‑source driver literature",
+  "desired_output_characteristics": "concise, fact‑based, properly cited",
+  "expected_knowledge_level": "general_climate_science",
+  "prompt": "How will the number of summer days with a dangerous heat index (above 95 °F) change by mid-century (2045–2054) under RCP8.5 across the U.S. NCA5 climate regions, which region is projected to see the largest increase, which the smallest, and what are the main physical drivers of this change?",
+  "source_independent_answerability": "yes",
+  "source_independence_note": "A climate‑trained scientist can infer the direction, regional ranking and primary warming drivers without needing the specific table values.",
+  "source_leakage_check": {
+    "clmrr_named": false,
+    "row_or_column_named": false,
+    "paper_named": false,
+    "hidden_exact_value_required": false,
+    "according_to_phrase": false,
+    "pass": true,
+    "flags": [],
+    "check_version": "leakage_check v1"
+  },
+  "reference_components": {
+    "table_patterns": [
+      {
+        "acceptance_blocked": false,
+        "acceptance_blocked_by": [],
+        "authorization": "verified",
+        "cautions": [],
+        "computed_value_or_range": {
+          "ordering": "descending signed value (DR-PT-004)",
+          "regions_ordered": [
+            {
+              "direction": "increase",
+              "name": "Southeast",
+              "rank": 1,
+              "region": "NCA5-SE",
+              "value": "26.970617067239689"
+            },
+            {
+              "direction": "increase",
+              "name": "Southern Great Plains",
+              "rank": 2,
+              "region": "NCA5-SGP",
+              "value": "25.324182054355443"
+            },
+            {
+              "direction": "increase",
+              "name": "Midwest",
+              "rank": 3,
+              "region": "NCA5-MW",
+              "value": "9.044876642181521"
+            },
+            {
+              "direction": "increase",
+              "name": "Northern Great Plains",
+              "rank": 4,
+              "region": "NCA5-NGP",
+              "value": "7.284407168551277"
+            },
+            {
+              "direction": "increase",
+              "name": "Southwest",
+              "rank": 5,
+              "region": "NCA5-SW",
+              "value": "7.119051178463900"
+            },
+            {
+              "direction": "increase",
+              "name": "Northeast",
+              "rank": 6,
+              "region": "NCA5-NE",
+              "value": "3.187878788685652"
+            },
+            {
+              "direction": "increase",
+              "name": "Northwest",
+              "rank": 7,
+              "region": "NCA5-NW",
+              "value": "2.735487396850855"
+            },
+            {
+              "direction": "increase",
+              "name": "Alaska",
+              "rank": 8,
+              "region": "NCA5-AK",
+              "value": "0.008507477520055"
+            }
+          ],
+          "value": null
+        },
+        "direction": "increase",
+        "family": "heat_index",
+        "geography": "all_covered_nca5_regions",
+        "geography_type": "nca_region",
+        "horizon": "mid",
+        "horizon_window": "2045-2054",
+        "metric": "heatindex_days_above_95F",
+        "metric_wording": "number of days with daily max heat index above 95 F",
+        "pattern_id": "TP1-02785",
+        "pattern_kind": "regional_contrast",
+        "pattern_robustness": "all_states_same_direction",
+        "pattern_support_n": 8,
+        "provenance": {
+          "code_version": "table_patterns v1 (src/climrr/table_patterns.py sha256 c5948f7e0ef85b73)",
+          "column_sources": {
+            "heatindex_HIS_Day95": {
+              "kind": "dictionary_line",
+              "line": 679,
+              "quote": "heatindex_HIS_Day95 Number of Summer days with daily max heat index above 95 F -- Historical"
+            },
+            "heatindex_M85_Day95": {
+              "kind": "dictionary_line",
+              "line": 685,
+              "quote": "heatindex_M85_Day95 Number of Summer days with daily max heat index above 95 F -- Mid-Century RCP8.5"
+            }
+          },
+          "column_statuses": {
+            "heatindex_HIS_Day95": "verified_from_dictionary",
+            "heatindex_M85_Day95": "verified_from_dictionary"
+          },
+          "columns": [
+            {
+              "column": "heatindex_HIS_Day95",
+              "index": 240
+            },
+            {
+              "column": "heatindex_M85_Day95",
+              "index": 246
+            }
+          ],
+          "derivation_rule_id": "DR-PT-008 over DR-TD-003 @ DR-PT-002",
+          "region_pattern_ids": [
+            "TP1-00059",
+            "TP1-00060",
+            "TP1-00061",
+            "TP1-00062",
+            "TP1-00063",
+            "TP1-00064",
+            "TP1-00065",
+            "TP1-00066"
+          ],
+          "region_scheme": {
+            "map": "data/metadata/geography/nca_regions_v1.yaml",
+            "map_sha256": "3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41",
+            "region_scheme_id": "NCA5"
+          },
+          "row_rule": "every NCA5 region with ≥1 State label in the table",
+          "table_data_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e"
+        },
+        "provisional": true,
+        "provisional_reasons": [
+          "location_inferred_candidate: State label IC-012 (A-G1, A-G3; D-034)",
+          "unweighted_mean: provisional aggregation rule for representation validation"
+        ],
+        "rank": null,
+        "relative_magnitude": null,
+        "relative_magnitude_skipped_reason": "population_lt_15 (n=8 regions)",
+        "robustness_unit": "nca_region",
+        "scenario": "RCP8.5",
+        "season": "summer",
+        "statistic": "absolute_change"
+      }
+    ],
+    "literature_mechanisms": [
+      {
+        "statement": "Observed increase in heat‑wave and drought frequency",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-extreme_heat_v1-driver-c1-008",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "199098498",
+            "paper_sha256": "945df7b916b7dd75924142fbb7d1542afa08cb36da06df37f135849d9ad15218",
+            "json_path": "$.late century results",
+            "span_start": 4443,
+            "span_end": 4601,
+            "verbatim_passage": "Identifying the climatological processes responsible for the increases in the frequency of high heat index days we identify is beyond the scope of this study.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 199098498",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-199098498-04",
+            "evidence_role": "cited_candidate"
+          },
+          {
+            "paper_item_id": "158091651",
+            "paper_sha256": "a62d4b52adcff6beb97df02ca10902942356fbe8834ada0474e227f40556486d",
+            "json_path": "$.abstract",
+            "span_start": 829,
+            "span_end": 1077,
+            "verbatim_passage": "Land-atmosphere feedbacks appear to be a stronger factor for heat wave maintenance at southern latitudes, but the NCEP model seems to misrepresent those feedbacks, particularly over the Southwest United States, leading to poor skill in that region.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 158091651",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-158091651-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "5838629",
+            "paper_sha256": "e11032fb59db4250a8562dfba97e961feee24186a931f6ec3d037270405f4606",
+            "json_path": "$.results",
+            "span_start": 1155,
+            "span_end": 1343,
+            "verbatim_passage": "Air mass stagnation events, which increase O3 production and will increase in frequency as weather conditions favorable to heat waves increase (CCSP 2008), are another important indicator.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 5838629",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-5838629-03",
+            "evidence_role": "cited_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "humidity magnifies heat stress and its effect grows with temperature",
+        "statement_type": "mechanism",
+        "evidence_strength": "single_source_supported",
+        "reference_scope": "single_study_observation",
+        "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "239996006",
+            "paper_sha256": "4bb60fe9aae3fde11d0b3cc7db90b67c97c0342c2c0c798fa8f0c838fb31e83f",
+            "json_path": "$.results",
+            "span_start": 2047,
+            "span_end": 2251,
+            "verbatim_passage": "at similar or lower humidity, the magnifying power of humidity increases with increasing T, i.e. similar or lower relative humidity levels will still cause greater human discomfort at higher temperatures.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 239996006",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-239996006-02",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      }
+    ],
+    "literature_caveats": []
+  },
+  "reference_answer": {
+    "table_pattern": "All NCA5 regions show an increase in days with a dangerous heat index (above 95 °F) by mid-century (2045–2054) under RCP8.5, with the largest increase in the Southeast and the smallest increase in Alaska.",
+    "literature_interpretation": "Large‑scale warming is identified as the primary driver of future increases in extreme heat index days. Land‑atmosphere feedbacks, especially in southern latitudes, amplify heat‑wave maintenance and contribute to the projected increases. One study suggests that humidity magnifies heat stress, so even unchanged humidity can worsen perceived heat as temperatures rise.",
+    "integrated": "The modeled projection shows an increase in summer days with a dangerous heat index (above 95 °F) across all NCA5 regions by mid-century under RCP8.5, most strongly in the Southeast and least in Alaska. Multi‑source evidence points to large‑scale warming and land‑atmosphere feedbacks—particularly in the southern United States—as the chief physical mechanisms, while single‑source work notes that rising temperatures amplify the heat‑stress effect of humidity."
+  },
+  "rubric": {
+    "required_points": [
+      "[w=3] Direction: increase",
+      "[w=3] Ranking: largest increase in the Southeast, smallest increase in Alaska",
+      "[w=2] Scenario and horizon phrasing: under RCP8.5, one high‑emissions scenario, by mid‑century (2045–2054)",
+      "[w=3] Mechanism: large‑scale warming and land‑atmosphere feedbacks are primary drivers",
+      "[w=2] Acknowledge that humidity can magnify heat stress (hedged single‑source claim)",
+      "[w=1] Exact numeric values are not required; any statement consistent with the magnitude class counts."
+    ],
+    "optional_points": [
+      "Reference to urban heat island effects as an additional mechanism"
+    ],
+    "acceptable_variants": [
+      "Any answer that states an increase across regions, identifies Southeast as the region with the greatest rise and Alaska as the least, cites large‑scale warming and land‑atmosphere feedbacks as drivers, and mentions humidity’s amplifying role (hedged) meets the rubric."
+    ],
+    "disallowed_claims": [
+      "Stating the exact number of days added for any region",
+      "Presenting a single‑source claim as consensus",
+      "Describing RCP8.5 as a forecast or the only possible future",
+      "Confusing hazard with exposure or risk"
+    ],
+    "fatal_errors": [
+      "Including any numeric value not listed in the allowed numbers",
+      "Mischaracterizing the modeled historical baseline as an observation"
+    ]
+  },
+  "guardrails": [
+    "A modeled historical baseline is model output for a past period, not an observation.",
+    "RCP8.5 is one high‑emissions scenario, not a forecast and not the only plausible future.",
+    "Hazard is not exposure, and exposure is not risk."
+  ],
+  "c_g_t_s_d_audit": null,
+  "generation": {
+    "generator_version": "litsynth_agent v3.2",
+    "model": "openai/gpt-oss-120b",
+    "prompt_hash": "231ea3e5b3b790b383a825707c25107a82deee5fe26381812b20d6b9f046ece1",
+    "timestamp": "2026-11-03T00:10:06Z",
+    "inputs_sha256": {
+      "packet": "5f453e2ca161312111ce19b89e476af35e852f83e4c4c4df0b7005c6d5b5e758",
+      "system_prompt": "9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715",
+      "item_seeds_v2": "3123dd3463f23555601d1e64edc172e2977e2fc6df3adbb08a74b5df41be9d50",
+      "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+      "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+      "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+      "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+      "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+      "pilot_selection": "c9f090297fd1beacbd524e33f571e275b2205f6e2b99687955999e3577f516fa",
+      "group_dispositions": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+      "descriptor_rules": "5c2090a77e0424d43603c9766c8925cee50a3b8fd31f24351334adbf82934650"
+    }
+  },
+  "review": {
+    "status": "human_review",
+    "history": [
+      {
+        "event": "deterministic_pass",
+        "reasons": [],
+        "check_version": "synthesis_post_checks v2.2",
+        "checks": {
+          "numbers_untraced": [],
+          "number_words_untraced": [],
+          "exact_values_in_graded_text": [],
+          "prompt_leakage": {
+            "clmrr_named": false,
+            "row_or_column_named": false,
+            "paper_named": false,
+            "hidden_exact_value_required": false,
+            "according_to_phrase": false,
+            "pass": true,
+            "flags": [],
+            "check_version": "leakage_check v1"
+          },
+          "schema_errors": [],
+          "texts_traced_to_literature": [
+            "literature_interpretation",
+            "literature_interpretation",
+            "literature_interpretation",
+            "rubric.required_points",
+            "rubric.required_points",
+            "rubric.optional_points"
+          ],
+          "rubric_points_without_source_ids": 1,
+          "n_table_sentences": 1,
+          "n_literature_sentences": 3
+        },
+        "reference_answer_tagged": {
+          "table_pattern": [
+            {
+              "sentence": "All NCA5 regions show an increase in days with a dangerous heat index (above 95 °F) by mid-century (2045–2054) under RCP8.5, with the largest increase in the Southeast and the smallest increase in Alaska.",
+              "pattern_ids": [
+                "TP1-02785"
+              ]
+            }
+          ],
+          "literature_interpretation": [
+            {
+              "sentence": "Large‑scale warming is identified as the primary driver of future increases in extreme heat index days.",
+              "group_ids": [
+                "LG-extreme_heat_v1-driver-c1-008"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "Land‑atmosphere feedbacks, especially in southern latitudes, amplify heat‑wave maintenance and contribute to the projected increases.",
+              "group_ids": [
+                "LG-extreme_heat_v1-driver-c1-008"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "One study suggests that humidity magnifies heat stress, so even unchanged humidity can worsen perceived heat as temperatures rise.",
+              "group_ids": [
+                "LG-extreme_heat_v1-mechanism-c2-003"
+              ],
+              "hedged": true
+            }
+          ],
+          "integrated": "The modeled projection shows an increase in summer days with a dangerous heat index (above 95 °F) across all NCA5 regions by mid-century under RCP8.5, most strongly in the Southeast and least in Alaska. Multi‑source evidence points to large‑scale warming and land‑atmosphere feedbacks—particularly in the southern United States—as the chief physical mechanisms, while single‑source work notes that rising temperatures amplify the heat‑stress effect of humidity.",
+          "rubric_required_weights": [
+            {
+              "point": "Direction: increase",
+              "weight": 3
+            },
+            {
+              "point": "Ranking: largest increase in the Southeast, smallest increase in Alaska",
+              "weight": 3
+            },
+            {
+              "point": "Scenario and horizon phrasing: under RCP8.5, one high‑emissions scenario, by mid‑century (2045–2054)",
+              "weight": 2
+            },
+            {
+              "point": "Mechanism: large‑scale warming and land‑atmosphere feedbacks are primary drivers",
+              "weight": 3
+            },
+            {
+              "point": "Acknowledge that humidity can magnify heat stress (hedged single‑source claim)",
+              "weight": 2
+            },
+            {
+              "point": "Exact numeric values are not required; any statement consistent with the magnitude class counts.",
+              "weight": 1
+            }
+          ],
+          "rubric_points": [
+            {
+              "field": "required_points",
+              "point": "Direction: increase",
+              "source_ids": [
+                "TP1-02785"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Ranking: largest increase in the Southeast, smallest increase in Alaska",
+              "source_ids": [
+                "TP1-02785"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Scenario and horizon phrasing: under RCP8.5, one high‑emissions scenario, by mid‑century (2045–2054)",
+              "source_ids": [
+                "TP1-02785"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Mechanism: large‑scale warming and land‑atmosphere feedbacks are primary drivers",
+              "source_ids": [
+                "LG-extreme_heat_v1-driver-c1-008"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Acknowledge that humidity can magnify heat stress (hedged single‑source claim)",
+              "source_ids": [
+                "LG-extreme_heat_v1-mechanism-c2-003"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Exact numeric values are not required; any statement consistent with the magnitude class counts.",
+              "source_ids": []
+            },
+            {
+              "field": "optional_points",
+              "point": "Reference to urban heat island effects as an additional mechanism",
+              "source_ids": [
+                "LG-extreme_heat_v1-mechanism-c1-024"
+              ]
+            }
+          ]
+        },
+        "seed_id": "SD2-TP1-02785",
+        "packet_id": "PK-SD2-TP1-02785",
+        "generator_version": "litsynth_agent v3.2",
+        "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+        "model": "openai/gpt-oss-120b",
+        "endpoint_label": "sophia_vllm",
+        "temperature": 0,
+        "reasoning_effort": "low",
+        "max_tokens": 16000,
+        "reasoning_effort_applied": true,
+        "system_prompt_sha256": "9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715",
+        "corrective_prompt_sha256": "256db051b3ddfa93d893e4573a2e818ecd4623d96ddac0aaebdba932c6e2a01a",
+        "prompt_hash": "231ea3e5b3b790b383a825707c25107a82deee5fe26381812b20d6b9f046ece1",
+        "packet_sha256": "5f453e2ca161312111ce19b89e476af35e852f83e4c4c4df0b7005c6d5b5e758",
+        "source_commit": "1f175dac7801b3d27ca7ed1961debe88e22b4dc6",
+        "generation_timestamp": "2026-11-03T00:10:06Z",
+        "model_seconds": 117.5,
+        "model_attempts": 1,
+        "corrective_retry_used": false,
+        "turns": [
+          {
+            "turn": 1,
+            "finish_reason": "stop",
+            "content_chars": 4837,
+            "reasoning_chars": 699,
+            "http_attempts": 1,
+            "model_seconds": 117.5
+          }
+        ],
+        "first_turn": null,
+        "corrective_error": null,
+        "corrective_turn_used": false,
+        "corrective_class": null,
+        "first_check": null,
+        "finish_reason": "stop",
+        "content_chars": 4837,
+        "reasoning_chars": 699,
+        "raw_response": "{\n  \"prompt\": \"How will the number of summer days with a dangerous heat index (above 95 °F) change by mid-century (2045–2054) under RCP8.5 across the U.S. NCA5 climate regions, which region is projected to see the largest increase, which the smallest, and what are the main physical drivers of this change?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"All NCA5 regions show an increase in days with a dangerous heat index (above 95 °F) by mid-century (2045–2054) under RCP8.5, with the largest increase in the Southeast and the smallest increase in Alaska.\",\n        \"pattern_ids\": [\"TP1-02785\"]\n      }\n    ],\n    \"literature_interpretation\": [\n      {\n        \"sentence\": \"Large‑scale warming is identified as the primary driver of future increases in extreme heat index days.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"Land‑atmosphere feedbacks, especially in southern latitudes, amplify heat‑wave maintenance and contribute to the projected increases.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"One study suggests that humidity magnifies heat stress, so even unchanged humidity can worsen perceived heat as temperatures rise.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-mechanism-c2-003\"],\n        \"hedged\": true\n      }\n    ],\n    \"integrated\": \"The modeled projection shows an increase in summer days with a dangerous heat index (above 95 °F) across all NCA5 regions by mid-century under RCP8.5, most strongly in the Southeast and least in Alaska. Multi‑source evidence points to large‑scale warming and land‑atmosphere feedbacks—particularly in the southern United States—as the chief physical mechanisms, while single‑source work notes that rising temperatures amplify the heat‑stress effect of humidity.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"Direction: increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-02785\"]\n      },\n      {\n        \"point\": \"Ranking: largest increase in the Southeast, smallest increase in Alaska\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-02785\"]\n      },\n      {\n        \"point\": \"Scenario and horizon phrasing: under RCP8.5, one high‑emissions scenario, by mid‑century (2045–2054)\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-02785\"]\n      },\n      {\n        \"point\": \"Mechanism: large‑scale warming and land‑atmosphere feedbacks are primary drivers\",\n        \"weight\": 3,\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"]\n      },\n      {\n        \"point\": \"Acknowledge that humidity can magnify heat stress (hedged single‑source claim)\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-extreme_heat_v1-mechanism-c2-003\"]\n      },\n      {\n        \"point\": \"Exact numeric values are not required; any statement consistent with the magnitude class counts.\",\n        \"weight\": 1,\n        \"source_ids\": []\n      }\n    ],\n    \"acceptable_variants\": [\n      \"Any answer that states an increase across regions, identifies Southeast as the region with the greatest rise and Alaska as the least, cites large‑scale warming and land‑atmosphere feedbacks as drivers, and mentions humidity’s amplifying role (hedged) meets the rubric.\"\n    ],\n    \"optional_points\": [\n      {\n        \"point\": \"Reference to urban heat island effects as an additional mechanism\",\n        \"source_ids\": [\"LG-extreme_heat_v1-mechanism-c1-024\"]\n      }\n    ],\n    \"disallowed_claims\": [\n      \"Stating the exact number of days added for any region\",\n      \"Presenting a single‑source claim as consensus\",\n      \"Describing RCP8.5 as a forecast or the only possible future\",\n      \"Confusing hazard with exposure or risk\"\n    ],\n    \"fatal_errors\": [\n      \"Including any numeric value not listed in the allowed numbers\",\n      \"Mischaracterizing the modeled historical baseline as an observation\"\n    ]\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"RCP8.5 is one high‑emissions scenario, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\"\n  ],\n  \"source_independent_answerability\": \"yes\",\n  \"source_independence_note\": \"A climate‑trained scientist can infer the direction, regional ranking and primary warming drivers without needing the specific table values.\",\n  \"capability_tested\": \"regional comparison and driver explanation\",\n  \"system_task\": \"generate benchmark item\",\n  \"key_relationships\": \"hazard change ↔ climate warming & feedbacks\",\n  \"evidence_needed\": \"pattern data + multi‑source driver literature\",\n  \"desired_output_characteristics\": \"concise, fact‑based, properly cited\",\n  \"expected_knowledge_level\": \"general_climate_science\"\n}",
+        "raw_response_chars": 4837,
+        "raw_reasoning": null,
+        "raw_reasoning_chars": null,
+        "content_fallback": false,
+        "raw_max_chars": 20000
+      },
+      {
+        "event": "human_review",
+        "from_status": "deterministic_pass",
+        "decision": "D-056",
+        "at": "2026-11-03T00:44:46Z",
+        "by": "EXECUTOR (scripts/ingest_litsynth.py)",
+        "note": "entered human review (D-033 lifecycle; D-056): Kaiyuan in artifacts/benchmark/review/P2b_items_review_v1.xlsx, then the mentor; edits are recorded in review.final_frozen"
+      }
+    ],
+    "kaiyuan_disposition": null,
+    "mentor_disposition": null,
+    "final_frozen": null
+  }
+}

@@ -2867,3 +2867,87 @@ code emits, and the next GUIDANCE packet still chooses.
   `9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715`, format-corrective template `919f52cb2612c6f7544a2d62f4488231a16092376e43ebef03e4a23ca7066d20`. Run 2 writes `litsynth/run2`.
 - **Affected files:** `src/climrr/benchmark_items.py`, `scripts/litcollect/litsynth_agent.py`,
   `docs/PILOT_P2B_DESIGN.md`, tests.
+
+## D-056 --- Synthesis run 2 accepted as the pilot item set
+
+- **Date:** 2026-11-02.
+- **Status:** **decided** (COORDINATOR, 2026-11-02; work package P2b-ingest-items).
+- **Context.** Synthesis run 2 (`litsynth_agent` v3.2, SHA-256 `f5778fbf54ea44794d40086b997a504971812fe8a4481f7fedefae5f6d4b8b5e`,
+  system prompt `9c79f45262b1a039e43edb46c928b6d32fa75f903eca34229d32838a734f5715`, format-corrective template
+  `919f52cb2612c6f7544a2d62f4488231a16092376e43ebef03e4a23ca7066d20`; Sophia vLLM `openai/gpt-oss-120b`, reasoning low,
+  max_tokens 16000; source commit `1f175dac7801b3d27ca7ed1961debe88e22b4dc6`; packets v3a, manifest
+  `86b02cd00f333249b91e49bca3d4ce4b40f33d1bea30bb76463875d392b8b84c`), delivered with runs 0 and 1 as
+  `litsynth_runs012_evidence.tar.gz` (`00c909340bd08d61331e1eb6515da0b2bf375627b63d7491456c740949ebaac1`): `items.jsonl`
+  `b0e0c60ff007ce1542c04534cdb1a89bad36aafe26d95f6cbfa5a6090c308bb8`, `summary.json`
+  `8908314133ca38630d2b691e0c503f17e54c9b0b4eb5a48ad1932939fb89b0cc`. 10 items, 10 `deterministic_pass`, 0 leakage flags;
+  the format-class corrective turn (D-055b) on 6 items (0001, 0002, 0006, 0008, 0009, 0010), all passing after it.
+- **Decision.** Run 2 is the pilot item set. The ten items enter human review (`review.status: human_review`, D-033
+  lifecycle). **Rubric and reference edits are human**, made in the item review workbook and recorded in
+  `review.final_frozen`; no code rewrites an item. **The synthesis agent is frozen at v3.2 until mentor feedback.**
+  Runs 0 (agent v2; number formatting) and 1 (agent v3.1; format checks) stay superseded.
+- **Implementation (EXECUTOR).** `scripts/ingest_litsynth.py`, `src/climrr/litsynth_run2.py` ->
+  `artifacts/benchmark/items/run2/` (`manifest.json` `c9c6bc9bc1a4f19d94e7a5e9c9514c34c9a3ad18b60dc97a11b87df2b84d60e9`):
+  `items.jsonl` byte-identical to the run; `items/<item_id>.json` = the delivered record plus the lifecycle step (status,
+  one `human_review` history event; both dispositions and `final_frozen` null), each validated against item schema v2
+  and the consistency rules; runs 0 and 1 logs and summaries under `superseded/`; prompts and raw responses hashed, not
+  copied. **`checks_reproduced: true`**: each item re-assembled by the pinned agent from its final raw response equals
+  the delivered item, post-checks v2.2 on it and its v3a packet (read at the source commit) equal the recorded result,
+  and for the six corrective items the first reply's check equals the recorded `first_check`. Rubric lint v1
+  (`scripts/lint_item_rubrics.py`, `src/climrr/rubric_lint.py`; report only, no item edited):
+  `rubric_lint_v1.json` `5b5cf722f54ad8bc7f790a6591f467f69c3cb963e6d26cec9529835e1d7d8d31`, 25 flags. Review workbook
+  `artifacts/benchmark/review/P2b_items_review_v1.xlsx` (gitignored) and `P2b_items_review_v1.csv`
+  (`ebcb856b21eddf02e69a2d51a32d689fe2988b1ea77130abfffc47c4c505eb73`; `scripts/build_p2b_items_review.py`,
+  `src/climrr/p2b_items_review.py`); the COORDINATOR notes copied byte-identical to
+  `artifacts/benchmark/review/P2b_items_coordinator_notes_v1.csv` (`1f4f72c39af8b73ed926dfe889c1784a6229afb11e7f7f7bca0e814ee1e849ea`;
+  accept_with_edits 9, regenerate 1 --- 0010).
+- **Recorded, for the COORDINATOR.** (1) The log records **two** recovered HTTP retries, not one: `SD2-TP1-02787` HTTP 502 and
+  `SD2-TP1-00069` `RemoteDisconnected`; each turn succeeded on its second HTTP attempt. (2) `items.jsonl` is written with
+  sorted keys; the per-item files keep the agent's key order, which is the order `checks.texts_traced_to_literature`
+  follows, so the reproduction reads the per-item files (equal to the `items.jsonl` lines as objects). (3) The workbook's
+  reviewer vocabulary (accept / accept_with_edits / reject / regenerate) is not schema v2's disposition enum (accept /
+  accept_after_edit / reject / needs_revision); the package that applies Kaiyuan's pass maps it. (4) The lint's literal
+  generation-constraint pattern misses two lines the COORDINATOR notes name in 0007: "Exact *numeric* values are not
+  required…" and "…not listed in the allowed numbers" (a space, not `allowed_numbers`); the pattern is kept as written.
+- **Affected files:** `src/climrr/litsynth_run2.py`, `src/climrr/rubric_lint.py`, `src/climrr/p2b_items_review.py`,
+  `scripts/ingest_litsynth.py`, `scripts/lint_item_rubrics.py`, `scripts/build_p2b_items_review.py`,
+  `tests/test_litsynth_run2.py`, `artifacts/benchmark/items/run2/`, `artifacts/benchmark/review/P2b_items_review_v1.csv`,
+  `artifacts/benchmark/review/P2b_items_coordinator_notes_v1.csv`, `docs/PILOT_P2B_DESIGN.md`, `docs/PROJECT_STATE.md`,
+  `docs/MENTOR_BRIEF.md`, `reports/milestones/PILOT_BENCHMARK_REPORT.md`.
+
+## D-054a --- DR-SEED-RANK-3a: rung-7 caveat slots take scenario-naming groups first
+
+- **Date:** 2026-11-02.
+- **Status:** **decided** (COORDINATOR, 2026-11-02; work package P2b-ingest-items). Amends D-054.
+- **Context.** Item 0010 (rung 7, Florida) is not a rung-7 item (COORDINATOR review: `regenerate`): its caveat slots held
+  measurement caveats, its prompt never asks about scenario dependence or uncertainty, and the scenario-contrast group
+  `LG-extreme_heat_v1-pattern-c2-003` (heat-wave duration under RCP8.5 vs RCP4.5) was not attached because it is typed
+  `pattern`.
+- **Decision.** At rung 7 the caveat slots (up to 4) are filled first by groups of **any** statement type whose member
+  statements name an emissions scenario (`RCP|SSP|emissions scenario|high-emissions|moderate`), `claim_about` in
+  {hazard_change_mechanism, hazard_definition_or_measurement}, ranked by the v3 order; then by caveat-type groups as
+  before. The rung-7 instruction goes in the packet (`model_view.rung_instruction`), not the system prompt, so the agent
+  hash is unchanged: ask how the projected change depends on the emissions scenario and what uncertainties or caveats
+  apply; the reference states that RCP8.5 is one high-emissions scenario and contrasts it with a moderate scenario where
+  the groups support it. Only `PK-SD2-TP1-00075` is rebuilt (packets v3b); the other nine are byte-identical.
+- **Recorded (EXECUTOR), for confirmation.** (1) "Member statements" = the members the packet carries (relevant to the
+  seed); over all members, "moderate" would also match "a moderate correlation" in the non-relevant member of
+  `…-pattern-c1-001`. The regex is used as written (case-sensitive); case-insensitive and hyphen / singular variants give
+  the same slots here. (2) A scenario-naming group takes a caveat slot **instead of** a driver or context slot (a group is
+  attached once); `exclude_from_rung7` still keeps a group out of every caveat slot (it keeps its ordinary role). (3)
+  Schema v2's literature `statement_type` has no `pattern`, and the frozen agent copies the packet's type into the
+  item, so a scenario-slot group is carried as `statement_type: caveat` with `statement_type_run` (the run's type) and
+  `scenario_slot: true`; without this, an item citing it would fail schema. (4) Version stamps: the rung-7 packet is
+  `synthpackets v3b`, rank rule `DR-SEED-RANK-3a`; the other nine keep `v3a` / `DR-SEED-RANK-3` so they stay
+  byte-identical; the manifest is v3b. (5) In this packet `…-pattern-c2-003` is **`single_source_supported`**: its two
+  relevant members (both us_subregion "eastern United States") come from one paper, `5882914` (its run strength over all
+  four members is multi). A reference sentence on the RCP4.5 contrast must be hedged.
+- **Result.** Packets v3b `manifest.json` `09ca030a5e4de913b1a6efb29943c84754de796a4a3987f300e72083e7f172c7`;
+  `PK-SD2-TP1-00075.json` `9ec338d64e963521d86de13a0ab6c8a40dadad9b69ad5079694abf3b685379ee` (v3a `25229d45…499f`). Caveat
+  slots: `LG-extreme_heat_v1-pattern-c2-003` "heat‑wave frequency, intensity and duration are projected to increase"
+  (single_source_supported in the packet), `…-caveat-c1-026` "Heat index is used as a primary exposure metric in some
+  studies but not universally" (review_supported), `…-caveat-c1-024` "Heat‑index calculation is omitted for apparent
+  temperatures below 80 °F, masking those grid cells" (single_source_supported). Drivers and context unchanged
+  (8 / 3); excluded list unchanged.
+- **Affected files:** `src/climrr/synthpackets.py` (v3b), `scripts/build_synth_packets.py` (`--expect-changed`),
+  `artifacts/benchmark/synth_packets/`, `tests/test_synthpackets.py`, `tests/test_litgroups_run2.py`,
+  `tests/test_litsynth_agent.py`, `docs/PILOT_P2B_DESIGN.md`.

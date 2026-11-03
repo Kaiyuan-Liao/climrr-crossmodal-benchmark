@@ -431,3 +431,87 @@ same configuration); **239 groups, 155 singletons, 747 statements once**; 0 labe
 4. **105 one-member labelled groups**; no cross-chunk merging by code (D-051, D-052).
 5. **Packet file names** stay `PK-<seed_id>.json` (the pinned synthesis agent reads them); item ids `BI-P2B-<nnnn>`
    are in the packets and the manifest.
+
+# Pilot P2b-ingest-items --- synthesis runs 0--2, the ten pilot items, review workbook, rung-7 packet fix
+
+Authorized by D-041 and the COORDINATOR work package P2b-ingest-items; decisions taken in the package: **D-056**
+(synthesis run 2 is the pilot item set) and **D-054a** (DR-SEED-RANK-3a). **No model call in this package. Ten items
+exist, all in `human_review`; nothing accepted.** No column status, concept-map entry or compatibility rule changed.
+Design: [`docs/PILOT_P2B_DESIGN.md`](../../docs/PILOT_P2B_DESIGN.md) section 14. Fields 20--25 (the template's fields
+10--15 for this package).
+
+## 20. Commits and evidence runs
+
+| | |
+| --- | --- |
+| Branch | `work/meeting-2026-10-22`, from head `1f175da` |
+| **Build commit** | **`BUILD_SHA_TBD`**: modules, scripts, tests, the ingested run, lint report, ITEMS CSV, COORDINATOR notes, packets v3b, D-056, D-054a, design section 14, this section, state, mentor brief |
+| **Evidence runs** | at the build commit, `git_dirty: false`: `ingest_litsynth`, `lint_item_rubrics`, `build_p2b_items_review`, `build_synth_packets` (`reports/runs/`, `.json` / `.md`); every tracked output byte-identical |
+| Report commit | the commit carrying the run records and the filled SHAs |
+| Remote | **pushed** (the Eagle clone needs packets v3b for run 3); not merged |
+
+## 21. Data and checksums
+
+| Object | SHA-256 | Notes |
+| --- | --- | --- |
+| `litsynth_runs012_evidence.tar.gz` (read, outside the repo) | `00c909340bd08d61331e1eb6515da0b2bf375627b63d7491456c740949ebaac1` | equals the work package |
+| run-2 `items.jsonl` / `summary.json` | `b0e0c60f…308bb8` / `89083141…89b0cc` | equal the work package; `items.jsonl` = the ten per-item files |
+| `litsynth_agent.py` v3.2 | `f5778fbf…4b8b5e` | equal at `1f175da` and at the build commit; system prompt `9c79f452…5715`, format-corrective template `919f52cb…6d20` |
+| packets v3a (what run 2 read) | manifest `86b02cd0…b84c` | read from Git at `1f175da`; every item's packet SHA-256 equal |
+| **`artifacts/benchmark/items/run2/manifest.json`** | **`c9c6bc9bc1a4f19d94e7a5e9c9514c34c9a3ad18b60dc97a11b87df2b84d60e9`** | 8 copied files, 10 ingested items, 32 excluded (hashed) |
+| `rubric_lint_v1.json` | `5b5cf722f54ad8bc7f790a6591f467f69c3cb963e6d26cec9529835e1d7d8d31` | report only |
+| `P2b_items_review_v1.csv` (tracked) | `ebcb856b21eddf02e69a2d51a32d689fe2988b1ea77130abfffc47c4c505eb73` | the ITEMS sheet |
+| `P2b_items_coordinator_notes_v1.csv` | `1f4f72c39af8b73ed926dfe889c1784a6229afb11e7f7f7bca0e814ee1e849ea` | byte-identical copy of the delivered notes |
+| **packets v3b `manifest.json`** | **`09ca030a5e4de913b1a6efb29943c84754de796a4a3987f300e72083e7f172c7`** | `PK-SD2-TP1-00075.json` `9ec338d6…79ee`; nine packets byte-identical to v3a |
+
+## 22. Work completed
+
+Phase A: run 2 verified and ingested; post-checks v2.2 reproduced; the ten items moved to `human_review`. Phase B: rubric
+lint v1 (report only). Phase C: item review workbook and ITEMS CSV with the COORDINATOR notes. Phase D: DR-SEED-RANK-3a
+and the rung-7 packet instruction; packets v3b. Phase E: D-056, D-054a, design section 14, state, mentor brief, this
+section.
+
+## 23. Methods and rules that affect scientific meaning
+
+- **D-056**: the ten items are the pilot set; edits are human and go to `review.final_frozen`; the agent is frozen at
+  v3.2. The lifecycle step changes `review.status` and appends one history event; nothing in the item's content changes.
+- **D-054a** (DR-SEED-RANK-3a): at rung 7 the caveat slots take scenario-naming groups of any type first. EXECUTOR readings
+  for confirmation: matched over the members the packet carries; the group takes a caveat slot instead of a driver slot;
+  carried as `statement_type: caveat` because schema v2 has no `pattern` literature type (D-054a, recorded).
+- **Rubric lint v1**: five rules (D-056 implementation); flags are a checklist, not edits.
+
+## 24. Results
+
+**The ten pilot items** (all `deterministic_pass` in run 2, now `human_review`; heat index, summer, RCP8.5):
+
+| item | seed | rung | place | quantity | horizon | literature sentences | format turn | lint flags | COORDINATOR | status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| BI-P2B-0001 | SD2-TP1-00018 | 1 | Georgia | days > 95 °F | mid | 0 | yes | 2 | accept_with_edits | human_review |
+| BI-P2B-0002 | SD2-TP1-00069 | 1 | Arizona | days > 95 °F | mid | 0 | yes | 3 | accept_with_edits | human_review |
+| BI-P2B-0003 | SD2-TP1-00071 | 3 | California | days > 95 °F | mid | 3 | no | 2 | accept_with_edits | human_review |
+| BI-P2B-0004 | SD2-TP1-00271 | 3 | New York | days > 95 °F | end | 2 | no | 4 | accept_with_edits | human_review |
+| BI-P2B-0005 | SD2-TP1-00460 | 3 | Washington | days > 105 °F | mid | 1 | no | 2 | accept_with_edits | human_review |
+| BI-P2B-0006 | SD2-TP1-00589 | 3 | Alabama | days > 105 °F | end | 4 | yes | 2 | accept_with_edits | human_review |
+| BI-P2B-0007 | SD2-TP1-02785 | 4 | NCA5 regions | days > 95 °F | mid | 3 | no | 1 | accept_with_edits | human_review |
+| BI-P2B-0008 | SD2-TP1-02787 | 4 | NCA5 regions | days > 95 °F | end | 2 | yes | 7 | accept_with_edits | human_review |
+| BI-P2B-0009 | SD2-TP1-02789 | 4 | NCA5 regions | days > 105 °F | mid | 2 | yes | 1 | accept_with_edits | human_review |
+| BI-P2B-0010 | SD2-TP1-00075 | 7 | Florida | days > 95 °F | mid | 4 | yes | 1 | **regenerate** (run 3) | human_review |
+
+**Lint totals:** generation_constraint 16, hedge_strength_mismatch 6, required_single_source_only 1, rung1_prompt_mechanism
+1, required_tercile 1 (25). **Rung-7 packet v3b caveat slots:** `LG-extreme_heat_v1-pattern-c2-003` (single-source in the
+packet), `…-caveat-c1-026` (review), `…-caveat-c1-024` (single).
+
+**Validation.** `pytest`: **1,498 passed, 2 skipped** (the two pre-existing skips); new `tests/test_litsynth_run2.py` (8),
+three new tests in `tests/test_synthpackets.py`, one in `tests/test_litsynth_agent.py`; v3a pins in
+`tests/test_litgroups_run2.py` and `tests/test_litsynth_agent.py` moved to v3b. Secrets and paths scan: **0 hits**.
+
+## 25. Escalations and limitations
+
+1. **0010 is not yet a rung-7 item**: run 3 (one packet, v3b) is needed; its prompt and reference depend on the model
+   using the scenario caveat, which is single-source in this packet (one paper) and must be hedged.
+2. **Workbook vocabulary vs schema v2**: accept_with_edits / regenerate are not schema dispositions; mapping deferred.
+3. **Lint coverage**: the literal generation-constraint pattern misses two 0007 lines; the COORDINATOR notes carry them.
+4. **Hedging**: six literature sentences hedge multi-source groups as "one study" (0003, 0004, 0006, 0008); the
+   COORDINATOR notes accept one of them (0004, `…-driver-c1-008`).
+5. **Two HTTP retries** in run 2, not one; both recovered on the second attempt.
+6. FWI column confirmation remains open (no FWI item in the pilot).
