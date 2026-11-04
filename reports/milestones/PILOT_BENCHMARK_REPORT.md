@@ -731,8 +731,8 @@ COORDINATOR work package "Mentor sheet v3" (2026-11-03). **No model call. Nothin
 | | |
 | --- | --- |
 | Branch | `work/meeting-2026-10-22`, from head `cc80e25` |
-| **Build commit** | __BUILD__: corrections v1a, manifest, modules, scripts, tests, the edits v3, the support map v3, the overlay record v1a, the workbook v3 CSV (rebuilt in place), the mentor `.md` (in place) and checks v3, docs |
-| **Evidence runs** | __RUNS__ |
+| **Build commit** | **`421463a`**: corrections v1a, manifest, modules, scripts, tests, the edits v3, the support map v3, the overlay record v1a, the workbook v3 CSV (rebuilt in place), the mentor `.md` (in place) and checks v3, docs |
+| **Evidence runs** | at `421463a`, **`git_dirty: false`**: `reports/runs/20261104T003405Z_local_apply_provenance_corrections`, `…003406Z_local_build_p2b_items_review_v3`, `…003406Z_local_build_mentor_pilot_items`; every tracked output byte-identical to the build |
 | Remote | pushed at the end of the package (authorized) |
 
 ## 39. Data and checksums
@@ -787,7 +787,7 @@ Notes kept for the reviewer (not support questions): 0003's feedback clause is o
 passage does not say whether California counts as "southern latitudes"; 0010 still gives no table value for the moderate
 scenario its question names (its pattern is RCP8.5 only).
 
-**Validation.** __VALIDATION__
+**Validation.** `pytest`: **1,534 passed, 2 skipped** (the two pre-existing `jsonschema` skips); new `tests/test_mentor_v3.py` (10); `tests/test_mentor_v2.py` v2 mentor `.md` and workbook CSV tests now compare with the files at `7825fcf`. Secrets and paths scan: 0 hits.
 
 ## 42. Escalations
 
