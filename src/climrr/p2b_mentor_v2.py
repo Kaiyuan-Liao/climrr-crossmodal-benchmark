@@ -52,6 +52,7 @@ POLARIS_COMMAND = ('cd "$LITCOLLECT_ROOT_POLARIS" && PYTHONPATH="$CLIMRR_REPO/sr
                    'litstatements as ls; c = ls.load_provenance_corrections()[0]; print(json.dumps(ls.reslice_correction(c, '
                    'open("sources/full_705k_v2_filtered/98/199098498.json", "rb").read())))\'')
 CORRECTED_NOTE = "passage corrected by reviewer verification (D-057); the agent's original passage is kept in provenance"
+STATEMENT_NOTE = " (statement corrected, D-057)"
 ADDED_NOTE = "in the item's packet; cited by the edited answer, not by the generated item"
 README_V2_LINES = mx.README_LINES + [
     ["Papers citing earlier work",
@@ -235,8 +236,11 @@ def table_side_v2(it: dict, d2: dict) -> str:
     return "\n".join(lines + [descriptor_line(d2)])
 
 
-def paper_cells_v2(it: dict, smap: dict, corrections: list[dict], reslices: dict) -> tuple[str, str]:
-    """(Paper side, Original passages) from support map v2, checked against the packet, with the D-057 overlay."""
+def paper_cells_v2(it: dict, smap: dict, corrections: list[dict], reslices: dict,
+                   label_overrides: list[dict] | None = None) -> tuple[str, str]:
+    """(Paper side, Original passages) from support map v2, checked against the packet, with the D-057 overlay.
+    Mentor sheet v3: `label_overrides` (D-058) put the reviewer label on the Paper side with the agent's label after it in
+    `<small>`, and a corrected statement (v1a) replaces the member's paraphrase, marked; the passages are unchanged."""
     if smap.get("table_only"):
         _check(not smap["groups"], f"{it['item_id']}: a table-only item lists groups")
         return "none — table-only item (pattern identification)", "none"
@@ -244,6 +248,7 @@ def paper_cells_v2(it: dict, smap: dict, corrections: list[dict], reslices: dict
     canon = li.canonical_map(json.loads(li.INDEPENDENCE_PATH.read_text(encoding="utf-8")))
     packet = s2.packet_for_item(it)
     groups = {g["group_id"]: g for g in packet["provenance"]["groups"]}
+    shown = {g["group_id"]: g for g in ls.apply_group_label_overrides(list(groups.values()), label_overrides or [])}
     tagged = it["review"]["history"][0]["reference_answer_tagged"]
     cited = {g for s in tagged["literature_interpretation"] for g in s["group_ids"]}
     ing, raw = mx._statements()
@@ -261,9 +266,12 @@ def paper_cells_v2(it: dict, smap: dict, corrections: list[dict], reslices: dict
         papers_used = sorted({m["paper_item_id"] for m in used})
         of_them = (f"; the statement{'s' if len(used) > 1 else ''} used come{'s' if len(used) == 1 else ''} from "
                    f"{len(papers_used)} of them") if g["n_papers"] > 1 else ""
-        side.append(f"{g['label'] or used[0]['statement']} — {mx.strength_words(strength['strength_after'], g['n_papers'])}{of_them}"
+        lo = shown[gid].get("label_override")
+        label = f"{shown[gid]['label']} <small>(agent label: {lo['agent_label']})</small>" if lo else g["label"] or used[0]["statement"]
+        side.append(f"{label} — {mx.strength_words(strength['strength_after'], g['n_papers'])}{of_them}"
                     + (f" ({ADDED_NOTE})" if added else ""))
-        side += [f"  - {m['statement']} (paper {m['paper_item_id']})" for m in used]
+        side += [f"  - {m['statement']}{STATEMENT_NOTE if 'original_statement' in m.get('provenance_correction', {}) else ''} "
+                 f"(paper {m['paper_item_id']})" for m in ls.apply_provenance_corrections(used, corrections, reslices)]
         passages.append(f"[{g['label'] or gid}]")
         for m in used:
             rec = raw[ing[m["statement_id"]]["agent_statement_id"]]

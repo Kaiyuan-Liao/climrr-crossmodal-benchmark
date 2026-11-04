@@ -31,6 +31,11 @@ from climrr.manifest import load_entry
 MENTOR_IDS = ["BI-P2B-0001", "BI-P2B-0003", "BI-P2B-0006", "BI-P2B-0007", "BI-P2B-0010"]
 CID = "LS-199098498-04"
 GID = "LG-extreme_heat_v1-driver-c1-008"
+V2_BUILD = "7825fcf"  # the mentor sheet v2 build; the workbook v3 CSV and the mentor Markdown are rebuilt in place by v3
+
+
+def _rel(path):
+    return path.relative_to(mx.REPO_ROOT).as_posix()
 
 
 @pytest.fixture(scope="module")
@@ -245,10 +250,12 @@ def test_support_map_v2_and_checks():
 
 
 def test_items_csv_v3_rebuilds(applied):
+    # the tracked CSV carries the v3 texts since the mentor sheet v3 package (tests/test_mentor_v3.py); the v2-text build is
+    # compared with the file as committed at the mentor sheet v2 build 7825fcf
     man2, man3, index, items, packets, lint, notes, item_sha = rv.inputs_v2()
     sheets = rv.workbook_sheets_v3(man2, man3, index, items, packets, lint, notes, item_sha, m2.edits_v2(), applied)
     rows = next(r for n, r, _ in sheets if n == "ITEMS")
-    assert rv.items_csv(rows) == rv.ITEMS_CSV_V3_PATH.read_text(encoding="utf-8")
+    assert rv.items_csv(rows) == s2.git_blob(V2_BUILD, _rel(rv.ITEMS_CSV_V3_PATH)).decode("utf-8")
     h = rows[0]
     assert [r[0] for r in rows[1:] if r[h.index(rv.EDIT_ORIGIN_COL)] == "coordinator_proposed_v2"] == MENTOR_IDS
     assert all(r[h.index("kaiyuan_disposition")] == "" for r in rows[1:])            # nothing confirmed, nothing frozen
@@ -263,7 +270,7 @@ def test_mentor_md_v2_rebuilds(current, corrections, applied):
     descs = m2.descriptors_v2(items, list(ed))
     rows = m2.mentor_rows_v2(items, ed, smap, corrections, applied["reslices"], descs)
     md = m2.render_md_v2(rows)
-    assert md == mx.MENTOR_MD_PATH.read_text(encoding="utf-8")
+    assert md == s2.git_blob(V2_BUILD, _rel(mx.MENTOR_MD_PATH)).decode("utf-8")  # the tracked Markdown is v3 since then
     assert "provenance note" not in md and md.count(m2.CORRECTED_NOTE) == 4
     assert corrections[0]["original_passage"] not in md and md.count(corrections[0]["corrected_passage"]) == 4
     assert m2.README_V2_LINES[:-1] == mx.README_LINES and "one study, citing earlier work" in m2.README_V2_LINES[-1][1]

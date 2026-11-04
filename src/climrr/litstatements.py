@@ -89,6 +89,13 @@ is not on this machine the overlay records `reslice: pending_polaris` and null
 offsets. On Polaris, from the litcollect root at the pushed commit:
 
     PYTHONPATH="$CLIMRR_REPO/src" python -c 'import json; from climrr import litstatements as ls; c = ls.load_provenance_corrections()[0]; print(json.dumps(ls.reslice_correction(c, open("sources/full_705k_v2_filtered/98/199098498.json", "rb").read())))'
+
+**Corrections v1a (D-057 closed, D-058).** `provenance_corrections_v1a.yaml`
+records that re-slice as run on Polaris (`recorded_reslice`), a
+`corrected_statement` (the overlay replaces the statement text and keeps the
+agent's as `original_statement`; `statement_type` is not changed), and
+`group_label_overrides`, applied by `apply_group_label_overrides` (the agent's
+label kept).
 """
 
 from __future__ import annotations
@@ -106,6 +113,9 @@ AGENT_PATH = REPO_ROOT / "scripts" / "litcollect" / "litstatement_agent.py"
 GENERATOR_VERSION = "litstatement_agent v3"
 PASS = "deterministic_pass"
 CORRECTIONS_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "provenance_corrections_v1.yaml"
+CORRECTIONS_V1A_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "provenance_corrections_v1a.yaml"
+RESLICE_FIELDS = ("reslice", "json_path", "section_idx", "span_start", "span_end", "occurrences", "original_reslices",
+                  "paper_sha256_match")
 RESLICE_PENDING = "pending_polaris"
 
 
@@ -132,8 +142,8 @@ def to_support(record: dict, independence_note: str) -> dict:
 # --- provenance corrections (D-057) ---------------------------------------------------------------------------
 
 
-def load_provenance_corrections(path: Path | str = CORRECTIONS_PATH, manifest_path: Path | str | None = None) -> list[dict]:
-    """The correction records, read only when the file's bytes match the manifest pin."""
+def load_corrections_doc(path: Path | str = CORRECTIONS_PATH, manifest_path: Path | str | None = None) -> dict:
+    """The whole corrections file, read only when its bytes match the manifest pin."""
     from climrr.checksums import sha256_file
     from climrr.manifest import load_entry
 
@@ -141,7 +151,26 @@ def load_provenance_corrections(path: Path | str = CORRECTIONS_PATH, manifest_pa
     pin = load_entry(path.name, manifest_path)["sha256"]
     if sha256_file(path) != pin:
         raise ValueError(f"{path.name} differs from its manifest pin {pin}")
-    return yaml.safe_load(path.read_text(encoding="utf-8"))["corrections"]
+    return yaml.safe_load(path.read_text(encoding="utf-8"))
+
+
+def load_provenance_corrections(path: Path | str = CORRECTIONS_PATH, manifest_path: Path | str | None = None) -> list[dict]:
+    """The correction records, read only when the file's bytes match the manifest pin."""
+    return load_corrections_doc(path, manifest_path)["corrections"]
+
+
+def load_group_label_overrides(path: Path | str = CORRECTIONS_V1A_PATH, manifest_path: Path | str | None = None) -> list[dict]:
+    """The `group_label_overrides` section (v1a on; D-058), read only when the file's bytes match the manifest pin."""
+    return load_corrections_doc(path, manifest_path).get("group_label_overrides") or []
+
+
+def recorded_reslice(c: dict) -> dict | None:
+    """The re-slice a reviewer ran and recorded in the correction (v1a on: `verified_on`), in `reslice_correction`'s
+    shape, or None when the record carries none."""
+    if "reslice" not in c:
+        return None
+    return {"statement_id": c["statement_id"], **{k: c[k] for k in RESLICE_FIELDS}, "verified_on": c["verified_on"],
+            "source": "recorded in the corrections file"}
 
 
 def reslice_correction(c: dict, paper_bytes: bytes) -> dict:
@@ -171,12 +200,15 @@ def reslice_correction(c: dict, paper_bytes: bytes) -> dict:
     return out
 
 
-def apply_provenance_corrections(records: list[dict], corrections: list[dict], reslices: dict | None = None) -> list[dict]:
+def apply_provenance_corrections(records: list[dict], corrections: list[dict], reslices: dict | None = None,
+                                 correction_file: str = CORRECTIONS_PATH.name) -> list[dict]:
     """Copies of `records` (statement records: `statements_ingested.jsonl`, or packet / group members) with each
     correction applied: `verbatim_passage`, the passage type and the evidence location replaced, the original kept under
     `provenance_correction`. `reslices` = {statement_id: `reslice_correction` result}; without one the offsets are null
     and `reslice` is pending_polaris. A record whose passage is neither the original nor the corrected one is an error.
-    Records without a correction are returned unchanged (copied)."""
+    A correction with a `corrected_statement` (v1a on) also replaces the statement text (`statement`, or
+    `proposal.statement`), keeping the original as `provenance_correction.original_statement`; the record's
+    `statement_type` is not changed. Records without a correction are returned unchanged (copied)."""
     by_id = {c["statement_id"]: c for c in corrections}
     reslices = reslices or {}
     out = []
@@ -206,11 +238,37 @@ def apply_provenance_corrections(records: list[dict], corrections: list[dict], r
         for k in ("json_path", "span_start", "span_end"):
             if k in r:
                 r[k] = loc[k]
+        prior = r.get("provenance_correction") or {}
         r["provenance_correction"] = {
-            "decision": "D-057", "correction_file": CORRECTIONS_PATH.name, "statement_id": c["statement_id"],
+            "decision": "D-057", "correction_file": correction_file, "statement_id": c["statement_id"],
             "original_passage": c["original_passage"], "original_passage_type": c["original_passage_type"],
             "original_evidence": c["original_evidence"], "original_recovery": c.get("original_recovery"),
             "reslice": rs["reslice"] if rs else RESLICE_PENDING, "verified_by": c["verified_by"], "method": c["method"],
             "reason": c["reason"]}
+        if c.get("corrected_statement"):
+            holder = r["proposal"] if "proposal" in r else r
+            if "statement" in holder:
+                original = prior.get("original_statement", holder["statement"])
+                holder["statement"] = c["corrected_statement"]
+                r["provenance_correction"]["original_statement"] = original
+            r["provenance_correction"]["corrected_statement_type"] = c["corrected_statement_type"]
         out.append(r)
+    return out
+
+
+def apply_group_label_overrides(groups: list[dict], overrides: list[dict]) -> list[dict]:
+    """Copies of `groups` (group-file records or packet groups) with each reviewer label override applied (D-058): `label`
+    replaced, the agent's label kept as `label_override.agent_label`. A group whose label is neither the override's
+    `agent_label` nor its label is an error. Groups without an override are returned unchanged (copied)."""
+    by_id = {o["group_id"]: o for o in overrides}
+    out = []
+    for g in groups:
+        g = copy.deepcopy(g)
+        o = by_id.get(g.get("group_id"))
+        if o is not None:
+            if g.get("label") not in (o["agent_label"], o["label"]):
+                raise ValueError(f"{o['group_id']}: the group's label is neither the agent label nor the override")
+            g["label"] = o["label"]
+            g["label_override"] = {"decision": o["decision"], "origin": o["origin"], "agent_label": o["agent_label"]}
+        out.append(g)
     return out

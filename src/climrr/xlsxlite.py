@@ -2,7 +2,8 @@
 
 Writes inline-string and number cells, a bold frozen header row, an autofilter and
 fixed column widths; nothing else (no formulas, styles beyond bold + wrap, or
-shared strings). Deterministic: the zip entries carry a fixed timestamp, so the same
+shared strings). A `Rich` cell is an inline string of runs, each plain or small
+(mentor sheet v3: the agent's group label after a reviewer label). Deterministic: the zip entries carry a fixed timestamp, so the same
 sheets give the same bytes. Used instead of adding a spreadsheet library to the
 pinned environment.
 """
@@ -17,6 +18,14 @@ from xml.sax.saxutils import escape
 _FIXED_TIME = (2026, 1, 1, 0, 0, 0)
 _ILLEGAL = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f]")
 MAX_CELL = 32767  # Excel's per-cell character limit
+SMALL_PT = 8
+
+
+class Rich(tuple):
+    """An inline rich-text cell: a tuple of (text, small) runs."""
+
+    def text(self) -> str:
+        return "".join(t for t, _ in self)
 
 
 def _col(i: int) -> str:
@@ -35,6 +44,11 @@ def _cell(ref: str, v, style: int) -> str:
         v = "true" if v else "false"
     if isinstance(v, (int, float)):
         return f'<c r="{ref}" s="{style}"><v>{v}</v></c>'
+    if isinstance(v, Rich):
+        small_pr = f'<rPr><sz val="{SMALL_PT}"/></rPr>'
+        runs = "".join(f'<r>{small_pr if small else ""}<t xml:space="preserve">{escape(_ILLEGAL.sub("", t))}</t></r>'
+                       for t, small in v)
+        return f'<c r="{ref}" t="inlineStr" s="{style}"><is>{runs}</is></c>'
     text = _ILLEGAL.sub("", str(v))[:MAX_CELL]
     return f'<c r="{ref}" t="inlineStr" s="{style}"><is><t xml:space="preserve">{escape(text)}</t></is></c>'
 

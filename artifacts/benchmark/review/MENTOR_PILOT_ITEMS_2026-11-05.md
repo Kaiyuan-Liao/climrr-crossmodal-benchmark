@@ -1,6 +1,6 @@
 # Pilot items for mentor review --- 2026-11-05
 
-Five pilot benchmark items. Question and reference answer are COORDINATOR-proposed edits (v2, 2026-11-03), not yet frozen. Same content as `MENTOR_PILOT_ITEMS_2026-11-05.xlsx` (sheets ITEMS and README).
+Five pilot benchmark items. Question and reference answer are COORDINATOR-proposed edits (v3, 2026-11-03), not yet frozen. Same content as `MENTOR_PILOT_ITEMS_2026-11-05.xlsx` (sheets ITEMS and README).
 
 ## README
 
@@ -52,7 +52,7 @@ How is the summer frequency of days with a dangerous heat index (above 95 °F) e
 
 ### Reference answer
 
-California is projected to see a moderate increase (about half again as many) in summer days with a dangerous heat index (above 95 °F) by mid-century (2045–2054) under RCP8.5, one high-emissions scenario. Warming is the main driver: one study, citing earlier CMIP5 work, identifies large-scale warming rather than changes in regional circulation as the primary driver of future changes in extreme heat, and global warming is expected to increase the frequency, intensity and duration of heat waves. One study suggests that land–atmosphere feedbacks appear to be a stronger factor in sustaining heat waves in the Southwest.
+California is projected to see a moderate increase (about half again as many) in summer days with a dangerous heat index (above 95 °F) by mid-century (2045–2054) under RCP8.5, one high-emissions scenario. Warming drives the change: one study, citing earlier CMIP5 work, identifies large-scale warming rather than changes in regional circulation as the primary driver of future changes in extreme heat, and global warming is expected to increase the frequency, intensity and duration of heat waves. One study suggests that land–atmosphere feedbacks appear to be a stronger factor in sustaining heat waves at southern latitudes.
 
 ### Table side
 
@@ -72,8 +72,8 @@ California is projected to see a moderate increase (about half again as many) in
 
 ### Paper side
 
-- Observed increase in heat‑wave and drought frequency — supported by 4 independent papers; the statements used come from 2 of them
-    - Large‑scale warming, rather than changes in regional atmospheric circulation, is identified as the primary driver of future increases in extreme heat index days. (paper 199098498)
+- Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat <small>(agent label: Observed increase in heat‑wave and drought frequency)</small> — supported by 4 independent papers; the statements used come from 2 of them
+    - Citing Schoof et al. (2019), the paper reports that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat. (statement corrected, D-057) (paper 199098498)
     - Land-atmosphere feedbacks are a stronger factor for heat wave maintenance at southern latitudes, and misrepresentation of these feedbacks in models leads to poor forecast skill in the Southwest United States. (paper 158091651)
 - global warming increases heatwave frequency and intensity — supported by 4 independent papers; the statements used come from 4 of them (in the item's packet; cited by the edited answer, not by the generated item)
     - Projected climate warming is expected to increase the frequency, intensity, and duration of heatwaves, thereby elevating heat‑stress risk. (paper 14006228)
@@ -127,8 +127,8 @@ In Alabama, summer days with a dangerous heat index (above 105 °F) are projecte
     - Climate change is causing heat waves to occur more often and with greater intensity. (paper 235602877)
     - Anthropogenic global warming is expected to increase both the mean annual temperature and the frequency of heat events. (paper 221504407)
     - Global warming is expected to increase the frequency of extreme heat events, raising heat exposure for agricultural workers. (paper 199381463)
-- Observed increase in heat‑wave and drought frequency — supported by 2 independent papers; the statement used comes from 1 of them
-    - Large‑scale warming, rather than changes in regional atmospheric circulation, is identified as the primary driver of future increases in extreme heat index days. (paper 199098498)
+- Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat <small>(agent label: Observed increase in heat‑wave and drought frequency)</small> — supported by 2 independent papers; the statement used comes from 1 of them
+    - Citing Schoof et al. (2019), the paper reports that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat. (statement corrected, D-057) (paper 199098498)
 - heat index combines temperature and humidity as a perceived‑heat metric — review-supported (11 papers); the statements used come from 2 of them (in the item's packet; cited by the edited answer, not by the generated item)
     - The heat index combines temperature and relative humidity to represent perceived temperature and underlies US National Weather Service heat advisories. (paper 199098498)
     - The heat index, also known as the apparent temperature, is a metric that combines air temperature and relative humidity to give an accurate representation of how hot it feels to the human body. (paper 269945312)
@@ -188,8 +188,8 @@ By mid-century (2045–2054) under RCP8.5, one high-emissions scenario, summer d
 
 ### Paper side
 
-- Observed increase in heat‑wave and drought frequency — supported by 3 independent papers; the statements used come from 2 of them
-    - Large‑scale warming, rather than changes in regional atmospheric circulation, is identified as the primary driver of future increases in extreme heat index days. (paper 199098498)
+- Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat <small>(agent label: Observed increase in heat‑wave and drought frequency)</small> — supported by 3 independent papers; the statements used come from 2 of them
+    - Citing Schoof et al. (2019), the paper reports that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat. (statement corrected, D-057) (paper 199098498)
     - Land-atmosphere feedbacks are a stronger factor for heat wave maintenance at southern latitudes, and misrepresentation of these feedbacks in models leads to poor forecast skill in the Southwest United States. (paper 158091651)
 - global warming increases heatwave frequency and intensity — supported by 4 independent papers; the statements used come from 4 of them (in the item's packet; cited by the edited answer, not by the generated item)
     - Projected climate warming is expected to increase the frequency, intensity, and duration of heatwaves, thereby elevating heat‑stress risk. (paper 14006228)
@@ -222,7 +222,7 @@ How is the number of summer days with a dangerous heat index (above 95 °F) in F
 
 ### Reference answer
 
-Under RCP8.5, one high-emissions scenario, Florida's summer days with a dangerous heat index (above 95 °F) are projected to roughly triple by mid-century (2045–2054). Warming is the main driver: global warming is expected to raise heat-wave frequency, intensity and duration, and one study, citing earlier CMIP5 work, identifies large-scale warming rather than regional circulation change as the primary driver of future changes in extreme heat; one study suggests that humidity's magnifying effect on heat stress grows with temperature. The change is scenario-dependent: one study of the eastern United States reports heat-wave duration almost one day longer under RCP8.5 than under the moderate RCP4.5 scenario. RCP8.5 should be read as one plausible high-emissions future, not a forecast.
+Under RCP8.5, one high-emissions scenario, Florida's summer days with a dangerous heat index (above 95 °F) are projected to roughly triple by mid-century (2045–2054). Warming drives the change: global warming is expected to raise heat-wave frequency, intensity and duration, and one study, citing earlier CMIP5 work, identifies large-scale warming rather than regional circulation change as the primary driver of future changes in extreme heat; one study suggests that humidity's magnifying effect on heat stress grows with temperature. Projections differ between emissions pathways: one study reports heat-wave duration almost one day longer under RCP8.5 than under the moderate RCP4.5 scenario. RCP8.5 should be read as one plausible high-emissions future, not a forecast.
 
 ### Table side
 
@@ -247,8 +247,8 @@ Under RCP8.5, one high-emissions scenario, Florida's summer days with a dangerou
     - Climate change is causing heat waves to occur more often and with greater intensity. (paper 235602877)
     - Anthropogenic global warming is expected to increase both the mean annual temperature and the frequency of heat events. (paper 221504407)
     - Global warming is expected to increase the frequency of extreme heat events, raising heat exposure for agricultural workers. (paper 199381463)
-- Observed increase in heat‑wave and drought frequency — supported by 2 independent papers; the statement used comes from 1 of them
-    - Large‑scale warming, rather than changes in regional atmospheric circulation, is identified as the primary driver of future increases in extreme heat index days. (paper 199098498)
+- Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat <small>(agent label: Observed increase in heat‑wave and drought frequency)</small> — supported by 2 independent papers; the statement used comes from 1 of them
+    - Citing Schoof et al. (2019), the paper reports that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat. (statement corrected, D-057) (paper 199098498)
 - humidity magnifies heat stress and its effect grows with temperature — single study (1 paper)
     - The magnifying effect of relative humidity on heat stress grows with increasing temperature, so that even unchanged or lower humidity can cause greater discomfort at higher temperatures. (paper 239996006)
 - heat‑wave frequency, intensity and duration are projected to increase — single study (1 paper)

@@ -348,26 +348,39 @@ def workbook_sheets_v2(man2: dict, man3: dict, index: dict, items: list[dict], p
 WORKBOOK_V3_PATH = REVIEW_DIR / "P2b_items_review_v3.xlsx"
 ITEMS_CSV_V3_PATH = REVIEW_DIR / "P2b_items_review_v3.csv"
 
-LEGEND_V3 = [r for r in LEGEND_V2 if r[0] != "edit_origin"] + [
-    ["edit_origin", "coordinator_proposed_v2: the edited_prompt / edited_reference_integrated cells hold the COORDINATOR's proposed "
-                    "texts v2 (2026-11-03), not yet confirmed; empty: no edit proposed"],
-    ["provenance_corrections_applied", "D-057: statements whose verbatim passage a reviewer corrected "
-                                       "(data/metadata/benchmark/provenance_corrections_v1.yaml); applied as an overlay, the item "
-                                       "files are unchanged (artifacts/litstatements/corrections/provenance_corrections_v1_applied.json)"],
-]
+# Mentor sheet v3 package (2026-11-03): the same workbook v3, rebuilt in place with the COORDINATOR texts v3
+# (`texts="v3"`, edit_origin = coordinator_proposed_v3) and the corrections v1a overlay; the defaults give the v2-text build.
+
+
+def legend_v3(texts: str = "v2", corrections: str = "provenance_corrections_v1") -> list[list]:
+    return [r for r in LEGEND_V2 if r[0] != "edit_origin"] + [
+        ["edit_origin", f"coordinator_proposed_{texts}: the edited_prompt / edited_reference_integrated cells hold the COORDINATOR's "
+                        f"proposed texts {texts} (2026-11-03), not yet confirmed; empty: no edit proposed"],
+        ["provenance_corrections_applied", "D-057: statements whose verbatim passage a reviewer corrected "
+                                           f"(data/metadata/benchmark/{corrections}.yaml); applied as an overlay, the item "
+                                           f"files are unchanged (artifacts/litstatements/corrections/{corrections}_applied.json)"],
+    ]
+
+
+LEGEND_V3 = legend_v3()
 
 
 def workbook_sheets_v3(man2: dict, man3: dict, index: dict, items: list[dict], packets: dict, lint: dict, notes: dict,
-                       item_sha: dict, edits: dict, applied: dict) -> list[tuple]:
+                       item_sha: dict, edits: dict, applied: dict, texts: str = "v2") -> list[tuple]:
     sheets = dict((name, (rows, widths)) for name, rows, widths in
                   workbook_sheets_v2(man2, man3, index, items, packets, lint, notes, item_sha, edits))
+    corrections = Path(applied["corrections_file"]["path"]).stem
     ov = [r for r in sheets["OVERVIEW"][0] if r[0] != "COORDINATOR-proposed edits"]
-    ov += [["COORDINATOR-proposed edits v2", f"{len(edits)} items ({', '.join(edits)}): edited_prompt and edited_reference_integrated, "
-                                             "edit_origin = coordinator_proposed_v2; recorded, not frozen (Kaiyuan confirms or rewrites)"],
+    ov += [[f"COORDINATOR-proposed edits {texts}", f"{len(edits)} items ({', '.join(edits)}): edited_prompt and edited_reference_integrated, "
+                                                   f"edit_origin = coordinator_proposed_{texts}; recorded, not frozen (Kaiyuan confirms or rewrites)"],
            ["provenance corrections (D-057)", "; ".join(f"{c['statement_id']} reslice {c['reslice']}" for c in applied["reslices"].values())
             + "; applied to " + ", ".join(x["item_id"] for x in applied["items"]) + " (overlay; item files unchanged)"]]
+    ov += [["group label overrides (D-058)", "; ".join(f"{o['group_id']}: reviewer label '{o['label']}' (agent label '{o['agent_label']}')"
+                                                       for o in applied["group_label_overrides"]) + " (overlay; mentor sheet only)"]
+           ] if applied.get("group_label_overrides") else []
+    legend = legend_v3(texts, corrections)
     out = []
     for name in ("OVERVIEW", "ITEMS", "PROVENANCE", "GROUPS_CITED", "LINT", "Legend"):
         rows, widths = sheets[name]
-        out.append((name, ov if name == "OVERVIEW" else LEGEND_V3 if name == "Legend" else rows, widths))
+        out.append((name, ov if name == "OVERVIEW" else legend if name == "Legend" else rows, widths))
     return out

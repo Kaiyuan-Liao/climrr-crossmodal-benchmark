@@ -3008,3 +3008,52 @@ code emits, and the next GUIDANCE packet still chooses.
   "common" would overstate; no pilot item has one, and no guard was added.
 - **Affected files:** `data/metadata/benchmark/descriptor_rules_v2.yaml`, `data/manifest.json`,
   `src/climrr/pattern_descriptors.py`, `docs/PILOT_P2B_DESIGN.md` section 15, tests.
+
+## D-057 (closed) --- Re-slice verified on Polaris; corrected statement; corrections v1a
+
+- **Date:** 2026-11-03.
+- **Status:** **closed** (COORDINATOR, 2026-11-03; work package "Mentor sheet v3", section A). Re-slice run by Kaiyuan on
+  Polaris.
+- **Context.** D-057 left the corrected passage of `LS-199098498-04` at `reslice: pending_polaris` (the paper is not on
+  this machine) and kept the agent's paraphrase as the statement text.
+- **Decision.** Record in `data/metadata/benchmark/provenance_corrections_v1a.yaml` (v1 kept unchanged; new hash pinned):
+  `reslice: exact`, `json_path: "$.late century results"`, `section_idx: 8`, `span_start: 4602`, `span_end: 5001`,
+  `occurrences: 1`, `original_reslices: true`, `paper_sha256_match: true`, `verified_on: polaris, 2026-11-03, Kaiyuan`;
+  `corrected_statement: "Citing Schoof et al. (2019), the paper reports that large-scale warming, rather than changes in
+  regional circulation, is the primary driver of future changes in extreme heat."`, `corrected_statement_type:
+  cited_finding` (overlay only; the statements file is immutable). The `*_applied.json` record lists where each overlay is
+  used.
+- **Recorded (EXECUTOR).** v1a SHA-256 `d56cbe5e0c4feaffd8398126953c8437416967b2fbc382d5da907e88081ebd93`. Consistency
+  checked here: the span length is the corrected passage's (399 characters), and it starts one character after the
+  original passage's end (4601), in the same section. The overlay takes the recorded re-slice, and on a machine holding the
+  paper it would also re-slice locally and require agreement. The corrected statement replaces `statement` (packet members)
+  or `proposal.statement` (statement records), the agent's text kept as `provenance_correction.original_statement`.
+  **Reading for confirmation:** `corrected_statement_type: cited_finding` is a passage-type value; the statement record's
+  `statement_type` (vocabulary mechanism / driver / consensus / caveat / pattern; here `driver`) is **not** changed, and
+  the value is carried as `provenance_correction.corrected_statement_type`. `LG-extreme_heat_v1-driver-c1-008` stays
+  `multi_source_supported` (group file and all 8 packets). Overlay record
+  `artifacts/litstatements/corrections/provenance_corrections_v1a_applied.json` (the v1 record kept as built). Support
+  map v3: the `conditional_on` re-slice marks are removed.
+- **Affected files:** `data/metadata/benchmark/provenance_corrections_v1a.yaml`, `data/manifest.json`,
+  `src/climrr/litstatements.py`, `src/climrr/p2b_mentor_v3.py`, `scripts/apply_provenance_corrections.py`, tests.
+
+## D-058 --- Group label overrides are reviewer overlays
+
+- **Date:** 2026-11-03.
+- **Status:** **decided** (COORDINATOR, 2026-11-03; work package "Mentor sheet v3", sections A and D).
+- **Context.** The agent's label of `LG-extreme_heat_v1-driver-c1-008`, "Observed increase in heat‑wave and drought
+  frequency", does not describe its members (the label check had already flagged `drought`, `frequency`, `observed` as
+  words not in the members); after the D-057 correction the group is about drivers of extreme heat.
+- **Decision.** A reviewer may override a group's label. The override is an overlay: a `group_label_overrides` section in
+  the provenance corrections file (v1a on), each with `group_id`, `label`, `agent_label` (kept) and `origin: reviewer`; the
+  groups file, the packets and the item files are unchanged. First override: `LG-extreme_heat_v1-driver-c1-008` ->
+  "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat". The mentor sheet shows the reviewer
+  label with "(agent label: ...)" in small text after it.
+- **Recorded (EXECUTOR).** Applied by `climrr.litstatements.apply_group_label_overrides` (a group whose label is neither
+  the agent label nor the override is refused). Used on the mentor sheet's Paper side only (items 0003, 0006, 0007, 0010);
+  the Original passages headings keep the agent label (the work package: passages unchanged), and the review workbook names
+  the override on OVERVIEW only. In 0006 and 0010 the group contributes only the 199098498 statement, so the label's
+  "land–atmosphere feedbacks" part rests on a member those items do not use.
+- **Affected files:** `data/metadata/benchmark/provenance_corrections_v1a.yaml`, `src/climrr/litstatements.py`,
+  `src/climrr/p2b_mentor_v2.py`, `src/climrr/p2b_mentor_v3.py`, `src/climrr/p2b_items_review.py`, `src/climrr/xlsxlite.py`,
+  tests.

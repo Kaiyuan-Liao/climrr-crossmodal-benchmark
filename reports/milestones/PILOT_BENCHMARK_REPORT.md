@@ -721,3 +721,83 @@ the table used here" are fixed.
 
 Nothing is frozen; `final_frozen` is null for every item; the packets are v1-descriptor packets. The support map v2 is one
 reader's judgement (EXECUTOR).
+
+# Mentor sheet v3 --- final for 2026-11-05: re-slice record, corrected statement, label override, wording v3
+
+COORDINATOR work package "Mentor sheet v3" (2026-11-03). **No model call. Nothing frozen.** Decisions D-057 (closed), D-058.
+
+## 38. Commits and evidence runs
+
+| | |
+| --- | --- |
+| Branch | `work/meeting-2026-10-22`, from head `cc80e25` |
+| **Build commit** | __BUILD__: corrections v1a, manifest, modules, scripts, tests, the edits v3, the support map v3, the overlay record v1a, the workbook v3 CSV (rebuilt in place), the mentor `.md` (in place) and checks v3, docs |
+| **Evidence runs** | __RUNS__ |
+| Remote | pushed at the end of the package (authorized) |
+
+## 39. Data and checksums
+
+| Object | SHA-256 | Notes |
+| --- | --- | --- |
+| **`data/metadata/benchmark/provenance_corrections_v1a.yaml`** | **`d56cbe5e0c4feaffd8398126953c8437416967b2fbc382d5da907e88081ebd93`** | manifest-pinned; v1 `ea981346…82f1` unchanged |
+| `artifacts/litstatements/corrections/provenance_corrections_v1a_applied.json` | `f6075dfd5c5a9a1a71f926e9faa5b8ab892faf34824aed317af5a04936205862` | overlay record with `uses`; 0 files modified; v1 record `9bbd39d9…e3c5` kept |
+| `P2b_coordinator_edits_2026-11-03_v3.yaml` | `dba28d141d0c0e1d6e8007ddf54c4f88ecad562759d7316ad12a8d55fc3d943d` | v2 + section B's four substitutions; pinned |
+| `P2b_mentor_support_map_v3.yaml` | `933298f7a277bee895052da67b26a1be982138449777cc4cc4bb2c1469a8da9a` | EXECUTOR reading |
+| `P2b_items_review_v3.csv` (tracked) | `dcb4771d5d2a3bab3990ab6edfee56ad135bdada3ae0eddfd9632472f2aaebe4` | v3 texts; the v2-text build `39346e18…fac3` is the file at `7825fcf` |
+| `MENTOR_PILOT_ITEMS_2026-11-05_v3_checks.json` | `a093e5878236f779fb3fa2a951ae42df0bf1741c88a141e21277e746e0367fb0` | leakage v2.3, verdicts, clauses changed since v2 |
+| **`MENTOR_PILOT_ITEMS_2026-11-05.md`** | **`0b4ec7a42c0b03bbe8e6df4a7acf0adb522a788c63c47729b4819a2c244e2dc8`** | v3, final; same content as the gitignored `.xlsx`; v2 `8362d765…da22` stays in Git at `7825fcf` |
+
+## 40. Methods and readings for the COORDINATOR
+
+- **v1a is a new file** (as `group_dispositions_v1a.csv`); v1 and its overlay record stay as built. The overlay takes the
+  re-slice recorded in v1a, checks it (span length = the passage's 399 characters; starts at 4602, one past the original
+  span's end, same section; exact, unique, paper hash matching) and, where the paper is on the machine, would re-slice
+  locally and require agreement (not the case here).
+- **`corrected_statement_type: cited_finding`** is a passage-type value. The statement record's `statement_type`
+  (mechanism / driver / consensus / caveat / pattern; here `driver`) is left unchanged; the value is carried in
+  `provenance_correction.corrected_statement_type`. For confirmation.
+- **Label override on the Paper side only.** The Original passages headings keep the agent label ("passages unchanged");
+  the workbook names the override on OVERVIEW and keeps the agent label in GROUPS_CITED. In the xlsx the agent label is a
+  rich-text run at 8 pt (`xlsxlite.Rich`); in the `.md` it is `<small>`. Plain-string cells are written byte-identically.
+- **Workbook v3 rebuilt in place** with the v3 texts (the work package: "workbook v3 `edited_*` cells"); only the 0003 and
+  0010 `edited_reference_integrated` cells and the five `edit_origin` cells differ from the build at `7825fcf`.
+- **No PDF.** LibreOffice (`soffice`) is not installed on this machine; skipped.
+
+## 41. Results
+
+**Corrections v1a.** Re-slice `exact` (recorded, Polaris 2026-11-03, Kaiyuan); `…-driver-c1-008` `multi_source_supported`
+before and after (group file and all eight packets); items with `provenance_corrections_applied`: 0003--0010. Overlay uses:
+the corrected statement and passage on the mentor sheet for 0003, 0006, 0007, 0010; the reviewer label on the Paper side
+of the same four.
+
+**Leakage v2.3 on the v3 texts:** 0 hits (10 texts).
+
+**Sentence-support check v3** (27 clauses: **22 supported, 2 guardrails, 3 supported by a packet group the generated item
+does not cite, 0 partially supported, 0 not supported**). The five v2 partial clauses are replaced and read as supported:
+
+| item | v3 clause | why supported |
+| --- | --- | --- |
+| 0003 | "Warming drives the change" | warming as a driver without a ranking (`…-driver-c2-001` + the corrected passage); "primary" only in the hedged clause after it |
+| 0003 | "… a stronger factor in sustaining heat waves at southern latitudes." | the passage's own words ("heat wave maintenance at southern latitudes") |
+| 0010 | "Warming drives the change" | as 0003 |
+| 0010 | "Projections differ between emissions pathways" | a lead-in to the one study's RCP8.5 / RCP4.5 result; no longer generalised to the table quantity |
+| 0010 | "one study reports heat-wave duration almost one day longer under RCP8.5 than under the moderate RCP4.5 scenario." | verbatim result; the unverified region tag is gone |
+
+Notes kept for the reviewer (not support questions): 0003's feedback clause is one paper's forecast-skill finding, and the
+passage does not say whether California counts as "southern latitudes"; 0010 still gives no table value for the moderate
+scenario its question names (its pattern is RCP8.5 only).
+
+**Validation.** __VALIDATION__
+
+## 42. Escalations
+
+1. **`corrected_statement_type` reading** (section 40): confirm that `statement_type` stays `driver`.
+2. **`…-driver-c1-008` multi-source by rule, not by claim** (section 36, escalation 3) stands; the reviewer label names
+   land–atmosphere feedbacks, which in 0006 and 0010 rest on a member those items do not use.
+3. **Original passages headings keep the agent label** (as instructed); a one-line change if the reviewer label should
+   appear there too.
+
+## 43. Limitations
+
+Nothing is frozen; `final_frozen` is null for every item. The support map v3 is one reader's judgement (EXECUTOR). The
+re-slice is recorded from Kaiyuan's Polaris run, not reproduced on this machine.

@@ -1,6 +1,6 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-11-02   Next meeting: **Thursday 2026-11-05** --- bring the items under *For Thursday 2026-11-05* below
+Last updated: 2026-11-03   Next meeting: **Thursday 2026-11-05** --- bring the items under *For Thursday 2026-11-05* below
 
 ## Status in five lines
 
@@ -14,16 +14,23 @@ Last updated: 2026-11-02   Next meeting: **Thursday 2026-11-05** --- bring the i
 
 > ### **For Thursday 2026-11-05**
 >
-> **Review of the ten pilot items** --- the item review workbook (`P2b_items_review_v1.xlsx`): one row per item with
-> the prompt, the reference answer (table pattern, literature interpretation, integrated), the rubric, the guardrails,
-> the evidence strength of every literature group it uses, and its provenance; your columns are `mentor_disposition`
-> and `mentor_note`. In particular:
+> **Status:** 10 pilot items generated and deterministically checked; 5 prepared for review; one provenance correction
+> found and verified (entailment gap).
 >
-> 1. **Are the prompts at the right generality** for a closed-book question (state or climate region, season, horizon,
->    scenario; direction, rough size, ranking and drivers --- never an exact number)?
-> 2. **Are pattern-level rubrics acceptable** --- graded on direction, magnitude class ("roughly tripling"), region or
->    ranking, mechanism and scenario handling, with exact values kept only as provenance?
-> 3. **Still open: the FWI column confirmation** (question 0 below). The pilot has no FWI item because of it.
+> **Bring:** the mentor sheet `MENTOR_PILOT_ITEMS_2026-11-05.xlsx` (Markdown copy
+> [`MENTOR_PILOT_ITEMS_2026-11-05.md`](../artifacts/benchmark/review/MENTOR_PILOT_ITEMS_2026-11-05.md); v3, final): five
+> items, each with the question, the reference answer (COORDINATOR-proposed edits, not frozen), the table side, the paper
+> side and the original passages; README sheet first.
+>
+> 1. **Are table-only items acceptable in the benchmark?** Item 1 (Georgia) is pattern identification only, with no
+>    literature.
+> 2. **Are single-study mechanisms acceptable in a reference answer if they are labelled as single-study?** ("one study
+>    suggests ..."; a grader does not require them as consensus.)
+>
+> **Standing confirmation requests (still open):** the summer **Fire Weather Index** columns (question 0 below; IC-006 --
+> IC-010; the pilot has no FWI item because of it) and the **`State` / `NAME`** labels (IC-011, IC-012; every pilot item's
+> geography rests on the `State` label, marked provisional on the table side). A confirm / correct / don't know per
+> record is enough.
 
 > ### **For the next meeting (after 2026-10-29)**
 >

@@ -1,0 +1,49 @@
+# Reviewer-verified provenance corrections v1a (D-057 closed, D-058; mentor sheet v3 package, 2026-11-03).
+#
+# v1 (provenance_corrections_v1.yaml, kept unchanged) plus, from the COORDINATOR work package "Mentor sheet v3", section A,
+# verbatim: the Polaris re-slice of the corrected passage (run by Kaiyuan, 2026-11-03), a corrected statement for
+# LS-199098498-04, and a second overlay section, `group_label_overrides`. Everything is an overlay, applied by
+# climrr.litstatements (apply_provenance_corrections, apply_group_label_overrides): the statements file, the groups file,
+# the packets and the item files stay immutable, and every original (passage, statement, label) is kept in the overlaid
+# record.
+#
+# `corrected_statement_type` is recorded as the work package gives it. It names the corrected statement's passage-type
+# reading (cited_finding, as `corrected_passage_type`); it is not mapped onto the statement record's `statement_type`
+# (vocabulary mechanism / driver / consensus / caveat / pattern; this record: driver), which the overlay leaves unchanged.
+#
+# Pinned by SHA-256 in data/manifest.json; a change is provenance_corrections_v2.yaml (or a v1b) with its own decision.
+
+version: provenance_corrections_v1a
+supersedes: provenance_corrections_v1.yaml
+decision: D-057
+corrections:
+  - statement_id: LS-199098498-04
+    paper_item_id: "199098498"
+    paper_sha256: 945df7b916b7dd75924142fbb7d1542afa08cb36da06df37f135849d9ad15218
+    original_passage: "Identifying the climatological processes responsible for the increases in the frequency of high heat index days we identify is beyond the scope of this study."
+    original_passage_type: cited_finding
+    original_evidence: {json_path: "$.late century results", section_idx: 8, span_start: 4443, span_end: 4601}
+    original_recovery: prefix_anchor
+    corrected_passage: "However, recent work examining changes in the frequency of different types of extreme heat days (considering both temperature and humidity) in CMIP5 projections after using a multivariate quantile mapping approach similar to the MACA methodology finds that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat (Schoof et al 2019)."
+    corrected_passage_type: cited_finding
+    corrected_section_key: late century results
+    corrected_statement: "Citing Schoof et al. (2019), the paper reports that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat."
+    corrected_statement_type: cited_finding
+    verified_by: "Kaiyuan (grep of the stored paper JSON on Polaris, 2026-11-03), COORDINATOR"
+    method: "full-text search of sources/full_705k_v2_filtered/98/199098498.json"
+    reason: "agent passage did not contain the claim; the claim is the paper relaying Schoof et al. 2019"
+    reslice: exact
+    json_path: "$.late century results"
+    section_idx: 8
+    span_start: 4602
+    span_end: 5001
+    occurrences: 1
+    original_reslices: true
+    paper_sha256_match: true
+    verified_on: "polaris, 2026-11-03, Kaiyuan"
+group_label_overrides:
+  - group_id: LG-extreme_heat_v1-driver-c1-008
+    label: "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat"
+    agent_label: "Observed increase in heat‑wave and drought frequency"
+    origin: reviewer
+    decision: D-058
