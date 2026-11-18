@@ -931,7 +931,8 @@ readings. The polish synonym list is short and EXECUTOR-written: a missing synon
 
 ## 50. P3a hotfix: fire-arm dispositions, selection v2a, packets v4a (D-053b, 2026-11-18)
 
-No model call; nothing frozen; no item accepted.
+No model call; nothing frozen; no item accepted. Build `fcd5a12`; evidence run `build_synth_packets_v4a` at `fcd5a12`
+(`git_dirty: false`; `reports/runs/20261118T190951Z_local_build_synth_packets_v4a.json`), outputs byte-identical.
 
 | | |
 | --- | --- |
