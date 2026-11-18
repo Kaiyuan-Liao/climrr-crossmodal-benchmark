@@ -145,3 +145,62 @@ def row(level: int, s: dict, combo: str | None) -> dict:
             "top_named_place_statements": " || ".join(fmt(t) for t in s["top_explaining_named_place"]),
             "blockers": ";".join(b["blocker"] + ("" if b["blocks_eligibility"] else " (non-blocking)") for b in s["acceptance_blockers"]),
             "pattern_id": s["pattern"]["pattern_id"], "level3_combination": combo or ""}
+
+
+# --- FWI application of the rule (work package P3a, D-064) -------------------------------------------------------
+
+FWI_VERSION = "pilot_shortlist fwi v1"
+FWI_SHORTLIST_PATH = REPO_ROOT / "artifacts" / "benchmark" / "pilot_shortlist_fwi_v1.csv"
+FWI_METRIC, FWI_STATISTIC, FWI_HORIZONS = "fwi_summer_seasonal_value", "absolute_change", ("mid", "end")
+FWI_COLUMNS = ("seed_id", "pick", "state_or_region", "season", "horizon", "horizon_window", "scenario", "statistic", "metric",
+               "value", "direction", "best_strength", "n_relevant_explaining_core_cited_background",
+               "n_explaining_named_state_or_region", "seed_rank_key", "top_statement_1", "top_statement_2", "top_statement_3",
+               "top_named_place_statements", "working_assumptions", "pattern_id")
+
+
+def fwi_candidates(seeds: list[dict], horizon: str) -> list[dict]:
+    """Work package P3a: "two fire-weather seeds chosen by the shortlist rule (two different states, summer FWI, mid- and
+    end-century)". The level-3 rule of v1 applied to the fire-weather family (eligible v3 seeds; a single-place state
+    pattern with a relevant mechanism / driver statement; highest-ranked first). EXECUTOR choices (for confirmation): the
+    metric is the summer seasonal FWI value (the columns D-064 unblocked; a pattern with a baseline and a future mean),
+    the statistic absolute change (the first statistic of the v1 level-3 combinations), states only."""
+    return sorted((s for s in seeds if s["eligible_for_pilot"] and s["family"] == "fire_weather_index" and s["pattern_kind"] == "single"
+                   and s["geography_type"] == "state" and s["season"] == "summer" and s["metric"] == FWI_METRIC
+                   and s["statistic"] == FWI_STATISTIC and s["horizon"] == horizon and 3 in s["use_case_levels_applicable"]),
+                  key=lambda s: s["seed_rank_key"])
+
+
+def fwi_select(seeds: list[dict]) -> list[dict]:
+    """The highest-ranked mid-century candidate, then the highest-ranked end-century candidate in a different state
+    (EXECUTOR: mid first)."""
+    picks: list[dict] = []
+    for h in FWI_HORIZONS:
+        s = next((c for c in fwi_candidates(seeds, h) if c["geography"] not in {p["geography"] for p in picks}), None)
+        if s is not None:
+            picks.append(s)
+    return picks
+
+
+def fwi_row(s: dict, pick: str) -> dict:
+    fmt = lambda t: f"[{t['statement_id']}; {t['statement_type']}; {t['role']}; {t['basis']}; {t['cluster_strength']}] {t['statement']}"  # noqa: E731
+    tops = [fmt(t) for t in s["top_explaining"]]
+    e = s["n_relevant_explaining_by_role"]
+    return {"seed_id": s["seed_id"], "pick": pick, "state_or_region": place(s), "season": s["season"], "horizon": s["horizon"],
+            "horizon_window": s["horizon_window"], "scenario": s["scenario"], "statistic": s["statistic"], "metric": s["metric"],
+            "value": f"{spk.show(s['pattern']['computed_value_or_range']['value'])} (mean change, index units; baseline "
+                     f"{spk.show(s['pattern']['computed_value_or_range']['mean_from'])}, future "
+                     f"{spk.show(s['pattern']['computed_value_or_range']['mean_to'])})",
+            "direction": s["direction"], "best_strength": s["best_explaining_strength"] or "",
+            "n_relevant_explaining_core_cited_background": f"{e['core']}/{e['cited']}/{e['background']}",
+            "n_explaining_named_state_or_region": s["n_relevant_explaining_specific"], "seed_rank_key": s["seed_rank_key"],
+            **{f"top_statement_{i + 1}": tops[i] if i < len(tops) else "" for i in range(3)},
+            "top_named_place_statements": " || ".join(fmt(t) for t in s["top_explaining_named_place"]),
+            "working_assumptions": ";".join(w["id"] for w in s["working_assumptions"]), "pattern_id": s["pattern"]["pattern_id"]}
+
+
+def fwi_rows(seeds: list[dict], per_horizon: int = 5) -> list[dict]:
+    """The picks and the next candidates of each horizon (at most `per_horizon` each), for the reviewer."""
+    picked = {s["seed_id"] for s in fwi_select(seeds)}
+    return [fwi_row(s, "selected" if s["seed_id"] in picked else "candidate")
+            for h in FWI_HORIZONS for s in fwi_candidates(seeds, h)[:per_horizon]]
+

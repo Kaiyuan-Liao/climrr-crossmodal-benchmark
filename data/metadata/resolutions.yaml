@@ -37,6 +37,16 @@
 #   decision_ref   The D-number that records the decision to accept this answer.
 #   confidence     confirmed | stated_not_verified
 #   notes          (optional) EXECUTOR commentary. Affects nothing.
+#   working_assumption  (optional; D-064) {status, covers, columns_relied_on,
+#                  reading, relied_on_by}. `status` is always
+#                  `owner_authorized_working_assumption`: the owner has directed
+#                  the project to proceed on the project's documented reading
+#                  without confirming it. It is NOT a column status (the record
+#                  has `effect: null` and names no columns, so every column keeps
+#                  its status); it is not `verified_from_dictionary` and not
+#                  `owner_confirmed`. `columns_relied_on` is documentation only.
+#                  `relied_on_by` is the id artifacts cite in
+#                  `working_assumptions_relied_on`.
 #
 # Three rules the code enforces, not conventions
 # ----------------------------------------------
@@ -175,3 +185,164 @@ resolutions:
       both meetings and is authoritative about whether a review took place.
       Marked `paraphrase` because the words are the COORDINATOR's summary of
       his report, not the mentor's. What follows from it is D-014.
+
+  - id: R-004
+    date: 2026-11-13
+    source: mentor
+    source_detail: >-
+      Mentor one-on-one, 2026-11-13, after her review of the five-item sheet
+      sent 2026-11-04; point (6) of seven, relayed by Kaiyuan Liao in the
+      COORDINATOR work package P3a (2026-11-17).
+    question_ids: [Q13, Q17]
+    columns: []
+    statement: >-
+      For the meaning of other columns, go with our assumptions based on the
+      table and related files; no further confirmation needed.
+    statement_fidelity: paraphrase
+    effect: null
+    decision_ref: D-064
+    confidence: confirmed
+    working_assumption:
+      status: owner_authorized_working_assumption
+      covers: [IC-006, IC-007, IC-008, IC-009, IC-010]
+      columns_relied_on: [189, 190, 191, 192, 193]
+      reading: >-
+        The five summer Fire Weather Index columns hold the project's documented
+        reading (inferred_candidates.yaml IC-006 -- IC-010): the multi-model
+        ensemble-mean summer seasonal average daily FWI, a meteorological
+        fire-danger index and never fire occurrence; index 189 the modeled
+        historical baseline (model output, not an observation); 190 and 191 the
+        mid- and end-century values under RCP8.5; 192 and 193 the differences
+        between the mid- and end-century values and the historical baseline,
+        which the table patterns read as future minus historical (their
+        per-cell ranges).
+      relied_on_by: WA-FWI-SUMMER
+    notes: >-
+      Point (6) names no column; it directs the project to proceed on its
+      documented readings. Recorded per reading so that every artifact can name
+      the one it relies on. Columns 189--193 stay `inferred_candidate`: the
+      working assumption is not a status and this record moves none. The
+      FWI-summer table patterns' acceptance blocker (IC-006 -- IC-010) is
+      replaced by this working assumption in the item seeds v3 (D-064).
+
+  - id: R-005
+    date: 2026-11-13
+    source: mentor
+    source_detail: >-
+      Mentor one-on-one, 2026-11-13, after her review of the five-item sheet
+      sent 2026-11-04; point (6) of seven, relayed by Kaiyuan Liao in the
+      COORDINATOR work package P3a (2026-11-17).
+    question_ids: [Q10, Q16]
+    columns: []
+    statement: >-
+      For the meaning of other columns, go with our assumptions based on the
+      table and related files; no further confirmation needed.
+    statement_fidelity: paraphrase
+    effect: null
+    decision_ref: D-064
+    confidence: confirmed
+    working_assumption:
+      status: owner_authorized_working_assumption
+      covers: [IC-012]
+      columns_relied_on: [3]
+      reading: >-
+        `State` (index 3) is the full name of the U.S. state or state-equivalent
+        the row's grid cell falls in (inferred_candidates.yaml IC-012); state
+        and NCA5-region patterns select rows by it.
+      relied_on_by: WA-STATE-LABEL
+    notes: >-
+      Column 3 stays `inferred_candidate`. The IC-012 provisional-state-label
+      marker every state and region pattern carried (non-blocking, D-034) is
+      now this working assumption (D-064).
+
+  - id: R-006
+    date: 2026-11-13
+    source: mentor
+    source_detail: >-
+      Mentor one-on-one, 2026-11-13, after her review of the five-item sheet
+      sent 2026-11-04; point (6) of seven, relayed by Kaiyuan Liao in the
+      COORDINATOR work package P3a (2026-11-17).
+    question_ids: [Q10]
+    columns: []
+    statement: >-
+      For the meaning of other columns, go with our assumptions based on the
+      table and related files; no further confirmation needed.
+    statement_fidelity: paraphrase
+    effect: null
+    decision_ref: D-064
+    confidence: confirmed
+    working_assumption:
+      status: owner_authorized_working_assumption
+      covers: [IC-011]
+      columns_relied_on: [2]
+      reading: >-
+        `NAME` (index 2) is a county or county-equivalent name for the area the
+        row's grid cell falls in (inferred_candidates.yaml IC-011).
+      relied_on_by: WA-NAME-LABEL
+    notes: >-
+      Column 2 stays `inferred_candidate`. No table pattern of the pilot
+      selects rows by `NAME`; recorded because the work package lists it
+      (D-064).
+
+  - id: R-007
+    date: 2026-11-13
+    source: mentor
+    source_detail: >-
+      Mentor one-on-one, 2026-11-13, after her review of the five-item sheet
+      sent 2026-11-04; point (6) of seven, relayed by Kaiyuan Liao in the
+      COORDINATOR work package P3a (2026-11-17).
+    question_ids: []
+    columns: []
+    statement: >-
+      For the meaning of other columns, go with our assumptions based on the
+      table and related files; no further confirmation needed.
+    statement_fidelity: paraphrase
+    effect: null
+    decision_ref: D-064
+    confidence: confirmed
+    working_assumption:
+      status: owner_authorized_working_assumption
+      covers: [fwi_percent_change_scenario]
+      columns_relied_on: [180, 181, 187, 188, 194, 195, 201, 202]
+      reading: >-
+        The FWI percent-change columns (`wildfire_<season>_Pmid`, `_Pend`),
+        whose dictionary lines state no scenario, are percent changes under
+        RCP8.5, the scenario of the seasonal FWI columns they derive from.
+      relied_on_by: WA-FWI-PCT-SCENARIO
+    notes: >-
+      The columns are `verified_from_dictionary` for what the dictionary does
+      state (percent change between a horizon and the historical period) and
+      keep that status; only the unstated scenario is assumed. The table
+      patterns record their scenario as `unstated_in_dictionary`, unchanged;
+      descriptor rules v3 render it as the RCP8.5 phrase and name this
+      working assumption (D-064).
+
+  - id: R-008
+    date: 2026-11-13
+    source: mentor
+    source_detail: >-
+      Mentor one-on-one, 2026-11-13, after her review of the five-item sheet
+      sent 2026-11-04; point (6) of seven, relayed by Kaiyuan Liao in the
+      COORDINATOR work package P3a (2026-11-17).
+    question_ids: []
+    columns: []
+    statement: >-
+      For the meaning of other columns, go with our assumptions based on the
+      table and related files; no further confirmation needed.
+    statement_fidelity: paraphrase
+    effect: null
+    decision_ref: D-064
+    confidence: confirmed
+    working_assumption:
+      status: owner_authorized_working_assumption
+      covers: [unweighted_cell_mean]
+      columns_relied_on: []
+      reading: >-
+        A state or NCA5-region value is the unweighted mean over the grid-cell
+        rows the region selects, every cell counting once (the provisional
+        aggregation rule for representation validation).
+      relied_on_by: WA-UNWEIGHTED-MEAN
+    notes: >-
+      An aggregation rule, not a column: names no column index. Every table
+      pattern with the `unweighted_mean` provisional reason relies on it
+      (D-064).

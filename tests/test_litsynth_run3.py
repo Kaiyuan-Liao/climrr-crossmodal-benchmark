@@ -12,6 +12,7 @@ map's clauses verbatim in the COORDINATOR texts.
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import os
 
@@ -60,7 +61,7 @@ def test_every_manifest_file_matches_its_hash():
     assert sha256_file(s3.ART / "items.jsonl") == MAN["items_sha256"] == s3.ITEMS_SHA256
     assert sha256_file(s3.ART / "summary.json") == MAN["summary_sha256"] == s3.SUMMARY_SHA256
     assert MAN["tarball"]["sha256"] == s3.TARBALL_SHA256 and MAN["packets"]["manifest_sha256"] == s3.PACKETS_MANIFEST_SHA256
-    assert sha256_file(s2.REPO_ROOT / s2.AGENT_REL) == MAN["generator"]["agent_sha256"] == s2.AGENT_SHA256
+    assert hashlib.sha256(s2.agent_v32_source()).hexdigest() == MAN["generator"]["agent_sha256"] == s2.AGENT_SHA256  # v3.2 at the source commit
     assert [e["path"] for e in MAN["excluded_files"]] == ["litsynth/run3/raw/SD2-TP1-00075/prompt_user.txt",
                                                           "litsynth/run3/raw/SD2-TP1-00075/response.json"]
 

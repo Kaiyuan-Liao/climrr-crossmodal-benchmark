@@ -76,7 +76,7 @@ def verify_source(src: Path) -> dict:
     src, run = Path(src), _run(src)
     _check(sha256_file(run / "items.jsonl") == ITEMS_SHA256, "items.jsonl differs from its stated SHA-256")
     _check(sha256_file(run / "summary.json") == SUMMARY_SHA256, "summary.json differs from its stated SHA-256")
-    _check(sha256_file(REPO_ROOT / s2.AGENT_REL) == s2.AGENT_SHA256, f"{s2.AGENT_REL} differs from the pinned v3.2 SHA-256")
+    # The working tree carries litsynth_agent v4 since work package P3a; the run is held to the v3.2 file at its source commit.
     _check(hashlib.sha256(s2.git_blob(SOURCE_COMMIT, s2.AGENT_REL)).hexdigest() == s2.AGENT_SHA256,
            f"{s2.AGENT_REL} at the source commit differs from the pinned SHA-256")
     _check(hashlib.sha256(s2.git_blob(SOURCE_COMMIT, f"{s2.PACKETS_REL}/manifest.json")).hexdigest() == PACKETS_MANIFEST_SHA256,

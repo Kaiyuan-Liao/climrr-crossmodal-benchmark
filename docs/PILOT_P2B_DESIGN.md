@@ -459,3 +459,83 @@ cover and the v2 descriptor; README v1 plus one line.
 **For the GUIDANCE packet** (a running list; this package opens it):
 
 1. Pre-check verifies passage existence, not entailment; a reviewer entailment step is now part of item review (D-057).
+
+## 16. P3 changes: mentor feedback 2026-11 (work package P3a, D-059 -- D-065, 2026-11-17)
+
+The mentor reviewed the five-item sheet on 2026-11-13: "no need to care about details" (seven points: `MENTOR_BRIEF.md`,
+meeting log). What changes, all without a model call:
+
+**Both sources (D-059).** Rung 1 is dropped: BI-P2B-0001 / 0002 `rejected_by_design (D-059)` by the overlay
+`item_design_dispositions_v1.yaml` (schema v2 has no such status; the item files are unchanged).
+
+**General words (D-060, D-061, D-062).** `plain_language_v1.yaml` and DR-DESC-1 **v3** (`descriptor_rules_v3.yaml`):
+"days hot and humid enough to be dangerous" / "fire-weather danger", "under a high-emissions future", "by mid-century" /
+"by late this century", anchor pair "... days a summer"; no RCP label, threshold or years in graded text; "research
+shows" (>= 2 independent papers or a review) / "research suggests" (one paper). Scenario is provenance only and is never
+matched on the paper side; rung 7 retired. FWI patterns: ratio classes only, no anchors (an index has no countable unit).
+
+**Working assumptions (D-064).** Resolution records R-004 -- R-008 (`owner_authorized_working_assumption`, `effect: null`,
+no column status moved): WA-FWI-SUMMER, WA-STATE-LABEL, WA-NAME-LABEL, WA-FWI-PCT-SCENARIO, WA-UNWEIGHTED-MEAN. **Item seeds
+v3** (`scripts/build_item_seeds_v3.py`, `src/climrr/itemseeds_v3.py`): from the pinned v2 seeds; the FWI-summer blocker
+replaced by WA-FWI-SUMMER (352 seeds become eligible); rungs 1 and 7 removed; rank recomputed by the v2 key. 2,812 seeds,
+**2,720 eligible (heat 1,316, FWI 1,404)**; rung 3: 2,692, rung 4: 28.
+
+**Fire-weather shortlist** (`pilot_shortlist.fwi_select`; `artifacts/benchmark/pilot_shortlist_fwi_v1.csv`): the level-3
+rule on the FWI family --- eligible v3 seeds, single state pattern with a relevant mechanism / driver statement, summer
+seasonal FWI, absolute change, highest-ranked mid-century, then highest-ranked end-century in another state. Picks:
+**SD2-TP1-01463 California, mid-century** (rank 26; 31.4 -> 33.6, +2.2, upper tercile) and **SD2-TP1-01654 Minnesota,
+end-century** (rank 162; 15.3 -> 16.8, +1.5, middle tercile; California end-century, rank 29, skipped as the same state).
+EXECUTOR readings for confirmation: the metric (summer seasonal value, the columns D-064 unblocked), the statistic
+(absolute change), states only, mid first.
+
+**Selection v2** (`pilot_selection_v2.yaml`, owner Kaiyuan, the two FWI seeds **pending his confirmation**): BI-P3-0001 ..
+0008 = 0003 California (95 °F, mid), 0004 New York (95, end), 0005 Washington (105, mid), 0006 Alabama (105, end) at rung
+3; 0007 NCA5 regions (95, mid) and 0009 NCA5 regions (105, mid) at rung 4; California FWI (mid) and Minnesota FWI (end)
+at rung 3. **Flag:** BI-P3-0005 and BI-P3-0006 are the same place set and horizon at two thresholds --- with no threshold in
+the graded text their questions read alike (D-060 "one threshold per place" not met; `threshold_conflicts`).
+
+**Packets v4** (`scripts/build_synth_packets_v4.py`, `src/climrr/synthpackets_v4.py`, `artifacts/benchmark/synth_packets_v4/`):
+v3a rules (geography v2, DR-SEED-RANK-3, dispositions v1a and the no-disposition rule for the heat arm) plus:
+`model_view.plain_language`; the pattern text in plain words (threshold and window years no longer allowed numbers; exact
+values in `provenance.exact`); `hedge` on every group; guardrail without an RCP label; corrections v1a applied (corrected
+statement and passage of LS-199098498-04, reviewer label of `…-driver-c1-008`) --- EXECUTOR choice, for confirmation;
+`working_assumptions_relied_on`; `inputs_sha256` naming the NCA5 map and its disposition sidecar (D-065). **Fire arm:** no
+disposition file covers it, so its groups are attached by the agent's claim tag without the no-disposition rule, each
+`review_state: unreviewed_agent_tag`, packet `fire_groups_unreviewed: true`; the manifest lists them for the
+COORDINATOR's review before the run (report section 46). Heat packets: 11--12 groups (8 drivers, 3--4 context, 4
+multi-source); FWI packets: 14 (10 / 4; 9 and 5 multi-source).
+
+**Synthesis agent v4** (`litsynth_agent.py`; system prompt `33d387fe…3db05`; format corrective prompt `05303752…239f`):
+the plain-language vocabulary, the hedge table, no scenario talk, the question as two linked questions in one sentence or
+two short sentences, required rubric points = direction, magnitude class, place, mechanisms with strength >= 2 (single-source
+mechanisms optional), fatal errors = climate errors only. **Post-checks v3** (`synthesis_post_checks`, opt-in;
+v2.2 stays the default the ingest of runs 2 and 3 reproduces): v2.3 on, the generality rule (a failure; format-class, with
+any untraced number it names), the hedge-by-strength report. The v3.2 agent tests and the run-2 / run-3 reproduction now
+load the v3.2 bytes from the runs' source commit.
+
+**Polish agent v1** (`litpolish_agent.py`; D-063): readability rewrite of the prompt and the integrated answer, the work
+package's system prompt verbatim; invariance checks `polish_checks` v1 (numbers, places, hedges, no new source / leakage /
+generality flag, length 0.6--1.2x, mechanism keywords or listed synonyms, `polish_synonyms_v1.yaml`); a failure keeps the
+pre-polish text (`polish_rejected`); `pre_polish` in a `polish` history event.
+
+**Mentor sample sheet v2** (`scripts/build_mentor_sheet.py`, `src/climrr/mentor_sheet_v2.py`): `#`, `Question`, `Answer`,
+`Table side` (plain words, then the exact values, columns and working assumptions), `Paper side` (research shows /
+suggests, n papers, unreviewed fire tags marked), `Original passages`; README of three lines; polished items when present,
+the pre-polish text in small type.
+
+**Polaris runs** (Kaiyuan; at the pushed commit that carries the packets, after the COORDINATOR's review of the fire groups):
+
+    bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
+    cd "$CLIMRR_REPO_ROOT"
+    python scripts/litcollect/litsynth_agent.py --packets artifacts/benchmark/synth_packets_v4 \
+        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run4" \
+        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
+        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --sleep 5 --source-commit <PINNED_SHA>
+    python scripts/litcollect/litpolish_agent.py --items "$LITCOLLECT_ROOT_POLARIS/litsynth/run4" \
+        --out "$LITCOLLECT_ROOT_POLARIS/litpolish/run1" \
+        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
+        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --sleep 5 --source-commit <PINNED_SHA>
+
+**For the GUIDANCE packet** (continued): 2. CLAUDE.md gains the status `owner_authorized_working_assumption` (D-064) and the
+polish agent's run-evidence exemption (D-063). 3. FWI items now rest on owner-authorized working assumptions, not on
+confirmed column readings.

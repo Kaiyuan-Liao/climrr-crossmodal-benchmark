@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pilot P2b — item-synthesis agent v3.2 (D-041, D-048, D-051, D-055, D-055a, D-055b; COORDINATOR rulings 2026-11-01 and 2026-11-02).
+"""Pilot P2b / P3 — item-synthesis agent v4 (D-041, D-048, D-051, D-055, D-055a, D-055b, D-059 -- D-062; COORDINATOR rulings 2026-11-01 and 2026-11-02; work package P3a).
 
 Input: a directory of seed packets `PK-<seed_id>.json` (`scripts/build_synth_packets.py`). One model call per packet,
 temperature 0. The model sees the packet's `model_view` only: the table pattern in plain words with its values, the
@@ -59,6 +59,19 @@ check runs again on the reply. Any other failure (leakage, an untraced fact or i
 `first_check` (the result that triggered the turn, with the first reply's raw text); an unparseable or failed corrective
 reply keeps the first item, rejected_pre_review, with a `format corrective:` reason.
 
+v4 (work package P3a; mentor 2026-11-13, D-059 -- D-062; packets v4, `scripts/build_synth_packets_v4.py`): the system
+prompt asks for general words. The graded text (prompt, reference answer, every rubric list) uses the packet's
+`plain_language` phrases (quantity without its threshold, "under a high-emissions future", "by mid-century" / "by late
+this century") and never writes an RCP label, a threshold number, a year or "one study" / "a single study" (D-060); no
+scenario talk beyond "a high-emissions future" (D-061); the hedge follows the cited groups' strength --- "research shows /
+has shown" for a multi-source or review group, "research suggests" for single-source groups only (D-062); the question
+may be two linked questions in one sentence or two short sentences; the required rubric points are direction, magnitude
+class, place and the mechanisms resting on a multi-source or review group, a single-source mechanism is optional; the
+fatal errors are climate errors only (wrong direction; projection as a certainty or forecast; baseline as observation;
+FWI as fire; hazard as risk). Post-checks `synthesis_post_checks` v3 (v2.3 on by default, the generality rule, the
+hedge-by-strength report); a generality failure is format-class (one corrective turn). `review.history[0]` also carries
+the packet's `working_assumptions_relied_on` (D-064) and `fire_groups_unreviewed`. Everything else as v3.2.
+
 Polaris invocation (Sophia vLLM, D-043). Run from the execution clone on Eagle (`$CLIMRR_REPO_ROOT`,
 docs/SOPHIA_RUNBOOK.md) checked out at the pinned commit that carries the packets and provides `climrr`; output
 under the litcollect root (`$LITCOLLECT_ROOT_POLARIS`, config key `litcollect_root_polaris`), never in the clone; the
@@ -67,8 +80,8 @@ ALCF credential in the environment; first check the environment: `python -c "imp
     bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
     cd "$CLIMRR_REPO_ROOT"
     python scripts/litcollect/litsynth_agent.py \\
-        --packets artifacts/benchmark/synth_packets \\
-        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run2" \\
+        --packets artifacts/benchmark/synth_packets_v4 \\
+        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run4" \\
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \\
         --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \\
         --sleep 5 --source-commit <PINNED_SHA>
@@ -84,42 +97,51 @@ from litstatement_agent import (  # noqa: E402  (v3)
 from litgroup_agent import DEFAULT_MAX_TOKENS, REASONING_EFFORTS, call_turn, turn_stats  # noqa: E402  (v3)
 from climrr import benchmark_items as bi  # noqa: E402
 
-GENERATOR_VERSION = "litsynth_agent v3.2"
+GENERATOR_VERSION = "litsynth_agent v4"
+CHECK_VERSION = bi.SYNTH_CHECK_VERSION_V3
 CORRECTIVE_PROMPT = ("Your reply did not contain a JSON object with the keys \"prompt\" and \"reference_answer\". "
                      "Return the complete JSON object.")
 NOT_REQUIRED_SENTENCE = "Exact values are not required; any statement consistent with the magnitude class counts."
-HEDGE_WORDS = ('"one study"', '"a single study"', '"suggests"', '"has been reported"')
 FORMAT_CORRECTIVE_PROMPT = ("Your item failed these format checks:\n{reasons}\nReturn the complete corrected JSON object. Keep "
                             "every fact, pattern id, group id and source id unchanged; change only the wording the checks name. "
-                            "Copy magnitude language verbatim from \"allowed_descriptors\"; put no numeral with a decimal point "
-                            "and no exact pattern value in \"reference_answer\" or \"rubric\" (to say exact values are not "
-                            f"required, write: \"{NOT_REQUIRED_SENTENCE}\"); give every literature sentence that rests only on "
-                            f"single-source groups one of the hedge words {', '.join(HEDGE_WORDS)}.")
+                            "Use the packet's \"plain_language\" phrases; in \"prompt\", \"reference_answer\" and \"rubric\" write "
+                            "no emissions-scenario label, no threshold number or temperature, no year, no numeral with a decimal "
+                            "point and no exact pattern value, and never \"one study\" or \"a single study\". Copy magnitude "
+                            "language verbatim from \"allowed_descriptors\" (to say exact values are not required, write: "
+                            f"\"{NOT_REQUIRED_SENTENCE}\"); a literature sentence that rests only on single-source groups says "
+                            "\"research suggests\" and is marked \"hedged\": true.")
 
 
 def format_corrective_prompt(reasons: list[str]) -> str:
     return FORMAT_CORRECTIVE_PROMPT.replace("{reasons}", "\n".join(f"- {r}" for r in reasons))
 
-SYSTEM_PROMPT = """You write ONE closed-book benchmark item for climate scientists from a SEED PACKET. The packet holds (a) table patterns: deterministic facts about modeled climate projections, in plain words, with their values and, for each pattern, "allowed_descriptors": the pattern-level words (direction, magnitude class, coarse anchors, relative tercile, regional ranking, horizon, scenario and quantity phrases) computed by code; (b) groups of literature statements: each group has an id, a label, an evidence strength, and member statements with their supporting passages and paper ids; (c) the use-case rung, the guardrails and the numbers you may use. Use ONLY facts in the packet. Add no fact, number, place, mechanism, scenario or source that is not in it.
+SYSTEM_PROMPT = """You write ONE closed-book benchmark item for climate scientists from a SEED PACKET. The packet holds (a) a table pattern: deterministic facts about modeled climate projections, in plain words, with "allowed_descriptors": the pattern-level words (direction, magnitude class, coarse anchor pair, relative tercile, regional ranking, horizon, scenario and quantity phrases) computed by code; (b) "plain_language": the phrases the item must use for the quantity, the scenario, the horizon and the hedges; (c) groups of literature statements: each group has an id, a label, an evidence strength, a "hedge" and member statements with their supporting passages and paper ids; (d) the use-case rung, the guardrails and the numbers you may use. Use ONLY facts in the packet. Add no fact, number, place, mechanism or source that is not in it.
 
-The item is graded at the PATTERN level: direction, magnitude class, region, horizon and scenario, mechanism. Exact values are NOT graded: they are attached to the item as provenance by code, never by you. Never put a decimal number or an exact pattern value in "reference_answer" or "rubric".
+GENERAL WORDS. The item is read by a general scientific reader and graded at the PATTERN level: direction, magnitude class, place, mechanism. In "prompt", "reference_answer" and every list of "rubric":
+- name the quantity with the packet's "plain_language" "quantity" (or "quantity_short"), the scenario only as "under a high-emissions future", and the horizon only with the packet's horizon phrase ("by mid-century" or "by late this century");
+- never write an emissions-scenario label (no "RCP", no "SSP"), a threshold number or temperature (no "95 °F", no "105 °F"), a year or a range of years, or a numeral with a decimal point;
+- say nothing about scenarios beyond "under a high-emissions future", and compare no scenarios;
+- never write "one study" or "a single study".
+The exact values, the threshold, the scenario name and the years are attached to the item as provenance by code, never by you.
 
-NUMBERS. Any number in "prompt", "reference_answer" or "rubric" must be copied AS DIGITS from the pattern's "allowed_descriptors" or from the packet's pattern values (for example the heat-index threshold, or "about 16 days" when it is an allowed anchor). Never write a number as a word ("sixteen", "forty-five", "twice", "double", "triple", "half", "threefold"), except inside an allowed descriptor phrase copied verbatim (for example "roughly tripling" or "about half again as many" when the packet lists it). Copy magnitude language VERBATIM from "allowed_descriptors": write "roughly tripling", never "threefold", "triples" or "three times". Do not round a value yourself, and do not state a ratio, percentage or range the packet does not list. Do not state horizon years unless the packet states them; prefer the packet's horizon phrase (for example "by mid-century (2045–2054)") and scenario phrase (for example "under RCP8.5, one high-emissions scenario") exactly as given. One exception for literature: a number (or number-word) that a group's label or member statement states, for example a threshold such as "80 °F", may be copied exactly as written there into a "literature_interpretation" sentence whose "group_ids" include that group, or into a rubric point whose "source_ids" include that group --- nowhere else.
+NUMBERS. The only digits allowed are those of the pattern's "anchor_pair", copied verbatim (for example "from about 16 to about 45 days a summer"). Never write a number as a word ("sixteen", "forty-five", "twice", "double", "triple", "half", "threefold"), except inside an allowed descriptor phrase copied verbatim (for example "roughly tripling" or "about half again as many"). Copy magnitude language VERBATIM from "allowed_descriptors": write "roughly tripling", never "threefold", "triples" or "three times". State no ratio, percentage or range the packet does not list.
+
+HEDGES, by evidence strength. Each group carries its "hedge". A literature sentence that rests on at least one multi_source_supported or review_supported group says "research shows" or "research has shown" and is marked "hedged": false. A literature sentence that rests only on single_source_supported groups says "research suggests" and is marked "hedged": true. Never present a single-source claim as established.
 
 Return ONE JSON object with exactly these keys:
-- "prompt": a closed-book question that a well-informed climate scientist could answer from general knowledge. It asks about the general pattern and its drivers at the state or region level the packet names, for the season, horizon and scenario the packet names. It names the quantity in general words a closed-book reader can answer, using the pattern's "quantity" descriptor (for the heat index: "days with a dangerous heat index (above 95 °F)" or "(above 105 °F)" --- the threshold stays, because it defines the quantity). It must NOT name or hint at any table, dataset, data portal, paper, study, author, column, variable name or grid cell, and must not say "according to", "the table", "the data", "the paper" or "the study". It must not require recalling an exact number: ask for direction, rough size, ranking or contrast, and the drivers.
+- "prompt": a closed-book question that a well-informed climate scientist could answer from general knowledge, in plain words and short sentences: either one sentence holding two linked questions (how the quantity is projected to change, and why) or two short sentences. It asks about the general pattern and its drivers for the place, season and horizon the packet names, "under a high-emissions future". It must NOT name or hint at any table, dataset, data portal, model output, paper, study, author, column, variable name or grid cell, and must not say "according to", "the table", "the data", "the paper" or "the study". It must not require recalling a number: ask for direction, rough size, ranking or contrast, and the drivers.
 - "reference_answer": {
-  "table_pattern": [{"sentence": "...", "pattern_ids": ["..."]}] --- each sentence states what a pattern shows, in the pattern's allowed descriptors (direction, magnitude class or low-baseline phrase, place or regional ranking with largest / smallest, relative tercile where given, horizon and scenario phrases), and is tagged with the pattern id(s) it comes from;
-  "literature_interpretation": [{"sentence": "...", "group_ids": ["..."], "hedged": true or false}] --- each sentence rests on the group(s) it cites. A sentence that rests only on single_source_supported groups must be hedged and marked "hedged": true, and it must contain one of these hedge words: "one study", "a single study", "suggests", "has been reported" (for example "one study reports ..."); never present a single-source claim as consensus. If the packet has no groups, return [];
-  "integrated": "a short paragraph that combines the two, in the same terms, with no new fact" }
-- "rubric": {"required_points": [{"point": "...", "weight": 1, 2 or 3, "source_ids": ["..."]}], "acceptable_variants": ["..."], "optional_points": [{"point": "...", "source_ids": ["..."]}], "disallowed_claims": ["..."], "fatal_errors": ["..."]}. Every required and optional point MUST carry "source_ids": the pattern id(s) and / or group id(s) from the packet that the point rests on. The required points are pattern-level: the direction; the magnitude class (or the low-baseline phrase); the place, or for a regional contrast the ranking (largest / smallest); the mechanism, where the packet has groups; the handling of the scenario and horizon (one high-emissions scenario, not a forecast); and no overclaim (no exact number demanded, no single-source claim as consensus, hazard not exposure). A specific number may appear only under "optional_points", and only as an allowed anchor copied as digits --- except a literature number under the exception above, in a point whose "source_ids" include its group. The rubric must contain NO numeral with a decimal point and NO exact pattern value at all, in any of its lists ("required_points", "acceptable_variants", "optional_points", "disallowed_claims", "fatal_errors") --- not even to tell the grader not to require it. To tell the grader that exact values are not required, write exactly: "Exact values are not required; any statement consistent with the magnitude class counts.".
+  "table_pattern": [{"sentence": "...", "pattern_ids": ["..."]}] --- each sentence states what the pattern shows, in the pattern's allowed descriptors (direction, magnitude class, place or regional ranking with largest / smallest, relative tercile where given, horizon and scenario phrases), and is tagged with the pattern id(s) it comes from;
+  "literature_interpretation": [{"sentence": "...", "group_ids": ["..."], "hedged": true or false}] --- each sentence rests on the group(s) it cites and uses the hedge above. If the packet has no groups, return [];
+  "integrated": "a short paragraph that combines the two, in the same words, with no new fact" }
+- "rubric": {"required_points": [{"point": "...", "weight": 1, 2 or 3, "source_ids": ["..."]}], "acceptable_variants": ["..."], "optional_points": [{"point": "...", "source_ids": ["..."]}], "disallowed_claims": ["..."], "fatal_errors": ["..."]}. Every required and optional point MUST carry "source_ids": the pattern id(s) and / or group id(s) from the packet that the point rests on. The required points are exactly: the direction; the magnitude class; the place (for a regional contrast, the ranking: largest / smallest); and each mechanism that rests on a multi_source_supported or review_supported group. A mechanism that rests only on single_source_supported groups is an optional point, never a required one. The anchor pair, if used at all, is an optional point. "fatal_errors" lists climate errors only: the wrong direction; stating the projection as a certainty or a forecast; treating the modeled historical baseline as an observation; reading fire-weather danger as fire occurrence; treating a hazard as a risk. To tell the grader that exact values are not required, write exactly: "Exact values are not required; any statement consistent with the magnitude class counts.".
 - "guardrails": the packet guardrails that apply to this item, verbatim or made more specific.
 - "source_independent_answerability": "yes", "borderline" or "no" --- could a well-informed climate scientist answer without the packet's sources?
 - "source_independence_note": one sentence explaining that judgement.
 - "capability_tested", "system_task", "key_relationships", "evidence_needed", "desired_output_characteristics": one short phrase each, for the packet's use-case rung.
 - "expected_knowledge_level": "general_climate_science" or "specialist_climate_science".
 
-Respect every guardrail: a modeled historical baseline is model output, not an observation; a Fire Weather Index is meteorological fire danger, never fire occurrence; RCP8.5 is one high-emissions scenario, not a forecast; hazard is not exposure and exposure is not risk. Return ONLY the JSON object."""
+Respect every guardrail: a modeled historical baseline is model output, not an observation; a Fire Weather Index is meteorological fire danger, never fire occurrence; a high-emissions future is one plausible future, not a forecast; hazard is not exposure and exposure is not risk. Return ONLY the JSON object."""
 
 IDENTITY = ("capability_tested", "system_task", "key_relationships", "evidence_needed", "desired_output_characteristics")
 CORE_OR_CITED = ("core_candidate", "cited_candidate")
@@ -218,15 +240,17 @@ def assemble(obj: dict, packet: dict, common: dict, columns) -> tuple[dict, dict
 
 def finish(item: dict, tagged: dict, packet: dict, common: dict, columns, parse_error=None, extra_reasons=()) -> dict:
     if parse_error:
-        res = {"check_version": bi.SYNTH_CHECK_VERSION, "pass": False, "reasons": [f"parse: {parse_error}"], "checks": {}}
+        res = {"check_version": CHECK_VERSION, "pass": False, "reasons": [f"parse: {parse_error}"], "checks": {}}
     else:
-        res = bi.synthesis_post_checks(item, tagged, packet["checks_input"], columns)
+        res = bi.synthesis_post_checks(item, tagged, packet["checks_input"], columns, check_version=CHECK_VERSION)
     if extra_reasons:
         res = {**res, "pass": False, "reasons": res["reasons"] + list(extra_reasons)}
     item["review"]["status"] = "deterministic_pass" if res["pass"] else "rejected_pre_review"
     item["review"]["history"] = [{"event": "deterministic_pass" if res["pass"] else "deterministic_fail", "reasons": res["reasons"],
                                   "check_version": res["check_version"], "checks": res["checks"], "reference_answer_tagged": tagged,
-                                  "seed_id": packet["seed_id"], "packet_id": packet["packet_id"], **common}]
+                                  "seed_id": packet["seed_id"], "packet_id": packet["packet_id"],
+                                  "working_assumptions_relied_on": packet.get("working_assumptions_relied_on") or [],
+                                  "fire_groups_unreviewed": bool(packet.get("fire_groups_unreviewed")), **common}]
     return item
 
 
@@ -251,7 +275,9 @@ def summarise(out: Path, endpoint=None, budget=None):
          "format_corrective_pass": sum(bool(h.get("corrective_turn_used")) and h["event"] == "deterministic_pass" for h in hist),
          "reasoning_effort_not_applied": sum(h.get("reasoning_effort_applied") is False for h in hist),
          "finish_reasons": {k: sum(str(h.get("finish_reason")) == k for h in hist) for k in sorted({str(h.get("finish_reason")) for h in hist})},
-         "by_level": {str(k): sum(it["use_case_level"] == k for it in items) for k in sorted({it["use_case_level"] for it in items})}}
+         "by_level": {str(k): sum(it["use_case_level"] == k for it in items) for k in sorted({it["use_case_level"] for it in items})},
+         "check_version": CHECK_VERSION,
+         "hedge_by_strength_flags": sum(len(h.get("checks", {}).get("hedge_by_strength") or []) for h in hist)}
     (out / "summary.json").write_text(json.dumps(s, indent=2))
     return s
 

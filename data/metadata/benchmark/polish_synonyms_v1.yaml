@@ -1,0 +1,40 @@
+# Polish-agent synonym list v1 (D-063; work package P3a, section C).
+#
+# The readability polish (scripts/litcollect/litpolish_agent.py v1) may shorten and simplify a question and its answer,
+# never change what they say. One of its deterministic invariance checks (src/climrr/polish_checks.py) keeps the
+# mechanism: every content word of the original text that is a mechanism keyword --- a content word of the label of a
+# literature group the item cites --- must still be present in the polished text, or be replaced by one of the words
+# listed for it here. Words are compared lower-case after removing one plural "s" (`polish_checks.stem`). A keyword with no
+# entry must stay as it is. `stopwords` are never keywords.
+#
+# The list is written by the EXECUTOR for the pilot's heat-index and fire-weather mechanisms and recorded for
+# confirmation; it is short on purpose --- a missing synonym rejects a polish (the pre-polish text is kept), it never
+# admits a change of meaning. Pinned by SHA-256 in data/manifest.json; a change is polish_synonyms_v2.yaml.
+
+version: polish_synonyms_v1
+decision: D-063
+min_keyword_length: 4
+
+synonyms:
+  humidity: [humid, moisture, moist]
+  moisture: [humidity, moist, wetness]
+  warming: [warmer, heating]
+  drought: [dry, dryness, drier]
+  dryness: [dry, drier, drought]
+  evaporative: [evaporation]
+  intensifies: [strengthens, intensify]
+  increase: [rise, grow, more]
+  urban: [city, cities]
+  nighttime: [night, overnight]
+  vegetation: [plant]
+  feedback: [feedbacks]
+  wind: [winds]
+  temperature: [heat]
+
+stopwords: [about, above, across, after, also, among, an, and, are, as, at, based, be, been, being, below, between, both,
+            but, by, can, could, during, each, from, has, have, higher, into, its, lower, many, more, most, much, not, of,
+            often, "on", or, over, such, than, that, the, their, them, then, there, these, they, this, those, through, to,
+            under, used, using, very, was, were, when, where, which, while, with, within, would,
+            # EXECUTOR: generic causal verbs and nouns of the labels ("drive increases", "its effect grows") name no mechanism;
+            # a question may ask "why?" instead of "what drives it?".
+            alter, altering, cause, causes, change, changes, drive, drives, driven, effect, effects, grow, grows, lead, leads]

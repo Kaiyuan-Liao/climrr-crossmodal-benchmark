@@ -3057,3 +3057,155 @@ code emits, and the next GUIDANCE packet still chooses.
 - **Affected files:** `data/metadata/benchmark/provenance_corrections_v1a.yaml`, `src/climrr/litstatements.py`,
   `src/climrr/p2b_mentor_v2.py`, `src/climrr/p2b_mentor_v3.py`, `src/climrr/p2b_items_review.py`, `src/climrr/xlsxlite.py`,
   tests.
+
+## D-059 --- Items use both sources
+
+- **Date:** 2026-11-13 (mentor); recorded 2026-11-17.
+- **Status:** **decided** (mentor 2026-11-13, point 1, relayed by Kaiyuan; COORDINATOR work package P3a, section A).
+- **Context.** The pilot carried two rung-1 (pattern-only) items, BI-P2B-0001 (Georgia) and BI-P2B-0002 (Arizona); the
+  2026-11-05 sheet asked whether table-only items are acceptable. The mentor: "QAs from two sources only."
+- **Decision.** Rung 1 (pattern-only) items are dropped from the benchmark. BI-P2B-0001 and BI-P2B-0002 are
+  `rejected_by_design (D-059)`, kept as evidence.
+- **Recorded (EXECUTOR).** Item schema v2's `review.status` enum has no `rejected_by_design` value and the item files are
+  immutable (pinned by the run-2 manifest and the items index), so the disposition is an overlay:
+  `data/metadata/benchmark/item_design_dispositions_v1.yaml` (`3589b2c6…b6ff`, manifest-pinned), read by
+  `climrr.item_dispositions.effective_status`; the two item files keep `human_review` and their SHA-256 is recorded in the
+  overlay. Item seeds v3 drop rung 1 from every seed's applicable rungs. **For confirmation:** the overlay in place of a
+  schema change.
+- **Affected files:** `data/metadata/benchmark/item_design_dispositions_v1.yaml`, `data/manifest.json`,
+  `src/climrr/item_dispositions.py`, `src/climrr/itemseeds_v3.py`, tests.
+
+## D-060 --- Generality of question and answer text
+
+- **Date:** 2026-11-13 (mentor); recorded 2026-11-17.
+- **Status:** **decided** (mentor 2026-11-13, point 2; COORDINATOR work package P3a, sections A and B).
+- **Context.** The mentor: no concrete details such as "RCP8.5" or "95 °F" in questions or answers --- general plain
+  words, or omit.
+- **Decision.** Graded text names no RCP label, no threshold number, no years. Scenario -> "under a high-emissions
+  future"; horizon -> "by mid-century" / "by late this century"; quantity -> a plain phrase defined per family in
+  `data/metadata/benchmark/plain_language_v1.yaml` (heat index: "days hot and humid enough to be dangerous" / "dangerous
+  heat-index days"; FWI: "fire-weather danger" --- never fire occurrence); magnitude words from DR-DESC-1 v2 (digits allowed
+  only in the coarse anchor pair, e.g. "from about 16 to about 45 days a summer" --- kept optional). Exact threshold,
+  scenario, windows and values stay in provenance. One threshold per place per item set.
+- **Recorded (EXECUTOR).** `plain_language_v1.yaml` (`03bca7f4…bf5f`) and DR-DESC-1 v3 `descriptor_rules_v3.yaml`
+  (`fd32f4ba…47d9`), both manifest-pinned; v1 and v2 rules unchanged and still reproduce the v3 packets and the 2026-11-05
+  sheet. Post-checks **v3** forbid the work package's pattern `RCP|\d{2,}\s?°?F|\b(19|20)\d{2}\b|one study|a single study`
+  in the prompt, the reference texts and every rubric list (on the normalised text; the two phrases case-insensitively). The
+  packets v4 render the pattern in the plain phrases and no longer allow the threshold or the window years as numbers.
+  EXECUTOR readings, for confirmation: the FWI quantity has no short form other than "fire-weather danger"; an index value
+  has no countable unit, so FWI patterns get no anchor pair and no day-count classes (rare to common, low baseline) --- the
+  ratio classes only ("a slight increase" for both FWI sample seeds); the anchor pair's season unit is "a summer" (every
+  sample pattern is summer). **"One threshold per place" is not met by the work package's own sample list:** BI-P3-0005
+  and BI-P3-0006 cover all NCA5 regions at mid-century at 95 °F and 105 °F --- built as listed, reported in the packet
+  manifest (`threshold_conflicts`) and in `pilot_selection_v2.yaml`, for the COORDINATOR and Kaiyuan before the run.
+- **Affected files:** `data/metadata/benchmark/plain_language_v1.yaml`, `data/metadata/benchmark/descriptor_rules_v3.yaml`,
+  `data/manifest.json`, `src/climrr/plain_language.py`, `src/climrr/pattern_descriptors.py`, `src/climrr/synthpackets.py`,
+  `src/climrr/synthpackets_v4.py`, `src/climrr/benchmark_items.py`, `scripts/litcollect/litsynth_agent.py`, tests.
+
+## D-061 --- Scenario is table-side provenance only
+
+- **Date:** 2026-11-13 (mentor); recorded 2026-11-17.
+- **Status:** **decided** (mentor 2026-11-13, point 3; COORDINATOR work package P3a, sections A and B).
+- **Context.** The mentor: do not try to match the paper side to a specific RCP --- such details seldom appear in papers;
+  focus on the matched pattern.
+- **Decision.** Literature statements are attached by family, geography, direction and claim type; scenario naming is not
+  required and not matched. Rung 7 is retired for now; `scenario_check` fields remain recorded.
+- **Recorded (EXECUTOR).** Item seeds v3 drop rung 7 from every seed's applicable rungs; packets v4 refuse rungs other than
+  3 and 4 and carry no rung instruction; DR-SEED-RANK-3a (the rung-7 scenario caveats) is not used. The group attachment
+  rules (DR-SEED-RANK-3; relevance by family, direction and geography; roles by claim type) never matched scenarios and are
+  unchanged. The v4 guardrail reads "A high-emissions future is one plausible future, not a forecast and not the only
+  plausible future" (no RCP label). The rung-7 item BI-P2B-0010 is not carried into selection v2.
+- **Affected files:** `src/climrr/itemseeds_v3.py`, `src/climrr/synthpackets_v4.py`, `scripts/litcollect/litsynth_agent.py`,
+  `data/metadata/benchmark/pilot_selection_v2.yaml`, tests.
+
+## D-062 --- Hedge wording
+
+- **Date:** 2026-11-13 (mentor); recorded 2026-11-17.
+- **Status:** **decided** (mentor 2026-11-13, point 4; COORDINATOR work package P3a, sections A and B).
+- **Context.** The mentor: avoid "one study"; general wording such as "recent research shows" is acceptable.
+- **Decision.** In graded text: strength >= 2 independent papers or review -> "research shows / has shown"; one paper ->
+  "research suggests"; never "one study", "a single study". The strength label is unchanged in provenance and rubric
+  (`single_source_supported` points stay optional).
+- **Recorded (EXECUTOR).** `plain_language_v1.yaml` `hedges`; every group in a packet v4 carries its `hedge`; the
+  synthesis agent v4 asks for it; post-checks v3 report a mismatch (`hedge_by_strength`: a sentence citing only
+  single-source groups without "suggests", or one citing a multi-source / review group with "suggests" but no "shows") ---
+  report, not failure, as the work package says; v2.2's hedge requirement for single-source sentences still fails an item
+  (and "suggests" satisfies it).
+- **Affected files:** `data/metadata/benchmark/plain_language_v1.yaml`, `src/climrr/benchmark_items.py`,
+  `src/climrr/synthpackets_v4.py`, `scripts/litcollect/litsynth_agent.py`, tests.
+
+## D-063 --- Readability polish step
+
+- **Date:** 2026-11-13 (mentor); recorded 2026-11-17.
+- **Status:** **decided** (mentor 2026-11-13, point 5; COORDINATOR work package P3a, section C).
+- **Context.** The mentor: the current questions are hard to read; polish the wording for readability without changing
+  the meaning; two linked questions with one answer is acceptable.
+- **Decision.** A separate agent rewrites question and answer for readability only; the pre-polish text is kept as
+  `pre_polish`; deterministic invariance checks; the human review sees both.
+- **Recorded (EXECUTOR).** `scripts/litcollect/litpolish_agent.py` v1 (`901e3954…10dc`; system prompt verbatim from the work
+  package, `42537289…43b9`), checks `src/climrr/polish_checks.py` v1 with the synonym list
+  `data/metadata/benchmark/polish_synonyms_v1.yaml` (`8236d5eb…a549`, manifest-pinned). Per field (question, answer):
+  identical sets of numbers, place / region names (states and NCA5 regions of the pinned map, "United States", "U.S.") and
+  hedge words; no new source word and no new leakage or generality flag; length 0.6--1.2x; every mechanism keyword (a
+  content word of a cited group's label) kept or replaced by a listed synonym. A failed rewrite leaves the text unchanged
+  (`polish_rejected`). `pre_polish` lives in a `polish` event in `review.history` (schema v2 has no top-level field for it,
+  and no polish review status: the status is unchanged). EXECUTOR readings, for confirmation: the synonym list and its
+  stopwords (generic causal words --- "drive", "change", "effect" --- are not mechanism keywords, so "what drives it?" may
+  become "why?"); sets, not counts, for numbers, places and hedges; the polish runs on `deterministic_pass` items only. Like
+  the other Polaris tools it writes no run record: its `agent.log`, per-item files, `polished.jsonl` and `summary.json` are
+  the run evidence (CLAUDE.md, rule change flagged for the GUIDANCE packet). The mentor sheet v2 takes a polished item when
+  present and shows the pre-polish text beside it.
+- **Affected files:** `scripts/litcollect/litpolish_agent.py`, `src/climrr/polish_checks.py`,
+  `data/metadata/benchmark/polish_synonyms_v1.yaml`, `data/manifest.json`, `src/climrr/mentor_sheet_v2.py`,
+  `scripts/build_mentor_sheet.py`, `CLAUDE.md`, tests.
+
+## D-064 --- Working assumptions for inferred columns authorized by the data owner
+
+- **Date:** 2026-11-13 (mentor via Kaiyuan); recorded 2026-11-17.
+- **Status:** **decided** (mentor 2026-11-13, point 6; COORDINATOR work package P3a, section A).
+- **Context.** The FWI-summer columns (IC-006 -- IC-010) blocked every FWI-summer pattern; `State` / `NAME` (IC-011, IC-012),
+  the FWI percent-change scenario and the unweighted cell mean were standing confirmation requests. The mentor: for the
+  meaning of other columns, go with our assumptions based on the table and related files; no further confirmation needed.
+- **Decision.** Resolution records in `data/metadata/resolutions.yaml` with status `owner_authorized_working_assumption`
+  --- defined in CLAUDE.md: the owner has directed the project to proceed on the project's documented reading without
+  confirming it; it is not `verified_from_dictionary` and not `owner_confirmed`; every artifact relying on it says so --- for
+  IC-006 -- IC-010 (FWI summer 189--193: seasonal FWI, RCP8.5 for 190--193, differences for 192/193), IC-012 (`State`),
+  IC-011 (`NAME`), the FWI percent-change scenario (RCP8.5 assumed) and the unweighted cell-mean aggregation rule. FWI
+  patterns' `acceptance_blockers` are replaced by `working_assumptions: [...]`; they become eligible. Items carry
+  `working_assumptions_relied_on`.
+- **Recorded (EXECUTOR).** Five records **R-004 -- R-008** (`resolutions.yaml` `d86e1cd4…869a`), each with a
+  `working_assumption` block {status, covers, columns_relied_on, reading, relied_on_by: WA-FWI-SUMMER, WA-STATE-LABEL,
+  WA-NAME-LABEL, WA-FWI-PCT-SCENARIO, WA-UNWEIGHTED-MEAN}. **The working assumption is not a column status:** the records
+  have `effect: null` and name no columns (the validator, `dictionary.validate_working_assumption`, refuses anything else),
+  so columns 2, 3 and 189--193 stay `inferred_candidate` and the M1 status machinery is untouched. The coverage report and
+  the status diff were regenerated (columns identical; only the resolution metadata changed) and the table-pattern
+  extraction re-run to check that the patterns, summary and examples reproduce byte-identically (they do; the doc's
+  coverage hash line updated). Item seeds v3 (`04602e1b…d9a5`): 352 FWI-summer seeds replace the IC-006 -- IC-010 blocker
+  with WA-FWI-SUMMER and become eligible (2,720 eligible: heat 1,316, FWI 1,404); the seed's pattern copy reads
+  `acceptance_blocked: false`, keeps `acceptance_blocked_by_original`, carries `working_assumptions`; the non-blocking
+  IC-012 marker is replaced by WA-STATE-LABEL; `table_patterns_v1.jsonl` unchanged. The FWI-summer reading of 192 / 193 is
+  written as the project's code uses it (future minus historical, the per-cell ranges); the dictionary does not fix the sign.
+  Items record the working assumptions in each table-pattern record (`working_assumptions`) and in
+  `review.history[0].working_assumptions_relied_on` (schema v2 has no top-level field). `METADATA_QUESTIONS.md`: the
+  FWI-summer and `State` / `NAME` questions are `closed_by_owner_direction (D-064)`; nothing was confirmed.
+- **Affected files:** `data/metadata/resolutions.yaml`, `src/climrr/dictionary.py`, `artifacts/profiles/dictionary_coverage.json`,
+  `artifacts/profiles/status_diff.md`, `docs/TABLE_PATTERNS_V1.md`, `src/climrr/itemseeds_v3.py`,
+  `scripts/build_item_seeds_v3.py`, `artifacts/benchmark/item_seeds_v3_summary.json`, `docs/METADATA_QUESTIONS.md`,
+  `CLAUDE.md`, tests.
+
+## D-065 --- NCA5 region map recorded as the project's grouping
+
+- **Date:** 2026-11-13 (mentor); recorded 2026-11-17.
+- **Status:** **decided** (mentor 2026-11-13, point 7; COORDINATOR work package P3a, section A).
+- **Context.** `nca_regions_v1.yaml` carries `source_verification: pending_kaiyuan`. The mentor: climate regions are good;
+  record our grouping for future checking.
+- **Decision.** `nca_regions_v1.yaml` keeps `source_verification: pending` and gains `owner_disposition:
+  accepted_as_project_grouping (2026-11-13)`; every regional item references its hash.
+- **Recorded (EXECUTOR).** The map is a manifest-pinned immutable object ("a change is a new version, never an edit") whose
+  hash the table patterns, seeds and packets name, so the disposition is a sidecar,
+  `data/metadata/geography/nca_regions_v1_disposition.yaml` (`a0c390a8…1ae9`, manifest-pinned), naming the map by its SHA-256; the map's
+  bytes are unchanged. Every packet v4 names `nca_map` and `nca_regions_disposition` in `inputs_sha256`, which the
+  synthesis agent copies into each item's `generation.inputs_sha256`. **For confirmation:** the sidecar in place of an
+  edit.
+- **Affected files:** `data/metadata/geography/nca_regions_v1_disposition.yaml`, `data/manifest.json`,
+  `src/climrr/synthpackets_v4.py`, tests.

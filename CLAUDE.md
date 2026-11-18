@@ -69,6 +69,15 @@ and duplicates --- with no meaning attached.
    Read them as text and keep them as text. Coercing them to integers destroys
    real identifiers and silently corrupts every join.
 
+### Owner-authorized working assumptions (D-064; rule added 2026-11-17, flagged for GUIDANCE)
+
+`owner_authorized_working_assumption` is a status of a **resolution record**, never of a column: the owner has directed
+the project to proceed on the project's documented reading without confirming it. It is **not**
+`verified_from_dictionary` and **not** `owner_confirmed`. A record carrying it has `effect: null` and names no columns,
+so every column it concerns keeps its status (`inferred_candidate` stays `inferred_candidate`); the code refuses any other
+combination. Every artifact relying on one says so --- `working_assumptions` / `working_assumptions_relied_on`, citing the
+`WA-…` id and the record (R-004 -- R-008). Never describe a working assumption as confirmed, verified or answered.
+
 ## Required checks before every commit
 
 Both must pass, every time, with no exceptions:
@@ -140,6 +149,10 @@ Pilot P2b (D-048) adds `scripts/litcollect/litgroup_agent.py` and `litsynth_agen
 Polaris and kept byte-identical to the files that run (pinned in their tests): their
 `agent.log`, per-partition / per-seed `result.json` or item file, `prompt_user.txt`,
 `response.json`, `groups.jsonl` / `items.jsonl` and `summary.json` are the run evidence.
+Pilot P3a (D-063) adds `scripts/litcollect/litpolish_agent.py`, run on Polaris and kept byte-identical to the file that
+runs (pinned in its test): its `agent.log`, per-item files, `prompt_user.txt`, `response.json`, `polished.jsonl` and
+`summary.json` are the run evidence. Since P3a `litsynth_agent.py` is v4; the v3.2 file that synthesis runs 2 and 3 used
+is held by its bytes at their source commit (`litsynth_run2.agent_v32_source`).
 
 ## Knowledge-refresh staging
 

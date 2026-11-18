@@ -19,6 +19,10 @@ format failures gets none; an unparseable corrective reply keeps the first item,
 Packets v3b (D-054a; the agent unchanged): on the real Florida rung-7 packet, a reply that cites the scenario caveat
 `LG-extreme_heat_v1-pattern-c2-003` (typed `pattern` in the run, carried as a caveat) for the RCP8.5 vs RCP4.5 contrast,
 hedged, passes every post-check and schema v2, and the group lands in `literature_caveats`.
+
+Since work package P3a the working tree carries litsynth_agent v4 (`test_litsynth_agent_v4.py`). These tests hold the
+v3.2 agent that synthesis runs 2 and 3 used: its bytes at the runs' source commit (`litsynth_run2.agent_v32_source`),
+materialized beside the unchanged sibling tools and `src`, and run exactly as before.
 """
 
 from __future__ import annotations
@@ -42,7 +46,27 @@ from climrr import table_patterns as tp
 from climrr.checksums import sha256_file
 from climrr.paths import REPO_ROOT
 
-TOOLS = REPO_ROOT / "scripts" / "litcollect"
+REPO_TOOLS = REPO_ROOT / "scripts" / "litcollect"
+
+
+def _materialize_v32():
+    """<tmp>/scripts/litcollect/litsynth_agent.py = the v3.2 bytes at the source commit; its siblings and <tmp>/src link to the
+    repository's (the agent imports litstatement_agent and litgroup_agent from its own directory and climrr from ../../src)."""
+    import tempfile
+    from pathlib import Path
+
+    from climrr import litsynth_run2 as s2
+    root = Path(tempfile.mkdtemp(prefix="litsynth_v3_2_"))
+    tools = root / "scripts" / "litcollect"
+    tools.mkdir(parents=True)
+    (tools / "litsynth_agent.py").write_bytes(s2.agent_v32_source())
+    for name in ("litstatement_agent.py", "litgroup_agent.py"):
+        (tools / name).symlink_to(REPO_TOOLS / name)
+    (root / "src").symlink_to(REPO_ROOT / "src")
+    return tools
+
+
+TOOLS = _materialize_v32()
 AGENT = TOOLS / "litsynth_agent.py"
 AGENT_SHA256 = "f5778fbf54ea44794d40086b997a504971812fe8a4481f7fedefae5f6d4b8b5e"
 FORMAT_CORRECTIVE_PROMPT_SHA256 = "919f52cb2612c6f7544a2d62f4488231a16092376e43ebef03e4a23ca7066d20"

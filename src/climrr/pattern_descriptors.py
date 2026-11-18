@@ -12,6 +12,15 @@ contrast (a region whose change rounds to 0.0 days; `smallest` then says "essent
 output is v1's, unchanged: the seed packets stay v1 (frozen for the pilot); v2 serves the edited texts and the mentor
 sheet.
 
+**v3** (`descriptor_rules_v3.yaml`, D-060, D-061; work package P3a) removes the RCP label, the threshold and the years
+from every phrase: horizon "by mid-century" / "by late this century", scenario "under a high-emissions future", the
+quantity from `plain_language_v1.yaml` by family (no threshold), and the anchor pair ending with the season unit ("from
+about 16 to about 45 days a summer"). The day-count rules (rare to common, low baseline, anchors) apply only to the
+rules' `day_count_families`; another family (fire weather: an index value) gets the ratio classes only. A pattern whose
+scenario the dictionary leaves unstated takes the scenario of the owner-authorized working assumption the rules name
+(D-064), recorded in `scenario_working_assumption`. With v1 or v2 rules the output is unchanged. The seed packets v4
+carry v3 descriptors.
+
 `phrases` flattens a descriptor record into the strings the post-checks accept (`checks_input.allowed_descriptors`).
 
 No model call; no table value computed beyond the ratio of two values the pattern stores.
@@ -31,6 +40,7 @@ from climrr.paths import REPO_ROOT
 
 RULES_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "descriptor_rules_v1.yaml"
 RULES_V2_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "descriptor_rules_v2.yaml"
+RULES_V3_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "descriptor_rules_v3.yaml"
 _THRESHOLD = re.compile(r"above (\d+) F\b")
 
 
@@ -62,6 +72,16 @@ def _unit(n: int, unit: str, rules: dict) -> str:
     return unit[:-1] if unit.endswith("s") and n == rules["anchor"]["unit_singular_at"] else unit
 
 
+def _per_season(p: dict, rules: dict) -> str:
+    """v3: the season unit the anchor pair ends with ("a summer"); empty for v1 / v2 rules and an unlisted season."""
+    return (rules["anchor"].get("per_season") or {}).get(p.get("season"), "")
+
+
+def _day_count(p: dict, rules: dict) -> bool:
+    """v3: whether the day-count rules apply to the pattern's family (always, for v1 / v2 rules)."""
+    return "day_count_families" not in rules or p.get("family") in rules["day_count_families"]
+
+
 def _rare_end(n: int, unit: str, r2: dict, rules: dict) -> str:
     return r2["end_zero"] if n == 0 else r2["end"].format(n=n, unit=_unit(n, unit, rules)).strip()
 
@@ -80,17 +100,25 @@ def negligible(value: str, rules: dict) -> bool:
     return bool(n) and round(float(value), n["decimals"]) == n["rounds_to"]
 
 
-def descriptors(p: dict, rules: dict) -> dict:
-    """The DR-DESC-1 descriptor record for pattern `p`."""
+def descriptors(p: dict, rules: dict, plain: dict | None = None) -> dict:
+    """The DR-DESC-1 descriptor record for pattern `p`. `plain`: the plain-language phrases v3 rules take the quantity
+    from (default: the pinned `plain_language_v1.yaml`); unused with v1 / v2 rules."""
     v = p["computed_value_or_range"]
-    window = p["horizon_window"].replace("-", rules["horizon"]["window_dash"])
+    window = p["horizon_window"].replace("-", rules["horizon"].get("window_dash", "-"))   # v3 phrases carry no window
     out = {"pattern_id": p["pattern_id"], "rule": rules["rule"], "rules_sha256": rules["sha256"],
            "direction": rules["direction_words"].get(p["direction"], p["direction"]),
-           "horizon": rules["horizon"][p["horizon"]].format(window=window) if p["horizon"] in rules["horizon"] else None,
+           "horizon": rules["horizon"][p["horizon"]].format(window=window) if p["horizon"] in ("mid", "end") and p["horizon"] in rules["horizon"] else None,
            "scenario": rules["scenario"].get(p["scenario"]), "quantity": None,
            "magnitude_class": None, "magnitude_note": None, "magnitude_also_allowed": [], "anchor_pair": None, "anchors": [], "tercile": None}
+    wa = (rules.get("scenario_working_assumption") or {}).get(p["scenario"])
+    if out["scenario"] is None and wa:
+        out["scenario"] = rules["scenario"].get(wa["scenario"])
+        out["scenario_working_assumption"] = {"assumed": wa["scenario"], "resolution": wa["resolution"]}
     t = _THRESHOLD.search(p.get("metric_wording") or "")
-    if p["metric"].startswith("heatindex_days") and t:
+    if rules.get("quantity_source"):
+        from climrr import plain_language
+        out["quantity"] = plain_language.quantity(p["family"], plain)
+    elif p["metric"].startswith("heatindex_days") and t:
         out["quantity"] = rules["quantity"]["heatindex_days"].format(threshold=t.group(1))
     if p["pattern_kind"] == "regional_contrast":
         ranked = [r for r in v["regions_ordered"] if r.get("value") is not None]
@@ -106,15 +134,25 @@ def descriptors(p: dict, rules: dict) -> dict:
                 out["smallest"] = rules["regional"]["negligible"]["smallest"].format(regions=", ".join(neg))
         return out
     mf, mt = v.get("mean_from"), v.get("mean_to")
-    if mf is not None and mt is not None:
+    if mf is not None and mt is not None and not _day_count(p, rules):
+        if Decimal(mf) > 0:
+            out["magnitude_class"] = magnitude_class(Decimal(mt) / Decimal(mf), p["direction"], rules)
+        out["magnitude_note"] = ("not a day count: ratio classes only, no anchors (DR-DESC-1 v3)" if out["magnitude_class"]
+                                 else f"not a day count: no magnitude class for direction {p['direction']} or a baseline <= 0")
+        if out["magnitude_class"]:
+            c = next(c for c in rules["magnitude"]["classes"] if c.get(p["direction"]) == out["magnitude_class"])
+            out["magnitude_also_allowed"] = list(c.get("also_allowed") or [])
+    elif mf is not None and mt is not None:
         unit = "days" if p["metric"].startswith("heatindex_days") else (v.get("unit") or "")
         a, b = anchor(mf), anchor(mt)
-        out["anchor_pair"] = rules["anchor"]["pair"].format(**{"from": a, "to": b, "unit": _unit(b, unit, rules)}).strip()
+        out["anchor_pair"] = rules["anchor"]["pair"].format(**{"from": a, "to": b, "unit": _unit(b, unit, rules),
+                                                               "per_season": _per_season(p, rules)}).strip()
         out["anchors"] = [rules["anchor"]["single"].format(n=n, unit=_unit(n, unit, rules)).strip() for n in (a, b)]
         if rare_to_common(mf, mt, p["direction"], rules):
             r2 = rules["magnitude"]["rare_to_common"]
             out["magnitude_class"] = r2["class"]
-            out["anchor_pair"] = r2["pair"].format(**{"from": _rare_end(a, unit, r2, rules), "to": _rare_end(b, unit, r2, rules)})
+            out["anchor_pair"] = r2["pair"].format(**{"from": _rare_end(a, unit, r2, rules), "to": _rare_end(b, unit, r2, rules),
+                                                      "per_season": _per_season(p, rules)}).strip()
             out["anchors"] = [_rare_end(n, unit, r2, rules) for n in (a, b)]
             out["magnitude_note"] = (f"rising from rare to common (D-055c): ratio {Decimal(mt) / Decimal(mf):.1f}" if Decimal(mf) > 0
                                      else "rising from rare to common (D-055c): baseline 0") + f", baseline {float(mf):.1f} days"

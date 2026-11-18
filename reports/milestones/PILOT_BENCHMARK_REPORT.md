@@ -801,3 +801,130 @@ scenario its question names (its pattern is RCP8.5 only).
 
 Nothing is frozen; `final_frozen` is null for every item. The support map v3 is one reader's judgement (EXECUTOR). The
 re-slice is recorded from Kaiyuan's Polaris run, not reproduced on this machine.
+
+# Pilot P3a --- mentor feedback 2026-11: generality rules, hedge wording, polish agent, working assumptions, packets v4
+
+COORDINATOR work package P3a (2026-11-17); owner input: Kaiyuan's relay of the mentor's feedback of 2026-11-13. **No model
+call. Nothing accepted; nothing frozen.** Decisions D-059 -- D-065.
+
+## 44. Commits and evidence runs
+
+| | |
+| --- | --- |
+| Branch | `work/meeting-2026-10-22`, from head `a53f978` |
+| **Build commit** | **`<BUILD>`**: resolution records R-004 -- R-008 and the validator, plain language v1, descriptor rules v3, selection v2, item design dispositions v1, the NCA5 disposition sidecar, polish synonyms v1 (all manifest-pinned), seeds v3 summary, FWI shortlist, packets v4, synthesis agent v4, post-checks v3, polish agent v1, mentor sheet builder v2, tests, docs |
+| **Evidence runs** | at `<BUILD>`, **`git_dirty: false`**: `dictionary_coverage`, `extract_table_patterns`, `status_diff`, `build_item_seeds_v3`, `build_synth_packets_v4` (run records under `reports/runs/`, listed in the evidence commit); outputs byte-identical to the build except the coverage report's `environment` block (commit, dirty flag, time), which the clean run rewrites, and the coverage hash line of `docs/TABLE_PATTERNS_V1.md` that follows it |
+| Remote | pushed at the end of the package (authorized) |
+
+## 45. Data and checksums
+
+| Object | SHA-256 | Notes |
+| --- | --- | --- |
+| `data/metadata/resolutions.yaml` | `d86e1cd4e92ab51562ec251c98652d135280a52642012f6c94f3e2d02595869a` | R-001 -- R-003 unchanged; **R-004 -- R-008** working assumptions (`effect: null`) |
+| **`data/metadata/benchmark/plain_language_v1.yaml`** | **`03bca7f46840998422201aba4b35cc16c87dabf21092a4b34401286c326fbf5f`** | manifest-pinned (D-060 -- D-062) |
+| **`data/metadata/benchmark/descriptor_rules_v3.yaml`** | **`fd32f4ba64afe37a4b264be831785c58ae8b23a7d8b435db30c86ca8405d47d9`** | DR-DESC-1 v3; v1, v2 unchanged |
+| `data/metadata/benchmark/pilot_selection_v2.yaml` | `067789c384c45d606f8bf0272c7ceda6c8a8e3af18788337a73131c3ece3421b` | owner Kaiyuan; FWI seeds pending his confirmation |
+| `data/metadata/benchmark/item_design_dispositions_v1.yaml` | `3589b2c6ed8481c4e5c59b6eda2bfba46359cb48aa3f3388fee6a52483dcb6ff` | D-059 overlay |
+| `data/metadata/geography/nca_regions_v1_disposition.yaml` | `a0c390a80634a8e4a74693e47828a9912ddea8f8151784d57c82f816e3bb1ae9` | D-065 sidecar; map `3141b122…9a41` unchanged |
+| `data/metadata/benchmark/polish_synonyms_v1.yaml` | `8236d5eb2444cfacbbbbf902499714f84902c3f15978683d02b53459f5dca549` | D-063; EXECUTOR list |
+| `artifacts/benchmark/item_seeds_v3.jsonl` (gitignored) | `04602e1bce5bc205ab6ae0d179f866ce894cfc517be62f2039fdc9c393f9d8a5` | pinned in the summary |
+| `artifacts/benchmark/item_seeds_v3_summary.json` | `255c182d0023e4811ee52e52d0ec0e172b38fef99c205edab0abbe82c2a1b13c` | |
+| `artifacts/benchmark/pilot_shortlist_fwi_v1.csv` | `d16b540c73fa5975a7ce896327be66ae5e97a903c38e833af440b96599205920` | picks + next candidates per horizon |
+| **`artifacts/benchmark/synth_packets_v4/manifest.json`** | **`97b98d9f9ea30dc2972ab4b713478af161b5d8eed3a5b90d17704fc58b50e813`** | 8 packets, each with its SHA-256 |
+| **`scripts/litcollect/litsynth_agent.py`** v4 | **`8a8ca836a6cd6469ead6948305f721b9e0d6e7063770350f4c89810a3000fee1`** | system prompt `33d387fe5098806cac70822194dc34804d80fc98cdb69ec850c919f88993db05`; format corrective `053037521584043f258b74c3e96fc1d5bf6e93f76d15b1c7a4d5229a041a239f`; v3.2 `f5778fbf…8b5e` held at `1f175da` |
+| **`scripts/litcollect/litpolish_agent.py`** v1 | **`901e39540885b461fccb666803eb5d088ade229dc75253bc5901f3937a9f10dc`** | system prompt `42537289f4ee83a532dd6af22e9c6af1c72bb248c17bae640b2fde24ba6b43b9` (verbatim) |
+
+## 46. Methods and readings for the COORDINATOR
+
+- **Working assumptions are not statuses (D-064).** R-004 -- R-008 have `effect: null` and name no columns; the validator
+  refuses a working assumption with an effect or columns. Columns 2, 3, 189--193 stay `inferred_candidate`; the coverage
+  report's columns are identical; the table patterns re-extract byte-identically. The seeds v3 copy of a pattern carries
+  `working_assumptions` and, for FWI summer, `acceptance_blocked: false` with `acceptance_blocked_by_original`.
+- **Overlays instead of edits (EXECUTOR, for confirmation):** `rejected_by_design (D-059)` is not a schema-v2 review
+  status and the item files are immutable -> `item_design_dispositions_v1.yaml`; the NCA5 map is an immutable pinned
+  object -> `nca_regions_v1_disposition.yaml`.
+- **Packets v4 apply corrections v1a** (corrected statement and passage of LS-199098498-04; reviewer label of
+  `…-driver-c1-008`) before choosing groups. The corrected statement ("Citing Schoof et al. (2019), the paper reports ...")
+  is in the model view; post-checks v3 would reject "et al." or "2019" in graded text.
+- **FWI descriptors:** ratio classes only (both sample seeds "a slight increase": 31.4 -> 33.6, 15.3 -> 16.8), no anchors.
+- **The v3.2 agent stays tested.** `tests/test_litsynth_agent.py` runs the v3.2 bytes from the runs' source commit
+  (`1f175da`); the run-2 / run-3 ingest reproduction loads the same bytes.
+- **Polish checks:** sets of numbers / places / hedges per field; generic causal words are stopwords; a failure keeps the
+  pre-polish text.
+
+**Fire-arm groups attached to the two FWI packets** (agent claim tags, never human-reviewed; `review_state:
+unreviewed_agent_tag`; for review before the run):
+
+**BI-P3-0007** (`PK-SD2-TP1-01463`):
+
+| group | label | kind | type | claim tag (agent) | role | strength in packet | papers |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `LG-fire_weather_v1-driver-c1-001` | warming temperatures increase fire risk and severity | group | driver | hazard_change_mechanism | driver | multi_source_supported | 5 |
+| `LG-fire_weather_v1-driver-c1-003` | strong winds are a primary driver of fire danger and spread | group | driver | hazard_change_mechanism | driver | multi_source_supported | 5 |
+| `LG-fire_weather_v1-mechanism-c1-002` | strong winds and low humidity raise fire danger and fire size | group | mechanism | hazard_change_mechanism | driver | multi_source_supported | 5 |
+| `LG-fire_weather_v1-mechanism-c1-003` | higher temperatures and aridity dry fuels, creating extreme fire‑weather | group | mechanism | hazard_change_mechanism | driver | multi_source_supported | 4 |
+| `LG-fire_weather_v1-mechanism-c1-007` | fuel moisture is estimated from soil moisture or weather and strongly controls fire emissions | group | mechanism | hazard_change_mechanism | driver | multi_source_supported | 3 |
+| `LG-fire_weather_v1-driver-c1-002` | humidity and vapor pressure deficit affect fire risk | group | driver | hazard_change_mechanism | driver | multi_source_supported | 2 |
+| `LG-fire_weather_v1-driver-c1-007` | The highest severity fires are most often caused by extreme fire weather, including high temperatures and low atmospheric moisture. | singleton | driver | hazard_change_mechanism | driver | single_source_supported | 1 |
+| `LG-fire_weather_v1-driver-c1-015` | In recent decades, power‑line failures have become the dominant source of human ignitions during Santa Ana wind events, suggesting that utility maintenance influences fire danger risk. | singleton | driver | hazard_change_mechanism | driver | single_source_supported | 1 |
+| `LG-fire_weather_v1-mechanism-c1-001` | warmer atmosphere increases VPD and lowers fuel moisture | group | mechanism | hazard_change_mechanism | driver | single_source_supported | 1 |
+| `LG-fire_weather_v1-driver-c1-004` | warmer climate increases lightning, raising fire risk | group | driver | hazard_change_mechanism | driver | multi_source_supported | 2 |
+| `LG-fire_weather_v1-driver-c1-005` | fire weather indices (FWI and components) predict burned area | group | driver | hazard_definition_or_measurement | context | multi_source_supported | 6 |
+| `LG-fire_weather_v1-mechanism-c1-005` | model calculates fire intensity, spread and consumption from fuel and weather parameters | group | mechanism | hazard_definition_or_measurement | context | multi_source_supported | 4 |
+| `LG-fire_weather_v1-mechanism-c1-004` | fire‑danger indices are defined/measured from weather variables and intermediate moisture variables | group | mechanism | hazard_definition_or_measurement | context | single_source_supported | 5 |
+| `LG-fire_weather_v1-driver-c2-002` | Fire‑weather indices are strong predictors of lightning‑ignited wildfire risk | group | driver | hazard_definition_or_measurement | context | single_source_supported | 1 |
+
+**BI-P3-0008** (`PK-SD2-TP1-01654`):
+
+| group | label | kind | type | claim tag (agent) | role | strength in packet | papers |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `LG-fire_weather_v1-driver-c1-014` | Both fire ignition and spread rates in the model are directly influenced by fire weather and topography, indicating fire weather as a primary driver of fire dynamics. | singleton | driver | hazard_change_mechanism | driver | single_source_supported | 1 |
+| `LG-fire_weather_v1-driver-c1-001` | warming temperatures increase fire risk and severity | group | driver | hazard_change_mechanism | driver | multi_source_supported | 3 |
+| `LG-fire_weather_v1-mechanism-c1-003` | higher temperatures and aridity dry fuels, creating extreme fire‑weather | group | mechanism | hazard_change_mechanism | driver | multi_source_supported | 2 |
+| `LG-fire_weather_v1-driver-c1-004` | warmer climate increases lightning, raising fire risk | group | driver | hazard_change_mechanism | driver | multi_source_supported | 2 |
+| `LG-fire_weather_v1-driver-c1-006` | climate change increases extreme fire‑weather frequency | group | driver | hazard_change_mechanism | driver | single_source_supported | 2 |
+| `LG-fire_weather_v1-mechanism-c2-005` | Potential evaporation or evaporative demand influences fire occurrence inversely | group | mechanism | hazard_change_mechanism | driver | single_source_supported | 2 |
+| `LG-fire_weather_v1-driver-c2-021` | Low sea‑ice concentrations in the Beaufort/Chukchi Seas favor fire‑weather conditions in the western United States. | singleton | driver | hazard_change_mechanism | driver | single_source_supported | 1 |
+| `LG-fire_weather_v1-driver-c3-001` | Vapor pressure deficit is a dominant driver of fire frequency and intensity | group | driver | hazard_change_mechanism | driver | single_source_supported | 1 |
+| `LG-fire_weather_v1-driver-c3-002` | Warmer and drier conditions increase high‑severity fire area burned | group | driver | hazard_change_mechanism | driver | single_source_supported | 1 |
+| `LG-fire_weather_v1-mechanism-c2-004` | Higher live‑vegetation or dead‑fuel moisture reduces fire hazard | group | mechanism | hazard_change_mechanism | driver | single_source_supported | 1 |
+| `LG-fire_weather_v1-mechanism-c1-005` | model calculates fire intensity, spread and consumption from fuel and weather parameters | group | mechanism | hazard_definition_or_measurement | context | multi_source_supported | 4 |
+| `LG-fire_weather_v1-mechanism-c1-004` | fire‑danger indices are defined/measured from weather variables and intermediate moisture variables | group | mechanism | hazard_definition_or_measurement | context | single_source_supported | 5 |
+| `LG-fire_weather_v1-driver-c1-005` | fire weather indices (FWI and components) predict burned area | group | driver | hazard_definition_or_measurement | context | multi_source_supported | 5 |
+| `LG-fire_weather_v1-driver-c2-002` | Fire‑weather indices are strong predictors of lightning‑ignited wildfire risk | group | driver | hazard_definition_or_measurement | context | single_source_supported | 1 |
+
+Reading for the review (EXECUTOR): several attached groups are about fire occurrence, severity or burned area rather than
+fire-weather danger (`…-driver-c1-001` "fire risk and severity", `…-driver-c3-002` "high-severity fire area burned",
+`…-mechanism-c2-005` "fire occurrence", `…-driver-c1-005` "FWI ... predict burned area", `…-driver-c2-002` "lightning-ignited
+wildfire risk"); `…-driver-c1-015` (power-line ignitions during Santa Ana winds) is a human-ignition finding; `…-driver-c2-021`
+(Beaufort / Chukchi sea ice -> western U.S. fire weather) is attached to Minnesota through a national-scope relevance basis.
+None is excluded here: no disposition exists for the fire arm, and the work package attaches by the same rules.
+
+## 47. Results
+
+| | |
+| --- | --- |
+| Seeds v3 | 2,812 seeds; **2,720 eligible** (v2: 2,368): heat 1,316, **FWI 1,404**; 352 newly eligible, 0 newly ineligible; rung 3: 2,692, rung 4: 28; blockers replaced: IC-006 -- IC-010 -> WA-FWI-SUMMER (352), IC-012 -> WA-STATE-LABEL (2,764); none remaining |
+| FWI shortlist rule | 49 candidates per horizon. **SD2-TP1-01463 California, summer seasonal FWI, mid-century** (rank 26; 31.4 -> 33.6, +2.2; upper tercile; 22 state-named explaining statements, e.g. Santa Ana winds); **SD2-TP1-01654 Minnesota, end-century** (rank 162; 15.3 -> 16.8, +1.5; middle tercile; California end-century, rank 29, skipped as the same state) |
+| Selection v2 | BI-P3-0001 .. 0008: SD2-TP1-00071, -00271, -00460, -00589 (rung 3), -02785, -02789 (rung 4), -01463, -01654 (rung 3) |
+| Packets v4 | heat: 11--12 groups (8 drivers, 3--4 context; 4 multi-source), 0 `no_disposition` exclusions, label override and correction in all six; FWI: 14 groups each (10 drivers, 4 context; 9 and 5 multi-source), all unreviewed; no RCP label, threshold or year in any pattern text, descriptor or guardrail; thresholds and window years not allowed numbers |
+| Threshold conflict | `all_covered_nca5_regions`: BI-P3-0005 (95 °F, mid) and BI-P3-0006 (105 °F, mid) |
+| Tests | `pytest`: **1,580 passed, 2 skipped** (the two pre-existing `jsonschema` skips); new `test_litsynth_agent_v4.py` (15: prompt pin, general items pass v3, generality failures and their corrective turn, hedge report, end-to-end), `test_litpolish_agent.py` (16: faithful rewrite used, seven rejection cases, corrective turn, skip, unit checks), `test_pilot_p3a.py` (15); `test_litsynth_agent.py` (30) now on the v3.2 bytes at `1f175da` |
+| Scanner | `verify_no_secrets_or_paths.py`: 0 hits (1,719 tracked text files) |
+
+## 48. Escalations
+
+1. **BI-P3-0005 / 0006** cover the same place set at the same horizon with two thresholds; under D-060 their questions read
+   alike. Keep both (as listed), or drop one, before the run.
+2. **Fire-arm groups** (section 46): occurrence / severity / burned-area and human-ignition groups are attached as drivers
+   of fire-weather danger; the COORDINATOR's review (or a fire-arm disposition file) before synthesis run 4.
+3. **The two FWI seeds** await Kaiyuan's confirmation; the rule's EXECUTOR readings (metric, statistic, states only, mid
+   first) are in `pilot_shortlist.fwi_candidates`.
+4. **Overlays** for D-059 and D-065 instead of a schema value and a map edit; **corrections v1a** applied in packets v4.
+5. **The mentor's quoted example** for point (5) was not in the relay; not recorded.
+
+## 49. Limitations
+
+No item exists yet for the sample set: synthesis run 4 and polish run 1 are Polaris runs (Kaiyuan). The mentor sheet
+builder v2 is exercised by tests on synthetic items only. The FWI items rest on working assumptions, not confirmed column
+readings. The polish synonym list is short and EXECUTOR-written: a missing synonym rejects a rewrite, it never admits one.

@@ -48,6 +48,12 @@ exact pattern value with a decimal (`exact_value_in_graded_text`): exact values 
 v2.2 (D-055b): number-words start at "two" --- "one", "a", "an", "once", "single" are never numeric
 ("twenty-one" still is); "has been reported" is a hedge word. `format_class_only` tells the synthesis
 agent whether every failure reason is a format failure (one corrective turn, D-055b).
+v3 (work package P3a; D-060, D-061, D-062; run by litsynth_agent v4): v2.3 (model-source phrases) on by default, plus
+the generality rule --- the prompt, reference texts and rubric carry no RCP label, no threshold such as "95 °F", no year
+and no "one study" / "a single study" (`GENERALITY_RE`, the work package's pattern); the number rule is unchanged (the
+coarse anchor pair stays allowed). A hedge-by-strength report (`hedge_by_strength`; report only, not a failure): a
+literature sentence citing only single-source groups should say "suggests"; one citing a multi-source or review group
+should not say "suggests" without "shows" / "shown".
 
 Nothing here calls a model, reads table values, or touches the concept map,
 column statuses or compatibility rules.
@@ -327,7 +333,15 @@ SYNTH_CHECK_VERSION = "synthesis_post_checks v2.2"
 # model, projection, data or table as its source ("The model shows ..."). Opt-in (`check_version=`): the default stays
 # v2.2, which the frozen litsynth_agent v3.2 runs and runs 2 and 3 are reproduced with; v2.3 was a report-only re-run.
 SYNTH_CHECK_VERSION_V23 = "synthesis_post_checks v2.3"
-SYNTH_CHECK_VERSIONS = (SYNTH_CHECK_VERSION, SYNTH_CHECK_VERSION_V23)
+# v3 (work package P3a, D-060 -- D-062): v2.3 plus the generality rule and the hedge-by-strength report. Opt-in as well:
+# litsynth_agent v4 passes it; v2.2 stays the default the ingest of runs 2 and 3 reproduces.
+SYNTH_CHECK_VERSION_V3 = "synthesis_post_checks v3"
+SYNTH_CHECK_VERSIONS = (SYNTH_CHECK_VERSION, SYNTH_CHECK_VERSION_V23, SYNTH_CHECK_VERSION_V3)
+#: The work package's pattern, `RCP|\d{2,}\s?°?F|\b(19|20)\d{2}\b|one study|a single study`, applied to the normalised text
+#: (`normalise_number_text`: "95℉" and "95\u202f°F" read "95 °F"); the two phrases case-insensitively.
+GENERALITY_RE = re.compile(r"RCP|\d{2,}\s?°?F|\b(?:19|20)\d{2}\b|(?i:one study|a single study)")
+SHOW_RE = re.compile(r"\bshows?\b|\bshown\b", re.I)
+SUGGEST_RE = re.compile(r"\bsuggests?\b", re.I)
 MODEL_SOURCE_RES = (re.compile(r"\b(the|this|our) (model|projection|modeled projection|data|dataset|table) (shows?|indicates?|projects?|suggests?)\b", re.I),
                     re.compile(r"\bmodeled projection shows\b", re.I))
 INTERNAL_ID_RE = re.compile(r"\b(?:LS|LG|LC|SD[12]|PK|BI)-[A-Za-z0-9_-]+|\bTP\d+-\d+\b")
@@ -453,7 +467,11 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
     (`checks_input.group_texts`; `literature_trace`). Table-pattern sentences, the integrated paragraph, the prompt and
     rubric text without group source ids keep the v2 rule.
 
-    v2.3 (`check_version=SYNTH_CHECK_VERSION_V23`): also `model_source_flags` on the prompt and the reference texts."""
+    v2.3 (`check_version=SYNTH_CHECK_VERSION_V23`): also `model_source_flags` on the prompt and the reference texts.
+
+    v3 (`check_version=SYNTH_CHECK_VERSION_V3`; D-060 -- D-062): v2.3, and `generality_flags` on the prompt, the reference
+    texts and every rubric list (a failure); `checks.hedge_by_strength` reports hedge words that do not match the cited
+    groups' strength (not a failure)."""
     if check_version not in SYNTH_CHECK_VERSIONS:
         raise ItemError(f"unknown post-check version {check_version!r}")
     cols = columns if columns is not None else column_names()
@@ -523,8 +541,12 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
     reasons += [f"prompt leakage: {f}" for f in prompt_extra]
     for w, t in texts:
         reasons += [f"{w} leakage: {f}" for f in text_leakage(t, cols, checks_input.get("forbidden_strings", []))]
-    if check_version == SYNTH_CHECK_VERSION_V23:
+    if check_version in (SYNTH_CHECK_VERSION_V23, SYNTH_CHECK_VERSION_V3):
         reasons += [f"{w} leakage: {f}" for w, t in [("prompt", item.get("prompt") or "")] + texts for f in model_source_flags(t)]
+    hedge_report = None
+    if check_version == SYNTH_CHECK_VERSION_V3:
+        reasons += [f"{w}: generality (D-060/D-062): {m!r} in graded text" for w, t in every for m in generality_flags(t)]
+        hedge_report = hedge_by_strength(lit_s, strengths)
 
     schema = schema_errors(item)
     reasons += [f"schema: {e}" for e in schema]
@@ -536,18 +558,43 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
                        "texts_traced_to_literature": [every[i][0] for i in sorted(lit)],
                        "rubric_points_without_source_ids": sum(not (isinstance(r, dict) and r.get("source_ids"))
                                                                for r in tagged.get("rubric_points") or []),
-                       "n_table_sentences": len(tp_s), "n_literature_sentences": len(lit_s)}}
+                       "n_table_sentences": len(tp_s), "n_literature_sentences": len(lit_s),
+                       **({"hedge_by_strength": hedge_report} if hedge_report is not None else {})}}
+
+
+def generality_flags(text: str) -> list[str]:
+    """v3 (D-060, D-062): the matches of `GENERALITY_RE` in the normalised `text`."""
+    return [m.group(0) for m in GENERALITY_RE.finditer(normalise_number_text(text))]
+
+
+def hedge_by_strength(lit_s: list[dict], strengths: dict) -> list[dict]:
+    """v3 report (D-062): literature sentences whose hedge does not match the cited packet groups' strength --- only
+    single-source groups and no "suggests"; or a multi-source / review group and "suggests" without "shows" / "shown"."""
+    out = []
+    for i, s in enumerate(lit_s):
+        ids = [g for g in (s.get("group_ids") if isinstance(s.get("group_ids"), list) else []) if g in strengths]
+        if not ids:
+            continue
+        single = all(strengths[g] == "single_source_supported" for g in ids)
+        t = s["sentence"]
+        if single and not SUGGEST_RE.search(t):
+            out.append({"sentence": i, "issue": "single-source groups only, no 'suggests'", "group_ids": ids})
+        elif not single and SUGGEST_RE.search(t) and not SHOW_RE.search(t):
+            out.append({"sentence": i, "issue": "a multi-source or review group, 'suggests' without 'shows'", "group_ids": ids})
+    return out
 
 
 # --- format-class failures (D-055b; litsynth_agent v3.2 corrective turn) ---------------------------------
 
 _WORD_VALUES = {w: i for i, w in enumerate(_ONES.split("|"), 1)} | {w: i for i, w in enumerate(_TEENS.split("|"), 10)} | \
                {w: 10 * i for i, w in enumerate(_TENS.split("|"), 2)} | {"hundred": 100, "thousand": 1000, "twice": 2}
+_GENERALITY_REASON_RE = re.compile(r"^[^:]+: generality \(D-060/D-062\): (.+) in graded text$")
 _FORMAT_NUMBER_RE = re.compile(r"^[^:]+: number (\S+) does not trace to a pattern value or allowed descriptor in the packet$")
 _FORMAT_REASON_RES = (re.compile(r"^[^:]+: number-word '.*' does not trace to an allowed descriptor in the packet$"),
                       re.compile(r"^[^:]+: exact_value_in_graded_text \S+ \(exact values belong to provenance\)$"),
                       re.compile(r"^literature_interpretation\[\d+\]: rests only on single-source groups but "
-                                 r"(?:is not marked hedged|carries no hedge word)$"))
+                                 r"(?:is not marked hedged|carries no hedge word)$"),
+                      re.compile(r"^[^:]+: generality \(D-060/D-062\): .+ in graded text$"))   # v3 only emits it
 
 
 def number_word_value(word: str) -> float | None:
@@ -579,14 +626,18 @@ def descriptor_values(phrases: list[str]) -> set[float]:
 def format_class_only(reasons: list[str], allowed_descriptors: list[str]) -> bool:
     """D-055b: True when there is at least one reason and every reason is a format failure --- `exact_value_in_graded_text`,
     an untraced number-word, a missing hedge (flag or word), or an untraced number whose value an allowed descriptor
-    states under another form (digits "16.0" for "about 16 days", "3" for "roughly tripling"). Anything else (leakage,
-    an untraced fact or id, schema, consistency, parse) is not."""
+    states under another form (digits "16.0" for "about 16 days", "3" for "roughly tripling"); v3: a generality failure, and
+    an untraced number a generality reason names. Anything else (leakage, an untraced fact or id, schema, consistency,
+    parse) is not."""
     vals = descriptor_values(allowed_descriptors)
+    # v3: an untraced number that a generality reason itself names (a year, a threshold such as '95 °F') is that wording
+    # failure seen twice; generality reasons appear only under post-checks v3.
+    general = {n for r in reasons if (g := _GENERALITY_REASON_RE.match(r)) for n in re.findall(r"\d+", g.group(1))}
 
     def fmt(r: str) -> bool:
         if any(x.match(r) for x in _FORMAT_REASON_RES):
             return True
         m = _FORMAT_NUMBER_RE.match(r)
-        return bool(m) and float(m.group(1)) in vals
+        return bool(m) and (float(m.group(1)) in vals or m.group(1) in general)
 
     return bool(reasons) and all(fmt(r) for r in reasons)

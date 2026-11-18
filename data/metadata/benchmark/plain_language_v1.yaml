@@ -1,0 +1,43 @@
+# Plain-language phrases v1 for the graded text of a benchmark item (D-060, D-061, D-062; mentor 2026-11-13; work package P3a).
+#
+# The graded text of an item (the question, the reference answer, the rubric) names no RCP label, no threshold number and
+# no years. It names the quantity, the scenario and the horizon with the phrases below; the exact threshold, scenario,
+# windows and values stay in the item's provenance (reference_components) only. One threshold per place per item set
+# (D-060), so the plain quantity phrase cannot be ambiguous within a set.
+#
+# src/climrr/plain_language.py reads this file only when its bytes match the manifest pin; the seed packets v4 carry the
+# phrases (model_view.plain_language), litsynth_agent v4 must use them, and synthesis_post_checks v3 forbids what they
+# replace. Pinned by SHA-256 in data/manifest.json; a change is plain_language_v2.yaml with its own decision.
+#
+# Marked EXECUTOR: a detail the work package does not fix, recorded for confirmation.
+#
+# No column is interpreted here. The fire-weather phrase follows the standing caution: a Fire Weather Index is a
+# meteorological fire-danger index, never fire occurrence.
+
+version: plain_language_v1
+decision: D-060
+
+families:
+  heat_index:
+    quantity: "days hot and humid enough to be dangerous"        # the work package, verbatim
+    quantity_short: "dangerous heat-index days"                  # the work package, verbatim
+    season_unit: "a summer"                                      # the coarse anchor pair ends "... days a summer"
+  fire_weather_index:
+    quantity: "fire-weather danger"                              # the work package, verbatim; never fire occurrence
+    quantity_short: "fire-weather danger"                        # EXECUTOR: the work package gives one phrase
+    season_unit: null                                            # EXECUTOR: an index value has no countable unit; no anchor pair
+
+scenario:
+  RCP8.5: "under a high-emissions future"                        # D-061: the only scenario words in graded text
+
+horizon:
+  mid: "by mid-century"
+  end: "by late this century"
+
+# D-062: the hedge in graded text follows the evidence strength of the groups a sentence rests on. The strength label itself
+# is unchanged in provenance and rubric.
+hedges:
+  multi_source_supported: ["research shows", "research has shown"]
+  review_supported: ["research shows", "research has shown"]     # D-062: "or review"
+  single_source_supported: ["research suggests"]
+  never: ["one study", "a single study"]

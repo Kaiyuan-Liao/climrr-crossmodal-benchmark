@@ -1,5 +1,8 @@
 # Metadata questions — M1-WP1 inventory
 
+> **2026-11-13 (D-064):** the FWI-summer and `State` / `NAME` questions are `closed_by_owner_direction` --- see
+> *Closed by owner direction* below; nothing was confirmed and no status moved.
+>
 > **Status after the 2026-09-10 mentor meeting (M1-WP2b).** **Q0 is closed,
 > answered in the negative** — there is no further documentation of any kind
 > (R-001). **Q1–Q18 were put to the mentor and none was answered per column**
@@ -578,6 +581,26 @@ Q19--Q21, added later, are for the collection scientist. D-008 closed the
 Kaiyuan-side half of Q1, Q10, Q11 and Q18: he received one file and changed
 nothing, so nothing about this table's shape can be explained by handling on this
 side.
+
+## Closed by owner direction (2026-11-13, D-064)
+
+The mentor's direction of 2026-11-13, point (6) as relayed by Kaiyuan: "for the meaning of other columns, go with our
+assumptions based on the table and related files; no further confirmation needed." The FWI and `State` / `NAME`
+confirmation requests are **`closed_by_owner_direction (D-064)`**: the project proceeds on its documented readings as
+**owner-authorized working assumptions** (resolution records R-004 -- R-008, status `owner_authorized_working_assumption`,
+`effect: null`). They are **not answered**: no reading was confirmed, no column status moved, and every artifact that
+relies on one names it (`working_assumptions_relied_on`).
+
+| Question | Standing | Working assumption |
+| --- | --- | --- |
+| **Q13** for indices 189--193 (the summer FWI columns, IC-006 -- IC-010) | `closed_by_owner_direction (D-064)` | R-004 `WA-FWI-SUMMER` |
+| **Q10.5**, the `State` part (index 3, IC-012) | `closed_by_owner_direction (D-064)` | R-005 `WA-STATE-LABEL` |
+| **Q10.5**, the `NAME` part (index 2, IC-011) | `closed_by_owner_direction (D-064)` | R-006 `WA-NAME-LABEL` |
+| The FWI percent-change scenario (indices 180, 181, 187, 188, 194, 195, 201, 202; asked in the mentor brief, not numbered here) | `closed_by_owner_direction (D-064)` | R-007 `WA-FWI-PCT-SCENARIO` |
+
+Unchanged and still open: the rest of Q10 (Census vintage, `GEOID`, `TRACTCE`, `X` / `Y`, `NAME_1`, `NAMELSAD`, the
+49-versus-50 state labels and the 7 blank rows), Q13 for the other seasons' FWI columns, Q17, and every other question
+below. The unweighted cell-mean aggregation rule (R-008) is a project rule, not a question of this file.
 
 ## Where each question now stands (after the 2026-09-10 meeting)
 

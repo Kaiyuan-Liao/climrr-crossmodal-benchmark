@@ -1,0 +1,24 @@
+# Item design dispositions v1 (D-059; mentor 2026-11-13; work package P3a).
+#
+# D-059: items use both sources; rung 1 (pattern-only) items are dropped from the benchmark. The work package sets
+# BI-P2B-0001 and BI-P2B-0002 to `review.status: rejected_by_design (D-059)`, kept as evidence. Item schema v2's
+# `review.status` enum has no such value, and the item files are immutable (pinned by the run-2 manifest and the items
+# index), so the disposition is recorded here as an overlay: the item files keep `human_review`, and
+# `climrr.item_dispositions.effective_status` reads `rejected_by_design (D-059)` for them. Pinned by SHA-256 in
+# data/manifest.json; a change is item_design_dispositions_v2.yaml with its own decision.
+
+version: item_design_dispositions_v1
+decision: D-059
+items:
+  - item_id: BI-P2B-0001
+    status: rejected_by_design (D-059)
+    reason: "rung 1, pattern only (no literature): items use both sources (D-059)"
+    item_file: artifacts/benchmark/items/run2/items/BI-P2B-0001.json
+    item_file_sha256: 03b49f1a72ac694d852fe680ca5cd7cb01ff8bd77b2c28d38225c935b791d9e7
+    kept_as_evidence: true
+  - item_id: BI-P2B-0002
+    status: rejected_by_design (D-059)
+    reason: "rung 1, pattern only (no literature): items use both sources (D-059)"
+    item_file: artifacts/benchmark/items/run2/items/BI-P2B-0002.json
+    item_file_sha256: e2330ede9d52a948af5ca4d668da6b436ac152a661d29a67ec62076e0c628811
+    kept_as_evidence: true

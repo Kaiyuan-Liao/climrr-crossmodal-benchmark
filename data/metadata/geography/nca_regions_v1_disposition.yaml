@@ -1,0 +1,22 @@
+# NCA5 state -> region map v1: owner disposition (D-065; mentor 2026-11-13; work package P3a).
+#
+# The work package asks that nca_regions_v1.yaml keep `source_verification: pending` and gain
+# `owner_disposition: accepted_as_project_grouping (2026-11-13)`. The map is pinned by SHA-256 in data/manifest.json as an
+# immutable object ("a change is a new version, never an edit"), and the table patterns, item seeds and packets name
+# that hash. The disposition is therefore recorded in this sidecar, which names the map by its hash; the map's bytes, and
+# its `source_verification: pending_kaiyuan`, are unchanged. Every regional item references the map hash through its
+# packet's `inputs_sha256` (nca_map, nca_regions_disposition). Pinned by SHA-256 in data/manifest.json.
+#
+# Mentor point (7), as relayed by Kaiyuan: "climate regions are good; record our grouping for future checking."
+
+version: nca_regions_v1_disposition
+decision: D-065
+map:
+  path: data/metadata/geography/nca_regions_v1.yaml
+  sha256: 3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41
+  source_verification: pending          # unchanged: the map's own field reads pending_kaiyuan
+owner_disposition: accepted_as_project_grouping (2026-11-13)
+owner_disposition_source: "mentor one-on-one 2026-11-13, point (7), relayed by Kaiyuan Liao (work package P3a, 2026-11-17)"
+note: >-
+  Accepted as the project's grouping of U.S. states into climate regions, recorded for future checking. The source of the
+  membership (NCA5, 2023) has not been verified against the report; the disposition does not verify it.

@@ -207,20 +207,24 @@ def _unit_words(p: dict, over_cells: bool) -> str:
     return {"percent": "%", None: ""}.get(v.get("unit"), v.get("unit") or "")
 
 
-def render_pattern(p: dict, nca: dict) -> tuple[str, dict, set[str]]:
-    """(plain-words text, the rounded values shown, allowed number strings)."""
+def render_pattern(p: dict, nca: dict, plain: dict | None = None) -> tuple[str, dict, set[str]]:
+    """(plain-words text, the rounded values shown, allowed number strings). `plain` (packets v4, D-060): {quantity,
+    horizon, scenario} phrases that replace the quantity with its threshold, the horizon with its years and the scenario
+    name; the threshold and the window years are then not allowed numbers. Without it the output is v3's."""
     v = p["computed_value_or_range"]
     allowed: set[str] = set()
     shown: dict = {}
+    horizon = (f"{plain['horizon']}" if plain else f"{HORIZON_WORDS.get(p['horizon'], p['horizon'])} ({p['horizon_window']})")
     lines = [f"Pattern {p['pattern_id']} ({'regional contrast' if p['pattern_kind'] == 'regional_contrast' else 'single place'}).",
-             f"Place: {place_words(p, nca)}.", f"Quantity: {quantity(p)}.", f"Season: {p['season']}.",
-             f"Horizon: {HORIZON_WORDS.get(p['horizon'], p['horizon'])} ({p['horizon_window']}), compared with the modeled historical baseline.",
-             f"Scenario: {SCENARIO_NOTE.get(p['scenario'], p['scenario'])}.", f"Statistic: {statistic_words(p)}.",
-             f"Direction: {p['direction']}."]
+             f"Place: {place_words(p, nca)}.", f"Quantity: {plain['quantity'] if plain else quantity(p)}.", f"Season: {p['season']}.",
+             f"Horizon: {horizon}, compared with the modeled historical baseline.",
+             f"Scenario: {plain['scenario'] if plain else SCENARIO_NOTE.get(p['scenario'], p['scenario'])}.",
+             f"Statistic: {statistic_words(p)}.", f"Direction: {p['direction']}."]
     t = threshold(p)
-    if t:
+    if t and not plain:
         allowed.add(t)
-    allowed |= set(re.findall(r"\d+", p["horizon_window"]))
+    if not plain:
+        allowed |= set(re.findall(r"\d+", p["horizon_window"]))
     if p["pattern_kind"] == "regional_contrast":
         unit = _unit_words(p, False)
         order = [r for r in v["regions_ordered"] if r.get("value") is not None]
@@ -310,10 +314,12 @@ def rank_key(x: dict) -> tuple:
             x["group_id"])
 
 
-def packet_groups(level: int, groups: list[dict], by_statement: dict, seed_basis: dict, geo: dict | None = None
-                  ) -> tuple[list[dict], list[dict]]:
+def packet_groups(level: int, groups: list[dict], by_statement: dict, seed_basis: dict, geo: dict | None = None,
+                  unreviewed_arms: tuple = ()) -> tuple[list[dict], list[dict]]:
     """(the groups a packet at `level` carries, ranked and capped; the excluded candidates with reasons) --- module docstring.
-    `geo`: {statement_id: litgeo classification}, for the members' region class and qualifier."""
+    `geo`: {statement_id: litgeo classification}, for the members' region class and qualifier. `unreviewed_arms` (packets
+    v4): arms no disposition file covers (the fire arm, whose claim tags were never human-reviewed); their groups are
+    attached by the agent's claim tag without the no-disposition rule and marked `review_state: unreviewed_agent_tag`."""
     if level == 1:
         return [], []
     geo = geo or {}
@@ -364,6 +370,7 @@ def packet_groups(level: int, groups: list[dict], by_statement: dict, seed_basis
         else:
             role = {DRIVER_CLAIM: "driver", CONTEXT_CLAIM: "context"}.get(claim)
             why = None if role else f"claim_about:{claim}"
+        unreviewed = g.get("arm") in unreviewed_arms
         picked.append({"group_id": g["group_id"], "kind": g["kind"],
                        "statement_type": "caveat" if scenario_slot else g["statement_type"], "claim_about": claim,
                        **({"statement_type_run": g["statement_type"], "scenario_slot": True} if scenario_slot else {}),
@@ -374,7 +381,8 @@ def packet_groups(level: int, groups: list[dict], by_statement: dict, seed_basis
                        "names_scenario": scen, "n_specific": sum(m["basis"] in ("state", "nca_region") for m in members),
                        "best_basis": min((m["basis"] for m in members), key=BASIS_RANK.get),
                        "best_basis_rank": min(BASIS_RANK[m["basis"]] for m in members),
-                       "n_papers": len({m["canonical_paper"] for m in members}), "members": members})
+                       "n_papers": len({m["canonical_paper"] for m in members}), "members": members,
+                       **({"review_state": "unreviewed_agent_tag"} if unreviewed else {})})
     excluded = [{"group_id": x["group_id"], "statement_type": x["statement_type"], "claim_about": x["claim_about"],
                  "reason": x["excluded_reason"]}
                 for x in sorted(picked, key=lambda x: x["group_id"]) if x["role"] is None]
@@ -383,7 +391,7 @@ def packet_groups(level: int, groups: list[dict], by_statement: dict, seed_basis
         kept = []
         key = (lambda x: (not x.get("scenario_slot"), *rank_key(x))) if role == "caveat" else rank_key   # D-054a: scenario first
         for x in sorted((x for x in picked if x["role"] == role), key=key):
-            if len(kept) < cap and x["disposition"] is not None:
+            if len(kept) < cap and (x["disposition"] is not None or x.get("review_state") == "unreviewed_agent_tag"):
                 kept.append(x)
                 continue
             why = f"over_cap:{role}" if len(kept) >= cap else "no_disposition"                  # D-053a

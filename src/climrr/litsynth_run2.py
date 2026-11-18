@@ -138,7 +138,7 @@ def verify_source(src: Path) -> dict:
     src, run = Path(src), _run(src)
     _check(sha256_file(run / "items.jsonl") == ITEMS_SHA256, "items.jsonl differs from its stated SHA-256")
     _check(sha256_file(run / "summary.json") == SUMMARY_SHA256, "summary.json differs from its stated SHA-256")
-    _check(sha256_file(REPO_ROOT / AGENT_REL) == AGENT_SHA256, f"{AGENT_REL} differs from the pinned v3.2 SHA-256")
+    # The working tree carries litsynth_agent v4 since work package P3a; the run is held to the v3.2 file at its source commit.
     _check(hashlib.sha256(git_blob(SOURCE_COMMIT, AGENT_REL)).hexdigest() == AGENT_SHA256,
            f"{AGENT_REL} at the source commit differs from the pinned SHA-256")
     _check(hashlib.sha256(git_blob(SOURCE_COMMIT, f"{PACKETS_REL}/manifest.json")).hexdigest() == PACKETS_MANIFEST_SHA256,
@@ -229,13 +229,26 @@ def superseded_facts(src: Path, name: str) -> dict:
 # --- reproduction of the post-checks -------------------------------------------------------------
 
 
+def agent_v32_source(commit: str = SOURCE_COMMIT) -> bytes:
+    """The v3.2 agent the runs used, from the source commit (the working tree carries v4 since work package P3a)."""
+    blob = git_blob(commit, AGENT_REL)
+    _check(hashlib.sha256(blob).hexdigest() == AGENT_SHA256, f"{AGENT_REL} at {commit[:7]} differs from the pinned v3.2 SHA-256")
+    return blob
+
+
 def _agent():
+    """The pinned v3.2 agent as a module, loaded from its bytes at the source commit; its sibling imports
+    (litstatement_agent v3, litgroup_agent v3) resolve from scripts/litcollect, unchanged since."""
     import importlib.util
     import sys
+    import tempfile
     sys.path.insert(0, str(REPO_ROOT / "scripts" / "litcollect"))
-    spec = importlib.util.spec_from_file_location("litsynth_agent", REPO_ROOT / AGENT_REL)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
+    with tempfile.TemporaryDirectory() as d:
+        path = Path(d) / "litsynth_agent.py"
+        path.write_bytes(agent_v32_source())
+        spec = importlib.util.spec_from_file_location("litsynth_agent_v3_2", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
     return mod
 
 

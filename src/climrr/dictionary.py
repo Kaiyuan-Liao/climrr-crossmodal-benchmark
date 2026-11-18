@@ -709,7 +709,19 @@ RESOLUTION_REQUIRED_KEYS = frozenset(
 #: `statement_fidelity` says whether `statement` is the source's own words or a
 #: relayed paraphrase; absent means verbatim, which is what `statement` is
 #: defined to hold. `notes` is EXECUTOR commentary and never affects anything.
-RESOLUTION_OPTIONAL_KEYS = frozenset({"stem_section_map", "statement_fidelity", "notes"})
+#: `working_assumption` (D-064) records a reading the owner directed the project
+#: to proceed on without confirming it --- see `validate_working_assumption`.
+RESOLUTION_OPTIONAL_KEYS = frozenset({"stem_section_map", "statement_fidelity", "notes", "working_assumption"})
+
+#: D-064 (mentor 2026-11-13 via Kaiyuan): the data owner has directed the project
+#: to proceed on the project's documented reading without confirming it. It is
+#: not `verified_from_dictionary` and not `owner_confirmed`, and it is not a
+#: column status: a record carrying it has `effect: null`, so every column it
+#: concerns keeps its status (`inferred_candidate` stays `inferred_candidate`).
+#: Every artifact that relies on it says so (`working_assumptions_relied_on`).
+OWNER_AUTHORIZED_WORKING_ASSUMPTION = "owner_authorized_working_assumption"
+WORKING_ASSUMPTION_KEYS = frozenset({"status", "covers", "columns_relied_on", "reading", "relied_on_by"})
+WORKING_ASSUMPTION_ID_RE = re.compile(r"^WA-[A-Z0-9-]+$")
 
 #: `verbatim` --- the source's own words. `paraphrase` --- relayed in someone
 #: else's words, which is weaker evidence and must stay visible as such.
@@ -841,6 +853,9 @@ def validate_resolution(record: object, *, where: str = "resolution") -> dict:
             f"`statement_fidelity` must be one of {sorted(RESOLUTION_FIDELITY)}, got {fidelity!r}",
         )
 
+    if "working_assumption" in record:
+        validate_working_assumption(record, where)
+
     effect = record["effect"]
     if effect is None:
         # A recorded answer that moves nothing: the mentor said something worth
@@ -888,6 +903,35 @@ def validate_resolution(record: object, *, where: str = "resolution") -> dict:
         f"`effect.to` must be one of {sorted(RESOLUTION_TARGET_STATUSES)}, got {effect['to']!r}",
     )
     return record
+
+
+def validate_working_assumption(record: dict, where: str) -> None:
+    """D-064: a `working_assumption` block names its status, what it covers (inferred-candidate ids, a column name, or a
+    rule id), the column indices it relies on (documentation only: it reaches no column), the reading in words and who
+    relies on it. The record must have `effect: null` and name no columns: the working assumption is not a status."""
+    wa = record["working_assumption"]
+    _require(isinstance(wa, dict), where, "`working_assumption` must be a mapping")
+    _require(set(wa) == WORKING_ASSUMPTION_KEYS, where,
+             f"`working_assumption` must have exactly the keys {sorted(WORKING_ASSUMPTION_KEYS)}, got {sorted(wa)}")
+    _require(wa["status"] == OWNER_AUTHORIZED_WORKING_ASSUMPTION, where,
+             f"`working_assumption.status` must be `{OWNER_AUTHORIZED_WORKING_ASSUMPTION}`, got {wa['status']!r}")
+    _require(record["effect"] is None and not record["columns"] and not record.get("stem_section_map"), where,
+             "a working assumption moves no column status: the record must have `effect: null` and name no columns (D-064)")
+    _require(isinstance(wa["covers"], list) and wa["covers"] and all(isinstance(c, str) and c.strip() for c in wa["covers"]),
+             where, "`working_assumption.covers` must be a non-empty list of ids or names")
+    _require(isinstance(wa["columns_relied_on"], list) and all(isinstance(c, int) and not isinstance(c, bool) and c >= 0
+                                                                for c in wa["columns_relied_on"]),
+             where, "`working_assumption.columns_relied_on` must be a list of column indices")
+    _require(isinstance(wa["reading"], str) and wa["reading"].strip() != "", where, "`working_assumption.reading` may not be blank")
+    _require(isinstance(wa["relied_on_by"], str) and bool(WORKING_ASSUMPTION_ID_RE.match(wa["relied_on_by"])), where,
+             f"`working_assumption.relied_on_by` must look like WA-FWI-SUMMER, got {wa['relied_on_by']!r}")
+
+
+def working_assumptions(resolutions: list[dict]) -> dict:
+    """{working-assumption id: {resolution, covers, columns_relied_on, reading, status}} of the records that carry one."""
+    return {r["working_assumption"]["relied_on_by"]: {"resolution": r["id"], **{k: r["working_assumption"][k] for k in
+                                                                               ("status", "covers", "columns_relied_on", "reading")}}
+            for r in resolutions if r.get("working_assumption")}
 
 
 def load_resolutions(path_or_text: str) -> list[dict]:

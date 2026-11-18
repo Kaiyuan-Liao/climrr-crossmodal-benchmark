@@ -1,0 +1,125 @@
+{
+  "version": "itemseeds v3",
+  "rule": "DR-SEED-1 v3",
+  "decisions": [
+    "D-059",
+    "D-061",
+    "D-064"
+  ],
+  "inputs": {
+    "item_seeds_v2": {
+      "path": "artifacts/benchmark/item_seeds_v2.jsonl",
+      "sha256": "3123dd3463f23555601d1e64edc172e2977e2fc6df3adbb08a74b5df41be9d50"
+    },
+    "resolutions": {
+      "path": "data/metadata/resolutions.yaml",
+      "sha256": "d86e1cd4e92ab51562ec251c98652d135280a52642012f6c94f3e2d02595869a"
+    }
+  },
+  "seeds_file": {
+    "path": "artifacts/benchmark/item_seeds_v3.jsonl",
+    "sha256": "04602e1bce5bc205ab6ae0d179f866ce894cfc517be62f2039fdc9c393f9d8a5",
+    "gitignored": true
+  },
+  "retired_levels": {
+    "1": "D-059",
+    "7": "D-061"
+  },
+  "seeds": 2812,
+  "eligible": 2720,
+  "eligible_v2": 2368,
+  "eligible_by_family": {
+    "fire_weather_index": 1404,
+    "heat_index": 1316
+  },
+  "eligible_by_level": {
+    "3": 2692,
+    "4": 28
+  },
+  "eligible_levels_applicable": {
+    "3": 2720,
+    "4": 28
+  },
+  "eligible_by_metric": {
+    "fwi_autumn_percent_change_column": 234,
+    "fwi_percent_change_column (four seasons)": 116,
+    "fwi_spring_percent_change_column": 234,
+    "fwi_summer_percent_change_column": 234,
+    "fwi_summer_seasonal_value": 352,
+    "fwi_winter_percent_change_column": 234,
+    "heatindex_days_above_105F": 342,
+    "heatindex_days_above_115F": 312,
+    "heatindex_days_above_125F": 310,
+    "heatindex_days_above_95F": 352
+  },
+  "became_eligible": 352,
+  "became_ineligible": 0,
+  "fwi": {
+    "seeds": 1404,
+    "acceptance_blocked_v2": 352,
+    "acceptance_blocked_v3": 0,
+    "eligible": 1404,
+    "eligible_fwi_summer_seasonal_value": 352
+  },
+  "heat_index": {
+    "seeds": 1408,
+    "eligible": 1316
+  },
+  "seeds_by_working_assumption": {
+    "WA-FWI-PCT-SCENARIO": 1052,
+    "WA-FWI-SUMMER": 352,
+    "WA-STATE-LABEL": 2764,
+    "WA-UNWEIGHTED-MEAN": 1730
+  },
+  "eligible_by_working_assumption": {
+    "WA-FWI-PCT-SCENARIO": 1052,
+    "WA-FWI-SUMMER": 352,
+    "WA-STATE-LABEL": 2676,
+    "WA-UNWEIGHTED-MEAN": 1642
+  },
+  "blockers_replaced": {
+    "IC-006 -> WA-FWI-SUMMER": 352,
+    "IC-007 -> WA-FWI-SUMMER": 352,
+    "IC-008 -> WA-FWI-SUMMER": 352,
+    "IC-009 -> WA-FWI-SUMMER": 352,
+    "IC-010 -> WA-FWI-SUMMER": 352,
+    "IC-012 -> WA-STATE-LABEL": 2764
+  },
+  "blockers_remaining": {},
+  "fwi_shortlist": {
+    "version": "pilot_shortlist fwi v1",
+    "path": "artifacts/benchmark/pilot_shortlist_fwi_v1.csv",
+    "sha256": "d16b540c73fa5975a7ce896327be66ae5e97a903c38e833af440b96599205920",
+    "rule": {
+      "metric": "fwi_summer_seasonal_value",
+      "statistic": "absolute_change",
+      "horizons": [
+        "mid",
+        "end"
+      ],
+      "geography_type": "state",
+      "distinct_states": true,
+      "level": 3
+    },
+    "candidates": {
+      "mid": 49,
+      "end": 49
+    },
+    "picks": [
+      {
+        "seed_id": "SD2-TP1-01463",
+        "state": "California",
+        "horizon": "mid",
+        "seed_rank_key": 26,
+        "pattern_id": "TP1-01463"
+      },
+      {
+        "seed_id": "SD2-TP1-01654",
+        "state": "Minnesota",
+        "horizon": "end",
+        "seed_rank_key": 162,
+        "pattern_id": "TP1-01654"
+      }
+    ]
+  }
+}

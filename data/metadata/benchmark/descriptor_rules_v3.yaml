@@ -1,0 +1,99 @@
+# Pattern-level descriptors v3 (DR-DESC-1 v3; work package P3a, 2026-11-17; D-060, D-061).
+#
+# descriptor_rules_v2.yaml (D-055c) with the generality rules of D-060 (mentor 2026-11-13): the graded text names no RCP
+# label, no threshold number and no years. Changes from v2, and nothing else:
+#   - horizon phrases without years: "by mid-century", "by late this century";
+#   - scenario phrase: "under a high-emissions future" (D-061: no scenario talk beyond it);
+#   - quantity phrase from plain_language_v1.yaml, per family (no threshold: "days hot and humid enough to be dangerous";
+#     fire weather: "fire-weather danger");
+#   - the coarse anchor pair ends with the season unit: "from about 16 to about 45 days a summer" (digits are allowed in
+#     graded text only in this pair, and it stays an optional rubric point, D-060).
+# Marked EXECUTOR: a detail the work package does not fix, recorded for confirmation. The packets v4 carry these
+# descriptors; packets v3 / v3a / v3b keep v1 and the mentor sheet of 2026-11-05 keeps v2 (both files unchanged).
+# src/climrr/pattern_descriptors.py reads this file (RULES_V3_PATH) only when its bytes match the manifest pin.
+#
+# No column is interpreted and no table value is computed here: the ratio is of two values the pattern already stores
+# (mean_to / mean_from); a regional change is the value the pattern stores, rounded.
+
+version: descriptor_rules_v3
+rule: DR-DESC-1 v3
+decision: D-060
+base: descriptor_rules_v2
+
+direction_words:
+  increase: increase
+  decrease: decrease
+  no_change: no change
+
+# EXECUTOR (v3): the day-count rules below --- rare_to_common, low_baseline and the anchor pair --- apply only to the
+# families listed here, whose value is a count of days per season. For any other family (fire_weather_index: an index
+# value, no countable unit) only the ratio classes apply, and no anchor is emitted.
+day_count_families: [heat_index]
+
+magnitude:
+  ratio: mean_to / mean_from            # future / modeled historical baseline, both from the pattern record
+  # EXECUTOR: the first class whose [lower, upper) holds the ratio; "roughly tripling" includes 3.5 (the work
+  # package's last class is "> 3.5").
+  classes:
+    - {upper: 1.25, increase: "a slight increase"}
+    - {lower: 1.25, upper: 1.75, increase: "a moderate increase (about half again as many)", also_allowed: ["about half again as many"]}
+    - {lower: 1.75, upper: 2.5, increase: "roughly doubling"}
+    - {lower: 2.5, upper: 3.5, increase: "roughly tripling", inclusive_upper: true}
+    - {lower: 3.5, increase: "more than tripling"}
+  # EXECUTOR: the work package words the first class "a slight increase/decrease" and the others for an
+  # increase only; a decrease (ratio < 1) would always fall in the first class, so no class is emitted for a
+  # decrease until a rule is set (no pilot packet has one).
+  decrease_class: none
+  low_baseline:
+    below: 1                            # baseline mean < 1 day per season
+    # EXECUTOR reading of "<class>": the future anchor, rendered as below ("about 11 days").
+    phrase: "from rare or no such days to {future_anchor}"
+  # v2 (D-055c): applies to an increase before the ratio classes and before low_baseline above, when
+  # ratio > 10 or the baseline mean < 2 days. EXECUTOR: it takes precedence over low_baseline (a baseline < 1 day
+  # is also < 2 days), and it applies to an increase only, like the ratio classes.
+  rare_to_common:
+    ratio_above: 10                     # strictly greater
+    baseline_below: 2                   # baseline mean, days per season, strictly less
+    class: "rising from rare to common"
+    pair: "from {from} to {to} {per_season}"   # v3: the season unit at the end
+    end_zero: "essentially none"        # an end that rounds to 0
+    end: "about {n} {unit}"             # "about 1 day", "about 45 days" (unit singular at 1, as anchor)
+
+anchor:
+  rounding: python_round_to_integer     # round(float(value)): the work package names round()
+  pair: "from about {from} to about {to} {unit} {per_season}"   # v3: "from about 16 to about 45 days a summer"
+  single: "about {n} {unit}"            # both ends also listed on their own
+  unit_singular_at: 1                   # "about 1 day"
+  # v3 (D-060, "anchor pair with 'a summer'"). EXECUTOR: a season with no entry gets no suffix.
+  per_season:
+    summer: "a summer"
+
+tercile:
+  words: {small: lower tercile, moderate: middle tercile, large: upper tercile}
+  # D-041: a disclosed relative descriptor among U.S. states, never an absolute threshold, never the sole answer key.
+  phrase: "{class} relative to other U.S. states ({tercile}; a relative descriptor among states for the same quantity, season, horizon and scenario, not an absolute threshold)"
+
+regional:
+  ranking: names of the ranked regions, largest first (DR-PT-004 order)
+  largest: "the largest {direction}: {region}"
+  smallest: "the smallest {direction}: {region}"
+  magnitude: none                       # EXECUTOR: a regional-contrast pattern stores no baseline mean
+  negligible:
+    rounds_to: 0.0
+    decimals: 1
+    smallest: "essentially no change: {regions}"
+
+horizon:                                # v3 (D-060): no years
+  mid: "by mid-century"
+  end: "by late this century"
+
+scenario:                               # v3 (D-061)
+  RCP8.5: "under a high-emissions future"
+# v3 (D-064): the FWI percent-change columns state no scenario in the dictionary; the owner-authorized working
+# assumption (resolution R-007) reads them as RCP8.5. A pattern whose scenario is the key below takes the phrase of the
+# scenario it maps to, and its descriptor record names the working assumption.
+scenario_working_assumption:
+  unstated_in_dictionary: {scenario: RCP8.5, resolution: R-007}
+
+# v3: the quantity phrase is the family's `quantity` in plain_language_v1.yaml (D-060), with no threshold.
+quantity_source: plain_language_v1
