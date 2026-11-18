@@ -11,7 +11,7 @@ Pilot P1 (D-041; GUIDANCE re-anchor ruling 2026-10-29). **No model call. No item
 | `data/raw/FullData.csv` | `e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e` |
 | `data/metadata/templates/slots_v1.yaml` | `d40f835e969cc0dac0ed7de3affd1ce4ef26152a56252f042b7dbdf889b47e10` |
 | `data/metadata/geography/nca_regions_v1.yaml` | `3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41` |
-| `artifacts/profiles/dictionary_coverage.json` | `4c633302c48768c82e78e6b7a8a80ab68266d31161bd8816acf7bfc52bcd8e27` |
+| `artifacts/profiles/dictionary_coverage.json` | `88fc43a8a6d91577ac2493a13e26647ba1256b43bcbfd3fbdfe7baae29be61cf` |
 | `artifacts/benchmark/table_patterns_v1.jsonl` | `ed3c2154818fc363e982b17e0dcb9bb1a2d2ca25e18de97fda6d353974bbf3b0` |
 | `artifacts/benchmark/table_patterns_v1_summary.json` | `fbec4c94298c9feda9c52705eba3c020ccaf36d1b08df659b30a56879f6f3b03` |
 | `artifacts/benchmark/table_patterns_v1_examples.jsonl` | `c51707dc943443de38c44ac3123cc712910b5bad6c7a22df249d44c7767dc00c` |
