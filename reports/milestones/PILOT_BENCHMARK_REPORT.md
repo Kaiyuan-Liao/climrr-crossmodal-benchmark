@@ -1065,8 +1065,9 @@ Reasons (checks v1a, verbatim):
 
 ## 53. P3b: gate, escalations, Polaris commands (2026-11-18)
 
-Build `BUILD_SHA`; evidence runs `build_synth_packets_v4b` and `ingest_litsynth_run4` at the build commit (`git_dirty:
-false`), outputs byte-identical.
+Build `246c748`; evidence runs `build_synth_packets_v4b` and `ingest_litsynth_run4` at `246c748` (`git_dirty: false`;
+`reports/runs/20261118T202125Z_local_build_synth_packets_v4b.json`, `reports/runs/20261118T202127Z_local_ingest_litsynth_run4.json`),
+outputs byte-identical.
 
 | | |
 | --- | --- |
@@ -1092,15 +1093,15 @@ false`), outputs byte-identical.
 6. **Mentor sheet builder v2** reads packets v4; for run 5 it must read v4b (next package).
 7. CLAUDE.md gains one sentence: where the v4 / v1 agent bytes of runs 4 / polish 1 are held (as P3a did for v3.2).
 
-**Polaris runs** (Kaiyuan), pinned at the build commit `BUILD_SHA` (it carries packets v4b and both agents):
+**Polaris runs** (Kaiyuan), pinned at the build commit `246c748` (it carries packets v4b and both agents):
 
-    bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" BUILD_SHA
+    bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" 246c748a18e63cbd43faf4c372eede0bc78e3bb6
     cd "$CLIMRR_REPO_ROOT"
     python scripts/litcollect/litsynth_agent.py --packets artifacts/benchmark/synth_packets_v4b \
         --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run5" \
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
-        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --sleep 5 --source-commit BUILD_SHA
+        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --sleep 5 --source-commit 246c748a18e63cbd43faf4c372eede0bc78e3bb6
     python scripts/litcollect/litpolish_agent.py --items "$LITCOLLECT_ROOT_POLARIS/litsynth/run5" \
         --out "$LITCOLLECT_ROOT_POLARIS/litpolish/run2" \
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
-        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --sleep 5 --source-commit BUILD_SHA
+        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --sleep 5 --source-commit 246c748a18e63cbd43faf4c372eede0bc78e3bb6
