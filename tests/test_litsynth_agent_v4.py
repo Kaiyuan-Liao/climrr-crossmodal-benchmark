@@ -7,6 +7,10 @@ and carries the packet's working assumptions; a reply naming "RCP8.5", "95 °F",
 generality rule, which is format-class --- one corrective turn, and a clean second reply passes; a leak mixed in gets no
 turn. The hedge-by-strength report flags "suggests" on a multi-source group without failing the item. Post-checks v2.2
 stay the default (the ingest of runs 2 and 3 reproduces with them).
+
+Since work package P3b the working tree carries litsynth_agent v4.1 (`test_p3b.py`). These tests hold the v4 agent that
+synthesis run 4 used: its bytes at the run's source commit (`litsynth_run4.materialize_agents`), beside the unchanged
+sibling tools and `src`, run exactly as before.
 """
 
 from __future__ import annotations
@@ -24,11 +28,12 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import pytest
 
 from climrr import benchmark_items as bi
+from climrr import litsynth_run4 as s4
 from climrr import synthpackets_v4 as v4
 from climrr.checksums import sha256_file
 from climrr.paths import REPO_ROOT
 
-TOOLS = REPO_ROOT / "scripts" / "litcollect"
+TOOLS = s4.materialize_agents()                                    # v4 at the run-4 source commit
 AGENT = TOOLS / "litsynth_agent.py"
 AGENT_SHA256 = "8a8ca836a6cd6469ead6948305f721b9e0d6e7063770350f4c89810a3000fee1"
 SYSTEM_PROMPT_SHA256 = "33d387fe5098806cac70822194dc34804d80fc98cdb69ec850c919f88993db05"

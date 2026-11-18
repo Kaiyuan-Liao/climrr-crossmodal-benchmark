@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pilot P3 — readability polish agent v1 (D-063; mentor 2026-11-13; work package P3a, section C).
+"""Pilot P3 — readability polish agent v1.1 (D-063; mentor 2026-11-13; work package P3a, section C; v1.1: work package P3b, section D).
 
 Input: the output directory of a synthesis run (`litsynth_agent.py` v4: `<items>/items/<seed_id>.json`). For every item
 with `review.status: deterministic_pass`, one model call, temperature 0: the system prompt `SYSTEM_PROMPT` (stored
@@ -23,6 +23,16 @@ reasons, checks), `summary.json`, `agent.log`. Restartable per item (skips items
 turn on a reply with no JSON object holding "prompt" and "answer" (`CORRECTIVE_PROMPT`). Retries, backoff, `--base-url`,
 `--model`, `--reasoning-effort`, `--max-tokens`, `--sleep` as in litsynth_agent v4 (imported).
 
+v1.1 (work package P3b; polish run 1 --- v1, `litpolish/run1`, six items, all `polish_rejected`, 12 of 14 reasons a
+mechanism keyword lost word by word --- recorded): the system prompt adds "Start sentences with a capital letter; prefer
+one idea per sentence; keep the hedge words exactly." and keeps the descriptor phrases exactly (magnitude, comparison with
+other states, scenario, horizon, quantity; never a magnitude turned into a number --- run 1 wrote "about 50 %" for "a
+moderate increase"). Checks `climrr.polish_checks.invariance_v2` (`polish_checks v2`): numbers compared by value
+("about one day" = "about 1 day"), mechanism by cited group (each group recognisable in the original stays recognisable:
+one key term or a phrase of `data/metadata/benchmark/polish_synonyms_v2.yaml`), and every descriptor phrase class of
+DR-DESC-1 v4 / plain language v1a the original uses still used; places, hedges, source words, leakage and length as v1.
+Everything else as v1.
+
 Polaris invocation (Sophia vLLM, D-043). Run from the execution clone on Eagle (`$CLIMRR_REPO_ROOT`,
 docs/SOPHIA_RUNBOOK.md) checked out at the pinned commit; input the synthesis run's output and output under the
 litcollect root (`$LITCOLLECT_ROOT_POLARIS`), never in the clone; the ALCF credential in the environment; first check the
@@ -31,8 +41,8 @@ environment: `python -c "import yaml, duckdb"`:
     bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
     cd "$CLIMRR_REPO_ROOT"
     python scripts/litcollect/litpolish_agent.py \\
-        --items "$LITCOLLECT_ROOT_POLARIS/litsynth/run4" \\
-        --out "$LITCOLLECT_ROOT_POLARIS/litpolish/run1" \\
+        --items "$LITCOLLECT_ROOT_POLARIS/litsynth/run5" \\
+        --out "$LITCOLLECT_ROOT_POLARIS/litpolish/run2" \\
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \\
         --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \\
         --sleep 5 --source-commit <PINNED_SHA>
@@ -48,12 +58,20 @@ from litstatement_agent import (  # noqa: E402  (v3)
 from litgroup_agent import DEFAULT_MAX_TOKENS, REASONING_EFFORTS, call_turn, turn_stats  # noqa: E402  (v3)
 from climrr import benchmark_items as bi  # noqa: E402
 from climrr import itemseeds as sd  # noqa: E402
+from climrr import pattern_descriptors as pd  # noqa: E402
+from climrr import plain_language as pl  # noqa: E402
 from climrr import polish_checks as pc  # noqa: E402
 
-GENERATOR_VERSION = "litpolish_agent v1"
-SYSTEM_PROMPT = ("Rewrite for a general scientific reader: shorter sentences, plain words, same meaning. Do not add, remove or "
-                 "change any fact, number, place, time phrase, hedge word (shows/suggests) or mechanism. Do not mention data, "
-                 "tables, models, papers or studies beyond the hedge words already present. Return JSON {prompt, answer}.")
+GENERATOR_VERSION = "litpolish_agent v1.1"
+CHECK_VERSION = pc.VERSION_V2
+SYSTEM_PROMPT = ("Rewrite for a general scientific reader: shorter sentences, plain words, same meaning. Start sentences with a "
+                 "capital letter; prefer one idea per sentence; keep the hedge words exactly. Do not add, remove or change any "
+                 "fact, number, place, time phrase, hedge word (shows/suggests) or mechanism. Keep these phrases exactly as "
+                 "written: the magnitude phrase (such as \"a slight increase\", \"roughly doubling\", \"remaining rare\"), the "
+                 "comparison with other states (such as \"a larger change than in most states\"), \"under a high-emissions "
+                 "future\", \"by mid-century\" or \"by late this century\", and the name of the quantity; never turn a magnitude "
+                 "phrase into a number or a percentage. Do not mention data, tables, models, papers or studies beyond the hedge "
+                 "words already present. Return JSON {prompt, answer}.")
 CORRECTIVE_PROMPT = ("Your reply did not contain a JSON object with the keys \"prompt\" and \"answer\". "
                      "Return the complete JSON object.")
 
@@ -85,6 +103,12 @@ def cited_labels(item: dict) -> list[str]:
     return [s["statement"] for s in rc["literature_mechanisms"] + rc["literature_caveats"]]
 
 
+def cited_groups(item: dict) -> list[dict]:
+    """v1.1: [{group_id, label}] of the literature groups the item cites (checks v2 work by group)."""
+    rc = item["reference_components"]
+    return [{"group_id": s["group_id"], "label": s["statement"]} for s in rc["literature_mechanisms"] + rc["literature_caveats"]]
+
+
 def apply(item: dict, original: dict, rewrite, res: dict | None, status: str, common: dict, columns) -> dict:
     """The item after the polish: text replaced only when `status` is `polished`; a `polish` event appended."""
     out = copy.deepcopy(item)
@@ -106,7 +130,7 @@ def summarise(out: Path, endpoint=None, budget=None, skipped=()):
             key = x.split(":")[1].strip().split(" ")[0] if ":" in x else x
             reasons[key] = reasons.get(key, 0) + 1
     s = {"generator_version": GENERATOR_VERSION, **(endpoint or {}), **(budget or {}), "system_prompt_sha256": sha(SYSTEM_PROMPT),
-         "corrective_prompt_sha256": sha(CORRECTIVE_PROMPT), "check_version": pc.VERSION, "items": len(recs),
+         "corrective_prompt_sha256": sha(CORRECTIVE_PROMPT), "check_version": CHECK_VERSION, "items": len(recs),
          **{k: sum(r["status"] == k for r in recs) for k in ("polished", "polish_rejected", "polish_parse_failed")},
          "reasons_by_kind": dict(sorted(reasons.items())), "skipped_not_deterministic_pass": list(skipped)}
     (out / "summary.json").write_text(json.dumps(s, indent=2))
@@ -140,7 +164,8 @@ def main():
     backoff = tuple(float(x) for x in a.backoff.split(","))
     endpoint = {"base_url": a.base_url, "model": a.model, "endpoint_label": endpoint_label(a.base_url)}
     budget = {"reasoning_effort": a.reasoning_effort, "max_tokens": a.max_tokens}
-    columns, nca, syn = bi.column_names(), sd.nca_map(), pc.load_synonyms()
+    columns, nca, syn = bi.column_names(), sd.nca_map(), pc.load_synonyms_v2()
+    rules, plain = pd.load_rules(pd.RULES_V4_PATH), pl.load(pl.PLAIN_V1A_PATH)
     say(f"START {GENERATOR_VERSION} items={len(paths)} endpoint_label={endpoint['endpoint_label']} base_url={a.base_url} model={a.model} reasoning_effort={a.reasoning_effort} max_tokens={a.max_tokens} system_sha={sha(SYSTEM_PROMPT)[:12]}")
 
     done, skipped = 0, []
@@ -193,11 +218,11 @@ def main():
                   **turn_stats(resp), **raw_fields(resp)}
         if obj:
             rewrite = {"prompt": obj["prompt"], "answer": obj["answer"]}
-            res = pc.invariance(original, rewrite, cited_labels(item), nca, syn, columns)
+            res = pc.invariance_v2(original, rewrite, cited_groups(item), nca, syn, rules, plain, columns)
             status = "polished" if res["pass"] else "polish_rejected"
         else:
             rewrite, status = None, "polish_parse_failed"
-            res = {"check_version": pc.VERSION, "pass": False, "reasons": ["parse: no JSON object with 'prompt' and 'answer' found"], "checks": None}
+            res = {"check_version": CHECK_VERSION, "pass": False, "reasons": ["parse: no JSON object with 'prompt' and 'answer' found"], "checks": None}
         new = apply(item, original, rewrite, res, status, common, columns)
         opath.write_text(json.dumps(new, indent=2, ensure_ascii=False))
         with open(out / "polished.jsonl", "a", encoding="utf-8") as f:

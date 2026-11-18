@@ -35,6 +35,17 @@ with another undisposed group; listed as `undisposed_candidates`); every attache
 `review_state: reviewer_tagged`. `checks_input` gains `family` and `plain_quantity`, which post-checks v3 use for the
 fire-weather words. Packets v4 (`variant="v4"`, the default) are built exactly as before.
 
+**Packets v4b (work package P3b, D-066, D-067).** `build_selection(variant="v4b")`: packets v4a (same selection, plain
+language v1a, dispositions and groups) with DR-DESC-1 **v4** descriptors (`descriptor_rules_v4.yaml`: magnitude and
+tercile `forms`, the fixed rare rule), and:
+- `model_view.must_not_use`: the words the graded text never writes, anywhere --- the plain-language `never_write` words
+  (for fire weather "wildfire", "fires", "burned area"), the tercile words of the v4 rules, "RCP", "SSP";
+- the pattern text's relative-magnitude sentence written as the comparison ("Comparison with other U.S. states: a larger
+  change than in most states (...)"), so "tercile" is not in the text the model reads;
+- `checks_input.group_role` (each group's role: driver / context / caveat) and, for a regional contrast,
+  `checks_input.regions` (the ranked regions), which post-checks v3.1 use.
+Packets v4 and v4a stay as built.
+
 No model call; no table value computed here (values are copied from the pattern).
 """
 
@@ -59,7 +70,29 @@ VERSION_V4A = "synthpackets v4a"
 PACKETS_V4A_DIR = REPO_ROOT / "artifacts" / "benchmark" / "synth_packets_v4a"
 FIRE_DISPOSITIONS_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "group_dispositions_fire_v1.csv"
 REVIEWED_ARMS_V4A = ("fire_weather_v1",)                         # arms whose dispositions D-053b adds: review_state marked
-VARIANTS = ("v4", "v4a")
+VERSION_V4B = "synthpackets v4b"
+PACKETS_V4B_DIR = REPO_ROOT / "artifacts" / "benchmark" / "synth_packets_v4b"
+VARIANTS = ("v4", "v4a", "v4b")
+EXTRA_MUST_NOT_USE = ("RCP", "SSP")
+
+
+def comparison_text(text: str, descr: dict) -> str:
+    """v4b: the pattern text with its relative-magnitude sentence written as the DR-DESC-1 v4 comparison (first form)."""
+    import re
+
+    if not descr.get("tercile_forms"):
+        return text
+    out, n = re.subn(r"Relative magnitude: (?:small|moderate|large) \((?:lower|middle|upper) tercile, ",
+                     f"Comparison with other U.S. states: {descr['tercile_forms'][0]} (", text)
+    if n != 1:
+        raise ValueError(f"{descr['pattern_id']}: relative-magnitude sentence not found once in the pattern text")
+    return out
+
+
+def must_not_use(phrases_view: dict, rules: dict) -> list[str]:
+    """v4b: the words the graded text never writes (plain-language never_write, the v4 tercile words, RCP / SSP)."""
+    return list(dict.fromkeys(list(phrases_view["never_write"]) + list(rules["tercile"]["never_in_graded_text"])
+                              + list(EXTRA_MUST_NOT_USE)))
 LEVELS = (3, 4)
 GUARDRAILS = (
     "A modeled historical baseline is model output for a past period, not an observation.",
@@ -92,6 +125,8 @@ def assemble_packet(seed_id: str, p: dict, lvl: int, item_id: str, pg: list[dict
     phrases_view = pl.model_view(p["family"], scen, p["horizon"], plain)
     text, shown, allowed = spk.render_pattern(p, nca, plain=phrases_view)
     descr = pd.descriptors(p, rules, plain)
+    if variant == "v4b":
+        text = comparison_text(text, descr)
     phrases = pd.phrases(descr) + [phrases_view["quantity_short"]]
     phrases = list(dict.fromkeys(phrases))
     allowed |= {n for ph in phrases for n in bi.reference_numbers(ph)}
@@ -108,15 +143,22 @@ def assemble_packet(seed_id: str, p: dict, lvl: int, item_id: str, pg: list[dict
         groups_view.append(x)
     unreviewed = any(g.get("review_state") == "unreviewed_agent_tag" for g in pg)
     checks_extra = {"family": p["family"], "plain_quantity": [phrases_view["quantity"], phrases_view["quantity_short"]]} \
-        if variant == "v4a" else {}
+        if variant in ("v4a", "v4b") else {}
+    view_extra = {}
+    if variant == "v4b":
+        checks_extra["group_role"] = {g["group_id"]: g["role"] for g in pg}
+        if descr.get("ranking_largest_first"):
+            checks_extra["regions"] = list(descr["ranking_largest_first"])
+        view_extra["must_not_use"] = must_not_use(phrases_view, rules)
+    version = {"v4": VERSION, "v4a": VERSION_V4A, "v4b": VERSION_V4B}[variant]
     return {
-        "packet_id": f"PK-{seed_id}", "version": VERSION_V4A if variant == "v4a" else VERSION, "rank_rule": RANK_RULE, "descriptor_rule": rules["rule"],
+        "packet_id": f"PK-{seed_id}", "version": version, "rank_rule": RANK_RULE, "descriptor_rule": rules["rule"],
         "descriptor_rules_sha256": rules["sha256"], "plain_language": plain["version"], "plain_language_sha256": plain["sha256"],
         "item_id": item_id, "seed_id": seed_id, "use_case_level": lvl, "family": p["family"],
         "fire_groups_unreviewed": unreviewed, "working_assumptions_relied_on": wa,
         "model_view": {
             "use_case_level": lvl, "rung": f"{lvl}. {name}: {desc}", "reasoning_modalities": modality,
-            "plain_language": phrases_view,
+            "plain_language": phrases_view, **view_extra,
             "patterns": [{"pattern_id": p["pattern_id"], "text": text, "values_shown": shown, "allowed_descriptors": descr}],
             "groups": groups_view,
             "allowed_numbers": sorted(allowed, key=lambda s: (len(s), s)),
@@ -154,7 +196,7 @@ def build_packet(seed: dict, level: int, item_id: str, groups: list[dict], by_st
     for g in pg:                                                   # D-058: the reviewer label is marked, the agent's kept
         if src[g["group_id"]].get("label_override"):
             g["label_override"] = src[g["group_id"]]["label_override"]
-        if variant == "v4a" and src[g["group_id"]]["arm"] in REVIEWED_ARMS_V4A:
+        if variant in ("v4a", "v4b") and src[g["group_id"]]["arm"] in REVIEWED_ARMS_V4A:
             if g["disposition"] is None:                           # the no-disposition rule keeps these out
                 raise ValueError(f"{g['group_id']}: attached with no disposition")
             g["review_state"] = "reviewer_tagged"
@@ -223,7 +265,7 @@ def build_selection(selection_path=None, variant: str = "v4") -> dict:
 
     if variant not in VARIANTS:
         raise ValueError(f"unknown packet variant {variant!r}")
-    v4a = variant == "v4a"
+    v4a = variant in ("v4a", "v4b")                                # v4b: v4a's inputs, DR-DESC-1 v4
     selection_path = selection_path or (psel.SELECTION_V2A_PATH if v4a else psel.SELECTION_V2_PATH)
     sel = psel.load(selection_path)
     pin = json.loads(s3.SUMMARY_PATH.read_text(encoding="utf-8"))["seeds_file"]["sha256"]
@@ -245,7 +287,7 @@ def build_selection(selection_path=None, variant: str = "v4") -> dict:
     rows = s2.statement_table(records, sd.read_jsonl(li.CLUSTERS_V1B_PATH), indep, lg.Gazetteer(nca))   # geography v2 (D-047a)
     disp = load_dispositions_v4a() if v4a else lgr.load_dispositions(lgr.DISPOSITIONS_PATH)
     groups = ls.apply_group_label_overrides(lgr.apply_dispositions(lgr.read_groups(GROUPS_PATH), disp), overrides)
-    rules, was = pd.load_rules(pd.RULES_V3_PATH), load_working_assumptions()
+    rules, was = pd.load_rules(pd.RULES_V4_PATH if variant == "v4b" else pd.RULES_V3_PATH), load_working_assumptions()
     plain = pl.load(pl.PLAIN_V1A_PATH) if v4a else pl.load()
     hashes = inputs_hashes(s3.SEEDS_PATH, GROUPS_PATH, selection_path, lgr.DISPOSITIONS_PATH, ls.CORRECTIONS_V1A_PATH, rules, plain,
                            fire_dispositions_path=FIRE_DISPOSITIONS_PATH if v4a else None)

@@ -343,7 +343,27 @@ SYNTH_CHECK_VERSION_V23 = "synthesis_post_checks v2.3"
 # v3 (work package P3a, D-060 -- D-062): v2.3 plus the generality rule and the hedge-by-strength report. Opt-in as well:
 # litsynth_agent v4 passes it; v2.2 stays the default the ingest of runs 2 and 3 reproduces.
 SYNTH_CHECK_VERSION_V3 = "synthesis_post_checks v3"
-SYNTH_CHECK_VERSIONS = (SYNTH_CHECK_VERSION, SYNTH_CHECK_VERSION_V23, SYNTH_CHECK_VERSION_V3)
+# v3.1 (work package P3b, D-066, D-067): v3 plus the readability rules --- a context group never written as a driver
+# (`context_as_driver`), no tercile wording, no doubled magnitude phrase, sentences start with a capital letter (all four
+# format-class failures), and two reports (a context phrase in a driver sentence of the paragraph; a regional contrast
+# claimed to be explained). Opt-in: litsynth_agent v4.1 passes it; v3 stays what the run-4 reproduction uses.
+SYNTH_CHECK_VERSION_V31 = "synthesis_post_checks v3.1"
+SYNTH_CHECK_VERSIONS = (SYNTH_CHECK_VERSION, SYNTH_CHECK_VERSION_V23, SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31)
+_V3_PLUS = (SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31)
+#: v3.1 (D-067): the driver / cause words a sentence resting only on context groups must not carry next to the context phrase.
+DRIVER_WORD_RE = re.compile(r"\bdriven\s+by\b|\bdrivers?\b|\bdrives?\b|\bcause[sd]?\b|\bcausing\b|\bbecause\s+of\b", re.I)
+#: v3.1 (DR-DESC-1 v4, D-066): the relative tercile is written as a comparison with other states, never with these words.
+TERCILE_WORD_RE = re.compile(r"\btercile\b|\brank(?:s|ing)?\s+(?:small|moderate|large)\b", re.I)
+#: v3.1 (D-066): a direction verb followed by a magnitude phrase of its own ("increase a slight increase").
+DOUBLED_MAGNITUDE_RE = re.compile(r"\b(?:increase[sd]?|rises?|grows?)\s+(?:by\s+)?(?:a|an)\s+(?:slight|small|moderate)\s+(?:increase|rise)\b", re.I)
+#: v3.1 report: a sentence claiming to explain a contrast, ranking or difference.
+CONTRAST_CLAIM_RE = re.compile(r"\b(?:explain(?:s|ed|ing)?|account(?:s|ed)?\s+for|why)\b[^.]*\b(?:contrast|difference|differences|ranking)\b"
+                               r"|\b(?:contrast|difference|differences|ranking)\b[^.]*\b(?:is|are)\s+(?:explained|driven|caused)\b", re.I)
+CLAUSE_SPLIT_RE = re.compile(r"[,;:]|\s[–—-]\s")
+SENTENCE_SPLIT_RE = re.compile(r"(?<!U\.S\.)(?<!e\.g\.)(?<!i\.e\.)(?<=[.!?])\s+")   # not after "U.S.", "e.g.", "i.e."
+_CONTEXT_STOP = frozenset({"about", "also", "and", "are", "as", "based", "between", "both", "from", "have", "into", "more", "most",
+                           "such", "than", "that", "their", "these", "they", "this", "used", "using", "when", "where", "which",
+                           "while", "with", "within"})
 #: The work package's pattern, `RCP|\d{2,}\s?°?F|\b(19|20)\d{2}\b|one study|a single study`, applied to the normalised text
 #: (`normalise_number_text`: "95℉" and "95\u202f°F" read "95 °F"); the two phrases case-insensitively.
 GENERALITY_RE = re.compile(r"RCP|\d{2,}\s?°?F|\b(?:19|20)\d{2}\b|(?i:one study|a single study)")
@@ -485,7 +505,12 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
 
     v3 (`check_version=SYNTH_CHECK_VERSION_V3`; D-060 -- D-062): v2.3, and `generality_flags` on the prompt, the reference
     texts and every rubric list (a failure); `checks.hedge_by_strength` reports hedge words that do not match the cited
-    groups' strength (not a failure)."""
+    groups' strength (not a failure).
+
+    v3.1 (`check_version=SYNTH_CHECK_VERSION_V31`; D-066, D-067): v3, and `readability_reasons` (context group written as a
+    driver, tercile wording, doubled magnitude phrase, lower-case sentence start: failures) and `readability_reports`
+    (`checks.context_driver_report`, `checks.regional_contrast_report`: not failures). `checks_input.group_role` names
+    each group's role (driver / context / caveat) and `checks_input.regions` a regional contrast's regions."""
     if check_version not in SYNTH_CHECK_VERSIONS:
         raise ItemError(f"unknown post-check version {check_version!r}")
     cols = columns if columns is not None else column_names()
@@ -555,20 +580,24 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
     reasons += [f"prompt leakage: {f}" for f in prompt_extra]
     for w, t in texts:
         reasons += [f"{w} leakage: {f}" for f in text_leakage(t, cols, checks_input.get("forbidden_strings", []))]
-    if check_version in (SYNTH_CHECK_VERSION_V23, SYNTH_CHECK_VERSION_V3):
+    if check_version in (SYNTH_CHECK_VERSION_V23, *_V3_PLUS):
         reasons += [f"{w} leakage: {f}" for w, t in [("prompt", item.get("prompt") or "")] + texts for f in model_source_flags(t)]
     hedge_report = None
-    if check_version == SYNTH_CHECK_VERSION_V3:
+    if check_version in _V3_PLUS:
         reasons += [f"{w}: generality (D-060/D-062): {m!r} in graded text" for w, t in every for m in generality_flags(t)]
         hedge_report = hedge_by_strength(lit_s, strengths)
     fire_report = None
-    if check_version == SYNTH_CHECK_VERSION_V3 and checks_input.get("family") == FWI_FAMILY:
+    if check_version in _V3_PLUS and checks_input.get("family") == FWI_FAMILY:
         reasons += [f"{w}: fire-weather wording (an FWI is never fire occurrence): {m!r} in graded text"
                     for w, t in every if w not in FWI_WRONG_ANSWER_FIELDS for m in fwi_forbidden_flags(t)]
         plain = [q for q in checks_input.get("plain_quantity") or [] if isinstance(q, str) and q]
         fire_report = [{"field": w, "word": m, "kind": "forbidden_word_in_wrong_answer_list"}
                        for w, t in every if w in FWI_WRONG_ANSWER_FIELDS for m in fwi_forbidden_flags(t)] + \
                       [{"field": w, "word": m, "kind": "fire_alone"} for w, t in every for m in fwi_fire_words(t, plain)]
+    readability = None
+    if check_version == SYNTH_CHECK_VERSION_V31:
+        reasons += readability_reasons(item.get("prompt") or "", tp_s, lit_s, integrated, graded, checks_input)
+        readability = readability_reports(tp_s, lit_s, integrated, item.get("prompt") or "", checks_input)
 
     schema = schema_errors(item)
     reasons += [f"schema: {e}" for e in schema]
@@ -582,7 +611,89 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
                                                                for r in tagged.get("rubric_points") or []),
                        "n_table_sentences": len(tp_s), "n_literature_sentences": len(lit_s),
                        **({"hedge_by_strength": hedge_report} if hedge_report is not None else {}),
-                       **({"fire_word_report": fire_report} if fire_report is not None else {})}}
+                       **({"fire_word_report": fire_report} if fire_report is not None else {}),
+                       **(readability or {})}}
+
+
+def _terms(text: str) -> set[str]:
+    """Content words (>= 4 letters, not a stopword), compared by their first 6 letters ("combines" ~ "combined")."""
+    return {w.lower()[:6] for w in re.findall(r"[A-Za-z]{4,}", text or "") if w.lower() not in _CONTEXT_STOP}
+
+
+def context_terms(group_ids, checks_input: dict) -> set[str]:
+    """v3.1: content words (>= 4 letters) of the labels of the cited context groups --- the "context phrase"."""
+    texts = checks_input.get("group_texts") or {}
+    return {t for g in group_ids for t in _terms((texts.get(g) or [""])[0])}
+
+
+def _context_only(ids, checks_input: dict) -> list[str]:
+    role = checks_input.get("group_role") or {}
+    ids = [g for g in ids if g in role]
+    return ids if ids and all(role[g] == "context" for g in ids) else []
+
+
+def lower_case_starts(text: str) -> list[str]:
+    """v3.1: the sentences of `text` whose first letter is lower-case (their first 30 characters)."""
+    out = []
+    for sent in SENTENCE_SPLIT_RE.split(text.strip()):
+        m = re.search(r"[A-Za-z]", sent)
+        if m and sent[m.start()].islower():
+            out.append(sent[:30])
+    return out
+
+
+def readability_reasons(prompt: str, tp_s: list[dict], lit_s: list[dict], integrated: str, graded: list[tuple[str, str]],
+                        checks_input: dict) -> list[str]:
+    """v3.1 failures (D-066, D-067; every one format-class): a literature sentence resting only on context groups that
+    names a driver or cause in a clause with the context phrase (`context_as_driver`); tercile wording, or a doubled
+    magnitude phrase, in the prompt or any graded text; a reference sentence starting with a lower-case letter."""
+    out = []
+    for i, s in enumerate(lit_s):
+        ids = _context_only(s.get("group_ids") if isinstance(s.get("group_ids"), list) else [], checks_input)
+        if not ids:
+            continue
+        terms = context_terms(ids, checks_input)
+        for clause in CLAUSE_SPLIT_RE.split(s["sentence"]):
+            if DRIVER_WORD_RE.search(clause) and _terms(clause) & terms:
+                out.append(f"literature_interpretation[{i}]: context_as_driver (D-067): {clause.strip()!r}")
+    for w, t in [("prompt", prompt)] + graded:
+        out += [f"{w}: tercile wording (DR-DESC-1 v4): {m.group(0)!r} in graded text" for m in TERCILE_WORD_RE.finditer(t)]
+        out += [f"{w}: doubled magnitude phrase (DR-DESC-1 v4): {m.group(0)!r}" for m in DOUBLED_MAGNITUDE_RE.finditer(t)]
+    starts = [("prompt", prompt)] + [("table_pattern", s["sentence"]) for s in tp_s] + \
+             [("literature_interpretation", s["sentence"]) for s in lit_s] + [("integrated", integrated)]
+    out += [f"{w}: sentence starts with a lower-case letter: {x!r}" for w, t in starts for x in lower_case_starts(t)]
+    return out
+
+
+def readability_reports(tp_s: list[dict], lit_s: list[dict], integrated: str, prompt: str, checks_input: dict) -> dict:
+    """v3.1 reports (not failures). `context_driver_report`: a sentence of the table-pattern or integrated text with a
+    driver word and a context group's term (a context group listed among the drivers, D-067). `regional_contrast_report`:
+    for a regional contrast (`checks_input.regions`), a sentence claiming to explain the contrast or ranking while a region
+    it names (none named: the largest and the smallest) is named by no cited group."""
+    role = checks_input.get("group_role") or {}
+    cited = sorted({g for s in lit_s for g in (s.get("group_ids") or []) if isinstance(g, str) and g in role})
+    cterms = context_terms([g for g in cited if role[g] == "context"], checks_input)
+    cterms -= context_terms([g for g in cited if role[g] != "context"], checks_input)   # words of a cited driver too
+    cterms -= {t for q in checks_input.get("plain_quantity") or [] for t in _terms(q)}  # the quantity's own words
+    ctx_report = []
+    for w, t in [("table_pattern", s["sentence"]) for s in tp_s] + [("integrated", integrated)]:
+        for sent in SENTENCE_SPLIT_RE.split(t):
+            hit = sorted(_terms(sent) & cterms)
+            if hit and DRIVER_WORD_RE.search(sent):
+                ctx_report.append({"field": w, "sentence": sent, "context_terms": hit})
+    regions = checks_input.get("regions") or []
+    reg_report = []
+    if regions:
+        texts = checks_input.get("group_texts") or {}
+        for w, t in [("prompt", prompt)] + [("literature_interpretation", s["sentence"]) for s in lit_s] + [("integrated", integrated)]:
+            for sent in SENTENCE_SPLIT_RE.split(t):
+                if not CONTRAST_CLAIM_RE.search(sent):
+                    continue
+                claimed = [r for r in regions if r in sent] or [regions[0], regions[-1]]   # none named: largest and smallest
+                unnamed = [r for r in claimed if not any(r in x for g in cited for x in texts.get(g, []))]
+                if unnamed:
+                    reg_report.append({"field": w, "sentence": sent, "regions_not_named_by_a_cited_group": unnamed})
+    return {"context_driver_report": ctx_report, "regional_contrast_report": reg_report}
 
 
 def fwi_forbidden_flags(text: str) -> list[str]:
@@ -630,7 +741,12 @@ _FORMAT_REASON_RES = (re.compile(r"^[^:]+: number-word '.*' does not trace to an
                       re.compile(r"^[^:]+: exact_value_in_graded_text \S+ \(exact values belong to provenance\)$"),
                       re.compile(r"^literature_interpretation\[\d+\]: rests only on single-source groups but "
                                  r"(?:is not marked hedged|carries no hedge word)$"),
-                      re.compile(r"^[^:]+: generality \(D-060/D-062\): .+ in graded text$"))   # v3 only emits it
+                      re.compile(r"^[^:]+: generality \(D-060/D-062\): .+ in graded text$"),   # v3 only emits it
+                      # v3.1 only emits these (D-066, D-067)
+                      re.compile(r"^literature_interpretation\[\d+\]: context_as_driver \(D-067\): .+$"),
+                      re.compile(r"^[^:]+: tercile wording \(DR-DESC-1 v4\): .+ in graded text$"),
+                      re.compile(r"^[^:]+: doubled magnitude phrase \(DR-DESC-1 v4\): .+$"),
+                      re.compile(r"^[^:]+: sentence starts with a lower-case letter: .+$"))
 
 
 def number_word_value(word: str) -> float | None:

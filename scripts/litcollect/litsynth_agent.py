@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pilot P2b / P3 — item-synthesis agent v4 (D-041, D-048, D-051, D-055, D-055a, D-055b, D-059 -- D-062; COORDINATOR rulings 2026-11-01 and 2026-11-02; work package P3a).
+"""Pilot P2b / P3 — item-synthesis agent v4.1 (D-041, D-048, D-051, D-055, D-055a, D-055b, D-059 -- D-062; COORDINATOR rulings 2026-11-01 and 2026-11-02; work package P3a).
 
 Input: a directory of seed packets `PK-<seed_id>.json` (`scripts/build_synth_packets.py`). One model call per packet,
 temperature 0. The model sees the packet's `model_view` only: the table pattern in plain words with its values, the
@@ -72,6 +72,17 @@ FWI as fire; hazard as risk). Post-checks `synthesis_post_checks` v3 (v2.3 on by
 hedge-by-strength report); a generality failure is format-class (one corrective turn). `review.history[0]` also carries
 the packet's `working_assumptions_relied_on` (D-064) and `fire_groups_unreviewed`. Everything else as v3.2.
 
+v4.1 (work package P3b, D-066, D-067; synthesis run 4 --- v4, `litsynth/run4`, packets v4a: 6 deterministic_pass, 1
+rejected_pre_review --- ingested; packets v4b, `scripts/build_synth_packets_v4b.py`): the system prompt uses the
+DR-DESC-1 v4 descriptor forms --- one magnitude form as a natural phrase inside a sentence, never two magnitude phrases
+for one pattern ("increase a slight increase" is an error), the comparison with other states only in a listed form,
+never "tercile"; every sentence starts with a capital letter; a context group (role "context": a definition or a
+measurement) only as an explanatory aside, never in a list of drivers or causes (D-067); for a regional contrast no
+literature sentence claims to explain the contrast unless a cited group names the regions; nothing of the packet's
+`must_not_use` anywhere, every rubric list included. Post-checks `synthesis_post_checks` v3.1 (v3 + `context_as_driver`,
+tercile wording, doubled magnitude phrase, lower-case sentence start --- all format-class --- and two reports). The format
+corrective prompt names the same rules. Everything else as v4.
+
 Polaris invocation (Sophia vLLM, D-043). Run from the execution clone on Eagle (`$CLIMRR_REPO_ROOT`,
 docs/SOPHIA_RUNBOOK.md) checked out at the pinned commit that carries the packets and provides `climrr`; output
 under the litcollect root (`$LITCOLLECT_ROOT_POLARIS`, config key `litcollect_root_polaris`), never in the clone; the
@@ -80,8 +91,8 @@ ALCF credential in the environment; first check the environment: `python -c "imp
     bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
     cd "$CLIMRR_REPO_ROOT"
     python scripts/litcollect/litsynth_agent.py \\
-        --packets artifacts/benchmark/synth_packets_v4 \\
-        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run4" \\
+        --packets artifacts/benchmark/synth_packets_v4b \\
+        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run5" \\
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \\
         --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \\
         --sleep 5 --source-commit <PINNED_SHA>
@@ -97,8 +108,8 @@ from litstatement_agent import (  # noqa: E402  (v3)
 from litgroup_agent import DEFAULT_MAX_TOKENS, REASONING_EFFORTS, call_turn, turn_stats  # noqa: E402  (v3)
 from climrr import benchmark_items as bi  # noqa: E402
 
-GENERATOR_VERSION = "litsynth_agent v4"
-CHECK_VERSION = bi.SYNTH_CHECK_VERSION_V3
+GENERATOR_VERSION = "litsynth_agent v4.1"
+CHECK_VERSION = bi.SYNTH_CHECK_VERSION_V31
 CORRECTIVE_PROMPT = ("Your reply did not contain a JSON object with the keys \"prompt\" and \"reference_answer\". "
                      "Return the complete JSON object.")
 NOT_REQUIRED_SENTENCE = "Exact values are not required; any statement consistent with the magnitude class counts."
@@ -106,32 +117,44 @@ FORMAT_CORRECTIVE_PROMPT = ("Your item failed these format checks:\n{reasons}\nR
                             "every fact, pattern id, group id and source id unchanged; change only the wording the checks name. "
                             "Use the packet's \"plain_language\" phrases; in \"prompt\", \"reference_answer\" and \"rubric\" write "
                             "no emissions-scenario label, no threshold number or temperature, no year, no numeral with a decimal "
-                            "point and no exact pattern value, and never \"one study\" or \"a single study\". Copy magnitude "
-                            "language verbatim from \"allowed_descriptors\" (to say exact values are not required, write: "
-                            f"\"{NOT_REQUIRED_SENTENCE}\"); a literature sentence that rests only on single-source groups says "
-                            "\"research suggests\" and is marked \"hedged\": true.")
+                            "point and no exact pattern value, never \"one study\" or \"a single study\", and no word of "
+                            "\"must_not_use\" in any field or rubric list. Write the magnitude with ONE of the pattern's "
+                            "\"magnitude_forms\", once per pattern, as a natural phrase in the sentence; compare with other states "
+                            "only with one of the \"tercile_forms\" (to say exact values are not required, write: "
+                            f"\"{NOT_REQUIRED_SENTENCE}\"). Start every sentence with a capital letter. A group whose role is "
+                            "\"context\" is never a driver or a cause. A literature sentence that rests only on single-source "
+                            "groups says \"research suggests\" and is marked \"hedged\": true.")
 
 
 def format_corrective_prompt(reasons: list[str]) -> str:
     return FORMAT_CORRECTIVE_PROMPT.replace("{reasons}", "\n".join(f"- {r}" for r in reasons))
 
-SYSTEM_PROMPT = """You write ONE closed-book benchmark item for climate scientists from a SEED PACKET. The packet holds (a) a table pattern: deterministic facts about modeled climate projections, in plain words, with "allowed_descriptors": the pattern-level words (direction, magnitude class, coarse anchor pair, relative tercile, regional ranking, horizon, scenario and quantity phrases) computed by code; (b) "plain_language": the phrases the item must use for the quantity, the scenario, the horizon and the hedges; (c) groups of literature statements: each group has an id, a label, an evidence strength, a "hedge" and member statements with their supporting passages and paper ids; (d) the use-case rung, the guardrails and the numbers you may use. Use ONLY facts in the packet. Add no fact, number, place, mechanism or source that is not in it.
+SYSTEM_PROMPT = """You write ONE closed-book benchmark item for climate scientists from a SEED PACKET. The packet holds (a) a table pattern: deterministic facts about modeled climate projections, in plain words, with "allowed_descriptors": the pattern-level words (direction, magnitude class with its "magnitude_forms", coarse anchor pair, comparison with other states with its "tercile_forms", regional ranking, horizon, scenario and quantity phrases) computed by code; (b) "plain_language": the phrases the item must use for the quantity, the scenario, the horizon and the hedges; (c) groups of literature statements: each group has an id, a role ("driver" or "context"), a label, an evidence strength, a "hedge" and member statements with their supporting passages and paper ids; (d) the use-case rung, the guardrails, the numbers you may use and "must_not_use": words never written anywhere in the item. Use ONLY facts in the packet. Add no fact, number, place, mechanism or source that is not in it.
 
 GENERAL WORDS. The item is read by a general scientific reader and graded at the PATTERN level: direction, magnitude class, place, mechanism. In "prompt", "reference_answer" and every list of "rubric":
 - name the quantity with the packet's "plain_language" "quantity" (or "quantity_short"), the scenario only as "under a high-emissions future", and the horizon only with the packet's horizon phrase ("by mid-century" or "by late this century");
 - never write an emissions-scenario label (no "RCP", no "SSP"), a threshold number or temperature (no "95 °F", no "105 °F"), a year or a range of years, or a numeral with a decimal point;
 - say nothing about scenarios beyond "under a high-emissions future", and compare no scenarios;
-- never write "one study" or "a single study".
+- never write "one study" or "a single study", and never any word or phrase of the packet's "must_not_use";
+- these rules hold in EVERY rubric list too: "required_points", "acceptable_variants", "optional_points", "disallowed_claims" and "fatal_errors".
 The exact values, the threshold, the scenario name and the years are attached to the item as provenance by code, never by you.
 
-NUMBERS. The only digits allowed are those of the pattern's "anchor_pair", copied verbatim (for example "from about 16 to about 45 days a summer"). Never write a number as a word ("sixteen", "forty-five", "twice", "double", "triple", "half", "threefold"), except inside an allowed descriptor phrase copied verbatim (for example "roughly tripling" or "about half again as many"). Copy magnitude language VERBATIM from "allowed_descriptors": write "roughly tripling", never "threefold", "triples" or "three times". State no ratio, percentage or range the packet does not list.
+NUMBERS. The only digits allowed are those of the pattern's "anchor_pair", copied verbatim (for example "from about 16 to about 45 days a summer"). Never write a number as a word ("sixteen", "forty-five", "twice", "double", "triple", "half", "threefold"), except inside one of the listed "magnitude_forms" (for example "roughly tripling", "about twice as many" or "about half again as many"). State no ratio, percentage or range the packet does not list.
+
+MAGNITUDE AND COMPARISON. Write the magnitude with ONE of the pattern's "magnitude_forms", any one, used as a natural phrase inside the sentence ("... is projected to increase slightly ...", "... shows a slight increase ...", "... days remain rare ..."). Never write two magnitude phrases for one pattern: "increase a slight increase" and "increase by a slight increase" are errors. Compare the place with other states only with one of the "tercile_forms" ("a larger change than in most states"); never write "tercile", "ranking large" or "moderate relative tercile".
+
+WRITING. Every sentence starts with a capital letter ("Research shows ...", never "research shows ..."). Short sentences, plain words.
+
+CONTEXT GROUPS. A group whose "role" is "context" (how the quantity is defined or measured, such as "the heat index combines temperature and humidity") is never a driver or a cause of the change. Use it only as an explanatory aside ("Because the heat index combines temperature and humidity, ..."), never in a list of drivers or causes, and never with "driven by", "driver", "cause" or "because of" in the same clause.
+
+REGIONAL CONTRASTS. For a regional-contrast pattern, no literature sentence may claim to explain the contrast between regions unless a group it cites names those regions. The question asks how the quantity changes, which regions see the largest and smallest change, and what drives the increase; the answer says that the ranking comes from the projection and that the drivers are general.
 
 HEDGES, by evidence strength. Each group carries its "hedge". A literature sentence that rests on at least one multi_source_supported or review_supported group says "research shows" or "research has shown" and is marked "hedged": false. A literature sentence that rests only on single_source_supported groups says "research suggests" and is marked "hedged": true. Never present a single-source claim as established.
 
 Return ONE JSON object with exactly these keys:
 - "prompt": a closed-book question that a well-informed climate scientist could answer from general knowledge, in plain words and short sentences: either one sentence holding two linked questions (how the quantity is projected to change, and why) or two short sentences. It asks about the general pattern and its drivers for the place, season and horizon the packet names, "under a high-emissions future". It must NOT name or hint at any table, dataset, data portal, model output, paper, study, author, column, variable name or grid cell, and must not say "according to", "the table", "the data", "the paper" or "the study". It must not require recalling a number: ask for direction, rough size, ranking or contrast, and the drivers.
 - "reference_answer": {
-  "table_pattern": [{"sentence": "...", "pattern_ids": ["..."]}] --- each sentence states what the pattern shows, in the pattern's allowed descriptors (direction, magnitude class, place or regional ranking with largest / smallest, relative tercile where given, horizon and scenario phrases), and is tagged with the pattern id(s) it comes from;
+  "table_pattern": [{"sentence": "...", "pattern_ids": ["..."]}] --- each sentence states what the pattern shows, in the pattern's allowed descriptors (direction, one magnitude form, place or regional ranking with largest / smallest, the comparison with other states where given, horizon and scenario phrases), and is tagged with the pattern id(s) it comes from;
   "literature_interpretation": [{"sentence": "...", "group_ids": ["..."], "hedged": true or false}] --- each sentence rests on the group(s) it cites and uses the hedge above. If the packet has no groups, return [];
   "integrated": "a short paragraph that combines the two, in the same words, with no new fact" }
 - "rubric": {"required_points": [{"point": "...", "weight": 1, 2 or 3, "source_ids": ["..."]}], "acceptable_variants": ["..."], "optional_points": [{"point": "...", "source_ids": ["..."]}], "disallowed_claims": ["..."], "fatal_errors": ["..."]}. Every required and optional point MUST carry "source_ids": the pattern id(s) and / or group id(s) from the packet that the point rests on. The required points are exactly: the direction; the magnitude class; the place (for a regional contrast, the ranking: largest / smallest); and each mechanism that rests on a multi_source_supported or review_supported group. A mechanism that rests only on single_source_supported groups is an optional point, never a required one. The anchor pair, if used at all, is an optional point. "fatal_errors" lists climate errors only: the wrong direction; stating the projection as a certainty or a forecast; treating the modeled historical baseline as an observation; reading fire-weather danger as fire occurrence; treating a hazard as a risk. To tell the grader that exact values are not required, write exactly: "Exact values are not required; any statement consistent with the magnitude class counts.".

@@ -1,0 +1,122 @@
+# Pattern-level descriptors v4 (DR-DESC-1 v4; work package P3b, 2026-11-18; D-066).
+#
+# descriptor_rules_v3.yaml (D-060, D-061) with the readability fixes of work package P3b, section B. Changes from v3,
+# and nothing else:
+#   1. every magnitude class carries `forms`: phrases the graded text may use interchangeably, as a natural part of a
+#      sentence (synthesis run 4 wrote "increase a slight increase" from the v3 single phrase); the post-checks accept a
+#      number-word only inside a listed form;
+#   2. the rare rule is fixed: "rising from rare to common" only when the baseline mean is below 2 days AND the future
+#      mean is at least 10 days; a baseline below 2 days with a future below 10 days is "remaining rare" (Washington,
+#      0.04 -> 0.82 days, came out "rising from rare to common" under v3). The v3 alternative "ratio > 10" is dropped,
+#      and so is the low-baseline phrase (every baseline below 1 day is now below 2 days, so it is never reached);
+#   3. the relative tercile is worded as a comparison with other states, never "tercile", "ranking large" or
+#      "moderate relative tercile" in graded text;
+#   4. fire-weather danger: ratio classes only (as v3), with the forms of 1; quantity phrase from plain_language_v1a.
+# Marked EXECUTOR: a detail the work package does not fix, recorded for confirmation. The packets v4b carry these
+# descriptors; packets v4 / v4a keep v3 (unchanged). src/climrr/pattern_descriptors.py reads this file (RULES_V4_PATH)
+# only when its bytes match the manifest pin.
+#
+# No column is interpreted and no table value is computed here: the ratio is of two values the pattern already stores
+# (mean_to / mean_from); the day-count bounds compare those stored means.
+
+version: descriptor_rules_v4
+rule: DR-DESC-1 v4
+decision: D-066
+base: descriptor_rules_v3
+
+direction_words:
+  increase: increase
+  decrease: decrease
+  no_change: no change
+
+# As v3: the day-count rules (rare_to_common, remaining_rare, anchors) apply only to these families.
+day_count_families: [heat_index]
+
+magnitude:
+  ratio: mean_to / mean_from            # future / modeled historical baseline, both from the pattern record
+  # The first class whose [lower, upper) holds the ratio (v3 bounds, unchanged). `increase` is the class name the
+  # descriptor record carries (`magnitude_class`); `forms` are what the graded text may write, any one of them.
+  classes:
+    - upper: 1.25
+      increase: "a slight increase"
+      # the work package's four, then EXECUTOR "rise slightly" (polish run 1 wrote it for "increase slightly")
+      forms: ["a slight increase", "increase slightly", "slightly higher", "a small rise", "rise slightly"]
+    - lower: 1.25
+      upper: 1.75
+      increase: "a moderate increase"
+      # the work package's three, then EXECUTOR "rise moderately" (by analogy with "rise slightly")
+      forms: ["a moderate increase", "increase moderately", "about half again as many", "rise moderately"]
+    - lower: 1.75
+      upper: 2.5
+      increase: "roughly doubling"
+      forms: ["roughly double", "about twice as many", "roughly doubling"]                          # the work package
+    - lower: 2.5
+      upper: 3.5
+      inclusive_upper: true
+      increase: "roughly tripling"
+      forms: ["roughly triple", "about three times as many", "roughly tripling"]                    # EXECUTOR, by analogy
+    - lower: 3.5
+      increase: "more than tripling"
+      forms: ["more than triple", "more than three times as many", "more than tripling"]            # EXECUTOR, by analogy
+  # EXECUTOR: the work package asks for decrease forms "likewise", but v3 has no decrease class (a ratio below 1 always
+  # fell in the first class) and no decrease threshold has been ruled. No class is emitted for a decrease until a rule
+  # sets one; no pilot packet has a decrease. Escalated in the P3b report.
+  decrease_class: none
+  # Fix 2 (P3b, B.2). Both apply to an increase of a day-count family, before the ratio classes.
+  rare_to_common:
+    baseline_below: 2                   # baseline mean, days per season, strictly less
+    future_at_least: 10                 # future mean, days per season, at least
+    class: "rising from rare to common"
+    forms: ["rising from rare to common", "going from rare to common", "from rare to common"]       # EXECUTOR
+    pair: "from {from} to {to} {per_season}"
+    end_zero: "essentially none"        # an end that rounds to 0
+    end: "about {n} {unit}"             # "about 1 day", "about 45 days" (unit singular at 1)
+  remaining_rare:
+    baseline_below: 2                   # baseline mean below 2 days ...
+    future_below: 10                    # ... and future mean below 10 days
+    class: "remaining rare"
+    forms: ["remain rare", "stay rare", "remaining rare"]                                           # the work package
+    # The work package: anchor "from essentially none to about N day(s) a summer", N the rounded future mean.
+    # EXECUTOR: the start is rendered like the rare_to_common ends ("essentially none" when the baseline rounds to 0,
+    # else "about N day(s)"), so a baseline of 1.6 days is not called "essentially none".
+    pair: "from {from} to {to} {per_season}"
+
+anchor:
+  rounding: python_round_to_integer     # round(float(value))
+  pair: "from about {from} to about {to} {unit} {per_season}"
+  single: "about {n} {unit}"
+  unit_singular_at: 1                   # "about 1 day"
+  per_season:
+    summer: "a summer"
+
+# Fix 3 (P3b, B.3): the relative tercile (D-041: a disclosed relative descriptor among U.S. states, never an absolute
+# threshold, never the sole answer key) as a comparison, in forms. The pattern record's class (small / moderate / large)
+# selects the forms; the graded text never says "tercile".
+tercile:
+  forms:
+    small: ["a smaller change than in most states", "among the states with the smallest changes"]
+    moderate: ["a change similar to most states", "in the middle of the range among states"]
+    large: ["a larger change than in most states", "among the states with the largest changes"]
+  never_in_graded_text: ["tercile", "ranking large", "ranking small", "ranking moderate"]
+
+regional:
+  ranking: names of the ranked regions, largest first (DR-PT-004 order)
+  largest: "the largest {direction}: {region}"
+  smallest: "the smallest {direction}: {region}"
+  magnitude: none                       # a regional-contrast pattern stores no baseline mean
+  negligible:
+    rounds_to: 0.0
+    decimals: 1
+    smallest: "essentially no change: {regions}"
+
+horizon:
+  mid: "by mid-century"
+  end: "by late this century"
+
+scenario:
+  RCP8.5: "under a high-emissions future"
+scenario_working_assumption:
+  unstated_in_dictionary: {scenario: RCP8.5, resolution: R-007}
+
+# Fix 4 (P3b, B.4): the quantity phrase is the family's `quantity` in plain_language_v1a.yaml.
+quantity_source: plain_language_v1a

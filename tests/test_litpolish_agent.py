@@ -6,6 +6,10 @@ answer (leakage check recomputed), keeps `pre_polish` in the `polish` history ev
 v2; a rewrite that drops a place, adds a number, changes a hedge, adds a source word, loses a mechanism keyword or
 shrinks too far is `polish_rejected` and the item's text is unchanged; a reply without the JSON gets one corrective
 turn; an item that failed the synthesis checks is skipped. Each invariance check is also tested on its own.
+
+Since work package P3b the working tree carries litpolish_agent v1.1 and checks v2 (`test_p3b.py`). These tests hold the v1
+agent that polish run 1 used (and the v4 synthesis agent that builds their item): their bytes at the run's source commit
+(`litsynth_run4.materialize_agents`), run exactly as before; checks v1a and synonyms v1 are unchanged.
 """
 
 from __future__ import annotations
@@ -24,12 +28,13 @@ import pytest
 
 from climrr import benchmark_items as bi
 from climrr import itemseeds as sd
+from climrr import litsynth_run4 as s4
 from climrr import polish_checks as pc
 from climrr import synthpackets_v4 as v4
 from climrr.checksums import sha256_file
 from climrr.paths import REPO_ROOT
 
-TOOLS = REPO_ROOT / "scripts" / "litcollect"
+TOOLS = s4.materialize_agents()                                    # v1 (and synthesis v4) at the run source commit
 AGENT = TOOLS / "litpolish_agent.py"
 AGENT_SHA256 = "901e39540885b461fccb666803eb5d088ade229dc75253bc5901f3937a9f10dc"
 SYSTEM_PROMPT = ("Rewrite for a general scientific reader: shorter sentences, plain words, same meaning. Do not add, remove or "

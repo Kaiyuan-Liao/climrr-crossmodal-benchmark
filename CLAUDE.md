@@ -152,7 +152,9 @@ Polaris and kept byte-identical to the files that run (pinned in their tests): t
 Pilot P3a (D-063) adds `scripts/litcollect/litpolish_agent.py`, run on Polaris and kept byte-identical to the file that
 runs (pinned in its test): its `agent.log`, per-item files, `prompt_user.txt`, `response.json`, `polished.jsonl` and
 `summary.json` are the run evidence. Since P3a `litsynth_agent.py` is v4; the v3.2 file that synthesis runs 2 and 3 used
-is held by its bytes at their source commit (`litsynth_run2.agent_v32_source`).
+is held by its bytes at their source commit (`litsynth_run2.agent_v32_source`). Since P3b `litsynth_agent.py` is v4.1 and
+`litpolish_agent.py` v1.1; the v4 and v1 files that synthesis run 4 and polish run 1 used are held by their bytes at their
+source commit (`litsynth_run4.materialize_agents`).
 
 ## Knowledge-refresh staging
 

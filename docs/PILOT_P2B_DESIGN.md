@@ -564,3 +564,55 @@ stay as built. Polaris runs (Kaiyuan), at the pushed commit, replacing the §16 
         --out "$LITCOLLECT_ROOT_POLARIS/litpolish/run1" \
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
         --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --sleep 5 --source-commit <PINNED_SHA>
+
+## 18. P3b: synthesis run 4 and polish run 1, readability fixes (D-066, D-067, 2026-11-18)
+
+**Run 4 outcome** (`litsynth_agent` v4, packets v4a, source `2601920`; ingested by `scripts/ingest_litsynth_run4.py` into
+`artifacts/benchmark/items/run4/`, post-checks v3 reproduced): 7 items, **6 `deterministic_pass`** (format corrective turn
+on BI-P3-0003 and 0004, both for "a single study" in the disallowed claims) in `human_review`, **1 `rejected_pre_review`**:
+BI-P3-0007 California FWI --- "three" untraced (acceptable variants), the exact values 31.4 / 33.6 in optional points, "a
+single study" (disallowed claims; all three format-class) and "fires" in a literature sentence (not format-class, so no
+corrective turn). Readability faults in the passing texts: "increase by a slight increase" (0008), "ranking large" /
+"lower tercile" / "moderate relative tercile" (0002, 0004, 0008), "rising from rare to common" for Washington's 0.04 ->
+0.82 days (0003), lower-case "research shows" at a sentence start (0002, 0003, 0008), the heat index listed among the
+drivers (0004, 0005 paragraph), and 0005's question asking which drivers "explain the regional contrast between the
+Southeast and Alaska" although no cited group names either region.
+
+**Polish run 1 outcome** (`litpolish_agent` v1, checks v1a; `artifacts/benchmark/polish/run1/`, checks v1a reproduced): 6
+items, **0 polished, 6 `polish_rejected`** (mechanism 12, numbers 2); 0007 skipped. The polisher never changed a question.
+Per item (report section 51): of 14 reasons the checker was wrong on 11 (word-level keyword loss: "condition", "creating",
+"frequency" for "more frequent"; "1" written "one"), arguable on 2 ("large" / "scale" for "overall warming"), right on 1
+(0001's "50 %"); and three rewrites changed meaning the checker did not see (0001 "about 50 %" and "scenario"; 0003 "become common", "mainly", "adds to the risk"; 0004 "rank among the
+highest in the nation", "if emissions stay high"). The rejections stand; no text changed.
+
+**Fixes.**
+- **DR-DESC-1 v4** (`descriptor_rules_v4.yaml`, D-066): magnitude `forms` (any one may be used); "rising from rare to
+  common" only for a baseline < 2 days and a future >= 10 days, else "remaining rare" with "from essentially none to about
+  N day(s) a summer" (Washington: "remaining rare", "... about 1 day a summer"); the tercile as a comparison with other
+  states (forms; "tercile" never in graded text); FWI ratio classes with the forms. No decrease class (no rule; escalated).
+- **Packets v4b** (`scripts/build_synth_packets_v4b.py`): v4a + descriptors v4, `model_view.must_not_use`, the pattern
+  text's relative-magnitude sentence as the comparison, `checks_input.group_role` / `regions`. Packets v4 / v4a unchanged.
+- **Synthesis agent v4.1** and **post-checks v3.1** (D-067): forms used naturally and once; capital letters; context groups
+  only as asides; no explained regional contrast without a cited group naming the regions; `must_not_use` everywhere.
+  v3.1 fails (format-class) `context_as_driver`, tercile wording, a doubled magnitude phrase and a lower-case sentence
+  start, and reports a context term in a driver sentence of the paragraph and a claimed explanation of a regional contrast.
+- **Polish agent v1.1** and **checks v2** (`polish_synonyms_v2.yaml`): numbers by value; mechanism by cited group (one
+  recognisable term per group); and every descriptor phrase class of the original (magnitude, comparison, scenario,
+  horizon, quantity) kept in any form of its class. Replayed on run 1: 0001, 0003, 0004 still rejected; 0002, 0005, 0008
+  would pass.
+
+**Polaris runs** (Kaiyuan), at the pushed commit `<PINNED_SHA>` that carries packets v4b and the agents:
+
+    bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
+    cd "$CLIMRR_REPO_ROOT"
+    python scripts/litcollect/litsynth_agent.py --packets artifacts/benchmark/synth_packets_v4b \
+        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run5" \
+        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
+        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --sleep 5 --source-commit <PINNED_SHA>
+    python scripts/litcollect/litpolish_agent.py --items "$LITCOLLECT_ROOT_POLARIS/litsynth/run5" \
+        --out "$LITCOLLECT_ROOT_POLARIS/litpolish/run2" \
+        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
+        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --sleep 5 --source-commit <PINNED_SHA>
+
+Then: ingest, sample sheet v2 (`scripts/build_mentor_sheet.py`, which reads packets v4 today: to be pointed at v4b in the
+ingest package), mentor.

@@ -1,0 +1,69 @@
+# Polish-agent synonym table v2 (D-063; work package P3b, section D).
+#
+# polish_synonyms_v1.yaml (kept unchanged: the evidence for polish run 1) rejected all six rewrites of polish run 1,
+# 12 of 14 reasons on "mechanism keyword lost" --- a check word by word ("condition", "creating", "frequency" for "more
+# frequent"). The work package asks for a semantic-tolerant check instead, and this table serves it
+# (src/climrr/polish_checks.py, `invariance_v2`):
+#
+#   - a cited group's KEY TERMS are the content words of its label (>= `min_term_length` letters, not a stopword, not a
+#     `non_distinctive` word), plus, for every `terms` entry whose key occurs in the label, the key and its listed phrases;
+#   - a group is RECOGNISABLE in a text when one of its key terms occurs in it --- words and phrases compared after
+#     `polish_checks.stem2` (lower case; "-ies"/"-ied" -> "-y", "-ing", "-ed", plural "s" removed, then one final "e"),
+#     with hyphens and dashes read as spaces;
+#   - a rewrite keeps the mechanism when every cited group recognisable in the original is still recognisable in the
+#     rewrite. Not every keyword has to survive.
+#
+# The work package's three examples are entries below, verbatim. The rest are EXECUTOR entries for the pilot's
+# heat-index and fire-weather groups (labels of packets v4a / v4b) and for the rewrites polish run 1 made, recorded for
+# confirmation. The table is short on purpose: a missing entry can only reject a polish (the pre-polish text is kept),
+# it never admits a change of meaning on its own --- the numbers, places, hedges and descriptor phrases are checked
+# separately. Pinned by SHA-256 in data/manifest.json; a change is polish_synonyms_v3.yaml.
+
+version: polish_synonyms_v2
+decision: D-063 (work package P3b)
+base: polish_synonyms_v1
+min_term_length: 4
+
+# Words of a label that name the hazard, the season or a generic change, not a mechanism: never a key term on their own
+# (EXECUTOR). Without this list "heat" in "dangerous heat-index days" would make every heat group recognisable.
+non_distinctive: [heat, index, fire, weather, danger, dangerous, hazard, days, summer, extreme, event, events, increase,
+                  increases, projected, future, risk, metric, value, values, greater, higher, lower, strong, primary]
+
+# key (a word or phrase of a label) -> phrases that also recognise the group. Keys and phrases are matched after stem2.
+terms:
+  # --- the work package's examples, verbatim -------------------------------------------------------------------------
+  "land–atmosphere feedbacks": ["feedback between land and air", "feedbacks between the land and atmosphere",
+                                "land and atmosphere"]
+  "urban heat island": ["cities trapping heat", "urban heat", "city heat"]
+  "vapor pressure deficit": ["drier air"]
+  # --- EXECUTOR ------------------------------------------------------------------------------------------------------
+  frequency: [frequent, often, more heatwaves, more heat waves]
+  intensity: [intense, stronger, severe, severity]
+  intensifies: [strengthens, stronger, grows, intensify, intensified, amplifies, amplified]
+  duration: [longer, last longer, length]
+  warming: [warmer, warming climate, hotter]
+  "global warming": [climate warming, climate change]
+  "climate change": [global warming, climate warming]
+  humidity: [humid, moisture, moist]
+  moisture: [humidity, moist, wetness, wetter]
+  nighttime: [night, nights, overnight]
+  "soil moisture": [dry soil, drier soil, wet soil]
+  evaporative: [evaporation]
+  aridity: [dryness, drier, dry conditions, drought]
+  fuels: [vegetation, fuel]
+  winds: [wind, windy]
+  temperature: [temperatures, hotter, warmer]
+  VPD: [vapor pressure deficit, drier air]
+  "apparent temperature": [feels like, perceived temperature, perceived heat]
+  "perceived-heat": [feels like, apparent temperature, perceived heat]
+  threshold: [cutoff, cut-off, above a set level]
+
+# Never key terms (v1's list and its causal verbs, plus generic nouns run 1 tripped on: "condition", "creating").
+stopwords: [about, above, across, after, also, among, an, and, are, as, at, based, be, been, being, below, between, both,
+            but, by, can, could, during, each, from, has, have, into, its, many, more, most, much, not, of, often, "on",
+            or, over, such, than, that, the, their, them, then, there, these, they, this, those, through, to, under,
+            used, using, very, was, were, when, where, which, while, with, within, would,
+            alter, altering, cause, causes, change, changes, drive, drives, driven, effect, effects, grow, grows, lead,
+            leads, condition, conditions, create, creates, creating, raise, raises, rises, affect, affects, reflects,
+            amount, indicating, alone, define, defined, defines, predict, predicts, estimated, strongly, controls,
+            favor, favors, reduces, reduced, exceeds, combines]

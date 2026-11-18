@@ -948,3 +948,159 @@ No model call; nothing frozen; no item accepted. Build `fcd5a12`; evidence run `
 the FWI words are reported, not failed, in the rubric's disallowed claims and fatal errors; the failure has no corrective
 turn; polish checks v1a refuse an added FWI word; the accepted context group `driver-c1-005` is labelled "... predict
 burned area", a phrase the graded text may not use.
+
+## 51. P3b, section A: synthesis run 4 and polish run 1 ingested (2026-11-18)
+
+No model call; nothing frozen; no item accepted. Tarball `litsynth_run4_polish_run1_evidence.tar.gz`
+`ebd502ac7aaea764a86a40501d5b5347d8372164f9b17a28d0299ebf55fb7168` (verified; `items.jsonl` `e333099b…28c7` and polish
+`summary.json` `53eafe9c…dce` as stated). Ingest `scripts/ingest_litsynth_run4.py`, rules `src/climrr/litsynth_run4.py`.
+
+| | |
+| --- | --- |
+| Synthesis run 4 | `litsynth_agent` v4 `8a8ca836…fee1` (prompt `33d387fe…3db05`), packets v4a `3119c0b3…f687`, source `2601920`, Sophia `openai/gpt-oss-120b`, reasoning low, 16000 tokens; 2026-11-18 19:41--19:44 UTC |
+| Run-4 manifest | `artifacts/benchmark/items/run4/manifest.json` `a0a43f67cef3d5c89779b5ed9dd5b7f2d7bce367af6009517797f5164cacc768` |
+| Run-4 result | 7 items: **6 `deterministic_pass` -> `human_review`** (BI-P3-0001 .. 0005, 0008; format corrective turn on 0003 and 0004, both for "a single study" in the disallowed claims); **BI-P3-0007 `rejected_pre_review`** (five reasons below); 0 leakage flags, no HTTP retry; **post-checks v3 reproduced** (`checks_reproduced: true`, first turns included) |
+| BI-P3-0007 reasons | `rubric.acceptable_variants: number-word 'three' ...`; `rubric.optional_points: exact_value_in_graded_text 31.4`; `... 33.6`; `rubric.disallowed_claims: generality ... 'a single study'`; `literature_interpretation: fire-weather wording ... 'fires'` --- the first four format-class, the last not, so no corrective turn |
+| Polish run 1 | `litpolish_agent` v1 `901e3954…10dc` (prompt `42537289…43b9`), checks v1a, synonyms v1; 2026-11-18 19:45--19:46 UTC |
+| Polish manifest | `artifacts/benchmark/polish/run1/manifest.json` `70e5b32b91cfa056fab3bd6ccb940c9965b64e12cfe86941096d35064d78fd85` |
+| Polish result | 6 items, **0 polished, 6 `polish_rejected`** (mechanism 12, numbers 2); 0007 skipped; **checks v1a reproduced** from the raw responses; the polisher returned every **question unchanged** |
+| Item records | `items/run4/items/<item_id>.json`: the six = run-4 record + `polish` event (text unchanged) + `human_review`; 0007 as delivered |
+
+**Polish rejections, per item** (the COORDINATOR's question: was the polisher or the checker wrong?). Summary: of the 14 reasons
+the checker was **wrong on 11** --- 10 mechanism reasons are word-level misses of the same idea ("condition", "creating",
+"frequency" for "more frequent", "intensity" for "stronger", "increase" for "rising") and one number reason is "1" written
+"one" --- **arguable on 2** (0004's "large" and "scale" for "overall warming") and **right on 1** (0001's "about 50 %").
+And it **missed** meaning changes in 0001, 0003 and 0004 that it had no check for (scenario and horizon phrases, the
+comparison with other states, added claims). Those three rejections stand on their own grounds; 0002, 0005 and 0008 were
+faithful rewrites rejected by the checker.
+
+**BI-P3-0001** (`SD2-TP1-00071`). Question: unchanged by the polisher.
+
+Reasons (checks v1a, verbatim):
+
+- `answer: numbers differ (original [], polished ['50'])`
+- `answer: mechanism keyword 'condition' lost (no listed synonym present)`
+
+- *Original answer:* In California during summer, the number of days hot and humid enough to be dangerous is projected to increase, a moderate increase (about half again as many) by mid-century under a high‑emissions future. This rise is driven by large‑scale warming and land‑atmosphere feedbacks, by the overall warming that makes heatwaves more frequent and intense, and by urban heat‑island effects that amplify nighttime heat under calm, clear conditions.
+- *Polished answer:* In California summer, the number of dangerous heat‑index days is expected to rise by about 50 % by mid‑century under a high‑emissions scenario. The increase comes from large‑scale warming, feedbacks between the land and atmosphere, more frequent and stronger heatwaves, and urban heat‑island effects that make nights hotter when the air is calm and clear.
+- *Checks v2 replay:* fail --- `answer: numbers differ by value (original [], polished [50.0])`; `answer: descriptor phrase lost: magnitude: a moderate increase (original ['a moderate increase', 'about half again as many'])`; `answer: descriptor phrase lost: scenario: RCP8.5 (original ['under a high-emissions future'])`
+- *EXECUTOR reading:* Checker **right** on the number ("about 50 %" turns the magnitude class into a precise percentage), **wrong** on "condition" ("when the air is calm and clear" keeps it). The rewrite also changed "under a high-emissions future" to "... scenario" (D-061) and dropped "moderate". **Fact changed: rejection kept.**
+
+**BI-P3-0002** (`SD2-TP1-00271`). Question: unchanged by the polisher.
+
+Reasons (checks v1a, verbatim):
+
+- `answer: mechanism keyword 'intensifie' lost (no listed synonym present)`
+
+- *Original answer:* In summer, days hot and humid enough to be dangerous are projected to increase in New York, rising from rare to common and moving from essentially none to about 11 days a summer, putting the state in the lower tercile of U.S. states by late this century under a high-emissions future. research shows that large‑scale warming, rather than regional circulation changes, drives this increase, that global warming will boost heat‑wave frequency, intensity and duration, and that the urban heat island effect intensifies under nighttime, high‑pressure, calm conditions, all contributing to more dangerous heat‑index days.
+- *Polished answer:* In summer, days that are hot and humid enough to be dangerous are expected to rise in New York. They will go from rare to common, increasing from essentially none to about 11 days each summer. By late this century, under a high‑emissions future, the state will be in the lower third of U.S. states for such days. Research shows that large‑scale warming, not regional circulation changes, drives this rise. Global warming will increase the frequency, intensity, and length of heat waves. The urban heat‑island effect also grows under nighttime, high‑pressure, calm conditions, adding to the number of dangerous heat‑index days.
+- *Checks v2 replay:* pass
+- *EXECUTOR reading:* Checker **wrong**: "intensifies" became "grows" (same mechanism). Borderline: "lower third of U.S. states *for such days*" reads the tercile as a ranking of the number of days, not of the change (the original "lower tercile of U.S. states" was already ambiguous); "Global warming will increase ..." now stands outside the "Research shows" sentence. **No fact changed**; v2 would pass it.
+
+**BI-P3-0003** (`SD2-TP1-00460`). Question: unchanged by the polisher.
+
+Reasons (checks v1a, verbatim):
+
+- `answer: numbers differ (original ['1'], polished [])`
+- `answer: mechanism keyword 'condition' lost (no listed synonym present)`
+- `answer: mechanism keyword 'increase' lost (no listed synonym present)`
+
+- *Original answer:* In Washington during summer, days hot and humid enough to be dangerous are projected to increase by mid-century under a high-emissions future, rising from rare to common (from essentially none to about 1 day a summer). This increase is driven by large‑scale warming rather than regional circulation changes, by the overall warming of the climate that raises heat‑wave frequency and intensity, and by an intensified urban heat island effect at night under calm, clear‑sky conditions.
+- *Polished answer:* In Washington summer, days that are hot and humid enough to be dangerous are expected to become common by mid‑century under a high‑emissions scenario, rising from almost none to about one day each summer. The change is caused mainly by large‑scale warming, not by regional circulation shifts. Overall climate warming raises heat‑wave frequency and intensity, and a stronger urban heat‑island effect at night under calm, clear skies adds to the risk.
+- *Checks v2 replay:* fail --- `answer: descriptor phrase lost: magnitude: rising from rare to common (original ['rising from rare to common', 'from rare to common'])`; `answer: descriptor phrase lost: scenario: RCP8.5 (original ['under a high-emissions future'])`
+- *EXECUTOR reading:* Checker **wrong** on all three ("1" written "one"; "increase" -> "rising"; "condition" -> "clear skies"). The rewrite kept the original's wrong class ("become common", fixed upstream by D-066) and **added** "mainly" and "adds to the risk" (a new claim and a risk word). **Meaning changed: rejection kept.**
+
+**BI-P3-0004** (`SD2-TP1-00589`). Question: unchanged by the polisher.
+
+Reasons (checks v1a, verbatim):
+
+- `answer: mechanism keyword 'frequency' lost (no listed synonym present)`
+- `answer: mechanism keyword 'intensity' lost (no listed synonym present)`
+- `answer: mechanism keyword 'large' lost (no listed synonym present)`
+- `answer: mechanism keyword 'scale' lost (no listed synonym present)`
+
+- *Original answer:* In Alabama during summer, dangerous heat‑index days are projected to increase, moving from rare to common and ranking large relative to other states by late this century under a high‑emissions future. This increase is driven by large‑scale warming, the overall rise in heat‑wave frequency and intensity from global warming, amplification from the urban heat island effect, and the fact that the heat index captures combined temperature‑humidity stress.
+- *Polished answer:* In Alabama, summer days with dangerous heat‑index values are expected to go from rare to common by the end of the century if emissions stay high. The state will rank among the highest in the nation. The change is caused by overall warming, more frequent and stronger heat waves from global warming, added warming from the urban heat island effect, and the fact that the heat index measures the combined stress of temperature and humidity.
+- *Checks v2 replay:* fail --- `answer: descriptor phrase lost: scenario: RCP8.5 (original ['under a high-emissions future'])`; `answer: descriptor phrase lost: horizon: end (original ['by late this century'])`; `answer: descriptor phrase lost: quantity: heat_index (original ['dangerous heat-index days'])`
+- *EXECUTOR reading:* Checker **wrong** on "frequency" / "intensity" ("more frequent and stronger"); arguable on "large-scale" ("overall warming"). The checker **missed** a fact change: "ranking large relative to other states" became "The state will rank among the highest in the nation" (a ranking of the count, not of the change), and "under a high-emissions future" / "by late this century" became "if emissions stay high" / "by the end of the century". **Fact changed: rejection kept.**
+
+**BI-P3-0005** (`SD2-TP1-02785`). Question: unchanged by the polisher.
+
+Reasons (checks v1a, verbatim):
+
+- `answer: mechanism keyword 'condition' lost (no listed synonym present)`
+- `answer: mechanism keyword 'frequency' lost (no listed synonym present)`
+- `answer: mechanism keyword 'intensity' lost (no listed synonym present)`
+
+- *Original answer:* Research shows that an increase in days hot and humid enough to be dangerous is projected, with the Southeast seeing the largest rise and Alaska essentially unchanged by mid-century under a high-emissions future. This pattern is driven by large‑scale warming, higher heat‑wave frequency and intensity from global warming, amplified urban heat island effects under calm, clear conditions, and the use of the heat index, which captures combined temperature‑humidity stress.
+- *Polished answer:* Research shows that days that are hot and humid enough to be dangerous will increase by mid‑century under a high‑emissions future. The Southeast will see the biggest rise, while Alaska will change little. This pattern comes from large‑scale warming, more frequent and intense heat waves caused by global warming, stronger urban heat‑island effects when skies are clear and winds are calm, and the heat index, which measures combined temperature‑humidity stress.
+- *Checks v2 replay:* pass
+- *EXECUTOR reading:* Checker **wrong** on all three ("condition" -> "skies are clear and winds are calm"; "more frequent and intense"). "Alaska will change little" for "essentially unchanged" is faithful. **No fact changed** (the heat index stays listed as a driver, inherited from the original: D-067); v2 would pass it.
+
+**BI-P3-0008** (`SD2-TP1-01654`). Question: unchanged by the polisher.
+
+Reasons (checks v1a, verbatim):
+
+- `answer: mechanism keyword 'creating' lost (no listed synonym present)`
+
+- *Original answer:* In Minnesota summer, fire‑weather danger is projected to increase by a slight increase by late this century under a high‑emissions future, placing the state in the moderate relative tercile among U.S. states. research shows that higher temperatures and aridity dry fuels, creating extreme fire‑weather conditions.
+- *Polished answer:* By late this century, under a high‑emissions future, fire‑weather danger in Minnesota summer is projected to rise slightly. This would place the state in the moderate relative tercile of U.S. states. Research shows that higher temperatures and greater aridity dry fuels, leading to extreme fire‑weather conditions.
+- *Checks v2 replay:* pass
+- *EXECUTOR reading:* Checker **wrong**: "creating" is a generic verb ("leading to"). The rewrite fixed "increase by a slight increase" -> "rise slightly" and kept "moderate relative tercile". **No fact changed**; v2 would pass it.
+
+## 52. P3b, sections B--D: descriptors v4, packets v4b, synthesis agent v4.1, polish v1.1 (D-066, D-067, 2026-11-18)
+
+| | |
+| --- | --- |
+| DR-DESC-1 v4 | `descriptor_rules_v4.yaml` `dbfa8fd8a86a9379b4709b998bb33e673dceafd5f8ba7d199d55ff672d4c282d` (manifest-pinned; D-066) |
+| Washington (BI-P3-0003) | baseline 0.04, future 0.82 days -> **"remaining rare"**, forms "remain rare" / "stay rare" / "remaining rare", anchor "from essentially none to about 1 day a summer"; comparison "a smaller change than in most states" / "among the states with the smallest changes" |
+| Minnesota FWI (BI-P3-0008) | 15.3 -> 16.8 (ratio 1.09) -> **"a slight increase"**, forms "a slight increase" / "increase slightly" / "slightly higher" / "a small rise" / "rise slightly"; no anchor (index); comparison (middle) "a change similar to most states" / "in the middle of the range among states" |
+| Other items | 0001 California "a moderate increase" (15 -> 24 days); 0002 New York "rising from rare to common" (0.2 -> 11.2); 0004 Alabama "rising from rare to common" (1.4 -> 45.2); 0007 California FWI "a slight increase", "a larger change than in most states"; 0005 regional: largest Southeast, "essentially no change: Alaska" |
+| Packets v4b | `artifacts/benchmark/synth_packets_v4b/manifest.json` `598b2744c7fbde5aeaf4cdc3c0bc9465134e41d35e08f11ce19441eb3cf5bfad`; v4a + descriptors v4, `must_not_use` (heat: "one study", "a single study", "tercile", "ranking large / small / moderate", "RCP", "SSP"; FWI adds "wildfire", "fires", "burned area"), the relative-magnitude sentence written as the comparison, `group_role`, `regions`; groups, provenance and allowed numbers identical to v4a |
+| Synthesis agent v4.1 | `litsynth_agent.py` `f41c0b9537912779076bfac81e1341f94e07bd87723177cc583350ce164d33d7`; system prompt `8ce96b076ee0f9366a25cc6caf50a72cd034c821f567f69b777ad4947481c8ab`; format corrective prompt `41eac0f7b03b4d9e33726161638510f022f8f9c8526af09b4feb9ff2ee6ae8f0` |
+| Post-checks v3.1 | fail (format-class): `context_as_driver`, tercile wording, doubled magnitude phrase, lower-case sentence start; report: context term in a driver sentence of the paragraph, explained regional contrast. On run 4's texts: 0008 / 0007 doubled magnitude, 0002 / 0004 / 0007 / 0008 tercile words, 0002 / 0003 / 0008 lower-case "research shows"; reports on 0004 and 0005 (paragraph) and 0005 (question); nothing on 0001 |
+| Polish agent v1.1 | `litpolish_agent.py` `6abc7b2b46298934682bf8342793e185cc73b85d69b505ef61e6cbe0c374366e`; system prompt `2dbbce7f345fdcdeccd4661c22f5c22d87e6c4bcaa070856b59e6234093f0a18` |
+| Polish checks v2 / synonyms v2 | `polish_checks` v2; `polish_synonyms_v2.yaml` `7d55d33ca1ca6212341ef06f3a2857f3bfd145ac637e667deb42955fa2267b2b` (manifest-pinned; v1 kept); replayed on run 1: 0001, 0003, 0004 fail, 0002, 0005, 0008 pass |
+| Tests | see section 53 |
+
+## 53. P3b: gate, escalations, Polaris commands (2026-11-18)
+
+Build `BUILD_SHA`; evidence runs `build_synth_packets_v4b` and `ingest_litsynth_run4` at the build commit (`git_dirty:
+false`), outputs byte-identical.
+
+| | |
+| --- | --- |
+| Tests | `pytest`: **1,631 passed, 2 skipped** (the two pre-existing `jsonschema` skips); new `tests/test_p3b.py` (34); `test_litsynth_agent_v4.py` and `test_litpolish_agent.py` now run the v4 / v1 bytes at `2601920`; packets v4 / v4a and every earlier ingest still reproduce |
+| Scanner | `verify_no_secrets_or_paths.py`: 0 hits (1,774 tracked text files) |
+
+**Escalations and readings for confirmation.**
+1. **No decrease class** (D-066 (d)): the work package asks for decrease forms "likewise", but no decrease threshold has
+   been ruled; none emitted. No pilot packet has a decrease. A ruling is needed before a decreasing pattern is used.
+2. **`polish_synonyms_v2.yaml`, not v1**: the work package names `polish_synonyms_v1.yaml`, which is manifest-pinned and the
+   evidence for polish run 1 (its own header: a change is a new file). The new table is v2; v1 is unchanged.
+3. **Polish checks v2 add a descriptor-phrase check** (EXECUTOR, from section 51): the magnitude class, the comparison with
+   other states, the scenario and horizon phrases and the quantity of the original must survive, in any form of their class.
+   Without it v2 would have passed 0004 ("rank among the highest in the nation", "if emissions stay high"). It is strict:
+   a polisher that paraphrases one of these phrases outside the listed forms is rejected and the pre-polish text kept.
+4. **Post-checks v3.1 fail on more than `context_as_driver`**: tercile wording, a doubled magnitude phrase and a lower-case
+   sentence start are also failures (format-class, one corrective turn) --- the work package's B.3 "never ... in graded
+   text" and C's "is an error" / "start with a capital letter". The context error run 4 actually made (the heat index in
+   the paragraph's list of drivers) is caught by a **report**, not a failure, because the work package's rule is written
+   for sentences tagged only with context groups.
+5. **BI-P3-0007's "fires"** stays a non-format failure (no corrective turn, as D-053b (c)); whether run 5 passes 0007
+   depends on the model following `must_not_use`.
+6. **Mentor sheet builder v2** reads packets v4; for run 5 it must read v4b (next package).
+7. CLAUDE.md gains one sentence: where the v4 / v1 agent bytes of runs 4 / polish 1 are held (as P3a did for v3.2).
+
+**Polaris runs** (Kaiyuan), pinned at the build commit `BUILD_SHA` (it carries packets v4b and both agents):
+
+    bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" BUILD_SHA
+    cd "$CLIMRR_REPO_ROOT"
+    python scripts/litcollect/litsynth_agent.py --packets artifacts/benchmark/synth_packets_v4b \
+        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run5" \
+        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
+        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --sleep 5 --source-commit BUILD_SHA
+    python scripts/litcollect/litpolish_agent.py --items "$LITCOLLECT_ROOT_POLARIS/litsynth/run5" \
+        --out "$LITCOLLECT_ROOT_POLARIS/litpolish/run2" \
+        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
+        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --sleep 5 --source-commit BUILD_SHA

@@ -1,0 +1,444 @@
+{
+  "run": "run4",
+  "diagnostic_id": "litsynth_run4",
+  "decision": "D-053b",
+  "work_package": "P3b",
+  "tarball": {
+    "name": "litsynth_run4_polish_run1_evidence.tar.gz",
+    "sha256": "ebd502ac7aaea764a86a40501d5b5347d8372164f9b17a28d0299ebf55fb7168"
+  },
+  "generator": {
+    "version": "litsynth_agent v4",
+    "agent_path": "scripts/litcollect/litsynth_agent.py",
+    "agent_sha256": "8a8ca836a6cd6469ead6948305f721b9e0d6e7063770350f4c89810a3000fee1",
+    "system_prompt_sha256": "33d387fe5098806cac70822194dc34804d80fc98cdb69ec850c919f88993db05",
+    "corrective_template_sha256": "256db051b3ddfa93d893e4573a2e818ecd4623d96ddac0aaebdba932c6e2a01a",
+    "format_corrective_template_sha256": "053037521584043f258b74c3e96fc1d5bf6e93f76d15b1c7a4d5229a041a239f"
+  },
+  "endpoint": {
+    "endpoint_label": "sophia_vllm",
+    "model": "openai/gpt-oss-120b",
+    "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1"
+  },
+  "budget": {
+    "reasoning_effort": "low",
+    "max_tokens": 16000,
+    "temperature": 0
+  },
+  "source_commit": "26019206581366185a59b4113824a7c62755cec3",
+  "packets": {
+    "version": "synthpackets v4a",
+    "path": "artifacts/benchmark/synth_packets_v4a",
+    "at_commit": "26019206581366185a59b4113824a7c62755cec3",
+    "manifest_sha256": "3119c0b3d29b12364519b3262da2b8c791a6e70ccda814bdb0bd9b5b92d3f687"
+  },
+  "counts": {
+    "items": 7,
+    "deterministic_pass": 6,
+    "deterministic_fail": 1,
+    "leakage_flags": 0,
+    "corrective_retry_used": 0,
+    "format_corrective_used": 2,
+    "format_corrective_pass": 2
+  },
+  "items": [
+    {
+      "item_id": "BI-P3-0001",
+      "seed_id": "SD2-TP1-00071",
+      "use_case_level": 3,
+      "status": "deterministic_pass",
+      "packet_sha256": "ff7bbbda341a605e40931e8a1497492e35800f151ea610d18de7e6014af81ecd",
+      "corrective_turn_used": false
+    },
+    {
+      "item_id": "BI-P3-0002",
+      "seed_id": "SD2-TP1-00271",
+      "use_case_level": 3,
+      "status": "deterministic_pass",
+      "packet_sha256": "627e907a05a932bd1f9b850f19b058b4dd5ddf6089684b28d4c226eb15d35814",
+      "corrective_turn_used": false
+    },
+    {
+      "item_id": "BI-P3-0003",
+      "seed_id": "SD2-TP1-00460",
+      "use_case_level": 3,
+      "status": "deterministic_pass",
+      "packet_sha256": "69cad1f2f513a0ce4cc03a35d679516de2d5c5b4100630feb63c3ce8c999f883",
+      "corrective_turn_used": true
+    },
+    {
+      "item_id": "BI-P3-0004",
+      "seed_id": "SD2-TP1-00589",
+      "use_case_level": 3,
+      "status": "deterministic_pass",
+      "packet_sha256": "2277e6492535b2618ca95abe874084ff56463ade92d7a48056b6a55cbeeeb805",
+      "corrective_turn_used": true
+    },
+    {
+      "item_id": "BI-P3-0005",
+      "seed_id": "SD2-TP1-02785",
+      "use_case_level": 4,
+      "status": "deterministic_pass",
+      "packet_sha256": "56a6da1ff466dbc6aa087efb6acefa1558230b9543401a9903c260176cbe2aa1",
+      "corrective_turn_used": false
+    },
+    {
+      "item_id": "BI-P3-0007",
+      "seed_id": "SD2-TP1-01463",
+      "use_case_level": 3,
+      "status": "rejected_pre_review",
+      "packet_sha256": "a2335056b07641730264c5b66ba0ad62d0895a9e3185f5b79b0d6005f8002e85",
+      "corrective_turn_used": false
+    },
+    {
+      "item_id": "BI-P3-0008",
+      "seed_id": "SD2-TP1-01654",
+      "use_case_level": 3,
+      "status": "deterministic_pass",
+      "packet_sha256": "6f1b3bb3d6f849bbb1edc9f9ef8aecaeb5fbccf69cdeeafaf2668ad738663bc1",
+      "corrective_turn_used": false
+    }
+  ],
+  "format_corrective_items": [
+    "BI-P3-0003",
+    "BI-P3-0004"
+  ],
+  "rejected_pre_review": {
+    "BI-P3-0007": [
+      "rubric.acceptable_variants: number-word 'three' does not trace to an allowed descriptor in the packet",
+      "rubric.optional_points: exact_value_in_graded_text 31.4 (exact values belong to provenance)",
+      "rubric.optional_points: exact_value_in_graded_text 33.6 (exact values belong to provenance)",
+      "rubric.disallowed_claims: generality (D-060/D-062): 'a single study' in graded text",
+      "literature_interpretation: fire-weather wording (an FWI is never fire occurrence): 'fires' in graded text"
+    ]
+  },
+  "log": {
+    "start_utc": "2026-11-18T19:41:22Z",
+    "end_utc": "2026-11-18T19:44:28Z",
+    "done": [
+      "items=7 pass=6 fail=1"
+    ]
+  },
+  "items_sha256": "e333099bfacffdcd53f2f6cdd428ac4f5314b5689c3eabb962fbc7a1c74928c7",
+  "summary_sha256": "cf9b71ac34a9d4e237d30f7ce3c0ffab2c6f11c485c0fcaed93fa3e1c1a4b7ea",
+  "checks_reproduced": true,
+  "checks": {
+    "checks_reproduced": true,
+    "check_version": "synthesis_post_checks v3",
+    "items": [
+      {
+        "item_id": "BI-P3-0001",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": null
+      },
+      {
+        "item_id": "BI-P3-0002",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": null
+      },
+      {
+        "item_id": "BI-P3-0003",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": [
+          "rubric.disallowed_claims: generality (D-060/D-062): 'a single study' in graded text"
+        ]
+      },
+      {
+        "item_id": "BI-P3-0004",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": [
+          "rubric.disallowed_claims: generality (D-060/D-062): 'a single study' in graded text"
+        ]
+      },
+      {
+        "item_id": "BI-P3-0007",
+        "pass": false,
+        "reasons": [
+          "rubric.acceptable_variants: number-word 'three' does not trace to an allowed descriptor in the packet",
+          "rubric.optional_points: exact_value_in_graded_text 31.4 (exact values belong to provenance)",
+          "rubric.optional_points: exact_value_in_graded_text 33.6 (exact values belong to provenance)",
+          "rubric.disallowed_claims: generality (D-060/D-062): 'a single study' in graded text",
+          "literature_interpretation: fire-weather wording (an FWI is never fire occurrence): 'fires' in graded text"
+        ],
+        "first_check_reasons": null
+      },
+      {
+        "item_id": "BI-P3-0008",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": null
+      },
+      {
+        "item_id": "BI-P3-0005",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": null
+      }
+    ]
+  },
+  "item_schema": {
+    "path": "data/metadata/benchmark/item_schema_v2.json",
+    "sha256": "765631f16eeea5dadce1d9d3458942b15d8272531a2516a08ce7210f7ec852a7"
+  },
+  "lifecycle": {
+    "status": "human_review",
+    "from": "deterministic_pass",
+    "rule": "D-033",
+    "kaiyuan_disposition": null,
+    "mentor_disposition": null,
+    "final_frozen": null,
+    "note": "items/<item_id>.json: the six passing items = the polish-run record (run-4 item + its polish event, text unchanged: every rewrite was rejected) + this step; BI-P3-0007 = the run-4 record as delivered (rejected_pre_review, not entered human review); items.jsonl is the run's file, byte-identical"
+  },
+  "polish": {
+    "run": "polish/run1",
+    "manifest": "../../polish/run1/manifest.json"
+  },
+  "files": [
+    {
+      "path": "items.jsonl",
+      "sha256": "e333099bfacffdcd53f2f6cdd428ac4f5314b5689c3eabb962fbc7a1c74928c7",
+      "bytes": 202826
+    },
+    {
+      "path": "summary.json",
+      "sha256": "cf9b71ac34a9d4e237d30f7ce3c0ffab2c6f11c485c0fcaed93fa3e1c1a4b7ea",
+      "bytes": 1081
+    },
+    {
+      "path": "agent.log",
+      "sha256": "c8b269f2e07db6defd94291443f4a98be27aa1e4ac3ee6c59c6b1eca0e3a3232",
+      "bytes": 1227
+    }
+  ],
+  "items_ingested": [
+    {
+      "item_id": "BI-P3-0001",
+      "seed_id": "SD2-TP1-00071",
+      "path": "items/BI-P3-0001.json",
+      "sha256": "261bcee22c800c4cb9b0a342669bf9d7edae2547bb3f5e0a175664fb2d190c49",
+      "status": "human_review",
+      "history": [
+        "deterministic_pass",
+        "polish",
+        "human_review"
+      ],
+      "schema_valid": true,
+      "consistency_errors": []
+    },
+    {
+      "item_id": "BI-P3-0002",
+      "seed_id": "SD2-TP1-00271",
+      "path": "items/BI-P3-0002.json",
+      "sha256": "c07b810eb6e79a19f1ae5ec83ac36b0f97f2bc4af605553e7d7e7c02cf70664f",
+      "status": "human_review",
+      "history": [
+        "deterministic_pass",
+        "polish",
+        "human_review"
+      ],
+      "schema_valid": true,
+      "consistency_errors": []
+    },
+    {
+      "item_id": "BI-P3-0003",
+      "seed_id": "SD2-TP1-00460",
+      "path": "items/BI-P3-0003.json",
+      "sha256": "610112ec8c50f51115d36f67f492f2feeb9345c7c63dc60164b5d58dad439580",
+      "status": "human_review",
+      "history": [
+        "deterministic_pass",
+        "polish",
+        "human_review"
+      ],
+      "schema_valid": true,
+      "consistency_errors": []
+    },
+    {
+      "item_id": "BI-P3-0004",
+      "seed_id": "SD2-TP1-00589",
+      "path": "items/BI-P3-0004.json",
+      "sha256": "dc5e9c215ea5f2d83cc7a072dde5a548f47a06ad76ae7272341dc9735943aa06",
+      "status": "human_review",
+      "history": [
+        "deterministic_pass",
+        "polish",
+        "human_review"
+      ],
+      "schema_valid": true,
+      "consistency_errors": []
+    },
+    {
+      "item_id": "BI-P3-0005",
+      "seed_id": "SD2-TP1-02785",
+      "path": "items/BI-P3-0005.json",
+      "sha256": "00ace1ab7ee6dbe839c720e8d1220a7570dacf8f1f6f22c868787c3bbca4de21",
+      "status": "human_review",
+      "history": [
+        "deterministic_pass",
+        "polish",
+        "human_review"
+      ],
+      "schema_valid": true,
+      "consistency_errors": []
+    },
+    {
+      "item_id": "BI-P3-0007",
+      "seed_id": "SD2-TP1-01463",
+      "path": "items/BI-P3-0007.json",
+      "sha256": "5b086746f2fc68a924d95dd9471e41b1bf91683fa9fad016c65ac3ad04135af3",
+      "status": "rejected_pre_review",
+      "history": [
+        "deterministic_fail"
+      ],
+      "schema_valid": true,
+      "consistency_errors": []
+    },
+    {
+      "item_id": "BI-P3-0008",
+      "seed_id": "SD2-TP1-01654",
+      "path": "items/BI-P3-0008.json",
+      "sha256": "c15d81a9a18024758c57f1fbb4c0b6b9475f6eb260a19e496e6523933e95b896",
+      "status": "human_review",
+      "history": [
+        "deterministic_pass",
+        "polish",
+        "human_review"
+      ],
+      "schema_valid": true,
+      "consistency_errors": []
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": "litsynth/run4/items/SD2-TP1-00071.json",
+      "sha256": "d3509725a8ca8d104822f56dbfa9c9eb6c3f9be5392eed8c7862f9034f677992",
+      "bytes": 30521
+    },
+    {
+      "path": "litsynth/run4/items/SD2-TP1-00271.json",
+      "sha256": "7ec4bbfe40edd7c497856a33ae8b1e6292336be0eda3394b54a5b332d1c3c362",
+      "bytes": 33162
+    },
+    {
+      "path": "litsynth/run4/items/SD2-TP1-00460.json",
+      "sha256": "f7e93fade5eb3aba5a9aab776c699b43397eadcbfc9131908929f552da05796e",
+      "bytes": 41868
+    },
+    {
+      "path": "litsynth/run4/items/SD2-TP1-00589.json",
+      "sha256": "007a849f5afc703f6d3a3b81a448f1988e09c317bf40a10ec91511ba80e82719",
+      "bytes": 45809
+    },
+    {
+      "path": "litsynth/run4/items/SD2-TP1-01463.json",
+      "sha256": "a78383da924cba46c6c0bdb2d777179dfb3fad9b994466da78d7af68fef242b1",
+      "bytes": 37390
+    },
+    {
+      "path": "litsynth/run4/items/SD2-TP1-01654.json",
+      "sha256": "e7c2ceea6f7710fb4a3eedb6a18843f6816c31a9796de7942bc1af832c26272b",
+      "bytes": 24651
+    },
+    {
+      "path": "litsynth/run4/items/SD2-TP1-02785.json",
+      "sha256": "8850cf6645ca5bc33338713ad65e341e9ea237212c1c44c8c9457936bac5dd06",
+      "bytes": 35470
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-00071/prompt_user.txt",
+      "sha256": "f03fdfa12097b87bc36c2ad6e0f8dd073f1c37003973220270068522db68362d",
+      "bytes": 26736
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-00071/response.json",
+      "sha256": "da3b962566a834b220467ccbc2f073819ad81c29f38e35e5531ca3f7c9a76cb6",
+      "bytes": 7893
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-00271/prompt_user.txt",
+      "sha256": "fa609358a9f80ca35ac4b65108b000f65a986072c6d34b59e56c1fb1ac0b6cd4",
+      "bytes": 24623
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-00271/response.json",
+      "sha256": "28593d09feba102c7eeb051b5d332b95aecd43baf0ef6ced51f3b64a71587a96",
+      "bytes": 10293
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-00460/prompt_format_corrective.txt",
+      "sha256": "dddc0ae996110ed198b0c52a8c502a4f673722bff804f25261ac9769e97d9939",
+      "bytes": 857
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-00460/prompt_user.txt",
+      "sha256": "d1461228b30d7f5083100ea144eb14c9b8a98f69e427ebd36aa558212e6f4a7e",
+      "bytes": 24035
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-00460/response.json",
+      "sha256": "6e263cb95779573ac71c29f8b67888a2468c7066b8c20356e9380d79519965e4",
+      "bytes": 8397
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-00460/response_format_corrective.json",
+      "sha256": "1c68482e8fafd24693b439593e58e49ed46cfd4d3675491f9a230288cdd9d8cf",
+      "bytes": 6399
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-00589/prompt_format_corrective.txt",
+      "sha256": "dddc0ae996110ed198b0c52a8c502a4f673722bff804f25261ac9769e97d9939",
+      "bytes": 857
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-00589/prompt_user.txt",
+      "sha256": "8d7aab9d90cabacf8292c116873d0f876e7e0a8bc92d8f2e5327eca5364e16cc",
+      "bytes": 24092
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-00589/response.json",
+      "sha256": "77773f3d445d7deb4b3d9f49a8a9424bf52d9c0b166126fb687515cf8faaaa20",
+      "bytes": 7590
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-00589/response_format_corrective.json",
+      "sha256": "d03c0c3b09de2484d82fee4f3fcec9e4068b603a05144ff3c6609ece5f1ad2d5",
+      "bytes": 6797
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-01463/prompt_user.txt",
+      "sha256": "c27668368114a63b20f09bba0e736cc57e0675fdd4ce22f9630056fc183dc48f",
+      "bytes": 30719
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-01463/response.json",
+      "sha256": "348ceece351dace1ad9f93f7ca8b24ef964bd1846cb9f36624aa1aa53584ba66",
+      "bytes": 7503
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-01654/prompt_user.txt",
+      "sha256": "a37d3c68c717f481bf4851fd8bc7dbffba445a5e2abcfdb21648970e57ae3b85",
+      "bytes": 21313
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-01654/response.json",
+      "sha256": "7b05e07cf064aa362902549f6cec0425072a97420ba25c3642111205acc232b9",
+      "bytes": 6401
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-02785/prompt_user.txt",
+      "sha256": "85770c84519bda8db67eaae033ec3660b8cd18c2946e7613ab86e6f4e0168ed2",
+      "bytes": 25351
+    },
+    {
+      "path": "litsynth/run4/raw/SD2-TP1-02785/response.json",
+      "sha256": "cbd036c656c1d706b34058d9eb2d664c30eb2be851ad6027ecc0a8622e9628e6",
+      "bytes": 7452
+    }
+  ],
+  "ingested_at": "2026-11-18T20:10:53Z",
+  "ingested_by": "EXECUTOR"
+}

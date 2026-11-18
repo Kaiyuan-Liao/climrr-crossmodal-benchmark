@@ -3243,3 +3243,63 @@ code emits, and the next GUIDANCE packet still chooses.
   `plain_language_v1a.yaml`, `data/manifest.json`, `src/climrr/synthpackets_v4.py`, `pilot_selection.py`,
   `plain_language.py`, `benchmark_items.py`, `polish_checks.py`, `scripts/build_synth_packets_v4a.py`,
   `artifacts/benchmark/synth_packets_v4a/`, tests.
+
+## D-066 --- Descriptor forms and the rare rule (DR-DESC-1 v4)
+
+- **Date:** 2026-11-18.
+- **Status:** **decided** (COORDINATOR work package P3b, section B).
+- **Context.** Synthesis run 4 (agent v4, packets v4a) copied the single v3 magnitude phrase into sentences where it did
+  not fit ("increase by a slight increase", BI-P3-0008; "increase a slight increase", BI-P3-0007), wrote the tercile as
+  "ranking large" / "moderate relative tercile", and called Washington's 0.04 -> 0.82 days "rising from rare to common" (the
+  v3 rule: ratio > 10 or baseline < 2 days).
+- **Decision.** (1) Every magnitude class lists `allowed_forms` the agent may use interchangeably; the checker accepts any
+  listed form. (2) "Rising from rare to common" only when the baseline is below 2 days **and** the future at least 10
+  days; below 10 days the class is "remaining rare" (forms "remain rare", "stay rare", "remaining rare"), anchor "from
+  essentially none to about N day(s) a summer". (3) The tercile in forms: lower "a smaller change than in most states" /
+  "among the states with the smallest changes"; middle "a change similar to most states" / "in the middle of the range
+  among states"; upper "a larger change than in most states" / "among the states with the largest changes"; never "ranking
+  large", "moderate relative tercile", "upper tercile" in graded text. (4) FWI: ratio classes only, with the forms; quantity
+  from plain language v1a.
+- **Recorded (EXECUTOR).** `data/metadata/benchmark/descriptor_rules_v4.yaml` (`dbfa8fd8…282d`, manifest-pinned; v3 kept
+  for packets v4 / v4a); `pattern_descriptors.descriptors_v4` (v1 -- v3 output unchanged); packets v4b; post-checks v3.1
+  fail "tercile" / "ranking small|moderate|large" and a doubled magnitude phrase in graded text (format-class). **For
+  confirmation:** (a) the forms of "roughly tripling" and "more than tripling" (by analogy) and the extra forms "rise
+  slightly" / "rise moderately" (polish run 1 wrote "rise slightly" for "increase slightly"); forms for "rising from rare
+  to common" ("going from rare to common", "from rare to common"); (b) the remaining-rare start is rendered like the
+  rare-to-common ends ("essentially none" when the baseline rounds to 0, else "about N day(s)"), so a baseline of 1.6 days
+  is not "essentially none"; (c) the ratio > 10 path is dropped (a baseline >= 2 days takes a ratio class); (d) **no
+  decrease class**: the work package asks for decrease forms "likewise", but no decrease threshold has been ruled and v3
+  emitted none; no pilot packet has a decrease --- **escalated**; (e) `magnitude_class` keeps the class name ("a moderate
+  increase", no longer "... (about half again as many)"), the forms are `magnitude_forms`; `tercile` is null and the
+  comparison is `tercile_class` / `tercile_forms`.
+- **Affected files:** `data/metadata/benchmark/descriptor_rules_v4.yaml`, `data/manifest.json`,
+  `src/climrr/pattern_descriptors.py`, `src/climrr/synthpackets_v4.py`, `src/climrr/benchmark_items.py`,
+  `scripts/build_synth_packets_v4b.py`, `artifacts/benchmark/synth_packets_v4b/`, `scripts/litcollect/litsynth_agent.py`,
+  tests.
+
+## D-067 --- Context groups are never written as drivers
+
+- **Date:** 2026-11-18.
+- **Status:** **decided** (COORDINATOR work package P3b, section C).
+- **Context.** In synthesis run 4 the answers of BI-P3-0004 and 0005 listed "the fact that the heat index captures combined
+  temperature-humidity stress" among the drivers of the increase; the group behind it (`…-mechanism-c1-021`) is a context
+  group (claim type definition / measurement). BI-P3-0005's question asked which drivers "explain the regional contrast
+  between the Southeast and Alaska", though no cited group names either region.
+- **Decision.** A context group may appear only as an explanatory aside ("because the heat index combines temperature and
+  humidity ..."), never in a list of drivers or causes. Post-check v3.1: a sentence tagged only with context groups must
+  not contain "driven by | driver | cause | because of" in the same clause as the context phrase (`context_as_driver`, a
+  failure). For a regional item, the literature sentence may not claim to explain the regional contrast unless a cited
+  group names the regions: the question asks for the drivers of the increase and the ranking; the answer says the ranking
+  comes from the projection and the drivers are general.
+- **Recorded (EXECUTOR).** Synthesis agent v4.1 (`litsynth_agent.py`, prompt section CONTEXT GROUPS and REGIONAL
+  CONTRASTS); post-checks v3.1 (`benchmark_items.readability_reasons` / `readability_reports`); packets v4b carry
+  `checks_input.group_role` and `regions`. **For confirmation:** (a) "the context phrase" read as the content words of the
+  cited context groups' labels (first six letters compared); clauses split at `, ; :` and spaced dashes; "drives" /
+  "caused" / "causing" added to the driver words; (b) `context_as_driver` is format-class (one corrective turn); (c) two
+  **reports, not failures**: a sentence of the table-pattern text or the integrated paragraph with a driver word and a
+  term of a cited context group that no cited driver group shares (this is where run 4 made the error: the literature
+  sentence for the context group was correct, the paragraph listed it as a driver); a sentence of the question, a
+  literature sentence or the paragraph claiming to explain a contrast / ranking while a region it names (none named: the
+  largest and the smallest) is named by no cited group. Both reports fire on run 4's 0004 / 0005 and on nothing else.
+- **Affected files:** `scripts/litcollect/litsynth_agent.py`, `src/climrr/benchmark_items.py`,
+  `src/climrr/synthpackets_v4.py`, `artifacts/benchmark/synth_packets_v4b/`, tests.
