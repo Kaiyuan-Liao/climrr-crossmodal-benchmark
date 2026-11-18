@@ -26,6 +26,15 @@ rule for the heat arm) with these changes:
 - **NCA5 grouping (D-065).** `inputs_sha256` names the NCA5 map and its owner-disposition sidecar, so every item built
   from a packet references the map hash (`generation.inputs_sha256`).
 
+**Packets v4a (P3a hotfix, D-053b).** `build_selection(variant="v4a")`: selection v2a (seven items, BI-P3-0006 dropped,
+ids kept), plain language v1a (the fire-weather quantity "fire-weather danger (how hot, dry and windy conditions favour
+fire)" and its `never_write` words), and the fire-arm dispositions v1 (`group_dispositions_fire_v1.csv`) applied with the
+heat dispositions v1a under the same rule set: the fire arm is no longer an unreviewed arm, so the no-disposition rule
+applies to it (an undisposed fire group that would otherwise be attached is excluded, `no_disposition`, never refilled
+with another undisposed group; listed as `undisposed_candidates`); every attached fire group carries
+`review_state: reviewer_tagged`. `checks_input` gains `family` and `plain_quantity`, which post-checks v3 use for the
+fire-weather words. Packets v4 (`variant="v4"`, the default) are built exactly as before.
+
 No model call; no table value computed here (values are copied from the pattern).
 """
 
@@ -46,6 +55,11 @@ RANK_RULE = "DR-SEED-RANK-3"
 PACKETS_DIR = REPO_ROOT / "artifacts" / "benchmark" / "synth_packets_v4"
 NCA_DISPOSITION_PATH = REPO_ROOT / "data" / "metadata" / "geography" / "nca_regions_v1_disposition.yaml"
 UNREVIEWED_ARMS = ("fire_weather_v1",)
+VERSION_V4A = "synthpackets v4a"
+PACKETS_V4A_DIR = REPO_ROOT / "artifacts" / "benchmark" / "synth_packets_v4a"
+FIRE_DISPOSITIONS_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "group_dispositions_fire_v1.csv"
+REVIEWED_ARMS_V4A = ("fire_weather_v1",)                         # arms whose dispositions D-053b adds: review_state marked
+VARIANTS = ("v4", "v4a")
 LEVELS = (3, 4)
 GUARDRAILS = (
     "A modeled historical baseline is model output for a past period, not an observation.",
@@ -71,7 +85,7 @@ def working_assumptions_relied_on(p: dict, was: dict) -> list[dict]:
 
 
 def assemble_packet(seed_id: str, p: dict, lvl: int, item_id: str, pg: list[dict], nca: dict, inputs_sha256: dict,
-                    excluded: list[dict], rules: dict, plain: dict, was: dict) -> dict:
+                    excluded: list[dict], rules: dict, plain: dict, was: dict, variant: str = "v4") -> dict:
     if lvl not in LEVELS:
         raise ValueError(f"packets v4 build rungs {LEVELS} only (D-059, D-061), got {lvl}")
     scen = effective_scenario(p, rules)
@@ -93,8 +107,10 @@ def assemble_packet(seed_id: str, p: dict, lvl: int, item_id: str, pg: list[dict
             x["review_state"] = g["review_state"]
         groups_view.append(x)
     unreviewed = any(g.get("review_state") == "unreviewed_agent_tag" for g in pg)
+    checks_extra = {"family": p["family"], "plain_quantity": [phrases_view["quantity"], phrases_view["quantity_short"]]} \
+        if variant == "v4a" else {}
     return {
-        "packet_id": f"PK-{seed_id}", "version": VERSION, "rank_rule": RANK_RULE, "descriptor_rule": rules["rule"],
+        "packet_id": f"PK-{seed_id}", "version": VERSION_V4A if variant == "v4a" else VERSION, "rank_rule": RANK_RULE, "descriptor_rule": rules["rule"],
         "descriptor_rules_sha256": rules["sha256"], "plain_language": plain["version"], "plain_language_sha256": plain["sha256"],
         "item_id": item_id, "seed_id": seed_id, "use_case_level": lvl, "family": p["family"],
         "fire_groups_unreviewed": unreviewed, "working_assumptions_relied_on": wa,
@@ -116,24 +132,34 @@ def assemble_packet(seed_id: str, p: dict, lvl: int, item_id: str, pg: list[dict
                          "forbidden_strings": cols + paper_ids,
                          "group_texts": {g["group_id"]: ([g["label"]] if g["label"] else []) + [m["statement"] for m in g["members"]]
                                          for g in pg},
-                         "level": lvl},
+                         "level": lvl, **checks_extra},
         "excluded_groups": list(excluded),
         "inputs_sha256": inputs_sha256,
     }
 
 
 def build_packet(seed: dict, level: int, item_id: str, groups: list[dict], by_statement: dict, rows: list[dict], nca: dict,
-                 inputs_sha256: dict, rules: dict, plain: dict, was: dict, selection: dict | None = None) -> dict:
+                 inputs_sha256: dict, rules: dict, plain: dict, was: dict, selection: dict | None = None,
+                 variant: str = "v4") -> dict:
     """`groups`: dispositions and label overrides applied; `by_statement`: the corrected statement lookup; `rows`:
-    `itemseeds_v2.statement_table` with the v2 gazetteer."""
+    `itemseeds_v2.statement_table` with the v2 gazetteer. `variant`: "v4" (fire arm unreviewed) or "v4a" (D-053b: the fire
+    arm under its dispositions and the no-disposition rule; attached fire groups `review_state: reviewer_tagged`)."""
+    if variant not in VARIANTS:
+        raise ValueError(f"unknown packet variant {variant!r}")
     basis = spk.relevant_basis(seed["pattern"], rows, nca)
     geo = {r["statement_id"]: r["geo"] for r in rows}
-    pg, excluded = spk.packet_groups(level, groups, by_statement, basis, geo, unreviewed_arms=UNREVIEWED_ARMS)
+    pg, excluded = spk.packet_groups(level, groups, by_statement, basis, geo,
+                                     unreviewed_arms=UNREVIEWED_ARMS if variant == "v4" else ())
     src = {g["group_id"]: g for g in groups}
     for g in pg:                                                   # D-058: the reviewer label is marked, the agent's kept
         if src[g["group_id"]].get("label_override"):
             g["label_override"] = src[g["group_id"]]["label_override"]
-    pk = assemble_packet(seed["seed_id"], seed["pattern"], level, item_id, pg, nca, inputs_sha256, excluded, rules, plain, was)
+        if variant == "v4a" and src[g["group_id"]]["arm"] in REVIEWED_ARMS_V4A:
+            if g["disposition"] is None:                           # the no-disposition rule keeps these out
+                raise ValueError(f"{g['group_id']}: attached with no disposition")
+            g["review_state"] = "reviewer_tagged"
+    pk = assemble_packet(seed["seed_id"], seed["pattern"], level, item_id, pg, nca, inputs_sha256, excluded, rules, plain, was,
+                         variant=variant)
     pk["relevance"] = {"geography": lg.VERSION, "n_relevant_statements": len(basis),
                        "by_basis": {b: sum(x == b for x in basis.values()) for b in lg.BASIS_ORDER}}
     if selection is not None:
@@ -141,7 +167,8 @@ def build_packet(seed: dict, level: int, item_id: str, groups: list[dict], by_st
     return pk
 
 
-def inputs_hashes(seeds_path, groups_path, selection_path, dispositions_path, corrections_path, rules: dict, plain: dict) -> dict:
+def inputs_hashes(seeds_path, groups_path, selection_path, dispositions_path, corrections_path, rules: dict, plain: dict,
+                  fire_dispositions_path=None) -> dict:
     from climrr import itemseeds_v3 as s3
     from climrr import litaggregate as la
     from climrr import litindependence as li
@@ -152,7 +179,8 @@ def inputs_hashes(seeds_path, groups_path, selection_path, dispositions_path, co
             "pilot_selection": sha256_file(selection_path), "group_dispositions": sha256_file(dispositions_path),
             "provenance_corrections": sha256_file(corrections_path), "descriptor_rules": rules["sha256"],
             "plain_language": plain["sha256"], "resolutions": sha256_file(s3.RESOLUTIONS_PATH),
-            "nca_map": sd.NCA_MAP_SHA256, "nca_regions_disposition": sha256_file(NCA_DISPOSITION_PATH)}
+            "nca_map": sd.NCA_MAP_SHA256, "nca_regions_disposition": sha256_file(NCA_DISPOSITION_PATH),
+            **({"group_dispositions_fire": sha256_file(fire_dispositions_path)} if fire_dispositions_path else {})}
 
 
 def load_working_assumptions() -> dict:
@@ -164,9 +192,23 @@ def load_working_assumptions() -> dict:
 GROUPS_PATH = REPO_ROOT / "artifacts" / "litgroups" / "run2" / "groups_enriched.jsonl"
 
 
-def build_selection(selection_path=None) -> dict:
-    """Every packet of the pilot selection v2, in order, from the pinned inputs: {"selection", "packets", "conflicts",
-    "hashes", "rules", "plain", "reslices"}. Raises when an input differs from its pin or the selection fails its checks."""
+def load_dispositions_v4a() -> dict:
+    """Heat dispositions v1a and fire-arm dispositions v1 (D-053b), each checked against its manifest pin; no group twice."""
+    from climrr import litgroups as lgr
+
+    heat, fire = lgr.load_dispositions(lgr.DISPOSITIONS_PATH), lgr.load_dispositions(FIRE_DISPOSITIONS_PATH)
+    both = sorted(set(heat) & set(fire))
+    if both:
+        raise ValueError(f"groups disposed in both files: {both}")
+    if any(not k.startswith("LG-fire_weather_v1-") for k in fire):
+        raise ValueError("the fire dispositions name a group outside the fire arm")
+    return {**heat, **fire}
+
+
+def build_selection(selection_path=None, variant: str = "v4") -> dict:
+    """Every packet of the pilot selection v2 (v4) or v2a (v4a), in order, from the pinned inputs: {"selection", "packets",
+    "conflicts", "hashes", "rules", "plain", "reslices", "groups"}. Raises when an input differs from its pin or the
+    selection fails its checks."""
     import json
 
     from climrr import itemseeds_v2 as s2
@@ -179,16 +221,19 @@ def build_selection(selection_path=None) -> dict:
     from climrr import pilot_selection as psel
     from climrr.paths import repo_relative
 
-    selection_path = selection_path or psel.SELECTION_V2_PATH
+    if variant not in VARIANTS:
+        raise ValueError(f"unknown packet variant {variant!r}")
+    v4a = variant == "v4a"
+    selection_path = selection_path or (psel.SELECTION_V2A_PATH if v4a else psel.SELECTION_V2_PATH)
     sel = psel.load(selection_path)
     pin = json.loads(s3.SUMMARY_PATH.read_text(encoding="utf-8"))["seeds_file"]["sha256"]
     if not s3.SEEDS_PATH.is_file() or sha256_file(s3.SEEDS_PATH) != pin or sel["seeds_file"]["sha256"] != pin:
         raise ValueError(f"{repo_relative(s3.SEEDS_PATH)} is absent or differs from its pin {pin} (or the selection's); "
                          "run scripts/build_item_seeds_v3.py")
     seeds = {s["seed_id"]: s for s in sd.read_jsonl(s3.SEEDS_PATH)}
-    errs = psel.check_v2(sel, seeds)
+    errs = psel.check_v2a(sel, seeds) if v4a else psel.check_v2(sel, seeds)
     if errs:
-        raise ValueError("pilot selection v2 fails its checks: " + "; ".join(errs))
+        raise ValueError(f"pilot selection {sel['version']} fails its checks: " + "; ".join(errs))
     records = sd.read_jsonl(r2.INGESTED_PATH)
     corrections, overrides = m3.corrections_v1a()
     statements = {r["statement_id"]: r for r in ls.load_statements(m3.mx.STATEMENTS_INGESTED_PATH)}
@@ -198,13 +243,15 @@ def build_selection(selection_path=None) -> dict:
     nca = sd.nca_map()
     by_statement = spk.statement_lookup(corrected, indep)
     rows = s2.statement_table(records, sd.read_jsonl(li.CLUSTERS_V1B_PATH), indep, lg.Gazetteer(nca))   # geography v2 (D-047a)
-    groups = ls.apply_group_label_overrides(lgr.apply_dispositions(lgr.read_groups(GROUPS_PATH),
-                                                                   lgr.load_dispositions(lgr.DISPOSITIONS_PATH)), overrides)
-    rules, plain, was = pd.load_rules(pd.RULES_V3_PATH), pl.load(), load_working_assumptions()
-    hashes = inputs_hashes(s3.SEEDS_PATH, GROUPS_PATH, selection_path, lgr.DISPOSITIONS_PATH, ls.CORRECTIONS_V1A_PATH, rules, plain)
+    disp = load_dispositions_v4a() if v4a else lgr.load_dispositions(lgr.DISPOSITIONS_PATH)
+    groups = ls.apply_group_label_overrides(lgr.apply_dispositions(lgr.read_groups(GROUPS_PATH), disp), overrides)
+    rules, was = pd.load_rules(pd.RULES_V3_PATH), load_working_assumptions()
+    plain = pl.load(pl.PLAIN_V1A_PATH) if v4a else pl.load()
+    hashes = inputs_hashes(s3.SEEDS_PATH, GROUPS_PATH, selection_path, lgr.DISPOSITIONS_PATH, ls.CORRECTIONS_V1A_PATH, rules, plain,
+                           fire_dispositions_path=FIRE_DISPOSITIONS_PATH if v4a else None)
     packets = [build_packet(seeds[x["seed_id"]], x["rung"], x["item_id"], groups, by_statement, rows, nca, hashes, rules, plain, was,
-                            selection={"file": repo_relative(selection_path), "decision": sel["decision"], **x})
+                            selection={"file": repo_relative(selection_path), "decision": sel["decision"], **x}, variant=variant)
                for x in psel.selected(sel)]
     return {"selection": sel, "packets": packets, "conflicts": psel.threshold_conflicts(sel, seeds), "hashes": hashes,
-            "rules": rules, "plain": plain, "reslices": reslices}
+            "rules": rules, "plain": plain, "reslices": reslices, "groups": groups}
 

@@ -928,3 +928,22 @@ None is excluded here: no disposition exists for the fire arm, and the work pack
 No item exists yet for the sample set: synthesis run 4 and polish run 1 are Polaris runs (Kaiyuan). The mentor sheet
 builder v2 is exercised by tests on synthetic items only. The FWI items rest on working assumptions, not confirmed column
 readings. The polish synonym list is short and EXECUTOR-written: a missing synonym rejects a rewrite, it never admits one.
+
+## 50. P3a hotfix: fire-arm dispositions, selection v2a, packets v4a (D-053b, 2026-11-18)
+
+No model call; nothing frozen; no item accepted.
+
+| | |
+| --- | --- |
+| Fire dispositions v1 | `group_dispositions_fire_v1.csv` `94a88f5d3228f3fdc4cf68a585475bb0cbc08b6c8d2ffe95430c8cf029ed907a` (21: accept 10, relabel 8, not_about_family 3) |
+| Selection v2a | `pilot_selection_v2a.yaml` `8dc336cbe31053b4e0459d9a300f2c135720a89264db6a5d4a29ae6aee7518f1`: BI-P3-0001 .. 0005, 0007, 0008; 0006 dropped; no threshold conflict |
+| Plain language v1a | `plain_language_v1a.yaml` `bd6fc84416c6a5fae4bfcc40dab927758d71fd3411daf22817b05ab1932d5c46` |
+| Packets v4a | `manifest.json` `3119c0b3d29b12364519b3262da2b8c791a6e70ccda814bdb0bd9b5b92d3f687`; heat as v4 but for the inputs; **BI-P3-0007 California FWI**: 11 groups, 8 drivers (`driver-c1-003`, `mechanism-c1-002`, `mechanism-c1-003`, `driver-c1-002` multi-source; `mechanism-c1-001`, `driver-c1-006`, `driver-c2-021`, `mechanism-c2-004` single-source), 3 context (`driver-c1-005`, `mechanism-c1-007` multi; `mechanism-c1-004` single); **BI-P3-0008 Minnesota FWI**: 9 groups, 6 drivers (`mechanism-c1-003` multi; `driver-c1-006`, `driver-c2-021`, `mechanism-c2-004`, `driver-c1-002`, `driver-c1-003` single), 3 context (`driver-c1-005` multi; `mechanism-c1-004`, `mechanism-c1-007` single); all `reviewer_tagged` |
+| Undisposed candidates | 8 fire-arm, the same in both FWI packets: `mechanism-c2-007`, `driver-c1-008`, `mechanism-c1-010`, `consensus-c1-004`, `driver-c1-009`, `driver-c2-001`, `driver-c2-010`, `driver-c2-011` |
+| Tests | `pytest`: **1,597 passed, 2 skipped** (the two pre-existing `jsonschema` skips); new `test_p3a_hotfix.py` (17); packets v4 still rebuild byte-identically |
+| Scanner | `verify_no_secrets_or_paths.py`: 0 hits (1,743 tracked text files) |
+
+**Escalations (for confirmation, D-053b "Recorded"):** the new file `plain_language_v1a.yaml` instead of an edit of v1;
+the FWI words are reported, not failed, in the rubric's disallowed claims and fatal errors; the failure has no corrective
+turn; polish checks v1a refuse an added FWI word; the accepted context group `driver-c1-005` is labelled "... predict
+burned area", a phrase the graded text may not use.

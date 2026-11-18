@@ -10,7 +10,8 @@ per field (the question, the answer):
 - **hedges**: the identical set of hedge words ("shows", "shown", "suggests", ...; `HEDGE_WORD_RE`);
 - **no new source words**: no source word (data, table, model, paper, study, ...) the original lacks, and no leakage flag
   (`text_leakage`, `model_source_flags`, for the question `leakage_check`) or generality flag (post-checks v3) the original
-  lacks --- "leakage v2.3";
+  lacks --- "leakage v2.3"; v1a (P3a hotfix, D-053b): nor a fire-occurrence word ("wildfire", "fires", "burned area";
+  `benchmark_items.FWI_FORBIDDEN_RE`) the original lacks, for every item (the polish step does not see the family);
 - **length**: between 0.6x and 1.2x the original's characters;
 - **mechanism keywords**: every content word of the original that is a mechanism keyword (a content word of the label of
   a group the item cites) still present, or replaced by a word `polish_synonyms_v1.yaml` lists for it.
@@ -32,7 +33,7 @@ from climrr.checksums import sha256_file
 from climrr.manifest import MANIFEST_PATH, load_entry
 from climrr.paths import REPO_ROOT
 
-VERSION = "polish_checks v1"
+VERSION = "polish_checks v1a"   # v1 + the fire-occurrence words (D-053b)
 SYNONYMS_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "polish_synonyms_v1.yaml"
 LENGTH_BOUNDS = (0.6, 1.2)
 HEDGE_WORD_RE = re.compile(r"\b(?:shows?|shown|suggests?|suggested|indicates?|reports?|reported)\b", re.I)
@@ -91,6 +92,7 @@ def source_words(text: str) -> list[str]:
 
 def leakage_flags(text: str, field: str, columns: list[str]) -> set[str]:
     flags = set(bi.text_leakage(text, columns)) | set(bi.model_source_flags(text)) | {f"generality: {g}" for g in bi.generality_flags(text)}
+    flags |= {f"fire-occurrence word: {w.lower()}" for w in bi.fwi_forbidden_flags(text)}
     if field == "prompt":
         flags |= set(bi.leakage_check(text, columns)["flags"])
     return flags

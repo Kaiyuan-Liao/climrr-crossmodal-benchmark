@@ -1,0 +1,842 @@
+{
+  "version": "synthpackets v4a",
+  "rank_rule": "DR-SEED-RANK-3",
+  "descriptor_rule": "DR-DESC-1 v3",
+  "plain_language": "plain_language_v1a",
+  "geography": "litgeo v2",
+  "unreviewed_arms": [],
+  "reviewed_arms": [
+    "fire_weather_v1"
+  ],
+  "selection": {
+    "file": "data/metadata/benchmark/pilot_selection_v2a.yaml",
+    "sha256": "8dc336cbe31053b4e0459d9a300f2c135720a89264db6a5d4a29ae6aee7518f1",
+    "owner_confirmation": "confirmed (Kaiyuan, 2026-11-17): the two fire-weather seeds, orders 7 and 8",
+    "excluded_from_v2": [
+      {
+        "order": 6,
+        "item_id": "BI-P3-0006",
+        "seed_id": "SD2-TP1-02789",
+        "pilot_v1_item": "BI-P2B-0009",
+        "reason": "duplicate question under D-060: NCA5 regions, mid-century, as BI-P3-0005; with no threshold in the graded text (95 vs 105 F) the two questions read the same (COORDINATOR, P3a hotfix, 2026-11-17)"
+      }
+    ]
+  },
+  "group_dispositions_fire": {
+    "file": "data/metadata/benchmark/group_dispositions_fire_v1.csv",
+    "sha256": "94a88f5d3228f3fdc4cf68a585475bb0cbc08b6c8d2ffe95430c8cf029ed907a"
+  },
+  "undisposed_candidates": {
+    "n": 8,
+    "n_fire_arm": 8,
+    "group_ids": [
+      "LG-fire_weather_v1-consensus-c1-004",
+      "LG-fire_weather_v1-driver-c1-008",
+      "LG-fire_weather_v1-driver-c1-009",
+      "LG-fire_weather_v1-driver-c2-001",
+      "LG-fire_weather_v1-driver-c2-010",
+      "LG-fire_weather_v1-driver-c2-011",
+      "LG-fire_weather_v1-mechanism-c1-010",
+      "LG-fire_weather_v1-mechanism-c2-007"
+    ]
+  },
+  "threshold_conflicts": [],
+  "inputs_sha256": {
+    "item_seeds_v3": "04602e1bce5bc205ab6ae0d179f866ce894cfc517be62f2039fdc9c393f9d8a5",
+    "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+    "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+    "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+    "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+    "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+    "pilot_selection": "8dc336cbe31053b4e0459d9a300f2c135720a89264db6a5d4a29ae6aee7518f1",
+    "group_dispositions": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+    "provenance_corrections": "d56cbe5e0c4feaffd8398126953c8437416967b2fbc382d5da907e88081ebd93",
+    "descriptor_rules": "fd32f4ba64afe37a4b264be831785c58ae8b23a7d8b435db30c86ca8405d47d9",
+    "plain_language": "bd6fc84416c6a5fae4bfcc40dab927758d71fd3411daf22817b05ab1932d5c46",
+    "resolutions": "d86e1cd4e92ab51562ec251c98652d135280a52642012f6c94f3e2d02595869a",
+    "nca_map": "3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41",
+    "nca_regions_disposition": "a0c390a80634a8e4a74693e47828a9912ddea8f8151784d57c82f816e3bb1ae9",
+    "group_dispositions_fire": "94a88f5d3228f3fdc4cf68a585475bb0cbc08b6c8d2ffe95430c8cf029ed907a"
+  },
+  "packets": [
+    {
+      "packet_id": "PK-SD2-TP1-00071",
+      "item_id": "BI-P3-0001",
+      "seed_id": "SD2-TP1-00071",
+      "level": 3,
+      "family": "heat_index",
+      "groups": 12,
+      "groups_driver": 8,
+      "groups_context": 4,
+      "groups_caveat": 0,
+      "groups_multi_source_or_review": 4,
+      "excluded_groups": 49,
+      "excluded_no_disposition": 0,
+      "fire_groups_unreviewed": false,
+      "fire_groups_attached": [],
+      "fire_candidates_excluded_by_disposition": [],
+      "undisposed_candidates": [],
+      "corrections_applied": [
+        "LS-199098498-04"
+      ],
+      "label_overrides_applied": [
+        "LG-extreme_heat_v1-driver-c1-008"
+      ],
+      "working_assumptions_relied_on": [
+        "WA-STATE-LABEL",
+        "WA-UNWEIGHTED-MEAN"
+      ],
+      "allowed_descriptors": [
+        "increase",
+        "by mid-century",
+        "under a high-emissions future",
+        "days hot and humid enough to be dangerous",
+        "a moderate increase (about half again as many)",
+        "from about 15 to about 24 days a summer",
+        "moderate relative to other U.S. states (middle tercile; a relative descriptor among states for the same quantity, season, horizon and scenario, not an absolute threshold)",
+        "about 15 days",
+        "about 24 days",
+        "about half again as many",
+        "dangerous heat-index days"
+      ],
+      "top3_labels": [
+        "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat",
+        "global warming increases heatwave frequency and intensity",
+        "urban heat island intensifies due to nighttime conditions and reduced moisture"
+      ],
+      "sha256": "ff7bbbda341a605e40931e8a1497492e35800f151ea610d18de7e6014af81ecd"
+    },
+    {
+      "packet_id": "PK-SD2-TP1-00271",
+      "item_id": "BI-P3-0002",
+      "seed_id": "SD2-TP1-00271",
+      "level": 3,
+      "family": "heat_index",
+      "groups": 11,
+      "groups_driver": 8,
+      "groups_context": 3,
+      "groups_caveat": 0,
+      "groups_multi_source_or_review": 4,
+      "excluded_groups": 44,
+      "excluded_no_disposition": 0,
+      "fire_groups_unreviewed": false,
+      "fire_groups_attached": [],
+      "fire_candidates_excluded_by_disposition": [],
+      "undisposed_candidates": [],
+      "corrections_applied": [
+        "LS-199098498-04"
+      ],
+      "label_overrides_applied": [
+        "LG-extreme_heat_v1-driver-c1-008"
+      ],
+      "working_assumptions_relied_on": [
+        "WA-STATE-LABEL",
+        "WA-UNWEIGHTED-MEAN"
+      ],
+      "allowed_descriptors": [
+        "increase",
+        "by late this century",
+        "under a high-emissions future",
+        "days hot and humid enough to be dangerous",
+        "rising from rare to common",
+        "from essentially none to about 11 days a summer",
+        "small relative to other U.S. states (lower tercile; a relative descriptor among states for the same quantity, season, horizon and scenario, not an absolute threshold)",
+        "essentially none",
+        "about 11 days",
+        "dangerous heat-index days"
+      ],
+      "top3_labels": [
+        "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat",
+        "global warming increases heatwave frequency and intensity",
+        "urban heat island intensifies due to nighttime conditions and reduced moisture"
+      ],
+      "sha256": "627e907a05a932bd1f9b850f19b058b4dd5ddf6089684b28d4c226eb15d35814"
+    },
+    {
+      "packet_id": "PK-SD2-TP1-00460",
+      "item_id": "BI-P3-0003",
+      "seed_id": "SD2-TP1-00460",
+      "level": 3,
+      "family": "heat_index",
+      "groups": 11,
+      "groups_driver": 8,
+      "groups_context": 3,
+      "groups_caveat": 0,
+      "groups_multi_source_or_review": 4,
+      "excluded_groups": 47,
+      "excluded_no_disposition": 0,
+      "fire_groups_unreviewed": false,
+      "fire_groups_attached": [],
+      "fire_candidates_excluded_by_disposition": [],
+      "undisposed_candidates": [],
+      "corrections_applied": [
+        "LS-199098498-04"
+      ],
+      "label_overrides_applied": [
+        "LG-extreme_heat_v1-driver-c1-008"
+      ],
+      "working_assumptions_relied_on": [
+        "WA-STATE-LABEL",
+        "WA-UNWEIGHTED-MEAN"
+      ],
+      "allowed_descriptors": [
+        "increase",
+        "by mid-century",
+        "under a high-emissions future",
+        "days hot and humid enough to be dangerous",
+        "rising from rare to common",
+        "from essentially none to about 1 day a summer",
+        "small relative to other U.S. states (lower tercile; a relative descriptor among states for the same quantity, season, horizon and scenario, not an absolute threshold)",
+        "essentially none",
+        "about 1 day",
+        "dangerous heat-index days"
+      ],
+      "top3_labels": [
+        "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat",
+        "global warming increases heatwave frequency and intensity",
+        "urban heat island intensifies due to nighttime conditions and reduced moisture"
+      ],
+      "sha256": "69cad1f2f513a0ce4cc03a35d679516de2d5c5b4100630feb63c3ce8c999f883"
+    },
+    {
+      "packet_id": "PK-SD2-TP1-00589",
+      "item_id": "BI-P3-0004",
+      "seed_id": "SD2-TP1-00589",
+      "level": 3,
+      "family": "heat_index",
+      "groups": 11,
+      "groups_driver": 8,
+      "groups_context": 3,
+      "groups_caveat": 0,
+      "groups_multi_source_or_review": 4,
+      "excluded_groups": 46,
+      "excluded_no_disposition": 0,
+      "fire_groups_unreviewed": false,
+      "fire_groups_attached": [],
+      "fire_candidates_excluded_by_disposition": [],
+      "undisposed_candidates": [],
+      "corrections_applied": [
+        "LS-199098498-04"
+      ],
+      "label_overrides_applied": [
+        "LG-extreme_heat_v1-driver-c1-008"
+      ],
+      "working_assumptions_relied_on": [
+        "WA-STATE-LABEL",
+        "WA-UNWEIGHTED-MEAN"
+      ],
+      "allowed_descriptors": [
+        "increase",
+        "by late this century",
+        "under a high-emissions future",
+        "days hot and humid enough to be dangerous",
+        "rising from rare to common",
+        "from about 1 day to about 45 days a summer",
+        "large relative to other U.S. states (upper tercile; a relative descriptor among states for the same quantity, season, horizon and scenario, not an absolute threshold)",
+        "about 1 day",
+        "about 45 days",
+        "dangerous heat-index days"
+      ],
+      "top3_labels": [
+        "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat",
+        "global warming increases heatwave frequency and intensity",
+        "urban heat island intensifies due to nighttime conditions and reduced moisture"
+      ],
+      "sha256": "2277e6492535b2618ca95abe874084ff56463ade92d7a48056b6a55cbeeeb805"
+    },
+    {
+      "packet_id": "PK-SD2-TP1-02785",
+      "item_id": "BI-P3-0005",
+      "seed_id": "SD2-TP1-02785",
+      "level": 4,
+      "family": "heat_index",
+      "groups": 11,
+      "groups_driver": 8,
+      "groups_context": 3,
+      "groups_caveat": 0,
+      "groups_multi_source_or_review": 4,
+      "excluded_groups": 43,
+      "excluded_no_disposition": 0,
+      "fire_groups_unreviewed": false,
+      "fire_groups_attached": [],
+      "fire_candidates_excluded_by_disposition": [],
+      "undisposed_candidates": [],
+      "corrections_applied": [
+        "LS-199098498-04"
+      ],
+      "label_overrides_applied": [
+        "LG-extreme_heat_v1-driver-c1-008"
+      ],
+      "working_assumptions_relied_on": [
+        "WA-STATE-LABEL",
+        "WA-UNWEIGHTED-MEAN"
+      ],
+      "allowed_descriptors": [
+        "increase",
+        "by mid-century",
+        "under a high-emissions future",
+        "days hot and humid enough to be dangerous",
+        "the largest increase: Southeast",
+        "essentially no change: Alaska",
+        "Southeast",
+        "Southern Great Plains",
+        "Midwest",
+        "Northern Great Plains",
+        "Southwest",
+        "Northeast",
+        "Northwest",
+        "Alaska",
+        "dangerous heat-index days"
+      ],
+      "top3_labels": [
+        "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat",
+        "global warming increases heatwave frequency and intensity",
+        "urban heat island intensifies due to nighttime conditions and reduced moisture"
+      ],
+      "sha256": "56a6da1ff466dbc6aa087efb6acefa1558230b9543401a9903c260176cbe2aa1"
+    },
+    {
+      "packet_id": "PK-SD2-TP1-01463",
+      "item_id": "BI-P3-0007",
+      "seed_id": "SD2-TP1-01463",
+      "level": 3,
+      "family": "fire_weather_index",
+      "groups": 11,
+      "groups_driver": 8,
+      "groups_context": 3,
+      "groups_caveat": 0,
+      "groups_multi_source_or_review": 6,
+      "excluded_groups": 34,
+      "excluded_no_disposition": 8,
+      "fire_groups_unreviewed": false,
+      "fire_groups_attached": [
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-003",
+          "label": "strong winds are a primary driver of fire danger and spread",
+          "kind": "group",
+          "statement_type": "driver",
+          "claim_about": "hazard_change_mechanism",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "n_papers": 5,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-002",
+          "label": "strong winds and low humidity raise fire danger and fire size",
+          "kind": "group",
+          "statement_type": "mechanism",
+          "claim_about": "hazard_change_mechanism",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "n_papers": 5,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-003",
+          "label": "higher temperatures and aridity dry fuels, creating extreme fire‑weather",
+          "kind": "group",
+          "statement_type": "mechanism",
+          "claim_about": "hazard_change_mechanism",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "n_papers": 4,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-002",
+          "label": "humidity and vapor pressure deficit affect fire risk",
+          "kind": "group",
+          "statement_type": "driver",
+          "claim_about": "hazard_change_mechanism",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "n_papers": 2,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-001",
+          "label": "warmer atmosphere increases VPD and lowers fuel moisture",
+          "kind": "group",
+          "statement_type": "mechanism",
+          "claim_about": "hazard_change_mechanism",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "n_papers": 1,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-006",
+          "label": "climate change increases extreme fire‑weather frequency",
+          "kind": "group",
+          "statement_type": "driver",
+          "claim_about": "hazard_change_mechanism",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "n_papers": 2,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-021",
+          "label": "Low sea‑ice concentrations in the Beaufort/Chukchi Seas favor fire‑weather conditions in the western United States.",
+          "kind": "singleton",
+          "statement_type": "driver",
+          "claim_about": "hazard_change_mechanism",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "n_papers": 1,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c2-004",
+          "label": "Higher live‑vegetation or dead‑fuel moisture reduces fire hazard",
+          "kind": "group",
+          "statement_type": "mechanism",
+          "claim_about": "hazard_change_mechanism",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "n_papers": 1,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-005",
+          "label": "fire weather indices (FWI and components) predict burned area",
+          "kind": "group",
+          "statement_type": "driver",
+          "claim_about": "hazard_definition_or_measurement",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "context",
+          "strength_in_packet": "multi_source_supported",
+          "n_papers": 6,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-007",
+          "label": "fuel moisture is estimated from soil moisture or weather and strongly controls fire emissions",
+          "kind": "group",
+          "statement_type": "mechanism",
+          "claim_about": "hazard_definition_or_measurement",
+          "claim_about_source": "reviewer",
+          "disposition": "relabel:hazard_definition_or_measurement",
+          "role": "context",
+          "strength_in_packet": "multi_source_supported",
+          "n_papers": 3,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-004",
+          "label": "fire‑danger indices are defined/measured from weather variables and intermediate moisture variables",
+          "kind": "group",
+          "statement_type": "mechanism",
+          "claim_about": "hazard_definition_or_measurement",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "n_papers": 5,
+          "review_state": "reviewer_tagged"
+        }
+      ],
+      "fire_candidates_excluded_by_disposition": [
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-001",
+          "disposition": "relabel:impact_or_exposure",
+          "reason": "claim_about:impact_or_exposure"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-004",
+          "disposition": "not_about_family",
+          "reason": "disposition:not_about_family"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-007",
+          "disposition": "relabel:impact_or_exposure",
+          "reason": "claim_about:impact_or_exposure"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-015",
+          "disposition": "not_about_family",
+          "reason": "disposition:not_about_family"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-002",
+          "disposition": "relabel:impact_or_exposure",
+          "reason": "claim_about:impact_or_exposure"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c3-001",
+          "disposition": "relabel:impact_or_exposure",
+          "reason": "claim_about:impact_or_exposure"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c3-002",
+          "disposition": "relabel:impact_or_exposure",
+          "reason": "claim_about:impact_or_exposure"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-005",
+          "disposition": "relabel:method_or_data",
+          "reason": "claim_about:method_or_data"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c2-005",
+          "disposition": "not_about_family",
+          "reason": "disposition:not_about_family"
+        }
+      ],
+      "undisposed_candidates": [
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c2-007",
+          "arm": "fire_weather_v1",
+          "label": "Large‑scale atmospheric patterns create fire‑favorable conditions",
+          "statement_type": "mechanism",
+          "claim_about": "hazard_change_mechanism"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-008",
+          "arm": "fire_weather_v1",
+          "label": null,
+          "statement_type": "driver",
+          "claim_about": "hazard_change_mechanism"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-010",
+          "arm": "fire_weather_v1",
+          "label": null,
+          "statement_type": "mechanism",
+          "claim_about": "hazard_change_mechanism"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-consensus-c1-004",
+          "arm": "fire_weather_v1",
+          "label": null,
+          "statement_type": "consensus",
+          "claim_about": "hazard_change_mechanism"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-009",
+          "arm": "fire_weather_v1",
+          "label": null,
+          "statement_type": "driver",
+          "claim_about": "hazard_change_mechanism"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-001",
+          "arm": "fire_weather_v1",
+          "label": "Fire‑weather variables positively correlate with fire occurrence",
+          "statement_type": "driver",
+          "claim_about": "hazard_change_mechanism"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-010",
+          "arm": "fire_weather_v1",
+          "label": null,
+          "statement_type": "driver",
+          "claim_about": "hazard_definition_or_measurement"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-011",
+          "arm": "fire_weather_v1",
+          "label": null,
+          "statement_type": "driver",
+          "claim_about": "hazard_definition_or_measurement"
+        }
+      ],
+      "corrections_applied": [],
+      "label_overrides_applied": [],
+      "working_assumptions_relied_on": [
+        "WA-FWI-SUMMER",
+        "WA-STATE-LABEL",
+        "WA-UNWEIGHTED-MEAN"
+      ],
+      "allowed_descriptors": [
+        "increase",
+        "by mid-century",
+        "under a high-emissions future",
+        "fire-weather danger (how hot, dry and windy conditions favour fire)",
+        "a slight increase",
+        "large relative to other U.S. states (upper tercile; a relative descriptor among states for the same quantity, season, horizon and scenario, not an absolute threshold)",
+        "fire-weather danger"
+      ],
+      "top3_labels": [
+        "strong winds are a primary driver of fire danger and spread",
+        "strong winds and low humidity raise fire danger and fire size",
+        "higher temperatures and aridity dry fuels, creating extreme fire‑weather"
+      ],
+      "sha256": "a2335056b07641730264c5b66ba0ad62d0895a9e3185f5b79b0d6005f8002e85"
+    },
+    {
+      "packet_id": "PK-SD2-TP1-01654",
+      "item_id": "BI-P3-0008",
+      "seed_id": "SD2-TP1-01654",
+      "level": 3,
+      "family": "fire_weather_index",
+      "groups": 9,
+      "groups_driver": 6,
+      "groups_context": 3,
+      "groups_caveat": 0,
+      "groups_multi_source_or_review": 2,
+      "excluded_groups": 30,
+      "excluded_no_disposition": 8,
+      "fire_groups_unreviewed": false,
+      "fire_groups_attached": [
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-003",
+          "label": "higher temperatures and aridity dry fuels, creating extreme fire‑weather",
+          "kind": "group",
+          "statement_type": "mechanism",
+          "claim_about": "hazard_change_mechanism",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "n_papers": 2,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-006",
+          "label": "climate change increases extreme fire‑weather frequency",
+          "kind": "group",
+          "statement_type": "driver",
+          "claim_about": "hazard_change_mechanism",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "n_papers": 2,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-021",
+          "label": "Low sea‑ice concentrations in the Beaufort/Chukchi Seas favor fire‑weather conditions in the western United States.",
+          "kind": "singleton",
+          "statement_type": "driver",
+          "claim_about": "hazard_change_mechanism",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "n_papers": 1,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c2-004",
+          "label": "Higher live‑vegetation or dead‑fuel moisture reduces fire hazard",
+          "kind": "group",
+          "statement_type": "mechanism",
+          "claim_about": "hazard_change_mechanism",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "n_papers": 1,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-002",
+          "label": "humidity and vapor pressure deficit affect fire risk",
+          "kind": "group",
+          "statement_type": "driver",
+          "claim_about": "hazard_change_mechanism",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "n_papers": 1,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-003",
+          "label": "strong winds are a primary driver of fire danger and spread",
+          "kind": "group",
+          "statement_type": "driver",
+          "claim_about": "hazard_change_mechanism",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "n_papers": 1,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-004",
+          "label": "fire‑danger indices are defined/measured from weather variables and intermediate moisture variables",
+          "kind": "group",
+          "statement_type": "mechanism",
+          "claim_about": "hazard_definition_or_measurement",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "n_papers": 5,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-005",
+          "label": "fire weather indices (FWI and components) predict burned area",
+          "kind": "group",
+          "statement_type": "driver",
+          "claim_about": "hazard_definition_or_measurement",
+          "claim_about_source": "agent",
+          "disposition": "accept",
+          "role": "context",
+          "strength_in_packet": "multi_source_supported",
+          "n_papers": 5,
+          "review_state": "reviewer_tagged"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-007",
+          "label": "fuel moisture is estimated from soil moisture or weather and strongly controls fire emissions",
+          "kind": "group",
+          "statement_type": "mechanism",
+          "claim_about": "hazard_definition_or_measurement",
+          "claim_about_source": "reviewer",
+          "disposition": "relabel:hazard_definition_or_measurement",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "n_papers": 2,
+          "review_state": "reviewer_tagged"
+        }
+      ],
+      "fire_candidates_excluded_by_disposition": [
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-001",
+          "disposition": "relabel:impact_or_exposure",
+          "reason": "claim_about:impact_or_exposure"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-004",
+          "disposition": "not_about_family",
+          "reason": "disposition:not_about_family"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-014",
+          "disposition": "relabel:impact_or_exposure",
+          "reason": "claim_about:impact_or_exposure"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-002",
+          "disposition": "relabel:impact_or_exposure",
+          "reason": "claim_about:impact_or_exposure"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c3-001",
+          "disposition": "relabel:impact_or_exposure",
+          "reason": "claim_about:impact_or_exposure"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c3-002",
+          "disposition": "relabel:impact_or_exposure",
+          "reason": "claim_about:impact_or_exposure"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-005",
+          "disposition": "relabel:method_or_data",
+          "reason": "claim_about:method_or_data"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c2-005",
+          "disposition": "not_about_family",
+          "reason": "disposition:not_about_family"
+        }
+      ],
+      "undisposed_candidates": [
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c2-007",
+          "arm": "fire_weather_v1",
+          "label": "Large‑scale atmospheric patterns create fire‑favorable conditions",
+          "statement_type": "mechanism",
+          "claim_about": "hazard_change_mechanism"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-008",
+          "arm": "fire_weather_v1",
+          "label": null,
+          "statement_type": "driver",
+          "claim_about": "hazard_change_mechanism"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-010",
+          "arm": "fire_weather_v1",
+          "label": null,
+          "statement_type": "mechanism",
+          "claim_about": "hazard_change_mechanism"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-consensus-c1-004",
+          "arm": "fire_weather_v1",
+          "label": null,
+          "statement_type": "consensus",
+          "claim_about": "hazard_change_mechanism"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-009",
+          "arm": "fire_weather_v1",
+          "label": null,
+          "statement_type": "driver",
+          "claim_about": "hazard_change_mechanism"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-001",
+          "arm": "fire_weather_v1",
+          "label": "Fire‑weather variables positively correlate with fire occurrence",
+          "statement_type": "driver",
+          "claim_about": "hazard_change_mechanism"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-010",
+          "arm": "fire_weather_v1",
+          "label": null,
+          "statement_type": "driver",
+          "claim_about": "hazard_definition_or_measurement"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-011",
+          "arm": "fire_weather_v1",
+          "label": null,
+          "statement_type": "driver",
+          "claim_about": "hazard_definition_or_measurement"
+        }
+      ],
+      "corrections_applied": [],
+      "label_overrides_applied": [],
+      "working_assumptions_relied_on": [
+        "WA-FWI-SUMMER",
+        "WA-STATE-LABEL",
+        "WA-UNWEIGHTED-MEAN"
+      ],
+      "allowed_descriptors": [
+        "increase",
+        "by late this century",
+        "under a high-emissions future",
+        "fire-weather danger (how hot, dry and windy conditions favour fire)",
+        "a slight increase",
+        "moderate relative to other U.S. states (middle tercile; a relative descriptor among states for the same quantity, season, horizon and scenario, not an absolute threshold)",
+        "fire-weather danger"
+      ],
+      "top3_labels": [
+        "higher temperatures and aridity dry fuels, creating extreme fire‑weather",
+        "climate change increases extreme fire‑weather frequency",
+        "Low sea‑ice concentrations in the Beaufort/Chukchi Seas favor fire‑weather conditions in the western United States."
+      ],
+      "sha256": "6f1b3bb3d6f849bbb1edc9f9ef8aecaeb5fbccf69cdeeafaf2668ad738663bc1"
+    }
+  ]
+}

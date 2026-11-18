@@ -1,0 +1,48 @@
+# Pilot seed selection v2a: the sample set for the mentor (P3a hotfix; D-053b; owner: Kaiyuan).
+#
+# Selection v2 (pilot_selection_v2.yaml, kept unchanged as the evidence for packets v4) minus BI-P3-0006: the NCA5 regions
+# at 105 F, mid-century, duplicates BI-P3-0005's question once the graded text names no threshold (D-060). Seven items;
+# the item ids and orders of v2 are kept, not renumbered (order 6 is the excluded one). Kaiyuan confirmed the two
+# fire-weather seeds (orders 7 and 8) on 2026-11-17.
+# scripts/build_synth_packets_v4a.py builds exactly these seven packets, in this order, at these rungs.
+# Pinned by SHA-256 in data/manifest.json; a change is a new file with its own decision.
+#
+# `reason`: one line on what the seed contributes, written by the EXECUTOR from the seed (place, threshold, horizon,
+# statistic), carried from v2. No value is computed here and no column is interpreted.
+
+version: pilot_selection_v2a
+decision: "D-053b (on D-059, D-060, D-061, D-064)"
+supersedes: pilot_selection_v2
+owner: Kaiyuan
+owner_confirmation: "confirmed (Kaiyuan, 2026-11-17): the two fire-weather seeds, orders 7 and 8"
+date: "2026-11-17"
+seeds_file:
+  path: artifacts/benchmark/item_seeds_v3.jsonl
+  sha256: 04602e1bce5bc205ab6ae0d179f866ce894cfc517be62f2039fdc9c393f9d8a5
+sources:
+  heat_shortlist:
+    path: artifacts/benchmark/pilot_shortlist_v1.csv
+    sha256: 948ad24ecad1bf65c34e5d59d980825754d1bdb13d22f61c1e78fc52a825867a
+  fwi_shortlist:
+    path: artifacts/benchmark/pilot_shortlist_fwi_v1.csv
+    sha256: d16b540c73fa5975a7ce896327be66ae5e97a903c38e833af440b96599205920
+
+selected:
+  - {order: 1, item_id: BI-P3-0001, seed_id: SD2-TP1-00071, rung: 3, source: heat_shortlist, pilot_v1_item: BI-P2B-0003, reason: "California, days above 95 F, mid-century, absolute change: pattern + mechanism"}
+  - {order: 2, item_id: BI-P3-0002, seed_id: SD2-TP1-00271, rung: 3, source: heat_shortlist, pilot_v1_item: BI-P2B-0004, reason: "New York, days above 95 F, end of century, absolute change: pattern + mechanism"}
+  - {order: 3, item_id: BI-P3-0003, seed_id: SD2-TP1-00460, rung: 3, source: heat_shortlist, pilot_v1_item: BI-P2B-0005, reason: "Washington, days above 105 F, mid-century, absolute change: pattern + mechanism at a small change"}
+  - {order: 4, item_id: BI-P3-0004, seed_id: SD2-TP1-00589, rung: 3, source: heat_shortlist, pilot_v1_item: BI-P2B-0006, reason: "Alabama, days above 105 F, end of century, absolute change: pattern + mechanism at a large change"}
+  - {order: 5, item_id: BI-P3-0005, seed_id: SD2-TP1-02785, rung: 4, source: heat_shortlist, pilot_v1_item: BI-P2B-0007, reason: "NCA5 regions ranked, days above 95 F, mid-century, absolute change: regional comparison"}
+  - {order: 7, item_id: BI-P3-0007, seed_id: SD2-TP1-01463, rung: 3, source: fwi_shortlist, pilot_v1_item: null, selected_by: "Kaiyuan, 2026-11-17", reason: "California, summer seasonal FWI, mid-century, absolute change: fire-weather pattern + mechanism (rule pick, mid-century)"}
+  - {order: 8, item_id: BI-P3-0008, seed_id: SD2-TP1-01654, rung: 3, source: fwi_shortlist, pilot_v1_item: null, selected_by: "Kaiyuan, 2026-11-17", reason: "Minnesota, summer seasonal FWI, end of century, absolute change: fire-weather pattern + mechanism (rule pick, end-century, a state other than California)"}
+
+# Selection-v2 seeds dropped by v2a, with the reason; the order and item id stay reserved.
+excluded_from_v2:
+  - {order: 6, item_id: BI-P3-0006, seed_id: SD2-TP1-02789, pilot_v1_item: BI-P2B-0009, reason: "duplicate question under D-060: NCA5 regions, mid-century, as BI-P3-0005; with no threshold in the graded text (95 vs 105 F) the two questions read the same (COORDINATOR, P3a hotfix, 2026-11-17)"}
+
+# The selection-v1 seeds not carried by v2, with the reason (unchanged from v2).
+not_carried:
+  - {seed_id: SD2-TP1-00018, pilot_v1_item: BI-P2B-0001, reason: "rung 1, pattern only: dropped (D-059); item rejected_by_design (item_design_dispositions_v1.yaml)"}
+  - {seed_id: SD2-TP1-00069, pilot_v1_item: BI-P2B-0002, reason: "rung 1, pattern only: dropped (D-059); item rejected_by_design (item_design_dispositions_v1.yaml)"}
+  - {seed_id: SD2-TP1-02787, pilot_v1_item: BI-P2B-0008, reason: "NCA5 regions, days above 95 F, end of century: not in the work package's sample set"}
+  - {seed_id: SD2-TP1-00075, pilot_v1_item: BI-P2B-0010, reason: "rung 7 (scenario) retired for now (D-061): the rung-7 duplicate"}

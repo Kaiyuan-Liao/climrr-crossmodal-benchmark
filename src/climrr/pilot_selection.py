@@ -131,3 +131,30 @@ def threshold_conflicts(sel: dict, seeds: dict) -> list[dict]:
         by.setdefault(s["geography"], []).append((x["item_id"], x["seed_id"], spk.threshold(s["pattern"]), s["horizon"]))
     return [{"place": k, "items": [{"item_id": i, "seed_id": sid, "threshold_F": t, "horizon": h} for i, sid, t, h in v]}
             for k, v in sorted(by.items()) if len({t for _, _, t, _ in v}) > 1]
+
+
+# --- selection v2a (P3a hotfix; D-053b) ---------------------------------------------------------------------------
+
+SELECTION_V2A_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "pilot_selection_v2a.yaml"
+
+
+def check_v2a(sel: dict, seeds: dict, v2: dict | None = None) -> list[str]:
+    """Problems with selection v2a (empty when it holds): the v2 checks, except that the orders keep v2's numbering with the
+    excluded orders as gaps (ids are not renumbered); selected + `excluded_from_v2` are exactly v2's selected entries
+    (order, item id, seed, rung); every exclusion has a reason; the fire-weather seeds carry `selected_by`."""
+    v2 = v2 if v2 is not None else load(SELECTION_V2_PATH)
+    errs = [e for e in check_v2(sel, seeds) if e != "selection order is not 1..n"]
+    xs = sorted(sel["selected"], key=lambda x: x["order"])
+    ex = list(sel.get("excluded_from_v2") or [])
+    key = lambda x: (x["order"], x["item_id"], x["seed_id"])                               # noqa: E731
+    v2k = {key(x): x for x in v2["selected"]}
+    if sorted(map(key, xs + ex)) != sorted(v2k):
+        errs.append("selected + excluded_from_v2 are not exactly selection v2's entries")
+    errs += [f"{x['seed_id']}: rung {x['rung']} differs from selection v2" for x in xs
+             if key(x) in v2k and v2k[key(x)]["rung"] != x["rung"]]
+    if [x["order"] for x in xs] != sorted(x["order"] for x in xs) or len({x["order"] for x in xs + ex}) != len(xs + ex):
+        errs.append("orders are not increasing and unique")
+    errs += [f"{x['item_id']}: excluded with no reason" for x in ex if not (x.get("reason") or "").strip()]
+    errs += [f"{x['seed_id']}: fire-weather seed without selected_by" for x in xs
+             if x["source"] == "fwi_shortlist" and not x.get("selected_by")]
+    return errs

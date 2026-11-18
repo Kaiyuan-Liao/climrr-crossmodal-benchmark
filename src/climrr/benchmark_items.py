@@ -54,6 +54,13 @@ and no "one study" / "a single study" (`GENERALITY_RE`, the work package's patte
 coarse anchor pair stays allowed). A hedge-by-strength report (`hedge_by_strength`; report only, not a failure): a
 literature sentence citing only single-source groups should say "suggests"; one citing a multi-source or review group
 should not say "suggests" without "shows" / "shown".
+v3, fire-weather words (P3a hotfix, D-053b): for a packet whose `checks_input.family` is `fire_weather_index` (packets
+v4a), "wildfire(s)", "fires" and "burned area" in the prompt, reference texts or rubric are a failure
+(`FWI_FORBIDDEN_RE`; not a format class, so no corrective turn) --- except in `rubric.disallowed_claims` and
+`rubric.fatal_errors`, which name the fire-occurrence misreading the guardrail rules out (EXECUTOR reading, for
+confirmation); hits there, and "fire" alone anywhere --- not "fire-weather" / "fire danger", and not inside the packet's
+plain quantity phrases (`checks_input.plain_quantity`) --- are reported in `checks.fire_word_report`, not failed. Packets
+without `family` (v3, v4) are checked exactly as before.
 
 Nothing here calls a model, reads table values, or touches the concept map,
 column statuses or compatibility rules.
@@ -340,6 +347,13 @@ SYNTH_CHECK_VERSIONS = (SYNTH_CHECK_VERSION, SYNTH_CHECK_VERSION_V23, SYNTH_CHEC
 #: The work package's pattern, `RCP|\d{2,}\s?°?F|\b(19|20)\d{2}\b|one study|a single study`, applied to the normalised text
 #: (`normalise_number_text`: "95℉" and "95\u202f°F" read "95 °F"); the two phrases case-insensitively.
 GENERALITY_RE = re.compile(r"RCP|\d{2,}\s?°?F|\b(?:19|20)\d{2}\b|(?i:one study|a single study)")
+#: P3a hotfix (D-053b): never in a fire-weather item's graded text --- an FWI is a fire-danger index, never fire occurrence.
+FWI_FORBIDDEN_RE = re.compile(r"\bwild[- ]?fires?\b|\bfires\b|\bburned\s+area\b", re.I)
+#: "fire" alone (not "fire-weather", "fire weather", "fire-danger", "fire danger"): reported, not failed.
+FWI_FIRE_WORD_RE = re.compile(r"\bfire\b(?![-\s](?:weather|danger)\b)", re.I)
+FWI_FAMILY = "fire_weather_index"
+#: Rubric lists that describe wrong answers: an FWI-forbidden word there is reported, not failed (EXECUTOR reading).
+FWI_WRONG_ANSWER_FIELDS = ("rubric.disallowed_claims", "rubric.fatal_errors")
 SHOW_RE = re.compile(r"\bshows?\b|\bshown\b", re.I)
 SUGGEST_RE = re.compile(r"\bsuggests?\b", re.I)
 MODEL_SOURCE_RES = (re.compile(r"\b(the|this|our) (model|projection|modeled projection|data|dataset|table) (shows?|indicates?|projects?|suggests?)\b", re.I),
@@ -547,6 +561,14 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
     if check_version == SYNTH_CHECK_VERSION_V3:
         reasons += [f"{w}: generality (D-060/D-062): {m!r} in graded text" for w, t in every for m in generality_flags(t)]
         hedge_report = hedge_by_strength(lit_s, strengths)
+    fire_report = None
+    if check_version == SYNTH_CHECK_VERSION_V3 and checks_input.get("family") == FWI_FAMILY:
+        reasons += [f"{w}: fire-weather wording (an FWI is never fire occurrence): {m!r} in graded text"
+                    for w, t in every if w not in FWI_WRONG_ANSWER_FIELDS for m in fwi_forbidden_flags(t)]
+        plain = [q for q in checks_input.get("plain_quantity") or [] if isinstance(q, str) and q]
+        fire_report = [{"field": w, "word": m, "kind": "forbidden_word_in_wrong_answer_list"}
+                       for w, t in every if w in FWI_WRONG_ANSWER_FIELDS for m in fwi_forbidden_flags(t)] + \
+                      [{"field": w, "word": m, "kind": "fire_alone"} for w, t in every for m in fwi_fire_words(t, plain)]
 
     schema = schema_errors(item)
     reasons += [f"schema: {e}" for e in schema]
@@ -559,7 +581,21 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
                        "rubric_points_without_source_ids": sum(not (isinstance(r, dict) and r.get("source_ids"))
                                                                for r in tagged.get("rubric_points") or []),
                        "n_table_sentences": len(tp_s), "n_literature_sentences": len(lit_s),
-                       **({"hedge_by_strength": hedge_report} if hedge_report is not None else {})}}
+                       **({"hedge_by_strength": hedge_report} if hedge_report is not None else {}),
+                       **({"fire_word_report": fire_report} if fire_report is not None else {})}}
+
+
+def fwi_forbidden_flags(text: str) -> list[str]:
+    """P3a hotfix (D-053b): the matches of `FWI_FORBIDDEN_RE` in `text` ("wildfire", "fires", "burned area")."""
+    return [m.group(0) for m in FWI_FORBIDDEN_RE.finditer(text or "")]
+
+
+def fwi_fire_words(text: str, plain_phrases: list[str] = ()) -> list[str]:
+    """P3a hotfix (D-053b), report only: "fire" alone in `text`, outside the plain quantity phrases (longest removed first)."""
+    t = text or ""
+    for ph in sorted(plain_phrases, key=len, reverse=True):
+        t = re.sub(re.escape(ph), " ", t, flags=re.I)
+    return [m.group(0) for m in FWI_FIRE_WORD_RE.finditer(t)]
 
 
 def generality_flags(text: str) -> list[str]:

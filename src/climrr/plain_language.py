@@ -19,6 +19,9 @@ from climrr.manifest import MANIFEST_PATH, load_entry
 from climrr.paths import REPO_ROOT
 
 PLAIN_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "plain_language_v1.yaml"
+#: v1a (P3a hotfix, D-053b): the fire-weather quantity "fire-weather danger (how hot, dry and windy conditions favour fire)"
+#: and the family's `never_write` words; read by the seed packets v4a. v1 stays the evidence for packets v4.
+PLAIN_V1A_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "plain_language_v1a.yaml"
 
 
 def load(path: Path = PLAIN_PATH, manifest_path: Path = MANIFEST_PATH) -> dict:
@@ -39,10 +42,12 @@ def hedge(strength: str, plain: dict | None = None) -> list[str]:
 
 
 def model_view(family: str, scenario: str, horizon: str, plain: dict | None = None) -> dict:
-    """The phrases a packet's graded text must use, for its pattern's family, scenario and horizon."""
+    """The phrases a packet's graded text must use, for its pattern's family, scenario and horizon. `never_write`: the
+    hedge words never used, then (v1a) the family's own `never_write` words."""
     plain = plain or load()
     fam = plain["families"][family]
     return {"version": plain["version"], "quantity": fam["quantity"], "quantity_short": fam["quantity_short"],
             "scenario": plain["scenario"][scenario], "horizon": plain["horizon"][horizon],
             "hedge_multi_source_or_review": plain["hedges"]["multi_source_supported"],
-            "hedge_single_source": plain["hedges"]["single_source_supported"], "never_write": plain["hedges"]["never"]}
+            "hedge_single_source": plain["hedges"]["single_source_supported"],
+            "never_write": list(plain["hedges"]["never"]) + list(fam.get("never_write") or [])}

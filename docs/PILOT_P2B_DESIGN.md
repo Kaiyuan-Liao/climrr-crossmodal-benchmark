@@ -539,3 +539,28 @@ the pre-polish text in small type.
 **For the GUIDANCE packet** (continued): 2. CLAUDE.md gains the status `owner_authorized_working_assumption` (D-064) and the
 polish agent's run-evidence exemption (D-063). 3. FWI items now rest on owner-authorized working assumptions, not on
 confirmed column readings.
+
+## 17. P3a hotfix: fire-arm dispositions, seven items, packets v4a (D-053b, 2026-11-17)
+
+The COORDINATOR's fire-arm dispositions v1 (`group_dispositions_fire_v1.csv`, Kaiyuan-confirmed; 10 accept, 8 relabel, 3
+not_about_family) apply with the heat dispositions v1a under the same rules, and the no-disposition rule now covers the fire
+arm: an undisposed fire group that would be attached is excluded and not refilled with another undisposed group
+(`undisposed_candidates` in the manifest, 8 for the next review round); attached fire groups carry `review_state:
+reviewer_tagged`. BI-P3-0006 is dropped as a duplicate question under D-060 (`pilot_selection_v2a.yaml`, seven items, ids
+kept; the two FWI seeds selected by Kaiyuan). FWI graded text uses "fire-weather danger (how hot, dry and windy conditions
+favour fire)" (`plain_language_v1a.yaml`) and never "wildfire", "fires" or "burned area" (post-checks v3: a failure,
+except in the rubric's disallowed claims and fatal errors, where it is reported; "fire" alone reported; polish checks v1a
+refuse a rewrite that adds one). **Packets v4a** (`scripts/build_synth_packets_v4a.py`, `artifacts/benchmark/synth_packets_v4a/`):
+heat packets as v4 but for the inputs; California FWI 11 groups (8 drivers, 3 context), Minnesota FWI 9 (6, 3). Packets v4
+stay as built. Polaris runs (Kaiyuan), at the pushed commit, replacing the §16 commands:
+
+    bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
+    cd "$CLIMRR_REPO_ROOT"
+    python scripts/litcollect/litsynth_agent.py --packets artifacts/benchmark/synth_packets_v4a \
+        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run4" \
+        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
+        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --sleep 5 --source-commit <PINNED_SHA>
+    python scripts/litcollect/litpolish_agent.py --items "$LITCOLLECT_ROOT_POLARIS/litsynth/run4" \
+        --out "$LITCOLLECT_ROOT_POLARIS/litpolish/run1" \
+        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
+        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --sleep 5 --source-commit <PINNED_SHA>

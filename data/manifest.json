@@ -580,6 +580,54 @@
       "decision_ref": "D-063",
       "source_description": "COORDINATOR work package P3a (2026-11-17), owner input: Kaiyuan's relay of the mentor's feedback of 2026-11-13, section C; the list written by the EXECUTOR, recorded for confirmation",
       "interpretation_notes": "no interpretation assigned to any table column; no column status, concept-map entry or compatibility rule changed"
+    },
+    {
+      "filename": "group_dispositions_fire_v1.csv",
+      "path": "data/metadata/benchmark/group_dispositions_fire_v1.csv",
+      "role": "Fire-arm group dispositions v1 --- one row per fire-arm group of grouping run 2 attached to the FWI packets v4 (21 groups: accept 10, relabel 8, not_about_family 3), columns group_id, label, proposed_disposition, reason, kaiyuan_disposition (empty), kaiyuan_note (empty); applied with group_dispositions_v1a.csv by src/climrr/litgroups.apply_dispositions when scripts/build_synth_packets_v4a.py builds the packets v4a (synthpackets_v4.load_dispositions_v4a)",
+      "sha256": "94a88f5d3228f3fdc4cf68a585475bb0cbc08b6c8d2ffe95430c8cf029ed907a",
+      "bytes": 3890,
+      "row_count": 21,
+      "column_count": 6,
+      "encoding_note": "UTF-8, CRLF line endings as received (as group_dispositions_v1.csv), no byte-order mark; one header row. Pinned -text in .gitattributes (data/metadata/benchmark/**).",
+      "acquisition_date": "2026-11-17",
+      "storage_policy": "tracked in ordinary Git as an immutable object; a change is a new file with its own decision",
+      "tracked_in_git": true,
+      "decision_ref": "D-053b",
+      "source_description": "COORDINATOR proposal P3a_fire_groups_dispositions_v1.csv, confirmed by Kaiyuan 2026-11-17 as proposed (the kaiyuan_disposition column is empty, so the proposal applies); copied byte-identical by the EXECUTOR",
+      "interpretation_notes": "no interpretation assigned to any table column; no column status, concept-map entry or compatibility rule changed"
+    },
+    {
+      "filename": "plain_language_v1a.yaml",
+      "path": "data/metadata/benchmark/plain_language_v1a.yaml",
+      "role": "Plain-language phrases v1a --- v1 with the fire-weather quantity 'fire-weather danger (how hot, dry and windy conditions favour fire)' (quantity_short 'fire-weather danger' unchanged) and the fire-weather never_write words 'wildfire', 'fires', 'burned area'; read by src/climrr/plain_language.py (PLAIN_V1A_PATH); carried by the seed packets v4a; plain_language_v1.yaml kept as the evidence for packets v4",
+      "sha256": "bd6fc84416c6a5fae4bfcc40dab927758d71fd3411daf22817b05ab1932d5c46",
+      "bytes": 3006,
+      "row_count": null,
+      "column_count": null,
+      "encoding_note": "UTF-8, LF line endings, no byte-order mark. Pinned -text in .gitattributes (data/metadata/benchmark/**).",
+      "acquisition_date": "2026-11-17",
+      "storage_policy": "tracked in ordinary Git as an immutable object; a change is a new file with its own decision",
+      "tracked_in_git": true,
+      "decision_ref": "D-053b (on D-060, D-061, D-062)",
+      "source_description": "COORDINATOR work package P3a hotfix (2026-11-17), item 4; written by the EXECUTOR on top of plain_language_v1.yaml, details marked EXECUTOR recorded for confirmation",
+      "interpretation_notes": "no interpretation assigned to any table column; no column status, concept-map entry or compatibility rule changed"
+    },
+    {
+      "filename": "pilot_selection_v2a.yaml",
+      "path": "data/metadata/benchmark/pilot_selection_v2a.yaml",
+      "role": "Pilot seed selection v2a --- selection v2 minus BI-P3-0006 (NCA5 regions, 105 F, mid-century: duplicate question under D-060); seven seeds, ids and orders of v2 kept; the two fire-weather seeds selected_by Kaiyuan 2026-11-17; read by src/climrr/pilot_selection.py (check_v2a) and scripts/build_synth_packets_v4a.py",
+      "sha256": "8dc336cbe31053b4e0459d9a300f2c135720a89264db6a5d4a29ae6aee7518f1",
+      "bytes": 4418,
+      "row_count": null,
+      "column_count": null,
+      "encoding_note": "UTF-8, LF line endings, no byte-order mark. Pinned -text in .gitattributes (data/metadata/benchmark/**).",
+      "acquisition_date": "2026-11-17",
+      "storage_policy": "tracked in ordinary Git as an immutable object; pilot_selection_v2.yaml kept as the evidence for packets v4; a change is a new file with its own decision",
+      "tracked_in_git": true,
+      "decision_ref": "D-053b",
+      "source_description": "COORDINATOR work package P3a hotfix (2026-11-17), item 2, owner confirmation (Kaiyuan, 2026-11-17) of the two fire-weather seeds; written by the EXECUTOR from pilot_selection_v2.yaml",
+      "interpretation_notes": "no interpretation assigned to any table column; no column status, concept-map entry or compatibility rule changed"
     }
   ],
   "amendments": [
@@ -678,6 +726,12 @@
       "milestone": "Pilot P3a",
       "change": "Added data/metadata/benchmark/plain_language_v1.yaml, data/metadata/benchmark/descriptor_rules_v3.yaml, data/metadata/benchmark/pilot_selection_v2.yaml, data/metadata/benchmark/item_design_dispositions_v1.yaml, data/metadata/geography/nca_regions_v1_disposition.yaml, data/metadata/benchmark/polish_synonyms_v1.yaml. Every other entry unchanged.",
       "decision_ref": "D-059 -- D-065"
+    },
+    {
+      "date": "2026-11-17",
+      "milestone": "Pilot P3a hotfix",
+      "change": "Added data/metadata/benchmark/group_dispositions_fire_v1.csv, data/metadata/benchmark/plain_language_v1a.yaml, data/metadata/benchmark/pilot_selection_v2a.yaml. Every other entry unchanged.",
+      "decision_ref": "D-053b"
     }
   ],
   "external_corpora": [

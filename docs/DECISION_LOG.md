@@ -3209,3 +3209,37 @@ code emits, and the next GUIDANCE packet still chooses.
   edit.
 - **Affected files:** `data/metadata/geography/nca_regions_v1_disposition.yaml`, `data/manifest.json`,
   `src/climrr/synthpackets_v4.py`, tests.
+
+## D-053b --- Fire-arm group dispositions v1; BI-P3-0006 dropped; packets v4a; fire-weather wording
+
+- **Date:** 2026-11-17 (COORDINATOR proposal, confirmed by Kaiyuan); recorded 2026-11-18.
+- **Status:** **decided** (COORDINATOR, P3a hotfix; Kaiyuan-confirmed 2026-11-17). Amends D-053 / D-053a (extends the
+  rule set to the fire arm), D-060 (sample set) and the P3a plain-language phrases.
+- **Context.** Packets v4 attached 14 fire-arm groups to each FWI packet by the agent's claim tag, never human-reviewed
+  (`fire_groups_unreviewed: true`); several were about fire occurrence, severity, burned area or ignition. BI-P3-0005 and
+  BI-P3-0006 read the same once the graded text names no threshold (D-060).
+- **Decision.** (1) Fire-arm dispositions v1, 21 groups: 10 accept, 8 relabel, 3 not_about_family, applied with the
+  existing rule set (relabel changes the claim tag; not_about_family excludes from every fire packet; the no-disposition
+  rule now covers the fire arm --- an undisposed fire group that would otherwise be attached is excluded and not refilled
+  with another undisposed group; listed as `undisposed_candidates` for the next review round); disposed groups
+  `review_state: reviewer_tagged`. (2) BI-P3-0006 dropped (duplicate question under D-060); seven items, ids kept; the
+  two FWI seeds `selected_by: Kaiyuan, 2026-11-17`. (3) FWI plain phrase "fire-weather danger (how hot, dry and windy
+  conditions favour fire)"; never "wildfire", "fires", "burned area" in graded text (post-checks v3, a failure); "fire"
+  alone reported, not failed.
+- **Recorded (EXECUTOR).** `group_dispositions_fire_v1.csv` (`94a88f5d…907a`, byte-identical to the COORDINATOR's file,
+  CRLF, `kaiyuan_disposition` empty so the proposal applies), `pilot_selection_v2a.yaml`, `plain_language_v1a.yaml`, all
+  manifest-pinned; v1 / v2 files kept as the evidence for packets v4. **For confirmation:** (a) the phrase went into a new
+  file `plain_language_v1a.yaml`, not an edit of the pinned v1 (its storage policy: a change is a new file); `quantity`
+  takes the new phrase, `quantity_short` stays "fire-weather danger"; (b) the FWI words fail in the prompt, reference
+  texts and rubric **except** `rubric.disallowed_claims` and `rubric.fatal_errors`, which must be able to name the
+  fire-occurrence misreading (the agent v4 prompt asks for "FWI as fire" fatal errors); hits there are reported; (c) the
+  failure is not format-class (no corrective turn); (d) the polish checks (v1a) also refuse a rewrite that adds one of
+  the three words; (e) the packets carry the words in `model_view.plain_language.never_write` and `checks_input.family`
+  / `plain_quantity`, so the pinned agent v4 runs unchanged. Packets v4a: California 11 groups (8 drivers, 3 context),
+  Minnesota 9 (6, 3); 8 undisposed fire candidates (the same 8 in both). Accepted context group
+  `LG-fire_weather_v1-driver-c1-005` has the label "fire weather indices (FWI and components) predict burned area": the
+  model sees "burned area" in a packet whose graded text may not use it.
+- **Affected files:** `data/metadata/benchmark/group_dispositions_fire_v1.csv`, `pilot_selection_v2a.yaml`,
+  `plain_language_v1a.yaml`, `data/manifest.json`, `src/climrr/synthpackets_v4.py`, `pilot_selection.py`,
+  `plain_language.py`, `benchmark_items.py`, `polish_checks.py`, `scripts/build_synth_packets_v4a.py`,
+  `artifacts/benchmark/synth_packets_v4a/`, tests.
