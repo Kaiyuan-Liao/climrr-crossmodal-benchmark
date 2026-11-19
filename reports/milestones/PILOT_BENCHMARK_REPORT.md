@@ -1117,7 +1117,7 @@ No model call; nothing frozen; no item accepted. Tarball `litsynth_run5_polish_r
 | | |
 | --- | --- |
 | Synthesis run 5 | `litsynth_agent` v4.1 `f41c0b95…4d33d7` (prompt `8ce96b07…1c8ab`), packets v4b `598b2744…5bfad`, source `f6f7543`, Sophia `openai/gpt-oss-120b`, reasoning low, 16000 tokens; run proper 2026-11-19 05:02:51--05:04:43 UTC, restarts 05:06:48 and 05:07:38--05:07:47 |
-| Run-5 manifest | `artifacts/benchmark/items/run5/manifest.json` `02e5c60dacf7f91a3516d6053801d47d684edb2137d06a1bc5192f6851ec8fdc` |
+| Run-5 manifest | `artifacts/benchmark/items/run5/manifest.json` `52a4cb57e43d3ce73fa8719320cd66dbb1a17468c54bdd6a435c90acb907936c` |
 | Run-5 result | **7 items, all `deterministic_pass` -> `human_review`**; format corrective turn on BI-P3-0004 ("tercile" in acceptable variants) and BI-P3-0005 ("a single study", "one study", "RCP", "tercile", "ranking large" in disallowed claims); 0 leakage flags, no HTTP retry; **post-checks v3.1 reproduced** (first turns and the superseded attempt included); `context_driver_report` and `regional_contrast_report` empty on all seven |
 | Superseded attempt | BI-P3-0007's first attempt (run proper, `rejected_pre_review`: 31.4 and 33.6 in optional points, "fires" in a literature sentence --- not format-class, so no corrective turn), moved to `attempt1/` and regenerated with `--only`; copied byte-identical to `items/run5/superseded/BI-P3-0007_attempt1.json` `d2c4b2f3…369f`, role `superseded_attempt` |
 | Before the run | a start at 04:56:55 failed on SD2-TP1-00071 and 00271 with HTTP 401 (expired sign-in) and stopped: **`pre_run_auth_failures: 2`**, not item failures; it left `failed_packets.txt` and two `model_error.txt` (listed as `pre_run_leftover`); `reports/litsynth_run5.log` = `agent.log` without those three lines |
@@ -1188,3 +1188,33 @@ No model call; nothing frozen; no item accepted. Tarball `litsynth_run5_polish_r
      (required point) --- fire-outcome wording from the reviewer-tagged group labels in an FWI item; not in the answer;
    - **EX-6** rubric consistency: 0001 lacks the comparison point; 0004 weighs the table points 1; "Regional ranking" for
      a state comparison (0002, 0004); "(multi-source)" in 0003's required points.
+
+## 56. P3c: gate, readings for confirmation (2026-11-19)
+
+Build `ab42cfd`; evidence runs `ingest_litsynth_run5`, `build_mentor_sheet` and `build_p3_items_review` at `ab42cfd`
+(`git_dirty: false`; `reports/runs/20261119T052807Z_local_ingest_litsynth_run5.json`,
+`reports/runs/20261119T052808Z_local_build_mentor_sheet.json`, `reports/runs/20261119T052808Z_local_build_p3_items_review.json`),
+every output byte-identical (the two `.xlsx` included: sheet `09ad0bdd…09f9`).
+
+| | |
+| --- | --- |
+| Tests | `pytest`: **1,648 passed, 2 skipped** (the two pre-existing `jsonschema` skips); new `tests/test_p3c.py` (17); `test_pilot_p3a.py`'s script test now runs the P3a builder's bytes at `f6f7543` |
+| Scanner | `verify_no_secrets_or_paths.py`: 0 hits (1,803 tracked text files) |
+
+**Readings for confirmation.**
+1. **Regenerated item** (D-068 (a)): BI-P3-0007 was rejected, moved aside and regenerated; the second draw (temperature 0,
+   different text) passed and is the sample. The first is kept as `superseded_attempt`. A scale-up should state whether a
+   rejected item may be redrawn, and how many times.
+2. **Display text** = the item's `prompt` / `reference_answer.integrated` as the polish agent wrote them; the rubric and the
+   tagged answer are the synthesis run's (the polish touches only those two texts).
+3. **`superseded_attempt`** is a manifest role, not an item status (the item schema has no such status); the file is the
+   delivered record, byte-identical, still `rejected_pre_review`.
+4. **"N papers"** on the paper side is the group's independent-paper count in the packet (the basis of "shows" /
+   "suggests"); the passages column lists every member passage of the group, so a group with duplicate copies of a paper
+   or background passages shows more passages than N, and more than the item's own `supports` (core / cited members).
+5. **FWI quantity line**: the dictionary names the column only "Seasonal value" (under the Wildfire columns); the sheet
+   adds "read as the summer Fire Weather Index (FWI): a fire-danger index, not fire occurrence" and names WA-FWI-SUMMER.
+6. **Flags EX-1 / EX-2 are not caught by polish checks v2** and five of the seven sheet answers are polished texts; the
+   sheet went out as generated (the work package's instruction). If the COORDINATOR wants the hedge scope enforced, a
+   checks v2.1 rule (each literature sentence of the rewrite carries a hedge, or one hedge governs a single sentence) would
+   have rejected 0002, 0003, 0005, 0007.
