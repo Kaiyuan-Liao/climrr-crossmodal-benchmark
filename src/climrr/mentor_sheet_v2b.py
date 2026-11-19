@@ -16,13 +16,25 @@ and built from its v4b packet). One row per item, in the work package's order (`
 - `Original passages` --- per cited group, every member passage verbatim (no cut), with paper id and section.
 
 README of three lines (`README_LINES`). The Markdown copy has the same content. No model call; no item modified.
+
+**Sheet v2 (P3c hotfix, COORDINATOR 2026-11-18).** `P3_display_edits_v1.yaml` (`edit_origin: coordinator_edit`) overrides
+the display question and / or answer of five items (`load_edits`, `display`); `display_source` is then `coordinator_edit`
+for those, else the v1 value. The generated and polished texts stay in the items, untouched. `edited_text_checks` runs
+leakage v2.3 (`p2b_mentor_export.edited_text_flags`) and post-checks v3.1 against the item's v4b packet on every edited
+text, report written to `P3_display_edits_v1_checks.json`. Without edits, `rows` / `render_md` give v1 byte for byte
+(`V1_MD_SHA256`).
 """
 
 from __future__ import annotations
 
+import copy
 import json
 from pathlib import Path
 
+import yaml
+
+from climrr import benchmark_items as bi
+from climrr import litsynth_run2 as s2
 from climrr import litsynth_run5 as s5
 from climrr import p2b_mentor_export as mx
 from climrr import p2b_mentor_v2 as m2
@@ -34,6 +46,13 @@ REVIEW_DIR = REPO_ROOT / "artifacts" / "benchmark" / "review"
 SHEET_DATE = "2026-11-19"
 MD_PATH = REVIEW_DIR / f"MENTOR_SAMPLE_ITEMS_{SHEET_DATE}.md"
 XLSX_PATH = REVIEW_DIR / f"MENTOR_SAMPLE_ITEMS_{SHEET_DATE}.xlsx"
+#: v1 as sent (build `ab42cfd`, run record `build_mentor_sheet` 20261119T052808Z): reproduced by `render_md(rows(...))`.
+V1_MD_SHA256 = "c898e45af3141d343ae7da69f4e4f98b050fc1010e6057df326b21332c411310"
+SHEET_VERSION = 2
+EDITS_PATH = REVIEW_DIR / "P3_display_edits_v1.yaml"
+EDITS_CHECKS_PATH = REVIEW_DIR / "P3_display_edits_v1_checks.json"
+EDIT_ORIGIN = "coordinator_edit"
+EDIT_FIELDS = {"display_prompt": "prompt", "display_answer": "answer"}
 HEADER = ["#", "Question", "Answer", "Table side", "Paper side", "Original passages"]
 WIDTHS = [12, 45, 60, 60, 50, 80]
 ORDER = [("BI-P3-0001", "California heat"), ("BI-P3-0004", "Alabama heat"), ("BI-P3-0003", "Washington heat"),
@@ -81,6 +100,33 @@ def load_items(run_dir: Path, packets_manifest: dict) -> dict:
         _check(it["generation"]["inputs_sha256"]["packet"] == sha[it["item_id"]], f"{it['item_id']}: built from another packet")
         out[it["item_id"]] = it
     return out
+
+
+def load_edits(path: Path = EDITS_PATH) -> dict:
+    """{item_id: edit record} from the COORDINATOR display-edits file; every record a sample item, with a reason and at
+    least one display field; edit_origin `coordinator_edit`."""
+    doc = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
+    _check(doc.get("edit_origin") == EDIT_ORIGIN and doc.get("by") == "COORDINATOR", f"{path}: not a COORDINATOR display edit")
+    ids, out = {i for i, _ in ORDER}, {}
+    for e in doc["items"]:
+        iid = e["item_id"]
+        _check(iid in ids and iid not in out, f"{iid}: not a sample item, or edited twice")
+        _check(bool(e.get("reason")), f"{iid}: no reason")
+        extra = set(e) - {"item_id", "label", "reason", *EDIT_FIELDS}
+        _check(not extra and any(k in e for k in EDIT_FIELDS), f"{iid}: fields {sorted(extra)} / no display field")
+        _check(all(isinstance(e[k], str) and e[k].strip() == e[k] and e[k] for k in EDIT_FIELDS if k in e), f"{iid}: empty text")
+        out[iid] = {**e, "edit_origin": doc["edit_origin"], "date": doc["date"]}
+    return out
+
+
+def display(item: dict, edit: dict | None = None) -> dict:
+    """{prompt, answer} on the sheet: the v1 display text (`litsynth_run5.display_text`), overridden field by field by a
+    COORDINATOR display edit."""
+    text = dict(s5.display_text(item))
+    for k, f in EDIT_FIELDS.items():
+        if edit and k in edit:
+            text[f] = edit[k]
+    return text
 
 
 def _f1(v) -> str:
@@ -199,12 +245,13 @@ def paper_cells(item: dict, packet: dict) -> tuple[str, str]:
     return "\n".join(side), "\n".join(passages)
 
 
-def rows(packets: dict, items: dict) -> list[list]:
+def rows(packets: dict, items: dict, edits: dict | None = None) -> list[list]:
     _check(sorted(items) == sorted(i for i, _ in ORDER), f"items {sorted(items)} are not the seven sample items")
+    edits = edits or {}
     out = [HEADER]
     for n, (iid, _) in enumerate(ORDER, 1):
         it, pk = items[iid], packets[iid]
-        text = s5.display_text(it)
+        text = display(it, edits.get(iid))
         _check([w["id"] for w in it["review"]["history"][0]["working_assumptions_relied_on"]]
                == [w["id"] for w in pk["working_assumptions_relied_on"]], f"{iid}: working assumptions differ from the packet")
         side, passages = paper_cells(it, pk)
@@ -212,8 +259,8 @@ def rows(packets: dict, items: dict) -> list[list]:
     return out
 
 
-def render_md(rs: list[list]) -> str:
-    out = [f"# Sample items for mentor review --- {SHEET_DATE}", "",
+def render_md(rs: list[list], version: int | None = None) -> str:
+    out = [f"# Sample items for mentor review --- {SHEET_DATE}" + (f" (v{version})" if version else ""), "",
            f"Seven sample items (five heat index, two fire weather). Same content as `MENTOR_SAMPLE_ITEMS_{SHEET_DATE}.xlsx` "
            "(sheets ITEMS and README).", "", "## README", ""]
     out += [f"- **{k}.** {v}" for k, v in README_LINES]
@@ -234,6 +281,35 @@ def sheets(rs: list[list]) -> list[tuple]:
     return [("ITEMS", rs, WIDTHS), ("README", [list(x) for x in README_LINES], [36, 110])]
 
 
-def display_sources(items: dict) -> dict:
-    return {iid: s5.display_source(items[iid]) for iid, _ in ORDER}
+def display_sources(items: dict, edits: dict | None = None) -> dict:
+    edits = edits or {}
+    return {iid: EDIT_ORIGIN if iid in edits else s5.display_source(items[iid]) for iid, _ in ORDER}
+
+
+def edited_text_checks(items: dict, packets: dict, edits: dict, columns: list[str] | None = None,
+                       edits_path: Path = EDITS_PATH) -> dict:
+    """Per edited item, on its sheet text (edits applied): leakage v2.3 on the question and the answer, and post-checks v3.1
+    against its v4b packet with the question and the integrated answer replaced (the tagged sentences and rubric are the
+    run-5 ones, which passed). Report only; no item modified."""
+    cols = columns if columns is not None else bi.column_names()
+    out = []
+    for iid, _ in ORDER:
+        if iid not in edits:
+            continue
+        text = display(items[iid], edits[iid])
+        lk = mx.edited_text_flags({"item_id": iid, "edited_prompt": text["prompt"], "edited_reference_integrated": text["answer"]}, cols)
+        x = s2._as_candidate(items[iid])
+        x["prompt"], x["reference_answer"]["integrated"] = text["prompt"], text["answer"]
+        tagged = copy.deepcopy(items[iid]["review"]["history"][0]["reference_answer_tagged"])
+        tagged["integrated"] = text["answer"]
+        pc = bi.synthesis_post_checks(x, tagged, packets[iid]["checks_input"], cols, check_version=bi.SYNTH_CHECK_VERSION_V31)
+        rep = {k: pc["checks"].get(k) for k in ("context_driver_report", "regional_contrast_report")}
+        out.append({"item_id": iid, "fields_edited": [f for k, f in EDIT_FIELDS.items() if k in edits[iid]],
+                    "leakage_v2_3": {"prompt": lk["prompt"], "answer": lk["reference_integrated"]},
+                    "post_checks_v3_1": {"pass": pc["pass"], "reasons": pc["reasons"], "reports": rep}})
+    fails = [x["item_id"] for x in out if x["leakage_v2_3"]["prompt"] or x["leakage_v2_3"]["answer"]
+             or not x["post_checks_v3_1"]["pass"]]
+    return {"version": "P3 display edits v1 checks", "edits_sha256": sha256_file(edits_path),
+            "leakage_check_version": bi.SYNTH_CHECK_VERSION_V23, "post_check_version": bi.SYNTH_CHECK_VERSION_V31,
+            "report_only": True, "items_modified": 0, "items": out, "failures": len(fails), "items_failing": fails}
 

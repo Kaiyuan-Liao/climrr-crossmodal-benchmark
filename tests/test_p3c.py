@@ -164,7 +164,8 @@ def _sheet_rows():
 
 def test_sheet_rebuilds_byte_identically_and_follows_the_package():
     rs, packets = _sheet_rows()
-    assert ms.render_md(rs) == ms.MD_PATH.read_text(encoding="utf-8")
+    # v1 as sent (no display edits); the tracked file is v2 since the P3c hotfix (tests/test_p3c_display_edits.py)
+    assert hashlib.sha256(ms.render_md(rs).encode("utf-8")).hexdigest() == ms.V1_MD_SHA256
     assert rs[0] == ["#", "Question", "Answer", "Table side", "Paper side", "Original passages"] and len(rs) == 8
     assert [r[0].split("\n")[1] for r in rs[1:]] == ["BI-P3-0001", "BI-P3-0004", "BI-P3-0003", "BI-P3-0002", "BI-P3-0005",
                                                      "BI-P3-0007", "BI-P3-0008"]
@@ -199,11 +200,11 @@ def test_build_mentor_sheet_script(tmp_path, monkeypatch, capsys):
     spec = importlib.util.spec_from_file_location("build_mentor_sheet_p3c", REPO_ROOT / "scripts" / "build_mentor_sheet.py")
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
-    monkeypatch.setattr(sys, "argv", ["build_mentor_sheet.py", "--out-md", str(md), "--out-xlsx", str(xlsx)])
+    monkeypatch.setattr(sys, "argv", ["build_mentor_sheet.py", "--out-md", str(md), "--out-xlsx", str(xlsx), "--no-edits"])
     assert mod.main() == 0
     out = json.loads(capsys.readouterr().out.split("\nrun record:")[0])
-    assert out["rows"] == 7 and out["display_source"] == MAN["display_source"]
-    assert md.read_bytes() == ms.MD_PATH.read_bytes() and xlsx.stat().st_size > 0
+    assert out["rows"] == 7 and out["display_source"] == MAN["display_source"] and out["sheet_version"] == 1
+    assert sha256_file(md) == ms.V1_MD_SHA256 and xlsx.stat().st_size > 0
     assert len(list((tmp_path / "runs").glob("*_build_mentor_sheet.json"))) == 1
 
 

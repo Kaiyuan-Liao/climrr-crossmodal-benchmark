@@ -1,5 +1,7 @@
 # Notes on the 2026-11-19 sample sheet --- for Kaiyuan, not for the mentor
 
+> **Sheet v2 (2026-11-18):** five display texts are now COORDINATOR edits (`P3_display_edits_v1.yaml`: answers of 0002, 0003, 0004, 0007; question and answer of 0005). The notes below describe v1.
+
 What changed since the sheet sent 2026-11-04 (`MENTOR_PILOT_ITEMS_2026-11-05`, five items, COORDINATOR-edited v3 texts).
 The new sheet shows the **generated** text of synthesis run 5 (agent v4.1, packets v4b), polished where polish run 2
 passed its checks; nobody edited it. Item review flags: `P3_review_flags_v1.json` (work package P3c, section C).

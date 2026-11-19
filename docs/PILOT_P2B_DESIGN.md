@@ -638,6 +638,7 @@ no question. **Display text** = the rewrite where polished (0002, 0003, 0004, 00
 ingested run 5): `artifacts/benchmark/review/MENTOR_SAMPLE_ITEMS_2026-11-19.xlsx` (gitignored) and `.md`; seven rows in the
 order California, Alabama, Washington, New York heat, regions heat, California, Minnesota fire weather. Notes for Kaiyuan:
 `MENTOR_SAMPLE_ITEMS_2026-11-19_notes.md`.
+**Sheet v2 (P3c hotfix, 2026-11-18):** COORDINATOR display edits `P3_display_edits_v1.yaml` (`coordinator_edit`; answers of 0002, 0003, 0004, 0007, question and answer of 0005; generated and polished texts untouched in the items) override the sheet text; leakage v2.3 and post-checks v3.1 on the edited texts: 0 failures (`P3_display_edits_v1_checks.json`); `--no-edits` rebuilds v1.
 
 **Review flags** (report only; `scripts/build_p3_items_review.py` -> `P3_items_review_v1.csv` / `.xlsx`,
 `P3_review_flags_v1.json`): 0005's question does not ask about regional differences (COORDINATOR-proposed question recorded

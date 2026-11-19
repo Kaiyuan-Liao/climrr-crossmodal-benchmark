@@ -1,4 +1,4 @@
-# Sample items for mentor review --- 2026-11-19
+# Sample items for mentor review --- 2026-11-19 (v2)
 
 Seven sample items (five heat index, two fire weather). Same content as `MENTOR_SAMPLE_ITEMS_2026-11-19.xlsx` (sheets ITEMS and README).
 
@@ -67,7 +67,7 @@ How are summer days hot and humid enough to be dangerous projected to change in 
 
 ### Answer
 
-In Alabama, days that are hot and humid enough to be dangerous are projected to increase. They will move from rare to common. This is a larger change than in most states. The change is expected by late this century under a high-emissions future. Research shows that large‑scale warming drives the increase. It also shows that global warming raises heat‑wave frequency and intensity. It further shows that intensified urban heat islands at night amplify dangerous heat‑index days.
+In Alabama, summer days hot and humid enough to be dangerous are projected to increase, going from rare to common by late this century under a high‑emissions future, a larger change than in most states. Research shows that large‑scale warming drives the increase, that global warming raises heat‑wave frequency and intensity, and that intensified urban heat islands at night add to dangerous heat‑index days.
 
 ### Table side
 
@@ -116,7 +116,7 @@ How are dangerous heat‑index days projected to change in Washington during sum
 
 ### Answer
 
-In Washington, dangerous heat‑index days are projected to increase slightly and remain rare. This is a smaller change than in most states. The projection is for by mid-century under a high‑emissions future. Research shows that large‑scale warming and global warming drive the increase. The urban heat island effect intensifies nighttime heat. That further contributes to the projected rise.
+In Washington, dangerous heat‑index days are projected to increase slightly but remain rare by mid-century under a high‑emissions future, a smaller change than in most states. Research shows that large‑scale warming drives the increase and that the urban heat island effect intensifies night‑time heat, adding to the projected rise.
 
 ### Table side
 
@@ -165,7 +165,7 @@ How are summer days hot and humid enough to be dangerous projected to change in 
 
 ### Answer
 
-In New York, dangerous heat‑index days in summer are projected to increase. They will go from rare to common. This is a smaller change than in most states. The change will occur by late this century under a high-emissions future. Research shows that large‑scale warming drives this increase. Global warming raises heat‑wave frequency and intensity. Intensified urban heat islands at night further amplify dangerous heat‑index days.
+In New York, summer days hot and humid enough to be dangerous are projected to go from rare to common by late this century under a high-emissions future, a smaller change than in most states. Research shows that large‑scale warming drives this increase, that global warming raises heat‑wave frequency and intensity, and that intensified urban heat islands at night add to dangerous heat‑index days.
 
 ### Table side
 
@@ -210,11 +210,11 @@ In New York, dangerous heat‑index days in summer are projected to increase. Th
 
 ### Question
 
-How are dangerous heat-index days projected to change in summer by mid-century under a high-emissions future, and what drives this change?
+How are dangerous heat-index days in summer projected to change by mid-century under a high-emissions future, how do the changes differ across U.S. regions, and what drives them?
 
 ### Answer
 
-Dangerous heat-index days are projected to increase in summer by mid-century under a high-emissions future. The Southeast shows the largest increase. Alaska shows essentially no change. Research shows that large‑scale warming is the primary driver of future extreme heat. Global warming raises heat‑wave frequency and intensity. The urban heat island effect further intensifies heat stress, especially at night.
+Dangerous heat-index days in summer are projected to increase across U.S. regions by mid-century under a high-emissions future, with the largest increase in the Southeast and essentially no change in Alaska. Research shows that large‑scale warming is the primary driver of future extreme heat, that global warming raises heat‑wave frequency and intensity, and that the urban heat island effect adds to heat stress, especially at night.
 
 ### Table side
 
@@ -271,7 +271,7 @@ How is fire‑weather danger projected to change in California during summer by 
 
 ### Answer
 
-In California during summer, fire‑weather danger is projected to show a slight increase. This is a larger change than in most states. The change occurs by mid‑century under a high‑emissions future. Research shows that strong winds are a main physical driver. Low humidity combined with strong winds also drives the increase. Higher temperatures and aridity are additional drivers. Humidity‑related vapor‑pressure‑deficit effects also contribute.
+In California during summer, fire‑weather danger is projected to increase slightly by mid‑century under a high‑emissions future, a larger change than in most states. Research shows that strong winds, low humidity, and higher temperatures that dry out fuels are the main drivers of fire‑weather danger, with drier air (a higher vapor‑pressure deficit) adding to it.
 
 ### Table side
 
