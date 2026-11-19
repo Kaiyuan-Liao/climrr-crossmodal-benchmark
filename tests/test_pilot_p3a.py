@@ -283,7 +283,13 @@ def test_build_mentor_sheet_script(run_dirs, tmp_path, monkeypatch, capsys):
     from climrr import runrecord as rr
     monkeypatch.setattr(rr, "RUNS_DIR", tmp_path / "runs")
     md, xlsx = tmp_path / "sheet.md", tmp_path / "sheet.xlsx"
-    spec = importlib.util.spec_from_file_location("build_mentor_sheet", REPO_ROOT / "scripts" / "build_mentor_sheet.py")
+    # The P3a builder (packets v4, raw run directories), held by its bytes at f6f7543: since P3c the script builds the
+    # 2026-11-19 sheet from packets v4b and the ingested run 5 (tests/test_p3c.py).
+    import subprocess
+    script = tmp_path / "build_mentor_sheet.py"
+    script.write_bytes(subprocess.run(["git", "show", "f6f7543:scripts/build_mentor_sheet.py"], cwd=REPO_ROOT, check=True,
+                                      capture_output=True).stdout)
+    spec = importlib.util.spec_from_file_location("build_mentor_sheet", script)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     monkeypatch.setattr(sys, "argv", ["build_mentor_sheet.py", "--items", str(run_dirs[0]), "--polished", str(run_dirs[1]),

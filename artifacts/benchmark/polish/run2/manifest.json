@@ -1,0 +1,250 @@
+{
+  "run": "polish/run2",
+  "diagnostic_id": "litpolish_run2",
+  "decision": "D-068",
+  "work_package": "P3c",
+  "tarball": {
+    "name": "litsynth_run5_polish_run2_evidence.tar.gz",
+    "sha256": "e092875e21152f262e0a903e6e2dde41254782e6053dacb07385696c523acc4b"
+  },
+  "generator": {
+    "version": "litpolish_agent v1.1",
+    "agent_path": "scripts/litcollect/litpolish_agent.py",
+    "agent_sha256": "6abc7b2b46298934682bf8342793e185cc73b85d69b505ef61e6cbe0c374366e",
+    "system_prompt_sha256": "2dbbce7f345fdcdeccd4661c22f5c22d87e6c4bcaa070856b59e6234093f0a18",
+    "corrective_template_sha256": "b12f5fc80f7ad62b20c122f7cb28c5174a9c0c48888acdcd609dbab63f722bf8",
+    "check_version": "polish_checks v2",
+    "synonyms_sha256": "7d55d33ca1ca6212341ef06f3a2857f3bfd145ac637e667deb42955fa2267b2b"
+  },
+  "endpoint": {
+    "endpoint_label": "sophia_vllm",
+    "model": "openai/gpt-oss-120b",
+    "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1"
+  },
+  "budget": {
+    "reasoning_effort": "low",
+    "max_tokens": 16000,
+    "temperature": 0
+  },
+  "source_commit": "f6f7543c6b6bc225c6a635c84018a36074837cc1",
+  "input": "synthesis run 5 (artifacts/benchmark/items/run5)",
+  "counts": {
+    "items": 7,
+    "polished": 5,
+    "polish_rejected": 2,
+    "polish_parse_failed": 0,
+    "reasons_by_kind": {
+      "descriptor": 1,
+      "hedges": 1,
+      "length": 1
+    },
+    "skipped_not_deterministic_pass": []
+  },
+  "rejected": {
+    "BI-P3-0001": [
+      "answer: hedges differ (original ['show', 'shows'], polished ['show'])",
+      "answer: descriptor phrase lost: comparison with other states: moderate (original ['a change similar to most states'])"
+    ],
+    "BI-P3-0008": [
+      "answer: length ratio 1.23 outside 0.6-1.2"
+    ]
+  },
+  "log": {
+    "start_utc": "2026-11-19T05:04:47Z",
+    "restart_utc": [
+      "2026-11-19T05:08:21Z"
+    ],
+    "end_utc": "2026-11-19T05:08:24Z",
+    "done": [
+      "items=6 polished=4 rejected=2 parse_failed=0",
+      "items=7 polished=5 rejected=2 parse_failed=0"
+    ],
+    "reading": "the first polish start ran while BI-P3-0007 was rejected_pre_review (skipped); the second, after the --only restart of run 5, polished the new 0007"
+  },
+  "summary_sha256": "bcba3bea461b367101e00f4becebda5dae35f20215f0c002cda5b0f172864bcd",
+  "polished_sha256": "490d6dc0c60d92109c950a7f1b8f8b016216f9e327d8dbe397e013f5eceed4ec",
+  "checks_reproduced": true,
+  "checks": {
+    "checks_reproduced": true,
+    "check_version": "polish_checks v2",
+    "synonyms_sha256": "7d55d33ca1ca6212341ef06f3a2857f3bfd145ac637e667deb42955fa2267b2b",
+    "descriptor_rules_sha256": "dbfa8fd8a86a9379b4709b998bb33e673dceafd5f8ba7d199d55ff672d4c282d",
+    "plain_language_sha256": "bd6fc84416c6a5fae4bfcc40dab927758d71fd3411daf22817b05ab1932d5c46",
+    "items": [
+      {
+        "item_id": "BI-P3-0001",
+        "seed_id": "SD2-TP1-00071",
+        "pass": false,
+        "reasons": [
+          "answer: hedges differ (original ['show', 'shows'], polished ['show'])",
+          "answer: descriptor phrase lost: comparison with other states: moderate (original ['a change similar to most states'])"
+        ]
+      },
+      {
+        "item_id": "BI-P3-0002",
+        "seed_id": "SD2-TP1-00271",
+        "pass": true,
+        "reasons": []
+      },
+      {
+        "item_id": "BI-P3-0003",
+        "seed_id": "SD2-TP1-00460",
+        "pass": true,
+        "reasons": []
+      },
+      {
+        "item_id": "BI-P3-0004",
+        "seed_id": "SD2-TP1-00589",
+        "pass": true,
+        "reasons": []
+      },
+      {
+        "item_id": "BI-P3-0008",
+        "seed_id": "SD2-TP1-01654",
+        "pass": false,
+        "reasons": [
+          "answer: length ratio 1.23 outside 0.6-1.2"
+        ]
+      },
+      {
+        "item_id": "BI-P3-0005",
+        "seed_id": "SD2-TP1-02785",
+        "pass": true,
+        "reasons": []
+      },
+      {
+        "item_id": "BI-P3-0007",
+        "seed_id": "SD2-TP1-01463",
+        "pass": true,
+        "reasons": []
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "polished.jsonl",
+      "sha256": "490d6dc0c60d92109c950a7f1b8f8b016216f9e327d8dbe397e013f5eceed4ec",
+      "bytes": 24208
+    },
+    {
+      "path": "summary.json",
+      "sha256": "bcba3bea461b367101e00f4becebda5dae35f20215f0c002cda5b0f172864bcd",
+      "bytes": 689
+    },
+    {
+      "path": "agent.log",
+      "sha256": "3089e2d8181d97f9bfe71c9466b703180170ea5455562085323dfff08b876072",
+      "bytes": 1159
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": "litpolish/run2/items/SD2-TP1-00071.json",
+      "sha256": "ecf7edcb2a95613e012d5c5c1bd45abe04407b46544c4d344753e1fec4d0394d",
+      "bytes": 37853
+    },
+    {
+      "path": "litpolish/run2/items/SD2-TP1-00271.json",
+      "sha256": "5533ab8deca0e33b07d0c0788cceaaf0f68df2258536c668464d22bf6cb150bd",
+      "bytes": 38293
+    },
+    {
+      "path": "litpolish/run2/items/SD2-TP1-00460.json",
+      "sha256": "a0b2393a52123de277c524b0288257851db35b2e6f467f636e82f7008be3c744",
+      "bytes": 37889
+    },
+    {
+      "path": "litpolish/run2/items/SD2-TP1-00589.json",
+      "sha256": "1688c564492ab0f75feb853207857821c7a40364986c875ad3ff7f7a84e110b5",
+      "bytes": 50394
+    },
+    {
+      "path": "litpolish/run2/items/SD2-TP1-01463.json",
+      "sha256": "174bec0998aaca6a551ced34b6957fcdf89f676e1ef55005fd0b99853eecd7c9",
+      "bytes": 46847
+    },
+    {
+      "path": "litpolish/run2/items/SD2-TP1-01654.json",
+      "sha256": "7ab4389dae94ad1039f1977391491c22597e28958ecba62362b34737c35d62de",
+      "bytes": 31490
+    },
+    {
+      "path": "litpolish/run2/items/SD2-TP1-02785.json",
+      "sha256": "de7fe25238016c2b9fb6759aa60cbe4353496f42cd9f550c5f2e413c6026e9ea",
+      "bytes": 49740
+    },
+    {
+      "path": "litpolish/run2/raw/SD2-TP1-00071/prompt_user.txt",
+      "sha256": "0c57c4d844069fefc8d851b302ff6826dbc2c7d92d92759d06b74b5f5ef17549",
+      "bytes": 594
+    },
+    {
+      "path": "litpolish/run2/raw/SD2-TP1-00071/response.json",
+      "sha256": "3516324561b98156473c3dd05c4d4daaf195ca95d418e83fd2cace74ce1830d7",
+      "bytes": 2459
+    },
+    {
+      "path": "litpolish/run2/raw/SD2-TP1-00271/prompt_user.txt",
+      "sha256": "2a69441ee9ddab7e0f04eb1c555a8556186740af663e2e860943646510cc7d03",
+      "bytes": 618
+    },
+    {
+      "path": "litpolish/run2/raw/SD2-TP1-00271/response.json",
+      "sha256": "1e2b5d552cda25633714e41aada1a86d31dbf29718e3762e93a6dddc0231f50b",
+      "bytes": 3042
+    },
+    {
+      "path": "litpolish/run2/raw/SD2-TP1-00460/prompt_user.txt",
+      "sha256": "8bcf36520e3adfbe0fe898d1cdd046d9922bb98a7b233b46792c7a352620ff2a",
+      "bytes": 576
+    },
+    {
+      "path": "litpolish/run2/raw/SD2-TP1-00460/response.json",
+      "sha256": "792aa24d4df0c9296ef2d4cce0b6c356d4d09633cb64558191f73be1aa5caedd",
+      "bytes": 1960
+    },
+    {
+      "path": "litpolish/run2/raw/SD2-TP1-00589/prompt_user.txt",
+      "sha256": "5cbfe12b126731beb632b3a5578853c29b05809b45de10edc498b50e1143cf8d",
+      "bytes": 670
+    },
+    {
+      "path": "litpolish/run2/raw/SD2-TP1-00589/response.json",
+      "sha256": "58a6fa1ea790077143d6c6329620d7a282f34db6cc2734db24d0643977849ad8",
+      "bytes": 2810
+    },
+    {
+      "path": "litpolish/run2/raw/SD2-TP1-01463/prompt_user.txt",
+      "sha256": "4d2ea8faafce691c922a0a5c62bba093448ae3e5f2522bc991b38859a93dc108",
+      "bytes": 607
+    },
+    {
+      "path": "litpolish/run2/raw/SD2-TP1-01463/response.json",
+      "sha256": "70122213bb9a997a8fe57fe6efe34ba8f0779c05ab6d51f0b2b639714af2c59c",
+      "bytes": 3330
+    },
+    {
+      "path": "litpolish/run2/raw/SD2-TP1-01654/prompt_user.txt",
+      "sha256": "8a5214ec206394575c7331b617cd0d5584f417db58742cc383b05a7d6cfbb107",
+      "bytes": 512
+    },
+    {
+      "path": "litpolish/run2/raw/SD2-TP1-01654/response.json",
+      "sha256": "2dc3515dea25bc8c79e2a9b9067d1a7c890b9e4ef000678c67e6ec7d44ffb6bd",
+      "bytes": 2022
+    },
+    {
+      "path": "litpolish/run2/raw/SD2-TP1-02785/prompt_user.txt",
+      "sha256": "28363cd2b2dd7eaae5906f1f38bc146e48892da7db96a12d26c1d10b1eb38aa8",
+      "bytes": 603
+    },
+    {
+      "path": "litpolish/run2/raw/SD2-TP1-02785/response.json",
+      "sha256": "20d145543ef5d874542837718a8d58c66ab407168f11a7b17ce373bf049db416",
+      "bytes": 1851
+    }
+  ],
+  "note": "five rewrites passed checks v2 and are the items' text (display_source polished); BI-P3-0001 and 0008 were rejected and keep the synthesis text; the seven item records with their polish event are in items/run5/items (human_review); polished.jsonl holds pre_polish, the rewrite, the reasons and the checks",
+  "ingested_at": "2026-11-19T05:18:24Z",
+  "ingested_by": "EXECUTOR"
+}

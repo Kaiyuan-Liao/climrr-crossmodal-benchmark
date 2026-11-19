@@ -616,3 +616,36 @@ highest in the nation", "if emissions stay high"). The rejections stand; no text
 
 Then: ingest, sample sheet v2 (`scripts/build_mentor_sheet.py`, which reads packets v4 today: to be pointed at v4b in the
 ingest package), mentor.
+
+## 19. P3c: synthesis run 5 and polish run 2, the sample set (D-068, 2026-11-19)
+
+**Run 5 outcome** (`litsynth_agent` v4.1, packets v4b, source `f6f7543`; ingested by `scripts/ingest_litsynth_run5.py` into
+`artifacts/benchmark/items/run5/`, post-checks v3.1 reproduced): **7 items, all `deterministic_pass`**, now in
+`human_review`. Format corrective turn on BI-P3-0004 ("tercile" in the acceptable variants) and BI-P3-0005 ("a single
+study", "one study", "RCP", "tercile", "ranking large" in the disallowed claims). BI-P3-0007 passed on its second attempt:
+the first (kept as a `superseded_attempt` in `items/run5/superseded/`) failed on 31.4 / 33.6 in optional points and "fires"
+in a literature sentence. The log also holds a start before the run proper that failed on its first two packets with HTTP
+401 (expired sign-in; `pre_run_auth_failures: 2`, not item failures) and two restarts (one that made nothing; one with
+`--only` for 0007). v3.1 reports: `context_driver_report` and `regional_contrast_report` fired on nothing.
+
+**Polish run 2 outcome** (`litpolish_agent` v1.1, checks v2; `artifacts/benchmark/polish/run2/`, checks reproduced): 7
+items, **5 polished, 2 `polish_rejected`** --- BI-P3-0001 (hedges "show, shows" -> "show"; the comparison phrase "a change
+similar to most states" became "a similar change to most states") and BI-P3-0008 (length ratio 1.23). The polisher changed
+no question. **Display text** = the rewrite where polished (0002, 0003, 0004, 0005, 0007), else the synthesis text (0001,
+0008); `display_source` is on each item's `human_review` event.
+
+**Mentor sample sheet** (`scripts/build_mentor_sheet.py`, rules `src/climrr/mentor_sheet_v2b.py`, packets v4b + the
+ingested run 5): `artifacts/benchmark/review/MENTOR_SAMPLE_ITEMS_2026-11-19.xlsx` (gitignored) and `.md`; seven rows in the
+order California, Alabama, Washington, New York heat, regions heat, California, Minnesota fire weather. Notes for Kaiyuan:
+`MENTOR_SAMPLE_ITEMS_2026-11-19_notes.md`.
+
+**Review flags** (report only; `scripts/build_p3_items_review.py` -> `P3_items_review_v1.csv` / `.xlsx`,
+`P3_review_flags_v1.json`): 0005's question does not ask about regional differences (COORDINATOR-proposed question recorded
+as `coordinator_proposed`, not applied); 0007 repeats "strong winds" (for prompt v4.2); rubric lint v1a 4 hits
+(generation-constraint wording); EXECUTOR readings: the polish split a single "Research shows that A, that B, and that C"
+so later drivers read unhedged (0002, 0003, 0005, 0007), "will go / move from rare to common" (0002, 0004), one broken
+sentence (0003), "increase slightly and remain rare" (0003), "fire size" / "fire risk" (0007 literature sentence and
+rubric), rubric inconsistencies. For polish checks v2.1 / prompt v1.2 and agent v4.2 if the COORDINATOR so decides.
+
+Then: mentor review of the sheet (sent 2026-11-19); if accepted, **P4 = scale-up** (all eligible seeds, batch generation,
+review sampling).

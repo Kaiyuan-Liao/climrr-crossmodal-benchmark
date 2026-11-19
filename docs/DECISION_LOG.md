@@ -3303,3 +3303,27 @@ code emits, and the next GUIDANCE packet still chooses.
   largest and the smallest) is named by no cited group. Both reports fire on run 4's 0004 / 0005 and on nothing else.
 - **Affected files:** `scripts/litcollect/litsynth_agent.py`, `src/climrr/benchmark_items.py`,
   `src/climrr/synthpackets_v4.py`, `artifacts/benchmark/synth_packets_v4b/`, tests.
+
+## D-068 --- Synthesis run 5 is the sample set
+
+- **Date:** 2026-11-18.
+- **Status:** **decided** (COORDINATOR, 2026-11-18; recorded in work package P3c).
+- **Context.** Synthesis run 5 (`litsynth_agent` v4.1, packets v4b, source `f6f7543`) and polish run 2 (`litpolish_agent`
+  v1.1, checks v2) ran on Polaris on 2026-11-19 UTC. All seven items passed post-checks v3.1, BI-P3-0007 on a second
+  attempt: the first attempt was rejected ("fires" in a literature sentence, exact values in optional points) and, after
+  the file was moved aside, regenerated with `--only`. Polish run 2 passed five rewrites and rejected two (0001, 0008).
+- **Decision.** Run 5 is the sample set for the mentor: the seven items enter `human_review`, and the mentor sample sheet
+  (2026-11-19) shows each item's display text (the polished prompt / answer where the polish passed, else the synthesis
+  text). The first 0007 attempt is kept as a `superseded_attempt`, not as an item.
+- **Recorded (EXECUTOR).** `artifacts/benchmark/items/run5/` and `artifacts/benchmark/polish/run2/` (manifests; post-checks
+  v3.1 and polish checks v2 reproduced); `display_source` on each item's `human_review` event; the two HTTP-401 failures of
+  a start before the run proper are recorded as `pre_run_auth_failures: 2`, not as item failures. **For confirmation:**
+  (a) regenerating a rejected item and keeping the second draw is a selection step: at temperature 0 the second call gave a
+  different text, and only the passing draw is shown; recorded as such in the manifest; (b) the display text is the item's
+  `prompt` / `reference_answer.integrated` as the polish agent wrote them; the rubric and the tagged answer stay the
+  synthesis run's; (c) the review flags (report only, `P3_review_flags_v1.json`) include EXECUTOR readings of the polished
+  texts that polish checks v2 do not catch --- hedge scope lost in four answers, "will" in two --- for the COORDINATOR before
+  any item is accepted.
+- **Affected files:** `src/climrr/litsynth_run5.py`, `scripts/ingest_litsynth_run5.py`, `src/climrr/mentor_sheet_v2b.py`,
+  `scripts/build_mentor_sheet.py`, `src/climrr/p3_items_review.py`, `scripts/build_p3_items_review.py`,
+  `artifacts/benchmark/items/run5/`, `artifacts/benchmark/polish/run2/`, `artifacts/benchmark/review/`, tests.

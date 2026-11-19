@@ -1,30 +1,37 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-11-17   Next: **you check the polished sample items** (sheet v2, after Polaris synthesis run 4 and polish run 1); if they are good, we proceed
+Last updated: 2026-11-19   Next: **you review the seven sample items** (sheet sent 2026-11-19); if they are what you want, we scale up
 
 ## Status in five lines
 
 1. **On 2026-11-13 you reviewed the five-item sheet (sent 2026-11-04): "no need to care about details."** Your seven points are recorded below (meeting log) and became D-059 -- D-065.
 2. **Every item now uses both sources (D-059)** --- table pattern + literature. The pattern-only items (Georgia, Arizona) are dropped by design and kept as evidence.
-3. **Questions and answers are in general words (D-060 -- D-062):** no "RCP8.5", no "95 °F", no years --- "under a high-emissions future", "by mid-century", "days hot and humid enough to be dangerous", "fire-weather danger"; "research shows" (two or more independent papers or a review) / "research suggests" (one paper), never "one study". The paper side is matched by pattern, not by scenario (D-061). A separate readability step rewrites each question and answer without changing its meaning, with deterministic checks (D-063).
+3. **Questions and answers are in general words (D-060 -- D-062):** no "RCP8.5", no "95 °F", no years --- "under a high-emissions future", "by mid-century", "days hot and humid enough to be dangerous", "fire-weather danger"; "research shows" (two or more independent papers or a review) / "research suggests" (one paper), never "one study". A separate readability step rewrites each question and answer without changing its meaning, with deterministic checks (D-063); five of the seven answers you will see are the rewritten text.
 4. **The other columns go ahead on our documented readings (D-064)** --- the summer Fire Weather Index columns, `State`, `NAME`, the FWI percent-change scenario and the unweighted cell mean are recorded as *owner-authorized working assumptions* (not confirmed; every item says which it relies on). Your NCA5 climate-region grouping is recorded as the project's grouping (D-065).
-5. **Eight sample items are prepared for generation** (six heat index, two fire weather; packets v4): the next Polaris runs generate and polish them, and the sample sheet v2 comes to you. **Nothing accepted; nothing frozen.**
+5. **Seven sample items are generated and in human review** (five heat index: California, Alabama, Washington, New York, the NCA5 regions; two fire weather: California, Minnesota; D-068). **Nothing accepted; nothing frozen.**
 
 ## What I need from this meeting
 
-> ### **Next: the polished sample items (sheet v2)**
+> ### **Next: the seven sample items (sheet sent 2026-11-19)**
 >
-> **Bring:** `MENTOR_SAMPLE_SHEET_v2.xlsx` (Markdown copy `artifacts/benchmark/review/MENTOR_SAMPLE_SHEET_v2.md`), built
-> after Polaris synthesis run 4 and polish run 1: eight items (California, New York, Washington, Alabama, the NCA5
-> regions twice --- heat index; California and Minnesota --- fire weather), each with the question, the answer, the table
-> side (plain words, then the exact values the question omits), the paper side ("research shows / suggests", number of
-> papers) and the original passages; README of three lines.
+> **Bring:** `MENTOR_SAMPLE_ITEMS_2026-11-19.xlsx` (Markdown copy `artifacts/benchmark/review/MENTOR_SAMPLE_ITEMS_2026-11-19.md`):
+> seven items, each with the question, the answer, the table side (plain words, the windows, scenario, values and the
+> working assumptions relied on), the paper side ("research shows (N papers)") and the original passages; README of
+> three lines.
 >
-> **Ask:** are the polished samples good enough to proceed? (Your direction of 2026-11-13: if good, proceed.)
+> **Ask:** (1) are these samples what you want? (2) which of the two fire-weather items (California, Minnesota) reads
+> right?
 >
-> **Flagged with the sheet:** two of the eight items cover all NCA5 regions at mid-century with two different heat
-> thresholds; since the questions now name no threshold, they read alike (D-060's "one threshold per place" is not met
-> for that pair --- for the COORDINATOR and Kaiyuan before the run).
+> **If yes:** P4 --- scale-up: all eligible seeds, batch generation, review of a sample.
+>
+> **Not raised with the sheet** (for the COORDINATOR and Kaiyuan first): the review flags on the generated texts (the
+> regional question does not ask about regions; hedge and "will" wording in some rewritten answers;
+> `P3_review_flags_v1.json`).
+
+> ### **Asked 2026-11-17 --- the polished sample items (sheet v2): superseded by the 2026-11-19 sheet above**
+>
+> Planned as an eight-item sheet after synthesis run 4; one item (BI-P3-0006) was dropped, run 4's texts had readability
+> faults (fixed in D-066, D-067) and polish run 1 rejected every rewrite. The sheet was rebuilt from synthesis run 5 and polish run 2.
 
 > ### **Asked for Thursday 2026-11-05 --- answered 2026-11-13 (meeting log; D-059, D-062)**
 >
@@ -439,7 +446,7 @@ documented readings. The five records R-004 -- R-008 carry `working_assumption` 
 `owner_authorized_working_assumption`) with `effect: null`: the FWI-summer, `State` and `NAME` columns stay
 `inferred_candidate`.
 
-**Newly asked:** review of the polished sample items (sheet v2).
+**Newly asked:** review of the polished sample items (sheet v2) --- sent 2026-11-19 as `MENTOR_SAMPLE_ITEMS_2026-11-19` (seven items).
 
 ---
 

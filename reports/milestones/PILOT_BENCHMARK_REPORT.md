@@ -1105,3 +1105,86 @@ outputs byte-identical.
         --out "$LITCOLLECT_ROOT_POLARIS/litpolish/run2" \
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
         --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --sleep 5 --source-commit 246c748a18e63cbd43faf4c372eede0bc78e3bb6
+
+# Pilot P3c --- synthesis run 5 and polish run 2: the sample set, mentor sample sheet, review flags (D-068)
+
+## 54. P3c, section A: synthesis run 5 and polish run 2 ingested (2026-11-19)
+
+No model call; nothing frozen; no item accepted. Tarball `litsynth_run5_polish_run2_evidence.tar.gz`
+`e092875e21152f262e0a903e6e2dde41254782e6053dacb07385696c523acc4b` (verified; `items.jsonl` `9fa632e9…b3e` and polish
+`summary.json` `bcba3bea…864bcd` as stated). Ingest `scripts/ingest_litsynth_run5.py`, rules `src/climrr/litsynth_run5.py`.
+
+| | |
+| --- | --- |
+| Synthesis run 5 | `litsynth_agent` v4.1 `f41c0b95…4d33d7` (prompt `8ce96b07…1c8ab`), packets v4b `598b2744…5bfad`, source `f6f7543`, Sophia `openai/gpt-oss-120b`, reasoning low, 16000 tokens; run proper 2026-11-19 05:02:51--05:04:43 UTC, restarts 05:06:48 and 05:07:38--05:07:47 |
+| Run-5 manifest | `artifacts/benchmark/items/run5/manifest.json` `02e5c60dacf7f91a3516d6053801d47d684edb2137d06a1bc5192f6851ec8fdc` |
+| Run-5 result | **7 items, all `deterministic_pass` -> `human_review`**; format corrective turn on BI-P3-0004 ("tercile" in acceptable variants) and BI-P3-0005 ("a single study", "one study", "RCP", "tercile", "ranking large" in disallowed claims); 0 leakage flags, no HTTP retry; **post-checks v3.1 reproduced** (first turns and the superseded attempt included); `context_driver_report` and `regional_contrast_report` empty on all seven |
+| Superseded attempt | BI-P3-0007's first attempt (run proper, `rejected_pre_review`: 31.4 and 33.6 in optional points, "fires" in a literature sentence --- not format-class, so no corrective turn), moved to `attempt1/` and regenerated with `--only`; copied byte-identical to `items/run5/superseded/BI-P3-0007_attempt1.json` `d2c4b2f3…369f`, role `superseded_attempt` |
+| Before the run | a start at 04:56:55 failed on SD2-TP1-00071 and 00271 with HTTP 401 (expired sign-in) and stopped: **`pre_run_auth_failures: 2`**, not item failures; it left `failed_packets.txt` and two `model_error.txt` (listed as `pre_run_leftover`); `reports/litsynth_run5.log` = `agent.log` without those three lines |
+| Polish run 2 | `litpolish_agent` v1.1 `6abc7b2b…74366e` (prompt `2dbbce7f…93a18`), checks v2, synonyms v2; 05:04:47--05:05:29 (six items; 0007 then `rejected_pre_review`, skipped) and 05:08:21--05:08:24 (the new 0007) |
+| Polish manifest | `artifacts/benchmark/polish/run2/manifest.json` `0769478fa617e17539eebddeb0d320a73cc96892cf64587111274ae97bc3a6b7` |
+| Polish result | 7 items, **5 polished, 2 `polish_rejected`** (descriptor 1, hedges 1, length 1); **checks v2 reproduced** from the raw responses; the polisher returned every **question unchanged** |
+| Item records | `items/run5/items/<item_id>.json` = run-5 record + `polish` event (text = the rewrite where polished) + `human_review` with **`display_source`** |
+| `display_source` | **polished**: 0002, 0003, 0004, 0005, 0007; **original**: 0001, 0008 |
+
+**The two polish rejections** (reasons verbatim; original | rewrite; the question was returned unchanged in both).
+
+- **BI-P3-0001** --- `answer: hedges differ (original ['show', 'shows'], polished ['show'])`; `answer: descriptor phrase
+  lost: comparison with other states: moderate (original ['a change similar to most states'])`.
+  Original: "In California during summer, dangerous heat‑index days are projected to show a moderate increase by
+  mid-century under a high‑emissions future, a change similar to most states. Research shows that large‑scale warming,
+  global warming‑driven heat‑wave intensification, and an intensified urban heat island effect at night are the main
+  physical mechanisms behind this increase."
+  Rewrite: "In California during summer, dangerous heat‑index days are projected to show a moderate increase by
+  mid-century under a high‑emissions future. This is a similar change to most states. Large‑scale warming drives the
+  increase. Global warming‑driven heat‑wave intensification also contributes. An intensified urban heat island effect at
+  night adds to the rise."
+  Reading: both reasons are right --- the rewrite drops "Research shows" (every driver unhedged) and bends the comparison
+  phrase.
+- **BI-P3-0008** --- `answer: length ratio 1.23 outside 0.6-1.2`.
+  Original: "In summer, fire‑weather danger in Minnesota is projected to show a slight increase, a change similar to most
+  states, by late this century under a high‑emissions future. Research shows that higher temperatures and increased aridity
+  dry fuels, creating more extreme fire‑weather conditions."
+  Rewrite: "In summer, fire‑weather danger in Minnesota is projected to show a slight increase. This is a change similar to
+  most states. The increase occurs by late this century under a high‑emissions future. Research shows that higher
+  temperatures dry fuels. Research shows that increased aridity also dries fuels. These conditions create more extreme
+  fire‑weather."
+  Reading: the length rule is mechanical, but the rejection is defensible: the rewrite splits one driver group into two
+  "Research shows" claims.
+
+## 55. P3c, sections B and C: mentor sample sheet and review flags (2026-11-19)
+
+| | |
+| --- | --- |
+| Builder | `scripts/build_mentor_sheet.py` (repointed: packets v4b and the ingested run 5), rules `src/climrr/mentor_sheet_v2b.py` (the P3a draft `mentor_sheet_v2.py` is kept with its tests; the P3a script is held by its bytes at `f6f7543`) |
+| Sheet | `artifacts/benchmark/review/MENTOR_SAMPLE_ITEMS_2026-11-19.md` `c898e45af3141d343ae7da69f4e4f98b050fc1010e6057df326b21332c411310` (tracked); `.xlsx` gitignored (sheets ITEMS, README) |
+| Rows | 0001 California, 0004 Alabama, 0003 Washington, 0002 New York heat; 0005 regions heat; 0007 California, 0008 Minnesota fire weather; columns `#`, `Question`, `Answer` (display text), `Table side`, `Paper side`, `Original passages` |
+| Table side | quantity as the dictionary names it with line and columns (FWI: "Seasonal value" under the Wildfire columns, read as the summer FWI, a fire-danger index, not fire occurrence), place, season, baseline / future windows as the dictionary names them (lines 101--102), scenario, statistic (unweighted mean over grid cells), values to one decimal, rank, grid cells, DR-DESC-1 v4 descriptor, "working assumptions relied on: WA-… (R-…)" |
+| Paper side / passages | "Research shows (N papers): label" per cited group (N = the group's independent papers); every member passage of each cited group verbatim (the longest is 538 characters; nothing cut), with paper id and section. No group cited in the seven items is single-paper, so "research suggests" appears only in the README |
+| Notes for Kaiyuan | `MENTOR_SAMPLE_ITEMS_2026-11-19_notes.md` `aa99daef…52d3`: per item, what changed since the 2026-11-05 sheet |
+| Review workbook | `scripts/build_p3_items_review.py`, rules `src/climrr/p3_items_review.py`: `P3_items_review_v1.csv` `c6a06603…4097` (tracked), `.xlsx` (gitignored; ITEMS, FLAGS, README), `P3_review_flags_v1.json` `9a84f121…1408`; no item modified (checked) |
+
+**Review flags** (report only; 22 flags: work package 2, post-check report 0, rubric lint 4, EXECUTOR reading 16).
+
+1. **WP-C1, BI-P3-0005**: the question ("How are dangerous heat-index days projected to change in summer by mid-century
+   under a high-emissions future, and what drives this change?") does not ask about regional differences; the answer
+   ranks the regions. Proposed question recorded in the review workbook as `coordinator_proposed` (not applied; the sheet
+   shows the generated text): "How are dangerous heat-index days in summer projected to change by mid-century under a
+   high-emissions future, how do the changes differ across U.S. regions, and what drives them?"
+2. **`context_driver_report`**: no hits on any of the seven (nor `regional_contrast_report`).
+3. **WP-C3, BI-P3-0007**: "Low humidity combined with strong winds also drives the increase" repeats "strong winds" (the
+   cited groups driver-c1-003 and mechanism-c1-002 overlap) --- for synthesis prompt v4.2.
+4. **Further** (rubric lint v1a and the EXECUTOR's reading):
+   - lint v1a: 4 `generation_constraint` hits --- "Exact values are not required; ..." in the disallowed claims of 0001,
+     0003, 0007; 'Use either "research shows" or "research has shown" for multi-source supported claims' in 0002's
+     acceptable variants;
+   - **EX-1 hedge scope lost in the polish** (0002, 0003, 0005, 0007): "Research shows that A, that B, and that C" became
+     "Research shows that A. B. C." --- the later drivers read as unhedged facts; checks v2 count hedge words, not their
+     scope (0001 was rejected only because its rewrite dropped the hedge entirely);
+   - **EX-2 certainty** (0002, 0004): "They will go / move from rare to common" in a sentence of its own;
+   - **EX-3** (0003): "The projection is for by mid-century under a high-emissions future." (ungrammatical);
+   - **EX-4** (0003): "increase slightly and remain rare" --- a slight-class form beside Washington's "remaining rare";
+   - **EX-5** (0007): "raise fire danger and fire size" (literature sentence) and "Humidity and VPD affect fire risk"
+     (required point) --- fire-outcome wording from the reviewer-tagged group labels in an FWI item; not in the answer;
+   - **EX-6** rubric consistency: 0001 lacks the comparison point; 0004 weighs the table points 1; "Regional ranking" for
+     a state comparison (0002, 0004); "(multi-source)" in 0003's required points.
