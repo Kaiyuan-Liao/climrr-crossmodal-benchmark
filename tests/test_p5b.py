@@ -24,11 +24,13 @@ from climrr import litgeo as lg
 from climrr import litgroups_infra as lgi
 from climrr import litstatements_infra1 as ir
 from climrr import p5b
+from climrr import p5c
 from climrr import seeds_infra as si
 from climrr.checksums import sha256_file
 from climrr.paths import REPO_ROOT
 
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
+TOOLS52 = p5c.materialize_tools("litsynth_agent.py")   # v5.2 held at the P5c-hotfix base commit (v5.3 since the hotfix)
 MAN = json.loads(ir.MANIFEST_PATH.read_text(encoding="utf-8"))
 CMAN = json.loads(ir.CORPUS_MANIFEST_PATH.read_text(encoding="utf-8"))
 REC = sd.read_jsonl(ir.INGESTED_PATH)
@@ -292,7 +294,7 @@ def test_rung8_reasons():
 def test_v33_equals_v32_on_v5a_packets_and_masks_wildfire():
     import test_p5a_hotfix as th
     obj = th._scoped("BI-P3-0007", False)
-    a = _load("litsynth_agent_v52_checks", TOOLS / "litsynth_agent.py")
+    a = _load("litsynth_agent_v52_checks", TOOLS52 / "litsynth_agent.py")
     common = {"model": "m", "prompt_hash": "0" * 64, "generation_timestamp": "t", "packet_sha256": "0" * 64, "system_prompt_sha256": "0" * 64}
     pk = th.PK5A["BI-P3-0007"]
     item, tagged = a.assemble(obj, pk, common, bi.column_names())
@@ -311,7 +313,7 @@ def test_v33_equals_v32_on_v5a_packets_and_masks_wildfire():
 
 
 def test_synth_agent_v52_pins_and_prompt():
-    path = TOOLS / "litsynth_agent.py"
+    path = TOOLS52 / "litsynth_agent.py"
     a = _load("litsynth_agent_v52", path)
     assert sha256_file(path) == SYNTH_V52_SHA256 and a.GENERATOR_VERSION == "litsynth_agent v5.2"
     assert a.CHECK_VERSION == "synthesis_post_checks v3.3"

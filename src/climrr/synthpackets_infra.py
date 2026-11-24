@@ -33,6 +33,19 @@ the fire words + "will fail", "at risk"; in a fire-weather packet "wildfire" is 
 the rung-8 guardrails. `checks_input.rung8` is what post-checks v3.3 read (impact group ids, place-named ids, hazard
 relation per group, asset-class phrase, broader-hazard phrase, quantity phrases).
 
+**v1a (P5c hotfix; D-077, D-078, D-073c).** `build(..., variant="v1a")` over the v1a seeds and selection (the COORDINATOR's
+dispositions applied): `review_state: impact_groups_reviewed`, not provisional; every impact group carries its `disposition`
+and `two_hop`; `item_fields` per impact group are what a schema-v2a `impact` literature statement records (`asset_class` =
+the packet's class, `impact_mechanism` / `impact_outcome` = the members' distinct values joined by "; ", `hazard_relation`,
+`two_hop`; for a record whose members carry no impact fields --- the driver-partition groups relabelled into the impact
+claim --- the group label, or the singleton's statement, with `impact_fields_source: group_label`; EXECUTOR, for
+confirmation). D-073c, when a two-hop group is attached: `model_view.two_hop_group_ids`, `two_hop_rule` (the sentence forms)
+and, in a fire-weather packet, `bridge_clause` ("fire-weather danger describes conditions that favour wildfire; it is not
+fire occurrence", once in the integrated paragraph); in a heat packet "wildfire" leaves `must_not_use` (the two-hop forms
+write "wildfires"; no bridge clause, which names fire-weather danger --- EXECUTOR, for confirmation); `checks_input.rung8`
+adds `two_hop_group_ids`, `bridge_clause`, `two_hop_phrases` for post-checks v3.4. Written to `synth_packets_infra_v1a/`.
+v1 is kept and rebuilds byte-identically.
+
 No model call; no table value computed (values are the pattern's).
 """
 
@@ -58,6 +71,25 @@ DECISION = "D-076"
 RULES = "D-075 (DR-SEED-INFRA-1, rung-8 wording), D-073b, D-069a"
 RUNG = 8
 PACKETS_DIR = REPO_ROOT / "artifacts" / "benchmark" / "synth_packets_infra_v1"
+VERSION_V1A = "synthpackets infra v1a"
+DECISION_V1A = "D-078"
+RULES_V1A = "D-075 (DR-SEED-INFRA-1, rung-8 wording), D-073b, D-073c (two-hop wording), D-069a, D-077 (item schema v2a), D-078 (dispositions)"
+PACKETS_V1A_DIR = REPO_ROOT / "artifacts" / "benchmark" / "synth_packets_infra_v1a"
+REVIEW_STATE_V1A = si.REVIEW_STATE_REVIEWED
+#: D-073c (the work package verbatim): the clause the integrated paragraph of a fire-weather item citing a two-hop group holds once.
+BRIDGE_CLAUSE = "fire-weather danger describes conditions that favour wildfire; it is not fire occurrence"
+#: D-073c: a sentence resting on a two-hop group contains one of these (post-checks v3.4).
+TWO_HOP_PHRASES = ("when wildfires occur", "wildfires can", "raise the chance of ignition")
+TWO_HOP_RULE = (
+    'D-073c (two-hop groups, listed in two_hop_group_ids: research about what wildfires do, not about fire-weather danger '
+    'itself). A sentence resting on a two-hop group takes the form "<scope phrase> that when wildfires occur, they <impact> '
+    '<asset class phrase>" or "<scope phrase> that wildfires can <impact> <asset class phrase>"; for the group on heat and '
+    'ignitions near power lines: "<scope phrase> that extreme heat and wind raise the chance of ignitions near power lines". '
+    'Write one sentence for the two-hop groups and another for the direct groups; a two-hop sentence does not use the '
+    'broader-hazard phrase.')
+TWO_HOP_RULE_FIRE = (' The table sentence states the fire-weather change, and "integrated" contains, exactly once, the bridge clause '
+                     f'"{BRIDGE_CLAUSE}". Outside these forms and the bridge clause, "wildfire" stays as the WILDFIRE rule says.')
+RUNG8_INSTRUCTION_V1A_TAIL = (" Two-hop impact groups (two_hop_group_ids) follow two_hop_rule.")
 MAX_IMPACT_GROUPS = spk.MAX_DRIVER_GROUPS
 REVIEW_STATE = si.REVIEW_STATE_UNREVIEWED
 LEVEL_TEXT_8 = ("Hazard impact on infrastructure", "Hazard + Text",
@@ -173,15 +205,35 @@ def impact_members(view: dict, by_id: dict, canon: dict, places: dict, gz: lg.Ga
     return out
 
 
-def impact_provenance(view: dict, members: list[dict], enriched: dict) -> dict:
+def item_fields(view: dict, members: list[dict], label: str | None, asset_class: str) -> dict:
+    """v1a: what a schema-v2a `impact` literature statement records for this group (module docstring)."""
+    mech = list(dict.fromkeys(m["impact_mechanism"] for m in members if m["impact_mechanism"]))
+    outc = list(dict.fromkeys(m["impact_outcome"] for m in members if m["impact_outcome"]))
+    fallback = label or members[0]["statement"]
+    src = "members" if mech and outc else "group_label"
+    return {"asset_class": asset_class, "impact_mechanism": "; ".join(mech) if mech else fallback,
+            "impact_outcome": "; ".join(outc) if outc else fallback, "hazard_relation": view["hazard_relation"],
+            "two_hop": bool(view.get("two_hop")), "impact_fields_source": src}
+
+
+def impact_provenance(view: dict, members: list[dict], enriched: dict, variant: str = "v1", asset_class: str | None = None) -> dict:
     e = enriched[view["group_id"]]
-    return {"group_id": view["group_id"], "kind": e["kind"], "statement_type": "impact", "claim_about": e["claim_about"],
-            "role": "impact", "excluded_reason": None, "label": e["label"] if e["kind"] == "group" else None,
-            "claim_about_source": "agent", "disposition": None, "review_state": REVIEW_STATE,
-            "group_strength_run": e["evidence_strength"], "strength_in_packet": view["evidence_strength"],
-            "n_members_run": e["n_members"], "relevance": view["relevance"], "hazard_relation": view["hazard_relation"],
-            "asset_classes": view["asset_classes"], "partition": e["partition"],
-            "n_papers": len({m["canonical_paper"] for m in members}), "members": members}
+    out = {"group_id": view["group_id"], "kind": e["kind"], "statement_type": "impact", "claim_about": e["claim_about"],
+           "role": "impact", "excluded_reason": None, "label": e["label"] if e["kind"] == "group" else None,
+           "claim_about_source": "agent", "disposition": None, "review_state": REVIEW_STATE,
+           "group_strength_run": e["evidence_strength"], "strength_in_packet": view["evidence_strength"],
+           "n_members_run": e["n_members"], "relevance": view["relevance"], "hazard_relation": view["hazard_relation"],
+           "asset_classes": view["asset_classes"], "partition": e["partition"],
+           "n_papers": len({m["canonical_paper"] for m in members}), "members": members}
+    if variant == "v1a":
+        relabelled = view["disposition"].startswith("relabel:")
+        out.update({"claim_about": si.IMPACT_CLAIM, "claim_about_run": e["claim_about"],
+                    "claim_about_source": "coordinator_disposition" if relabelled else "agent", "disposition": view["disposition"],
+                    "disposition_decision": DECISION_V1A, "two_hop": bool(view.get("two_hop")),
+                    "asset_class_override": view.get("asset_class_override"), "merged_from": view.get("merged_from") or [],
+                    "statement_type_run": e["statement_type"], "review_state": REVIEW_STATE_V1A,
+                    "item_fields": item_fields(view, members, out["label"], asset_class)})
+    return out
 
 
 def impact_model_group(g: dict, plain: dict) -> dict:
@@ -192,7 +244,9 @@ def impact_model_group(g: dict, plain: dict) -> dict:
               "asset_classes": g["asset_classes"],
               "impact_mechanism": list(dict.fromkeys(m["impact_mechanism"] for m in g["members"] if m["impact_mechanism"])),
               "impact_outcome": list(dict.fromkeys(m["impact_outcome"] for m in g["members"] if m["impact_outcome"])),
-              "review_state": REVIEW_STATE})
+              "review_state": g["review_state"]})
+    if "two_hop" in g:                                                # v1a
+        x["two_hop"] = g["two_hop"]
     return x
 
 
@@ -200,8 +254,9 @@ def impact_model_group(g: dict, plain: dict) -> dict:
 
 
 def build_packet(cell: dict, seed8: dict, base_in: dict, infra: dict, forms: dict, plain_v1b: dict, sectors: dict,
-                 extra_hashes: dict) -> dict:
-    """The rung-8 packet of one selected cell (module docstring)."""
+                 extra_hashes: dict, variant: str = "v1") -> dict:
+    """The rung-8 packet of one selected cell (module docstring). `variant` "v1a": the reviewed packet (P5c hotfix)."""
+    v1a = variant == "v1a"
     s3 = base_in["seeds_v3"][seed8["rung3_seed_id"]]
     p = s3["pattern"]
     nca, gz = base_in["nca"], infra["gz"]
@@ -218,9 +273,10 @@ def build_packet(cell: dict, seed8: dict, base_in: dict, infra: dict, forms: dic
     kept, over = views[:MAX_IMPACT_GROUPS], views[MAX_IMPACT_GROUPS:]
     excluded += [{"group_id": v["group_id"], "statement_type": "impact", "claim_about": si.IMPACT_CLAIM, "reason": "over_cap:impact"}
                  for v in over]
-    impact = [impact_provenance(v, impact_members(v, infra["by_id"], infra["canon"], places, gz), infra["enriched"]) for v in kept]
-    place = p["geography"]
     a = seed8["asset_class"]
+    impact = [impact_provenance(v, impact_members(v, infra["by_id"], infra["canon"], places, gz), infra["enriched"], variant, a)
+              for v in kept]
+    place = p["geography"]
     phrase = asset_phrase(a)
     fam = plain_v1b["families"][p["family"]]
 
@@ -247,21 +303,27 @@ def build_packet(cell: dict, seed8: dict, base_in: dict, infra: dict, forms: dic
     fire = p["family"] == "fire_weather_index"
     mnu = list(dict.fromkeys(list(mv["must_not_use"]) + [w for w in FIRE_WORDS if not (fire and w == "wildfire")]
                              + list(RUNG8_MUST_NOT_USE)))
-    if fire:
+    two_hop = [g["group_id"] for g in impact if g.get("two_hop")] if v1a else []
+    if fire or two_hop:                                               # v1a: a heat packet with a two-hop group writes "wildfires"
         mnu = [w for w in mnu if w != "wildfire"]
+    bridge = BRIDGE_CLAUSE if (two_hop and fire) else None
     place_named = [g["group_id"] for g in impact if g["relevance"] == "place_named"]
     name, modality, desc = LEVEL_TEXT_8
     infra_papers = sorted({m["paper_item_id"] for g in impact for m in g["members"]})
 
     mv.update({"use_case_level": RUNG, "rung": RUNG, "rung_name": f"{RUNG}. {name}: {desc}", "reasoning_modalities": modality,
-               "rung_instruction": RUNG8_INSTRUCTION, "asset_class": a, "asset_class_phrase": phrase, "cisa_sector": sectors[a],
+               "rung_instruction": RUNG8_INSTRUCTION + (RUNG8_INSTRUCTION_V1A_TAIL if two_hop else ""), "asset_class": a, "asset_class_phrase": phrase, "cisa_sector": sectors[a],
                "place_named_impact_group_ids": place_named, "plain_language": plain, "must_not_use": mnu,
-               "guardrails": list(mv["guardrails"]) + list(RUNG8_GUARDRAILS), "review_state": REVIEW_STATE,
+               "guardrails": list(mv["guardrails"]) + list(RUNG8_GUARDRAILS), "review_state": REVIEW_STATE_V1A if v1a else REVIEW_STATE,
                "scope": {"decision": v5.DECISION_V5A, "place": place, "classes_present": classes, "needs_general_clause": needs,
                          "general_clause": clause, "rule": "majority of cited members; ties -> general; minority place mentions -> optional clause"},
                "question_form": qf})
     if fire:
         mv["wildfire_rule"] = WILDFIRE_RULE
+    if two_hop:
+        mv.update({"two_hop_group_ids": two_hop, "two_hop_rule": TWO_HOP_RULE + (TWO_HOP_RULE_FIRE if fire else "")})
+        if bridge:
+            mv["bridge_clause"] = bridge
     ci.update({"level": RUNG,
                "group_strength": {g["group_id"]: g["strength_in_packet"] for g in prov["groups"]},
                "group_role": {g["group_id"]: g["role"] for g in prov["groups"]},
@@ -277,25 +339,31 @@ def build_packet(cell: dict, seed8: dict, base_in: dict, infra: dict, forms: dic
                "rung8": {"impact_group_ids": [g["group_id"] for g in impact], "place_named_impact_group_ids": place_named,
                          "group_hazard_relation": {g["group_id"]: g["hazard_relation"] for g in impact},
                          "asset_class_phrase": phrase, "broader_hazard_phrase": fam["broader_hazard_phrase"],
-                         "quantity_phrases": [plain["quantity"], plain["quantity_short"]]}})
+                         "quantity_phrases": [plain["quantity"], plain["quantity_short"]],
+                         **({"two_hop_group_ids": two_hop, "bridge_clause": bridge, "two_hop_phrases": list(TWO_HOP_PHRASES)}
+                            if v1a else {})}})
     prov["item_frame"] = {"use_case_level": RUNG, "reasoning_modalities": modality, "level_name": name}
-    x.update({"packet_id": f"PK-{seed8['seed_id']}", "version": VERSION, "decision": DECISION, "rules": RULES,
+    x.update({"packet_id": f"PK-{seed8['seed_id']}", "version": VERSION_V1A if v1a else VERSION,
+              "decision": DECISION_V1A if v1a else DECISION, "rules": RULES_V1A if v1a else RULES,
               "item_id": cell["item_id"], "seed_id": seed8["seed_id"], "rung3_seed_id": s3["seed_id"], "use_case_level": RUNG,
-              "asset_class": a, "state": place, "review_state": REVIEW_STATE, "provisional": True,
+              "asset_class": a, "state": place, "review_state": REVIEW_STATE_V1A if v1a else REVIEW_STATE, "provisional": not v1a,
               "place_named_impact_evidence": cell["place_named_impact_evidence"], "question_form_id": form["id"],
               "plain_language": plain_v1b["version"], "plain_language_sha256": plain_v1b["sha256"],
               "excluded_groups": excluded, "scope_detail": scopes,
-              "selection": {"file": "artifacts/benchmark/pilot_selection_infra_v1.yaml", "decision": "D-075",
+              "selection": {"file": f"artifacts/benchmark/pilot_selection_infra_{'v1a' if v1a else 'v1'}.yaml", "decision": "D-075",
                             **{k: cell[k] for k in ("order", "item_id", "family", "asset_class", "state", "state_basis",
                                                      "candidate_states", "table_change", "place_named_impact_evidence",
                                                      "question_form_id")}},
               "inputs_sha256": {**base["inputs_sha256"], **extra_hashes, "plain_language": plain_v1b["sha256"],
                                 "question_forms": forms["sha256"]}})
     x.pop("fire_groups_unreviewed", None)
+    if v1a:
+        x["item_schema"] = "benchmark_item_v2a"
     return x
 
 
-def build(selection: dict, seeds8: list[dict], enriched: list[dict], records: list[dict], indep: dict, extra_hashes: dict) -> list[dict]:
+def build(selection: dict, seeds8: list[dict], enriched: list[dict], records: list[dict], indep: dict, extra_hashes: dict,
+          variant: str = "v1") -> list[dict]:
     """Every rung-8 packet of the selection, in selection order."""
     from climrr import litindependence as li
 
@@ -306,7 +374,8 @@ def build(selection: dict, seeds8: list[dict], enriched: list[dict], records: li
     plain_v1b = pl.load(pl.PLAIN_V1B_PATH)
     sectors = cisa_sector_names()
     by_seed = {s["seed_id"]: s for s in seeds8}
-    return [build_packet(c, by_seed[c["seed_id"]], base_in, infra, forms, plain_v1b, sectors, extra_hashes) for c in selection["selected"]]
+    return [build_packet(c, by_seed[c["seed_id"]], base_in, infra, forms, plain_v1b, sectors, extra_hashes, variant)
+            for c in selection["selected"]]
 
 
 def report_entry(pk: dict, path=None) -> dict:
@@ -328,14 +397,19 @@ def report_entry(pk: dict, path=None) -> dict:
             "impact_groups": [{"group_id": gid, "label": prov[gid]["label"] or prov[gid]["members"][0]["statement"],
                                "is_singleton": prov[gid]["kind"] == "singleton", "evidence_strength": prov[gid]["strength_in_packet"],
                                "relevance": prov[gid]["relevance"], "scope_class": groups[gid]["scope_class"],
-                               "scope_phrase": groups[gid]["scope_phrase"], "hazard_relation": prov[gid]["hazard_relation"]}
+                               "scope_phrase": groups[gid]["scope_phrase"], "hazard_relation": prov[gid]["hazard_relation"],
+                               **({"two_hop": prov[gid]["two_hop"], "disposition": prov[gid]["disposition"],
+                                   "impact_fields_source": prov[gid]["item_fields"]["impact_fields_source"]} if "two_hop" in prov[gid] else {})}
                               for gid in pk["checks_input"]["rung8"]["impact_group_ids"]],
             "place_named_impact_group_ids": mv["place_named_impact_group_ids"],
             "driver_groups": [{"group_id": g["group_id"], "label": g["label"], "evidence_strength": g["evidence_strength"],
                                "scope_class": g["scope_class"]} for g in mv["groups"] if g["role"] == "driver"],
             "excluded_groups": len(pk["excluded_groups"]),
             "excluded_by_reason": dict(sorted(Counter(str(e["reason"]) for e in pk["excluded_groups"]).items())),
-            "review_state": pk["review_state"], **({"sha256": sha256_file(path)} if path else {})}
+            "review_state": pk["review_state"],
+            **({"two_hop_group_ids": pk["model_view"].get("two_hop_group_ids") or [],
+                "bridge_clause_required": bool(pk["model_view"].get("bridge_clause"))} if pk["version"] == VERSION_V1A else {}),
+            **({"sha256": sha256_file(path)} if path else {})}
 
 
 def dumps(pk: dict) -> str:

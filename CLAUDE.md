@@ -169,6 +169,8 @@ bytes at the hotfix-2 base commit (`climrr.p5a.held_bytes_hotfix2`).
 Since P5b (D-075) `litgroup_agent.py` is v3.1 (the impact prompt variant; its `agent.log`, per-chunk `result.json`,
 `groups.jsonl` and `summary.json` are the run evidence, as for v3) and `litsynth_agent.py` v5.2; v3, which grouping run 2
 ran, and v5.1, which never ran, are held by their bytes at the P5b base commit (`climrr.p5b.held_bytes`).
+Since the P5c hotfix (D-073c, D-077) `litsynth_agent.py` is v5.3 (two-hop wording, post-checks v3.4, schema-v2a rung-8 items;
+same run evidence as v5); v5.2, which never ran, is held by its bytes at the hotfix base commit (`climrr.p5c.held_bytes`).
 
 ## Knowledge-refresh staging
 

@@ -224,8 +224,8 @@ def test_packets_pass_the_rung8_checks_on_a_well_formed_sentence():
 
 
 def test_schema_v2_rejects_an_impact_literature_statement_escalated():
-    """OPEN ESCALATION (P5c report): item schema v2 (frozen) has no `impact` statement type, so a rung-8 item citing an impact
-    group fails `schema_errors` with a non-format reason. This test documents the gap; it changes when the decision lands."""
+    """P5c escalation, resolved by D-077 (P5c hotfix): item schema v2 (frozen) has no `impact` statement type and keeps refusing
+    it; rung-8 items validate against item schema v2a instead (tests/test_p5c_hotfix.py)."""
     enum = bi.load_schema()["$defs"]["literature_statement"]["properties"]["statement_type"]["enum"]
     assert "impact" not in enum
 

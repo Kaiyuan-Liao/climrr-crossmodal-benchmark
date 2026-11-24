@@ -1514,3 +1514,165 @@ No model call; no column status moved. **Ingest** of `litgroups_infra_run1_evide
   `pilot_selection_rung8_v1.json`; the agent's docstring example names `synth_packets_rung8_v1` (the agent is hash-pinned and
   unchanged; the run command in `P5_INFRA_IMPACT_DESIGN.md` §16 names `synth_packets_infra_v1`).
 - **Readings for confirmation:** D-076 (a) -- (g).
+
+## 67. P5c hotfix, sections A -- C: item schema v2a, dispositions applied, two-hop wording, packets v1a (2026-11-24; D-073c, D-077, D-078)
+
+No model call. Design: `P5_INFRA_IMPACT_DESIGN.md` §17 -- §21.
+
+- **A. Item schema v2a (D-077).** `data/metadata/benchmark/item_schema_v2a.json` `deca317cfdf11c9aa9074b68b7305c3b8ea7922ddf45a0542bc316901400d2d8`
+  (manifest): v2 + statement type `impact` with required `asset_class` (16 lexicon classes), `impact_mechanism`, `impact_outcome`,
+  `hazard_relation`, `two_hop`; `schema_version: benchmark_item_v2a`. `benchmark_items.schema_for` dispatches on `schema_version`;
+  `softqa._check` evaluates `if` / `then`. v2 unchanged (still refuses `impact`). Every v1a packet, assembled with agent v5.3 from
+  a synthetic reply, gives a v2a item with no schema error; dropping a required impact field fails.
+- **B. Dispositions (D-078).** `group_dispositions_infra_v1.csv` `9b94e028bc571d9d84e6714ef1264bf2e087ea405d6561bfcdbd6d333c601bef`
+  (byte copy of the COORDINATOR's file, CRLF; manifest). Applied: accept 41, accept_two_hop 13, relabel 10 (6 -> hazard_impact_on_asset,
+  4 -> impact_or_exposure), merge_with 1 (heat energy c1-016 into c2-002), not_about_family 9, reject 15, keep_excluded 14; 17 asset-class
+  overrides; Kaiyuan's column empty (all 103 COORDINATOR). Of the 143 run records 60 are usable impact groups (13 two-hop), 40 have no
+  row (`no_disposition`), 43 are excluded by their disposition. `groups_dispositioned_v1.jsonl` `d92cd95f…91ce`,
+  `dispositions_v1_applied.json` `6c371c35…8624`.
+- **B. Two-hop wording (D-073c).** Synthesis agent **v5.3** (file `1be4ba2a6aec418b2729f6d165a3ed159208a0d31b786ad92413d7d195f43edd`,
+  system prompt `1157f73286a6de3a443a20becf924be401abd22e46170a62d6f4a580bbd75ea5`, format corrective `46f2681c…84d6`; v5.2 held at
+  `a549ea9`, `climrr.p5c`). **Post-checks v3.4**: two-hop sentence wording (`when wildfires occur | wildfires can | raise the chance of
+  ignition(s)`), the bridge clause exactly once in a fire-weather item's integrated paragraph, the two phrases masked in a fire-weather
+  item's graded text (not the prompt), a two-hop sentence exempt from the hazard-phrase rule; both new failures format-class. Tests:
+  a well-formed two-hop + direct pair and the bridge pass; a two-hop sentence without the wording, a missing bridge (found 0) and a
+  doubled bridge (found 2) fail and are format-class; the heat -> ignition form passes; v3.3 lacks the exemption; v3.4 equals v3.3 on a
+  packet without two-hop groups; the mask leaves "Wildfires spread" flagged.
+- **C. Seeds / selection / packets v1a.** `item_seeds_infra_v1a.jsonl` `0bd723a0…ea2a` (686 seeds), `pilot_selection_infra_v1a.yaml`
+  `316a93f9…9212` (8 of 8 cells; candidate states read through the dispositions), `synth_packets_infra_v1a/` manifest
+  `829d80cfa3fdff217ddc19a2f2b8ffc97bf7b41cc7f1f869ecfa0daaf37e5bf2`; every packet `review_state: impact_groups_reviewed`,
+  `item_schema: benchmark_item_v2a`, not provisional. v1 is kept and rebuilds byte-identically.
+  - **BI-P5-0007** (fire x emergency services) now has the relabelled standby-cost singleton (direct, general, governed term).
+  - **BI-P5-0008** (fire x communications) keeps its one direct group.
+  - **BI-P5-0004** (heat x healthcare) no longer carries the two Arizona people-statements; no remaining healthcare impact group names
+    a state, so it **falls back to California and is a general item** (four single-source general groups; closing clause required).
+  - **Not foreseen by the work package:** BI-P5-0005 (fire x energy) moves **Arizona -> California** (every place-named fire x energy
+    group was rejected), and BI-P5-0006's evidence becomes `none` (state unchanged). Both follow from reading the candidate states
+    through the dispositions (D-078 (a), for confirmation).
+
+**BI-P5-0001** heat_index x energy, Virginia (place_named_impact_statement), QF-08, closing clause not required, bridge clause not required; `PK-SD8-TP1-00111-energy` `fe4a3a50…be88`.
+
+| impact group | label (or statement) | strength | two-hop | place class (relevance / scope) |
+| --- | --- | --- | --- | --- |
+| `heat_index__energy-impact-c1-001` | thermal power plant output reduction | multi | no | place_named / unknown |
+| `heat_index__energy-impact-c1-006` | Higher ambient temperatures reduce transformer peak load capacity, decreasing the amoun... | single | no | place_named / state |
+| `heat_index__energy-impact-c1-007` | Rising summer temperatures increase the resistance of transmission lines, requiring gre... | single | no | place_named / state |
+| `heat_index__energy-impact-c1-008` | Higher summer temperatures increase the likelihood of power outages because temperature... | single | no | place_named / state |
+| `heat_index__energy-impact-c1-002` | electricity demand increase with temperature | multi | no | us / global |
+| `heat_index__energy-impact-c1-003` | wildfire risk to power transmission lines | multi | yes | us / unknown |
+| `heat_index__energy-impact-c1-012` | Extreme heat waves increase power demand while simultaneously reducing output from wind... | single | no | us / unknown |
+| `heat_index__energy-impact-c2-001` | extreme heat increases electricity demand and stresses power supply | multi | no | general / other |
+| `heat_index__energy-impact-c2-002` | high temperatures cause transmission line sag and mechanical failure | multi | no | general / mixed |
+| `heat_index-driver-c1-007` | more hot days boost air‑conditioning sales and electricity demand (label used as impact fields) | single | no | general / other |
+
+Drivers (8): `extreme_heat_v1-driver-c1-008` (multi, us_national), `extreme_heat_v1-driver-c2-001` (multi, global), `extreme_heat_v1-mechanism-c1-024` (multi, global), `extreme_heat_v1-mechanism-c2-003` (single, us_subregion), `extreme_heat_v1-driver-c1-001` (single, us_national), `extreme_heat_v1-mechanism-c1-003` (single, us_national), `extreme_heat_v1-consensus-c1-005` (single, global), `extreme_heat_v1-mechanism-c1-020` (single, global). Excluded (60): caveat_outside_rung_7 13, claim_about:impact_or_exposure 16, claim_about:method_or_data 7, claim_about:other 2, disposition:not_about_family 5, over_cap:impact 14, rung8:context_not_attached 3.
+
+**BI-P5-0002** heat_index x transportation_systems, Arizona (place_named_impact_statement), QF-09, closing clause required, bridge clause not required; `PK-SD8-TP1-00069-transportation_systems` `94091535…df8c`.
+
+| impact group | label (or statement) | strength | two-hop | place class (relevance / scope) |
+| --- | --- | --- | --- | --- |
+| `heat_index__transportation_systems-impact-c1-001` | pavement structural degradation from heat | multi | no | place_named / other |
+| `heat_index__transportation_systems-impact-c1-002` | rail track expansion and buckling causing disruptions | multi | no | general / other |
+| `heat_index__other_assets-impact-c1-003` | rail track deformation caused by severe temperature anomalies | single | no | general / other |
+| `heat_index__other_assets-impact-c1-004` | airport runway heat buckling leading to service disruption | single | no | general / other |
+| `heat_index__transportation_systems-impact-c1-003` | runway surface damage and operational limits from heat | single | no | general / global |
+| `heat_index__transportation_systems-impact-c1-007` | heat‑driven vegetation fires threaten railway corridors | single | yes | general / other |
+| `heat_index__transportation_systems-impact-c1-009` | heat exacerbates erosion of road embankments and side slopes | single | no | general / other |
+| `heat_index__transportation_systems-impact-c1-010` | heat waves cause costly impacts on rail systems | single | no | general / unknown |
+
+Drivers (8): `extreme_heat_v1-driver-c1-008` (multi, us_national), `extreme_heat_v1-driver-c2-001` (multi, global), `extreme_heat_v1-mechanism-c1-024` (multi, global), `extreme_heat_v1-mechanism-c2-003` (single, us_subregion), `extreme_heat_v1-driver-c1-001` (single, us_national), `extreme_heat_v1-mechanism-c1-003` (single, us_national), `extreme_heat_v1-consensus-c1-005` (single, global), `extreme_heat_v1-mechanism-c1-020` (single, global). Excluded (46): caveat_outside_rung_7 13, claim_about:impact_or_exposure 16, claim_about:method_or_data 7, claim_about:other 2, disposition:not_about_family 5, rung8:context_not_attached 3.
+
+**BI-P5-0003** heat_index x water_and_wastewater, California (none), QF-10, closing clause required, bridge clause not required; `PK-SD8-TP1-00071-water_and_wastewater` `52c2eef9…e0e4`.
+
+| impact group | label (or statement) | strength | two-hop | place class (relevance / scope) |
+| --- | --- | --- | --- | --- |
+| `heat_index__other_assets-impact-c1-006` | water‑service interruptions and stress on water infrastructure from extreme heat | multi | no | general / other |
+| `heat_index__other_assets-impact-c1-007` | increased water use aggravating reservoir‑based water shortages | single | no | general / other |
+| `heat_index__other_assets-impact-c1-009` | building water‑scarcity risk requiring larger tanks and efficiency | single | no | general / unknown |
+
+Drivers (8): `extreme_heat_v1-driver-c1-008` (multi, us_national), `extreme_heat_v1-driver-c2-001` (multi, global), `extreme_heat_v1-mechanism-c1-024` (multi, global), `extreme_heat_v1-mechanism-c2-003` (single, us_subregion), `extreme_heat_v1-driver-c1-001` (single, us_national), `extreme_heat_v1-mechanism-c1-003` (single, us_national), `extreme_heat_v1-consensus-c1-005` (single, global), `extreme_heat_v1-mechanism-c1-020` (single, global). Excluded (53): caveat_outside_rung_7 15, claim_about:impact_or_exposure 19, claim_about:method_or_data 7, claim_about:other 3, disposition:not_about_family 5, rung8:context_not_attached 4.
+
+**BI-P5-0004** heat_index x healthcare_and_public_health, California (none), QF-08, closing clause required, bridge clause not required; `PK-SD8-TP1-00071-healthcare_and_public_health` `69b156d1…c593`.
+
+| impact group | label (or statement) | strength | two-hop | place class (relevance / scope) |
+| --- | --- | --- | --- | --- |
+| `heat_index__healthcare_and_public_health-impact-c1-006` | Heat waves increase demand for ambulance services, emergency medical services, and hosp... | single | no | general / global |
+| `heat_index__healthcare_and_public_health-impact-c1-007` | Heatwaves can damage critical public health infrastructure and impede health system fun... | single | no | general / unknown |
+| `heat_index__healthcare_and_public_health-impact-c1-008` | Increasing extreme heat and heat‑wave conditions are expected to raise hospital morbidi... | single | no | general / other |
+| `heat_index__healthcare_and_public_health-impact-c1-009` | Heat waves are identified as one of the key natural hazards that can generate a large s... | single | no | general / other |
+
+Drivers (8): `extreme_heat_v1-driver-c1-008` (multi, us_national), `extreme_heat_v1-driver-c2-001` (multi, global), `extreme_heat_v1-mechanism-c1-024` (multi, global), `extreme_heat_v1-mechanism-c2-003` (single, us_subregion), `extreme_heat_v1-driver-c1-001` (single, us_national), `extreme_heat_v1-mechanism-c1-003` (single, us_national), `extreme_heat_v1-consensus-c1-005` (single, global), `extreme_heat_v1-mechanism-c1-020` (single, global). Excluded (53): caveat_outside_rung_7 15, claim_about:impact_or_exposure 19, claim_about:method_or_data 7, claim_about:other 3, disposition:not_about_family 5, rung8:context_not_attached 4.
+
+**BI-P5-0005** fire_weather_index x energy, California (none), QF-09, closing clause not required, bridge clause required; `PK-SD8-TP1-01463-energy` `ea0ad546…c067`.
+
+| impact group | label (or statement) | strength | two-hop | place class (relevance / scope) |
+| --- | --- | --- | --- | --- |
+| `fire_weather_index__energy-impact-c1-005` | increased wildfire activity extends transmission line exposure length | single | yes | us / us_national |
+| `fire_weather_index__energy-impact-c1-010` | wildfire smoke reduces solar PV power output on military bases | single | yes | us / us_subregion |
+| `fire_weather_index__energy-impact-c1-001` | transmission line insulation reduction causing trips and outages | multi | yes | general / other |
+| `fire_weather_index__energy-impact-c1-002` | wildfire makes automatic reclosing difficult causing multiple trips | single | yes | general / other |
+| `fire_weather_index__energy-impact-c1-003` | wildfire‑induced arc‑faults trigger transient instability | single | yes | general / unknown |
+| `fire_weather_index__energy-impact-c1-004` | radiative heat from wildfires raises conductor temperature causing outages | single | yes | general / unknown |
+| `fire_weather_index__energy-impact-c1-013` | fire‑weather bushfires raise power and water service disruption likelihood | single | yes | general / other |
+| `fire_weather_index__energy-impact-c1-014` | fire weather causes bushfires that burn electricity network assets and become ignition ... | single | no | general / other |
+
+Drivers (8): `fire_weather_v1-driver-c1-003` (multi, state), `fire_weather_v1-mechanism-c1-002` (multi, state), `fire_weather_v1-mechanism-c1-003` (multi, mixed), `fire_weather_v1-driver-c1-002` (multi, global), `fire_weather_v1-mechanism-c1-001` (single, state), `fire_weather_v1-driver-c1-006` (single, mixed), `fire_weather_v1-driver-c2-021` (single, us_subregion), `fire_weather_v1-mechanism-c2-004` (single, us_subregion). Excluded (37): caveat_outside_rung_7 10, claim_about:impact_or_exposure 6, claim_about:method_or_data 7, disposition:not_about_family 3, no_disposition 8, rung8:context_not_attached 3.
+
+**BI-P5-0006** fire_weather_index x transportation_systems, California (none), QF-10, closing clause not required, bridge clause required; `PK-SD8-TP1-01463-transportation_systems` `a5adfffe…b136`.
+
+| impact group | label (or statement) | strength | two-hop | place class (relevance / scope) |
+| --- | --- | --- | --- | --- |
+| `fire_weather_index__transportation_systems-impact-c1-003` | wildfire activity increases road network exposure to fire | single | yes | us / us_national |
+| `fire_weather_index__transportation_systems-impact-c1-004` | fire‑weather damage to roads and bridges | single | no | general / other |
+| `fire_weather_index__transportation_systems-impact-c1-005` | extreme fire‑weather exposure risk to residential and critical infrastructure | single | no | general / other |
+
+Drivers (8): `fire_weather_v1-driver-c1-003` (multi, state), `fire_weather_v1-mechanism-c1-002` (multi, state), `fire_weather_v1-mechanism-c1-003` (multi, mixed), `fire_weather_v1-driver-c1-002` (multi, global), `fire_weather_v1-mechanism-c1-001` (single, state), `fire_weather_v1-driver-c1-006` (single, mixed), `fire_weather_v1-driver-c2-021` (single, us_subregion), `fire_weather_v1-mechanism-c2-004` (single, us_subregion). Excluded (37): caveat_outside_rung_7 10, claim_about:impact_or_exposure 6, claim_about:method_or_data 7, disposition:not_about_family 3, no_disposition 8, rung8:context_not_attached 3.
+
+**BI-P5-0007** fire_weather_index x emergency_services, California (none), QF-08, closing clause not required, bridge clause not required; `PK-SD8-TP1-01463-emergency_services` `19385c7a…05f7`.
+
+| impact group | label (or statement) | strength | two-hop | place class (relevance / scope) |
+| --- | --- | --- | --- | --- |
+| `fire_weather_index__other_assets-impact-c1-012` | Higher numbers of fire‑danger days lead to substantially higher daily costs for standby... | single | no | general / other |
+
+Drivers (8): `fire_weather_v1-driver-c1-003` (multi, state), `fire_weather_v1-mechanism-c1-002` (multi, state), `fire_weather_v1-mechanism-c1-003` (multi, mixed), `fire_weather_v1-driver-c1-002` (multi, global), `fire_weather_v1-mechanism-c1-001` (single, state), `fire_weather_v1-driver-c1-006` (single, mixed), `fire_weather_v1-driver-c2-021` (single, us_subregion), `fire_weather_v1-mechanism-c2-004` (single, us_subregion). Excluded (37): caveat_outside_rung_7 10, claim_about:impact_or_exposure 6, claim_about:method_or_data 7, disposition:not_about_family 3, no_disposition 8, rung8:context_not_attached 3.
+
+**BI-P5-0008** fire_weather_index x communications, California (none), QF-09, closing clause not required, bridge clause not required; `PK-SD8-TP1-01463-communications` `51fa6421…5509`.
+
+| impact group | label (or statement) | strength | two-hop | place class (relevance / scope) |
+| --- | --- | --- | --- | --- |
+| `fire_weather_index__other_assets-impact-c1-004` | telecommunication system loss due to fire‑weather damage | single | no | general / other |
+
+Drivers (8): `fire_weather_v1-driver-c1-003` (multi, state), `fire_weather_v1-mechanism-c1-002` (multi, state), `fire_weather_v1-mechanism-c1-003` (multi, mixed), `fire_weather_v1-driver-c1-002` (multi, global), `fire_weather_v1-mechanism-c1-001` (single, state), `fire_weather_v1-driver-c1-006` (single, mixed), `fire_weather_v1-driver-c2-021` (single, us_subregion), `fire_weather_v1-mechanism-c2-004` (single, us_subregion). Excluded (37): caveat_outside_rung_7 10, claim_about:impact_or_exposure 6, claim_about:method_or_data 7, disposition:not_about_family 3, no_disposition 8, rung8:context_not_attached 3.
+
+## 68. P5c hotfix: gate, Polaris commands, readings for confirmation (2026-11-24)
+
+- **Gate.** Build `BUILD_SHA_PENDING`: `pytest` **1,760 passed, 2 skipped**; scanner 0 hits. New `tests/test_p5c_hotfix.py` (16);
+  `tests/test_p5b.py` reads agent v5.2 from its held bytes (`climrr.p5c`); `tests/test_p5c.py` unchanged in substance (the schema-v2
+  test's docstring now says D-077 resolved it). Evidence run records of `build_seeds_infra --dispositions` and
+  `build_synth_packets_infra --variant v1a` at the clean build tree, outputs byte-identical.
+- **Polaris (Kaiyuan; env as in `P5_INFRA_IMPACT_DESIGN.md` §6; first `python -c "import yaml, duckdb"`).** At the pushed build
+  commit, which carries the v1a packets and agent v5.3:
+
+      bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" BUILD_SHA_PENDING
+      cd "$CLIMRR_REPO_ROOT"
+      python scripts/litcollect/litsynth_agent.py \
+          --packets artifacts/benchmark/synth_packets_infra_v1a \
+          --out "$LITCOLLECT_ROOT_POLARIS/litsynth/infra_run1" \
+          --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
+          --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \
+          --sleep 5 --source-commit BUILD_SHA_PENDING
+      python scripts/litcollect/litpolish_agent.py \
+          --items "$LITCOLLECT_ROOT_POLARIS/litsynth/infra_run1" \
+          --out "$LITCOLLECT_ROOT_POLARIS/litpolish/infra_run1" \
+          --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
+          --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \
+          --sleep 5 --source-commit BUILD_SHA_PENDING
+
+  Expect `START litsynth_agent v5.3 packets=8 ... system_sha=1157f73286a6`. Ship back both run directories (`items/`, `raw/`,
+  `items.jsonl` / `polished.jsonl`, `summary.json`, `agent.log`) with the SHA-256 of each file. Then: ingest -> the Alvi sheet.
+- **For the COORDINATOR (new).** (1) Polish v1.1 runs unchanged on the v2a items, but its checks (`polish_checks.invariance_v2`)
+  protect numbers, places and mechanism terms, not the D-073c bridge clause or the two-hop phrases: a polished text could drop the
+  bridge without failing (as the scope phrases in the P5a note). A rule before the polish run, or a reviewer check on the sheet,
+  is a decision. (2) BI-P5-0005 moved to California and BI-P5-0006 lost its place-named evidence (D-078 (a)); with BI-P5-0004 this
+  leaves two place-named items (BI-P5-0001 Virginia, BI-P5-0002 Arizona) of eight.
+- **Readings for confirmation:** D-073c (a) -- (c), D-077 (field types; label fallback), D-078 (a) -- (c).

@@ -161,6 +161,11 @@ def _check(value, sch: dict, where: str, errors: list[str]) -> None:
     if isinstance(value, list) and "items" in sch:
         for i, v in enumerate(value):
             _check(v, sch["items"], f"{where}[{i}]", errors)
+    if "if" in sch:                     # P5c hotfix (item schema v2a, D-077): `then` applies when `if` validates
+        probe: list[str] = []
+        _check(value, sch["if"], where, probe)
+        if not probe and "then" in sch:
+            _check(value, sch["then"], where, errors)
 
 
 def schema_errors(record: dict, schema: dict | None = None) -> list[str]:

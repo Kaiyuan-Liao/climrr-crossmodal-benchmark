@@ -772,6 +772,38 @@
       "decision_ref": "D-070b, D-074",
       "source_description": "Polaris run 2026-11-24T05:05:59Z (Kaiyuan), delivered in infra_run1_evidence.tar.gz (SHA-256 218a9a430daf249f340c6ecbe46dd03c610bc77069520a93171d131655a1ad5a); ingested by scripts/ingest_litstatements_infra1.py",
       "interpretation_notes": "no interpretation assigned to any table column; no column status, concept-map entry or compatibility rule changed"
+    },
+    {
+      "filename": "item_schema_v2a.json",
+      "path": "data/metadata/benchmark/item_schema_v2a.json",
+      "role": "Closed-book benchmark item schema v2a (JSON Schema 2020-12) --- item schema v2 plus the literature statement type `impact` (rung 8, hazard impact on infrastructure) with required asset_class (an infrastructure-lexicon class), impact_mechanism, impact_outcome, hazard_relation (governed_term | broader_hazard) and two_hop; schema_version benchmark_item_v2a; v2 unchanged and still pinned; validated by src/climrr/benchmark_items.py (schema_for dispatches on schema_version); rung-8 items (litsynth_agent v5.3, packets synth_packets_infra_v1a) validate against it; not an item",
+      "sha256": "deca317cfdf11c9aa9074b68b7305c3b8ea7922ddf45a0542bc316901400d2d8",
+      "bytes": 12759,
+      "row_count": null,
+      "column_count": null,
+      "encoding_note": "UTF-8, LF line endings, no byte-order mark. Pinned -text in .gitattributes (data/metadata/benchmark/**).",
+      "acquisition_date": "2026-11-24",
+      "storage_policy": "tracked in ordinary Git as an immutable object; a change is a new version with its own decision",
+      "tracked_in_git": true,
+      "decision_ref": "D-077",
+      "source_description": "COORDINATOR work package P5c hotfix (2026-11-24), section A (the statement type and its five fields); field types and the asset-class enum (the 16 classes of infrastructure_lexicon_v1.yaml) by the EXECUTOR, recorded for confirmation",
+      "interpretation_notes": "no interpretation assigned to any table column; no column status, concept-map entry or compatibility rule changed"
+    },
+    {
+      "filename": "group_dispositions_infra_v1.csv",
+      "path": "data/metadata/benchmark/group_dispositions_infra_v1.csv",
+      "role": "Infra impact-group dispositions v1 --- one row per record of the P5c review list (artifacts/benchmark/review/P5_impact_groups_review_v1.csv; 103 records of infra grouping run 1 tagged hazard_impact_on_asset or impact_or_exposure): accept 41, accept_two_hop 13, relabel 10 (6 to hazard_impact_on_asset, 4 to impact_or_exposure), merge_with 1, not_about_family 9, reject 15, keep_excluded 14; asset_class_override on 17; kaiyuan_disposition and kaiyuan_note empty; applied by src/climrr/dispositions_infra.py when scripts/build_seeds_infra.py --dispositions builds the v1a seeds, selection and (scripts/build_synth_packets_infra.py --variant v1a) packets",
+      "sha256": "9b94e028bc571d9d84e6714ef1264bf2e087ea405d6561bfcdbd6d333c601bef",
+      "bytes": 28713,
+      "row_count": 103,
+      "column_count": 12,
+      "encoding_note": "UTF-8 (non-ASCII hyphens and arrows in labels and reasons as received), CRLF line endings as received, no byte-order mark; one header row. Pinned -text in .gitattributes (*.csv, data/metadata/benchmark/**).",
+      "acquisition_date": "2026-11-24",
+      "storage_policy": "tracked in ordinary Git as an immutable object; a change is a new file with its own decision",
+      "tracked_in_git": true,
+      "decision_ref": "D-078",
+      "source_description": "COORDINATOR 2026-11-24, confirmed by Kaiyuan; received as P5_impact_groups_dispositions_v1.csv and copied byte-identically",
+      "interpretation_notes": "no interpretation assigned to any table column; no column status, concept-map entry or compatibility rule changed"
     }
   ],
   "amendments": [
@@ -900,6 +932,12 @@
       "milestone": "P5a hotfix 2",
       "change": "Added data/metadata/litstatements/hazard_proxy_lexicon_v1a.yaml (hazard-proxy lexicon v1a: \"high temperatures\" conditional on climate_coterms_v1). Every other entry unchanged.",
       "decision_ref": "D-070b"
+    },
+    {
+      "date": "2026-11-24",
+      "milestone": "P5c hotfix",
+      "change": "Added data/metadata/benchmark/item_schema_v2a.json (item schema v2a: literature statement type impact) and data/metadata/benchmark/group_dispositions_infra_v1.csv (COORDINATOR dispositions of the infra impact groups). Every other entry unchanged.",
+      "decision_ref": "D-077, D-078"
     }
   ],
   "external_corpora": [

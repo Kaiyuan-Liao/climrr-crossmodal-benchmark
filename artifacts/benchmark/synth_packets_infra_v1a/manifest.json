@@ -1,0 +1,1344 @@
+{
+  "version": "synthpackets infra v1a",
+  "decision": "D-078",
+  "rules": "D-075 (DR-SEED-INFRA-1, rung-8 wording), D-073b, D-073c (two-hop wording), D-069a, D-077 (item schema v2a), D-078 (dispositions)",
+  "review_state": "impact_groups_reviewed",
+  "provisional": false,
+  "item_schema": "benchmark_item_v2a",
+  "bridge_clause": "fire-weather danger describes conditions that favour wildfire; it is not fire occurrence",
+  "two_hop_phrases": [
+    "when wildfires occur",
+    "wildfires can",
+    "raise the chance of ignition"
+  ],
+  "two_hop_rule": "D-073c (two-hop groups, listed in two_hop_group_ids: research about what wildfires do, not about fire-weather danger itself). A sentence resting on a two-hop group takes the form \"<scope phrase> that when wildfires occur, they <impact> <asset class phrase>\" or \"<scope phrase> that wildfires can <impact> <asset class phrase>\"; for the group on heat and ignitions near power lines: \"<scope phrase> that extreme heat and wind raise the chance of ignitions near power lines\". Write one sentence for the two-hop groups and another for the direct groups; a two-hop sentence does not use the broader-hazard phrase.",
+  "two_hop_rule_fire": " The table sentence states the fire-weather change, and \"integrated\" contains, exactly once, the bridge clause \"fire-weather danger describes conditions that favour wildfire; it is not fire occurrence\". Outside these forms and the bridge clause, \"wildfire\" stays as the WILDFIRE rule says.",
+  "selection": {
+    "path": "artifacts/benchmark/pilot_selection_infra_v1a.yaml",
+    "sha256": "316a93f9d197d35756ef0c81a7a1e9f683978f59ce512615d93f0963134f9212",
+    "selected": 8,
+    "missing": []
+  },
+  "inputs_sha256": {
+    "item_seeds_infra_v1a": "0bd723a092c02eff84bb00e3b733baba1396787cdd8b5991b97b296c2037ea2a",
+    "pilot_selection_infra_v1a": "316a93f9d197d35756ef0c81a7a1e9f683978f59ce512615d93f0963134f9212",
+    "groups_infra_run1": "f61bf4f557c0f5fbdfec2779fc578b01e84bdc6edfca80c4b633d25f841045ce",
+    "groups_enriched_infra_run1": "1e5aa4fb5902bc598c5977dd231d9b1b1c029fdad98076651cb0b2d7b0913eb1",
+    "statements_infra_run1": "869b0592e72ec22b7617a3fbe6ae3005df762b4817f7609e41c96a8559cbca4b",
+    "independence_infra_run1": "b0a2fa3f3bd9998597c4681100586abf555ce295283984f102222030bd2fb602",
+    "group_dispositions_infra_v1": "9b94e028bc571d9d84e6714ef1264bf2e087ea405d6561bfcdbd6d333c601bef",
+    "groups_dispositioned_v1": "d92cd95ff9dcc669a4f19355d22ac556c8211a587bc7155b5fb6fea42ff091ce",
+    "item_schema_v2a": "deca317cfdf11c9aa9074b68b7305c3b8ea7922ddf45a0542bc316901400d2d8"
+  },
+  "max_impact_groups": 10,
+  "asset_class_phrase": {
+    "energy": "energy systems",
+    "transportation_systems": "transportation systems",
+    "water_and_wastewater": "water and wastewater systems",
+    "healthcare_and_public_health": "healthcare and public health systems",
+    "emergency_services": "emergency services",
+    "communications": "communications systems"
+  },
+  "rung8_must_not_use": [
+    "will fail",
+    "at risk"
+  ],
+  "fire_words": [
+    "wildfire",
+    "fires",
+    "burned area"
+  ],
+  "wildfire_rule": "D-073b: \"wildfire\" only inside the exact phrase \"conditions that favour wildfire\" (as in the broader-hazard phrase); \"wildfire\" anywhere else, \"fires\" and \"burned area\" are never written.",
+  "rung_instruction": "Rung 8 (hazard impact on infrastructure). Write the answer in three parts: (1) the hazard change at the place, as projected, in the table-pattern sentence; (2) for the impact groups, '<scope phrase> that <hazard phrase> <impact mechanism> <asset class phrase>', where the hazard phrase is the broader-hazard phrase when a cited impact group has hazard_relation broader_hazard, else the plain quantity; the driver groups as in any item; the general closing clause when no cited group is state- or NCA-specific; (3) never state that an asset, or the asset class, in the place will fail, is at risk, is vulnerable or will be damaged. Only when citing a group listed in place_named_impact_group_ids may the answer write 'For <asset class phrase> in <Place>, this implies more exposure to <impact outcome>'.",
+  "packets": [
+    {
+      "item_id": "BI-P5-0001",
+      "packet_id": "PK-SD8-TP1-00111-energy",
+      "seed_id": "SD8-TP1-00111-energy",
+      "family": "heat_index",
+      "asset_class": "energy",
+      "state": "Virginia",
+      "question_form": "QF-08",
+      "question_skeleton": "What does a projected increase in dangerous heat-index days in Virginia by mid-century mean for energy systems, and why?",
+      "pattern": {
+        "pattern_id": "TP1-00111",
+        "metric": "heatindex_days_above_95F",
+        "statistic": "absolute_change",
+        "horizon": "mid",
+        "direction": "increase",
+        "value": "12.5",
+        "magnitude_class": "more than tripling",
+        "anchor_pair": "from about 4 to about 16 days a summer",
+        "comparison": "a change similar to most states"
+      },
+      "place_named_impact_evidence": "place_named_impact_statement",
+      "needs_general_clause": false,
+      "classes_present": [
+        "state",
+        "us_subregion",
+        "us_national",
+        "global",
+        "other",
+        "unknown",
+        "mixed"
+      ],
+      "impact_groups": [
+        {
+          "group_id": "LG-infra_heat_index__energy-impact-c1-001",
+          "label": "thermal power plant output reduction",
+          "is_singleton": false,
+          "evidence_strength": "multi_source_supported",
+          "relevance": "place_named",
+          "scope_class": "unknown",
+          "scope_phrase": "In general, research shows",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__energy-impact-c1-006",
+          "label": "Higher ambient temperatures reduce transformer peak load capacity, decreasing the amount of power that can be delivered.",
+          "is_singleton": true,
+          "evidence_strength": "single_source_supported",
+          "relevance": "place_named",
+          "scope_class": "state",
+          "scope_phrase": "Research on Virginia suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__energy-impact-c1-007",
+          "label": "Rising summer temperatures increase the resistance of transmission lines, requiring greater generation capacity to maintain power delivery.",
+          "is_singleton": true,
+          "evidence_strength": "single_source_supported",
+          "relevance": "place_named",
+          "scope_class": "state",
+          "scope_phrase": "Research on Virginia suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__energy-impact-c1-008",
+          "label": "Higher summer temperatures increase the likelihood of power outages because temperature‑related reductions in transmission and transformer capacity compound with higher demand.",
+          "is_singleton": true,
+          "evidence_strength": "single_source_supported",
+          "relevance": "place_named",
+          "scope_class": "state",
+          "scope_phrase": "Research on Virginia suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__energy-impact-c1-002",
+          "label": "electricity demand increase with temperature",
+          "is_singleton": false,
+          "evidence_strength": "multi_source_supported",
+          "relevance": "us",
+          "scope_class": "global",
+          "scope_phrase": "In general, research shows",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__energy-impact-c1-003",
+          "label": "wildfire risk to power transmission lines",
+          "is_singleton": false,
+          "evidence_strength": "multi_source_supported",
+          "relevance": "us",
+          "scope_class": "unknown",
+          "scope_phrase": "In general, research shows",
+          "hazard_relation": "broader_hazard",
+          "two_hop": true,
+          "disposition": "accept_two_hop",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__energy-impact-c1-012",
+          "label": "Extreme heat waves increase power demand while simultaneously reducing output from wind and solar generators, leading to regional supply‑demand imbalances that can cause large‑scale blackouts.",
+          "is_singleton": true,
+          "evidence_strength": "single_source_supported",
+          "relevance": "us",
+          "scope_class": "unknown",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__energy-impact-c2-001",
+          "label": "extreme heat increases electricity demand and stresses power supply",
+          "is_singleton": false,
+          "evidence_strength": "multi_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research shows",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__energy-impact-c2-002",
+          "label": "high temperatures cause transmission line sag and mechanical failure",
+          "is_singleton": false,
+          "evidence_strength": "multi_source_supported",
+          "relevance": "general",
+          "scope_class": "mixed",
+          "scope_phrase": "In general, research shows",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index-driver-c1-007",
+          "label": "more hot days boost air‑conditioning sales and electricity demand",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "governed_term",
+          "two_hop": false,
+          "disposition": "relabel:hazard_impact_on_asset",
+          "impact_fields_source": "group_label"
+        }
+      ],
+      "place_named_impact_group_ids": [
+        "LG-infra_heat_index__energy-impact-c1-001",
+        "LG-infra_heat_index__energy-impact-c1-006",
+        "LG-infra_heat_index__energy-impact-c1-007",
+        "LG-infra_heat_index__energy-impact-c1-008"
+      ],
+      "driver_groups": [
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-008",
+          "label": "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "us_national"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c2-001",
+          "label": "global warming increases heatwave frequency and intensity",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-024",
+          "label": "urban heat island intensifies due to nighttime conditions and reduced moisture",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+          "label": "humidity magnifies heat stress and its effect grows with temperature",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_subregion"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-001",
+          "label": "Humidity raises heat‑index values or humid heatwave occurrence",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_national"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
+          "label": "Soil moisture changes evaporative cooling and humidity, altering heatwave intensity",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_national"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-consensus-c1-005",
+          "label": "heat event frequency and intensity projected to increase, occupational illness risk will not diminish",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-020",
+          "label": "Minimum air temperature reflects the amount of overnight cooling, with higher minima indicating reduced cooling and greater heat stress.",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "global"
+        }
+      ],
+      "excluded_groups": 60,
+      "excluded_by_reason": {
+        "caveat_outside_rung_7": 13,
+        "claim_about:impact_or_exposure": 16,
+        "claim_about:method_or_data": 7,
+        "claim_about:other": 2,
+        "disposition:not_about_family": 5,
+        "over_cap:impact": 14,
+        "rung8:context_not_attached": 3
+      },
+      "review_state": "impact_groups_reviewed",
+      "two_hop_group_ids": [
+        "LG-infra_heat_index__energy-impact-c1-003"
+      ],
+      "bridge_clause_required": false,
+      "sha256": "fe4a3a50ff230e6495042547ae8e06c7fc4a5dc30a2b186c9af8f74a75f7be88"
+    },
+    {
+      "item_id": "BI-P5-0002",
+      "packet_id": "PK-SD8-TP1-00069-transportation_systems",
+      "seed_id": "SD8-TP1-00069-transportation_systems",
+      "family": "heat_index",
+      "asset_class": "transportation_systems",
+      "state": "Arizona",
+      "question_form": "QF-09",
+      "question_skeleton": "What could a projected increase in dangerous heat-index days mean for transportation systems in Arizona, and why?",
+      "pattern": {
+        "pattern_id": "TP1-00069",
+        "metric": "heatindex_days_above_95F",
+        "statistic": "absolute_change",
+        "horizon": "mid",
+        "direction": "increase",
+        "value": "10.3",
+        "magnitude_class": "a moderate increase",
+        "anchor_pair": "from about 14 to about 24 days a summer",
+        "comparison": "a change similar to most states"
+      },
+      "place_named_impact_evidence": "place_named_impact_statement",
+      "needs_general_clause": true,
+      "classes_present": [
+        "us_subregion",
+        "us_national",
+        "global",
+        "other",
+        "unknown"
+      ],
+      "impact_groups": [
+        {
+          "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-001",
+          "label": "pavement structural degradation from heat",
+          "is_singleton": false,
+          "evidence_strength": "multi_source_supported",
+          "relevance": "place_named",
+          "scope_class": "other",
+          "scope_phrase": "In general, research shows",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-002",
+          "label": "rail track expansion and buckling causing disruptions",
+          "is_singleton": false,
+          "evidence_strength": "multi_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research shows",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__other_assets-impact-c1-003",
+          "label": "rail track deformation caused by severe temperature anomalies",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__other_assets-impact-c1-004",
+          "label": "airport runway heat buckling leading to service disruption",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-003",
+          "label": "runway surface damage and operational limits from heat",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-007",
+          "label": "heat‑driven vegetation fires threaten railway corridors",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": true,
+          "disposition": "accept_two_hop",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-009",
+          "label": "heat exacerbates erosion of road embankments and side slopes",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-010",
+          "label": "heat waves cause costly impacts on rail systems",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "unknown",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "relabel:hazard_impact_on_asset",
+          "impact_fields_source": "members"
+        }
+      ],
+      "place_named_impact_group_ids": [
+        "LG-infra_heat_index__transportation_systems-impact-c1-001"
+      ],
+      "driver_groups": [
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-008",
+          "label": "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "us_national"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c2-001",
+          "label": "global warming increases heatwave frequency and intensity",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-024",
+          "label": "urban heat island intensifies due to nighttime conditions and reduced moisture",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+          "label": "humidity magnifies heat stress and its effect grows with temperature",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_subregion"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-001",
+          "label": "Humidity raises heat‑index values or humid heatwave occurrence",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_national"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
+          "label": "Soil moisture changes evaporative cooling and humidity, altering heatwave intensity",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_national"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-consensus-c1-005",
+          "label": "heat event frequency and intensity projected to increase, occupational illness risk will not diminish",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-020",
+          "label": "Minimum air temperature reflects the amount of overnight cooling, with higher minima indicating reduced cooling and greater heat stress.",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "global"
+        }
+      ],
+      "excluded_groups": 46,
+      "excluded_by_reason": {
+        "caveat_outside_rung_7": 13,
+        "claim_about:impact_or_exposure": 16,
+        "claim_about:method_or_data": 7,
+        "claim_about:other": 2,
+        "disposition:not_about_family": 5,
+        "rung8:context_not_attached": 3
+      },
+      "review_state": "impact_groups_reviewed",
+      "two_hop_group_ids": [
+        "LG-infra_heat_index__transportation_systems-impact-c1-007"
+      ],
+      "bridge_clause_required": false,
+      "sha256": "940915356fc2a61695af7750970987344f2ce7d26d6821cfdabd44346b5cdf8c"
+    },
+    {
+      "item_id": "BI-P5-0003",
+      "packet_id": "PK-SD8-TP1-00071-water_and_wastewater",
+      "seed_id": "SD8-TP1-00071-water_and_wastewater",
+      "family": "heat_index",
+      "asset_class": "water_and_wastewater",
+      "state": "California",
+      "question_form": "QF-10",
+      "question_skeleton": "Why does the number of dangerous heat-index days matter for water and wastewater systems, and how is it projected to change in California?",
+      "pattern": {
+        "pattern_id": "TP1-00071",
+        "metric": "heatindex_days_above_95F",
+        "statistic": "absolute_change",
+        "horizon": "mid",
+        "direction": "increase",
+        "value": "9.0",
+        "magnitude_class": "a moderate increase",
+        "anchor_pair": "from about 15 to about 24 days a summer",
+        "comparison": "a change similar to most states"
+      },
+      "place_named_impact_evidence": "none",
+      "needs_general_clause": true,
+      "classes_present": [
+        "us_subregion",
+        "us_national",
+        "global",
+        "other",
+        "unknown"
+      ],
+      "impact_groups": [
+        {
+          "group_id": "LG-infra_heat_index__other_assets-impact-c1-006",
+          "label": "water‑service interruptions and stress on water infrastructure from extreme heat",
+          "is_singleton": false,
+          "evidence_strength": "multi_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research shows",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__other_assets-impact-c1-007",
+          "label": "increased water use aggravating reservoir‑based water shortages",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__other_assets-impact-c1-009",
+          "label": "building water‑scarcity risk requiring larger tanks and efficiency",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "unknown",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        }
+      ],
+      "place_named_impact_group_ids": [],
+      "driver_groups": [
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-008",
+          "label": "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "us_national"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c2-001",
+          "label": "global warming increases heatwave frequency and intensity",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-024",
+          "label": "urban heat island intensifies due to nighttime conditions and reduced moisture",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+          "label": "humidity magnifies heat stress and its effect grows with temperature",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_subregion"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-001",
+          "label": "Humidity raises heat‑index values or humid heatwave occurrence",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_national"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
+          "label": "Soil moisture changes evaporative cooling and humidity, altering heatwave intensity",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_national"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-consensus-c1-005",
+          "label": "heat event frequency and intensity projected to increase, occupational illness risk will not diminish",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-020",
+          "label": "Minimum air temperature reflects the amount of overnight cooling, with higher minima indicating reduced cooling and greater heat stress.",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "global"
+        }
+      ],
+      "excluded_groups": 53,
+      "excluded_by_reason": {
+        "caveat_outside_rung_7": 15,
+        "claim_about:impact_or_exposure": 19,
+        "claim_about:method_or_data": 7,
+        "claim_about:other": 3,
+        "disposition:not_about_family": 5,
+        "rung8:context_not_attached": 4
+      },
+      "review_state": "impact_groups_reviewed",
+      "two_hop_group_ids": [],
+      "bridge_clause_required": false,
+      "sha256": "52c2eef9a6ce148d9cd00d6ce4ad3efce60e11774f1a04149c53cb760423e0e4"
+    },
+    {
+      "item_id": "BI-P5-0004",
+      "packet_id": "PK-SD8-TP1-00071-healthcare_and_public_health",
+      "seed_id": "SD8-TP1-00071-healthcare_and_public_health",
+      "family": "heat_index",
+      "asset_class": "healthcare_and_public_health",
+      "state": "California",
+      "question_form": "QF-08",
+      "question_skeleton": "What does a projected increase in dangerous heat-index days in California by mid-century mean for healthcare and public health systems, and why?",
+      "pattern": {
+        "pattern_id": "TP1-00071",
+        "metric": "heatindex_days_above_95F",
+        "statistic": "absolute_change",
+        "horizon": "mid",
+        "direction": "increase",
+        "value": "9.0",
+        "magnitude_class": "a moderate increase",
+        "anchor_pair": "from about 15 to about 24 days a summer",
+        "comparison": "a change similar to most states"
+      },
+      "place_named_impact_evidence": "none",
+      "needs_general_clause": true,
+      "classes_present": [
+        "us_subregion",
+        "us_national",
+        "global",
+        "other",
+        "unknown"
+      ],
+      "impact_groups": [
+        {
+          "group_id": "LG-infra_heat_index__healthcare_and_public_health-impact-c1-006",
+          "label": "Heat waves increase demand for ambulance services, emergency medical services, and hospitalizations, thereby straining healthcare facility capacity.",
+          "is_singleton": true,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__healthcare_and_public_health-impact-c1-007",
+          "label": "Heatwaves can damage critical public health infrastructure and impede health system functioning.",
+          "is_singleton": true,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "unknown",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__healthcare_and_public_health-impact-c1-008",
+          "label": "Increasing extreme heat and heat‑wave conditions are expected to raise hospital morbidity and emergency‑room service demand in Quebec.",
+          "is_singleton": true,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_heat_index__healthcare_and_public_health-impact-c1-009",
+          "label": "Heat waves are identified as one of the key natural hazards that can generate a large share of hospital emergencies and contribute to power outages in hospitals.",
+          "is_singleton": true,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        }
+      ],
+      "place_named_impact_group_ids": [],
+      "driver_groups": [
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-008",
+          "label": "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "us_national"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c2-001",
+          "label": "global warming increases heatwave frequency and intensity",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-024",
+          "label": "urban heat island intensifies due to nighttime conditions and reduced moisture",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+          "label": "humidity magnifies heat stress and its effect grows with temperature",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_subregion"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-001",
+          "label": "Humidity raises heat‑index values or humid heatwave occurrence",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_national"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
+          "label": "Soil moisture changes evaporative cooling and humidity, altering heatwave intensity",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_national"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-consensus-c1-005",
+          "label": "heat event frequency and intensity projected to increase, occupational illness risk will not diminish",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-020",
+          "label": "Minimum air temperature reflects the amount of overnight cooling, with higher minima indicating reduced cooling and greater heat stress.",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "global"
+        }
+      ],
+      "excluded_groups": 53,
+      "excluded_by_reason": {
+        "caveat_outside_rung_7": 15,
+        "claim_about:impact_or_exposure": 19,
+        "claim_about:method_or_data": 7,
+        "claim_about:other": 3,
+        "disposition:not_about_family": 5,
+        "rung8:context_not_attached": 4
+      },
+      "review_state": "impact_groups_reviewed",
+      "two_hop_group_ids": [],
+      "bridge_clause_required": false,
+      "sha256": "69b156d17633f2a0af2f2435fa59bc01a4068685e7d0f9a0ae9592e6aae1c593"
+    },
+    {
+      "item_id": "BI-P5-0005",
+      "packet_id": "PK-SD8-TP1-01463-energy",
+      "seed_id": "SD8-TP1-01463-energy",
+      "family": "fire_weather_index",
+      "asset_class": "energy",
+      "state": "California",
+      "question_form": "QF-09",
+      "question_skeleton": "What could a projected increase in fire-weather danger mean for energy systems in California, and why?",
+      "pattern": {
+        "pattern_id": "TP1-01463",
+        "metric": "fwi_summer_seasonal_value",
+        "statistic": "absolute_change",
+        "horizon": "mid",
+        "direction": "increase",
+        "value": "2.2",
+        "magnitude_class": "a slight increase",
+        "anchor_pair": null,
+        "comparison": "a larger change than in most states"
+      },
+      "place_named_impact_evidence": "none",
+      "needs_general_clause": false,
+      "classes_present": [
+        "state",
+        "us_subregion",
+        "us_national",
+        "global",
+        "other",
+        "unknown",
+        "mixed"
+      ],
+      "impact_groups": [
+        {
+          "group_id": "LG-infra_fire_weather_index__energy-impact-c1-005",
+          "label": "increased wildfire activity extends transmission line exposure length",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "us",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": true,
+          "disposition": "accept_two_hop",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_fire_weather_index__energy-impact-c1-010",
+          "label": "wildfire smoke reduces solar PV power output on military bases",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "us",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": true,
+          "disposition": "accept_two_hop",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_fire_weather_index__energy-impact-c1-001",
+          "label": "transmission line insulation reduction causing trips and outages",
+          "is_singleton": false,
+          "evidence_strength": "multi_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research shows",
+          "hazard_relation": "broader_hazard",
+          "two_hop": true,
+          "disposition": "accept_two_hop",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_fire_weather_index__energy-impact-c1-002",
+          "label": "wildfire makes automatic reclosing difficult causing multiple trips",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": true,
+          "disposition": "accept_two_hop",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_fire_weather_index__energy-impact-c1-003",
+          "label": "wildfire‑induced arc‑faults trigger transient instability",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "unknown",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": true,
+          "disposition": "accept_two_hop",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_fire_weather_index__energy-impact-c1-004",
+          "label": "radiative heat from wildfires raises conductor temperature causing outages",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "unknown",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": true,
+          "disposition": "accept_two_hop",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_fire_weather_index__energy-impact-c1-013",
+          "label": "fire‑weather bushfires raise power and water service disruption likelihood",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": true,
+          "disposition": "accept_two_hop",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_fire_weather_index__energy-impact-c1-014",
+          "label": "fire weather causes bushfires that burn electricity network assets and become ignition sources",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        }
+      ],
+      "place_named_impact_group_ids": [],
+      "driver_groups": [
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-003",
+          "label": "strong winds are a primary driver of fire danger and spread",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "state"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-002",
+          "label": "strong winds and low humidity raise fire danger and fire size",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "state"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-003",
+          "label": "higher temperatures and aridity dry fuels, creating extreme fire‑weather",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "mixed"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-002",
+          "label": "humidity and vapor pressure deficit affect fire risk",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-001",
+          "label": "warmer atmosphere increases VPD and lowers fuel moisture",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "state"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-006",
+          "label": "climate change increases extreme fire‑weather frequency",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "mixed"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-021",
+          "label": "Low sea‑ice concentrations in the Beaufort/Chukchi Seas favor fire‑weather conditions in the western United States.",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_subregion"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c2-004",
+          "label": "Higher live‑vegetation or dead‑fuel moisture reduces fire hazard",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_subregion"
+        }
+      ],
+      "excluded_groups": 37,
+      "excluded_by_reason": {
+        "caveat_outside_rung_7": 10,
+        "claim_about:impact_or_exposure": 6,
+        "claim_about:method_or_data": 7,
+        "disposition:not_about_family": 3,
+        "no_disposition": 8,
+        "rung8:context_not_attached": 3
+      },
+      "review_state": "impact_groups_reviewed",
+      "two_hop_group_ids": [
+        "LG-infra_fire_weather_index__energy-impact-c1-005",
+        "LG-infra_fire_weather_index__energy-impact-c1-010",
+        "LG-infra_fire_weather_index__energy-impact-c1-001",
+        "LG-infra_fire_weather_index__energy-impact-c1-002",
+        "LG-infra_fire_weather_index__energy-impact-c1-003",
+        "LG-infra_fire_weather_index__energy-impact-c1-004",
+        "LG-infra_fire_weather_index__energy-impact-c1-013"
+      ],
+      "bridge_clause_required": true,
+      "sha256": "ea0ad546e27b3cd8b47e65bba06f2efb25e8d0076b8a3ab2dd554c7c380fc067"
+    },
+    {
+      "item_id": "BI-P5-0006",
+      "packet_id": "PK-SD8-TP1-01463-transportation_systems",
+      "seed_id": "SD8-TP1-01463-transportation_systems",
+      "family": "fire_weather_index",
+      "asset_class": "transportation_systems",
+      "state": "California",
+      "question_form": "QF-10",
+      "question_skeleton": "Why does fire-weather danger matter for transportation systems, and how is it projected to change in California?",
+      "pattern": {
+        "pattern_id": "TP1-01463",
+        "metric": "fwi_summer_seasonal_value",
+        "statistic": "absolute_change",
+        "horizon": "mid",
+        "direction": "increase",
+        "value": "2.2",
+        "magnitude_class": "a slight increase",
+        "anchor_pair": null,
+        "comparison": "a larger change than in most states"
+      },
+      "place_named_impact_evidence": "none",
+      "needs_general_clause": false,
+      "classes_present": [
+        "state",
+        "us_subregion",
+        "us_national",
+        "global",
+        "other",
+        "mixed"
+      ],
+      "impact_groups": [
+        {
+          "group_id": "LG-infra_fire_weather_index__transportation_systems-impact-c1-003",
+          "label": "wildfire activity increases road network exposure to fire",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "us",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": true,
+          "disposition": "accept_two_hop",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_fire_weather_index__transportation_systems-impact-c1-004",
+          "label": "fire‑weather damage to roads and bridges",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        },
+        {
+          "group_id": "LG-infra_fire_weather_index__transportation_systems-impact-c1-005",
+          "label": "extreme fire‑weather exposure risk to residential and critical infrastructure",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        }
+      ],
+      "place_named_impact_group_ids": [],
+      "driver_groups": [
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-003",
+          "label": "strong winds are a primary driver of fire danger and spread",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "state"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-002",
+          "label": "strong winds and low humidity raise fire danger and fire size",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "state"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-003",
+          "label": "higher temperatures and aridity dry fuels, creating extreme fire‑weather",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "mixed"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-002",
+          "label": "humidity and vapor pressure deficit affect fire risk",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-001",
+          "label": "warmer atmosphere increases VPD and lowers fuel moisture",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "state"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-006",
+          "label": "climate change increases extreme fire‑weather frequency",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "mixed"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-021",
+          "label": "Low sea‑ice concentrations in the Beaufort/Chukchi Seas favor fire‑weather conditions in the western United States.",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_subregion"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c2-004",
+          "label": "Higher live‑vegetation or dead‑fuel moisture reduces fire hazard",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_subregion"
+        }
+      ],
+      "excluded_groups": 37,
+      "excluded_by_reason": {
+        "caveat_outside_rung_7": 10,
+        "claim_about:impact_or_exposure": 6,
+        "claim_about:method_or_data": 7,
+        "disposition:not_about_family": 3,
+        "no_disposition": 8,
+        "rung8:context_not_attached": 3
+      },
+      "review_state": "impact_groups_reviewed",
+      "two_hop_group_ids": [
+        "LG-infra_fire_weather_index__transportation_systems-impact-c1-003"
+      ],
+      "bridge_clause_required": true,
+      "sha256": "a5adfffebd1926b7381e69a122385785974493fe43a16962232c5f9968f7b136"
+    },
+    {
+      "item_id": "BI-P5-0007",
+      "packet_id": "PK-SD8-TP1-01463-emergency_services",
+      "seed_id": "SD8-TP1-01463-emergency_services",
+      "family": "fire_weather_index",
+      "asset_class": "emergency_services",
+      "state": "California",
+      "question_form": "QF-08",
+      "question_skeleton": "What does a projected increase in fire-weather danger in California by mid-century mean for emergency services, and why?",
+      "pattern": {
+        "pattern_id": "TP1-01463",
+        "metric": "fwi_summer_seasonal_value",
+        "statistic": "absolute_change",
+        "horizon": "mid",
+        "direction": "increase",
+        "value": "2.2",
+        "magnitude_class": "a slight increase",
+        "anchor_pair": null,
+        "comparison": "a larger change than in most states"
+      },
+      "place_named_impact_evidence": "none",
+      "needs_general_clause": false,
+      "classes_present": [
+        "state",
+        "us_subregion",
+        "global",
+        "other",
+        "mixed"
+      ],
+      "impact_groups": [
+        {
+          "group_id": "LG-infra_fire_weather_index__other_assets-impact-c1-012",
+          "label": "Higher numbers of fire‑danger days lead to substantially higher daily costs for standby firefighting equipment and personnel.",
+          "is_singleton": true,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "governed_term",
+          "two_hop": false,
+          "disposition": "relabel:hazard_impact_on_asset",
+          "impact_fields_source": "members"
+        }
+      ],
+      "place_named_impact_group_ids": [],
+      "driver_groups": [
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-003",
+          "label": "strong winds are a primary driver of fire danger and spread",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "state"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-002",
+          "label": "strong winds and low humidity raise fire danger and fire size",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "state"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-003",
+          "label": "higher temperatures and aridity dry fuels, creating extreme fire‑weather",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "mixed"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-002",
+          "label": "humidity and vapor pressure deficit affect fire risk",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-001",
+          "label": "warmer atmosphere increases VPD and lowers fuel moisture",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "state"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-006",
+          "label": "climate change increases extreme fire‑weather frequency",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "mixed"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-021",
+          "label": "Low sea‑ice concentrations in the Beaufort/Chukchi Seas favor fire‑weather conditions in the western United States.",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_subregion"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c2-004",
+          "label": "Higher live‑vegetation or dead‑fuel moisture reduces fire hazard",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_subregion"
+        }
+      ],
+      "excluded_groups": 37,
+      "excluded_by_reason": {
+        "caveat_outside_rung_7": 10,
+        "claim_about:impact_or_exposure": 6,
+        "claim_about:method_or_data": 7,
+        "disposition:not_about_family": 3,
+        "no_disposition": 8,
+        "rung8:context_not_attached": 3
+      },
+      "review_state": "impact_groups_reviewed",
+      "two_hop_group_ids": [],
+      "bridge_clause_required": false,
+      "sha256": "19385c7a37e139dcc3fff53707ce6f167610644a720398213d553a95ec8205f7"
+    },
+    {
+      "item_id": "BI-P5-0008",
+      "packet_id": "PK-SD8-TP1-01463-communications",
+      "seed_id": "SD8-TP1-01463-communications",
+      "family": "fire_weather_index",
+      "asset_class": "communications",
+      "state": "California",
+      "question_form": "QF-09",
+      "question_skeleton": "What could a projected increase in fire-weather danger mean for communications systems in California, and why?",
+      "pattern": {
+        "pattern_id": "TP1-01463",
+        "metric": "fwi_summer_seasonal_value",
+        "statistic": "absolute_change",
+        "horizon": "mid",
+        "direction": "increase",
+        "value": "2.2",
+        "magnitude_class": "a slight increase",
+        "anchor_pair": null,
+        "comparison": "a larger change than in most states"
+      },
+      "place_named_impact_evidence": "none",
+      "needs_general_clause": false,
+      "classes_present": [
+        "state",
+        "us_subregion",
+        "global",
+        "other",
+        "mixed"
+      ],
+      "impact_groups": [
+        {
+          "group_id": "LG-infra_fire_weather_index__other_assets-impact-c1-004",
+          "label": "telecommunication system loss due to fire‑weather damage",
+          "is_singleton": false,
+          "evidence_strength": "single_source_supported",
+          "relevance": "general",
+          "scope_class": "other",
+          "scope_phrase": "In general, research suggests",
+          "hazard_relation": "broader_hazard",
+          "two_hop": false,
+          "disposition": "accept",
+          "impact_fields_source": "members"
+        }
+      ],
+      "place_named_impact_group_ids": [],
+      "driver_groups": [
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-003",
+          "label": "strong winds are a primary driver of fire danger and spread",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "state"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-002",
+          "label": "strong winds and low humidity raise fire danger and fire size",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "state"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-003",
+          "label": "higher temperatures and aridity dry fuels, creating extreme fire‑weather",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "mixed"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-002",
+          "label": "humidity and vapor pressure deficit affect fire risk",
+          "evidence_strength": "multi_source_supported",
+          "scope_class": "global"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-001",
+          "label": "warmer atmosphere increases VPD and lowers fuel moisture",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "state"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-006",
+          "label": "climate change increases extreme fire‑weather frequency",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "mixed"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-021",
+          "label": "Low sea‑ice concentrations in the Beaufort/Chukchi Seas favor fire‑weather conditions in the western United States.",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_subregion"
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c2-004",
+          "label": "Higher live‑vegetation or dead‑fuel moisture reduces fire hazard",
+          "evidence_strength": "single_source_supported",
+          "scope_class": "us_subregion"
+        }
+      ],
+      "excluded_groups": 37,
+      "excluded_by_reason": {
+        "caveat_outside_rung_7": 10,
+        "claim_about:impact_or_exposure": 6,
+        "claim_about:method_or_data": 7,
+        "disposition:not_about_family": 3,
+        "no_disposition": 8,
+        "rung8:context_not_attached": 3
+      },
+      "review_state": "impact_groups_reviewed",
+      "two_hop_group_ids": [],
+      "bridge_clause_required": false,
+      "sha256": "51fa642173f69dbb79263c9ae056de340868c703717ccf1089bbd0124fbc5509"
+    }
+  ]
+}

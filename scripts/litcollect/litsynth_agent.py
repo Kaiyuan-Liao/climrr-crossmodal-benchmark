@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pilot P2b / P3 / P5 — item-synthesis agent v5.2 (D-041, D-048, D-051, D-055, D-055a, D-055b, D-059 -- D-062; COORDINATOR rulings 2026-11-01 and 2026-11-02; work package P3a).
+"""Pilot P2b / P3 / P5 — item-synthesis agent v5.3 (D-041, D-048, D-051, D-055, D-055a, D-055b, D-059 -- D-062; COORDINATOR rulings 2026-11-01 and 2026-11-02; work package P3a).
 
 Input: a directory of seed packets `PK-<seed_id>.json` (`scripts/build_synth_packets.py`). One model call per packet,
 temperature 0. The model sees the packet's `model_view` only: the table pattern in plain words with its values, the
@@ -114,6 +114,19 @@ inside "conditions that favour wildfire". Post-checks `synthesis_post_checks` v3
 rules, all format-class). The format corrective prompt names the rung-8 rules. Everything else as v5.1 (v5.1 is held by its
 bytes at `157e49d`, `climrr.p5b.held_bytes`).
 
+v5.3 (work package P5c hotfix, D-073c, D-077, D-078; rung-8 packets v1a, `scripts/build_synth_packets_infra.py --variant v1a`,
+the COORDINATOR's dispositions applied; not yet run): the system prompt adds TWO-HOP --- an impact group listed in the
+packet's `two_hop_group_ids` (an `accept_two_hop` disposition: research on what wildfires do) is written "<scope phrase> that
+when wildfires occur, they <impact> <asset class>" or "<scope phrase> that wildfires can <impact> <asset class>" (for the
+heat-and-ignition group: "... that extreme heat and wind raise the chance of ignitions near power lines"), never with the
+broader-hazard phrase; in a fire-weather packet the table sentence states the fire-weather change and "integrated" contains the
+packet's `bridge_clause` ("fire-weather danger describes conditions that favour wildfire; it is not fire occurrence") exactly
+once. Direct (`accept`) groups need no bridge. Post-checks `synthesis_post_checks` v3.4 (v3.3 + the two-hop wording and the
+bridge clause, format-class). A packet with `"item_schema": "benchmark_item_v2a"` yields a schema-v2a item: each cited impact
+group becomes a literature statement of type `impact` with the packet's `item_fields` (`asset_class`, `impact_mechanism`,
+`impact_outcome`, `hazard_relation`, `two_hop`). The format corrective prompt names the two-hop rule. Everything else as v5.2
+(v5.2 is held by its bytes at `a549ea9`, `climrr.p5c.held_bytes`).
+
 Polaris invocation (Sophia vLLM, D-043). Run from the execution clone on Eagle (`$CLIMRR_REPO_ROOT`,
 docs/SOPHIA_RUNBOOK.md) checked out at the pinned commit that carries the packets and provides `climrr`; output
 under the litcollect root (`$LITCOLLECT_ROOT_POLARIS`, config key `litcollect_root_polaris`), never in the clone; the
@@ -122,8 +135,8 @@ ALCF credential in the environment; first check the environment: `python -c "imp
     bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
     cd "$CLIMRR_REPO_ROOT"
     python scripts/litcollect/litsynth_agent.py \\
-        --packets artifacts/benchmark/synth_packets_rung8_v1 \\
-        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/rung8_run1" \\
+        --packets artifacts/benchmark/synth_packets_infra_v1a \\
+        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/infra_run1" \\
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \\
         --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \\
         --sleep 5 --source-commit <PINNED_SHA>
@@ -139,8 +152,8 @@ from litstatement_agent import (  # noqa: E402  (v3)
 from litgroup_agent import DEFAULT_MAX_TOKENS, REASONING_EFFORTS, call_turn, turn_stats  # noqa: E402  (v3)
 from climrr import benchmark_items as bi  # noqa: E402
 
-GENERATOR_VERSION = "litsynth_agent v5.2"
-CHECK_VERSION = bi.SYNTH_CHECK_VERSION_V33
+GENERATOR_VERSION = "litsynth_agent v5.3"
+CHECK_VERSION = bi.SYNTH_CHECK_VERSION_V34
 CORRECTIVE_PROMPT = ("Your reply did not contain a JSON object with the keys \"prompt\" and \"reference_answer\". "
                      "Return the complete JSON object.")
 NOT_REQUIRED_SENTENCE = "Exact values are not required; any statement consistent with the magnitude class counts."
@@ -165,7 +178,9 @@ FORMAT_CORRECTIVE_PROMPT = ("Your item failed these format checks:\n{reasons}\nR
                             "impact group has \"hazard_relation\": \"broader_hazard\", the broader-hazard phrase; never write that an "
                             "asset in the place will fail, is at risk or is vulnerable; write \"this implies more exposure to\" only "
                             "when you cite a group listed in \"place_named_impact_group_ids\". \"wildfire\" appears only inside "
-                            "\"conditions that favour wildfire\".")
+                            "\"conditions that favour wildfire\". TWO-HOP: a sentence citing a group listed in \"two_hop_group_ids\" says "
+                            "\"when wildfires occur, they ...\" or \"wildfires can ...\" (the heat-and-ignition group: \"raise the chance of "
+                            "ignitions near power lines\"); when the packet has a \"bridge_clause\", \"integrated\" contains it exactly once.")
 
 
 def format_corrective_prompt(reasons: list[str]) -> str:
@@ -195,7 +210,9 @@ BROADER HAZARD. The packet's "plain_language" may carry a "broader_hazard_phrase
 
 RUNG 8 (hazard impact on infrastructure). A packet with "rung": 8 names an "asset_class" (with its plain "asset_class_phrase") and carries, besides the table pattern and the family's "driver" groups, "impact" groups: each states how a hazard condition acts on that kind of asset and what happens to it ("impact_mechanism", "impact_outcome"), with its "relevance" to the place ("place_named", "us" or "general") and its "hazard_relation". Write the answer in three parts: (1) the hazard change at the place, as projected, in the table-pattern sentence; (2) for the impact groups, "<scope phrase> that <hazard phrase> <impact mechanism> <asset class phrase>" --- for example "In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can buckle rails and disrupt rail service" --- where the hazard phrase is the "broader_hazard_phrase" when a cited impact group has "hazard_relation": "broader_hazard", else the plain quantity; the driver groups as in any item; and the general closing clause (SCOPE) when no cited group is state- or NCA-specific, which for impact groups is the usual case; (3) never state that an asset, or the asset class, in the place will fail, is at risk, is vulnerable or will be damaged: the research describes such conditions, not a forecast for a particular asset. Only when you cite a group listed in "place_named_impact_group_ids" may you write "For <asset class phrase> in <Place>, this implies more exposure to <impact outcome>". The question asks what the projected change could mean for the asset class at the place and why, in the packet's "question_form"; the required rubric points are the direction, the magnitude class, the place, and the impact pathway in general words (resting on the impact groups); "treating a hazard as a risk" and "stating that a particular asset will fail" are fatal errors.
 
-WILDFIRE (D-073b). In an item about fire-weather danger, the word "wildfire" appears ONLY inside the exact phrase "conditions that favour wildfire" (as in the broader-hazard phrase); "wildfire" anywhere else, "fires" and "burned area" stay forbidden, even if a packet's "must_not_use" lists "wildfire".
+WILDFIRE (D-073b). In an item about fire-weather danger, the word "wildfire" appears ONLY inside the exact phrase "conditions that favour wildfire" (as in the broader-hazard phrase); "wildfire" anywhere else, "fires" and "burned area" stay forbidden, even if a packet's "must_not_use" lists "wildfire". The TWO-HOP forms below are the only exception.
+
+TWO-HOP (D-073c). A rung-8 packet may list "two_hop_group_ids": impact groups whose research is about what wildfires do to the asset, not about the fire-weather danger (or the heat) itself. A sentence resting on such a group takes one of these forms: "<scope phrase> that when wildfires occur, they <impact> <asset class phrase>" or "<scope phrase> that wildfires can <impact> <asset class phrase>"; for the group on heat and ignitions near power lines: "<scope phrase> that extreme heat and wind raise the chance of ignitions near power lines". Do not use the broader-hazard phrase in such a sentence, and write the two-hop groups and the direct groups in separate sentences. Only in these forms may "wildfires" be written. In a fire-weather packet the table sentence states the projected fire-weather change, and when the packet gives a "bridge_clause" ("fire-weather danger describes conditions that favour wildfire; it is not fire occurrence"), "integrated" contains that clause exactly once (it may open its own sentence: "Fire-weather danger describes ..."). A direct impact group (not listed in "two_hop_group_ids") needs no bridge.
 
 QUESTION FORM. The packet's "question_form" gives the form of the question ("id", "name", "skeleton"). Write "prompt" in that form: begin it as the skeleton begins and keep the skeleton's structure (one question, or two short questions for "two_short_questions"), with the packet's plain-language phrases; adjust the grammar so it reads well. Do not copy anything the skeleton does not need.
 
@@ -254,6 +271,7 @@ def _strings(xs):
 def literature_statement(g: dict) -> dict:
     sups = [m for m in g["members"] if m["evidence_role"] in CORE_OR_CITED or m["passage_type"] == "review_synthesis"]
     return {"statement": g["label"] or g["members"][0]["statement"], "statement_type": g["statement_type"],
+            **(g.get("item_fields") or {}),                         # v5.3: a schema-v2a impact statement (D-077)
             "evidence_strength": g["strength_in_packet"],
             "reference_scope": "single_study_observation" if g["strength_in_packet"] == "single_source_supported" else "regional_climate_expectation",
             "group_id": g["group_id"], "group_strength_run": g["group_strength_run"],
@@ -265,7 +283,8 @@ def literature_statement(g: dict) -> dict:
 
 
 def assemble(obj: dict, packet: dict, common: dict, columns) -> tuple[dict, dict]:
-    """(schema-v2 item, tagged reference answer) from the model object and the packet."""
+    """(schema-v2 item --- v2a for a packet with `item_schema` benchmark_item_v2a --- , tagged reference answer) from the model
+    object and the packet."""
     ra = obj.get("reference_answer") if isinstance(obj.get("reference_answer"), dict) else {}
     tagged = {"table_pattern": ra.get("table_pattern") if isinstance(ra.get("table_pattern"), list) else [],
               "literature_interpretation": ra.get("literature_interpretation") if isinstance(ra.get("literature_interpretation"), list) else [],
@@ -289,7 +308,8 @@ def assemble(obj: dict, packet: dict, common: dict, columns) -> tuple[dict, dict
     prompt = _str(obj.get("prompt"))
     frame = packet["provenance"]["item_frame"]
     item = {
-        "schema_version": bi.SCHEMA_VERSION, "item_id": packet["item_id"], "use_case_level": frame["use_case_level"],
+        "schema_version": bi.SCHEMA_VERSION_V2A if packet.get("item_schema") == bi.SCHEMA_VERSION_V2A else bi.SCHEMA_VERSION,
+        "item_id": packet["item_id"], "use_case_level": frame["use_case_level"],
         **{k: _str(obj.get(k)) for k in IDENTITY[:2]}, "reasoning_modalities": frame["reasoning_modalities"],
         **{k: _str(obj.get(k)) for k in IDENTITY[2:]}, "expected_knowledge_level": _str(obj.get("expected_knowledge_level")),
         "prompt": prompt, "source_independent_answerability": _str(obj.get("source_independent_answerability")),

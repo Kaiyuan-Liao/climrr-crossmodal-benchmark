@@ -62,6 +62,11 @@ confirmation); hits there, and "fire" alone anywhere --- not "fire-weather" / "f
 plain quantity phrases (`checks_input.plain_quantity`) --- are reported in `checks.fire_word_report`, not failed. Packets
 without `family` (v3, v4) are checked exactly as before.
 
+**Item schema v2a** (work package P5c hotfix, D-077; `item_schema_v2a.json`): v2 plus the literature statement type
+`impact` (rung 8), which must carry `asset_class` (a lexicon class), `impact_mechanism`, `impact_outcome`, `hazard_relation`
+(governed_term | broader_hazard) and `two_hop`; `schema_version: benchmark_item_v2a`. `schema_errors` picks the schema by
+the item's `schema_version` (v2 items are checked against v2, unchanged).
+
 Nothing here calls a model, reads table values, or touches the concept map,
 column statuses or compatibility rules.
 """
@@ -79,6 +84,8 @@ from climrr.paths import REPO_ROOT
 
 SCHEMA_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "item_schema_v2.json"
 SCHEMA_VERSION = "benchmark_item_v2"
+SCHEMA_V2A_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "item_schema_v2a.json"
+SCHEMA_VERSION_V2A = "benchmark_item_v2a"
 COVERAGE_PATH = REPO_ROOT / "artifacts" / "profiles" / "dictionary_coverage.json"
 LEAKAGE_CHECK_VERSION = "leakage_check v1"
 USE_CASE_LEVELS = range(1, 9)  # ladder v1, D-038 (proposed)
@@ -133,9 +140,15 @@ def resolve_refs(schema: dict) -> dict:
     return walk(schema)
 
 
+def schema_for(item: dict) -> dict:
+    """D-077: schema v2a for an item whose `schema_version` is benchmark_item_v2a, else schema v2."""
+    v2a = isinstance(item, dict) and item.get("schema_version") == SCHEMA_VERSION_V2A
+    return load_schema(SCHEMA_V2A_PATH if v2a else SCHEMA_PATH)
+
+
 def schema_errors(item: dict, schema: dict | None = None) -> list[str]:
     errors: list[str] = []
-    softqa._check(item, resolve_refs(schema or load_schema()), "$", errors)
+    softqa._check(item, resolve_refs(schema or schema_for(item)), "$", errors)
     return errors
 
 
@@ -362,11 +375,19 @@ SYNTH_CHECK_VERSION_V32 = "synthesis_post_checks v3.2"
 # asset-class phrase, and names the broader-hazard phrase when a cited impact group rests on a broader hazard term (else the
 # plain quantity). All format-class. Opt-in: litsynth_agent v5.2 passes it; v3.2 is unchanged.
 SYNTH_CHECK_VERSION_V33 = "synthesis_post_checks v3.3"
+# v3.4 (work package P5c hotfix, D-073c): v3.3 plus the two-hop wording, applied when `checks_input.rung8.two_hop_group_ids`
+# is present (packets v1a): a literature sentence citing a two-hop group must contain "when wildfires occur", "wildfires can"
+# or "raise the chance of ignition" (`TWO_HOP_RE`), and is exempt from the hazard-phrase rule (the direct groups it cites
+# keep it); when the item cites a two-hop group and the packet gives a `bridge_clause` (fire-weather packets), the integrated
+# paragraph contains it exactly once; in a fire-weather item the two two-hop phrases are masked like "conditions that favour
+# wildfire" everywhere but the prompt. All format-class. Opt-in: litsynth_agent v5.3 passes it; v3.3 is unchanged.
+SYNTH_CHECK_VERSION_V34 = "synthesis_post_checks v3.4"
 SYNTH_CHECK_VERSIONS = (SYNTH_CHECK_VERSION, SYNTH_CHECK_VERSION_V23, SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31,
-                        SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33)
-_V3_PLUS = (SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31, SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33)
-_V31_PLUS = (SYNTH_CHECK_VERSION_V31, SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33)
-_V32_PLUS = (SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33)
+                        SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34)
+_V3_PLUS = (SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31, SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34)
+_V31_PLUS = (SYNTH_CHECK_VERSION_V31, SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34)
+_V32_PLUS = (SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34)
+_V33_PLUS = (SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34)
 #: v3.1 (D-067): the driver / cause words a sentence resting only on context groups must not carry next to the context phrase.
 DRIVER_WORD_RE = re.compile(r"\bdriven\s+by\b|\bdrivers?\b|\bdrives?\b|\bcause[sd]?\b|\bcausing\b|\bbecause\s+of\b", re.I)
 #: v3.1 (DR-DESC-1 v4, D-066): the relative tercile is written as a comparison with other states, never with these words.
@@ -608,9 +629,15 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
         hedge_report = hedge_by_strength(lit_s, strengths)
     fire_report = None
     if check_version in _V3_PLUS and checks_input.get("family") == FWI_FAMILY:
-        mask = check_version == SYNTH_CHECK_VERSION_V33                  # D-073b
+        mask = check_version in _V33_PLUS                                # D-073b
+        hop = check_version == SYNTH_CHECK_VERSION_V34 and bool((checks_input.get("rung8") or {}).get("two_hop_group_ids"))  # D-073c
+
+        def masked(w: str, t: str) -> str:
+            t = mask_wildfire_phrase(t) if mask else t
+            return mask_two_hop_phrases(t) if hop and w != "prompt" else t
+
         reasons += [f"{w}: fire-weather wording (an FWI is never fire occurrence): {m!r} in graded text"
-                    for w, t in every if w not in FWI_WRONG_ANSWER_FIELDS for m in fwi_forbidden_flags(mask_wildfire_phrase(t) if mask else t)]
+                    for w, t in every if w not in FWI_WRONG_ANSWER_FIELDS for m in fwi_forbidden_flags(masked(w, t))]
         plain = [q for q in checks_input.get("plain_quantity") or [] if isinstance(q, str) and q]
         fire_report = [{"field": w, "word": m, "kind": "forbidden_word_in_wrong_answer_list"}
                        for w, t in every if w in FWI_WRONG_ANSWER_FIELDS for m in fwi_forbidden_flags(t)] + \
@@ -625,8 +652,8 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
         reasons += sr
         reasons += question_form_reasons(item.get("prompt") or "", checks_input)
     rung8_rep = None
-    if check_version == SYNTH_CHECK_VERSION_V33 and checks_input.get("rung8"):
-        r8, rung8_rep = rung8_reasons(lit_s, integrated, every, checks_input)
+    if check_version in _V33_PLUS and checks_input.get("rung8"):
+        r8, rung8_rep = rung8_reasons(lit_s, integrated, every, checks_input, two_hop=check_version == SYNTH_CHECK_VERSION_V34)
         reasons += r8
 
     schema = schema_errors(item)
@@ -748,6 +775,15 @@ def mask_wildfire_phrase(text: str) -> str:
     """v3.3 (D-073b): `text` with every "conditions that favour wildfire" replaced by a neutral placeholder word, so that
     FWI_FORBIDDEN_RE sees only the other uses of "wildfire"."""
     return _WILDFIRE_PHRASE_RE.sub("conditions that favour WFPHRASE", text or "")
+
+
+#: D-073c (work package P5c hotfix): the two-hop phrases that may write "wildfires" in a fire-weather item (post-checks v3.4).
+_TWO_HOP_MASK_RE = re.compile(r"\b(when\s+)wildfires(\s+occur)\b|\bwildfires(\s+can)\b", re.I)
+
+
+def mask_two_hop_phrases(text: str) -> str:
+    """v3.4 (D-073c): `text` with "wildfires" inside "when wildfires occur" / "wildfires can" replaced by a placeholder."""
+    return _TWO_HOP_MASK_RE.sub(lambda m: f"{m.group(1)}WFHOP{m.group(2)}" if m.group(1) else f"WFHOP{m.group(3)}", text or "")
 
 
 def generality_flags(text: str) -> list[str]:
@@ -885,7 +921,18 @@ IMPLIES_EXPOSURE_RE = re.compile(r"\bthis\s+implies\s+more\s+exposure\s+to\b", r
 RUNG8_WRONG_ANSWER_FIELDS = FWI_WRONG_ANSWER_FIELDS
 
 
-def rung8_reasons(lit_s: list[dict], integrated: str, every: list[tuple[str, str]], checks_input: dict) -> tuple[list[str], dict]:
+#: D-073c: a sentence resting on a two-hop group contains one of these.
+TWO_HOP_RE = re.compile(r"\bwhen\s+wildfires\s+occur\b|\bwildfires\s+can\b|\braise\s+the\s+chance\s+of\s+ignitions?\b", re.I)
+
+
+def bridge_count(text: str, bridge: str) -> int:
+    """How often the D-073c bridge clause occurs in `text` (case and whitespace normalised)."""
+    norm = lambda x: re.sub(r"\s+", " ", x or "").strip().lower()  # noqa: E731
+    return norm(text).count(norm(bridge)) if bridge else 0
+
+
+def rung8_reasons(lit_s: list[dict], integrated: str, every: list[tuple[str, str]], checks_input: dict,
+                  two_hop: bool = False) -> tuple[list[str], dict]:
     """v3.3 (D-075). `checks_input.rung8`: {impact_group_ids, place_named_impact_group_ids, group_hazard_relation
     {group_id: governed_term | broader_hazard}, asset_class_phrase, broader_hazard_phrase, quantity_phrases}. Failures:
     an asset-failure claim anywhere in the graded text (the wrong-answer lists excepted); "this implies more exposure to"
@@ -901,7 +948,9 @@ def rung8_reasons(lit_s: list[dict], integrated: str, every: list[tuple[str, str
     asset = (r8.get("asset_class_phrase") or "").lower()
     broader = (r8.get("broader_hazard_phrase") or "").lower()
     quantity = [q.lower() for q in r8.get("quantity_phrases") or [] if q]
-    out, cited_place_named = [], False
+    hop_ids = set(r8.get("two_hop_group_ids") or []) if two_hop else set()      # v3.4 (D-073c)
+    bridge = (r8.get("bridge_clause") or "") if two_hop else ""
+    out, cited_place_named, cited_hop = [], False, []
     for w, t in every:
         if w in RUNG8_WRONG_ANSWER_FIELDS:
             continue
@@ -921,17 +970,32 @@ def rung8_reasons(lit_s: list[dict], integrated: str, every: list[tuple[str, str
                        + " or ".join(repr(o + " that") for o in opens))
         if asset and asset not in low:
             out.append(f"literature_interpretation[{i}]: rung 8 impact sentence (D-075): must name the asset class {asset!r}")
-        if any(rel.get(g) == "broader_hazard" for g in cited_impact):
+        direct = [g for g in cited_impact if g not in hop_ids]
+        hop = [g for g in cited_impact if g in hop_ids]
+        if not direct:
+            pass                                                     # v3.4: a two-hop sentence takes the D-073c wording instead
+        elif any(rel.get(g) == "broader_hazard" for g in direct):
             if broader and broader not in low:
                 out.append(f"literature_interpretation[{i}]: rung 8 impact sentence (D-075): must name the broader hazard {broader!r}")
         elif quantity and not any(q in low for q in quantity):
             out.append(f"literature_interpretation[{i}]: rung 8 impact sentence (D-075): must name the hazard {quantity[0]!r}")
+        if hop:
+            cited_hop += [g for g in hop if g not in cited_hop]
+            if not TWO_HOP_RE.search(text):
+                out.append(f"literature_interpretation[{i}]: two-hop wording (D-073c): a sentence citing a two-hop group must say "
+                           "'when wildfires occur', 'wildfires can' or 'raise the chance of ignition'")
     for w, t in every:
         if w in RUNG8_WRONG_ANSWER_FIELDS:
             continue
         if IMPLIES_EXPOSURE_RE.search(t or "") and not cited_place_named:
             out.append(f"{w}: rung 8 place exposure (D-075): 'this implies more exposure to' needs a cited place-named impact group")
-    return out, {"cited_place_named_impact_group": cited_place_named, "impact_group_ids": sorted(impact)}
+    rep = {"cited_place_named_impact_group": cited_place_named, "impact_group_ids": sorted(impact)}
+    if two_hop:
+        n = bridge_count(integrated, bridge)
+        if cited_hop and bridge and n != 1:
+            out.append(f"integrated: bridge clause (D-073c): must contain {bridge!r} exactly once (found {n})")
+        rep.update({"cited_two_hop_group_ids": cited_hop, "bridge_clause_count": n})
+    return out, rep
 
 
 def opening_trigram(text: str) -> str:
@@ -976,7 +1040,10 @@ _FORMAT_REASON_RES = (re.compile(r"^[^:]+: number-word '.*' does not trace to an
                       # v3.3 only emits these (D-075, rung 8)
                       re.compile(r"^[^:]+: rung 8 asset-failure claim \(D-075\): .+$"),
                       re.compile(r"^literature_interpretation\[\d+\]: rung 8 impact sentence \(D-075\): .+$"),
-                      re.compile(r"^[^:]+: rung 8 place exposure \(D-075\): .+$"))
+                      re.compile(r"^[^:]+: rung 8 place exposure \(D-075\): .+$"),
+                      # v3.4 only emits these (D-073c, two-hop wording)
+                      re.compile(r"^literature_interpretation\[\d+\]: two-hop wording \(D-073c\): .+$"),
+                      re.compile(r"^integrated: bridge clause \(D-073c\): .+$"))
 
 
 def number_word_value(word: str) -> float | None:

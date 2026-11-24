@@ -3701,3 +3701,69 @@ code emits, and the next GUIDANCE packet still chooses.
   `artifacts/benchmark/item_seeds_infra_v1*`, `artifacts/benchmark/pilot_selection_infra_v1.yaml`,
   `src/climrr/synthpackets_infra.py`, `scripts/build_synth_packets_infra.py`, `artifacts/benchmark/synth_packets_infra_v1/`,
   `src/climrr/mentor_sheet_alvi.py`, `scripts/build_mentor_sheet.py`, `tests/test_p5c.py`, `docs/P5_INFRA_IMPACT_DESIGN.md`.
+
+## D-073c --- Two-hop fire wording
+
+- **Date:** 2026-11-24.
+- **Status:** **decided** (COORDINATOR, work package P5c hotfix).
+- **Context.** Of the fire-weather impact groups most rest on fire occurrence (wildfire near lines, smoke on PV, wildfire on water
+  infrastructure), not on fire-weather danger itself (D-076 escalation (3)). The COORDINATOR accepted 13 of them as
+  `accept_two_hop` (D-078): usable behind an item only with a wording that keeps the two hops apart.
+- **Decision.** A sentence resting on an `accept_two_hop` group takes the form "<scope opener> that when wildfires occur, they
+  <impact> <asset class>" or "… that wildfires can <impact> <asset class>" (the heat -> ignition group: "… that extreme heat and wind
+  raise the chance of ignitions near power lines"); the item's table sentence states the fire-weather change; the integrated
+  paragraph contains, once, the bridge clause "fire-weather danger describes conditions that favour wildfire; it is not fire
+  occurrence". A sentence citing a two-hop group without "when wildfires occur | wildfires can | raise the chance of ignition"
+  fails (format class, one corrective turn). `accept` fire groups need no bridge. Into synthesis prompt v5.3 and post-checks v3.4.
+- **Recorded (EXECUTOR).** `litsynth_agent.py` v5.3 (system prompt `1157f732…5ea5`; v5.2, never run, held at `a549ea9`,
+  `climrr.p5c`); post-checks v3.4 (`TWO_HOP_RE`, `bridge_count`; the two phrases masked in a fire-weather item's graded text
+  outside the prompt; a two-hop sentence exempt from the hazard-phrase rule).
+- **For confirmation:** (a) the bridge clause is required only in fire-weather items (it names fire-weather danger); the two
+  heat two-hop groups (heat -> ignition in BI-P5-0001; "heat-driven vegetation fires threaten railway corridors" in BI-P5-0002) get
+  the sentence form only, and "wildfire" leaves those heat packets' `must_not_use`; (b) a two-hop sentence does not carry the
+  broader-hazard phrase; (c) "raise the chance of ignition" matches "ignitions".
+- **Affected files:** `scripts/litcollect/litsynth_agent.py`, `src/climrr/benchmark_items.py`, `src/climrr/synthpackets_infra.py`,
+  `src/climrr/p5c.py`, `tests/test_p5c_hotfix.py`, `tests/test_p5b.py`, `docs/P5_INFRA_IMPACT_DESIGN.md` §19.
+
+## D-077 --- Item schema v2a: literature statement type `impact`
+
+- **Date:** 2026-11-24.
+- **Status:** **decided** (COORDINATOR, work package P5c hotfix; resolves D-076 escalation (1)).
+- **Decision.** `item_schema_v2a.json` = schema v2 plus the literature statement type `impact` with required `asset_class`
+  (lexicon class), `impact_mechanism`, `impact_outcome`, `hazard_relation` ∈ {governed_term, broader_hazard}, `two_hop` (bool);
+  `schema_version: benchmark_item_v2a`. The validator accepts both; v2 items are unchanged; rung-8 items validate against v2a.
+  Hash pinned.
+- **Recorded (EXECUTOR).** `deca317c…d2d8` (in `data/manifest.json`); `benchmark_items.schema_for` dispatches on
+  `schema_version`; the conditional requirement is an `if` / `then`, now evaluated by `climrr.softqa._check`; v2 still refuses
+  `impact`.
+- **For confirmation:** the field types (strings for mechanism / outcome, the 16-class enum for `asset_class`); mechanism / outcome
+  = the members' distinct values joined by "; ", the group label where the members carry none (`impact_fields_source:
+  group_label`; one attached group, the relabelled heat driver group in BI-P5-0001).
+- **Affected files:** `data/metadata/benchmark/item_schema_v2a.json`, `data/manifest.json`, `src/climrr/benchmark_items.py`,
+  `src/climrr/softqa.py`, `scripts/litcollect/litsynth_agent.py`, `tests/test_p5c_hotfix.py`.
+
+## D-078 --- Infra impact-group dispositions v1
+
+- **Date:** 2026-11-24.
+- **Status:** **decided** (COORDINATOR 2026-11-24, confirmed by Kaiyuan; resolves D-076 escalations (2) and (3)).
+- **Decision.** `group_dispositions_infra_v1.csv` (103 rows, one per review-list record) is applied before the rung-8 seeds,
+  selection and packets are rebuilt: `accept`, `accept_two_hop` (D-073c wording only), `relabel:<claim_about>`,
+  `merge_with:<group_id>`, `not_about_family`, `reject`, `keep_excluded`; `asset_class_override` reassigns the class where filled;
+  Kaiyuan's column overrides where filled; no-disposition groups excluded (`no_disposition`), as before. Packets carry
+  `review_state: impact_groups_reviewed`.
+- **Recorded (EXECUTOR).** File `9b94e028…1bef` (byte copy, CRLF; in `data/manifest.json`); `climrr.dispositions_infra`. Counts:
+  accept 41, accept_two_hop 13, relabel 10 (6 into hazard_impact_on_asset, 4 into impact_or_exposure), merge_with 1, not_about_family 9,
+  reject 15, keep_excluded 14; 17 overrides; Kaiyuan's column empty; 40 run records without a row excluded. 60 usable impact groups
+  (13 two-hop). Seeds v1a 686, selection v1a 8 of 8 cells, packets `synth_packets_infra_v1a/` (manifest `829d80cf…5bf2`). BI-P5-0007
+  filled by the relabelled standby-cost singleton; BI-P5-0004 falls back to California, general; BI-P5-0005 moves Arizona ->
+  California (every place-named fire x energy group rejected); BI-P5-0006 evidence becomes `none`.
+- **For confirmation:** (a) the selection's candidate states are read through the dispositions (a state counts only when a cited
+  member of a usable impact group names it), which moves BI-P5-0004 and BI-P5-0005 to the California fallback; (b) a relabel into
+  hazard_impact_on_asset makes a driver-partition group an impact group (two records); (c) the override `other` (not a lexicon class)
+  accepted on `LG-infra_heat_index-driver-c1-005` (no pilot cell uses it).
+- **Affected files:** `data/metadata/benchmark/group_dispositions_infra_v1.csv`, `src/climrr/dispositions_infra.py`,
+  `src/climrr/seeds_infra.py`, `scripts/build_seeds_infra.py`, `src/climrr/synthpackets_infra.py`,
+  `scripts/build_synth_packets_infra.py`, `artifacts/litgroups/infra_run1/groups_dispositioned_v1.jsonl`,
+  `artifacts/litgroups/infra_run1/dispositions_v1_applied.json`, `artifacts/benchmark/item_seeds_infra_v1a*`,
+  `artifacts/benchmark/pilot_selection_infra_v1a.yaml`, `artifacts/benchmark/synth_packets_infra_v1a/`, `tests/test_p5c_hotfix.py`,
+  `docs/P5_INFRA_IMPACT_DESIGN.md` §18, §20.

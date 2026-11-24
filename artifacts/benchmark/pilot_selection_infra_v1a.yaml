@@ -1,0 +1,238 @@
+version: pilot_selection_infra v1a
+rule: D-075 rung-8 pilot selection
+rung: 8
+review_state: impact_groups_reviewed
+candidate_states_rule: 'through the dispositions (D-078): states named by a cited member of a usable impact group of the cell'
+table_setting:
+  heat_index:
+    metric: heatindex_days_above_95F
+    statistic: absolute_change
+    horizon: mid
+  fire_weather_index:
+    metric: fwi_summer_seasonal_value
+    statistic: absolute_change
+    horizon: mid
+cells:
+- - heat_index
+  - energy
+- - heat_index
+  - transportation_systems
+- - heat_index
+  - water_and_wastewater
+- - heat_index
+  - healthcare_and_public_health
+- - fire_weather_index
+  - energy
+- - fire_weather_index
+  - transportation_systems
+- - fire_weather_index
+  - emergency_services
+- - fire_weather_index
+  - communications
+selected:
+- item_id: BI-P5-0001
+  family: heat_index
+  asset_class: energy
+  state: Virginia
+  state_basis: largest table change among states with a place-named impact statement
+  candidate_states:
+  - California
+  - Virginia
+  place_named_impact_evidence: place_named_impact_statement
+  table_change: 12.461513001092198
+  order: 1
+  seed_id: SD8-TP1-00111-energy
+  pattern_id: TP1-00111
+  question_form_id: QF-08
+  impact_group_ids:
+  - LG-infra_heat_index__energy-impact-c1-001
+  - LG-infra_heat_index__energy-impact-c1-006
+  - LG-infra_heat_index__energy-impact-c1-007
+  - LG-infra_heat_index__energy-impact-c1-008
+  - LG-infra_heat_index__energy-impact-c1-002
+  - LG-infra_heat_index__energy-impact-c1-003
+  - LG-infra_heat_index__energy-impact-c1-012
+  - LG-infra_heat_index__energy-impact-c2-001
+  - LG-infra_heat_index__energy-impact-c2-002
+  - LG-infra_heat_index-driver-c1-007
+  - LG-infra_heat_index__energy-impact-c1-004
+  - LG-infra_heat_index__energy-impact-c1-005
+  - LG-infra_heat_index__energy-impact-c1-009
+  - LG-infra_heat_index__energy-impact-c1-010
+  - LG-infra_heat_index__energy-impact-c1-011
+  - LG-infra_heat_index__energy-impact-c1-013
+  - LG-infra_heat_index__energy-impact-c1-014
+  - LG-infra_heat_index__energy-impact-c1-015
+  - LG-infra_heat_index__energy-impact-c2-003
+  - LG-infra_heat_index__energy-impact-c2-004
+  - LG-infra_heat_index__energy-impact-c2-005
+  - LG-infra_heat_index__energy-impact-c2-006
+  - LG-infra_heat_index__energy-impact-c2-008
+  - LG-infra_heat_index__energy-impact-c2-012
+  place_named_impact_group_ids:
+  - LG-infra_heat_index__energy-impact-c1-001
+  - LG-infra_heat_index__energy-impact-c1-006
+  - LG-infra_heat_index__energy-impact-c1-007
+  - LG-infra_heat_index__energy-impact-c1-008
+  needs_general_clause: false
+  two_hop_group_ids:
+  - LG-infra_heat_index__energy-impact-c1-003
+- item_id: BI-P5-0002
+  family: heat_index
+  asset_class: transportation_systems
+  state: Arizona
+  state_basis: largest table change among states with a place-named impact statement
+  candidate_states:
+  - Arizona
+  place_named_impact_evidence: place_named_impact_statement
+  table_change: 10.271200803886398
+  order: 2
+  seed_id: SD8-TP1-00069-transportation_systems
+  pattern_id: TP1-00069
+  question_form_id: QF-09
+  impact_group_ids:
+  - LG-infra_heat_index__transportation_systems-impact-c1-001
+  - LG-infra_heat_index__transportation_systems-impact-c1-002
+  - LG-infra_heat_index__other_assets-impact-c1-003
+  - LG-infra_heat_index__other_assets-impact-c1-004
+  - LG-infra_heat_index__transportation_systems-impact-c1-003
+  - LG-infra_heat_index__transportation_systems-impact-c1-007
+  - LG-infra_heat_index__transportation_systems-impact-c1-009
+  - LG-infra_heat_index__transportation_systems-impact-c1-010
+  place_named_impact_group_ids:
+  - LG-infra_heat_index__transportation_systems-impact-c1-001
+  needs_general_clause: false
+  two_hop_group_ids:
+  - LG-infra_heat_index__transportation_systems-impact-c1-007
+- item_id: BI-P5-0003
+  family: heat_index
+  asset_class: water_and_wastewater
+  state: California
+  state_basis: 'fallback: no state with a place-named impact statement of this class'
+  candidate_states: []
+  place_named_impact_evidence: none
+  table_change: 8.983409978493102
+  order: 3
+  seed_id: SD8-TP1-00071-water_and_wastewater
+  pattern_id: TP1-00071
+  question_form_id: QF-10
+  impact_group_ids:
+  - LG-infra_heat_index__other_assets-impact-c1-006
+  - LG-infra_heat_index__other_assets-impact-c1-007
+  - LG-infra_heat_index__other_assets-impact-c1-009
+  place_named_impact_group_ids: []
+  needs_general_clause: true
+  two_hop_group_ids: []
+- item_id: BI-P5-0004
+  family: heat_index
+  asset_class: healthcare_and_public_health
+  state: California
+  state_basis: 'fallback: no state with a place-named impact statement of this class'
+  candidate_states: []
+  place_named_impact_evidence: none
+  table_change: 8.983409978493102
+  order: 4
+  seed_id: SD8-TP1-00071-healthcare_and_public_health
+  pattern_id: TP1-00071
+  question_form_id: QF-08
+  impact_group_ids:
+  - LG-infra_heat_index__healthcare_and_public_health-impact-c1-006
+  - LG-infra_heat_index__healthcare_and_public_health-impact-c1-007
+  - LG-infra_heat_index__healthcare_and_public_health-impact-c1-008
+  - LG-infra_heat_index__healthcare_and_public_health-impact-c1-009
+  place_named_impact_group_ids: []
+  needs_general_clause: true
+  two_hop_group_ids: []
+- item_id: BI-P5-0005
+  family: fire_weather_index
+  asset_class: energy
+  state: California
+  state_basis: 'fallback: no state with a place-named impact statement of this class'
+  candidate_states: []
+  place_named_impact_evidence: none
+  table_change: 2.245804468117273
+  order: 5
+  seed_id: SD8-TP1-01463-energy
+  pattern_id: TP1-01463
+  question_form_id: QF-09
+  impact_group_ids:
+  - LG-infra_fire_weather_index__energy-impact-c1-005
+  - LG-infra_fire_weather_index__energy-impact-c1-010
+  - LG-infra_fire_weather_index__energy-impact-c1-001
+  - LG-infra_fire_weather_index__energy-impact-c1-002
+  - LG-infra_fire_weather_index__energy-impact-c1-003
+  - LG-infra_fire_weather_index__energy-impact-c1-004
+  - LG-infra_fire_weather_index__energy-impact-c1-013
+  - LG-infra_fire_weather_index__energy-impact-c1-014
+  place_named_impact_group_ids: []
+  needs_general_clause: true
+  two_hop_group_ids:
+  - LG-infra_fire_weather_index__energy-impact-c1-005
+  - LG-infra_fire_weather_index__energy-impact-c1-010
+  - LG-infra_fire_weather_index__energy-impact-c1-001
+  - LG-infra_fire_weather_index__energy-impact-c1-002
+  - LG-infra_fire_weather_index__energy-impact-c1-003
+  - LG-infra_fire_weather_index__energy-impact-c1-004
+  - LG-infra_fire_weather_index__energy-impact-c1-013
+- item_id: BI-P5-0006
+  family: fire_weather_index
+  asset_class: transportation_systems
+  state: California
+  state_basis: 'fallback: no state with a place-named impact statement of this class'
+  candidate_states: []
+  place_named_impact_evidence: none
+  table_change: 2.245804468117273
+  order: 6
+  seed_id: SD8-TP1-01463-transportation_systems
+  pattern_id: TP1-01463
+  question_form_id: QF-10
+  impact_group_ids:
+  - LG-infra_fire_weather_index__transportation_systems-impact-c1-003
+  - LG-infra_fire_weather_index__transportation_systems-impact-c1-004
+  - LG-infra_fire_weather_index__transportation_systems-impact-c1-005
+  place_named_impact_group_ids: []
+  needs_general_clause: true
+  two_hop_group_ids:
+  - LG-infra_fire_weather_index__transportation_systems-impact-c1-003
+- item_id: BI-P5-0007
+  family: fire_weather_index
+  asset_class: emergency_services
+  state: California
+  state_basis: 'fallback: no state with a place-named impact statement of this class'
+  candidate_states: []
+  place_named_impact_evidence: none
+  table_change: 2.245804468117273
+  order: 7
+  seed_id: SD8-TP1-01463-emergency_services
+  pattern_id: TP1-01463
+  question_form_id: QF-08
+  impact_group_ids:
+  - LG-infra_fire_weather_index__other_assets-impact-c1-012
+  place_named_impact_group_ids: []
+  needs_general_clause: true
+  two_hop_group_ids: []
+- item_id: BI-P5-0008
+  family: fire_weather_index
+  asset_class: communications
+  state: California
+  state_basis: 'fallback: no state with a place-named impact statement of this class'
+  candidate_states: []
+  place_named_impact_evidence: none
+  table_change: 2.245804468117273
+  order: 8
+  seed_id: SD8-TP1-01463-communications
+  pattern_id: TP1-01463
+  question_form_id: QF-09
+  impact_group_ids:
+  - LG-infra_fire_weather_index__other_assets-impact-c1-004
+  place_named_impact_group_ids: []
+  needs_general_clause: true
+  two_hop_group_ids: []
+missing: []
+question_forms:
+  version: question_forms_v2
+  sha256: 520aafa0804b5308be7e9e59b8316d9fbe0d8b60b335da4a0414ed0a17ab283e
+  rung8:
+  - QF-08
+  - QF-09
+  - QF-10

@@ -39,6 +39,18 @@ states with a place-named impact statement of the cell's class, `none` for the C
 carry `review_state: impact_groups_unreviewed` until the COORDINATOR's dispositions of the impact groups are applied
 (P5c-hotfix; `disposition_exclude` on a group record keeps it out, as before).
 
+**P5c hotfix (D-078; v1a).** `build_seeds(..., reviewed=True)` over the grouping run's records with the COORDINATOR's
+dispositions applied (`climrr.dispositions_infra.apply`): `disposition_exclude` keeps a record out (as before); a usable
+record's asset class is its `asset_class_override` where filled (else its members' classes), and its view carries
+`two_hop` (an `accept_two_hop` group, usable only with the D-073c wording), `disposition` and `merged_from`; strengths are
+recomputed from the (merged) members as before. The pilot selection then reads its candidate states **through the
+dispositions** (`select_pilot(..., views=...)`): a state counts when a cited member of a usable impact group of the cell's
+family and class names it (litgeo v2 class state), so that a statement the COORDINATOR rejected or relabelled out of the
+impact claim no longer makes its state a candidate (EXECUTOR reading of "rebuild the selection with the dispositions
+applied", for confirmation). Version `seeds_infra v1a` / `pilot_selection_infra v1a`, `review_state:
+impact_groups_reviewed`, files `item_seeds_infra_v1a.jsonl` (+ summary) and `pilot_selection_infra_v1a.yaml`; v1 is kept and
+rebuilds byte-identically (no dispositions, `reviewed=False`).
+
 No model call; no table value computed (values are read from the pattern records).
 """
 
@@ -55,6 +67,7 @@ from climrr.checksums import sha256_file
 from climrr.paths import REPO_ROOT
 
 VERSION = "seeds_infra v1"
+VERSION_V1A = "seeds_infra v1a"
 RULE_ID = "DR-SEED-INFRA-1"
 DECISION = "D-075"
 RUNG = 8
@@ -76,6 +89,12 @@ SEEDS_SUMMARY_PATH = REPO_ROOT / "artifacts" / "benchmark" / "item_seeds_infra_v
 SELECTION_PATH = REPO_ROOT / "artifacts" / "benchmark" / "pilot_selection_infra_v1.yaml"
 ITEM_ID_PREFIX = "BI-P5-"
 REVIEW_STATE_UNREVIEWED = "impact_groups_unreviewed"
+REVIEW_STATE_REVIEWED = "impact_groups_reviewed"
+SEEDS_V1A_PATH = REPO_ROOT / "artifacts" / "benchmark" / "item_seeds_infra_v1a.jsonl"
+SEEDS_V1A_SUMMARY_PATH = REPO_ROOT / "artifacts" / "benchmark" / "item_seeds_infra_v1a_summary.json"
+SELECTION_V1A_PATH = REPO_ROOT / "artifacts" / "benchmark" / "pilot_selection_infra_v1a.yaml"
+GROUPS_DISPOSITIONED_PATH = REPO_ROOT / "artifacts" / "litgroups" / "infra_run1" / "groups_dispositioned_v1.jsonl"
+DISPOSITIONS_LOG_PATH = REPO_ROOT / "artifacts" / "litgroups" / "infra_run1" / "dispositions_v1_applied.json"
 
 
 # --- table patterns --------------------------------------------------------------------------------------
@@ -139,12 +158,18 @@ def impact_group_view(g: dict, ctx: Context) -> dict | None:
                                 "passage_type": m["proposal"].get("passage_type")} for m in ms], ctx.canon)
     if strength == "background_only":
         return None
-    return {"group_id": g["group_id"], "family": fams.pop(), "members": [m["statement_id"] for m in ms],
-            "cited_members": [m["statement_id"] for m in cc],
-            "asset_classes": dict(sorted(Counter(m["proposal"].get("asset_class") or "" for m in ms).items())),
-            "hazard_relation": "broader_hazard" if any(m.get("hazard_relation") == "broader_hazard" for m in ms) else "governed_term",
-            "evidence_strength": strength, "n_papers": li.n_independent([m["paper_item_id"] for m in cc], ctx.canon),
-            "label": g.get("label")}
+    override = g.get("asset_class_override")
+    classes = {override: len(ms)} if override else dict(sorted(Counter(m["proposal"].get("asset_class") or "" for m in ms).items()))
+    out = {"group_id": g["group_id"], "family": fams.pop(), "members": [m["statement_id"] for m in ms],
+           "cited_members": [m["statement_id"] for m in cc],
+           "asset_classes": classes,
+           "hazard_relation": "broader_hazard" if any(m.get("hazard_relation") == "broader_hazard" for m in ms) else "governed_term",
+           "evidence_strength": strength, "n_papers": li.n_independent([m["paper_item_id"] for m in cc], ctx.canon),
+           "label": g.get("label")}
+    if "disposition" in g:                                            # P5c hotfix (D-078): a dispositioned record
+        out.update({"disposition": g["disposition"], "two_hop": bool(g.get("two_hop")), "asset_class_override": override,
+                    "merged_from": list(g.get("merged_from") or [])})
+    return out
 
 
 def group_tier(v: dict, state: str, ctx: Context) -> str:
@@ -159,10 +184,15 @@ def impact_rank_key(x: dict) -> tuple:
 # --- seeds -----------------------------------------------------------------------------------------------
 
 
+def impact_views(groups: list[dict], ctx: Context) -> list[dict]:
+    return [v for v in (impact_group_view(g, ctx) for g in groups) if v]
+
+
 def build_seeds(seeds_v3: list[dict], groups: list[dict], ctx: Context, rung3_driver_ids=None,
-                setting: dict | None = None) -> list[dict]:
-    """DR-SEED-INFRA-1 seeds, ranked. `rung3_driver_ids(v3_seed) -> [group_id]` (None: recorded as not attached)."""
-    views = [v for v in (impact_group_view(g, ctx) for g in groups) if v]
+                setting: dict | None = None, reviewed: bool = False) -> list[dict]:
+    """DR-SEED-INFRA-1 seeds, ranked. `rung3_driver_ids(v3_seed) -> [group_id]` (None: recorded as not attached).
+    `reviewed`: `groups` carry the COORDINATOR's dispositions (P5c hotfix, v1a)."""
+    views = impact_views(groups, ctx)
     out = []
     for fam in TABLE_SETTING:
         pats = table_patterns(seeds_v3, fam, (setting or {}).get(fam))
@@ -177,7 +207,8 @@ def build_seeds(seeds_v3: list[dict], groups: list[dict], ctx: Context, rung3_dr
                     continue
                 ig.sort(key=impact_rank_key)
                 p = s3["pattern"]
-                out.append({"seed_id": f"SD8-{p['pattern_id']}-{a}", "rule": RULE_ID, "version": VERSION, "decision": DECISION,
+                out.append({"seed_id": f"SD8-{p['pattern_id']}-{a}", "rule": RULE_ID, "version": VERSION_V1A if reviewed else VERSION,
+                            "decision": DECISION,
                             "rung": RUNG, "family": fam, "place": state, "asset_class": a, "pattern_id": p["pattern_id"],
                             "rung3_seed_id": s3["seed_id"], "table_change": table_change(s3),
                             "table_setting": dict((setting or {}).get(fam) or TABLE_SETTING[fam]),
@@ -188,7 +219,8 @@ def build_seeds(seeds_v3: list[dict], groups: list[dict], ctx: Context, rung3_dr
                             "driver_group_ids": drivers,
                             "driver_groups_rule": "as in rung 3: synthpackets.packet_groups(3, ...), role driver (LITCORPUS-02 grouping run 2, dispositions)",
                             "best_strength": min((x["evidence_strength"] for x in ig), key=STRENGTH_ORDER.get),
-                            "review_state": REVIEW_STATE_UNREVIEWED,
+                            "review_state": REVIEW_STATE_REVIEWED if reviewed else REVIEW_STATE_UNREVIEWED,
+                            **({"two_hop_group_ids": [x["group_id"] for x in ig if x.get("two_hop")]} if reviewed else {}),
                             "n_papers_impact": li.n_independent([ctx.by_id[s]["paper_item_id"] for x in ig for s in x["cited_members"]], ctx.canon)})
     out.sort(key=lambda s: (STRENGTH_ORDER[s["best_strength"]], -s["n_papers_impact"], s["pattern_id"], s["asset_class"]))
     for k, s in enumerate(out, 1):
@@ -199,9 +231,18 @@ def build_seeds(seeds_v3: list[dict], groups: list[dict], ctx: Context, rung3_dr
 # --- pilot selection -------------------------------------------------------------------------------------
 
 
-def place_named_states(records: list[dict], ctx: Context, family: str, asset_class: str) -> list[str]:
-    """States named (litgeo v2 class state) by a passing impact statement of `family` and `asset_class`."""
+def place_named_states(records: list[dict], ctx: Context, family: str, asset_class: str, views: list[dict] | None = None) -> list[str]:
+    """States named (litgeo v2 class state) by a passing impact statement of `family` and `asset_class`. With `views` (P5c
+    hotfix, the dispositioned impact-group views): by a cited member of a usable impact group of `family` and `asset_class`."""
     out = set()
+    if views is not None:
+        for v in views:
+            if v["family"] == family and asset_class in v["asset_classes"]:
+                for sid in v["cited_members"]:
+                    g = ctx.geo[sid]
+                    if g["class"] == "state":
+                        out.update(g["states"])
+        return sorted(out)
     for r in records:
         if r.get("impact_candidate") and r["statement_family"] == family and r["proposal"].get("asset_class") == asset_class:
             g = ctx.geo[r["statement_id"]]
@@ -227,14 +268,15 @@ def rung8_forms(forms: dict) -> list[dict]:
 
 
 def select_pilot(seeds: list[dict], seeds_v3: list[dict], records: list[dict], ctx: Context, forms: dict,
-                 setting: dict | None = None) -> dict:
-    """The eight-cell rung-8 pilot selection (module docstring)."""
+                 setting: dict | None = None, views: list[dict] | None = None) -> dict:
+    """The eight-cell rung-8 pilot selection (module docstring). `views` (P5c hotfix, v1a): the dispositioned impact-group
+    views; candidate states are then read through them and the selection is v1a, reviewed."""
     by = {(s["family"], s["place"], s["asset_class"]): s for s in seeds}
     f8 = rung8_forms(forms)
     picked, missing = [], []
     for k, (fam, a) in enumerate(PILOT_CELLS, 1):
         pats = table_patterns(seeds_v3, fam, (setting or {}).get(fam))
-        named = [st for st in place_named_states(records, ctx, fam, a) if st in pats and table_change(pats[st]) is not None]
+        named = [st for st in place_named_states(records, ctx, fam, a, views) if st in pats and table_change(pats[st]) is not None]
         if named:
             state = max(named, key=lambda st: (table_change(pats[st]), st))
             basis = "largest table change among states with a place-named impact statement"
@@ -250,9 +292,13 @@ def select_pilot(seeds: list[dict], seeds_v3: list[dict], records: list[dict], c
         form = f8[len(picked) % len(f8)]
         picked.append({**cell, "order": len(picked) + 1, "seed_id": s["seed_id"], "pattern_id": s["pattern_id"],
                        "question_form_id": form["id"], "impact_group_ids": [x["group_id"] for x in s["impact_groups"]],
-                       "place_named_impact_group_ids": s["place_named_impact_group_ids"], "needs_general_clause": s["needs_general_clause"]})
-    return {"version": "pilot_selection_infra v1", "rule": "D-075 rung-8 pilot selection", "rung": RUNG,
-            "review_state": REVIEW_STATE_UNREVIEWED,
+                       "place_named_impact_group_ids": s["place_named_impact_group_ids"], "needs_general_clause": s["needs_general_clause"],
+                       **({"two_hop_group_ids": s["two_hop_group_ids"]} if views is not None else {})})
+    reviewed = views is not None
+    return {"version": "pilot_selection_infra v1a" if reviewed else "pilot_selection_infra v1", "rule": "D-075 rung-8 pilot selection",
+            "rung": RUNG, "review_state": REVIEW_STATE_REVIEWED if reviewed else REVIEW_STATE_UNREVIEWED,
+            **({"candidate_states_rule": "through the dispositions (D-078): states named by a cited member of a usable impact group of the cell"}
+               if reviewed else {}),
             "table_setting": setting or TABLE_SETTING, "cells": [list(c) for c in PILOT_CELLS], "selected": picked,
             "missing": missing, "question_forms": {"version": forms["version"], "sha256": forms["sha256"], "rung8": [f["id"] for f in f8]}}
 

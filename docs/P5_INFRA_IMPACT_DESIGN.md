@@ -402,3 +402,114 @@ COORDINATOR dispositions on the review CSV (and a decision on the schema blocker
 dispositions, rebuild seeds, selection and packets) -> Polaris: the synthesis run over the rung-8 packets
 (`litsynth_agent.py --packets artifacts/benchmark/synth_packets_infra_v1 ...`; the agent's docstring example names
 `synth_packets_rung8_v1`, the directory the work package renamed) and the polish -> the Alvi sheet.
+
+(Section 16 is superseded by section 21: the dispositions are applied, the schema blocker and BI-P5-0007 are resolved.)
+
+## 17. Item schema v2a (P5c hotfix, part A; D-077)
+
+`data/metadata/benchmark/item_schema_v2a.json` (`deca317c…d2d8`, in `data/manifest.json`): schema v2 with `schema_version:
+benchmark_item_v2a` and the literature statement type `impact`, which must carry `asset_class` (one of the 16 classes of
+`infrastructure_lexicon_v1.yaml`), `impact_mechanism` and `impact_outcome` (non-empty strings), `hazard_relation`
+(`governed_term` | `broader_hazard`) and `two_hop` (boolean); the requirement is a JSON-Schema `if` / `then` on the statement
+type, which the project validator (`climrr.softqa._check`) now evaluates (no existing schema uses it). `benchmark_items.schema_for`
+picks v2a for an item whose `schema_version` is `benchmark_item_v2a`, v2 otherwise: v2 items are unchanged, v2 stays frozen and
+still refuses `impact` (`tests/test_p5c.py` keeps that test). Synthesis agent v5.3 writes a v2a item for a packet with `item_schema:
+benchmark_item_v2a` (the v1a packets), each cited impact group a statement of type `impact` with the packet's `item_fields`.
+**EXECUTOR readings (for confirmation):** the field types and the enum; `impact_mechanism` / `impact_outcome` are the group
+members' distinct values joined by "; "; for a group whose members carry no impact fields (the two heat driver-partition groups
+relabelled into the impact claim) the group label (or the singleton's statement), marked `impact_fields_source: group_label` ---
+one such group is attached, `LG-infra_heat_index-driver-c1-007` in BI-P5-0001 (tenth of ten).
+
+## 18. Dispositions applied (P5c hotfix, part B; D-078)
+
+`data/metadata/benchmark/group_dispositions_infra_v1.csv` (COORDINATOR 2026-11-24, confirmed by Kaiyuan; byte copy `9b94e028…1bef`,
+CRLF as received; in `data/manifest.json`), applied by `climrr.dispositions_infra` (vocabulary and merge targets validated; the SHA
+checked) through `scripts/build_seeds_infra.py --dispositions …`. Written: `artifacts/litgroups/infra_run1/groups_dispositioned_v1.jsonl`
+(`d92cd95f…91ce`; the run records + `disposition`, `disposition_source`, `disposition_exclude`, `two_hop`, `asset_class_override`,
+`merged_from`) and `dispositions_v1_applied.json` (`6c371c35…8624`, the counts).
+
+| disposition | rows |
+| --- | ---: |
+| accept | 41 |
+| accept_two_hop | 13 |
+| relabel:hazard_impact_on_asset | 6 |
+| relabel:impact_or_exposure | 4 |
+| merge_with | 1 (heat energy singleton c1-016 into c2-002 "transmission line sag", now 3 members) |
+| not_about_family | 9 |
+| reject | 15 |
+| keep_excluded | 14 |
+
+All 103 from the COORDINATOR column (Kaiyuan's empty); 17 asset-class overrides; the 40 grouping-run records without a row
+(other claim tags) excluded `no_disposition`. **Usable impact groups after the dispositions: 60** (13 two-hop), by family x class
+(override applied): heat energy 24, heat transportation 8, heat water 3, heat healthcare 4, heat emergency services 2, heat
+commercial facilities 2, heat other 1; fire energy 8, fire transportation 3, fire water 1, fire healthcare 1, fire dams 1, fire
+communications 1, fire emergency services 1 (the per-class counts are in the log). Strengths are recomputed from the members
+(the merged group: multi-source). **EXECUTOR readings (for confirmation):** (i) `relabel:hazard_impact_on_asset` on a
+driver-partition group also makes it an impact group (`statement_type: impact`, run type kept as `statement_type_run`), two
+records; (ii) `relabel:impact_or_exposure` keeps the record out, as `keep_excluded` does; (iii) the override `other` on
+`LG-infra_heat_index-driver-c1-005` is accepted (the grouping partitions' catch-all, not a lexicon class), so it seeds class
+`other`, which no pilot cell uses.
+
+## 19. Two-hop wording (P5c hotfix, part B; D-073c)
+
+**Rule** (the work package's): a sentence resting on an `accept_two_hop` group takes the form "<scope opener> that when wildfires
+occur, they <impact> <asset class>" or "… that wildfires can <impact> <asset class>" (for the heat -> ignition group: "… that
+extreme heat and wind raise the chance of ignitions near power lines"); the item's table sentence states the fire-weather change;
+the integrated paragraph contains, once, the bridge clause "fire-weather danger describes conditions that favour wildfire; it is
+not fire occurrence". `accept` fire groups (direct fire-weather statements) need no bridge.
+
+- **Synthesis prompt v5.3** (`litsynth_agent.py` v5.3, system prompt `1157f732…5ea5`, format corrective `46f2681c…84d6`, file
+  `1be4ba2a…3edd`; `TWO-HOP (D-073c)` section, a TWO-HOP line in the format corrective prompt; check version v3.4; v5.2, which
+  never ran, held by its bytes at `a549ea9`, `climrr.p5c.held_bytes`).
+- **Post-checks v3.4** (`benchmark_items.SYNTH_CHECK_VERSION_V34`): v3.3 plus, when `checks_input.rung8.two_hop_group_ids` is
+  present, (a) a literature sentence citing a two-hop group must match `when wildfires occur | wildfires can | raise the chance
+  of ignition(s)` (`TWO_HOP_RE`) and is exempt from the hazard-phrase rule (the direct groups it cites keep it); (b) when the
+  item cites a two-hop group and the packet gives `bridge_clause`, the integrated paragraph contains it exactly once (case and
+  whitespace normalised); (c) in a fire-weather item "wildfires" inside the two phrases is masked like D-073b's phrase, in every
+  graded field but the prompt. Both failures are format-class (one corrective turn). v3.3 is unchanged.
+- **Packets** carry `two_hop_group_ids`, `two_hop_rule`, and in a fire-weather packet with a two-hop group `bridge_clause`;
+  `checks_input.rung8` adds `two_hop_group_ids`, `bridge_clause`, `two_hop_phrases`.
+- **EXECUTOR readings (for confirmation):** two heat groups are two-hop (`LG-infra_heat_index__energy-impact-c1-003`, the
+  heat -> ignition group, in BI-P5-0001; `LG-infra_heat_index__transportation_systems-impact-c1-007` "heat-driven vegetation fires
+  threaten railway corridors", in BI-P5-0002). The bridge clause names fire-weather danger, so it is required only in fire-weather
+  items; in a heat packet with a two-hop group "wildfire" leaves `must_not_use` (the two-hop forms write "wildfires"), and no
+  bridge is required. A two-hop sentence does not carry the broader-hazard phrase.
+
+## 20. Seeds, selection and packets v1a (P5c hotfix, part C; D-078)
+
+**Seeds / selection** (`seeds_infra` v1a; `item_seeds_infra_v1a.jsonl` `0bd723a0…ea2a`, 686 seeds; `pilot_selection_infra_v1a.yaml`
+`316a93f9…9212`; `review_state: impact_groups_reviewed`). The candidate states of a cell are now read **through the dispositions**:
+a state counts when a cited member of a usable impact group of the cell's family and class names it (EXECUTOR reading of "rebuild
+the selection with the dispositions applied", for confirmation; without it BI-P5-0005 would stay at Arizona on the strength of a
+group rejected as "operational heuristic, not an impact"). **Packets** `synth_packets_infra_v1a/` (manifest `829d80cf…5bf2`;
+`scripts/build_synth_packets_infra.py --variant v1a`; not provisional). v1 seeds, selection and packets are kept and rebuild
+byte-identically.
+
+| item | cell | state (evidence) | form | impact groups (two-hop) | drivers | excluded |
+| --- | --- | --- | --- | ---: | ---: | ---: |
+| BI-P5-0001 | heat x energy | Virginia (place-named) | QF-08 | 10 of 24 (1) | 8 | 60 |
+| BI-P5-0002 | heat x transportation | Arizona (place-named) | QF-09 | 8 (1) | 8 | 46 |
+| BI-P5-0003 | heat x water | California (none) | QF-10 | 3 (0) | 8 | 53 |
+| BI-P5-0004 | heat x healthcare | **California (none; was Arizona)** | QF-08 | 4 (0) | 8 | 53 |
+| BI-P5-0005 | fire x energy | **California (none; was Arizona)** | QF-09 | 8 (7) | 8 | 37 |
+| BI-P5-0006 | fire x transportation | California (none; was place-named) | QF-10 | 3 (1) | 8 | 37 |
+| BI-P5-0007 | fire x emergency services | California (none) --- **now filled** | QF-08 | 1 (0) | 8 | 37 |
+| BI-P5-0008 | fire x communications | California (none) | QF-09 | 1 (0) | 8 | 37 |
+
+- **BI-P5-0004** no longer carries the two Arizona people-statements (relabelled `impact_or_exposure`); no other healthcare impact
+  group names a state, so the cell falls back to California and is a **general item** (four single-source groups, all general;
+  closing clause required).
+- **BI-P5-0005** every place-named fire x energy group was rejected (Arizona / Nevada, Idaho, California): California fallback,
+  general; seven of its eight impact groups are two-hop, so the bridge clause is required. **BI-P5-0006**: Montana's group
+  rejected, the California group `not_about_family`; the state stays California, the evidence becomes `none`.
+- **BI-P5-0007** carries the relabelled standby-cost singleton (`LG-infra_fire_weather_index__other_assets-impact-c1-012`,
+  Northern Territory, governed term "fire-danger days", direct). **BI-P5-0008** keeps its one direct group (telecommunication
+  loss).
+- The per-packet groups (id, label, strength, two-hop, place class) are in `synth_packets_infra_v1a/manifest.json` and the report,
+  section 67.
+
+## 21. Next
+
+Polaris (Kaiyuan): the synthesis run `infra_run1` over the eight v1a packets (agent v5.3) and the polish of its items, at the pushed
+hotfix commit; then ingest -> the Alvi sheet (`scripts/build_mentor_sheet.py --audience alvi --items …`). Commands: the report,
+section 68, and `docs/PROJECT_STATE.md`.

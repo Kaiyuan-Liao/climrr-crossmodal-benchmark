@@ -1,0 +1,93 @@
+{
+  "version": "dispositions_infra v1",
+  "decision": "D-078",
+  "file": {
+    "path": "data/metadata/benchmark/group_dispositions_infra_v1.csv",
+    "sha256": "9b94e028bc571d9d84e6714ef1264bf2e087ea405d6561bfcdbd6d333c601bef",
+    "rows": 103
+  },
+  "by_disposition": {
+    "accept": 41,
+    "accept_two_hop": 13,
+    "keep_excluded": 14,
+    "merge_with": 1,
+    "not_about_family": 9,
+    "reject": 15,
+    "relabel": 10
+  },
+  "by_disposition_full": {
+    "accept": 41,
+    "accept_two_hop": 13,
+    "keep_excluded": 14,
+    "merge_with:LG-infra_heat_index__energy-impact-c2-002": 1,
+    "not_about_family": 9,
+    "reject": 15,
+    "relabel:hazard_impact_on_asset": 6,
+    "relabel:impact_or_exposure": 4
+  },
+  "by_source": {
+    "coordinator": 103
+  },
+  "asset_class_overrides": {
+    "LG-infra_fire_weather_index__other_assets-impact-c1-001": "water_and_wastewater",
+    "LG-infra_fire_weather_index__other_assets-impact-c1-002": "healthcare_and_public_health",
+    "LG-infra_fire_weather_index__other_assets-impact-c1-003": "dams",
+    "LG-infra_fire_weather_index__other_assets-impact-c1-004": "communications",
+    "LG-infra_heat_index__other_assets-impact-c1-001": "commercial_facilities",
+    "LG-infra_heat_index__other_assets-impact-c1-002": "commercial_facilities",
+    "LG-infra_heat_index__other_assets-impact-c1-003": "transportation_systems",
+    "LG-infra_heat_index__other_assets-impact-c1-004": "transportation_systems",
+    "LG-infra_heat_index__other_assets-impact-c1-006": "water_and_wastewater",
+    "LG-infra_heat_index__other_assets-impact-c1-007": "water_and_wastewater",
+    "LG-infra_heat_index__other_assets-impact-c1-009": "water_and_wastewater",
+    "LG-infra_heat_index-driver-c1-005": "other",
+    "LG-infra_heat_index-driver-c1-007": "energy",
+    "LG-infra_heat_index__other_assets-impact-c1-010": "emergency_services",
+    "LG-infra_heat_index__other_assets-impact-c1-011": "emergency_services",
+    "LG-infra_heat_index__transportation_systems-impact-c1-010": "transportation_systems",
+    "LG-infra_fire_weather_index__other_assets-impact-c1-012": "emergency_services"
+  },
+  "merges": [
+    {
+      "from": "LG-infra_heat_index__energy-impact-c1-016",
+      "into": "LG-infra_heat_index__energy-impact-c2-002"
+    }
+  ],
+  "statement_type_relabelled": {
+    "LG-infra_heat_index-driver-c1-005": "driver",
+    "LG-infra_heat_index-driver-c1-007": "driver"
+  },
+  "records": 143,
+  "no_disposition": 40,
+  "usable": 60,
+  "usable_two_hop": 13,
+  "excluded_by_reason": {
+    "keep_excluded": 14,
+    "merged_into:LG-infra_heat_index__energy-impact-c2-002": 1,
+    "no_disposition": 40,
+    "not_about_family": 9,
+    "reject": 15,
+    "relabel:impact_or_exposure": 4
+  },
+  "usable_impact_views": 60,
+  "usable_impact_views_by_family_class": {
+    "fire_weather_index|communications": 1,
+    "fire_weather_index|dams": 1,
+    "fire_weather_index|emergency_services": 1,
+    "fire_weather_index|energy": 8,
+    "fire_weather_index|healthcare_and_public_health": 1,
+    "fire_weather_index|transportation_systems": 3,
+    "fire_weather_index|water_and_wastewater": 1,
+    "heat_index|commercial_facilities": 2,
+    "heat_index|emergency_services": 2,
+    "heat_index|energy": 24,
+    "heat_index|healthcare_and_public_health": 4,
+    "heat_index|other": 1,
+    "heat_index|transportation_systems": 8,
+    "heat_index|water_and_wastewater": 3
+  },
+  "groups_dispositioned": {
+    "path": "artifacts/litgroups/infra_run1/groups_dispositioned_v1.jsonl",
+    "sha256": "d92cd95ff9dcc669a4f19355d22ac556c8211a587bc7155b5fb6fea42ff091ce"
+  }
+}

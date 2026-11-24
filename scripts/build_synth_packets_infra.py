@@ -12,10 +12,17 @@ attached with label, strength and place class, driver groups, excluded groups). 
 dispositions of the impact groups are applied (P5c-hotfix). Deterministic; no model call, no table value computed.
 
     python scripts/build_synth_packets_infra.py
+
+P5c hotfix (D-077, D-078, D-073c): `--variant v1a` reads the v1a seeds and selection (dispositions applied; checked against
+`item_seeds_infra_v1a_summary.json`) and writes `artifacts/benchmark/synth_packets_infra_v1a/` (`review_state:
+impact_groups_reviewed`, two-hop fields, schema-v2a item fields per impact group).
+
+    python scripts/build_synth_packets_infra.py --variant v1a
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -37,35 +44,54 @@ from climrr.runrecord import write_run_record  # noqa: E402
 
 
 def main() -> int:
-    summ = json.loads(si.SEEDS_SUMMARY_PATH.read_text(encoding="utf-8"))
-    for key, path in (("seeds_file", si.SEEDS_PATH), ("selection_file", si.SELECTION_PATH)):
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--variant", choices=("v1", "v1a"), default="v1")
+    variant = ap.parse_args().variant
+    v1a = variant == "v1a"
+    seeds_path, summary_path, sel_path = ((si.SEEDS_V1A_PATH, si.SEEDS_V1A_SUMMARY_PATH, si.SELECTION_V1A_PATH) if v1a
+                                          else (si.SEEDS_PATH, si.SEEDS_SUMMARY_PATH, si.SELECTION_PATH))
+    summ = json.loads(summary_path.read_text(encoding="utf-8"))
+    for key, path in (("seeds_file", seeds_path), ("selection_file", sel_path)):
         if sha256_file(path) != summ[key]["sha256"]:
-            raise SystemExit(f"{repo_relative(path)} differs from its pin in {repo_relative(si.SEEDS_SUMMARY_PATH)}; run build_seeds_infra.py")
+            raise SystemExit(f"{repo_relative(path)} differs from its pin in {repo_relative(summary_path)}; run build_seeds_infra.py")
     man = json.loads(gi.MANIFEST_PATH.read_text(encoding="utf-8"))
     pinned = {d["path"]: d["sha256"] for d in man["derived_files"]}
     if sha256_file(gi.ENRICHED_PATH) != pinned["groups_enriched.jsonl"]:
         raise SystemExit("groups_enriched.jsonl differs from the ingest manifest; run scripts/ingest_litgroups_infra1.py")
-    sel = yaml.safe_load(si.SELECTION_PATH.read_text(encoding="utf-8"))
-    seeds = sd.read_jsonl(si.SEEDS_PATH)
+    sel = yaml.safe_load(sel_path.read_text(encoding="utf-8"))
+    seeds = sd.read_jsonl(seeds_path)
     enriched = sd.read_jsonl(gi.ENRICHED_PATH)
     records = sd.read_jsonl(ir.INGESTED_PATH)
     indep = json.loads(ir.INDEPENDENCE_PATH.read_text(encoding="utf-8"))
-    extra = {"item_seeds_infra_v1": sha256_file(si.SEEDS_PATH), "pilot_selection_infra_v1": sha256_file(si.SELECTION_PATH),
+    tag = "v1a" if v1a else "v1"
+    extra = {f"item_seeds_infra_{tag}": sha256_file(seeds_path), f"pilot_selection_infra_{tag}": sha256_file(sel_path),
              "groups_infra_run1": sha256_file(gi.ART / "groups.jsonl"), "groups_enriched_infra_run1": sha256_file(gi.ENRICHED_PATH),
              "statements_infra_run1": sha256_file(ir.INGESTED_PATH), "independence_infra_run1": sha256_file(ir.INDEPENDENCE_PATH)}
-    packets = spi.build(sel, seeds, enriched, records, indep, extra)
+    if v1a:
+        from climrr import benchmark_items as bi
+        from climrr import dispositions_infra as di
 
-    out = spi.PACKETS_DIR
+        extra.update({"group_dispositions_infra_v1": sha256_file(di.PATH), "groups_dispositioned_v1": sha256_file(si.GROUPS_DISPOSITIONED_PATH),
+                      "item_schema_v2a": bi.schema_sha256(bi.SCHEMA_V2A_PATH)})
+    packets = spi.build(sel, seeds, enriched, records, indep, extra, variant)
+
+    out = spi.PACKETS_V1A_DIR if v1a else spi.PACKETS_DIR
     out.mkdir(parents=True, exist_ok=True)
     index = []
     for pk in packets:
         path = out / f"{pk['packet_id']}.json"
         r2.write_json(path, pk)
         index.append(spi.report_entry(pk, path))
-    manifest = {"version": spi.VERSION, "decision": spi.DECISION, "rules": spi.RULES, "review_state": spi.REVIEW_STATE,
+    if v1a:
+        head = {"version": spi.VERSION_V1A, "decision": spi.DECISION_V1A, "rules": spi.RULES_V1A, "review_state": spi.REVIEW_STATE_V1A,
+                "provisional": False, "item_schema": "benchmark_item_v2a", "bridge_clause": spi.BRIDGE_CLAUSE,
+                "two_hop_phrases": list(spi.TWO_HOP_PHRASES), "two_hop_rule": spi.TWO_HOP_RULE, "two_hop_rule_fire": spi.TWO_HOP_RULE_FIRE}
+    else:
+        head = {"version": spi.VERSION, "decision": spi.DECISION, "rules": spi.RULES, "review_state": spi.REVIEW_STATE,
                 "provisional": True,
-                "provisional_note": "built before the COORDINATOR's dispositions of the impact groups; rebuilt by the P5c-hotfix",
-                "selection": {"path": repo_relative(si.SELECTION_PATH), "sha256": extra["pilot_selection_infra_v1"],
+                "provisional_note": "built before the COORDINATOR's dispositions of the impact groups; rebuilt by the P5c-hotfix"}
+    manifest = {**head,
+                "selection": {"path": repo_relative(sel_path), "sha256": extra[f"pilot_selection_infra_{tag}"],
                               "selected": len(sel["selected"]), "missing": sel["missing"]},
                 "inputs_sha256": extra, "max_impact_groups": spi.MAX_IMPACT_GROUPS,
                 "asset_class_phrase": spi.ASSET_CLASS_PHRASE, "rung8_must_not_use": list(spi.RUNG8_MUST_NOT_USE),
@@ -78,9 +104,10 @@ def main() -> int:
                           | {"impact_groups": len(p["impact_groups"]), "driver_groups": len(p["driver_groups"])} for p in index],
               "missing_cells": [{k: m[k] for k in ("item_id", "family", "asset_class", "state", "reason")} for m in sel["missing"]],
               "manifest_sha256": sha256_file(manifest_path)}
-    rec = write_run_record("build_synth_packets_infra", result_summary=result, passed=True, data_path=si.SELECTION_PATH,
+    rec = write_run_record("build_synth_packets_infra", result_summary=result, passed=True, data_path=sel_path,
                            output_path=manifest_path,
-                           config_snapshot={"version": spi.VERSION, "decision": spi.DECISION, "max_impact_groups": spi.MAX_IMPACT_GROUPS,
+                           config_snapshot={"version": head["version"], "decision": head["decision"], "variant": variant,
+                                            "max_impact_groups": spi.MAX_IMPACT_GROUPS,
                                             "asset_class_phrase": spi.ASSET_CLASS_PHRASE, "model_calls": 0})
     print(json.dumps(result, indent=2, ensure_ascii=False))
     print(f"run record: {repo_relative(rec)}")
