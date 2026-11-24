@@ -159,6 +159,10 @@ P5a (D-070) adds `scripts/litcollect/inventory_corpus.py`, run on Polaris: its o
 `run_query.py` is v4 (opt-in `--lexicon` mode, whose `summary.json`, `candidates.json` and `paper_hits.jsonl` are the run
 evidence), `litstatement_agent.py` v4 and `litsynth_agent.py` v5; the superseded v3, v3 and v4.1 files are held by their
 bytes at the P5a base commit (`climrr.p5a.materialize_tools`).
+Since the P5a hotfix (D-069a, D-070a, D-073a) they are `run_query.py` v4.1 (`--rule DR-CAND-INFRA-2`, same run evidence),
+`inventory_corpus.py` v1.1 (its JSON and its `--tags-out` file are the run evidence), `litstatement_agent.py` v4.1 and
+`litsynth_agent.py` v5.1; inventory v1, which ran on Polaris, is held by its bytes at the hotfix base commit
+(`climrr.p5a.held_bytes_hotfix`); the replaced run_query v4, litstatement v4 and litsynth v5 never ran.
 
 ## Knowledge-refresh staging
 

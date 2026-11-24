@@ -33,14 +33,14 @@ from climrr.paths import REPO_ROOT
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
 LEXICON_SHA256 = "dd16959260006514af18396aba78aa47c60fd95901405b859f1a97f1939b1753"
 QUESTION_FORMS_SHA256 = "d123b381f6807a9b8d6cc9b6b901a86e8c48dfe617cb1f26ff9c6be9fdd4c910"
-RUN_QUERY_V4_SHA256 = "52f7cdfc4a3d696cbfec083bc25b7095b793368aaa27792db4de22484c55e6ee"
-INVENTORY_SHA256 = "98ac67acf042ba488b17d7eea88e47a148ba3ab0b7aa2bf7d7c6a8f59e27bf81"
-LITSTATEMENT_V4_SHA256 = "0124903ecefa9e54b12b32ae26b852b7fa24a2b4122565f237da70f4be62389a"
+RUN_QUERY_V41_SHA256 = "819f223dc4739079e0b5d6fc7a3c2f5bd38078315d9f168b8ad79b7cf843dc42"   # v4.1 (P5a hotfix); v4 never ran
+INVENTORY_SHA256 = "de18fe7da59909410b4036185b04ff82c8a16b73618601148d3a0a615ba958e0"   # v1.1 (P5a hotfix); v1 never ran
+LITSTATEMENT_V41_SHA256 = "e2e204e066436cd6bfaea7758ce8125777c6ba9a69ae6a3fc71bc056b839445e"   # v4.1 (P5a hotfix); v4 never ran
 LITSTATEMENT_V3_PROMPT_SHA256 = "fbedadd25a8a6a048983f9ed3c49997c73c4de771e9f5d689dacd9f56cb01fff"
-LITSTATEMENT_INFRA_PROMPT_SHA256 = "a6e0c1663e48014bc8cde2ce20bee628e15fda57abbee528fc763152eee846a1"
-LITSYNTH_V5_SHA256 = "c04220f702a263bc675b098a3b951543a20a7e768292512ae9ba6003acb69ac9"
-LITSYNTH_V5_PROMPT_SHA256 = "aea5bbb9eec9f7dd97d3cf39f611f7718f526a77baea9fbf2556eef0b945a7e9"
-LITSYNTH_V5_FORMAT_SHA256 = "b30d002cd8b54a97faf49541c26911d502ccf0c6c09131e9ce76e8ea67fab0ff"
+LITSTATEMENT_INFRA_PROMPT_SHA256 = "945b487ca515d89fd25755d82e3c4d63e662888dea61f9f386028857ed69e095"
+LITSYNTH_V51_SHA256 = "8ff71879c234375299e74a7c7f1d8777f47d86350f3ccf218ed6910bc5aa1a43"   # v5.1 (P5a hotfix); v5 never ran
+LITSYNTH_V51_PROMPT_SHA256 = "b81b71abb75a9d57b9f3f08f53f945b99b3f5d6966d42d982da407a185cb3793"
+LITSYNTH_V51_FORMAT_SHA256 = "73278b5c7cf0da7e419588850b8c16c90d96a90d10008e14b6d998d176081fe1"
 PACKETS_V5_MANIFEST_SHA256 = "1f92c194411ea12152c6659058633bf250812bdb234328fa8f39fb81dd8ea0fd"
 HEAT_Q = REPO_ROOT / "artifacts" / "literature" / "litcorpus02" / "evidence" / "queries" / "extreme_heat_diag_topical_only_query.txt"
 FIRE_Q = REPO_ROOT / "artifacts" / "literature" / "litcorpus02" / "evidence" / "queries" / "fire_weather_diag_topical_only_query.txt"
@@ -120,7 +120,7 @@ def lexrun(tmp_path_factory):
 
 
 def test_run_query_v4_pinned_and_v3_held():
-    assert sha256_file(TOOLS / "run_query.py") == RUN_QUERY_V4_SHA256
+    assert sha256_file(TOOLS / "run_query.py") == RUN_QUERY_V41_SHA256
     assert hashlib.sha256(p5a.held_bytes("run_query.py")).hexdigest() == p5a.HELD["run_query.py"]
 
 
@@ -219,7 +219,7 @@ def _impact_st(**kw):
 
 def test_litstatement_v4_pins_constants_and_v3_prompt_unchanged():
     a = _load("litstatement_agent_v4", AGENT_LS)
-    assert sha256_file(AGENT_LS) == LITSTATEMENT_V4_SHA256 and a.GENERATOR_VERSION == "litstatement_agent v4"
+    assert sha256_file(AGENT_LS) == LITSTATEMENT_V41_SHA256 and a.GENERATOR_VERSION == "litstatement_agent v4.1"
     assert a.sha(a.SYSTEM_PROMPT) == LITSTATEMENT_V3_PROMPT_SHA256 and a.sha(a.SYSTEM_PROMPT_INFRA) == LITSTATEMENT_INFRA_PROMPT_SHA256
     assert a.INFRA_ASSET_CLASSES == il.class_ids(il.load()) + ("other",)
     cm = yaml.safe_load((REPO_ROOT / "data" / "metadata" / "concept_map.yaml").read_text(encoding="utf-8"))
@@ -242,7 +242,7 @@ def test_litstatement_v4_impact_prechecks():
     ok = a.pre_review_check(_impact_st(), secs, a.INFRA_ARM)
     assert ok[0] == "deterministic_pass" and ok[1]["impact_fields_pass"]
     assert a.pre_review_check(_impact_st(hazard_term="HEAT INDEX"), secs, a.INFRA_ARM)[0] == "deterministic_pass"
-    for kw, needle in ((dict(hazard_term="heat wave"), "impact_fields_pass"), (dict(asset_class="power"), "impact_fields_pass"),
+    for kw, needle in ((dict(hazard_term="drought"), "impact_fields_pass"),   # v4.1: "heat wave" is a proxy term (D-073a) (dict(asset_class="power"), "impact_fields_pass"),
                        (dict(impact_outcome=" "), "impact_fields_pass")):
         st, chk, _ = a.pre_review_check(_impact_st(**kw), secs, a.INFRA_ARM)
         assert st == "rejected_pre_review" and needle in chk["failed"], kw
@@ -303,10 +303,12 @@ def test_litstatement_v4_infra_run_end_to_end(tmp_path, reject_effort):
     r = json.loads((out / "7001" / "result.json").read_text())
     assert r["arm"] == "infra_impact_v1" and r["reasoning_effort_applied"] is (not reject_effort)
     assert r["system_prompt_sha256"] == LITSTATEMENT_INFRA_PROMPT_SHA256
-    assert [x["status"] for x in r["statements"]] == ["deterministic_pass", "rejected_pre_review"]
+    assert [x["status"] for x in r["statements"]] == ["deterministic_pass", "deterministic_pass"]   # v4.1: "extreme heat" a proxy
+    assert [x["hazard_relation"] for x in r["statements"]] == ["governed_term", "broader_hazard"]
     assert r["statements"][0]["candidate_families"][0]["family"] == "heat_index"
     s = json.loads((out / "summary.json").read_text())
     assert s["by_statement_type"] == {"impact": 2} and s["by_asset_class"] == {"energy": 2}
+    assert s["by_hazard_relation"] == {"governed_term": 1, "broader_hazard": 1}
     log = (out / "agent.log").read_text()
     assert "arm=infra_impact_v1" in log and ("REASONING_EFFORT_REJECTED" in log) is reject_effort
 
@@ -474,9 +476,9 @@ def test_v31_and_earlier_unchanged_by_v32():
 def test_litsynth_v5_pinned_and_prompt():
     path = TOOLS / "litsynth_agent.py"
     a = _load("litsynth_agent_v5", path)
-    assert sha256_file(path) == LITSYNTH_V5_SHA256 and a.GENERATOR_VERSION == "litsynth_agent v5"
+    assert sha256_file(path) == LITSYNTH_V51_SHA256 and a.GENERATOR_VERSION == "litsynth_agent v5.1"
     assert a.CHECK_VERSION == "synthesis_post_checks v3.2"
-    assert a.sha(a.SYSTEM_PROMPT) == LITSYNTH_V5_PROMPT_SHA256 and a.sha(a.FORMAT_CORRECTIVE_PROMPT) == LITSYNTH_V5_FORMAT_SHA256
+    assert a.sha(a.SYSTEM_PROMPT) == LITSYNTH_V51_PROMPT_SHA256 and a.sha(a.FORMAT_CORRECTIVE_PROMPT) == LITSYNTH_V51_FORMAT_SHA256
     for needle in ("SCOPE (where the research comes from)", '"Research on <State> shows"', '"In general, research shows"',
                    "general_clause", "QUESTION FORM", '"question_form"', "OPTIONAL point"):
         assert needle in a.SYSTEM_PROMPT, needle

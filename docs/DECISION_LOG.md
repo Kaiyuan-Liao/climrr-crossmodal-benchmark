@@ -3423,3 +3423,118 @@ code emits, and the next GUIDANCE packet still chooses.
   only; other types keep the v3 schema; (c) `asset_class` = one of the 16 CISA ids or "other".
 - **Affected files:** `scripts/litcollect/litstatement_agent.py`, `data/metadata/litstatements/infrastructure_lexicon_v1.yaml`,
   `src/climrr/infra_lexicon.py`, `tests/test_p5a.py`, `tests/test_litstatement_agent.py` (v3 now from its held bytes).
+
+## D-069a --- Scope phrase by the majority of cited members
+
+- **Date:** 2026-11-23.
+- **Status:** **decided** (COORDINATOR, P5a hotfix work package, section A; answers the D-069 escalation of P5a).
+- **Decision.** The scope phrase of a group follows the majority geography class among its **cited** members; ties ->
+  general ("In general, research"). Minority place mentions become an optional clause ", including work on <State>".
+  Post-checks v3.2 updated; packets v5 -> v5a.
+- **Recorded (EXECUTOR, P5a hotfix).** `synthpackets_v5.build(variant="v5a")` (`majority_class`, `group_scope(rule=
+  "majority")`), `scripts/build_synth_packets_v5a.py`, `artifacts/benchmark/synth_packets_v5a/` (packets v5 kept, rebuilt
+  byte-identically); `benchmark_items.scope_openings` / `SCOPE_CLASS_ORDER` (post-checks v3.2, changed in place before
+  any run); `litsynth_agent.py` v5.1 (SCOPE). On the seven packets: **11 group attachments change** --- the 5 minority cases
+  (0001 / 0005 `driver-c1-008` -> "Research on the United States, including work on the Southwest, shows"; 0007
+  `mechanism-c1-003`, `driver-c1-002`, `driver-c1-005` -> "In general, research, including work on California, shows") and
+  6 others --- five 1 : 1 ties now `mixed`, "In general, research" (0001 `mechanism-c1-021` and 0007 `mechanism-c1-007`,
+  both California before, now with the California clause; 0007 `driver-c1-006`, 0008 `mechanism-c1-003`, `driver-c1-006`,
+  "the United States" before) and 0008 `driver-c1-005` (1 U.S. member of 4 cited: "the United States" -> "In general"; a
+  U.S. minority the v5 manifest did not list, as it listed state / NCA only). BI-P3-0005 now needs the closing general
+  clause (its only NCA group became `us_national`).
+  **For confirmation:** (a) "majority" = plurality over the seven member classes (the class with the most cited members),
+  not a strict majority over half; a tie for the most -> the new class `mixed` ("In general, research"); a group with no
+  cited member is `mixed` too (v5: `unknown`; same stem); (b) the vote is over the member classes, not over the four stems
+  (`us_subregion` and `us_national` vote separately; so do `global`, `other`, `unknown`); on the seven packets the two
+  readings give the same result; (c) the optional clause names the cited members of a place-specific class (`state`,
+  `nca`) MORE specific than the group's class --- the state for `state` members, the NCA5 region (the stem's naming rule)
+  for `nca` members --- so a `state`-majority group never gets a region clause; (d) the clause sits between the stem and
+  the verb ("<stem>, including work on <Place>, <verb>"); it is optional, never required, and post-checks v3.2 accept both
+  openings; (e) the sentence-level rule of D-069 is unchanged (a sentence citing groups of different scope opens with the
+  most specific group's phrase). **Gap made wider (report, not changed):** an integrated-paragraph sentence may open with
+  one group's place phrase and go on to name mechanisms of general groups; v3.2 checks only the opening (P5a reading (h)).
+- **Affected files:** `src/climrr/synthpackets_v5.py`, `scripts/build_synth_packets_v5a.py`, `src/climrr/benchmark_items.py`,
+  `scripts/litcollect/litsynth_agent.py`, `artifacts/benchmark/synth_packets_v5a/`, `tests/test_p5a_hotfix.py`.
+
+## D-070a --- Sector tags from the corpus; candidate rule DR-CAND-INFRA-2
+
+- **Date:** 2026-11-23.
+- **Status:** **decided** (COORDINATOR, P5a hotfix work package, section C; the id D-070a is the EXECUTOR's, the work
+  package gives none).
+- **Context.** The LITCORPUS-03 inventory (Polaris, 2026-11-24 00:33 UTC, `inventory_corpus v1`; facts in
+  `LITCORPUS03_PROVENANCE.md` §4): `_araiadoc_tags` is an object on every file, with a `critical_infrastructure` entry
+  carrying `matched_groups[]`, `sectors[] {sector, subsectors[]}` and `tags[]` (CISA sector names).
+- **Decision.** Parse `_araiadoc_tags.critical_infrastructure.sectors[]` into `asset_sector_tag` (list of
+  `sector/subsector`, `origin: external_model (JL pipeline)`); map CISA sector names to the lexicon classes by name and
+  report unmapped names. DR-CAND-INFRA-2: a paper is a candidate if (a) a section contains a hazard term (governed or
+  proxy) and an asset term of the lexicon, or (b) a section contains a hazard term and the paper carries a sector tag; rank
+  by number of qualifying sections, then (a) before (b); record `in_186k_set`; cap 300 per hazard family for the pilot;
+  full distribution reported; `candidates.json` gives the basis per paper.
+- **Recorded (EXECUTOR, P5a hotfix).** `inventory_corpus.py` v1.1 (`--tags-out`; the report's `sector_tags` with the
+  mapping), `run_query.py` v4.1 (`--rule DR-CAND-INFRA-2 --proxy-lexicon --sector-tags --in-set-ids`; DR-CAND-INFRA-1
+  stays the default, its code path unchanged), `climrr.infra_lexicon` (`map_sector_name`, `derive_candidates_2`,
+  `verify_candidates_2`). **For confirmation:** (a) the tags reach `run_query.py` through the inventory's per-paper file,
+  because `build_index.py` stores string sections only (the object is not in the index; so tag text can never match a
+  lexical query --- D-070 (b) settled); each line's SHA-256 must equal the index's for that paper, else the run stops;
+  (b) a sector without subsectors gives the tag `sector` alone; (c) "by name" = equal after normalisation (lowercase,
+  "&" -> "and", punctuation -> space, a trailing "Sector" dropped), else a unique leading-word prefix of one CISA name
+  ("Transportation" -> `transportation_systems`, "Water" -> `water_and_wastewater`); anything else unmapped (e.g. the
+  pre-2013 name "Government Facilities"); the mapping annotates and reports only --- rule (b) needs a tag, not a mapped one;
+  (d) a qualifying section = a section with a hazard term of the family and an asset form, or any hazard section of a
+  tagged paper; basis `a` when the paper has at least one section of kind (a), else `b`; rank = (number of qualifying
+  sections desc, basis a before b, paper id); so a tagged paper counts all its hazard sections, and on a corpus where
+  nearly every paper is tagged the rank is close to "number of hazard sections"; (e) `in_186k_set` from
+  `--in-set-ids` (the 186k index `manifest.csv`), null without it; (f) each candidate also records `hazard_relation`
+  (`governed_term` when a qualifying section holds a governed term, else `broader_hazard`). The mapping of the corpus's
+  actual sector names is known only when inventory v1.1 runs on Polaris; from the facts supplied, Transportation (prefix),
+  Communications and Energy (exact) map.
+- **Affected files:** `scripts/litcollect/inventory_corpus.py`, `scripts/litcollect/run_query.py`, `src/climrr/infra_lexicon.py`,
+  `tests/test_p5a.py`, `tests/test_p5a_hotfix.py`, `docs/P5_INFRA_IMPACT_DESIGN.md`, `docs/LITCORPUS03_PROVENANCE.md`.
+
+## D-072a --- The knowledge-graph note goes to the mentors as is
+
+- **Date:** 2026-11-23.
+- **Status:** **decided** (COORDINATOR, 2026-11-23).
+- **Decision.** The note (`docs/KG_SURVEY_AND_DESIGN_NOTE.md`, SHA-256
+  `d6c00df7a356559c1bf727e8d74af9738ac615711430203f77392c38994bb871`, verbatim) goes to the mentors as is; nothing is built
+  until they answer its three questions; P5 artifacts keep statement-level provenance, scope relation and support counts so
+  they can load into the thin graph later.
+- **Recorded (EXECUTOR, P5a hotfix).** The note copied byte-identically; `docs/REFERENCES.md` entry with its SHA-256; its
+  three decisions added to `MENTOR_BRIEF.md` as questions. Nothing built. The fields D-072a names already travel with the P5
+  artifacts: statement-level provenance (passage, offsets, paper hash in every statement record), scope (`scope_class`,
+  `scope_phrase`, `scope_optional_clause`, `cited_by_class` per group in packets v5a), support counts (`strength_in_packet`
+  and the members per group); `hazard_relation` is added per impact statement (D-073a). **For confirmation:** "scope
+  relation" is read as the per-group scope class and its member counts; no pattern-to-mechanism relation type is stored yet.
+- **Affected files:** `docs/KG_SURVEY_AND_DESIGN_NOTE.md`, `docs/REFERENCES.md`, `docs/MENTOR_BRIEF.md`.
+
+## D-073a --- Hazard-proxy lexicon: broader hazard terms for infrastructure papers
+
+- **Date:** 2026-11-23.
+- **Status:** **decided** (COORDINATOR, P5a hotfix work package, section B; **our reading**; GUIDANCE to be notified).
+  Answers the D-073 (a) yield escalation of P5a.
+- **Decision.** `data/metadata/litstatements/hazard_proxy_lexicon_v1.yaml` (hash pinned): heat_index <- {"extreme heat",
+  "heat wave", "heat waves", "heatwave", "heatwaves", "high temperatures", "hot days", "humid heat"}, relation
+  `broader_hazard`; fire_weather_index <- {"fire weather", "fire danger", "fire-weather", "wildfire", "wildfires",
+  "wildland fire"}, relation `broader_hazard` (wildfire terms: wording rule "conditions that favour wildfire", never fire
+  itself); each term `source: EXECUTOR (common usage)`, `authorization: our_reading`, `use: literature classification only;
+  never table matching`. The extraction agent (infra arm) records `hazard_term` and `hazard_relation` in {`governed_term`,
+  `broader_hazard`}; the synthesis prompt phrases broader-hazard support as "extreme heat, of which dangerous heat-index days
+  are one measure" (the phrase stored per family).
+- **Recorded (EXECUTOR, P5a hotfix).** The lexicon (`2da6895e232f57c9c6c254e42710002d00c6aa3a51afa2ec88c5fc03d9ab9d08`,
+  `climrr.infra_lexicon.validate_proxy`); `litstatement_agent.py` v4.1 (`INFRA_PROXY_TERMS`, `hazard_relation_of`; the
+  record carries `hazard_relation` and `hazard_family`); `run_query.py` v4.1 (proxy terms in DR-CAND-INFRA-2);
+  `plain_language_v1b.yaml` (`60598527bf21a9dbc5a68e31cb60ec76d75b95d5ede7411181c323f56832b140`); packets v5a carry
+  `plain_language.broader_hazard_phrase`; `litsynth_agent.py` v5.1 (BROADER HAZARD). **For confirmation:** (a) the phrase is
+  stored in a new file `plain_language_v1b.yaml`, not in `plain_language_v1a.yaml` as the work package says: v1a is
+  hash-pinned, its header says a change is a new file, and its hash is embedded in packets v4a / v4b / v5, whose rebuilds
+  the tests check; (b) the fire-weather phrase is the EXECUTOR's, in the heat phrase's form: "conditions that favour
+  wildfire, of which fire-weather danger is one measure"; (c) `hazard_relation` is computed by code from the term (the
+  model is not asked for it); (d) a section holding "fire weather index" also matches the proxy "fire weather"; it counts
+  as `governed_term`. **Escalation (for the COORDINATOR, not resolved):** the D-073a wording rule puts "wildfire" in graded
+  text, but plain language v1a / v1b `never_write` and post-checks v3+ (`FWI_FORBIDDEN_RE`, a failure) forbid "wildfire" in
+  a fire-weather item's graded text (P3a hotfix). An item using the fire-weather phrase would fail. Nothing trips today (no
+  packet group carries `broader_hazard`); a ruling is needed before the rung-8 packets: exempt the exact phrase, or another
+  phrase.
+- **Affected files:** `data/metadata/litstatements/hazard_proxy_lexicon_v1.yaml`, `data/metadata/benchmark/plain_language_v1b.yaml`,
+  `data/manifest.json`, `src/climrr/infra_lexicon.py`, `src/climrr/plain_language.py`, `scripts/litcollect/litstatement_agent.py`,
+  `scripts/litcollect/run_query.py`, `scripts/litcollect/litsynth_agent.py`, `tests/test_p5a.py`, `tests/test_p5a_hotfix.py`.

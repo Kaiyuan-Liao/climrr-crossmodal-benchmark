@@ -1,14 +1,14 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-11-23   Next: **sample QAs from the infrastructure papers + the climate table, for Alvi to judge** (after the Polaris runs); scope marking on the seven samples
+Last updated: 2026-11-23   Next: **sample QAs from the infrastructure papers + the climate table, for Alvi to judge** (after the Polaris runs); scope marking on the seven samples; the knowledge-graph note (three questions)
 
 ## Status in five lines
 
 1. **2026-11-23 group meeting (with Alvi and JL):** your concern --- combined QAs make the papers' general mechanisms look place-specific --- is now a rule (D-069): every literature sentence says where its research comes from, and general drivers are labelled as general. Your direction: hazards' impact on infrastructure, combining our climate table and papers with Alvi's infrastructure papers (D-070, D-071, D-073); a knowledge graph only after a literature survey (D-072).
 2. **Every item uses both sources (D-059)** in general words (D-060 -- D-062): no "RCP8.5", no "95 °F", no years; "research shows" (two or more independent papers or a review) / "research suggests" (one paper), never "one study"; a readability step rewrites each text without changing its meaning (D-063).
 3. **The other columns go ahead on our documented readings (D-064)** --- recorded as *owner-authorized working assumptions*, not confirmed; your NCA5 grouping is the project's grouping (D-065).
-4. **Seven sample items are in human review** (sheet of 2026-11-19; D-068); their packets are rebuilt with the scope phrases and eight question forms (packets v5), not yet regenerated. **Nothing accepted; nothing frozen.**
-5. **Infrastructure papers (LITCORPUS-03, 89,497 papers from Alvi):** the search and extraction tools are ready; the runs on Polaris come next, then sample QAs for Alvi.
+4. **Seven sample items are in human review** (sheet of 2026-11-19; D-068); their packets are rebuilt with the scope phrases (majority rule, D-069a) and eight question forms (packets v5a), not yet regenerated. **Nothing accepted; nothing frozen.**
+5. **Infrastructure papers (LITCORPUS-03, 89,497 papers from Alvi):** inventoried on Polaris; the search uses broader hazard words and the pipeline's sector labels (D-070a, D-073a); the paper search and extraction runs come next, then sample QAs for Alvi. **Knowledge graph:** the survey note is ready for you (three questions, KG-1 -- KG-3); nothing built.
 
 ## What I need from this meeting
 
@@ -23,15 +23,29 @@ Last updated: 2026-11-23   Next: **sample QAs from the infrastructure papers + t
 > impact statements: D-071, D-073). Questions now come in eight forms instead of one ("How ...", "Why ...", "What happens
 > ...", "Which regions ...").
 >
+> **Since then (P5a hotfix, COORDINATOR decisions, 2026-11-23; no model call):** a paper group now counts as place-specific
+> only when **most** of its papers are about the place; otherwise the answer says "In general, research, including work on
+> California, shows ..." (D-069a; five such cases in the seven samples). Impact statements may use the broader hazard words
+> papers use ("extreme heat", "heat wave", "wildfire"), recorded as *broader* than what the table measures; the answer then
+> says "extreme heat, of which dangerous heat-index days are one measure" (D-073a; our reading). The infrastructure search
+> also uses the sector labels JL's pipeline attached to each paper (D-070a). The 89,497 papers are inventoried on Polaris.
+>
 > **Ask:** (1) for Alvi: which infrastructure classes matter most for the samples (energy, transportation, water, ...)? (2)
 > is "Research on California shows ..." / "In general, research shows ..." the right way to keep general mechanisms from
-> looking place-specific --- or too heavy? (3) should a paper group count as place-specific when only one of its papers is
-> about the place (it does today; five cases in the seven samples)? (4) infrastructure papers mostly say "extreme heat",
-> "heat wave" or "wildfire", not "heat index" or "Fire Weather Index": may the impact statements use those broader hazard
-> words (they are not what the table measures), or only the table's own quantities?
+> looking place-specific --- or too heavy? (3) and (4) of the previous list (one place-specific paper; broader hazard words)
+> are now COORDINATOR decisions (above): tell us if you disagree.
 >
-> **Knowledge graph (point 4):** a literature survey and design note come first (D-072); nothing is built until you have
-> read it.
+> **Knowledge graph (point 4; D-072, D-072a):** the survey and design note is ready --- `docs/KG_SURVEY_AND_DESIGN_NOTE.md`,
+> sent to you as is. Its recommendation: a thin graph built from what we already have (patterns, checked paper groups and
+> passages, plus asset classes and impact types from the infrastructure side), no open-ended extraction of facts from
+> papers, and a 30-item pilot against the current packet approach before committing. **Nothing is built until you answer
+> its three questions:**
+>
+> | # | Question (from the note) | What it decides |
+> | --- | --- | --- |
+> | KG-1 | Locality level for infrastructure items: general (hazard family -> asset class) only, or also place-specific exposure ("assets of this class in this state")? | Whether rung-8 items stay general, or need the infrastructure graph's asset locations |
+> | KG-2 | Minimum evidence for a graph edge to appear in graded text: is one passage enough if worded as single-study, or are two independent papers required? | Which paper groups may enter graded text (today: one paper allowed, written "research suggests", D-062) |
+> | KG-3 | Who owns the shared vocabulary (hazard families, asset classes, impact types) across the two teams, and is the pilot approved at the proposed size (about 30 items)? | The join with Alvi's graph; whether the pilot goes ahead |
 
 > ### **Next: the seven sample items (sheet sent 2026-11-19)**
 >
@@ -496,7 +510,8 @@ points 3, 5), D-072 (knowledge graph: survey first; point 4), D-073 (statement t
 questions asked with the 2026-11-19 sheet was answered).
 
 **Newly asked:** see *What I need from this meeting* (infrastructure classes; the scope wording; minority place-specific
-groups; broader hazard words in impact statements).
+groups; broader hazard words in impact statements). The last two were decided by the COORDINATOR the same day (D-069a,
+D-073a); the knowledge-graph note's three questions (KG-1 -- KG-3, D-072a) were added.
 
 ---
 

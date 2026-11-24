@@ -1,0 +1,1777 @@
+{
+  "version": "synthpackets v5a",
+  "decision": "D-069a, D-073a",
+  "base": {
+    "version": "synthpackets v5",
+    "manifest_sha256": "1f92c194411ea12152c6659058633bf250812bdb234328fa8f39fb81dd8ea0fd",
+    "v4b_manifest_sha256": "598b2744c7fbde5aeaf4cdc3c0bc9465134e41d35e08f11ce19441eb3cf5bfad",
+    "v4b_and_v5_rebuilt_byte_identical": true,
+    "groups_identical_to_v4b_beyond_scope_fields": true,
+    "scope_fields": [
+      "scope_class",
+      "scope_phrase",
+      "scope_optional_clause"
+    ]
+  },
+  "plain_language": {
+    "file": "data/metadata/benchmark/plain_language_v1b.yaml",
+    "version": "plain_language_v1b",
+    "sha256": "60598527bf21a9dbc5a68e31cb60ec76d75b95d5ede7411181c323f56832b140",
+    "broader_hazard_phrase": {
+      "heat_index": "extreme heat, of which dangerous heat-index days are one measure",
+      "fire_weather_index": "conditions that favour wildfire, of which fire-weather danger is one measure"
+    }
+  },
+  "question_forms": {
+    "sha256": "d123b381f6807a9b8d6cc9b6b901a86e8c48dfe617cb1f26ff9c6be9fdd4c910",
+    "assignment": {
+      "BI-P3-0001": "QF-01",
+      "BI-P3-0002": "QF-02",
+      "BI-P3-0003": "QF-03",
+      "BI-P3-0004": "QF-05",
+      "BI-P3-0005": "QF-04",
+      "BI-P3-0007": "QF-06",
+      "BI-P3-0008": "QF-07"
+    },
+    "as_v5": true
+  },
+  "scope_rule": {
+    "class": "majority class among the group's cited members (plurality over the member classes); a tie for the most, or no cited member -> mixed",
+    "member_class": "as v5: litgeo v2 basis state > nca_region > us_subregion > us_national > global, else region_class other / unknown",
+    "stems": {
+      "state": "Research on <State>",
+      "nca": "Research on the <Region>",
+      "us_subregion": "Research on the United States",
+      "us_national": "Research on the United States",
+      "global": "In general, research",
+      "other": "In general, research",
+      "unknown": "In general, research",
+      "mixed": "In general, research"
+    },
+    "optional_clause": ", including work on <State> / <the Region>: the cited members of a place-specific class (state, nca) more specific than the group's class; the phrase then reads <stem>, including work on <Place>, <verb>",
+    "verbs": {
+      "multi_source_or_review": [
+        "shows",
+        "has shown"
+      ],
+      "single_source": [
+        "suggests"
+      ]
+    },
+    "general_clause": "These are general drivers of <quantity_short>, not findings specific to <Place>."
+  },
+  "changes_from_v5": [
+    {
+      "item_id": "BI-P3-0001",
+      "group_id": "LG-extreme_heat_v1-driver-c1-008",
+      "role": "driver",
+      "cited_by_class": {
+        "nca": 1,
+        "us_national": 2
+      },
+      "v5": {
+        "scope_class": "nca",
+        "scope_phrase": "Research on the Southwest shows"
+      },
+      "v5a": {
+        "scope_class": "us_national",
+        "scope_phrase": "Research on the United States shows",
+        "scope_optional_clause": ", including work on the Southwest"
+      },
+      "v5_minority_case": true
+    },
+    {
+      "item_id": "BI-P3-0001",
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-021",
+      "role": "context",
+      "cited_by_class": {
+        "state": 1,
+        "us_national": 1
+      },
+      "v5": {
+        "scope_class": "state",
+        "scope_phrase": "Research on California shows"
+      },
+      "v5a": {
+        "scope_class": "mixed",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": ", including work on California"
+      },
+      "v5_minority_case": false
+    },
+    {
+      "item_id": "BI-P3-0005",
+      "group_id": "LG-extreme_heat_v1-driver-c1-008",
+      "role": "driver",
+      "cited_by_class": {
+        "nca": 1,
+        "us_national": 2
+      },
+      "v5": {
+        "scope_class": "nca",
+        "scope_phrase": "Research on the Southwest shows"
+      },
+      "v5a": {
+        "scope_class": "us_national",
+        "scope_phrase": "Research on the United States shows",
+        "scope_optional_clause": ", including work on the Southwest"
+      },
+      "v5_minority_case": true
+    },
+    {
+      "item_id": "BI-P3-0007",
+      "group_id": "LG-fire_weather_v1-mechanism-c1-003",
+      "role": "driver",
+      "cited_by_class": {
+        "state": 1,
+        "us_national": 1,
+        "global": 1
+      },
+      "v5": {
+        "scope_class": "state",
+        "scope_phrase": "Research on California shows"
+      },
+      "v5a": {
+        "scope_class": "mixed",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": ", including work on California"
+      },
+      "v5_minority_case": true
+    },
+    {
+      "item_id": "BI-P3-0007",
+      "group_id": "LG-fire_weather_v1-driver-c1-002",
+      "role": "driver",
+      "cited_by_class": {
+        "state": 1,
+        "global": 2
+      },
+      "v5": {
+        "scope_class": "state",
+        "scope_phrase": "Research on California shows"
+      },
+      "v5a": {
+        "scope_class": "global",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": ", including work on California"
+      },
+      "v5_minority_case": true
+    },
+    {
+      "item_id": "BI-P3-0007",
+      "group_id": "LG-fire_weather_v1-driver-c1-006",
+      "role": "driver",
+      "cited_by_class": {
+        "us_subregion": 1,
+        "global": 1
+      },
+      "v5": {
+        "scope_class": "us_subregion",
+        "scope_phrase": "Research on the United States suggests"
+      },
+      "v5a": {
+        "scope_class": "mixed",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      "v5_minority_case": false
+    },
+    {
+      "item_id": "BI-P3-0007",
+      "group_id": "LG-fire_weather_v1-driver-c1-005",
+      "role": "context",
+      "cited_by_class": {
+        "state": 1,
+        "us_national": 1,
+        "global": 3
+      },
+      "v5": {
+        "scope_class": "state",
+        "scope_phrase": "Research on California shows"
+      },
+      "v5a": {
+        "scope_class": "global",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": ", including work on California"
+      },
+      "v5_minority_case": true
+    },
+    {
+      "item_id": "BI-P3-0007",
+      "group_id": "LG-fire_weather_v1-mechanism-c1-007",
+      "role": "context",
+      "cited_by_class": {
+        "state": 1,
+        "global": 1
+      },
+      "v5": {
+        "scope_class": "state",
+        "scope_phrase": "Research on California shows"
+      },
+      "v5a": {
+        "scope_class": "mixed",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": ", including work on California"
+      },
+      "v5_minority_case": false
+    },
+    {
+      "item_id": "BI-P3-0008",
+      "group_id": "LG-fire_weather_v1-mechanism-c1-003",
+      "role": "driver",
+      "cited_by_class": {
+        "us_national": 1,
+        "global": 1
+      },
+      "v5": {
+        "scope_class": "us_national",
+        "scope_phrase": "Research on the United States shows"
+      },
+      "v5a": {
+        "scope_class": "mixed",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": null
+      },
+      "v5_minority_case": false
+    },
+    {
+      "item_id": "BI-P3-0008",
+      "group_id": "LG-fire_weather_v1-driver-c1-006",
+      "role": "driver",
+      "cited_by_class": {
+        "us_subregion": 1,
+        "global": 1
+      },
+      "v5": {
+        "scope_class": "us_subregion",
+        "scope_phrase": "Research on the United States suggests"
+      },
+      "v5a": {
+        "scope_class": "mixed",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      "v5_minority_case": false
+    },
+    {
+      "item_id": "BI-P3-0008",
+      "group_id": "LG-fire_weather_v1-driver-c1-005",
+      "role": "context",
+      "cited_by_class": {
+        "us_national": 1,
+        "global": 3
+      },
+      "v5": {
+        "scope_class": "us_national",
+        "scope_phrase": "Research on the United States shows"
+      },
+      "v5a": {
+        "scope_class": "global",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": null
+      },
+      "v5_minority_case": false
+    }
+  ],
+  "v5_minority_cases": [
+    {
+      "item_id": "BI-P3-0001",
+      "group_id": "LG-extreme_heat_v1-driver-c1-008",
+      "role": "driver",
+      "cited_by_class": {
+        "nca": 1,
+        "us_national": 2
+      },
+      "v5": {
+        "scope_class": "nca",
+        "scope_phrase": "Research on the Southwest shows"
+      },
+      "v5a": {
+        "scope_class": "us_national",
+        "scope_phrase": "Research on the United States shows",
+        "scope_optional_clause": ", including work on the Southwest"
+      },
+      "v5_minority_case": true
+    },
+    {
+      "item_id": "BI-P3-0005",
+      "group_id": "LG-extreme_heat_v1-driver-c1-008",
+      "role": "driver",
+      "cited_by_class": {
+        "nca": 1,
+        "us_national": 2
+      },
+      "v5": {
+        "scope_class": "nca",
+        "scope_phrase": "Research on the Southwest shows"
+      },
+      "v5a": {
+        "scope_class": "us_national",
+        "scope_phrase": "Research on the United States shows",
+        "scope_optional_clause": ", including work on the Southwest"
+      },
+      "v5_minority_case": true
+    },
+    {
+      "item_id": "BI-P3-0007",
+      "group_id": "LG-fire_weather_v1-mechanism-c1-003",
+      "role": "driver",
+      "cited_by_class": {
+        "state": 1,
+        "us_national": 1,
+        "global": 1
+      },
+      "v5": {
+        "scope_class": "state",
+        "scope_phrase": "Research on California shows"
+      },
+      "v5a": {
+        "scope_class": "mixed",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": ", including work on California"
+      },
+      "v5_minority_case": true
+    },
+    {
+      "item_id": "BI-P3-0007",
+      "group_id": "LG-fire_weather_v1-driver-c1-002",
+      "role": "driver",
+      "cited_by_class": {
+        "state": 1,
+        "global": 2
+      },
+      "v5": {
+        "scope_class": "state",
+        "scope_phrase": "Research on California shows"
+      },
+      "v5a": {
+        "scope_class": "global",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": ", including work on California"
+      },
+      "v5_minority_case": true
+    },
+    {
+      "item_id": "BI-P3-0007",
+      "group_id": "LG-fire_weather_v1-driver-c1-005",
+      "role": "context",
+      "cited_by_class": {
+        "state": 1,
+        "us_national": 1,
+        "global": 3
+      },
+      "v5": {
+        "scope_class": "state",
+        "scope_phrase": "Research on California shows"
+      },
+      "v5a": {
+        "scope_class": "global",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": ", including work on California"
+      },
+      "v5_minority_case": true
+    }
+  ],
+  "diversity": {
+    "assigned_skeletons": {
+      "rule": "opening_trigram",
+      "max_share": 0.3,
+      "n": 7,
+      "pass": true,
+      "largest_share": 0.143,
+      "trigrams": [
+        {
+          "trigram": "how are dangerous",
+          "n": 1,
+          "share": 0.143
+        },
+        {
+          "trigram": "why are dangerous",
+          "n": 1,
+          "share": 0.143
+        },
+        {
+          "trigram": "what happens to",
+          "n": 1,
+          "share": 0.143
+        },
+        {
+          "trigram": "are dangerous heat-index",
+          "n": 1,
+          "share": 0.143
+        },
+        {
+          "trigram": "which u s",
+          "n": 1,
+          "share": 0.143
+        },
+        {
+          "trigram": "what factors drive",
+          "n": 1,
+          "share": 0.143
+        },
+        {
+          "trigram": "how are fire-weather",
+          "n": 1,
+          "share": 0.143
+        }
+      ]
+    }
+  },
+  "packets": [
+    {
+      "packet_id": "PK-SD2-TP1-00071",
+      "item_id": "BI-P3-0001",
+      "seed_id": "SD2-TP1-00071",
+      "level": 3,
+      "family": "heat_index",
+      "place": "California",
+      "classes_present": [
+        "state",
+        "us_subregion",
+        "us_national",
+        "global",
+        "mixed"
+      ],
+      "needs_general_clause": false,
+      "general_clause": "These are general drivers of dangerous heat-index days, not findings specific to California.",
+      "broader_hazard_phrase": "extreme heat, of which dangerous heat-index days are one measure",
+      "question_form": {
+        "id": "QF-01",
+        "name": "how_and_what_drives",
+        "skeleton": "How are dangerous heat-index days in California projected to change by mid-century under a high-emissions future, and what drives that change?",
+        "opening_regex": "^How\\b",
+        "min_question_marks": 1
+      },
+      "groups": [
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-008",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States shows",
+          "scope_optional_clause": ", including work on the Southwest",
+          "cited_members": 3,
+          "cited_by_class": {
+            "nca": 1,
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [
+            "the Southwest"
+          ],
+          "minority_cited_members": 1
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c2-001",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "global": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-024",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": null,
+          "cited_members": 4,
+          "cited_by_class": {
+            "global": 4
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_subregion": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-001",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_national": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-consensus-c1-005",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-020",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-021",
+          "role": "context",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "mixed",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": ", including work on California",
+          "cited_members": 2,
+          "cited_by_class": {
+            "state": 1,
+            "us_national": 1
+          },
+          "regions": [],
+          "minority_places": [
+            "California"
+          ],
+          "minority_cited_members": 1
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-029",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "state",
+          "scope_phrase": "Research on California suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "state": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-001",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_subregion": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-022",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        }
+      ],
+      "sha256": "46091f48258f7d66e99475f320eb136d7ef2c4dc1540bbf81fefe3b49142e1b5"
+    },
+    {
+      "packet_id": "PK-SD2-TP1-00271",
+      "item_id": "BI-P3-0002",
+      "seed_id": "SD2-TP1-00271",
+      "level": 3,
+      "family": "heat_index",
+      "place": "New York",
+      "classes_present": [
+        "us_subregion",
+        "us_national",
+        "global"
+      ],
+      "needs_general_clause": true,
+      "general_clause": "These are general drivers of dangerous heat-index days, not findings specific to New York.",
+      "broader_hazard_phrase": "extreme heat, of which dangerous heat-index days are one measure",
+      "question_form": {
+        "id": "QF-02",
+        "name": "why_question",
+        "skeleton": "Why are dangerous heat-index days in New York projected to change by late this century under a high-emissions future, and in which direction?",
+        "opening_regex": "^Why\\b",
+        "min_question_marks": 1
+      },
+      "groups": [
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-008",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States shows",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c2-001",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "global": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-024",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": null,
+          "cited_members": 4,
+          "cited_by_class": {
+            "global": 4
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_subregion": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-001",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_national": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-consensus-c1-005",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-020",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-021",
+          "role": "context",
+          "strength_in_packet": "review_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States shows",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_national": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-001",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_subregion": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-022",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        }
+      ],
+      "sha256": "d5cca354c6b215f3f5606bbeae55f632dc93a1cc3f7c5fa67e9cf3a9c1659552"
+    },
+    {
+      "packet_id": "PK-SD2-TP1-00460",
+      "item_id": "BI-P3-0003",
+      "seed_id": "SD2-TP1-00460",
+      "level": 3,
+      "family": "heat_index",
+      "place": "Washington",
+      "classes_present": [
+        "us_subregion",
+        "us_national",
+        "global"
+      ],
+      "needs_general_clause": true,
+      "general_clause": "These are general drivers of dangerous heat-index days, not findings specific to Washington.",
+      "broader_hazard_phrase": "extreme heat, of which dangerous heat-index days are one measure",
+      "question_form": {
+        "id": "QF-03",
+        "name": "what_happens_and_why",
+        "skeleton": "What happens to dangerous heat-index days in Washington by mid-century under a high-emissions future, and why?",
+        "opening_regex": "^What happens\\b",
+        "min_question_marks": 1
+      },
+      "groups": [
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-008",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States shows",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c2-001",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "global": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-024",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": null,
+          "cited_members": 4,
+          "cited_by_class": {
+            "global": 4
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_subregion": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-001",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_national": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-consensus-c1-005",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-020",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-021",
+          "role": "context",
+          "strength_in_packet": "review_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States shows",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_national": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-001",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_subregion": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-022",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        }
+      ],
+      "sha256": "fdd8b709a7ffd3233be4dfcfca3b70f29db2c50e16dc3d31c41fcd8bad6ef8d0"
+    },
+    {
+      "packet_id": "PK-SD2-TP1-00589",
+      "item_id": "BI-P3-0004",
+      "seed_id": "SD2-TP1-00589",
+      "level": 3,
+      "family": "heat_index",
+      "place": "Alabama",
+      "classes_present": [
+        "us_subregion",
+        "us_national",
+        "global"
+      ],
+      "needs_general_clause": true,
+      "general_clause": "These are general drivers of dangerous heat-index days, not findings specific to Alabama.",
+      "broader_hazard_phrase": "extreme heat, of which dangerous heat-index days are one measure",
+      "question_form": {
+        "id": "QF-05",
+        "name": "expected_to_worsen_and_why",
+        "skeleton": "Are dangerous heat-index days in Alabama projected to worsen by late this century under a high-emissions future, and why?",
+        "opening_regex": "^(?:Is|Are)\\b",
+        "min_question_marks": 1
+      },
+      "groups": [
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-008",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States shows",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c2-001",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "global": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-024",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": null,
+          "cited_members": 4,
+          "cited_by_class": {
+            "global": 4
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_subregion": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-001",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_national": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-consensus-c1-005",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-020",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-021",
+          "role": "context",
+          "strength_in_packet": "review_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States shows",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_national": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-001",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_subregion": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-022",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        }
+      ],
+      "sha256": "f5947edc25a3615e1cf02704aaccf02389eaab09e3a925275557d4b6f4b6fda0"
+    },
+    {
+      "packet_id": "PK-SD2-TP1-02785",
+      "item_id": "BI-P3-0005",
+      "seed_id": "SD2-TP1-02785",
+      "level": 4,
+      "family": "heat_index",
+      "place": "any one region",
+      "classes_present": [
+        "us_subregion",
+        "us_national",
+        "global"
+      ],
+      "needs_general_clause": true,
+      "general_clause": "These are general drivers of dangerous heat-index days, not findings specific to any one region.",
+      "broader_hazard_phrase": "extreme heat, of which dangerous heat-index days are one measure",
+      "question_form": {
+        "id": "QF-04",
+        "name": "which_regions_largest_smallest",
+        "skeleton": "Which U.S. regions see the largest and the smallest projected change in dangerous heat-index days by mid-century under a high-emissions future, and what drives the change?",
+        "opening_regex": "^Which\\b",
+        "min_question_marks": 1
+      },
+      "groups": [
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-008",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States shows",
+          "scope_optional_clause": ", including work on the Southwest",
+          "cited_members": 3,
+          "cited_by_class": {
+            "nca": 1,
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [
+            "the Southwest"
+          ],
+          "minority_cited_members": 1
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c2-001",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "global": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-024",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": null,
+          "cited_members": 4,
+          "cited_by_class": {
+            "global": 4
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_subregion": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-driver-c1-001",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_national": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-consensus-c1-005",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-020",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-021",
+          "role": "context",
+          "strength_in_packet": "review_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States shows",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_national": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-001",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_subregion": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-extreme_heat_v1-mechanism-c1-022",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_national",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_national": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        }
+      ],
+      "sha256": "6a3637d700b21aec5c38ea4dff6f2316a7c48a5f6f656bd1f5ed82b6ba2be297"
+    },
+    {
+      "packet_id": "PK-SD2-TP1-01463",
+      "item_id": "BI-P3-0007",
+      "seed_id": "SD2-TP1-01463",
+      "level": 3,
+      "family": "fire_weather_index",
+      "place": "California",
+      "classes_present": [
+        "state",
+        "us_subregion",
+        "global",
+        "mixed"
+      ],
+      "needs_general_clause": false,
+      "general_clause": "These are general drivers of fire-weather danger, not findings specific to California.",
+      "broader_hazard_phrase": "conditions that favour wildfire, of which fire-weather danger is one measure",
+      "question_form": {
+        "id": "QF-06",
+        "name": "what_factors_and_how_large",
+        "skeleton": "What factors drive the projected change in fire-weather danger in California by mid-century under a high-emissions future, and how large is that change?",
+        "opening_regex": "^What factors\\b",
+        "min_question_marks": 1
+      },
+      "groups": [
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-003",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "state",
+          "scope_phrase": "Research on California shows",
+          "scope_optional_clause": null,
+          "cited_members": 4,
+          "cited_by_class": {
+            "state": 3,
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-002",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "state",
+          "scope_phrase": "Research on California shows",
+          "scope_optional_clause": null,
+          "cited_members": 5,
+          "cited_by_class": {
+            "state": 5
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-003",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "mixed",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": ", including work on California",
+          "cited_members": 3,
+          "cited_by_class": {
+            "state": 1,
+            "us_national": 1,
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [
+            "California"
+          ],
+          "minority_cited_members": 1
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-002",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": ", including work on California",
+          "cited_members": 3,
+          "cited_by_class": {
+            "state": 1,
+            "global": 2
+          },
+          "regions": [],
+          "minority_places": [
+            "California"
+          ],
+          "minority_cited_members": 1
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-001",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "state",
+          "scope_phrase": "Research on California suggests",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "state": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-006",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "mixed",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_subregion": 1,
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-021",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_subregion": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c2-004",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_subregion": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-005",
+          "role": "context",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": ", including work on California",
+          "cited_members": 5,
+          "cited_by_class": {
+            "state": 1,
+            "us_national": 1,
+            "global": 3
+          },
+          "regions": [],
+          "minority_places": [
+            "California"
+          ],
+          "minority_cited_members": 1
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-007",
+          "role": "context",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "mixed",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": ", including work on California",
+          "cited_members": 2,
+          "cited_by_class": {
+            "state": 1,
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [
+            "California"
+          ],
+          "minority_cited_members": 1
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-004",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "state",
+          "scope_phrase": "Research on California suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "state": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        }
+      ],
+      "sha256": "2deb6ddad4963568ad59e703313c83393bdda45cf01aa1788a01a028fc48c3d6"
+    },
+    {
+      "packet_id": "PK-SD2-TP1-01654",
+      "item_id": "BI-P3-0008",
+      "seed_id": "SD2-TP1-01654",
+      "level": 3,
+      "family": "fire_weather_index",
+      "place": "Minnesota",
+      "classes_present": [
+        "state",
+        "us_subregion",
+        "global",
+        "mixed"
+      ],
+      "needs_general_clause": false,
+      "general_clause": "These are general drivers of fire-weather danger, not findings specific to Minnesota.",
+      "broader_hazard_phrase": "conditions that favour wildfire, of which fire-weather danger is one measure",
+      "question_form": {
+        "id": "QF-07",
+        "name": "two_short_questions",
+        "skeleton": "How are fire-weather danger in Minnesota projected to change by late this century under a high-emissions future? What drives the change?",
+        "opening_regex": "^How\\b",
+        "min_question_marks": 2
+      },
+      "groups": [
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-003",
+          "role": "driver",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "mixed",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_national": 1,
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-006",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "mixed",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "us_subregion": 1,
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c2-021",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_subregion": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c2-004",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "us_subregion",
+          "scope_phrase": "Research on the United States suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "us_subregion": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-002",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 2,
+          "cited_by_class": {
+            "global": 2
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-003",
+          "role": "driver",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-004",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "state",
+          "scope_phrase": "Research on Minnesota suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "state": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-fire_weather_v1-driver-c1-005",
+          "role": "context",
+          "strength_in_packet": "multi_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research shows",
+          "scope_optional_clause": null,
+          "cited_members": 4,
+          "cited_by_class": {
+            "us_national": 1,
+            "global": 3
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        },
+        {
+          "group_id": "LG-fire_weather_v1-mechanism-c1-007",
+          "role": "context",
+          "strength_in_packet": "single_source_supported",
+          "scope_class": "global",
+          "scope_phrase": "In general, research suggests",
+          "scope_optional_clause": null,
+          "cited_members": 1,
+          "cited_by_class": {
+            "global": 1
+          },
+          "regions": [],
+          "minority_places": [],
+          "minority_cited_members": 0
+        }
+      ],
+      "sha256": "7d5f87c52e7e2b6db3aec07a40385cf0b098b318a375f0034f9a24d95a153e01"
+    }
+  ]
+}

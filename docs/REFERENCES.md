@@ -92,3 +92,19 @@ mapped to a field.
 **Not taken:** the infrastructure and graph modalities (out of scope); the
 prompts and illustrative outputs themselves. No cell text is copied into the
 repository beyond the headers and use-case names above.
+
+## `KG_SURVEY_AND_DESIGN_NOTE.md` --- knowledge-graph survey and design note (D-072, D-072a)
+
+| | |
+| --- | --- |
+| **What** | Literature survey and design sketch: knowledge graphs for cross-modal benchmark question generation (KG question-set generation, hazard / infrastructure graphs, scope of an edge, a thin statement-centred graph, a 30-item pilot); three decisions for the mentors |
+| **Author** | satellite chat "KG STUDY - Cross-modal knowledge graph" (D-072), 2026-11-23 |
+| **Supplied by** | Kaiyuan, 2026-11-23 (P5a hotfix work package) |
+| **SHA-256** | `d6c00df7a356559c1bf727e8d74af9738ac615711430203f77392c38994bb871` (computed by the EXECUTOR on the Mac, 2026-11-23; 30,306 bytes, UTF-8, LF) |
+| **Stored in repo** | **Yes, verbatim** --- `docs/KG_SURVEY_AND_DESIGN_NOTE.md`, byte-identical to the file received (same SHA-256) |
+
+**Status.** A discussion note: nothing in it has been built or trialled (its own words). Under D-072a it goes to the
+mentors as is; nothing is built until they answer its three questions (locality level of infrastructure items; minimum
+evidence for an edge in graded text; ownership of the shared vocabularies and approval of the pilot size), listed in
+`MENTOR_BRIEF.md`. Its reference marks ([V] retrieved, [C] cited only, "from memory") are the satellite's; the EXECUTOR has
+not re-checked any reference. Its statements about the current pipeline come from project records.

@@ -25,6 +25,17 @@ DR-DESC-1 v4, plain language v1a, dispositions and groups, unchanged) with only 
 Nothing else changes: `provenance` (the groups with their members) is byte-identical to v4b's, and each model-view group
 minus its two scope fields equals v4b's (`group_identity`, checked by the builder and the tests). No model call; no table
 value computed.
+
+**Packets v5a (P5a hotfix, D-069a; `build(variant="v5a")`, `scripts/build_synth_packets_v5a.py`).** The group's scope class
+is the MAJORITY class among its cited members instead of the most specific one: the class with the most cited members
+(plurality over the seven member classes); a tie for the most --- or no cited member --- gives `mixed` (D-069a: "ties ->
+general"), stem "In general, research". The cited members of a place-specific class (state / nca) MORE specific than the
+group's class become the optional clause `scope_optional_clause` = ", including work on <State>" (or "<the Region>"; names
+joined as in the stems), so the phrase may read "In general, research, including work on California, shows"; null when
+there is none. Each model-view group gains that third field. `model_view.plain_language` comes from plain_language_v1b
+(v1a + `broader_hazard_phrase`, D-073a), `inputs_sha256.plain_language` its hash. `checks_input.scope.groups[*]` carries
+`optional_clause`; post-checks v3.2 accept the opening with the clause. Everything else as v5 (the same question forms;
+`provenance` and every group beyond the three scope fields byte-identical to v4b).
 """
 
 from __future__ import annotations
@@ -48,7 +59,14 @@ DECISION = "D-069"
 BASIS_TO_CLASS = {"state": "state", "nca_region": "nca", "us_subregion": "us_subregion", "us_national": "us_national",
                   "global": "global"}
 CLASS_ORDER = ("state", "nca", "us_subregion", "us_national", "global", "other", "unknown")
+#: v5a (D-069a): `mixed` = a tie for the most cited members (or none); "In general, research".
+CLASS_ORDER_V5A = CLASS_ORDER + ("mixed",)
 SCOPE_FIELDS = ("scope_class", "scope_phrase")
+SCOPE_FIELDS_V5A = SCOPE_FIELDS + ("scope_optional_clause",)
+VERSION_V5A = "synthpackets v5a"
+PACKETS_V5A_DIR = REPO_ROOT / "artifacts" / "benchmark" / "synth_packets_v5a"
+DECISION_V5A = "D-069a"
+PLACE_CLASSES = ("state", "nca")
 NO_ARTICLE_REGIONS = ("Alaska", "Hawai'i and U.S.-Affiliated Pacific Islands")
 REGIONAL_PLACE = "any one region"
 
@@ -72,30 +90,63 @@ def join_names(names: list[str]) -> str:
     return names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1]
 
 
-def group_scope(g: dict, pattern: dict, nca: dict, gz) -> dict:
-    """{class, stem, cited_members, cited_by_class, regions} for one packet group (provenance record)."""
+def nca_regions_of(members: list[dict], pattern: dict, places: dict, gz) -> list[str]:
+    """The NCA5 regions an nca-class member set stands for: the item's region; for a regional contrast the regions the
+    members name, of those the pattern covers (else the first)."""
+    if pattern["pattern_kind"] != "regional_contrast":
+        return list(places["nca_region"])
+    regions = []
+    for m in members:
+        if member_class(m) == "nca":
+            regions += [r for r in gz.names_in(m["region"])[1] if r in places["nca_region"] and r not in regions]
+    return sorted(regions) or list(places["nca_region"][:1])
+
+
+def majority_class(classes: list[str]) -> str:
+    """D-069a: the class with the most cited members; a tie for the most, or no member, -> `mixed`."""
+    if not classes:
+        return "mixed"
+    counts = {c: classes.count(c) for c in CLASS_ORDER if c in classes}
+    top = max(counts.values())
+    winners = [c for c, k in counts.items() if k == top]
+    return winners[0] if len(winners) == 1 else "mixed"
+
+
+def group_scope(g: dict, pattern: dict, nca: dict, gz, rule: str = "best") -> dict:
+    """{class, stem, cited_members, cited_by_class, regions} for one packet group (provenance record). `rule="majority"`
+    (v5a, D-069a) adds `optional_clause` and `minority_places`."""
     cm = [m for m in g["members"] if cited(m)]
     classes = [member_class(m) for m in cm]
-    best = min(classes, key=CLASS_ORDER.index) if classes else "unknown"
+    if rule == "majority":
+        best = majority_class(classes)
+    else:
+        best = min(classes, key=CLASS_ORDER.index) if classes else "unknown"
     places = sd.pattern_places(pattern, nca)
     regions = []
     if best == "state":
         stem = f"Research on {places['state'][0]}"
     elif best == "nca":
-        if pattern["pattern_kind"] == "regional_contrast":
-            for m in cm:
-                if member_class(m) == "nca":
-                    regions += [r for r in gz.names_in(m["region"])[1] if r in places["nca_region"] and r not in regions]
-            regions = sorted(regions) or list(places["nca_region"][:1])
-        else:
-            regions = list(places["nca_region"])
+        regions = nca_regions_of(cm, pattern, places, gz)
         stem = f"Research on {join_names([region_np(r) for r in regions])}"
     elif best in ("us_subregion", "us_national"):
         stem = "Research on the United States"
     else:
         stem = "In general, research"
-    return {"class": best, "stem": stem, "regions": regions, "cited_members": len(cm),
-            "cited_by_class": {c: classes.count(c) for c in CLASS_ORDER if c in classes}}
+    out = {"class": best, "stem": stem, "regions": regions, "cited_members": len(cm),
+           "cited_by_class": {c: classes.count(c) for c in CLASS_ORDER if c in classes}}
+    if rule == "majority":
+        rank = CLASS_ORDER_V5A.index(best)
+        minority = [m for m in cm if member_class(m) in PLACE_CLASSES and CLASS_ORDER_V5A.index(member_class(m)) < rank]
+        names = []
+        if any(member_class(m) == "state" for m in minority):
+            names.append(places["state"][0])
+        if any(member_class(m) == "nca" for m in minority):
+            names += [region_np(r) for r in nca_regions_of([m for m in minority if member_class(m) == "nca"], pattern, places, gz)]
+        names = list(dict.fromkeys(names))
+        out["minority_places"] = names
+        out["minority_cited_members"] = len(minority)
+        out["optional_clause"] = f", including work on {join_names(names)}" if names else None
+    return out
 
 
 def scope_phrase(stem: str, strength: str) -> str:
@@ -142,65 +193,84 @@ def place_of(pattern: dict) -> str:
     return REGIONAL_PLACE if pattern["pattern_kind"] == "regional_contrast" else pattern["geography"]
 
 
-def add_scope(pk: dict, form: dict, nca: dict, gz, forms_sha256: str) -> dict:
-    """Packet v5 from a packet v4b (deep copy; the input is unchanged)."""
+def add_scope(pk: dict, form: dict, nca: dict, gz, forms_sha256: str, variant: str = "v5", plain_v1b: dict | None = None) -> dict:
+    """Packet v5 (or v5a) from a packet v4b (deep copy; the input is unchanged)."""
+    v5a = variant == "v5a"
     x = copy.deepcopy(pk)
     p = x["provenance"]["patterns"][0]
+    if v5a:                                                     # plain_language_v1b: v1a + broader_hazard_phrase (D-073a)
+        fam = plain_v1b["families"][p["family"]]
+        x["model_view"]["plain_language"] = {**x["model_view"]["plain_language"], "version": plain_v1b["version"],
+                                             "broader_hazard_phrase": fam["broader_hazard_phrase"]}
     plain = x["model_view"]["plain_language"]
     prov = {g["group_id"]: g for g in x["provenance"]["groups"]}
-    scopes = {gid: group_scope(g, p, nca, gz) for gid, g in prov.items()}
+    scopes = {gid: group_scope(g, p, nca, gz, rule="majority" if v5a else "best") for gid, g in prov.items()}
     for g in x["model_view"]["groups"]:
         sc = scopes[g["group_id"]]
         g["scope_class"] = sc["class"]
         g["scope_phrase"] = scope_phrase(sc["stem"], prov[g["group_id"]]["strength_in_packet"])
+        if v5a:
+            g["scope_optional_clause"] = sc["optional_clause"]
     place = place_of(p)
     places = sd.pattern_places(p, nca)
-    classes = sorted({s["class"] for s in scopes.values()}, key=CLASS_ORDER.index)
+    order = CLASS_ORDER_V5A if v5a else CLASS_ORDER
+    classes = sorted({s["class"] for s in scopes.values()}, key=order.index)
     needs = not any(c in ("state", "nca") for c in classes)
     clause = f"These are general drivers of {plain['quantity_short']}, not findings specific to {place}."
     slots = {"quantity": plain["quantity_short"], "place": place if p["pattern_kind"] != "regional_contrast" else "U.S. regions",
              "horizon": plain["horizon"], "scenario": plain["scenario"]}
     qf = {"id": form["id"], "name": form["name"], "skeleton": fill_skeleton(form, slots), "opening_regex": form["opening_regex"],
           "min_question_marks": form["min_question_marks"]}
-    x["version"] = VERSION
+    decision = DECISION_V5A if v5a else DECISION
+    x["version"] = VERSION_V5A if v5a else VERSION
     x["question_form_id"] = form["id"]
-    x["model_view"]["scope"] = {"decision": DECISION, "place": place, "classes_present": classes,
-                                "needs_general_clause": needs, "general_clause": clause}
+    x["model_view"]["scope"] = {"decision": decision, "place": place, "classes_present": classes,
+                                "needs_general_clause": needs, "general_clause": clause,
+                                **({"rule": "majority of cited members; ties -> general; minority place mentions -> optional clause"} if v5a else {})}
     x["model_view"]["question_form"] = qf
-    x["checks_input"]["scope"] = {"decision": DECISION, "groups": {gid: {"class": s["class"], "stem": s["stem"]} for gid, s in scopes.items()},
+    x["checks_input"]["scope"] = {"decision": decision,
+                                  "groups": {gid: {"class": s["class"], "stem": s["stem"],
+                                                   **({"optional_clause": s["optional_clause"]} if v5a else {})} for gid, s in scopes.items()},
                                   "general_clause": clause, "needs_general_clause": needs,
                                   "place_names": list(dict.fromkeys(places["state"] + places["nca_region"]))}
     x["checks_input"]["question_form"] = {k: qf[k] for k in ("id", "name", "opening_regex", "min_question_marks")}
     x["scope_detail"] = {gid: s for gid, s in scopes.items()}
-    x["inputs_sha256"] = {**x["inputs_sha256"], "question_forms": forms_sha256}
+    x["inputs_sha256"] = {**x["inputs_sha256"], "question_forms": forms_sha256,
+                          **({"plain_language": plain_v1b["sha256"]} if v5a else {})}
     return x
 
 
-def group_identity(v4b: dict, v5: dict) -> bool:
+def group_identity(v4b: dict, v5: dict, fields: tuple = SCOPE_FIELDS) -> bool:
     """Every model-view group of v5 minus its scope fields equals v4b's, and the provenance groups are equal."""
-    strip = [{k: v for k, v in g.items() if k not in SCOPE_FIELDS} for g in v5["model_view"]["groups"]]
+    strip = [{k: v for k, v in g.items() if k not in fields} for g in v5["model_view"]["groups"]]
     return strip == v4b["model_view"]["groups"] and v5["provenance"]["groups"] == v4b["provenance"]["groups"]
 
 
-def build() -> dict:
+def build(variant: str = "v5") -> dict:
     """{"v4b": [packet], "v5": [packet], "forms": forms, "assignment": {item_id: form_id}, "selection": ...} from the
-    v4b build (in memory) and question_forms_v1. Raises if a group differs from v4b beyond the scope fields."""
+    v4b build (in memory) and question_forms_v1. Raises if a group differs from v4b beyond the scope fields.
+    `variant="v5a"` (D-069a): the packets under "v5" are v5a (majority rule, optional clause, plain language v1b)."""
     from climrr import litgeo as lg
+    from climrr import plain_language as pl
 
+    if variant not in ("v5", "v5a"):
+        raise ValueError(f"variant {variant!r}")
     b = v4.build_selection(variant="v4b")
     forms = load_question_forms()
+    plain_v1b = pl.load(pl.PLAIN_V1B_PATH) if variant == "v5a" else None
     nca = sd.nca_map()
     gz = lg.Gazetteer(nca)
     items = [(pk["item_id"], pk["use_case_level"], pk["provenance"]["patterns"][0]) for pk in b["packets"]]
     assign = assign_question_forms(items, forms)
+    fields = SCOPE_FIELDS_V5A if variant == "v5a" else SCOPE_FIELDS
     out = []
     for pk in b["packets"]:
-        x = add_scope(pk, assign[pk["item_id"]], nca, gz, forms["sha256"])
-        if not group_identity(pk, x):
+        x = add_scope(pk, assign[pk["item_id"]], nca, gz, forms["sha256"], variant=variant, plain_v1b=plain_v1b)
+        if not group_identity(pk, x, fields):
             raise ValueError(f"{pk['packet_id']}: a group differs from v4b beyond the scope fields")
         out.append(x)
     return {"v4b": b["packets"], "v5": out, "forms": forms, "assignment": {k: f["id"] for k, f in assign.items()},
-            "build": b}
+            "build": b, "variant": variant, "plain_v1b": plain_v1b}
 
 
 def dumps(pk: dict) -> str:

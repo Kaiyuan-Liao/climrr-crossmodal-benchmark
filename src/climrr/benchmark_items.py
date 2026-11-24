@@ -348,7 +348,8 @@ SYNTH_CHECK_VERSION_V3 = "synthesis_post_checks v3"
 # format-class failures), and two reports (a context phrase in a driver sentence of the paragraph; a regional contrast
 # claimed to be explained). Opt-in: litsynth_agent v4.1 passes it; v3 stays what the run-4 reproduction uses.
 SYNTH_CHECK_VERSION_V31 = "synthesis_post_checks v3.1"
-# v3.2 (work package P5a, D-069): v3.1 plus scope marking --- every literature sentence opens with the scope phrase of its
+# v3.2 (work package P5a, D-069; updated in the P5a hotfix for D-069a before any run: the `mixed` class and the optional
+# ", including work on <Place>" clause after the stem): v3.1 plus scope marking --- every literature sentence opens with the scope phrase of its
 # cited groups; the general closing clause when (and only when) no cited group is state- or NCA-specific; no required
 # rubric point names the place on a group's authority; the question opens as its assigned question form (all format-
 # class) --- and the mixed-scope report. Opt-in: litsynth_agent v5 passes it.
@@ -749,7 +750,8 @@ def hedge_by_strength(lit_s: list[dict], strengths: dict) -> list[dict]:
 # --- v3.2: scope marking (D-069) and question forms (P5a) ------------------------------------------------
 
 #: Most specific first. D-069: state, nca, us_subregion / us_national, then global / other / unknown ("In general").
-SCOPE_CLASS_ORDER = ("state", "nca", "us_subregion", "us_national", "global", "other", "unknown")
+#: D-069a (packets v5a): `mixed` --- a tie for the most cited members --- is general too ("In general").
+SCOPE_CLASS_ORDER = ("state", "nca", "us_subregion", "us_national", "global", "other", "unknown", "mixed")
 PLACE_SPECIFIC_CLASSES = ("state", "nca")
 SCOPE_VERBS_MULTI = ("shows", "has shown")
 SCOPE_VERBS_SINGLE = ("suggests",)
@@ -768,8 +770,16 @@ def best_scope(group_ids, scope_groups: dict) -> dict | None:
 
 
 def scope_openings(group_ids, scope_groups: dict, strengths: dict) -> list[str]:
+    """The allowed openings: the best group's stem + verb; D-069a (packets v5a) also stem + optional clause + ", " + verb,
+    for the optional clause of any cited group with that stem ("In general, research, including work on California,
+    shows"). A v5 packet carries no optional clause, so its openings are unchanged."""
     best = best_scope(group_ids, scope_groups)
-    return [f"{best['stem']} {v}" for v in scope_verbs(group_ids, strengths)] if best else []
+    if not best:
+        return []
+    clauses = list(dict.fromkeys(scope_groups[g]["optional_clause"] for g in group_ids
+                                 if g in scope_groups and scope_groups[g].get("optional_clause") and scope_groups[g]["stem"] == best["stem"]))
+    verbs = scope_verbs(group_ids, strengths)
+    return [f"{best['stem']} {v}" for v in verbs] + [f"{best['stem']}{c}, {v}" for c in clauses for v in verbs]
 
 
 def scope_checks(lit_s: list[dict], integrated: str, rubric_points: list, checks_input: dict) -> tuple[list[str], dict]:

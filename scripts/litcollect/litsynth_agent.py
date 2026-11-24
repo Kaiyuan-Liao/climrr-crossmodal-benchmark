@@ -94,6 +94,14 @@ packet's assigned form (`question_form`: opening and structure of its skeleton).
 mixed-scope report). `summary.json` adds `question_diversity` (opening trigram, at most 30 %; a report). The format
 corrective prompt names the new rules. Everything else as v4.1.
 
+v5.1 (P5a hotfix, D-069a, D-073a; packets v5a, `scripts/build_synth_packets_v5a.py`; not yet run): SCOPE says that the
+scope phrase follows the majority of a group's papers and that a group may carry `scope_optional_clause` (", including
+work on <Place>"), which may follow the stem ("In general, research, including work on California, shows"); post-checks
+v3.2 accept that opening. BROADER HAZARD: a group whose statements rest on a broader hazard term (`hazard_relation`
+`broader_hazard`) is written with the packet's `plain_language.broader_hazard_phrase` ("extreme heat, of which dangerous
+heat-index days are one measure"), never as the governed quantity itself (no packet v5a group carries the relation yet;
+the rule is for the rung-8 packets). The format corrective prompt names the optional clause. Everything else as v5.
+
 Polaris invocation (Sophia vLLM, D-043). Run from the execution clone on Eagle (`$CLIMRR_REPO_ROOT`,
 docs/SOPHIA_RUNBOOK.md) checked out at the pinned commit that carries the packets and provides `climrr`; output
 under the litcollect root (`$LITCOLLECT_ROOT_POLARIS`, config key `litcollect_root_polaris`), never in the clone; the
@@ -102,7 +110,7 @@ ALCF credential in the environment; first check the environment: `python -c "imp
     bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
     cd "$CLIMRR_REPO_ROOT"
     python scripts/litcollect/litsynth_agent.py \\
-        --packets artifacts/benchmark/synth_packets_v5 \\
+        --packets artifacts/benchmark/synth_packets_v5a \\
         --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run6" \\
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \\
         --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \\
@@ -119,7 +127,7 @@ from litstatement_agent import (  # noqa: E402  (v3)
 from litgroup_agent import DEFAULT_MAX_TOKENS, REASONING_EFFORTS, call_turn, turn_stats  # noqa: E402  (v3)
 from climrr import benchmark_items as bi  # noqa: E402
 
-GENERATOR_VERSION = "litsynth_agent v5"
+GENERATOR_VERSION = "litsynth_agent v5.1"
 CHECK_VERSION = bi.SYNTH_CHECK_VERSION_V32
 CORRECTIVE_PROMPT = ("Your reply did not contain a JSON object with the keys \"prompt\" and \"reference_answer\". "
                      "Return the complete JSON object.")
@@ -135,7 +143,8 @@ FORMAT_CORRECTIVE_PROMPT = ("Your item failed these format checks:\n{reasons}\nR
                             f"\"{NOT_REQUIRED_SENTENCE}\"). Start every sentence with a capital letter. A group whose role is "
                             "\"context\" is never a driver or a cause. A literature sentence that rests only on single-source "
                             "groups says \"research suggests\" and is marked \"hedged\": true. Begin every literature sentence with the "
-                            "\"scope_phrase\" of the groups it cites (the most specific one); when none of the groups you cite has "
+                            "\"scope_phrase\" of the groups it cites (the most specific one), optionally with the group's \"scope_optional_clause\" just "
+                            "before the verb (\"In general, research, including work on California, shows\"); when none of the groups you cite has "
                             "\"scope_class\" \"state\" or \"nca\", end \"literature_interpretation\" with {\"sentence\": <the packet's "
                             "\"general_clause\">, \"group_ids\": [], \"hedged\": false} and end \"integrated\" with the same sentence; "
                             "otherwise write no such clause. No required rubric point names the place on a group's authority. The "
@@ -163,7 +172,9 @@ WRITING. Every sentence starts with a capital letter ("Research shows ...", neve
 
 CONTEXT GROUPS. A group whose "role" is "context" (how the quantity is defined or measured, such as "the heat index combines temperature and humidity") is never a driver or a cause of the change. Use it only as an explanatory aside ("Because the heat index combines temperature and humidity, ..."), never in a list of drivers or causes, and never with "driven by", "driver", "cause" or "because of" in the same clause.
 
-SCOPE (where the research comes from). Each group carries a "scope_class" and a "scope_phrase" computed by code from where its papers are about: "Research on <State> shows" (state), "Research on the <Region> shows" (NCA5 region), "Research on the United States shows" (the United States or a part of it), "In general, research shows" (global or unstated). With a single-source group the phrase says "suggests" instead of "shows"; "has shown" may replace "shows". Every literature sentence BEGINS with the scope phrase of the groups it cites; when it cites groups of different scope it begins with the most specific of their phrases, but write one sentence per scope wherever you can, so that a general mechanism is never made to look specific to the place. If the packet's "scope" has "needs_general_clause": true, or if none of the groups you cite has "scope_class" "state" or "nca", the LAST entry of "literature_interpretation" is {"sentence": "<the packet's general_clause, copied exactly>", "group_ids": [], "hedged": false}, and "integrated" ends with the same sentence; otherwise write no such sentence. In "integrated", every sentence that mentions research begins with its scope phrase. No required rubric point names the place (the state or its region) on the authority of a literature group: required mechanism points are written in general words; a group whose "scope_class" is "state" or "nca" may earn an OPTIONAL point that states its finding for the place.
+SCOPE (where the research comes from). Each group carries a "scope_class" and a "scope_phrase" computed by code from where most of its papers are about: "Research on <State> shows" (state), "Research on the <Region> shows" (NCA5 region), "Research on the United States shows" (the United States or a part of it), "In general, research shows" (global, unstated, or papers split evenly). With a single-source group the phrase says "suggests" instead of "shows"; "has shown" may replace "shows". A group may also carry a "scope_optional_clause" such as ", including work on California": some of its papers are about the place, but most are not. You MAY insert it into the phrase just before the verb ("In general, research, including work on California, shows"); never move the place into the first words. Every literature sentence BEGINS with the scope phrase of the groups it cites; when it cites groups of different scope it begins with the most specific of their phrases, but write one sentence per scope wherever you can, so that a general mechanism is never made to look specific to the place. If the packet's "scope" has "needs_general_clause": true, or if none of the groups you cite has "scope_class" "state" or "nca", the LAST entry of "literature_interpretation" is {"sentence": "<the packet's general_clause, copied exactly>", "group_ids": [], "hedged": false}, and "integrated" ends with the same sentence; otherwise write no such sentence. In "integrated", every sentence that mentions research begins with its scope phrase. No required rubric point names the place (the state or its region) on the authority of a literature group: required mechanism points are written in general words; a group whose "scope_class" is "state" or "nca" may earn an OPTIONAL point that states its finding for the place.
+
+BROADER HAZARD. The packet's "plain_language" may carry a "broader_hazard_phrase" (for example "extreme heat, of which dangerous heat-index days are one measure"). When a group's statements rest on a broader hazard term (the group says "hazard_relation": "broader_hazard"), write its support with that phrase: the research is about the broader hazard, of which the quantity is one measure, never about the quantity itself. Without such a group, do not use the phrase.
 
 QUESTION FORM. The packet's "question_form" gives the form of the question ("id", "name", "skeleton"). Write "prompt" in that form: begin it as the skeleton begins and keep the skeleton's structure (one question, or two short questions for "two_short_questions"), with the packet's plain-language phrases; adjust the grammar so it reads well. Do not copy anything the skeleton does not need.
 

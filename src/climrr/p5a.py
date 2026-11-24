@@ -60,3 +60,19 @@ def materialize_tools(*names: str) -> Path:
             (tools / n).symlink_to(REPO_ROOT / TOOLS_REL / n)
     (root / "src").symlink_to(REPO_ROOT / "src")
     return tools
+
+
+#: P5a hotfix (2026-11-23): inventory_corpus.py v1 ran on Polaris (2026-11-24 00:33 UTC, the LITCORPUS-03 inventory whose
+#: figures are in docs/LITCORPUS03_PROVENANCE.md §4) and was then replaced by v1.1; its bytes are held at the hotfix's base
+#: commit (pushed). The other tools the hotfix bumps (run_query v4, litstatement_agent v4, litsynth_agent v5) never ran.
+HOTFIX_BASE_COMMIT = "600c8887cb1bc27969c71de51c0040b125927dd9"
+HELD_HOTFIX = {
+    "inventory_corpus.py": "98ac67acf042ba488b17d7eea88e47a148ba3ab0b7aa2bf7d7c6a8f59e27bf81",   # v1 (P5a; ran on Polaris)
+}
+
+
+def held_bytes_hotfix(name: str) -> bytes:
+    blob = s2.git_blob(HOTFIX_BASE_COMMIT, f"{TOOLS_REL}/{name}")
+    if hashlib.sha256(blob).hexdigest() != HELD_HOTFIX[name]:
+        raise ValueError(f"{name} at {HOTFIX_BASE_COMMIT[:7]} differs from its pinned SHA-256 {HELD_HOTFIX[name]}")
+    return blob

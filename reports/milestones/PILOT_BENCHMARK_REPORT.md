@@ -1271,3 +1271,62 @@ Hawai'i. (e) Pipeline forms under transportation (CISA "Pipeline Systems"). (f) 
 asks the direction rather than presupposing it. (g) `CLAUDE.md`: one run-evidence line for the P5a tools (precedent of each
 earlier Polaris tool). (h) Gaps: polish checks v2 do not protect scope phrases; an integrated sentence may merge scopes
 undetected; the rung-8 wording rule is not yet a check.
+
+## 60. P5a hotfix, sections A -- D: majority scope rule, hazard-proxy lexicon, sector tags, KG note (2026-11-23)
+
+No model call; nothing frozen; no column status moved. Decisions D-069a, D-070a, D-072a, D-073a (COORDINATOR).
+
+| | |
+| --- | --- |
+| Packets v5a (D-069a) | manifest `30c46fa15ee60a75817fd879fa7a2321ac91e472412100a6fbc53cb861c67de3`; v4b and v5 rebuilt byte-identical; every group byte-identical to v4b beyond `scope_class` / `scope_phrase` / `scope_optional_clause`; plain language v1b in `model_view.plain_language`; question forms as v5 |
+| Scope changes | 11 group attachments; closing clause now required for 0002, 0003, 0004 **and 0005** |
+| Proxy lexicon (D-073a) | `hazard_proxy_lexicon_v1.yaml` `2da6895e232f57c9c6c254e42710002d00c6aa3a51afa2ec88c5fc03d9ab9d08`; 8 heat + 6 fire-weather terms, `broader_hazard`, EXECUTOR / `our_reading` / literature only |
+| Plain language v1b | `60598527bf21a9dbc5a68e31cb60ec76d75b95d5ede7411181c323f56832b140`; v1a + `broader_hazard_phrase` (heat: the WP's phrase; fire weather: EXECUTOR) |
+| `run_query.py` v4.1 | `819f223dc4739079e0b5d6fc7a3c2f5bd38078315d9f168b8ad79b7cf843dc42`; `--rule DR-CAND-INFRA-2 --proxy-lexicon --sector-tags --in-set-ids`; INFRA-1 and v3 paths unchanged (tests) |
+| `inventory_corpus.py` v1.1 | `de18fe7da59909410b4036185b04ff82c8a16b73618601148d3a0a615ba958e0`; `sector_tags` (mapping by name) and `--tags-out`; on a synthetic corpus its report equals v1's beyond `sector_tags` (v1 held at `600c888`) |
+| `litstatement_agent.py` v4.1 | `e2e204e066436cd6bfaea7758ce8125777c6ba9a69ae6a3fc71bc056b839445e`; infra prompt `945b487ca515d89fd25755d82e3c4d63e662888dea61f9f386028857ed69e095`; v3 prompt unchanged |
+| `litsynth_agent.py` v5.1 | `8ff71879c234375299e74a7c7f1d8777f47d86350f3ccf218ed6910bc5aa1a43`; prompt `b81b71abb75a9d57b9f3f08f53f945b99b3f5d6966d42d982da407a185cb3793`; format corrective `73278b5c7cf0da7e419588850b8c16c90d96a90d10008e14b6d998d176081fe1` |
+| KG note (D-072a) | `docs/KG_SURVEY_AND_DESIGN_NOTE.md` `d6c00df7a356559c1bf727e8d74af9738ac615711430203f77392c38994bb871` (verbatim); three questions in `MENTOR_BRIEF.md` (KG-1 -- KG-3) |
+
+**The five v5 minority cases under D-069a** (v5 -> v5a):
+
+| Item | Group | Cited by class | v5 | v5a |
+| --- | --- | --- | --- | --- |
+| BI-P3-0001 | `extreme_heat_v1-driver-c1-008` | nca 1, us_national 2 | Research on the Southwest shows | Research on the United States shows; clause ", including work on the Southwest" |
+| BI-P3-0005 | `extreme_heat_v1-driver-c1-008` | nca 1, us_national 2 | Research on the Southwest shows | Research on the United States shows; clause ", including work on the Southwest" |
+| BI-P3-0007 | `fire_weather_v1-mechanism-c1-003` | state 1, us_national 1, global 1 | Research on California shows | In general, research shows (`mixed`: three-way tie); clause ", including work on California" |
+| BI-P3-0007 | `fire_weather_v1-driver-c1-002` | state 1, global 2 | Research on California shows | In general, research shows; clause ", including work on California" |
+| BI-P3-0007 | `fire_weather_v1-driver-c1-005` | state 1, us_national 1, global 3 | Research on California shows | In general, research shows; clause ", including work on California" |
+
+The other six: five 1 : 1 ties -> `mixed` (0001 `mechanism-c1-021`, 0007 `mechanism-c1-007`: California -> general + clause;
+0007 `driver-c1-006`, 0008 `mechanism-c1-003`, `driver-c1-006`: the United States -> general) and 0008 `driver-c1-005` (1
+U.S. member of 4 -> general). BI-P3-0005 lost its only NCA group, so it now ends with the general clause.
+
+**LITCORPUS-03 inventory** (relayed; `LITCORPUS03_PROVENANCE.md` §4 -- §5): 89,497 files, 0 parse failures, 89,497 ids, 32
+shards, identity `2dfc8eca…f725`; `_araiadoc_tags` an object (so not indexed); duplicates 103 / 109 by content, 891 / 2,078
+by title; 6,533 papers also in the 186k set; 10,403 distinct tag values.
+
+## 61. P5a hotfix: gate, escalations, readings for confirmation (2026-11-23)
+
+| | |
+| --- | --- |
+| Tests | `pytest`: **1,696 passed, 2 skipped** (the two `jsonschema` skips); new `tests/test_p5a_hotfix.py` (16); `test_p5a.py` repinned to the new tool versions (two expectations follow D-073a: "heat wave" / "extreme heat" now pass the infra pre-check) |
+| Scanner | `verify_no_secrets_or_paths.py`: 0 hits |
+
+**Escalations (for the COORDINATOR; not resolved).**
+1. **"wildfire" in the fire-weather phrase (D-073a).** The wording rule ("conditions that favour wildfire") and plain language
+   `never_write` / post-checks v3+ (`FWI_FORBIDDEN_RE`) conflict: an item using the phrase fails. Nothing trips yet (no packet
+   group carries `broader_hazard`). Needed before the rung-8 packets: exempt the exact phrase, or another phrase.
+2. **Basis (b) breadth (D-070a).** If nearly every LITCORPUS-03 paper carries a sector tag (the relayed figures suggest so),
+   basis (b) admits nearly every hazard paper and the rank is close to "number of hazard sections"; the proxy terms ("high
+   temperatures", "wildfire") are broad. The query's distribution (by basis, by relation) will show it before the extraction.
+
+**Readings for confirmation.** (a) D-069a "majority" = plurality over the seven member classes; a tie (or no cited member) ->
+`mixed`. (b) The clause names cited members of a place class more specific than the group's class; it sits between the stem
+and the verb; optional. (c) The broader-hazard phrase is stored in a new `plain_language_v1b.yaml` (the WP said v1a, which is
+pinned and embedded in three packet sets). (d) `hazard_relation` computed by code from the term. (e) Sector names mapped by
+normalised equality, else a unique word prefix ("Transportation" -> Transportation Systems); the tag file carries the tags to
+`run_query.py` (the index holds no tags). (f) D-070a recorded under an EXECUTOR id. (g) Tool versions: run_query v4.1,
+inventory v1.1, litstatement v4.1, litsynth v5.1; post-checks v3.2 changed in place (it never ran). (h) Gap (wider under
+v5a): an integrated sentence that opens with a place phrase may carry general groups' mechanisms; v3.2 checks only the
+opening. (i) The tarball's SHA-256 check on Eagle is not among the relayed facts.

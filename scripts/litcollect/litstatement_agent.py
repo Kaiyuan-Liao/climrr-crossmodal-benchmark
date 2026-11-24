@@ -38,6 +38,13 @@ other pre-checks are the v3 ones (verbatim passage, passage type, no numeric spe
 retried once without (`reasoning_effort_applied: false`). Without `--arm infra_impact_v1` and `--reasoning-effort` the
 agent behaves as v3: the v3 system prompt is byte-identical.
 
+v4.1 (P5a hotfix, D-073a; not yet run): the infra arm also admits the BROADER hazard terms of
+data/metadata/litstatements/hazard_proxy_lexicon_v1.yaml (`INFRA_PROXY_TERMS`, equality with the file is tested) as an
+impact statement's `hazard_term`, and every impact statement record carries `hazard_relation` (`governed_term` for a term of
+`INFRA_HAZARD_TERMS`, `broader_hazard` for a proxy term) and `hazard_family` (heat_index / fire_weather_index), computed by
+code from the term (`hazard_relation_of`), never asked of the model. The infra prompt names the proxy terms and the wording
+rule for the wildfire terms ("conditions that favour wildfire", never fire itself); the v3 prompt is unchanged.
+
 Polaris invocation of the infra arm (Sophia vLLM; from the execution clone at the pinned commit; output under the
 litcollect root; the ALCF credential in the environment):
 
@@ -61,7 +68,7 @@ import duckdb
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from softqa_agent import call_model, locate_passage  # noqa: E402  (v2, pinned byte-identical)
 
-GENERATOR_VERSION = "litstatement_agent v4"
+GENERATOR_VERSION = "litstatement_agent v4.1"
 MAX_STATEMENTS = 6
 MAX_PASSAGE_CHARS = 700
 MAX_RAW_CHARS = 20000
@@ -105,8 +112,30 @@ INFRA_HAZARD_TERMS = ("heat index", "heat-index", "extended heat index", "fire w
                       "dangerous heat-index days", "fire-weather danger (how hot, dry and windy conditions favour fire)",
                       "fire-weather danger")
 INFRA_FIELDS = ("hazard_term", "asset_class", "impact_mechanism", "impact_outcome")
+#: v4.1 (D-073a): the governed terms by family, and the broader hazard terms of hazard_proxy_lexicon_v1.yaml (equality is tested).
+INFRA_HAZARD_FAMILY = {"heat_index": ("heat index", "heat-index", "extended heat index", "days hot and humid enough to be dangerous",
+                                      "dangerous heat-index days"),
+                       "fire_weather_index": ("fire weather index", "FWI", "fire-weather index", "canadian forest fire weather index",
+                                              "canadian fwi", "fire-weather danger (how hot, dry and windy conditions favour fire)",
+                                              "fire-weather danger")}
+INFRA_PROXY_TERMS = {"heat_index": ("extreme heat", "heat wave", "heat waves", "heatwave", "heatwaves", "high temperatures", "hot days",
+                                    "humid heat"),
+                     "fire_weather_index": ("fire weather", "fire danger", "fire-weather", "wildfire", "wildfires", "wildland fire")}
+HAZARD_RELATIONS = ("governed_term", "broader_hazard")
 
-SYSTEM_PROMPT_INFRA = """You are helping build a closed-book benchmark about the impact of climate hazards on infrastructure. You will read ONE scientific paper in full. Your task: extract the GENERAL statements this paper supports about how a hazard condition measured by the heat index (humid heat) or by a fire weather / fire danger index (for example the Fire Weather Index) affects infrastructure, and general statements about those two hazards themselves. A statement is something a scientist could say in general terms. A fire weather or fire danger index describes meteorological fire danger: never restate it as fire occurrence, ignition, burned area or damage; a statement about fires that actually burned is not a fire-weather statement. A modeled historical baseline is not an observation. A hazard is not exposure and exposure is not risk: state what the paper shows about such conditions, never that a particular asset will fail.
+
+def hazard_relation_of(term):
+    """v4.1: (hazard_relation, hazard_family) of an impact statement's hazard_term (case-insensitive), or (None, None)."""
+    t = str(term or "").strip().lower()
+    for fam, terms in INFRA_HAZARD_FAMILY.items():
+        if t in {x.lower() for x in terms}:
+            return "governed_term", fam
+    for fam, terms in INFRA_PROXY_TERMS.items():
+        if t in {x.lower() for x in terms}:
+            return "broader_hazard", fam
+    return None, None
+
+SYSTEM_PROMPT_INFRA = """You are helping build a closed-book benchmark about the impact of climate hazards on infrastructure. You will read ONE scientific paper in full. Your task: extract the GENERAL statements this paper supports about how a hazard condition measured by the heat index (humid heat) or by a fire weather / fire danger index (for example the Fire Weather Index), or a broader hazard of which they are one measure (extreme heat or heat waves; conditions that favour wildfire), affects infrastructure, and general statements about those hazards themselves. A statement is something a scientist could say in general terms. A fire weather or fire danger index describes meteorological fire danger: never restate it as fire occurrence, ignition, burned area or damage; a statement about fires that actually burned is not a fire-weather statement. A modeled historical baseline is not an observation. A hazard is not exposure and exposure is not risk: state what the paper shows about such conditions, never that a particular asset will fail.
 
 Return at most 6 statements. Fewer honest statements are better than many weak ones. If the paper supports none, return {"statements": []}. Never invent passages or statements. For each statement return:
 - "statement": ONE sentence, general, in your own words, faithful to the passage; no numbers unless they are essential to the statement.
@@ -126,7 +155,7 @@ Return at most 6 statements. Fewer honest statements are better than many weak o
 - "time_location": as scenario_location, for the time.
 - "generality": one of "general_mechanism" (holds beyond this study), "regional_expectation" (expected for a region), "specific_result" (this study's particular number or result).
 - "confidence": "high", "medium" or "low".
-- "hazard_term": for an "impact" statement, the hazard exactly as one of: "heat index", "heat-index", "extended heat index", "fire weather index", "FWI", "fire-weather index", "canadian forest fire weather index", "canadian fwi", "days hot and humid enough to be dangerous", "dangerous heat-index days", "fire-weather danger". If the paper's hazard is none of these (for example a heat wave, extreme heat or a wildfire), return no "impact" statement for it. For other statement types, "".
+- "hazard_term": for an "impact" statement, the hazard exactly as one of: "heat index", "heat-index", "extended heat index", "fire weather index", "FWI", "fire-weather index", "canadian forest fire weather index", "canadian fwi", "days hot and humid enough to be dangerous", "dangerous heat-index days", "fire-weather danger"; or, when the paper names only a broader hazard, exactly one of: "extreme heat", "heat wave", "heat waves", "heatwave", "heatwaves", "high temperatures", "hot days", "humid heat", "fire weather", "fire danger", "fire-weather", "wildfire", "wildfires", "wildland fire". Prefer the first list whenever the paper uses one of its terms. With a wildfire term, write the statement about conditions that favour wildfire, never as if a fire-weather index were fire itself. If the paper's hazard is in neither list, return no "impact" statement for it. For other statement types, "".
 - "asset_class": for an "impact" statement, exactly one of: "chemical", "commercial_facilities", "communications", "critical_manufacturing", "dams", "defense_industrial_base", "emergency_services", "energy", "financial_services", "food_and_agriculture", "government_services_and_facilities", "healthcare_and_public_health", "information_technology", "nuclear_reactors_materials_and_waste", "transportation_systems", "water_and_wastewater", or "other". For other statement types, "".
 - "impact_mechanism": for an "impact" statement, ONE clause: how the hazard condition acts on the asset. For other statement types, "".
 - "impact_outcome": for an "impact" statement, ONE clause: what happens to the asset or its service. For other statement types, "".
@@ -219,8 +248,8 @@ def impact_field_errors(st) -> list:
     if st.get("statement_type") != "impact":
         return []
     errs = []
-    if str(st.get("hazard_term") or "").strip().lower() not in {t.lower() for t in INFRA_HAZARD_TERMS}:
-        errs.append(f"hazard_term not in the governed list: {st.get('hazard_term')!r}")
+    if hazard_relation_of(st.get("hazard_term"))[0] is None:      # v4.1: governed or proxy term (D-073a)
+        errs.append(f"hazard_term not in the governed or proxy list: {st.get('hazard_term')!r}")
     if st.get("asset_class") not in INFRA_ASSET_CLASSES:
         errs.append(f"asset_class not a lexicon class or 'other': {st.get('asset_class')!r}")
     for k in ("impact_mechanism", "impact_outcome"):
@@ -342,7 +371,7 @@ def migrate_http_failures(out: Path, say):
 def summarise(out: Path, endpoint=None):
     allr, summary = [], {"papers": 0, "papers_with_error": 0, "papers_over_limit": 0, "statements": 0, "deterministic_pass": 0,
                          "rejected_pre_review": 0, **(endpoint or {}), "endpoints_in_results": {}, "rejected_by_check": {}, "by_statement_type": {}, "by_passage_type": {},
-                         "by_generality": {}, "by_region_scope": {}, "by_recovery": {}, "scenario_check": {}, "time_check": {}, "by_asset_class": {}}
+                         "by_generality": {}, "by_region_scope": {}, "by_recovery": {}, "scenario_check": {}, "time_check": {}, "by_asset_class": {}, "by_hazard_relation": {}}
     for p in sorted(out.glob("*/result.json")):
         r = json.loads(p.read_text())
         if "statements" not in r:
@@ -359,7 +388,7 @@ def summarise(out: Path, endpoint=None):
             for key, val in (("by_statement_type", g.get("statement_type")), ("by_passage_type", g.get("passage_type")),
                              ("by_generality", g.get("generality")), ("by_region_scope", g.get("region_scope")),
                              ("by_recovery", x["passage_recovery"]), ("scenario_check", x["scenario"]["check"]),
-                             ("time_check", x["time"]["check"])) + ((("by_asset_class", g.get("asset_class")),) if g.get("statement_type") == "impact" else ()):
+                             ("time_check", x["time"]["check"])) + ((("by_asset_class", g.get("asset_class")), ("by_hazard_relation", x.get("hazard_relation"))) if g.get("statement_type") == "impact" else ()):
                 summary[key][str(val)] = summary[key].get(str(val), 0) + 1
     with open(out / "statements.jsonl", "w", encoding="utf-8") as f:
         for x in allr: f.write(json.dumps(x, ensure_ascii=False) + "\n")
@@ -474,6 +503,8 @@ def main():
                 "passage_recovery": checks["passage_recovery"], "scenario": located["scenario"], "time": located["time"],
                 "proposal": st, "over_limit": si >= MAX_STATEMENTS,
                 "table_values_visible_to_generator": False, "answer_visible_to_generator": False,
+                **({"hazard_relation": hazard_relation_of(st.get("hazard_term"))[0], "hazard_family": hazard_relation_of(st.get("hazard_term"))[1]}
+                   if infra and st.get("statement_type") == "impact" else {}),
                 "pre_review_checks": checks, "pre_review_status": status,
                 "aggregation": None, "evidence_strength": None, "human_review": None,
             })

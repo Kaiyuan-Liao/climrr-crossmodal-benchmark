@@ -9,12 +9,15 @@ and rules below with **no model call**; the runs are on Polaris (§6), then samp
 The P1 -- P3 workflow (table concepts -> queries -> papers -> per-paper extraction -> grouping -> packets -> synthesis ->
 polish -> review), applied to LITCORPUS-03 (`LITCORPUS03_PROVENANCE.md`):
 
-1. transfer, verify, **inventory** (`scripts/litcollect/inventory_corpus.py`), **index** (`build_index.py`);
-2. **lexicon query** (`run_query.py` v4 `--lexicon`): hazard-family hits, asset-class hits, impact-term hits and
-   hazard + asset co-occurrence within a section, per paper (`paper_hits.jsonl`);
-3. **candidates** `DR-CAND-INFRA-1` (§3) -> `candidates.json`, shipped back as `data/metadata/softqa/infra_candidates_v1.json`
-   (hash pinned on ingest; re-derived by `climrr.infra_lexicon.verify_candidates`);
-4. **extraction** (`litstatement_agent.py` v4 `--arm infra_impact_v1`; statement type `impact`, D-073);
+1. transfer, verify, **inventory** (`scripts/litcollect/inventory_corpus.py`; v1 done 2026-11-24, `LITCORPUS03_PROVENANCE.md`
+   §4; v1.1 adds the per-paper sector tags, D-070a), **index** (`build_index.py`);
+2. **lexicon query** (`run_query.py` v4.1 `--lexicon --rule DR-CAND-INFRA-2`): per paper and hazard family, the hazard
+   sections (governed and proxy terms, D-073a), the sections with an asset term, the sector tags and `in_186k_set`
+   (`paper_hits.jsonl`);
+3. **candidates** `DR-CAND-INFRA-2` (§3a) -> `candidates.json`, shipped back as `data/metadata/softqa/infra_candidates_v1.json`
+   (hash pinned on ingest; re-derived by `climrr.infra_lexicon.verify_candidates_2`);
+4. **extraction** (`litstatement_agent.py` v4.1 `--arm infra_impact_v1`; statement type `impact`, D-073; `hazard_relation`,
+   D-073a);
 5. grouping, rung-8 packets, synthesis, polish --- designed after the extraction run is ingested;
 6. sample QAs for Alvi.
 
@@ -39,7 +42,26 @@ is reported (`by_family.distribution_n_cooc_sections`). A paper in both families
 **Expected yield risk (for the COORDINATOR).** Infrastructure papers mostly write "extreme heat", "heat wave" or
 "wildfire", rarely "heat index" or "Fire Weather Index". The governed terms will find few co-occurrences; widening the
 hazard vocabulary is a scientific decision (an FWI is never fire occurrence; "extreme heat" is not the heat index), not
-taken here. The query reports the counts that decision needs.
+taken here. The query reports the counts that decision needs. *(Decided in the P5a hotfix: D-073a, §3a.)*
+
+## 3a. Candidate rule DR-CAND-INFRA-2 (P5a hotfix; D-070a, D-073a) --- the pilot's rule
+
+DR-CAND-INFRA-1 stays available (`--rule DR-CAND-INFRA-1`, the default; unchanged); the pilot uses INFRA-2.
+
+- **Hazard terms per family** = the governed terms (the topical-only query files, R-FWI-1 as above) **plus** the broader
+  hazard terms of `data/metadata/litstatements/hazard_proxy_lexicon_v1.yaml` (heat_index: extreme heat, heat wave(s),
+  heatwave(s), high temperatures, hot days, humid heat; fire_weather_index: fire weather, fire danger, fire-weather,
+  wildfire(s), wildland fire), relation `broader_hazard`, literature classification only, never table matching.
+- **Sector tag** = `asset_sector_tag` from `_araiadoc_tags.critical_infrastructure.sectors[]` (JL's pipeline, `origin:
+  external_model (JL pipeline)`), read from the inventory v1.1 per-paper file (the index does not hold the tags).
+- A section **qualifies** for a family when it holds a hazard term of the family and (a) an asset form of the lexicon, or
+  (b) the paper carries a sector tag. Basis `a` when the paper has a section of kind (a), else `b`.
+- **Rank**: number of qualifying sections (descending), then basis a before b, then paper id. Top 300 per family. Reported:
+  the distribution by count, by basis, by hazard relation (`governed_term` when a qualifying section holds a governed
+  term, else `broader_hazard`) and in / not in the 186k set (`in_186k_set`).
+- **Reading (for confirmation).** On LITCORPUS-03 almost every paper may carry a sector tag, so basis (b) admits nearly
+  every paper with a hazard term, and the rank is then close to "number of hazard sections". The query's distribution
+  shows how far that is so before the extraction run.
 
 ## 4. Item type (rung 8, D-071) and the wording rule
 
@@ -49,7 +71,15 @@ shows about such conditions, and never that a specific asset at the place will f
 force: impact statements are almost always general, so most rung-8 answers will close with the general clause. Question
 form QF-08: "What does a projected <change> in <hazard phrase> in <Place> <horizon> mean for <asset class>, and why?"
 
-## 5. Scope rule and question forms (D-069; packets v5, synthesis prompt v5, post-checks v3.2)
+## 5. Scope rule and question forms (D-069, D-069a; packets v5 -> v5a, synthesis prompt v5.1, post-checks v3.2)
+
+**P5a hotfix (D-069a).** The scope class of a group is now the **majority** class among its cited members (a tie -> `mixed`,
+"In general, research"); cited members of a more specific place class (state / NCA) become the optional clause
+", including work on <Place>" ("In general, research, including work on California, shows"). Packets v5a
+(`artifacts/benchmark/synth_packets_v5a/`, manifest `changes_from_v5`): 11 group attachments change on the seven seeds
+(the 5 minority cases and 6 others); BI-P3-0005 now needs the closing clause. Packets v5a also carry plain language v1b
+(`broader_hazard_phrase`, D-073a). The text below describes v5; where it says "most specific", v5a reads "majority".
+
 
 - **Scope.** Per group, the most specific geography class among its cited members (core / cited candidates and review
   passages; litgeo v2 basis, else the member's region class) -> "Research on <State>", "Research on the <Region>",
@@ -70,34 +100,35 @@ form QF-08: "What does a projected <change> in <hazard phrase> in <Place> <horiz
 
 ## 6. Polaris plan (Kaiyuan; env as before: `module load conda/2026-10-01`, `conda activate globus_env`)
 
-At the pushed commit `<PINNED_SHA>` that carries P5a; the litcollect root in `$LITCOLLECT_ROOT_POLARIS`; first check the
+**Done (2026-11-24):** transfer, extraction and the v1 inventory (`LITCORPUS03_PROVENANCE.md` §4). **Next**, at the pushed
+commit `<PINNED_SHA>` that carries the P5a hotfix; the litcollect root in `$LITCOLLECT_ROOT_POLARIS`; first check the
 environment: `python -c "import yaml, duckdb; print(duckdb.__version__)"` (DuckDB 1.5.4).
 
     bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
     cd "$CLIMRR_REPO_ROOT"
     L="$LITCOLLECT_ROOT_POLARIS"; SRC="$L/sources/critical_infrastructure_v1"
-    # 1. transfer the tarball into "$SRC", then verify and extract (expect 6c6e21c2...1ec76; the archive should hold kept/)
-    sha256sum "$SRC/critical_infrastructure_judged_relevant.tar.gz"
-    tar -tzf "$SRC/critical_infrastructure_judged_relevant.tar.gz" | head -3
-    tar -xzf "$SRC/critical_infrastructure_judged_relevant.tar.gz" -C "$SRC"
-    # 2. inventory (overlap with the 186k set through its index manifest)
-    mkdir -p "$L/inventory"
-    python scripts/litcollect/inventory_corpus.py --root "$SRC/kept" --out "$L/inventory/litcorpus03_inventory.json" \
+    # 1. inventory v1.1: the same figures as v1 plus the sector tags and their mapping; the per-paper tag file
+    #    (new output names: the tool refuses to overwrite the v1 output)
+    python scripts/litcollect/inventory_corpus.py --root "$SRC/kept" --out "$L/inventory/litcorpus03_inventory_v11.json" \
         --corpus-id LITCORPUS-03 --compare-ids "$L/index/full_705k_v2_filtered/manifest.csv" \
-        --compare-label LITCORPUS-02-source-186k
-    # -> stop here if the file count is not 89,497 or _araiadoc_tags is a string (LITCORPUS03_PROVENANCE.md §3)
-    # 3. index
+        --compare-label LITCORPUS-02-source-186k --tags-out "$L/inventory/litcorpus03_sector_tags_v11.jsonl"
+    # -> stop if files != 89,497 or the content identity != 2dfc8eca...f725 (the v1 run)
+    # 2. index (skip if done; its content identity must equal 2dfc8eca...f725)
     python scripts/litcollect/build_index.py --root "$SRC/kept" --out "$L/index/critical_infrastructure_v1"
-    # 4. lexicon query and candidates (DR-CAND-INFRA-1, cap 300 per family)
+    # 3. lexicon query and candidates (DR-CAND-INFRA-2, cap 300 per family)
     python scripts/litcollect/run_query.py --index "$L/index/critical_infrastructure_v1" \
-        --out "$L/runs/infra_lexicon_v1" --name infra_lexicon_v1 \
+        --out "$L/runs/infra_lexicon_v2" --name infra_lexicon_v2 \
         --lexicon data/metadata/litstatements/infrastructure_lexicon_v1.yaml \
+        --rule DR-CAND-INFRA-2 --proxy-lexicon data/metadata/litstatements/hazard_proxy_lexicon_v1.yaml \
+        --sector-tags "$L/inventory/litcorpus03_sector_tags_v11.jsonl" \
+        --in-set-ids "$L/index/full_705k_v2_filtered/manifest.csv" --in-set-label LITCORPUS-02-source-186k \
         --family heat_index=artifacts/literature/litcorpus02/evidence/queries/extreme_heat_diag_topical_only_query.txt \
         --family fire_weather_index=artifacts/literature/litcorpus02/evidence/queries/fire_weather_diag_topical_only_query.txt \
         --family-disambiguate 'fire_weather_index:fwi=fire weather|fire-weather' --cap 300
 
-Ship back: `litcorpus03_inventory.json`, the index's `index_summary.json` and `build.log`, and the query run's
-`summary.json`, `candidates.json` and `paper_hits.jsonl` (with SHA-256 of each). The ingest pins
-`infra_candidates_v1.json` = `candidates.json` and re-derives it. The extraction run (`litstatement_agent.py --arm
-infra_impact_v1 --reasoning-effort low --max-tokens 6000`, invocation in the agent's docstring) runs at the commit that
-carries the pinned candidates, after the COORDINATOR has seen the counts.
+Ship back: both inventory JSONs (v1 and v1.1; not the tag file, which stays on Eagle --- its SHA-256 is in the v1.1 JSON
+and in `candidates.json`), the index's `index_summary.json` and `build.log`, and the query run's `summary.json`,
+`candidates.json` and `paper_hits.jsonl` (with SHA-256 of each). The ingest checks the v1.1 inventory against the relayed v1
+figures, pins `infra_candidates_v1.json` = `candidates.json` and re-derives it (`verify_candidates_2`). The extraction run
+(`litstatement_agent.py --arm infra_impact_v1 --reasoning-effort low --max-tokens 6000`, invocation in the agent's
+docstring) runs at the commit that carries the pinned candidates, after the COORDINATOR has seen the counts.

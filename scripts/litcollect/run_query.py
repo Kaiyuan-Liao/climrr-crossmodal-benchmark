@@ -37,6 +37,19 @@ rule DR-CAND-INFRA-1: papers with >= 1 co-occurrence section for a family, ranke
 doc_id in code-point order), the top `--cap` (default 300) per family; the full distribution is reported. Outputs:
 summary.json, paper_hits.jsonl (every paper with a hazard-family hit), candidates.json. Without --lexicon the script
 behaves exactly as v3. Lexicon mode needs PyYAML (present in the Polaris env: `python -c "import yaml, duckdb"`).
+
+v4.1 (P5a hotfix, 2026-11-23): `--rule DR-CAND-INFRA-2` in lexicon mode (DR-CAND-INFRA-1 stays the default and its outputs
+are unchanged). INFRA-2 adds the hazard-proxy lexicon (`--proxy-lexicon hazard_proxy_lexicon_v1.yaml`: per family, broader
+hazard terms, relation `broader_hazard`; literature classification only) and the corpus sector tags (`--sector-tags`: the
+JSON lines inventory_corpus.py v1.1 `--tags-out` writes; `asset_sector_tag` = 'sector/subsector' labels of JL's pipeline,
+origin `external_model (JL pipeline)`; each line's sha256 must equal the index's for that paper). A section QUALIFIES for a
+family when it holds a hazard term of the family (governed or proxy; R-FWI-1 as before) and (a) an asset form of the lexicon
+or (b) the paper carries a sector tag. Basis per paper and family: `a` if any section meets (a), else `b`. Rank by the
+number of qualifying sections (descending), then basis a before b, then doc_id in code-point order; the top `--cap` per
+family; the full distribution is reported (by count, by basis, by hazard relation, in / not in the comparison set).
+`--in-set-ids` (a build_index manifest.csv or a text file of ids; e.g. the 186k set) gives each paper `in_186k_set`
+true / false (null without it). Each candidate records its basis, counts, `hazard_relation` (`governed_term` if a
+qualifying section holds a governed term, else `broader_hazard`), `in_186k_set` and `asset_sector_tag`.
 """
 import argparse, csv, hashlib, json, re, sys, time
 from pathlib import Path
@@ -113,11 +126,24 @@ def main():
     ap.add_argument("--family", action="append", default=[], help="lexicon mode: NAME=QUERYFILE (one OR group), repeatable")
     ap.add_argument("--family-disambiguate", action="append", default=[], help="lexicon mode: 'NAME:bare=t1|t2', repeatable")
     ap.add_argument("--cap", type=int, default=300, help="lexicon mode: DR-CAND-INFRA-1 cap per hazard family")
+    ap.add_argument("--rule", default="DR-CAND-INFRA-1", choices=("DR-CAND-INFRA-1", "DR-CAND-INFRA-2"), help="v4.1: lexicon-mode candidate rule")
+    ap.add_argument("--proxy-lexicon", default=None, help="v4.1, DR-CAND-INFRA-2: hazard_proxy_lexicon_v1.yaml")
+    ap.add_argument("--sector-tags", default=None, help="v4.1, DR-CAND-INFRA-2: inventory_corpus.py v1.1 --tags-out JSON lines")
+    ap.add_argument("--in-set-ids", default=None, help="v4.1, DR-CAND-INFRA-2: manifest.csv (doc_id) or text file of ids -> in_186k_set")
+    ap.add_argument("--in-set-label", default=None)
     a = ap.parse_args()
     if a.lexicon:
         if a.query_file or a.disambiguate:
             sys.exit("--lexicon mode takes --family / --family-disambiguate, not --query-file / --disambiguate")
+        if a.rule == "DR-CAND-INFRA-2":
+            if not (a.proxy_lexicon and a.sector_tags):
+                sys.exit("--rule DR-CAND-INFRA-2 needs --proxy-lexicon and --sector-tags")
+            return lexicon_main_2(a)
+        if a.proxy_lexicon or a.sector_tags or a.in_set_ids:
+            sys.exit("--proxy-lexicon / --sector-tags / --in-set-ids belong to --rule DR-CAND-INFRA-2")
         return lexicon_main(a)
+    if a.rule != "DR-CAND-INFRA-1" or a.proxy_lexicon or a.sector_tags or a.in_set_ids:
+        sys.exit("--rule / --proxy-lexicon / --sector-tags / --in-set-ids need --lexicon")
     if not a.query_file:
         sys.exit("--query-file is required (or --lexicon)")
 
@@ -407,6 +433,247 @@ def lexicon_main(a):
     }
     (out / "summary.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False) + "\n")
     print(json.dumps({k: summary[k] for k in ("name", "documents_in_index", "per_family_doc_counts", "per_family_cooc_doc_counts", "n_candidates", "elapsed_seconds")}, indent=2))
+
+
+# --- v4.1: DR-CAND-INFRA-2 (P5a hotfix) -----------------------------------------------------------------------------
+
+CAND_RULE_2 = "DR-CAND-INFRA-2"
+CAND_RULE_2_TEXT = ("a section qualifies for a family when it holds a hazard term of the family (governed or proxy) and (a) an "
+                    "asset term of the lexicon or (b) the paper carries a sector tag; basis a if any section meets (a), else b; "
+                    "ranked by the number of qualifying sections, descending, then basis a before b, then doc_id in code-point "
+                    "order; the top `cap` per hazard family")
+TAG_ORIGIN = "external_model (JL pipeline)"
+BASIS_ORDER = ("a", "b")
+
+
+def load_ids(path: Path) -> set:
+    lines = path.read_text(encoding="utf-8").splitlines()
+    if lines and "doc_id" in lines[0].split(","):
+        return {r["doc_id"] for r in csv.DictReader(lines)}
+    return {x.strip() for x in lines if x.strip()}
+
+
+def counts_of(xs) -> dict:
+    out = {}
+    for x in xs:
+        out[str(x)] = out.get(str(x), 0) + 1
+    return dict(sorted(out.items(), key=lambda kv: (int(kv[0]) if kv[0].lstrip("-").isdigit() else 10**9, kv[0])))
+
+
+def select_candidates_2(papers: list, families: list, cap: int) -> dict:
+    """DR-CAND-INFRA-2 over INFRA-2 paper_hits records (see CAND_RULE_2_TEXT)."""
+    by_family, order, entry = {}, [], {}
+    pid = {p["doc_id"]: p for p in papers}
+    for f in families:
+        elig = sorted(((p["infra2"][f]["n_qualifying_sections"], p["infra2"][f]["basis"], p["doc_id"]) for p in papers
+                       if p["infra2"].get(f, {}).get("n_qualifying_sections", 0) >= 1),
+                      key=lambda x: (-x[0], BASIS_ORDER.index(x[1]), x[2]))
+        chosen = elig[:cap]
+
+        def split(rows):
+            return {"n": len(rows), "by_basis": counts_of(b for _, b, _ in rows),
+                    "by_hazard_relation": counts_of(pid[d]["infra2"][f]["hazard_relation"] for _, _, d in rows),
+                    "in_186k_set": counts_of(pid[d]["in_186k_set"] for _, _, d in rows)}
+        by_family[f] = {"eligible": len(elig), "selected": len(chosen), "eligible_split": split(elig), "selected_split": split(chosen),
+                        "distribution_n_qualifying_sections": counts_of(n for n, _, _ in elig),
+                        "distribution_n_qualifying_sections_by_basis": {b: counts_of(n for n, bb, _ in elig if bb == b) for b in BASIS_ORDER},
+                        "cutoff": {"n_qualifying_sections": chosen[-1][0], "basis": chosen[-1][1]} if chosen else None,
+                        "ids": [d for _, _, d in chosen]}
+        for rank, (n, b, d) in enumerate(chosen, 1):
+            p = pid[d]
+            if d not in entry:
+                entry[d] = {"item_id": d, "arm": CAND_ARM, "in_186k_set": p["in_186k_set"], "asset_sector_tag": p["asset_sector_tag"],
+                            "sector_tag_origin": TAG_ORIGIN, "basis": {}, "families": []}
+                order.append(d)
+            q = p["infra2"][f]
+            entry[d]["basis"][f] = b
+            entry[d]["families"].append({"family": f, "rank": rank, "n_qualifying_sections": n, "basis": b,
+                                         "n_cooc_sections": q["n_cooc_sections"], "n_hazard_sections": q["n_hazard_sections"],
+                                         "hazard_relation": q["hazard_relation"]})
+    return {"by_family": by_family, "candidates": [entry[d] for d in order]}
+
+
+def lexicon_main_2(a):
+    import yaml  # lexicon mode only
+
+    out = Path(a.out)
+    if out.exists() and any(out.iterdir()):
+        sys.exit(f"refusing to write into non-empty {out}")
+    out.mkdir(parents=True, exist_ok=True)
+    idx, lex_path, prox_path, tags_path = Path(a.index), Path(a.lexicon), Path(a.proxy_lexicon), Path(a.sector_tags)
+    lex_text, prox_text = lex_path.read_text(encoding="utf-8"), prox_path.read_text(encoding="utf-8")
+    lex = load_lexicon(lex_path)
+    prox = yaml.safe_load(prox_text)
+    fams, fam_files, kind = [], {}, {}
+    for spec in a.family:
+        name, qf = spec.split("=", 1)
+        name = name.strip()
+        qtext = Path(qf).read_text(encoding="utf-8")
+        groups = parse(qtext)
+        if len(groups) != 1:
+            sys.exit(f"--family {name}: the query must be ONE OR group of hazard terms, got {len(groups)} groups")
+        if name not in (prox.get("families") or {}):
+            sys.exit(f"--family {name}: not a family of the proxy lexicon {sorted(prox.get('families') or {})}")
+        gov = groups[0]
+        proxies = [t["term"].lower() for t in prox["families"][name]["terms"] if t["term"].lower() not in gov]
+        fams.append((name, gov + proxies))
+        kind.update({(name, t): "governed" for t in gov} | {(name, t): "proxy" for t in proxies})
+        fam_files[name] = {"query_file": Path(qf).name, "query_sha256": hashlib.sha256(qtext.encode("utf-8")).hexdigest(),
+                           "terms": gov, "proxy_terms": proxies, "proxy_relation": prox["families"][name]["relation"]}
+    if not fams:
+        sys.exit("--lexicon needs at least one --family NAME=QUERYFILE")
+    dis = {}
+    for spec in a.family_disambiguate:
+        name, rest = spec.split(":", 1)
+        bare, terms = rest.split("=", 1)
+        dis[name.strip()] = (bare.strip().lower(), [x.strip().lower() for x in terms.split("|")])
+    unknown = sorted(set(dis) - {f for f, _ in fams})
+    if unknown:
+        sys.exit(f"--family-disambiguate names no --family: {unknown}")
+    tags = {}
+    for line in tags_path.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            r = json.loads(line)
+            tags[r["doc_id"]] = r
+    in_set = load_ids(Path(a.in_set_ids)) if a.in_set_ids else None
+    t0 = time.time()
+    con = duckdb.connect()
+    con.execute(f"SET threads={a.threads}"); con.execute(f"SET memory_limit='{a.memory_limit}'")
+    con.execute("SET preserve_insertion_order=false")
+    (out / "_duckdb_tmp").mkdir(exist_ok=True); con.execute(f"SET temp_directory='{(out/'_duckdb_tmp').as_posix()}'")
+    sec_glob, doc_glob = f"{(idx/'sections').as_posix()}/*.parquet", f"{(idx/'docs').as_posix()}/*.parquet"
+    rx = lambda pat: f"regexp_matches(text, {duckdb_str(pat)}, 'i')"  # noqa: E731
+    meta = {r[0]: (r[1], r[2]) for r in con.execute(f"SELECT doc_id, rel_path, sha256 FROM read_parquet('{doc_glob}')").fetchall()}
+    bad = sorted(d for d, r in tags.items() if d in meta and r.get("sha256") != meta[d][1])
+    if bad:
+        sys.exit(f"--sector-tags: sha256 differs from the index for {len(bad)} paper(s), first {bad[:5]}")
+    tags_missing = sorted(d for d in meta if d not in tags)
+
+    # Pass 1, document level: every hazard term (governed and proxy), every disambiguator, every asset class, impact terms.
+    hz = [(f, t) for f, terms in fams for t in terms]
+    dz = [(f, t) for f, (_, ts) in dis.items() for t in ts]
+    cols = [f"bool_or({rx(word_pattern([t]))})" for _, t in hz] + [f"bool_or({rx(word_pattern([t]))})" for _, t in dz] + \
+           [f"bool_or({rx(word_pattern(forms))})" for _, forms in lex["classes"]] + [f"bool_or({rx(word_pattern(lex['impact']))})"]
+    rows = con.execute(f"SELECT doc_id, {', '.join(cols)} FROM read_parquet('{sec_glob}') GROUP BY doc_id").fetchall()
+    n_docs = len(rows)
+    nh, nd, nc = len(hz), len(dz), len(lex["classes"])
+    doc = {}
+    for r in rows:
+        v = r[1:]
+        doc[r[0]] = {"hz": {hz[i] for i in range(nh) if v[i]}, "dz": {dz[i] for i in range(nd) if v[nh + i]},
+                     "classes": [lex["classes"][i][0] for i in range(nc) if v[nh + nd + i]], "impact": bool(v[nh + nd + nc])}
+
+    def family_ok(f, matched_terms, doc_dz):
+        """R-FWI-1: matched only by the bare term -> needs a disambiguator in the document."""
+        if not matched_terms:
+            return False
+        if f in dis and matched_terms == {dis[f][0]}:
+            return any((f, t) in doc_dz for t in dis[f][1])
+        return True
+
+    # Pass 2, section level, every section with a hazard term of any family.
+    forms = [(c, x) for c, fs in lex["classes"] for x in fs]
+    all_hz = sorted({t for _, t in hz})
+    cols2 = [rx(word_pattern([t])) for t in all_hz] + [rx(word_pattern([x])) for _, x in forms] + [rx(word_pattern([x])) for x in lex["impact"]]
+    secs = con.execute(f"SELECT doc_id, section_idx, section_key, {', '.join(cols2)} FROM read_parquet('{sec_glob}') "
+                       f"WHERE {rx(word_pattern(all_hz))} ORDER BY doc_id, section_idx").fetchall()
+    nt, nf = len(all_hz), len(forms)
+    hsec = {}
+    for r in secs:
+        did, sidx, skey, v = r[0], r[1], r[2], r[3:]
+        terms = {all_hz[i] for i in range(nt) if v[i]}
+        hit_forms = [forms[i] for i in range(nf) if v[nt + i]]
+        imp = [lex["impact"][i] for i in range(len(lex["impact"])) if v[nt + nf + i]]
+        for f, fterms in fams:
+            ft = terms & set(fterms)
+            if family_ok(f, ft, doc[did]["dz"]):
+                gov, pro = sorted(t for t in ft if kind[(f, t)] == "governed"), sorted(t for t in ft if kind[(f, t)] == "proxy")
+                hsec.setdefault(did, {}).setdefault(f, []).append({
+                    "section_idx": sidx, "section_key": skey, "cooc": bool(hit_forms),
+                    "hazard_relation": "governed_term" if gov else "broader_hazard", "governed_terms": gov, "proxy_terms": pro,
+                    "asset_classes": sorted({c for c, _ in hit_forms}), "asset_forms": sorted({x for _, x in hit_forms}),
+                    "impact_forms": sorted(imp)})
+
+    papers = []
+    for did in sorted(doc):
+        d = doc[did]
+        fam_hits = {}
+        for f, fterms in fams:
+            ft = {t for (ff, t) in d["hz"] if ff == f}
+            if ft:
+                fam_hits[f] = {"terms": sorted(ft), "governed_terms": sorted(t for t in ft if kind[(f, t)] == "governed"),
+                               "proxy_terms": sorted(t for t in ft if kind[(f, t)] == "proxy"), "admitted": family_ok(f, ft, d["dz"])}
+        if not fam_hits:
+            continue
+        ast = list((tags.get(did) or {}).get("asset_sector_tag") or [])
+        tagged = bool(ast)
+        infra2 = {}
+        for f, sl in (hsec.get(did) or {}).items():
+            q = [s for s in sl if s["cooc"] or tagged]
+            n_cooc = sum(s["cooc"] for s in q)
+            infra2[f] = {"n_hazard_sections": len(sl), "n_cooc_sections": n_cooc, "n_qualifying_sections": len(q),
+                         "basis": ("a" if n_cooc else "b") if q else None,
+                         "hazard_relation": ("governed_term" if any(s["hazard_relation"] == "governed_term" for s in q) else "broader_hazard") if q else None,
+                         "qualifying_sections": q}
+        papers.append({"doc_id": did, "rel_path": meta.get(did, (None, None))[0], "sha256": meta.get(did, (None, None))[1],
+                       "families": fam_hits, "asset_classes": d["classes"], "impact": d["impact"],
+                       "asset_sector_tag": ast, "sector_tagged": tagged, "sector_tag_origin": TAG_ORIGIN,
+                       "in_186k_set": (did in in_set) if in_set is not None else None, "infra2": infra2})
+    sel = select_candidates_2(papers, [f for f, _ in fams], a.cap)
+    with open(out / "paper_hits.jsonl", "w", encoding="utf-8") as fh:
+        for p in papers:
+            fh.write(json.dumps(p, ensure_ascii=False, sort_keys=True) + "\n")
+    try:
+        (out / "_duckdb_tmp").rmdir()
+    except OSError:
+        pass
+    idx_summary = json.loads((idx / "index_summary.json").read_text()) if (idx / "index_summary.json").exists() else {}
+    paper_hits_sha = hashlib.sha256((out / "paper_hits.jsonl").read_bytes()).hexdigest()
+    sha = lambda t: hashlib.sha256(t.encode("utf-8")).hexdigest()  # noqa: E731
+    cand = {"rule": CAND_RULE_2, "rule_text": CAND_RULE_2_TEXT, "cap_per_family": a.cap, "arm": CAND_ARM,
+            "lexicon": {"file": lex_path.name, "version": lex["version"], "sha256": sha(lex_text)},
+            "proxy_lexicon": {"file": prox_path.name, "version": prox.get("version"), "sha256": sha(prox_text),
+                              "use": prox.get("use")},
+            "families": fam_files, "family_disambiguation": {f: {"bare": b, "disambiguators": ts} for f, (b, ts) in dis.items()},
+            "sector_tags": {"file": tags_path.name, "sha256": hashlib.sha256(tags_path.read_bytes()).hexdigest(), "origin": TAG_ORIGIN,
+                            "papers_in_file": len(tags), "index_papers_missing_from_file": len(tags_missing),
+                            "index_papers_missing_first_20": tags_missing[:20],
+                            "index_papers_tagged": sum(1 for dd in meta if (tags.get(dd) or {}).get("asset_sector_tag"))},
+            "in_set": ({"label": a.in_set_label or Path(a.in_set_ids).name, "file": Path(a.in_set_ids).name,
+                        "sha256": hashlib.sha256(Path(a.in_set_ids).read_bytes()).hexdigest(), "ids": len(in_set),
+                        "field": "in_186k_set", "rule": "paper id = doc_id, compared as strings"} if in_set is not None else None),
+            "index_content_identity_sha256": idx_summary.get("content_identity_sha256"), "paper_hits_sha256": paper_hits_sha,
+            "by_family": {f: {k: v for k, v in x.items() if k != "ids"} for f, x in sel["by_family"].items()},
+            "n_candidates": len(sel["candidates"]), "candidates": sel["candidates"]}
+    (out / "candidates.json").write_text(json.dumps(cand, indent=2, ensure_ascii=False) + "\n")
+    summary = {
+        "name": a.name or out.name, "mode": "lexicon (run_query v4.1, DR-CAND-INFRA-2)",
+        "run_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); a section qualifies with a hazard term of the family (governed or proxy) and an asset form (basis a) or a sector-tagged paper (basis b)",
+        "lexicon": cand["lexicon"], "proxy_lexicon": cand["proxy_lexicon"], "families": fam_files,
+        "family_disambiguation": cand["family_disambiguation"], "sector_tags": cand["sector_tags"], "in_set": cand["in_set"],
+        "index": {"path": idx.as_posix(), "content_identity_sha256": idx_summary.get("content_identity_sha256"), "files": idx_summary.get("files")},
+        "documents_in_index": n_docs,
+        "per_family_doc_counts": {f: {"any_term": sum(f in p["families"] for p in papers),
+                                      "admitted": sum(f in p["families"] and p["families"][f]["admitted"] for p in papers),
+                                      "admitted_governed_term": sum(f in p["families"] and p["families"][f]["admitted"] and bool(p["families"][f]["governed_terms"]) for p in papers),
+                                      "admitted_proxy_only": sum(f in p["families"] and p["families"][f]["admitted"] and not p["families"][f]["governed_terms"] for p in papers)}
+                                  for f, _ in fams},
+        "per_hazard_term_doc_counts": {f"{f}:{t}": {"kind": kind[(f, t)], "docs": sum(1 for dd in doc.values() if (f, t) in dd["hz"])} for f, t in hz},
+        "per_asset_class_doc_counts": {c: sum(c in dd["classes"] for dd in doc.values()) for c, _ in lex["classes"]},
+        "impact_doc_count": sum(dd["impact"] for dd in doc.values()),
+        "hazard_sections_scanned": len(secs),
+        "per_family_qualifying_doc_counts": {f: sel["by_family"][f]["eligible"] for f, _ in fams},
+        "per_family_basis_a_asset_class_doc_counts": {f: {c: sum(1 for p in papers if f in p["infra2"] and any(c in s["asset_classes"] for s in p["infra2"][f]["qualifying_sections"]))
+                                                          for c, _ in lex["classes"]} for f, _ in fams},
+        "candidate_rule": CAND_RULE_2, "cap_per_family": a.cap, "by_family": cand["by_family"], "n_candidates": len(sel["candidates"]),
+        "candidates_in_186k_set": counts_of(c["in_186k_set"] for c in sel["candidates"]),
+        "paper_hits_sha256": paper_hits_sha, "candidates_sha256": hashlib.sha256((out / "candidates.json").read_bytes()).hexdigest(),
+        "elapsed_seconds": round(time.time() - t0, 1),
+        "duckdb_version": duckdb.__version__, "threads": a.threads, "memory_limit": a.memory_limit,
+    }
+    (out / "summary.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False) + "\n")
+    print(json.dumps({k: summary[k] for k in ("name", "documents_in_index", "per_family_doc_counts", "per_family_qualifying_doc_counts", "n_candidates", "elapsed_seconds")}, indent=2))
 
 
 if __name__ == "__main__":

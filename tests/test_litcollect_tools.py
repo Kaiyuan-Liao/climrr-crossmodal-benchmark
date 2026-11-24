@@ -27,12 +27,14 @@ TOOLS = REPO_ROOT / "scripts" / "litcollect"
 #: (work package P5a: v3 plus the opt-in --lexicon mode; tests/test_p5a.py). v3 (Track B survey
 #: run 1, D-026; SHA-256 5f56ee49...030d, held at the P5a base commit, `climrr.p5a`) was v2
 #: (SHA-256 a93eeba7...7708, the file that produced LITCORPUS-02, recoverable at 38116a0) plus
-#: an opt-in --no-hits flag only. Without --lexicon, v4 runs the v3 code path.
+#: an opt-in --no-hits flag only. Without --lexicon, v4 runs the v3 code path. v4.1 (P5a hotfix:
+#: --rule DR-CAND-INFRA-2, tests/test_p5a_hotfix.py) replaced v4 before v4 ever ran (v4: SHA-256
+#: 52f7cdfc...e6ee, at 600c888); the v3 path and the DR-CAND-INFRA-1 path are unchanged.
 #: run_v1_on_705k.sh differs from the executed file (SHA-256 0c9516b7...) in one line only:
 #: BASE is read from LITCOLLECT_ROOT_POLARIS instead of an absolute Eagle path.
 TOOL_SHA256 = {
     "build_index.py": "5e063a44f30bee0da81205b6b119d647d87fd08ddf38998eb1d8fa0c235b99a9",
-    "run_query.py": "52f7cdfc4a3d696cbfec083bc25b7095b793368aaa27792db4de22484c55e6ee",
+    "run_query.py": "819f223dc4739079e0b5d6fc7a3c2f5bd38078315d9f168b8ad79b7cf843dc42",
     "run_v1_on_705k.sh": "47fe1e17f3dc27fa8267ec21a173bbb3c773d4bc5f2e2045a7d5ccd379ffba59",
 }
 
