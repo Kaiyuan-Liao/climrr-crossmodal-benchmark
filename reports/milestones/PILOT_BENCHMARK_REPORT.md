@@ -1716,25 +1716,25 @@ No model call. Design: `P5_INFRA_IMPACT_DESIGN.md` §22 -- §24.
 
 ## 70. litsynth v5.4: gate, Polaris commands, readings for confirmation (2026-11-24)
 
-- **Gate.** Build `<BUILD_SHA>`: `pytest` **<N_PASSED> passed, 2 skipped**; scanner 0 hits. Evidence run record of
-  `build_synth_packets_infra --variant v1b` at the clean build tree, outputs byte-identical: `<RUN_RECORD>` (`git_dirty: false`).
+- **Gate.** Build `ca6f56f`: `pytest` **1,779 passed, 2 skipped**; scanner 0 hits. Evidence run record of
+  `build_synth_packets_infra --variant v1b` at the clean build tree, outputs byte-identical: `reports/runs/20261124T233933Z_local_build_synth_packets_infra` (`git_dirty: false`).
 - **Polaris (Kaiyuan; env as in `P5_INFRA_IMPACT_DESIGN.md` §6; first `python -c "import yaml, duckdb"`).** At the pushed build
   commit, which carries the v1b packets and agent v5.4:
 
-      bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <BUILD_SHA_FULL>
+      bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" ca6f56f48bef2a2d8758bd44e362e7dc8a9ffd0d
       cd "$CLIMRR_REPO_ROOT"
       python scripts/litcollect/litsynth_agent.py \
           --packets artifacts/benchmark/synth_packets_infra_v1b \
           --out "$LITCOLLECT_ROOT_POLARIS/litsynth/infra_run2" \
           --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
           --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \
-          --sleep 5 --source-commit <BUILD_SHA_FULL>
+          --sleep 5 --source-commit ca6f56f48bef2a2d8758bd44e362e7dc8a9ffd0d
       python scripts/litcollect/litpolish_agent.py \
           --items "$LITCOLLECT_ROOT_POLARIS/litsynth/infra_run2" \
           --out "$LITCOLLECT_ROOT_POLARIS/litpolish/infra_run2" \
           --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
           --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \
-          --sleep 5 --source-commit <BUILD_SHA_FULL>
+          --sleep 5 --source-commit ca6f56f48bef2a2d8758bd44e362e7dc8a9ffd0d
 
   Expect `START litsynth_agent v5.4 packets=8 ... system_sha=1a023c1e98e8`. Ship back both run directories (`items/`, `raw/`,
   `items.jsonl` / `polished.jsonl`, `summary.json`, `agent.log`) with the SHA-256 of each file --- and, if still on Eagle, the run-1
