@@ -1,0 +1,41 @@
+# Run record: 20261124T222238Z_local_build_synth_packets_infra
+
+- **Result**: PASS
+- **UTC timestamp**: 2026-11-24T22:22:38.958108+00:00
+- **Git commit**: `b443b3d9c57be6668b4e13e9073fb39d02e8e7cf`
+- **Working tree dirty (tracked files)**: False
+- **Untracked files present**: 2
+- **Hostname**: ryous-MacBook-Pro-2.local
+- **Location**: local
+- **Python**: 3.11.16 (macOS-15.3-arm64-arm-64bit)
+- **pip freeze SHA-256**: `d9af804d5018f7022ae9f4db0bb83a8d57104d2ff6ff5676d912d896f952bf51`
+- **Pinned libraries (D-007)**: `pandas==3.0.5`, `numpy==2.4.6`, `pypdf==6.18.0`, `pyyaml==6.0.3`, `pytest==9.1.1`, `pypdfium2==5.13.0`
+- **Data path (repo-relative)**: `artifacts/benchmark/pilot_selection_infra_v1a.yaml`
+- **Data SHA-256**: `316a93f9d197d35756ef0c81a7a1e9f683978f59ce512615d93f0963134f9212`
+- **Output path**: `artifacts/benchmark/synth_packets_infra_v1a/manifest.json`
+
+## Config snapshot
+
+```json
+{
+  "version": "synthpackets infra v1a",
+  "decision": "D-078",
+  "variant": "v1a",
+  "max_impact_groups": 10,
+  "asset_class_phrase": {
+    "energy": "energy systems",
+    "transportation_systems": "transportation systems",
+    "water_and_wastewater": "water and wastewater systems",
+    "healthcare_and_public_health": "healthcare and public health systems",
+    "emergency_services": "emergency services",
+    "communications": "communications systems"
+  },
+  "model_calls": 0
+}
+```
+
+## Result summary
+
+- `packets`: [{'item_id': 'BI-P5-0001', 'packet_id': 'PK-SD8-TP1-00111-energy', 'family': 'heat_index', 'asset_class': 'energy', 'state': 'Virginia', 'question_form': 'QF-08', 'needs_general_clause': False, 'place_named_impact_evidence': 'place_named_impact_statement', 'excluded_groups': 60, 'sha256': 'fe4a3a50ff230e6495042547ae8e06c7fc4a5dc30a2b186c9af8f74a75f7be88', 'impact_groups': 10, 'driver_groups': 8}, {'item_id': 'BI-P5-0002', 'packet_id': 'PK-SD8-TP1-00069-transportation_systems', 'family': 'heat_index', 'asset_class': 'transportation_systems', 'state': 'Arizona', 'question_form': 'QF-09', 'needs_general_clause': True, 'place_named_impact_evidence': 'place_named_impact_statement', 'excluded_groups': 46, 'sha256': '940915356fc2a61695af7750970987344f2ce7d26d6821cfdabd44346b5cdf8c', 'impact_groups': 8, 'driver_groups': 8}, {'item_id': 'BI-P5-0003', 'packet_id': 'PK-SD8-TP1-00071-water_and_wastewater', 'family': 'heat_index', 'asset_class': 'water_and_wastewater', 'state': 'California', 'question_form': 'QF-10', 'needs_general_clause': True, 'place_named_impact_evidence': 'none', 'excluded_groups': 53, 'sha256': '52c2eef9a6ce148d9cd00d6ce4ad3efce60e11774f1a04149c53cb760423e0e4', 'impact_groups': 3, 'driver_groups': 8}, {'item_id': 'BI-P5-0004', 'packet_id': 'PK-SD8-TP1-00071-healthcare_and_public_health', 'family': 'heat_index', 'asset_class': 'healthcare_and_public_health', 'state': 'California', 'question_form': 'QF-08', 'needs_general_clause': True, 'place_named_impact_evidence': 'none', 'excluded_groups': 53, 'sha256': '69b156d17633f2a0af2f2435fa59bc01a4068685e7d0f9a0ae9592e6aae1c593', 'impact_groups': 4, 'driver_groups': 8}, {'item_id': 'BI-P5-0005', 'packet_id': 'PK-SD8-TP1-01463-energy', 'family': 'fire_weather_index', 'asset_class': 'energy', 'state': 'California', 'question_form': 'QF-09', 'needs_general_clause': False, 'place_named_impact_evidence': 'none', 'excluded_groups': 37, 'sha256': 'ea0ad546e27b3cd8b47e65bba06f2efb25e8d0076b8a3ab2dd554c7c380fc067', 'impact_groups': 8, 'driver_groups': 8}, {'item_id': 'BI-P5-0006', 'packet_id': 'PK-SD8-TP1-01463-transportation_systems', 'family': 'fire_weather_index', 'asset_class': 'transportation_systems', 'state': 'California', 'question_form': 'QF-10', 'needs_general_clause': False, 'place_named_impact_evidence': 'none', 'excluded_groups': 37, 'sha256': 'a5adfffebd1926b7381e69a122385785974493fe43a16962232c5f9968f7b136', 'impact_groups': 3, 'driver_groups': 8}, {'item_id': 'BI-P5-0007', 'packet_id': 'PK-SD8-TP1-01463-emergency_services', 'family': 'fire_weather_index', 'asset_class': 'emergency_services', 'state': 'California', 'question_form': 'QF-08', 'needs_general_clause': False, 'place_named_impact_evidence': 'none', 'excluded_groups': 37, 'sha256': '19385c7a37e139dcc3fff53707ce6f167610644a720398213d553a95ec8205f7', 'impact_groups': 1, 'driver_groups': 8}, {'item_id': 'BI-P5-0008', 'packet_id': 'PK-SD8-TP1-01463-communications', 'family': 'fire_weather_index', 'asset_class': 'communications', 'state': 'California', 'question_form': 'QF-09', 'needs_general_clause': False, 'place_named_impact_evidence': 'none', 'excluded_groups': 37, 'sha256': '51fa642173f69dbb79263c9ae056de340868c703717ccf1089bbd0124fbc5509', 'impact_groups': 1, 'driver_groups': 8}]
+- `missing_cells`: []
+- `manifest_sha256`: 829d80cfa3fdff217ddc19a2f2b8ffc97bf7b41cc7f1f869ecfa0daaf37e5bf2

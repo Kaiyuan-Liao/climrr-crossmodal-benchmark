@@ -1646,27 +1646,28 @@ Drivers (8): `fire_weather_v1-driver-c1-003` (multi, state), `fire_weather_v1-me
 
 ## 68. P5c hotfix: gate, Polaris commands, readings for confirmation (2026-11-24)
 
-- **Gate.** Build `BUILD_SHA_PENDING`: `pytest` **1,760 passed, 2 skipped**; scanner 0 hits. New `tests/test_p5c_hotfix.py` (16);
+- **Gate.** Build `b443b3d`: `pytest` **1,760 passed, 2 skipped**; scanner 0 hits. New `tests/test_p5c_hotfix.py` (16);
   `tests/test_p5b.py` reads agent v5.2 from its held bytes (`climrr.p5c`); `tests/test_p5c.py` unchanged in substance (the schema-v2
   test's docstring now says D-077 resolved it). Evidence run records of `build_seeds_infra --dispositions` and
-  `build_synth_packets_infra --variant v1a` at the clean build tree, outputs byte-identical.
+  `build_synth_packets_infra --variant v1a` at the clean build tree, outputs byte-identical:
+  `reports/runs/20261124T222237Z_local_build_seeds_infra`, `20261124T222238Z_local_build_synth_packets_infra` (`git_dirty: false`).
 - **Polaris (Kaiyuan; env as in `P5_INFRA_IMPACT_DESIGN.md` §6; first `python -c "import yaml, duckdb"`).** At the pushed build
   commit, which carries the v1a packets and agent v5.3:
 
-      bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" BUILD_SHA_PENDING
+      bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" b443b3d9c57be6668b4e13e9073fb39d02e8e7cf
       cd "$CLIMRR_REPO_ROOT"
       python scripts/litcollect/litsynth_agent.py \
           --packets artifacts/benchmark/synth_packets_infra_v1a \
           --out "$LITCOLLECT_ROOT_POLARIS/litsynth/infra_run1" \
           --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
           --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \
-          --sleep 5 --source-commit BUILD_SHA_PENDING
+          --sleep 5 --source-commit b443b3d9c57be6668b4e13e9073fb39d02e8e7cf
       python scripts/litcollect/litpolish_agent.py \
           --items "$LITCOLLECT_ROOT_POLARIS/litsynth/infra_run1" \
           --out "$LITCOLLECT_ROOT_POLARIS/litpolish/infra_run1" \
           --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
           --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \
-          --sleep 5 --source-commit BUILD_SHA_PENDING
+          --sleep 5 --source-commit b443b3d9c57be6668b4e13e9073fb39d02e8e7cf
 
   Expect `START litsynth_agent v5.3 packets=8 ... system_sha=1157f73286a6`. Ship back both run directories (`items/`, `raw/`,
   `items.jsonl` / `polished.jsonl`, `summary.json`, `agent.log`) with the SHA-256 of each file. Then: ingest -> the Alvi sheet.
