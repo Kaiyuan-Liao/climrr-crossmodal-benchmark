@@ -18,7 +18,8 @@ polish -> review), applied to LITCORPUS-03 (`LITCORPUS03_PROVENANCE.md`):
    (§6); shipped back afterwards, hash pinned on ingest and re-derived by `climrr.infra_lexicon.verify_candidates_3`;
 4. **extraction** (`litstatement_agent.py` v4.1 `--arm infra_impact_v1`; statement type `impact`, D-073; `hazard_relation`,
    D-073a);
-5. grouping, rung-8 packets, synthesis, polish --- designed after the extraction run is ingested;
+5. **grouping** (`litgroup_agent.py` v3.1 over `partitions_infra_v1.jsonl`, §8), **rung-8 seeds and selection**
+   (DR-SEED-INFRA-1, §9), **rung-8 packets** (P5c), synthesis (`litsynth_agent.py` v5.2, post-checks v3.3, §9), polish;
 6. sample QAs for Alvi.
 
 ## 2. Infrastructure vocabulary (`data/metadata/litstatements/infrastructure_lexicon_v1.yaml`)
@@ -170,3 +171,111 @@ and in `candidates.json`), the index's `index_summary.json` and `build.log`, and
 figures, pins `infra_candidates_v1.json` = `candidates.json` and re-derives it (`verify_candidates_2`). The extraction run
 (`litstatement_agent.py --arm infra_impact_v1 --reasoning-effort low --max-tokens 6000`, invocation in the agent's
 docstring) runs at the commit that carries the pinned candidates, after the COORDINATOR has seen the counts.
+
+## 7. Infra run 1: run facts and ingest (work package P5b; D-074)
+
+**Run** (Polaris, 2026-11-24 05:11 -- 06:15 UTC; Kaiyuan): `litstatement_agent.py` v4.1, arm `infra_impact_v1`, system prompt
+`945b487c…e095` (the work package abbreviates it "…9095"; the full hash, recorded by every statement, the summary and the
+log, is the hash of `SYSTEM_PROMPT_INFRA` in the agent at `157e49d`, tested), Sophia `openai/gpt-oss-120b`, reasoning low, max_tokens 6000, source commit `157e49d`, over the 572
+DR-CAND-INFRA-3 candidates of `runs/infra_lexicon_v3`. Delivered `infra_run1_evidence.tar.gz` (`218a9a43…ad5a`).
+**Reproduced on ingest** (`scripts/ingest_litstatements_infra1.py`, `climrr.litstatements_infra1.verify_source`; any
+difference fails the ingest): 572 papers, 0 errors, 0 over limit, 31 truncated (`TRUNC`); 407 statements (impact 264, driver 79,
+mechanism 38, pattern 14, caveat 5, consensus 5, background 2), 210 `deterministic_pass`, 197 rejected; 407 papers with no
+statement (165 productive); recovery exact 213 / prefix_anchor 83 / normalized 30 / not_found 81; asset classes (all impact
+statements) energy 120, transportation 49, water 24, healthcare 21, emergency 13, other 22, communications 6, food 3, dams 2,
+commercial 2, transmission_systems 1, blank 1; hazard relation broader_hazard 242, governed_term 12, none 10. **The ten
+without a relation** are all rejected before review; their hazard terms are outside both lexicons: "fire" (3: cable-gland
+polymers above 300 °C, an optical-fibre fire alarm, Bluetooth attenuation in fire), "marine heat waves" (3: underwater data
+centres), "fire hazard" (bridge fires), "low temperatures" (equipment failures in cold), "high wind loads" (utility poles),
+and one blank.
+
+**Query history (D-070a, D-070b).** v2 (`runs/infra_lexicon_v2`, run_query v4.1, DR-CAND-INFRA-2, 588 candidates) ran first
+and was read as a diagnostic (§3b); v3 (`runs/infra_lexicon_v3`, run_query v4.2, DR-CAND-INFRA-3, 572 candidates, 28 in both
+families) produced the candidates the run read. Both summaries are in `artifacts/literature/litcorpus03/runs/`; v3
+`candidates.json` is pinned as `data/metadata/softqa/infra_candidates_v1.json` and re-derived on ingest from the delivered
+`paper_hits.jsonl` and `basis_b_only.json` (`verify_candidates_3`); `paper_hits.jsonl` (both runs) and the v2 candidates are
+recorded by hash only. The index summary, both query summaries and the index build log held an absolute Eagle path, which
+the copies replace by a placeholder (both hashes in `redactions.json`). Corpus identity `2dfc8eca…f725` (inventory v1 and
+v1.1, index), index manifest CSV `fc53ab3a…f42e`, 89,388 distinct SHA-256 among 89,497 files.
+
+**Ingested** (`artifacts/litstatements/infra_run1/`): `statements_ingested.jsonl` (ids `LS3-<paper>-<nn>`, evidence roles as
+run 2, `impact_candidate: true` on the 151 passing impact statements, `statement_family` and its basis), `independence_v2.json`
+(D-046 over the 572 papers: one possible-duplicate title pair, 571 canonical papers), `breakdowns.json`, `manifest.json`.
+
+**Passing statements by type x asset class x hazard family** (210): impact 151 --- heat 98 (energy 43, transportation 22,
+healthcare 15, other 6, water 6, emergency 3, food 2, commercial 1), fire weather 53 (energy 21, transportation 13, water 7,
+emergency 4, other 4, healthcare 2, communications 1, dams 1); driver 34; mechanism 13; pattern 8; consensus 3; caveat 1.
+**Passing impact statements that name a U.S. place** (geography v2): 38 --- state 28, NCA5 region 2, U.S. subregion 1, U.S.
+national 7. The other 113 are general (global, other countries, unknown).
+
+## 8. Grouping partitions for the impact arm (D-075)
+
+`artifacts/litgroups/partitions_infra_v1.jsonl` (`0d8f3229…9b50`; `scripts/build_group_partitions_infra.py`,
+`climrr.litgroups_infra`): over the passing statements, **impact partitions** = hazard family x asset class, a class with < 8
+statements (and the agent's `other`) merged into `other_assets`, `prompt_variant: impact_v1`; **driver / mechanism partitions**
+by family and type, as before. Eleven partitions, 198 statements, 12 chunks of <= 40:
+
+| partition | n | chunks |
+| --- | ---: | ---: |
+| infra_heat_index.impact.energy | 43 | 2 |
+| infra_heat_index.impact.transportation_systems | 22 | 1 |
+| infra_heat_index.impact.healthcare_and_public_health | 15 | 1 |
+| infra_heat_index.impact.other_assets (water 6, other 6, emergency 3, food 2, commercial 1) | 18 | 1 |
+| infra_heat_index.driver / .mechanism | 17 / 8 | 1 / 1 |
+| infra_fire_weather_index.impact.energy | 21 | 1 |
+| infra_fire_weather_index.impact.transportation_systems | 13 | 1 |
+| infra_fire_weather_index.impact.other_assets (water 7, emergency 4, other 4, healthcare 2, communications 1, dams 1) | 19 | 1 |
+| infra_fire_weather_index.driver / .mechanism | 17 / 5 | 1 / 1 |
+
+Not partitioned: the 12 passing pattern / consensus / caveat statements. **Grouping agent v3.1**: the impact template
+(`70018280…3925`) groups by the same hazard condition -> asset -> impact mechanism / outcome, adds `claim_about`
+`hazard_impact_on_asset`, asks for a label naming the asset class and the impact; impact group records carry `asset_classes`,
+`hazard_relations`, `impact_mechanisms`, `impact_outcomes` from `meta` (never sent). Partitions without a variant get the v3
+template unchanged (`ac135f00…2ae7`). Filled system prompts: heat impact `1bd1f71e…b379`, fire impact `a98f67f5…81e5`, heat
+driver / mechanism `4e6e4f1e…2212`, fire driver / mechanism `0c3997b6…9eaf`.
+
+## 9. Pairing rule DR-SEED-INFRA-1, the rung-8 pilot selection and the wording rules (D-075; D-073b)
+
+Implemented now, run after the grouping run is ingested (P5c): `climrr.seeds_infra`, `scripts/build_seeds_infra.py`.
+
+- **Seed** = (table pattern for family F at state P, at `TABLE_SETTING`) + the impact groups of F for asset class A
+  (`claim_about` `hazard_impact_on_asset`; a group is of class A when a passing member has class A) + the family's driver
+  groups as a rung-3 packet attaches them (`synthpackets.packet_groups(3, ...)` over LITCORPUS-02 grouping run 2). Impact
+  groups ranked by geography relevance (place_named: a member names P; us: an NCA5-region, U.S.-subregion, U.S.-national or
+  other-state member; general), then strength, then independent papers; one seed per (pattern, asset class) with >= 1 impact
+  group; seeds ranked by the best strength, then independent papers. A seed with no place-named group needs the closing
+  clause (D-069).
+- **Pilot selection** (8 cells): heat x {energy, transportation, water, healthcare}; fire weather x {energy, transportation,
+  emergency services, communications}; each at the state with the largest table change among states named by a passing impact
+  statement of that class (geography v2 state), else California; question forms QF-08 / QF-09 / QF-10 round-robin. On the
+  ingest the candidate states are: heat energy {California, Virginia}, heat transportation {Arizona}, heat healthcare
+  {Arizona}, fire energy {Arizona, California, Idaho, Nevada}, fire transportation {California, Montana}; heat water, fire
+  emergency services and fire communications none (California). `TABLE_SETTING` (EXECUTOR default, for confirmation):
+  days above 95 F / summer seasonal FWI, absolute change, mid-century.
+- **Wording** (synthesis prompt v5.2 `0753023c…578a`; post-checks v3.3): (1) the hazard change at the place, projected (the
+  table sentence, with scope); (2) "<scope phrase> that <hazard phrase> <impact mechanism> <asset class>", the broader-hazard
+  phrase (`plain_language_v1b`) when an impact group rests on a broader hazard term, and the general closing clause when no
+  cited group is place-specific; (3) never "<asset> in <Place> will fail / is at risk"; "For <asset class> in <Place>, this
+  implies more exposure to <impact>" only with a cited place-named impact group; D-073b: "wildfire" only inside "conditions
+  that favour wildfire". Question forms (`question_forms_v2.yaml`): QF-08 (v1), QF-09 "What could a <change> in <hazard phrase>
+  mean for <asset class> in <Place>, and why?", QF-10 "Why does <hazard phrase> matter for <asset class>, and how is it
+  projected to change in <Place>?".
+
+## 10. Polaris: the infra grouping run (next)
+
+At the pushed commit `<PINNED_SHA>` that carries `partitions_infra_v1.jsonl` and `litgroup_agent.py` v3.1 (env as in §6;
+first `python -c "import yaml, duckdb"`):
+
+    bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
+    cd "$CLIMRR_REPO_ROOT"
+    python scripts/litcollect/litgroup_agent.py \
+        --partitions artifacts/litgroups/partitions_infra_v1.jsonl \
+        --out "$LITCOLLECT_ROOT_POLARIS/litgroups/infra_run1" \
+        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
+        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --chunk-size 40 \
+        --sleep 5 --source-commit <PINNED_SHA>
+
+Expect 11 partitions, 12 chunks (`START ... partitions=11 chunks=12 ... template_impact_sha=70018280938b`). Ship back
+`groups.jsonl`, `summary.json`, `agent.log` and every chunk directory (SHA-256 of each). Then P5c: ingest the groups, build the
+seeds and the selection (`scripts/build_seeds_infra.py`), the rung-8 packets, the synthesis run, samples for Alvi.
+

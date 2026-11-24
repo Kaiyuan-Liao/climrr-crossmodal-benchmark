@@ -22,7 +22,7 @@ from climrr.checksums import sha256_file
 from climrr.manifest import load_entry
 from climrr.paths import REPO_ROOT
 
-from test_p5a import FIRE_Q, HEAT_Q, TOOLS, _index, _load
+from test_p5a import FIRE_Q, HEAT_Q, TOOLS, TOOLS51, _index, _load
 
 PROXY_SHA256 = "2da6895e232f57c9c6c254e42710002d00c6aa3a51afa2ec88c5fc03d9ab9d08"
 PLAIN_V1B_SHA256 = "60598527bf21a9dbc5a68e31cb60ec76d75b95d5ede7411181c323f56832b140"
@@ -283,7 +283,7 @@ def _scoped(iid: str, use_clause: bool) -> dict:
 
 
 def _check5a(iid, obj):
-    a = _load("litsynth_agent_v51_checks", TOOLS / "litsynth_agent.py")
+    a = _load("litsynth_agent_v51_checks", TOOLS51 / "litsynth_agent.py")
     common = {"model": "m", "prompt_hash": "0" * 64, "generation_timestamp": "2026-11-23T00:00:00Z", "packet_sha256": "0" * 64,
               "system_prompt_sha256": "0" * 64}
     item, tagged = a.assemble(obj, PK5A[iid], common, bi.column_names())
@@ -323,13 +323,13 @@ def test_v32_place_first_fails_on_v5a():
 
 
 def test_litsynth_v51_prompt_and_default_packets():
-    a = _load("litsynth_agent_v51", TOOLS / "litsynth_agent.py")
+    a = _load("litsynth_agent_v51", TOOLS51 / "litsynth_agent.py")
     assert a.GENERATOR_VERSION == "litsynth_agent v5.1" and a.CHECK_VERSION == "synthesis_post_checks v3.2"
     for needle in ('"scope_optional_clause"', "just before the verb", "BROADER HAZARD", '"broader_hazard_phrase"',
                    '"hazard_relation": "broader_hazard"', "papers split evenly"):
         assert needle in a.SYSTEM_PROMPT, needle
     assert '"scope_optional_clause" just before the verb' in a.FORMAT_CORRECTIVE_PROMPT
-    assert "--packets artifacts/benchmark/synth_packets_v5a" in (TOOLS / "litsynth_agent.py").read_text(encoding="utf-8")
+    assert "--packets artifacts/benchmark/synth_packets_v5a" in (TOOLS51 / "litsynth_agent.py").read_text(encoding="utf-8")
 
 
 def test_v5_artifacts_unchanged_by_the_hotfix():

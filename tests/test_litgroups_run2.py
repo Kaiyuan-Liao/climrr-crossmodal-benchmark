@@ -9,6 +9,8 @@ manifest and DR-SEED-RANK-2; the tracked GROUPS CSV rebuilt from the tracked fil
 
 from __future__ import annotations
 
+import hashlib
+
 import json
 
 import pytest
@@ -62,7 +64,8 @@ def test_every_manifest_file_matches_its_hash():
 def test_run_facts():
     assert MAN["counts"] == g2.RUN_FACTS
     assert MAN["budget"] == {"reasoning_effort": "low", "max_tokens": 16000, "chunk_size": 40, "temperature": 0}
-    assert MAN["generator"]["agent_sha256"] == sha256_file(g2.REPO_ROOT / g2.AGENT_REL) == g2.AGENT_SHA256
+    from climrr import p5b                                        # the working tree is v3.1 since P5b; v3 is held
+    assert MAN["generator"]["agent_sha256"] == hashlib.sha256(p5b.held_bytes("litgroup_agent.py")).hexdigest() == g2.AGENT_SHA256
     assert MAN["source_commit"].startswith("7676e53")
     assert MAN["partitions"]["sha256"] == sha256_file(lgr.PARTITIONS_PATH)
     assert len(MAN["corrective_chunks"]) == 15 and len(MAN["corrective_passed_first_attempt"]) == 12

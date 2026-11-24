@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pilot P2b / P3 — item-synthesis agent v4.1 (D-041, D-048, D-051, D-055, D-055a, D-055b, D-059 -- D-062; COORDINATOR rulings 2026-11-01 and 2026-11-02; work package P3a).
+"""Pilot P2b / P3 / P5 — item-synthesis agent v5.2 (D-041, D-048, D-051, D-055, D-055a, D-055b, D-059 -- D-062; COORDINATOR rulings 2026-11-01 and 2026-11-02; work package P3a).
 
 Input: a directory of seed packets `PK-<seed_id>.json` (`scripts/build_synth_packets.py`). One model call per packet,
 temperature 0. The model sees the packet's `model_view` only: the table pattern in plain words with its values, the
@@ -102,6 +102,18 @@ v3.2 accept that opening. BROADER HAZARD: a group whose statements rest on a bro
 heat-index days are one measure"), never as the governed quantity itself (no packet v5a group carries the relation yet;
 the rule is for the rung-8 packets). The format corrective prompt names the optional clause. Everything else as v5.
 
+v5.2 (work package P5b, D-073b, D-075; rung-8 packets built in P5c; not yet run): the system prompt adds RUNG 8 --- a
+packet with `"rung": 8` carries a table pattern, `"impact"` groups (hazard condition -> asset class -> impact mechanism /
+outcome; each with `relevance` and `hazard_relation`) and the family's driver groups. The answer is (1) the projected hazard
+change at the place (the table sentence, with its scope); (2) "<scope phrase> that <hazard phrase> <impact mechanism>
+<asset class>" for the impact groups (the D-069 opener; the broader-hazard phrase when an impact group rests on a broader
+hazard term), with the general closing clause when no cited group is place-specific; (3) never "<asset> in <Place> will
+fail / is at risk"; "For <asset class> in <Place>, this implies more exposure to <impact>" only when a cited impact group is
+place-named for the place (`place_named_impact_group_ids`). D-073b: in a fire-weather item "wildfire" is written only
+inside "conditions that favour wildfire". Post-checks `synthesis_post_checks` v3.3 (v3.2 + the D-073b mask + the rung-8
+rules, all format-class). The format corrective prompt names the rung-8 rules. Everything else as v5.1 (v5.1 is held by its
+bytes at `157e49d`, `climrr.p5b.held_bytes`).
+
 Polaris invocation (Sophia vLLM, D-043). Run from the execution clone on Eagle (`$CLIMRR_REPO_ROOT`,
 docs/SOPHIA_RUNBOOK.md) checked out at the pinned commit that carries the packets and provides `climrr`; output
 under the litcollect root (`$LITCOLLECT_ROOT_POLARIS`, config key `litcollect_root_polaris`), never in the clone; the
@@ -110,8 +122,8 @@ ALCF credential in the environment; first check the environment: `python -c "imp
     bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
     cd "$CLIMRR_REPO_ROOT"
     python scripts/litcollect/litsynth_agent.py \\
-        --packets artifacts/benchmark/synth_packets_v5a \\
-        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run6" \\
+        --packets artifacts/benchmark/synth_packets_rung8_v1 \\
+        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/rung8_run1" \\
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \\
         --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \\
         --sleep 5 --source-commit <PINNED_SHA>
@@ -127,8 +139,8 @@ from litstatement_agent import (  # noqa: E402  (v3)
 from litgroup_agent import DEFAULT_MAX_TOKENS, REASONING_EFFORTS, call_turn, turn_stats  # noqa: E402  (v3)
 from climrr import benchmark_items as bi  # noqa: E402
 
-GENERATOR_VERSION = "litsynth_agent v5.1"
-CHECK_VERSION = bi.SYNTH_CHECK_VERSION_V32
+GENERATOR_VERSION = "litsynth_agent v5.2"
+CHECK_VERSION = bi.SYNTH_CHECK_VERSION_V33
 CORRECTIVE_PROMPT = ("Your reply did not contain a JSON object with the keys \"prompt\" and \"reference_answer\". "
                      "Return the complete JSON object.")
 NOT_REQUIRED_SENTENCE = "Exact values are not required; any statement consistent with the magnitude class counts."
@@ -148,7 +160,12 @@ FORMAT_CORRECTIVE_PROMPT = ("Your item failed these format checks:\n{reasons}\nR
                             "\"scope_class\" \"state\" or \"nca\", end \"literature_interpretation\" with {\"sentence\": <the packet's "
                             "\"general_clause\">, \"group_ids\": [], \"hedged\": false} and end \"integrated\" with the same sentence; "
                             "otherwise write no such clause. No required rubric point names the place on a group's authority. The "
-                            "question opens as the packet's \"question_form\" skeleton opens.")
+                            "question opens as the packet's \"question_form\" skeleton opens. RUNG 8: a sentence citing an \"impact\" "
+                            "group begins with its scope phrase followed by \"that\", names the packet's asset class and, when a cited "
+                            "impact group has \"hazard_relation\": \"broader_hazard\", the broader-hazard phrase; never write that an "
+                            "asset in the place will fail, is at risk or is vulnerable; write \"this implies more exposure to\" only "
+                            "when you cite a group listed in \"place_named_impact_group_ids\". \"wildfire\" appears only inside "
+                            "\"conditions that favour wildfire\".")
 
 
 def format_corrective_prompt(reasons: list[str]) -> str:
@@ -175,6 +192,10 @@ CONTEXT GROUPS. A group whose "role" is "context" (how the quantity is defined o
 SCOPE (where the research comes from). Each group carries a "scope_class" and a "scope_phrase" computed by code from where most of its papers are about: "Research on <State> shows" (state), "Research on the <Region> shows" (NCA5 region), "Research on the United States shows" (the United States or a part of it), "In general, research shows" (global, unstated, or papers split evenly). With a single-source group the phrase says "suggests" instead of "shows"; "has shown" may replace "shows". A group may also carry a "scope_optional_clause" such as ", including work on California": some of its papers are about the place, but most are not. You MAY insert it into the phrase just before the verb ("In general, research, including work on California, shows"); never move the place into the first words. Every literature sentence BEGINS with the scope phrase of the groups it cites; when it cites groups of different scope it begins with the most specific of their phrases, but write one sentence per scope wherever you can, so that a general mechanism is never made to look specific to the place. If the packet's "scope" has "needs_general_clause": true, or if none of the groups you cite has "scope_class" "state" or "nca", the LAST entry of "literature_interpretation" is {"sentence": "<the packet's general_clause, copied exactly>", "group_ids": [], "hedged": false}, and "integrated" ends with the same sentence; otherwise write no such sentence. In "integrated", every sentence that mentions research begins with its scope phrase. No required rubric point names the place (the state or its region) on the authority of a literature group: required mechanism points are written in general words; a group whose "scope_class" is "state" or "nca" may earn an OPTIONAL point that states its finding for the place.
 
 BROADER HAZARD. The packet's "plain_language" may carry a "broader_hazard_phrase" (for example "extreme heat, of which dangerous heat-index days are one measure"). When a group's statements rest on a broader hazard term (the group says "hazard_relation": "broader_hazard"), write its support with that phrase: the research is about the broader hazard, of which the quantity is one measure, never about the quantity itself. Without such a group, do not use the phrase.
+
+RUNG 8 (hazard impact on infrastructure). A packet with "rung": 8 names an "asset_class" (with its plain "asset_class_phrase") and carries, besides the table pattern and the family's "driver" groups, "impact" groups: each states how a hazard condition acts on that kind of asset and what happens to it ("impact_mechanism", "impact_outcome"), with its "relevance" to the place ("place_named", "us" or "general") and its "hazard_relation". Write the answer in three parts: (1) the hazard change at the place, as projected, in the table-pattern sentence; (2) for the impact groups, "<scope phrase> that <hazard phrase> <impact mechanism> <asset class phrase>" --- for example "In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can buckle rails and disrupt rail service" --- where the hazard phrase is the "broader_hazard_phrase" when a cited impact group has "hazard_relation": "broader_hazard", else the plain quantity; the driver groups as in any item; and the general closing clause (SCOPE) when no cited group is state- or NCA-specific, which for impact groups is the usual case; (3) never state that an asset, or the asset class, in the place will fail, is at risk, is vulnerable or will be damaged: the research describes such conditions, not a forecast for a particular asset. Only when you cite a group listed in "place_named_impact_group_ids" may you write "For <asset class phrase> in <Place>, this implies more exposure to <impact outcome>". The question asks what the projected change could mean for the asset class at the place and why, in the packet's "question_form"; the required rubric points are the direction, the magnitude class, the place, and the impact pathway in general words (resting on the impact groups); "treating a hazard as a risk" and "stating that a particular asset will fail" are fatal errors.
+
+WILDFIRE (D-073b). In an item about fire-weather danger, the word "wildfire" appears ONLY inside the exact phrase "conditions that favour wildfire" (as in the broader-hazard phrase); "wildfire" anywhere else, "fires" and "burned area" stay forbidden, even if a packet's "must_not_use" lists "wildfire".
 
 QUESTION FORM. The packet's "question_form" gives the form of the question ("id", "name", "skeleton"). Write "prompt" in that form: begin it as the skeleton begins and keep the skeleton's structure (one question, or two short questions for "two_short_questions"), with the packet's plain-language phrases; adjust the grammar so it reads well. Do not copy anything the skeleton does not need.
 

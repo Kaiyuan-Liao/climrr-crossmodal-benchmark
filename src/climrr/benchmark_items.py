@@ -354,10 +354,19 @@ SYNTH_CHECK_VERSION_V31 = "synthesis_post_checks v3.1"
 # rubric point names the place on a group's authority; the question opens as its assigned question form (all format-
 # class) --- and the mixed-scope report. Opt-in: litsynth_agent v5 passes it.
 SYNTH_CHECK_VERSION_V32 = "synthesis_post_checks v3.2"
+# v3.3 (work package P5b, D-073b, D-075): v3.2 plus (a) D-073b --- in a fire-weather item "wildfire" is allowed only inside
+# the exact phrase "conditions that favour wildfire" (masked before FWI_FORBIDDEN_RE; any other "wildfire" still fails);
+# (b) the rung-8 wording rules, applied when `checks_input.rung8` is present (rung-8 packets, P5c): no asset-failure claim
+# ("<asset> in <Place> will fail / is at risk"); "this implies more exposure to" only when the item cites a place-named
+# impact group; a literature sentence citing an impact group opens with its scope phrase + " that", names the packet's
+# asset-class phrase, and names the broader-hazard phrase when a cited impact group rests on a broader hazard term (else the
+# plain quantity). All format-class. Opt-in: litsynth_agent v5.2 passes it; v3.2 is unchanged.
+SYNTH_CHECK_VERSION_V33 = "synthesis_post_checks v3.3"
 SYNTH_CHECK_VERSIONS = (SYNTH_CHECK_VERSION, SYNTH_CHECK_VERSION_V23, SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31,
-                        SYNTH_CHECK_VERSION_V32)
-_V3_PLUS = (SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31, SYNTH_CHECK_VERSION_V32)
-_V31_PLUS = (SYNTH_CHECK_VERSION_V31, SYNTH_CHECK_VERSION_V32)
+                        SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33)
+_V3_PLUS = (SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31, SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33)
+_V31_PLUS = (SYNTH_CHECK_VERSION_V31, SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33)
+_V32_PLUS = (SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33)
 #: v3.1 (D-067): the driver / cause words a sentence resting only on context groups must not carry next to the context phrase.
 DRIVER_WORD_RE = re.compile(r"\bdriven\s+by\b|\bdrivers?\b|\bdrives?\b|\bcause[sd]?\b|\bcausing\b|\bbecause\s+of\b", re.I)
 #: v3.1 (DR-DESC-1 v4, D-066): the relative tercile is written as a comparison with other states, never with these words.
@@ -567,7 +576,7 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
         reasons += [f"table_pattern[{i}]: pattern id {p} not in the packet" for p in ids if p not in pattern_ids]
     if strengths and not lit_s:
         reasons.append("reference_answer.literature_interpretation: no sentence while the packet has literature groups")
-    clause = ((checks_input.get("scope") or {}).get("general_clause") or "").strip() if check_version == SYNTH_CHECK_VERSION_V32 else ""
+    clause = ((checks_input.get("scope") or {}).get("general_clause") or "").strip() if check_version in _V32_PLUS else ""
     for i, s in enumerate(lit_s):
         ids = s.get("group_ids") if isinstance(s.get("group_ids"), list) else []
         if not ids and clause and s["sentence"].strip() == clause:   # v3.2: the D-069 closing clause cites no group
@@ -599,8 +608,9 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
         hedge_report = hedge_by_strength(lit_s, strengths)
     fire_report = None
     if check_version in _V3_PLUS and checks_input.get("family") == FWI_FAMILY:
+        mask = check_version == SYNTH_CHECK_VERSION_V33                  # D-073b
         reasons += [f"{w}: fire-weather wording (an FWI is never fire occurrence): {m!r} in graded text"
-                    for w, t in every if w not in FWI_WRONG_ANSWER_FIELDS for m in fwi_forbidden_flags(t)]
+                    for w, t in every if w not in FWI_WRONG_ANSWER_FIELDS for m in fwi_forbidden_flags(mask_wildfire_phrase(t) if mask else t)]
         plain = [q for q in checks_input.get("plain_quantity") or [] if isinstance(q, str) and q]
         fire_report = [{"field": w, "word": m, "kind": "forbidden_word_in_wrong_answer_list"}
                        for w, t in every if w in FWI_WRONG_ANSWER_FIELDS for m in fwi_forbidden_flags(t)] + \
@@ -610,10 +620,14 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
         reasons += readability_reasons(item.get("prompt") or "", tp_s, lit_s, integrated, graded, checks_input)
         readability = readability_reports(tp_s, lit_s, integrated, item.get("prompt") or "", checks_input)
     scope_rep = None
-    if check_version == SYNTH_CHECK_VERSION_V32:
+    if check_version in _V32_PLUS:
         sr, scope_rep = scope_checks(lit_s, integrated, tagged.get("rubric_points") or [], checks_input)
         reasons += sr
         reasons += question_form_reasons(item.get("prompt") or "", checks_input)
+    rung8_rep = None
+    if check_version == SYNTH_CHECK_VERSION_V33 and checks_input.get("rung8"):
+        r8, rung8_rep = rung8_reasons(lit_s, integrated, every, checks_input)
+        reasons += r8
 
     schema = schema_errors(item)
     reasons += [f"schema: {e}" for e in schema]
@@ -628,7 +642,7 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
                        "n_table_sentences": len(tp_s), "n_literature_sentences": len(lit_s),
                        **({"hedge_by_strength": hedge_report} if hedge_report is not None else {}),
                        **({"fire_word_report": fire_report} if fire_report is not None else {}),
-                       **(readability or {}), **(scope_rep or {})}}
+                       **(readability or {}), **(scope_rep or {}), **({"rung8_report": rung8_rep} if rung8_rep is not None else {})}}
 
 
 def _terms(text: str) -> set[str]:
@@ -723,6 +737,17 @@ def fwi_fire_words(text: str, plain_phrases: list[str] = ()) -> list[str]:
     for ph in sorted(plain_phrases, key=len, reverse=True):
         t = re.sub(re.escape(ph), " ", t, flags=re.I)
     return [m.group(0) for m in FWI_FIRE_WORD_RE.finditer(t)]
+
+
+#: D-073b (work package P5b): the only phrase in which a fire-weather item's graded text may write "wildfire".
+WILDFIRE_ALLOWED_PHRASE = "conditions that favour wildfire"
+_WILDFIRE_PHRASE_RE = re.compile(r"\bconditions\s+that\s+favour\s+wildfire\b", re.I)
+
+
+def mask_wildfire_phrase(text: str) -> str:
+    """v3.3 (D-073b): `text` with every "conditions that favour wildfire" replaced by a neutral placeholder word, so that
+    FWI_FORBIDDEN_RE sees only the other uses of "wildfire"."""
+    return _WILDFIRE_PHRASE_RE.sub("conditions that favour WFPHRASE", text or "")
 
 
 def generality_flags(text: str) -> list[str]:
@@ -850,6 +875,65 @@ def question_form_reasons(prompt: str, checks_input: dict) -> list[str]:
     return out
 
 
+# --- v3.3: rung-8 wording (D-075; work package P5b) ------------------------------------------------------------
+
+#: "<asset> in <Place> will fail / is at risk" and its close forms: never in a rung-8 item's graded text (D-075 rule 3).
+ASSET_FAILURE_RE = re.compile(r"\b(?:will|would|is\s+going\s+to|are\s+going\s+to)\s+(?:fail|break\s+down|collapse|be\s+(?:damaged|destroyed|disrupted))\b"
+                              r"|\b(?:is|are)\s+(?:at\s+risk|vulnerable)\b|\bat\s+risk\s+of\s+fail\w*", re.I)
+#: The one place-anchored impact form D-075 allows, only with a place-named impact group cited.
+IMPLIES_EXPOSURE_RE = re.compile(r"\bthis\s+implies\s+more\s+exposure\s+to\b", re.I)
+RUNG8_WRONG_ANSWER_FIELDS = FWI_WRONG_ANSWER_FIELDS
+
+
+def rung8_reasons(lit_s: list[dict], integrated: str, every: list[tuple[str, str]], checks_input: dict) -> tuple[list[str], dict]:
+    """v3.3 (D-075). `checks_input.rung8`: {impact_group_ids, place_named_impact_group_ids, group_hazard_relation
+    {group_id: governed_term | broader_hazard}, asset_class_phrase, broader_hazard_phrase, quantity_phrases}. Failures:
+    an asset-failure claim anywhere in the graded text (the wrong-answer lists excepted); "this implies more exposure to"
+    while no cited literature sentence rests on a place-named impact group; a literature sentence citing an impact group
+    that does not open with its scope phrase + " that", does not name the asset-class phrase, or (a cited impact group
+    resting on a broader hazard term) does not name the broader-hazard phrase / (otherwise) a plain quantity phrase."""
+    r8 = checks_input["rung8"]
+    sc = checks_input.get("scope") or {}
+    groups, strengths = sc.get("groups") or {}, checks_input.get("group_strength") or {}
+    impact = set(r8.get("impact_group_ids") or [])
+    place_named = set(r8.get("place_named_impact_group_ids") or [])
+    rel = r8.get("group_hazard_relation") or {}
+    asset = (r8.get("asset_class_phrase") or "").lower()
+    broader = (r8.get("broader_hazard_phrase") or "").lower()
+    quantity = [q.lower() for q in r8.get("quantity_phrases") or [] if q]
+    out, cited_place_named = [], False
+    for w, t in every:
+        if w in RUNG8_WRONG_ANSWER_FIELDS:
+            continue
+        for m in ASSET_FAILURE_RE.finditer(t or ""):
+            out.append(f"{w}: rung 8 asset-failure claim (D-075): {m.group(0)!r}")
+    for i, s in enumerate(lit_s):
+        ids = [g for g in (s.get("group_ids") if isinstance(s.get("group_ids"), list) else []) if isinstance(g, str)]
+        cited_impact = [g for g in ids if g in impact]
+        if not cited_impact:
+            continue
+        cited_place_named |= any(g in place_named for g in cited_impact)
+        text = s["sentence"].strip()
+        low = text.lower()
+        opens = scope_openings(ids, groups, strengths)
+        if opens and not any(text.startswith(o + " that ") for o in opens):
+            out.append(f"literature_interpretation[{i}]: rung 8 impact sentence (D-075): must begin with "
+                       + " or ".join(repr(o + " that") for o in opens))
+        if asset and asset not in low:
+            out.append(f"literature_interpretation[{i}]: rung 8 impact sentence (D-075): must name the asset class {asset!r}")
+        if any(rel.get(g) == "broader_hazard" for g in cited_impact):
+            if broader and broader not in low:
+                out.append(f"literature_interpretation[{i}]: rung 8 impact sentence (D-075): must name the broader hazard {broader!r}")
+        elif quantity and not any(q in low for q in quantity):
+            out.append(f"literature_interpretation[{i}]: rung 8 impact sentence (D-075): must name the hazard {quantity[0]!r}")
+    for w, t in every:
+        if w in RUNG8_WRONG_ANSWER_FIELDS:
+            continue
+        if IMPLIES_EXPOSURE_RE.search(t or "") and not cited_place_named:
+            out.append(f"{w}: rung 8 place exposure (D-075): 'this implies more exposure to' needs a cited place-named impact group")
+    return out, {"cited_place_named_impact_group": cited_place_named, "impact_group_ids": sorted(impact)}
+
+
 def opening_trigram(text: str) -> str:
     return " ".join(re.findall(r"[a-z0-9'-]+", (text or "").lower())[:3])
 
@@ -888,7 +972,11 @@ _FORMAT_REASON_RES = (re.compile(r"^[^:]+: number-word '.*' does not trace to an
                       re.compile(r"^(?:literature_interpretation|integrated): closing clause \(D-069\) .+$"),
                       re.compile(r"^integrated: scope phrase \(D-069\): .+$"),
                       re.compile(r"^rubric\.required_points: place-specific mechanism required \(D-069\): .+$"),
-                      re.compile(r"^prompt: question form QF-\d+ .+$"))
+                      re.compile(r"^prompt: question form QF-\d+ .+$"),
+                      # v3.3 only emits these (D-075, rung 8)
+                      re.compile(r"^[^:]+: rung 8 asset-failure claim \(D-075\): .+$"),
+                      re.compile(r"^literature_interpretation\[\d+\]: rung 8 impact sentence \(D-075\): .+$"),
+                      re.compile(r"^[^:]+: rung 8 place exposure \(D-075\): .+$"))
 
 
 def number_word_value(word: str) -> float | None:

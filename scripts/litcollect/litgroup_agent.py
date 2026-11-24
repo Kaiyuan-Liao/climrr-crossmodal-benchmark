@@ -39,6 +39,18 @@ v3 (D-051; run 1 at v2 ended `finish_reason=length` with no content on every par
   per turn `finish_reason`, `content_chars`, `reasoning_chars` are recorded; the first turn's checks and raw text are
   kept in `first_turn`.
 
+v3.1 (work package P5b, D-075; LITCORPUS-03 infra run 1; partitions `artifacts/litgroups/partitions_infra_v1.jsonl`):
+a partition may carry `prompt_variant: "impact_v1"` (the impact partitions: hazard family x asset class over the passing
+`impact` statements). Such a chunk is sent `SYSTEM_PROMPT_TEMPLATE_IMPACT`: group sentences that state the same hazard
+condition -> the same asset -> the same impact mechanism / outcome; the label names the asset class and the impact;
+`claim_about` takes `CLAIM_ABOUT_IMPACT` (the five values plus `hazard_impact_on_asset`). Every other partition --- no
+`prompt_variant` --- is sent the v3 template unchanged (same text, same hash), so partitions_v1 runs exactly as at v3. The
+model still sees local ids and sentences only. Impact group records also carry, from the partition's `meta` (never sent),
+`asset_classes`, `hazard_relations`, `impact_mechanisms` and `impact_outcomes` (one entry per member, member order), and
+two recorded, non-gating label checks (`label_names_asset_class_word`, `label_shares_word_with_impact_outcome`).
+`summary.json` adds `prompt_variants` (chunks per variant) and both template hashes. v3 (which grouping run 2 ran, source
+commit `7676e53`) is held by its bytes at `157e49d` (`climrr.p5b.held_bytes`).
+
 Output: per chunk `<out>/<chunk_id>/result.json` (+ `prompt_user.txt`, `response.json`, and after a corrective turn
 `prompt_corrective.txt`, `response_corrective.json`; raw model text in result.json as in litstatement_agent v3),
 aggregate `groups.jsonl` (group_id `LG-<arm>-<type>-c<k>-<nnn>`, numbered per arm x type x chunk index over the
@@ -54,8 +66,8 @@ the environment; first check the environment: `python -c "import yaml, duckdb"`:
     bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
     cd "$CLIMRR_REPO_ROOT"
     python scripts/litcollect/litgroup_agent.py \\
-        --partitions artifacts/litgroups/partitions_v1.jsonl \\
-        --out "$LITCOLLECT_ROOT_POLARIS/litgroups/run2" \\
+        --partitions artifacts/litgroups/partitions_infra_v1.jsonl \\
+        --out "$LITCOLLECT_ROOT_POLARIS/litgroups/infra_run1" \\
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \\
         --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 --chunk-size 40 \\
         --sleep 5 --source-commit <PINNED_SHA>
@@ -67,7 +79,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from litstatement_agent import (  # noqa: E402  (v3)
     BACKOFF_SECONDS, CREDENTIAL_ENV, DEFAULT_BASE_URL, ModelCallFailed, call_with_retries, endpoint_label, raw_fields, sha)
 
-GENERATOR_VERSION = "litgroup_agent v3"
+GENERATOR_VERSION = "litgroup_agent v3.1"
 MAX_RATIONALE_WORDS = 25
 DEFAULT_MAX_TOKENS = 16000
 DEFAULT_CHUNK_SIZE = 40
@@ -84,8 +96,19 @@ SYSTEM_PROMPT_TEMPLATE = """You are grouping sentences that each state a general
 - other: none of the above.
 Return JSON: groups: [{label: one short neutral sentence naming the shared claim, using only words that appear in the member sentences or common function words; member_ids: [...]; rationale: ≤25 words; claim_about: one of the five values}], singletons: [{id: ..., claim_about: one of the five values}]. Every input id appears exactly once."""
 
+IMPACT_VARIANT = "impact_v1"
+SYSTEM_PROMPT_TEMPLATE_IMPACT = """You are grouping sentences that each state how a hazard condition affects infrastructure, about <family>. Put sentences into one group only when they state the same hazard condition, acting on the same kind of asset, through the same impact mechanism or with the same outcome. Do not merge sentences that differ in the hazard condition, in the asset, in the mechanism, in the outcome or in direction. Tag every group and every singleton with claim_about, exactly one of:
+- hazard_impact_on_asset: how a hazard condition acts on an infrastructure asset and what happens to the asset or its service;
+- hazard_change_mechanism: why or how the hazard quantity itself changes — e.g. humidity, temperature, circulation, land surface;
+- hazard_definition_or_measurement: what the index is or how it is measured;
+- impact_or_exposure: consequences for people, health or the economy that are not about an infrastructure asset;
+- method_or_data: datasets, models, methods;
+- other: none of the above.
+Return JSON: groups: [{label: one short neutral sentence that names the asset class and the impact, using only words that appear in the member sentences or common function words; member_ids: [...]; rationale: ≤25 words; claim_about: one of the six values}], singletons: [{id: ..., claim_about: one of the six values}]. Every input id appears exactly once."""
+
 STRENGTHS = ("multi_source_supported", "review_supported", "single_source_supported", "background_only")
 CLAIM_ABOUT = ("hazard_change_mechanism", "hazard_definition_or_measurement", "impact_or_exposure", "method_or_data", "other")
+CLAIM_ABOUT_IMPACT = ("hazard_impact_on_asset",) + CLAIM_ABOUT
 CORE_OR_CITED = ("core_candidate", "cited_candidate")
 FUNCTION_WORDS = frozenset("""a an the and or but nor of in on at to for from by with without within into onto over under
 between among about as than then that this these those which who whom whose what when where while how why is are was were
@@ -96,8 +119,21 @@ _DIGITS = re.compile(r"\d+(?:[.,]\d+)?")
 _WORD = re.compile(r"[a-z]+")
 
 
-def system_prompt(family_phrase: str) -> str:
-    return SYSTEM_PROMPT_TEMPLATE.replace("<family>", family_phrase)
+def system_prompt(family_phrase: str, variant: str | None = None) -> str:
+    return template_for(variant).replace("<family>", family_phrase)
+
+
+def template_for(variant: str | None) -> str:
+    """v3.1: the impact template for `prompt_variant: impact_v1`, else the v3 template."""
+    if variant in (None, ""):
+        return SYSTEM_PROMPT_TEMPLATE
+    if variant == IMPACT_VARIANT:
+        return SYSTEM_PROMPT_TEMPLATE_IMPACT
+    raise ValueError(f"unknown prompt_variant {variant!r}")
+
+
+def claim_values(variant: str | None) -> tuple:
+    return CLAIM_ABOUT_IMPACT if variant == IMPACT_VARIANT else CLAIM_ABOUT
 
 
 def chunk_partition(part: dict, chunk_size: int = DEFAULT_CHUNK_SIZE) -> list[dict]:
@@ -186,6 +222,7 @@ def check_partition(obj, part: dict):
     [{id, claim_about, checks}], with local ids."""
     known = [s["local_id"] for s in part["statements"]]
     sentence = {s["local_id"]: s["sentence"] for s in part["statements"]}
+    claims = claim_values(part.get("prompt_variant"))
     checks = {"parse_pass": isinstance(obj, dict) and isinstance(obj.get("groups"), list)}
     groups, singles = [], []
     if checks["parse_pass"]:
@@ -218,10 +255,17 @@ def check_partition(obj, part: dict):
                        "rationale_words": len(g["rationale"].split()),
                        "rationale_over_limit": len(g["rationale"].split()) > MAX_RATIONALE_WORDS,
                        "single_member": len(g["member_ids"]) == 1,
-                       "claim_about_pass": g["claim_about"] in CLAIM_ABOUT}
+                       "claim_about_pass": g["claim_about"] in claims}
+        if part.get("prompt_variant") == IMPACT_VARIANT:            # v3.1, recorded, not gating
+            lw = set(_WORD.findall(g["label"].lower()))
+            meta = [part["meta"].get(i, {}) for i in g["member_ids"]]
+            asset_words = {w for m in meta for w in _WORD.findall(str(m.get("asset_class") or "").replace("_", " ")) if w not in FUNCTION_WORDS}
+            outcome_words = {w for m in meta for w in _WORD.findall(str(m.get("impact_outcome") or "").lower()) if w not in FUNCTION_WORDS}
+            g["checks"]["label_names_asset_class_word"] = bool(lw & asset_words)
+            g["checks"]["label_shares_word_with_impact_outcome"] = bool(lw & outcome_words)
         g["checks"]["failed"] = [k for k in ("label_present", "label_digit_pass", "claim_about_pass") if not g["checks"][k]]
     for x in singles:
-        ok = x["claim_about"] in CLAIM_ABOUT
+        ok = x["claim_about"] in claims
         x["checks"] = {"claim_about_pass": ok, "failed": [] if ok else ["claim_about_pass"]}
     checks["failed"] = [k for k in ("parse_pass", "ids_exactly_once_pass", "no_empty_group_pass") if not checks[k]]
     return checks, groups, singles
@@ -250,6 +294,11 @@ def group_record(kind, local_ids, part, label, rationale, claim_about, gchecks, 
             "n_independent_core_cited_papers": len({m["canonical_paper"] for m in meta if m["evidence_role"] in CORE_OR_CITED}),
             "role_counts": dict(sorted(roles.items())), "evidence_strength": strength(meta),
             "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+            **({"prompt_variant": IMPACT_VARIANT, "hazard_family": part.get("hazard_family"),
+                "asset_partition": part.get("asset_partition"),
+                "asset_classes": [m.get("asset_class") for m in meta], "hazard_relations": [m.get("hazard_relation") for m in meta],
+                "impact_mechanisms": [m.get("impact_mechanism") for m in meta], "impact_outcomes": [m.get("impact_outcome") for m in meta]}
+               if part.get("prompt_variant") == IMPACT_VARIANT else {}),
             "checks": gchecks, "status": "deterministic_fail" if gchecks and gchecks["failed"] else "deterministic_pass",
             "human_review": None, **common}
 
@@ -265,8 +314,10 @@ def summarise(out: Path, parts: list, endpoint=None, chunk_size=DEFAULT_CHUNK_SI
                "chunks_done": 0, "chunks_pass": 0, "chunks_fail": [], "corrective_retry_used": 0, "corrective_retry_pass": 0,
                "reasoning_effort_not_applied": 0, "finish_reasons": {}, "groups": 0, "singletons": 0,
                "groups_label_fail": 0, "by_strength": {s: 0 for s in STRENGTHS}, "groups_by_strength": {s: 0 for s in STRENGTHS},
-               "statements_grouped": 0, "by_claim_about": {c: 0 for c in CLAIM_ABOUT}, "groups_by_claim_about": {c: 0 for c in CLAIM_ABOUT},
-               "statements_by_claim_about": {c: 0 for c in CLAIM_ABOUT}, "claim_about_fail": 0,
+               "statements_grouped": 0, "by_claim_about": {c: 0 for c in CLAIM_ABOUT_IMPACT}, "groups_by_claim_about": {c: 0 for c in CLAIM_ABOUT_IMPACT},
+               "statements_by_claim_about": {c: 0 for c in CLAIM_ABOUT_IMPACT}, "claim_about_fail": 0,
+               "prompt_variants": {v or "v3": sum((c.get("prompt_variant") or None) == v for c in chunks) for v in (None, IMPACT_VARIANT)},
+               "system_prompt_template_impact_sha256": sha(SYSTEM_PROMPT_TEMPLATE_IMPACT),
                "endpoints_in_results": {}, "system_prompt_template_sha256": sha(SYSTEM_PROMPT_TEMPLATE),
                "corrective_template_sha256": sha(CORRECTIVE_TEMPLATE)}
     results = []
@@ -294,7 +345,7 @@ def summarise(out: Path, parts: list, endpoint=None, chunk_size=DEFAULT_CHUNK_SI
             records.append(g)
             summary["by_strength"][g["evidence_strength"]] += 1
             summary["statements_grouped"] += g["n_members"]
-            if g["claim_about"] in CLAIM_ABOUT:
+            if g["claim_about"] in claim_values(g.get("prompt_variant")):
                 summary["by_claim_about"][g["claim_about"]] += 1
                 summary["statements_by_claim_about"][g["claim_about"]] += g["n_members"]
                 if g["kind"] == "group": summary["groups_by_claim_about"][g["claim_about"]] += 1
@@ -341,7 +392,7 @@ def main():
     backoff = tuple(float(x) for x in a.backoff.split(","))
     endpoint = {"base_url": a.base_url, "model": a.model, "endpoint_label": endpoint_label(a.base_url)}
     budget = {"reasoning_effort": a.reasoning_effort, "max_tokens": a.max_tokens}
-    say(f"START {GENERATOR_VERSION} partitions={len(parts)} chunks={len(chunks)} chunk_size={a.chunk_size} partitions_sha={sha(parts_raw.decode('utf-8'))[:12]} endpoint_label={endpoint['endpoint_label']} base_url={a.base_url} model={a.model} reasoning_effort={a.reasoning_effort} max_tokens={a.max_tokens} template_sha={sha(SYSTEM_PROMPT_TEMPLATE)[:12]}")
+    say(f"START {GENERATOR_VERSION} partitions={len(parts)} chunks={len(chunks)} chunk_size={a.chunk_size} partitions_sha={sha(parts_raw.decode('utf-8'))[:12]} endpoint_label={endpoint['endpoint_label']} base_url={a.base_url} model={a.model} reasoning_effort={a.reasoning_effort} max_tokens={a.max_tokens} template_sha={sha(SYSTEM_PROMPT_TEMPLATE)[:12]} template_impact_sha={sha(SYSTEM_PROMPT_TEMPLATE_IMPACT)[:12]}")
 
     done = 0
     for chunk in chunks:
@@ -352,7 +403,8 @@ def main():
         if a.limit and done >= a.limit: break
         if done and a.sleep: time.sleep(a.sleep)
         cdir.mkdir(parents=True, exist_ok=True)
-        system, user = system_prompt(chunk["family_phrase"]), user_prompt(chunk)
+        variant = chunk.get("prompt_variant") or None
+        system, user = system_prompt(chunk["family_phrase"], variant), user_prompt(chunk)
         (cdir / "prompt_user.txt").write_text(user, encoding="utf-8")
         messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
         t0 = time.time()
@@ -393,7 +445,8 @@ def main():
         common = {"generator_version": GENERATOR_VERSION, **endpoint, "temperature": 0, **budget, "reasoning_effort_applied": applied,
                   "chunk_size": a.chunk_size, "chunk_id": cid, "model_attempts": len(turns), "corrective_retry_used": first_turn is not None,
                   **turn_stats(resp),
-                  "system_prompt_sha256": sha(system), "system_prompt_template_sha256": sha(SYSTEM_PROMPT_TEMPLATE),
+                  "system_prompt_sha256": sha(system), "system_prompt_template_sha256": sha(template_for(variant)),
+                  "prompt_variant": variant,
                   "prompt_hash": sha(system + user), "source_commit": a.source_commit,
                   "generation_timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
         status = "deterministic_pass" if not checks["failed"] else "deterministic_fail"

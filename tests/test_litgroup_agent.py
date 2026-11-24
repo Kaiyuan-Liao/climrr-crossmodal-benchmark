@@ -28,7 +28,9 @@ from climrr import litgroups as lgr
 from climrr.checksums import sha256_file
 from climrr.paths import REPO_ROOT
 
-TOOLS = REPO_ROOT / "scripts" / "litcollect"
+from climrr import p5b  # noqa: E402
+
+TOOLS = p5b.materialize_tools("litgroup_agent.py")   # v3 held at the P5b base commit (v3.1 since P5b)
 AGENT = TOOLS / "litgroup_agent.py"
 AGENT_SHA256 = "e094aa5cbd4b981042fe07f165afc5d83ba77000ca718f185bcecee325d845f4"
 TEMPLATE_SHA256 = "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7"

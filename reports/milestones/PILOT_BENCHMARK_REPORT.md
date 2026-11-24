@@ -1354,3 +1354,31 @@ rule per section; "basis (b) papers" = tagged, a hazard section after the rule, 
 proxy" over the qualifying sections; "admitted before" = the v4.1 document-level count; v4.1 shape kept plus `impact`,
 `report`, `basis_b_only_sha256`; INFRA-3 refuses a lexicon without a conditional term; the extraction reads `candidates.json`
 on Eagle directly.
+
+## 63. P5b, sections A -- C: infra run 1 ingested, impact grouping partitions, rung-8 pairing and wording (2026-11-23; D-073b, D-074, D-075)
+
+No model call; no column status moved. **Ingest** of `infra_run1_evidence.tar.gz` (`218a9a430daf249f340c6ecbe46dd03c610bc77069520a93171d131655a1ad5a`,
+verified): every stated run fact reproduced (`P5_INFRA_IMPACT_DESIGN.md` §7; the query history v2 -> v3, D-070b, recorded).
+
+| | |
+| --- | --- |
+| Run manifest | `artifacts/litstatements/infra_run1/manifest.json`; 572 `papers/*.json`, `statements.jsonl` `86750028…0b01`, `summary.json` `952280a1…b286`; prompts / responses by hash only (1,144) |
+| Ingested | `statements_ingested.jsonl` (407, ids `LS3-`; roles core 184 / cited 26 / background 71 / unusable 126; 151 `impact_candidate`); `independence_v2.json` (571 canonical of 572); `breakdowns.json` |
+| Corpus evidence | `artifacts/literature/litcorpus03/` (`litcorpus03_evidence_manifest.json`): inventories v1 / v1.1, index summary, query summaries v2 / v3, `basis_b_only.json`, six logs; 4 files redacted (`redactions.json`); `infra_candidates_v1.json` = v3 `candidates.json` `07968720…b176` (manifest), re-derived (`verify_candidates_3`) |
+| Breakdowns | passing 210: impact 151 (heat 98, fire 53), driver 34, mechanism 13, pattern 8, consensus 3, caveat 1; 38 passing impact statements name a U.S. place (state 28, NCA 2, U.S. subregion 1, U.S. national 7); the 10 `hazard_relation: None` all rejected (terms outside both lexicons) |
+| Partitions | `partitions_infra_v1.jsonl` `0d8f3229e06b7b2dc209c33b108b9b58d477633d9602eaa8862840ded8bc9b50`: 11 partitions (7 impact, 4 driver / mechanism), 198 statements, 12 chunks of <= 40 |
+| Grouping agent v3.1 | `litgroup_agent.py` `9c4633692c3ae92b4a51cf96ee0bb540282a33c89cac8c52e941658ec2ea1c8f`; impact template `70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925`; v3 template unchanged; v3 held at `157e49d` |
+| Synthesis agent v5.2 | `litsynth_agent.py` `e057c0ff3fecc4a7fe7be29d7aa059a238b750acfaaad3b3a285bd199fedb687`; system prompt `0753023c4ad667f8e9d429fd1873bef658fc7a7d39b1f02a7515cf60a81e578a`; post-checks v3.3; v5.1 (never run) held at `157e49d` |
+| Rung 8 | `climrr.seeds_infra` (DR-SEED-INFRA-1, pilot selection), `scripts/build_seeds_infra.py` --- run in P5c; `question_forms_v2.yaml` `520aafa0804b5308be7e9e59b8316d9fbe0d8b60b335da4a0414ed0a17ab283e` |
+
+## 64. P5b: gate, escalations, readings for confirmation (2026-11-23)
+
+- **Gate.** `pytest` and `scripts/verify_no_secrets_or_paths.py` at the commit (numbers in the commit's report-back);
+  new `tests/test_p5b.py`; `test_litgroup_agent.py`, `test_litgroups_run2.py`, `test_p5a.py`, `test_p5a_hotfix.py` read the held
+  bytes.
+- **Discrepancy (not a stop).** The work package abbreviates the run's system prompt "945b487c…9095"; the delivered records,
+  summary and log all carry `945b487ca515d89fd25755d82e3c4d63e662888dea61f9f386028857ed69e095`, which is the hash of
+  `SYSTEM_PROMPT_INFRA` in the agent at the source commit `157e49d` (tested). Read as a typo in the abbreviation.
+- **To confirm before P5c.** `seeds_infra.TABLE_SETTING`, the table setting behind "largest table change" (days above 95 F /
+  summer seasonal FWI, absolute change, mid-century: the rung-3 pilot's choices).
+- **Readings for confirmation:** D-073b (a) -- (b), D-074 (a) -- (c), D-075 (a) -- (j).

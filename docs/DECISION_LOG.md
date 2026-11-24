@@ -3574,3 +3574,94 @@ code emits, and the next GUIDANCE packet still chooses.
 - **Affected files:** `data/metadata/litstatements/hazard_proxy_lexicon_v1a.yaml`, `data/manifest.json`,
   `scripts/litcollect/run_query.py`, `src/climrr/infra_lexicon.py`, `src/climrr/p5a.py`, `tests/test_p5a_hotfix2.py`,
   `tests/test_p5a.py`, `tests/test_litcollect_tools.py`, `docs/P5_INFRA_IMPACT_DESIGN.md`, `CLAUDE.md`.
+
+## D-073b --- "wildfire" only inside "conditions that favour wildfire"
+
+- **Date:** 2026-11-23.
+- **Status:** **decided** (COORDINATOR, work package P5b, section C; cited there as D-073b, recorded here by the EXECUTOR).
+  Resolves the escalation of the P5a hotfix (D-073a, report section 61).
+- **Decision.** In a fire-weather item's graded text "wildfire" is written only inside the exact phrase "conditions that
+  favour wildfire" (as in the broader-hazard phrase "conditions that favour wildfire, of which fire-weather danger is one
+  measure"); "wildfire" anywhere else, "fires" and "burned area" stay forbidden.
+- **Recorded (EXECUTOR).** `synthesis_post_checks` v3.3 (`benchmark_items.mask_wildfire_phrase`, `WILDFIRE_ALLOWED_PHRASE`):
+  the exact phrase is masked before `FWI_FORBIDDEN_RE`; v3.2 and earlier are unchanged; `litsynth_agent.py` v5.2 (WILDFIRE
+  section). **For confirmation:** (a) the exact British spelling only ("favor" does not qualify), as the plain-language phrase
+  is written; (b) `plain_language_v1b.yaml` keeps "wildfire" in `never_write` (the file is pinned; a change is a new file):
+  the prompt says the exception holds even when a packet's `must_not_use` lists "wildfire", and the rung-8 packet builder
+  (P5c) should leave it out of `must_not_use`.
+- **Affected files:** `src/climrr/benchmark_items.py`, `scripts/litcollect/litsynth_agent.py`, `tests/test_p5b.py`.
+
+## D-074 --- Infra run 1 accepted as the impact-statement evidence
+
+- **Date:** 2026-11-23.
+- **Status:** **decided** (COORDINATOR, work package P5b).
+- **Context.** `litstatement_agent.py` v4.1, arm `infra_impact_v1`, Sophia `openai/gpt-oss-120b`, reasoning low, max_tokens
+  6000, source commit `157e49d`, over the 572 DR-CAND-INFRA-3 candidates (`runs/infra_lexicon_v3`); delivered as
+  `infra_run1_evidence.tar.gz` (`218a9a43…ad5a`).
+- **Decision.** Infra run 1 is the LITCORPUS-03 impact-statement evidence for the rung-8 pilot.
+- **Recorded (EXECUTOR, ingest).** Every stated fact reproduced from the delivered files (`climrr.litstatements_infra1.
+  verify_source`): 572 papers, 0 errors, 0 over limit, 31 truncated; 407 statements (impact 264, driver 79, mechanism 38,
+  pattern 14, caveat 5, consensus 5, background 2), 210 `deterministic_pass`, 197 rejected; 407 papers with no statement
+  (165 productive); recovery exact 213 / prefix_anchor 83 / normalized 30 / not_found 81; asset classes energy 120,
+  transportation 49, water 24, healthcare 21, emergency 13, other 22 (and communications 6, food 3, dams 2, commercial 2,
+  transmission_systems 1, blank 1); hazard relation broader 242, governed 12, none 10 (all ten rejected; hazard terms
+  outside both lexicons: "fire" x3, "fire hazard", "marine heat waves" x3, "low temperatures", "high wind loads", blank).
+  The v3 candidates re-derive from `paper_hits.jsonl` (`verify_candidates_3`) and are pinned as
+  `data/metadata/softqa/infra_candidates_v1.json`; both query runs (v2 diagnostic, v3) recorded in
+  `artifacts/literature/litcorpus03/` (absolute Eagle paths redacted in four files, both hashes in `redactions.json`).
+  Statement ids `LS3-<paper>-<nn>`; evidence roles as run 2 plus `impact_candidate: true` on the 151 passing impact
+  statements; independence (D-046) over the 572 papers: one possible-duplicate title pair (571 canonical papers).
+  **For confirmation:** (a) `impact_candidate` is a flag beside the evidence role, not a fifth role (so D-045 strength still
+  reads the role); (b) a non-impact statement's family = the family of its `hazard_term` (the agent's lookup), else the
+  paper's only candidate family (17 passing statements), else none (0); (c) the inventory's corpus-wide duplicate groups list
+  only the first ten (NFKC normalisation), so independence uses the D-046 rule on the 572 papers' own hashes and titles.
+- **Affected files:** `src/climrr/litstatements_infra1.py`, `scripts/ingest_litstatements_infra1.py`,
+  `artifacts/litstatements/infra_run1/`, `artifacts/literature/litcorpus03/`, `data/metadata/softqa/infra_candidates_v1.json`,
+  `data/manifest.json`, `.gitattributes`, `tests/test_p5b.py`.
+
+## D-075 --- DR-SEED-INFRA-1, the impact grouping partitions and the rung-8 wording
+
+- **Date:** 2026-11-23.
+- **Status:** **decided** (COORDINATOR, work package P5b). Implemented, not run: the grouping run is next on Polaris; the
+  seeds, the selection and the packets follow in P5c.
+- **Decision.** (1) Grouping partitions = hazard family x asset class over the passing impact statements (classes with < 8
+  statements merged into `other_assets`), plus the passing driver / mechanism statements in their own partitions by family;
+  <= 40 per chunk; the grouping agent's impact prompt variant groups by the same (hazard condition -> asset -> impact
+  mechanism / outcome), `claim_about` gains `hazard_impact_on_asset`, the label names the asset class and the impact; group
+  records carry `impact_outcome` and `impact_mechanism`. (2) DR-SEED-INFRA-1: a rung-8 seed = (table pattern for family F at
+  place P) + impact groups of F for asset class A (geography relevance place-named > US > general; general allowed under
+  D-069 with the closing clause mandatory) + the family's driver groups as in rung 3; one seed per (pattern, asset class)
+  with >= 1 impact group; rank by evidence strength then n_papers. (3) Pilot selection: 8 seeds, heat x {energy,
+  transportation, water, healthcare}, fire weather x {energy, transportation, emergency services, communications}, each at
+  the state with the largest table change among states with a place-named impact statement for that class, else
+  California. (4) Rung-8 answer shape and wording (synthesis prompt v5.2, post-checks v3.3); question forms QF-08 plus two
+  new forms (QF-09, QF-10).
+- **Recorded (EXECUTOR).** `partitions_infra_v1.jsonl` (`0d8f3229…9b50`): 11 partitions (7 impact, 4 driver / mechanism),
+  198 statements, 12 chunks; `litgroup_agent.py` v3.1 (impact template `70018280…3925`; the v3 template unchanged; v3 held at
+  `157e49d`, `climrr.p5b`); `climrr.seeds_infra` (DR-SEED-INFRA-1, the selection) and `scripts/build_seeds_infra.py`;
+  `litsynth_agent.py` v5.2 (prompt `0753023c…578a`; v5.1, never run, held at `157e49d`); `synthesis_post_checks` v3.3;
+  `question_forms_v2.yaml` (`520aafa0…283e`). **For confirmation:** (a) the 12 passing pattern / consensus / caveat statements
+  are not partitioned (the work package names impact, driver and mechanism only); (b) the agent's own `other` asset class
+  goes into `other_assets` regardless of its size; (c) the grouping prompt's family phrase: "extreme heat and humid heat (of
+  which the heat index is one measure)" / "fire weather and fire danger (conditions that favour wildfire)"; the model still
+  sees ids and sentences only (the impact fields travel in `meta`); (d) an impact group is "of asset class A" when at least
+  one of its passing members has class A (matters for the merged `other_assets` groups, from which the pilot's water,
+  emergency-services and communications cells draw); (e) place-named = a member whose geography-v2 class is state and names
+  P; an NCA5-region, U.S.-subregion, U.S.-national or other-state member is "US"; everything else general; (f) "largest
+  table change" needs a table setting the work package does not fix: `seeds_infra.TABLE_SETTING` = the rung-3 pilot's
+  (days above 95 F; summer seasonal FWI; absolute change; mid-century) --- **to confirm before P5c**; (g) "place-named impact
+  statement" in the selection = a passing impact statement of the family and class whose geography-v2 class is state (today:
+  heat energy California, Virginia; heat transportation Arizona; heat healthcare Arizona; fire energy Arizona, California,
+  Idaho, Nevada; fire transportation California, Montana; heat water, fire emergency services and fire communications none ->
+  California); (h) seeds rank by the best impact group's strength, then independent papers over the seed's impact groups;
+  (i) post-checks v3.3 check the shape deterministically: a sentence citing an impact group opens with its scope phrase +
+  "that", names the packet's asset-class phrase, and the broader-hazard phrase when a cited impact group rests on a broader
+  hazard term (else a plain quantity phrase); asset-failure wording ("will fail", "is / are at risk", "vulnerable", "will be
+  damaged") fails outside the wrong-answer lists; "this implies more exposure to" needs a cited place-named impact group;
+  (j) QF-09 / QF-10 carry no horizon slot (the work package's wording has none).
+- **Affected files:** `src/climrr/litgroups_infra.py`, `scripts/build_group_partitions_infra.py`,
+  `artifacts/litgroups/partitions_infra_v1*.json*`, `scripts/litcollect/litgroup_agent.py`, `src/climrr/p5b.py`,
+  `src/climrr/litgroups_run2.py`, `src/climrr/seeds_infra.py`, `scripts/build_seeds_infra.py`,
+  `scripts/litcollect/litsynth_agent.py`, `src/climrr/benchmark_items.py`, `data/metadata/benchmark/question_forms_v2.yaml`,
+  `data/manifest.json`, `tests/test_p5b.py`, `tests/test_litgroup_agent.py`, `tests/test_litgroups_run2.py`,
+  `tests/test_p5a.py`, `tests/test_p5a_hotfix.py`, `docs/P5_INFRA_IMPACT_DESIGN.md`, `CLAUDE.md`.

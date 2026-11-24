@@ -1,0 +1,433 @@
+{
+  "name": "infra_lexicon_v2",
+  "mode": "lexicon (run_query v4.1, DR-CAND-INFRA-2)",
+  "run_utc": "2026-11-24T04:30:38Z",
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); a section qualifies with a hazard term of the family (governed or proxy) and an asset form (basis a) or a sector-tagged paper (basis b)",
+  "lexicon": {
+    "file": "infrastructure_lexicon_v1.yaml",
+    "version": "infrastructure_lexicon_v1",
+    "sha256": "dd16959260006514af18396aba78aa47c60fd95901405b859f1a97f1939b1753"
+  },
+  "proxy_lexicon": {
+    "file": "hazard_proxy_lexicon_v1.yaml",
+    "version": "hazard_proxy_lexicon_v1",
+    "sha256": "2da6895e232f57c9c6c254e42710002d00c6aa3a51afa2ec88c5fc03d9ab9d08",
+    "use": "literature classification only; never table matching"
+  },
+  "families": {
+    "heat_index": {
+      "query_file": "extreme_heat_diag_topical_only_query.txt",
+      "query_sha256": "849388b459b2523587cbb358fa40738cb283b84b9c5b9444f9dc21be7282a3ba",
+      "terms": [
+        "heat index",
+        "heat-index",
+        "extended heat index"
+      ],
+      "proxy_terms": [
+        "extreme heat",
+        "heat wave",
+        "heat waves",
+        "heatwave",
+        "heatwaves",
+        "high temperatures",
+        "hot days",
+        "humid heat"
+      ],
+      "proxy_relation": "broader_hazard"
+    },
+    "fire_weather_index": {
+      "query_file": "fire_weather_diag_topical_only_query.txt",
+      "query_sha256": "88d148d6f5db9db03e9f42895759afc1f183a45b7311b6b39c2da76f5f87a07b",
+      "terms": [
+        "fire weather index",
+        "fire-weather index",
+        "fwi",
+        "canadian forest fire weather index",
+        "canadian fwi"
+      ],
+      "proxy_terms": [
+        "fire weather",
+        "fire danger",
+        "fire-weather",
+        "wildfire",
+        "wildfires",
+        "wildland fire"
+      ],
+      "proxy_relation": "broader_hazard"
+    }
+  },
+  "family_disambiguation": {
+    "fire_weather_index": {
+      "bare": "fwi",
+      "disambiguators": [
+        "fire weather",
+        "fire-weather"
+      ]
+    }
+  },
+  "sector_tags": {
+    "file": "litcorpus03_sector_tags_v11.jsonl",
+    "sha256": "81a1dfd9b44ba5f84ee47c66f57b69e5ec8a855e6a45d414830bc64bf25bbe14",
+    "origin": "external_model (JL pipeline)",
+    "papers_in_file": 89497,
+    "index_papers_missing_from_file": 0,
+    "index_papers_missing_first_20": [],
+    "index_papers_tagged": 88972
+  },
+  "in_set": {
+    "label": "LITCORPUS-02-source-186k",
+    "file": "manifest.csv",
+    "sha256": "a94885b9f2ebb6c47adb2f1ca09a2b62941cfb200151aad7ca4199ced1e4d212",
+    "ids": 186346,
+    "field": "in_186k_set",
+    "rule": "paper id = doc_id, compared as strings"
+  },
+  "index": {
+    "path": "<LITCOLLECT_ROOT_POLARIS>/index/critical_infrastructure_v1",
+    "content_identity_sha256": "2dfc8eca533a0e983c4863e712b37ce35a08bc4980996d1483b711b05e3ff725",
+    "files": 89497
+  },
+  "documents_in_index": 89497,
+  "per_family_doc_counts": {
+    "heat_index": {
+      "any_term": 3107,
+      "admitted": 3107,
+      "admitted_governed_term": 39,
+      "admitted_proxy_only": 3068
+    },
+    "fire_weather_index": {
+      "any_term": 446,
+      "admitted": 432,
+      "admitted_governed_term": 10,
+      "admitted_proxy_only": 422
+    }
+  },
+  "per_hazard_term_doc_counts": {
+    "heat_index:heat index": {
+      "kind": "governed",
+      "docs": 39
+    },
+    "heat_index:heat-index": {
+      "kind": "governed",
+      "docs": 0
+    },
+    "heat_index:extended heat index": {
+      "kind": "governed",
+      "docs": 0
+    },
+    "heat_index:extreme heat": {
+      "kind": "proxy",
+      "docs": 171
+    },
+    "heat_index:heat wave": {
+      "kind": "proxy",
+      "docs": 76
+    },
+    "heat_index:heat waves": {
+      "kind": "proxy",
+      "docs": 284
+    },
+    "heat_index:heatwave": {
+      "kind": "proxy",
+      "docs": 58
+    },
+    "heat_index:heatwaves": {
+      "kind": "proxy",
+      "docs": 158
+    },
+    "heat_index:high temperatures": {
+      "kind": "proxy",
+      "docs": 2520
+    },
+    "heat_index:hot days": {
+      "kind": "proxy",
+      "docs": 102
+    },
+    "heat_index:humid heat": {
+      "kind": "proxy",
+      "docs": 4
+    },
+    "fire_weather_index:fire weather index": {
+      "kind": "governed",
+      "docs": 10
+    },
+    "fire_weather_index:fire-weather index": {
+      "kind": "governed",
+      "docs": 0
+    },
+    "fire_weather_index:fwi": {
+      "kind": "governed",
+      "docs": 20
+    },
+    "fire_weather_index:canadian forest fire weather index": {
+      "kind": "governed",
+      "docs": 0
+    },
+    "fire_weather_index:canadian fwi": {
+      "kind": "governed",
+      "docs": 0
+    },
+    "fire_weather_index:fire weather": {
+      "kind": "proxy",
+      "docs": 29
+    },
+    "fire_weather_index:fire danger": {
+      "kind": "proxy",
+      "docs": 46
+    },
+    "fire_weather_index:fire-weather": {
+      "kind": "proxy",
+      "docs": 2
+    },
+    "fire_weather_index:wildfire": {
+      "kind": "proxy",
+      "docs": 214
+    },
+    "fire_weather_index:wildfires": {
+      "kind": "proxy",
+      "docs": 299
+    },
+    "fire_weather_index:wildland fire": {
+      "kind": "proxy",
+      "docs": 31
+    }
+  },
+  "per_asset_class_doc_counts": {
+    "chemical": 401,
+    "commercial_facilities": 1157,
+    "communications": 7660,
+    "critical_manufacturing": 730,
+    "dams": 5740,
+    "defense_industrial_base": 158,
+    "emergency_services": 2027,
+    "energy": 36896,
+    "financial_services": 411,
+    "food_and_agriculture": 872,
+    "government_services_and_facilities": 856,
+    "healthcare_and_public_health": 4476,
+    "information_technology": 2902,
+    "nuclear_reactors_materials_and_waste": 2419,
+    "transportation_systems": 41555,
+    "water_and_wastewater": 20834
+  },
+  "impact_doc_count": 38872,
+  "hazard_sections_scanned": 5428,
+  "per_family_qualifying_doc_counts": {
+    "heat_index": 3096,
+    "fire_weather_index": 425
+  },
+  "per_family_basis_a_asset_class_doc_counts": {
+    "heat_index": {
+      "chemical": 6,
+      "commercial_facilities": 23,
+      "communications": 32,
+      "critical_manufacturing": 10,
+      "dams": 89,
+      "defense_industrial_base": 1,
+      "emergency_services": 28,
+      "energy": 856,
+      "financial_services": 2,
+      "food_and_agriculture": 13,
+      "government_services_and_facilities": 19,
+      "healthcare_and_public_health": 62,
+      "information_technology": 22,
+      "nuclear_reactors_materials_and_waste": 96,
+      "transportation_systems": 704,
+      "water_and_wastewater": 549
+    },
+    "fire_weather_index": {
+      "chemical": 3,
+      "commercial_facilities": 2,
+      "communications": 17,
+      "critical_manufacturing": 2,
+      "dams": 35,
+      "defense_industrial_base": 2,
+      "emergency_services": 60,
+      "energy": 127,
+      "financial_services": 1,
+      "food_and_agriculture": 7,
+      "government_services_and_facilities": 4,
+      "healthcare_and_public_health": 27,
+      "information_technology": 7,
+      "nuclear_reactors_materials_and_waste": 6,
+      "transportation_systems": 144,
+      "water_and_wastewater": 89
+    }
+  },
+  "candidate_rule": "DR-CAND-INFRA-2",
+  "cap_per_family": 300,
+  "by_family": {
+    "heat_index": {
+      "eligible": 3096,
+      "selected": 300,
+      "eligible_split": {
+        "n": 3096,
+        "by_basis": {
+          "a": 1835,
+          "b": 1261
+        },
+        "by_hazard_relation": {
+          "broader_hazard": 3057,
+          "governed_term": 39
+        },
+        "in_186k_set": {
+          "False": 2512,
+          "True": 584
+        }
+      },
+      "selected_split": {
+        "n": 300,
+        "by_basis": {
+          "a": 248,
+          "b": 52
+        },
+        "by_hazard_relation": {
+          "broader_hazard": 292,
+          "governed_term": 8
+        },
+        "in_186k_set": {
+          "False": 217,
+          "True": 83
+        }
+      },
+      "distribution_n_qualifying_sections": {
+        "1": 2341,
+        "2": 489,
+        "3": 142,
+        "4": 61,
+        "5": 30,
+        "6": 17,
+        "7": 4,
+        "8": 8,
+        "9": 2,
+        "11": 1,
+        "13": 1
+      },
+      "distribution_n_qualifying_sections_by_basis": {
+        "a": {
+          "1": 1288,
+          "2": 333,
+          "3": 111,
+          "4": 49,
+          "5": 24,
+          "6": 15,
+          "7": 3,
+          "8": 8,
+          "9": 2,
+          "11": 1,
+          "13": 1
+        },
+        "b": {
+          "1": 1053,
+          "2": 156,
+          "3": 31,
+          "4": 12,
+          "5": 6,
+          "6": 2,
+          "7": 1
+        }
+      },
+      "cutoff": {
+        "n_qualifying_sections": 2,
+        "basis": "a"
+      }
+    },
+    "fire_weather_index": {
+      "eligible": 425,
+      "selected": 300,
+      "eligible_split": {
+        "n": 425,
+        "by_basis": {
+          "a": 320,
+          "b": 105
+        },
+        "by_hazard_relation": {
+          "broader_hazard": 415,
+          "governed_term": 10
+        },
+        "in_186k_set": {
+          "False": 152,
+          "True": 273
+        }
+      },
+      "selected_split": {
+        "n": 300,
+        "by_basis": {
+          "a": 283,
+          "b": 17
+        },
+        "by_hazard_relation": {
+          "broader_hazard": 292,
+          "governed_term": 8
+        },
+        "in_186k_set": {
+          "False": 99,
+          "True": 201
+        }
+      },
+      "distribution_n_qualifying_sections": {
+        "1": 286,
+        "2": 39,
+        "3": 22,
+        "4": 17,
+        "5": 11,
+        "6": 11,
+        "7": 9,
+        "8": 5,
+        "9": 3,
+        "10": 3,
+        "11": 6,
+        "12": 2,
+        "13": 5,
+        "15": 1,
+        "18": 2,
+        "19": 3
+      },
+      "distribution_n_qualifying_sections_by_basis": {
+        "a": {
+          "1": 198,
+          "2": 33,
+          "3": 18,
+          "4": 14,
+          "5": 11,
+          "6": 11,
+          "7": 8,
+          "8": 4,
+          "9": 3,
+          "10": 3,
+          "11": 5,
+          "12": 2,
+          "13": 4,
+          "15": 1,
+          "18": 2,
+          "19": 3
+        },
+        "b": {
+          "1": 88,
+          "2": 6,
+          "3": 4,
+          "4": 3,
+          "7": 1,
+          "8": 1,
+          "11": 1,
+          "13": 1
+        }
+      },
+      "cutoff": {
+        "n_qualifying_sections": 1,
+        "basis": "a"
+      }
+    }
+  },
+  "n_candidates": 588,
+  "candidates_in_186k_set": {
+    "False": 315,
+    "True": 273
+  },
+  "paper_hits_sha256": "26864b97525ef05039c8885412c5148f1a1b3dae8bba700d946bf33e0a146010",
+  "candidates_sha256": "af8a37598ca1888b46defbd6e018374a1cd10d8c30066f8715874d5b9e8792ac",
+  "elapsed_seconds": 108.3,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

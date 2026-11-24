@@ -31,6 +31,8 @@ from climrr.manifest import load_entry
 from climrr.paths import REPO_ROOT
 
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
+from climrr import p5b  # noqa: E402
+TOOLS51 = p5b.materialize_tools("litsynth_agent.py")   # v5.1 held at the P5b base commit (v5.2 since P5b)
 LEXICON_SHA256 = "dd16959260006514af18396aba78aa47c60fd95901405b859f1a97f1939b1753"
 QUESTION_FORMS_SHA256 = "d123b381f6807a9b8d6cc9b6b901a86e8c48dfe617cb1f26ff9c6be9fdd4c910"
 RUN_QUERY_V41_SHA256 = "aeb3b8cb33c747f8d14e865584856213157044bff4b66625de7f2b8333d6bc3e"   # v4.2 (P5a hotfix 2; name kept); v4.1 ran, held at 9890a00; v4 never ran
@@ -414,7 +416,7 @@ def _reply(iid):
 
 
 def _check(iid, obj):
-    a = _load("litsynth_agent_v5_checks", TOOLS / "litsynth_agent.py")
+    a = _load("litsynth_agent_v5_checks", TOOLS51 / "litsynth_agent.py")
     common = {"model": "m", "prompt_hash": "0" * 64, "generation_timestamp": "2026-11-23T00:00:00Z", "packet_sha256": "0" * 64,
               "system_prompt_sha256": "0" * 64}
     item, tagged = a.assemble(obj, PK5[iid], common, bi.column_names())
@@ -463,7 +465,7 @@ def test_v31_and_earlier_unchanged_by_v32():
     assert bi.SYNTH_CHECK_VERSION == "synthesis_post_checks v2.2" and bi.SYNTH_CHECK_VERSION_V31 in bi.SYNTH_CHECK_VERSIONS
     obj = _reply("BI-P3-0002")
     obj["reference_answer"]["literature_interpretation"] = obj["reference_answer"]["literature_interpretation"][:-1]
-    a = _load("litsynth_agent_v5_v31", TOOLS / "litsynth_agent.py")
+    a = _load("litsynth_agent_v5_v31", TOOLS51 / "litsynth_agent.py")
     common = {"model": "m", "prompt_hash": "0" * 64, "generation_timestamp": "t", "packet_sha256": "0" * 64, "system_prompt_sha256": "0" * 64}
     item, tagged = a.assemble(obj, PK5["BI-P3-0002"], common, bi.column_names())
     r = bi.synthesis_post_checks(item, tagged, PK5["BI-P3-0002"]["checks_input"], bi.column_names(), check_version=bi.SYNTH_CHECK_VERSION_V31)
@@ -474,7 +476,7 @@ def test_v31_and_earlier_unchanged_by_v32():
 
 
 def test_litsynth_v5_pinned_and_prompt():
-    path = TOOLS / "litsynth_agent.py"
+    path = TOOLS51 / "litsynth_agent.py"
     a = _load("litsynth_agent_v5", path)
     assert sha256_file(path) == LITSYNTH_V51_SHA256 and a.GENERATOR_VERSION == "litsynth_agent v5.1"
     assert a.CHECK_VERSION == "synthesis_post_checks v3.2"
@@ -496,7 +498,7 @@ def test_litsynth_v5_end_to_end_with_the_format_turn(tmp_path):
     (pdir / f"{pk['packet_id']}.json").write_text((v5.PACKETS_V5_DIR / f"{pk['packet_id']}.json").read_text(encoding="utf-8"), encoding="utf-8")
     mock = helpers._Mock({pk["packet_id"]: [json.dumps(bad), json.dumps(good)]})
     try:
-        p = subprocess.run([sys.executable, str(TOOLS / "litsynth_agent.py"), "--packets", str(pdir), "--out", str(out), "--base-url", mock.url,
+        p = subprocess.run([sys.executable, str(TOOLS51 / "litsynth_agent.py"), "--packets", str(pdir), "--out", str(out), "--base-url", mock.url,
                             "--model", "mock-model", "--source-commit", "abc1234", "--backoff", "0,0,0"], env=ENV, capture_output=True, text=True)
     finally:
         mock.server.shutdown()

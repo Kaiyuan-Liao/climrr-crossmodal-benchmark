@@ -166,6 +166,9 @@ Since the P5a hotfix (D-069a, D-070a, D-073a) they are `run_query.py` v4.1 (`--r
 Since P5a hotfix 2 (D-070b) `run_query.py` is v4.2 (`--rule DR-CAND-INFRA-3`; its `summary.json`, `candidates.json`,
 `paper_hits.jsonl` and `basis_b_only.json` are the run evidence); v4.1, which ran on Polaris (the v2 query), is held by its
 bytes at the hotfix-2 base commit (`climrr.p5a.held_bytes_hotfix2`).
+Since P5b (D-075) `litgroup_agent.py` is v3.1 (the impact prompt variant; its `agent.log`, per-chunk `result.json`,
+`groups.jsonl` and `summary.json` are the run evidence, as for v3) and `litsynth_agent.py` v5.2; v3, which grouping run 2
+ran, and v5.1, which never ran, are held by their bytes at the P5b base commit (`climrr.p5b.held_bytes`).
 
 ## Knowledge-refresh staging
 

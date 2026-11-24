@@ -1,0 +1,449 @@
+{
+  "name": "infra_lexicon_v3",
+  "mode": "lexicon (run_query v4.2, DR-CAND-INFRA-3)",
+  "run_utc": "2026-11-24T05:05:59Z",
+  "matcher": "per-section whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b'+escape(term)+'\\b', 'i'); a section qualifies with a hazard term of the family (governed or proxy; a conditional proxy only with a co-term of its list in the same section) and an asset form (basis a only)",
+  "lexicon": {
+    "file": "infrastructure_lexicon_v1.yaml",
+    "version": "infrastructure_lexicon_v1",
+    "sha256": "dd16959260006514af18396aba78aa47c60fd95901405b859f1a97f1939b1753"
+  },
+  "proxy_lexicon": {
+    "file": "hazard_proxy_lexicon_v1a.yaml",
+    "version": "hazard_proxy_lexicon_v1a",
+    "sha256": "018e5e69cb5c3700dc026ed87a672c81edd6b17efe3b660a34c9b9cf6d94b5f8",
+    "use": "literature classification only; never table matching",
+    "conditional_terms": {
+      "heat_index:high temperatures": "climate_coterms_v1"
+    },
+    "coterm_lists": {
+      "climate_coterms_v1": [
+        "climate",
+        "climate change",
+        "warming",
+        "global warming",
+        "weather",
+        "summer",
+        "heat wave",
+        "heat waves",
+        "heatwave",
+        "heatwaves",
+        "extreme heat",
+        "projected",
+        "projection",
+        "projections"
+      ]
+    }
+  },
+  "families": {
+    "heat_index": {
+      "query_file": "extreme_heat_diag_topical_only_query.txt",
+      "query_sha256": "849388b459b2523587cbb358fa40738cb283b84b9c5b9444f9dc21be7282a3ba",
+      "terms": [
+        "heat index",
+        "heat-index",
+        "extended heat index"
+      ],
+      "proxy_terms": [
+        "extreme heat",
+        "heat wave",
+        "heat waves",
+        "heatwave",
+        "heatwaves",
+        "high temperatures",
+        "hot days",
+        "humid heat"
+      ],
+      "proxy_relation": "broader_hazard",
+      "conditional_terms": {
+        "high temperatures": "climate_coterms_v1"
+      }
+    },
+    "fire_weather_index": {
+      "query_file": "fire_weather_diag_topical_only_query.txt",
+      "query_sha256": "88d148d6f5db9db03e9f42895759afc1f183a45b7311b6b39c2da76f5f87a07b",
+      "terms": [
+        "fire weather index",
+        "fire-weather index",
+        "fwi",
+        "canadian forest fire weather index",
+        "canadian fwi"
+      ],
+      "proxy_terms": [
+        "fire weather",
+        "fire danger",
+        "fire-weather",
+        "wildfire",
+        "wildfires",
+        "wildland fire"
+      ],
+      "proxy_relation": "broader_hazard",
+      "conditional_terms": {}
+    }
+  },
+  "family_disambiguation": {
+    "fire_weather_index": {
+      "bare": "fwi",
+      "disambiguators": [
+        "fire weather",
+        "fire-weather"
+      ]
+    }
+  },
+  "sector_tags": {
+    "file": "litcorpus03_sector_tags_v11.jsonl",
+    "sha256": "81a1dfd9b44ba5f84ee47c66f57b69e5ec8a855e6a45d414830bc64bf25bbe14",
+    "origin": "external_model (JL pipeline)",
+    "papers_in_file": 89497,
+    "index_papers_missing_from_file": 0,
+    "index_papers_missing_first_20": [],
+    "index_papers_tagged": 88972
+  },
+  "in_set": {
+    "label": "LITCORPUS-02-source-186k",
+    "file": "manifest.csv",
+    "sha256": "a94885b9f2ebb6c47adb2f1ca09a2b62941cfb200151aad7ca4199ced1e4d212",
+    "ids": 186346,
+    "field": "in_186k_set",
+    "rule": "paper id = doc_id, compared as strings"
+  },
+  "index": {
+    "path": "<LITCOLLECT_ROOT_POLARIS>/index/critical_infrastructure_v1",
+    "content_identity_sha256": "2dfc8eca533a0e983c4863e712b37ce35a08bc4980996d1483b711b05e3ff725",
+    "files": 89497
+  },
+  "documents_in_index": 89497,
+  "per_hazard_term_doc_counts": {
+    "heat_index:heat index": {
+      "kind": "governed",
+      "conditional": false,
+      "docs": 39
+    },
+    "heat_index:heat-index": {
+      "kind": "governed",
+      "conditional": false,
+      "docs": 0
+    },
+    "heat_index:extended heat index": {
+      "kind": "governed",
+      "conditional": false,
+      "docs": 0
+    },
+    "heat_index:extreme heat": {
+      "kind": "proxy",
+      "conditional": false,
+      "docs": 171
+    },
+    "heat_index:heat wave": {
+      "kind": "proxy",
+      "conditional": false,
+      "docs": 76
+    },
+    "heat_index:heat waves": {
+      "kind": "proxy",
+      "conditional": false,
+      "docs": 284
+    },
+    "heat_index:heatwave": {
+      "kind": "proxy",
+      "conditional": false,
+      "docs": 58
+    },
+    "heat_index:heatwaves": {
+      "kind": "proxy",
+      "conditional": false,
+      "docs": 158
+    },
+    "heat_index:high temperatures": {
+      "kind": "proxy",
+      "conditional": true,
+      "docs": 2520
+    },
+    "heat_index:hot days": {
+      "kind": "proxy",
+      "conditional": false,
+      "docs": 102
+    },
+    "heat_index:humid heat": {
+      "kind": "proxy",
+      "conditional": false,
+      "docs": 4
+    },
+    "fire_weather_index:fire weather index": {
+      "kind": "governed",
+      "conditional": false,
+      "docs": 10
+    },
+    "fire_weather_index:fire-weather index": {
+      "kind": "governed",
+      "conditional": false,
+      "docs": 0
+    },
+    "fire_weather_index:fwi": {
+      "kind": "governed",
+      "conditional": false,
+      "docs": 20
+    },
+    "fire_weather_index:canadian forest fire weather index": {
+      "kind": "governed",
+      "conditional": false,
+      "docs": 0
+    },
+    "fire_weather_index:canadian fwi": {
+      "kind": "governed",
+      "conditional": false,
+      "docs": 0
+    },
+    "fire_weather_index:fire weather": {
+      "kind": "proxy",
+      "conditional": false,
+      "docs": 29
+    },
+    "fire_weather_index:fire danger": {
+      "kind": "proxy",
+      "conditional": false,
+      "docs": 46
+    },
+    "fire_weather_index:fire-weather": {
+      "kind": "proxy",
+      "conditional": false,
+      "docs": 2
+    },
+    "fire_weather_index:wildfire": {
+      "kind": "proxy",
+      "conditional": false,
+      "docs": 214
+    },
+    "fire_weather_index:wildfires": {
+      "kind": "proxy",
+      "conditional": false,
+      "docs": 299
+    },
+    "fire_weather_index:wildland fire": {
+      "kind": "proxy",
+      "conditional": false,
+      "docs": 31
+    }
+  },
+  "per_asset_class_doc_counts": {
+    "chemical": 401,
+    "commercial_facilities": 1157,
+    "communications": 7660,
+    "critical_manufacturing": 730,
+    "dams": 5740,
+    "defense_industrial_base": 158,
+    "emergency_services": 2027,
+    "energy": 36896,
+    "financial_services": 411,
+    "food_and_agriculture": 872,
+    "government_services_and_facilities": 856,
+    "healthcare_and_public_health": 4476,
+    "information_technology": 2902,
+    "nuclear_reactors_materials_and_waste": 2419,
+    "transportation_systems": 41555,
+    "water_and_wastewater": 20834
+  },
+  "impact_doc_count": 38872,
+  "hazard_sections_scanned": 5428,
+  "per_family_qualifying_asset_class_doc_counts": {
+    "heat_index": {
+      "chemical": 1,
+      "commercial_facilities": 18,
+      "communications": 22,
+      "critical_manufacturing": 4,
+      "dams": 75,
+      "defense_industrial_base": 1,
+      "emergency_services": 26,
+      "energy": 427,
+      "financial_services": 2,
+      "food_and_agriculture": 13,
+      "government_services_and_facilities": 15,
+      "healthcare_and_public_health": 50,
+      "information_technology": 14,
+      "nuclear_reactors_materials_and_waste": 25,
+      "transportation_systems": 349,
+      "water_and_wastewater": 264
+    },
+    "fire_weather_index": {
+      "chemical": 3,
+      "commercial_facilities": 2,
+      "communications": 17,
+      "critical_manufacturing": 2,
+      "dams": 35,
+      "defense_industrial_base": 2,
+      "emergency_services": 60,
+      "energy": 127,
+      "financial_services": 1,
+      "food_and_agriculture": 7,
+      "government_services_and_facilities": 4,
+      "healthcare_and_public_health": 27,
+      "information_technology": 7,
+      "nuclear_reactors_materials_and_waste": 6,
+      "transportation_systems": 144,
+      "water_and_wastewater": 89
+    }
+  },
+  "candidate_rule": "DR-CAND-INFRA-3",
+  "cap_per_family": 300,
+  "report": {
+    "heat_index": {
+      "admitted": {
+        "before_conditional": 3107,
+        "after_conditional": 1274,
+        "after_conditional_split": {
+          "n": 1274,
+          "governed_term": 39,
+          "impact_true": 715,
+          "in_186k_set": {
+            "False": 748,
+            "True": 526
+          }
+        }
+      },
+      "qualifying": {
+        "before_conditional": 1835,
+        "after_conditional": 884,
+        "before_conditional_split": {
+          "n": 1835,
+          "governed_term": 19,
+          "impact_true": 1053,
+          "in_186k_set": {
+            "False": 1434,
+            "True": 401
+          }
+        },
+        "after_conditional_split": {
+          "n": 884,
+          "governed_term": 19,
+          "impact_true": 517,
+          "in_186k_set": {
+            "False": 517,
+            "True": 367
+          }
+        },
+        "only_conditional_terms_before": 1376,
+        "only_conditional_terms_after": 425
+      },
+      "candidates": {
+        "n": 300,
+        "governed_term": 5,
+        "impact_true": 300,
+        "in_186k_set": {
+          "False": 137,
+          "True": 163
+        }
+      },
+      "basis_b_only": 385,
+      "hazard_sections_dropped_by_conditional": 2693
+    },
+    "fire_weather_index": {
+      "admitted": {
+        "before_conditional": 432,
+        "after_conditional": 432,
+        "after_conditional_split": {
+          "n": 432,
+          "governed_term": 10,
+          "impact_true": 304,
+          "in_186k_set": {
+            "False": 156,
+            "True": 276
+          }
+        }
+      },
+      "qualifying": {
+        "before_conditional": 320,
+        "after_conditional": 320,
+        "before_conditional_split": {
+          "n": 320,
+          "governed_term": 5,
+          "impact_true": 232,
+          "in_186k_set": {
+            "False": 111,
+            "True": 209
+          }
+        },
+        "after_conditional_split": {
+          "n": 320,
+          "governed_term": 5,
+          "impact_true": 232,
+          "in_186k_set": {
+            "False": 111,
+            "True": 209
+          }
+        },
+        "only_conditional_terms_before": 0,
+        "only_conditional_terms_after": 0
+      },
+      "candidates": {
+        "n": 300,
+        "governed_term": 5,
+        "impact_true": 232,
+        "in_186k_set": {
+          "False": 101,
+          "True": 199
+        }
+      },
+      "basis_b_only": 105,
+      "hazard_sections_dropped_by_conditional": 0
+    }
+  },
+  "by_family": {
+    "heat_index": {
+      "eligible": 884,
+      "selected": 300,
+      "distribution_n_qualifying_sections": {
+        "1": 767,
+        "2": 84,
+        "3": 18,
+        "4": 8,
+        "5": 4,
+        "6": 1,
+        "7": 1,
+        "11": 1
+      },
+      "cutoff": {
+        "impact": true,
+        "n_qualifying_sections": 1,
+        "hazard_relation": "broader_hazard"
+      }
+    },
+    "fire_weather_index": {
+      "eligible": 320,
+      "selected": 300,
+      "distribution_n_qualifying_sections": {
+        "1": 231,
+        "2": 31,
+        "3": 20,
+        "4": 20,
+        "5": 8,
+        "6": 5,
+        "8": 2,
+        "10": 1,
+        "11": 1,
+        "19": 1
+      },
+      "cutoff": {
+        "impact": false,
+        "n_qualifying_sections": 1,
+        "hazard_relation": "broader_hazard"
+      }
+    }
+  },
+  "n_candidates": 572,
+  "candidates_in_186k_set": {
+    "False": 235,
+    "True": 337
+  },
+  "candidates_impact": {
+    "False": 68,
+    "True": 504
+  },
+  "candidates_in_both_families": 28,
+  "paper_hits_sha256": "dc208d70f7eaf03af5beec8d9a134832f491c2e217a763609e3e5f7cc77b0174",
+  "basis_b_only_sha256": "067ef97f5a88b64c4008113e97f2baaf199be4f2e8d68abbcb682b3a782150c1",
+  "candidates_sha256": "079687206168f75c2e8e924391b8db18f3b1659fc5e3a2f6177dabcf0309b176",
+  "elapsed_seconds": 155.7,
+  "duckdb_version": "1.5.4",
+  "threads": 4,
+  "memory_limit": "4GB"
+}

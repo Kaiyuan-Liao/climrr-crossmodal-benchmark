@@ -140,7 +140,8 @@ def verify_source(src: Path, partitions: list[dict] | None = None) -> dict:
     src, run = Path(src), _run(src)
     _check(sha256_file(run / "groups.jsonl") == GROUPS_SHA256, "groups.jsonl differs from its stated SHA-256")
     _check(sha256_file(run / "summary.json") == SUMMARY_SHA256, "summary.json differs from its stated SHA-256")
-    _check(sha256_file(REPO_ROOT / AGENT_REL) == AGENT_SHA256, f"{AGENT_REL} differs from the pinned v3 SHA-256")
+    from climrr import p5b                                        # v3.1 since P5b; v3 held at the P5b base commit
+    _check(hashlib.sha256(p5b.held_bytes("litgroup_agent.py")).hexdigest() == AGENT_SHA256, f"{AGENT_REL} v3 held bytes differ")
     _check(agent_sha_at(SOURCE_COMMIT) == AGENT_SHA256, f"{AGENT_REL} at the source commit differs from the pinned SHA-256")
     s = _load(run / "summary.json")
     for k, v in (("generator_version", GENERATOR_VERSION), ("endpoint_label", ENDPOINT_LABEL), ("model", MODEL),
