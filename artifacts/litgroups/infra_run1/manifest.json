@@ -1,0 +1,348 @@
+{
+  "run": "infra_run1",
+  "diagnostic_id": "litgroups_infra_run1",
+  "decision": "D-076",
+  "tarball": {
+    "name": "litgroups_infra_run1_evidence.tar.gz",
+    "sha256": "14797dc7f804f4dbba4d7f6fc6e904765bbd87948a9c131abd4f003a07319f65"
+  },
+  "generator": {
+    "version": "litgroup_agent v3.1",
+    "agent_path": "scripts/litcollect/litgroup_agent.py",
+    "agent_sha256": "9c4633692c3ae92b4a51cf96ee0bb540282a33c89cac8c52e941658ec2ea1c8f",
+    "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+    "system_prompt_template_impact_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+    "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6"
+  },
+  "budget": {
+    "reasoning_effort": "low",
+    "max_tokens": 16000,
+    "chunk_size": 40,
+    "temperature": 0
+  },
+  "endpoint": {
+    "endpoint_label": "sophia_vllm",
+    "model": "openai/gpt-oss-120b",
+    "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+    "chunks": 12
+  },
+  "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+  "partitions": {
+    "path": "artifacts/litgroups/partitions_infra_v1.jsonl",
+    "sha256": "0d8f3229e06b7b2dc209c33b108b9b58d477633d9602eaa8862840ded8bc9b50"
+  },
+  "statements": {
+    "path": "artifacts/litstatements/infra_run1/statements_ingested.jsonl",
+    "sha256": "869b0592e72ec22b7617a3fbe6ae3005df762b4817f7609e41c96a8559cbca4b"
+  },
+  "independence": {
+    "path": "artifacts/litstatements/infra_run1/independence_v2.json",
+    "sha256": "b0a2fa3f3bd9998597c4681100586abf555ce295283984f102222030bd2fb602"
+  },
+  "counts": {
+    "partitions": 11,
+    "chunks": 12,
+    "chunks_pass": 12,
+    "chunks_fail": 0,
+    "corrective_retry_used": 4,
+    "groups": 84,
+    "singletons": 59,
+    "statements": 198
+  },
+  "by_strength": {
+    "multi_source_supported": 20,
+    "review_supported": 2,
+    "single_source_supported": 121,
+    "background_only": 0
+  },
+  "groups_by_claim_about": {
+    "hazard_impact_on_asset": 59,
+    "hazard_change_mechanism": 8,
+    "hazard_definition_or_measurement": 1,
+    "impact_or_exposure": 13,
+    "method_or_data": 3,
+    "other": 0
+  },
+  "prompt_variants": {
+    "v3": 4,
+    "impact_v1": 8
+  },
+  "corrective_chunks": [
+    "infra_heat_index.impact.energy.c1",
+    "infra_heat_index.impact.energy.c2",
+    "infra_heat_index.impact.other_assets.c1",
+    "infra_heat_index.impact.transportation_systems.c1"
+  ],
+  "cross_chunk_merge": "not done; deferred to human review (D-051)",
+  "log": {
+    "invocations": 1,
+    "start_utc": "2026-11-24T07:19:58Z",
+    "end_utc": "2026-11-24T07:23:06Z",
+    "corrective_lines": 4,
+    "done_lines": [
+      {
+        "chunks": "12",
+        "pass": "12",
+        "fail": "0",
+        "corrective": "4",
+        "groups": "84",
+        "singletons": "59"
+      }
+    ]
+  },
+  "groups_sha256": "f61bf4f557c0f5fbdfec2779fc578b01e84bdc6edfca80c4b633d25f841045ce",
+  "summary_sha256": "81d7f2b044b0256e47d1aac7ebff7cbce4664d8c9cee6ac214d6861647fbf005",
+  "files": [
+    {
+      "path": "groups.jsonl",
+      "sha256": "f61bf4f557c0f5fbdfec2779fc578b01e84bdc6edfca80c4b633d25f841045ce",
+      "bytes": 309219
+    },
+    {
+      "path": "summary.json",
+      "sha256": "81d7f2b044b0256e47d1aac7ebff7cbce4664d8c9cee6ac214d6861647fbf005",
+      "bytes": 2718
+    },
+    {
+      "path": "agent.log",
+      "sha256": "245d97de4f0787e3462cced263b9b77436222c6b4e217439735bd2401bf84c94",
+      "bytes": 2882
+    },
+    {
+      "path": "chunks/infra_fire_weather_index.driver.c1.json",
+      "sha256": "8d393d216a19be751abea3f3829a7ffab8cadf06f706bff6cda2d1afc354a462",
+      "bytes": 31773
+    },
+    {
+      "path": "chunks/infra_fire_weather_index.impact.energy.c1.json",
+      "sha256": "d6d88b3e38648ba9b9c609812e29e7de4c6f7fa4acd81163a697498f4246c127",
+      "bytes": 76955
+    },
+    {
+      "path": "chunks/infra_fire_weather_index.impact.other_assets.c1.json",
+      "sha256": "f383a4aaac4886f61f369b70132a40f8d57f1ca366418d0a9a7bc39d496b00d2",
+      "bytes": 50705
+    },
+    {
+      "path": "chunks/infra_fire_weather_index.impact.transportation_systems.c1.json",
+      "sha256": "1b0daddf2eeb51d5d3bb1c2ed7513c02723d8680ac4c1c50976b54320f038f07",
+      "bytes": 39416
+    },
+    {
+      "path": "chunks/infra_fire_weather_index.mechanism.c1.json",
+      "sha256": "128c417518378bb75526a5d8034fbfc3a7408e99017c0af4b3564ac29a52306c",
+      "bytes": 12510
+    },
+    {
+      "path": "chunks/infra_heat_index.driver.c1.json",
+      "sha256": "2e22d23cbe33a09fe8cbf32715eb09470281edebd4f93cbbfd22c3ddbc0af4c6",
+      "bytes": 35880
+    },
+    {
+      "path": "chunks/infra_heat_index.impact.energy.c1.json",
+      "sha256": "45576776f154accd19f24663e85a88a1f18ac0190309649f26370c382d9df6ff",
+      "bytes": 58699
+    },
+    {
+      "path": "chunks/infra_heat_index.impact.energy.c2.json",
+      "sha256": "7c5c1ced450e35e3696bcfc03918edeb10a564f99f84476877f56d350dde7511",
+      "bytes": 64906
+    },
+    {
+      "path": "chunks/infra_heat_index.impact.healthcare_and_public_health.c1.json",
+      "sha256": "c9c5b5fed703eb21aa82f86962ba4d36ce7da11bf890b430a9d65da9e7cfcaa0",
+      "bytes": 33337
+    },
+    {
+      "path": "chunks/infra_heat_index.impact.other_assets.c1.json",
+      "sha256": "356fcac8a34febe109aae3565d7d11f7ba190d562cfc91b07f89968804057e48",
+      "bytes": 72289
+    },
+    {
+      "path": "chunks/infra_heat_index.impact.transportation_systems.c1.json",
+      "sha256": "1132b1a12c351dd8ff4a4933f36af68a38a17c5d20151853993216eb177b87fe",
+      "bytes": 59563
+    },
+    {
+      "path": "chunks/infra_heat_index.mechanism.c1.json",
+      "sha256": "63486029ef85a256eb1d96b0fb78dc5ab19731728671950289f170ca035b8721",
+      "bytes": 19328
+    }
+  ],
+  "derived_files": [
+    {
+      "path": "groups_enriched.jsonl",
+      "sha256": "1e5aa4fb5902bc598c5977dd231d9b1b1c029fdad98076651cb0b2d7b0913eb1",
+      "bytes": 527643
+    },
+    {
+      "path": "groups_enriched_summary.json",
+      "sha256": "8d62ea9ae285a3d5ddbbe5bd188e6bfa125a39ec94d766205d4598945faa4b5b",
+      "bytes": 39849
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": "litgroups/infra_run1/infra_fire_weather_index.driver.c1/prompt_user.txt",
+      "sha256": "c3fe9335cb0230b9d239755e4fd29fae67bf2c2c583f80a7eebb44a628716c4b",
+      "bytes": 2662
+    },
+    {
+      "path": "litgroups/infra_run1/infra_fire_weather_index.driver.c1/response.json",
+      "sha256": "46c0b0e5bdfb4b20f1d04a19502976aea77b6272ada5f508785ca0099c3b2f05",
+      "bytes": 7126
+    },
+    {
+      "path": "litgroups/infra_run1/infra_fire_weather_index.impact.energy.c1/prompt_user.txt",
+      "sha256": "bd79183c01e30f4ca667af87144dc5e023360b5047b8328198d0627604d26da2",
+      "bytes": 3328
+    },
+    {
+      "path": "litgroups/infra_run1/infra_fire_weather_index.impact.energy.c1/response.json",
+      "sha256": "78dbf2ff02e72ba504cf471f512cfd5766dd2ccdf0b724668d24b61e9e03e9df",
+      "bytes": 14059
+    },
+    {
+      "path": "litgroups/infra_run1/infra_fire_weather_index.impact.other_assets.c1/prompt_user.txt",
+      "sha256": "910b734933c3b63be2872438384c4b257dfc830236640b54939e5cecb512eaa0",
+      "bytes": 2992
+    },
+    {
+      "path": "litgroups/infra_run1/infra_fire_weather_index.impact.other_assets.c1/response.json",
+      "sha256": "b64433509d8fe84d6c8934481aa36c839ab21acaf46bc45eac34f65513aa56f8",
+      "bytes": 8862
+    },
+    {
+      "path": "litgroups/infra_run1/infra_fire_weather_index.impact.transportation_systems.c1/prompt_user.txt",
+      "sha256": "48213a4a6dc7a08f91ac8c10862633312dd4b5fe53ef1d1b26e269b595e69c38",
+      "bytes": 2169
+    },
+    {
+      "path": "litgroups/infra_run1/infra_fire_weather_index.impact.transportation_systems.c1/response.json",
+      "sha256": "9104320d9028dd79abaa2c7c0e57f450118c37edd75f9ffc2fe37eba15de19b5",
+      "bytes": 9281
+    },
+    {
+      "path": "litgroups/infra_run1/infra_fire_weather_index.mechanism.c1/prompt_user.txt",
+      "sha256": "a4299e8a730b0d1b2dc2ffebb35ad95d444d1d9bb478d31a4b7fe32713043eb4",
+      "bytes": 784
+    },
+    {
+      "path": "litgroups/infra_run1/infra_fire_weather_index.mechanism.c1/response.json",
+      "sha256": "7c0fb1ea9d0dd9a5f4370a03cc63cf19bf1040aab0c6154dcc2ab780f1a21fec",
+      "bytes": 3250
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.driver.c1/prompt_user.txt",
+      "sha256": "4b67ca2c60a9dde2a634010d57468a23c282120d74e554957f1717920b5c0d93",
+      "bytes": 2513
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.driver.c1/response.json",
+      "sha256": "253ed28eba1e9d02e72ccc42763c1726eba8dbaf612e3502178256991ba5d8f8",
+      "bytes": 7088
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.energy.c1/prompt_corrective.txt",
+      "sha256": "0e6ed453775463c51a7a019c1b9a7f06e8a4406da46d5e6506231feb6dfa03d7",
+      "bytes": 126
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.energy.c1/prompt_user.txt",
+      "sha256": "760dcfc4b4168912a7320a8175250f3fedf4dae24d3715a531a94b16805eabbe",
+      "bytes": 3387
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.energy.c1/response.json",
+      "sha256": "0da10662a295a28a7114955bb5ddeff4aa04020b138d720102e09aaab86f283b",
+      "bytes": 4964
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.energy.c1/response_corrective.json",
+      "sha256": "defa22b2fc02ce71bd456586116a07aa1142bfb98186acc84d84e7cd926e495c",
+      "bytes": 4808
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.energy.c2/prompt_corrective.txt",
+      "sha256": "c65e86742dafbfc3bf4bd5de8f9465350b1e24638a7f04b8b25493373b00c414",
+      "bytes": 136
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.energy.c2/prompt_user.txt",
+      "sha256": "36e3be74bd19b9324d80c9f000bf60c1712db4d5d016b90ace087f0843a986b0",
+      "bytes": 3519
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.energy.c2/response.json",
+      "sha256": "78acfb02d27b974b0eed8e0f8bf4de996a7951f381acb3ed55495acc188c8273",
+      "bytes": 10256
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.energy.c2/response_corrective.json",
+      "sha256": "fc64746154caa939ba0fab7b5edc122d04d760c75eb9f2ed0459f81532a7b5a9",
+      "bytes": 5738
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.healthcare_and_public_health.c1/prompt_user.txt",
+      "sha256": "fd8c3096336b9dfa6af4874452ef433b323abb0022409f1c3535742fda815181",
+      "bytes": 2211
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.healthcare_and_public_health.c1/response.json",
+      "sha256": "960e81b94559507ada2800447e55433928ac0fda5ee716e19f90b3ec549cde63",
+      "bytes": 5065
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.other_assets.c1/prompt_corrective.txt",
+      "sha256": "befda74d960c1ea1facbaa846293edd45eddb14dc2bd190cc58523185ae49c8f",
+      "bytes": 130
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.other_assets.c1/prompt_user.txt",
+      "sha256": "50b668fe6cf346da601a1f542e8e56c05c7ba7720887d8dc5812b1757c75e3cc",
+      "bytes": 2763
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.other_assets.c1/response.json",
+      "sha256": "8ef01ae0212301f34b4e1e9ea5582c5620373ac1a74b41f94d8be23c83a455ef",
+      "bytes": 9073
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.other_assets.c1/response_corrective.json",
+      "sha256": "0d612714375c7f678edbf39ccfabc9144e2fcf87796ba37f13afb43cefecb870",
+      "bytes": 5095
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.transportation_systems.c1/prompt_corrective.txt",
+      "sha256": "d5a6360c20d3f45936fe046917f44e889da4a6cabe7c223dcd3c3de685060290",
+      "bytes": 130
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.transportation_systems.c1/prompt_user.txt",
+      "sha256": "83e385c8d3f7c94b0026220446af98761a47cf25a0bda59730c6cde141e958ec",
+      "bytes": 3594
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.transportation_systems.c1/response.json",
+      "sha256": "fdd90c7013813c9ddb661543b079d97cd08efcdc6fb85c3c8944f021d63e5918",
+      "bytes": 7710
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.impact.transportation_systems.c1/response_corrective.json",
+      "sha256": "7598bf81abfe27f3e86d9fcda1e7d816b371d65a8ffa2a903cf3ed246b731ec5",
+      "bytes": 4985
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.mechanism.c1/prompt_user.txt",
+      "sha256": "a5254bafdb9b24f70b662f9f95bda298260c832039e09dda89042cc696abe98b",
+      "bytes": 1456
+    },
+    {
+      "path": "litgroups/infra_run1/infra_heat_index.mechanism.c1/response.json",
+      "sha256": "f6efc07d2577acbee85e802e53e5642f86e6165cff0076181466cde24af0c385",
+      "bytes": 4152
+    }
+  ],
+  "ingested_at": "2026-11-24T18:02:15Z",
+  "ingested_by": "EXECUTOR"
+}

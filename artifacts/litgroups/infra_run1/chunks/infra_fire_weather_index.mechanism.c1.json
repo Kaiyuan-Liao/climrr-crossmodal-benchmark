@@ -1,0 +1,374 @@
+{
+  "partition_id": "infra_fire_weather_index.mechanism",
+  "chunk_index": 1,
+  "n_chunks": 1,
+  "arm": "infra_fire_weather_index",
+  "statement_type": "mechanism",
+  "split_by": [],
+  "partition_n_statements": 5,
+  "n_statements": 5,
+  "local_ids": [
+    "S004",
+    "S002",
+    "S001",
+    "S003",
+    "S005"
+  ],
+  "generator_version": "litgroup_agent v3.1",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "infra_fire_weather_index.mechanism.c1",
+  "model_attempts": 1,
+  "corrective_retry_used": false,
+  "finish_reason": "stop",
+  "content_chars": 599,
+  "reasoning_chars": 1485,
+  "system_prompt_sha256": "0c3997b61218dea9728c52d31250baf9ffacc1d3c355c613383495128c569eaf",
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "prompt_variant": null,
+  "prompt_hash": "2bf05b4a906a64ce568ae5e924aa7b0da74482df05201e250d54638442a14477",
+  "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+  "generation_timestamp": "2026-11-24T07:23:05Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S001",
+        "S003"
+      ],
+      "label": "Post‑fire soil exposure increases runoff and rockfall risk",
+      "rationale": "Both sentences describe post‑wildfire environmental impacts such as accelerated runoff and more frequent rockfalls.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "exposure",
+          "fire",
+          "increases",
+          "post",
+          "risk",
+          "rockfall"
+        ],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [
+    {
+      "id": "S002",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S004",
+      "claim_about": "hazard_definition_or_measurement",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S005",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_fire_weather_index",
+      "statement_type": "mechanism",
+      "partition_id": "infra_fire_weather_index.mechanism",
+      "chunk_id": "infra_fire_weather_index.mechanism.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-226313909-02",
+        "LS3-253341601-02"
+      ],
+      "member_local_ids": [
+        "S001",
+        "S003"
+      ],
+      "label": "Post‑fire soil exposure increases runoff and rockfall risk",
+      "rationale": "Both sentences describe post‑wildfire environmental impacts such as accelerated runoff and more frequent rockfalls.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 2,
+      "papers": [
+        "226313909",
+        "253341601"
+      ],
+      "canonical_papers": [
+        "226313909",
+        "253341601"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "exposure",
+          "fire",
+          "increases",
+          "post",
+          "risk",
+          "rockfall"
+        ],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 599,
+      "reasoning_chars": 1485,
+      "system_prompt_sha256": "0c3997b61218dea9728c52d31250baf9ffacc1d3c355c613383495128c569eaf",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "2bf05b4a906a64ce568ae5e924aa7b0da74482df05201e250d54638442a14477",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:23:05Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_fire_weather_index",
+      "statement_type": "mechanism",
+      "partition_id": "infra_fire_weather_index.mechanism",
+      "chunk_id": "infra_fire_weather_index.mechanism.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-234364516-03"
+      ],
+      "member_local_ids": [
+        "S002"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "234364516"
+      ],
+      "canonical_papers": [
+        "234364516"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 599,
+      "reasoning_chars": 1485,
+      "system_prompt_sha256": "0c3997b61218dea9728c52d31250baf9ffacc1d3c355c613383495128c569eaf",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "2bf05b4a906a64ce568ae5e924aa7b0da74482df05201e250d54638442a14477",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:23:05Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_fire_weather_index",
+      "statement_type": "mechanism",
+      "partition_id": "infra_fire_weather_index.mechanism",
+      "chunk_id": "infra_fire_weather_index.mechanism.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-268510027-01"
+      ],
+      "member_local_ids": [
+        "S004"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_definition_or_measurement",
+      "n_members": 1,
+      "papers": [
+        "268510027"
+      ],
+      "canonical_papers": [
+        "268510027"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 599,
+      "reasoning_chars": 1485,
+      "system_prompt_sha256": "0c3997b61218dea9728c52d31250baf9ffacc1d3c355c613383495128c569eaf",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "2bf05b4a906a64ce568ae5e924aa7b0da74482df05201e250d54638442a14477",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:23:05Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_fire_weather_index",
+      "statement_type": "mechanism",
+      "partition_id": "infra_fire_weather_index.mechanism",
+      "chunk_id": "infra_fire_weather_index.mechanism.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-49228805-03"
+      ],
+      "member_local_ids": [
+        "S005"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "49228805"
+      ],
+      "canonical_papers": [
+        "49228805"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 599,
+      "reasoning_chars": 1485,
+      "system_prompt_sha256": "0c3997b61218dea9728c52d31250baf9ffacc1d3c355c613383495128c569eaf",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "2bf05b4a906a64ce568ae5e924aa7b0da74482df05201e250d54638442a14477",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:23:05Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 599,
+      "reasoning_chars": 1485,
+      "http_attempts": 1,
+      "model_seconds": 4.9
+    }
+  ],
+  "first_turn": null,
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 4.9,
+  "model_parse_error": null,
+  "elapsed_seconds": 5.4,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"Post‑fire soil exposure increases runoff and rockfall risk\",\n      \"member_ids\": [\"S001\", \"S003\"],\n      \"rationale\": \"Both sentences describe post‑wildfire environmental impacts such as accelerated runoff and more frequent rockfalls.\",\n      \"claim_about\": \"impact_or_exposure\"\n    }\n  ],\n  \"singletons\": [\n    {\n      \"id\": \"S002\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"id\": \"S004\",\n      \"claim_about\": \"hazard_definition_or_measurement\"\n    },\n    {\n      \"id\": \"S005\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    }\n  ]\n}",
+  "raw_response_chars": 599,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

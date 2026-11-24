@@ -3,8 +3,9 @@
 
 Runs after the infra grouping run (`litgroups/infra_run1`) is ingested. Reads the v3 seeds (pinned), the ingested infra
 statements and their independence, and the infra groups (`--groups`: the grouping run's `groups.jsonl`); writes
-`artifacts/benchmark/item_seeds_infra_v1.jsonl` (+ summary) and `artifacts/benchmark/pilot_selection_rung8_v1.json`.
-Rules: `src/climrr/seeds_infra.py`. Deterministic; no model call, no table value computed.
+`artifacts/benchmark/item_seeds_infra_v1.jsonl` (+ summary) and `artifacts/benchmark/pilot_selection_infra_v1.yaml` (P5c:
+item ids, `place_named_impact_evidence`, `review_state: impact_groups_unreviewed`). Rules: `src/climrr/seeds_infra.py`.
+Deterministic; no model call, no table value computed.
 
     python scripts/build_seeds_infra.py --groups artifacts/litgroups/infra_run1/groups.jsonl
 """
@@ -14,6 +15,8 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+
+import yaml
 from collections import Counter
 from pathlib import Path
 
@@ -46,13 +49,16 @@ def main() -> int:
     ir.write_jsonl(si.SEEDS_PATH, seeds)
     forms = si.load_question_forms_v2()
     sel = si.select_pilot(seeds, seeds_v3, records, ctx, forms)
-    ir.write_json(si.SELECTION_PATH, sel)
+    si.SELECTION_PATH.write_text(yaml.safe_dump(sel, sort_keys=False, allow_unicode=True, width=120), encoding="utf-8")
     summary = {"version": si.VERSION, "rule": si.RULE_ID, "decision": si.DECISION, "seeds": len(seeds),
                "by_family_class": dict(sorted(Counter(f"{s['family']}|{s['asset_class']}" for s in seeds).items())),
                "by_best_relevance": dict(sorted(Counter(s["best_relevance"] for s in seeds).items())),
                "seeds_file": {"path": repo_relative(si.SEEDS_PATH), "sha256": sha256_file(si.SEEDS_PATH)},
                "selection_file": {"path": repo_relative(si.SELECTION_PATH), "sha256": sha256_file(si.SELECTION_PATH)},
-               "selected": [{k: x[k] for k in ("order", "family", "asset_class", "state", "seed_id", "question_form_id")} for x in sel["selected"]],
+               "review_state": si.REVIEW_STATE_UNREVIEWED,
+               "selected": [{k: x[k] for k in ("order", "item_id", "family", "asset_class", "state", "state_basis", "candidate_states",
+                                               "table_change", "place_named_impact_evidence", "seed_id", "question_form_id",
+                                               "needs_general_clause")} for x in sel["selected"]],
                "missing": sel["missing"],
                "inputs": {"item_seeds_v3": pin, "statements_ingested": sha256_file(ir.INGESTED_PATH),
                           "independence_v2": sha256_file(ir.INDEPENDENCE_PATH), "groups": sha256_file(a.groups),

@@ -32,6 +32,13 @@ place-named impact statement of that family and class (litgeo v2 class state nam
 that state's seed for the class. A cell whose seed does not exist (no impact group of the class) is reported, not filled.
 Question forms: QF-08, QF-09, QF-10 (`question_forms_v2.yaml`) round-robin in selection order.
 
+**P5c (D-076; the table setting confirmed, D-075).** The selection is written as `pilot_selection_infra_v1.yaml` (the work
+package's name; P5b's code named a JSON file that was never written). Each cell gains `item_id` (`BI-P5-0001` ... `BI-P5-0008`
+by its position in PILOT_CELLS, so that a cell left unfilled keeps its id and the others do not move) and `place_named_impact_evidence`: `place_named_impact_statement` when the state was chosen among
+states with a place-named impact statement of the cell's class, `none` for the California fallback. Seeds and selection
+carry `review_state: impact_groups_unreviewed` until the COORDINATOR's dispositions of the impact groups are applied
+(P5c-hotfix; `disposition_exclude` on a group record keeps it out, as before).
+
 No model call; no table value computed (values are read from the pattern records).
 """
 
@@ -66,7 +73,9 @@ FALLBACK_STATE = "California"
 QUESTION_FORMS_V2_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "question_forms_v2.yaml"
 SEEDS_PATH = REPO_ROOT / "artifacts" / "benchmark" / "item_seeds_infra_v1.jsonl"
 SEEDS_SUMMARY_PATH = REPO_ROOT / "artifacts" / "benchmark" / "item_seeds_infra_v1_summary.json"
-SELECTION_PATH = REPO_ROOT / "artifacts" / "benchmark" / "pilot_selection_rung8_v1.json"
+SELECTION_PATH = REPO_ROOT / "artifacts" / "benchmark" / "pilot_selection_infra_v1.yaml"
+ITEM_ID_PREFIX = "BI-P5-"
+REVIEW_STATE_UNREVIEWED = "impact_groups_unreviewed"
 
 
 # --- table patterns --------------------------------------------------------------------------------------
@@ -179,6 +188,7 @@ def build_seeds(seeds_v3: list[dict], groups: list[dict], ctx: Context, rung3_dr
                             "driver_group_ids": drivers,
                             "driver_groups_rule": "as in rung 3: synthpackets.packet_groups(3, ...), role driver (LITCORPUS-02 grouping run 2, dispositions)",
                             "best_strength": min((x["evidence_strength"] for x in ig), key=STRENGTH_ORDER.get),
+                            "review_state": REVIEW_STATE_UNREVIEWED,
                             "n_papers_impact": li.n_independent([ctx.by_id[s]["paper_item_id"] for x in ig for s in x["cited_members"]], ctx.canon)})
     out.sort(key=lambda s: (STRENGTH_ORDER[s["best_strength"]], -s["n_papers_impact"], s["pattern_id"], s["asset_class"]))
     for k, s in enumerate(out, 1):
@@ -222,7 +232,7 @@ def select_pilot(seeds: list[dict], seeds_v3: list[dict], records: list[dict], c
     by = {(s["family"], s["place"], s["asset_class"]): s for s in seeds}
     f8 = rung8_forms(forms)
     picked, missing = [], []
-    for fam, a in PILOT_CELLS:
+    for k, (fam, a) in enumerate(PILOT_CELLS, 1):
         pats = table_patterns(seeds_v3, fam, (setting or {}).get(fam))
         named = [st for st in place_named_states(records, ctx, fam, a) if st in pats and table_change(pats[st]) is not None]
         if named:
@@ -231,7 +241,8 @@ def select_pilot(seeds: list[dict], seeds_v3: list[dict], records: list[dict], c
         else:
             state, basis = FALLBACK_STATE, "fallback: no state with a place-named impact statement of this class"
         s = by.get((fam, state, a))
-        cell = {"family": fam, "asset_class": a, "state": state, "state_basis": basis, "candidate_states": named,
+        cell = {"item_id": f"{ITEM_ID_PREFIX}{k:04d}", "family": fam, "asset_class": a, "state": state, "state_basis": basis,
+                "candidate_states": named, "place_named_impact_evidence": "place_named_impact_statement" if named else "none",
                 "table_change": table_change(pats[state]) if state in pats else None}
         if s is None:
             missing.append({**cell, "reason": "no seed (no usable impact group of this family and class)"})
@@ -240,7 +251,8 @@ def select_pilot(seeds: list[dict], seeds_v3: list[dict], records: list[dict], c
         picked.append({**cell, "order": len(picked) + 1, "seed_id": s["seed_id"], "pattern_id": s["pattern_id"],
                        "question_form_id": form["id"], "impact_group_ids": [x["group_id"] for x in s["impact_groups"]],
                        "place_named_impact_group_ids": s["place_named_impact_group_ids"], "needs_general_clause": s["needs_general_clause"]})
-    return {"version": "pilot_selection_rung8 v1", "rule": "D-075 rung-8 pilot selection", "rung": RUNG,
+    return {"version": "pilot_selection_infra v1", "rule": "D-075 rung-8 pilot selection", "rung": RUNG,
+            "review_state": REVIEW_STATE_UNREVIEWED,
             "table_setting": setting or TABLE_SETTING, "cells": [list(c) for c in PILOT_CELLS], "selected": picked,
             "missing": missing, "question_forms": {"version": forms["version"], "sha256": forms["sha256"], "rung8": [f["id"] for f in f8]}}
 

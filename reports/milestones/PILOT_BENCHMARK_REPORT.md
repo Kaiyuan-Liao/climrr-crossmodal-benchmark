@@ -1384,3 +1384,133 @@ verified): every stated run fact reproduced (`P5_INFRA_IMPACT_DESIGN.md` §7; th
 - **To confirm before P5c.** `seeds_infra.TABLE_SETTING`, the table setting behind "largest table change" (days above 95 F /
   summer seasonal FWI, absolute change, mid-century: the rung-3 pilot's choices).
 - **Readings for confirmation:** D-073b (a) -- (b), D-074 (a) -- (c), D-075 (a) -- (j).
+
+## 65. P5c, sections A -- D: infra grouping run ingested, review list, rung-8 seeds and packets (provisional), Alvi sheet builder (2026-11-24; D-076)
+
+No model call; no column status moved. **Ingest** of `litgroups_infra_run1_evidence.tar.gz` (`14797dc7f804f4dbba4d7f6fc6e904765bbd87948a9c131abd4f003a07319f65`, verified; `groups.jsonl` `f61bf4f5…045ce`, `summary.json` `81d7f2b0…bf005`): every stated run fact reproduced (`P5_INFRA_IMPACT_DESIGN.md` §11, with the breakdowns by family x asset class x strength and the 20 multi-source groups).
+
+| | |
+| --- | --- |
+| Run manifest | `artifacts/litgroups/infra_run1/manifest.json` `49b0b1a7…4133`; 15 files copied (run files + 12 chunk results), 32 prompts / responses by hash only |
+| Enriched | `groups_enriched.jsonl` `1e5aa4fb…3eb1` (143 records; D-046 strengths equal the agent's; 0 duplicate merges); 59 of 84 labelled groups have one member; place-named member in 14 of 59 hazard_impact_on_asset groups (19 with any U.S. place) |
+| Review list | `artifacts/benchmark/review/P5_impact_groups_review_v1.csv` `db89c906…56a7`: 103 records (72 groups, 31 singletons), dispositions empty |
+| Seeds / selection | `item_seeds_infra_v1.jsonl` `f724b4c8…0934` (637); `pilot_selection_infra_v1.yaml` `0f42385a…e9e6` (7 of 8 cells; BI-P5-0007 not filled) |
+| Packets | `synth_packets_infra_v1/manifest.json` `1aba0b10…eb1`; 7 packets, `review_state: impact_groups_unreviewed` |
+| Alvi sheet | `scripts/build_mentor_sheet.py --audience alvi` (`climrr.mentor_sheet_alvi`); not run (no items) |
+
+**hazard_impact_on_asset labels by family x asset class** (⚑ = a keyword screen trips: (i) fire occurrence as the hazard, (ii) an impact on people, (iii) another hazard; markers for the COORDINATOR, not dispositions; strength, independent papers, place-named states):
+
+- **fire weather x energy** (17; flagged 15)
+  - transmission line insulation reduction causing trips and outages (multi, 2) `c1-001`
+  - wildfire makes automatic reclosing difficult causing multiple trips (single, 1) --- ⚑ (i) fire: wildfire `c1-002`
+  - wildfire‑induced arc‑faults trigger transient instability (single, 1) --- ⚑ (i) fire: wildfire `c1-003`
+  - radiative heat from wildfires raises conductor temperature causing outages (single, 1) --- ⚑ (i) fire: wildfires `c1-004`
+  - increased wildfire activity extends transmission line exposure length (single, 1) --- ⚑ (i) fire: wildfire `c1-005`
+  - proactive de‑energisation of transmission lines prevents outages (single, 1) `c1-006`
+  - low‑WFPI line selection reduces wildfire risk but raises load shed (single, 1; Arizona, Nevada) --- ⚑ (i) fire: wildfire `c1-007`
+  - fire‑forecasting and water‑mist strategy cuts transmission‑line trips (single, 1) --- ⚑ (i) fire: fire `c1-008`
+  - networked microgrid maintains low wildfire risk while serving more load (single, 1; California) --- ⚑ (i) fire: wildfire `c1-009`
+  - wildfire smoke reduces solar PV power output on military bases (single, 1) --- ⚑ (i) fire: wildfire, smoke `c1-010`
+  - wildfire conditions endanger coal mining infrastructure with prolonged seam fires (single, 1) --- ⚑ (i) fire: wildfire, fires `c1-011`
+  - wildfire risk reduces biomass feedstock disrupting community biomass boilers (single, 1) --- ⚑ (i) fire: wildfire `c1-012`
+  - fire‑weather bushfires raise power and water service disruption likelihood (single, 1) --- ⚑ (i) fire: bushfires `c1-013`
+  - fire weather causes bushfires that burn electricity network assets and become ignition sources (single, 1) --- ⚑ (i) fire: bushfires, burn, ignition `c1-014`
+  - higher mean wind speed raises power grid vulnerability to wildfire (single, 1; Idaho) --- ⚑ (i) fire: wildfire | (iii) other hazard: wind `c1-015`
+  - lower growing‑season precipitation raises power grid vulnerability to wildfire (single, 1; Idaho) --- ⚑ (i) fire: wildfire | (iii) other hazard: precipitation `c1-016`
+  - lower mean NDVI increases power grid vulnerability to wildfire (single, 1; Idaho) --- ⚑ (i) fire: wildfire `c1-017`
+- **fire weather x transportation_systems** (7; flagged 4)
+  - fire‑weather impact on line construction (single, 1; Montana) `c1-001`
+  - wildfire size increase leads to debris‑flow threat to roads (single, 1; California) --- ⚑ (i) fire: wildfire | (iii) other hazard: debris‑flow `c1-002`
+  - wildfire activity increases road network exposure to fire (single, 1) --- ⚑ (i) fire: wildfire, fire `c1-003`
+  - fire‑weather damage to roads and bridges (single, 1) `c1-004`
+  - extreme fire‑weather exposure risk to residential and critical infrastructure (single, 1) `c1-005`
+  - fire propagation speed affects vehicle deployment (single, 1) --- ⚑ (i) fire: fire `c1-006`
+  - fast fire spread reduces evacuation time increasing road traffic demand (single, 1) --- ⚑ (i) fire: fire | (ii) people: evacuation `c1-009`
+- **fire weather x other_assets** (6; flagged 5)
+  - water infrastructure degradation from wildfires [water_and_wastewater] (multi, 4; California, Colorado) --- ⚑ (i) fire: wildfires `c1-001`
+  - facility vulnerability to wildfire near hospitals and care sites [healthcare_and_public_health] (multi, 2; California) --- ⚑ (i) fire: wildfire `c1-002`
+  - dam reservoir siltation risk from frequent fires [dams] (single, 1) --- ⚑ (i) fire: fires `c1-003`
+  - telecommunication system loss due to fire‑weather damage [communications] (single, 1) `c1-004`
+  - rockfall mitigation structure damage from wildfires [other] (single, 1) --- ⚑ (i) fire: wildfires | (iii) other hazard: rockfall `c1-005`
+  - downstream flooding damage to homes and infrastructure [other] (single, 1; Arizona) --- ⚑ (iii) other hazard: flooding `c1-006`
+- **heat x energy** (14; flagged 3)
+  - thermal power plant output reduction (multi, 2; Virginia) `c1-001`
+  - electricity demand increase with temperature (multi, 2) `c1-002`
+  - wildfire risk to power transmission lines (multi, 2; California) --- ⚑ (i) fire: wildfire `c1-003`
+  - water‑limited cooling curtails power plant output (single, 1) `c1-004`
+  - extreme heat increases electricity demand and stresses power supply (multi, 9) `c2-001`
+  - high temperatures cause transmission line sag and mechanical failure (multi, 2) `c2-002`
+  - high ambient temperature overheats transformer resistors (single, 1) `c2-003`
+  - heatwaves reduce cooling effectiveness of nuclear power plants (single, 1) `c2-004`
+  - extreme heat lowers power‑plant efficiency and reliability (single, 1) `c2-005`
+  - combined drought and heatwave cut hydro and thermoelectric generation (single, 1) --- ⚑ (iii) other hazard: drought `c2-006`
+  - rising maximum temperatures require upgraded pipeline and refinery equipment designs (single, 1) `c2-007`
+  - humid heat limits outdoor repair work, extending power‑outage duration (single, 1) --- ⚑ (ii) people: outdoor `c2-008`
+  - higher humidity slightly raises cooling demand and AC sales (single, 1) `c2-009`
+  - heat waves damage water and energy infrastructure and raise energy costs (single, 1) `c2-012`
+- **heat x healthcare_and_public_health** (1; flagged 1)
+  - healthcare workers performance reduced by heat stress (single, 1) --- ⚑ (ii) people: workers `c1-001`
+- **heat x transportation_systems** (6; flagged 2)
+  - pavement structural degradation from heat (multi, 9; Arizona) `c1-001`
+  - rail track expansion and buckling causing disruptions (multi, 3) `c1-002`
+  - runway surface damage and operational limits from heat (single, 1) `c1-003`
+  - cool roofs provide pedestrian‑level temperature cooling (single, 1) --- ⚑ (ii) people: pedestrian `c1-004`
+  - heat‑driven vegetation fires threaten railway corridors (single, 1) --- ⚑ (i) fire: fires `c1-007`
+  - heat exacerbates erosion of road embankments and side slopes (single, 1) `c1-009`
+- **heat x other_assets** (8; flagged 1)
+  - building stock functionality limited by extreme heat [other] (single, 1; Arizona, New York) `c1-001`
+  - building finishing damage from extreme heat [commercial_facilities] (single, 1) `c1-002`
+  - rail track deformation caused by severe temperature anomalies [other] (single, 1) `c1-003`
+  - airport runway heat buckling leading to service disruption [other] (single, 1) `c1-004`
+  - water‑service interruptions and stress on water infrastructure from extreme heat [water_and_wastewater] (multi, 2) `c1-006`
+  - increased water use aggravating reservoir‑based water shortages [water_and_wastewater] (single, 1) `c1-007`
+  - public water supply shortages limiting household access [water_and_wastewater] (single, 1) --- ⚑ (ii) people: household `c1-008`
+  - building water‑scarcity risk requiring larger tanks and efficiency [water_and_wastewater] (single, 1) `c1-009`
+
+**Packets (per item: pattern, impact groups attached with strength / relevance / scope class, driver groups, excluded):**
+
+| item | cell, place | pattern | impact groups (place-named) | drivers | excluded | clause needed |
+| --- | --- | --- | --- | ---: | ---: | --- |
+| BI-P5-0001 | heat x energy, Virginia | TP1-00111 12.5 (more than tripling) | 10 (4) | 8 | 62 | False |
+| BI-P5-0002 | heat x transportation_systems, Arizona | TP1-00069 10.3 (a moderate increase) | 7 (1) | 8 | 46 | True |
+| BI-P5-0003 | heat x water_and_wastewater, California | TP1-00071 9.0 (a moderate increase) | 4 (0) | 8 | 53 | True |
+| BI-P5-0004 | heat x healthcare_and_public_health, Arizona | TP1-00069 10.3 (a moderate increase) | 8 (2) | 8 | 46 | False |
+| BI-P5-0005 | fire weather x energy, Arizona | TP1-01461 3.9 (a slight increase) | 10 (1) | 6 | 36 | False |
+| BI-P5-0006 | fire weather x transportation_systems, California | TP1-01463 2.2 (a slight increase) | 7 (1) | 8 | 37 | False |
+| BI-P5-0008 | fire weather x communications, California | TP1-01463 2.2 (a slight increase) | 1 (0) | 8 | 37 | False |
+
+- **BI-P5-0001** (QF-08: "What does a projected increase in dangerous heat-index days in Virginia by mid-century mean for energy systems, and why?") impact: thermal power plant output reduction (multi, place_named, unknown); Higher ambient temperatures reduce transformer peak load capacity, dec… (single, place_named, state); Rising summer temperatures increase the resistance of transmission lin… (single, place_named, state); Higher summer temperatures increase the likelihood of power outages be… (single, place_named, state); electricity demand increase with temperature (multi, us, global); wildfire risk to power transmission lines (multi, us, unknown); Extreme heat waves increase power demand while simultaneously reducing… (single, us, unknown); extreme heat increases electricity demand and stresses power supply (multi, general, other); high temperatures cause transmission line sag and mechanical failure (multi, general, mixed); water‑limited cooling curtails power plant output (single, general, global). Excluded: caveat_outside_rung_7 13, claim_about:impact_or_exposure 16, claim_about:method_or_data 7, claim_about:other 2, disposition:not_about_family 5, over_cap:impact 16, rung8:context_not_attached 3.
+- **BI-P5-0002** (QF-09: "What could a projected increase in dangerous heat-index days mean for transportation systems in Arizona, and why?") impact: pavement structural degradation from heat (multi, place_named, other); cool roofs provide pedestrian‑level temperature cooling (single, us, us_national); rail track expansion and buckling causing disruptions (multi, general, other); runway surface damage and operational limits from heat (single, general, global); heat‑driven vegetation fires threaten railway corridors (single, general, other); heat exacerbates erosion of road embankments and side slopes (single, general, other); Permeable and vegetated pavements can reduce surface temperatures by e… (single, general, global). Excluded: caveat_outside_rung_7 13, claim_about:impact_or_exposure 16, claim_about:method_or_data 7, claim_about:other 2, disposition:not_about_family 5, rung8:context_not_attached 3.
+- **BI-P5-0003** (QF-10: "Why does the number of dangerous heat-index days matter for water and wastewater systems, and how is it projected to change in California?") impact: water‑service interruptions and stress on water infrastructure from ex… (multi, general, other); increased water use aggravating reservoir‑based water shortages (single, general, other); public water supply shortages limiting household access (single, general, other); building water‑scarcity risk requiring larger tanks and efficiency (single, general, unknown). Excluded: caveat_outside_rung_7 15, claim_about:impact_or_exposure 19, claim_about:method_or_data 7, claim_about:other 3, disposition:not_about_family 5, rung8:context_not_attached 4.
+- **BI-P5-0004** (QF-08: "What does a projected increase in dangerous heat-index days in Arizona by mid-century mean for healthcare and public health systems, and why?") impact: Extreme heat increases personal heat exposure for unshaded tasks at ou… (single, place_named, state); High vehicle surface temperatures can exceed safety thresholds, reachi… (single, place_named, state); healthcare workers performance reduced by heat stress (single, general, unknown); Heat waves increase demand for ambulance services, emergency medical s… (single, general, global); Heatwaves can damage critical public health infrastructure and impede … (single, general, unknown); Increasing extreme heat and heat‑wave conditions are expected to raise… (single, general, other); Heat waves are identified as one of the key natural hazards that can g… (single, general, other); Heat waves generated by the blast damaged hospitals, reducing their ca… (single, general, other). Excluded: caveat_outside_rung_7 13, claim_about:impact_or_exposure 16, claim_about:method_or_data 7, claim_about:other 2, disposition:not_about_family 5, rung8:context_not_attached 3.
+- **BI-P5-0005** (QF-09: "What could a projected increase in fire-weather danger mean for energy systems in Arizona, and why?") impact: low‑WFPI line selection reduces wildfire risk but raises load shed (single, place_named, state); increased wildfire activity extends transmission line exposure length (single, us, us_national); networked microgrid maintains low wildfire risk while serving more loa… (single, us, unknown); wildfire smoke reduces solar PV power output on military bases (single, us, us_subregion); higher mean wind speed raises power grid vulnerability to wildfire (single, us, unknown); lower growing‑season precipitation raises power grid vulnerability to … (single, us, unknown); lower mean NDVI increases power grid vulnerability to wildfire (single, us, unknown); transmission line insulation reduction causing trips and outages (multi, general, other); wildfire makes automatic reclosing difficult causing multiple trips (single, general, other); wildfire‑induced arc‑faults trigger transient instability (single, general, unknown). Excluded: caveat_outside_rung_7 5, claim_about:impact_or_exposure 5, claim_about:method_or_data 7, disposition:not_about_family 2, no_disposition 8, over_cap:impact 7, rung8:context_not_attached 2.
+- **BI-P5-0006** (QF-10: "Why does fire-weather danger matter for transportation systems, and how is it projected to change in California?") impact: wildfire size increase leads to debris‑flow threat to roads (single, place_named, state); fire‑weather impact on line construction (single, us, unknown); wildfire activity increases road network exposure to fire (single, us, us_national); fire‑weather damage to roads and bridges (single, general, other); extreme fire‑weather exposure risk to residential and critical infrast… (single, general, other); fire propagation speed affects vehicle deployment (single, general, other); fast fire spread reduces evacuation time increasing road traffic deman… (single, general, unknown). Excluded: caveat_outside_rung_7 10, claim_about:impact_or_exposure 6, claim_about:method_or_data 7, disposition:not_about_family 3, no_disposition 8, rung8:context_not_attached 3.
+- **BI-P5-0008** (QF-08: "What does a projected increase in fire-weather danger in California by mid-century mean for communications systems, and why?") impact: telecommunication system loss due to fire‑weather damage (single, general, other). Excluded: caveat_outside_rung_7 10, claim_about:impact_or_exposure 6, claim_about:method_or_data 7, disposition:not_about_family 3, no_disposition 8, rung8:context_not_attached 3.
+
+## 66. P5c: gate, escalations, readings for confirmation (2026-11-24)
+
+- **Gate.** Build `<BUILD_SHA>`: `pytest` **1,744 passed, 2 skipped**; scanner 0 hits (2,495 tracked files). Evidence run records
+  (`ingest_litgroups_infra1`, `build_seeds_infra`, `build_synth_packets_infra`) at the clean build tree: `<RUN_RECORDS>`. New
+  `tests/test_p5c.py` (15).
+- **Escalation 1 --- blocks the synthesis run.** Item schema v2 (`item_schema_v2.json`, frozen, manifest-pinned) allows literature
+  statement types `mechanism`, `driver`, `consensus`, `caveat` only. Agent v5.2 copies a cited group's `statement_type` into
+  `reference_components.literature_mechanisms[*]`, so every rung-8 item that cites an impact group fails `schema_errors`
+  (`statement_type: 'impact' not in [...]`), a non-format reason, and would be `deterministic_fail`. Checked offline with the
+  agent's own `assemble` on packet BI-P5-0003 (no model call); the rung-8 rules of post-checks v3.3 accept the same sentence. A
+  decision is needed: a new schema file (v2a with `impact`) or an agent-side mapping (a v5.3). Nothing changed here.
+- **Escalation 2 --- BI-P5-0007 not filled.** Fire weather x emergency services: the four passing statements are tagged `other`
+  (2), `hazard_change_mechanism`, `impact_or_exposure`; none `hazard_impact_on_asset`, so DR-SEED-INFRA-1 gives no seed. The id
+  is reserved (ids by cell position). A re-tag in the dispositions would fill it in the hotfix; otherwise the pilot has 7 items.
+- **Escalation 3 --- fire-occurrence labels.** 23 of the 30 fire-weather hazard_impact_on_asset labels name fire occurrence as the
+  hazard (screen (i)); their members are about wildfire acting on assets. D-073b governs how an item may word it ("conditions that
+  favour wildfire"); whether such groups may stand behind an FWI item is for the dispositions. Two heat labels also trip (i)
+  (`wildfire risk to power transmission lines`, multi-source, attached to BI-P5-0001; `heat-driven vegetation fires threaten
+  railway corridors`, attached to BI-P5-0002).
+- **Other observations for the review (not flags).** Several impact labels describe an adaptation or operational measure rather
+  than a hazard impact (fire energy `c1-006` de-energisation, `c1-008` water-mist strategy, `c1-009` microgrid; heat
+  transportation `c1-004` cool roofs, `c1-011` permeable pavements); BI-P5-0004's two place-named (Arizona) impact singletons are
+  about personnel at vaccination sites and vehicle surfaces (people, not an asset; singletons carry no label, so no screen ran).
+- **Not a stop.** The work package's selection file name (`pilot_selection_infra_v1.yaml`) replaces P5b's never-written
+  `pilot_selection_rung8_v1.json`; the agent's docstring example names `synth_packets_rung8_v1` (the agent is hash-pinned and
+  unchanged; the run command in `P5_INFRA_IMPACT_DESIGN.md` §16 names `synth_packets_infra_v1`).
+- **Readings for confirmation:** D-076 (a) -- (g).

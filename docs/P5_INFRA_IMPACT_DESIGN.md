@@ -18,8 +18,9 @@ polish -> review), applied to LITCORPUS-03 (`LITCORPUS03_PROVENANCE.md`):
    (§6); shipped back afterwards, hash pinned on ingest and re-derived by `climrr.infra_lexicon.verify_candidates_3`;
 4. **extraction** (`litstatement_agent.py` v4.1 `--arm infra_impact_v1`; statement type `impact`, D-073; `hazard_relation`,
    D-073a);
-5. **grouping** (`litgroup_agent.py` v3.1 over `partitions_infra_v1.jsonl`, §8), **rung-8 seeds and selection**
-   (DR-SEED-INFRA-1, §9), **rung-8 packets** (P5c), synthesis (`litsynth_agent.py` v5.2, post-checks v3.3, §9), polish;
+5. **grouping** (`litgroup_agent.py` v3.1 over `partitions_infra_v1.jsonl`, §8; run and ingested, §11), **review list**
+   (§12), **rung-8 seeds and selection** (DR-SEED-INFRA-1, §9, §13), **rung-8 packets** (§14, provisional), synthesis
+   (`litsynth_agent.py` v5.2, post-checks v3.3, §9), polish;
 6. sample QAs for Alvi.
 
 ## 2. Infrastructure vocabulary (`data/metadata/litstatements/infrastructure_lexicon_v1.yaml`)
@@ -279,3 +280,125 @@ Expect 11 partitions, 12 chunks (`START ... partitions=11 chunks=12 ... template
 `groups.jsonl`, `summary.json`, `agent.log` and every chunk directory (SHA-256 of each). Then P5c: ingest the groups, build the
 seeds and the selection (`scripts/build_seeds_infra.py`), the rung-8 packets, the synthesis run, samples for Alvi.
 
+
+## 11. Infra grouping run 1: run facts and ingest (work package P5c, part A; D-076)
+
+**Run** (Polaris, 2026-11-24 07:19 -- 07:23 UTC; Kaiyuan): `litgroup_agent.py` v3.1 (`9c463369…1c8f`, the file at the source
+commit), impact template `70018280…3925`, v3 template `ac135f00…2ae7` for the driver / mechanism chunks, corrective template
+`5d052853…54b6`, Sophia `openai/gpt-oss-120b`, reasoning low, max_tokens 16000, chunk 40, source commit `7699412`, over
+`partitions_infra_v1.jsonl` (`0d8f3229…9b50`). Delivered `litgroups_infra_run1_evidence.tar.gz` (`14797dc7…9f65`):
+`groups.jsonl` `f61bf4f5…045ce`, `summary.json` `81d7f2b0…bf005`. **Reproduced on ingest** (`scripts/ingest_litgroups_infra1.py`,
+`climrr.litgroups_infra_run1.verify_source`; any difference fails): 11 partitions, 12 chunks (8 impact_v1, 4 v3), 12 pass, 4
+corrective turns (all passed; no failed first attempt), 84 groups + 59 singletons over the 198 statements each exactly once;
+strength multi 20 / review 2 / single 121; group claim tags hazard_impact_on_asset 59, hazard_change_mechanism 8,
+hazard_definition_or_measurement 1, impact_or_exposure 13, method_or_data 3 (singletons: 20 / 12 / 2 / 11 / 5, other 9).
+
+**Ingested** (`artifacts/litgroups/infra_run1/`): `groups.jsonl`, `summary.json`, `agent.log`, `chunks/<chunk>.json` (the 12
+`result.json`); prompts and raw responses by hash only (32); `groups_enriched.jsonl` (`1e5aa4fb…3eb1`): per record the members
+resolved to `LS3-` ids, D-046 strength over the infra papers recomputed and equal to the agent's (no group touches the one
+possible-duplicate pair), geography v2 classes and the states named, `family` and `asset_partition` from the partition,
+`asset_class_counts`, impact mechanism / outcome / hazard relation read from the members (checked against the lists the agent
+copied from `meta`); `groups_enriched_summary.json`; `manifest.json`.
+
+**Groups by family x asset class x strength** (groups / singletons):
+
+| family | partition | multi | single | singletons |
+| --- | --- | ---: | ---: | ---: |
+| heat | impact: energy | 5 | 11 | 12 |
+| heat | impact: transportation_systems | 2 | 8 | 1 |
+| heat | impact: healthcare_and_public_health | 1 | 1 | 8 |
+| heat | impact: other_assets | 1 | 10 | 5 |
+| heat | driver / mechanism | 3 / 0 | 5 / 0 | 3 / 8 |
+| fire weather | impact: energy | 1 | 16 | 3 |
+| fire weather | impact: transportation_systems | 0 | 9 | 0 |
+| fire weather | impact: other_assets | 2 | 4 | 9 |
+| fire weather | driver / mechanism | 4 / 1 | 0 / 0 | 7 (2 review) / 3 |
+
+**59 of the 84 labelled groups have one member** (the agent's `single_member` check does not gate; fire x energy alone: 17
+groups from 21 statements). **The 20 multi-source groups:** heat energy "extreme heat increases electricity demand and stresses
+power supply" (9 papers), "thermal power plant output reduction", "electricity demand increase with temperature", "wildfire risk
+to power transmission lines", "high temperatures cause transmission line sag and mechanical failure" (2 each); heat transportation
+"pavement structural degradation from heat" (9), "rail track expansion and buckling causing disruptions" (3); heat healthcare
+"population health risk increased by heat waves" (4; impact_or_exposure); heat other_assets "water-service interruptions and
+stress on water infrastructure from extreme heat" (2); heat driver "projected increase in extreme heat intensity" (4),
+"temperature stress degrades infrastructure performance" (3; impact_or_exposure), "heatwaves increase health risks" (2;
+impact_or_exposure); fire energy "transmission line insulation reduction causing trips and outages" (2); fire other_assets "water
+infrastructure degradation from wildfires" (4), "facility vulnerability to wildfire near hospitals and care sites" (2); fire
+driver "Use of fire-weather indices as safety or operational indicators" (3), "Specific environmental or structural features
+identified as key predictors of fire risk or damage" (3), "Climate change projected to increase fire hazard metrics" (2),
+"Heat-dry conditions raise wildfire ignition or related hazards" (2); fire mechanism "Post-fire soil exposure increases runoff and
+rockfall risk" (2; impact_or_exposure). **Place-named:** 14 of the 59 hazard_impact_on_asset groups have a member of geography
+class state (19 a member naming any U.S. place); 6 of the 20 such singletons.
+
+## 12. Review list for the COORDINATOR (P5c, part B; no disposition applied)
+
+`artifacts/benchmark/review/P5_impact_groups_review_v1.csv` (`db89c906…56a7`): the 103 records tagged hazard_impact_on_asset or
+impact_or_exposure (72 groups, 31 singletons), columns `group_id, kind, family, asset_partition, asset_class, claim_about,
+evidence_strength, n_papers, n_independent_papers, label, member_statements` (` || `), `region_classes, place_named_states,
+label_screen_flags, coordinator_disposition, kaiyuan_disposition` (the last two empty). Five columns beyond the work package's
+list (`kind`, `asset_partition`, `n_independent_papers`, `place_named_states`, `label_screen_flags`) are added for the reviewer.
+**Label screens** (`litgroups_infra_run1.LABEL_SCREENS`; whole-word keyword markers, never a disposition): (i) fire occurrence /
+burned area as the hazard (wildfire, bushfire, fire(s), burn, ignition, smoke ...; "fire" followed by "-weather" / "danger", the index's own name, does not count), (ii) an impact on people (workers, patients, mortality,
+evacuation, households, pedestrians, outdoor ...), (iii) a different hazard (flood, wind, cold, ice, storm, precipitation,
+drought, debris flow, rockfall ...). Of the 59 hazard_impact_on_asset labels 31 trip a screen: (i) 25, (ii) 5, (iii) 6; by cell
+fire energy 15 / 17, fire transportation 4 / 7, fire other_assets 5 / 6, heat energy 3 / 14, heat transportation 2 / 6, heat
+healthcare 1 / 1, heat other_assets 1 / 8. The full listing with markers is in `groups_enriched_summary.json`
+(`hazard_impact_on_asset_labels`) and the report, section 65. Kaiyuan uploads the CSV; the COORDINATOR returns dispositions; the
+P5c-hotfix applies them (as `disposition_exclude` / re-tags) before the synthesis run.
+
+## 13. Seeds and the rung-8 selection (P5c, part C; table setting confirmed, D-075)
+
+`scripts/build_seeds_infra.py --groups artifacts/litgroups/infra_run1/groups.jsonl` (DR-SEED-INFRA-1, `seeds_infra` v1, table
+setting days above 95 F / summer seasonal FWI, absolute change, mid-century): `item_seeds_infra_v1.jsonl` (`f724b4c8…0934`; 637
+seeds = 49 states x 13 family-class pairs; best relevance place_named 16, us 425, general 196), `item_seeds_infra_v1_summary.json`,
+`pilot_selection_infra_v1.yaml` (`0f42385a…e9e6`). P5c adds to the selection: `item_id` by cell position (`BI-P5-0001` --
+`0008`, so that an unfilled cell keeps its id), `place_named_impact_evidence` (`none` for the California fallback) and
+`review_state: impact_groups_unreviewed` (seeds too).
+
+| item | cell | state (basis) | change | form |
+| --- | --- | --- | ---: | --- |
+| BI-P5-0001 | heat x energy | Virginia (largest of California, Virginia) | +12.5 days | QF-08 |
+| BI-P5-0002 | heat x transportation | Arizona (only candidate) | +10.3 days | QF-09 |
+| BI-P5-0003 | heat x water | California (fallback; `place_named_impact_evidence: none`) | +9.0 days | QF-10 |
+| BI-P5-0004 | heat x healthcare | Arizona (only candidate) | +10.3 days | QF-08 |
+| BI-P5-0005 | fire x energy | Arizona (largest of Arizona, California, Idaho, Nevada) | +3.9 | QF-09 |
+| BI-P5-0006 | fire x transportation | California (largest of California, Montana) | +2.2 | QF-10 |
+| BI-P5-0007 | fire x emergency services | **not filled** (California fallback; no seed) | --- | --- |
+| BI-P5-0008 | fire x communications | California (fallback; `none`) | +2.2 | QF-08 |
+
+**BI-P5-0007 has no seed:** the four passing fire-weather emergency-services statements were tagged `other` (2),
+`hazard_change_mechanism` and `impact_or_exposure` by the agent, none `hazard_impact_on_asset`, so DR-SEED-INFRA-1 has no impact
+group for the cell; reported, not filled (escalated; a COORDINATOR re-tag in the dispositions would fill it in the hotfix).
+
+## 14. Rung-8 packets v1 (P5c, part C; provisional)
+
+`scripts/build_synth_packets_infra.py`, `climrr.synthpackets_infra`: `artifacts/benchmark/synth_packets_infra_v1/PK-<seed>.json` +
+`manifest.json` (`1aba0b10…eb1`). Per packet: the rung-3 packet v4b of the seed's pattern (same pinned inputs as packets
+v4b / v5a) for the table pattern and the driver groups (driver only; their ids equal the seed's; rung-3 context groups excluded
+`rung8:context_not_attached`); the seed's impact groups in rank order, at most 10 (the DR-SEED-RANK-3 driver cap; EXECUTOR, for
+confirmation), the rest `over_cap:impact`; scope per group by the v5a majority rule (an impact member's basis =
+`litgeo.relevance` to the item's place, so a member naming another state counts as `unknown`); `needs_general_clause` and the
+v5a closing clause; `rung: 8`, `rung_instruction`, `asset_class` / `asset_class_phrase` (EXECUTOR phrases: energy systems,
+transportation systems, water and wastewater systems, healthcare and public health systems, emergency services, communications
+systems) / `cisa_sector`; `place_named_impact_group_ids`; plain language v1b; the selection's question form (QF-09 change slot
+"projected increase"; QF-10 for a counted quantity "the number of <quantity>", both EXECUTOR for grammar); `must_not_use` = the
+v4b list + "wildfire", "fires", "burned area" + "will fail", "at risk", with "wildfire" left out of a fire-weather packet and
+`wildfire_rule` stating D-073b (as D-073b (b) asked); `checks_input.rung8` for post-checks v3.3; `review_state:
+impact_groups_unreviewed` on the packet and every impact group. The per-packet attachment summary is in the manifest and the
+report, section 65. **Synthesis blocker (escalated):** item schema v2 (frozen) allows literature statement types mechanism /
+driver / consensus / caveat only, so every rung-8 item that cites an impact group fails `schema_errors` (`statement_type:
+'impact'`), a non-format reason (checked offline with agent v5.2's `assemble`; `tests/test_p5c.py` documents the gap).
+
+## 15. Sample sheet builder for Alvi (P5c, part D; not run)
+
+`scripts/build_mentor_sheet.py --audience alvi --items <ingested rung-8 run>` (`climrr.mentor_sheet_alvi`): the mentor sheet v2's
+six columns + `Asset class (CISA sector)`; "Paper side" marks each impact group "[impact; general]" or "[impact; place-specific:
+<State>]" (and "[impact group not yet reviewed]" while unreviewed); README = the three mentor lines + two for Alvi (what the item
+type is; the question for him). Writes `ALVI_SAMPLE_ITEMS_P5.{md,xlsx}`. Refuses to run without `--items`.
+
+## 16. Next
+
+COORDINATOR dispositions on the review CSV (and a decision on the schema blocker and on BI-P5-0007) -> P5c-hotfix (apply the
+dispositions, rebuild seeds, selection and packets) -> Polaris: the synthesis run over the rung-8 packets
+(`litsynth_agent.py --packets artifacts/benchmark/synth_packets_infra_v1 ...`; the agent's docstring example names
+`synth_packets_rung8_v1`, the directory the work package renamed) and the polish -> the Alvi sheet.

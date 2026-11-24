@@ -1,0 +1,85 @@
+{
+  "generator_version": "litgroup_agent v3.1",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "chunk_size": 40,
+  "partitions_in_file": 11,
+  "chunks_in_file": 12,
+  "chunks_per_partition": {
+    "infra_heat_index.impact.energy": 2,
+    "infra_heat_index.impact.healthcare_and_public_health": 1,
+    "infra_heat_index.impact.transportation_systems": 1,
+    "infra_heat_index.impact.other_assets": 1,
+    "infra_heat_index.driver": 1,
+    "infra_heat_index.mechanism": 1,
+    "infra_fire_weather_index.impact.energy": 1,
+    "infra_fire_weather_index.impact.transportation_systems": 1,
+    "infra_fire_weather_index.impact.other_assets": 1,
+    "infra_fire_weather_index.driver": 1,
+    "infra_fire_weather_index.mechanism": 1
+  },
+  "cross_chunk_merge": "not done by code (D-051)",
+  "chunks_done": 12,
+  "chunks_pass": 12,
+  "chunks_fail": [],
+  "corrective_retry_used": 4,
+  "corrective_retry_pass": 4,
+  "reasoning_effort_not_applied": 0,
+  "finish_reasons": {
+    "stop": 12
+  },
+  "groups": 84,
+  "singletons": 59,
+  "groups_label_fail": 0,
+  "by_strength": {
+    "multi_source_supported": 20,
+    "review_supported": 2,
+    "single_source_supported": 121,
+    "background_only": 0
+  },
+  "groups_by_strength": {
+    "multi_source_supported": 20,
+    "review_supported": 0,
+    "single_source_supported": 64,
+    "background_only": 0
+  },
+  "statements_grouped": 198,
+  "by_claim_about": {
+    "hazard_impact_on_asset": 79,
+    "hazard_change_mechanism": 20,
+    "hazard_definition_or_measurement": 3,
+    "impact_or_exposure": 24,
+    "method_or_data": 8,
+    "other": 9
+  },
+  "groups_by_claim_about": {
+    "hazard_impact_on_asset": 59,
+    "hazard_change_mechanism": 8,
+    "hazard_definition_or_measurement": 1,
+    "impact_or_exposure": 13,
+    "method_or_data": 3,
+    "other": 0
+  },
+  "statements_by_claim_about": {
+    "hazard_impact_on_asset": 116,
+    "hazard_change_mechanism": 25,
+    "hazard_definition_or_measurement": 5,
+    "impact_or_exposure": 33,
+    "method_or_data": 10,
+    "other": 9
+  },
+  "claim_about_fail": 0,
+  "prompt_variants": {
+    "v3": 4,
+    "impact_v1": 8
+  },
+  "system_prompt_template_impact_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+  "endpoints_in_results": {
+    "sophia_vllm openai/gpt-oss-120b https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1": 12
+  },
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6"
+}

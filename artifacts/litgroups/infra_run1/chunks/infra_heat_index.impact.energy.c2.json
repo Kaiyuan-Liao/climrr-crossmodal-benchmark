@@ -1,0 +1,1764 @@
+{
+  "partition_id": "infra_heat_index.impact.energy",
+  "chunk_index": 2,
+  "n_chunks": 2,
+  "arm": "infra_heat_index__energy",
+  "statement_type": "impact",
+  "split_by": [],
+  "partition_n_statements": 43,
+  "n_statements": 21,
+  "local_ids": [
+    "S009",
+    "S010",
+    "S011",
+    "S013",
+    "S014",
+    "S015",
+    "S016",
+    "S017",
+    "S022",
+    "S028",
+    "S031",
+    "S032",
+    "S033",
+    "S035",
+    "S036",
+    "S043",
+    "S012",
+    "S025",
+    "S026",
+    "S029",
+    "S042"
+  ],
+  "generator_version": "litgroup_agent v3.1",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "infra_heat_index.impact.energy.c2",
+  "model_attempts": 2,
+  "corrective_retry_used": true,
+  "finish_reason": "stop",
+  "content_chars": 3284,
+  "reasoning_chars": 1084,
+  "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+  "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+  "prompt_variant": "impact_v1",
+  "prompt_hash": "552266311a759e1d2f84dc8530e164aa6d8d95e17289082f629282d967349efd",
+  "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+  "generation_timestamp": "2026-11-24T07:20:34Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S009",
+        "S013",
+        "S017",
+        "S022",
+        "S035",
+        "S012",
+        "S025",
+        "S043",
+        "S011"
+      ],
+      "label": "extreme heat increases electricity demand and stresses power supply",
+      "rationale": "Same hazard, same electricity infrastructure, higher demand or failures causing strain or outages.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "increases",
+          "stresses"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S033",
+        "S042"
+      ],
+      "label": "high temperatures cause transmission line sag and mechanical failure",
+      "rationale": "Identical hazard and asset (transmission lines) with physical elongation/sag leading to failure.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "line"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S014"
+      ],
+      "label": "high ambient temperature overheats transformer resistors",
+      "rationale": "Specific component overheating due to heat.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "overheats",
+          "temperature"
+        ],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S015"
+      ],
+      "label": "heatwaves reduce cooling effectiveness of nuclear power plants",
+      "rationale": "Hazard impacts nuclear plant cooling performance.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "effectiveness",
+          "reduce"
+        ],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S016"
+      ],
+      "label": "extreme heat lowers power‑plant efficiency and reliability",
+      "rationale": "Heat reduces efficiency of electricity generation assets.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "lowers",
+          "plant"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S026"
+      ],
+      "label": "combined drought and heatwave cut hydro and thermoelectric generation",
+      "rationale": "Joint hazard reduces generation capacity, causing supply shortages.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "cut",
+          "hydro"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S032"
+      ],
+      "label": "rising maximum temperatures require upgraded pipeline and refinery equipment designs",
+      "rationale": "Heat drives design‑spec changes for pipelines, distillation equipment, valves.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "designs",
+          "pipeline",
+          "refinery",
+          "rising",
+          "upgraded"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S028"
+      ],
+      "label": "humid heat limits outdoor repair work, extending power‑outage duration",
+      "rationale": "Humid heat affects worker ability, lengthening outage recovery.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "extending",
+          "limits",
+          "repair",
+          "work"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S036"
+      ],
+      "label": "higher humidity slightly raises cooling demand and AC sales",
+      "rationale": "Humid heat increases cooling demand, a modest demand impact.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "ac",
+          "raises"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S029"
+      ],
+      "label": "heat‑index values drop after cyclones, lowering compound event probability",
+      "rationale": "Describes change in heat‑index measurement affecting event likelihood.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "cyclones",
+          "lowering"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S031"
+      ],
+      "label": "heatwaves increase vulnerability of refinery outdoor personnel",
+      "rationale": "Hazard impacts human health/safety, not infrastructure.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": false,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S010"
+      ],
+      "label": "heat waves damage water and energy infrastructure and raise energy costs",
+      "rationale": "Heat waves directly damage water/energy assets and increase costs.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "raise"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": true,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS3-169368231-01",
+        "LS3-209454109-02",
+        "LS3-225158620-01",
+        "LS3-239192122-01",
+        "LS3-256804611-01",
+        "LS3-203641904-01",
+        "LS3-244576100-01",
+        "LS3-55454018-01",
+        "LS3-199326805-02"
+      ],
+      "member_local_ids": [
+        "S009",
+        "S013",
+        "S017",
+        "S022",
+        "S035",
+        "S012",
+        "S025",
+        "S043",
+        "S011"
+      ],
+      "label": "extreme heat increases electricity demand and stresses power supply",
+      "rationale": "Same hazard, same electricity infrastructure, higher demand or failures causing strain or outages.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 9,
+      "papers": [
+        "169368231",
+        "199326805",
+        "203641904",
+        "209454109",
+        "225158620",
+        "239192122",
+        "244576100",
+        "256804611",
+        "55454018"
+      ],
+      "canonical_papers": [
+        "169368231",
+        "199326805",
+        "203641904",
+        "209454109",
+        "225158620",
+        "239192122",
+        "244576100",
+        "256804611",
+        "55454018"
+      ],
+      "n_independent_core_cited_papers": 9,
+      "role_counts": {
+        "core_candidate": 9
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy",
+        "energy",
+        "energy",
+        "energy",
+        "energy",
+        "energy",
+        "energy",
+        "energy",
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard",
+        "broader_hazard",
+        "broader_hazard",
+        "broader_hazard",
+        "broader_hazard",
+        "broader_hazard",
+        "broader_hazard",
+        "broader_hazard",
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "increases household electricity demand",
+        "heat waves raise ambient temperatures and cooling needs",
+        "heat creates more difficult operating conditions and raises electricity demand",
+        "higher temperatures raise cooling demand",
+        "higher temperatures raise cooling demand",
+        "excessive cooling demand exceeds generation capacity",
+        "increased cooling demand stresses generation and transmission",
+        "overload and reduced generation capacity during high temperatures",
+        "extreme heat creates high demand for electricity for cooling and water pumping"
+      ],
+      "impact_outcomes": [
+        "reduces power reserve margins and threatens stable supply",
+        "higher electricity consumption and strain on power grids",
+        "increases the frequency of emergency shutdowns",
+        "increased electricity use and financial pressure on households",
+        "increase in electricity consumption for air‑conditioning",
+        "site‑wide outage or load‑shedding",
+        "short‑term power outages",
+        "outages of electricity supply",
+        "loss of power compromises health, livestock, fire‑fighting water supply and communications"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "increases",
+          "stresses"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3284,
+      "reasoning_chars": 1084,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "552266311a759e1d2f84dc8530e164aa6d8d95e17289082f629282d967349efd",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:34Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS3-254441522-01",
+        "LS3-270845714-01"
+      ],
+      "member_local_ids": [
+        "S033",
+        "S042"
+      ],
+      "label": "high temperatures cause transmission line sag and mechanical failure",
+      "rationale": "Identical hazard and asset (transmission lines) with physical elongation/sag leading to failure.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 2,
+      "papers": [
+        "254441522",
+        "270845714"
+      ],
+      "canonical_papers": [
+        "254441522",
+        "270845714"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy",
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard",
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "high temperatures cause line stretching and sagging",
+        "increases conductor temperature causing thermal elongation and fatigue"
+      ],
+      "impact_outcomes": [
+        "short circuits and reduced transmission capacity",
+        "mechanical failure of the transmission line"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "line"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3284,
+      "reasoning_chars": 1084,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "552266311a759e1d2f84dc8530e164aa6d8d95e17289082f629282d967349efd",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:34Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS3-210620018-01"
+      ],
+      "member_local_ids": [
+        "S014"
+      ],
+      "label": "high ambient temperature overheats transformer resistors",
+      "rationale": "Specific component overheating due to heat.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "210620018"
+      ],
+      "canonical_papers": [
+        "210620018"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "elevated ambient temperature and solar radiation increase the heat load on transformer resistors"
+      ],
+      "impact_outcomes": [
+        "resistor temperatures rise to levels that are unsafe for transformer operation"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "overheats",
+          "temperature"
+        ],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3284,
+      "reasoning_chars": 1084,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "552266311a759e1d2f84dc8530e164aa6d8d95e17289082f629282d967349efd",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:34Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS3-213690404-01"
+      ],
+      "member_local_ids": [
+        "S015"
+      ],
+      "label": "heatwaves reduce cooling effectiveness of nuclear power plants",
+      "rationale": "Hazard impacts nuclear plant cooling performance.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "213690404"
+      ],
+      "canonical_papers": [
+        "213690404"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "high water temperatures reduce cooling efficiency"
+      ],
+      "impact_outcomes": [
+        "risk of overheating in nuclear reactors"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "effectiveness",
+          "reduce"
+        ],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3284,
+      "reasoning_chars": 1084,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "552266311a759e1d2f84dc8530e164aa6d8d95e17289082f629282d967349efd",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:34Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS3-219059026-01"
+      ],
+      "member_local_ids": [
+        "S016"
+      ],
+      "label": "extreme heat lowers power‑plant efficiency and reliability",
+      "rationale": "Heat reduces efficiency of electricity generation assets.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "219059026"
+      ],
+      "canonical_papers": [
+        "219059026"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "reduces the efficiency of power plants"
+      ],
+      "impact_outcomes": [
+        "decreases reliability and resilience of electricity supply"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "lowers",
+          "plant"
+        ],
+        "rationale_words": 7,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3284,
+      "reasoning_chars": 1084,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "552266311a759e1d2f84dc8530e164aa6d8d95e17289082f629282d967349efd",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:34Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS3-244576100-02"
+      ],
+      "member_local_ids": [
+        "S026"
+      ],
+      "label": "combined drought and heatwave cut hydro and thermoelectric generation",
+      "rationale": "Joint hazard reduces generation capacity, causing supply shortages.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "244576100"
+      ],
+      "canonical_papers": [
+        "244576100"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "drought and heatwave lower water availability for hydro and cooling"
+      ],
+      "impact_outcomes": [
+        "reduced generation and water‑power supply shortages"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "cut",
+          "hydro"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3284,
+      "reasoning_chars": 1084,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "552266311a759e1d2f84dc8530e164aa6d8d95e17289082f629282d967349efd",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:34Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS3-253992810-03"
+      ],
+      "member_local_ids": [
+        "S032"
+      ],
+      "label": "rising maximum temperatures require upgraded pipeline and refinery equipment designs",
+      "rationale": "Heat drives design‑spec changes for pipelines, distillation equipment, valves.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "253992810"
+      ],
+      "canonical_papers": [
+        "253992810"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "raises maximum temperature"
+      ],
+      "impact_outcomes": [
+        "requires higher design specifications for equipment"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "designs",
+          "pipeline",
+          "refinery",
+          "rising",
+          "upgraded"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3284,
+      "reasoning_chars": 1084,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "552266311a759e1d2f84dc8530e164aa6d8d95e17289082f629282d967349efd",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:34Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS3-251197829-01"
+      ],
+      "member_local_ids": [
+        "S028"
+      ],
+      "label": "humid heat limits outdoor repair work, extending power‑outage duration",
+      "rationale": "Humid heat affects worker ability, lengthening outage recovery.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "251197829"
+      ],
+      "canonical_papers": [
+        "251197829"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "heat‑index limits outdoor worker hours"
+      ],
+      "impact_outcomes": [
+        "extends power‑outage duration"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "extending",
+          "limits",
+          "repair",
+          "work"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3284,
+      "reasoning_chars": 1084,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "552266311a759e1d2f84dc8530e164aa6d8d95e17289082f629282d967349efd",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:34Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS3-256804611-05"
+      ],
+      "member_local_ids": [
+        "S036"
+      ],
+      "label": "higher humidity slightly raises cooling demand and AC sales",
+      "rationale": "Humid heat increases cooling demand, a modest demand impact.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "256804611"
+      ],
+      "canonical_papers": [
+        "256804611"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "higher humidity raises perceived temperature"
+      ],
+      "impact_outcomes": [
+        "small increase in AC sales"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "ac",
+          "raises"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3284,
+      "reasoning_chars": 1084,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "552266311a759e1d2f84dc8530e164aa6d8d95e17289082f629282d967349efd",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:34Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS3-251197829-03"
+      ],
+      "member_local_ids": [
+        "S029"
+      ],
+      "label": "heat‑index values drop after cyclones, lowering compound event probability",
+      "rationale": "Describes change in heat‑index measurement affecting event likelihood.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "251197829"
+      ],
+      "canonical_papers": [
+        "251197829"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "TC passage lowers heat‑index"
+      ],
+      "impact_outcomes": [
+        "decreases chance of compound outage‑heatwave event"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "cyclones",
+          "lowering"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3284,
+      "reasoning_chars": 1084,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "552266311a759e1d2f84dc8530e164aa6d8d95e17289082f629282d967349efd",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:34Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS3-253992810-02"
+      ],
+      "member_local_ids": [
+        "S031"
+      ],
+      "label": "heatwaves increase vulnerability of refinery outdoor personnel",
+      "rationale": "Hazard impacts human health/safety, not infrastructure.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "253992810"
+      ],
+      "canonical_papers": [
+        "253992810"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "exposes outdoor personnel to extreme temperatures"
+      ],
+      "impact_outcomes": [
+        "necessitates enhanced protective measures"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 6,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": false,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3284,
+      "reasoning_chars": 1084,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "552266311a759e1d2f84dc8530e164aa6d8d95e17289082f629282d967349efd",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:34Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c2",
+      "split_by": [],
+      "member_ids": [
+        "LS3-195528324-02"
+      ],
+      "member_local_ids": [
+        "S010"
+      ],
+      "label": "heat waves damage water and energy infrastructure and raise energy costs",
+      "rationale": "Heat waves directly damage water/energy assets and increase costs.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "195528324"
+      ],
+      "canonical_papers": [
+        "195528324"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "high temperatures increase cooling energy demand and damage infrastructure"
+      ],
+      "impact_outcomes": [
+        "higher operational costs and transport disruptions for milk"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "raise"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": true,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3284,
+      "reasoning_chars": 1084,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "552266311a759e1d2f84dc8530e164aa6d8d95e17289082f629282d967349efd",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:34Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 3013,
+      "reasoning_chars": 5806,
+      "http_attempts": 1,
+      "model_seconds": 10.5
+    },
+    {
+      "turn": 2,
+      "finish_reason": "stop",
+      "content_chars": 3284,
+      "reasoning_chars": 1084,
+      "http_attempts": 1,
+      "model_seconds": 6.2
+    }
+  ],
+  "first_turn": {
+    "checks": {
+      "parse_pass": true,
+      "unknown_ids": [],
+      "duplicate_ids": [],
+      "missing_ids": [
+        "S010",
+        "S011"
+      ],
+      "empty_groups": 0,
+      "ids_exactly_once_pass": false,
+      "no_empty_group_pass": true,
+      "failed": [
+        "ids_exactly_once_pass"
+      ]
+    },
+    "groups_as_returned": [
+      {
+        "member_ids": [
+          "S009",
+          "S013",
+          "S017",
+          "S022",
+          "S035",
+          "S012",
+          "S025",
+          "S043"
+        ],
+        "label": "extreme heat increases electricity demand and stresses power supply",
+        "rationale": "Same hazard, same electricity infrastructure, same mechanism of higher demand causing strain or outages.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "increases",
+            "stresses"
+          ],
+          "rationale_words": 14,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S033",
+          "S042"
+        ],
+        "label": "high temperatures cause transmission line sag and mechanical failure",
+        "rationale": "Identical hazard and asset (transmission lines) with physical elongation/sag leading to failure.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "line"
+          ],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S014"
+        ],
+        "label": "high ambient temperature overheats transformer resistors",
+        "rationale": "Specific component overheating due to heat.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "overheats",
+            "temperature"
+          ],
+          "rationale_words": 6,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S015"
+        ],
+        "label": "heatwaves reduce cooling effectiveness of nuclear power plants",
+        "rationale": "Hazard impacts nuclear plant cooling performance.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "effectiveness",
+            "reduce"
+          ],
+          "rationale_words": 6,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S016"
+        ],
+        "label": "extreme heat lowers power‑plant efficiency and reliability",
+        "rationale": "Heat reduces efficiency of electricity generation assets.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "lowers",
+            "plant"
+          ],
+          "rationale_words": 7,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S026"
+        ],
+        "label": "combined drought and heatwave cut hydro and thermoelectric generation",
+        "rationale": "Joint hazard reduces generation capacity, causing supply shortages.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "cut",
+            "hydro"
+          ],
+          "rationale_words": 8,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S032"
+        ],
+        "label": "rising maximum temperatures require upgraded pipeline and refinery equipment designs",
+        "rationale": "Heat drives design‑spec changes for pipelines, distillation equipment, valves.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "designs",
+            "pipeline",
+            "refinery",
+            "rising",
+            "upgraded"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S028"
+        ],
+        "label": "humid heat limits outdoor repair work, extending power‑outage duration",
+        "rationale": "Humid heat affects worker ability, lengthening outage recovery.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "extending",
+            "limits",
+            "repair",
+            "work"
+          ],
+          "rationale_words": 8,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S036"
+        ],
+        "label": "higher humidity slightly raises cooling demand and AC sales",
+        "rationale": "Humid heat increases cooling demand, a modest demand impact.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "ac",
+            "raises"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S029"
+        ],
+        "label": "heat‑index values drop after cyclones, lowering compound event probability",
+        "rationale": "Describes change in heat‑index measurement affecting event likelihood.",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "cyclones",
+            "lowering"
+          ],
+          "rationale_words": 8,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S031"
+        ],
+        "label": "heatwaves increase vulnerability of refinery outdoor personnel",
+        "rationale": "Hazard impacts human health/safety, not infrastructure.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 6,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": false,
+          "failed": []
+        }
+      }
+    ],
+    "singletons_as_returned": [],
+    "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"extreme heat increases electricity demand and stresses power supply\",\n      \"member_ids\": [\"S009\", \"S013\", \"S017\", \"S022\", \"S035\", \"S012\", \"S025\", \"S043\"],\n      \"rationale\": \"Same hazard, same electricity infrastructure, same mechanism of higher demand causing strain or outages.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"high temperatures cause transmission line sag and mechanical failure\",\n      \"member_ids\": [\"S033\", \"S042\"],\n      \"rationale\": \"Identical hazard and asset (transmission lines) with physical elongation/sag leading to failure.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"high ambient temperature overheats transformer resistors\",\n      \"member_ids\": [\"S014\"],\n      \"rationale\": \"Specific component overheating due to heat.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"heatwaves reduce cooling effectiveness of nuclear power plants\",\n      \"member_ids\": [\"S015\"],\n      \"rationale\": \"Hazard impacts nuclear plant cooling performance.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"extreme heat lowers power‑plant efficiency and reliability\",\n      \"member_ids\": [\"S016\"],\n      \"rationale\": \"Heat reduces efficiency of electricity generation assets.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"combined drought and heatwave cut hydro and thermoelectric generation\",\n      \"member_ids\": [\"S026\"],\n      \"rationale\": \"Joint hazard reduces generation capacity, causing supply shortages.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"rising maximum temperatures require upgraded pipeline and refinery equipment designs\",\n      \"member_ids\": [\"S032\"],\n      \"rationale\": \"Heat drives design‑spec changes for pipelines, distillation equipment, valves.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"humid heat limits outdoor repair work, extending power‑outage duration\",\n      \"member_ids\": [\"S028\"],\n      \"rationale\": \"Humid heat affects worker ability, lengthening outage recovery.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"higher humidity slightly raises cooling demand and AC sales\",\n      \"member_ids\": [\"S036\"],\n      \"rationale\": \"Humid heat increases cooling demand, a modest demand impact.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"heat‑index values drop after cyclones, lowering compound event probability\",\n      \"member_ids\": [\"S029\"],\n      \"rationale\": \"Describes change in heat‑index measurement affecting event likelihood.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"heatwaves increase vulnerability of refinery outdoor personnel\",\n      \"member_ids\": [\"S031\"],\n      \"rationale\": \"Hazard impacts human health/safety, not infrastructure.\",\n      \"claim_about\": \"impact_or_exposure\"\n    }\n  ],\n  \"singletons\": []\n}",
+    "raw_response_chars": 3013,
+    "raw_reasoning": null,
+    "raw_reasoning_chars": null,
+    "content_fallback": false,
+    "finish_reason": "stop",
+    "raw_max_chars": 20000
+  },
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 16.7,
+  "model_parse_error": null,
+  "elapsed_seconds": 17.1,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"extreme heat increases electricity demand and stresses power supply\",\n      \"member_ids\": [\"S009\", \"S013\", \"S017\", \"S022\", \"S035\", \"S012\", \"S025\", \"S043\", \"S011\"],\n      \"rationale\": \"Same hazard, same electricity infrastructure, higher demand or failures causing strain or outages.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"high temperatures cause transmission line sag and mechanical failure\",\n      \"member_ids\": [\"S033\", \"S042\"],\n      \"rationale\": \"Identical hazard and asset (transmission lines) with physical elongation/sag leading to failure.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"high ambient temperature overheats transformer resistors\",\n      \"member_ids\": [\"S014\"],\n      \"rationale\": \"Specific component overheating due to heat.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"heatwaves reduce cooling effectiveness of nuclear power plants\",\n      \"member_ids\": [\"S015\"],\n      \"rationale\": \"Hazard impacts nuclear plant cooling performance.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"extreme heat lowers power‑plant efficiency and reliability\",\n      \"member_ids\": [\"S016\"],\n      \"rationale\": \"Heat reduces efficiency of electricity generation assets.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"combined drought and heatwave cut hydro and thermoelectric generation\",\n      \"member_ids\": [\"S026\"],\n      \"rationale\": \"Joint hazard reduces generation capacity, causing supply shortages.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"rising maximum temperatures require upgraded pipeline and refinery equipment designs\",\n      \"member_ids\": [\"S032\"],\n      \"rationale\": \"Heat drives design‑spec changes for pipelines, distillation equipment, valves.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"humid heat limits outdoor repair work, extending power‑outage duration\",\n      \"member_ids\": [\"S028\"],\n      \"rationale\": \"Humid heat affects worker ability, lengthening outage recovery.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"higher humidity slightly raises cooling demand and AC sales\",\n      \"member_ids\": [\"S036\"],\n      \"rationale\": \"Humid heat increases cooling demand, a modest demand impact.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"heat‑index values drop after cyclones, lowering compound event probability\",\n      \"member_ids\": [\"S029\"],\n      \"rationale\": \"Describes change in heat‑index measurement affecting event likelihood.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"heatwaves increase vulnerability of refinery outdoor personnel\",\n      \"member_ids\": [\"S031\"],\n      \"rationale\": \"Hazard impacts human health/safety, not infrastructure.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"heat waves damage water and energy infrastructure and raise energy costs\",\n      \"member_ids\": [\"S010\"],\n      \"rationale\": \"Heat waves directly damage water/energy assets and increase costs.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    }\n  ],\n  \"singletons\": []\n}",
+  "raw_response_chars": 3284,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

@@ -1,0 +1,2540 @@
+{
+  "packet_id": "PK-SD8-TP1-01461-energy",
+  "version": "synthpackets infra v1",
+  "rank_rule": "DR-SEED-RANK-3",
+  "descriptor_rule": "DR-DESC-1 v4",
+  "descriptor_rules_sha256": "dbfa8fd8a86a9379b4709b998bb33e673dceafd5f8ba7d199d55ff672d4c282d",
+  "plain_language": "plain_language_v1b",
+  "plain_language_sha256": "60598527bf21a9dbc5a68e31cb60ec76d75b95d5ede7411181c323f56832b140",
+  "item_id": "BI-P5-0005",
+  "seed_id": "SD8-TP1-01461-energy",
+  "use_case_level": 8,
+  "family": "fire_weather_index",
+  "working_assumptions_relied_on": [
+    {
+      "id": "WA-FWI-SUMMER",
+      "resolution": "R-004",
+      "status": "owner_authorized_working_assumption",
+      "covers": [
+        "IC-006",
+        "IC-007",
+        "IC-008",
+        "IC-009",
+        "IC-010"
+      ]
+    },
+    {
+      "id": "WA-STATE-LABEL",
+      "resolution": "R-005",
+      "status": "owner_authorized_working_assumption",
+      "covers": [
+        "IC-012"
+      ]
+    },
+    {
+      "id": "WA-UNWEIGHTED-MEAN",
+      "resolution": "R-008",
+      "status": "owner_authorized_working_assumption",
+      "covers": [
+        "unweighted_cell_mean"
+      ]
+    }
+  ],
+  "model_view": {
+    "use_case_level": 8,
+    "rung": 8,
+    "reasoning_modalities": "Hazard + Text",
+    "plain_language": {
+      "version": "plain_language_v1b",
+      "quantity": "fire-weather danger (how hot, dry and windy conditions favour fire)",
+      "quantity_short": "fire-weather danger",
+      "scenario": "under a high-emissions future",
+      "horizon": "by mid-century",
+      "hedge_multi_source_or_review": [
+        "research shows",
+        "research has shown"
+      ],
+      "hedge_single_source": [
+        "research suggests"
+      ],
+      "never_write": [
+        "one study",
+        "a single study",
+        "wildfire",
+        "fires",
+        "burned area"
+      ],
+      "broader_hazard_phrase": "conditions that favour wildfire, of which fire-weather danger is one measure"
+    },
+    "must_not_use": [
+      "one study",
+      "a single study",
+      "fires",
+      "burned area",
+      "tercile",
+      "ranking large",
+      "ranking small",
+      "ranking moderate",
+      "RCP",
+      "SSP",
+      "will fail",
+      "at risk"
+    ],
+    "patterns": [
+      {
+        "pattern_id": "TP1-01461",
+        "text": "Pattern TP1-01461 (single place). Place: the U.S. state of Arizona (NCA5 region: Southwest). Quantity: fire-weather danger (how hot, dry and windy conditions favour fire). Season: summer. Horizon: by mid-century, compared with the modeled historical baseline. Scenario: under a high-emissions future. Statistic: change of the mean (future minus modeled historical baseline). Direction: increase. Value: +3.9. Mean: 36.2 in the modeled historical baseline, 40.1 at mid-century. Robustness: 2007 of 2007 grid cells change in the same direction as the mean (all_states_same_direction). Comparison with other U.S. states: a larger change than in most states (by signed value, among 49 U.S. states for this quantity, season, horizon, scenario and statistic; a relative descriptor among states, not an absolute threshold).",
+        "values_shown": {
+          "value": "3.9",
+          "mean_from": "36.2",
+          "mean_to": "40.1",
+          "tercile": "large"
+        },
+        "allowed_descriptors": {
+          "pattern_id": "TP1-01461",
+          "rule": "DR-DESC-1 v4",
+          "rules_sha256": "dbfa8fd8a86a9379b4709b998bb33e673dceafd5f8ba7d199d55ff672d4c282d",
+          "direction": "increase",
+          "horizon": "by mid-century",
+          "scenario": "under a high-emissions future",
+          "quantity": "fire-weather danger (how hot, dry and windy conditions favour fire)",
+          "magnitude_class": "a slight increase",
+          "magnitude_forms": [
+            "a slight increase",
+            "increase slightly",
+            "slightly higher",
+            "a small rise",
+            "rise slightly"
+          ],
+          "magnitude_note": "not a day count: ratio classes only, no anchors (DR-DESC-1 v4)",
+          "magnitude_also_allowed": [],
+          "anchor_pair": null,
+          "anchors": [],
+          "tercile": null,
+          "tercile_class": "large",
+          "tercile_forms": [
+            "a larger change than in most states",
+            "among the states with the largest changes"
+          ]
+        }
+      }
+    ],
+    "groups": [
+      {
+        "group_id": "LG-fire_weather_v1-mechanism-c1-003",
+        "role": "driver",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "label": "higher temperatures and aridity dry fuels, creating extreme fire‑weather",
+        "evidence_strength": "multi_source_supported",
+        "independent_papers": 2,
+        "members": [
+          {
+            "statement": "Increasing temperature and aridity have created more frequent extreme fire‑weather conditions, leading to more very large wildfires and higher‑severity burning.",
+            "passage": "Beginning in the late twentieth century, increasing temperature and aridity [23,[59][60][61] have created more frequent extreme fireweather conditions, leading to more very large wildfires [62,63] and area burned at high severity [38,64], although sufficient fuels are necessary for this pattern to continue.",
+            "passage_truncated": false,
+            "paper_id": "273287103",
+            "region": "United States"
+          },
+          {
+            "statement": "Higher temperatures quickly dry wildland fuels, making them easier to ignite and leading to faster fire spread.",
+            "passage": "An increase in the temperature causes the quick drying of wildland fuel, and the drier fuels are easy to ignite and endure a faster rate of fire spread.",
+            "passage_truncated": false,
+            "paper_id": "268308343",
+            "region": "global"
+          }
+        ],
+        "hedge": [
+          "research shows",
+          "research has shown"
+        ],
+        "review_state": "reviewer_tagged",
+        "scope_class": "mixed",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-fire_weather_v1-driver-c1-006",
+        "role": "driver",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "label": "climate change increases extreme fire‑weather frequency",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Exceptionally warm and dry atmospheric conditions, including high vapor pressure deficit, have driven the recent intensification of wildfire activity in the Western United States.",
+            "passage": "The 2020 wildfire season across the Western U.S. was undoubtedly one for the record books, largely due to exceptionally warm and dry atmospheric conditions [26] in addition to favorable regional wind patterns [2]. According to [26], 2020 ranked as the season with the second highest burned area and vapor pressure deficit-a measure of aridity-across the West over the last 36 years.",
+            "passage_truncated": false,
+            "paper_id": "246522870",
+            "region": "Western U.S.",
+            "region_qualifier": "western"
+          },
+          {
+            "statement": "Climate change in the western United States has increased the frequency of extreme fire weather events and is projected to increase the area burned by wildfire in the coming decades.",
+            "passage": "Climate change in the western United States has increased the frequency of extreme fire weather events and is projected to increase the area burned by wildfire in the coming decades.",
+            "passage_truncated": false,
+            "paper_id": "3642757",
+            "region": "western United States",
+            "region_qualifier": "western"
+          },
+          {
+            "statement": "Climate change is expected to increase the frequency of extreme fire weather and associated smoke events, potentially tripling wildfire numbers by mid‑century.",
+            "passage": "In fact, a 2013 study reported that, based on an ensemble of global climate models, wildfires may triple in number by 2050 leading to substantially higher organic and black carbon concentrations [63].",
+            "passage_truncated": false,
+            "paper_id": "246522870",
+            "region": "global"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "review_state": "reviewer_tagged",
+        "scope_class": "mixed",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-fire_weather_v1-driver-c2-021",
+        "role": "driver",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "label": "Low sea‑ice concentrations in the Beaufort/Chukchi Seas favor fire‑weather conditions in the western United States.",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Low sea‑ice concentrations in the Beaufort/Chukchi Seas favor fire‑weather conditions in the western United States.",
+            "passage": "The difference between these simulations bears a strong resemblance to the correlation patterns exhibited by those based on the reanalysis, suggesting that low sea-ice concentrations in the Beaufort/Chukchi Seas favor fire-weather conditions in western states.",
+            "passage_truncated": false,
+            "paper_id": "233618492",
+            "region": "western United States",
+            "region_qualifier": "western"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "review_state": "reviewer_tagged",
+        "scope_class": "us_subregion",
+        "scope_phrase": "Research on the United States suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-fire_weather_v1-mechanism-c2-004",
+        "role": "driver",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "label": "Higher live‑vegetation or dead‑fuel moisture reduces fire hazard",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Fire sizes increase exponentially with higher VPD and decrease with higher 1000‑hour dead fuel moisture across all spatial scales, especially in forested areas.",
+            "passage": "We find that fire sizes simulated by our model respond, above a threshold, exponentially to increases in VPD and decreases in FM1000 at all spatial scales, although the response is notably stronger in Forests.",
+            "passage_truncated": false,
+            "paper_id": "254994199",
+            "region": "western United States",
+            "region_qualifier": "western"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "review_state": "reviewer_tagged",
+        "scope_class": "us_subregion",
+        "scope_phrase": "Research on the United States suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-fire_weather_v1-driver-c1-002",
+        "role": "driver",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "label": "humidity and vapor pressure deficit affect fire risk",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Relative humidity and temperature are the most influential individual climate variables affecting observed burned area.",
+            "passage": "Additionally, among the individual climate variables that comprise the FWI, relative humidity and temperature are the most influential factors that affect the observed BA.",
+            "passage_truncated": false,
+            "paper_id": "247649715",
+            "region": "global"
+          },
+          {
+            "statement": "Forest burned area anomalies are most sensitive to relative humidity anomalies, while non‑forest burned area anomalies are most sensitive to temperature and relative humidity anomalies across most regions.",
+            "passage": "Globally, in the case of forest BA anomaly, the most highly associated climate variable is found to be relative humidity, while in the case of the non-forest BA anomaly, temperature and relative humidity are found to be most highly associated for most of the regions, without, however, exhibiting any clear spatial or latitudinal pattern.",
+            "passage_truncated": false,
+            "paper_id": "247649715",
+            "region": "global"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "review_state": "reviewer_tagged",
+        "scope_class": "global",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-fire_weather_v1-driver-c1-003",
+        "role": "driver",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "label": "strong winds are a primary driver of fire danger and spread",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Fire spread and the resulting area burnt are driven by wind speed, fire duration, and the amount, moisture content, and characteristics of the fuel, beyond just fire danger.",
+            "passage": "Whereas fire numbers are determined by the presence of fuel, lightning frequency, population density and surface fire intensity, fire spread (and hence area burnt) is driven by wind speed, fire duration and the amount, moisture content and characteristics of the fuel.",
+            "passage_truncated": false,
+            "paper_id": "14300",
+            "region": "global"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "review_state": "reviewer_tagged",
+        "scope_class": "global",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-007",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "low‑WFPI line selection reduces wildfire risk but raises load shed",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Applying a low‑WFPI line selection heuristic reduces wildfire risk but can increase the amount of load that must be shed.",
+            "passage": "MNWF achieves the lowest production cost at each active line setting, it does this at the cost of producing the most load-shed compared to other approaches.",
+            "passage_truncated": false,
+            "paper_id": "268510027",
+            "region": "Southern Nevada and Northwestern Arizona",
+            "asset_class": "energy"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "relevance": "place_named",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "impact_mechanism": [
+          "low‑WFPI line selection limits operation of lines in fire‑prone areas"
+        ],
+        "impact_outcome": [
+          "increases load shedding"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "state",
+        "scope_phrase": "Research on Arizona suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-005",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "increased wildfire activity extends transmission line exposure length",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Increasing wildfire activity has increased exposure of electricity transmission lines to fire, extending the length of powerlines intersected by fire perimeters.",
+            "passage": "Powerline exposure increased at a rate of 20 km yr −1 (s.e.15) in the CONUS, a growth of 70% in the past 20 years (Fig. 3b).",
+            "passage_truncated": false,
+            "paper_id": "259716408",
+            "region": "contiguous United States",
+            "asset_class": "energy"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "relevance": "us",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "impact_mechanism": [
+          "fire perimeters intersect powerlines"
+        ],
+        "impact_outcome": [
+          "increased length of powerlines exposed to fire"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "us_national",
+        "scope_phrase": "Research on the United States suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-009",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "networked microgrid maintains low wildfire risk while serving more load",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Networked microgrid configurations can maintain low wildfire risk while serving a higher proportion of load compared with standard distribution operation.",
+            "passage": "Overall, the ability to operate the grid in networked microgrid configuration enables significant reductions in wildfire risk without sacrificing load served, both in absolute terms and when considering social vulnerability.",
+            "passage_truncated": false,
+            "paper_id": "259088727",
+            "region": "California",
+            "asset_class": "energy"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "relevance": "us",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "impact_mechanism": [
+          "networked microgrids allow selective energization and sharing of generation"
+        ],
+        "impact_outcome": [
+          "reduces wildfire risk while maintaining high load service"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "unknown",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-010",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "wildfire smoke reduces solar PV power output on military bases",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Wildfire smoke can reduce the power output of solar photovoltaic systems on military bases.",
+            "passage": "More dust and smoke from fire negatively impact the generation of energy from solar panels on the base [58], [59].",
+            "passage_truncated": false,
+            "paper_id": "264178918",
+            "region": "Western U.S.",
+            "region_qualifier": "western",
+            "asset_class": "energy"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "relevance": "us",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "impact_mechanism": [
+          "smoke reduces solar panel irradiance"
+        ],
+        "impact_outcome": [
+          "decreases solar power generation"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "us_subregion",
+        "scope_phrase": "Research on the United States suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-015",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "higher mean wind speed raises power grid vulnerability to wildfire",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Higher mean wind speed increases the vulnerability of power grid infrastructure to wildfire.",
+            "passage": "Thus, the most easily accessible and reliable variables to identify power grid vulnerability to wildfire are wind mean (higher wind speed results in higher vulnerability), cumulative growing season precipitation (lower cumulative precipitation results in higher vulnerability), and NDVI mean (lower mean NDVI results in increased vulnerability) (Figure 2).",
+            "passage_truncated": false,
+            "paper_id": "258535031",
+            "region": "Idaho, USA",
+            "asset_class": "energy"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "relevance": "us",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "impact_mechanism": [
+          "higher wind speed increases wildfire vulnerability"
+        ],
+        "impact_outcome": [
+          "greater risk to power grid infrastructure"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "unknown",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-016",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "lower growing‑season precipitation raises power grid vulnerability to wildfire",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Lower cumulative growing‑season precipitation is associated with higher vulnerability of power grid infrastructure to wildfire.",
+            "passage": "Thus, the most easily accessible and reliable variables to identify power grid vulnerability to wildfire are wind mean (higher wind speed results in higher vulnerability), cumulative growing season precipitation (lower cumulative precipitation results in higher vulnerability), and NDVI mean (lower mean NDVI results in increased vulnerability) (Figure 2).",
+            "passage_truncated": false,
+            "paper_id": "258535031",
+            "region": "Idaho, USA",
+            "asset_class": "energy"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "relevance": "us",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "impact_mechanism": [
+          "lower precipitation increases wildfire vulnerability"
+        ],
+        "impact_outcome": [
+          "greater risk to power grid infrastructure"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "unknown",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-017",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "lower mean NDVI increases power grid vulnerability to wildfire",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Lower mean NDVI, indicating reduced vegetation productivity, increases the vulnerability of power grid infrastructure to wildfire.",
+            "passage": "Thus, the most easily accessible and reliable variables to identify power grid vulnerability to wildfire are wind mean (higher wind speed results in higher vulnerability), cumulative growing season precipitation (lower cumulative precipitation results in higher vulnerability), and NDVI mean (lower mean NDVI results in increased vulnerability) (Figure 2).",
+            "passage_truncated": false,
+            "paper_id": "258535031",
+            "region": "Idaho, USA",
+            "asset_class": "energy"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "relevance": "us",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "impact_mechanism": [
+          "lower NDVI indicates less fuel moisture and higher wildfire vulnerability"
+        ],
+        "impact_outcome": [
+          "greater risk to power grid infrastructure"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "unknown",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-001",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "transmission line insulation reduction causing trips and outages",
+        "evidence_strength": "multi_source_supported",
+        "independent_papers": 2,
+        "members": [
+          {
+            "statement": "Wildfires near electrical transmission lines sharply reduce insulation between ground and the line, causing line trips and power outages.",
+            "passage": "When a wildfire occurs near electrical transmission line, the insulation between ground and electrical transmission line decreases sharply, which causes an electrical transmission line trip and power outage [31].",
+            "passage_truncated": false,
+            "paper_id": "221709315",
+            "region": "China",
+            "asset_class": "energy"
+          },
+          {
+            "statement": "When a wildfire ignites near a transmission line, the burning vegetation raises temperatures and soot concentration, dramatically decreasing air insulation and making phase-to-phase or phase-to-ground breakdowns more likely.",
+            "passage": "Once a wildfire is ignited near a transmission line, the burning of vegetation produces high temperatures and a high concentration of soot cover, which causes the dramatic decrease of air insulation under the transmission line.",
+            "passage_truncated": false,
+            "paper_id": "246491629",
+            "region": "China",
+            "asset_class": "energy"
+          }
+        ],
+        "hedge": [
+          "research shows",
+          "research has shown"
+        ],
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 2
+        },
+        "impact_mechanism": [
+          "reduces insulation between ground and the line",
+          "high temperatures and soot reduce air insulation"
+        ],
+        "impact_outcome": [
+          "causes line trips and power outages",
+          "increased likelihood of breakdowns and tripping failures"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "other",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-002",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "wildfire makes automatic reclosing difficult causing multiple trips",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Wildfire combustion makes automatic reclosing of transmission lines difficult, potentially causing multiple trips and cascading grid failures.",
+            "passage": "Under the effect of wildfire combustion, the automatic reclosing is difficult to operate successfully, and may even cause multiple trips of transmission lines to induce a cascading grid failure (Hu et al., 2014;Wu et al., 2012).",
+            "passage_truncated": false,
+            "paper_id": "246491629",
+            "region": "China",
+            "asset_class": "energy"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "impact_mechanism": [
+          "wildfire combustion impairs automatic reclosing"
+        ],
+        "impact_outcome": [
+          "multiple trips and possible cascading grid failure"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "other",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-003",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "wildfire‑induced arc‑faults trigger transient instability",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Arc‑faults caused by wildfires can trigger transient instability that requires rapid generation redispatch to maintain system synchronism.",
+            "passage": "During implementation, the RT-SCED did not reschedule sufficient generation for ensuring transient stability as it did not have any dynamic information (power from CMs was only lowered by 20 MW as compared to the minimum needed 118 MW shown in Table I).",
+            "passage_truncated": false,
+            "paper_id": "265128606",
+            "region": "unknown",
+            "asset_class": "energy"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "impact_mechanism": [
+          "arc‑faults cause transient instability"
+        ],
+        "impact_outcome": [
+          "require generation redispatch"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "unknown",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      }
+    ],
+    "allowed_numbers": [
+      "4",
+      "36",
+      "40",
+      "49",
+      "3.9",
+      "2007",
+      "36.2",
+      "40.1",
+      "3.915562260587942",
+      "36.188747110024913",
+      "40.104309693976084"
+    ],
+    "guardrails": [
+      "A modeled historical baseline is model output for a past period, not an observation.",
+      "A Fire Weather Index is a meteorological fire-danger index; it is never fire occurrence, ignition, burned area or damage.",
+      "A high-emissions future is one plausible future, not a forecast and not the only plausible future.",
+      "Hazard is not exposure, and exposure is not risk.",
+      "Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.",
+      "Impact statements are general unless a group is marked place_named for the place."
+    ],
+    "item_fields": [
+      "prompt",
+      "reference_answer.table_pattern",
+      "reference_answer.literature_interpretation",
+      "reference_answer.integrated",
+      "rubric.required_points",
+      "rubric.acceptable_variants",
+      "rubric.optional_points",
+      "rubric.disallowed_claims",
+      "rubric.fatal_errors",
+      "guardrails",
+      "source_independent_answerability",
+      "source_independence_note",
+      "capability_tested",
+      "system_task",
+      "key_relationships",
+      "evidence_needed",
+      "desired_output_characteristics",
+      "expected_knowledge_level"
+    ],
+    "rung_name": "8. Hazard impact on infrastructure: State the projected hazard change at a place and what research shows such conditions do to an asset class.",
+    "rung_instruction": "Rung 8 (hazard impact on infrastructure). Write the answer in three parts: (1) the hazard change at the place, as projected, in the table-pattern sentence; (2) for the impact groups, '<scope phrase> that <hazard phrase> <impact mechanism> <asset class phrase>', where the hazard phrase is the broader-hazard phrase when a cited impact group has hazard_relation broader_hazard, else the plain quantity; the driver groups as in any item; the general closing clause when no cited group is state- or NCA-specific; (3) never state that an asset, or the asset class, in the place will fail, is at risk, is vulnerable or will be damaged. Only when citing a group listed in place_named_impact_group_ids may the answer write 'For <asset class phrase> in <Place>, this implies more exposure to <impact outcome>'.",
+    "asset_class": "energy",
+    "asset_class_phrase": "energy systems",
+    "cisa_sector": "Energy Sector",
+    "place_named_impact_group_ids": [
+      "LG-infra_fire_weather_index__energy-impact-c1-007"
+    ],
+    "review_state": "impact_groups_unreviewed",
+    "scope": {
+      "decision": "D-069a",
+      "place": "Arizona",
+      "classes_present": [
+        "state",
+        "us_subregion",
+        "us_national",
+        "global",
+        "other",
+        "unknown",
+        "mixed"
+      ],
+      "needs_general_clause": false,
+      "general_clause": "These are general drivers of fire-weather danger, not findings specific to Arizona.",
+      "rule": "majority of cited members; ties -> general; minority place mentions -> optional clause"
+    },
+    "question_form": {
+      "id": "QF-09",
+      "name": "what_could_it_mean_rung8",
+      "skeleton": "What could a projected increase in fire-weather danger mean for energy systems in Arizona, and why?",
+      "opening_regex": "^What could\\b",
+      "min_question_marks": 1
+    },
+    "wildfire_rule": "D-073b: \"wildfire\" only inside the exact phrase \"conditions that favour wildfire\" (as in the broader-hazard phrase); \"wildfire\" anywhere else, \"fires\" and \"burned area\" are never written."
+  },
+  "provenance": {
+    "patterns": [
+      {
+        "acceptance_blocked": false,
+        "acceptance_blocked_by": [],
+        "acceptance_blocked_by_original": [
+          "IC-006",
+          "IC-007",
+          "IC-008",
+          "IC-009",
+          "IC-010"
+        ],
+        "authorization": "inferred_candidate",
+        "cautions": [
+          "C-fire_weather: a fire-danger index, never fire occurrence"
+        ],
+        "computed_value_or_range": {
+          "cell_direction_counts": {
+            "decrease": 0,
+            "increase": 2007,
+            "no_change": 0
+          },
+          "mean_from": "36.188747110024913",
+          "mean_to": "40.104309693976084",
+          "n_cells_empty": 0,
+          "n_cells_used": 2007,
+          "range": {
+            "max": "7.484570030000000",
+            "min": "1.869590040000000",
+            "over": "cells"
+          },
+          "unit": null,
+          "value": "3.915562260587942",
+          "value_is": "absolute_change",
+          "value_reason": null
+        },
+        "direction": "increase",
+        "family": "fire_weather_index",
+        "geography": "Arizona",
+        "geography_type": "state",
+        "horizon": "mid",
+        "horizon_window": "2045-2054",
+        "metric": "fwi_summer_seasonal_value",
+        "metric_wording": "seasonal value of the Fire Weather Index (FWI)",
+        "pattern_id": "TP1-01461",
+        "pattern_kind": "single",
+        "pattern_robustness": "all_states_same_direction",
+        "pattern_support_n": 2007,
+        "provenance": {
+          "code_version": "table_patterns v1 (src/climrr/table_patterns.py sha256 c5948f7e0ef85b73)",
+          "column_sources": {
+            "wildfire_summer_Dmid": {
+              "id": "IC-009",
+              "kind": "inferred_candidate_record",
+              "line": 664,
+              "quote": "Wildfire_summer_Dmid Difference between Mid-Century and Historical"
+            },
+            "wildfire_summer_Hist": {
+              "id": "IC-006",
+              "kind": "inferred_candidate_record",
+              "line": 661,
+              "quote": "Wildfire_summer_hist Seasonal value – Historical"
+            },
+            "wildfire_summer_Midc": {
+              "id": "IC-007",
+              "kind": "inferred_candidate_record",
+              "line": 662,
+              "quote": "Wildfire_summer_midc Seasonal value – Mid-Century RCP 8.5"
+            }
+          },
+          "column_statuses": {
+            "wildfire_summer_Dmid": "inferred_candidate",
+            "wildfire_summer_Hist": "inferred_candidate",
+            "wildfire_summer_Midc": "inferred_candidate"
+          },
+          "columns": [
+            {
+              "column": "wildfire_summer_Hist",
+              "index": 189
+            },
+            {
+              "column": "wildfire_summer_Midc",
+              "index": 190
+            },
+            {
+              "column": "wildfire_summer_Dmid",
+              "index": 192
+            }
+          ],
+          "derivation_rule_id": "DR-TD-003 @ DR-PT-001",
+          "member_cells_sha256": "eac237b78fe2430548583c866d57d5a5b0da52a7ea8e1397e7ad9400e8bee700",
+          "member_rows": 2007,
+          "row_rule": "State == 'Arizona'",
+          "table_data_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e"
+        },
+        "provisional": true,
+        "provisional_reasons": [
+          "location_inferred_candidate: State label IC-012 (A-G1, A-G3; D-034)",
+          "unweighted_mean: provisional aggregation rule for representation validation"
+        ],
+        "rank": {
+          "of": 49,
+          "order": "descending signed value (DR-PT-004)",
+          "rank": 1,
+          "tied_with": 0
+        },
+        "relative_magnitude": {
+          "class": "large",
+          "definition": "large = upper tercile, by signed value, among the 49 U.S. State labels in the table with a computed value for family=fire_weather_index, metric=fwi_summer_seasonal_value, season=summer, horizon=mid (2045-2054), scenario=RCP8.5, statistic=absolute_change (DR-PT-005); a relative descriptor among states, not an absolute threshold"
+        },
+        "relative_magnitude_skipped_reason": null,
+        "robustness_share": "2007/2007",
+        "robustness_unit": "cell",
+        "scenario": "RCP8.5",
+        "season": "summer",
+        "statistic": "absolute_change",
+        "status": "computed",
+        "working_assumptions": [
+          "WA-FWI-SUMMER",
+          "WA-STATE-LABEL",
+          "WA-UNWEIGHTED-MEAN"
+        ]
+      }
+    ],
+    "groups": [
+      {
+        "group_id": "LG-fire_weather_v1-mechanism-c1-003",
+        "kind": "group",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "higher temperatures and aridity dry fuels, creating extreme fire‑weather",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "multi_source_supported",
+        "n_members_run": 4,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "us_national",
+        "best_basis_rank": 3,
+        "n_papers": 2,
+        "members": [
+          {
+            "statement_id": "LS-273287103-06",
+            "statement": "Increasing temperature and aridity have created more frequent extreme fire‑weather conditions, leading to more very large wildfires and higher‑severity burning.",
+            "paper_item_id": "273287103",
+            "canonical_paper": "273287103",
+            "paper_sha256": "0d4e4b1dd7b235ae7edaa3973254eafcc91ba1f5cd2b3c77be6c7c798f339a53",
+            "json_path": "$.types of disturbances wildfires",
+            "span_start": 5519,
+            "span_end": 5827,
+            "verbatim_passage": "Beginning in the late twentieth century, increasing temperature and aridity [23,[59][60][61] have created more frequent extreme fireweather conditions, leading to more very large wildfires [62,63] and area burned at high severity [38,64], although sufficient fuels are necessary for this pattern to continue.",
+            "evidence_role": "cited_candidate",
+            "passage_type": "cited_finding",
+            "region": "United States",
+            "scenario": "unknown",
+            "basis": "us_national",
+            "region_class": "us_national",
+            "region_qualifier": null
+          },
+          {
+            "statement_id": "LS-268308343-06",
+            "statement": "Higher temperatures quickly dry wildland fuels, making them easier to ignite and leading to faster fire spread.",
+            "paper_item_id": "268308343",
+            "canonical_paper": "268308343",
+            "paper_sha256": "5956fe0d79d4426db40ea171473ff4be0d43c116dce47ab68e1b9c3e0cb6682f",
+            "json_path": "$.drivers of lightning-induced fire",
+            "span_start": 20724,
+            "span_end": 20876,
+            "verbatim_passage": "An increase in the temperature causes the quick drying of wildland fuel, and the drier fuels are easy to ignite and endure a faster rate of fire spread.",
+            "evidence_role": "cited_candidate",
+            "passage_type": "cited_finding",
+            "region": "global",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          }
+        ],
+        "review_state": "reviewer_tagged"
+      },
+      {
+        "group_id": "LG-fire_weather_v1-driver-c1-006",
+        "kind": "group",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "climate change increases extreme fire‑weather frequency",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 3,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "us_subregion",
+        "best_basis_rank": 2,
+        "n_papers": 2,
+        "members": [
+          {
+            "statement_id": "LS-246522870-01",
+            "statement": "Exceptionally warm and dry atmospheric conditions, including high vapor pressure deficit, have driven the recent intensification of wildfire activity in the Western United States.",
+            "paper_item_id": "246522870",
+            "canonical_paper": "246522870",
+            "paper_sha256": "4ce7ddb5297c9b0c455b057986844a3cfe0889617ee792ed052c7a53bb82284b",
+            "json_path": "$.the western u.s. wildfires of 2020",
+            "span_start": 1362,
+            "span_end": 1744,
+            "verbatim_passage": "The 2020 wildfire season across the Western U.S. was undoubtedly one for the record books, largely due to exceptionally warm and dry atmospheric conditions [26] in addition to favorable regional wind patterns [2]. According to [26], 2020 ranked as the season with the second highest burned area and vapor pressure deficit-a measure of aridity-across the West over the last 36 years.",
+            "evidence_role": "cited_candidate",
+            "passage_type": "cited_finding",
+            "region": "Western U.S.",
+            "scenario": "unknown",
+            "basis": "us_subregion",
+            "region_class": "us_subregion",
+            "region_qualifier": "western"
+          },
+          {
+            "statement_id": "LS-3642757-01",
+            "statement": "Climate change in the western United States has increased the frequency of extreme fire weather events and is projected to increase the area burned by wildfire in the coming decades.",
+            "paper_item_id": "3642757",
+            "canonical_paper": "3642757",
+            "paper_sha256": "f0ee8c72b0ca96ea2cd0318d640a53482656853f5d2434739851759bb5159b5f",
+            "json_path": "$.abstract",
+            "span_start": 0,
+            "span_end": 182,
+            "verbatim_passage": "Climate change in the western United States has increased the frequency of extreme fire weather events and is projected to increase the area burned by wildfire in the coming decades.",
+            "evidence_role": "background_consensus_candidate",
+            "passage_type": "background",
+            "region": "western United States",
+            "scenario": "unknown",
+            "basis": "us_subregion",
+            "region_class": "us_subregion",
+            "region_qualifier": "western"
+          },
+          {
+            "statement_id": "LS-246522870-04",
+            "statement": "Climate change is expected to increase the frequency of extreme fire weather and associated smoke events, potentially tripling wildfire numbers by mid‑century.",
+            "paper_item_id": "246522870",
+            "canonical_paper": "246522870",
+            "paper_sha256": "4ce7ddb5297c9b0c455b057986844a3cfe0889617ee792ed052c7a53bb82284b",
+            "json_path": "$.discussion and conclusions",
+            "span_start": 3230,
+            "span_end": 3430,
+            "verbatim_passage": "In fact, a 2013 study reported that, based on an ensemble of global climate models, wildfires may triple in number by 2050 leading to substantially higher organic and black carbon concentrations [63].",
+            "evidence_role": "cited_candidate",
+            "passage_type": "cited_finding",
+            "region": "global",
+            "scenario": "2050",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          }
+        ],
+        "review_state": "reviewer_tagged"
+      },
+      {
+        "group_id": "LG-fire_weather_v1-driver-c2-021",
+        "kind": "singleton",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": null,
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "us_subregion",
+        "best_basis_rank": 2,
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS-233618492-01",
+            "statement": "Low sea‑ice concentrations in the Beaufort/Chukchi Seas favor fire‑weather conditions in the western United States.",
+            "paper_item_id": "233618492",
+            "canonical_paper": "233618492",
+            "paper_sha256": "5c36d92838eb4393021a244d4b1209f18ffb05762986f04d36fb9d49ddef13b8",
+            "json_path": "$.introduction",
+            "span_start": 4993,
+            "span_end": 5253,
+            "verbatim_passage": "The difference between these simulations bears a strong resemblance to the correlation patterns exhibited by those based on the reanalysis, suggesting that low sea-ice concentrations in the Beaufort/Chukchi Seas favor fire-weather conditions in western states.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "western United States",
+            "scenario": "unknown",
+            "basis": "us_subregion",
+            "region_class": "us_subregion",
+            "region_qualifier": "western"
+          }
+        ],
+        "review_state": "reviewer_tagged"
+      },
+      {
+        "group_id": "LG-fire_weather_v1-mechanism-c2-004",
+        "kind": "group",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "Higher live‑vegetation or dead‑fuel moisture reduces fire hazard",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 2,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "us_subregion",
+        "best_basis_rank": 2,
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS-254994199-04",
+            "statement": "Fire sizes increase exponentially with higher VPD and decrease with higher 1000‑hour dead fuel moisture across all spatial scales, especially in forested areas.",
+            "paper_item_id": "254994199",
+            "canonical_paper": "254994199",
+            "paper_sha256": "29662226f224fa2935890f94fd3bf859cf458ec7e651e11e3c4be1129e3dc8da",
+            "json_path": "$.results",
+            "span_start": 17606,
+            "span_end": 17815,
+            "verbatim_passage": "We find that fire sizes simulated by our model respond, above a threshold, exponentially to increases in VPD and decreases in FM1000 at all spatial scales, although the response is notably stronger in Forests.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "western United States",
+            "scenario": "unknown",
+            "basis": "us_subregion",
+            "region_class": "us_subregion",
+            "region_qualifier": "western"
+          }
+        ],
+        "review_state": "reviewer_tagged"
+      },
+      {
+        "group_id": "LG-fire_weather_v1-driver-c1-002",
+        "kind": "group",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "humidity and vapor pressure deficit affect fire risk",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 5,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "global",
+        "best_basis_rank": 4,
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS-247649715-02",
+            "statement": "Relative humidity and temperature are the most influential individual climate variables affecting observed burned area.",
+            "paper_item_id": "247649715",
+            "canonical_paper": "247649715",
+            "paper_sha256": "04aff65e7d558903a3dcfbfdb96dbd7f47fbeb81bacc385b2c44217be4bf0b0a",
+            "json_path": "$.abstract",
+            "span_start": 1387,
+            "span_end": 1558,
+            "verbatim_passage": "Additionally, among the individual climate variables that comprise the FWI, relative humidity and temperature are the most influential factors that affect the observed BA.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "global",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          },
+          {
+            "statement_id": "LS-247649715-06",
+            "statement": "Forest burned area anomalies are most sensitive to relative humidity anomalies, while non‑forest burned area anomalies are most sensitive to temperature and relative humidity anomalies across most regions.",
+            "paper_item_id": "247649715",
+            "canonical_paper": "247649715",
+            "paper_sha256": "04aff65e7d558903a3dcfbfdb96dbd7f47fbeb81bacc385b2c44217be4bf0b0a",
+            "json_path": "$.discussion",
+            "span_start": 1821,
+            "span_end": 2159,
+            "verbatim_passage": "Globally, in the case of forest BA anomaly, the most highly associated climate variable is found to be relative humidity, while in the case of the non-forest BA anomaly, temperature and relative humidity are found to be most highly associated for most of the regions, without, however, exhibiting any clear spatial or latitudinal pattern.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "global",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          }
+        ],
+        "review_state": "reviewer_tagged"
+      },
+      {
+        "group_id": "LG-fire_weather_v1-driver-c1-003",
+        "kind": "group",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "strong winds are a primary driver of fire danger and spread",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 5,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "global",
+        "best_basis_rank": 4,
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS-14300-05",
+            "statement": "Fire spread and the resulting area burnt are driven by wind speed, fire duration, and the amount, moisture content, and characteristics of the fuel, beyond just fire danger.",
+            "paper_item_id": "14300",
+            "canonical_paper": "14300",
+            "paper_sha256": "d63010c65b1955f330d76d9bf6c51e4114248a3e261af1b5160d40095a5fb594",
+            "json_path": "$.results",
+            "span_start": 1219,
+            "span_end": 1487,
+            "verbatim_passage": "Whereas fire numbers are determined by the presence of fuel, lightning frequency, population density and surface fire intensity, fire spread (and hence area burnt) is driven by wind speed, fire duration and the amount, moisture content and characteristics of the fuel.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "global",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          }
+        ],
+        "review_state": "reviewer_tagged"
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-007",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "low‑WFPI line selection reduces wildfire risk but raises load shed",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "relevance": "place_named",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "partition": "infra_fire_weather_index.impact.energy",
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS3-268510027-02",
+            "statement": "Applying a low‑WFPI line selection heuristic reduces wildfire risk but can increase the amount of load that must be shed.",
+            "paper_item_id": "268510027",
+            "canonical_paper": "268510027",
+            "paper_sha256": "a16c8e1b755b8fb63202f69773225b9b3c9e28c877b1f6f9020a7d0eb7355b13",
+            "json_path": "$.b. comparison of different line outage strategies",
+            "span_start": 2515,
+            "span_end": 2671,
+            "verbatim_passage": "MNWF achieves the lowest production cost at each active line setting, it does this at the cost of producing the most load-shed compared to other approaches.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Southern Nevada and Northwestern Arizona",
+            "scenario": "unknown",
+            "basis": "state",
+            "region_class": "state",
+            "region_qualifier": null,
+            "states": [
+              "Arizona",
+              "Nevada"
+            ],
+            "asset_class": "energy",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "low‑WFPI line selection limits operation of lines in fire‑prone areas",
+            "impact_outcome": "increases load shedding"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-005",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "increased wildfire activity extends transmission line exposure length",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "relevance": "us",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "partition": "infra_fire_weather_index.impact.energy",
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS3-259716408-02",
+            "statement": "Increasing wildfire activity has increased exposure of electricity transmission lines to fire, extending the length of powerlines intersected by fire perimeters.",
+            "paper_item_id": "259716408",
+            "canonical_paper": "259716408",
+            "paper_sha256": "707775ccbebbed3a4d5caa28a4c419086036e40728f2c2e1448fe68a57e0d43e",
+            "json_path": "$.increasing road and powerline exposure to large fires",
+            "span_start": 611,
+            "span_end": 735,
+            "verbatim_passage": "Powerline exposure increased at a rate of 20 km yr −1 (s.e.15) in the CONUS, a growth of 70% in the past 20 years (Fig. 3b).",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "contiguous United States",
+            "scenario": "unknown",
+            "basis": "us_national",
+            "region_class": "us_national",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "energy",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "fire perimeters intersect powerlines",
+            "impact_outcome": "increased length of powerlines exposed to fire"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-009",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "networked microgrid maintains low wildfire risk while serving more load",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "relevance": "us",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "partition": "infra_fire_weather_index.impact.energy",
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS3-259088727-02",
+            "statement": "Networked microgrid configurations can maintain low wildfire risk while serving a higher proportion of load compared with standard distribution operation.",
+            "paper_item_id": "259088727",
+            "canonical_paper": "259088727",
+            "paper_sha256": "cd1989554168dc96a576e53f1c3aac183ed9ebae79ffeeae4c1b5b8b3227cea8",
+            "json_path": "$.smart-ds test case results",
+            "span_start": 2222,
+            "span_end": 2446,
+            "verbatim_passage": "Overall, the ability to operate the grid in networked microgrid configuration enables significant reductions in wildfire risk without sacrificing load served, both in absolute terms and when considering social vulnerability.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "California",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "state",
+            "region_qualifier": null,
+            "states": [
+              "California"
+            ],
+            "asset_class": "energy",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "networked microgrids allow selective energization and sharing of generation",
+            "impact_outcome": "reduces wildfire risk while maintaining high load service"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-010",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "wildfire smoke reduces solar PV power output on military bases",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "relevance": "us",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "partition": "infra_fire_weather_index.impact.energy",
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS3-264178918-02",
+            "statement": "Wildfire smoke can reduce the power output of solar photovoltaic systems on military bases.",
+            "paper_item_id": "264178918",
+            "canonical_paper": "264178918",
+            "paper_sha256": "751d8f7d140243abfd67e094ee6e60247d216f38eec94e44bbf93df66c1f976d",
+            "json_path": "$.b. interrelationship between systems",
+            "span_start": 1398,
+            "span_end": 1512,
+            "verbatim_passage": "More dust and smoke from fire negatively impact the generation of energy from solar panels on the base [58], [59].",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Western U.S.",
+            "scenario": "unknown",
+            "basis": "us_subregion",
+            "region_class": "us_subregion",
+            "region_qualifier": "western",
+            "states": [],
+            "asset_class": "energy",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "smoke reduces solar panel irradiance",
+            "impact_outcome": "decreases solar power generation"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-015",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "higher mean wind speed raises power grid vulnerability to wildfire",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "relevance": "us",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "partition": "infra_fire_weather_index.impact.energy",
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS3-258535031-01",
+            "statement": "Higher mean wind speed increases the vulnerability of power grid infrastructure to wildfire.",
+            "paper_item_id": "258535031",
+            "canonical_paper": "258535031",
+            "paper_sha256": "0c2aed18785b7e55852ea35f421c476677e30367c04a2ea0216fe3c581bcf541",
+            "json_path": "$.results and discussion",
+            "span_start": 2292,
+            "span_end": 2648,
+            "verbatim_passage": "Thus, the most easily accessible and reliable variables to identify power grid vulnerability to wildfire are wind mean (higher wind speed results in higher vulnerability), cumulative growing season precipitation (lower cumulative precipitation results in higher vulnerability), and NDVI mean (lower mean NDVI results in increased vulnerability) (Figure 2).",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Idaho, USA",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "state",
+            "region_qualifier": null,
+            "states": [
+              "Idaho"
+            ],
+            "asset_class": "energy",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "higher wind speed increases wildfire vulnerability",
+            "impact_outcome": "greater risk to power grid infrastructure"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-016",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "lower growing‑season precipitation raises power grid vulnerability to wildfire",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "relevance": "us",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "partition": "infra_fire_weather_index.impact.energy",
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS3-258535031-02",
+            "statement": "Lower cumulative growing‑season precipitation is associated with higher vulnerability of power grid infrastructure to wildfire.",
+            "paper_item_id": "258535031",
+            "canonical_paper": "258535031",
+            "paper_sha256": "0c2aed18785b7e55852ea35f421c476677e30367c04a2ea0216fe3c581bcf541",
+            "json_path": "$.results and discussion",
+            "span_start": 2292,
+            "span_end": 2648,
+            "verbatim_passage": "Thus, the most easily accessible and reliable variables to identify power grid vulnerability to wildfire are wind mean (higher wind speed results in higher vulnerability), cumulative growing season precipitation (lower cumulative precipitation results in higher vulnerability), and NDVI mean (lower mean NDVI results in increased vulnerability) (Figure 2).",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Idaho, USA",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "state",
+            "region_qualifier": null,
+            "states": [
+              "Idaho"
+            ],
+            "asset_class": "energy",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "lower precipitation increases wildfire vulnerability",
+            "impact_outcome": "greater risk to power grid infrastructure"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-017",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "lower mean NDVI increases power grid vulnerability to wildfire",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "relevance": "us",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "partition": "infra_fire_weather_index.impact.energy",
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS3-258535031-03",
+            "statement": "Lower mean NDVI, indicating reduced vegetation productivity, increases the vulnerability of power grid infrastructure to wildfire.",
+            "paper_item_id": "258535031",
+            "canonical_paper": "258535031",
+            "paper_sha256": "0c2aed18785b7e55852ea35f421c476677e30367c04a2ea0216fe3c581bcf541",
+            "json_path": "$.results and discussion",
+            "span_start": 2292,
+            "span_end": 2648,
+            "verbatim_passage": "Thus, the most easily accessible and reliable variables to identify power grid vulnerability to wildfire are wind mean (higher wind speed results in higher vulnerability), cumulative growing season precipitation (lower cumulative precipitation results in higher vulnerability), and NDVI mean (lower mean NDVI results in increased vulnerability) (Figure 2).",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Idaho, USA",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "state",
+            "region_qualifier": null,
+            "states": [
+              "Idaho"
+            ],
+            "asset_class": "energy",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "lower NDVI indicates less fuel moisture and higher wildfire vulnerability",
+            "impact_outcome": "greater risk to power grid infrastructure"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-001",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "transmission line insulation reduction causing trips and outages",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "multi_source_supported",
+        "n_members_run": 2,
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 2
+        },
+        "partition": "infra_fire_weather_index.impact.energy",
+        "n_papers": 2,
+        "members": [
+          {
+            "statement_id": "LS3-221709315-01",
+            "statement": "Wildfires near electrical transmission lines sharply reduce insulation between ground and the line, causing line trips and power outages.",
+            "paper_item_id": "221709315",
+            "canonical_paper": "221709315",
+            "paper_sha256": "94c74edbd28781cd9982b37e0fce3b6bb443f9367b9b66fc87d52de1ade4f507",
+            "json_path": "$.overview of wildfires near electrical transmission lines",
+            "span_start": 486,
+            "span_end": 698,
+            "verbatim_passage": "When a wildfire occurs near electrical transmission line, the insulation between ground and electrical transmission line decreases sharply, which causes an electrical transmission line trip and power outage [31].",
+            "evidence_role": "cited_candidate",
+            "passage_type": "cited_finding",
+            "region": "China",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "other",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "energy",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "reduces insulation between ground and the line",
+            "impact_outcome": "causes line trips and power outages"
+          },
+          {
+            "statement_id": "LS3-246491629-01",
+            "statement": "When a wildfire ignites near a transmission line, the burning vegetation raises temperatures and soot concentration, dramatically decreasing air insulation and making phase-to-phase or phase-to-ground breakdowns more likely.",
+            "paper_item_id": "246491629",
+            "canonical_paper": "246491629",
+            "paper_sha256": "c8e9c5b24489125e7c459553b1f3a336f8dca1a9557a277436eb9852bbfa0dde",
+            "json_path": "$.introduction",
+            "span_start": 418,
+            "span_end": 645,
+            "verbatim_passage": "Once a wildfire is ignited near a transmission line, the burning of vegetation produces high temperatures and a high concentration of soot cover, which causes the dramatic decrease of air insulation under the transmission line.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "China",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "other",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "energy",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "high temperatures and soot reduce air insulation",
+            "impact_outcome": "increased likelihood of breakdowns and tripping failures"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-002",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "wildfire makes automatic reclosing difficult causing multiple trips",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "partition": "infra_fire_weather_index.impact.energy",
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS3-246491629-02",
+            "statement": "Wildfire combustion makes automatic reclosing of transmission lines difficult, potentially causing multiple trips and cascading grid failures.",
+            "paper_item_id": "246491629",
+            "canonical_paper": "246491629",
+            "paper_sha256": "c8e9c5b24489125e7c459553b1f3a336f8dca1a9557a277436eb9852bbfa0dde",
+            "json_path": "$.introduction",
+            "span_start": 820,
+            "span_end": 1048,
+            "verbatim_passage": "Under the effect of wildfire combustion, the automatic reclosing is difficult to operate successfully, and may even cause multiple trips of transmission lines to induce a cascading grid failure (Hu et al., 2014;Wu et al., 2012).",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "China",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "other",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "energy",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "wildfire combustion impairs automatic reclosing",
+            "impact_outcome": "multiple trips and possible cascading grid failure"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-003",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "wildfire‑induced arc‑faults trigger transient instability",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "energy": 1
+        },
+        "partition": "infra_fire_weather_index.impact.energy",
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS3-265128606-05",
+            "statement": "Arc‑faults caused by wildfires can trigger transient instability that requires rapid generation redispatch to maintain system synchronism.",
+            "paper_item_id": "265128606",
+            "canonical_paper": "265128606",
+            "paper_sha256": "b726d1e19b828f6aeeddfdaf9f09608d5b2dcd916249fe25c2d8a11391ccf93d",
+            "json_path": "$.b. cscopf implementation results",
+            "span_start": 976,
+            "span_end": 1229,
+            "verbatim_passage": "During implementation, the RT-SCED did not reschedule sufficient generation for ensuring transient stability as it did not have any dynamic information (power from CMs was only lowered by 20 MW as compared to the minimum needed 118 MW shown in Table I).",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "unknown",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "unknown",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "energy",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "arc‑faults cause transient instability",
+            "impact_outcome": "require generation redispatch"
+          }
+        ]
+      }
+    ],
+    "working_assumptions_relied_on": [
+      {
+        "id": "WA-FWI-SUMMER",
+        "resolution": "R-004",
+        "status": "owner_authorized_working_assumption",
+        "covers": [
+          "IC-006",
+          "IC-007",
+          "IC-008",
+          "IC-009",
+          "IC-010"
+        ]
+      },
+      {
+        "id": "WA-STATE-LABEL",
+        "resolution": "R-005",
+        "status": "owner_authorized_working_assumption",
+        "covers": [
+          "IC-012"
+        ]
+      },
+      {
+        "id": "WA-UNWEIGHTED-MEAN",
+        "resolution": "R-008",
+        "status": "owner_authorized_working_assumption",
+        "covers": [
+          "unweighted_cell_mean"
+        ]
+      }
+    ],
+    "item_frame": {
+      "use_case_level": 8,
+      "reasoning_modalities": "Hazard + Text",
+      "level_name": "Hazard impact on infrastructure"
+    },
+    "exact": {
+      "scenario": "RCP8.5",
+      "scenario_effective": "RCP8.5",
+      "horizon_window": "2045-2054",
+      "threshold_F": null,
+      "metric_wording": "seasonal value of the Fire Weather Index (FWI)"
+    }
+  },
+  "checks_input": {
+    "pattern_ids": [
+      "TP1-01461"
+    ],
+    "group_strength": {
+      "LG-fire_weather_v1-mechanism-c1-003": "multi_source_supported",
+      "LG-fire_weather_v1-driver-c1-006": "single_source_supported",
+      "LG-fire_weather_v1-driver-c2-021": "single_source_supported",
+      "LG-fire_weather_v1-mechanism-c2-004": "single_source_supported",
+      "LG-fire_weather_v1-driver-c1-002": "single_source_supported",
+      "LG-fire_weather_v1-driver-c1-003": "single_source_supported",
+      "LG-infra_fire_weather_index__energy-impact-c1-007": "single_source_supported",
+      "LG-infra_fire_weather_index__energy-impact-c1-005": "single_source_supported",
+      "LG-infra_fire_weather_index__energy-impact-c1-009": "single_source_supported",
+      "LG-infra_fire_weather_index__energy-impact-c1-010": "single_source_supported",
+      "LG-infra_fire_weather_index__energy-impact-c1-015": "single_source_supported",
+      "LG-infra_fire_weather_index__energy-impact-c1-016": "single_source_supported",
+      "LG-infra_fire_weather_index__energy-impact-c1-017": "single_source_supported",
+      "LG-infra_fire_weather_index__energy-impact-c1-001": "multi_source_supported",
+      "LG-infra_fire_weather_index__energy-impact-c1-002": "single_source_supported",
+      "LG-infra_fire_weather_index__energy-impact-c1-003": "single_source_supported"
+    },
+    "allowed_numbers": [
+      "2007",
+      "3.9",
+      "3.915562260587942",
+      "36",
+      "36.188747110024913",
+      "36.2",
+      "4",
+      "40",
+      "40.1",
+      "40.104309693976084",
+      "49"
+    ],
+    "allowed_descriptors": [
+      "increase",
+      "by mid-century",
+      "under a high-emissions future",
+      "fire-weather danger (how hot, dry and windy conditions favour fire)",
+      "a slight increase",
+      "increase slightly",
+      "slightly higher",
+      "a small rise",
+      "rise slightly",
+      "a larger change than in most states",
+      "among the states with the largest changes",
+      "fire-weather danger"
+    ],
+    "exact_values": [
+      "1.869590040000000",
+      "1.9",
+      "3.9",
+      "3.915562260587942",
+      "36.188747110024913",
+      "36.2",
+      "40.1",
+      "40.104309693976084",
+      "7.484570030000000",
+      "7.5"
+    ],
+    "forbidden_strings": [
+      "wildfire_summer_Dmid",
+      "wildfire_summer_Hist",
+      "wildfire_summer_Midc",
+      "14300",
+      "208499235",
+      "221664018",
+      "229495849",
+      "233618492",
+      "239564763",
+      "246522870",
+      "247649715",
+      "254994199",
+      "268308343",
+      "268380986",
+      "273287103",
+      "273855287",
+      "3642757",
+      "221709315",
+      "246491629",
+      "258535031",
+      "259088727",
+      "259716408",
+      "264178918",
+      "265128606",
+      "268510027"
+    ],
+    "group_texts": {
+      "LG-fire_weather_v1-mechanism-c1-003": [
+        "higher temperatures and aridity dry fuels, creating extreme fire‑weather",
+        "Increasing temperature and aridity have created more frequent extreme fire‑weather conditions, leading to more very large wildfires and higher‑severity burning.",
+        "Higher temperatures quickly dry wildland fuels, making them easier to ignite and leading to faster fire spread."
+      ],
+      "LG-fire_weather_v1-driver-c1-006": [
+        "climate change increases extreme fire‑weather frequency",
+        "Exceptionally warm and dry atmospheric conditions, including high vapor pressure deficit, have driven the recent intensification of wildfire activity in the Western United States.",
+        "Climate change in the western United States has increased the frequency of extreme fire weather events and is projected to increase the area burned by wildfire in the coming decades.",
+        "Climate change is expected to increase the frequency of extreme fire weather and associated smoke events, potentially tripling wildfire numbers by mid‑century."
+      ],
+      "LG-fire_weather_v1-driver-c2-021": [
+        "Low sea‑ice concentrations in the Beaufort/Chukchi Seas favor fire‑weather conditions in the western United States."
+      ],
+      "LG-fire_weather_v1-mechanism-c2-004": [
+        "Higher live‑vegetation or dead‑fuel moisture reduces fire hazard",
+        "Fire sizes increase exponentially with higher VPD and decrease with higher 1000‑hour dead fuel moisture across all spatial scales, especially in forested areas."
+      ],
+      "LG-fire_weather_v1-driver-c1-002": [
+        "humidity and vapor pressure deficit affect fire risk",
+        "Relative humidity and temperature are the most influential individual climate variables affecting observed burned area.",
+        "Forest burned area anomalies are most sensitive to relative humidity anomalies, while non‑forest burned area anomalies are most sensitive to temperature and relative humidity anomalies across most regions."
+      ],
+      "LG-fire_weather_v1-driver-c1-003": [
+        "strong winds are a primary driver of fire danger and spread",
+        "Fire spread and the resulting area burnt are driven by wind speed, fire duration, and the amount, moisture content, and characteristics of the fuel, beyond just fire danger."
+      ],
+      "LG-infra_fire_weather_index__energy-impact-c1-007": [
+        "low‑WFPI line selection reduces wildfire risk but raises load shed",
+        "Applying a low‑WFPI line selection heuristic reduces wildfire risk but can increase the amount of load that must be shed."
+      ],
+      "LG-infra_fire_weather_index__energy-impact-c1-005": [
+        "increased wildfire activity extends transmission line exposure length",
+        "Increasing wildfire activity has increased exposure of electricity transmission lines to fire, extending the length of powerlines intersected by fire perimeters."
+      ],
+      "LG-infra_fire_weather_index__energy-impact-c1-009": [
+        "networked microgrid maintains low wildfire risk while serving more load",
+        "Networked microgrid configurations can maintain low wildfire risk while serving a higher proportion of load compared with standard distribution operation."
+      ],
+      "LG-infra_fire_weather_index__energy-impact-c1-010": [
+        "wildfire smoke reduces solar PV power output on military bases",
+        "Wildfire smoke can reduce the power output of solar photovoltaic systems on military bases."
+      ],
+      "LG-infra_fire_weather_index__energy-impact-c1-015": [
+        "higher mean wind speed raises power grid vulnerability to wildfire",
+        "Higher mean wind speed increases the vulnerability of power grid infrastructure to wildfire."
+      ],
+      "LG-infra_fire_weather_index__energy-impact-c1-016": [
+        "lower growing‑season precipitation raises power grid vulnerability to wildfire",
+        "Lower cumulative growing‑season precipitation is associated with higher vulnerability of power grid infrastructure to wildfire."
+      ],
+      "LG-infra_fire_weather_index__energy-impact-c1-017": [
+        "lower mean NDVI increases power grid vulnerability to wildfire",
+        "Lower mean NDVI, indicating reduced vegetation productivity, increases the vulnerability of power grid infrastructure to wildfire."
+      ],
+      "LG-infra_fire_weather_index__energy-impact-c1-001": [
+        "transmission line insulation reduction causing trips and outages",
+        "Wildfires near electrical transmission lines sharply reduce insulation between ground and the line, causing line trips and power outages.",
+        "When a wildfire ignites near a transmission line, the burning vegetation raises temperatures and soot concentration, dramatically decreasing air insulation and making phase-to-phase or phase-to-ground breakdowns more likely."
+      ],
+      "LG-infra_fire_weather_index__energy-impact-c1-002": [
+        "wildfire makes automatic reclosing difficult causing multiple trips",
+        "Wildfire combustion makes automatic reclosing of transmission lines difficult, potentially causing multiple trips and cascading grid failures."
+      ],
+      "LG-infra_fire_weather_index__energy-impact-c1-003": [
+        "wildfire‑induced arc‑faults trigger transient instability",
+        "Arc‑faults caused by wildfires can trigger transient instability that requires rapid generation redispatch to maintain system synchronism."
+      ]
+    },
+    "level": 8,
+    "family": "fire_weather_index",
+    "plain_quantity": [
+      "fire-weather danger (how hot, dry and windy conditions favour fire)",
+      "fire-weather danger"
+    ],
+    "group_role": {
+      "LG-fire_weather_v1-mechanism-c1-003": "driver",
+      "LG-fire_weather_v1-driver-c1-006": "driver",
+      "LG-fire_weather_v1-driver-c2-021": "driver",
+      "LG-fire_weather_v1-mechanism-c2-004": "driver",
+      "LG-fire_weather_v1-driver-c1-002": "driver",
+      "LG-fire_weather_v1-driver-c1-003": "driver",
+      "LG-infra_fire_weather_index__energy-impact-c1-007": "impact",
+      "LG-infra_fire_weather_index__energy-impact-c1-005": "impact",
+      "LG-infra_fire_weather_index__energy-impact-c1-009": "impact",
+      "LG-infra_fire_weather_index__energy-impact-c1-010": "impact",
+      "LG-infra_fire_weather_index__energy-impact-c1-015": "impact",
+      "LG-infra_fire_weather_index__energy-impact-c1-016": "impact",
+      "LG-infra_fire_weather_index__energy-impact-c1-017": "impact",
+      "LG-infra_fire_weather_index__energy-impact-c1-001": "impact",
+      "LG-infra_fire_weather_index__energy-impact-c1-002": "impact",
+      "LG-infra_fire_weather_index__energy-impact-c1-003": "impact"
+    },
+    "scope": {
+      "decision": "D-069a",
+      "groups": {
+        "LG-fire_weather_v1-mechanism-c1-003": {
+          "class": "mixed",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-fire_weather_v1-driver-c1-006": {
+          "class": "mixed",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-fire_weather_v1-driver-c2-021": {
+          "class": "us_subregion",
+          "stem": "Research on the United States",
+          "optional_clause": null
+        },
+        "LG-fire_weather_v1-mechanism-c2-004": {
+          "class": "us_subregion",
+          "stem": "Research on the United States",
+          "optional_clause": null
+        },
+        "LG-fire_weather_v1-driver-c1-002": {
+          "class": "global",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-fire_weather_v1-driver-c1-003": {
+          "class": "global",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-infra_fire_weather_index__energy-impact-c1-007": {
+          "class": "state",
+          "stem": "Research on Arizona",
+          "optional_clause": null
+        },
+        "LG-infra_fire_weather_index__energy-impact-c1-005": {
+          "class": "us_national",
+          "stem": "Research on the United States",
+          "optional_clause": null
+        },
+        "LG-infra_fire_weather_index__energy-impact-c1-009": {
+          "class": "unknown",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-infra_fire_weather_index__energy-impact-c1-010": {
+          "class": "us_subregion",
+          "stem": "Research on the United States",
+          "optional_clause": null
+        },
+        "LG-infra_fire_weather_index__energy-impact-c1-015": {
+          "class": "unknown",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-infra_fire_weather_index__energy-impact-c1-016": {
+          "class": "unknown",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-infra_fire_weather_index__energy-impact-c1-017": {
+          "class": "unknown",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-infra_fire_weather_index__energy-impact-c1-001": {
+          "class": "other",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-infra_fire_weather_index__energy-impact-c1-002": {
+          "class": "other",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-infra_fire_weather_index__energy-impact-c1-003": {
+          "class": "unknown",
+          "stem": "In general, research",
+          "optional_clause": null
+        }
+      },
+      "general_clause": "These are general drivers of fire-weather danger, not findings specific to Arizona.",
+      "needs_general_clause": false,
+      "place_names": [
+        "Arizona",
+        "Southwest"
+      ]
+    },
+    "question_form": {
+      "id": "QF-09",
+      "name": "what_could_it_mean_rung8",
+      "opening_regex": "^What could\\b",
+      "min_question_marks": 1
+    },
+    "rung8": {
+      "impact_group_ids": [
+        "LG-infra_fire_weather_index__energy-impact-c1-007",
+        "LG-infra_fire_weather_index__energy-impact-c1-005",
+        "LG-infra_fire_weather_index__energy-impact-c1-009",
+        "LG-infra_fire_weather_index__energy-impact-c1-010",
+        "LG-infra_fire_weather_index__energy-impact-c1-015",
+        "LG-infra_fire_weather_index__energy-impact-c1-016",
+        "LG-infra_fire_weather_index__energy-impact-c1-017",
+        "LG-infra_fire_weather_index__energy-impact-c1-001",
+        "LG-infra_fire_weather_index__energy-impact-c1-002",
+        "LG-infra_fire_weather_index__energy-impact-c1-003"
+      ],
+      "place_named_impact_group_ids": [
+        "LG-infra_fire_weather_index__energy-impact-c1-007"
+      ],
+      "group_hazard_relation": {
+        "LG-infra_fire_weather_index__energy-impact-c1-007": "broader_hazard",
+        "LG-infra_fire_weather_index__energy-impact-c1-005": "broader_hazard",
+        "LG-infra_fire_weather_index__energy-impact-c1-009": "broader_hazard",
+        "LG-infra_fire_weather_index__energy-impact-c1-010": "broader_hazard",
+        "LG-infra_fire_weather_index__energy-impact-c1-015": "broader_hazard",
+        "LG-infra_fire_weather_index__energy-impact-c1-016": "broader_hazard",
+        "LG-infra_fire_weather_index__energy-impact-c1-017": "broader_hazard",
+        "LG-infra_fire_weather_index__energy-impact-c1-001": "broader_hazard",
+        "LG-infra_fire_weather_index__energy-impact-c1-002": "broader_hazard",
+        "LG-infra_fire_weather_index__energy-impact-c1-003": "broader_hazard"
+      },
+      "asset_class_phrase": "energy systems",
+      "broader_hazard_phrase": "conditions that favour wildfire, of which fire-weather danger is one measure",
+      "quantity_phrases": [
+        "fire-weather danger (how hot, dry and windy conditions favour fire)",
+        "fire-weather danger"
+      ]
+    }
+  },
+  "excluded_groups": [
+    {
+      "group_id": "LG-fire_weather_v1-caveat-c1-001",
+      "statement_type": "caveat",
+      "claim_about": "hazard_definition_or_measurement",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-caveat-c1-003",
+      "statement_type": "caveat",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-caveat-c1-004",
+      "statement_type": "caveat",
+      "claim_about": "method_or_data",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-caveat-c1-017",
+      "statement_type": "caveat",
+      "claim_about": "impact_or_exposure",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-caveat-c1-019",
+      "statement_type": "caveat",
+      "claim_about": "method_or_data",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c1-001",
+      "statement_type": "driver",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c1-004",
+      "statement_type": "driver",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "disposition:not_about_family"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c2-002",
+      "statement_type": "driver",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c2-005",
+      "statement_type": "driver",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c2-008",
+      "statement_type": "driver",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c2-009",
+      "statement_type": "driver",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c2-016",
+      "statement_type": "driver",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c2-025",
+      "statement_type": "driver",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c2-026",
+      "statement_type": "driver",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c3-001",
+      "statement_type": "driver",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c3-002",
+      "statement_type": "driver",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-mechanism-c1-005",
+      "statement_type": "mechanism",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-mechanism-c1-006",
+      "statement_type": "mechanism",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-mechanism-c2-005",
+      "statement_type": "mechanism",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "disposition:not_about_family"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-mechanism-c2-007",
+      "statement_type": "mechanism",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "no_disposition"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c1-008",
+      "statement_type": "driver",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "no_disposition"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-mechanism-c1-010",
+      "statement_type": "mechanism",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "no_disposition"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-consensus-c1-004",
+      "statement_type": "consensus",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "no_disposition"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c1-009",
+      "statement_type": "driver",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "no_disposition"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c2-001",
+      "statement_type": "driver",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "no_disposition"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c2-010",
+      "statement_type": "driver",
+      "claim_about": "hazard_definition_or_measurement",
+      "reason": "no_disposition"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c2-011",
+      "statement_type": "driver",
+      "claim_about": "hazard_definition_or_measurement",
+      "reason": "no_disposition"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-driver-c1-005",
+      "statement_type": "driver",
+      "claim_about": "hazard_definition_or_measurement",
+      "reason": "rung8:context_not_attached"
+    },
+    {
+      "group_id": "LG-fire_weather_v1-mechanism-c1-007",
+      "statement_type": "mechanism",
+      "claim_about": "hazard_definition_or_measurement",
+      "reason": "rung8:context_not_attached"
+    },
+    {
+      "group_id": "LG-infra_fire_weather_index__energy-impact-c1-004",
+      "statement_type": "impact",
+      "claim_about": "hazard_impact_on_asset",
+      "reason": "over_cap:impact"
+    },
+    {
+      "group_id": "LG-infra_fire_weather_index__energy-impact-c1-006",
+      "statement_type": "impact",
+      "claim_about": "hazard_impact_on_asset",
+      "reason": "over_cap:impact"
+    },
+    {
+      "group_id": "LG-infra_fire_weather_index__energy-impact-c1-008",
+      "statement_type": "impact",
+      "claim_about": "hazard_impact_on_asset",
+      "reason": "over_cap:impact"
+    },
+    {
+      "group_id": "LG-infra_fire_weather_index__energy-impact-c1-011",
+      "statement_type": "impact",
+      "claim_about": "hazard_impact_on_asset",
+      "reason": "over_cap:impact"
+    },
+    {
+      "group_id": "LG-infra_fire_weather_index__energy-impact-c1-012",
+      "statement_type": "impact",
+      "claim_about": "hazard_impact_on_asset",
+      "reason": "over_cap:impact"
+    },
+    {
+      "group_id": "LG-infra_fire_weather_index__energy-impact-c1-013",
+      "statement_type": "impact",
+      "claim_about": "hazard_impact_on_asset",
+      "reason": "over_cap:impact"
+    },
+    {
+      "group_id": "LG-infra_fire_weather_index__energy-impact-c1-014",
+      "statement_type": "impact",
+      "claim_about": "hazard_impact_on_asset",
+      "reason": "over_cap:impact"
+    }
+  ],
+  "inputs_sha256": {
+    "item_seeds_v3": "04602e1bce5bc205ab6ae0d179f866ce894cfc517be62f2039fdc9c393f9d8a5",
+    "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+    "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+    "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+    "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+    "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+    "group_dispositions": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+    "provenance_corrections": "d56cbe5e0c4feaffd8398126953c8437416967b2fbc382d5da907e88081ebd93",
+    "descriptor_rules": "dbfa8fd8a86a9379b4709b998bb33e673dceafd5f8ba7d199d55ff672d4c282d",
+    "plain_language": "60598527bf21a9dbc5a68e31cb60ec76d75b95d5ede7411181c323f56832b140",
+    "resolutions": "d86e1cd4e92ab51562ec251c98652d135280a52642012f6c94f3e2d02595869a",
+    "nca_map": "3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41",
+    "nca_regions_disposition": "a0c390a80634a8e4a74693e47828a9912ddea8f8151784d57c82f816e3bb1ae9",
+    "group_dispositions_fire": "94a88f5d3228f3fdc4cf68a585475bb0cbc08b6c8d2ffe95430c8cf029ed907a",
+    "item_seeds_infra_v1": "f724b4c850a1ec548fdc7fe3aa7cf3ff8ede87d2773c4805cba7f762ea120934",
+    "pilot_selection_infra_v1": "0f42385ab51377637e523ed0e1323789690807e0c32f9cf744d2820ba26ae9e6",
+    "groups_infra_run1": "f61bf4f557c0f5fbdfec2779fc578b01e84bdc6edfca80c4b633d25f841045ce",
+    "groups_enriched_infra_run1": "1e5aa4fb5902bc598c5977dd231d9b1b1c029fdad98076651cb0b2d7b0913eb1",
+    "statements_infra_run1": "869b0592e72ec22b7617a3fbe6ae3005df762b4817f7609e41c96a8559cbca4b",
+    "independence_infra_run1": "b0a2fa3f3bd9998597c4681100586abf555ce295283984f102222030bd2fb602",
+    "question_forms": "520aafa0804b5308be7e9e59b8316d9fbe0d8b60b335da4a0414ed0a17ab283e"
+  },
+  "relevance": {
+    "geography": "litgeo v2",
+    "n_relevant_statements": 109,
+    "by_basis": {
+      "state": 0,
+      "nca_region": 0,
+      "us_subregion": 24,
+      "us_national": 18,
+      "global": 67
+    }
+  },
+  "decision": "D-076",
+  "rules": "D-075 (DR-SEED-INFRA-1, rung-8 wording), D-073b, D-069a",
+  "rung3_seed_id": "SD2-TP1-01461",
+  "asset_class": "energy",
+  "state": "Arizona",
+  "review_state": "impact_groups_unreviewed",
+  "provisional": true,
+  "place_named_impact_evidence": "place_named_impact_statement",
+  "question_form_id": "QF-09",
+  "scope_detail": {
+    "LG-fire_weather_v1-mechanism-c1-003": {
+      "class": "mixed",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 2,
+      "cited_by_class": {
+        "us_national": 1,
+        "global": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-fire_weather_v1-driver-c1-006": {
+      "class": "mixed",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 2,
+      "cited_by_class": {
+        "us_subregion": 1,
+        "global": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-fire_weather_v1-driver-c2-021": {
+      "class": "us_subregion",
+      "stem": "Research on the United States",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "us_subregion": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-fire_weather_v1-mechanism-c2-004": {
+      "class": "us_subregion",
+      "stem": "Research on the United States",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "us_subregion": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-fire_weather_v1-driver-c1-002": {
+      "class": "global",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 2,
+      "cited_by_class": {
+        "global": 2
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-fire_weather_v1-driver-c1-003": {
+      "class": "global",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "global": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_fire_weather_index__energy-impact-c1-007": {
+      "class": "state",
+      "stem": "Research on Arizona",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "state": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_fire_weather_index__energy-impact-c1-005": {
+      "class": "us_national",
+      "stem": "Research on the United States",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "us_national": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_fire_weather_index__energy-impact-c1-009": {
+      "class": "unknown",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "unknown": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_fire_weather_index__energy-impact-c1-010": {
+      "class": "us_subregion",
+      "stem": "Research on the United States",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "us_subregion": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_fire_weather_index__energy-impact-c1-015": {
+      "class": "unknown",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "unknown": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_fire_weather_index__energy-impact-c1-016": {
+      "class": "unknown",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "unknown": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_fire_weather_index__energy-impact-c1-017": {
+      "class": "unknown",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "unknown": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_fire_weather_index__energy-impact-c1-001": {
+      "class": "other",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 2,
+      "cited_by_class": {
+        "other": 2
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_fire_weather_index__energy-impact-c1-002": {
+      "class": "other",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "other": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_fire_weather_index__energy-impact-c1-003": {
+      "class": "unknown",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "unknown": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    }
+  },
+  "selection": {
+    "file": "artifacts/benchmark/pilot_selection_infra_v1.yaml",
+    "decision": "D-075",
+    "order": 5,
+    "item_id": "BI-P5-0005",
+    "family": "fire_weather_index",
+    "asset_class": "energy",
+    "state": "Arizona",
+    "state_basis": "largest table change among states with a place-named impact statement",
+    "candidate_states": [
+      "Arizona",
+      "California",
+      "Idaho",
+      "Nevada"
+    ],
+    "table_change": 3.915562260587942,
+    "place_named_impact_evidence": "place_named_impact_statement",
+    "question_form_id": "QF-09"
+  }
+}

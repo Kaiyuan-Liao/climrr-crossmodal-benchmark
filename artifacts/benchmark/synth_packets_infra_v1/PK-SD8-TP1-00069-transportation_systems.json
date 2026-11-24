@@ -1,0 +1,2911 @@
+{
+  "packet_id": "PK-SD8-TP1-00069-transportation_systems",
+  "version": "synthpackets infra v1",
+  "rank_rule": "DR-SEED-RANK-3",
+  "descriptor_rule": "DR-DESC-1 v4",
+  "descriptor_rules_sha256": "dbfa8fd8a86a9379b4709b998bb33e673dceafd5f8ba7d199d55ff672d4c282d",
+  "plain_language": "plain_language_v1b",
+  "plain_language_sha256": "60598527bf21a9dbc5a68e31cb60ec76d75b95d5ede7411181c323f56832b140",
+  "item_id": "BI-P5-0002",
+  "seed_id": "SD8-TP1-00069-transportation_systems",
+  "use_case_level": 8,
+  "family": "heat_index",
+  "working_assumptions_relied_on": [
+    {
+      "id": "WA-STATE-LABEL",
+      "resolution": "R-005",
+      "status": "owner_authorized_working_assumption",
+      "covers": [
+        "IC-012"
+      ]
+    },
+    {
+      "id": "WA-UNWEIGHTED-MEAN",
+      "resolution": "R-008",
+      "status": "owner_authorized_working_assumption",
+      "covers": [
+        "unweighted_cell_mean"
+      ]
+    }
+  ],
+  "model_view": {
+    "use_case_level": 8,
+    "rung": 8,
+    "reasoning_modalities": "Hazard + Text",
+    "plain_language": {
+      "version": "plain_language_v1b",
+      "quantity": "days hot and humid enough to be dangerous",
+      "quantity_short": "dangerous heat-index days",
+      "scenario": "under a high-emissions future",
+      "horizon": "by mid-century",
+      "hedge_multi_source_or_review": [
+        "research shows",
+        "research has shown"
+      ],
+      "hedge_single_source": [
+        "research suggests"
+      ],
+      "never_write": [
+        "one study",
+        "a single study"
+      ],
+      "broader_hazard_phrase": "extreme heat, of which dangerous heat-index days are one measure"
+    },
+    "must_not_use": [
+      "one study",
+      "a single study",
+      "tercile",
+      "ranking large",
+      "ranking small",
+      "ranking moderate",
+      "RCP",
+      "SSP",
+      "wildfire",
+      "fires",
+      "burned area",
+      "will fail",
+      "at risk"
+    ],
+    "patterns": [
+      {
+        "pattern_id": "TP1-00069",
+        "text": "Pattern TP1-00069 (single place). Place: the U.S. state of Arizona (NCA5 region: Southwest). Quantity: days hot and humid enough to be dangerous. Season: summer. Horizon: by mid-century, compared with the modeled historical baseline. Scenario: under a high-emissions future. Statistic: change of the mean (future minus modeled historical baseline). Direction: increase. Value: +10.3 days. Mean: 13.9 days in the modeled historical baseline, 24.2 days at mid-century. Range of the change per grid cell: 0.0 to 27.1 days. Robustness: 1976 of 2007 grid cells change in the same direction as the mean (majority_same_direction). Comparison with other U.S. states: a change similar to most states (by signed value, among 49 U.S. states for this quantity, season, horizon, scenario and statistic; a relative descriptor among states, not an absolute threshold).",
+        "values_shown": {
+          "value": "10.3",
+          "mean_from": "13.9",
+          "mean_to": "24.2",
+          "range": [
+            "0.0",
+            "27.1"
+          ],
+          "tercile": "moderate"
+        },
+        "allowed_descriptors": {
+          "pattern_id": "TP1-00069",
+          "rule": "DR-DESC-1 v4",
+          "rules_sha256": "dbfa8fd8a86a9379b4709b998bb33e673dceafd5f8ba7d199d55ff672d4c282d",
+          "direction": "increase",
+          "horizon": "by mid-century",
+          "scenario": "under a high-emissions future",
+          "quantity": "days hot and humid enough to be dangerous",
+          "magnitude_class": "a moderate increase",
+          "magnitude_forms": [
+            "a moderate increase",
+            "increase moderately",
+            "about half again as many",
+            "rise moderately"
+          ],
+          "magnitude_note": null,
+          "magnitude_also_allowed": [],
+          "anchor_pair": "from about 14 to about 24 days a summer",
+          "anchors": [
+            "about 14 days",
+            "about 24 days"
+          ],
+          "tercile": null,
+          "tercile_class": "moderate",
+          "tercile_forms": [
+            "a change similar to most states",
+            "in the middle of the range among states"
+          ]
+        }
+      }
+    ],
+    "groups": [
+      {
+        "group_id": "LG-extreme_heat_v1-driver-c1-008",
+        "role": "driver",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "label": "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat",
+        "evidence_strength": "multi_source_supported",
+        "independent_papers": 3,
+        "members": [
+          {
+            "statement": "Citing Schoof et al. (2019), the paper reports that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat.",
+            "passage": "However, recent work examining changes in the frequency of different types of extreme heat days (considering both temperature and humidity) in CMIP5 projections after using a multivariate quantile mapping approach similar to the MACA methodology finds that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat (Schoof et al 2019).",
+            "passage_truncated": false,
+            "paper_id": "199098498",
+            "region": "United States"
+          },
+          {
+            "statement": "Land-atmosphere feedbacks are a stronger factor for heat wave maintenance at southern latitudes, and misrepresentation of these feedbacks in models leads to poor forecast skill in the Southwest United States.",
+            "passage": "Land-atmosphere feedbacks appear to be a stronger factor for heat wave maintenance at southern latitudes, but the NCEP model seems to misrepresent those feedbacks, particularly over the Southwest United States, leading to poor skill in that region.",
+            "passage_truncated": false,
+            "paper_id": "158091651",
+            "region": "Southwest United States"
+          },
+          {
+            "statement": "Air mass stagnation events, which boost ozone production, are expected to become more frequent as weather conditions that favor heat waves increase.",
+            "passage": "Air mass stagnation events, which increase O3 production and will increase in frequency as weather conditions favorable to heat waves increase (CCSP 2008), are another important indicator.",
+            "passage_truncated": false,
+            "paper_id": "5838629",
+            "region": "United States"
+          }
+        ],
+        "hedge": [
+          "research shows",
+          "research has shown"
+        ],
+        "scope_class": "us_national",
+        "scope_phrase": "Research on the United States shows",
+        "scope_optional_clause": ", including work on the Southwest"
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-driver-c2-001",
+        "role": "driver",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "label": "global warming increases heatwave frequency and intensity",
+        "evidence_strength": "multi_source_supported",
+        "independent_papers": 2,
+        "members": [
+          {
+            "statement": "Projected climate warming is expected to increase the frequency, intensity, and duration of heatwaves, thereby elevating heat‑stress risk.",
+            "passage": "As global warming continues, the frequency, intensity and duration of heatwaves are likely to increase.",
+            "passage_truncated": false,
+            "paper_id": "14006228",
+            "region": "unknown"
+          },
+          {
+            "statement": "Climate change is causing heat waves to occur more often and with greater intensity.",
+            "passage": "With climate change, heat waves have become more frequent and intense.",
+            "passage_truncated": false,
+            "paper_id": "235602877",
+            "region": "global"
+          },
+          {
+            "statement": "Anthropogenic global warming is expected to increase both the mean annual temperature and the frequency of heat events.",
+            "passage": "The occurrence of heat events is expected to increase due to the worsening effects of anthropogenic global warming [60]. This will be seen in both higher mean annual temperatures and in the frequency of heat shocks [37].",
+            "passage_truncated": false,
+            "paper_id": "221504407",
+            "region": "global"
+          },
+          {
+            "statement": "Global warming is expected to increase the frequency of extreme heat events, raising heat exposure for agricultural workers.",
+            "passage": "Climate change has resulted in a significant rise in the global mean temperature and it is predicted to get worse [23]. This means more extreme heat events and heat exposure for people working in agriculture in the hot climates.",
+            "passage_truncated": false,
+            "paper_id": "199381463",
+            "region": "global"
+          }
+        ],
+        "hedge": [
+          "research shows",
+          "research has shown"
+        ],
+        "scope_class": "global",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-mechanism-c1-024",
+        "role": "driver",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "label": "urban heat island intensifies due to nighttime conditions and reduced moisture",
+        "evidence_strength": "multi_source_supported",
+        "independent_papers": 2,
+        "members": [
+          {
+            "statement": "The urban heat island effect is most pronounced at night and under high‑pressure, calm, clear‑sky conditions.",
+            "passage": "Further, the UHI is most noticeable at night and under synoptic high pressure systems with calm conditions and clear skies [24,[26][27][28], and the UHI has been measured in cities spanning many varying climate regimes and sizes [29][30][31][32].",
+            "passage_truncated": false,
+            "paper_id": "128765172",
+            "region": "unknown"
+          },
+          {
+            "statement": "During heat‑wave events, CUHI intensifies markedly, especially at night, because urban areas experience lower moisture and reduced wind speed.",
+            "passage": "In general, simulated CUHI values during a heat wave have intensified extensively relative to pre-heat wave conditions, mostly due to the lower moisture and reduced wind speed in urban areas during the heat wave.",
+            "passage_truncated": false,
+            "paper_id": "246243282",
+            "region": "unknown"
+          },
+          {
+            "statement": "During daytime, evapotranspiration from vegetation is the primary cooling mechanism, but it often cannot fully offset heat gains from advection and sensible heat from impervious surfaces.",
+            "passage": "During the daytime, evapotranspiration is the main cooling mechanism, however its impact on the surface energy budget may not be enough to compensate and counterbalance heat fluxes due to advection and sensible heat released by the impervious surfaces.",
+            "passage_truncated": false,
+            "paper_id": "230583145",
+            "region": "unknown"
+          },
+          {
+            "statement": "In extreme heat or drought conditions, trees may close their stomata, reducing evapotranspiration and potentially adding sensible heat, thereby diminishing their cooling effect.",
+            "passage": "During excessive temperature and drought conditions, trees may close their stomata while the surface temperature of leaves increases, contributing more sensible heat to the atmosphere and increasing the ambient temperature [150,151].",
+            "passage_truncated": false,
+            "paper_id": "230583145",
+            "region": "unknown"
+          },
+          {
+            "statement": "The cooling benefit of urban greenery is generally larger at night than during the day because trees reduce stored daytime heat and emit less sensible heat at night.",
+            "passage": "During the night, the maximum ambient temperature decrease corresponding to a GI rise of 80% may not exceed 2.3 • C, while the temperature drop for a GI increase by 20% is close to 0.5 • C.",
+            "passage_truncated": false,
+            "paper_id": "230583145",
+            "region": "unknown"
+          }
+        ],
+        "hedge": [
+          "research shows",
+          "research has shown"
+        ],
+        "scope_class": "global",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+        "role": "driver",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "label": "humidity magnifies heat stress and its effect grows with temperature",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "The magnifying effect of relative humidity on heat stress grows with increasing temperature, so that even unchanged or lower humidity can cause greater discomfort at higher temperatures.",
+            "passage": "at similar or lower humidity, the magnifying power of humidity increases with increasing T, i.e. similar or lower relative humidity levels will still cause greater human discomfort at higher temperatures.",
+            "passage_truncated": false,
+            "paper_id": "239996006",
+            "region": "southeastern United States",
+            "region_qualifier": "southeastern"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "scope_class": "us_subregion",
+        "scope_phrase": "Research on the United States suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-driver-c1-001",
+        "role": "driver",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "label": "Humidity raises heat‑index values or humid heatwave occurrence",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Including humidity in heatwave definitions leads to an increase in humid heatwave occurrence over broader areas of the United States.",
+            "passage": "The inclusion of humidity in temperature calculations led to an increase in humid heatwaves over broader areas, suggesting humidity played a significant role in the humid heatwaves (Russo et al 2017).",
+            "passage_truncated": false,
+            "paper_id": "269932944",
+            "region": "United States"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "scope_class": "us_national",
+        "scope_phrase": "Research on the United States suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
+        "role": "driver",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "label": "Soil moisture changes evaporative cooling and humidity, altering heatwave intensity",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Soil moisture deficits reduce evaporative cooling, increasing sensible heat flux and intensifying temperature‑only heatwaves.",
+            "passage": "If interpreting this as the impacts of soil moisture on heatwave, during temperature-only heatwaves, soil with lower moisture content and limited evaporation can heat up more readily, leading to increased sensible heat flux from the surface to the atmosphere.This can potentially intensify the warming of the lower atmosphere, contributing to the elevated temperatures characteristics of such heatwav",
+            "passage_truncated": true,
+            "paper_id": "269932944",
+            "region": "United States"
+          },
+          {
+            "statement": "Higher soil moisture enhances latent heat flux, raising atmospheric humidity and potentially strengthening humid heatwave conditions.",
+            "passage": "Although enhanced latent heat flux reduces air temperature, this excess evaporation would increase air humidity, potentially contributing to enhanced humid heatwave conditions (Matthews et al 2022).",
+            "passage_truncated": false,
+            "paper_id": "269932944",
+            "region": "United States"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "scope_class": "us_national",
+        "scope_phrase": "Research on the United States suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-consensus-c1-005",
+        "role": "driver",
+        "statement_type": "consensus",
+        "claim_about": "hazard_change_mechanism",
+        "label": "heat event frequency and intensity projected to increase, occupational illness risk will not diminish",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "The frequency and intensity of heat events are projected to increase, implying that occupational heat‑related illness risk will not diminish in the future.",
+            "passage": "The risk of HRI is unlikely to diminish in the future, as the frequency and intensity of heat events is projected to increase [10].",
+            "passage_truncated": false,
+            "paper_id": "252282233",
+            "region": "unknown"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "scope_class": "global",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-mechanism-c1-020",
+        "role": "driver",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "label": "Minimum air temperature reflects the amount of overnight cooling, with higher minima indicating reduced cooling and greater heat stress.",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Minimum air temperature reflects the amount of overnight cooling, with higher minima indicating reduced cooling and greater heat stress.",
+            "passage": "heat-trapping urban environments may intensify heat stress by preventing overnight cooling, which is indicated by minimum air temperature [58,80].",
+            "passage_truncated": false,
+            "paper_id": "6585212",
+            "region": "unknown"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "scope_class": "global",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-001",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "pavement structural degradation from heat",
+        "evidence_strength": "multi_source_supported",
+        "independent_papers": 9,
+        "members": [
+          {
+            "statement": "Higher pavement temperatures associated with extreme heat events increase the number of identified pavement distress points, indicating that hot conditions worsen road surface conditions.",
+            "passage": "It shows that the number of identified POIs, which signify pavement distress, varies with changes in pavement temperature.The data exhibit a strong correlation between pavement temperature and the frequency of POIs, with an 83% R-squared value for road section 1 and 70% for road section 2.",
+            "passage_truncated": false,
+            "paper_id": "269406624",
+            "region": "Phoenix, Arizona",
+            "asset_class": "transportation_systems"
+          },
+          {
+            "statement": "Increasing temperatures make common road pavements and rail tracks more vulnerable.",
+            "passage": "The increase in temperatures causes a greater vulnerability of common road pavements (with surface layer composed of asphalt concrete) and rail (track), increases the energy demand to operate buses, especially for auxiliaries [17], which is perceived by the fleets managers as one more items in the overall lists of operational costs [18,19], and worsens the public's living conditions.",
+            "passage_truncated": false,
+            "paper_id": "158185209",
+            "region": "unknown",
+            "asset_class": "transportation_systems"
+          },
+          {
+            "statement": "Increasing summer temperatures lead to critical impacts on pavement structural and functional performance, including rutting and thermal cracking that shorten service life.",
+            "passage": "This table shows a temperature rise in the summer months that have critical impacts on the pavement and its structural and functional performance.",
+            "passage_truncated": false,
+            "paper_id": "214326018",
+            "region": "Morocco",
+            "asset_class": "transportation_systems"
+          },
+          {
+            "statement": "High temperatures cause permanent deformation of asphalt pavements, reducing their smoothness and service life.",
+            "passage": "High temperatures have a significant impact on the service life of asphalt pavements and are often the basis of determining the design of the pavement mixture and section. Asphalt becomes a plastomer that deforms under high-temperature conditions, and its shape cannot be completely recovered. Hence, asphalt pavements are prone to permanent deformation under the influence of repeated loading [24], ",
+            "passage_truncated": true,
+            "paper_id": "221665613",
+            "region": "Liaoning Province",
+            "asset_class": "transportation_systems"
+          },
+          {
+            "statement": "During high temperature periods, pavement surface temperatures exhibit large fluctuations that diminish with depth, indicating that elevated atmospheric heat primarily affects the upper layers of the road.",
+            "passage": "During the high temperature period, the eastern observation area fluctuates between 20 and 60°C. As the depth increases, the temperature variation range gradually decreases, and within 0-10cm, the temperature variation change decreases greatly.",
+            "passage_truncated": false,
+            "paper_id": "226335422",
+            "region": "Inner Mongolia",
+            "asset_class": "transportation_systems"
+          },
+          {
+            "statement": "High ambient temperatures in a warm tropical environment increase the susceptibility of asphalt pavements to flow and permanent deformation, leading to inevitable rutting under heavy traffic loading.",
+            "passage": "Such severe loading in combination with high temperatures in the area due to the warm tropical environment exacerbate the situation and can cause the asphalt to begin to flow, hence making rutting and deformation inevitable.",
+            "passage_truncated": false,
+            "paper_id": "229433013",
+            "region": "Uganda",
+            "asset_class": "transportation_systems"
+          },
+          {
+            "statement": "Increasing temperature above about 25 °C sharply reduces the interlaminar shear fatigue life of steel bridge deck pavements.",
+            "passage": "When the temperature reaches 50°C, the interlaminar shear fatigue life of the pavement structure decreases sharply. Taking 25°C as the boundary, the change rate of the shear fatigue life with temperature can be divided into two stages. At −10°C to 25°C, the shear fatigue lives at different temperatures have little differences. In contrast, when the temperature is higher than 25°C, the shear fatigu",
+            "passage_truncated": true,
+            "paper_id": "231654622",
+            "region": "China",
+            "asset_class": "transportation_systems"
+          },
+          {
+            "statement": "Significant daily or hourly increases in temperature can accelerate the development of permanent deformation in flexible pavements.",
+            "passage": "In extreme cases, when temperature has significant daily/hourly increases, accelerated development of permanent deformation can be expected [3,16].",
+            "passage_truncated": false,
+            "paper_id": "213951900",
+            "region": "unknown",
+            "asset_class": "transportation_systems"
+          },
+          {
+            "statement": "Wider temperature ranges caused by climate change increase thermal stresses in asphalt layers, leading to more thermal cracking.",
+            "passage": "Increases in the temperature ranges due to climate change can increase thermal stresses in asphalt layers, and more thermal cracking can be expected [17,18].",
+            "passage_truncated": false,
+            "paper_id": "213951900",
+            "region": "unknown",
+            "asset_class": "transportation_systems"
+          },
+          {
+            "statement": "Increasing temperatures and heat waves can promote excessive vegetation growth and higher evaporation, which in turn impair drainage and increase road distress, raising maintenance needs for transportation systems.",
+            "passage": "Other indications of possible problems observed included the accumulation of sand and debris (due to wind and flooding) and excessive vegetation caused by increased rainfall and high temperatures, leading to sight distance and passability problems.",
+            "passage_truncated": false,
+            "paper_id": "257991205",
+            "region": "central Kenya",
+            "asset_class": "transportation_systems"
+          }
+        ],
+        "hedge": [
+          "research shows",
+          "research has shown"
+        ],
+        "relevance": "place_named",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "transportation_systems": 10
+        },
+        "impact_mechanism": [
+          "higher pavement temperature increases vibration magnitude",
+          "higher temperatures degrade material performance",
+          "causes thermal cracking and rutting",
+          "causes permanent deformation of the pavement surface",
+          "elevated atmospheric heat increases surface temperature fluctuations",
+          "high temperatures reduce asphalt viscosity causing the material to flow under load",
+          "high temperatures reduce the bond strength at the waterproof‑adhesive‑pavement interface",
+          "temperature spikes increase pavement material deformation",
+          "greater temperature variability raises thermal stress in asphalt",
+          "higher temperatures increase vegetation growth and water evaporation, impairing drainage"
+        ],
+        "impact_outcome": [
+          "more pavement distress points are detected",
+          "increased vulnerability and potential failure of pavements and tracks",
+          "reduces pavement service life",
+          "reduces smoothness and shortens service life",
+          "greater temperature variability in the upper pavement layers",
+          "permanent rutting and deformation of the pavement surface",
+          "shear fatigue life of the bridge deck pavement is sharply shortened",
+          "accelerated permanent deformation",
+          "increased thermal cracking",
+          "greater road distress and higher maintenance requirements"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "other",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": ", including work on Arizona"
+      },
+      {
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-004",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "cool roofs provide pedestrian‑level temperature cooling",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Cool roofs provide daytime pedestrian-level air temperature cooling of up to about 2 °C during heatwaves, with the greatest cooling observed in Phoenix.",
+            "passage": "Daily maximum temperature change (averaged from 11 am through 2 pm local time) reaches −2.5°C in Phoenix and −2.0°C in Atlanta and Detroit (see daily maximum cooling in figure S9).",
+            "passage_truncated": false,
+            "paper_id": "212809106",
+            "region": "Phoenix, Atlanta, Detroit (USA)",
+            "asset_class": "transportation_systems"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "relevance": "us",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "transportation_systems": 1
+        },
+        "impact_mechanism": [
+          "reflective roofs reduce solar heat absorption"
+        ],
+        "impact_outcome": [
+          "lowering pedestrian-level air temperature"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "us_national",
+        "scope_phrase": "Research on the United States suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-002",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "rail track expansion and buckling causing disruptions",
+        "evidence_strength": "multi_source_supported",
+        "independent_papers": 3,
+        "members": [
+          {
+            "statement": "Increasing ambient temperatures can cause rail buckling, which can lead to train derailments and service disruptions on high‑speed rail lines.",
+            "passage": "There are many consequences to the railway infrastructure due to hot and dry weather and the obvious example is the risk of buckling.",
+            "passage_truncated": false,
+            "paper_id": "1004111",
+            "region": "Malaysia",
+            "asset_class": "transportation_systems"
+          },
+          {
+            "statement": "Longer periods of heat waves are expected to increase and can disrupt railway operations because rails, switch components, and overhead lines expand in heat, leading to traffic disruptions and a higher probability of rail defects.",
+            "passage": "All through heatwaves, railway transport is difficult to operate due to the higher tolerance of heat in technical components and cooling systems [19].",
+            "passage_truncated": false,
+            "paper_id": "237251104",
+            "region": "Sweden",
+            "asset_class": "transportation_systems"
+          },
+          {
+            "statement": "Extreme heat can cause track expansion and deformation, leading to disruptions in underground transport systems and problems with electrical systems.",
+            "passage": "When temperatures reach dangerous levels, such as the record heat waves that affected Europe recently, transport systems encounter disruptions due to track expansion and deformation, as well as issues with electrical systems [14].",
+            "passage_truncated": false,
+            "paper_id": "270031609",
+            "region": "Europe",
+            "asset_class": "transportation_systems"
+          }
+        ],
+        "hedge": [
+          "research shows",
+          "research has shown"
+        ],
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "transportation_systems": 3
+        },
+        "impact_mechanism": [
+          "high temperatures cause rail buckling",
+          "thermal expansion of rails and components",
+          "heat causes track expansion and deformation"
+        ],
+        "impact_outcome": [
+          "train derailments and service disruptions",
+          "traffic disruptions and increased rail defects",
+          "disrupts service and creates electrical system issues"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "other",
+        "scope_phrase": "In general, research shows",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-003",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "runway surface damage and operational limits from heat",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Extreme heat can cause runway surface damage and reduce aircraft lift, leading to weight restrictions and operational disruptions at airports.",
+            "passage": "Extreme temperatures can cause restrictions on the aircraft's maximum take-off weights because of the reduced lift generated in less dense air. This is especially relevant for airports located at higher altitudes and especially where the airport has a short runway (Coffel & Horton, 2015;Monioudi et al., 2018;Zhou et al., 2018).",
+            "passage_truncated": false,
+            "paper_id": "255723100",
+            "region": "unknown",
+            "asset_class": "transportation_systems"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "transportation_systems": 1
+        },
+        "impact_mechanism": [
+          "high temperatures reduce air density"
+        ],
+        "impact_outcome": [
+          "aircraft weight limits are lowered and runway damage may occur"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "global",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-007",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "heat‑driven vegetation fires threaten railway corridors",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Heat and drought associated with extreme heat waves increase the risk of vegetation fires along railway corridors, creating a need to stop or redirect train traffic.",
+            "passage": "Heat and drought also increase the risk of vegetation fires and thus also the need to stop or redirect traffic.",
+            "passage_truncated": false,
+            "paper_id": "237251104",
+            "region": "Sweden",
+            "asset_class": "transportation_systems"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "transportation_systems": 1
+        },
+        "impact_mechanism": [
+          "increased fire risk from vegetation"
+        ],
+        "impact_outcome": [
+          "need to stop or redirect train traffic"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "other",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-009",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "heat exacerbates erosion of road embankments and side slopes",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Higher ambient temperatures can exacerbate water‑related damage to road embankments and side slopes, increasing the risk of material loss and erosion.",
+            "passage": "Embankment slopes 53% showed minor evidence of water damage 33% had discernible channels on the embankment slopes 13% showed warning signs of channels on slopes and a notable loss of slope material.",
+            "passage_truncated": false,
+            "paper_id": "257991205",
+            "region": "central Kenya",
+            "asset_class": "transportation_systems"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "transportation_systems": 1
+        },
+        "impact_mechanism": [
+          "higher temperatures increase water‑related damage to embankments and slopes"
+        ],
+        "impact_outcome": [
+          "greater material loss and erosion of road structures"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "other",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      },
+      {
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-011",
+        "role": "impact",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "label": "Permeable and vegetated pavements can reduce surface temperatures by evaporative cooling, but their service life may be shorter than traditional pavements.",
+        "evidence_strength": "single_source_supported",
+        "independent_papers": 1,
+        "members": [
+          {
+            "statement": "Permeable and vegetated pavements can reduce surface temperatures by evaporative cooling, but their service life may be shorter than traditional pavements.",
+            "passage": "Both non-vegetative and vegetative pavements are suitable for humid climates, where frequent rainfall powers the process [37]. Both pavements mitigate the UHI, but their implementation is limited by mechanical and functional characteristics of the materials. Indeed, for the same thickness, porous pavements have a service life lower than traditional structures [40].",
+            "passage_truncated": false,
+            "paper_id": "158185209",
+            "region": "unknown",
+            "asset_class": "transportation_systems"
+          }
+        ],
+        "hedge": [
+          "research suggests"
+        ],
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "transportation_systems": 1
+        },
+        "impact_mechanism": [
+          "evaporation and transpiration remove heat from pavement surface"
+        ],
+        "impact_outcome": [
+          "lower surface temperatures but reduced durability"
+        ],
+        "review_state": "impact_groups_unreviewed",
+        "scope_class": "global",
+        "scope_phrase": "In general, research suggests",
+        "scope_optional_clause": null
+      }
+    ],
+    "allowed_numbers": [
+      "0",
+      "10",
+      "14",
+      "24",
+      "27",
+      "49",
+      "0.0",
+      "10.3",
+      "13.9",
+      "1976",
+      "2007",
+      "24.2",
+      "27.1",
+      "0.000000000000000",
+      "10.271200803886398",
+      "13.932170738594918",
+      "24.203371542481315",
+      "27.133333200000003"
+    ],
+    "guardrails": [
+      "A modeled historical baseline is model output for a past period, not an observation.",
+      "A Fire Weather Index is a meteorological fire-danger index; it is never fire occurrence, ignition, burned area or damage.",
+      "A high-emissions future is one plausible future, not a forecast and not the only plausible future.",
+      "Hazard is not exposure, and exposure is not risk.",
+      "Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.",
+      "Impact statements are general unless a group is marked place_named for the place."
+    ],
+    "item_fields": [
+      "prompt",
+      "reference_answer.table_pattern",
+      "reference_answer.literature_interpretation",
+      "reference_answer.integrated",
+      "rubric.required_points",
+      "rubric.acceptable_variants",
+      "rubric.optional_points",
+      "rubric.disallowed_claims",
+      "rubric.fatal_errors",
+      "guardrails",
+      "source_independent_answerability",
+      "source_independence_note",
+      "capability_tested",
+      "system_task",
+      "key_relationships",
+      "evidence_needed",
+      "desired_output_characteristics",
+      "expected_knowledge_level"
+    ],
+    "rung_name": "8. Hazard impact on infrastructure: State the projected hazard change at a place and what research shows such conditions do to an asset class.",
+    "rung_instruction": "Rung 8 (hazard impact on infrastructure). Write the answer in three parts: (1) the hazard change at the place, as projected, in the table-pattern sentence; (2) for the impact groups, '<scope phrase> that <hazard phrase> <impact mechanism> <asset class phrase>', where the hazard phrase is the broader-hazard phrase when a cited impact group has hazard_relation broader_hazard, else the plain quantity; the driver groups as in any item; the general closing clause when no cited group is state- or NCA-specific; (3) never state that an asset, or the asset class, in the place will fail, is at risk, is vulnerable or will be damaged. Only when citing a group listed in place_named_impact_group_ids may the answer write 'For <asset class phrase> in <Place>, this implies more exposure to <impact outcome>'.",
+    "asset_class": "transportation_systems",
+    "asset_class_phrase": "transportation systems",
+    "cisa_sector": "Transportation Systems Sector",
+    "place_named_impact_group_ids": [
+      "LG-infra_heat_index__transportation_systems-impact-c1-001"
+    ],
+    "review_state": "impact_groups_unreviewed",
+    "scope": {
+      "decision": "D-069a",
+      "place": "Arizona",
+      "classes_present": [
+        "us_subregion",
+        "us_national",
+        "global",
+        "other"
+      ],
+      "needs_general_clause": true,
+      "general_clause": "These are general drivers of dangerous heat-index days, not findings specific to Arizona.",
+      "rule": "majority of cited members; ties -> general; minority place mentions -> optional clause"
+    },
+    "question_form": {
+      "id": "QF-09",
+      "name": "what_could_it_mean_rung8",
+      "skeleton": "What could a projected increase in dangerous heat-index days mean for transportation systems in Arizona, and why?",
+      "opening_regex": "^What could\\b",
+      "min_question_marks": 1
+    }
+  },
+  "provenance": {
+    "patterns": [
+      {
+        "acceptance_blocked": false,
+        "acceptance_blocked_by": [],
+        "authorization": "verified",
+        "cautions": [],
+        "computed_value_or_range": {
+          "cell_direction_counts": {
+            "decrease": 0,
+            "increase": 1976,
+            "no_change": 31
+          },
+          "mean_from": "13.932170738594918",
+          "mean_to": "24.203371542481315",
+          "n_cells_empty": 0,
+          "n_cells_used": 2007,
+          "range": {
+            "max": "27.133333200000003",
+            "min": "0.000000000000000",
+            "over": "cells"
+          },
+          "unit": "days",
+          "value": "10.271200803886398",
+          "value_is": "absolute_change",
+          "value_reason": null
+        },
+        "direction": "increase",
+        "family": "heat_index",
+        "geography": "Arizona",
+        "geography_type": "state",
+        "horizon": "mid",
+        "horizon_window": "2045-2054",
+        "metric": "heatindex_days_above_95F",
+        "metric_wording": "number of days with daily max heat index above 95 F",
+        "pattern_id": "TP1-00069",
+        "pattern_kind": "single",
+        "pattern_robustness": "majority_same_direction",
+        "pattern_support_n": 2007,
+        "provenance": {
+          "code_version": "table_patterns v1 (src/climrr/table_patterns.py sha256 c5948f7e0ef85b73)",
+          "column_sources": {
+            "heatindex_HIS_Day95": {
+              "kind": "dictionary_line",
+              "line": 679,
+              "quote": "heatindex_HIS_Day95 Number of Summer days with daily max heat index above 95 F -- Historical"
+            },
+            "heatindex_M85_Day95": {
+              "kind": "dictionary_line",
+              "line": 685,
+              "quote": "heatindex_M85_Day95 Number of Summer days with daily max heat index above 95 F -- Mid-Century RCP8.5"
+            }
+          },
+          "column_statuses": {
+            "heatindex_HIS_Day95": "verified_from_dictionary",
+            "heatindex_M85_Day95": "verified_from_dictionary"
+          },
+          "columns": [
+            {
+              "column": "heatindex_HIS_Day95",
+              "index": 240
+            },
+            {
+              "column": "heatindex_M85_Day95",
+              "index": 246
+            }
+          ],
+          "derivation_rule_id": "DR-TD-003 @ DR-PT-001",
+          "member_cells_sha256": "eac237b78fe2430548583c866d57d5a5b0da52a7ea8e1397e7ad9400e8bee700",
+          "member_rows": 2007,
+          "row_rule": "State == 'Arizona'",
+          "table_data_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e"
+        },
+        "provisional": true,
+        "provisional_reasons": [
+          "location_inferred_candidate: State label IC-012 (A-G1, A-G3; D-034)",
+          "unweighted_mean: provisional aggregation rule for representation validation"
+        ],
+        "rank": {
+          "of": 49,
+          "order": "descending signed value (DR-PT-004)",
+          "rank": 23,
+          "tied_with": 0
+        },
+        "relative_magnitude": {
+          "class": "moderate",
+          "definition": "moderate = middle tercile, by signed value, among the 49 U.S. State labels in the table with a computed value for family=heat_index, metric=heatindex_days_above_95F, season=summer, horizon=mid (2045-2054), scenario=RCP8.5, statistic=absolute_change (DR-PT-005); a relative descriptor among states, not an absolute threshold"
+        },
+        "relative_magnitude_skipped_reason": null,
+        "robustness_share": "1976/2007",
+        "robustness_unit": "cell",
+        "scenario": "RCP8.5",
+        "season": "summer",
+        "statistic": "absolute_change",
+        "status": "computed",
+        "working_assumptions": [
+          "WA-STATE-LABEL",
+          "WA-UNWEIGHTED-MEAN"
+        ]
+      }
+    ],
+    "groups": [
+      {
+        "group_id": "LG-extreme_heat_v1-driver-c1-008",
+        "kind": "group",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "multi_source_supported",
+        "n_members_run": 4,
+        "names_scenario": false,
+        "n_specific": 1,
+        "best_basis": "nca_region",
+        "best_basis_rank": 1,
+        "n_papers": 3,
+        "members": [
+          {
+            "statement_id": "LS-199098498-04",
+            "statement": "Citing Schoof et al. (2019), the paper reports that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat.",
+            "paper_item_id": "199098498",
+            "canonical_paper": "199098498",
+            "paper_sha256": "945df7b916b7dd75924142fbb7d1542afa08cb36da06df37f135849d9ad15218",
+            "json_path": "$.late century results",
+            "span_start": 4602,
+            "span_end": 5001,
+            "verbatim_passage": "However, recent work examining changes in the frequency of different types of extreme heat days (considering both temperature and humidity) in CMIP5 projections after using a multivariate quantile mapping approach similar to the MACA methodology finds that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat (Schoof et al 2019).",
+            "evidence_role": "cited_candidate",
+            "passage_type": "cited_finding",
+            "region": "United States",
+            "scenario": "unknown",
+            "basis": "us_national",
+            "region_class": "us_national",
+            "region_qualifier": null
+          },
+          {
+            "statement_id": "LS-158091651-01",
+            "statement": "Land-atmosphere feedbacks are a stronger factor for heat wave maintenance at southern latitudes, and misrepresentation of these feedbacks in models leads to poor forecast skill in the Southwest United States.",
+            "paper_item_id": "158091651",
+            "canonical_paper": "158091651",
+            "paper_sha256": "a62d4b52adcff6beb97df02ca10902942356fbe8834ada0474e227f40556486d",
+            "json_path": "$.abstract",
+            "span_start": 829,
+            "span_end": 1077,
+            "verbatim_passage": "Land-atmosphere feedbacks appear to be a stronger factor for heat wave maintenance at southern latitudes, but the NCEP model seems to misrepresent those feedbacks, particularly over the Southwest United States, leading to poor skill in that region.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Southwest United States",
+            "scenario": "unknown",
+            "basis": "nca_region",
+            "region_class": "nca",
+            "region_qualifier": null
+          },
+          {
+            "statement_id": "LS-5838629-03",
+            "statement": "Air mass stagnation events, which boost ozone production, are expected to become more frequent as weather conditions that favor heat waves increase.",
+            "paper_item_id": "5838629",
+            "canonical_paper": "5838629",
+            "paper_sha256": "e11032fb59db4250a8562dfba97e961feee24186a931f6ec3d037270405f4606",
+            "json_path": "$.results",
+            "span_start": 1155,
+            "span_end": 1343,
+            "verbatim_passage": "Air mass stagnation events, which increase O3 production and will increase in frequency as weather conditions favorable to heat waves increase (CCSP 2008), are another important indicator.",
+            "evidence_role": "cited_candidate",
+            "passage_type": "cited_finding",
+            "region": "United States",
+            "scenario": "unknown",
+            "basis": "us_national",
+            "region_class": "us_national",
+            "region_qualifier": null
+          }
+        ],
+        "label_override": {
+          "decision": "D-058",
+          "origin": "reviewer",
+          "agent_label": "Observed increase in heat‑wave and drought frequency"
+        }
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-driver-c2-001",
+        "kind": "group",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "global warming increases heatwave frequency and intensity",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "multi_source_supported",
+        "n_members_run": 4,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "global",
+        "best_basis_rank": 4,
+        "n_papers": 4,
+        "members": [
+          {
+            "statement_id": "LS-14006228-04",
+            "statement": "Projected climate warming is expected to increase the frequency, intensity, and duration of heatwaves, thereby elevating heat‑stress risk.",
+            "paper_item_id": "14006228",
+            "canonical_paper": "14006228",
+            "paper_sha256": "802cc7b80c67735e86e9740ca72bba6361cedf5d9a330ab2236ea6a901115d8d",
+            "json_path": "$.discussion",
+            "span_start": 4074,
+            "span_end": 4177,
+            "verbatim_passage": "As global warming continues, the frequency, intensity and duration of heatwaves are likely to increase.",
+            "evidence_role": "core_candidate",
+            "passage_type": "review_synthesis",
+            "region": "unknown",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          },
+          {
+            "statement_id": "LS-235602877-05",
+            "statement": "Climate change is causing heat waves to occur more often and with greater intensity.",
+            "paper_item_id": "235602877",
+            "canonical_paper": "235602877",
+            "paper_sha256": "c96ebc7c30645673a9f80894aa352be78cbaa9bb9423dbc915808cabd36c22bb",
+            "json_path": "$.abstract",
+            "span_start": 0,
+            "span_end": 70,
+            "verbatim_passage": "With climate change, heat waves have become more frequent and intense.",
+            "evidence_role": "background_consensus_candidate",
+            "passage_type": "background",
+            "region": "global",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          },
+          {
+            "statement_id": "LS-221504407-03",
+            "statement": "Anthropogenic global warming is expected to increase both the mean annual temperature and the frequency of heat events.",
+            "paper_item_id": "221504407",
+            "canonical_paper": "221504407",
+            "paper_sha256": "a3342e14fcd6c45de5a3831eddc22fc5dac739f8aebc5a920e41f9dcb546467e",
+            "json_path": "$.conclusion",
+            "span_start": 0,
+            "span_end": 220,
+            "verbatim_passage": "The occurrence of heat events is expected to increase due to the worsening effects of anthropogenic global warming [60]. This will be seen in both higher mean annual temperatures and in the frequency of heat shocks [37].",
+            "evidence_role": "cited_candidate",
+            "passage_type": "cited_finding",
+            "region": "global",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          },
+          {
+            "statement_id": "LS-199381463-04",
+            "statement": "Global warming is expected to increase the frequency of extreme heat events, raising heat exposure for agricultural workers.",
+            "paper_item_id": "199381463",
+            "canonical_paper": "199381463",
+            "paper_sha256": "b21440cabafe6ca50ef17a5771bcfbad316d44c8ab52beed68a909b345f2fe61",
+            "json_path": "$.introduction",
+            "span_start": 3400,
+            "span_end": 3628,
+            "verbatim_passage": "Climate change has resulted in a significant rise in the global mean temperature and it is predicted to get worse [23]. This means more extreme heat events and heat exposure for people working in agriculture in the hot climates.",
+            "evidence_role": "background_consensus_candidate",
+            "passage_type": "background",
+            "region": "global",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          }
+        ]
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-mechanism-c1-024",
+        "kind": "group",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "urban heat island intensifies due to nighttime conditions and reduced moisture",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "multi_source_supported",
+        "n_members_run": 5,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "global",
+        "best_basis_rank": 4,
+        "n_papers": 3,
+        "members": [
+          {
+            "statement_id": "LS-128765172-04",
+            "statement": "The urban heat island effect is most pronounced at night and under high‑pressure, calm, clear‑sky conditions.",
+            "paper_item_id": "128765172",
+            "canonical_paper": "128765172",
+            "paper_sha256": "d6f3f0f3ae1f90cfa7ae83a62f4a136f0602a800078c7ab6040a8c5102d13bcf",
+            "json_path": "$.introduction",
+            "span_start": 2837,
+            "span_end": 3083,
+            "verbatim_passage": "Further, the UHI is most noticeable at night and under synoptic high pressure systems with calm conditions and clear skies [24,[26][27][28], and the UHI has been measured in cities spanning many varying climate regimes and sizes [29][30][31][32].",
+            "evidence_role": "background_consensus_candidate",
+            "passage_type": "background",
+            "region": "unknown",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          },
+          {
+            "statement_id": "LS-246243282-05",
+            "statement": "During heat‑wave events, CUHI intensifies markedly, especially at night, because urban areas experience lower moisture and reduced wind speed.",
+            "paper_item_id": "246243282",
+            "canonical_paper": "246243282",
+            "paper_sha256": "56cdb85730fcda26ac9db10ee5d8fd12b3d5bc45de1c773738c373ddcd17079e",
+            "json_path": "$.impact on temperature and heat waves",
+            "span_start": 15725,
+            "span_end": 15937,
+            "verbatim_passage": "In general, simulated CUHI values during a heat wave have intensified extensively relative to pre-heat wave conditions, mostly due to the lower moisture and reduced wind speed in urban areas during the heat wave.",
+            "evidence_role": "cited_candidate",
+            "passage_type": "cited_finding",
+            "region": "unknown",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          },
+          {
+            "statement_id": "LS-230583145-02",
+            "statement": "During daytime, evapotranspiration from vegetation is the primary cooling mechanism, but it often cannot fully offset heat gains from advection and sensible heat from impervious surfaces.",
+            "paper_item_id": "230583145",
+            "canonical_paper": "230583145",
+            "paper_sha256": "38441232d336742c14573a17de45acbe8c89099dd093da3e309244a5fb9bad1d",
+            "json_path": "$.discussion and conclusions on the mitigation potential of gi",
+            "span_start": 1070,
+            "span_end": 1322,
+            "verbatim_passage": "During the daytime, evapotranspiration is the main cooling mechanism, however its impact on the surface energy budget may not be enough to compensate and counterbalance heat fluxes due to advection and sensible heat released by the impervious surfaces.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "unknown",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          },
+          {
+            "statement_id": "LS-230583145-03",
+            "statement": "In extreme heat or drought conditions, trees may close their stomata, reducing evapotranspiration and potentially adding sensible heat, thereby diminishing their cooling effect.",
+            "paper_item_id": "230583145",
+            "canonical_paper": "230583145",
+            "paper_sha256": "38441232d336742c14573a17de45acbe8c89099dd093da3e309244a5fb9bad1d",
+            "json_path": "$.the impact of increased green infrastructure on health",
+            "span_start": 12800,
+            "span_end": 13033,
+            "verbatim_passage": "During excessive temperature and drought conditions, trees may close their stomata while the surface temperature of leaves increases, contributing more sensible heat to the atmosphere and increasing the ambient temperature [150,151].",
+            "evidence_role": "core_candidate",
+            "passage_type": "review_synthesis",
+            "region": "unknown",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          },
+          {
+            "statement_id": "LS-230583145-04",
+            "statement": "The cooling benefit of urban greenery is generally larger at night than during the day because trees reduce stored daytime heat and emit less sensible heat at night.",
+            "paper_item_id": "230583145",
+            "canonical_paper": "230583145",
+            "paper_sha256": "38441232d336742c14573a17de45acbe8c89099dd093da3e309244a5fb9bad1d",
+            "json_path": "$.discussion and conclusions on the mitigation potential of gi",
+            "span_start": 372,
+            "span_end": 561,
+            "verbatim_passage": "During the night, the maximum ambient temperature decrease corresponding to a GI rise of 80% may not exceed 2.3 • C, while the temperature drop for a GI increase by 20% is close to 0.5 • C.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "unknown",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          }
+        ]
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-mechanism-c2-003",
+        "kind": "group",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "humidity magnifies heat stress and its effect grows with temperature",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 3,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "us_subregion",
+        "best_basis_rank": 2,
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS-239996006-02",
+            "statement": "The magnifying effect of relative humidity on heat stress grows with increasing temperature, so that even unchanged or lower humidity can cause greater discomfort at higher temperatures.",
+            "paper_item_id": "239996006",
+            "canonical_paper": "239996006",
+            "paper_sha256": "4bb60fe9aae3fde11d0b3cc7db90b67c97c0342c2c0c798fa8f0c838fb31e83f",
+            "json_path": "$.results",
+            "span_start": 2047,
+            "span_end": 2251,
+            "verbatim_passage": "at similar or lower humidity, the magnifying power of humidity increases with increasing T, i.e. similar or lower relative humidity levels will still cause greater human discomfort at higher temperatures.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "southeastern United States",
+            "scenario": "unknown",
+            "basis": "us_subregion",
+            "region_class": "us_subregion",
+            "region_qualifier": "southeastern"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-driver-c1-001",
+        "kind": "group",
+        "statement_type": "driver",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "Humidity raises heat‑index values or humid heatwave occurrence",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 2,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "us_national",
+        "best_basis_rank": 3,
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS-269932944-05",
+            "statement": "Including humidity in heatwave definitions leads to an increase in humid heatwave occurrence over broader areas of the United States.",
+            "paper_item_id": "269932944",
+            "canonical_paper": "269932944",
+            "paper_sha256": "8224f7567beb54ba8510d97f97c89ffde3eeaa1a29fb754caf965091f873e3c9",
+            "json_path": "$.discussion",
+            "span_start": 652,
+            "span_end": 852,
+            "verbatim_passage": "The inclusion of humidity in temperature calculations led to an increase in humid heatwaves over broader areas, suggesting humidity played a significant role in the humid heatwaves (Russo et al 2017).",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "United States",
+            "scenario": "unknown",
+            "basis": "us_national",
+            "region_class": "us_national",
+            "region_qualifier": null
+          }
+        ]
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-mechanism-c1-003",
+        "kind": "group",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "Soil moisture changes evaporative cooling and humidity, altering heatwave intensity",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 2,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "us_national",
+        "best_basis_rank": 3,
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS-269932944-01",
+            "statement": "Soil moisture deficits reduce evaporative cooling, increasing sensible heat flux and intensifying temperature‑only heatwaves.",
+            "paper_item_id": "269932944",
+            "canonical_paper": "269932944",
+            "paper_sha256": "8224f7567beb54ba8510d97f97c89ffde3eeaa1a29fb754caf965091f873e3c9",
+            "json_path": "$.results",
+            "span_start": 3205,
+            "span_end": 3614,
+            "verbatim_passage": "If interpreting this as the impacts of soil moisture on heatwave, during temperature-only heatwaves, soil with lower moisture content and limited evaporation can heat up more readily, leading to increased sensible heat flux from the surface to the atmosphere.This can potentially intensify the warming of the lower atmosphere, contributing to the elevated temperatures characteristics of such heatwave events.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "United States",
+            "scenario": "unknown",
+            "basis": "us_national",
+            "region_class": "us_national",
+            "region_qualifier": null
+          },
+          {
+            "statement_id": "LS-269932944-02",
+            "statement": "Higher soil moisture enhances latent heat flux, raising atmospheric humidity and potentially strengthening humid heatwave conditions.",
+            "paper_item_id": "269932944",
+            "canonical_paper": "269932944",
+            "paper_sha256": "8224f7567beb54ba8510d97f97c89ffde3eeaa1a29fb754caf965091f873e3c9",
+            "json_path": "$.results",
+            "span_start": 4894,
+            "span_end": 5092,
+            "verbatim_passage": "Although enhanced latent heat flux reduces air temperature, this excess evaporation would increase air humidity, potentially contributing to enhanced humid heatwave conditions (Matthews et al 2022).",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "United States",
+            "scenario": "unknown",
+            "basis": "us_national",
+            "region_class": "us_national",
+            "region_qualifier": null
+          }
+        ]
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-consensus-c1-005",
+        "kind": "group",
+        "statement_type": "consensus",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": "heat event frequency and intensity projected to increase, occupational illness risk will not diminish",
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "global",
+        "best_basis_rank": 4,
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS-252282233-04",
+            "statement": "The frequency and intensity of heat events are projected to increase, implying that occupational heat‑related illness risk will not diminish in the future.",
+            "paper_item_id": "252282233",
+            "canonical_paper": "252282233",
+            "paper_sha256": "d8532686ab6c6de592ce7634d9f365b6f050aa172bc03c982fefef4f584c354c",
+            "json_path": "$.background",
+            "span_start": 1313,
+            "span_end": 1444,
+            "verbatim_passage": "The risk of HRI is unlikely to diminish in the future, as the frequency and intensity of heat events is projected to increase [10].",
+            "evidence_role": "cited_candidate",
+            "passage_type": "cited_finding",
+            "region": "unknown",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          }
+        ]
+      },
+      {
+        "group_id": "LG-extreme_heat_v1-mechanism-c1-020",
+        "kind": "singleton",
+        "statement_type": "mechanism",
+        "claim_about": "hazard_change_mechanism",
+        "role": "driver",
+        "excluded_reason": null,
+        "label": null,
+        "claim_about_source": "agent",
+        "disposition": "accept",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "names_scenario": false,
+        "n_specific": 0,
+        "best_basis": "global",
+        "best_basis_rank": 4,
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS-6585212-06",
+            "statement": "Minimum air temperature reflects the amount of overnight cooling, with higher minima indicating reduced cooling and greater heat stress.",
+            "paper_item_id": "6585212",
+            "canonical_paper": "6585212",
+            "paper_sha256": "a24b79193b9c71225e2a88facbb7e27805a8a4fafa8f7f6ead152553ecf57641",
+            "json_path": "$.discussion",
+            "span_start": 9726,
+            "span_end": 9872,
+            "verbatim_passage": "heat-trapping urban environments may intensify heat stress by preventing overnight cooling, which is indicated by minimum air temperature [58,80].",
+            "evidence_role": "cited_candidate",
+            "passage_type": "cited_finding",
+            "region": "unknown",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-001",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "pavement structural degradation from heat",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "multi_source_supported",
+        "n_members_run": 10,
+        "relevance": "place_named",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "transportation_systems": 10
+        },
+        "partition": "infra_heat_index.impact.transportation_systems",
+        "n_papers": 9,
+        "members": [
+          {
+            "statement_id": "LS3-269406624-01",
+            "statement": "Higher pavement temperatures associated with extreme heat events increase the number of identified pavement distress points, indicating that hot conditions worsen road surface conditions.",
+            "paper_item_id": "269406624",
+            "canonical_paper": "269406624",
+            "paper_sha256": "3a33226cce41a2fcb5df303d204ffe9c9c28789904db59ef4d8657c7bfb6de3b",
+            "json_path": "$.bepam",
+            "span_start": 1757,
+            "span_end": 2047,
+            "verbatim_passage": "It shows that the number of identified POIs, which signify pavement distress, varies with changes in pavement temperature.The data exhibit a strong correlation between pavement temperature and the frequency of POIs, with an 83% R-squared value for road section 1 and 70% for road section 2.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Phoenix, Arizona",
+            "scenario": "unknown",
+            "basis": "state",
+            "region_class": "state",
+            "region_qualifier": null,
+            "states": [
+              "Arizona"
+            ],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "higher pavement temperature increases vibration magnitude",
+            "impact_outcome": "more pavement distress points are detected"
+          },
+          {
+            "statement_id": "LS3-158185209-01",
+            "statement": "Increasing temperatures make common road pavements and rail tracks more vulnerable.",
+            "paper_item_id": "158185209",
+            "canonical_paper": "158185209",
+            "paper_sha256": "0e7f5e483dc97957535f2a6bf2c947994642b11d65dc151bf1b37f0103b6c300",
+            "json_path": "$.temperature",
+            "span_start": 122,
+            "span_end": 508,
+            "verbatim_passage": "The increase in temperatures causes a greater vulnerability of common road pavements (with surface layer composed of asphalt concrete) and rail (track), increases the energy demand to operate buses, especially for auxiliaries [17], which is perceived by the fleets managers as one more items in the overall lists of operational costs [18,19], and worsens the public's living conditions.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "unknown",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "higher temperatures degrade material performance",
+            "impact_outcome": "increased vulnerability and potential failure of pavements and tracks"
+          },
+          {
+            "statement_id": "LS3-214326018-01",
+            "statement": "Increasing summer temperatures lead to critical impacts on pavement structural and functional performance, including rutting and thermal cracking that shorten service life.",
+            "paper_item_id": "214326018",
+            "canonical_paper": "214326018",
+            "paper_sha256": "e8b4c3937ac28315835f639998b9cbba4b847efb818cf8cc726898832cafc071",
+            "json_path": "$.the temperature effect",
+            "span_start": 409,
+            "span_end": 555,
+            "verbatim_passage": "This table shows a temperature rise in the summer months that have critical impacts on the pavement and its structural and functional performance.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Morocco",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "other",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "causes thermal cracking and rutting",
+            "impact_outcome": "reduces pavement service life"
+          },
+          {
+            "statement_id": "LS3-221665613-01",
+            "statement": "High temperatures cause permanent deformation of asphalt pavements, reducing their smoothness and service life.",
+            "paper_item_id": "221665613",
+            "canonical_paper": "221665613",
+            "paper_sha256": "618f418cfca53ef0f2f3f66fba9e2a6b7c0bc0ced0776fddd327300f4fa08052",
+            "json_path": "$.high temperature",
+            "span_start": 0,
+            "span_end": 499,
+            "verbatim_passage": "High temperatures have a significant impact on the service life of asphalt pavements and are often the basis of determining the design of the pavement mixture and section. Asphalt becomes a plastomer that deforms under high-temperature conditions, and its shape cannot be completely recovered. Hence, asphalt pavements are prone to permanent deformation under the influence of repeated loading [24], and high temperatures are one of the main causes of the permanent deformation of asphalt pavements.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Liaoning Province",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "other",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "causes permanent deformation of the pavement surface",
+            "impact_outcome": "reduces smoothness and shortens service life"
+          },
+          {
+            "statement_id": "LS3-226335422-01",
+            "statement": "During high temperature periods, pavement surface temperatures exhibit large fluctuations that diminish with depth, indicating that elevated atmospheric heat primarily affects the upper layers of the road.",
+            "paper_item_id": "226335422",
+            "canonical_paper": "226335422",
+            "paper_sha256": "e06d5e552b8fb199d0d5762117f0350a202fe699dcecf9cd18f8f29a8fa5ab3d",
+            "json_path": "$.conclusion",
+            "span_start": 1049,
+            "span_end": 1293,
+            "verbatim_passage": "During the high temperature period, the eastern observation area fluctuates between 20 and 60°C. As the depth increases, the temperature variation range gradually decreases, and within 0-10cm, the temperature variation change decreases greatly.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Inner Mongolia",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "other",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "elevated atmospheric heat increases surface temperature fluctuations",
+            "impact_outcome": "greater temperature variability in the upper pavement layers"
+          },
+          {
+            "statement_id": "LS3-229433013-01",
+            "statement": "High ambient temperatures in a warm tropical environment increase the susceptibility of asphalt pavements to flow and permanent deformation, leading to inevitable rutting under heavy traffic loading.",
+            "paper_item_id": "229433013",
+            "canonical_paper": "229433013",
+            "paper_sha256": "a6a14811bf085ac04348a0b0e0978049c60075f8234a7322b47b443bd9347c90",
+            "json_path": "$.conclusion",
+            "span_start": 694,
+            "span_end": 918,
+            "verbatim_passage": "Such severe loading in combination with high temperatures in the area due to the warm tropical environment exacerbate the situation and can cause the asphalt to begin to flow, hence making rutting and deformation inevitable.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Uganda",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "other",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "high temperatures reduce asphalt viscosity causing the material to flow under load",
+            "impact_outcome": "permanent rutting and deformation of the pavement surface"
+          },
+          {
+            "statement_id": "LS3-231654622-01",
+            "statement": "Increasing temperature above about 25 °C sharply reduces the interlaminar shear fatigue life of steel bridge deck pavements.",
+            "paper_item_id": "231654622",
+            "canonical_paper": "231654622",
+            "paper_sha256": "0675213491654e99bbae6dac7fdceb5df96e308c3d8063ddbd91faa9e452209f",
+            "json_path": "$.conclusion",
+            "span_start": 442,
+            "span_end": 867,
+            "verbatim_passage": "When the temperature reaches 50°C, the interlaminar shear fatigue life of the pavement structure decreases sharply. Taking 25°C as the boundary, the change rate of the shear fatigue life with temperature can be divided into two stages. At −10°C to 25°C, the shear fatigue lives at different temperatures have little differences. In contrast, when the temperature is higher than 25°C, the shear fatigue life decreases sharply.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "China",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "other",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "high temperatures reduce the bond strength at the waterproof‑adhesive‑pavement interface",
+            "impact_outcome": "shear fatigue life of the bridge deck pavement is sharply shortened"
+          },
+          {
+            "statement_id": "LS3-213951900-01",
+            "statement": "Significant daily or hourly increases in temperature can accelerate the development of permanent deformation in flexible pavements.",
+            "paper_item_id": "213951900",
+            "canonical_paper": "213951900",
+            "paper_sha256": "dc7c25520f9c4f5327a296d1db7388114ee449c54afdf4837f4774fe4fc8628d",
+            "json_path": "$.temperature",
+            "span_start": 1760,
+            "span_end": 1907,
+            "verbatim_passage": "In extreme cases, when temperature has significant daily/hourly increases, accelerated development of permanent deformation can be expected [3,16].",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "unknown",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "unknown",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "temperature spikes increase pavement material deformation",
+            "impact_outcome": "accelerated permanent deformation"
+          },
+          {
+            "statement_id": "LS3-213951900-02",
+            "statement": "Wider temperature ranges caused by climate change increase thermal stresses in asphalt layers, leading to more thermal cracking.",
+            "paper_item_id": "213951900",
+            "canonical_paper": "213951900",
+            "paper_sha256": "dc7c25520f9c4f5327a296d1db7388114ee449c54afdf4837f4774fe4fc8628d",
+            "json_path": "$.temperature",
+            "span_start": 1908,
+            "span_end": 2065,
+            "verbatim_passage": "Increases in the temperature ranges due to climate change can increase thermal stresses in asphalt layers, and more thermal cracking can be expected [17,18].",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "unknown",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "unknown",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "greater temperature variability raises thermal stress in asphalt",
+            "impact_outcome": "increased thermal cracking"
+          },
+          {
+            "statement_id": "LS3-257991205-01",
+            "statement": "Increasing temperatures and heat waves can promote excessive vegetation growth and higher evaporation, which in turn impair drainage and increase road distress, raising maintenance needs for transportation systems.",
+            "paper_item_id": "257991205",
+            "canonical_paper": "257991205",
+            "paper_sha256": "ad0ab1cdf13ae9d8e2443e417b89b98977bc2f434177781d24d12e04e3c00160",
+            "json_path": "$.methodology",
+            "span_start": 934,
+            "span_end": 1182,
+            "verbatim_passage": "Other indications of possible problems observed included the accumulation of sand and debris (due to wind and flooding) and excessive vegetation caused by increased rainfall and high temperatures, leading to sight distance and passability problems.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "central Kenya",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "other",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "higher temperatures increase vegetation growth and water evaporation, impairing drainage",
+            "impact_outcome": "greater road distress and higher maintenance requirements"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-004",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "cool roofs provide pedestrian‑level temperature cooling",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "relevance": "us",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "transportation_systems": 1
+        },
+        "partition": "infra_heat_index.impact.transportation_systems",
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS3-212809106-03",
+            "statement": "Cool roofs provide daytime pedestrian-level air temperature cooling of up to about 2 °C during heatwaves, with the greatest cooling observed in Phoenix.",
+            "paper_item_id": "212809106",
+            "canonical_paper": "212809106",
+            "paper_sha256": "36eca50a8ee58828ae397118071c6050e3fe5c7988ac44028fd7485c3bc620c5",
+            "json_path": "$.absolute cooling impacts of cool roofs",
+            "span_start": 957,
+            "span_end": 1137,
+            "verbatim_passage": "Daily maximum temperature change (averaged from 11 am through 2 pm local time) reaches −2.5°C in Phoenix and −2.0°C in Atlanta and Detroit (see daily maximum cooling in figure S9).",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Phoenix, Atlanta, Detroit (USA)",
+            "scenario": "unsupported",
+            "basis": "us_national",
+            "region_class": "us_national",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "reflective roofs reduce solar heat absorption",
+            "impact_outcome": "lowering pedestrian-level air temperature"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-002",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "rail track expansion and buckling causing disruptions",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "multi_source_supported",
+        "strength_in_packet": "multi_source_supported",
+        "n_members_run": 3,
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "transportation_systems": 3
+        },
+        "partition": "infra_heat_index.impact.transportation_systems",
+        "n_papers": 3,
+        "members": [
+          {
+            "statement_id": "LS3-1004111-01",
+            "statement": "Increasing ambient temperatures can cause rail buckling, which can lead to train derailments and service disruptions on high‑speed rail lines.",
+            "paper_item_id": "1004111",
+            "canonical_paper": "1004111",
+            "paper_sha256": "9c89a5330db84d36573fedbcc470000861dd02243fa01c0e3223505b4ff47225",
+            "json_path": "$.landslide",
+            "span_start": 1635,
+            "span_end": 1768,
+            "verbatim_passage": "There are many consequences to the railway infrastructure due to hot and dry weather and the obvious example is the risk of buckling.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Malaysia",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "other",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "high temperatures cause rail buckling",
+            "impact_outcome": "train derailments and service disruptions"
+          },
+          {
+            "statement_id": "LS3-237251104-01",
+            "statement": "Longer periods of heat waves are expected to increase and can disrupt railway operations because rails, switch components, and overhead lines expand in heat, leading to traffic disruptions and a higher probability of rail defects.",
+            "paper_item_id": "237251104",
+            "canonical_paper": "237251104",
+            "paper_sha256": "f4acfc38d573487b9ba90ed0822d02c3cdc117f5092f05efc8ec4ddbf3057f29",
+            "json_path": "$.climate change impact on swedish railways infrastructure",
+            "span_start": 366,
+            "span_end": 516,
+            "verbatim_passage": "All through heatwaves, railway transport is difficult to operate due to the higher tolerance of heat in technical components and cooling systems [19].",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Sweden",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "other",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "thermal expansion of rails and components",
+            "impact_outcome": "traffic disruptions and increased rail defects"
+          },
+          {
+            "statement_id": "LS3-270031609-01",
+            "statement": "Extreme heat can cause track expansion and deformation, leading to disruptions in underground transport systems and problems with electrical systems.",
+            "paper_item_id": "270031609",
+            "canonical_paper": "270031609",
+            "paper_sha256": "ae5277f543785ed577920474824f1dab400b7577a5ba851045ef3be840453dfc",
+            "json_path": "$.extreme temperature changes",
+            "span_start": 1603,
+            "span_end": 1833,
+            "verbatim_passage": "When temperatures reach dangerous levels, such as the record heat waves that affected Europe recently, transport systems encounter disruptions due to track expansion and deformation, as well as issues with electrical systems [14].",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Europe",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "other",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "heat causes track expansion and deformation",
+            "impact_outcome": "disrupts service and creates electrical system issues"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-003",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "runway surface damage and operational limits from heat",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "transportation_systems": 1
+        },
+        "partition": "infra_heat_index.impact.transportation_systems",
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS3-255723100-01",
+            "statement": "Extreme heat can cause runway surface damage and reduce aircraft lift, leading to weight restrictions and operational disruptions at airports.",
+            "paper_item_id": "255723100",
+            "canonical_paper": "255723100",
+            "paper_sha256": "56930e4cfa31f6baabac1e44bd53beabfc6bb9044ad9c217b138321dbd75006c",
+            "json_path": "$.climate hazards and airports' sensitivity",
+            "span_start": 10359,
+            "span_end": 10688,
+            "verbatim_passage": "Extreme temperatures can cause restrictions on the aircraft's maximum take-off weights because of the reduced lift generated in less dense air. This is especially relevant for airports located at higher altitudes and especially where the airport has a short runway (Coffel & Horton, 2015;Monioudi et al., 2018;Zhou et al., 2018).",
+            "evidence_role": "cited_candidate",
+            "passage_type": "cited_finding",
+            "region": "unknown",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "high temperatures reduce air density",
+            "impact_outcome": "aircraft weight limits are lowered and runway damage may occur"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-007",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "heat‑driven vegetation fires threaten railway corridors",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "transportation_systems": 1
+        },
+        "partition": "infra_heat_index.impact.transportation_systems",
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS3-237251104-02",
+            "statement": "Heat and drought associated with extreme heat waves increase the risk of vegetation fires along railway corridors, creating a need to stop or redirect train traffic.",
+            "paper_item_id": "237251104",
+            "canonical_paper": "237251104",
+            "paper_sha256": "f4acfc38d573487b9ba90ed0822d02c3cdc117f5092f05efc8ec4ddbf3057f29",
+            "json_path": "$.climate change impact on swedish railways infrastructure",
+            "span_start": 1978,
+            "span_end": 2089,
+            "verbatim_passage": "Heat and drought also increase the risk of vegetation fires and thus also the need to stop or redirect traffic.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "Sweden",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "other",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "increased fire risk from vegetation",
+            "impact_outcome": "need to stop or redirect train traffic"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-009",
+        "kind": "group",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": "heat exacerbates erosion of road embankments and side slopes",
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "transportation_systems": 1
+        },
+        "partition": "infra_heat_index.impact.transportation_systems",
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS3-257991205-02",
+            "statement": "Higher ambient temperatures can exacerbate water‑related damage to road embankments and side slopes, increasing the risk of material loss and erosion.",
+            "paper_item_id": "257991205",
+            "canonical_paper": "257991205",
+            "paper_sha256": "ad0ab1cdf13ae9d8e2443e417b89b98977bc2f434177781d24d12e04e3c00160",
+            "json_path": "$.side drains",
+            "span_start": 219,
+            "span_end": 417,
+            "verbatim_passage": "Embankment slopes 53% showed minor evidence of water damage 33% had discernible channels on the embankment slopes 13% showed warning signs of channels on slopes and a notable loss of slope material.",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "central Kenya",
+            "scenario": "unknown",
+            "basis": null,
+            "region_class": "other",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "higher temperatures increase water‑related damage to embankments and slopes",
+            "impact_outcome": "greater material loss and erosion of road structures"
+          }
+        ]
+      },
+      {
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-011",
+        "kind": "singleton",
+        "statement_type": "impact",
+        "claim_about": "hazard_impact_on_asset",
+        "role": "impact",
+        "excluded_reason": null,
+        "label": null,
+        "claim_about_source": "agent",
+        "disposition": null,
+        "review_state": "impact_groups_unreviewed",
+        "group_strength_run": "single_source_supported",
+        "strength_in_packet": "single_source_supported",
+        "n_members_run": 1,
+        "relevance": "general",
+        "hazard_relation": "broader_hazard",
+        "asset_classes": {
+          "transportation_systems": 1
+        },
+        "partition": "infra_heat_index.impact.transportation_systems",
+        "n_papers": 1,
+        "members": [
+          {
+            "statement_id": "LS3-158185209-04",
+            "statement": "Permeable and vegetated pavements can reduce surface temperatures by evaporative cooling, but their service life may be shorter than traditional pavements.",
+            "paper_item_id": "158185209",
+            "canonical_paper": "158185209",
+            "paper_sha256": "0e7f5e483dc97957535f2a6bf2c947994642b11d65dc151bf1b37f0103b6c300",
+            "json_path": "$.temperature",
+            "span_start": 15433,
+            "span_end": 15800,
+            "verbatim_passage": "Both non-vegetative and vegetative pavements are suitable for humid climates, where frequent rainfall powers the process [37]. Both pavements mitigate the UHI, but their implementation is limited by mechanical and functional characteristics of the materials. Indeed, for the same thickness, porous pavements have a service life lower than traditional structures [40].",
+            "evidence_role": "core_candidate",
+            "passage_type": "own_finding",
+            "region": "unknown",
+            "scenario": "unknown",
+            "basis": "global",
+            "region_class": "global",
+            "region_qualifier": null,
+            "states": [],
+            "asset_class": "transportation_systems",
+            "hazard_relation": "broader_hazard",
+            "impact_mechanism": "evaporation and transpiration remove heat from pavement surface",
+            "impact_outcome": "lower surface temperatures but reduced durability"
+          }
+        ]
+      }
+    ],
+    "working_assumptions_relied_on": [
+      {
+        "id": "WA-STATE-LABEL",
+        "resolution": "R-005",
+        "status": "owner_authorized_working_assumption",
+        "covers": [
+          "IC-012"
+        ]
+      },
+      {
+        "id": "WA-UNWEIGHTED-MEAN",
+        "resolution": "R-008",
+        "status": "owner_authorized_working_assumption",
+        "covers": [
+          "unweighted_cell_mean"
+        ]
+      }
+    ],
+    "item_frame": {
+      "use_case_level": 8,
+      "reasoning_modalities": "Hazard + Text",
+      "level_name": "Hazard impact on infrastructure"
+    },
+    "exact": {
+      "scenario": "RCP8.5",
+      "scenario_effective": "RCP8.5",
+      "horizon_window": "2045-2054",
+      "threshold_F": "95",
+      "metric_wording": "number of days with daily max heat index above 95 F"
+    }
+  },
+  "checks_input": {
+    "pattern_ids": [
+      "TP1-00069"
+    ],
+    "group_strength": {
+      "LG-extreme_heat_v1-driver-c1-008": "multi_source_supported",
+      "LG-extreme_heat_v1-driver-c2-001": "multi_source_supported",
+      "LG-extreme_heat_v1-mechanism-c1-024": "multi_source_supported",
+      "LG-extreme_heat_v1-mechanism-c2-003": "single_source_supported",
+      "LG-extreme_heat_v1-driver-c1-001": "single_source_supported",
+      "LG-extreme_heat_v1-mechanism-c1-003": "single_source_supported",
+      "LG-extreme_heat_v1-consensus-c1-005": "single_source_supported",
+      "LG-extreme_heat_v1-mechanism-c1-020": "single_source_supported",
+      "LG-infra_heat_index__transportation_systems-impact-c1-001": "multi_source_supported",
+      "LG-infra_heat_index__transportation_systems-impact-c1-004": "single_source_supported",
+      "LG-infra_heat_index__transportation_systems-impact-c1-002": "multi_source_supported",
+      "LG-infra_heat_index__transportation_systems-impact-c1-003": "single_source_supported",
+      "LG-infra_heat_index__transportation_systems-impact-c1-007": "single_source_supported",
+      "LG-infra_heat_index__transportation_systems-impact-c1-009": "single_source_supported",
+      "LG-infra_heat_index__transportation_systems-impact-c1-011": "single_source_supported"
+    },
+    "allowed_numbers": [
+      "0",
+      "0.0",
+      "0.000000000000000",
+      "10",
+      "10.271200803886398",
+      "10.3",
+      "13.9",
+      "13.932170738594918",
+      "14",
+      "1976",
+      "2007",
+      "24",
+      "24.2",
+      "24.203371542481315",
+      "27",
+      "27.1",
+      "27.133333200000003",
+      "49"
+    ],
+    "allowed_descriptors": [
+      "increase",
+      "by mid-century",
+      "under a high-emissions future",
+      "days hot and humid enough to be dangerous",
+      "a moderate increase",
+      "from about 14 to about 24 days a summer",
+      "about 14 days",
+      "about 24 days",
+      "increase moderately",
+      "about half again as many",
+      "rise moderately",
+      "a change similar to most states",
+      "in the middle of the range among states",
+      "dangerous heat-index days"
+    ],
+    "exact_values": [
+      "0.0",
+      "0.000000000000000",
+      "10.271200803886398",
+      "10.3",
+      "13.9",
+      "13.932170738594918",
+      "24.2",
+      "24.203371542481315",
+      "27.1",
+      "27.133333200000003"
+    ],
+    "forbidden_strings": [
+      "heatindex_HIS_Day95",
+      "heatindex_M85_Day95",
+      "121201574",
+      "128765172",
+      "14006228",
+      "158091651",
+      "199098498",
+      "199381463",
+      "201658056",
+      "221504407",
+      "2239637",
+      "230583145",
+      "235602877",
+      "237371886",
+      "239996006",
+      "246243282",
+      "248185344",
+      "252282233",
+      "269932944",
+      "269945312",
+      "32695834",
+      "34148006",
+      "5838629",
+      "62829390",
+      "6479124",
+      "6585212",
+      "9917590",
+      "1004111",
+      "158185209",
+      "212809106",
+      "213951900",
+      "214326018",
+      "221665613",
+      "226335422",
+      "229433013",
+      "231654622",
+      "237251104",
+      "255723100",
+      "257991205",
+      "269406624",
+      "270031609"
+    ],
+    "group_texts": {
+      "LG-extreme_heat_v1-driver-c1-008": [
+        "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat",
+        "Citing Schoof et al. (2019), the paper reports that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat.",
+        "Land-atmosphere feedbacks are a stronger factor for heat wave maintenance at southern latitudes, and misrepresentation of these feedbacks in models leads to poor forecast skill in the Southwest United States.",
+        "Air mass stagnation events, which boost ozone production, are expected to become more frequent as weather conditions that favor heat waves increase."
+      ],
+      "LG-extreme_heat_v1-driver-c2-001": [
+        "global warming increases heatwave frequency and intensity",
+        "Projected climate warming is expected to increase the frequency, intensity, and duration of heatwaves, thereby elevating heat‑stress risk.",
+        "Climate change is causing heat waves to occur more often and with greater intensity.",
+        "Anthropogenic global warming is expected to increase both the mean annual temperature and the frequency of heat events.",
+        "Global warming is expected to increase the frequency of extreme heat events, raising heat exposure for agricultural workers."
+      ],
+      "LG-extreme_heat_v1-mechanism-c1-024": [
+        "urban heat island intensifies due to nighttime conditions and reduced moisture",
+        "The urban heat island effect is most pronounced at night and under high‑pressure, calm, clear‑sky conditions.",
+        "During heat‑wave events, CUHI intensifies markedly, especially at night, because urban areas experience lower moisture and reduced wind speed.",
+        "During daytime, evapotranspiration from vegetation is the primary cooling mechanism, but it often cannot fully offset heat gains from advection and sensible heat from impervious surfaces.",
+        "In extreme heat or drought conditions, trees may close their stomata, reducing evapotranspiration and potentially adding sensible heat, thereby diminishing their cooling effect.",
+        "The cooling benefit of urban greenery is generally larger at night than during the day because trees reduce stored daytime heat and emit less sensible heat at night."
+      ],
+      "LG-extreme_heat_v1-mechanism-c2-003": [
+        "humidity magnifies heat stress and its effect grows with temperature",
+        "The magnifying effect of relative humidity on heat stress grows with increasing temperature, so that even unchanged or lower humidity can cause greater discomfort at higher temperatures."
+      ],
+      "LG-extreme_heat_v1-driver-c1-001": [
+        "Humidity raises heat‑index values or humid heatwave occurrence",
+        "Including humidity in heatwave definitions leads to an increase in humid heatwave occurrence over broader areas of the United States."
+      ],
+      "LG-extreme_heat_v1-mechanism-c1-003": [
+        "Soil moisture changes evaporative cooling and humidity, altering heatwave intensity",
+        "Soil moisture deficits reduce evaporative cooling, increasing sensible heat flux and intensifying temperature‑only heatwaves.",
+        "Higher soil moisture enhances latent heat flux, raising atmospheric humidity and potentially strengthening humid heatwave conditions."
+      ],
+      "LG-extreme_heat_v1-consensus-c1-005": [
+        "heat event frequency and intensity projected to increase, occupational illness risk will not diminish",
+        "The frequency and intensity of heat events are projected to increase, implying that occupational heat‑related illness risk will not diminish in the future."
+      ],
+      "LG-extreme_heat_v1-mechanism-c1-020": [
+        "Minimum air temperature reflects the amount of overnight cooling, with higher minima indicating reduced cooling and greater heat stress."
+      ],
+      "LG-infra_heat_index__transportation_systems-impact-c1-001": [
+        "pavement structural degradation from heat",
+        "Higher pavement temperatures associated with extreme heat events increase the number of identified pavement distress points, indicating that hot conditions worsen road surface conditions.",
+        "Increasing temperatures make common road pavements and rail tracks more vulnerable.",
+        "Increasing summer temperatures lead to critical impacts on pavement structural and functional performance, including rutting and thermal cracking that shorten service life.",
+        "High temperatures cause permanent deformation of asphalt pavements, reducing their smoothness and service life.",
+        "During high temperature periods, pavement surface temperatures exhibit large fluctuations that diminish with depth, indicating that elevated atmospheric heat primarily affects the upper layers of the road.",
+        "High ambient temperatures in a warm tropical environment increase the susceptibility of asphalt pavements to flow and permanent deformation, leading to inevitable rutting under heavy traffic loading.",
+        "Increasing temperature above about 25 °C sharply reduces the interlaminar shear fatigue life of steel bridge deck pavements.",
+        "Significant daily or hourly increases in temperature can accelerate the development of permanent deformation in flexible pavements.",
+        "Wider temperature ranges caused by climate change increase thermal stresses in asphalt layers, leading to more thermal cracking.",
+        "Increasing temperatures and heat waves can promote excessive vegetation growth and higher evaporation, which in turn impair drainage and increase road distress, raising maintenance needs for transportation systems."
+      ],
+      "LG-infra_heat_index__transportation_systems-impact-c1-004": [
+        "cool roofs provide pedestrian‑level temperature cooling",
+        "Cool roofs provide daytime pedestrian-level air temperature cooling of up to about 2 °C during heatwaves, with the greatest cooling observed in Phoenix."
+      ],
+      "LG-infra_heat_index__transportation_systems-impact-c1-002": [
+        "rail track expansion and buckling causing disruptions",
+        "Increasing ambient temperatures can cause rail buckling, which can lead to train derailments and service disruptions on high‑speed rail lines.",
+        "Longer periods of heat waves are expected to increase and can disrupt railway operations because rails, switch components, and overhead lines expand in heat, leading to traffic disruptions and a higher probability of rail defects.",
+        "Extreme heat can cause track expansion and deformation, leading to disruptions in underground transport systems and problems with electrical systems."
+      ],
+      "LG-infra_heat_index__transportation_systems-impact-c1-003": [
+        "runway surface damage and operational limits from heat",
+        "Extreme heat can cause runway surface damage and reduce aircraft lift, leading to weight restrictions and operational disruptions at airports."
+      ],
+      "LG-infra_heat_index__transportation_systems-impact-c1-007": [
+        "heat‑driven vegetation fires threaten railway corridors",
+        "Heat and drought associated with extreme heat waves increase the risk of vegetation fires along railway corridors, creating a need to stop or redirect train traffic."
+      ],
+      "LG-infra_heat_index__transportation_systems-impact-c1-009": [
+        "heat exacerbates erosion of road embankments and side slopes",
+        "Higher ambient temperatures can exacerbate water‑related damage to road embankments and side slopes, increasing the risk of material loss and erosion."
+      ],
+      "LG-infra_heat_index__transportation_systems-impact-c1-011": [
+        "Permeable and vegetated pavements can reduce surface temperatures by evaporative cooling, but their service life may be shorter than traditional pavements."
+      ]
+    },
+    "level": 8,
+    "family": "heat_index",
+    "plain_quantity": [
+      "days hot and humid enough to be dangerous",
+      "dangerous heat-index days"
+    ],
+    "group_role": {
+      "LG-extreme_heat_v1-driver-c1-008": "driver",
+      "LG-extreme_heat_v1-driver-c2-001": "driver",
+      "LG-extreme_heat_v1-mechanism-c1-024": "driver",
+      "LG-extreme_heat_v1-mechanism-c2-003": "driver",
+      "LG-extreme_heat_v1-driver-c1-001": "driver",
+      "LG-extreme_heat_v1-mechanism-c1-003": "driver",
+      "LG-extreme_heat_v1-consensus-c1-005": "driver",
+      "LG-extreme_heat_v1-mechanism-c1-020": "driver",
+      "LG-infra_heat_index__transportation_systems-impact-c1-001": "impact",
+      "LG-infra_heat_index__transportation_systems-impact-c1-004": "impact",
+      "LG-infra_heat_index__transportation_systems-impact-c1-002": "impact",
+      "LG-infra_heat_index__transportation_systems-impact-c1-003": "impact",
+      "LG-infra_heat_index__transportation_systems-impact-c1-007": "impact",
+      "LG-infra_heat_index__transportation_systems-impact-c1-009": "impact",
+      "LG-infra_heat_index__transportation_systems-impact-c1-011": "impact"
+    },
+    "scope": {
+      "decision": "D-069a",
+      "groups": {
+        "LG-extreme_heat_v1-driver-c1-008": {
+          "class": "us_national",
+          "stem": "Research on the United States",
+          "optional_clause": ", including work on the Southwest"
+        },
+        "LG-extreme_heat_v1-driver-c2-001": {
+          "class": "global",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-extreme_heat_v1-mechanism-c1-024": {
+          "class": "global",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-extreme_heat_v1-mechanism-c2-003": {
+          "class": "us_subregion",
+          "stem": "Research on the United States",
+          "optional_clause": null
+        },
+        "LG-extreme_heat_v1-driver-c1-001": {
+          "class": "us_national",
+          "stem": "Research on the United States",
+          "optional_clause": null
+        },
+        "LG-extreme_heat_v1-mechanism-c1-003": {
+          "class": "us_national",
+          "stem": "Research on the United States",
+          "optional_clause": null
+        },
+        "LG-extreme_heat_v1-consensus-c1-005": {
+          "class": "global",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-extreme_heat_v1-mechanism-c1-020": {
+          "class": "global",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-infra_heat_index__transportation_systems-impact-c1-001": {
+          "class": "other",
+          "stem": "In general, research",
+          "optional_clause": ", including work on Arizona"
+        },
+        "LG-infra_heat_index__transportation_systems-impact-c1-004": {
+          "class": "us_national",
+          "stem": "Research on the United States",
+          "optional_clause": null
+        },
+        "LG-infra_heat_index__transportation_systems-impact-c1-002": {
+          "class": "other",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-infra_heat_index__transportation_systems-impact-c1-003": {
+          "class": "global",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-infra_heat_index__transportation_systems-impact-c1-007": {
+          "class": "other",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-infra_heat_index__transportation_systems-impact-c1-009": {
+          "class": "other",
+          "stem": "In general, research",
+          "optional_clause": null
+        },
+        "LG-infra_heat_index__transportation_systems-impact-c1-011": {
+          "class": "global",
+          "stem": "In general, research",
+          "optional_clause": null
+        }
+      },
+      "general_clause": "These are general drivers of dangerous heat-index days, not findings specific to Arizona.",
+      "needs_general_clause": true,
+      "place_names": [
+        "Arizona",
+        "Southwest"
+      ]
+    },
+    "question_form": {
+      "id": "QF-09",
+      "name": "what_could_it_mean_rung8",
+      "opening_regex": "^What could\\b",
+      "min_question_marks": 1
+    },
+    "rung8": {
+      "impact_group_ids": [
+        "LG-infra_heat_index__transportation_systems-impact-c1-001",
+        "LG-infra_heat_index__transportation_systems-impact-c1-004",
+        "LG-infra_heat_index__transportation_systems-impact-c1-002",
+        "LG-infra_heat_index__transportation_systems-impact-c1-003",
+        "LG-infra_heat_index__transportation_systems-impact-c1-007",
+        "LG-infra_heat_index__transportation_systems-impact-c1-009",
+        "LG-infra_heat_index__transportation_systems-impact-c1-011"
+      ],
+      "place_named_impact_group_ids": [
+        "LG-infra_heat_index__transportation_systems-impact-c1-001"
+      ],
+      "group_hazard_relation": {
+        "LG-infra_heat_index__transportation_systems-impact-c1-001": "broader_hazard",
+        "LG-infra_heat_index__transportation_systems-impact-c1-004": "broader_hazard",
+        "LG-infra_heat_index__transportation_systems-impact-c1-002": "broader_hazard",
+        "LG-infra_heat_index__transportation_systems-impact-c1-003": "broader_hazard",
+        "LG-infra_heat_index__transportation_systems-impact-c1-007": "broader_hazard",
+        "LG-infra_heat_index__transportation_systems-impact-c1-009": "broader_hazard",
+        "LG-infra_heat_index__transportation_systems-impact-c1-011": "broader_hazard"
+      },
+      "asset_class_phrase": "transportation systems",
+      "broader_hazard_phrase": "extreme heat, of which dangerous heat-index days are one measure",
+      "quantity_phrases": [
+        "days hot and humid enough to be dangerous",
+        "dangerous heat-index days"
+      ]
+    }
+  },
+  "excluded_groups": [
+    {
+      "group_id": "LG-extreme_heat_v1-caveat-c1-012",
+      "statement_type": "caveat",
+      "claim_about": "method_or_data",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-caveat-c1-013",
+      "statement_type": "caveat",
+      "claim_about": "method_or_data",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-caveat-c1-014",
+      "statement_type": "caveat",
+      "claim_about": "impact_or_exposure",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-caveat-c1-015",
+      "statement_type": "caveat",
+      "claim_about": "method_or_data",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-caveat-c1-017",
+      "statement_type": "caveat",
+      "claim_about": "other",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-caveat-c1-018",
+      "statement_type": "caveat",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "disposition:not_about_family"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-caveat-c1-019",
+      "statement_type": "caveat",
+      "claim_about": "method_or_data",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-caveat-c1-020",
+      "statement_type": "caveat",
+      "claim_about": "impact_or_exposure",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-caveat-c1-022",
+      "statement_type": "caveat",
+      "claim_about": "impact_or_exposure",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-caveat-c1-024",
+      "statement_type": "caveat",
+      "claim_about": "hazard_definition_or_measurement",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-caveat-c1-026",
+      "statement_type": "caveat",
+      "claim_about": "hazard_definition_or_measurement",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-caveat-c1-027",
+      "statement_type": "caveat",
+      "claim_about": "impact_or_exposure",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-caveat-c2-006",
+      "statement_type": "caveat",
+      "claim_about": "method_or_data",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-caveat-c2-015",
+      "statement_type": "caveat",
+      "claim_about": "impact_or_exposure",
+      "reason": "caveat_outside_rung_7"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-consensus-c1-002",
+      "statement_type": "consensus",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-consensus-c1-007",
+      "statement_type": "consensus",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-consensus-c1-012",
+      "statement_type": "consensus",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c1-002",
+      "statement_type": "driver",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c1-006",
+      "statement_type": "driver",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c1-007",
+      "statement_type": "driver",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "disposition:not_about_family"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c1-009",
+      "statement_type": "driver",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c1-011",
+      "statement_type": "driver",
+      "claim_about": "other",
+      "reason": "claim_about:other"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c1-017",
+      "statement_type": "driver",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c2-003",
+      "statement_type": "driver",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c2-004",
+      "statement_type": "driver",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "disposition:not_about_family"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c2-005",
+      "statement_type": "driver",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c2-006",
+      "statement_type": "driver",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c2-011",
+      "statement_type": "driver",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "disposition:not_about_family"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c3-002",
+      "statement_type": "driver",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c3-003",
+      "statement_type": "driver",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-driver-c3-004",
+      "statement_type": "driver",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-002",
+      "statement_type": "mechanism",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-004",
+      "statement_type": "mechanism",
+      "claim_about": "hazard_change_mechanism",
+      "reason": "disposition:not_about_family"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-007",
+      "statement_type": "mechanism",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-009",
+      "statement_type": "mechanism",
+      "claim_about": "other",
+      "reason": "claim_about:other"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-016",
+      "statement_type": "mechanism",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-023",
+      "statement_type": "mechanism",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-026",
+      "statement_type": "mechanism",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-028",
+      "statement_type": "mechanism",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-031",
+      "statement_type": "mechanism",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-033",
+      "statement_type": "mechanism",
+      "claim_about": "method_or_data",
+      "reason": "claim_about:method_or_data"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c2-004",
+      "statement_type": "mechanism",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c2-014",
+      "statement_type": "mechanism",
+      "claim_about": "impact_or_exposure",
+      "reason": "claim_about:impact_or_exposure"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-021",
+      "statement_type": "mechanism",
+      "claim_about": "hazard_definition_or_measurement",
+      "reason": "rung8:context_not_attached"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-001",
+      "statement_type": "mechanism",
+      "claim_about": "hazard_definition_or_measurement",
+      "reason": "rung8:context_not_attached"
+    },
+    {
+      "group_id": "LG-extreme_heat_v1-mechanism-c1-022",
+      "statement_type": "mechanism",
+      "claim_about": "hazard_definition_or_measurement",
+      "reason": "rung8:context_not_attached"
+    }
+  ],
+  "inputs_sha256": {
+    "item_seeds_v3": "04602e1bce5bc205ab6ae0d179f866ce894cfc517be62f2039fdc9c393f9d8a5",
+    "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+    "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+    "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+    "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+    "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+    "group_dispositions": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+    "provenance_corrections": "d56cbe5e0c4feaffd8398126953c8437416967b2fbc382d5da907e88081ebd93",
+    "descriptor_rules": "dbfa8fd8a86a9379b4709b998bb33e673dceafd5f8ba7d199d55ff672d4c282d",
+    "plain_language": "60598527bf21a9dbc5a68e31cb60ec76d75b95d5ede7411181c323f56832b140",
+    "resolutions": "d86e1cd4e92ab51562ec251c98652d135280a52642012f6c94f3e2d02595869a",
+    "nca_map": "3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41",
+    "nca_regions_disposition": "a0c390a80634a8e4a74693e47828a9912ddea8f8151784d57c82f816e3bb1ae9",
+    "group_dispositions_fire": "94a88f5d3228f3fdc4cf68a585475bb0cbc08b6c8d2ffe95430c8cf029ed907a",
+    "item_seeds_infra_v1": "f724b4c850a1ec548fdc7fe3aa7cf3ff8ede87d2773c4805cba7f762ea120934",
+    "pilot_selection_infra_v1": "0f42385ab51377637e523ed0e1323789690807e0c32f9cf744d2820ba26ae9e6",
+    "groups_infra_run1": "f61bf4f557c0f5fbdfec2779fc578b01e84bdc6edfca80c4b633d25f841045ce",
+    "groups_enriched_infra_run1": "1e5aa4fb5902bc598c5977dd231d9b1b1c029fdad98076651cb0b2d7b0913eb1",
+    "statements_infra_run1": "869b0592e72ec22b7617a3fbe6ae3005df762b4817f7609e41c96a8559cbca4b",
+    "independence_infra_run1": "b0a2fa3f3bd9998597c4681100586abf555ce295283984f102222030bd2fb602",
+    "question_forms": "520aafa0804b5308be7e9e59b8316d9fbe0d8b60b335da4a0414ed0a17ab283e"
+  },
+  "relevance": {
+    "geography": "litgeo v2",
+    "n_relevant_statements": 134,
+    "by_basis": {
+      "state": 2,
+      "nca_region": 1,
+      "us_subregion": 20,
+      "us_national": 62,
+      "global": 49
+    }
+  },
+  "decision": "D-076",
+  "rules": "D-075 (DR-SEED-INFRA-1, rung-8 wording), D-073b, D-069a",
+  "rung3_seed_id": "SD2-TP1-00069",
+  "asset_class": "transportation_systems",
+  "state": "Arizona",
+  "review_state": "impact_groups_unreviewed",
+  "provisional": true,
+  "place_named_impact_evidence": "place_named_impact_statement",
+  "question_form_id": "QF-09",
+  "scope_detail": {
+    "LG-extreme_heat_v1-driver-c1-008": {
+      "class": "us_national",
+      "stem": "Research on the United States",
+      "regions": [],
+      "cited_members": 3,
+      "cited_by_class": {
+        "nca": 1,
+        "us_national": 2
+      },
+      "minority_places": [
+        "the Southwest"
+      ],
+      "minority_cited_members": 1,
+      "optional_clause": ", including work on the Southwest"
+    },
+    "LG-extreme_heat_v1-driver-c2-001": {
+      "class": "global",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 2,
+      "cited_by_class": {
+        "global": 2
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-extreme_heat_v1-mechanism-c1-024": {
+      "class": "global",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 4,
+      "cited_by_class": {
+        "global": 4
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-extreme_heat_v1-mechanism-c2-003": {
+      "class": "us_subregion",
+      "stem": "Research on the United States",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "us_subregion": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-extreme_heat_v1-driver-c1-001": {
+      "class": "us_national",
+      "stem": "Research on the United States",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "us_national": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-extreme_heat_v1-mechanism-c1-003": {
+      "class": "us_national",
+      "stem": "Research on the United States",
+      "regions": [],
+      "cited_members": 2,
+      "cited_by_class": {
+        "us_national": 2
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-extreme_heat_v1-consensus-c1-005": {
+      "class": "global",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "global": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-extreme_heat_v1-mechanism-c1-020": {
+      "class": "global",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "global": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_heat_index__transportation_systems-impact-c1-001": {
+      "class": "other",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 10,
+      "cited_by_class": {
+        "state": 1,
+        "global": 1,
+        "other": 6,
+        "unknown": 2
+      },
+      "minority_places": [
+        "Arizona"
+      ],
+      "minority_cited_members": 1,
+      "optional_clause": ", including work on Arizona"
+    },
+    "LG-infra_heat_index__transportation_systems-impact-c1-004": {
+      "class": "us_national",
+      "stem": "Research on the United States",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "us_national": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_heat_index__transportation_systems-impact-c1-002": {
+      "class": "other",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 3,
+      "cited_by_class": {
+        "other": 3
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_heat_index__transportation_systems-impact-c1-003": {
+      "class": "global",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "global": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_heat_index__transportation_systems-impact-c1-007": {
+      "class": "other",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "other": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_heat_index__transportation_systems-impact-c1-009": {
+      "class": "other",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "other": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    },
+    "LG-infra_heat_index__transportation_systems-impact-c1-011": {
+      "class": "global",
+      "stem": "In general, research",
+      "regions": [],
+      "cited_members": 1,
+      "cited_by_class": {
+        "global": 1
+      },
+      "minority_places": [],
+      "minority_cited_members": 0,
+      "optional_clause": null
+    }
+  },
+  "selection": {
+    "file": "artifacts/benchmark/pilot_selection_infra_v1.yaml",
+    "decision": "D-075",
+    "order": 2,
+    "item_id": "BI-P5-0002",
+    "family": "heat_index",
+    "asset_class": "transportation_systems",
+    "state": "Arizona",
+    "state_basis": "largest table change among states with a place-named impact statement",
+    "candidate_states": [
+      "Arizona"
+    ],
+    "table_change": 10.271200803886398,
+    "place_named_impact_evidence": "place_named_impact_statement",
+    "question_form_id": "QF-09"
+  }
+}

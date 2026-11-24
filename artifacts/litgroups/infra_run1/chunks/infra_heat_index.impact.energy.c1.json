@@ -1,0 +1,1756 @@
+{
+  "partition_id": "infra_heat_index.impact.energy",
+  "chunk_index": 1,
+  "n_chunks": 2,
+  "arm": "infra_heat_index__energy",
+  "statement_type": "impact",
+  "split_by": [],
+  "partition_n_statements": 43,
+  "n_statements": 22,
+  "local_ids": [
+    "S002",
+    "S003",
+    "S004",
+    "S005",
+    "S021",
+    "S027",
+    "S034",
+    "S037",
+    "S038",
+    "S020",
+    "S006",
+    "S007",
+    "S008",
+    "S018",
+    "S019",
+    "S023",
+    "S024",
+    "S030",
+    "S039",
+    "S040",
+    "S041",
+    "S001"
+  ],
+  "generator_version": "litgroup_agent v3.1",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "infra_heat_index.impact.energy.c1",
+  "model_attempts": 2,
+  "corrective_retry_used": true,
+  "finish_reason": "stop",
+  "content_chars": 1869,
+  "reasoning_chars": 1661,
+  "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+  "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+  "prompt_variant": "impact_v1",
+  "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+  "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+  "generation_timestamp": "2026-11-24T07:20:12Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S004",
+        "S037",
+        "S038"
+      ],
+      "label": "thermal power plant output reduction",
+      "rationale": "All state that higher temperatures lower generation output of thermal plants.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "plant",
+          "reduction"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S020",
+        "S023",
+        "S024"
+      ],
+      "label": "electricity demand increase with temperature",
+      "rationale": "Each links higher ambient temperature to higher electricity demand and higher blackout risk.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S027",
+        "S034"
+      ],
+      "label": "wildfire risk to power transmission lines",
+      "rationale": "Both describe high temperature (and wind) raising wildfire risk to transmission infrastructure.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S007",
+        "S008"
+      ],
+      "label": "water‑limited cooling curtails power plant output",
+      "rationale": "Higher temperatures and drought reduce water for cooling, forcing generation curtailment.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "curtails",
+          "limited",
+          "output",
+          "plant"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [
+    {
+      "id": "S001",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S002",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S003",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S005",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S006",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S018",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S019",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S021",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S030",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S039",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S040",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S041",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-132959901-03",
+        "LS3-257463109-01",
+        "LS3-257463109-03"
+      ],
+      "member_local_ids": [
+        "S004",
+        "S037",
+        "S038"
+      ],
+      "label": "thermal power plant output reduction",
+      "rationale": "All state that higher temperatures lower generation output of thermal plants.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 3,
+      "papers": [
+        "132959901",
+        "257463109"
+      ],
+      "canonical_papers": [
+        "132959901",
+        "257463109"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "cited_candidate": 1,
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy",
+        "energy",
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard",
+        "broader_hazard",
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "higher cooling water temperature reduces plant efficiency",
+        "heat wave reduces the efficiency of cooling and fuel performance",
+        "repeated heat waves lower plant efficiency"
+      ],
+      "impact_outcomes": [
+        "decreases generation output during peak demand",
+        "electricity production declines",
+        "regional electricity generation declines"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "plant",
+          "reduction"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-233601407-01",
+        "LS3-239927222-01",
+        "LS3-239927222-04"
+      ],
+      "member_local_ids": [
+        "S020",
+        "S023",
+        "S024"
+      ],
+      "label": "electricity demand increase with temperature",
+      "rationale": "Each links higher ambient temperature to higher electricity demand and higher blackout risk.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 3,
+      "papers": [
+        "233601407",
+        "239927222"
+      ],
+      "canonical_papers": [
+        "233601407",
+        "239927222"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 3
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy",
+        "energy",
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard",
+        "broader_hazard",
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "higher ambient temperature raises cooling demand",
+        "higher temperature increases load demand",
+        "greater temperature sensitivity raises demand"
+      ],
+      "impact_outcomes": [
+        "increases daily electricity consumption",
+        "greater risk of operating beyond capacity leading to blackout",
+        "increases blackout probability"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-249431725-01",
+        "LS3-255372301-01"
+      ],
+      "member_local_ids": [
+        "S027",
+        "S034"
+      ],
+      "label": "wildfire risk to power transmission lines",
+      "rationale": "Both describe high temperature (and wind) raising wildfire risk to transmission infrastructure.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 2,
+      "papers": [
+        "249431725",
+        "255372301"
+      ],
+      "canonical_papers": [
+        "249431725",
+        "255372301"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy",
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard",
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "high temperature and wind increase ignition likelihood",
+        "higher temperature raises ignition likelihood of fuels near power lines"
+      ],
+      "impact_outcomes": [
+        "greater risk of infrastructure‑induced wildfires",
+        "increased probability of wildfire events affecting the lines"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-154584707-01",
+        "LS3-154584707-03"
+      ],
+      "member_local_ids": [
+        "S007",
+        "S008"
+      ],
+      "label": "water‑limited cooling curtails power plant output",
+      "rationale": "Higher temperatures and drought reduce water for cooling, forcing generation curtailment.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 2,
+      "papers": [
+        "154584707"
+      ],
+      "canonical_papers": [
+        "154584707"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy",
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard",
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "increased temperature and heat‑wave conditions reduce water availability for cooling and increase electricity demand",
+        "drought and high water temperatures limit cooling water supply"
+      ],
+      "impact_outcomes": [
+        "power plant efficiency declines and electricity supply may be constrained",
+        "electricity generation is curtailed"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "curtails",
+          "limited",
+          "output",
+          "plant"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-110551509-01"
+      ],
+      "member_local_ids": [
+        "S001"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "110551509"
+      ],
+      "canonical_papers": [
+        "110551509"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "higher ambient temperatures lower the thermal rating of conductors and equipment"
+      ],
+      "impact_outcomes": [
+        "potential overload failures if ampacity is not derated"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-132959901-01"
+      ],
+      "member_local_ids": [
+        "S002"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "132959901"
+      ],
+      "canonical_papers": [
+        "132959901"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "increased ambient temperature lowers transformer efficiency"
+      ],
+      "impact_outcomes": [
+        "reduces peak load capacity"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-132959901-02"
+      ],
+      "member_local_ids": [
+        "S003"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "132959901"
+      ],
+      "canonical_papers": [
+        "132959901"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "higher temperature raises line resistance"
+      ],
+      "impact_outcomes": [
+        "increases required generation capacity"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-132959901-05"
+      ],
+      "member_local_ids": [
+        "S005"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "132959901"
+      ],
+      "canonical_papers": [
+        "132959901"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "temperature reduces equipment capacity while demand rises"
+      ],
+      "impact_outcomes": [
+        "increases risk of rolling blackouts"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-133829109-01"
+      ],
+      "member_local_ids": [
+        "S006"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "133829109"
+      ],
+      "canonical_papers": [
+        "133829109"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "higher air temperature raises containment pressure"
+      ],
+      "impact_outcomes": [
+        "increased likelihood of exceeding safety limits"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-230554825-05"
+      ],
+      "member_local_ids": [
+        "S018"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "230554825"
+      ],
+      "canonical_papers": [
+        "230554825"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "recirculating cooling is less efficient under high heat"
+      ],
+      "impact_outcomes": [
+        "higher annual curtailment"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-233549428-01"
+      ],
+      "member_local_ids": [
+        "S019"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "233549428"
+      ],
+      "canonical_papers": [
+        "233549428"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "heat waves accelerate insulation degradation"
+      ],
+      "impact_outcomes": [
+        "increase in cable failure rate"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-235445000-01"
+      ],
+      "member_local_ids": [
+        "S021"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "235445000"
+      ],
+      "canonical_papers": [
+        "235445000"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "increases power demand and reduces renewable generation output"
+      ],
+      "impact_outcomes": [
+        "causes regional supply‑demand imbalance and large‑scale blackouts"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-253992810-01"
+      ],
+      "member_local_ids": [
+        "S030"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "253992810"
+      ],
+      "canonical_papers": [
+        "253992810"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "accelerates ageing and degradation of infrastructure"
+      ],
+      "impact_outcomes": [
+        "reduces lifecycle and service level, increasing incident risk"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-264178918-04"
+      ],
+      "member_local_ids": [
+        "S039"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "264178918"
+      ],
+      "canonical_papers": [
+        "264178918"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "heat limits crew workability"
+      ],
+      "impact_outcomes": [
+        "delays maintenance of critical equipment"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-264178918-05"
+      ],
+      "member_local_ids": [
+        "S040"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "264178918"
+      ],
+      "canonical_papers": [
+        "264178918"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "heat‑driven drought extends outage duration"
+      ],
+      "impact_outcomes": [
+        "exceeds standard outage planning horizon"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__energy",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.energy",
+      "chunk_id": "infra_heat_index.impact.energy.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-269204029-01"
+      ],
+      "member_local_ids": [
+        "S041"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "269204029"
+      ],
+      "canonical_papers": [
+        "269204029"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "energy",
+      "asset_classes": [
+        "energy"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "thermal expansion causes line sagging"
+      ],
+      "impact_outcomes": [
+        "increased likelihood of short‑circuit faults and power outages"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "58b230e8e6b30e37acb7f2d21659b21afa5a7276b483f05a28aef221121a80d0",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:20:12Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 1991,
+      "reasoning_chars": 1635,
+      "http_attempts": 1,
+      "model_seconds": 6.4
+    },
+    {
+      "turn": 2,
+      "finish_reason": "stop",
+      "content_chars": 1869,
+      "reasoning_chars": 1661,
+      "http_attempts": 1,
+      "model_seconds": 6.8
+    }
+  ],
+  "first_turn": {
+    "checks": {
+      "parse_pass": true,
+      "unknown_ids": [
+        "S009",
+        "S010"
+      ],
+      "duplicate_ids": [],
+      "missing_ids": [],
+      "empty_groups": 0,
+      "ids_exactly_once_pass": false,
+      "no_empty_group_pass": true,
+      "failed": [
+        "ids_exactly_once_pass"
+      ]
+    },
+    "groups_as_returned": [
+      {
+        "member_ids": [
+          "S004",
+          "S037",
+          "S038"
+        ],
+        "label": "thermal power plant output reduction",
+        "rationale": "All state that higher temperatures lower generation output of thermal plants.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "plant",
+            "reduction"
+          ],
+          "rationale_words": 11,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S020",
+          "S023",
+          "S024"
+        ],
+        "label": "electricity demand increase with temperature",
+        "rationale": "Each links higher ambient temperature to higher electricity demand and higher blackout risk.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 13,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S027",
+          "S034"
+        ],
+        "label": "wildfire risk to power transmission lines",
+        "rationale": "Both describe high temperature (and wind) raising wildfire risk to transmission infrastructure.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 12,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S007",
+          "S008"
+        ],
+        "label": "water‑limited cooling curtails power plant output",
+        "rationale": "Higher temperatures and drought reduce water for cooling, forcing generation curtailment.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "curtails",
+            "limited",
+            "output",
+            "plant"
+          ],
+          "rationale_words": 11,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      }
+    ],
+    "singletons_as_returned": [
+      {
+        "id": "S001",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S002",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S003",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S005",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S006",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S009",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S010",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S018",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S019",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S021",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S030",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S039",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S040",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S041",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"thermal power plant output reduction\",\n      \"member_ids\": [\"S004\", \"S037\", \"S038\"],\n      \"rationale\": \"All state that higher temperatures lower generation output of thermal plants.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"electricity demand increase with temperature\",\n      \"member_ids\": [\"S020\", \"S023\", \"S024\"],\n      \"rationale\": \"Each links higher ambient temperature to higher electricity demand and higher blackout risk.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"wildfire risk to power transmission lines\",\n      \"member_ids\": [\"S027\", \"S034\"],\n      \"rationale\": \"Both describe high temperature (and wind) raising wildfire risk to transmission infrastructure.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"water‑limited cooling curtails power plant output\",\n      \"member_ids\": [\"S007\", \"S008\"],\n      \"rationale\": \"Higher temperatures and drought reduce water for cooling, forcing generation curtailment.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    }\n  ],\n  \"singletons\": [\n    {\"id\": \"S001\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S002\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S003\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S005\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S006\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S009\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S010\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S018\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S019\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S021\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S030\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S039\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S040\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S041\", \"claim_about\": \"hazard_impact_on_asset\"}\n  ]\n}",
+    "raw_response_chars": 1991,
+    "raw_reasoning": null,
+    "raw_reasoning_chars": null,
+    "content_fallback": false,
+    "finish_reason": "stop",
+    "raw_max_chars": 20000
+  },
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 13.2,
+  "model_parse_error": null,
+  "elapsed_seconds": 13.6,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"thermal power plant output reduction\",\n      \"member_ids\": [\"S004\", \"S037\", \"S038\"],\n      \"rationale\": \"All state that higher temperatures lower generation output of thermal plants.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"electricity demand increase with temperature\",\n      \"member_ids\": [\"S020\", \"S023\", \"S024\"],\n      \"rationale\": \"Each links higher ambient temperature to higher electricity demand and higher blackout risk.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"wildfire risk to power transmission lines\",\n      \"member_ids\": [\"S027\", \"S034\"],\n      \"rationale\": \"Both describe high temperature (and wind) raising wildfire risk to transmission infrastructure.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"water‑limited cooling curtails power plant output\",\n      \"member_ids\": [\"S007\", \"S008\"],\n      \"rationale\": \"Higher temperatures and drought reduce water for cooling, forcing generation curtailment.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    }\n  ],\n  \"singletons\": [\n    {\"id\": \"S001\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S002\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S003\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S005\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S006\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S018\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S019\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S021\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S030\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S039\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S040\", \"claim_about\": \"hazard_impact_on_asset\"},\n    {\"id\": \"S041\", \"claim_about\": \"hazard_impact_on_asset\"}\n  ]\n}",
+  "raw_response_chars": 1869,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

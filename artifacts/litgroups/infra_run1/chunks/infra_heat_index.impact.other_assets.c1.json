@@ -1,0 +1,1989 @@
+{
+  "partition_id": "infra_heat_index.impact.other_assets",
+  "chunk_index": 1,
+  "n_chunks": 1,
+  "arm": "infra_heat_index__other_assets",
+  "statement_type": "impact",
+  "split_by": [],
+  "partition_n_statements": 18,
+  "n_statements": 18,
+  "local_ids": [
+    "S010",
+    "S011",
+    "S008",
+    "S009",
+    "S014",
+    "S015",
+    "S001",
+    "S002",
+    "S003",
+    "S004",
+    "S005",
+    "S006",
+    "S007",
+    "S012",
+    "S013",
+    "S016",
+    "S017",
+    "S018"
+  ],
+  "generator_version": "litgroup_agent v3.1",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "infra_heat_index.impact.other_assets.c1",
+  "model_attempts": 2,
+  "corrective_retry_used": true,
+  "finish_reason": "stop",
+  "content_chars": 3287,
+  "reasoning_chars": 418,
+  "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+  "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+  "prompt_variant": "impact_v1",
+  "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+  "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+  "generation_timestamp": "2026-11-24T07:21:27Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S010"
+      ],
+      "label": "building stock functionality limited by extreme heat",
+      "rationale": "Extreme heat reduces building and transport functionality and comfort.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "limited"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S012"
+      ],
+      "label": "building finishing damage from extreme heat",
+      "rationale": "Heat causes cracks in panels and roof coverings of buildings.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "extreme"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S006"
+      ],
+      "label": "rail track deformation caused by severe temperature anomalies",
+      "rationale": "Heat deforms rail tracks, affecting safety and mobility.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "caused",
+          "track"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S007"
+      ],
+      "label": "airport runway heat buckling leading to service disruption",
+      "rationale": "Higher temperatures cause runway buckling, restricting payloads and flights.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "runway",
+          "service"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S016",
+        "S017"
+      ],
+      "label": "manufacturing plant productivity lowered by high ambient temperatures",
+      "rationale": "Heat reduces worker output and raises absenteeism in plants.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "lowered"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S004",
+        "S005"
+      ],
+      "label": "water‑service interruptions and stress on water infrastructure from extreme heat",
+      "rationale": "Heat reduces river flow and water availability, stressing municipal water systems.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": true,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S001"
+      ],
+      "label": "increased water use aggravating reservoir‑based water shortages",
+      "rationale": "Higher summer temperatures raise water demand, stressing supply reservoirs.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "increased"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": true,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S013"
+      ],
+      "label": "public water supply shortages limiting household access",
+      "rationale": "Heat‑related water scarcity reduced household water supply in Europe.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "access",
+          "household",
+          "limiting"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": true,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S018"
+      ],
+      "label": "building water‑scarcity risk requiring larger tanks and efficiency",
+      "rationale": "Heat waves raise water‑scarcity risk for buildings, prompting design changes.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "building",
+          "larger",
+          "tanks"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": true,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S008"
+      ],
+      "label": "police incidents increase with higher daily maximum temperature",
+      "rationale": "A 10 °F rise raises expected daily police incidents by about 3 %.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "higher"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S009"
+      ],
+      "label": "fire department incidents increase with higher daily maximum temperature",
+      "rationale": "A 10 °F rise raises expected daily fire incidents by about 11 %.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "higher"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [
+    {
+      "id": "S011",
+      "claim_about": "method_or_data",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S003",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S015",
+      "claim_about": "other",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S014",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S002",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-225694924-01"
+      ],
+      "member_local_ids": [
+        "S010"
+      ],
+      "label": "building stock functionality limited by extreme heat",
+      "rationale": "Extreme heat reduces building and transport functionality and comfort.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "225694924"
+      ],
+      "canonical_papers": [
+        "225694924"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "other"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "creates hazardous indoor and outdoor thermal conditions"
+      ],
+      "impact_outcomes": [
+        "increases vulnerability and limits functionality of buildings and transportation infrastructure"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "limited"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-234264317-01"
+      ],
+      "member_local_ids": [
+        "S012"
+      ],
+      "label": "building finishing damage from extreme heat",
+      "rationale": "Heat causes cracks in panels and roof coverings of buildings.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "234264317"
+      ],
+      "canonical_papers": [
+        "234264317"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "commercial_facilities"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "heat wave‑induced temperature loads"
+      ],
+      "impact_outcomes": [
+        "cracking of building finishes and water leakage"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "extreme"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-219450331-01"
+      ],
+      "member_local_ids": [
+        "S006"
+      ],
+      "label": "rail track deformation caused by severe temperature anomalies",
+      "rationale": "Heat deforms rail tracks, affecting safety and mobility.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "219450331"
+      ],
+      "canonical_papers": [
+        "219450331"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "other"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "severe temperature anomalies cause rail track deformation"
+      ],
+      "impact_outcomes": [
+        "reduces safety, mobility and efficiency of rail transport"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "caused",
+          "track"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-219450331-02"
+      ],
+      "member_local_ids": [
+        "S007"
+      ],
+      "label": "airport runway heat buckling leading to service disruption",
+      "rationale": "Higher temperatures cause runway buckling, restricting payloads and flights.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "219450331"
+      ],
+      "canonical_papers": [
+        "219450331"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "other"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "high temperatures cause runway heat buckling"
+      ],
+      "impact_outcomes": [
+        "lead to payload limits, flight cancellations and service disruptions"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "runway",
+          "service"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-53422624-01",
+        "LS3-53422624-02"
+      ],
+      "member_local_ids": [
+        "S016",
+        "S017"
+      ],
+      "label": "manufacturing plant productivity lowered by high ambient temperatures",
+      "rationale": "Heat reduces worker output and raises absenteeism in plants.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 2,
+      "papers": [
+        "53422624"
+      ],
+      "canonical_papers": [
+        "53422624"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "other",
+        "other"
+      ],
+      "hazard_relations": [
+        "broader_hazard",
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "heat reduces worker efficiency",
+        "heat raises absenteeism"
+      ],
+      "impact_outcomes": [
+        "decreases manufacturing output",
+        "reduces labor availability and output"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "lowered"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-199657725-01",
+        "LS3-209454109-01"
+      ],
+      "member_local_ids": [
+        "S004",
+        "S005"
+      ],
+      "label": "water‑service interruptions and stress on water infrastructure from extreme heat",
+      "rationale": "Heat reduces river flow and water availability, stressing municipal water systems.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 2,
+      "papers": [
+        "199657725",
+        "209454109"
+      ],
+      "canonical_papers": [
+        "199657725",
+        "209454109"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "water_and_wastewater",
+        "water_and_wastewater"
+      ],
+      "hazard_relations": [
+        "broader_hazard",
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "high temperatures reduce river flow",
+        "heat waves reduce precipitation and increase evaporation"
+      ],
+      "impact_outcomes": [
+        "municipal water supply is rationed or interrupted",
+        "lower water supply and higher demand on water infrastructure"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": true,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-131646206-02"
+      ],
+      "member_local_ids": [
+        "S001"
+      ],
+      "label": "increased water use aggravating reservoir‑based water shortages",
+      "rationale": "Higher summer temperatures raise water demand, stressing supply reservoirs.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "131646206"
+      ],
+      "canonical_papers": [
+        "131646206"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "water_and_wastewater"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "increased water demand due to higher temperatures"
+      ],
+      "impact_outcomes": [
+        "exacerbated water shortages in reservoir‑based supply systems"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "increased"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": true,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-234859428-03"
+      ],
+      "member_local_ids": [
+        "S013"
+      ],
+      "label": "public water supply shortages limiting household access",
+      "rationale": "Heat‑related water scarcity reduced household water supply in Europe.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "234859428"
+      ],
+      "canonical_papers": [
+        "234859428"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "water_and_wastewater"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "high temperatures increase evaporation and reduce river flows"
+      ],
+      "impact_outcomes": [
+        "reduced availability of drinking water for households"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "access",
+          "household",
+          "limiting"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": true,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-86673907-01"
+      ],
+      "member_local_ids": [
+        "S018"
+      ],
+      "label": "building water‑scarcity risk requiring larger tanks and efficiency",
+      "rationale": "Heat waves raise water‑scarcity risk for buildings, prompting design changes.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "86673907"
+      ],
+      "canonical_papers": [
+        "86673907"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "water_and_wastewater"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "increases water scarcity risk"
+      ],
+      "impact_outcomes": [
+        "necessitates larger water‑tank sizing and greater water‑use efficiency"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "building",
+          "larger",
+          "tanks"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": true,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-225191307-03"
+      ],
+      "member_local_ids": [
+        "S008"
+      ],
+      "label": "police incidents increase with higher daily maximum temperature",
+      "rationale": "A 10 °F rise raises expected daily police incidents by about 3 %.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "225191307"
+      ],
+      "canonical_papers": [
+        "225191307"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "emergency_services"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "higher temperatures increase police call volume"
+      ],
+      "impact_outcomes": [
+        "incremental rise in daily police incidents"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "higher"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-225191307-04"
+      ],
+      "member_local_ids": [
+        "S009"
+      ],
+      "label": "fire department incidents increase with higher daily maximum temperature",
+      "rationale": "A 10 °F rise raises expected daily fire incidents by about 11 %.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "225191307"
+      ],
+      "canonical_papers": [
+        "225191307"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "emergency_services"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "higher temperatures increase fire call volume"
+      ],
+      "impact_outcomes": [
+        "higher daily fire incidents"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "higher"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-225694924-02"
+      ],
+      "member_local_ids": [
+        "S011"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "225694924"
+      ],
+      "canonical_papers": [
+        "225694924"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "emergency_services"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "lack of granular microclimate data limits targeting of interventions"
+      ],
+      "impact_outcomes": [
+        "reduces effectiveness of response and protection measures"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-198412324-01"
+      ],
+      "member_local_ids": [
+        "S003"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "198412324"
+      ],
+      "canonical_papers": [
+        "198412324"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "food_and_agriculture"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "temperature increase reduces vegetation greenness"
+      ],
+      "impact_outcomes": [
+        "potential decline in agricultural productivity"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-257903228-03"
+      ],
+      "member_local_ids": [
+        "S015"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "other",
+      "n_members": 1,
+      "papers": [
+        "257903228"
+      ],
+      "canonical_papers": [
+        "257903228"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "water_and_wastewater"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "warmer water reduces dissolved oxygen"
+      ],
+      "impact_outcomes": [
+        "increased risk of hypoxia for aquatic ecosystems"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-255723100-03"
+      ],
+      "member_local_ids": [
+        "S014"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "255723100"
+      ],
+      "canonical_papers": [
+        "255723100"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "other"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "high temperatures affect human physiology"
+      ],
+      "impact_outcomes": [
+        "increased health and safety risks for outdoor staff"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_heat_index.impact.other_assets",
+      "chunk_id": "infra_heat_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-195528324-01"
+      ],
+      "member_local_ids": [
+        "S002"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "195528324"
+      ],
+      "canonical_papers": [
+        "195528324"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "heat_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "food_and_agriculture"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "heat stress reduces feed intake"
+      ],
+      "impact_outcomes": [
+        "milk production declines"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 2,
+      "corrective_retry_used": true,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "system_prompt_sha256": "1bd1f71ec7344f4000dac90596c7e0d038608fbbcf7e92a5eff339f5a99bb379",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "45f33078f33b363355ab46bbee54bf4c908fc0db87d6c608aa00bdeb72374645",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:27Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 3212,
+      "reasoning_chars": 4391,
+      "http_attempts": 1,
+      "model_seconds": 9.3
+    },
+    {
+      "turn": 2,
+      "finish_reason": "stop",
+      "content_chars": 3287,
+      "reasoning_chars": 418,
+      "http_attempts": 1,
+      "model_seconds": 5.8
+    }
+  ],
+  "first_turn": {
+    "checks": {
+      "parse_pass": true,
+      "unknown_ids": [],
+      "duplicate_ids": [],
+      "missing_ids": [
+        "S002"
+      ],
+      "empty_groups": 0,
+      "ids_exactly_once_pass": false,
+      "no_empty_group_pass": true,
+      "failed": [
+        "ids_exactly_once_pass"
+      ]
+    },
+    "groups_as_returned": [
+      {
+        "member_ids": [
+          "S010"
+        ],
+        "label": "building stock functionality limited by extreme heat",
+        "rationale": "Extreme heat reduces building and transport functionality and comfort.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "limited"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S012"
+        ],
+        "label": "building finishing damage from extreme heat",
+        "rationale": "Heat causes cracks in panels and roof coverings of buildings.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "extreme"
+          ],
+          "rationale_words": 10,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S006"
+        ],
+        "label": "rail track deformation caused by severe temperature anomalies",
+        "rationale": "Heat deforms rail tracks, affecting safety and mobility.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "caused",
+            "track"
+          ],
+          "rationale_words": 8,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S007"
+        ],
+        "label": "airport runway heat buckling leading to service disruption",
+        "rationale": "Higher temperatures cause runway buckling, restricting payloads and flights.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "runway",
+            "service"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S016",
+          "S017"
+        ],
+        "label": "manufacturing plant productivity lowered by high ambient temperatures",
+        "rationale": "Heat reduces worker output and raises absenteeism in plants.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "lowered"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S004",
+          "S005"
+        ],
+        "label": "water‑service interruptions and stress on water infrastructure from extreme heat",
+        "rationale": "Heat reduces river flow and water availability, stressing municipal water systems.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [],
+          "rationale_words": 11,
+          "rationale_over_limit": false,
+          "single_member": false,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": true,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S001"
+        ],
+        "label": "increased water use aggravating reservoir‑based water shortages",
+        "rationale": "Higher summer temperatures raise water demand, stressing supply reservoirs.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "increased"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": true,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S013"
+        ],
+        "label": "public water supply shortages limiting household access",
+        "rationale": "Heat‑related water scarcity reduced household water supply in Europe.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "access",
+            "household",
+            "limiting"
+          ],
+          "rationale_words": 9,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": true,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S018"
+        ],
+        "label": "building water‑scarcity risk requiring larger tanks and efficiency",
+        "rationale": "Heat waves raise water‑scarcity risk for buildings, prompting design changes.",
+        "claim_about": "hazard_impact_on_asset",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "building",
+            "larger",
+            "tanks"
+          ],
+          "rationale_words": 10,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": true,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S008"
+        ],
+        "label": "police incidents increase with higher daily maximum temperature",
+        "rationale": "A 10 °F rise raises expected daily police incidents by about 3 %.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "higher"
+          ],
+          "rationale_words": 13,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      },
+      {
+        "member_ids": [
+          "S009"
+        ],
+        "label": "fire department incidents increase with higher daily maximum temperature",
+        "rationale": "A 10 °F rise raises expected daily fire incidents by about 11 %.",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "label_present": true,
+          "label_digits_not_in_members": [],
+          "label_digit_pass": true,
+          "label_words_not_in_members": [
+            "higher"
+          ],
+          "rationale_words": 13,
+          "rationale_over_limit": false,
+          "single_member": true,
+          "claim_about_pass": true,
+          "label_names_asset_class_word": false,
+          "label_shares_word_with_impact_outcome": true,
+          "failed": []
+        }
+      }
+    ],
+    "singletons_as_returned": [
+      {
+        "id": "S011",
+        "claim_about": "method_or_data",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S003",
+        "claim_about": "hazard_change_mechanism",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S015",
+        "claim_about": "other",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      },
+      {
+        "id": "S014",
+        "claim_about": "impact_or_exposure",
+        "checks": {
+          "claim_about_pass": true,
+          "failed": []
+        }
+      }
+    ],
+    "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"building stock functionality limited by extreme heat\",\n      \"member_ids\": [\"S010\"],\n      \"rationale\": \"Extreme heat reduces building and transport functionality and comfort.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"building finishing damage from extreme heat\",\n      \"member_ids\": [\"S012\"],\n      \"rationale\": \"Heat causes cracks in panels and roof coverings of buildings.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"rail track deformation caused by severe temperature anomalies\",\n      \"member_ids\": [\"S006\"],\n      \"rationale\": \"Heat deforms rail tracks, affecting safety and mobility.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"airport runway heat buckling leading to service disruption\",\n      \"member_ids\": [\"S007\"],\n      \"rationale\": \"Higher temperatures cause runway buckling, restricting payloads and flights.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"manufacturing plant productivity lowered by high ambient temperatures\",\n      \"member_ids\": [\"S016\", \"S017\"],\n      \"rationale\": \"Heat reduces worker output and raises absenteeism in plants.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"water‑service interruptions and stress on water infrastructure from extreme heat\",\n      \"member_ids\": [\"S004\", \"S005\"],\n      \"rationale\": \"Heat reduces river flow and water availability, stressing municipal water systems.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"increased water use aggravating reservoir‑based water shortages\",\n      \"member_ids\": [\"S001\"],\n      \"rationale\": \"Higher summer temperatures raise water demand, stressing supply reservoirs.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"public water supply shortages limiting household access\",\n      \"member_ids\": [\"S013\"],\n      \"rationale\": \"Heat‑related water scarcity reduced household water supply in Europe.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"building water‑scarcity risk requiring larger tanks and efficiency\",\n      \"member_ids\": [\"S018\"],\n      \"rationale\": \"Heat waves raise water‑scarcity risk for buildings, prompting design changes.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"police incidents increase with higher daily maximum temperature\",\n      \"member_ids\": [\"S008\"],\n      \"rationale\": \"A 10 °F rise raises expected daily police incidents by about 3 %.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"fire department incidents increase with higher daily maximum temperature\",\n      \"member_ids\": [\"S009\"],\n      \"rationale\": \"A 10 °F rise raises expected daily fire incidents by about 11 %.\",\n      \"claim_about\": \"impact_or_exposure\"\n    }\n  ],\n  \"singletons\": [\n    {\n      \"id\": \"S011\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S003\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"id\": \"S015\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"id\": \"S014\",\n      \"claim_about\": \"impact_or_exposure\"\n    }\n  ]\n}",
+    "raw_response_chars": 3212,
+    "raw_reasoning": null,
+    "raw_reasoning_chars": null,
+    "content_fallback": false,
+    "finish_reason": "stop",
+    "raw_max_chars": 20000
+  },
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 15.100000000000001,
+  "model_parse_error": null,
+  "elapsed_seconds": 15.5,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"building stock functionality limited by extreme heat\",\n      \"member_ids\": [\"S010\"],\n      \"rationale\": \"Extreme heat reduces building and transport functionality and comfort.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"building finishing damage from extreme heat\",\n      \"member_ids\": [\"S012\"],\n      \"rationale\": \"Heat causes cracks in panels and roof coverings of buildings.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"rail track deformation caused by severe temperature anomalies\",\n      \"member_ids\": [\"S006\"],\n      \"rationale\": \"Heat deforms rail tracks, affecting safety and mobility.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"airport runway heat buckling leading to service disruption\",\n      \"member_ids\": [\"S007\"],\n      \"rationale\": \"Higher temperatures cause runway buckling, restricting payloads and flights.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"manufacturing plant productivity lowered by high ambient temperatures\",\n      \"member_ids\": [\"S016\", \"S017\"],\n      \"rationale\": \"Heat reduces worker output and raises absenteeism in plants.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"water‑service interruptions and stress on water infrastructure from extreme heat\",\n      \"member_ids\": [\"S004\", \"S005\"],\n      \"rationale\": \"Heat reduces river flow and water availability, stressing municipal water systems.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"increased water use aggravating reservoir‑based water shortages\",\n      \"member_ids\": [\"S001\"],\n      \"rationale\": \"Higher summer temperatures raise water demand, stressing supply reservoirs.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"public water supply shortages limiting household access\",\n      \"member_ids\": [\"S013\"],\n      \"rationale\": \"Heat‑related water scarcity reduced household water supply in Europe.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"building water‑scarcity risk requiring larger tanks and efficiency\",\n      \"member_ids\": [\"S018\"],\n      \"rationale\": \"Heat waves raise water‑scarcity risk for buildings, prompting design changes.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"police incidents increase with higher daily maximum temperature\",\n      \"member_ids\": [\"S008\"],\n      \"rationale\": \"A 10 °F rise raises expected daily police incidents by about 3 %.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"fire department incidents increase with higher daily maximum temperature\",\n      \"member_ids\": [\"S009\"],\n      \"rationale\": \"A 10 °F rise raises expected daily fire incidents by about 11 %.\",\n      \"claim_about\": \"impact_or_exposure\"\n    }\n  ],\n  \"singletons\": [\n    {\n      \"id\": \"S011\",\n      \"claim_about\": \"method_or_data\"\n    },\n    {\n      \"id\": \"S003\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"id\": \"S015\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"id\": \"S014\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"id\": \"S002\",\n      \"claim_about\": \"impact_or_exposure\"\n    }\n  ]\n}",
+  "raw_response_chars": 3287,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

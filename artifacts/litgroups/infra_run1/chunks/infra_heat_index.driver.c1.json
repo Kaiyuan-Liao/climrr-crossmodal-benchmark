@@ -1,0 +1,1020 @@
+{
+  "partition_id": "infra_heat_index.driver",
+  "chunk_index": 1,
+  "n_chunks": 1,
+  "arm": "infra_heat_index",
+  "statement_type": "driver",
+  "split_by": [],
+  "partition_n_statements": 17,
+  "n_statements": 17,
+  "local_ids": [
+    "S008",
+    "S017",
+    "S005",
+    "S006",
+    "S014",
+    "S016",
+    "S001",
+    "S002",
+    "S003",
+    "S010",
+    "S012",
+    "S013",
+    "S015",
+    "S004",
+    "S007",
+    "S009",
+    "S011"
+  ],
+  "generator_version": "litgroup_agent v3.1",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "infra_heat_index.driver.c1",
+  "model_attempts": 1,
+  "corrective_retry_used": false,
+  "finish_reason": "stop",
+  "content_chars": 2528,
+  "reasoning_chars": 3172,
+  "system_prompt_sha256": "4e6e4f1e258a42e28ef2879003f6dc522f037cce467d386402073627790d2212",
+  "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+  "prompt_variant": null,
+  "prompt_hash": "ff2363cfaa3bb747511aba478bbb49a5200bdeca1faf1a09ffd42965e934bbca",
+  "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+  "generation_timestamp": "2026-11-24T07:21:40Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S008",
+        "S005",
+        "S016",
+        "S003"
+      ],
+      "label": "projected increase in extreme heat intensity",
+      "rationale": "All state that climate change will raise temperature extremes or exposure to extreme heat.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S017"
+      ],
+      "label": "low wind reduces convective cooling and raises equipment temperature",
+      "rationale": "Describes how low wind speeds limit cooling, causing conductor overheating.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "equipment",
+          "raises",
+          "reduces"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S006"
+      ],
+      "label": "less cloud cover enhances cooling benefit of cool roofs",
+      "rationale": "Links reduced cloudiness to greater reflected shortwave radiation from high‑albedo roofs.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "benefit",
+          "enhances"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S014"
+      ],
+      "label": "marine heat waves will become more frequent and reduce cooling capacity for underwater data centers",
+      "rationale": "Projects higher frequency/intensity of marine heat waves limiting cooling for submerged infrastructure.",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "become",
+          "reduce"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S004",
+        "S007",
+        "S009"
+      ],
+      "label": "temperature stress degrades infrastructure performance",
+      "rationale": "All note that higher temperatures raise loads or fatigue, threatening microgrids, pavements, or bridge decks.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "degrades",
+          "infrastructure"
+        ],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S010",
+        "S011"
+      ],
+      "label": "heatwaves increase health risks",
+      "rationale": "Both describe heat‑related health impacts, from illness to burns.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "risks"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S015"
+      ],
+      "label": "more hot days boost air‑conditioning sales and electricity demand",
+      "rationale": "Projects increased AC sales and power use as temperatures rise above 25 °C.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "hot"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S013"
+      ],
+      "label": "rising temperatures and drought lengthen fire season and threaten park infrastructure",
+      "rationale": "Links higher temps and drought to longer fire season and infrastructure/safety threats.",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "lengthen",
+          "rising",
+          "threaten"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [
+    {
+      "id": "S012",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S001",
+      "claim_about": "other",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S002",
+      "claim_about": "method_or_data",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index",
+      "statement_type": "driver",
+      "partition_id": "infra_heat_index.driver",
+      "chunk_id": "infra_heat_index.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-230539909-01",
+        "LS3-212809106-02",
+        "LS3-269204029-03",
+        "LS3-152679625-04"
+      ],
+      "member_local_ids": [
+        "S008",
+        "S005",
+        "S016",
+        "S003"
+      ],
+      "label": "projected increase in extreme heat intensity",
+      "rationale": "All state that climate change will raise temperature extremes or exposure to extreme heat.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 4,
+      "papers": [
+        "152679625",
+        "212809106",
+        "230539909",
+        "269204029"
+      ],
+      "canonical_papers": [
+        "152679625",
+        "212809106",
+        "230539909",
+        "269204029"
+      ],
+      "n_independent_core_cited_papers": 4,
+      "role_counts": {
+        "core_candidate": 4
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 14,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2528,
+      "reasoning_chars": 3172,
+      "system_prompt_sha256": "4e6e4f1e258a42e28ef2879003f6dc522f037cce467d386402073627790d2212",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "ff2363cfaa3bb747511aba478bbb49a5200bdeca1faf1a09ffd42965e934bbca",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index",
+      "statement_type": "driver",
+      "partition_id": "infra_heat_index.driver",
+      "chunk_id": "infra_heat_index.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-270845714-02"
+      ],
+      "member_local_ids": [
+        "S017"
+      ],
+      "label": "low wind reduces convective cooling and raises equipment temperature",
+      "rationale": "Describes how low wind speeds limit cooling, causing conductor overheating.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "270845714"
+      ],
+      "canonical_papers": [
+        "270845714"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "equipment",
+          "raises",
+          "reduces"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2528,
+      "reasoning_chars": 3172,
+      "system_prompt_sha256": "4e6e4f1e258a42e28ef2879003f6dc522f037cce467d386402073627790d2212",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "ff2363cfaa3bb747511aba478bbb49a5200bdeca1faf1a09ffd42965e934bbca",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index",
+      "statement_type": "driver",
+      "partition_id": "infra_heat_index.driver",
+      "chunk_id": "infra_heat_index.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-212809106-05"
+      ],
+      "member_local_ids": [
+        "S006"
+      ],
+      "label": "less cloud cover enhances cooling benefit of cool roofs",
+      "rationale": "Links reduced cloudiness to greater reflected shortwave radiation from high‑albedo roofs.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "212809106"
+      ],
+      "canonical_papers": [
+        "212809106"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "benefit",
+          "enhances"
+        ],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2528,
+      "reasoning_chars": 3172,
+      "system_prompt_sha256": "4e6e4f1e258a42e28ef2879003f6dc522f037cce467d386402073627790d2212",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "ff2363cfaa3bb747511aba478bbb49a5200bdeca1faf1a09ffd42965e934bbca",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index",
+      "statement_type": "driver",
+      "partition_id": "infra_heat_index.driver",
+      "chunk_id": "infra_heat_index.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-252848903-03"
+      ],
+      "member_local_ids": [
+        "S014"
+      ],
+      "label": "marine heat waves will become more frequent and reduce cooling capacity for underwater data centers",
+      "rationale": "Projects higher frequency/intensity of marine heat waves limiting cooling for submerged infrastructure.",
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "252848903"
+      ],
+      "canonical_papers": [
+        "252848903"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "become",
+          "reduce"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2528,
+      "reasoning_chars": 3172,
+      "system_prompt_sha256": "4e6e4f1e258a42e28ef2879003f6dc522f037cce467d386402073627790d2212",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "ff2363cfaa3bb747511aba478bbb49a5200bdeca1faf1a09ffd42965e934bbca",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index",
+      "statement_type": "driver",
+      "partition_id": "infra_heat_index.driver",
+      "chunk_id": "infra_heat_index.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-203641904-02",
+        "LS3-213951900-03",
+        "LS3-231654622-03"
+      ],
+      "member_local_ids": [
+        "S004",
+        "S007",
+        "S009"
+      ],
+      "label": "temperature stress degrades infrastructure performance",
+      "rationale": "All note that higher temperatures raise loads or fatigue, threatening microgrids, pavements, or bridge decks.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 3,
+      "papers": [
+        "203641904",
+        "213951900",
+        "231654622"
+      ],
+      "canonical_papers": [
+        "203641904",
+        "213951900",
+        "231654622"
+      ],
+      "n_independent_core_cited_papers": 3,
+      "role_counts": {
+        "core_candidate": 3
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "degrades",
+          "infrastructure"
+        ],
+        "rationale_words": 15,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2528,
+      "reasoning_chars": 3172,
+      "system_prompt_sha256": "4e6e4f1e258a42e28ef2879003f6dc522f037cce467d386402073627790d2212",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "ff2363cfaa3bb747511aba478bbb49a5200bdeca1faf1a09ffd42965e934bbca",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index",
+      "statement_type": "driver",
+      "partition_id": "infra_heat_index.driver",
+      "chunk_id": "infra_heat_index.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-233622014-01",
+        "LS3-239632426-01"
+      ],
+      "member_local_ids": [
+        "S010",
+        "S011"
+      ],
+      "label": "heatwaves increase health risks",
+      "rationale": "Both describe heat‑related health impacts, from illness to burns.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 2,
+      "papers": [
+        "233622014",
+        "239632426"
+      ],
+      "canonical_papers": [
+        "233622014",
+        "239632426"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "risks"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2528,
+      "reasoning_chars": 3172,
+      "system_prompt_sha256": "4e6e4f1e258a42e28ef2879003f6dc522f037cce467d386402073627790d2212",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "ff2363cfaa3bb747511aba478bbb49a5200bdeca1faf1a09ffd42965e934bbca",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index",
+      "statement_type": "driver",
+      "partition_id": "infra_heat_index.driver",
+      "chunk_id": "infra_heat_index.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-256804611-03"
+      ],
+      "member_local_ids": [
+        "S015"
+      ],
+      "label": "more hot days boost air‑conditioning sales and electricity demand",
+      "rationale": "Projects increased AC sales and power use as temperatures rise above 25 °C.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "256804611"
+      ],
+      "canonical_papers": [
+        "256804611"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "hot"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2528,
+      "reasoning_chars": 3172,
+      "system_prompt_sha256": "4e6e4f1e258a42e28ef2879003f6dc522f037cce467d386402073627790d2212",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "ff2363cfaa3bb747511aba478bbb49a5200bdeca1faf1a09ffd42965e934bbca",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_heat_index",
+      "statement_type": "driver",
+      "partition_id": "infra_heat_index.driver",
+      "chunk_id": "infra_heat_index.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-252503705-01"
+      ],
+      "member_local_ids": [
+        "S013"
+      ],
+      "label": "rising temperatures and drought lengthen fire season and threaten park infrastructure",
+      "rationale": "Links higher temps and drought to longer fire season and infrastructure/safety threats.",
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "252503705"
+      ],
+      "canonical_papers": [
+        "252503705"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "lengthen",
+          "rising",
+          "threaten"
+        ],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2528,
+      "reasoning_chars": 3172,
+      "system_prompt_sha256": "4e6e4f1e258a42e28ef2879003f6dc522f037cce467d386402073627790d2212",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "ff2363cfaa3bb747511aba478bbb49a5200bdeca1faf1a09ffd42965e934bbca",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index",
+      "statement_type": "driver",
+      "partition_id": "infra_heat_index.driver",
+      "chunk_id": "infra_heat_index.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-240527502-01"
+      ],
+      "member_local_ids": [
+        "S012"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "240527502"
+      ],
+      "canonical_papers": [
+        "240527502"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2528,
+      "reasoning_chars": 3172,
+      "system_prompt_sha256": "4e6e4f1e258a42e28ef2879003f6dc522f037cce467d386402073627790d2212",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "ff2363cfaa3bb747511aba478bbb49a5200bdeca1faf1a09ffd42965e934bbca",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index",
+      "statement_type": "driver",
+      "partition_id": "infra_heat_index.driver",
+      "chunk_id": "infra_heat_index.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-129077617-01"
+      ],
+      "member_local_ids": [
+        "S001"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "other",
+      "n_members": 1,
+      "papers": [
+        "129077617"
+      ],
+      "canonical_papers": [
+        "129077617"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2528,
+      "reasoning_chars": 3172,
+      "system_prompt_sha256": "4e6e4f1e258a42e28ef2879003f6dc522f037cce467d386402073627790d2212",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "ff2363cfaa3bb747511aba478bbb49a5200bdeca1faf1a09ffd42965e934bbca",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:40Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_heat_index",
+      "statement_type": "driver",
+      "partition_id": "infra_heat_index.driver",
+      "chunk_id": "infra_heat_index.driver.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-133944406-01"
+      ],
+      "member_local_ids": [
+        "S002"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "133944406"
+      ],
+      "canonical_papers": [
+        "133944406"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2528,
+      "reasoning_chars": 3172,
+      "system_prompt_sha256": "4e6e4f1e258a42e28ef2879003f6dc522f037cce467d386402073627790d2212",
+      "system_prompt_template_sha256": "ac135f00570d75f487c7bd414a662a18c271861afa5f026e3e17b3c4fb752ae7",
+      "prompt_variant": null,
+      "prompt_hash": "ff2363cfaa3bb747511aba478bbb49a5200bdeca1faf1a09ffd42965e934bbca",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:21:40Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 2528,
+      "reasoning_chars": 3172,
+      "http_attempts": 1,
+      "model_seconds": 7.6
+    }
+  ],
+  "first_turn": null,
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 7.6,
+  "model_parse_error": null,
+  "elapsed_seconds": 7.9,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"projected increase in extreme heat intensity\",\n      \"member_ids\": [\"S008\", \"S005\", \"S016\", \"S003\"],\n      \"rationale\": \"All state that climate change will raise temperature extremes or exposure to extreme heat.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"low wind reduces convective cooling and raises equipment temperature\",\n      \"member_ids\": [\"S017\"],\n      \"rationale\": \"Describes how low wind speeds limit cooling, causing conductor overheating.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"less cloud cover enhances cooling benefit of cool roofs\",\n      \"member_ids\": [\"S006\"],\n      \"rationale\": \"Links reduced cloudiness to greater reflected shortwave radiation from high‑albedo roofs.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"marine heat waves will become more frequent and reduce cooling capacity for underwater data centers\",\n      \"member_ids\": [\"S014\"],\n      \"rationale\": \"Projects higher frequency/intensity of marine heat waves limiting cooling for submerged infrastructure.\",\n      \"claim_about\": \"hazard_change_mechanism\"\n    },\n    {\n      \"label\": \"temperature stress degrades infrastructure performance\",\n      \"member_ids\": [\"S004\", \"S007\", \"S009\"],\n      \"rationale\": \"All note that higher temperatures raise loads or fatigue, threatening microgrids, pavements, or bridge decks.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"heatwaves increase health risks\",\n      \"member_ids\": [\"S010\", \"S011\"],\n      \"rationale\": \"Both describe heat‑related health impacts, from illness to burns.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"more hot days boost air‑conditioning sales and electricity demand\",\n      \"member_ids\": [\"S015\"],\n      \"rationale\": \"Projects increased AC sales and power use as temperatures rise above 25 °C.\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"label\": \"rising temperatures and drought lengthen fire season and threaten park infrastructure\",\n      \"member_ids\": [\"S013\"],\n      \"rationale\": \"Links higher temps and drought to longer fire season and infrastructure/safety threats.\",\n      \"claim_about\": \"impact_or_exposure\"\n    }\n  ],\n  \"singletons\": [\n    {\n      \"id\": \"S012\",\n      \"claim_about\": \"impact_or_exposure\"\n    },\n    {\n      \"id\": \"S001\",\n      \"claim_about\": \"other\"\n    },\n    {\n      \"id\": \"S002\",\n      \"claim_about\": \"method_or_data\"\n    }\n  ]\n}",
+  "raw_response_chars": 2528,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}

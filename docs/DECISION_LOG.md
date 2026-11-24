@@ -3665,3 +3665,39 @@ code emits, and the next GUIDANCE packet still chooses.
   `scripts/litcollect/litsynth_agent.py`, `src/climrr/benchmark_items.py`, `data/metadata/benchmark/question_forms_v2.yaml`,
   `data/manifest.json`, `tests/test_p5b.py`, `tests/test_litgroup_agent.py`, `tests/test_litgroups_run2.py`,
   `tests/test_p5a.py`, `tests/test_p5a_hotfix.py`, `docs/P5_INFRA_IMPACT_DESIGN.md`, `CLAUDE.md`.
+
+## D-076 --- Infra grouping run 1 accepted
+
+- **Date:** 2026-11-24.
+- **Status:** **decided** (COORDINATOR, work package P5c).
+- **Context.** `litgroup_agent.py` v3.1 (impact template `70018280…3925`), Sophia `openai/gpt-oss-120b`, reasoning low,
+  max_tokens 16000, chunk 40, source commit `7699412`, over `partitions_infra_v1.jsonl`; delivered as
+  `litgroups_infra_run1_evidence.tar.gz` (`14797dc7…9f65`).
+- **Decision.** The infra grouping run 1 is the impact-group evidence for the rung-8 pilot. Its impact groups go to the
+  COORDINATOR for dispositions before any synthesis run; the rung-8 seeds, selection and packets built now are provisional
+  (`review_state: impact_groups_unreviewed`) and are rebuilt by the P5c-hotfix once the dispositions are applied.
+- **Recorded (EXECUTOR, ingest).** Every stated fact reproduced (`climrr.litgroups_infra_run1.verify_source`): 11 partitions, 12
+  chunks (8 impact_v1, 4 v3), 12 pass, 4 corrective turns, 84 groups + 59 singletons over 198 statements each exactly once;
+  strength multi 20 / review 2 / single 121; group claim tags hazard_impact_on_asset 59, hazard_change_mechanism 8, definition
+  1, impact_or_exposure 13, method 3. The agent's strengths equal D-046 recomputed over the infra papers. 59 of the 84 labelled
+  groups have one member; 14 of the 59 hazard_impact_on_asset groups have a member of geography class state. Review list
+  `artifacts/benchmark/review/P5_impact_groups_review_v1.csv` (103 records; keyword label screens: 31 of 59 labels flagged).
+  Seeds `item_seeds_infra_v1.jsonl` (637); selection `pilot_selection_infra_v1.yaml` (7 of 8 cells; item ids by cell position);
+  packets `synth_packets_infra_v1/` (7).
+- **Escalated (not resolved).** (1) Item schema v2 (frozen) has no literature statement type `impact`: every rung-8 item citing
+  an impact group would fail `schema_errors` with a non-format reason, so the synthesis run cannot pass as things stand (a new
+  schema file or an agent-side mapping is a decision). (2) Cell fire weather x emergency services (BI-P5-0007) has no seed: none
+  of its four passing statements is tagged hazard_impact_on_asset. (3) Of the fire-weather impact labels 23 of 30 name fire
+  occurrence as the hazard (screen (i)); D-073b governs the wording, but whether such groups may stand behind an FWI item is
+  the COORDINATOR's call in the dispositions.
+- **For confirmation:** (a) impact groups per packet capped at 10 (the DR-SEED-RANK-3 driver cap); (b) rung-3 context groups
+  not attached to a rung-8 packet (DR-SEED-INFRA-1 names driver groups); (c) the asset-class phrases; (d) the QF-09 / QF-10 slot
+  fills ("projected increase"; "the number of <quantity>"); (e) "wildfire" left out of a fire-weather packet's `must_not_use`
+  (D-073b (b)), the fire words added to a heat packet's; (f) an impact member naming another U.S. state scopes as `unknown`
+  ("In general, research") under the v5a rule, while DR-SEED-INFRA-1 ranks it `us`; (g) the selection file is YAML, as the
+  work package names it (P5b's code named a JSON file, never written).
+- **Affected files:** `src/climrr/litgroups_infra_run1.py`, `scripts/ingest_litgroups_infra1.py`, `artifacts/litgroups/infra_run1/`,
+  `artifacts/benchmark/review/P5_impact_groups_review_v1.csv`, `src/climrr/seeds_infra.py`, `scripts/build_seeds_infra.py`,
+  `artifacts/benchmark/item_seeds_infra_v1*`, `artifacts/benchmark/pilot_selection_infra_v1.yaml`,
+  `src/climrr/synthpackets_infra.py`, `scripts/build_synth_packets_infra.py`, `artifacts/benchmark/synth_packets_infra_v1/`,
+  `src/climrr/mentor_sheet_alvi.py`, `scripts/build_mentor_sheet.py`, `tests/test_p5c.py`, `docs/P5_INFRA_IMPACT_DESIGN.md`.

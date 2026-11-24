@@ -1,0 +1,1469 @@
+{
+  "partition_id": "infra_fire_weather_index.impact.other_assets",
+  "chunk_index": 1,
+  "n_chunks": 1,
+  "arm": "infra_fire_weather_index__other_assets",
+  "statement_type": "impact",
+  "split_by": [],
+  "partition_n_statements": 19,
+  "n_statements": 19,
+  "local_ids": [
+    "S002",
+    "S005",
+    "S007",
+    "S008",
+    "S010",
+    "S017",
+    "S015",
+    "S006",
+    "S001",
+    "S003",
+    "S004",
+    "S009",
+    "S011",
+    "S012",
+    "S013",
+    "S014",
+    "S016",
+    "S018",
+    "S019"
+  ],
+  "generator_version": "litgroup_agent v3.1",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "temperature": 0,
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "reasoning_effort_applied": true,
+  "chunk_size": 40,
+  "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+  "model_attempts": 1,
+  "corrective_retry_used": false,
+  "finish_reason": "stop",
+  "content_chars": 2191,
+  "reasoning_chars": 5292,
+  "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+  "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+  "prompt_variant": "impact_v1",
+  "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+  "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+  "generation_timestamp": "2026-11-24T07:22:41Z",
+  "status": "deterministic_pass",
+  "checks": {
+    "parse_pass": true,
+    "unknown_ids": [],
+    "duplicate_ids": [],
+    "missing_ids": [],
+    "empty_groups": 0,
+    "ids_exactly_once_pass": true,
+    "no_empty_group_pass": true,
+    "failed": []
+  },
+  "groups_as_returned": [
+    {
+      "member_ids": [
+        "S005",
+        "S007",
+        "S003",
+        "S008"
+      ],
+      "label": "water infrastructure degradation from wildfires",
+      "rationale": "All describe wildfire‑related impacts on water‑related assets (treatment, pipes, supply quality, diversion).",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": true,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S010",
+        "S004"
+      ],
+      "label": "facility vulnerability to wildfire near hospitals and care sites",
+      "rationale": "Both state that fire‑weather conditions threaten hospitals, aged‑care, schools, causing evacuation or closure.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "sites",
+          "vulnerability",
+          "wildfire"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": false,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S009"
+      ],
+      "label": "dam reservoir siltation risk from frequent fires",
+      "rationale": "Describes wildfire‑induced siltation that can render dam reservoirs ineffective.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "reservoir",
+          "siltation"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": false,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S011"
+      ],
+      "label": "telecommunication system loss due to fire‑weather damage",
+      "rationale": "Specifies destruction of telecom infrastructure and loss of internet/GPS services.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "due",
+          "system"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S014"
+      ],
+      "label": "rockfall mitigation structure damage from wildfires",
+      "rationale": "Wildfire damage reduces effectiveness of rockfall protection structures.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "structure"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": false,
+        "failed": []
+      }
+    },
+    {
+      "member_ids": [
+        "S002"
+      ],
+      "label": "downstream flooding damage to homes and infrastructure",
+      "rationale": "Wildfires increase flood risk that can damage residential and other infrastructure.",
+      "claim_about": "hazard_impact_on_asset",
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      }
+    }
+  ],
+  "singletons_as_returned": [
+    {
+      "id": "S001",
+      "claim_about": "other",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S006",
+      "claim_about": "method_or_data",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S015",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S017",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S018",
+      "claim_about": "hazard_change_mechanism",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S019",
+      "claim_about": "impact_or_exposure",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S012",
+      "claim_about": "other",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S013",
+      "claim_about": "other",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    },
+    {
+      "id": "S016",
+      "claim_about": "method_or_data",
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      }
+    }
+  ],
+  "groups": [
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-1871619-01",
+        "LS3-207936822-01",
+        "LS3-134781924-04",
+        "LS3-222099517-02"
+      ],
+      "member_local_ids": [
+        "S005",
+        "S007",
+        "S003",
+        "S008"
+      ],
+      "label": "water infrastructure degradation from wildfires",
+      "rationale": "All describe wildfire‑related impacts on water‑related assets (treatment, pipes, supply quality, diversion).",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 4,
+      "papers": [
+        "134781924",
+        "1871619",
+        "207936822",
+        "222099517"
+      ],
+      "canonical_papers": [
+        "134781924",
+        "1871619",
+        "207936822",
+        "222099517"
+      ],
+      "n_independent_core_cited_papers": 4,
+      "role_counts": {
+        "cited_candidate": 1,
+        "core_candidate": 3
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "water_and_wastewater",
+        "water_and_wastewater",
+        "water_and_wastewater",
+        "water_and_wastewater"
+      ],
+      "hazard_relations": [
+        "broader_hazard",
+        "broader_hazard",
+        "broader_hazard",
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "increased runoff and turbidity",
+        "thermal degradation of plastic pipes and loss of water pressure causing back‑siphoning of contaminants",
+        "wildfire releases and transports nutrients from burned organic matter",
+        "containment limits fire‑induced erosion and sediment generation"
+      ],
+      "impact_outcomes": [
+        "jeopardizes treatment infrastructure",
+        "contaminants enter the drinking‑water distribution system",
+        "increased nitrogen and phosphorus concentrations in water bodies",
+        "lower sediment delivery to the water supply diversion"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 12,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": true,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-237447423-01",
+        "LS3-152679625-05"
+      ],
+      "member_local_ids": [
+        "S010",
+        "S004"
+      ],
+      "label": "facility vulnerability to wildfire near hospitals and care sites",
+      "rationale": "Both state that fire‑weather conditions threaten hospitals, aged‑care, schools, causing evacuation or closure.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 2,
+      "papers": [
+        "152679625",
+        "237447423"
+      ],
+      "canonical_papers": [
+        "152679625",
+        "237447423"
+      ],
+      "n_independent_core_cited_papers": 2,
+      "role_counts": {
+        "core_candidate": 2
+      },
+      "evidence_strength": "multi_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "healthcare_and_public_health",
+        "healthcare_and_public_health"
+      ],
+      "hazard_relations": [
+        "broader_hazard",
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "fire and smoke threaten the facility",
+        "increased fire‑weather exposure in high‑risk zones"
+      ],
+      "impact_outcomes": [
+        "may require evacuation or closure of the emergency department",
+        "greater risk of damage and evacuation challenges for critical facilities"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "sites",
+          "vulnerability",
+          "wildfire"
+        ],
+        "rationale_words": 13,
+        "rationale_over_limit": false,
+        "single_member": false,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": false,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-226313909-01"
+      ],
+      "member_local_ids": [
+        "S009"
+      ],
+      "label": "dam reservoir siltation risk from frequent fires",
+      "rationale": "Describes wildfire‑induced siltation that can render dam reservoirs ineffective.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "226313909"
+      ],
+      "canonical_papers": [
+        "226313909"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "dams"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "fire frequency and associated soil erosion increase sediment accumulation"
+      ],
+      "impact_outcomes": [
+        "reservoirs may become silted and lose functionality"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "reservoir",
+          "siltation"
+        ],
+        "rationale_words": 9,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": false,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-237693112-02"
+      ],
+      "member_local_ids": [
+        "S011"
+      ],
+      "label": "telecommunication system loss due to fire‑weather damage",
+      "rationale": "Specifies destruction of telecom infrastructure and loss of internet/GPS services.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "237693112"
+      ],
+      "canonical_papers": [
+        "237693112"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "communications"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "destruction of telecommunication infrastructure"
+      ],
+      "impact_outcomes": [
+        "loss of internet, GPS and GIS services"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "due",
+          "system"
+        ],
+        "rationale_words": 10,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-253341601-01"
+      ],
+      "member_local_ids": [
+        "S014"
+      ],
+      "label": "rockfall mitigation structure damage from wildfires",
+      "rationale": "Wildfire damage reduces effectiveness of rockfall protection structures.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "253341601"
+      ],
+      "canonical_papers": [
+        "253341601"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "other"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "fire damages the physical components of mitigation structures"
+      ],
+      "impact_outcomes": [
+        "reduced protective capability of the structures"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [
+          "structure"
+        ],
+        "rationale_words": 8,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": false,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    },
+    {
+      "group_id": null,
+      "kind": "group",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-134018902-01"
+      ],
+      "member_local_ids": [
+        "S002"
+      ],
+      "label": "downstream flooding damage to homes and infrastructure",
+      "rationale": "Wildfires increase flood risk that can damage residential and other infrastructure.",
+      "claim_about": "hazard_impact_on_asset",
+      "n_members": 1,
+      "papers": [
+        "134018902"
+      ],
+      "canonical_papers": [
+        "134018902"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "cited_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "other"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "increases downstream flood risk"
+      ],
+      "impact_outcomes": [
+        "damages homes and infrastructure"
+      ],
+      "checks": {
+        "label_present": true,
+        "label_digits_not_in_members": [],
+        "label_digit_pass": true,
+        "label_words_not_in_members": [],
+        "rationale_words": 11,
+        "rationale_over_limit": false,
+        "single_member": true,
+        "claim_about_pass": true,
+        "label_names_asset_class_word": false,
+        "label_shares_word_with_impact_outcome": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-126038319-02"
+      ],
+      "member_local_ids": [
+        "S001"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "other",
+      "n_members": 1,
+      "papers": [
+        "126038319"
+      ],
+      "canonical_papers": [
+        "126038319"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "emergency_services"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "fire‑weather conditions increase fire intensity and response time"
+      ],
+      "impact_outcomes": [
+        "higher fire‑management costs"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-203991805-04"
+      ],
+      "member_local_ids": [
+        "S006"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "203991805"
+      ],
+      "canonical_papers": [
+        "203991805"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "water_and_wastewater"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "fire‑weather hazard drives the specification of minimum water flow rates"
+      ],
+      "impact_outcomes": [
+        "water‑infrastructure must be sized to deliver the required flow for firefighting"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-259716408-03"
+      ],
+      "member_local_ids": [
+        "S015"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "259716408"
+      ],
+      "canonical_papers": [
+        "259716408"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "other"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "fire perimeters contain residential areas"
+      ],
+      "impact_outcomes": [
+        "increased number of people directly exposed to fire"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-4751707-01"
+      ],
+      "member_local_ids": [
+        "S017"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "4751707"
+      ],
+      "canonical_papers": [
+        "4751707"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "water_and_wastewater"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "increased runoff from burned areas"
+      ],
+      "impact_outcomes": [
+        "higher river flow"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-6254910-01"
+      ],
+      "member_local_ids": [
+        "S018"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "hazard_change_mechanism",
+      "n_members": 1,
+      "papers": [
+        "6254910"
+      ],
+      "canonical_papers": [
+        "6254910"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "emergency_services"
+      ],
+      "hazard_relations": [
+        "governed_term"
+      ],
+      "impact_mechanisms": [
+        "higher fuel loads increase the calculated fire danger index"
+      ],
+      "impact_outcomes": [
+        "more days trigger fire bans and warnings"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-6254910-03"
+      ],
+      "member_local_ids": [
+        "S019"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "impact_or_exposure",
+      "n_members": 1,
+      "papers": [
+        "6254910"
+      ],
+      "canonical_papers": [
+        "6254910"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "emergency_services"
+      ],
+      "hazard_relations": [
+        "governed_term"
+      ],
+      "impact_mechanisms": [
+        "more fire‑danger days increase standby requirements"
+      ],
+      "impact_outcomes": [
+        "daily standby costs rise dramatically"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-242088229-01"
+      ],
+      "member_local_ids": [
+        "S012"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "other",
+      "n_members": 1,
+      "papers": [
+        "242088229"
+      ],
+      "canonical_papers": [
+        "242088229"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "water_and_wastewater"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "fire density creates demand for rapid water supply"
+      ],
+      "impact_outcomes": [
+        "rainwater harvesting sites are identified to support helicopter water recharging"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-251694611-01"
+      ],
+      "member_local_ids": [
+        "S013"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "other",
+      "n_members": 1,
+      "papers": [
+        "251694611"
+      ],
+      "canonical_papers": [
+        "251694611"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "emergency_services"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "higher burn probability creates a need for more surveillance"
+      ],
+      "impact_outcomes": [
+        "increased installation of watchtowers"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    },
+    {
+      "group_id": null,
+      "kind": "singleton",
+      "arm": "infra_fire_weather_index__other_assets",
+      "statement_type": "impact",
+      "partition_id": "infra_fire_weather_index.impact.other_assets",
+      "chunk_id": "infra_fire_weather_index.impact.other_assets.c1",
+      "split_by": [],
+      "member_ids": [
+        "LS3-267569105-02"
+      ],
+      "member_local_ids": [
+        "S016"
+      ],
+      "label": null,
+      "rationale": null,
+      "claim_about": "method_or_data",
+      "n_members": 1,
+      "papers": [
+        "267569105"
+      ],
+      "canonical_papers": [
+        "267569105"
+      ],
+      "n_independent_core_cited_papers": 1,
+      "role_counts": {
+        "core_candidate": 1
+      },
+      "evidence_strength": "single_source_supported",
+      "independence_rule": "DR-LIT-IND-1 v2 (D-046)",
+      "prompt_variant": "impact_v1",
+      "hazard_family": "fire_weather_index",
+      "asset_partition": "other_assets",
+      "asset_classes": [
+        "other"
+      ],
+      "hazard_relations": [
+        "broader_hazard"
+      ],
+      "impact_mechanisms": [
+        "rapid detection and suppression of fires"
+      ],
+      "impact_outcomes": [
+        "reduced fire spread and lower risk to nearby infrastructure"
+      ],
+      "checks": {
+        "claim_about_pass": true,
+        "failed": []
+      },
+      "status": "deterministic_pass",
+      "human_review": null,
+      "generator_version": "litgroup_agent v3.1",
+      "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+      "model": "openai/gpt-oss-120b",
+      "endpoint_label": "sophia_vllm",
+      "temperature": 0,
+      "reasoning_effort": "low",
+      "max_tokens": 16000,
+      "reasoning_effort_applied": true,
+      "chunk_size": 40,
+      "model_attempts": 1,
+      "corrective_retry_used": false,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "system_prompt_sha256": "a98f67f5d1684be624ea857ae90fe668317eef754b2ca4be0c8f9ad0ef7881e5",
+      "system_prompt_template_sha256": "70018280938b269fe854de6baca520bb2b84429a66ea0d7ac58520acec353925",
+      "prompt_hash": "e26173ac2dd85f9ce654ded019f1e9ba7871e0ef6375dd08b8333ebc9b30823a",
+      "source_commit": "76994126a1834984a3dd23fc4cab0cfe350d7142",
+      "generation_timestamp": "2026-11-24T07:22:41Z"
+    }
+  ],
+  "turns": [
+    {
+      "turn": 1,
+      "finish_reason": "stop",
+      "content_chars": 2191,
+      "reasoning_chars": 5292,
+      "http_attempts": 1,
+      "model_seconds": 9.3
+    }
+  ],
+  "first_turn": null,
+  "corrective_error": null,
+  "corrective_template_sha256": "5d052853cc681596553912d25747cd59bbc7b548009e10715b7da30ea88d54b6",
+  "model_seconds": 9.3,
+  "model_parse_error": null,
+  "elapsed_seconds": 9.6,
+  "raw_response": "{\n  \"groups\": [\n    {\n      \"label\": \"water infrastructure degradation from wildfires\",\n      \"member_ids\": [\"S005\", \"S007\", \"S003\", \"S008\"],\n      \"rationale\": \"All describe wildfire‑related impacts on water‑related assets (treatment, pipes, supply quality, diversion).\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"facility vulnerability to wildfire near hospitals and care sites\",\n      \"member_ids\": [\"S010\", \"S004\"],\n      \"rationale\": \"Both state that fire‑weather conditions threaten hospitals, aged‑care, schools, causing evacuation or closure.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"dam reservoir siltation risk from frequent fires\",\n      \"member_ids\": [\"S009\"],\n      \"rationale\": \"Describes wildfire‑induced siltation that can render dam reservoirs ineffective.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"telecommunication system loss due to fire‑weather damage\",\n      \"member_ids\": [\"S011\"],\n      \"rationale\": \"Specifies destruction of telecom infrastructure and loss of internet/GPS services.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"rockfall mitigation structure damage from wildfires\",\n      \"member_ids\": [\"S014\"],\n      \"rationale\": \"Wildfire damage reduces effectiveness of rockfall protection structures.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    },\n    {\n      \"label\": \"downstream flooding damage to homes and infrastructure\",\n      \"member_ids\": [\"S002\"],\n      \"rationale\": \"Wildfires increase flood risk that can damage residential and other infrastructure.\",\n      \"claim_about\": \"hazard_impact_on_asset\"\n    }\n  ],\n  \"singletons\": [\n    {\"id\": \"S001\", \"claim_about\": \"other\"},\n    {\"id\": \"S006\", \"claim_about\": \"method_or_data\"},\n    {\"id\": \"S015\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S017\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S018\", \"claim_about\": \"hazard_change_mechanism\"},\n    {\"id\": \"S019\", \"claim_about\": \"impact_or_exposure\"},\n    {\"id\": \"S012\", \"claim_about\": \"other\"},\n    {\"id\": \"S013\", \"claim_about\": \"other\"},\n    {\"id\": \"S016\", \"claim_about\": \"method_or_data\"}\n  ]\n}",
+  "raw_response_chars": 2191,
+  "raw_reasoning": null,
+  "raw_reasoning_chars": null,
+  "content_fallback": false,
+  "raw_max_chars": 20000
+}
