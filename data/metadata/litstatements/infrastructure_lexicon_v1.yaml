@@ -1,0 +1,226 @@
+# Infrastructure lexicon v1 (work package P5a; D-070, D-071, D-073). Hash pinned; do not edit in place --- a change is v2.
+#
+# CLASSIFIES LITERATURE ONLY. It never touches the ClimRR table: no column is renamed, grouped, filtered or described by it.
+#
+# Asset classes = the 16 critical-infrastructure sectors of CISA (the authoritative taxonomy), names verbatim from the
+# CISA sector list. Surface forms are matched whole-word, case-insensitive, no stemming (the run_query.py matcher);
+# every plural is listed explicitly. Each form carries its source:
+#   source: CISA sector list         --- the phrase appears verbatim on the CISA sector page named in `cisa_page`
+#                                        (checked 2026-11-23); the sector page is cited, not interpreted;
+#   source: EXECUTOR (common usage)  --- the EXECUTOR's reading of common usage; always `authorization: our_reading`.
+# A CISA phrase was left out where it is too generic for whole-word matching in scientific text ("oil", "satellite",
+# "wireless", "cable"): recorded under `excluded_cisa_phrases`, not used.
+# Impact terms classify what a passage says happens to an asset; they are never a hazard and never a risk.
+
+version: infrastructure_lexicon_v1
+decision: "D-070, D-071, D-073 (work package P5a, 2026-11-23)"
+used_for: [literature_candidate_classification, statement_asset_class]
+never_used_for: [table_columns]
+matcher: "whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b' || escape(form) || '\\b', 'i')"
+taxonomy:
+  name: "CISA critical infrastructure sectors (16)"
+  publisher: "Cybersecurity and Infrastructure Security Agency (CISA)"
+  page_title: "Critical Infrastructure Sectors | CISA"
+  url: "https://www.cisa.gov/topics/critical-infrastructure-security-and-resilience/critical-infrastructure-sectors"
+  accessed: "2026-11-23"
+  sector_pages_read:
+    energy: "https://www.cisa.gov/topics/critical-infrastructure-security-and-resilience/critical-infrastructure-sectors/energy-sector"
+    transportation: "https://www.cisa.gov/topics/critical-infrastructure-security-and-resilience/critical-infrastructure-sectors/transportation-systems-sector"
+    water: "https://www.cisa.gov/topics/critical-infrastructure-security-and-resilience/critical-infrastructure-sectors/water-and-wastewater-sector"
+    communications: "https://www.cisa.gov/topics/critical-infrastructure-security-and-resilience/critical-infrastructure-sectors/communications-sector"
+    dams: "https://www.cisa.gov/topics/critical-infrastructure-security-and-resilience/critical-infrastructure-sectors/dams-sector"
+  note: "The sector list page gives names only, no per-sector description. Only the five sector pages above were read; forms of the other eleven classes are EXECUTOR (common usage)."
+
+asset_classes:
+  - id: chemical
+    cisa_sector: "Chemical Sector"
+    surface_forms:
+      - {form: "chemical plant", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "chemical plants", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "chemical facility", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "chemical facilities", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - id: commercial_facilities
+    cisa_sector: "Commercial Facilities Sector"
+    surface_forms:
+      - {form: "commercial building", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "commercial buildings", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "commercial facilities", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - id: communications
+    cisa_sector: "Communications Sector"
+    surface_forms:
+      - {form: "telecommunication", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "telecommunications", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "cell tower", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "cell towers", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "cellular towers", source: "CISA sector list", cisa_page: communications}
+      - {form: "communication network", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "communication networks", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "broadband", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - id: critical_manufacturing
+    cisa_sector: "Critical Manufacturing Sector"
+    surface_forms:
+      - {form: "manufacturing plant", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "manufacturing plants", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "manufacturing facilities", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - id: dams
+    cisa_sector: "Dams Sector"
+    surface_forms:
+      - {form: "dam", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "dams", source: "CISA sector list", cisa_page: dams}
+      - {form: "levee", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "levees", source: "CISA sector list", cisa_page: dams}
+      - {form: "navigation lock", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "navigation locks", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "spillway", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "spillways", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - id: defense_industrial_base
+    cisa_sector: "Defense Industrial Base Sector"
+    surface_forms:
+      - {form: "military installation", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "military installations", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "military base", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "military bases", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - id: emergency_services
+    cisa_sector: "Emergency Services Sector"
+    surface_forms:
+      - {form: "emergency services", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "emergency response", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "first responders", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "emergency medical services", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - id: energy
+    cisa_sector: "Energy Sector"
+    surface_forms:
+      - {form: "power grid", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "power grids", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "electric grid", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "electricity grid", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "transmission line", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "transmission lines", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "power line", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "power lines", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "distribution lines", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "substation", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "substations", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "power plant", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "power plants", source: "CISA sector list", cisa_page: energy}
+      - {form: "power station", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "power stations", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "power system", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "power systems", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "electricity", source: "CISA sector list", cisa_page: energy}
+      - {form: "electricity generation", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "natural gas", source: "CISA sector list", cisa_page: energy}
+      - {form: "hydropower", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "power outage", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "power outages", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "blackout", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "blackouts", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - id: financial_services
+    cisa_sector: "Financial Services Sector"
+    surface_forms:
+      - {form: "financial services", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "banking system", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - id: food_and_agriculture
+    cisa_sector: "Food and Agriculture Sector"
+    surface_forms:
+      - {form: "food supply", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "food supply chain", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "food system", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "food systems", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "irrigation infrastructure", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - id: government_services_and_facilities
+    cisa_sector: "Government Services and Facilities Sector"
+    surface_forms:
+      - {form: "government buildings", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "government facilities", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "public buildings", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "school buildings", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - id: healthcare_and_public_health
+    cisa_sector: "Healthcare and Public Health Sector"
+    surface_forms:
+      - {form: "hospital", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "hospitals", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "healthcare facilities", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "health care facilities", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "emergency department", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "emergency departments", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - id: information_technology
+    cisa_sector: "Information Technology Sector"
+    surface_forms:
+      - {form: "data center", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "data centers", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "data centre", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "data centres", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - id: nuclear_reactors_materials_and_waste
+    cisa_sector: "Nuclear Reactors, Materials, and Waste Sector"
+    surface_forms:
+      - {form: "nuclear power plant", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "nuclear power plants", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "nuclear reactor", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "nuclear reactors", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - id: transportation_systems
+    cisa_sector: "Transportation Systems Sector"
+    surface_forms:
+      - {form: "road", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "roads", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "highway", source: "CISA sector list", cisa_page: transportation}
+      - {form: "highways", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "pavement", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "pavements", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "bridge", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "bridges", source: "CISA sector list", cisa_page: transportation}
+      - {form: "railway", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "railways", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "railroad", source: "CISA sector list", cisa_page: transportation}
+      - {form: "railroads", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "rail track", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "rail tracks", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "freight rail", source: "CISA sector list", cisa_page: transportation}
+      - {form: "mass transit", source: "CISA sector list", cisa_page: transportation}
+      - {form: "airport", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "airports", source: "CISA sector list", cisa_page: transportation}
+      - {form: "aviation", source: "CISA sector list", cisa_page: transportation}
+      - {form: "port", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "ports", source: "CISA sector list", cisa_page: transportation}
+      - {form: "maritime", source: "CISA sector list", cisa_page: transportation}
+      - {form: "pipeline", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "pipelines", source: "CISA sector list", cisa_page: energy}
+      - {form: "pipeline systems", source: "CISA sector list", cisa_page: transportation}
+  - id: water_and_wastewater
+    cisa_sector: "Water and Wastewater Sector"
+    surface_forms:
+      - {form: "drinking water", source: "CISA sector list", cisa_page: water}
+      - {form: "wastewater", source: "CISA sector list", cisa_page: water}
+      - {form: "wastewater treatment", source: "CISA sector list", cisa_page: water}
+      - {form: "water supply", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "water supplies", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "water treatment", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "water distribution", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "water infrastructure", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "reservoir", source: "EXECUTOR (common usage)", authorization: our_reading}
+      - {form: "reservoirs", source: "EXECUTOR (common usage)", authorization: our_reading}
+
+# The pipeline forms sit under transportation_systems (CISA subsector "Pipeline Systems"), not under water / wastewater as
+# the work package's example list had them: CISA, the authoritative taxonomy, names pipelines under Energy and
+# Transportation, never under Water. EXECUTOR placement, for confirmation.
+excluded_cisa_phrases:
+  - {phrase: "oil", cisa_page: energy, reason: "too generic for whole-word matching (vegetable oil, oil palm, oil content of fuels)"}
+  - {phrase: "satellite", cisa_page: communications, reason: "matches satellite observations / remote sensing in climate papers"}
+  - {phrase: "wireless", cisa_page: communications, reason: "matches wireless sensor networks in measurement papers"}
+
+impact_terms:
+  - {form: "outage", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - {form: "outages", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - {form: "failure", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - {form: "failures", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - {form: "damage", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - {form: "damaged", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - {form: "disruption", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - {form: "disruptions", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - {form: "derating", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - {form: "capacity loss", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - {form: "buckling", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - {form: "sagging", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - {form: "load shedding", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - {form: "service interruption", source: "EXECUTOR (common usage)", authorization: our_reading}
+  - {form: "service interruptions", source: "EXECUTOR (common usage)", authorization: our_reading}

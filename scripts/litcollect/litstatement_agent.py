@@ -26,12 +26,34 @@ message content) and, when the content fallback fired (empty content, so the rea
 parse error can be inspected from result.json alone (run 2: all 21 parse errors stopped at `finish_reason: length`).
 The system prompt is unchanged.
 
+v4 (work package P5a; D-070, D-071, D-073; not yet run): `--arm infra_impact_v1` selects the infrastructure-impact arm
+for LITCORPUS-03: its own system prompt (`SYSTEM_PROMPT_INFRA`, stored verbatim and hashed in every record), the extra
+statement type `impact` (hazard condition -> infrastructure asset class -> impact mechanism / outcome) and, on an impact
+statement, the D-073 fields `hazard_term` (one of `INFRA_HAZARD_TERMS`: the governed concept-map terms of the two hazard
+families and the plain-language quantity phrases, compared case-insensitively), `asset_class` (one of
+`INFRA_ASSET_CLASSES`: the CISA sector ids of `infrastructure_lexicon_v1.yaml`, names only, or "other"),
+`impact_mechanism` and `impact_outcome` (non-empty free text); a further mandatory pre-check `impact_fields_pass`. The
+other pre-checks are the v3 ones (verbatim passage, passage type, no numeric specifics unless `specific_result`).
+`--reasoning-effort {low,medium,high}` (default: not sent, as v3) is sent as `reasoning_effort`; an HTTP 400 with it is
+retried once without (`reasoning_effort_applied: false`). Without `--arm infra_impact_v1` and `--reasoning-effort` the
+agent behaves as v3: the v3 system prompt is byte-identical.
+
+Polaris invocation of the infra arm (Sophia vLLM; from the execution clone at the pinned commit; output under the
+litcollect root; the ALCF credential in the environment):
+
+    python scripts/litcollect/litstatement_agent.py --arm infra_impact_v1 \\
+        --index "$LITCOLLECT_ROOT_POLARIS/index/critical_infrastructure_v1" \\
+        --candidates data/metadata/softqa/infra_candidates_v1.json \\
+        --out "$LITCOLLECT_ROOT_POLARIS/litstatements/infra_run1" \\
+        --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \\
+        --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 6000 --sleep 2 --source-commit <PINNED_SHA>
+
 Output per paper `result.json`; aggregate `statements.jsonl` + `summary.json`; `agent.log`. Restartable per
 paper (skips papers with result.json). Runs on Polaris with the ALCF inference credential in the environment
 (the variable the Track C agent reads). The invocation is documented in
 src/climrr/litstatements.py.
 """
-import argparse, hashlib, http.client, json, os, re, sys, time, urllib.error
+import argparse, hashlib, http.client, json, os, re, sys, time, urllib.error, urllib.request
 from pathlib import Path
 
 import duckdb
@@ -39,7 +61,7 @@ import duckdb
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from softqa_agent import call_model, locate_passage  # noqa: E402  (v2, pinned byte-identical)
 
-GENERATOR_VERSION = "litstatement_agent v3"
+GENERATOR_VERSION = "litstatement_agent v4"
 MAX_STATEMENTS = 6
 MAX_PASSAGE_CHARS = 700
 MAX_RAW_CHARS = 20000
@@ -70,7 +92,48 @@ Return at most 6 statements. Fewer honest statements are better than many weak o
 - "confidence": "high", "medium" or "low".
 Return ONLY a JSON object: {"statements": [ ... ]}."""
 
+#: v4 (P5a, D-073): the infrastructure-impact arm.
+INFRA_ARM = "infra_impact_v1"
+#: The CISA sector ids of data/metadata/litstatements/infrastructure_lexicon_v1.yaml (names only; equality is tested), and "other".
+INFRA_ASSET_CLASSES = ("chemical", "commercial_facilities", "communications", "critical_manufacturing", "dams",
+                       "defense_industrial_base", "emergency_services", "energy", "financial_services", "food_and_agriculture",
+                       "government_services_and_facilities", "healthcare_and_public_health", "information_technology",
+                       "nuclear_reactors_materials_and_waste", "transportation_systems", "water_and_wastewater", "other")
+#: The governed concept-map terms of the two hazard families and the plain-language quantity phrases (plain_language_v1a).
+INFRA_HAZARD_TERMS = ("heat index", "heat-index", "extended heat index", "fire weather index", "FWI", "fire-weather index",
+                      "canadian forest fire weather index", "canadian fwi", "days hot and humid enough to be dangerous",
+                      "dangerous heat-index days", "fire-weather danger (how hot, dry and windy conditions favour fire)",
+                      "fire-weather danger")
+INFRA_FIELDS = ("hazard_term", "asset_class", "impact_mechanism", "impact_outcome")
+
+SYSTEM_PROMPT_INFRA = """You are helping build a closed-book benchmark about the impact of climate hazards on infrastructure. You will read ONE scientific paper in full. Your task: extract the GENERAL statements this paper supports about how a hazard condition measured by the heat index (humid heat) or by a fire weather / fire danger index (for example the Fire Weather Index) affects infrastructure, and general statements about those two hazards themselves. A statement is something a scientist could say in general terms. A fire weather or fire danger index describes meteorological fire danger: never restate it as fire occurrence, ignition, burned area or damage; a statement about fires that actually burned is not a fire-weather statement. A modeled historical baseline is not an observation. A hazard is not exposure and exposure is not risk: state what the paper shows about such conditions, never that a particular asset will fail.
+
+Return at most 6 statements. Fewer honest statements are better than many weak ones. If the paper supports none, return {"statements": []}. Never invent passages or statements. For each statement return:
+- "statement": ONE sentence, general, in your own words, faithful to the passage; no numbers unless they are essential to the statement.
+- "statement_type": one of "mechanism", "driver", "consensus", "caveat", "pattern", "impact". Use "impact" for a statement of the form: a hazard condition -> an infrastructure asset class -> how it acts on the asset and what happens to the asset or its service.
+- "passage": an EXACT, verbatim copy of the contiguous passage in the paper that supports the statement (one to three sentences, at most 700 characters). Copy it character for character, including hyphens, quotes and spacing; do not shorten, do not add "...", do not merge sentences from different places. Stop at the end of a sentence in the paper.
+- "section_key": the section heading under which the passage appears (as given in the paper text).
+- "passage_type": one of "own_finding", "own_projection", "cited_finding", "review_synthesis", "background". Use "review_synthesis" only when the passage summarizes many studies; "background" for definitions, method descriptions and general introductions.
+- "region": the place the statement is about, as the paper names it, or "unknown".
+- "region_scope": one of "global", "continental", "national", "subnational", "local", "unknown".
+- "scenario": the emissions / climate scenario the statement refers to, as the paper names it, or "unknown".
+- "scenario_source": "in_passage" if the passage itself names it; "elsewhere_in_paper" if it is named elsewhere in the paper; "unknown".
+- "scenario_quote": if scenario_source is "elsewhere_in_paper", an EXACT verbatim copy (at most 200 characters) of the words that name it; otherwise "".
+- "scenario_location": if scenario_source is "elsewhere_in_paper", the section heading where that quote appears; otherwise "".
+- "time": the period or horizon the statement refers to, as the paper states it, or "unknown".
+- "time_source": "in_passage", "elsewhere_in_paper" or "unknown", as for the scenario.
+- "time_quote": as scenario_quote, for the time.
+- "time_location": as scenario_location, for the time.
+- "generality": one of "general_mechanism" (holds beyond this study), "regional_expectation" (expected for a region), "specific_result" (this study's particular number or result).
+- "confidence": "high", "medium" or "low".
+- "hazard_term": for an "impact" statement, the hazard exactly as one of: "heat index", "heat-index", "extended heat index", "fire weather index", "FWI", "fire-weather index", "canadian forest fire weather index", "canadian fwi", "days hot and humid enough to be dangerous", "dangerous heat-index days", "fire-weather danger". If the paper's hazard is none of these (for example a heat wave, extreme heat or a wildfire), return no "impact" statement for it. For other statement types, "".
+- "asset_class": for an "impact" statement, exactly one of: "chemical", "commercial_facilities", "communications", "critical_manufacturing", "dams", "defense_industrial_base", "emergency_services", "energy", "financial_services", "food_and_agriculture", "government_services_and_facilities", "healthcare_and_public_health", "information_technology", "nuclear_reactors_materials_and_waste", "transportation_systems", "water_and_wastewater", or "other". For other statement types, "".
+- "impact_mechanism": for an "impact" statement, ONE clause: how the hazard condition acts on the asset. For other statement types, "".
+- "impact_outcome": for an "impact" statement, ONE clause: what happens to the asset or its service. For other statement types, "".
+Return ONLY a JSON object: {"statements": [ ... ]}."""
+
 STATEMENT_TYPES = ("mechanism", "driver", "consensus", "caveat", "pattern")
+STATEMENT_TYPES_INFRA = STATEMENT_TYPES + ("impact",)
 PASSAGE_TYPES = ("own_finding", "own_projection", "cited_finding", "review_synthesis", "background")
 REGION_SCOPES = ("global", "continental", "national", "subnational", "local", "unknown")
 SOURCES = ("in_passage", "elsewhere_in_paper", "unknown")
@@ -150,13 +213,32 @@ def context_field(st, name, sections):
     return out
 
 
-def pre_review_check(st, sections):
-    """Deterministic checks. Returns (status, checks, located)."""
+def impact_field_errors(st) -> list:
+    """v4 (D-073): on an `impact` statement, the hazard term from the governed list (case-insensitive), the asset class
+    from the lexicon classes or "other", and non-empty mechanism and outcome clauses."""
+    if st.get("statement_type") != "impact":
+        return []
+    errs = []
+    if str(st.get("hazard_term") or "").strip().lower() not in {t.lower() for t in INFRA_HAZARD_TERMS}:
+        errs.append(f"hazard_term not in the governed list: {st.get('hazard_term')!r}")
+    if st.get("asset_class") not in INFRA_ASSET_CLASSES:
+        errs.append(f"asset_class not a lexicon class or 'other': {st.get('asset_class')!r}")
+    for k in ("impact_mechanism", "impact_outcome"):
+        if not (isinstance(st.get(k), str) and st.get(k).strip()):
+            errs.append(f"{k} empty")
+    return errs
+
+
+def pre_review_check(st, sections, arm=None):
+    """Deterministic checks. Returns (status, checks, located). v4: `arm == INFRA_ARM` admits the `impact` type and adds
+    the mandatory `impact_fields_pass`."""
+    infra = arm == INFRA_ARM
     checks, located = {}, {}
     missing = [k for k in REQUIRED if k not in st]
     checks["fields_complete"] = not missing
     checks["missing_fields"] = missing
-    bad = {k: st.get(k) for k, allowed in ENUMS.items() if k in st and st.get(k) not in allowed}
+    enums = {**ENUMS, "statement_type": STATEMENT_TYPES_INFRA} if infra else ENUMS
+    bad = {k: st.get(k) for k, allowed in enums.items() if k in st and st.get(k) not in allowed}
     checks["enums_valid"] = not bad
     checks["invalid_enum_values"] = bad
     span, recovery, verbatim = locate_passage(st.get("passage") or "", sections)
@@ -175,6 +257,10 @@ def pre_review_check(st, sections):
     checks["scenario_check"] = located["scenario"]["check"]
     checks["time_check"] = located["time"]["check"]
     mandatory = ["fields_complete", "enums_valid", "span_reslice_pass", "passage_length_pass", "passage_type_pass", "statement_value_pass"]
+    if infra:
+        checks["impact_field_errors"] = impact_field_errors(st)
+        checks["impact_fields_pass"] = not checks["impact_field_errors"]
+        mandatory.append("impact_fields_pass")
     checks["failed"] = [k for k in mandatory if not checks[k]]
     return ("deterministic_pass" if not checks["failed"] else "rejected_pre_review"), checks, located
 
@@ -195,6 +281,20 @@ def endpoint_label(base_url: str) -> str:
     if "/metis/" in base_url: return "metis"
     if "/sophia/vllm/" in base_url: return "sophia_vllm"
     return "other"
+
+
+def call_model_effort(base_url, model, credential, system, user, max_tokens, timeout, reasoning_effort):
+    """v4: softqa_agent.call_model with `reasoning_effort` in the body (the litgroup_agent v3 body)."""
+    body = {"model": model, "temperature": 0, "max_tokens": max_tokens, "reasoning_effort": reasoning_effort,
+            "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]}
+    req = urllib.request.Request(base_url.rstrip("/") + "/chat/completions", data=json.dumps(body).encode(), method="POST",
+                                 headers={"Authorization": f"Bearer {credential}", "Content-Type": "application/json"})
+    t0 = time.time()
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        resp = json.loads(r.read().decode("utf-8", "replace"))
+    msg = resp["choices"][0]["message"]
+    content = msg.get("content") or msg.get("reasoning_content") or msg.get("reasoning") or ""
+    return resp, content, round(time.time() - t0, 1)
 
 
 class ModelCallFailed(Exception):
@@ -242,7 +342,7 @@ def migrate_http_failures(out: Path, say):
 def summarise(out: Path, endpoint=None):
     allr, summary = [], {"papers": 0, "papers_with_error": 0, "papers_over_limit": 0, "statements": 0, "deterministic_pass": 0,
                          "rejected_pre_review": 0, **(endpoint or {}), "endpoints_in_results": {}, "rejected_by_check": {}, "by_statement_type": {}, "by_passage_type": {},
-                         "by_generality": {}, "by_region_scope": {}, "by_recovery": {}, "scenario_check": {}, "time_check": {}}
+                         "by_generality": {}, "by_region_scope": {}, "by_recovery": {}, "scenario_check": {}, "time_check": {}, "by_asset_class": {}}
     for p in sorted(out.glob("*/result.json")):
         r = json.loads(p.read_text())
         if "statements" not in r:
@@ -259,7 +359,7 @@ def summarise(out: Path, endpoint=None):
             for key, val in (("by_statement_type", g.get("statement_type")), ("by_passage_type", g.get("passage_type")),
                              ("by_generality", g.get("generality")), ("by_region_scope", g.get("region_scope")),
                              ("by_recovery", x["passage_recovery"]), ("scenario_check", x["scenario"]["check"]),
-                             ("time_check", x["time"]["check"])):
+                             ("time_check", x["time"]["check"])) + ((("by_asset_class", g.get("asset_class")),) if g.get("statement_type") == "impact" else ()):
                 summary[key][str(val)] = summary[key].get(str(val), 0) + 1
     with open(out / "statements.jsonl", "w", encoding="utf-8") as f:
         for x in allr: f.write(json.dumps(x, ensure_ascii=False) + "\n")
@@ -281,6 +381,7 @@ def main():
     ap.add_argument("--sleep", type=float, default=0, help="seconds between papers")
     ap.add_argument("--backoff", default=",".join(map(str, BACKOFF_SECONDS)), help="retry waits, seconds")
     ap.add_argument("--source-commit", default="unknown")
+    ap.add_argument("--reasoning-effort", choices=("low", "medium", "high"), default=None, help="v4: sent as reasoning_effort")
     a = ap.parse_args()
     credential = next((os.environ[v] for v in CREDENTIAL_ENV if os.environ.get(v)), None)
     if not credential:
@@ -296,14 +397,21 @@ def main():
         cands = json.loads(cands_raw)
     except Exception:  # noqa: BLE001
         cands = [{"item_id": l.strip(), "arm": a.arm} for l in cands_raw.splitlines() if l.strip()]
+    if isinstance(cands, dict) and isinstance(cands.get("candidates"), list):   # v4: run_query lexicon-mode candidates.json
+        cands = cands["candidates"]
     only = set(a.only.split(",")) if a.only else None
-    sys_sha = sha(SYSTEM_PROMPT)
+    infra = a.arm == INFRA_ARM
+    system_prompt = SYSTEM_PROMPT_INFRA if infra else SYSTEM_PROMPT
+    sys_sha = sha(system_prompt)
     backoff = tuple(float(x) for x in a.backoff.split(","))
     endpoint = {"base_url": a.base_url, "model": a.model, "endpoint_label": endpoint_label(a.base_url)}
     idx = Path(a.index)
     idx_summary = json.loads((idx / "index_summary.json").read_text())
     con = duckdb.connect(); con.execute("SET threads=2"); con.execute("SET memory_limit='3GB'")
-    say(f"START {GENERATOR_VERSION} candidates={len(cands)} endpoint_label={endpoint['endpoint_label']} base_url={a.base_url} model={a.model} system_sha={sys_sha[:12]} index={idx_summary.get('content_identity_sha256','')[:12]}")
+    if infra:
+        cands = [{**c, "candidate_arm": c.get("arm"), "arm": INFRA_ARM} for c in cands]
+    effort_state = {"applied": None}
+    say(f"START {GENERATOR_VERSION} arm={a.arm} reasoning_effort={a.reasoning_effort} max_tokens={a.max_tokens} candidates={len(cands)} endpoint_label={endpoint['endpoint_label']} base_url={a.base_url} model={a.model} system_sha={sys_sha[:12]} index={idx_summary.get('content_identity_sha256','')[:12]}")
 
     migrate_http_failures(out, say)
 
@@ -327,8 +435,20 @@ def main():
         (pdir / "prompt_user.txt").write_text(user, encoding="utf-8")
         t0 = time.time()
         try:
-            resp, content, secs, attempts = call_with_retries(
-                lambda: call_model(a.base_url, a.model, credential, SYSTEM_PROMPT, user, a.max_tokens, a.timeout), say, iid, backoff)
+            if a.reasoning_effort and effort_state["applied"] is not False:
+                try:
+                    resp, content, secs, attempts = call_with_retries(
+                        lambda: call_model_effort(a.base_url, a.model, credential, system_prompt, user, a.max_tokens, a.timeout,
+                                                  a.reasoning_effort), say, iid, backoff)
+                    effort_state["applied"] = True
+                except ModelCallFailed as e:
+                    if not str(e).startswith("HTTP 400"):
+                        raise
+                    say(f"REASONING_EFFORT_REJECTED paper={iid} reason={e}; continuing without reasoning_effort")
+                    effort_state["applied"] = False
+            if not a.reasoning_effort or effort_state["applied"] is False:
+                resp, content, secs, attempts = call_with_retries(
+                    lambda: call_model(a.base_url, a.model, credential, system_prompt, user, a.max_tokens, a.timeout), say, iid, backoff)
         except ModelCallFailed as e:
             (pdir / "model_error.txt").write_text(f"{e}\n")
             with open(out / "failed_papers.txt", "a") as f: f.write(iid + "\n")
@@ -342,10 +462,12 @@ def main():
         records = []
         for si, st in enumerate(proposed):
             if not isinstance(st, dict): continue
-            status, checks, located = pre_review_check(st, sections)
+            status, checks, located = pre_review_check(st, sections, a.arm)
             records.append({
                 "statement_id": f"S-{iid}-{si+1:02d}", "track": "C-statements", "status": status, "generator_version": GENERATOR_VERSION,
-                "generator_model": a.model, "endpoint": a.base_url, **endpoint, "prompt_hash": sha(SYSTEM_PROMPT + user), "system_prompt_sha256": sys_sha,
+                "generator_model": a.model, "endpoint": a.base_url, **endpoint, "prompt_hash": sha(system_prompt + user), "system_prompt_sha256": sys_sha,
+                "reasoning_effort": a.reasoning_effort, "reasoning_effort_applied": effort_state["applied"], "max_tokens": a.max_tokens,
+                **({"candidate_arm": c.get("candidate_arm"), "candidate_families": c.get("families")} if infra else {}),
                 "generation_timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "source_commit": a.source_commit,
                 "paper_item_id": iid, "paper_rel_path": rel_path, "paper_sha256": sha256, "arm": c.get("arm"),
                 "evidence": located["evidence"], "verbatim_passage": located["verbatim_passage"], "passage_as_proposed": st.get("passage"),
@@ -355,7 +477,8 @@ def main():
                 "pre_review_checks": checks, "pre_review_status": status,
                 "aggregation": None, "evidence_strength": None, "human_review": None,
             })
-        result = {"item_id": iid, "arm": c.get("arm"), **endpoint, "generator_version": GENERATOR_VERSION, "paper_sha256": sha256, "n_sections": len(sections), "paper_chars": len(paper_text),
+        result = {"item_id": iid, "arm": c.get("arm"), **endpoint, "generator_version": GENERATOR_VERSION, "system_prompt_sha256": sys_sha,
+                  "reasoning_effort": a.reasoning_effort, "reasoning_effort_applied": effort_state["applied"], "paper_sha256": sha256, "n_sections": len(sections), "paper_chars": len(paper_text),
                   "truncated": truncated, "model_seconds": secs, "model_attempts": attempts, "model_parse_error": perr, "n_statements_proposed": len(proposed),
                   "n_deterministic_pass": sum(1 for x in records if x["status"] == "deterministic_pass"),
                   "n_rejected_pre_review": sum(1 for x in records if x["status"] == "rejected_pre_review"),

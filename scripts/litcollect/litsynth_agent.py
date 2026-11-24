@@ -83,6 +83,17 @@ literature sentence claims to explain the contrast unless a cited group names th
 tercile wording, doubled magnitude phrase, lower-case sentence start --- all format-class --- and two reports). The format
 corrective prompt names the same rules. Everything else as v4.
 
+v5 (work package P5a, D-069; packets v5, `scripts/build_synth_packets_v5.py`; not yet run): the system prompt adds SCOPE
+--- every literature sentence opens with the scope phrase of the groups it cites ("Research on <State> shows", "Research
+on the <Region> shows", "Research on the United States shows", "In general, research shows"; "suggests" for single-source
+groups; one sentence per scope), the packet's `general_clause` closes the literature part and the paragraph when no cited
+group is state- or NCA-specific, the paragraph keeps the scope phrases, and no required rubric point names the place on a
+group's authority (a place-specific group earns an optional point) --- and QUESTION FORM: the question follows the
+packet's assigned form (`question_form`: opening and structure of its skeleton). Post-checks `synthesis_post_checks` v3.2
+(v3.1 + scope phrase, closing clause, place-specific required point, question form --- all format-class --- and the
+mixed-scope report). `summary.json` adds `question_diversity` (opening trigram, at most 30 %; a report). The format
+corrective prompt names the new rules. Everything else as v4.1.
+
 Polaris invocation (Sophia vLLM, D-043). Run from the execution clone on Eagle (`$CLIMRR_REPO_ROOT`,
 docs/SOPHIA_RUNBOOK.md) checked out at the pinned commit that carries the packets and provides `climrr`; output
 under the litcollect root (`$LITCOLLECT_ROOT_POLARIS`, config key `litcollect_root_polaris`), never in the clone; the
@@ -91,8 +102,8 @@ ALCF credential in the environment; first check the environment: `python -c "imp
     bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
     cd "$CLIMRR_REPO_ROOT"
     python scripts/litcollect/litsynth_agent.py \\
-        --packets artifacts/benchmark/synth_packets_v4b \\
-        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run5" \\
+        --packets artifacts/benchmark/synth_packets_v5 \\
+        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/run6" \\
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \\
         --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \\
         --sleep 5 --source-commit <PINNED_SHA>
@@ -108,8 +119,8 @@ from litstatement_agent import (  # noqa: E402  (v3)
 from litgroup_agent import DEFAULT_MAX_TOKENS, REASONING_EFFORTS, call_turn, turn_stats  # noqa: E402  (v3)
 from climrr import benchmark_items as bi  # noqa: E402
 
-GENERATOR_VERSION = "litsynth_agent v4.1"
-CHECK_VERSION = bi.SYNTH_CHECK_VERSION_V31
+GENERATOR_VERSION = "litsynth_agent v5"
+CHECK_VERSION = bi.SYNTH_CHECK_VERSION_V32
 CORRECTIVE_PROMPT = ("Your reply did not contain a JSON object with the keys \"prompt\" and \"reference_answer\". "
                      "Return the complete JSON object.")
 NOT_REQUIRED_SENTENCE = "Exact values are not required; any statement consistent with the magnitude class counts."
@@ -123,7 +134,12 @@ FORMAT_CORRECTIVE_PROMPT = ("Your item failed these format checks:\n{reasons}\nR
                             "only with one of the \"tercile_forms\" (to say exact values are not required, write: "
                             f"\"{NOT_REQUIRED_SENTENCE}\"). Start every sentence with a capital letter. A group whose role is "
                             "\"context\" is never a driver or a cause. A literature sentence that rests only on single-source "
-                            "groups says \"research suggests\" and is marked \"hedged\": true.")
+                            "groups says \"research suggests\" and is marked \"hedged\": true. Begin every literature sentence with the "
+                            "\"scope_phrase\" of the groups it cites (the most specific one); when none of the groups you cite has "
+                            "\"scope_class\" \"state\" or \"nca\", end \"literature_interpretation\" with {\"sentence\": <the packet's "
+                            "\"general_clause\">, \"group_ids\": [], \"hedged\": false} and end \"integrated\" with the same sentence; "
+                            "otherwise write no such clause. No required rubric point names the place on a group's authority. The "
+                            "question opens as the packet's \"question_form\" skeleton opens.")
 
 
 def format_corrective_prompt(reasons: list[str]) -> str:
@@ -147,17 +163,21 @@ WRITING. Every sentence starts with a capital letter ("Research shows ...", neve
 
 CONTEXT GROUPS. A group whose "role" is "context" (how the quantity is defined or measured, such as "the heat index combines temperature and humidity") is never a driver or a cause of the change. Use it only as an explanatory aside ("Because the heat index combines temperature and humidity, ..."), never in a list of drivers or causes, and never with "driven by", "driver", "cause" or "because of" in the same clause.
 
+SCOPE (where the research comes from). Each group carries a "scope_class" and a "scope_phrase" computed by code from where its papers are about: "Research on <State> shows" (state), "Research on the <Region> shows" (NCA5 region), "Research on the United States shows" (the United States or a part of it), "In general, research shows" (global or unstated). With a single-source group the phrase says "suggests" instead of "shows"; "has shown" may replace "shows". Every literature sentence BEGINS with the scope phrase of the groups it cites; when it cites groups of different scope it begins with the most specific of their phrases, but write one sentence per scope wherever you can, so that a general mechanism is never made to look specific to the place. If the packet's "scope" has "needs_general_clause": true, or if none of the groups you cite has "scope_class" "state" or "nca", the LAST entry of "literature_interpretation" is {"sentence": "<the packet's general_clause, copied exactly>", "group_ids": [], "hedged": false}, and "integrated" ends with the same sentence; otherwise write no such sentence. In "integrated", every sentence that mentions research begins with its scope phrase. No required rubric point names the place (the state or its region) on the authority of a literature group: required mechanism points are written in general words; a group whose "scope_class" is "state" or "nca" may earn an OPTIONAL point that states its finding for the place.
+
+QUESTION FORM. The packet's "question_form" gives the form of the question ("id", "name", "skeleton"). Write "prompt" in that form: begin it as the skeleton begins and keep the skeleton's structure (one question, or two short questions for "two_short_questions"), with the packet's plain-language phrases; adjust the grammar so it reads well. Do not copy anything the skeleton does not need.
+
 REGIONAL CONTRASTS. For a regional-contrast pattern, no literature sentence may claim to explain the contrast between regions unless a group it cites names those regions. The question asks how the quantity changes, which regions see the largest and smallest change, and what drives the increase; the answer says that the ranking comes from the projection and that the drivers are general.
 
 HEDGES, by evidence strength. Each group carries its "hedge". A literature sentence that rests on at least one multi_source_supported or review_supported group says "research shows" or "research has shown" and is marked "hedged": false. A literature sentence that rests only on single_source_supported groups says "research suggests" and is marked "hedged": true. Never present a single-source claim as established.
 
 Return ONE JSON object with exactly these keys:
-- "prompt": a closed-book question that a well-informed climate scientist could answer from general knowledge, in plain words and short sentences: either one sentence holding two linked questions (how the quantity is projected to change, and why) or two short sentences. It asks about the general pattern and its drivers for the place, season and horizon the packet names, "under a high-emissions future". It must NOT name or hint at any table, dataset, data portal, model output, paper, study, author, column, variable name or grid cell, and must not say "according to", "the table", "the data", "the paper" or "the study". It must not require recalling a number: ask for direction, rough size, ranking or contrast, and the drivers.
+- "prompt": a closed-book question that a well-informed climate scientist could answer from general knowledge, in plain words and short sentences, in the packet's "question_form". It asks about the general pattern and its drivers for the place, season and horizon the packet names, "under a high-emissions future". It must NOT name or hint at any table, dataset, data portal, model output, paper, study, author, column, variable name or grid cell, and must not say "according to", "the table", "the data", "the paper" or "the study". It must not require recalling a number: ask for direction, rough size, ranking or contrast, and the drivers.
 - "reference_answer": {
   "table_pattern": [{"sentence": "...", "pattern_ids": ["..."]}] --- each sentence states what the pattern shows, in the pattern's allowed descriptors (direction, one magnitude form, place or regional ranking with largest / smallest, the comparison with other states where given, horizon and scenario phrases), and is tagged with the pattern id(s) it comes from;
-  "literature_interpretation": [{"sentence": "...", "group_ids": ["..."], "hedged": true or false}] --- each sentence rests on the group(s) it cites and uses the hedge above. If the packet has no groups, return [];
-  "integrated": "a short paragraph that combines the two, in the same words, with no new fact" }
-- "rubric": {"required_points": [{"point": "...", "weight": 1, 2 or 3, "source_ids": ["..."]}], "acceptable_variants": ["..."], "optional_points": [{"point": "...", "source_ids": ["..."]}], "disallowed_claims": ["..."], "fatal_errors": ["..."]}. Every required and optional point MUST carry "source_ids": the pattern id(s) and / or group id(s) from the packet that the point rests on. The required points are exactly: the direction; the magnitude class; the place (for a regional contrast, the ranking: largest / smallest); and each mechanism that rests on a multi_source_supported or review_supported group. A mechanism that rests only on single_source_supported groups is an optional point, never a required one. The anchor pair, if used at all, is an optional point. "fatal_errors" lists climate errors only: the wrong direction; stating the projection as a certainty or a forecast; treating the modeled historical baseline as an observation; reading fire-weather danger as fire occurrence; treating a hazard as a risk. To tell the grader that exact values are not required, write exactly: "Exact values are not required; any statement consistent with the magnitude class counts.".
+  "literature_interpretation": [{"sentence": "...", "group_ids": ["..."], "hedged": true or false}] --- each sentence rests on the group(s) it cites, begins with its scope phrase and uses the hedge above; the closing general clause as the last entry when SCOPE requires it. If the packet has no groups, return [];
+  "integrated": "a short paragraph that combines the two, in the same words, with no new fact, keeping every scope phrase and ending with the closing general clause when SCOPE requires it" }
+- "rubric": {"required_points": [{"point": "...", "weight": 1, 2 or 3, "source_ids": ["..."]}], "acceptable_variants": ["..."], "optional_points": [{"point": "...", "source_ids": ["..."]}], "disallowed_claims": ["..."], "fatal_errors": ["..."]}. Every required and optional point MUST carry "source_ids": the pattern id(s) and / or group id(s) from the packet that the point rests on. The required points are exactly: the direction; the magnitude class; the place (for a regional contrast, the ranking: largest / smallest); and each mechanism that rests on a multi_source_supported or review_supported group, written in general words without the place name (SCOPE). A mechanism that rests only on single_source_supported groups is an optional point, never a required one. The anchor pair, if used at all, is an optional point. "fatal_errors" lists climate errors only: the wrong direction; stating the projection as a certainty or a forecast; treating the modeled historical baseline as an observation; reading fire-weather danger as fire occurrence; treating a hazard as a risk. To tell the grader that exact values are not required, write exactly: "Exact values are not required; any statement consistent with the magnitude class counts.".
 - "guardrails": the packet guardrails that apply to this item, verbatim or made more specific.
 - "source_independent_answerability": "yes", "borderline" or "no" --- could a well-informed climate scientist answer without the packet's sources?
 - "source_independence_note": one sentence explaining that judgement.
@@ -300,7 +320,9 @@ def summarise(out: Path, endpoint=None, budget=None):
          "finish_reasons": {k: sum(str(h.get("finish_reason")) == k for h in hist) for k in sorted({str(h.get("finish_reason")) for h in hist})},
          "by_level": {str(k): sum(it["use_case_level"] == k for it in items) for k in sorted({it["use_case_level"] for it in items})},
          "check_version": CHECK_VERSION,
-         "hedge_by_strength_flags": sum(len(h.get("checks", {}).get("hedge_by_strength") or []) for h in hist)}
+         "hedge_by_strength_flags": sum(len(h.get("checks", {}).get("hedge_by_strength") or []) for h in hist),
+         "mixed_scope_flags": sum(len(h.get("checks", {}).get("mixed_scope_report") or []) for h in hist),
+         "question_diversity": bi.opening_trigram_report([it.get("prompt") or "" for it in items])}
     (out / "summary.json").write_text(json.dumps(s, indent=2))
     return s
 

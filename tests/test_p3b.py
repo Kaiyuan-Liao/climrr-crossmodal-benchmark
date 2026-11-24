@@ -40,7 +40,8 @@ V4B = json.loads((v4.PACKETS_V4B_DIR / "manifest.json").read_text(encoding="utf-
 PACKETS = {p["item_id"]: json.loads((v4.PACKETS_V4B_DIR / f"{p['packet_id']}.json").read_text(encoding="utf-8"))
            for p in V4B["packets"]}
 WORK_TOOLS = REPO_ROOT / "scripts" / "litcollect"
-AGENT41 = WORK_TOOLS / "litsynth_agent.py"
+from climrr import p5a  # noqa: E402
+AGENT41 = p5a.materialize_tools("litsynth_agent.py") / "litsynth_agent.py"   # v4.1 held at the P5a base commit (v5 since P5a)
 POLISH11 = WORK_TOOLS / "litpolish_agent.py"
 AGENT41_SHA256 = "f41c0b9537912779076bfac81e1341f94e07bd87723177cc583350ce164d33d7"
 SYSTEM_PROMPT41_SHA256 = "8ce96b076ee0f9366a25cc6caf50a72cd034c821f567f69b777ad4947481c8ab"

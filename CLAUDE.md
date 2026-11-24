@@ -155,6 +155,10 @@ runs (pinned in its test): its `agent.log`, per-item files, `prompt_user.txt`, `
 is held by its bytes at their source commit (`litsynth_run2.agent_v32_source`). Since P3b `litsynth_agent.py` is v4.1 and
 `litpolish_agent.py` v1.1; the v4 and v1 files that synthesis run 4 and polish run 1 used are held by their bytes at their
 source commit (`litsynth_run4.materialize_agents`).
+P5a (D-070) adds `scripts/litcollect/inventory_corpus.py`, run on Polaris: its output JSON is the run evidence. Since P5a
+`run_query.py` is v4 (opt-in `--lexicon` mode, whose `summary.json`, `candidates.json` and `paper_hits.jsonl` are the run
+evidence), `litstatement_agent.py` v4 and `litsynth_agent.py` v5; the superseded v3, v3 and v4.1 files are held by their
+bytes at the P5a base commit (`climrr.p5a.materialize_tools`).
 
 ## Knowledge-refresh staging
 

@@ -24,7 +24,6 @@ from climrr import litaggregate as la
 from climrr import litgroups as lgr
 from climrr import litindependence as li
 from climrr import litstatements_run2 as r2
-from climrr.checksums import sha256_file
 from climrr.paths import REPO_ROOT
 
 REVIEW_DIR = REPO_ROOT / "artifacts" / "benchmark" / "review"
@@ -32,6 +31,8 @@ WORKBOOK_PATH = REVIEW_DIR / "P2a_clusters_and_seeds_v1.xlsx"
 SEEDS_CSV_PATH = REVIEW_DIR / "P2a_seeds_v1.csv"
 DOC_PATH = REPO_ROOT / "docs" / "LITSTATEMENTS_RUN2.md"
 AGENT_PATH = REPO_ROOT / "scripts" / "litcollect" / "litstatement_agent.py"
+#: The v3 agent this document describes (P2a); the working tree carries v4 since P5a, held bytes in `climrr.p5a`.
+AGENT_V3_SHA256 = "fd0e1dc391d46c691ab3b0b0d0190ba009f47a6e69e0eb6f0ececec441b6a9ea"
 PASSAGE_CHARS = 300
 
 
@@ -413,4 +414,4 @@ def doc_inputs() -> tuple:
     v2 = {"indep": _load(li.INDEPENDENCE_PATH), "v1b": _load(li.CLUSTERS_V1B_SUMMARY_PATH), "seeds2": _load(s2.SUMMARY_PATH),
           "partitions": _load(lgr.PARTITIONS_SUMMARY_PATH)}
     return (_load(r2.MANIFEST_PATH), _load(r2.PAPERS_META_PATH), _load(r2.PARSE_ERRORS_PATH), _load(la.SUMMARY_PATH),
-            _load(sd.SUMMARY_PATH), sha256_file(AGENT_PATH), v2)
+            _load(sd.SUMMARY_PATH), AGENT_V3_SHA256, v2)

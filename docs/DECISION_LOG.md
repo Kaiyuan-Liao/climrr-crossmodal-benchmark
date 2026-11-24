@@ -3327,3 +3327,99 @@ code emits, and the next GUIDANCE packet still chooses.
 - **Affected files:** `src/climrr/litsynth_run5.py`, `scripts/ingest_litsynth_run5.py`, `src/climrr/mentor_sheet_v2b.py`,
   `scripts/build_mentor_sheet.py`, `src/climrr/p3_items_review.py`, `scripts/build_p3_items_review.py`,
   `artifacts/benchmark/items/run5/`, `artifacts/benchmark/polish/run2/`, `artifacts/benchmark/review/`, tests.
+
+## D-069 --- Scope marking of literature sentences
+
+- **Date:** 2026-11-23.
+- **Status:** **decided** (COORDINATOR, 2026-11-23; implements the concern of the group meeting of 2026-11-23, point 1).
+- **Context.** The mentor (shared with Alvi's graph--text work): in a combined question the first half is answered by the
+  table (place-specific) and the second by the papers (general mechanisms); the combination makes general mechanisms look
+  location-specific; too strict a mapping leaves nothing --- be careful, not strict.
+- **Decision.** Each literature sentence in a reference answer opens with a scope phrase chosen by code from the best
+  geography class among its cited members: `state` -> "Research on <State> shows/suggests ..."; `nca` -> "Research on the
+  <Region> shows ..."; `us_subregion` / `us_national` -> "Research on the United States shows ..."; `global` / `other` /
+  `unknown` -> "In general, research shows ...". If no cited group is `state` or `nca` for the item's place, the
+  literature part ends with: "These are general drivers of <hazard phrase>, not findings specific to <Place>." The rubric
+  never requires a place-specific mechanism; a place-specific group earns an optional point. The scope phrase is computed
+  into the packet (`scope_phrase` per group) and checked (post-checks v3.2).
+- **Recorded (EXECUTOR, P5a).** `src/climrr/synthpackets_v5.py`, packets v5 (`artifacts/benchmark/synth_packets_v5/`),
+  `benchmark_items.scope_checks` (post-checks v3.2), `litsynth_agent.py` v5 (prompt section SCOPE). **For confirmation:**
+  (a) "cited members" = the members an item's literature statement cites as `supports` (core / cited candidates and
+  `review_synthesis` passages); a background member never sets the scope; (b) the member class is the relevance basis the
+  packets already store (litgeo v2: state > nca_region > us_subregion > us_national > global), else its `region_class`;
+  (c) the verb follows D-062 in every class ("shows" / "has shown" for a multi-source or review group, "suggests" for
+  single-source), although D-069 writes only "shows" for `nca` and the U.S.; (d) a sentence citing groups of different
+  scope opens with the most specific phrase (D-069's "best class"); the prompt asks for one sentence per scope and
+  `mixed_scope_report` lists the exceptions (report only); (e) the closing clause is a literature entry of its own with no
+  group id (exempt from "cites no group id") and also ends the integrated paragraph; it is a failure when required and
+  missing, and when present although a cited group is state- or NCA-specific; (f) every integrated-paragraph sentence that
+  names "research" must open with a cited scope phrase; (g) hazard phrase = the plain-language `quantity_short`; Place = the
+  state, or "any one region" for a regional contrast; "the" is dropped before Alaska and Hawai'i; (h) every v3.2 failure is
+  format-class (one corrective turn). **Escalation (scientific, for the COORDINATOR):** "best class" makes a group
+  place-specific on a single member: in packets v5, 5 group attachments take `state` / `nca` from a minority of their
+  cited members (e.g. BI-P3-0001 `driver-c1-008` -> "Research on the Southwest shows" on 1 of 3 cited members; BI-P3-0007
+  `driver-c1-005` -> "Research on California shows" on 1 of 5), and "shows" then rests on papers most of which are not
+  about the place --- the manifest lists them (`place_specific_class_from_minority_of_cited`). Implemented as written; not
+  changed.
+- **Affected files:** `src/climrr/synthpackets_v5.py`, `scripts/build_synth_packets_v5.py`, `src/climrr/benchmark_items.py`,
+  `scripts/litcollect/litsynth_agent.py`, `artifacts/benchmark/synth_packets_v5/`, `tests/test_p5a.py`.
+
+## D-070 --- LITCORPUS-03: the critical-infrastructure corpus
+
+- **Date:** 2026-11-23.
+- **Status:** **decided** (COORDINATOR, 2026-11-23).
+- **Decision.** `critical_infrastructure_judged_relevant.tar.gz`, SHA-256
+  `6c6e21c2b07cfa0ef6a4098b19a0335949d3bf68a9a97d9f16b5f7904791ec76`, 750 MB, 89,497 JSON papers under
+  `kept/<last two digits>/<id>.json`, same schema as the 186k set (section-keyed text + `_araiadoc_tags`); supplied by Alvi
+  2026-11-23; relevance to critical infrastructure judged by JL's agentic pipeline (model-judged; criteria not available to
+  us; recorded as `selection: external_model_judged`). Stored on Eagle at `climrr-litcollect/sources/critical_infrastructure_v1/`;
+  never in Git. Provenance doc `docs/LITCORPUS03_PROVENANCE.md`.
+- **Recorded (EXECUTOR, P5a).** The provenance doc (every figure "as supplied", none verified yet); `climrr.p5a.LITCORPUS03`;
+  `scripts/litcollect/inventory_corpus.py` (the inventory to run on Polaris). **For confirmation:** (a) the hash, size and
+  file count are the supplier's until Kaiyuan verifies them on Eagle; a different hash or count is an escalation; (b) if
+  `_araiadoc_tags` is a string, `build_index.py` indexes it as a section and the lexicon / hazard terms can match tag text
+  --- the inventory reports its type before the index is queried; (c) no `data/manifest.json` `external_corpora` entry
+  until the inventory is ingested.
+- **Affected files:** `docs/LITCORPUS03_PROVENANCE.md`, `src/climrr/p5a.py`, `scripts/litcollect/inventory_corpus.py`.
+
+## D-071 --- Rung 8 opened: hazard -> infrastructure impact items
+
+- **Date:** 2026-11-23.
+- **Status:** **decided** (mentor / Alvi direction, group meeting 2026-11-23; COORDINATOR).
+- **Decision.** Item type: table pattern (hazard change at place) + literature statements of type `impact` (hazard
+  condition -> infrastructure asset class -> impact mechanism / outcome) + general drivers where available. The guardrail
+  "hazard != exposure != risk" becomes a wording rule: the answer states the hazard change as projected, the impact pathway
+  as what research shows about such conditions, and never claims a specific asset at the place will fail. Scope marking
+  (D-069) applies with extra force: impact statements are almost always general.
+- **Recorded (EXECUTOR, P5a).** Question form QF-08 (rung 8); the design `docs/P5_INFRA_IMPACT_DESIGN.md`. No rung-8
+  packet, prompt or check yet: they need the extraction run's statements. **For confirmation:** the rung-8 wording rule is
+  not yet a deterministic check (planned with the rung-8 packets).
+- **Affected files:** `data/metadata/benchmark/question_forms_v1.yaml`, `docs/P5_INFRA_IMPACT_DESIGN.md`.
+
+## D-072 --- Knowledge-graph exploration: survey first
+
+- **Date:** 2026-11-23.
+- **Status:** **decided** (COORDINATOR; meeting point 4).
+- **Decision.** A satellite literature survey and design note first (prompt issued 2026-11-23); no graph construction
+  until the mentors have read it and CONTROL has ruled.
+- **Recorded (EXECUTOR, P5a).** Nothing built. Status in `PROJECT_STATE.md` (satellite, in progress).
+
+## D-073 --- Statement type `impact`
+
+- **Date:** 2026-11-23.
+- **Status:** **decided** (COORDINATOR).
+- **Decision.** Added to the extraction schema for LITCORPUS-03 runs: fields `hazard_term` (from the governed hazard
+  vocabularies or the plain-language phrases), `asset_class` (from the infrastructure lexicon), `impact_mechanism` (free
+  text, one clause), `impact_outcome` (free text), plus the existing passage / provenance fields. Same pre-checks
+  (verbatim passage, passage type, no numeric specifics unless `specific_result`).
+- **Recorded (EXECUTOR, P5a).** `litstatement_agent.py` v4 (`--arm infra_impact_v1`; the work package called it v5, but the
+  tracked agent was v3, so the next version is v4), infra system prompt hashed in every record; mandatory pre-check
+  `impact_fields_pass`; `infrastructure_lexicon_v1.yaml`. **For confirmation:** (a) `hazard_term` is an enum: the eight
+  governed concept-map terms of the two families and the four plain-language quantity phrases, compared case-insensitively;
+  the prompt tells the model to return no impact statement for a hazard outside the list ("heat wave", "extreme heat",
+  "wildfire") --- strict, and protective of cautions 2 and 3 of `CLAUDE.md` (an FWI is never fire occurrence; "extreme
+  heat" is not the heat index), but it will cut yield on an infrastructure corpus, whose papers mostly use those words;
+  widening the list is a COORDINATOR decision, not taken here; (b) the D-073 fields are required on `impact` statements
+  only; other types keep the v3 schema; (c) `asset_class` = one of the 16 CISA ids or "other".
+- **Affected files:** `scripts/litcollect/litstatement_agent.py`, `data/metadata/litstatements/infrastructure_lexicon_v1.yaml`,
+  `src/climrr/infra_lexicon.py`, `tests/test_p5a.py`, `tests/test_litstatement_agent.py` (v3 now from its held bytes).

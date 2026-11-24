@@ -23,14 +23,16 @@ from climrr.paths import REPO_ROOT
 
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
 
-#: build_index.py is byte-identical to the file that ran on Polaris. run_query.py is v3
-#: (Track B survey run 1, D-026): v2 (SHA-256 a93eeba7...7708, the file that produced
-#: LITCORPUS-02, recoverable at 38116a0) plus an opt-in --no-hits flag only.
+#: build_index.py is byte-identical to the file that ran on Polaris. run_query.py is v4
+#: (work package P5a: v3 plus the opt-in --lexicon mode; tests/test_p5a.py). v3 (Track B survey
+#: run 1, D-026; SHA-256 5f56ee49...030d, held at the P5a base commit, `climrr.p5a`) was v2
+#: (SHA-256 a93eeba7...7708, the file that produced LITCORPUS-02, recoverable at 38116a0) plus
+#: an opt-in --no-hits flag only. Without --lexicon, v4 runs the v3 code path.
 #: run_v1_on_705k.sh differs from the executed file (SHA-256 0c9516b7...) in one line only:
 #: BASE is read from LITCOLLECT_ROOT_POLARIS instead of an absolute Eagle path.
 TOOL_SHA256 = {
     "build_index.py": "5e063a44f30bee0da81205b6b119d647d87fd08ddf38998eb1d8fa0c235b99a9",
-    "run_query.py": "5f56ee49f0da675f49ef490b506c030b307c693032e8be9097e499cf1c64030d",
+    "run_query.py": "52f7cdfc4a3d696cbfec083bc25b7095b793368aaa27792db4de22484c55e6ee",
     "run_v1_on_705k.sh": "47fe1e17f3dc27fa8267ec21a173bbb3c773d4bc5f2e2045a7d5ccd379ffba59",
 }
 

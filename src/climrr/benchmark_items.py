@@ -348,8 +348,15 @@ SYNTH_CHECK_VERSION_V3 = "synthesis_post_checks v3"
 # format-class failures), and two reports (a context phrase in a driver sentence of the paragraph; a regional contrast
 # claimed to be explained). Opt-in: litsynth_agent v4.1 passes it; v3 stays what the run-4 reproduction uses.
 SYNTH_CHECK_VERSION_V31 = "synthesis_post_checks v3.1"
-SYNTH_CHECK_VERSIONS = (SYNTH_CHECK_VERSION, SYNTH_CHECK_VERSION_V23, SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31)
-_V3_PLUS = (SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31)
+# v3.2 (work package P5a, D-069): v3.1 plus scope marking --- every literature sentence opens with the scope phrase of its
+# cited groups; the general closing clause when (and only when) no cited group is state- or NCA-specific; no required
+# rubric point names the place on a group's authority; the question opens as its assigned question form (all format-
+# class) --- and the mixed-scope report. Opt-in: litsynth_agent v5 passes it.
+SYNTH_CHECK_VERSION_V32 = "synthesis_post_checks v3.2"
+SYNTH_CHECK_VERSIONS = (SYNTH_CHECK_VERSION, SYNTH_CHECK_VERSION_V23, SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31,
+                        SYNTH_CHECK_VERSION_V32)
+_V3_PLUS = (SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31, SYNTH_CHECK_VERSION_V32)
+_V31_PLUS = (SYNTH_CHECK_VERSION_V31, SYNTH_CHECK_VERSION_V32)
 #: v3.1 (D-067): the driver / cause words a sentence resting only on context groups must not carry next to the context phrase.
 DRIVER_WORD_RE = re.compile(r"\bdriven\s+by\b|\bdrivers?\b|\bdrives?\b|\bcause[sd]?\b|\bcausing\b|\bbecause\s+of\b", re.I)
 #: v3.1 (DR-DESC-1 v4, D-066): the relative tercile is written as a comparison with other states, never with these words.
@@ -559,8 +566,11 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
         reasons += [f"table_pattern[{i}]: pattern id {p} not in the packet" for p in ids if p not in pattern_ids]
     if strengths and not lit_s:
         reasons.append("reference_answer.literature_interpretation: no sentence while the packet has literature groups")
+    clause = ((checks_input.get("scope") or {}).get("general_clause") or "").strip() if check_version == SYNTH_CHECK_VERSION_V32 else ""
     for i, s in enumerate(lit_s):
         ids = s.get("group_ids") if isinstance(s.get("group_ids"), list) else []
+        if not ids and clause and s["sentence"].strip() == clause:   # v3.2: the D-069 closing clause cites no group
+            continue
         if not ids:
             reasons.append(f"literature_interpretation[{i}]: cites no group id")
         bad = [g for g in ids if g not in strengths]
@@ -595,9 +605,14 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
                        for w, t in every if w in FWI_WRONG_ANSWER_FIELDS for m in fwi_forbidden_flags(t)] + \
                       [{"field": w, "word": m, "kind": "fire_alone"} for w, t in every for m in fwi_fire_words(t, plain)]
     readability = None
-    if check_version == SYNTH_CHECK_VERSION_V31:
+    if check_version in _V31_PLUS:
         reasons += readability_reasons(item.get("prompt") or "", tp_s, lit_s, integrated, graded, checks_input)
         readability = readability_reports(tp_s, lit_s, integrated, item.get("prompt") or "", checks_input)
+    scope_rep = None
+    if check_version == SYNTH_CHECK_VERSION_V32:
+        sr, scope_rep = scope_checks(lit_s, integrated, tagged.get("rubric_points") or [], checks_input)
+        reasons += sr
+        reasons += question_form_reasons(item.get("prompt") or "", checks_input)
 
     schema = schema_errors(item)
     reasons += [f"schema: {e}" for e in schema]
@@ -612,7 +627,7 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
                        "n_table_sentences": len(tp_s), "n_literature_sentences": len(lit_s),
                        **({"hedge_by_strength": hedge_report} if hedge_report is not None else {}),
                        **({"fire_word_report": fire_report} if fire_report is not None else {}),
-                       **(readability or {})}}
+                       **(readability or {}), **(scope_rep or {})}}
 
 
 def _terms(text: str) -> set[str]:
@@ -731,6 +746,117 @@ def hedge_by_strength(lit_s: list[dict], strengths: dict) -> list[dict]:
     return out
 
 
+# --- v3.2: scope marking (D-069) and question forms (P5a) ------------------------------------------------
+
+#: Most specific first. D-069: state, nca, us_subregion / us_national, then global / other / unknown ("In general").
+SCOPE_CLASS_ORDER = ("state", "nca", "us_subregion", "us_national", "global", "other", "unknown")
+PLACE_SPECIFIC_CLASSES = ("state", "nca")
+SCOPE_VERBS_MULTI = ("shows", "has shown")
+SCOPE_VERBS_SINGLE = ("suggests",)
+
+
+def scope_verbs(group_ids, strengths: dict) -> tuple[str, ...]:
+    """D-062 under D-069: "shows" / "has shown" when a cited group is multi-source or review, else "suggests"."""
+    ids = [g for g in group_ids if g in strengths]
+    return SCOPE_VERBS_SINGLE if ids and all(strengths[g] == "single_source_supported" for g in ids) else SCOPE_VERBS_MULTI
+
+
+def best_scope(group_ids, scope_groups: dict) -> dict | None:
+    """The scope record (`class`, `stem`) of the most specific cited group."""
+    recs = [scope_groups[g] for g in group_ids if g in scope_groups]
+    return min(recs, key=lambda r: SCOPE_CLASS_ORDER.index(r["class"])) if recs else None
+
+
+def scope_openings(group_ids, scope_groups: dict, strengths: dict) -> list[str]:
+    best = best_scope(group_ids, scope_groups)
+    return [f"{best['stem']} {v}" for v in scope_verbs(group_ids, strengths)] if best else []
+
+
+def scope_checks(lit_s: list[dict], integrated: str, rubric_points: list, checks_input: dict) -> tuple[list[str], dict]:
+    """v3.2 (D-069). Failures: a literature sentence that does not begin with its scope phrase (stem of the most specific
+    cited group + "shows" / "has shown", or "suggests" when every cited group is single-source); the closing clause
+    missing (as the last literature entry, with no group, and as the end of the integrated paragraph) when no cited group
+    is state- or NCA-specific, or present when one is; a sentence of the integrated paragraph that names "research" and does
+    not begin with one of the cited groups' scope openings; a required rubric point resting on a group that names the place.
+    Report: `mixed_scope_report` --- a literature sentence citing groups of different scope classes."""
+    sc = checks_input.get("scope") or {}
+    groups, strengths = sc.get("groups") or {}, checks_input.get("group_strength") or {}
+    clause = (sc.get("general_clause") or "").strip()
+    out, mixed = [], []
+    cited = []
+    for i, s in enumerate(lit_s):
+        ids = [g for g in (s.get("group_ids") if isinstance(s.get("group_ids"), list) else []) if isinstance(g, str)]
+        text = s["sentence"].strip()
+        if not ids and clause and text == clause:
+            continue
+        cited += [g for g in ids if g in groups and g not in cited]
+        opens = scope_openings(ids, groups, strengths)
+        if opens and not any(text.startswith(o) for o in opens):
+            out.append(f"literature_interpretation[{i}]: scope phrase (D-069): the sentence must begin with "
+                       + " or ".join(repr(o) for o in opens))
+        classes = sorted({groups[g]["class"] for g in ids if g in groups}, key=SCOPE_CLASS_ORDER.index)
+        if len(classes) > 1:
+            mixed.append({"sentence": i, "classes": classes, "group_ids": ids})
+    specific = any(groups[g]["class"] in PLACE_SPECIFIC_CLASSES for g in cited)
+    last = lit_s[-1] if lit_s else None
+    clause_last = bool(last) and not (last.get("group_ids") or []) and last["sentence"].strip() == clause
+    if clause:
+        if not specific and not clause_last:
+            out.append(f"literature_interpretation: closing clause (D-069) missing as the last entry: {clause!r}")
+        if specific and clause_last:
+            out.append("literature_interpretation: closing clause (D-069) present though a cited group is state- or NCA-specific")
+        in_integrated = clause in (integrated or "")
+        if not specific and not (integrated or "").strip().endswith(clause):
+            out.append(f"integrated: closing clause (D-069) missing at the end: {clause!r}")
+        if specific and in_integrated:
+            out.append("integrated: closing clause (D-069) present though a cited group is state- or NCA-specific")
+    allowed = sorted({o for g in cited for o in scope_openings([g], groups, strengths)} |
+                     {o for s in lit_s for o in scope_openings([g for g in (s.get("group_ids") or []) if isinstance(g, str)], groups, strengths)})
+    for sent in SENTENCE_SPLIT_RE.split((integrated or "").strip()):
+        if re.search(r"\bresearch\b", sent, re.I) and allowed and not any(sent.startswith(o) for o in allowed):
+            out.append(f"integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope "
+                       f"phrases: {sent[:60]!r}")
+    places = [p for p in sc.get("place_names") or [] if p]
+    for r in rubric_points:
+        if not (isinstance(r, dict) and r.get("field") == "required_points" and isinstance(r.get("point"), str)):
+            continue
+        gids = [g for g in (r.get("source_ids") or []) if g in groups]
+        hit = [p for p in places if re.search(rf"\b{re.escape(p)}\b", r["point"])]
+        if gids and hit:
+            out.append(f"rubric.required_points: place-specific mechanism required (D-069): {r['point'][:60]!r} names {hit[0]!r}")
+    return out, {"mixed_scope_report": mixed, "scope_clause_required": bool(clause) and not specific}
+
+
+def question_form_reasons(prompt: str, checks_input: dict) -> list[str]:
+    """v3.2: the question opens as its assigned form (`opening_regex`) and holds at least `min_question_marks` '?'."""
+    qf = checks_input.get("question_form") or {}
+    if not qf:
+        return []
+    out = []
+    if not re.match(qf["opening_regex"], (prompt or "").strip()):
+        out.append(f"prompt: question form {qf['id']} ({qf['name']}): must open as {qf['opening_regex']!r}")
+    if (prompt or "").count("?") < int(qf.get("min_question_marks", 1)):
+        out.append(f"prompt: question form {qf['id']} ({qf['name']}): needs {qf.get('min_question_marks', 1)} question mark(s)")
+    return out
+
+
+def opening_trigram(text: str) -> str:
+    return " ".join(re.findall(r"[a-z0-9'-]+", (text or "").lower())[:3])
+
+
+def opening_trigram_report(prompts: list[str], max_share: float = 0.30) -> dict:
+    """P5a diversity report (not a failure): the share of the batch per opening trigram; `pass` when none exceeds
+    `max_share`."""
+    from collections import Counter
+
+    c = Counter(opening_trigram(p) for p in prompts)
+    n = len(prompts)
+    top = c.most_common()
+    worst = top[0][1] / n if n else 0.0
+    return {"rule": "opening_trigram", "max_share": max_share, "n": n, "pass": worst <= max_share,
+            "largest_share": round(worst, 3), "trigrams": [{"trigram": t, "n": k, "share": round(k / n, 3)} for t, k in top]}
+
+
 # --- format-class failures (D-055b; litsynth_agent v3.2 corrective turn) ---------------------------------
 
 _WORD_VALUES = {w: i for i, w in enumerate(_ONES.split("|"), 1)} | {w: i for i, w in enumerate(_TEENS.split("|"), 10)} | \
@@ -746,7 +872,13 @@ _FORMAT_REASON_RES = (re.compile(r"^[^:]+: number-word '.*' does not trace to an
                       re.compile(r"^literature_interpretation\[\d+\]: context_as_driver \(D-067\): .+$"),
                       re.compile(r"^[^:]+: tercile wording \(DR-DESC-1 v4\): .+ in graded text$"),
                       re.compile(r"^[^:]+: doubled magnitude phrase \(DR-DESC-1 v4\): .+$"),
-                      re.compile(r"^[^:]+: sentence starts with a lower-case letter: .+$"))
+                      re.compile(r"^[^:]+: sentence starts with a lower-case letter: .+$"),
+                      # v3.2 only emits these (D-069; question forms)
+                      re.compile(r"^literature_interpretation\[\d+\]: scope phrase \(D-069\): .+$"),
+                      re.compile(r"^(?:literature_interpretation|integrated): closing clause \(D-069\) .+$"),
+                      re.compile(r"^integrated: scope phrase \(D-069\): .+$"),
+                      re.compile(r"^rubric\.required_points: place-specific mechanism required \(D-069\): .+$"),
+                      re.compile(r"^prompt: question form QF-\d+ .+$"))
 
 
 def number_word_value(word: str) -> float | None:

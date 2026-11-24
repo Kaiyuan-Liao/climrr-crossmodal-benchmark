@@ -1,16 +1,37 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-11-19   Next: **you review the seven sample items** (sheet sent 2026-11-19); if they are what you want, we scale up
+Last updated: 2026-11-23   Next: **sample QAs from the infrastructure papers + the climate table, for Alvi to judge** (after the Polaris runs); scope marking on the seven samples
 
 ## Status in five lines
 
-1. **On 2026-11-13 you reviewed the five-item sheet (sent 2026-11-04): "no need to care about details."** Your seven points are recorded below (meeting log) and became D-059 -- D-065.
-2. **Every item now uses both sources (D-059)** --- table pattern + literature. The pattern-only items (Georgia, Arizona) are dropped by design and kept as evidence.
-3. **Questions and answers are in general words (D-060 -- D-062):** no "RCP8.5", no "95 °F", no years --- "under a high-emissions future", "by mid-century", "days hot and humid enough to be dangerous", "fire-weather danger"; "research shows" (two or more independent papers or a review) / "research suggests" (one paper), never "one study". A separate readability step rewrites each question and answer without changing its meaning, with deterministic checks (D-063); five of the seven answers you will see are the rewritten text.
-4. **The other columns go ahead on our documented readings (D-064)** --- the summer Fire Weather Index columns, `State`, `NAME`, the FWI percent-change scenario and the unweighted cell mean are recorded as *owner-authorized working assumptions* (not confirmed; every item says which it relies on). Your NCA5 climate-region grouping is recorded as the project's grouping (D-065).
-5. **Seven sample items are generated and in human review** (five heat index: California, Alabama, Washington, New York, the NCA5 regions; two fire weather: California, Minnesota; D-068). **Nothing accepted; nothing frozen.**
+1. **2026-11-23 group meeting (with Alvi and JL):** your concern --- combined QAs make the papers' general mechanisms look place-specific --- is now a rule (D-069): every literature sentence says where its research comes from, and general drivers are labelled as general. Your direction: hazards' impact on infrastructure, combining our climate table and papers with Alvi's infrastructure papers (D-070, D-071, D-073); a knowledge graph only after a literature survey (D-072).
+2. **Every item uses both sources (D-059)** in general words (D-060 -- D-062): no "RCP8.5", no "95 °F", no years; "research shows" (two or more independent papers or a review) / "research suggests" (one paper), never "one study"; a readability step rewrites each text without changing its meaning (D-063).
+3. **The other columns go ahead on our documented readings (D-064)** --- recorded as *owner-authorized working assumptions*, not confirmed; your NCA5 grouping is the project's grouping (D-065).
+4. **Seven sample items are in human review** (sheet of 2026-11-19; D-068); their packets are rebuilt with the scope phrases and eight question forms (packets v5), not yet regenerated. **Nothing accepted; nothing frozen.**
+5. **Infrastructure papers (LITCORPUS-03, 89,497 papers from Alvi):** the search and extraction tools are ready; the runs on Polaris come next, then sample QAs for Alvi.
 
 ## What I need from this meeting
+
+> ### **Next (after the 2026-11-23 group meeting): infrastructure-impact samples for Alvi; scope marking**
+>
+> **Done since the meeting (P5a, no model call):** the concern on the seven samples is a rule (D-069): every literature
+> sentence now says where the research comes from ("Research on California shows ...", "In general, research shows ..."),
+> and an answer whose papers are not about the place ends with "These are general drivers of ..., not findings specific to
+> <Place>." The rubric never requires a place-specific mechanism. Alvi's critical-infrastructure papers are recorded as
+> LITCORPUS-03 (D-070); the workflow is extended to them (an infrastructure vocabulary from the 16 CISA sectors, a search
+> for papers where a hazard term and an infrastructure term share a section, an extraction step for hazard -> asset ->
+> impact statements: D-071, D-073). Questions now come in eight forms instead of one ("How ...", "Why ...", "What happens
+> ...", "Which regions ...").
+>
+> **Ask:** (1) for Alvi: which infrastructure classes matter most for the samples (energy, transportation, water, ...)? (2)
+> is "Research on California shows ..." / "In general, research shows ..." the right way to keep general mechanisms from
+> looking place-specific --- or too heavy? (3) should a paper group count as place-specific when only one of its papers is
+> about the place (it does today; five cases in the seven samples)? (4) infrastructure papers mostly say "extreme heat",
+> "heat wave" or "wildfire", not "heat index" or "Fire Weather Index": may the impact statements use those broader hazard
+> words (they are not what the table measures), or only the table's own quantities?
+>
+> **Knowledge graph (point 4):** a literature survey and design note come first (D-072); nothing is built until you have
+> read it.
 
 > ### **Next: the seven sample items (sheet sent 2026-11-19)**
 >
@@ -210,6 +231,7 @@ listed here so the whole question inventory stays in one place. Each is
 | 2026-09-17, 2026-09-24 | — | No review of the `MENTOR_EXAMPLES` answer sheet occurred. | R-003, D-014. **No line answered; no status changed.** Not an answer to any question --- recorded because the ruling requires the outcome to be recorded either way. |
 | 2026-10-29 | --- (four soft-QA examples shown) | The examples are "not the type of question we want to build" --- all too specific to concrete numbers and details of the table and the papers. Use case: the question goes directly to an LLM, which answers from what it knows, with no table and no papers; extract general patterns from both sources and build open-ended QA. She will review generated QAs with basic info. Shared `ENSURE_Prompt Use Cases_v3.xlsx`. | D-035, D-036, D-040 (D-037, D-038, D-039 follow). Owner-relayed by Kaiyuan. **Names no column; no status changed.** |
 | 2026-11-13 | --- (review of the five-item sheet sent 2026-11-04) | "No need to care about details." (1) QAs from two sources only; (2) no concrete details such as "RCP8.5" or "95 °F" in questions / answers --- general plain words, or omit; (3) do not try to match the paper side to a specific RCP --- such details seldom appear in papers; focus on the matched pattern; (4) avoid "one study"; general wording such as "recent research shows" is acceptable; (5) the current questions are hard to read; polish the wording for readability without changing the meaning; two linked questions with one answer is acceptable; (6) for the meaning of other columns, go with our assumptions based on the table and related files; no further confirmation needed; (7) climate regions are good; record our grouping for future checking. She will check polished samples; if good, proceed. | D-059 -- D-065; R-004 -- R-008 (point 6: working assumptions, `effect: null`). Owner-relayed by Kaiyuan, his words. **No column status moved.** |
+| 2026-11-23 | --- (group meeting; the seven-item sheet sent 2026-11-19) | (1) Concern: combined QAs make the papers' general mechanisms look location-specific; be careful, not strict; (2) workflow judged helpful; (3) next: combine climate table + papers with Alvi's infrastructure graph + papers --- impact of hazards on infrastructure; (4) explore a knowledge graph, published work first; (5) apply the workflow to the infrastructure papers + the climate table, sample QAs for Alvi. | D-069 -- D-073. Owner-relayed by Kaiyuan, his words. **Names no column; no status changed.** The two sheet questions (samples as wanted? which fire item?) not answered. |
 | 2026-10-22 | Meeting questions 1--3 of the 2026-10-22 list (not inventory Q1--Q3) | Q1 (exact metric vs governed family-level quantity with metric and scenario as provenance): "good" --- family-level table-side object accepted. Q2 (state / multi-state / climate-region as table-side geography): "good" --- accepted. Q3 (cross-location comparison as a question type): "good" --- accepted. | D-029. Owner-relayed by Kaiyuan. **Names no column; no status changed.** Meeting question 4 not discussed; open. |
 
 ## Meeting log
@@ -447,6 +469,34 @@ documented readings. The five records R-004 -- R-008 carry `working_assumption` 
 `inferred_candidate`.
 
 **Newly asked:** review of the polished sample items (sheet v2) --- sent 2026-11-19 as `MENTOR_SAMPLE_ITEMS_2026-11-19` (seven items).
+
+### 2026-11-23 — group meeting (mentor, Alvi, JL present)
+
+**Outcome, as relayed by Kaiyuan** (owner-relayed, recorded in his words):
+
+1. **Concern on the seven samples**, shared with Alvi's graph--text work: in a combined question the first half is answered
+   by the table (place-specific) and the second by the papers (general mechanisms); our combination makes general
+   mechanisms look location-specific; too strict a mapping leaves nothing --- be careful, not strict.
+2. **Our workflow** (table concepts from field names -> queries -> papers -> agent reads paper by paper and extracts related
+   context -> agent generates QAs from patterns + context) was judged helpful.
+3. **Next direction:** combine modalities --- climate table + climate papers (ours) with infrastructure graph +
+   infrastructure papers (Alvi); the core interest is the **impact of hazards on infrastructure**.
+4. Explore whether a **knowledge graph** (nodes = concepts from each modality, edges = relationships) could be built
+   effectively and used by the agent to form QAs --- check published work first.
+5. **Deliverable:** apply our workflow to the infrastructure papers + the climate table; give sample QAs to Alvi to judge.
+
+Alvi supplied the critical-infrastructure corpus the same day (`critical_infrastructure_judged_relevant.tar.gz`, 89,497
+papers; relevance judged by JL's agentic pipeline).
+
+**Follows:** D-069 (scope marking; point 1), D-070 (LITCORPUS-03), D-071 (rung 8: hazard -> infrastructure impact items;
+points 3, 5), D-072 (knowledge graph: survey first; point 4), D-073 (statement type `impact`). Point 2 needs no decision.
+
+**No column status moved.** No point names a column or confirms a reading; nothing is recorded in
+`data/metadata/resolutions.yaml`. The seven samples were not reviewed item by item in this meeting (none of the two
+questions asked with the 2026-11-19 sheet was answered).
+
+**Newly asked:** see *What I need from this meeting* (infrastructure classes; the scope wording; minority place-specific
+groups; broader hazard words in impact statements).
 
 ---
 

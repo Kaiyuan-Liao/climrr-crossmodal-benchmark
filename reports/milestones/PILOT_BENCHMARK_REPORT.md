@@ -1218,3 +1218,53 @@ every output byte-identical (the two `.xlsx` included: sheet `09ad0bdd…09f9`).
    sheet went out as generated (the work package's instruction). If the COORDINATOR wants the hedge scope enforced, a
    checks v2.1 rule (each literature sentence of the rewrite carries a hedge, or one hedge governs a single sentence) would
    have rejected 0002, 0003, 0005, 0007.
+
+## 57. P5a, section A: group meeting 2026-11-23 and decisions D-069 -- D-073 (2026-11-23)
+
+No model call; nothing frozen; no column status moved. Meeting (mentor, Alvi, JL; owner-relayed, Kaiyuan's words) recorded in
+`MENTOR_BRIEF.md`: the concern that combined QAs make the papers' general mechanisms look place-specific ("be careful, not
+strict"); the workflow judged helpful; next = impact of hazards on infrastructure, combining our table + papers with Alvi's
+infrastructure graph + papers; a knowledge graph only after checking published work; sample QAs for Alvi. Decisions:
+D-069 (scope marking), D-070 (LITCORPUS-03, `external_model_judged`), D-071 (rung 8), D-072 (KG survey first), D-073
+(statement type `impact`). LITCORPUS-03 is recorded as supplied (`LITCORPUS03_PROVENANCE.md`); nothing verified yet.
+
+## 58. P5a, sections B -- D: lexicon, corpus tools, infra arm, scope rule, question forms, packets v5 (2026-11-23)
+
+| | |
+| --- | --- |
+| Lexicon | `infrastructure_lexicon_v1.yaml` `dd16959260006514af18396aba78aa47c60fd95901405b859f1a97f1939b1753`: 16 asset classes (the CISA sector list, verbatim, page order, read 2026-11-23), 119 surface forms (20 `CISA sector list` from five sector pages; 99 `EXECUTOR (common usage)`, `our_reading`), 15 impact terms; `climrr.infra_lexicon.validate` 0 errors |
+| `run_query.py` v4 | `52f7cdfc4a3d696cbfec083bc25b7095b793368aaa27792db4de22484c55e6ee`; `--lexicon` + `--family NAME=QUERYFILE` + `--family-disambiguate`; DR-CAND-INFRA-1 (cap 300); without `--lexicon` its outputs equal v3's on a synthetic index (test); v3 held at `986232c` |
+| `inventory_corpus.py` v1 | `98ac67acf042ba488b17d7eea88e47a148ba3ab0b7aa2bf7d7c6a8f59e27bf81`; standard library only; its content identity equals `build_index.py`'s on the same root (test) |
+| `litstatement_agent.py` v4 | `0124903ecefa9e54b12b32ae26b852b7fa24a2b4122565f237da70f4be62389a`; infra prompt `a6e0c1663e48014bc8cde2ce20bee628e15fda57abbee528fc763152eee846a1`; v3 prompt unchanged (`fbedadd2…1fff`); `impact_fields_pass`; `--reasoning-effort` (HTTP 400 -> once without) |
+| Post-checks v3.2 | scope phrase, closing clause (required / forbidden), integrated scope phrase, place-specific required point, question form: all format-class; `mixed_scope_report`; v2.2 -- v3.1 unchanged |
+| `litsynth_agent.py` v5 | `c04220f702a263bc675b098a3b951543a20a7e768292512ae9ba6003acb69ac9`; prompt `aea5bbb9eec9f7dd97d3cf39f611f7718f526a77baea9fbf2556eef0b945a7e9`; format corrective `b30d002cd8b54a97faf49541c26911d502ccf0c6c09131e9ce76e8ea67fab0ff`; v4.1 held at `986232c` |
+| Question forms v1 | `d123b381f6807a9b8d6cc9b6b901a86e8c48dfe617cb1f26ff9c6be9fdd4c910`; assignment 0001 QF-01, 0002 QF-02, 0003 QF-03, 0004 QF-05, 0005 QF-04, 0007 QF-06, 0008 QF-07 |
+| Packets v5 | manifest `1f92c194411ea12152c6659058633bf250812bdb234328fa8f39fb81dd8ea0fd`; v4b rebuilt byte-identical; every group byte-identical to v4b beyond `scope_class` / `scope_phrase`; `provenance` equal |
+| Clause required | 0002, 0003, 0004 (no state / NCA group in the packet); for the others it depends on the groups cited |
+| Diversity | assigned skeletons pass (largest share 0.143); baseline run-5 questions fail (0.429, "how are dangerous") |
+
+**Scope classes on the seven packets** (from cited members): 0007 (California fire) has eight `state` groups; 0001 two
+`state` (context) and one `nca` (Southwest); 0008 one `state` (Minnesota, context); 0005 one `nca`; 0002 -- 0004 none.
+
+## 59. P5a: gate, escalations, readings for confirmation (2026-11-23)
+
+| | |
+| --- | --- |
+| Tests | `pytest`: **1,680 passed, 2 skipped** (the two `jsonschema` skips); new `tests/test_p5a.py` (23); `test_litstatement_agent.py` and `test_p3b.py` run the held v3 / v4.1 bytes; `p2a_review` pins the v3 hash it documents |
+| Scanner | `verify_no_secrets_or_paths.py`: 0 hits |
+
+**Escalations (scientific; implemented as written, not changed).**
+1. **Minority place-specific groups (D-069).** "Best class among cited members" makes 5 group attachments place-specific on
+   a minority of their cited members (0001 / 0005 `driver-c1-008` "Research on the Southwest shows" on 1 of 3; 0007
+   `mechanism-c1-003` 1 of 3, `driver-c1-002` 1 of 3, `driver-c1-005` 1 of 5 "Research on California shows"). "Shows" then
+   rests mostly on papers about elsewhere. Packets v5 manifest: `place_specific_class_from_minority_of_cited`.
+2. **Hazard vocabulary of the infra arm (D-073).** Governed terms only; infrastructure papers mostly write "extreme heat",
+   "heat wave", "wildfire". Expected low yield; widening is a COORDINATOR / mentor decision (asked in the brief).
+
+**Readings for confirmation.** (a) Agent numbered v4 (the WP said v4 -> v5; the tracked file was v3). (b) Verb follows D-062
+in every scope class. (c) Closing clause = its own literature entry with no group, also ending the paragraph; failure when
+present although a cited group is place-specific. (d) "any one region" for the regional item; no article before Alaska /
+Hawai'i. (e) Pipeline forms under transportation (CISA "Pipeline Systems"). (f) QF-05 admits increase patterns only; QF-02
+asks the direction rather than presupposing it. (g) `CLAUDE.md`: one run-evidence line for the P5a tools (precedent of each
+earlier Polaris tool). (h) Gaps: polish checks v2 do not protect scope phrases; an integrated sentence may merge scopes
+undetected; the rung-8 wording rule is not yet a check.

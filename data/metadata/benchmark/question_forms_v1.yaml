@@ -1,0 +1,81 @@
+# Question-form library v1 (work package P5a; D-069 context, D-071 rung 8). Hash pinned; a change is v2.
+#
+# Eight forms. Each item gets one `question_form_id`, assigned by code (`climrr.synthpackets_v5.assign_question_forms`):
+# round-robin, in selection order, within the item's rung, over the forms whose `rungs`, `pattern_kinds` and (where
+# given) `directions` admit the item --- in id order. Synthesis prompt v5 requires the form: the question begins with the
+# form's opening (`opening_regex`, checked by post-checks v3.2) and keeps its structure. The skeleton is a guide in the
+# packet's plain-language slots, not a text to copy; slots: {quantity} (plain_language quantity_short), {place},
+# {horizon} ("by mid-century" / "by late this century"), {scenario} ("under a high-emissions future"), and for rung 8
+# {change}, {hazard_phrase}, {asset_class}.
+# Diversity (report, not failure): at most 30 % of a batch may share the same opening trigram (first three words,
+# lowercase, punctuation stripped).
+#
+# EXECUTOR readings, for confirmation: QF-02 asks for the direction instead of presupposing it (a "why does it rise"
+# question would give the table answer away); QF-05 ("worsen") presupposes a change of concern, so it admits increase
+# patterns only; QF-04 is the only form a regional-contrast pattern admits (it asks for the largest / smallest regions:
+# review flag WP-C1 on BI-P3-0005); QF-08 is rung 8 only and writes "{horizon}" for the work package's "by <horizon>",
+# since the horizon phrase already begins with "by".
+
+version: question_forms_v1
+decision: "D-069 (scope marking; work package P5a), D-071 (rung 8)"
+diversity:
+  rule: opening_trigram
+  max_share: 0.30
+forms:
+  - id: QF-01
+    name: how_and_what_drives
+    rungs: [3]
+    pattern_kinds: [single]
+    skeleton: "How are {quantity} in {place} projected to change {horizon} {scenario}, and what drives that change?"
+    opening_regex: '^How\b'
+    min_question_marks: 1
+  - id: QF-02
+    name: why_question
+    rungs: [3]
+    pattern_kinds: [single]
+    skeleton: "Why are {quantity} in {place} projected to change {horizon} {scenario}, and in which direction?"
+    opening_regex: '^Why\b'
+    min_question_marks: 1
+  - id: QF-03
+    name: what_happens_and_why
+    rungs: [3]
+    pattern_kinds: [single]
+    skeleton: "What happens to {quantity} in {place} {horizon} {scenario}, and why?"
+    opening_regex: '^What happens\b'
+    min_question_marks: 1
+  - id: QF-04
+    name: which_regions_largest_smallest
+    rungs: [4]
+    pattern_kinds: [regional_contrast]
+    skeleton: "Which U.S. regions see the largest and the smallest projected change in {quantity} {horizon} {scenario}, and what drives the change?"
+    opening_regex: '^Which\b'
+    min_question_marks: 1
+  - id: QF-05
+    name: expected_to_worsen_and_why
+    rungs: [3]
+    pattern_kinds: [single]
+    directions: [increase]
+    skeleton: "Are {quantity} in {place} projected to worsen {horizon} {scenario}, and why?"
+    opening_regex: '^(?:Is|Are)\b'
+    min_question_marks: 1
+  - id: QF-06
+    name: what_factors_and_how_large
+    rungs: [3]
+    pattern_kinds: [single]
+    skeleton: "What factors drive the projected change in {quantity} in {place} {horizon} {scenario}, and how large is that change?"
+    opening_regex: '^What factors\b'
+    min_question_marks: 1
+  - id: QF-07
+    name: two_short_questions
+    rungs: [3]
+    pattern_kinds: [single]
+    skeleton: "How are {quantity} in {place} projected to change {horizon} {scenario}? What drives the change?"
+    opening_regex: '^How\b'
+    min_question_marks: 2
+  - id: QF-08
+    name: impact_rung8
+    rungs: [8]
+    pattern_kinds: [single]
+    skeleton: "What does a projected {change} in {hazard_phrase} in {place} {horizon} mean for {asset_class}, and why?"
+    opening_regex: '^What does\b'
+    min_question_marks: 1

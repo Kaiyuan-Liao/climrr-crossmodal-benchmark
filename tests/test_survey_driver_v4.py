@@ -411,4 +411,6 @@ def test_run1_ingest_checks_the_v3_tools_as_committed_not_the_working_tree():
 
     assert cs.TOOL_SHA256["survey_driver.py"] == V3_SHA256 != sha256_file(DRIVER)
     assert {n: cs._v3_tracked_sha256(n) for n in cs.TOOL_SHA256} == cs.TOOL_SHA256
-    assert sha256_file(TOOLS / "run_query.py") == cs.TOOL_SHA256["run_query.py"]  # run_query.py v3 unchanged
+    from climrr import p5a  # run_query.py is v4 in the working tree since P5a; v3 is held at the P5a base commit
+    assert p5a.HELD["run_query.py"] == cs.TOOL_SHA256["run_query.py"]
+    assert hashlib.sha256(p5a.held_bytes("run_query.py")).hexdigest() == cs.TOOL_SHA256["run_query.py"]

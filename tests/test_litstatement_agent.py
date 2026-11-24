@@ -32,11 +32,13 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import pytest
 
 from climrr import litstatements as ls
+from climrr import p5a
 from climrr.checksums import sha256_file
 from climrr.paths import REPO_ROOT
 
 TOOLS = REPO_ROOT / "scripts" / "litcollect"
-AGENT = ls.AGENT_PATH
+#: v3 as held at the P5a base commit (the working tree carries v4 since P5a; tests/test_p5a.py).
+AGENT = p5a.materialize_tools("litstatement_agent.py") / "litstatement_agent.py"
 AGENT_SHA256 = "fd0e1dc391d46c691ab3b0b0d0190ba009f47a6e69e0eb6f0ececec441b6a9ea"  # v3; v2 (run 2) was f70edbb3…1d370d6
 SYSTEM_PROMPT_SHA256 = "fbedadd25a8a6a048983f9ed3c49997c73c4de771e9f5d689dacd9f56cb01fff"
 
