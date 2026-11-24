@@ -23,13 +23,14 @@ from climrr import litgeo as lg
 from climrr import litgroups_infra_run1 as gi
 from climrr import litstatements_infra1 as ir
 from climrr import p5c
+from climrr import p5c2
 from climrr import seeds_infra as si
 from climrr import synthpackets_infra as spi
 from climrr.checksums import sha256_file
 from climrr.manifest import load_entry
 from climrr.paths import REPO_ROOT
 
-TOOLS = REPO_ROOT / "scripts" / "litcollect"
+TOOLS53 = p5c2.materialize_tools("litsynth_agent.py")   # v5.3 held at the litsynth-v5.4 base commit (v5.4 since that package)
 SCHEMA_V2A_SHA256 = "deca317cfdf11c9aa9074b68b7305c3b8ea7922ddf45a0542bc316901400d2d8"
 SYNTH_V53_SHA256 = "1be4ba2a6aec418b2729f6d165a3ed159208a0d31b786ad92413d7d195f43edd"
 SYNTH_V53_PROMPT_SHA256 = "1157f73286a6de3a443a20becf924be401abd22e46170a62d6f4a580bbd75ea5"
@@ -288,7 +289,7 @@ def test_v34_equals_v33_without_two_hop_groups():
 
 
 def test_synth_agent_v53_pins_and_prompt():
-    path = TOOLS / "litsynth_agent.py"
+    path = TOOLS53 / "litsynth_agent.py"
     a = _load("litsynth_agent_v53", path)
     assert sha256_file(path) == SYNTH_V53_SHA256 and a.GENERATOR_VERSION == "litsynth_agent v5.3"
     assert a.CHECK_VERSION == bi.SYNTH_CHECK_VERSION_V34 == "synthesis_post_checks v3.4"
@@ -320,7 +321,7 @@ def _obj(pk):
 
 
 def test_agent_v53_assembles_schema_v2a_items_with_impact_statements():
-    a = _load("litsynth_agent_v53_assemble", TOOLS / "litsynth_agent.py")
+    a = _load("litsynth_agent_v53_assemble", TOOLS53 / "litsynth_agent.py")
     common = {"model": "m", "prompt_hash": "0" * 64, "generation_timestamp": "t", "packet_sha256": "0" * 64, "system_prompt_sha256": "0" * 64}
     for pk in PACKETS.values():
         item, _ = a.assemble(_obj(pk), pk, common, bi.column_names())

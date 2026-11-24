@@ -18,6 +18,13 @@ P5c hotfix (D-077, D-078, D-073c): `--variant v1a` reads the v1a seeds and selec
 impact_groups_reviewed`, two-hop fields, schema-v2a item fields per impact group).
 
     python scripts/build_synth_packets_infra.py --variant v1a
+
+Work package litsynth v5.4 (D-075a): `--variant v1b` reads the v1a packets (each checked against
+`synth_packets_infra_v1a/manifest.json`) and the pinned asset short forms (`data/metadata/benchmark/asset_short_forms_v1.yaml`)
+and writes `artifacts/benchmark/synth_packets_infra_v1b/` (`answer_shape: rung8_v2`, `asset_class_short_forms`, the shape-v2
+rung instruction; nothing else of the packet changes).
+
+    python scripts/build_synth_packets_infra.py --variant v1b
 """
 
 from __future__ import annotations
@@ -45,8 +52,10 @@ from climrr.runrecord import write_run_record  # noqa: E402
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--variant", choices=("v1", "v1a"), default="v1")
+    ap.add_argument("--variant", choices=("v1", "v1a", "v1b"), default="v1")
     variant = ap.parse_args().variant
+    if variant == "v1b":
+        return build_v1b()
     v1a = variant == "v1a"
     seeds_path, summary_path, sel_path = ((si.SEEDS_V1A_PATH, si.SEEDS_V1A_SUMMARY_PATH, si.SELECTION_V1A_PATH) if v1a
                                           else (si.SEEDS_PATH, si.SEEDS_SUMMARY_PATH, si.SELECTION_PATH))
@@ -109,6 +118,44 @@ def main() -> int:
                            config_snapshot={"version": head["version"], "decision": head["decision"], "variant": variant,
                                             "max_impact_groups": spi.MAX_IMPACT_GROUPS,
                                             "asset_class_phrase": spi.ASSET_CLASS_PHRASE, "model_calls": 0})
+    print(json.dumps(result, indent=2, ensure_ascii=False))
+    print(f"run record: {repo_relative(rec)}")
+    return 0
+
+
+def build_v1b() -> int:
+    """Packets v1b from the pinned v1a packets (module docstring)."""
+    man_a = json.loads((spi.PACKETS_V1A_DIR / "manifest.json").read_text(encoding="utf-8"))
+    short = spi.load_short_forms()
+    out = spi.PACKETS_V1B_DIR
+    out.mkdir(parents=True, exist_ok=True)
+    index, sources = [], {}
+    for e in man_a["packets"]:
+        src = spi.PACKETS_V1A_DIR / f"{e['packet_id']}.json"
+        if sha256_file(src) != e["sha256"]:
+            raise SystemExit(f"{repo_relative(src)} differs from the v1a manifest; run build_synth_packets_infra.py --variant v1a")
+        pk = spi.to_v1b(json.loads(src.read_text(encoding="utf-8")), short, e["sha256"])
+        path = out / f"{pk['packet_id']}.json"
+        r2.write_json(path, pk)
+        index.append(spi.report_entry(pk, path))
+        sources[e["packet_id"]] = e["sha256"]
+    manifest = {**{k: man_a[k] for k in man_a if k not in ("packets", "version", "decision", "rules", "rung_instruction")},
+                "version": spi.VERSION_V1B, "decision": spi.DECISION_V1B, "rules": spi.RULES_V1B, "answer_shape": spi.ANSWER_SHAPE,
+                "built_from": {"manifest": repo_relative(spi.PACKETS_V1A_DIR / "manifest.json"),
+                               "manifest_sha256": sha256_file(spi.PACKETS_V1A_DIR / "manifest.json"), "packets_sha256": sources},
+                "asset_short_forms": {"path": repo_relative(spi.SHORT_FORMS_PATH), "sha256": short["sha256"],
+                                      "classes": {k: v["short"] for k, v in short["classes"].items()}},
+                "rung_instruction": spi.RUNG8_INSTRUCTION_V2, "packets": index}
+    manifest_path = out / "manifest.json"
+    r2.write_json(manifest_path, manifest)
+    result = {"packets": [{k: p[k] for k in ("item_id", "packet_id", "family", "asset_class", "state", "answer_shape",
+                                             "asset_class_short_forms", "bridge_clause_required", "sha256")} for p in index],
+              "built_from_manifest_sha256": manifest["built_from"]["manifest_sha256"], "asset_short_forms_sha256": short["sha256"],
+              "manifest_sha256": sha256_file(manifest_path)}
+    rec = write_run_record("build_synth_packets_infra", result_summary=result, passed=True,
+                           data_path=spi.PACKETS_V1A_DIR / "manifest.json", output_path=manifest_path,
+                           config_snapshot={"version": spi.VERSION_V1B, "decision": spi.DECISION_V1B, "variant": "v1b",
+                                            "answer_shape": spi.ANSWER_SHAPE, "model_calls": 0})
     print(json.dumps(result, indent=2, ensure_ascii=False))
     print(f"run record: {repo_relative(rec)}")
     return 0

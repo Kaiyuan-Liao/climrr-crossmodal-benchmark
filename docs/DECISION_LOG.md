@@ -3767,3 +3767,42 @@ code emits, and the next GUIDANCE packet still chooses.
   `artifacts/litgroups/infra_run1/dispositions_v1_applied.json`, `artifacts/benchmark/item_seeds_infra_v1a*`,
   `artifacts/benchmark/pilot_selection_infra_v1a.yaml`, `artifacts/benchmark/synth_packets_infra_v1a/`, `tests/test_p5c_hotfix.py`,
   `docs/P5_INFRA_IMPACT_DESIGN.md` §18, §20.
+
+## D-075a --- Rung-8 answer shape v2; synthesis run 1 superseded
+
+- **Date:** 2026-11-24.
+- **Status:** **decided** (COORDINATOR, work package litsynth v5.4).
+- **Context.** Synthesis run 1 (Polaris `litsynth/infra_run1`, agent v5.3, packets v1a, 2026-11-24 22:56 UTC): 8 packets, 2
+  deterministic_pass (BI-P5-0001, BI-P5-0003), 6 rejected_pre_review, every failure template conformance (scope opener a word off;
+  a per-sentence broader-hazard phrase or asset name missing; the bridge clause written with U+2011 and a lower-case start, so
+  "found 0"). The text read badly: the broader-hazard phrase up to four times, five to six driver sentences before any impact,
+  "that that when wildfires occur", a garbled "this implies more exposure" sentence. Facts as relayed; the run's files are not in
+  the repository. **Run 1 is superseded.**
+- **Decision.** (1) Length budget: table sentence (1) + driver sentences (<= 2, by strength) + impact sentences (2 -- 3, by strength
+  then place) + closing clause (1) + bridge clause for FWI items (1); nothing else; rubric unchanged in structure. (2) The
+  broader-hazard phrase exactly once, in the first impact sentence; later impact sentences say "such heat" / "such conditions"; the
+  asset class named once, then optionally by a stored short form. (3) Same-scope sentences merged under one opener; place-named
+  sentences keep theirs; the checker verifies openers per sentence as before, the prompt asks for at most three. (4) Two-hop:
+  "… that when wildfires occur, they <impact>"; the checker forbids "that that". (5) The "this implies more exposure" sentence is
+  dropped for the pilot (prompt and checks). (6) Bridge clause as the second sentence, capitalised; every phrase check after Unicode
+  normalisation (U+2011 / U+2010 / U+2012 -> "-", NFKC) and case-insensitive. (7) Corrective turn: format class. (8) Packets v1a
+  unchanged except `answer_shape: rung8_v2` and the short-form asset names (packets v1b).
+- **Recorded (EXECUTOR).** `litsynth_agent.py` v5.4 (system prompt `1a023c1e…3ade`, format corrective `a21eb42a…10e8`; v5.3, which
+  ran, held at `b860658`, `climrr.p5c2`); post-checks v3.5 (`SYNTH_CHECK_VERSION_V35`, `phrase_norm`, `phrase_key`, `DOUBLE_THAT_RE`,
+  `rung8_budget`, `ANSWER_SHAPE_V2`); `asset_short_forms_v1.yaml` (`de28eaa2…444d`, in `data/manifest.json`); packets
+  `synth_packets_infra_v1b/` (manifest `b4cbbdb3…a3e`). The shape-v2 rules apply only to a packet with `answer_shape: rung8_v2`;
+  for v1a-built items v3.5 adds normalisation and the "that that" failure to v3.4 and reports the budget without failing it.
+- **For confirmation:** (a) the budget unit is the claim (a "that"-clause), so a merged sentence counts each claim; the impact
+  floor is `min(2, impact groups in the packet)` (BI-P5-0007, BI-P5-0008 carry one); (b) the hazard is named in the first *direct*
+  impact sentence; the broader-hazard phrase at most once in the integrated paragraph; (c) a later impact sentence must name the
+  asset (full or short form); (d) the short-form table (the work package's three examples assigned to energy, transportation and
+  healthcare; the other entries the EXECUTOR's); (e) "remove from checks" read as removing the allowance --- the exposure sentence
+  is a format failure under shape v2; (f) the bridge clause's position is reported, not failed; (g) the bridge is still required
+  only where packets v1a require it (a fire-weather item citing a two-hop group: BI-P5-0005, BI-P5-0006), not in every FWI item;
+  (h) the packets' rung instruction is rewritten for shape v2 (the v1a text allowed the exposure sentence); (i) the "run-1 passes
+  still pass v3.5" test is a synthetic stand-in (the owner chose to proceed without the run's files); (j) "that that" fails in
+  every v3.5 item, not only rung 8.
+- **Affected files:** `scripts/litcollect/litsynth_agent.py`, `src/climrr/benchmark_items.py`, `src/climrr/synthpackets_infra.py`,
+  `scripts/build_synth_packets_infra.py`, `src/climrr/p5c2.py`, `data/metadata/benchmark/asset_short_forms_v1.yaml`,
+  `data/manifest.json`, `artifacts/benchmark/synth_packets_infra_v1b/`, `tests/test_litsynth_v54.py`, `tests/test_p5c_hotfix.py`,
+  `docs/P5_INFRA_IMPACT_DESIGN.md` §22 -- §24.

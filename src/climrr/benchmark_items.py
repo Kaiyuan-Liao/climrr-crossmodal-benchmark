@@ -67,6 +67,16 @@ without `family` (v3, v4) are checked exactly as before.
 (governed_term | broader_hazard) and `two_hop`; `schema_version: benchmark_item_v2a`. `schema_errors` picks the schema by
 the item's `schema_version` (v2 items are checked against v2, unchanged).
 
+**Post-checks v3.5** (work package litsynth v5.4, D-075a; rung-8 answer shape v2): v3.4 plus (a) phrase normalisation ---
+every phrase check (scope openers, the closing clause, hazard phrases, asset names, two-hop phrases, the bridge clause, the
+fire words) compares after `phrase_norm` (U+2010 / U+2011 / U+2012 -> "-", NFKC, whitespace collapsed) and case-insensitively;
+(b) "that that" is a format failure in any graded text; (c) for a packet with `answer_shape: rung8_v2` (packets v1b) the
+shape-v2 rules replace the per-sentence ones: the length budget (one table sentence, at most two driver claims, two to three
+impact claims, the integrated paragraph no longer than the reference sentences plus the bridge), the broader-hazard phrase
+exactly once (in the first direct impact sentence), the asset class in full in the first impact sentence and in full or a
+stored short form after, "this implies more exposure to" never written. Without `answer_shape` (packets v1a, run-1 items)
+the budget is reported, never failed, and the v3.4 per-sentence rules apply.
+
 Nothing here calls a model, reads table values, or touches the concept map,
 column statuses or compatibility rules.
 """
@@ -76,6 +86,7 @@ from __future__ import annotations
 import copy
 import json
 import re
+import unicodedata
 from pathlib import Path
 
 from climrr import softqa
@@ -382,12 +393,18 @@ SYNTH_CHECK_VERSION_V33 = "synthesis_post_checks v3.3"
 # paragraph contains it exactly once; in a fire-weather item the two two-hop phrases are masked like "conditions that favour
 # wildfire" everywhere but the prompt. All format-class. Opt-in: litsynth_agent v5.3 passes it; v3.3 is unchanged.
 SYNTH_CHECK_VERSION_V34 = "synthesis_post_checks v3.4"
+# v3.5 (work package litsynth v5.4, D-075a): v3.4 plus phrase normalisation, the "that that" failure and, for a packet with
+# `answer_shape: rung8_v2` (packets v1b), the rung-8 answer shape v2 (module docstring). All format-class. Opt-in:
+# litsynth_agent v5.4 passes it; v3.4 is unchanged.
+SYNTH_CHECK_VERSION_V35 = "synthesis_post_checks v3.5"
 SYNTH_CHECK_VERSIONS = (SYNTH_CHECK_VERSION, SYNTH_CHECK_VERSION_V23, SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31,
-                        SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34)
-_V3_PLUS = (SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31, SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34)
-_V31_PLUS = (SYNTH_CHECK_VERSION_V31, SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34)
-_V32_PLUS = (SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34)
-_V33_PLUS = (SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34)
+                        SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34, SYNTH_CHECK_VERSION_V35)
+_V3_PLUS = (SYNTH_CHECK_VERSION_V3, SYNTH_CHECK_VERSION_V31, SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34,
+            SYNTH_CHECK_VERSION_V35)
+_V31_PLUS = (SYNTH_CHECK_VERSION_V31, SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34, SYNTH_CHECK_VERSION_V35)
+_V32_PLUS = (SYNTH_CHECK_VERSION_V32, SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34, SYNTH_CHECK_VERSION_V35)
+_V33_PLUS = (SYNTH_CHECK_VERSION_V33, SYNTH_CHECK_VERSION_V34, SYNTH_CHECK_VERSION_V35)
+_V34_PLUS = (SYNTH_CHECK_VERSION_V34, SYNTH_CHECK_VERSION_V35)
 #: v3.1 (D-067): the driver / cause words a sentence resting only on context groups must not carry next to the context phrase.
 DRIVER_WORD_RE = re.compile(r"\bdriven\s+by\b|\bdrivers?\b|\bdrives?\b|\bcause[sd]?\b|\bcausing\b|\bbecause\s+of\b", re.I)
 #: v3.1 (DR-DESC-1 v4, D-066): the relative tercile is written as a comparison with other states, never with these words.
@@ -598,9 +615,11 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
     if strengths and not lit_s:
         reasons.append("reference_answer.literature_interpretation: no sentence while the packet has literature groups")
     clause = ((checks_input.get("scope") or {}).get("general_clause") or "").strip() if check_version in _V32_PLUS else ""
+    v35 = check_version == SYNTH_CHECK_VERSION_V35
+    same = (lambda a, b: phrase_key(a) == phrase_key(b)) if v35 else (lambda a, b: a.strip() == b)  # noqa: E731
     for i, s in enumerate(lit_s):
         ids = s.get("group_ids") if isinstance(s.get("group_ids"), list) else []
-        if not ids and clause and s["sentence"].strip() == clause:   # v3.2: the D-069 closing clause cites no group
+        if not ids and clause and same(s["sentence"], clause):   # v3.2: the D-069 closing clause cites no group
             continue
         if not ids:
             reasons.append(f"literature_interpretation[{i}]: cites no group id")
@@ -630,9 +649,10 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
     fire_report = None
     if check_version in _V3_PLUS and checks_input.get("family") == FWI_FAMILY:
         mask = check_version in _V33_PLUS                                # D-073b
-        hop = check_version == SYNTH_CHECK_VERSION_V34 and bool((checks_input.get("rung8") or {}).get("two_hop_group_ids"))  # D-073c
+        hop = check_version in _V34_PLUS and bool((checks_input.get("rung8") or {}).get("two_hop_group_ids"))  # D-073c
 
         def masked(w: str, t: str) -> str:
+            t = phrase_norm(t) if v35 else t                             # v3.5: "wild\u2011fire" is "wild-fire"
             t = mask_wildfire_phrase(t) if mask else t
             return mask_two_hop_phrases(t) if hop and w != "prompt" else t
 
@@ -648,12 +668,15 @@ def synthesis_post_checks(item: dict, tagged: dict, checks_input: dict, columns:
         readability = readability_reports(tp_s, lit_s, integrated, item.get("prompt") or "", checks_input)
     scope_rep = None
     if check_version in _V32_PLUS:
-        sr, scope_rep = scope_checks(lit_s, integrated, tagged.get("rubric_points") or [], checks_input)
+        sr, scope_rep = scope_checks(lit_s, integrated, tagged.get("rubric_points") or [], checks_input, normalise=v35)
         reasons += sr
         reasons += question_form_reasons(item.get("prompt") or "", checks_input)
+    if v35:                                                              # D-075a rule 4
+        reasons += [f"{w}: doubled 'that' (D-075a): {m.group(0)!r}" for w, t in every if w not in RUNG8_WRONG_ANSWER_FIELDS
+                    for m in DOUBLE_THAT_RE.finditer(phrase_norm(t))]
     rung8_rep = None
     if check_version in _V33_PLUS and checks_input.get("rung8"):
-        r8, rung8_rep = rung8_reasons(lit_s, integrated, every, checks_input, two_hop=check_version == SYNTH_CHECK_VERSION_V34)
+        r8, rung8_rep = rung8_reasons(lit_s, integrated, every, checks_input, two_hop=check_version in _V34_PLUS, v35=v35, tp_s=tp_s)
         reasons += r8
 
     schema = schema_errors(item)
@@ -843,13 +866,18 @@ def scope_openings(group_ids, scope_groups: dict, strengths: dict) -> list[str]:
     return [f"{best['stem']} {v}" for v in verbs] + [f"{best['stem']}{c}, {v}" for c in clauses for v in verbs]
 
 
-def scope_checks(lit_s: list[dict], integrated: str, rubric_points: list, checks_input: dict) -> tuple[list[str], dict]:
+def scope_checks(lit_s: list[dict], integrated: str, rubric_points: list, checks_input: dict,
+                 normalise: bool = False) -> tuple[list[str], dict]:
     """v3.2 (D-069). Failures: a literature sentence that does not begin with its scope phrase (stem of the most specific
     cited group + "shows" / "has shown", or "suggests" when every cited group is single-source); the closing clause
     missing (as the last literature entry, with no group, and as the end of the integrated paragraph) when no cited group
     is state- or NCA-specific, or present when one is; a sentence of the integrated paragraph that names "research" and does
     not begin with one of the cited groups' scope openings; a required rubric point resting on a group that names the place.
-    Report: `mixed_scope_report` --- a literature sentence citing groups of different scope classes."""
+    Report: `mixed_scope_report` --- a literature sentence citing groups of different scope classes.
+
+    v3.5 (`normalise=True`, D-075a rule 6): every comparison after `phrase_key` (hyphen variants, NFKC, case); the report adds
+    `scope_openers` (literature sentences other than the closing clause: the prompt asks for at most three)."""
+    nz = phrase_key if normalise else (lambda x: x or "")  # noqa: E731
     sc = checks_input.get("scope") or {}
     groups, strengths = sc.get("groups") or {}, checks_input.get("group_strength") or {}
     clause = (sc.get("general_clause") or "").strip()
@@ -858,11 +886,11 @@ def scope_checks(lit_s: list[dict], integrated: str, rubric_points: list, checks
     for i, s in enumerate(lit_s):
         ids = [g for g in (s.get("group_ids") if isinstance(s.get("group_ids"), list) else []) if isinstance(g, str)]
         text = s["sentence"].strip()
-        if not ids and clause and text == clause:
+        if not ids and clause and nz(text) == nz(clause):
             continue
         cited += [g for g in ids if g in groups and g not in cited]
         opens = scope_openings(ids, groups, strengths)
-        if opens and not any(text.startswith(o) for o in opens):
+        if opens and not any(nz(text).startswith(nz(o)) for o in opens):
             out.append(f"literature_interpretation[{i}]: scope phrase (D-069): the sentence must begin with "
                        + " or ".join(repr(o) for o in opens))
         classes = sorted({groups[g]["class"] for g in ids if g in groups}, key=SCOPE_CLASS_ORDER.index)
@@ -870,21 +898,21 @@ def scope_checks(lit_s: list[dict], integrated: str, rubric_points: list, checks
             mixed.append({"sentence": i, "classes": classes, "group_ids": ids})
     specific = any(groups[g]["class"] in PLACE_SPECIFIC_CLASSES for g in cited)
     last = lit_s[-1] if lit_s else None
-    clause_last = bool(last) and not (last.get("group_ids") or []) and last["sentence"].strip() == clause
+    clause_last = bool(last) and not (last.get("group_ids") or []) and nz(last["sentence"].strip()) == nz(clause)
     if clause:
         if not specific and not clause_last:
             out.append(f"literature_interpretation: closing clause (D-069) missing as the last entry: {clause!r}")
         if specific and clause_last:
             out.append("literature_interpretation: closing clause (D-069) present though a cited group is state- or NCA-specific")
-        in_integrated = clause in (integrated or "")
-        if not specific and not (integrated or "").strip().endswith(clause):
+        in_integrated = nz(clause) in nz(integrated)
+        if not specific and not nz(integrated).strip().endswith(nz(clause)):
             out.append(f"integrated: closing clause (D-069) missing at the end: {clause!r}")
         if specific and in_integrated:
             out.append("integrated: closing clause (D-069) present though a cited group is state- or NCA-specific")
     allowed = sorted({o for g in cited for o in scope_openings([g], groups, strengths)} |
                      {o for s in lit_s for o in scope_openings([g for g in (s.get("group_ids") or []) if isinstance(g, str)], groups, strengths)})
     for sent in SENTENCE_SPLIT_RE.split((integrated or "").strip()):
-        if re.search(r"\bresearch\b", sent, re.I) and allowed and not any(sent.startswith(o) for o in allowed):
+        if re.search(r"\bresearch\b", sent, re.I) and allowed and not any(nz(sent).startswith(nz(o)) for o in allowed):
             out.append(f"integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope "
                        f"phrases: {sent[:60]!r}")
     places = [p for p in sc.get("place_names") or [] if p]
@@ -895,7 +923,10 @@ def scope_checks(lit_s: list[dict], integrated: str, rubric_points: list, checks
         hit = [p for p in places if re.search(rf"\b{re.escape(p)}\b", r["point"])]
         if gids and hit:
             out.append(f"rubric.required_points: place-specific mechanism required (D-069): {r['point'][:60]!r} names {hit[0]!r}")
-    return out, {"mixed_scope_report": mixed, "scope_clause_required": bool(clause) and not specific}
+    rep = {"mixed_scope_report": mixed, "scope_clause_required": bool(clause) and not specific}
+    if normalise:
+        rep["scope_openers"] = sum(not (not (s.get("group_ids") or []) and clause and nz(s["sentence"].strip()) == nz(clause)) for s in lit_s)
+    return out, rep
 
 
 def question_form_reasons(prompt: str, checks_input: dict) -> list[str]:
@@ -925,76 +956,204 @@ RUNG8_WRONG_ANSWER_FIELDS = FWI_WRONG_ANSWER_FIELDS
 TWO_HOP_RE = re.compile(r"\bwhen\s+wildfires\s+occur\b|\bwildfires\s+can\b|\braise\s+the\s+chance\s+of\s+ignitions?\b", re.I)
 
 
-def bridge_count(text: str, bridge: str) -> int:
-    """How often the D-073c bridge clause occurs in `text` (case and whitespace normalised)."""
-    norm = lambda x: re.sub(r"\s+", " ", x or "").strip().lower()  # noqa: E731
-    return norm(text).count(norm(bridge)) if bridge else 0
+def bridge_count(text: str, bridge: str, normalise: bool = False) -> int:
+    """How often the D-073c bridge clause occurs in `text` (case and whitespace normalised; v3.5 `normalise`: `phrase_key`)."""
+    norm = phrase_key if normalise else (lambda x: re.sub(r"\s+", " ", x or "").strip().lower())  # noqa: E731
+    return norm(text).count(norm(bridge).strip()) if bridge else 0
+
+
+# --- v3.5: phrase normalisation and the rung-8 answer shape v2 (D-075a; work package litsynth v5.4) ----------------------
+
+#: D-075a rule 6: the hyphen variants a model writes for "-" (U+2010 hyphen, U+2011 non-breaking hyphen, U+2012 figure dash).
+_HYPHEN_TABLE = str.maketrans({"\u2010": "-", "\u2011": "-", "\u2012": "-"})
+#: D-075a rule 4: never "that that" (run 1: "... shows that that when wildfires occur ...").
+DOUBLE_THAT_RE = re.compile(r"\bthat\s+that\b", re.I)
+#: Packets v1b mark the answer shape; post-checks v3.5 apply the shape-v2 rules only to such a packet.
+ANSWER_SHAPE_V2 = "rung8_v2"
+#: D-075a rule 1: one table sentence, at most two driver claims, two to three impact claims (fewer only when the packet has
+#: fewer impact groups), the closing clause and, in a fire-weather item citing a two-hop group, the bridge clause.
+BUDGET_V2 = {"table_sentences": 1, "driver_claims_max": 2, "impact_claims_min": 2, "impact_claims_max": 3}
+#: A claim inside a literature sentence: "shows that ...", "suggests that ...", ", that ...", ", and that ...", "and that ...".
+CLAIM_RE = re.compile(r"(?:\b(?:shows?|shown|suggests?)\s+|,\s*(?:and\s+)?|\band\s+)that\b", re.I)
+
+
+def phrase_norm(text: str) -> str:
+    """v3.5 (D-075a rule 6): NFKC, the hyphen variants U+2010 / U+2011 / U+2012 as "-", whitespace collapsed to one space."""
+    return re.sub(r"\s+", " ", unicodedata.normalize("NFKC", text or "").translate(_HYPHEN_TABLE))
+
+
+def phrase_key(text: str) -> str:
+    """v3.5: `phrase_norm`, case-folded --- the form every phrase comparison uses."""
+    return phrase_norm(text).casefold()
+
+
+def claim_count(sentence: str) -> int:
+    """v3.5 budget unit: the claims a literature sentence makes (merged openers count each "that"-clause), at least one."""
+    return max(1, len(CLAIM_RE.findall(phrase_norm(sentence))))
+
+
+def rung8_budget(tp_s: list[dict], lit_s: list[dict], integrated: str, checks_input: dict, bridge_required: bool) -> dict:
+    """v3.5 (D-075a rule 1): the counts the length budget is judged on, and the limits. Impact claims: literature sentences
+    citing an impact group; driver claims: those citing groups but no impact group; the closing clause counts as neither."""
+    impact = set(checks_input["rung8"].get("impact_group_ids") or [])
+    drv = imp = 0
+    for s in lit_s:
+        ids = [g for g in (s.get("group_ids") if isinstance(s.get("group_ids"), list) else []) if isinstance(g, str)]
+        if not ids:
+            continue
+        if any(g in impact for g in ids):
+            imp += claim_count(s["sentence"])
+        else:
+            drv += claim_count(s["sentence"])
+    n_int = len([x for x in SENTENCE_SPLIT_RE.split((integrated or "").strip()) if x.strip()])
+    lo = min(BUDGET_V2["impact_claims_min"], len(impact))
+    limit_int = len(tp_s) + len(lit_s) + (1 if bridge_required else 0)
+    return {"table_sentences": len(tp_s), "driver_claims": drv, "impact_claims": imp, "integrated_sentences": n_int,
+            "limits": {**BUDGET_V2, "impact_claims_min_here": lo, "integrated_sentences_max": limit_int},
+            "within": len(tp_s) == BUDGET_V2["table_sentences"] and drv <= BUDGET_V2["driver_claims_max"]
+                      and lo <= imp <= BUDGET_V2["impact_claims_max"] and n_int <= limit_int}
+
+
+def budget_reasons(b: dict) -> list[str]:
+    lim, out = b["limits"], []
+    if b["table_sentences"] != lim["table_sentences"]:
+        out.append(f"reference_answer: rung 8 answer shape (D-075a): exactly one table sentence (found {b['table_sentences']})")
+    if b["driver_claims"] > lim["driver_claims_max"]:
+        out.append(f"literature_interpretation: rung 8 answer shape (D-075a): at most {lim['driver_claims_max']} driver claims, the "
+                   f"strongest (found {b['driver_claims']})")
+    if not lim["impact_claims_min_here"] <= b["impact_claims"] <= lim["impact_claims_max"]:
+        out.append(f"literature_interpretation: rung 8 answer shape (D-075a): {lim['impact_claims_min_here']} to "
+                   f"{lim['impact_claims_max']} impact claims, chosen by strength then place (found {b['impact_claims']})")
+    if b["integrated_sentences"] > lim["integrated_sentences_max"]:
+        out.append(f"integrated: rung 8 answer shape (D-075a): at most {lim['integrated_sentences_max']} sentences, no more than the "
+                   f"reference sentences (found {b['integrated_sentences']})")
+    return out
 
 
 def rung8_reasons(lit_s: list[dict], integrated: str, every: list[tuple[str, str]], checks_input: dict,
-                  two_hop: bool = False) -> tuple[list[str], dict]:
+                  two_hop: bool = False, v35: bool = False, tp_s: list[dict] | None = None) -> tuple[list[str], dict]:
     """v3.3 (D-075). `checks_input.rung8`: {impact_group_ids, place_named_impact_group_ids, group_hazard_relation
     {group_id: governed_term | broader_hazard}, asset_class_phrase, broader_hazard_phrase, quantity_phrases}. Failures:
     an asset-failure claim anywhere in the graded text (the wrong-answer lists excepted); "this implies more exposure to"
     while no cited literature sentence rests on a place-named impact group; a literature sentence citing an impact group
     that does not open with its scope phrase + " that", does not name the asset-class phrase, or (a cited impact group
-    resting on a broader hazard term) does not name the broader-hazard phrase / (otherwise) a plain quantity phrase."""
+    resting on a broader hazard term) does not name the broader-hazard phrase / (otherwise) a plain quantity phrase.
+
+    v3.4 (`two_hop`, D-073c): the two-hop wording and the bridge clause. v3.5 (`v35`, D-075a): every phrase compared after
+    `phrase_key`; with `checks_input.answer_shape` == rung8_v2 the shape-v2 rules replace the per-sentence hazard and asset
+    rules --- the hazard (broader-hazard phrase when a cited direct impact group rests on a broader hazard term, else a plain
+    quantity phrase) named in the first direct impact sentence, the broader-hazard phrase exactly once in the literature
+    sentences and at most once in the paragraph; the asset class in full in the first impact sentence, in full or a short
+    form (`rung8.asset_class_short_forms`) in every later one; "this implies more exposure to" never; the length budget. The
+    budget is reported for every v3.5 item and failed only under shape v2."""
     r8 = checks_input["rung8"]
     sc = checks_input.get("scope") or {}
     groups, strengths = sc.get("groups") or {}, checks_input.get("group_strength") or {}
+    shape = v35 and checks_input.get("answer_shape") == ANSWER_SHAPE_V2
+    nz = phrase_key if v35 else (lambda x: (x or "").lower())  # noqa: E731
+    pn = phrase_norm if v35 else (lambda x: x or "")  # noqa: E731
     impact = set(r8.get("impact_group_ids") or [])
     place_named = set(r8.get("place_named_impact_group_ids") or [])
     rel = r8.get("group_hazard_relation") or {}
-    asset = (r8.get("asset_class_phrase") or "").lower()
-    broader = (r8.get("broader_hazard_phrase") or "").lower()
-    quantity = [q.lower() for q in r8.get("quantity_phrases") or [] if q]
+    asset = nz(r8.get("asset_class_phrase") or "")
+    shorts = [nz(x) for x in r8.get("asset_class_short_forms") or [] if x] if shape else []
+    broader = nz(r8.get("broader_hazard_phrase") or "")
+    quantity = [nz(q) for q in r8.get("quantity_phrases") or [] if q]
     hop_ids = set(r8.get("two_hop_group_ids") or []) if two_hop else set()      # v3.4 (D-073c)
     bridge = (r8.get("bridge_clause") or "") if two_hop else ""
+    cited_ids = lambda s: [g for g in (s.get("group_ids") if isinstance(s.get("group_ids"), list) else []) if isinstance(g, str)]  # noqa: E731
+    need_broader = shape and any(rel.get(g) == "broader_hazard" for s in lit_s for g in cited_ids(s) if g in impact and g not in hop_ids)
     out, cited_place_named, cited_hop = [], False, []
+    first_impact, first_direct = None, None
     for w, t in every:
         if w in RUNG8_WRONG_ANSWER_FIELDS:
             continue
-        for m in ASSET_FAILURE_RE.finditer(t or ""):
+        for m in ASSET_FAILURE_RE.finditer(pn(t)):
             out.append(f"{w}: rung 8 asset-failure claim (D-075): {m.group(0)!r}")
     for i, s in enumerate(lit_s):
-        ids = [g for g in (s.get("group_ids") if isinstance(s.get("group_ids"), list) else []) if isinstance(g, str)]
+        ids = cited_ids(s)
         cited_impact = [g for g in ids if g in impact]
         if not cited_impact:
             continue
         cited_place_named |= any(g in place_named for g in cited_impact)
         text = s["sentence"].strip()
-        low = text.lower()
+        low = nz(text)
         opens = scope_openings(ids, groups, strengths)
-        if opens and not any(text.startswith(o + " that ") for o in opens):
+        if opens and not any(low.startswith(nz(o + " that ")) if v35 else text.startswith(o + " that ") for o in opens):
             out.append(f"literature_interpretation[{i}]: rung 8 impact sentence (D-075): must begin with "
                        + " or ".join(repr(o + " that") for o in opens))
-        if asset and asset not in low:
-            out.append(f"literature_interpretation[{i}]: rung 8 impact sentence (D-075): must name the asset class {asset!r}")
         direct = [g for g in cited_impact if g not in hop_ids]
         hop = [g for g in cited_impact if g in hop_ids]
-        if not direct:
-            pass                                                     # v3.4: a two-hop sentence takes the D-073c wording instead
-        elif any(rel.get(g) == "broader_hazard" for g in direct):
-            if broader and broader not in low:
-                out.append(f"literature_interpretation[{i}]: rung 8 impact sentence (D-075): must name the broader hazard {broader!r}")
-        elif quantity and not any(q in low for q in quantity):
-            out.append(f"literature_interpretation[{i}]: rung 8 impact sentence (D-075): must name the hazard {quantity[0]!r}")
+        if shape:
+            if first_impact is None:
+                first_impact = i
+                if asset and asset not in low:
+                    out.append(f"literature_interpretation[{i}]: rung 8 answer shape (D-075a): the first impact sentence must name "
+                               f"the asset class in full {asset!r}")
+            elif asset and asset not in low and not any(x in low for x in shorts):
+                out.append(f"literature_interpretation[{i}]: rung 8 answer shape (D-075a): must name the asset class {asset!r} or a "
+                           f"short form ({', '.join(repr(x) for x in shorts) or 'none'})")
+            if direct and first_direct is None:
+                first_direct = i
+                if need_broader:
+                    if broader and broader not in low:
+                        out.append(f"literature_interpretation[{i}]: rung 8 answer shape (D-075a): the first impact sentence must "
+                                   f"name the broader hazard {broader!r}")
+                elif quantity and not any(q in low for q in quantity):
+                    out.append(f"literature_interpretation[{i}]: rung 8 answer shape (D-075a): the first impact sentence must name "
+                               f"the hazard {quantity[0]!r}")
+        else:
+            if asset and asset not in low:
+                out.append(f"literature_interpretation[{i}]: rung 8 impact sentence (D-075): must name the asset class {asset!r}")
+            if not direct:
+                pass                                                 # v3.4: a two-hop sentence takes the D-073c wording instead
+            elif any(rel.get(g) == "broader_hazard" for g in direct):
+                if broader and broader not in low:
+                    out.append(f"literature_interpretation[{i}]: rung 8 impact sentence (D-075): must name the broader hazard {broader!r}")
+            elif quantity and not any(q in low for q in quantity):
+                out.append(f"literature_interpretation[{i}]: rung 8 impact sentence (D-075): must name the hazard {quantity[0]!r}")
         if hop:
             cited_hop += [g for g in hop if g not in cited_hop]
-            if not TWO_HOP_RE.search(text):
+            if not TWO_HOP_RE.search(pn(text)):
                 out.append(f"literature_interpretation[{i}]: two-hop wording (D-073c): a sentence citing a two-hop group must say "
                            "'when wildfires occur', 'wildfires can' or 'raise the chance of ignition'")
     for w, t in every:
         if w in RUNG8_WRONG_ANSWER_FIELDS:
             continue
-        if IMPLIES_EXPOSURE_RE.search(t or "") and not cited_place_named:
+        if not IMPLIES_EXPOSURE_RE.search(pn(t)):
+            continue
+        if shape:
+            out.append(f"{w}: rung 8 answer shape (D-075a): 'this implies more exposure to' is not written in the pilot")
+        elif not cited_place_named:
             out.append(f"{w}: rung 8 place exposure (D-075): 'this implies more exposure to' needs a cited place-named impact group")
     rep = {"cited_place_named_impact_group": cited_place_named, "impact_group_ids": sorted(impact)}
+    n = None
     if two_hop:
-        n = bridge_count(integrated, bridge)
+        n = bridge_count(integrated, bridge, normalise=v35)
         if cited_hop and bridge and n != 1:
             out.append(f"integrated: bridge clause (D-073c): must contain {bridge!r} exactly once (found {n})")
         rep.update({"cited_two_hop_group_ids": cited_hop, "bridge_clause_count": n})
+    if v35:
+        lit_text = " ".join(nz(s["sentence"]) for s in lit_s)
+        nb_lit = lit_text.count(broader) if broader else 0
+        nb_int = nz(integrated).count(broader) if broader else 0
+        if shape:
+            if need_broader and nb_lit != 1:
+                out.append(f"literature_interpretation: rung 8 answer shape (D-075a): the broader hazard {broader!r} exactly once, "
+                           f"later impact sentences say 'such heat' / 'such conditions' (found {nb_lit})")
+            elif not need_broader and nb_lit > 1:
+                out.append(f"literature_interpretation: rung 8 answer shape (D-075a): the broader hazard {broader!r} at most once "
+                           f"(found {nb_lit})")
+            if nb_int > 1:
+                out.append(f"integrated: rung 8 answer shape (D-075a): the broader hazard {broader!r} at most once (found {nb_int})")
+        sents = [x for x in SENTENCE_SPLIT_RE.split((integrated or "").strip()) if x.strip()]
+        pos = next((k + 1 for k, x in enumerate(sents) if bridge and nz(bridge).strip() in nz(x)), None)
+        budget = rung8_budget(tp_s or [], lit_s, integrated, checks_input, bool(cited_hop and bridge))
+        if shape:
+            out += budget_reasons(budget)
+        rep.update({"answer_shape": ANSWER_SHAPE_V2 if shape else None, "budget": {**budget, "enforced": shape},
+                    "broader_hazard_phrase_count": {"literature_interpretation": nb_lit, "integrated": nb_int},
+                    "bridge_clause_sentence": pos, "bridge_clause_second_sentence": pos == 2 if bridge and cited_hop else None})
     return out, rep
 
 
@@ -1043,7 +1202,10 @@ _FORMAT_REASON_RES = (re.compile(r"^[^:]+: number-word '.*' does not trace to an
                       re.compile(r"^[^:]+: rung 8 place exposure \(D-075\): .+$"),
                       # v3.4 only emits these (D-073c, two-hop wording)
                       re.compile(r"^literature_interpretation\[\d+\]: two-hop wording \(D-073c\): .+$"),
-                      re.compile(r"^integrated: bridge clause \(D-073c\): .+$"))
+                      re.compile(r"^integrated: bridge clause \(D-073c\): .+$"),
+                      # v3.5 only emits these (D-075a, rung-8 answer shape v2)
+                      re.compile(r"^[^:]+: doubled 'that' \(D-075a\): .+$"),
+                      re.compile(r"^[^:]+: rung 8 answer shape \(D-075a\): .+$"))
 
 
 def number_word_value(word: str) -> float | None:

@@ -1677,3 +1677,69 @@ Drivers (8): `fire_weather_v1-driver-c1-003` (multi, state), `fire_weather_v1-me
   is a decision. (2) BI-P5-0005 moved to California and BI-P5-0006 lost its place-named evidence (D-078 (a)); with BI-P5-0004 this
   leaves two place-named items (BI-P5-0001 Virginia, BI-P5-0002 Arizona) of eight.
 - **Readings for confirmation:** D-073c (a) -- (c), D-077 (field types; label fallback), D-078 (a) -- (c).
+
+## 69. litsynth v5.4: synthesis run 1 recorded, rung-8 answer shape v2 (2026-11-24; D-075a)
+
+No model call. Design: `P5_INFRA_IMPACT_DESIGN.md` §22 -- §24.
+
+- **Run 1 (superseded).** Polaris `litsynth/infra_run1` (agent v5.3, post-checks v3.4, packets v1a, 2026-11-24 22:56 UTC): 8
+  packets, 2 deterministic_pass (BI-P5-0001, BI-P5-0003), 6 rejected_pre_review; every failure template conformance --- scope
+  opener a word off (0002, 0006, 0007), a per-sentence broader-hazard phrase missing (0002, 0006, 0008), the asset-class name
+  missing (0004), the bridge clause "found 0" because it was written with U+2011 and a lower-case start (0005, 0006). Text quality:
+  the broader-hazard phrase up to 4x per answer, 5 -- 6 driver sentences before any impact, "that that when wildfires occur", a
+  garbled "this implies more exposure" sentence (0002). **As relayed in the work package; the run's files are not in the
+  repository and were not ingested.**
+- **Agent v5.4.** `litsynth_agent.py` system prompt `1a023c1e98e822f74304801fce5a8b4605f6148c528c3dc4f5e236c5c87c3ade`, format
+  corrective `a21eb42a4a61ecf540803ba1b0da19fc80bb4c9c8077089b2d0cf58b8c6f10e8`; check version v3.5; v5.3 (which ran) held at
+  `b860658` (`climrr.p5c2`). RUNG 8 = answer shape v2 (budget, phrases once, MERGE OPENERS, no exposure sentence); TWO-HOP puts the
+  capitalised bridge clause second in `integrated`; plain "-" hyphens.
+- **Post-checks v3.5.** Phrase normalisation (`phrase_norm`: U+2010 / U+2011 / U+2012 -> "-", NFKC, whitespace; `phrase_key` adds
+  case-folding) in every phrase check; "that that" fails in any graded text; with `answer_shape: rung8_v2` the budget, the
+  broader-hazard phrase once (first direct impact sentence), the asset class in full first then full or short, the exposure sentence
+  a failure; all new failures format-class. Without `answer_shape` (v1a-built items) the v3.4 per-sentence rules and a budget
+  **report** (`enforced: false`).
+- **Short forms.** `data/metadata/benchmark/asset_short_forms_v1.yaml` `de28eaa2d65759d7c09c2e95e8388b17f477f7c0f6d21aa72bcc3681055c444d`
+  (manifest).
+- **Packets v1b.** `artifacts/benchmark/synth_packets_infra_v1b/` (`scripts/build_synth_packets_infra.py --variant v1b`), manifest
+  `b4cbbdb308ab90b5cd68a761009d88431315099aa9bb31acb9bd496061736a3e`: v1a + `answer_shape: rung8_v2` + `asset_class_short_forms` +
+  the shape-v2 rung instruction + metadata; every other field v1a's (tested per packet).
+- **Tests** `tests/test_litsynth_v54.py` (19): short forms pinned and refused when changed; v1b rebuilt byte-identically from v1a and
+  different only in the shape fields; `phrase_norm`; a well-formed shape-v2 answer for BI-P5-0006 passes (budget within, phrase
+  once, bridge counted once in sentence 2); each rule failing on a one-change variant (table sentences, impact claims above and
+  below, integrated length, phrase moved / doubled, asset not in full first / missing later, "that that", the exposure sentence;
+  normalised hyphens, no-break spaces and case pass; "Wild‑fire" flagged); the run-1 defects (U+2011 lower-case bridge, phrase 4x,
+  "that that", five drivers) fail format-class while v3.4 said "found 0" on the same bridge; end to end with a mock server, that reply
+  takes the format corrective turn and the corrected reply passes. `tests/test_p5c_hotfix.py` reads v5.3 from its held bytes.
+- **Run-1 passes.** The work package asked that the two passing run-1 items still pass v3.5 with the budget reported, not failed.
+  Their files are not in the repository (the owner chose to proceed without them); the test is a **synthetic stand-in**: a long
+  v3.4-conformant answer on the v1a packet of BI-P5-0006 passes v3.4 and v3.5, with `budget.within: false, enforced: false`.
+
+## 70. litsynth v5.4: gate, Polaris commands, readings for confirmation (2026-11-24)
+
+- **Gate.** Build `<BUILD_SHA>`: `pytest` **<N_PASSED> passed, 2 skipped**; scanner 0 hits. Evidence run record of
+  `build_synth_packets_infra --variant v1b` at the clean build tree, outputs byte-identical: `<RUN_RECORD>` (`git_dirty: false`).
+- **Polaris (Kaiyuan; env as in `P5_INFRA_IMPACT_DESIGN.md` §6; first `python -c "import yaml, duckdb"`).** At the pushed build
+  commit, which carries the v1b packets and agent v5.4:
+
+      bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <BUILD_SHA_FULL>
+      cd "$CLIMRR_REPO_ROOT"
+      python scripts/litcollect/litsynth_agent.py \
+          --packets artifacts/benchmark/synth_packets_infra_v1b \
+          --out "$LITCOLLECT_ROOT_POLARIS/litsynth/infra_run2" \
+          --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
+          --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \
+          --sleep 5 --source-commit <BUILD_SHA_FULL>
+      python scripts/litcollect/litpolish_agent.py \
+          --items "$LITCOLLECT_ROOT_POLARIS/litsynth/infra_run2" \
+          --out "$LITCOLLECT_ROOT_POLARIS/litpolish/infra_run2" \
+          --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \
+          --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \
+          --sleep 5 --source-commit <BUILD_SHA_FULL>
+
+  Expect `START litsynth_agent v5.4 packets=8 ... system_sha=1a023c1e98e8`. Ship back both run directories (`items/`, `raw/`,
+  `items.jsonl` / `polished.jsonl`, `summary.json`, `agent.log`) with the SHA-256 of each file --- and, if still on Eagle, the run-1
+  directory `litsynth/infra_run1` (and `litpolish/infra_run1` if it ran), so run 1 can be pinned as superseded evidence. Then: ingest
+  -> the Alvi sheet.
+- **For the COORDINATOR (carried).** Polish v1.1's checks still do not protect the bridge clause or the two-hop phrases (section 68
+  (1)); with shape v2 they also do not protect the once-only broader-hazard phrase or the short forms.
+- **Readings for confirmation:** D-075a (a) -- (j).

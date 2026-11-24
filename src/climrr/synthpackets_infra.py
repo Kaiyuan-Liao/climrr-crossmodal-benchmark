@@ -46,6 +46,14 @@ write "wildfires"; no bridge clause, which names fire-weather danger --- EXECUTO
 adds `two_hop_group_ids`, `bridge_clause`, `two_hop_phrases` for post-checks v3.4. Written to `synth_packets_infra_v1a/`.
 v1 is kept and rebuilds byte-identically.
 
+**v1b (work package litsynth v5.4, D-075a; rung-8 answer shape v2).** `build(..., variant="v1b")` = the v1a packets, each
+changed only in: `answer_shape: rung8_v2` (model view and `checks_input`), the asset class's short forms
+(`asset_class_short_forms`, from the pinned `asset_short_forms_v1.yaml`; model view and `checks_input.rung8`), the rung
+instruction rewritten for shape v2 (`RUNG8_INSTRUCTION_V2`: the length budget, the phrases once per answer, merged openers,
+no "this implies more exposure to" --- the v1a instruction allowed that sentence, which D-075a rule 5 drops), and the
+packet's own metadata (`version`, `decision`, `rules`, `inputs_sha256.asset_short_forms_v1`, `v1a_packet_sha256`).
+Written to `synth_packets_infra_v1b/`; v1a is kept and rebuilds byte-identically.
+
 No model call; no table value computed (values are the pattern's).
 """
 
@@ -90,6 +98,24 @@ TWO_HOP_RULE = (
 TWO_HOP_RULE_FIRE = (' The table sentence states the fire-weather change, and "integrated" contains, exactly once, the bridge clause '
                      f'"{BRIDGE_CLAUSE}". Outside these forms and the bridge clause, "wildfire" stays as the WILDFIRE rule says.')
 RUNG8_INSTRUCTION_V1A_TAIL = (" Two-hop impact groups (two_hop_group_ids) follow two_hop_rule.")
+VERSION_V1B = "synthpackets infra v1b"
+DECISION_V1B = "D-075a"
+RULES_V1B = RULES_V1A + ", D-075a (rung-8 answer shape v2)"
+PACKETS_V1B_DIR = REPO_ROOT / "artifacts" / "benchmark" / "synth_packets_infra_v1b"
+SHORT_FORMS_PATH = REPO_ROOT / "data" / "metadata" / "benchmark" / "asset_short_forms_v1.yaml"
+#: D-075a: the answer shape packets v1b carry; post-checks v3.5 apply the shape-v2 rules to it (`benchmark_items.ANSWER_SHAPE_V2`).
+ANSWER_SHAPE = "rung8_v2"
+RUNG8_INSTRUCTION_V2 = (
+    "Rung 8 (hazard impact on infrastructure), answer shape rung8_v2. The answer holds these parts and nothing else: (1) one "
+    "table sentence: the hazard change at the place, as projected; (2) in a fire-weather packet with a bridge_clause, the "
+    "bridge clause as the second sentence of 'integrated', capitalised; (3) at most two driver claims, the strongest; (4) two "
+    "to three impact claims (fewer only when the packet has fewer impact groups), chosen by strength, then by place: the first "
+    "impact sentence names the hazard --- the broader-hazard phrase when a cited impact group has hazard_relation "
+    "broader_hazard, else the plain quantity --- and the asset class phrase in full; later impact sentences say 'such heat' or "
+    "'such conditions' and may shorten the asset class to one of asset_class_short_forms; (5) the general closing clause when "
+    "no cited group is state- or NCA-specific. Claims that share a scope phrase go into one sentence with one opener: 'In "
+    "general, research shows that A, that B, and that C.' Never state that an asset, or the asset class, in the place will "
+    "fail, is at risk, is vulnerable or will be damaged, and do not write 'this implies more exposure to'.")
 MAX_IMPACT_GROUPS = spk.MAX_DRIVER_GROUPS
 REVIEW_STATE = si.REVIEW_STATE_UNREVIEWED
 LEVEL_TEXT_8 = ("Hazard impact on infrastructure", "Hazard + Text",
@@ -378,6 +404,42 @@ def build(selection: dict, seeds8: list[dict], enriched: list[dict], records: li
             for c in selection["selected"]]
 
 
+def load_short_forms(path=SHORT_FORMS_PATH) -> dict:
+    """The pinned asset-class short forms (D-075a rule 2): {version, classes {class: {full, short}}, sha256}; the full phrase
+    of each class must equal `ASSET_CLASS_PHRASE`, and the file its `data/manifest.json` hash."""
+    import yaml
+
+    from climrr.manifest import load_entry
+
+    if sha256_file(path) != load_entry(path.name)["sha256"]:
+        raise ValueError(f"{path.name} differs from its data/manifest.json pin")
+    d = yaml.safe_load(path.read_text(encoding="utf-8"))
+    if d.get("version") != "asset_short_forms_v1" or set(d["classes"]) != set(ASSET_CLASS_PHRASE):
+        raise ValueError("asset_short_forms_v1 must hold one entry per rung-8 asset class")
+    for k, v in d["classes"].items():
+        if v["full"] != ASSET_CLASS_PHRASE[k] or not v["short"] or any(not isinstance(x, str) or not x for x in v["short"]):
+            raise ValueError(f"asset_short_forms_v1: bad entry for {k!r}")
+    return {**d, "sha256": sha256_file(path)}
+
+
+def to_v1b(pk: dict, short_forms: dict, v1a_sha256: str) -> dict:
+    """The v1b packet of a v1a packet (module docstring): answer shape, short forms, shape-v2 rung instruction, metadata."""
+    if pk.get("version") != VERSION_V1A:
+        raise ValueError(f"{pk.get('packet_id')}: v1b is built from a v1a packet")
+    x = copy.deepcopy(pk)
+    mv, ci = x["model_view"], x["checks_input"]
+    shorts = list(short_forms["classes"][x["asset_class"]]["short"])
+    two_hop = bool(mv.get("two_hop_group_ids"))
+    mv.update({"answer_shape": ANSWER_SHAPE, "asset_class_short_forms": shorts,
+               "rung_instruction": RUNG8_INSTRUCTION_V2 + (RUNG8_INSTRUCTION_V1A_TAIL if two_hop else "")})
+    ci["answer_shape"] = ANSWER_SHAPE
+    ci["rung8"]["asset_class_short_forms"] = shorts
+    x.update({"version": VERSION_V1B, "decision": DECISION_V1B, "rules": RULES_V1B, "answer_shape": ANSWER_SHAPE,
+              "v1a_packet_sha256": v1a_sha256,
+              "inputs_sha256": {**x["inputs_sha256"], "asset_short_forms_v1": short_forms["sha256"]}})
+    return x
+
+
 def report_entry(pk: dict, path=None) -> dict:
     """Per packet: the pattern summary, the impact groups (id, label, strength, place class), the driver groups, excluded."""
     p = pk["provenance"]["patterns"][0]
@@ -408,7 +470,9 @@ def report_entry(pk: dict, path=None) -> dict:
             "excluded_by_reason": dict(sorted(Counter(str(e["reason"]) for e in pk["excluded_groups"]).items())),
             "review_state": pk["review_state"],
             **({"two_hop_group_ids": pk["model_view"].get("two_hop_group_ids") or [],
-                "bridge_clause_required": bool(pk["model_view"].get("bridge_clause"))} if pk["version"] == VERSION_V1A else {}),
+                "bridge_clause_required": bool(pk["model_view"].get("bridge_clause"))} if pk["version"] in (VERSION_V1A, VERSION_V1B) else {}),
+            **({"answer_shape": pk["answer_shape"], "asset_class_short_forms": pk["model_view"]["asset_class_short_forms"]}
+               if pk["version"] == VERSION_V1B else {}),
             **({"sha256": sha256_file(path)} if path else {})}
 
 

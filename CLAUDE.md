@@ -171,6 +171,8 @@ Since P5b (D-075) `litgroup_agent.py` is v3.1 (the impact prompt variant; its `a
 ran, and v5.1, which never ran, are held by their bytes at the P5b base commit (`climrr.p5b.held_bytes`).
 Since the P5c hotfix (D-073c, D-077) `litsynth_agent.py` is v5.3 (two-hop wording, post-checks v3.4, schema-v2a rung-8 items;
 same run evidence as v5); v5.2, which never ran, is held by its bytes at the hotfix base commit (`climrr.p5c.held_bytes`).
+Since the litsynth v5.4 package (D-075a) `litsynth_agent.py` is v5.4 (rung-8 answer shape v2, post-checks v3.5; same run evidence
+as v5); v5.3, which ran synthesis infra run 1, is held by its bytes at the package base commit (`climrr.p5c2.held_bytes`).
 
 ## Knowledge-refresh staging
 

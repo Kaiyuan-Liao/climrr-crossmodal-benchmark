@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pilot P2b / P3 / P5 — item-synthesis agent v5.3 (D-041, D-048, D-051, D-055, D-055a, D-055b, D-059 -- D-062; COORDINATOR rulings 2026-11-01 and 2026-11-02; work package P3a).
+"""Pilot P2b / P3 / P5 — item-synthesis agent v5.4 (D-041, D-048, D-051, D-055, D-055a, D-055b, D-059 -- D-062; COORDINATOR rulings 2026-11-01 and 2026-11-02; work package P3a).
 
 Input: a directory of seed packets `PK-<seed_id>.json` (`scripts/build_synth_packets.py`). One model call per packet,
 temperature 0. The model sees the packet's `model_view` only: the table pattern in plain words with its values, the
@@ -127,6 +127,18 @@ group becomes a literature statement of type `impact` with the packet's `item_fi
 `impact_outcome`, `hazard_relation`, `two_hop`). The format corrective prompt names the two-hop rule. Everything else as v5.2
 (v5.2 is held by its bytes at `a549ea9`, `climrr.p5c.held_bytes`).
 
+v5.4 (work package litsynth v5.4, D-075a; synthesis run 1 --- v5.3, `litsynth/infra_run1`, packets v1a: 2 deterministic_pass,
+6 rejected_pre_review, every failure template conformance --- superseded; rung-8 packets v1b, `scripts/build_synth_packets_infra.py
+--variant v1b`, `answer_shape: rung8_v2`; not yet run): the system prompt's RUNG 8 section is the answer shape v2 --- one table
+sentence, at most two driver claims, two to three impact claims (by strength, then place), the closing clause and, in a
+fire-weather item citing a two-hop group, the bridge clause as the second sentence of "integrated", capitalised; the
+broader-hazard phrase exactly once (the first impact sentence; later ones say "such heat" / "such conditions"), the asset class
+in full once and then by the packet's `asset_class_short_forms`; claims sharing a scope phrase merged under one opener ("In
+general, research shows that A, that B, and that C"), at most three openers; never "that that"; no "this implies more exposure
+to" sentence; plain "-" hyphens. Post-checks `synthesis_post_checks` v3.5 (v3.4 + phrase normalisation, the doubled "that",
+the shape-v2 rules for a packet with `answer_shape: rung8_v2`; all format-class). The format corrective prompt names the
+shape-v2 rules. Everything else as v5.3 (v5.3, which ran, is held by its bytes at `b860658`, `climrr.p5c2.held_bytes`).
+
 Polaris invocation (Sophia vLLM, D-043). Run from the execution clone on Eagle (`$CLIMRR_REPO_ROOT`,
 docs/SOPHIA_RUNBOOK.md) checked out at the pinned commit that carries the packets and provides `climrr`; output
 under the litcollect root (`$LITCOLLECT_ROOT_POLARIS`, config key `litcollect_root_polaris`), never in the clone; the
@@ -135,8 +147,8 @@ ALCF credential in the environment; first check the environment: `python -c "imp
     bash "$CLIMRR_REPO_ROOT/scripts/sophia_pull_pinned.sh" <PINNED_SHA>
     cd "$CLIMRR_REPO_ROOT"
     python scripts/litcollect/litsynth_agent.py \\
-        --packets artifacts/benchmark/synth_packets_infra_v1a \\
-        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/infra_run1" \\
+        --packets artifacts/benchmark/synth_packets_infra_v1b \\
+        --out "$LITCOLLECT_ROOT_POLARIS/litsynth/infra_run2" \\
         --base-url https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1 \\
         --model openai/gpt-oss-120b --reasoning-effort low --max-tokens 16000 \\
         --sleep 5 --source-commit <PINNED_SHA>
@@ -152,8 +164,8 @@ from litstatement_agent import (  # noqa: E402  (v3)
 from litgroup_agent import DEFAULT_MAX_TOKENS, REASONING_EFFORTS, call_turn, turn_stats  # noqa: E402  (v3)
 from climrr import benchmark_items as bi  # noqa: E402
 
-GENERATOR_VERSION = "litsynth_agent v5.3"
-CHECK_VERSION = bi.SYNTH_CHECK_VERSION_V34
+GENERATOR_VERSION = "litsynth_agent v5.4"
+CHECK_VERSION = bi.SYNTH_CHECK_VERSION_V35
 CORRECTIVE_PROMPT = ("Your reply did not contain a JSON object with the keys \"prompt\" and \"reference_answer\". "
                      "Return the complete JSON object.")
 NOT_REQUIRED_SENTENCE = "Exact values are not required; any statement consistent with the magnitude class counts."
@@ -173,14 +185,22 @@ FORMAT_CORRECTIVE_PROMPT = ("Your item failed these format checks:\n{reasons}\nR
                             "\"scope_class\" \"state\" or \"nca\", end \"literature_interpretation\" with {\"sentence\": <the packet's "
                             "\"general_clause\">, \"group_ids\": [], \"hedged\": false} and end \"integrated\" with the same sentence; "
                             "otherwise write no such clause. No required rubric point names the place on a group's authority. The "
-                            "question opens as the packet's \"question_form\" skeleton opens. RUNG 8: a sentence citing an \"impact\" "
-                            "group begins with its scope phrase followed by \"that\", names the packet's asset class and, when a cited "
-                            "impact group has \"hazard_relation\": \"broader_hazard\", the broader-hazard phrase; never write that an "
-                            "asset in the place will fail, is at risk or is vulnerable; write \"this implies more exposure to\" only "
-                            "when you cite a group listed in \"place_named_impact_group_ids\". \"wildfire\" appears only inside "
-                            "\"conditions that favour wildfire\". TWO-HOP: a sentence citing a group listed in \"two_hop_group_ids\" says "
-                            "\"when wildfires occur, they ...\" or \"wildfires can ...\" (the heat-and-ignition group: \"raise the chance of "
-                            "ignitions near power lines\"); when the packet has a \"bridge_clause\", \"integrated\" contains it exactly once.")
+                            "question opens as the packet's \"question_form\" skeleton opens. RUNG 8 (answer shape rung8_v2): one table "
+                            "sentence; at most two driver claims; two to three impact claims (one when the packet has one impact group); "
+                            "the closing clause when required; nothing else. A sentence citing an \"impact\" group begins with its scope "
+                            "phrase followed by \"that\"; claims sharing a scope phrase go into one sentence with one opener (\"In general, "
+                            "research shows that A, that B, and that C\"); never \"that that\". The FIRST impact sentence names the hazard "
+                            "(the broader-hazard phrase when a cited impact group has \"hazard_relation\": \"broader_hazard\", else the plain "
+                            "quantity) and the asset class phrase in full; the broader-hazard phrase appears exactly once in "
+                            "\"literature_interpretation\" and at most once in \"integrated\"; later impact sentences say \"such heat\" or "
+                            "\"such conditions\" and name the asset class in full or by one of \"asset_class_short_forms\". Never write that "
+                            "an asset in the place will fail, is at risk or is vulnerable, and never write \"this implies more exposure to\". "
+                            "\"integrated\" has no more sentences than the reference sentences (plus the bridge clause). \"wildfire\" appears "
+                            "only inside \"conditions that favour wildfire\". TWO-HOP: a sentence citing a group listed in "
+                            "\"two_hop_group_ids\" says \"that when wildfires occur, they ...\" or \"that wildfires can ...\" (the "
+                            "heat-and-ignition group: \"raise the chance of ignitions near power lines\"); when the packet has a "
+                            "\"bridge_clause\", the second sentence of \"integrated\" is \"Fire-weather danger describes conditions that "
+                            "favour wildfire; it is not fire occurrence.\", exactly once. Write every hyphen as the plain \"-\".")
 
 
 def format_corrective_prompt(reasons: list[str]) -> str:
@@ -200,7 +220,7 @@ NUMBERS. The only digits allowed are those of the pattern's "anchor_pair", copie
 
 MAGNITUDE AND COMPARISON. Write the magnitude with ONE of the pattern's "magnitude_forms", any one, used as a natural phrase inside the sentence ("... is projected to increase slightly ...", "... shows a slight increase ...", "... days remain rare ..."). Never write two magnitude phrases for one pattern: "increase a slight increase" and "increase by a slight increase" are errors. Compare the place with other states only with one of the "tercile_forms" ("a larger change than in most states"); never write "tercile", "ranking large" or "moderate relative tercile".
 
-WRITING. Every sentence starts with a capital letter ("Research shows ...", never "research shows ..."). Short sentences, plain words.
+WRITING. Every sentence starts with a capital letter ("Research shows ...", never "research shows ..."). Short sentences, plain words. Write every hyphen as the plain "-" character ("fire-weather", never a non-breaking or other Unicode hyphen).
 
 CONTEXT GROUPS. A group whose "role" is "context" (how the quantity is defined or measured, such as "the heat index combines temperature and humidity") is never a driver or a cause of the change. Use it only as an explanatory aside ("Because the heat index combines temperature and humidity, ..."), never in a list of drivers or causes, and never with "driven by", "driver", "cause" or "because of" in the same clause.
 
@@ -208,11 +228,19 @@ SCOPE (where the research comes from). Each group carries a "scope_class" and a 
 
 BROADER HAZARD. The packet's "plain_language" may carry a "broader_hazard_phrase" (for example "extreme heat, of which dangerous heat-index days are one measure"). When a group's statements rest on a broader hazard term (the group says "hazard_relation": "broader_hazard"), write its support with that phrase: the research is about the broader hazard, of which the quantity is one measure, never about the quantity itself. Without such a group, do not use the phrase.
 
-RUNG 8 (hazard impact on infrastructure). A packet with "rung": 8 names an "asset_class" (with its plain "asset_class_phrase") and carries, besides the table pattern and the family's "driver" groups, "impact" groups: each states how a hazard condition acts on that kind of asset and what happens to it ("impact_mechanism", "impact_outcome"), with its "relevance" to the place ("place_named", "us" or "general") and its "hazard_relation". Write the answer in three parts: (1) the hazard change at the place, as projected, in the table-pattern sentence; (2) for the impact groups, "<scope phrase> that <hazard phrase> <impact mechanism> <asset class phrase>" --- for example "In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can buckle rails and disrupt rail service" --- where the hazard phrase is the "broader_hazard_phrase" when a cited impact group has "hazard_relation": "broader_hazard", else the plain quantity; the driver groups as in any item; and the general closing clause (SCOPE) when no cited group is state- or NCA-specific, which for impact groups is the usual case; (3) never state that an asset, or the asset class, in the place will fail, is at risk, is vulnerable or will be damaged: the research describes such conditions, not a forecast for a particular asset. Only when you cite a group listed in "place_named_impact_group_ids" may you write "For <asset class phrase> in <Place>, this implies more exposure to <impact outcome>". The question asks what the projected change could mean for the asset class at the place and why, in the packet's "question_form"; the required rubric points are the direction, the magnitude class, the place, and the impact pathway in general words (resting on the impact groups); "treating a hazard as a risk" and "stating that a particular asset will fail" are fatal errors.
+RUNG 8 (hazard impact on infrastructure; answer shape "rung8_v2"). A packet with "rung": 8 names an "asset_class" (with its plain "asset_class_phrase" and its "asset_class_short_forms") and carries, besides the table pattern and the family's "driver" groups, "impact" groups: each states how a hazard condition acts on that kind of asset and what happens to it ("impact_mechanism", "impact_outcome"), with its "relevance" to the place ("place_named", "us" or "general") and its "hazard_relation". The reference answer has exactly these parts, in this order, and nothing else:
+(1) ONE table sentence: the projected hazard change at the place.
+(2) In a fire-weather packet that gives a "bridge_clause": the bridge clause, as the second sentence of "integrated" (see TWO-HOP).
+(3) At most TWO driver claims, from the strongest driver groups (review_supported, then multi_source_supported, then single_source_supported).
+(4) TWO or THREE impact claims (one when the packet has a single impact group), chosen by evidence strength first, then by place ("place_named", then "us", then "general"). The FIRST impact sentence names the hazard and the asset class, once for the whole answer: "<scope phrase> that <hazard phrase> <impact mechanism> <asset class phrase>" --- for example "In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can buckle rails and disrupt service on transportation systems" --- where the hazard phrase is the "broader_hazard_phrase" when a cited impact group has "hazard_relation": "broader_hazard", else the plain quantity. The broader-hazard phrase appears EXACTLY ONCE in "literature_interpretation" and at most once in "integrated". Later impact sentences refer back with "such heat" (a heat packet) or "such conditions" (a fire-weather packet) and name the asset class again in full or by one of the packet's "asset_class_short_forms" (for example "the grid").
+(5) The general closing clause (SCOPE) when no cited group is state- or NCA-specific.
+MERGE OPENERS. Claims whose groups share a scope phrase go into ONE sentence with ONE opener, citing all their groups: "In general, research shows that A, that B, and that C." A group with its own place ("Research on <State> ...") keeps its own sentence and opener. Use at most three scope openers in the whole answer. Each "that" is followed directly by its claim: never "that that".
+"integrated" repeats the same sentences in the same order (the table sentence, the bridge clause where required, the driver claims, the impact claims, the closing clause), with no more sentences than these.
+Never state that an asset, or the asset class, in the place will fail, is at risk, is vulnerable or will be damaged: the research describes such conditions, not a forecast for a particular asset. Do not write "this implies more exposure to": this pilot has no such sentence. The question asks what the projected change could mean for the asset class at the place and why, in the packet's "question_form"; the required rubric points are the direction, the magnitude class, the place, and the impact pathway in general words (resting on the impact groups); "treating a hazard as a risk" and "stating that a particular asset will fail" are fatal errors.
 
 WILDFIRE (D-073b). In an item about fire-weather danger, the word "wildfire" appears ONLY inside the exact phrase "conditions that favour wildfire" (as in the broader-hazard phrase); "wildfire" anywhere else, "fires" and "burned area" stay forbidden, even if a packet's "must_not_use" lists "wildfire". The TWO-HOP forms below are the only exception.
 
-TWO-HOP (D-073c). A rung-8 packet may list "two_hop_group_ids": impact groups whose research is about what wildfires do to the asset, not about the fire-weather danger (or the heat) itself. A sentence resting on such a group takes one of these forms: "<scope phrase> that when wildfires occur, they <impact> <asset class phrase>" or "<scope phrase> that wildfires can <impact> <asset class phrase>"; for the group on heat and ignitions near power lines: "<scope phrase> that extreme heat and wind raise the chance of ignitions near power lines". Do not use the broader-hazard phrase in such a sentence, and write the two-hop groups and the direct groups in separate sentences. Only in these forms may "wildfires" be written. In a fire-weather packet the table sentence states the projected fire-weather change, and when the packet gives a "bridge_clause" ("fire-weather danger describes conditions that favour wildfire; it is not fire occurrence"), "integrated" contains that clause exactly once (it may open its own sentence: "Fire-weather danger describes ..."). A direct impact group (not listed in "two_hop_group_ids") needs no bridge.
+TWO-HOP (D-073c). A rung-8 packet may list "two_hop_group_ids": impact groups whose research is about what wildfires do to the asset, not about the fire-weather danger (or the heat) itself. A claim resting on such a group takes one of these forms: "<scope phrase> that when wildfires occur, they <impact> <asset class phrase>" (one "that", directly followed by "when") or "<scope phrase> that wildfires can <impact> <asset class phrase>"; for the group on heat and ignitions near power lines: "<scope phrase> that extreme heat and wind raise the chance of ignitions near power lines". Do not use the broader-hazard phrase in such a sentence, and never merge two-hop claims and direct claims into one sentence. Only in these forms may "wildfires" be written. In a fire-weather packet the table sentence states the projected fire-weather change, and when the packet gives a "bridge_clause", the SECOND sentence of "integrated", right after the table sentence, is exactly: "Fire-weather danger describes conditions that favour wildfire; it is not fire occurrence." (capital F, plain hyphen), once. A direct impact group (not listed in "two_hop_group_ids") needs no bridge.
 
 QUESTION FORM. The packet's "question_form" gives the form of the question ("id", "name", "skeleton"). Write "prompt" in that form: begin it as the skeleton begins and keep the skeleton's structure (one question, or two short questions for "two_short_questions"), with the packet's plain-language phrases; adjust the grammar so it reads well. Do not copy anything the skeleton does not need.
 

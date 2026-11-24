@@ -513,3 +513,76 @@ byte-identically.
 Polaris (Kaiyuan): the synthesis run `infra_run1` over the eight v1a packets (agent v5.3) and the polish of its items, at the pushed
 hotfix commit; then ingest -> the Alvi sheet (`scripts/build_mentor_sheet.py --audience alvi --items …`). Commands: the report,
 section 68, and `docs/PROJECT_STATE.md`.
+
+## 22. Synthesis run 1: outcome (agent v5.3, packets v1a; superseded)
+
+Polaris `litsynth/infra_run1`, agent v5.3, post-checks v3.4, 2026-11-24 22:56 UTC, eight v1a packets. **Run 1, superseded** by the
+answer shape v2 (§23). The facts below are **as relayed in the work package** (litsynth v5.4); the run's files are not in the
+repository and no ingest was made.
+
+- **2 deterministic_pass** (BI-P5-0001, BI-P5-0003), **6 rejected_pre_review**. Every failure is template conformance (format
+  class):
+
+| item | failure (as relayed) |
+| --- | --- |
+| BI-P5-0002 | scope opener a word off; broader-hazard phrase missing in an impact sentence |
+| BI-P5-0004 | asset-class name missing in an impact sentence |
+| BI-P5-0005 | bridge clause "found 0": written with U+2011 ("fire‑weather") and a lower-case start |
+| BI-P5-0006 | scope opener a word off; broader-hazard phrase missing; bridge clause "found 0" (as 0005) |
+| BI-P5-0007 | scope opener a word off |
+| BI-P5-0008 | broader-hazard phrase missing in an impact sentence |
+
+- **Text quality** (passing and failing items): the broader-hazard phrase repeated up to four times per answer (the v3.4
+  per-sentence rule asked for it); five to six driver sentences before any impact; "that that when wildfires occur"; a garbled
+  "this implies more exposure to more pavement distress points are detected" (BI-P5-0002).
+
+## 23. Rung-8 answer shape v2 (work package litsynth v5.4; D-075a)
+
+**Rules (D-075a, decided).** (1) Length budget: one table sentence, at most two driver claims (by strength), two to three impact
+claims (by strength, then place), the closing clause, and the bridge clause in a fire-weather item that needs it; nothing else.
+(2) The broader-hazard phrase once per answer, in the first impact sentence ("… extreme heat, of which dangerous heat-index days
+are one measure, …"; fire: "… conditions that favour wildfire, of which fire-weather danger is one measure, …"); later impact
+sentences say "such heat" / "such conditions"; the asset class named in full once, then by a stored short form. (3) Claims sharing
+a scope class merged under one opener ("In general, research shows that A, that B, and that C"); place-named sentences keep
+theirs; at most three openers (prompt only; the checker verifies openers per sentence as before). (4) Two-hop: "… that when
+wildfires occur, they <impact>", never "that that". (5) The "this implies more exposure to" sentence is dropped for the pilot.
+(6) Bridge clause as the second sentence, capitalised; every phrase check after Unicode normalisation (U+2010 / U+2011 / U+2012 ->
+"-", NFKC) and case-insensitive. (7) Corrective turn: format class, as before.
+
+- **Synthesis prompt v5.4** (`litsynth_agent.py` v5.4; system prompt `1a023c1e…3ade`, format corrective `a21eb42a…10e8`): the RUNG 8
+  section is the answer shape v2 (parts in order, MERGE OPENERS, the integrated paragraph repeats the same sentences); TWO-HOP gives
+  the bridge clause as the second sentence of `integrated`; WRITING asks for plain "-" hyphens; the format corrective prompt names
+  the shape-v2 rules. v5.3, which ran (run 1), is held by its bytes at `b860658` (`climrr.p5c2.held_bytes`).
+- **Post-checks v3.5** (`benchmark_items.SYNTH_CHECK_VERSION_V35`; all new failures format-class):
+  - every phrase check through `phrase_norm` / `phrase_key` (scope openers, the closing clause, the integrated "research" sentences,
+    hazard phrases, asset names, two-hop phrases, the bridge clause, the fire words);
+  - `doubled 'that' (D-075a)` in any graded text, every v3.5 item;
+  - with `checks_input.answer_shape == "rung8_v2"` (packets v1b): the budget (`rung8_budget`: claims = the "that"-clauses of a
+    literature sentence, at least one; impact claims = sentences citing an impact group, driver claims = the others with a group;
+    floor `min(2, impact groups in the packet)`; the integrated paragraph no longer than the reference sentences plus the bridge);
+    the hazard named in the first **direct** impact sentence (broader-hazard phrase when a cited direct impact group rests on a
+    broader term, else a quantity phrase); the broader-hazard phrase exactly once in the literature sentences when required (at
+    most once otherwise) and at most once in the paragraph; the asset class in full in the first impact sentence and in full or a
+    short form in every later one; "this implies more exposure to" a failure; reports `budget`, `broader_hazard_phrase_count`,
+    `bridge_clause_sentence` (second sentence: reported, not failed), `scope_openers`.
+  - without `answer_shape` (packets v1a; run-1 items) the v3.4 per-sentence rules apply and the budget is **reported, never
+    failed** (`budget.enforced: false`).
+- **Short forms** `data/metadata/benchmark/asset_short_forms_v1.yaml` (`de28eaa2…444d`, in `data/manifest.json`): energy "the grid",
+  "power systems"; transportation "roads and rail"; water "water systems"; healthcare "hospitals and emergency services",
+  "hospitals"; emergency services "emergency responders"; communications "communications networks".
+- **Packets v1b** `synth_packets_infra_v1b/` (`scripts/build_synth_packets_infra.py --variant v1b`; manifest `b4cbbdb3…a3e`): the
+  v1a packets (each checked against the v1a manifest) with `answer_shape: rung8_v2`, `asset_class_short_forms` (model view and
+  `checks_input.rung8`), the rung instruction rewritten for shape v2 (`RUNG8_INSTRUCTION_V2`; the v1a instruction allowed the
+  exposure sentence), and their own metadata (`version`, `decision`, `rules`, `inputs_sha256.asset_short_forms_v1`,
+  `v1a_packet_sha256`). Groups, provenance, scope, question forms, bridge clause and every other field are v1a's (tested). v1a is
+  kept.
+- **EXECUTOR readings (for confirmation):** the claim as the budget unit; the floor for one-group cells (BI-P5-0007, BI-P5-0008);
+  "first impact sentence" for the hazard is the first direct one (a two-hop sentence never carries the broader phrase); a later
+  impact sentence must name the asset (full or short), a pronoun fails; the short-form assignments; "remove from checks" read as
+  "the allowance is removed": the exposure sentence fails under shape v2; the bridge position reported, not failed; the bridge
+  still required only where packets v1a required it (fire-weather item citing a two-hop group: BI-P5-0005, BI-P5-0006).
+
+## 24. Next
+
+Polaris (Kaiyuan): synthesis `infra_run2` over the eight v1b packets (agent v5.4) and the polish `litpolish/infra_run2`, at the
+pushed build commit; then ingest -> the Alvi sheet. Commands: the report, section 70, and `docs/PROJECT_STATE.md`.
