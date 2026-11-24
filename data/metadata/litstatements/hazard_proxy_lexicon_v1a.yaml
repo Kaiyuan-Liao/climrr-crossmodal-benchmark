@@ -1,0 +1,65 @@
+# Hazard-proxy lexicon v1a (P5a hotfix 2; D-073a, D-070b). Hash pinned; do not edit in place --- a change is a new file.
+#
+# v1a = v1 (hazard_proxy_lexicon_v1.yaml, unchanged and still pinned) with ONE change (D-070b): "high temperatures" is a
+# CONDITIONAL proxy --- it counts in a section only when the same section also holds a term of the stored co-term list
+# `climate_coterms_v1` (below). Same terms, same order, same relation; no other term is conditional. The co-term list is
+# matched like every term here (whole-word, case-insensitive, no stemming), so its plurals are listed explicitly
+# ("heat wave(s)" -> "heat wave", "heat waves"; "projection(s)" -> "projection", "projections"). Read by run_query.py v4.2
+# (--rule DR-CAND-INFRA-3). A co-term is never a hazard term: it only licenses the conditional term in its section.
+#
+# LITERATURE CLASSIFICATION ONLY; NEVER TABLE MATCHING. It never touches the ClimRR table: no column is renamed, grouped,
+# filtered or described by it, and no term here is a reading of any column.
+#
+# What it is: the words infrastructure papers use for a hazard BROADER than the governed quantity of a family. A term here
+# lets an infrastructure paper become a candidate (run_query.py v4.1, DR-CAND-INFRA-2) and lets an `impact` statement name
+# its hazard (litstatement_agent.py v4.1, infra arm), with `hazard_relation: broader_hazard` recorded --- never
+# `governed_term`. The governed terms stay the LITCORPUS-02 topical-only query files (heat index; fire weather index).
+#
+# Relation `broader_hazard`: the paper's hazard contains the governed quantity's hazard as one aspect; it is NOT the
+# governed quantity. "Extreme heat" is not the heat index. A wildfire is not a Fire Weather Index: an FWI is a
+# meteorological fire-danger index, never fire occurrence (CLAUDE.md caution 2). Wording rule for the wildfire terms:
+# graded text says "conditions that favour wildfire", never fire itself.
+#
+# Every term: source EXECUTOR (common usage), authorization our_reading (the work package lists them; the EXECUTOR's
+# reading of common usage, not a dictionary). Matched whole-word, case-insensitive, no stemming (the run_query.py
+# matcher); every plural is listed explicitly.
+
+version: hazard_proxy_lexicon_v1a
+decision: "D-073a (P5a hotfix, 2026-11-23; COORDINATOR, decided; our reading; GUIDANCE to be notified); D-070b (P5a hotfix 2, 2026-11-23; COORDINATOR, decided): high temperatures conditional on climate_coterms_v1"
+base: "hazard_proxy_lexicon_v1 (SHA-256 2da6895e232f57c9c6c254e42710002d00c6aa3a51afa2ec88c5fc03d9ab9d08)"
+use: "literature classification only; never table matching"
+never_used_for: [table_columns]
+matcher: "whole-word, case-insensitive, no stemming: regexp_matches(text, '\\b' || escape(term) || '\\b', 'i')"
+relations: [governed_term, broader_hazard]
+
+coterm_lists:
+  climate_coterms_v1:
+    decision: "D-070b"
+    source: "COORDINATOR work package P5a hotfix 2 (2026-11-23), verbatim; plurals written out by the EXECUTOR"
+    use: "literature classification only; never table matching"
+    role: "licenses a conditional proxy term in the same section; never a hazard term itself"
+    terms: ["climate", "climate change", "warming", "global warming", "weather", "summer", "heat wave", "heat waves", "heatwave", "heatwaves", "extreme heat", "projected", "projection", "projections"]
+
+families:
+  heat_index:
+    relation: broader_hazard
+    wording_rule: "extreme heat, of which dangerous heat-index days are one measure"
+    terms:
+      - {term: "extreme heat", source: "EXECUTOR (common usage)", authorization: our_reading, use: "literature classification only; never table matching"}
+      - {term: "heat wave", source: "EXECUTOR (common usage)", authorization: our_reading, use: "literature classification only; never table matching"}
+      - {term: "heat waves", source: "EXECUTOR (common usage)", authorization: our_reading, use: "literature classification only; never table matching"}
+      - {term: "heatwave", source: "EXECUTOR (common usage)", authorization: our_reading, use: "literature classification only; never table matching"}
+      - {term: "heatwaves", source: "EXECUTOR (common usage)", authorization: our_reading, use: "literature classification only; never table matching"}
+      - {term: "high temperatures", source: "EXECUTOR (common usage)", authorization: our_reading, use: "literature classification only; never table matching", conditional: true, condition: {same_section_any_of: climate_coterms_v1}}
+      - {term: "hot days", source: "EXECUTOR (common usage)", authorization: our_reading, use: "literature classification only; never table matching"}
+      - {term: "humid heat", source: "EXECUTOR (common usage)", authorization: our_reading, use: "literature classification only; never table matching"}
+  fire_weather_index:
+    relation: broader_hazard
+    wording_rule: "conditions that favour wildfire (never fire itself)"
+    terms:
+      - {term: "fire weather", source: "EXECUTOR (common usage)", authorization: our_reading, use: "literature classification only; never table matching"}
+      - {term: "fire danger", source: "EXECUTOR (common usage)", authorization: our_reading, use: "literature classification only; never table matching"}
+      - {term: "fire-weather", source: "EXECUTOR (common usage)", authorization: our_reading, use: "literature classification only; never table matching"}
+      - {term: "wildfire", source: "EXECUTOR (common usage)", authorization: our_reading, use: "literature classification only; never table matching"}
+      - {term: "wildfires", source: "EXECUTOR (common usage)", authorization: our_reading, use: "literature classification only; never table matching"}
+      - {term: "wildland fire", source: "EXECUTOR (common usage)", authorization: our_reading, use: "literature classification only; never table matching"}

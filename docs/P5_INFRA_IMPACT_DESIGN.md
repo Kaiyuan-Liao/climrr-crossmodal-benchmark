@@ -14,8 +14,8 @@ polish -> review), applied to LITCORPUS-03 (`LITCORPUS03_PROVENANCE.md`):
 2. **lexicon query** (`run_query.py` v4.1 `--lexicon --rule DR-CAND-INFRA-2`): per paper and hazard family, the hazard
    sections (governed and proxy terms, D-073a), the sections with an asset term, the sector tags and `in_186k_set`
    (`paper_hits.jsonl`);
-3. **candidates** `DR-CAND-INFRA-2` (§3a) -> `candidates.json`, shipped back as `data/metadata/softqa/infra_candidates_v1.json`
-   (hash pinned on ingest; re-derived by `climrr.infra_lexicon.verify_candidates_2`);
+3. **candidates** `DR-CAND-INFRA-3` (§3b; INFRA-2 §3a ran as the v2 diagnostic) -> `candidates.json`; the extraction reads it on Eagle
+   (§6); shipped back afterwards, hash pinned on ingest and re-derived by `climrr.infra_lexicon.verify_candidates_3`;
 4. **extraction** (`litstatement_agent.py` v4.1 `--arm infra_impact_v1`; statement type `impact`, D-073; `hazard_relation`,
    D-073a);
 5. grouping, rung-8 packets, synthesis, polish --- designed after the extraction run is ingested;
@@ -44,7 +44,7 @@ is reported (`by_family.distribution_n_cooc_sections`). A paper in both families
 hazard vocabulary is a scientific decision (an FWI is never fire occurrence; "extreme heat" is not the heat index), not
 taken here. The query reports the counts that decision needs. *(Decided in the P5a hotfix: D-073a, §3a.)*
 
-## 3a. Candidate rule DR-CAND-INFRA-2 (P5a hotfix; D-070a, D-073a) --- the pilot's rule
+## 3a. Candidate rule DR-CAND-INFRA-2 (P5a hotfix; D-070a, D-073a) --- ran as the v2 diagnostic; superseded for the pilot by §3b
 
 DR-CAND-INFRA-1 stays available (`--rule DR-CAND-INFRA-1`, the default; unchanged); the pilot uses INFRA-2.
 
@@ -62,6 +62,25 @@ DR-CAND-INFRA-1 stays available (`--rule DR-CAND-INFRA-1`, the default; unchange
 - **Reading (for confirmation).** On LITCORPUS-03 almost every paper may carry a sector tag, so basis (b) admits nearly
   every paper with a hazard term, and the rank is then close to "number of hazard sections". The query's distribution
   shows how far that is so before the extraction run.
+
+## 3b. v2 diagnostic and candidate rule DR-CAND-INFRA-3 (P5a hotfix 2; D-070b) --- the pilot's rule
+
+**v2 diagnostic** (Polaris, `runs/infra_lexicon_v2`, 2026-11-24 04:30 UTC, run_query v4.1, DR-CAND-INFRA-2; relayed by
+Kaiyuan): 89,497 docs; heat_index admitted 3,107 (39 governed-term, 3,068 proxy-only; "high temperatures" alone in 2,520
+docs); fire_weather_index admitted 432 (10 governed-term); 588 candidates (heat basis a 248 / b 52; fire a 283 / b 17);
+among the heat candidates 216 of 346 rest **only** on "high temperatures" (e.g. doc 100020824, section "integrated cpo and
+pko processes" + "electricity"); `impact: true` on 411 of 588; the qualifying sections are mostly introductions.
+**DR-CAND-INFRA-3** (`run_query.py` v4.2 `--rule DR-CAND-INFRA-3`; INFRA-1 / INFRA-2 unchanged, v4.1 held at `9890a00`):
+"high temperatures" is a conditional proxy --- it counts in a section only with a term of `climate_coterms_v1` (climate,
+climate change, warming, global warming, weather, summer, heat wave(s), heatwave(s), extreme heat, projected, projection(s);
+plurals written out for the no-stemming matcher) in the same section (`hazard_proxy_lexicon_v1a.yaml`, v1 otherwise
+unchanged); basis (a) only (a hazard term and an asset form in the same section), the tagged papers with a hazard section
+but none qualifying go to `basis_b_only.json`, not candidates; rank `impact` true (an impact term anywhere in the paper)
+first, then the number of qualifying sections, then governed-term before broader-hazard, then paper id; cap 300 per family,
+a paper may be a candidate for both; `candidates.json` keeps the v4.1 shape (`basis` always a) plus `impact` and a `report`
+per family (admitted and qualifying before / after the conditional rule; candidates; at each level governed-term,
+`impact` true and in the 186k set; basis-b-only; sections dropped by the rule); re-derived by
+`climrr.infra_lexicon.verify_candidates_3`.
 
 ## 4. Item type (rung 8, D-071) and the wording rule
 
@@ -100,7 +119,7 @@ form QF-08: "What does a projected <change> in <hazard phrase> in <Place> <horiz
 
 ## 6. Polaris plan (Kaiyuan; env as before: `module load conda/2026-10-01`, `conda activate globus_env`)
 
-**Done (2026-11-24):** transfer, extraction and the v1 inventory (`LITCORPUS03_PROVENANCE.md` §4). **Next**, at the pushed
+**Done (2026-11-24):** transfer, extraction and the v1 inventory (`LITCORPUS03_PROVENANCE.md` §4); the v2 query (§3b). **v2 plan**, at the pushed
 commit `<PINNED_SHA>` that carries the P5a hotfix; the litcollect root in `$LITCOLLECT_ROOT_POLARIS`; first check the
 environment: `python -c "import yaml, duckdb; print(duckdb.__version__)"` (DuckDB 1.5.4).
 
@@ -126,7 +145,26 @@ environment: `python -c "import yaml, duckdb; print(duckdb.__version__)"` (DuckD
         --family fire_weather_index=artifacts/literature/litcorpus02/evidence/queries/fire_weather_diag_topical_only_query.txt \
         --family-disambiguate 'fire_weather_index:fwi=fire weather|fire-weather' --cap 300
 
-Ship back: both inventory JSONs (v1 and v1.1; not the tag file, which stays on Eagle --- its SHA-256 is in the v1.1 JSON
+**Next (P5a hotfix 2), at the pushed commit `<PINNED_SHA>` that carries DR-CAND-INFRA-3** (inventory, index and the
+tag file as done for v2):
+
+    python scripts/litcollect/run_query.py --index "$L/index/critical_infrastructure_v1" \
+        --out "$L/runs/infra_lexicon_v3" --name infra_lexicon_v3 \
+        --lexicon data/metadata/litstatements/infrastructure_lexicon_v1.yaml \
+        --rule DR-CAND-INFRA-3 --proxy-lexicon data/metadata/litstatements/hazard_proxy_lexicon_v1a.yaml \
+        --sector-tags "$L/inventory/litcorpus03_sector_tags_v11.jsonl" \
+        --in-set-ids "$L/index/full_705k_v2_filtered/manifest.csv" --in-set-label LITCORPUS-02-source-186k \
+        --family heat_index=artifacts/literature/litcorpus02/evidence/queries/extreme_heat_diag_topical_only_query.txt \
+        --family fire_weather_index=artifacts/literature/litcorpus02/evidence/queries/fire_weather_diag_topical_only_query.txt \
+        --family-disambiguate 'fire_weather_index:fwi=fire weather|fire-weather' --cap 300
+
+Ship back `summary.json`, `candidates.json`, `paper_hits.jsonl` and `basis_b_only.json` (with SHA-256 of each). The infra
+extraction (work package P5a hotfix 2) then reads that `candidates.json` directly:
+`litstatement_agent.py --arm infra_impact_v1 --candidates "$L/runs/infra_lexicon_v3/candidates.json" --index
+"$L/index/critical_infrastructure_v1" --out "$L/litstatements/infra_run1"` (Sophia `openai/gpt-oss-120b`, `--reasoning-effort
+low --max-tokens 6000 --sleep 2 --source-commit <PINNED_SHA>`).
+
+*(v2 plan, done 2026-11-24:)* Ship back: both inventory JSONs (v1 and v1.1; not the tag file, which stays on Eagle --- its SHA-256 is in the v1.1 JSON
 and in `candidates.json`), the index's `index_summary.json` and `build.log`, and the query run's `summary.json`,
 `candidates.json` and `paper_hits.jsonl` (with SHA-256 of each). The ingest checks the v1.1 inventory against the relayed v1
 figures, pins `infra_candidates_v1.json` = `candidates.json` and re-derives it (`verify_candidates_2`). The extraction run

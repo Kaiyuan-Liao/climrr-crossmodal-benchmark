@@ -163,6 +163,9 @@ Since the P5a hotfix (D-069a, D-070a, D-073a) they are `run_query.py` v4.1 (`--r
 `inventory_corpus.py` v1.1 (its JSON and its `--tags-out` file are the run evidence), `litstatement_agent.py` v4.1 and
 `litsynth_agent.py` v5.1; inventory v1, which ran on Polaris, is held by its bytes at the hotfix base commit
 (`climrr.p5a.held_bytes_hotfix`); the replaced run_query v4, litstatement v4 and litsynth v5 never ran.
+Since P5a hotfix 2 (D-070b) `run_query.py` is v4.2 (`--rule DR-CAND-INFRA-3`; its `summary.json`, `candidates.json`,
+`paper_hits.jsonl` and `basis_b_only.json` are the run evidence); v4.1, which ran on Polaris (the v2 query), is held by its
+bytes at the hotfix-2 base commit (`climrr.p5a.held_bytes_hotfix2`).
 
 ## Knowledge-refresh staging
 

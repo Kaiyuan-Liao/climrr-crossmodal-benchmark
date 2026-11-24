@@ -76,3 +76,19 @@ def held_bytes_hotfix(name: str) -> bytes:
     if hashlib.sha256(blob).hexdigest() != HELD_HOTFIX[name]:
         raise ValueError(f"{name} at {HOTFIX_BASE_COMMIT[:7]} differs from its pinned SHA-256 {HELD_HOTFIX[name]}")
     return blob
+
+
+#: P5a hotfix 2 (D-070b): run_query.py v4.1 ran on Polaris (2026-11-24 04:30 UTC, `runs/infra_lexicon_v2`, DR-CAND-INFRA-2;
+#: the v2 diagnostic in docs/P5_INFRA_IMPACT_DESIGN.md §3b) and was then replaced by v4.2 (--rule DR-CAND-INFRA-3); its
+#: bytes are held at the hotfix-2 base commit (pushed).
+HOTFIX2_BASE_COMMIT = "9890a003847691913632f6d2cf667d6c887b2e4d"
+HELD_HOTFIX2 = {
+    "run_query.py": "819f223dc4739079e0b5d6fc7a3c2f5bd38078315d9f168b8ad79b7cf843dc42",   # v4.1 (P5a hotfix; ran on Polaris)
+}
+
+
+def held_bytes_hotfix2(name: str) -> bytes:
+    blob = s2.git_blob(HOTFIX2_BASE_COMMIT, f"{TOOLS_REL}/{name}")
+    if hashlib.sha256(blob).hexdigest() != HELD_HOTFIX2[name]:
+        raise ValueError(f"{name} at {HOTFIX2_BASE_COMMIT[:7]} differs from its pinned SHA-256 {HELD_HOTFIX2[name]}")
+    return blob

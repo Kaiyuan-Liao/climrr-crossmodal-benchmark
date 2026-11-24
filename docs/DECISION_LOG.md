@@ -3538,3 +3538,39 @@ code emits, and the next GUIDANCE packet still chooses.
 - **Affected files:** `data/metadata/litstatements/hazard_proxy_lexicon_v1.yaml`, `data/metadata/benchmark/plain_language_v1b.yaml`,
   `data/manifest.json`, `src/climrr/infra_lexicon.py`, `src/climrr/plain_language.py`, `scripts/litcollect/litstatement_agent.py`,
   `scripts/litcollect/run_query.py`, `scripts/litcollect/litsynth_agent.py`, `tests/test_p5a.py`, `tests/test_p5a_hotfix.py`.
+
+## D-070b --- Candidate rule DR-CAND-INFRA-3: conditional "high temperatures", basis (a) only, impact first
+
+- **Date:** 2026-11-23.
+- **Status:** **decided** (COORDINATOR, work package P5a hotfix 2). Supersedes DR-CAND-INFRA-2 (D-070a) for the pilot;
+  INFRA-2 stays available and is the v2 diagnostic.
+- **Context.** The v2 query (Polaris, `runs/infra_lexicon_v2`, 2026-11-24 04:30 UTC, run_query v4.1, DR-CAND-INFRA-2;
+  numbers in `P5_INFRA_IMPACT_DESIGN.md` §3b): heat_index admitted 3,107, of which 3,068 proxy-only and 2,520 on "high
+  temperatures" alone; 216 of 346 heat candidates rest only on "high temperatures" (e.g. a palm-oil process section with
+  "electricity"); basis (b) admitted 69 candidates.
+- **Decision.** (1) "high temperatures" is a conditional proxy: it qualifies a section only if the same section also holds a
+  term of `climate_coterms_v1` ("climate", "climate change", "warming", "global warming", "weather", "summer", "heat
+  wave(s)", "heatwave(s)", "extreme heat", "projected", "projection(s)"); marked `conditional: true` in
+  `hazard_proxy_lexicon_v1` -> v1a (new file, hash pinned). (2) Basis (a) only; basis (b) papers listed in
+  `basis_b_only.json`, not candidates. (3) Rank: `impact: true` (an impact term anywhere in the paper) first, then the number
+  of co-occurrence sections, then governed over proxy, then doc id; cap 300 per family; a paper may be a candidate for both
+  families. (4) Report per family: admitted, qualifying, candidates, governed-term papers, `impact: true`, in the 186k set,
+  and the heat count after the conditional rule vs before.
+- **Recorded (EXECUTOR).** `data/metadata/litstatements/hazard_proxy_lexicon_v1a.yaml`
+  (`018e5e69cb5c3700dc026ed87a672c81edd6b17efe3b660a34c9b9cf6d94b5f8`; v1 unchanged; `climrr.infra_lexicon.validate_proxy_v1a`);
+  `run_query.py` v4.2 (`--rule DR-CAND-INFRA-3`; the INFRA-1 / INFRA-2 outputs equal v4.1's on the test corpus; v4.1 held at
+  `9890a00`, `climrr.p5a.held_bytes_hotfix2`); `climrr.infra_lexicon.derive_candidates_3` / `verify_candidates_3`.
+  **For confirmation:** (a) the co-term list is stored in the v1a file (`coterm_lists.climate_coterms_v1`), with "heat
+  wave(s)", "heatwave(s)", "projection(s)" written out as singular and plural (the matcher does not stem; "summers" is not
+  "summer"); (b) a co-term only licenses the conditional term; "climate" etc. are never hazard terms; (c) the conditional rule
+  applies per section, so a section dropped by it is neither a hazard nor a qualifying section; (d) "basis (b) papers" = tagged
+  papers with at least one hazard section of the family after the conditional rule and none with an asset form; (e)
+  "governed over proxy" = `hazard_relation` over the qualifying sections (`governed_term` if one holds a governed term); (f)
+  "admitted before" = the v4.1 document-level count (comparable with the v2 3,107), "after" = papers with a hazard section
+  after the rule; (g) `candidates.json` keeps the v4.1 shape (every `basis` a; `n_cooc_sections` = `n_qualifying_sections`)
+  plus `impact` per candidate, `report` per family and `basis_b_only_sha256`; (h) INFRA-3 refuses a proxy lexicon without a
+  conditional term (so v1 cannot be passed by mistake); (i) the work package's extraction command reads `candidates.json` on
+  Eagle directly, not a copy pinned in the repository first (§6 of the design had planned the pinned copy).
+- **Affected files:** `data/metadata/litstatements/hazard_proxy_lexicon_v1a.yaml`, `data/manifest.json`,
+  `scripts/litcollect/run_query.py`, `src/climrr/infra_lexicon.py`, `src/climrr/p5a.py`, `tests/test_p5a_hotfix2.py`,
+  `tests/test_p5a.py`, `tests/test_litcollect_tools.py`, `docs/P5_INFRA_IMPACT_DESIGN.md`, `CLAUDE.md`.

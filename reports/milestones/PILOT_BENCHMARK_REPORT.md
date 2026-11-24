@@ -1333,3 +1333,24 @@ normalised equality, else a unique word prefix ("Transportation" -> Transportati
 inventory v1.1, litstatement v4.1, litsynth v5.1; post-checks v3.2 changed in place (it never ran). (h) Gap (wider under
 v5a): an integrated sentence that opens with a place phrase may carry general groups' mechanisms; v3.2 checks only the
 opening. (i) The tarball's SHA-256 check on Eagle is not among the relayed facts.
+
+## 62. P5a hotfix 2: candidate rule DR-CAND-INFRA-3 (2026-11-23; D-070b)
+
+No model call; nothing frozen; no column status moved. **v2 diagnostic** (relayed; Polaris `runs/infra_lexicon_v2`,
+2026-11-24 04:30 UTC, run_query v4.1, DR-CAND-INFRA-2): 89,497 docs; heat_index admitted 3,107 (39 governed-term, 3,068
+proxy-only; "high temperatures" alone in 2,520); fire_weather_index admitted 432 (10 governed-term); 588 candidates (heat a 248
+/ b 52; fire a 283 / b 17); 216 of 346 heat candidates rest only on "high temperatures"; `impact: true` on 411 of 588.
+
+| | |
+| --- | --- |
+| Proxy lexicon v1a | `hazard_proxy_lexicon_v1a.yaml` `018e5e69cb5c3700dc026ed87a672c81edd6b17efe3b660a34c9b9cf6d94b5f8`; v1's terms, "high temperatures" `conditional: true` on `climate_coterms_v1` (14 terms: the WP's 11 with three plurals written out) |
+| `run_query.py` v4.2 | `aeb3b8cb33c747f8d14e865584856213157044bff4b66625de7f2b8333d6bc3e`; `--rule DR-CAND-INFRA-3`; INFRA-1 / INFRA-2 outputs byte-identical to the held v4.1 (`819f223d…dc42`, at `9890a00`) on the test corpus |
+| Verification | `climrr.infra_lexicon.verify_candidates_3` re-derives the order, ranks, counts and `basis_b_only.json` from `paper_hits.jsonl` |
+| Tests | `pytest`: **1,706 passed, 2 skipped**; new `tests/test_p5a_hotfix2.py` (10) |
+| Scanner | `verify_no_secrets_or_paths.py`: 0 hits |
+
+**Readings for confirmation** (D-070b (a) -- (i)): plurals of the co-term list written out; a co-term never a hazard term; the
+rule per section; "basis (b) papers" = tagged, a hazard section after the rule, none with an asset form; "governed over
+proxy" over the qualifying sections; "admitted before" = the v4.1 document-level count; v4.1 shape kept plus `impact`,
+`report`, `basis_b_only_sha256`; INFRA-3 refuses a lexicon without a conditional term; the extraction reads `candidates.json`
+on Eagle directly.
