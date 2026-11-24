@@ -1489,8 +1489,8 @@ No model call; no column status moved. **Ingest** of `litgroups_infra_run1_evide
 
 ## 66. P5c: gate, escalations, readings for confirmation (2026-11-24)
 
-- **Gate.** Build `<BUILD_SHA>`: `pytest` **1,744 passed, 2 skipped**; scanner 0 hits (2,495 tracked files). Evidence run records
-  (`ingest_litgroups_infra1`, `build_seeds_infra`, `build_synth_packets_infra`) at the clean build tree: `<RUN_RECORDS>`. New
+- **Gate.** Build `79ceca8`: `pytest` **1,744 passed, 2 skipped**; scanner 0 hits (2,495 tracked files). Evidence run records
+  (`ingest_litgroups_infra1`, `build_seeds_infra`, `build_synth_packets_infra`) at the clean build tree: `reports/runs/20261124T181706Z_local_ingest_litgroups_infra1`, `20261124T181708Z_local_build_seeds_infra`, `20261124T181709Z_local_build_synth_packets_infra`; `git_dirty: false`, every output byte-identical. New
   `tests/test_p5c.py` (15).
 - **Escalation 1 --- blocks the synthesis run.** Item schema v2 (`item_schema_v2.json`, frozen, manifest-pinned) allows literature
   statement types `mechanism`, `driver`, `consensus`, `caveat` only. Agent v5.2 copies a cited group's `statement_type` into
