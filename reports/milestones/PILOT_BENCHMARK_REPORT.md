@@ -1248,6 +1248,9 @@ D-069 (scope marking), D-070 (LITCORPUS-03, `external_model_judged`), D-071 (run
 
 ## 59. P5a: gate, escalations, readings for confirmation (2026-11-23)
 
+Build `033c95c`; evidence run `build_synth_packets_v5` at `033c95c` (`git_dirty: false`;
+`reports/runs/20261124T000938Z_local_build_synth_packets_v5.json`), every output byte-identical.
+
 | | |
 | --- | --- |
 | Tests | `pytest`: **1,680 passed, 2 skipped** (the two `jsonschema` skips); new `tests/test_p5a.py` (23); `test_litstatement_agent.py` and `test_p3b.py` run the held v3 / v4.1 bytes; `p2a_review` pins the v3 hash it documents |
