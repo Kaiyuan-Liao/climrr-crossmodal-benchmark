@@ -1308,6 +1308,9 @@ by title; 6,533 papers also in the 186k set; 10,403 distinct tag values.
 
 ## 61. P5a hotfix: gate, escalations, readings for confirmation (2026-11-23)
 
+Build `e44a343`; evidence run `build_synth_packets_v5a` at `e44a343` (`git_dirty: false`;
+`reports/runs/20261124T031551Z_local_build_synth_packets_v5a.json`), every output byte-identical.
+
 | | |
 | --- | --- |
 | Tests | `pytest`: **1,696 passed, 2 skipped** (the two `jsonschema` skips); new `tests/test_p5a_hotfix.py` (16); `test_p5a.py` repinned to the new tool versions (two expectations follow D-073a: "heat wave" / "extreme heat" now pass the infra pre-check) |
