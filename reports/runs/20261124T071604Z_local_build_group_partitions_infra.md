@@ -1,0 +1,54 @@
+# Run record: 20261124T071604Z_local_build_group_partitions_infra
+
+- **Result**: PASS
+- **UTC timestamp**: 2026-11-24T07:16:04.672992+00:00
+- **Git commit**: `229e438eea2f3e1622509d41abcfb2007f3795bf`
+- **Working tree dirty (tracked files)**: False
+- **Untracked files present**: 2
+- **Hostname**: ryous-MacBook-Pro-2.local
+- **Location**: local
+- **Python**: 3.11.16 (macOS-15.3-arm64-arm-64bit)
+- **pip freeze SHA-256**: `d9af804d5018f7022ae9f4db0bb83a8d57104d2ff6ff5676d912d896f952bf51`
+- **Pinned libraries (D-007)**: `pandas==3.0.5`, `numpy==2.4.6`, `pypdf==6.18.0`, `pyyaml==6.0.3`, `pytest==9.1.1`, `pypdfium2==5.13.0`
+- **Data path (repo-relative)**: `artifacts/litstatements/infra_run1/statements_ingested.jsonl`
+- **Data SHA-256**: `869b0592e72ec22b7617a3fbe6ae3005df762b4817f7609e41c96a8559cbca4b`
+- **Output path**: `artifacts/litgroups/partitions_infra_v1.jsonl`
+
+## Config snapshot
+
+```json
+{
+  "version": "litgroups partitions infra v1",
+  "decision": "D-075",
+  "min_class": 8,
+  "chunk_size": 40,
+  "family_phrase": {
+    "heat_index": "extreme heat and humid heat (of which the heat index is one measure)",
+    "fire_weather_index": "fire weather and fire danger (conditions that favour wildfire)"
+  },
+  "geography": "litgeo v2",
+  "model_calls": 0
+}
+```
+
+## Result summary
+
+- `version`: litgroups partitions infra v1
+- `decision`: D-075
+- `min_class`: 8
+- `chunk_size`: 40
+- `partitions`: 11
+- `statements`: 198
+- `chunks`: 12
+- `chunks_per_partition`: {'infra_heat_index.impact.energy': 2, 'infra_heat_index.impact.healthcare_and_public_health': 1, 'infra_heat_index.impact.transportation_systems': 1, 'infra_heat_index.impact.other_assets': 1, 'infra_heat_index.driver': 1, 'infra_heat_index.mechanism': 1, 'infra_fire_weather_index.impact.energy': 1, 'infra_fire_weather_index.impact.transportation_systems': 1, 'infra_fire_weather_index.impact.other_assets': 1, 'infra_fire_weather_index.driver': 1, 'infra_fire_weather_index.mechanism': 1}
+- `sizes`: {'infra_heat_index.impact.energy': 43, 'infra_heat_index.impact.healthcare_and_public_health': 15, 'infra_heat_index.impact.transportation_systems': 22, 'infra_heat_index.impact.other_assets': 18, 'infra_heat_index.driver': 17, 'infra_heat_index.mechanism': 8, 'infra_fire_weather_index.impact.energy': 21, 'infra_fire_weather_index.impact.transportation_systems': 13, 'infra_fire_weather_index.impact.other_assets': 19, 'infra_fire_weather_index.driver': 17, 'infra_fire_weather_index.mechanism': 5}
+- `impact_partitions`: 7
+- `impact_statements`: 151
+- `by_role`: {'cited_candidate': 24, 'core_candidate': 174}
+- `by_region_class`: {'global': 23, 'nca': 2, 'other': 99, 'state': 36, 'unknown': 25, 'us_national': 12, 'us_subregion': 1}
+- `family_phrase`: {'heat_index': 'extreme heat and humid heat (of which the heat index is one measure)', 'fire_weather_index': 'fire weather and fire danger (conditions that favour wildfire)'}
+- `asset_partition_map`: {'heat_index': {'commercial_facilities': 'other_assets', 'emergency_services': 'other_assets', 'energy': 'energy', 'food_and_agriculture': 'other_assets', 'healthcare_and_public_health': 'healthcare_and_public_health', 'other': 'other_assets', 'transportation_systems': 'transportation_systems', 'water_and_wastewater': 'other_assets'}, 'fire_weather_index': {'communications': 'other_assets', 'dams': 'other_assets', 'emergency_services': 'other_assets', 'energy': 'energy', 'healthcare_and_public_health': 'other_assets', 'other': 'other_assets', 'transportation_systems': 'transportation_systems', 'water_and_wastewater': 'other_assets'}}
+- `merged_into_other_assets`: {'heat_index': ['commercial_facilities', 'emergency_services', 'food_and_agriculture', 'other', 'water_and_wastewater'], 'fire_weather_index': ['communications', 'dams', 'emergency_services', 'healthcare_and_public_health', 'other', 'water_and_wastewater']}
+- `passing_not_partitioned`: {'caveat|fire_weather_index': 1, 'consensus|fire_weather_index': 3, 'pattern|fire_weather_index': 3, 'pattern|heat_index': 5}
+- `partitions_file`: {'path': 'artifacts/litgroups/partitions_infra_v1.jsonl', 'sha256': '0d8f3229e06b7b2dc209c33b108b9b58d477633d9602eaa8862840ded8bc9b50'}
+- `inputs`: {'statements_ingested_sha256': '869b0592e72ec22b7617a3fbe6ae3005df762b4817f7609e41c96a8559cbca4b', 'independence_v2_sha256': 'b0a2fa3f3bd9998597c4681100586abf555ce295283984f102222030bd2fb602', 'exclusions_sha256': '41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f', 'nca_map_sha256': '3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41'}

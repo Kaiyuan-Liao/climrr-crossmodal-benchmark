@@ -1,0 +1,186 @@
+{
+  "run_id": "20261124T071604Z_local_ingest_litstatements_infra1",
+  "name": "ingest_litstatements_infra1",
+  "utc_timestamp": "2026-11-24T07:16:04.066694+00:00",
+  "git_commit": "229e438eea2f3e1622509d41abcfb2007f3795bf",
+  "git_dirty": false,
+  "untracked_files": 0,
+  "hostname": "ryous-MacBook-Pro-2.local",
+  "location": "local",
+  "user": "liaokaiyuan",
+  "python_version": "3.11.16",
+  "pinned_libraries": [
+    {
+      "name": "pandas",
+      "pinned_version": "3.0.5",
+      "imported_version": "3.0.5",
+      "matches_pin": true
+    },
+    {
+      "name": "numpy",
+      "pinned_version": "2.4.6",
+      "imported_version": "2.4.6",
+      "matches_pin": true
+    },
+    {
+      "name": "pypdf",
+      "pinned_version": "6.18.0",
+      "imported_version": "6.18.0",
+      "matches_pin": true
+    },
+    {
+      "name": "pyyaml",
+      "pinned_version": "6.0.3",
+      "imported_version": "6.0.3",
+      "matches_pin": true
+    },
+    {
+      "name": "pytest",
+      "pinned_version": "9.1.1",
+      "imported_version": "9.1.1",
+      "matches_pin": true
+    },
+    {
+      "name": "pypdfium2",
+      "pinned_version": "5.13.0",
+      "imported_version": "5.13.0",
+      "matches_pin": true
+    }
+  ],
+  "platform": "macOS-15.3-arm64-arm-64bit",
+  "pip_freeze_sha256": "d9af804d5018f7022ae9f4db0bb83a8d57104d2ff6ff5676d912d896f952bf51",
+  "config_snapshot": {
+    "source": "infra_run1_evidence.tar.gz (extracted)",
+    "source_tarball_sha256": "218a9a430daf249f340c6ecbe46dd03c610bc77069520a93171d131655a1ad5a",
+    "excluded": [
+      "prompt_user.txt",
+      "response.json"
+    ],
+    "not_copied": [
+      "runs/infra_lexicon_v2/candidates.json",
+      "runs/infra_lexicon_v2/paper_hits.jsonl",
+      "runs/infra_lexicon_v3/paper_hits.jsonl"
+    ],
+    "decision": "D-074",
+    "run_executed_on": "Polaris; this record is the local ingest, not the run",
+    "model_calls": 0
+  },
+  "data_path": "infra_run1_evidence.tar.gz",
+  "data_sha256": "218a9a430daf249f340c6ecbe46dd03c610bc77069520a93171d131655a1ad5a",
+  "output_path": "artifacts/litstatements/infra_run1",
+  "result_summary": {
+    "manifest_sha256": "74e5188e5555df927630d53484e23c3ac9361ea89b38573fb2c127d1f072dae2",
+    "corpus_manifest_sha256": "0d999fdd3f6d27c6282685ba3bd38939079b30638dc7f063b65b5d2759bd2a77",
+    "statements_ingested_sha256": "869b0592e72ec22b7617a3fbe6ae3005df762b4817f7609e41c96a8559cbca4b",
+    "independence_v2_sha256": "b0a2fa3f3bd9998597c4681100586abf555ce295283984f102222030bd2fb602",
+    "breakdowns_sha256": "66849624c23087ca0a45ef77419927de5d825cd4dfaf328697dd87fcd403f9a6",
+    "infra_candidates_v1_sha256": "079687206168f75c2e8e924391b8db18f3b1659fc5e3a2f6177dabcf0309b176",
+    "files_copied_this_run": 0,
+    "files_in_manifest": 578,
+    "excluded_files": 1144,
+    "redacted_files": [
+      "artifacts/literature/litcorpus03/index/index_summary.json",
+      "artifacts/literature/litcorpus03/logs/litcorpus03_index_build.log",
+      "artifacts/literature/litcorpus03/runs/infra_lexicon_v2/summary.json",
+      "artifacts/literature/litcorpus03/runs/infra_lexicon_v3/summary.json"
+    ],
+    "counts": {
+      "papers": 572,
+      "papers_with_error": 0,
+      "papers_over_limit": 0,
+      "truncated": 31,
+      "statements": 407,
+      "deterministic_pass": 210,
+      "rejected_pre_review": 197,
+      "papers_zero_statements": 407,
+      "papers_productive": 165,
+      "by_statement_type": {
+        "impact": 264,
+        "driver": 79,
+        "mechanism": 38,
+        "pattern": 14,
+        "caveat": 5,
+        "consensus": 5,
+        "background": 2
+      },
+      "by_recovery": {
+        "exact": 213,
+        "prefix_anchor": 83,
+        "normalized": 30,
+        "not_found": 81
+      },
+      "evidence_roles": {
+        "background_consensus_candidate": 71,
+        "cited_candidate": 26,
+        "core_candidate": 184,
+        "unusable": 126
+      },
+      "impact_candidates": 151
+    },
+    "independence": {
+      "papers_n": 572,
+      "canonical_papers_n": 571,
+      "merged_groups": [
+        [
+          "210275610",
+          "226192613"
+        ]
+      ],
+      "by_basis": {
+        "same_paper_sha256": 0,
+        "possible_duplicate_title": 2,
+        "assumed_independent_distinct_ids": 570
+      }
+    },
+    "candidates_verify_3": "pass",
+    "breakdowns": {
+      "passing_by_type": {
+        "caveat": 1,
+        "consensus": 3,
+        "driver": 34,
+        "impact": 151,
+        "mechanism": 13,
+        "pattern": 8
+      },
+      "passing_impact_by_asset_family": {
+        "commercial_facilities | heat_index": 1,
+        "communications | fire_weather_index": 1,
+        "dams | fire_weather_index": 1,
+        "emergency_services | fire_weather_index": 4,
+        "emergency_services | heat_index": 3,
+        "energy | fire_weather_index": 21,
+        "energy | heat_index": 43,
+        "food_and_agriculture | heat_index": 2,
+        "healthcare_and_public_health | fire_weather_index": 2,
+        "healthcare_and_public_health | heat_index": 15,
+        "other | fire_weather_index": 4,
+        "other | heat_index": 6,
+        "transportation_systems | fire_weather_index": 13,
+        "transportation_systems | heat_index": 22,
+        "water_and_wastewater | fire_weather_index": 7,
+        "water_and_wastewater | heat_index": 6
+      },
+      "passing_impact_naming_us_place": {
+        "n": 38,
+        "classes": [
+          "state",
+          "nca",
+          "us_subregion",
+          "us_national"
+        ],
+        "by_class": {
+          "nca": 2,
+          "state": 28,
+          "us_national": 7,
+          "us_subregion": 1
+        }
+      },
+      "passing_by_family_basis": {
+        "agent_hazard_family": 151,
+        "hazard_term_lookup": 42,
+        "paper_only_candidate_family": 17
+      }
+    }
+  },
+  "passed": true
+}

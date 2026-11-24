@@ -1373,7 +1373,9 @@ verified): every stated run fact reproduced (`P5_INFRA_IMPACT_DESIGN.md` §7; th
 
 ## 64. P5b: gate, escalations, readings for confirmation (2026-11-23)
 
-- **Gate.** `pytest` and `scripts/verify_no_secrets_or_paths.py` at the commit (numbers in the commit's report-back);
+- **Gate.** Build `229e438`: `pytest` **1,729 passed, 2 skipped**; scanner 0 hits. Evidence run records
+  (`reports/runs/20261124T071604Z_local_ingest_litstatements_infra1`, `..._build_group_partitions_infra`) at the clean build
+  tree, `git_dirty: false`, every output byte-identical;
   new `tests/test_p5b.py`; `test_litgroup_agent.py`, `test_litgroups_run2.py`, `test_p5a.py`, `test_p5a_hotfix.py` read the held
   bytes.
 - **Discrepancy (not a stop).** The work package abbreviates the run's system prompt "945b487c…9095"; the delivered records,
