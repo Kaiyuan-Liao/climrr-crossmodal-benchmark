@@ -1821,4 +1821,6 @@ then statement id; "(N more in provenance)" when cut (7 groups cut on the sheet)
 is place-named when its recorded `region` names the item's state as a whole word ("Phoenix, Arizona", "southern California").
 README gains a sixth line: "Claim groups are formed by an agent and checked by a reviewer at the claim level; individual member
 passages are still under review." Every member passage is still checked against the item, shown or not.
-Sheet `.md` `454ba2cb81c96b77005cbb4f6587a3f7ce6c07592081f16c9ce5d3b73a586d46`. Gate: `docs/PROJECT_STATE.md`.
+Sheet `.md` `454ba2cb81c96b77005cbb4f6587a3f7ce6c07592081f16c9ce5d3b73a586d46`. Gate: build `5df121e`, `pytest`
+1,796 passed, 2 skipped; scanner 0 hits; evidence run record `reports/runs/20261125T003016Z_local_build_mentor_sheet_alvi` at the clean
+build tree, outputs byte-identical.
