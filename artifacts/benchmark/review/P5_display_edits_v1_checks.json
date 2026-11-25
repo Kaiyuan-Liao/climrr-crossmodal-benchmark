@@ -1,0 +1,126 @@
+{
+  "version": "P5 display edits v1 checks",
+  "edits_sha256": "a44e89307d6f877c7480e6da164995702878f45123690f535c41b1572c44bb8e",
+  "leakage_check_version": "synthesis_post_checks v2.3",
+  "post_check_version": "synthesis_post_checks v3.5",
+  "report_only": true,
+  "items_modified": 0,
+  "items": [
+    {
+      "item_id": "BI-P5-0001",
+      "base_source": "original",
+      "edits_applied": [
+        "closing_clause",
+        "BI-P5-0001#1"
+      ],
+      "edits_absent": [
+        "us_southwest_opener"
+      ],
+      "display_answer": "In Virginia, dangerous heat-index days in summer are projected to increase more than tripling, from about 4 to about 16 days a summer, by mid-century under a high-emissions future. Research on the United States shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can reduce generation output of energy systems. In general, research shows that such heat raises electricity demand and stresses energy systems. In general, research shows that extreme heat and wind raise the chance of ignitions near power lines. These are general research findings, not findings specific to Virginia.",
+      "leakage_v2_3": {
+        "prompt": [],
+        "answer": []
+      },
+      "post_checks_v3_5": {
+        "pass": false,
+        "reasons": [
+          "integrated: closing clause (D-069) missing at the end: 'These are general drivers of dangerous heat-index days, not findings specific to Virginia.'",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'These are general research findings, not findings specific t'"
+        ]
+      },
+      "post_checks_v3_5_closing_clause_reverted": {
+        "pass": true,
+        "reasons": [],
+        "packet_general_clause": "These are general drivers of dangerous heat-index days, not findings specific to Virginia."
+      }
+    },
+    {
+      "item_id": "BI-P5-0002",
+      "base_source": "polished",
+      "edits_applied": [
+        "closing_clause",
+        "us_southwest_opener",
+        "BI-P5-0002#1",
+        "BI-P5-0002#2"
+      ],
+      "edits_absent": [],
+      "display_answer": "Dangerous heat-index days are projected to increase moderately in Arizona by mid-century under a high-emissions future. Research on the United States, including work on the Southwest, shows that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heat‑wave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems. In general, research shows that such heat increases pavement distress, reducing the performance of transportation systems. These are general research findings, not findings specific to Arizona.",
+      "leakage_v2_3": {
+        "prompt": [],
+        "answer": []
+      },
+      "post_checks_v3_5": {
+        "pass": false,
+        "reasons": [
+          "integrated: closing clause (D-069) missing at the end: 'These are general drivers of dangerous heat-index days, not findings specific to Arizona.'",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'These are general research findings, not findings specific t'"
+        ]
+      },
+      "post_checks_v3_5_closing_clause_reverted": {
+        "pass": true,
+        "reasons": [],
+        "packet_general_clause": "These are general drivers of dangerous heat-index days, not findings specific to Arizona."
+      }
+    },
+    {
+      "item_id": "BI-P5-0004",
+      "base_source": "original",
+      "edits_applied": [
+        "closing_clause"
+      ],
+      "edits_absent": [
+        "us_southwest_opener"
+      ],
+      "display_answer": "Dangerous heat-index days in California are projected to show a moderate increase by mid-century under a high-emissions future. Research on the United States, including work on the Southwest, shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services, straining healthcare and public health systems. In general, research suggests that such heat can damage critical public health infrastructure, impeding healthcare and public health systems. These are general research findings, not findings specific to California.",
+      "leakage_v2_3": {
+        "prompt": [],
+        "answer": []
+      },
+      "post_checks_v3_5": {
+        "pass": false,
+        "reasons": [
+          "integrated: closing clause (D-069) missing at the end: 'These are general drivers of dangerous heat-index days, not findings specific to California.'",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'These are general research findings, not findings specific t'"
+        ]
+      },
+      "post_checks_v3_5_closing_clause_reverted": {
+        "pass": true,
+        "reasons": [],
+        "packet_general_clause": "These are general drivers of dangerous heat-index days, not findings specific to California."
+      }
+    },
+    {
+      "item_id": "BI-P5-0007",
+      "base_source": "original",
+      "edits_applied": [
+        "BI-P5-0007#1"
+      ],
+      "edits_absent": [
+        "closing_clause",
+        "us_southwest_opener"
+      ],
+      "display_answer": "Fire‑weather danger in California is projected to show a slight increase by mid-century under a high-emissions future, a larger change than in most states. Research on California shows that strong winds are a primary driver of fire‑weather danger. In general, research shows that drier air, with a higher vapor-pressure deficit, raises fire danger. In general, research suggests that fire‑weather danger can increase daily standby costs for emergency services.",
+      "leakage_v2_3": {
+        "prompt": [],
+        "answer": []
+      },
+      "post_checks_v3_5": {
+        "pass": true,
+        "reasons": []
+      }
+    }
+  ],
+  "not_edited": [
+    "BI-P5-0006",
+    "BI-P5-0008"
+  ],
+  "failures": 3,
+  "items_failing": [
+    "BI-P5-0001",
+    "BI-P5-0002",
+    "BI-P5-0004"
+  ],
+  "leakage_failures": 0,
+  "failures_with_closing_clause_reverted": 0,
+  "reading": "post-checks v3.5 compare the closing clause with the packet's pinned general_clause ('These are general drivers of <quantity>, not findings specific to <Place>.'), and the new wording names 'research', so the D-069 scope-opener rule for paragraph sentences also catches it; with only the clause put back, the count is failures_with_closing_clause_reverted"
+}

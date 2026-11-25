@@ -1,0 +1,94 @@
+{
+  "run": "polish/infra_run1",
+  "role": "superseded",
+  "superseded_by": "polish/infra_run2",
+  "work_package": "P5d",
+  "tarball": {
+    "name": "infra_synth_runs12_evidence.tar.gz",
+    "sha256": "1ab289297f0ba606c147f97eb0b1d5758991598b7e78216ef5fb3ca80a4d33f7"
+  },
+  "generator": {
+    "version": "litpolish_agent v1.1",
+    "agent_sha256": "6abc7b2b46298934682bf8342793e185cc73b85d69b505ef61e6cbe0c374366e",
+    "check_version": "polish_checks v2"
+  },
+  "source_commit": "b860658873bd4d80ae9500587e23b18d4778c387",
+  "input": "infra synthesis run 1 (its two passing items)",
+  "counts": {
+    "items": 2,
+    "polished": 1,
+    "polish_rejected": 1,
+    "polish_parse_failed": 0
+  },
+  "summary_sha256": "4c54e8823e214b062ecf2267960ea28167e2a9c778383f93cb2447536138a942",
+  "polished_sha256": "9bc096cfeafdfc21fa0739588b850d851dbd8d17d7b922df28fd37fead371186",
+  "checks_reproduced": true,
+  "checks": [
+    {
+      "item_id": "BI-P5-0003",
+      "seed_id": "SD8-TP1-00071-water_and_wastewater",
+      "pass": true,
+      "reasons": []
+    },
+    {
+      "item_id": "BI-P5-0001",
+      "seed_id": "SD8-TP1-00111-energy",
+      "pass": false,
+      "reasons": [
+        "answer: places differ (original ['United States', 'Virginia'], polished ['Virginia'])",
+        "answer: hedges differ (original ['shows', 'suggests'], polished [])"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "polished.jsonl",
+      "sha256": "9bc096cfeafdfc21fa0739588b850d851dbd8d17d7b922df28fd37fead371186",
+      "bytes": 11989
+    },
+    {
+      "path": "summary.json",
+      "sha256": "4c54e8823e214b062ecf2267960ea28167e2a9c778383f93cb2447536138a942",
+      "bytes": 778
+    },
+    {
+      "path": "agent.log",
+      "sha256": "15faa6085901a15bb27f2ca5ea5692f2b0102c65f268acacc679ec063d078b12",
+      "bytes": 498
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": "litpolish/infra_run1/items/SD8-TP1-00071-water_and_wastewater.json",
+      "sha256": "90a548447f0aac0e04806350f24629e3edc4405567845d838a991e01743439e9",
+      "bytes": 67122
+    },
+    {
+      "path": "litpolish/infra_run1/items/SD8-TP1-00111-energy.json",
+      "sha256": "346f25c82738bf65cb30fdcb0e6b05d0db1df227f6ba2e8271f08f7822f64054",
+      "bytes": 90441
+    },
+    {
+      "path": "litpolish/infra_run1/raw/SD8-TP1-00071-water_and_wastewater/prompt_user.txt",
+      "sha256": "0396a9a0edb972aaa0b9b8baa5e34c6ee8a31cf3a382ca39760489dc5d942934",
+      "bytes": 1045
+    },
+    {
+      "path": "litpolish/infra_run1/raw/SD8-TP1-00071-water_and_wastewater/response.json",
+      "sha256": "98126be9b63dba8c32720bdbe57a3be0d8c2daa4c498222b5368cb32ed15a960",
+      "bytes": 4412
+    },
+    {
+      "path": "litpolish/infra_run1/raw/SD8-TP1-00111-energy/prompt_user.txt",
+      "sha256": "7349205bdf1168854a512f781037471fb9ad872c706b6dcc075fe41b654a018b",
+      "bytes": 1841
+    },
+    {
+      "path": "litpolish/infra_run1/raw/SD8-TP1-00111-energy/response.json",
+      "sha256": "38a7f64aa1cad95a7abaee145c5a2e57bfa674f2f10d31e01896c9847783bc30",
+      "bytes": 2676
+    }
+  ],
+  "ingested_at": "2026-11-25T00:07:46Z",
+  "ingested_by": "EXECUTOR"
+}

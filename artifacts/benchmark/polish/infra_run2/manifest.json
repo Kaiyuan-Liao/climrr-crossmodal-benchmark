@@ -1,0 +1,236 @@
+{
+  "run": "polish/infra_run2",
+  "diagnostic_id": "litpolish_infra_run2",
+  "decision": "D-080",
+  "display_rule": "D-079",
+  "work_package": "P5d",
+  "tarball": {
+    "name": "infra_synth_runs12_evidence.tar.gz",
+    "sha256": "1ab289297f0ba606c147f97eb0b1d5758991598b7e78216ef5fb3ca80a4d33f7"
+  },
+  "generator": {
+    "version": "litpolish_agent v1.1",
+    "agent_path": "scripts/litcollect/litpolish_agent.py",
+    "agent_sha256": "6abc7b2b46298934682bf8342793e185cc73b85d69b505ef61e6cbe0c374366e",
+    "system_prompt_sha256": "2dbbce7f345fdcdeccd4661c22f5c22d87e6c4bcaa070856b59e6234093f0a18",
+    "corrective_template_sha256": "b12f5fc80f7ad62b20c122f7cb28c5174a9c0c48888acdcd609dbab63f722bf8",
+    "check_version": "polish_checks v2"
+  },
+  "endpoint": {
+    "endpoint_label": "sophia_vllm",
+    "model": "openai/gpt-oss-120b",
+    "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1"
+  },
+  "budget": {
+    "reasoning_effort": "low",
+    "max_tokens": 16000,
+    "temperature": 0
+  },
+  "source_commit": "bf699700ab45ee9f3b0f5715515c1b7b42a7ba66",
+  "input": "infra synthesis run 2 (artifacts/benchmark/items/infra_run2)",
+  "counts": {
+    "items": 6,
+    "polished": 4,
+    "polish_rejected": 2,
+    "polish_parse_failed": 0,
+    "reasons_by_kind": {
+      "hedges": 1,
+      "places": 1
+    },
+    "skipped_not_deterministic_pass": [
+      "BI-P5-0003",
+      "BI-P5-0005"
+    ]
+  },
+  "rejected": {
+    "BI-P5-0001": [
+      "answer: places differ (original ['United States', 'Virginia'], polished ['Virginia'])"
+    ],
+    "BI-P5-0008": [
+      "answer: hedges differ (original ['show', 'shows', 'suggests'], polished ['show', 'suggests'])"
+    ]
+  },
+  "log": {
+    "start_utc": "2026-11-24T23:49:12Z",
+    "restart_utc": [
+      "2026-11-24T23:57:22Z"
+    ],
+    "done": [
+      "items=5 polished=3 rejected=2 parse_failed=0",
+      "items=6 polished=4 rejected=2 parse_failed=0"
+    ],
+    "reading": "the first polish start ran after the first synthesis start (BI-P5-0002 then rejected, skipped); the second, after BI-P5-0002 was redrawn, polished it"
+  },
+  "summary_sha256": "4e66b248b4c3b6937db0531aecafe1d95e5ff710c934d600884d467d732ccc0d",
+  "polished_sha256": "21f6620738cf3958eea049448ee2f4c0e98a9a40503bf3aaa8bb173a6ffdb1c7",
+  "checks_reproduced": true,
+  "checks": {
+    "checks_reproduced": true,
+    "check_version": "polish_checks v2",
+    "synonyms_sha256": "7d55d33ca1ca6212341ef06f3a2857f3bfd145ac637e667deb42955fa2267b2b",
+    "descriptor_rules_sha256": "dbfa8fd8a86a9379b4709b998bb33e673dceafd5f8ba7d199d55ff672d4c282d",
+    "plain_language_sha256": "bd6fc84416c6a5fae4bfcc40dab927758d71fd3411daf22817b05ab1932d5c46",
+    "items": [
+      {
+        "item_id": "BI-P5-0004",
+        "seed_id": "SD8-TP1-00071-healthcare_and_public_health",
+        "pass": true,
+        "reasons": []
+      },
+      {
+        "item_id": "BI-P5-0001",
+        "seed_id": "SD8-TP1-00111-energy",
+        "pass": false,
+        "reasons": [
+          "answer: places differ (original ['United States', 'Virginia'], polished ['Virginia'])"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0008",
+        "seed_id": "SD8-TP1-01463-communications",
+        "pass": false,
+        "reasons": [
+          "answer: hedges differ (original ['show', 'shows', 'suggests'], polished ['show', 'suggests'])"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0007",
+        "seed_id": "SD8-TP1-01463-emergency_services",
+        "pass": true,
+        "reasons": []
+      },
+      {
+        "item_id": "BI-P5-0006",
+        "seed_id": "SD8-TP1-01463-transportation_systems",
+        "pass": true,
+        "reasons": []
+      },
+      {
+        "item_id": "BI-P5-0002",
+        "seed_id": "SD8-TP1-00069-transportation_systems",
+        "pass": true,
+        "reasons": []
+      }
+    ]
+  },
+  "display_source": {
+    "BI-P5-0001": "original",
+    "BI-P5-0002": "polished",
+    "BI-P5-0004": "original",
+    "BI-P5-0006": "original",
+    "BI-P5-0007": "original",
+    "BI-P5-0008": "original"
+  },
+  "files": [
+    {
+      "path": "polished.jsonl",
+      "sha256": "21f6620738cf3958eea049448ee2f4c0e98a9a40503bf3aaa8bb173a6ffdb1c7",
+      "bytes": 23964
+    },
+    {
+      "path": "summary.json",
+      "sha256": "4e66b248b4c3b6937db0531aecafe1d95e5ff710c934d600884d467d732ccc0d",
+      "bytes": 706
+    },
+    {
+      "path": "agent.log",
+      "sha256": "5b57d94c4ef886b356aec98f5406d7946176ac3172c82cfb73fcb31643b4f231",
+      "bytes": 1203
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": "litpolish/infra_run2/items/SD8-TP1-00069-transportation_systems.json",
+      "sha256": "2f12c7bca585fa318c27af92f916fed835a4e7831e9f1f5cd7fae44c0aa233b8",
+      "bytes": 70949
+    },
+    {
+      "path": "litpolish/infra_run2/items/SD8-TP1-00071-healthcare_and_public_health.json",
+      "sha256": "d8af14e60092749bb5d4bec5fb241ed2b495a7d1a59258d9793c80ecf1c208e4",
+      "bytes": 63211
+    },
+    {
+      "path": "litpolish/infra_run2/items/SD8-TP1-00111-energy.json",
+      "sha256": "9f0618a17c3b941374ffedac76831b710b3716bc4c68b4f7fc7efed700aa206e",
+      "bytes": 70336
+    },
+    {
+      "path": "litpolish/infra_run2/items/SD8-TP1-01463-communications.json",
+      "sha256": "915963b1309ab49be888206425e784ea9b99565bbbcf50e66e589744296a3764",
+      "bytes": 56941
+    },
+    {
+      "path": "litpolish/infra_run2/items/SD8-TP1-01463-emergency_services.json",
+      "sha256": "42519767ba01e1873041c37197ff837bffe461341b70ac1f59d6eb47a2042f1c",
+      "bytes": 43873
+    },
+    {
+      "path": "litpolish/infra_run2/items/SD8-TP1-01463-transportation_systems.json",
+      "sha256": "d6aea74bcb0dadd2cc49d6025066a1a3672c85c2d5a9b61d1f264e6edc6c7604",
+      "bytes": 51273
+    },
+    {
+      "path": "litpolish/infra_run2/raw/SD8-TP1-00069-transportation_systems/prompt_user.txt",
+      "sha256": "4ad1bfc9d60985e44f9593951234b73a0d81589d23735e17b5d0552978ea1750",
+      "bytes": 1015
+    },
+    {
+      "path": "litpolish/infra_run2/raw/SD8-TP1-00069-transportation_systems/response.json",
+      "sha256": "ec0a573af3d9c1e488fc6232e50caaa051e68a272ba00f020c1708d7bf0865e1",
+      "bytes": 3727
+    },
+    {
+      "path": "litpolish/infra_run2/raw/SD8-TP1-00071-healthcare_and_public_health/prompt_user.txt",
+      "sha256": "9cea5e19b3766d7aa3a2b098e354ba2996903cfc330e6691bea7c0513a565b5f",
+      "bytes": 995
+    },
+    {
+      "path": "litpolish/infra_run2/raw/SD8-TP1-00071-healthcare_and_public_health/response.json",
+      "sha256": "6906e53fd0c8cdf61e4bf5358ed20ee574971d2bb894e80dabce869f73b7ec81",
+      "bytes": 3403
+    },
+    {
+      "path": "litpolish/infra_run2/raw/SD8-TP1-00111-energy/prompt_user.txt",
+      "sha256": "1a1108b1c249ba73623ec17181b6fe97d278c1fac2109e654eccd0e2a4bddc8d",
+      "bytes": 984
+    },
+    {
+      "path": "litpolish/infra_run2/raw/SD8-TP1-00111-energy/response.json",
+      "sha256": "5c57dd37b378f1bdb659390248ee28a409df12e85d5a55a82681b97b1e2325f2",
+      "bytes": 2133
+    },
+    {
+      "path": "litpolish/infra_run2/raw/SD8-TP1-01463-communications/prompt_user.txt",
+      "sha256": "d8e3804ce31602779f0537f87792da932e9ae43a2773eed38566b8b2225f92bd",
+      "bytes": 621
+    },
+    {
+      "path": "litpolish/infra_run2/raw/SD8-TP1-01463-communications/response.json",
+      "sha256": "a14390e3d6380b7b4fb0683a5772feba7d725fde693d29194e4da219b59457be",
+      "bytes": 2012
+    },
+    {
+      "path": "litpolish/infra_run2/raw/SD8-TP1-01463-emergency_services/prompt_user.txt",
+      "sha256": "1a5b836a30eb434748c3bacf7c490d6856a04775d55b18d1d5789ad5d09e0532",
+      "bytes": 603
+    },
+    {
+      "path": "litpolish/infra_run2/raw/SD8-TP1-01463-emergency_services/response.json",
+      "sha256": "24e64405de9a4974c979b78a09c005c6530f05806b51e4d14a056b8254ae517e",
+      "bytes": 3054
+    },
+    {
+      "path": "litpolish/infra_run2/raw/SD8-TP1-01463-transportation_systems/prompt_user.txt",
+      "sha256": "5a1dc0c736a662db484f9f30fcf01d4ea2a0a89315ef89df05ab98e2955f925e",
+      "bytes": 1029
+    },
+    {
+      "path": "litpolish/infra_run2/raw/SD8-TP1-01463-transportation_systems/response.json",
+      "sha256": "f415dd49b476ba8e339b7b3966854d5670ac4a77e9084bfeca86b5231eaadcf7",
+      "bytes": 3563
+    }
+  ],
+  "note": "four rewrites passed polish checks v2 (BI-P5-0002, 0004, 0006, 0007); BI-P5-0001 and 0008 were rejected. Under D-079 only BI-P5-0002's rewrite also passes post-checks v3.5 and is its display text; the item records with their polish event are in items/infra_run2/items (human_review)",
+  "ingested_at": "2026-11-25T00:07:46Z",
+  "ingested_by": "EXECUTOR"
+}

@@ -1,0 +1,1112 @@
+{
+  "schema_version": "benchmark_item_v2a",
+  "item_id": "BI-P5-0004",
+  "use_case_level": 8,
+  "capability_tested": "linking projected hazard change to infrastructure impact",
+  "system_task": "generate integrated answer",
+  "reasoning_modalities": "Hazard + Text",
+  "key_relationships": "hazard‑impact‑asset",
+  "evidence_needed": "multi‑source driver studies and impact literature",
+  "desired_output_characteristics": "concise, sourced, hazard‑impact focus",
+  "expected_knowledge_level": "general_climate_science",
+  "prompt": "What does a projected increase in dangerous heat-index days in California by mid-century mean for healthcare and public health systems, and why?",
+  "source_independent_answerability": "borderline",
+  "source_independence_note": "A climate scientist could infer the direction and rough size of the increase, but the specific mechanisms and impact pathways rely on the cited literature.",
+  "source_leakage_check": {
+    "clmrr_named": false,
+    "row_or_column_named": false,
+    "paper_named": false,
+    "hidden_exact_value_required": false,
+    "according_to_phrase": false,
+    "pass": true,
+    "flags": [],
+    "check_version": "leakage_check v1"
+  },
+  "reference_components": {
+    "table_patterns": [
+      {
+        "acceptance_blocked": false,
+        "acceptance_blocked_by": [],
+        "authorization": "verified",
+        "cautions": [],
+        "computed_value_or_range": {
+          "cell_direction_counts": {
+            "decrease": 0,
+            "increase": 2681,
+            "no_change": 146
+          },
+          "mean_from": "15.387053411857092",
+          "mean_to": "24.370463390350195",
+          "n_cells_empty": 4,
+          "n_cells_used": 2827,
+          "range": {
+            "max": "23.633333840000003",
+            "min": "0.000000000000000",
+            "over": "cells"
+          },
+          "unit": "days",
+          "value": "8.983409978493102",
+          "value_is": "absolute_change",
+          "value_reason": null
+        },
+        "direction": "increase",
+        "family": "heat_index",
+        "geography": "California",
+        "geography_type": "state",
+        "horizon": "mid",
+        "horizon_window": "2045-2054",
+        "metric": "heatindex_days_above_95F",
+        "metric_wording": "number of days with daily max heat index above 95 F",
+        "pattern_id": "TP1-00071",
+        "pattern_kind": "single",
+        "pattern_robustness": "majority_same_direction",
+        "pattern_support_n": 2827,
+        "provenance": {
+          "code_version": "table_patterns v1 (src/climrr/table_patterns.py sha256 c5948f7e0ef85b73)",
+          "column_sources": {
+            "heatindex_HIS_Day95": {
+              "kind": "dictionary_line",
+              "line": 679,
+              "quote": "heatindex_HIS_Day95 Number of Summer days with daily max heat index above 95 F -- Historical"
+            },
+            "heatindex_M85_Day95": {
+              "kind": "dictionary_line",
+              "line": 685,
+              "quote": "heatindex_M85_Day95 Number of Summer days with daily max heat index above 95 F -- Mid-Century RCP8.5"
+            }
+          },
+          "column_statuses": {
+            "heatindex_HIS_Day95": "verified_from_dictionary",
+            "heatindex_M85_Day95": "verified_from_dictionary"
+          },
+          "columns": [
+            {
+              "column": "heatindex_HIS_Day95",
+              "index": 240
+            },
+            {
+              "column": "heatindex_M85_Day95",
+              "index": 246
+            }
+          ],
+          "derivation_rule_id": "DR-TD-003 @ DR-PT-001",
+          "member_cells_sha256": "1b364743863b12af93e342a02318266f15973695ee4a56c8e4936a6bd8fdd6a1",
+          "member_rows": 2831,
+          "row_rule": "State == 'California'",
+          "table_data_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e"
+        },
+        "provisional": true,
+        "provisional_reasons": [
+          "location_inferred_candidate: State label IC-012 (A-G1, A-G3; D-034)",
+          "unweighted_mean: provisional aggregation rule for representation validation"
+        ],
+        "rank": {
+          "of": 49,
+          "order": "descending signed value (DR-PT-004)",
+          "rank": 25,
+          "tied_with": 0
+        },
+        "relative_magnitude": {
+          "class": "moderate",
+          "definition": "moderate = middle tercile, by signed value, among the 49 U.S. State labels in the table with a computed value for family=heat_index, metric=heatindex_days_above_95F, season=summer, horizon=mid (2045-2054), scenario=RCP8.5, statistic=absolute_change (DR-PT-005); a relative descriptor among states, not an absolute threshold"
+        },
+        "relative_magnitude_skipped_reason": null,
+        "robustness_share": "2681/2827",
+        "robustness_unit": "cell",
+        "scenario": "RCP8.5",
+        "season": "summer",
+        "statistic": "absolute_change",
+        "status": "computed",
+        "working_assumptions": [
+          "WA-STATE-LABEL",
+          "WA-UNWEIGHTED-MEAN"
+        ]
+      }
+    ],
+    "literature_mechanisms": [
+      {
+        "statement": "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-extreme_heat_v1-driver-c1-008",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "199098498",
+            "paper_sha256": "945df7b916b7dd75924142fbb7d1542afa08cb36da06df37f135849d9ad15218",
+            "json_path": "$.late century results",
+            "span_start": 4602,
+            "span_end": 5001,
+            "verbatim_passage": "However, recent work examining changes in the frequency of different types of extreme heat days (considering both temperature and humidity) in CMIP5 projections after using a multivariate quantile mapping approach similar to the MACA methodology finds that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat (Schoof et al 2019).",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 199098498",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-199098498-04",
+            "evidence_role": "cited_candidate"
+          },
+          {
+            "paper_item_id": "158091651",
+            "paper_sha256": "a62d4b52adcff6beb97df02ca10902942356fbe8834ada0474e227f40556486d",
+            "json_path": "$.abstract",
+            "span_start": 829,
+            "span_end": 1077,
+            "verbatim_passage": "Land-atmosphere feedbacks appear to be a stronger factor for heat wave maintenance at southern latitudes, but the NCEP model seems to misrepresent those feedbacks, particularly over the Southwest United States, leading to poor skill in that region.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 158091651",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-158091651-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "5838629",
+            "paper_sha256": "e11032fb59db4250a8562dfba97e961feee24186a931f6ec3d037270405f4606",
+            "json_path": "$.results",
+            "span_start": 1155,
+            "span_end": 1343,
+            "verbatim_passage": "Air mass stagnation events, which increase O3 production and will increase in frequency as weather conditions favorable to heat waves increase (CCSP 2008), are another important indicator.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 5838629",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-5838629-03",
+            "evidence_role": "cited_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "global warming increases heatwave frequency and intensity",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-extreme_heat_v1-driver-c2-001",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "14006228",
+            "paper_sha256": "802cc7b80c67735e86e9740ca72bba6361cedf5d9a330ab2236ea6a901115d8d",
+            "json_path": "$.discussion",
+            "span_start": 4074,
+            "span_end": 4177,
+            "verbatim_passage": "As global warming continues, the frequency, intensity and duration of heatwaves are likely to increase.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 14006228",
+            "is_review_or_synthesis": true,
+            "statement_id": "LS-14006228-04",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "221504407",
+            "paper_sha256": "a3342e14fcd6c45de5a3831eddc22fc5dac739f8aebc5a920e41f9dcb546467e",
+            "json_path": "$.conclusion",
+            "span_start": 0,
+            "span_end": 220,
+            "verbatim_passage": "The occurrence of heat events is expected to increase due to the worsening effects of anthropogenic global warming [60]. This will be seen in both higher mean annual temperatures and in the frequency of heat shocks [37].",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 221504407",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-221504407-03",
+            "evidence_role": "cited_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "Heat waves increase demand for ambulance services, emergency medical services, and hospitalizations, thereby straining healthcare facility capacity.",
+        "statement_type": "impact",
+        "asset_class": "healthcare_and_public_health",
+        "impact_mechanism": "increase demand for emergency and hospital services",
+        "impact_outcome": "strain facility capacity and service delivery",
+        "hazard_relation": "broader_hazard",
+        "two_hop": false,
+        "impact_fields_source": "members",
+        "evidence_strength": "single_source_supported",
+        "reference_scope": "single_study_observation",
+        "group_id": "LG-infra_heat_index__healthcare_and_public_health-impact-c1-006",
+        "group_strength_run": "single_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "243834420",
+            "paper_sha256": "d2438bfa0dc064d2facf7cdf8b4f56a549495b67b7492cda8a0992e4baf0230a",
+            "json_path": "$.literature co-citation network and timeline view",
+            "span_start": 2818,
+            "span_end": 3346,
+            "verbatim_passage": "Hajat et al. and Nitschke et al. discussed the effects of heat waves on human health and the increased demand for healthcare facilities (44,45). Morbidity, demand for ambulance services, demand for emergency medical services, hospitalization rates, and other indicators can be used to measure the impact on human health (14,44,45). Furthermore, indicators such as demand for ambulance services, hospitalization rates, and demand for emergency medical services can also be used to reflect the impact on health facilities (44,45).",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 243834420",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-243834420-01",
+            "evidence_role": "cited_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "Heatwaves can damage critical public health infrastructure and impede health system functioning.",
+        "statement_type": "impact",
+        "asset_class": "healthcare_and_public_health",
+        "impact_mechanism": "damage to critical public health infrastructure",
+        "impact_outcome": "impedes health system functioning",
+        "hazard_relation": "broader_hazard",
+        "two_hop": false,
+        "impact_fields_source": "members",
+        "evidence_strength": "single_source_supported",
+        "reference_scope": "single_study_observation",
+        "group_id": "LG-infra_heat_index__healthcare_and_public_health-impact-c1-007",
+        "group_strength_run": "single_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "53113505",
+            "paper_sha256": "00986da6174c2ea018e9ee809c0ea6793f92db34b1663614c222303742c8831d",
+            "json_path": "$.climate-related shocks and stresses",
+            "span_start": 1188,
+            "span_end": 1436,
+            "verbatim_passage": "Examples of shocks include environmental, climatic, or other types of events, such as floods, high winds, landslides, heatwaves or droughts, that can impact health, damage critical public health infrastructure, and impede health system functioning.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 53113505",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-53113505-01",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      }
+    ],
+    "literature_caveats": []
+  },
+  "reference_answer": {
+    "table_pattern": "Dangerous heat-index days in California are projected to show a moderate increase by mid-century under a high-emissions future.",
+    "literature_interpretation": "Research on the United States, including work on the Southwest, shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services, straining healthcare and public health systems. In general, research suggests that such heat can damage critical public health infrastructure, impeding healthcare and public health systems. These are general drivers of dangerous heat-index days, not findings specific to California.",
+    "integrated": "Dangerous heat-index days in California are projected to show a moderate increase by mid-century under a high-emissions future. Research on the United States, including work on the Southwest, shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services. This can strain healthcare and public health systems. In general, research suggests that such heat can damage critical public health infrastructure. That can impede healthcare and public health systems. These are general drivers of dangerous heat-index days, not findings specific to California."
+  },
+  "rubric": {
+    "required_points": [
+      "[w=3] Direction: increase",
+      "[w=3] Magnitude class: a moderate increase",
+      "[w=2] Place: California",
+      "[w=2] Mechanism: large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat",
+      "[w=2] Mechanism: global warming increases heatwave frequency and intensity"
+    ],
+    "optional_points": [
+      "Impact: increase demand for emergency and hospital services, straining healthcare and public health systems",
+      "Impact: damage to critical public health infrastructure, impeding healthcare and public health systems",
+      "Anchor pair: from about 15 to about 24 days a summer"
+    ],
+    "acceptable_variants": [
+      "Direction could be phrased as 'projected to rise'.",
+      "Magnitude could be expressed as 'rise moderately'."
+    ],
+    "disallowed_claims": [
+      "will fail",
+      "at risk",
+      "risk",
+      "exposure",
+      "hazard is a risk"
+    ],
+    "fatal_errors": [
+      "Wrong direction of change",
+      "Stating the projection as a certainty or forecast",
+      "Treating the modeled historical baseline as an observation",
+      "Reading fire-weather danger as fire occurrence",
+      "Treating a hazard as a risk"
+    ]
+  },
+  "guardrails": [
+    "A modeled historical baseline is model output for a past period, not an observation.",
+    "A Fire Weather Index is a meteorological fire-danger index; it is never fire occurrence, ignition, burned area or damage.",
+    "A high-emissions future is one plausible future, not a forecast and not the only plausible future.",
+    "Hazard is not exposure, and exposure is not risk.",
+    "Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.",
+    "Impact statements are general unless a group is marked place_named for the place."
+  ],
+  "c_g_t_s_d_audit": null,
+  "generation": {
+    "generator_version": "litsynth_agent v5.4",
+    "model": "openai/gpt-oss-120b",
+    "prompt_hash": "289c90c756c1879b73c85d2c5137ca34be5b5282285d140b4be7aed055f609d0",
+    "timestamp": "2026-11-24T23:46:09Z",
+    "inputs_sha256": {
+      "packet": "f304a5f1bd21355ef17c7786c32d39bd8fa7bdb9738462400320f52af1632c93",
+      "system_prompt": "1a023c1e98e822f74304801fce5a8b4605f6148c528c3dc4f5e236c5c87c3ade",
+      "item_seeds_v3": "04602e1bce5bc205ab6ae0d179f866ce894cfc517be62f2039fdc9c393f9d8a5",
+      "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+      "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+      "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+      "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+      "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+      "group_dispositions": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+      "provenance_corrections": "d56cbe5e0c4feaffd8398126953c8437416967b2fbc382d5da907e88081ebd93",
+      "descriptor_rules": "dbfa8fd8a86a9379b4709b998bb33e673dceafd5f8ba7d199d55ff672d4c282d",
+      "plain_language": "60598527bf21a9dbc5a68e31cb60ec76d75b95d5ede7411181c323f56832b140",
+      "resolutions": "d86e1cd4e92ab51562ec251c98652d135280a52642012f6c94f3e2d02595869a",
+      "nca_map": "3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41",
+      "nca_regions_disposition": "a0c390a80634a8e4a74693e47828a9912ddea8f8151784d57c82f816e3bb1ae9",
+      "group_dispositions_fire": "94a88f5d3228f3fdc4cf68a585475bb0cbc08b6c8d2ffe95430c8cf029ed907a",
+      "item_seeds_infra_v1a": "0bd723a092c02eff84bb00e3b733baba1396787cdd8b5991b97b296c2037ea2a",
+      "pilot_selection_infra_v1a": "316a93f9d197d35756ef0c81a7a1e9f683978f59ce512615d93f0963134f9212",
+      "groups_infra_run1": "f61bf4f557c0f5fbdfec2779fc578b01e84bdc6edfca80c4b633d25f841045ce",
+      "groups_enriched_infra_run1": "1e5aa4fb5902bc598c5977dd231d9b1b1c029fdad98076651cb0b2d7b0913eb1",
+      "statements_infra_run1": "869b0592e72ec22b7617a3fbe6ae3005df762b4817f7609e41c96a8559cbca4b",
+      "independence_infra_run1": "b0a2fa3f3bd9998597c4681100586abf555ce295283984f102222030bd2fb602",
+      "group_dispositions_infra_v1": "9b94e028bc571d9d84e6714ef1264bf2e087ea405d6561bfcdbd6d333c601bef",
+      "groups_dispositioned_v1": "d92cd95ff9dcc669a4f19355d22ac556c8211a587bc7155b5fb6fea42ff091ce",
+      "item_schema_v2a": "deca317cfdf11c9aa9074b68b7305c3b8ea7922ddf45a0542bc316901400d2d8",
+      "question_forms": "520aafa0804b5308be7e9e59b8316d9fbe0d8b60b335da4a0414ed0a17ab283e",
+      "asset_short_forms_v1": "de28eaa2d65759d7c09c2e95e8388b17f477f7c0f6d21aa72bcc3681055c444d"
+    }
+  },
+  "review": {
+    "status": "human_review",
+    "history": [
+      {
+        "event": "deterministic_pass",
+        "reasons": [],
+        "check_version": "synthesis_post_checks v3.5",
+        "checks": {
+          "numbers_untraced": [],
+          "number_words_untraced": [],
+          "exact_values_in_graded_text": [],
+          "prompt_leakage": {
+            "clmrr_named": false,
+            "row_or_column_named": false,
+            "paper_named": false,
+            "hidden_exact_value_required": false,
+            "according_to_phrase": false,
+            "pass": true,
+            "flags": [],
+            "check_version": "leakage_check v1"
+          },
+          "schema_errors": [],
+          "texts_traced_to_literature": [
+            "literature_interpretation",
+            "literature_interpretation",
+            "literature_interpretation",
+            "literature_interpretation",
+            "rubric.required_points",
+            "rubric.required_points",
+            "rubric.optional_points",
+            "rubric.optional_points"
+          ],
+          "rubric_points_without_source_ids": 0,
+          "n_table_sentences": 1,
+          "n_literature_sentences": 5,
+          "hedge_by_strength": [],
+          "context_driver_report": [],
+          "regional_contrast_report": [],
+          "mixed_scope_report": [],
+          "scope_clause_required": true,
+          "scope_openers": 4,
+          "rung8_report": {
+            "cited_place_named_impact_group": false,
+            "impact_group_ids": [
+              "LG-infra_heat_index__healthcare_and_public_health-impact-c1-006",
+              "LG-infra_heat_index__healthcare_and_public_health-impact-c1-007",
+              "LG-infra_heat_index__healthcare_and_public_health-impact-c1-008",
+              "LG-infra_heat_index__healthcare_and_public_health-impact-c1-009"
+            ],
+            "cited_two_hop_group_ids": [],
+            "bridge_clause_count": 0,
+            "answer_shape": "rung8_v2",
+            "budget": {
+              "table_sentences": 1,
+              "driver_claims": 2,
+              "impact_claims": 2,
+              "integrated_sentences": 6,
+              "limits": {
+                "table_sentences": 1,
+                "driver_claims_max": 2,
+                "impact_claims_min": 2,
+                "impact_claims_max": 3,
+                "impact_claims_min_here": 2,
+                "integrated_sentences_max": 6
+              },
+              "within": true,
+              "enforced": true
+            },
+            "broader_hazard_phrase_count": {
+              "literature_interpretation": 1,
+              "integrated": 1
+            },
+            "bridge_clause_sentence": null,
+            "bridge_clause_second_sentence": null
+          }
+        },
+        "reference_answer_tagged": {
+          "table_pattern": [
+            {
+              "sentence": "Dangerous heat-index days in California are projected to show a moderate increase by mid-century under a high-emissions future.",
+              "pattern_ids": [
+                "TP1-00071"
+              ]
+            }
+          ],
+          "literature_interpretation": [
+            {
+              "sentence": "Research on the United States, including work on the Southwest, shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat.",
+              "group_ids": [
+                "LG-extreme_heat_v1-driver-c1-008"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "In general, research shows that global warming increases heatwave frequency and intensity.",
+              "group_ids": [
+                "LG-extreme_heat_v1-driver-c2-001"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services, straining healthcare and public health systems.",
+              "group_ids": [
+                "LG-infra_heat_index__healthcare_and_public_health-impact-c1-006"
+              ],
+              "hedged": true
+            },
+            {
+              "sentence": "In general, research suggests that such heat can damage critical public health infrastructure, impeding healthcare and public health systems.",
+              "group_ids": [
+                "LG-infra_heat_index__healthcare_and_public_health-impact-c1-007"
+              ],
+              "hedged": true
+            },
+            {
+              "sentence": "These are general drivers of dangerous heat-index days, not findings specific to California.",
+              "group_ids": [],
+              "hedged": false
+            }
+          ],
+          "integrated": "Dangerous heat-index days in California are projected to show a moderate increase by mid-century under a high-emissions future. Research on the United States, including work on the Southwest, shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services, straining healthcare and public health systems. In general, research suggests that such heat can damage critical public health infrastructure, impeding healthcare and public health systems. These are general drivers of dangerous heat-index days, not findings specific to California.",
+          "rubric_required_weights": [
+            {
+              "point": "Direction: increase",
+              "weight": 3
+            },
+            {
+              "point": "Magnitude class: a moderate increase",
+              "weight": 3
+            },
+            {
+              "point": "Place: California",
+              "weight": 2
+            },
+            {
+              "point": "Mechanism: large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat",
+              "weight": 2
+            },
+            {
+              "point": "Mechanism: global warming increases heatwave frequency and intensity",
+              "weight": 2
+            }
+          ],
+          "rubric_points": [
+            {
+              "field": "required_points",
+              "point": "Direction: increase",
+              "source_ids": [
+                "TP1-00071"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Magnitude class: a moderate increase",
+              "source_ids": [
+                "TP1-00071"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Place: California",
+              "source_ids": [
+                "TP1-00071"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Mechanism: large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat",
+              "source_ids": [
+                "LG-extreme_heat_v1-driver-c1-008"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Mechanism: global warming increases heatwave frequency and intensity",
+              "source_ids": [
+                "LG-extreme_heat_v1-driver-c2-001"
+              ]
+            },
+            {
+              "field": "optional_points",
+              "point": "Impact: increase demand for emergency and hospital services, straining healthcare and public health systems",
+              "source_ids": [
+                "LG-infra_heat_index__healthcare_and_public_health-impact-c1-006"
+              ]
+            },
+            {
+              "field": "optional_points",
+              "point": "Impact: damage to critical public health infrastructure, impeding healthcare and public health systems",
+              "source_ids": [
+                "LG-infra_heat_index__healthcare_and_public_health-impact-c1-007"
+              ]
+            },
+            {
+              "field": "optional_points",
+              "point": "Anchor pair: from about 15 to about 24 days a summer",
+              "source_ids": [
+                "TP1-00071"
+              ]
+            }
+          ]
+        },
+        "seed_id": "SD8-TP1-00071-healthcare_and_public_health",
+        "packet_id": "PK-SD8-TP1-00071-healthcare_and_public_health",
+        "working_assumptions_relied_on": [
+          {
+            "id": "WA-STATE-LABEL",
+            "resolution": "R-005",
+            "status": "owner_authorized_working_assumption",
+            "covers": [
+              "IC-012"
+            ]
+          },
+          {
+            "id": "WA-UNWEIGHTED-MEAN",
+            "resolution": "R-008",
+            "status": "owner_authorized_working_assumption",
+            "covers": [
+              "unweighted_cell_mean"
+            ]
+          }
+        ],
+        "fire_groups_unreviewed": false,
+        "generator_version": "litsynth_agent v5.4",
+        "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+        "model": "openai/gpt-oss-120b",
+        "endpoint_label": "sophia_vllm",
+        "temperature": 0,
+        "reasoning_effort": "low",
+        "max_tokens": 16000,
+        "reasoning_effort_applied": true,
+        "system_prompt_sha256": "1a023c1e98e822f74304801fce5a8b4605f6148c528c3dc4f5e236c5c87c3ade",
+        "corrective_prompt_sha256": "256db051b3ddfa93d893e4573a2e818ecd4623d96ddac0aaebdba932c6e2a01a",
+        "prompt_hash": "289c90c756c1879b73c85d2c5137ca34be5b5282285d140b4be7aed055f609d0",
+        "packet_sha256": "f304a5f1bd21355ef17c7786c32d39bd8fa7bdb9738462400320f52af1632c93",
+        "source_commit": "bf699700ab45ee9f3b0f5715515c1b7b42a7ba66",
+        "generation_timestamp": "2026-11-24T23:46:09Z",
+        "model_seconds": 30.7,
+        "model_attempts": 2,
+        "corrective_retry_used": false,
+        "turns": [
+          {
+            "turn": 1,
+            "finish_reason": "stop",
+            "content_chars": 5804,
+            "reasoning_chars": 3745,
+            "http_attempts": 1,
+            "model_seconds": 17.5
+          },
+          {
+            "turn": 2,
+            "finish_reason": "stop",
+            "content_chars": 5897,
+            "reasoning_chars": 1582,
+            "http_attempts": 1,
+            "model_seconds": 13.2
+          }
+        ],
+        "first_turn": null,
+        "corrective_error": null,
+        "corrective_turn_used": true,
+        "corrective_class": "format",
+        "first_check": {
+          "event": "deterministic_fail",
+          "reasons": [
+            "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+            "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+            "literature_interpretation[3]: rung 8 answer shape (D-075a): must name the asset class 'healthcare and public health systems' or a short form ('hospitals and emergency services', 'hospitals')"
+          ],
+          "check_version": "synthesis_post_checks v3.5",
+          "checks": {
+            "numbers_untraced": [],
+            "number_words_untraced": [],
+            "exact_values_in_graded_text": [],
+            "prompt_leakage": {
+              "clmrr_named": false,
+              "row_or_column_named": false,
+              "paper_named": false,
+              "hidden_exact_value_required": false,
+              "according_to_phrase": false,
+              "pass": true,
+              "flags": [],
+              "check_version": "leakage_check v1"
+            },
+            "schema_errors": [],
+            "texts_traced_to_literature": [
+              "literature_interpretation",
+              "literature_interpretation",
+              "literature_interpretation",
+              "literature_interpretation",
+              "rubric.required_points",
+              "rubric.required_points",
+              "rubric.optional_points",
+              "rubric.optional_points"
+            ],
+            "rubric_points_without_source_ids": 0,
+            "n_table_sentences": 1,
+            "n_literature_sentences": 5,
+            "hedge_by_strength": [],
+            "context_driver_report": [],
+            "regional_contrast_report": [],
+            "mixed_scope_report": [],
+            "scope_clause_required": true,
+            "scope_openers": 4,
+            "rung8_report": {
+              "cited_place_named_impact_group": false,
+              "impact_group_ids": [
+                "LG-infra_heat_index__healthcare_and_public_health-impact-c1-006",
+                "LG-infra_heat_index__healthcare_and_public_health-impact-c1-007",
+                "LG-infra_heat_index__healthcare_and_public_health-impact-c1-008",
+                "LG-infra_heat_index__healthcare_and_public_health-impact-c1-009"
+              ],
+              "cited_two_hop_group_ids": [],
+              "bridge_clause_count": 0,
+              "answer_shape": "rung8_v2",
+              "budget": {
+                "table_sentences": 1,
+                "driver_claims": 2,
+                "impact_claims": 2,
+                "integrated_sentences": 6,
+                "limits": {
+                  "table_sentences": 1,
+                  "driver_claims_max": 2,
+                  "impact_claims_min": 2,
+                  "impact_claims_max": 3,
+                  "impact_claims_min_here": 2,
+                  "integrated_sentences_max": 6
+                },
+                "within": true,
+                "enforced": true
+              },
+              "broader_hazard_phrase_count": {
+                "literature_interpretation": 1,
+                "integrated": 1
+              },
+              "bridge_clause_sentence": null,
+              "bridge_clause_second_sentence": null
+            }
+          },
+          "reference_answer_tagged": {
+            "table_pattern": [
+              {
+                "sentence": "Dangerous heat-index days in California are projected to increase a moderate increase by mid-century under a high-emissions future.",
+                "pattern_ids": [
+                  "TP1-00071"
+                ]
+              }
+            ],
+            "literature_interpretation": [
+              {
+                "sentence": "Research on the United States shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat.",
+                "group_ids": [
+                  "LG-extreme_heat_v1-driver-c1-008"
+                ],
+                "hedged": false
+              },
+              {
+                "sentence": "In general, research shows that global warming increases heatwave frequency and intensity.",
+                "group_ids": [
+                  "LG-extreme_heat_v1-driver-c2-001"
+                ],
+                "hedged": false
+              },
+              {
+                "sentence": "In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services, straining healthcare and public health systems.",
+                "group_ids": [
+                  "LG-infra_heat_index__healthcare_and_public_health-impact-c1-006"
+                ],
+                "hedged": true
+              },
+              {
+                "sentence": "In general, research suggests that such heat can damage critical public health infrastructure, impeding health system functioning.",
+                "group_ids": [
+                  "LG-infra_heat_index__healthcare_and_public_health-impact-c1-007"
+                ],
+                "hedged": true
+              },
+              {
+                "sentence": "These are general drivers of dangerous heat-index days, not findings specific to California.",
+                "group_ids": [],
+                "hedged": false
+              }
+            ],
+            "integrated": "Dangerous heat-index days in California are projected to increase a moderate increase by mid-century under a high-emissions future. Research on the United States shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services, straining healthcare and public health systems. In general, research suggests that such heat can damage critical public health infrastructure, impeding health system functioning. These are general drivers of dangerous heat-index days, not findings specific to California.",
+            "rubric_required_weights": [
+              {
+                "point": "Direction: increase",
+                "weight": 3
+              },
+              {
+                "point": "Magnitude class: a moderate increase",
+                "weight": 3
+              },
+              {
+                "point": "Place: California",
+                "weight": 2
+              },
+              {
+                "point": "Mechanism: large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat",
+                "weight": 2
+              },
+              {
+                "point": "Mechanism: global warming increases heatwave frequency and intensity",
+                "weight": 2
+              }
+            ],
+            "rubric_points": [
+              {
+                "field": "required_points",
+                "point": "Direction: increase",
+                "source_ids": [
+                  "TP1-00071"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Magnitude class: a moderate increase",
+                "source_ids": [
+                  "TP1-00071"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Place: California",
+                "source_ids": [
+                  "TP1-00071"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Mechanism: large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat",
+                "source_ids": [
+                  "LG-extreme_heat_v1-driver-c1-008"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Mechanism: global warming increases heatwave frequency and intensity",
+                "source_ids": [
+                  "LG-extreme_heat_v1-driver-c2-001"
+                ]
+              },
+              {
+                "field": "optional_points",
+                "point": "Impact: increase demand for emergency and hospital services, straining healthcare and public health systems",
+                "source_ids": [
+                  "LG-infra_heat_index__healthcare_and_public_health-impact-c1-006"
+                ]
+              },
+              {
+                "field": "optional_points",
+                "point": "Impact: damage to critical public health infrastructure, impeding health system functioning",
+                "source_ids": [
+                  "LG-infra_heat_index__healthcare_and_public_health-impact-c1-007"
+                ]
+              },
+              {
+                "field": "optional_points",
+                "point": "Anchor pair: from about 15 to about 24 days a summer",
+                "source_ids": [
+                  "TP1-00071"
+                ]
+              }
+            ]
+          },
+          "raw_response": "{\n  \"prompt\": \"What does a projected increase in dangerous heat-index days in California by mid-century mean for healthcare and public health systems, and why?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"Dangerous heat-index days in California are projected to increase a moderate increase by mid-century under a high-emissions future.\",\n        \"pattern_ids\": [\"TP1-00071\"]\n      }\n    ],\n    \"literature_interpretation\": [\n      {\n        \"sentence\": \"Research on the United States shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research shows that global warming increases heatwave frequency and intensity.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c2-001\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services, straining healthcare and public health systems.\",\n        \"group_ids\": [\"LG-infra_heat_index__healthcare_and_public_health-impact-c1-006\"],\n        \"hedged\": true\n      },\n      {\n        \"sentence\": \"In general, research suggests that such heat can damage critical public health infrastructure, impeding health system functioning.\",\n        \"group_ids\": [\"LG-infra_heat_index__healthcare_and_public_health-impact-c1-007\"],\n        \"hedged\": true\n      },\n      {\n        \"sentence\": \"These are general drivers of dangerous heat-index days, not findings specific to California.\",\n        \"group_ids\": [],\n        \"hedged\": false\n      }\n    ],\n    \"integrated\": \"Dangerous heat-index days in California are projected to increase a moderate increase by mid-century under a high-emissions future. Research on the United States shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services, straining healthcare and public health systems. In general, research suggests that such heat can damage critical public health infrastructure, impeding health system functioning. These are general drivers of dangerous heat-index days, not findings specific to California.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"Direction: increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00071\"]\n      },\n      {\n        \"point\": \"Magnitude class: a moderate increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00071\"]\n      },\n      {\n        \"point\": \"Place: California\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00071\"]\n      },\n      {\n        \"point\": \"Mechanism: large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"]\n      },\n      {\n        \"point\": \"Mechanism: global warming increases heatwave frequency and intensity\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c2-001\"]\n      }\n    ],\n    \"acceptable_variants\": [\n      \"Direction could be phrased as 'projected to rise'.\",\n      \"Magnitude could be expressed as 'rise moderately'.\"\n    ],\n    \"optional_points\": [\n      {\n        \"point\": \"Impact: increase demand for emergency and hospital services, straining healthcare and public health systems\",\n        \"source_ids\": [\"LG-infra_heat_index__healthcare_and_public_health-impact-c1-006\"]\n      },\n      {\n        \"point\": \"Impact: damage to critical public health infrastructure, impeding health system functioning\",\n        \"source_ids\": [\"LG-infra_heat_index__healthcare_and_public_health-impact-c1-007\"]\n      },\n      {\n        \"point\": \"Anchor pair: from about 15 to about 24 days a summer\",\n        \"source_ids\": [\"TP1-00071\"]\n      }\n    ],\n    \"disallowed_claims\": [\n      \"will fail\",\n      \"at risk\",\n      \"risk\",\n      \"exposure\",\n      \"hazard is a risk\"\n    ],\n    \"fatal_errors\": [\n      \"Wrong direction of change\",\n      \"Stating the projection as a certainty or forecast\",\n      \"Treating the modeled historical baseline as an observation\",\n      \"Reading fire-weather danger as fire occurrence\",\n      \"Treating a hazard as a risk\"\n    ]\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"A Fire Weather Index is a meteorological fire-danger index; it is never fire occurrence, ignition, burned area or damage.\",\n    \"A high-emissions future is one plausible future, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\",\n    \"Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.\",\n    \"Impact statements are general unless a group is marked place_named for the place.\"\n  ],\n  \"source_independent_answerability\": \"borderline\",\n  \"source_independence_note\": \"A climate scientist could infer the direction and rough size of the increase, but the specific mechanisms and impact pathways rely on the cited literature.\",\n  \"capability_tested\": \"linking projected hazard change to infrastructure impact\",\n  \"system_task\": \"generate integrated answer\",\n  \"key_relationships\": \"hazard‑impact‑asset\",\n  \"evidence_needed\": \"multi‑source driver studies and impact literature\",\n  \"desired_output_characteristics\": \"concise, sourced, hazard‑impact focus\",\n  \"expected_knowledge_level\": \"general_climate_science\"\n}",
+          "raw_response_chars": 5804,
+          "raw_reasoning": null,
+          "raw_reasoning_chars": null,
+          "content_fallback": false,
+          "finish_reason": "stop",
+          "raw_max_chars": 20000
+        },
+        "finish_reason": "stop",
+        "content_chars": 5897,
+        "reasoning_chars": 1582,
+        "raw_response": "{\n  \"prompt\": \"What does a projected increase in dangerous heat-index days in California by mid-century mean for healthcare and public health systems, and why?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"Dangerous heat-index days in California are projected to show a moderate increase by mid-century under a high-emissions future.\",\n        \"pattern_ids\": [\"TP1-00071\"]\n      }\n    ],\n    \"literature_interpretation\": [\n      {\n        \"sentence\": \"Research on the United States, including work on the Southwest, shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research shows that global warming increases heatwave frequency and intensity.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c2-001\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services, straining healthcare and public health systems.\",\n        \"group_ids\": [\"LG-infra_heat_index__healthcare_and_public_health-impact-c1-006\"],\n        \"hedged\": true\n      },\n      {\n        \"sentence\": \"In general, research suggests that such heat can damage critical public health infrastructure, impeding healthcare and public health systems.\",\n        \"group_ids\": [\"LG-infra_heat_index__healthcare_and_public_health-impact-c1-007\"],\n        \"hedged\": true\n      },\n      {\n        \"sentence\": \"These are general drivers of dangerous heat-index days, not findings specific to California.\",\n        \"group_ids\": [],\n        \"hedged\": false\n      }\n    ],\n    \"integrated\": \"Dangerous heat-index days in California are projected to show a moderate increase by mid-century under a high-emissions future. Research on the United States, including work on the Southwest, shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services, straining healthcare and public health systems. In general, research suggests that such heat can damage critical public health infrastructure, impeding healthcare and public health systems. These are general drivers of dangerous heat-index days, not findings specific to California.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"Direction: increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00071\"]\n      },\n      {\n        \"point\": \"Magnitude class: a moderate increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00071\"]\n      },\n      {\n        \"point\": \"Place: California\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-00071\"]\n      },\n      {\n        \"point\": \"Mechanism: large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"]\n      },\n      {\n        \"point\": \"Mechanism: global warming increases heatwave frequency and intensity\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c2-001\"]\n      }\n    ],\n    \"acceptable_variants\": [\n      \"Direction could be phrased as 'projected to rise'.\",\n      \"Magnitude could be expressed as 'rise moderately'.\"\n    ],\n    \"optional_points\": [\n      {\n        \"point\": \"Impact: increase demand for emergency and hospital services, straining healthcare and public health systems\",\n        \"source_ids\": [\"LG-infra_heat_index__healthcare_and_public_health-impact-c1-006\"]\n      },\n      {\n        \"point\": \"Impact: damage to critical public health infrastructure, impeding healthcare and public health systems\",\n        \"source_ids\": [\"LG-infra_heat_index__healthcare_and_public_health-impact-c1-007\"]\n      },\n      {\n        \"point\": \"Anchor pair: from about 15 to about 24 days a summer\",\n        \"source_ids\": [\"TP1-00071\"]\n      }\n    ],\n    \"disallowed_claims\": [\n      \"will fail\",\n      \"at risk\",\n      \"risk\",\n      \"exposure\",\n      \"hazard is a risk\"\n    ],\n    \"fatal_errors\": [\n      \"Wrong direction of change\",\n      \"Stating the projection as a certainty or forecast\",\n      \"Treating the modeled historical baseline as an observation\",\n      \"Reading fire-weather danger as fire occurrence\",\n      \"Treating a hazard as a risk\"\n    ]\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"A Fire Weather Index is a meteorological fire-danger index; it is never fire occurrence, ignition, burned area or damage.\",\n    \"A high-emissions future is one plausible future, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\",\n    \"Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.\",\n    \"Impact statements are general unless a group is marked place_named for the place.\"\n  ],\n  \"source_independent_answerability\": \"borderline\",\n  \"source_independence_note\": \"A climate scientist could infer the direction and rough size of the increase, but the specific mechanisms and impact pathways rely on the cited literature.\",\n  \"capability_tested\": \"linking projected hazard change to infrastructure impact\",\n  \"system_task\": \"generate integrated answer\",\n  \"key_relationships\": \"hazard‑impact‑asset\",\n  \"evidence_needed\": \"multi‑source driver studies and impact literature\",\n  \"desired_output_characteristics\": \"concise, sourced, hazard‑impact focus\",\n  \"expected_knowledge_level\": \"general_climate_science\"\n}",
+        "raw_response_chars": 5897,
+        "raw_reasoning": null,
+        "raw_reasoning_chars": null,
+        "content_fallback": false,
+        "raw_max_chars": 20000,
+        "format_corrective_prompt_sha256": "308163206beed0a8072656033d9edeebaaf2d6d2025706a1f47b5ed372e14e4d"
+      },
+      {
+        "event": "polish",
+        "status": "polished",
+        "pre_polish": {
+          "prompt": "What does a projected increase in dangerous heat-index days in California by mid-century mean for healthcare and public health systems, and why?",
+          "answer": "Dangerous heat-index days in California are projected to show a moderate increase by mid-century under a high-emissions future. Research on the United States, including work on the Southwest, shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services, straining healthcare and public health systems. In general, research suggests that such heat can damage critical public health infrastructure, impeding healthcare and public health systems. These are general drivers of dangerous heat-index days, not findings specific to California."
+        },
+        "rewrite": {
+          "prompt": "What does a projected increase in dangerous heat-index days in California by mid-century mean for healthcare and public health systems, and why?",
+          "answer": "Dangerous heat-index days in California are projected to show a moderate increase by mid-century under a high-emissions future. Research on the United States, including work on the Southwest, shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services. This can strain healthcare and public health systems. In general, research suggests that such heat can damage critical public health infrastructure. That can impede healthcare and public health systems. These are general drivers of dangerous heat-index days, not findings specific to California."
+        },
+        "reasons": [],
+        "check_version": "polish_checks v2",
+        "checks": {
+          "prompt": {
+            "numbers": {
+              "original": [],
+              "polished": []
+            },
+            "places": {
+              "original": [
+                "California"
+              ],
+              "polished": [
+                "California"
+              ]
+            },
+            "hedges": {
+              "original": [],
+              "polished": []
+            },
+            "new_source_words": [],
+            "new_leakage_flags": [],
+            "length_ratio": 1.0,
+            "groups_recognised": {
+              "LG-infra_heat_index__healthcare_and_public_health-impact-c1-006": {
+                "original": [
+                  "healthcar"
+                ],
+                "polished": [
+                  "healthcar"
+                ]
+              },
+              "LG-infra_heat_index__healthcare_and_public_health-impact-c1-007": {
+                "original": [
+                  "public",
+                  "health",
+                  "system"
+                ],
+                "polished": [
+                  "public",
+                  "health",
+                  "system"
+                ]
+              }
+            },
+            "descriptor_phrases": {
+              "original": {
+                "horizon: mid": [
+                  "by mid-century"
+                ],
+                "quantity: heat_index": [
+                  "dangerous heat-index days"
+                ]
+              },
+              "polished": {
+                "horizon: mid": [
+                  "by mid-century"
+                ],
+                "quantity: heat_index": [
+                  "dangerous heat-index days"
+                ]
+              }
+            }
+          },
+          "answer": {
+            "numbers": {
+              "original": [],
+              "polished": []
+            },
+            "places": {
+              "original": [
+                "California",
+                "Southwest",
+                "United States"
+              ],
+              "polished": [
+                "California",
+                "Southwest",
+                "United States"
+              ]
+            },
+            "hedges": {
+              "original": [
+                "show",
+                "shows",
+                "suggests"
+              ],
+              "polished": [
+                "show",
+                "shows",
+                "suggests"
+              ]
+            },
+            "new_source_words": [],
+            "new_leakage_flags": [],
+            "length_ratio": 1.016,
+            "groups_recognised": {
+              "LG-extreme_heat_v1-driver-c1-008": {
+                "original": [
+                  "larg",
+                  "scal",
+                  "warm",
+                  "land",
+                  "atmospher",
+                  "feedback",
+                  "land atmospher feedback"
+                ],
+                "polished": [
+                  "larg",
+                  "scal",
+                  "warm",
+                  "land",
+                  "atmospher",
+                  "feedback",
+                  "land atmospher feedback"
+                ]
+              },
+              "LG-extreme_heat_v1-driver-c2-001": {
+                "original": [
+                  "global",
+                  "warm",
+                  "heatwav",
+                  "frequency",
+                  "intensity",
+                  "global warm"
+                ],
+                "polished": [
+                  "global",
+                  "warm",
+                  "heatwav",
+                  "frequency",
+                  "intensity",
+                  "global warm"
+                ]
+              },
+              "LG-infra_heat_index__healthcare_and_public_health-impact-c1-006": {
+                "original": [
+                  "demand",
+                  "servic",
+                  "emergency",
+                  "strain",
+                  "healthcar"
+                ],
+                "polished": [
+                  "demand",
+                  "servic",
+                  "emergency",
+                  "strain",
+                  "healthcar"
+                ]
+              },
+              "LG-infra_heat_index__healthcare_and_public_health-impact-c1-007": {
+                "original": [
+                  "heatwav",
+                  "damag",
+                  "critical",
+                  "public",
+                  "health",
+                  "infrastructur",
+                  "imped",
+                  "system"
+                ],
+                "polished": [
+                  "heatwav",
+                  "damag",
+                  "critical",
+                  "public",
+                  "health",
+                  "infrastructur",
+                  "imped",
+                  "system"
+                ]
+              }
+            },
+            "descriptor_phrases": {
+              "original": {
+                "magnitude: a moderate increase": [
+                  "a moderate increase"
+                ],
+                "scenario: RCP8.5": [
+                  "under a high-emissions future"
+                ],
+                "horizon: mid": [
+                  "by mid-century"
+                ],
+                "quantity: heat_index": [
+                  "dangerous heat-index days"
+                ]
+              },
+              "polished": {
+                "magnitude: a moderate increase": [
+                  "a moderate increase"
+                ],
+                "scenario: RCP8.5": [
+                  "under a high-emissions future"
+                ],
+                "horizon: mid": [
+                  "by mid-century"
+                ],
+                "quantity: heat_index": [
+                  "dangerous heat-index days"
+                ]
+              }
+            }
+          }
+        },
+        "generator_version": "litpolish_agent v1.1",
+        "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+        "model": "openai/gpt-oss-120b",
+        "endpoint_label": "sophia_vllm",
+        "temperature": 0,
+        "reasoning_effort": "low",
+        "max_tokens": 16000,
+        "reasoning_effort_applied": true,
+        "system_prompt_sha256": "2dbbce7f345fdcdeccd4661c22f5c22d87e6c4bcaa070856b59e6234093f0a18",
+        "prompt_hash": "39869298296f47da449ce61904f6694c8fd252670d36dbec5708f434bee44cb0",
+        "item_sha256": "ba0d4719b174571364869750f5fe7860e9c2f962434b3745ed4c4dd7a0d0b78b",
+        "source_commit": "bf699700ab45ee9f3b0f5715515c1b7b42a7ba66",
+        "timestamp": "2026-11-24T23:49:17Z",
+        "model_seconds": 4.9,
+        "model_attempts": 1,
+        "corrective_retry_used": false,
+        "turns": [
+          {
+            "turn": 1,
+            "finish_reason": "stop",
+            "content_chars": 1008,
+            "reasoning_chars": 1305,
+            "http_attempts": 1,
+            "model_seconds": 4.9
+          }
+        ],
+        "finish_reason": "stop",
+        "content_chars": 1008,
+        "reasoning_chars": 1305,
+        "raw_response": "{\n  \"prompt\": \"What does a projected increase in dangerous heat-index days in California by mid-century mean for healthcare and public health systems, and why?\",\n  \"answer\": \"Dangerous heat-index days in California are projected to show a moderate increase by mid-century under a high-emissions future. Research on the United States, including work on the Southwest, shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services. This can strain healthcare and public health systems. In general, research suggests that such heat can damage critical public health infrastructure. That can impede healthcare and public health systems. These are general drivers of dangerous heat-index days, not findings specific to California.\"\n}",
+        "raw_response_chars": 1008,
+        "raw_reasoning": null,
+        "raw_reasoning_chars": null,
+        "content_fallback": false,
+        "raw_max_chars": 20000
+      },
+      {
+        "event": "human_review",
+        "from_status": "deterministic_pass",
+        "decision": "D-033",
+        "display_rule": "D-079",
+        "at": "2026-11-25T00:07:46Z",
+        "by": "EXECUTOR (scripts/ingest_litsynth_infra_run2.py)",
+        "display_source": "original",
+        "display_recheck": {
+          "check_version": "synthesis_post_checks v3.5",
+          "pass": false,
+          "reasons": [
+            "integrated: rung 8 answer shape (D-075a): at most 6 sentences, no more than the reference sentences (found 8)"
+          ],
+          "on": "polished text",
+          "polish_status": "polished"
+        },
+        "display_text": {
+          "prompt": "What does a projected increase in dangerous heat-index days in California by mid-century mean for healthcare and public health systems, and why?",
+          "answer": "Dangerous heat-index days in California are projected to show a moderate increase by mid-century under a high-emissions future. Research on the United States, including work on the Southwest, shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services, straining healthcare and public health systems. In general, research suggests that such heat can damage critical public health infrastructure, impeding healthcare and public health systems. These are general drivers of dangerous heat-index days, not findings specific to California."
+        },
+        "note": "entered human review (D-033 lifecycle): infra synthesis run 2 (agent v5.4, packets v1b) and polish infra run 2 (agent v1.1, checks v2); the impact sample set (D-080); display text by D-079 (polished only if the polish passed and post-checks v3.5 pass on the polished text)"
+      }
+    ],
+    "kaiyuan_disposition": null,
+    "mentor_disposition": null,
+    "final_frozen": null
+  }
+}

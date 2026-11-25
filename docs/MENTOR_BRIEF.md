@@ -1,6 +1,6 @@
 # Mentor brief — ClimRR cross-modal benchmark
 
-Last updated: 2026-11-23   Next: **sample QAs from the infrastructure papers + the climate table, for Alvi to judge** (after the Polaris runs); scope marking on the seven samples; the knowledge-graph note (three questions)
+Last updated: 2026-11-25   Next: **Thursday --- your reaction to the seven heat / fire-weather samples (sheet of 2026-11-19), Alvi's to the six infrastructure-impact samples (sheet of 2026-11-25), and the knowledge-graph note's three questions**
 
 ## Status in five lines
 
@@ -8,9 +8,30 @@ Last updated: 2026-11-23   Next: **sample QAs from the infrastructure papers + t
 2. **Every item uses both sources (D-059)** in general words (D-060 -- D-062): no "RCP8.5", no "95 °F", no years; "research shows" (two or more independent papers or a review) / "research suggests" (one paper), never "one study"; a readability step rewrites each text without changing its meaning (D-063).
 3. **The other columns go ahead on our documented readings (D-064)** --- recorded as *owner-authorized working assumptions*, not confirmed; your NCA5 grouping is the project's grouping (D-065).
 4. **Seven sample items are in human review** (sheet of 2026-11-19; D-068); their packets are rebuilt with the scope phrases (majority rule, D-069a) and eight question forms (packets v5a), not yet regenerated. **Nothing accepted; nothing frozen.**
-5. **Infrastructure papers (LITCORPUS-03, 89,497 papers from Alvi):** inventoried on Polaris; the search uses broader hazard words and the pipeline's sector labels (D-070a, D-073a); the paper search and extraction runs come next, then sample QAs for Alvi. **Knowledge graph:** the survey note is ready for you (three questions, KG-1 -- KG-3); nothing built.
+5. **Six infrastructure-impact samples are ready for Alvi** (sheet of 2026-11-25; D-080): three heat (energy in Virginia, transportation in Arizona, healthcare in California), three fire weather (transportation, emergency services, communications in California); two further cells dropped after two attempts each (water, and energy under fire weather). Each answer says where its research comes from; most impact evidence is general, not about the named state. **Knowledge graph:** nothing built until the note's three questions are answered. **Nothing accepted; nothing frozen.**
 
 ## What I need from this meeting
+
+> ### **Thursday: reactions to both sample sheets; knowledge-graph decisions**
+>
+> **Done since 2026-11-23 (P5a -- P5d):** Alvi's infrastructure papers were searched and
+> read for hazard -> infrastructure impact statements; the statements were grouped and checked; eight sample cells were generated
+> twice (the second time with a shorter, fixed answer shape); six passed every check and are on the sheet for Alvi
+> (`ALVI_SAMPLE_ITEMS_2026-11-25.xlsx`). Each item: the question, the answer, the CISA sector, the table side, the paper side
+> (impact findings first, then drivers; "research shows (N papers)" / "research suggests (1 paper)"; findings that hold only
+> *when a wildfire occurs* marked as such) and the original passages.
+>
+> **Ask (priority order):**
+>
+> | # | Question | Whose |
+> | --- | --- | --- |
+> | T-1 | The seven heat / fire-weather samples (sheet of 2026-11-19): what you want? which fire-weather item reads right? | Mentor |
+> | T-2 | The six impact samples: are these the hazard -> infrastructure QAs scientists want? which asset classes and impact types matter most? | Alvi |
+> | T-3 | Is the general-evidence wording ("These are general research findings, not findings specific to California.") acceptable, or should items use only evidence that names the place? (Four of the six rest on general evidence only.) | Alvi, mentor |
+> | T-4 | Knowledge-graph note: KG-1 (locality level), KG-2 (minimum evidence for an edge), KG-3 (vocabulary owner; ~30-item pilot)? | Mentor, Alvi |
+>
+> **After both reviews:** the GUIDANCE packet for P2 -- P5 and the merge; then the P6 scale-up plan.
+
 
 > ### **Next (after the 2026-11-23 group meeting): infrastructure-impact samples for Alvi; scope marking**
 >

@@ -1,0 +1,498 @@
+{
+  "run": "infra_run1",
+  "role": "superseded",
+  "superseded_by": "infra_run2 (D-080)",
+  "work_package": "P5d",
+  "tarball": {
+    "name": "infra_synth_runs12_evidence.tar.gz",
+    "sha256": "1ab289297f0ba606c147f97eb0b1d5758991598b7e78216ef5fb3ca80a4d33f7"
+  },
+  "generator": {
+    "version": "litsynth_agent v5.3",
+    "agent_path": "scripts/litcollect/litsynth_agent.py",
+    "agent_sha256": "1be4ba2a6aec418b2729f6d165a3ed159208a0d31b786ad92413d7d195f43edd",
+    "system_prompt_sha256": "1157f73286a6de3a443a20becf924be401abd22e46170a62d6f4a580bbd75ea5",
+    "held": "climrr.p5c2 (bytes at b860658)"
+  },
+  "endpoint": {
+    "endpoint_label": "sophia_vllm",
+    "model": "openai/gpt-oss-120b",
+    "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1"
+  },
+  "budget": {
+    "reasoning_effort": "low",
+    "max_tokens": 16000,
+    "temperature": 0
+  },
+  "source_commit": "b860658873bd4d80ae9500587e23b18d4778c387",
+  "packets": {
+    "version": "synthpackets infra v1a",
+    "path": "artifacts/benchmark/synth_packets_infra_v1a",
+    "at_commit": "b860658873bd4d80ae9500587e23b18d4778c387",
+    "manifest_sha256": "829d80cfa3fdff217ddc19a2f2b8ffc97bf7b41cc7f1f869ecfa0daaf37e5bf2"
+  },
+  "counts": {
+    "items": 8,
+    "deterministic_pass": 2,
+    "deterministic_fail": 6,
+    "format_corrective_used": 8,
+    "format_corrective_pass": 2
+  },
+  "items": [
+    {
+      "item_id": "BI-P5-0001",
+      "status": "deterministic_pass",
+      "reasons": []
+    },
+    {
+      "item_id": "BI-P5-0002",
+      "status": "rejected_pre_review",
+      "reasons": [
+        "literature_interpretation[4]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on Arizona, shows' or 'In general, research, including work on Arizona, has shown'",
+        "literature_interpretation[4]: rung 8 impact sentence (D-075): must begin with 'In general, research shows that' or 'In general, research has shown that' or 'In general, research, including work on Arizona, shows that' or 'In general, research, including work on Arizona, has shown that'",
+        "literature_interpretation[4]: rung 8 impact sentence (D-075): must name the broader hazard 'extreme heat, of which dangerous heat-index days are one measure'"
+      ]
+    },
+    {
+      "item_id": "BI-P5-0003",
+      "status": "deterministic_pass",
+      "reasons": []
+    },
+    {
+      "item_id": "BI-P5-0004",
+      "status": "rejected_pre_review",
+      "reasons": [
+        "literature_interpretation[4]: rung 8 impact sentence (D-075): must name the asset class 'healthcare and public health systems'"
+      ]
+    },
+    {
+      "item_id": "BI-P5-0005",
+      "status": "rejected_pre_review",
+      "reasons": [
+        "integrated: sentence starts with a lower-case letter: 'fire‑weather danger describes '",
+        "integrated: bridge clause (D-073c): must contain 'fire-weather danger describes conditions that favour wildfire; it is not fire occurrence' exactly once (found 0)"
+      ]
+    },
+    {
+      "item_id": "BI-P5-0006",
+      "status": "rejected_pre_review",
+      "reasons": [
+        "integrated: sentence starts with a lower-case letter: 'fire‑weather danger describes '",
+        "literature_interpretation[2]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'",
+        "literature_interpretation[3]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'",
+        "literature_interpretation[7]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'",
+        "literature_interpretation[8]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'",
+        "integrated: bridge clause (D-073c): must contain 'fire-weather danger describes conditions that favour wildfire; it is not fire occurrence' exactly once (found 0)"
+      ]
+    },
+    {
+      "item_id": "BI-P5-0007",
+      "status": "rejected_pre_review",
+      "reasons": [
+        "literature_interpretation[1]: scope phrase (D-069): the sentence must begin with 'Research on California shows' or 'Research on California has shown'",
+        "literature_interpretation[3]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'"
+      ]
+    },
+    {
+      "item_id": "BI-P5-0008",
+      "status": "rejected_pre_review",
+      "reasons": [
+        "literature_interpretation[3]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'"
+      ]
+    }
+  ],
+  "items_sha256": "d4f91da923246c4756fb8e50f436709c0aca685101fb819eeccf5ef7bd1615ae",
+  "summary_sha256": "af5b0e9995805545e91c044cc2fbd89eb97cbf21c67e550e1da5f3129d657dd6",
+  "checks_reproduced": true,
+  "checks": {
+    "check_version": "synthesis_post_checks v3.4",
+    "items": [
+      {
+        "item_id": "BI-P5-0002",
+        "pass": false,
+        "reasons": [
+          "literature_interpretation[4]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on Arizona, shows' or 'In general, research, including work on Arizona, has shown'",
+          "literature_interpretation[4]: rung 8 impact sentence (D-075): must begin with 'In general, research shows that' or 'In general, research has shown that' or 'In general, research, including work on Arizona, shows that' or 'In general, research, including work on Arizona, has shown that'",
+          "literature_interpretation[4]: rung 8 impact sentence (D-075): must name the broader hazard 'extreme heat, of which dangerous heat-index days are one measure'"
+        ],
+        "first_check_reasons": [
+          "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+          "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+          "literature_interpretation[4]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on Arizona, shows' or 'In general, research, including work on Arizona, has shown'",
+          "literature_interpretation[4]: rung 8 impact sentence (D-075): must begin with 'In general, research shows that' or 'In general, research has shown that' or 'In general, research, including work on Arizona, shows that' or 'In general, research, including work on Arizona, has shown that'",
+          "literature_interpretation[4]: rung 8 impact sentence (D-075): must name the broader hazard 'extreme heat, of which dangerous heat-index days are one measure'"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0004",
+        "pass": false,
+        "reasons": [
+          "literature_interpretation[4]: rung 8 impact sentence (D-075): must name the asset class 'healthcare and public health systems'"
+        ],
+        "first_check_reasons": [
+          "literature_interpretation[4]: rung 8 impact sentence (D-075): must name the asset class 'healthcare and public health systems'"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0003",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": [
+          "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+          "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0001",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": [
+          "literature_interpretation[3]: rung 8 impact sentence (D-075): must begin with 'In general, research shows that' or 'In general, research has shown that' or 'In general, research, including work on Virginia, shows that' or 'In general, research, including work on Virginia, has shown that'",
+          "literature_interpretation[3]: rung 8 impact sentence (D-075): must name the asset class 'energy systems'",
+          "literature_interpretation[4]: rung 8 impact sentence (D-075): must name the asset class 'energy systems'",
+          "literature_interpretation[5]: rung 8 impact sentence (D-075): must name the asset class 'energy systems'",
+          "literature_interpretation[6]: rung 8 impact sentence (D-075): must name the asset class 'energy systems'"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0008",
+        "pass": false,
+        "reasons": [
+          "literature_interpretation[3]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'"
+        ],
+        "first_check_reasons": [
+          "rubric.disallowed_claims: generality (D-060/D-062): 'one study' in graded text",
+          "rubric.disallowed_claims: generality (D-060/D-062): 'a single study' in graded text",
+          "literature_interpretation[3]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0007",
+        "pass": false,
+        "reasons": [
+          "literature_interpretation[1]: scope phrase (D-069): the sentence must begin with 'Research on California shows' or 'Research on California has shown'",
+          "literature_interpretation[3]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'"
+        ],
+        "first_check_reasons": [
+          "literature_interpretation[2]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'",
+          "literature_interpretation[3]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0005",
+        "pass": false,
+        "reasons": [
+          "integrated: sentence starts with a lower-case letter: 'fire‑weather danger describes '",
+          "integrated: bridge clause (D-073c): must contain 'fire-weather danger describes conditions that favour wildfire; it is not fire occurrence' exactly once (found 0)"
+        ],
+        "first_check_reasons": [
+          "literature_interpretation[7]: two-hop wording (D-073c): a sentence citing a two-hop group must say 'when wildfires occur', 'wildfires can' or 'raise the chance of ignition'",
+          "integrated: bridge clause (D-073c): must contain 'fire-weather danger describes conditions that favour wildfire; it is not fire occurrence' exactly once (found 0)"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0006",
+        "pass": false,
+        "reasons": [
+          "integrated: sentence starts with a lower-case letter: 'fire‑weather danger describes '",
+          "literature_interpretation[2]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'",
+          "literature_interpretation[3]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'",
+          "literature_interpretation[7]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'",
+          "literature_interpretation[8]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'",
+          "integrated: bridge clause (D-073c): must contain 'fire-weather danger describes conditions that favour wildfire; it is not fire occurrence' exactly once (found 0)"
+        ],
+        "first_check_reasons": [
+          "integrated: sentence starts with a lower-case letter: 'fire‑weather danger describes '",
+          "literature_interpretation[2]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'",
+          "literature_interpretation[3]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'",
+          "literature_interpretation[4]: scope phrase (D-069): the sentence must begin with 'Research on California suggests'",
+          "literature_interpretation[5]: scope phrase (D-069): the sentence must begin with 'In general, research suggests'",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research suggests that a warmer atmosphere increases vapor p'",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research suggests that climate change increases extreme fire'",
+          "literature_interpretation[7]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'",
+          "literature_interpretation[8]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'",
+          "integrated: bridge clause (D-073c): must contain 'fire-weather danger describes conditions that favour wildfire; it is not fire occurrence' exactly once (found 0)"
+        ]
+      }
+    ]
+  },
+  "regression_fixture": {
+    "items": [
+      "BI-P5-0001",
+      "BI-P5-0003"
+    ],
+    "file": "items.jsonl",
+    "sha256": "d4f91da923246c4756fb8e50f436709c0aca685101fb819eeccf5ef7bd1615ae",
+    "rule": "the two run-1 passing items pass post-checks v3.5 against their v1a packets, budget reported",
+    "result": [
+      {
+        "item_id": "BI-P5-0001",
+        "check_version": "synthesis_post_checks v3.5",
+        "packets": "v1a",
+        "pass": true,
+        "reasons": [],
+        "budget": {
+          "table_sentences": 1,
+          "driver_claims": 3,
+          "impact_claims": 5,
+          "integrated_sentences": 9,
+          "limits": {
+            "table_sentences": 1,
+            "driver_claims_max": 2,
+            "impact_claims_min": 2,
+            "impact_claims_max": 3,
+            "impact_claims_min_here": 2,
+            "integrated_sentences_max": 9
+          },
+          "within": false,
+          "enforced": false
+        }
+      },
+      {
+        "item_id": "BI-P5-0003",
+        "check_version": "synthesis_post_checks v3.5",
+        "packets": "v1a",
+        "pass": true,
+        "reasons": [],
+        "budget": {
+          "table_sentences": 1,
+          "driver_claims": 3,
+          "impact_claims": 1,
+          "integrated_sentences": 6,
+          "limits": {
+            "table_sentences": 1,
+            "driver_claims_max": 2,
+            "impact_claims_min": 2,
+            "impact_claims_max": 3,
+            "impact_claims_min_here": 2,
+            "integrated_sentences_max": 6
+          },
+          "within": false,
+          "enforced": false
+        }
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "items.jsonl",
+      "sha256": "d4f91da923246c4756fb8e50f436709c0aca685101fb819eeccf5ef7bd1615ae",
+      "bytes": 441194
+    },
+    {
+      "path": "summary.json",
+      "sha256": "af5b0e9995805545e91c044cc2fbd89eb97cbf21c67e550e1da5f3129d657dd6",
+      "bytes": 1743
+    },
+    {
+      "path": "agent.log",
+      "sha256": "a0c088b13882bceb5184b08b3b690c7c5196ccd7fa4e6ff746be79102f2d9668",
+      "bytes": 2060
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": "litsynth/infra_run1/items/SD8-TP1-00069-transportation_systems.json",
+      "sha256": "8184a7ac696a1ce3e22d82b83916a8ae3377bf2e3fa4eb10c4701b760f89c603",
+      "bytes": 64821
+    },
+    {
+      "path": "litsynth/infra_run1/items/SD8-TP1-00071-healthcare_and_public_health.json",
+      "sha256": "ffee497d60825d3e7afabf2a65d2aa81ca2f0a74eb4232c9cb87059a3870990c",
+      "bytes": 60782
+    },
+    {
+      "path": "litsynth/infra_run1/items/SD8-TP1-00071-water_and_wastewater.json",
+      "sha256": "7f43c941884179ae02d8dbb544395e631fe402ab8d9ea3dd578104c2ebd68e5d",
+      "bytes": 56491
+    },
+    {
+      "path": "litsynth/infra_run1/items/SD8-TP1-00111-energy.json",
+      "sha256": "3915ac7a4784a241892a0968ca2cdd7fe4a2dba68fdaf95c1a75bc0f9c7e812c",
+      "bytes": 75822
+    },
+    {
+      "path": "litsynth/infra_run1/items/SD8-TP1-01463-communications.json",
+      "sha256": "f56d979a4b912b36aa9cfd27fd2f430988c5a07c27a3a76eb5afae1b8fd99026",
+      "bytes": 57066
+    },
+    {
+      "path": "litsynth/infra_run1/items/SD8-TP1-01463-emergency_services.json",
+      "sha256": "af018b23e4a227b82331086bfe5e220365ef90078ddcb3cde62951ac5a8bd2d9",
+      "bytes": 62139
+    },
+    {
+      "path": "litsynth/infra_run1/items/SD8-TP1-01463-energy.json",
+      "sha256": "49ef0602f287e3c8c021600bed36d5b0fd2e1fb901564b97729a53923b16b561",
+      "bytes": 72525
+    },
+    {
+      "path": "litsynth/infra_run1/items/SD8-TP1-01463-transportation_systems.json",
+      "sha256": "a0de42d464ae02ed2c8a70cbf72da16d543945288d0f6959ee244d2ba2e8a1be",
+      "bytes": 93240
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00069-transportation_systems/prompt_format_corrective.txt",
+      "sha256": "435706c1fc79b634823450eb5fb95290024db60901aeabf4abae655a01f79fea",
+      "bytes": 3346
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00069-transportation_systems/prompt_user.txt",
+      "sha256": "5a8d60d2f807c25c9f99c3c94b126bafce4d10f5a1f9e60273e68e23c553b98a",
+      "bytes": 39610
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00069-transportation_systems/response.json",
+      "sha256": "a3a802c08feca5b8e1b40698bed55001c0be8d81083e0c4b2afa30e0aeb3625f",
+      "bytes": 10339
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00069-transportation_systems/response_format_corrective.json",
+      "sha256": "25967e4e801c6264caf2df9b47cab94a0f58fd1d5a6112877685bef9eb3cbb7c",
+      "bytes": 9887
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00071-healthcare_and_public_health/prompt_format_corrective.txt",
+      "sha256": "bfbaede9e61031fa357e34adfeb97b7329b58fdaa94c18c9fcdf3224c2fc3dbb",
+      "bytes": 2579
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00071-healthcare_and_public_health/prompt_user.txt",
+      "sha256": "c3faa7c473b68a22b3d0c94d1fc5c20bbd5ab4c4ab2bcabad82151c32e7f08b4",
+      "bytes": 26401
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00071-healthcare_and_public_health/response.json",
+      "sha256": "eded055ad756a17315d69f2cb64d376ad803c4cdc06561b8b705c07c29700deb",
+      "bytes": 11872
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00071-healthcare_and_public_health/response_format_corrective.json",
+      "sha256": "b83cb3e4df779322de4689beec2dc638f525c5ac20554f4e502474638f5bc63e",
+      "bytes": 11348
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00071-water_and_wastewater/prompt_format_corrective.txt",
+      "sha256": "42609e4e5da0a00386988341688c01c65b504c39334c64988f92a1d347e843e8",
+      "bytes": 2625
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00071-water_and_wastewater/prompt_user.txt",
+      "sha256": "5b1b8369e667b42dd07cff217435f6b1c16ce86dcc109103ed9227d6088457c7",
+      "bytes": 25185
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00071-water_and_wastewater/response.json",
+      "sha256": "5f8e180d56ea7adbbfc765461a1a98cd3c5ab054cf7c3dfdaff0bdf4d9493e80",
+      "bytes": 10108
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00071-water_and_wastewater/response_format_corrective.json",
+      "sha256": "3e842618100cf247df69792dd82b46852bd5b84c64676a2114991285fef0f460",
+      "bytes": 9600
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00111-energy/prompt_format_corrective.txt",
+      "sha256": "c58fd58eb3b2ba2b38c0e27e228194c202aab2bd3e4518c34dd382f935b26673",
+      "bytes": 3169
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00111-energy/prompt_user.txt",
+      "sha256": "f5813223e5466bc133c89380c8d70af91a080de708af86591adf05bda19b1466",
+      "bytes": 44293
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00111-energy/response.json",
+      "sha256": "187a3bc1d33125af7edd1b9c121dbad160942b8ac7eed8dc2eb4a3dba0e167e3",
+      "bytes": 14455
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-00111-energy/response_format_corrective.json",
+      "sha256": "d69649c77967a349d35b8aac7b4497abff20b152b55b8f30ba29b42882a676b1",
+      "bytes": 13436
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-communications/prompt_format_corrective.txt",
+      "sha256": "f4547d31bf8fee76377d0c01ede2ee3debce8aedd1b340cdbf4992b429f6de2a",
+      "bytes": 2789
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-communications/prompt_user.txt",
+      "sha256": "79b57bcd3e8d6d0ecd9d568a40a33cf1c580e815de62b30956fd744408b80e80",
+      "bytes": 25389
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-communications/response.json",
+      "sha256": "6b43c1774ed66d6f785f6f6ee9b02874899c5a2525d1785f193176c89d99c8e5",
+      "bytes": 9172
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-communications/response_format_corrective.json",
+      "sha256": "9a957213088c6764a78d105e477fb83ae40c71ef7a44e2e45d087052285ba6b3",
+      "bytes": 8838
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-emergency_services/prompt_format_corrective.txt",
+      "sha256": "3c3633e7b66964d6c061d652f983540cfe2ec38fc7e34b8827995f56aa3297a1",
+      "bytes": 3006
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-emergency_services/prompt_user.txt",
+      "sha256": "a1f042d7567e557f742048a619d7650dd1b174f349467704fc64f0dd4c75c178",
+      "bytes": 25511
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-emergency_services/response.json",
+      "sha256": "5d2bfab2d8c2845cf541e46d7efa748c9336db48b8845b98b5df4f5eb2ebed08",
+      "bytes": 9265
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-emergency_services/response_format_corrective.json",
+      "sha256": "b338ef471fb5584f28ec754119c1f86dcb0b9db70b202e355a829acee9770081",
+      "bytes": 7548
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-energy/prompt_format_corrective.txt",
+      "sha256": "05ada73754af92e63f34aab9d1b7d7dd5ae4c0a7554fca0b8b9d85c9e373da5c",
+      "bytes": 2790
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-energy/prompt_user.txt",
+      "sha256": "0936ac5d8f8cc1416c3d218babbd9e96ee034d18e8ec6230ae850e0ac79019f3",
+      "bytes": 37347
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-energy/response.json",
+      "sha256": "a6e1ed1b8d7cea2ffd9cee65745a72415d0de62cb75a45f88012600d1e47a394",
+      "bytes": 10842
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-energy/response_format_corrective.json",
+      "sha256": "1c25541ccedfce86514f637ae44e31f135300c14dd1ca1710d7b1a6efb106797",
+      "bytes": 9765
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-transportation_systems/prompt_format_corrective.txt",
+      "sha256": "264b8ad670b757e3bca5170940213e4ddace144a5fa39b9025e402fdf91f6341",
+      "bytes": 4186
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-transportation_systems/prompt_user.txt",
+      "sha256": "ec76ae659cb8d279bb7766c3e8df83c2232bf8d75d0e0d0ef492189c176da008",
+      "bytes": 29807
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-transportation_systems/response.json",
+      "sha256": "45f72cf5f619d7957d3e12378798a99e81f27e7e841113e686e2c1b5d0496a05",
+      "bytes": 13455
+    },
+    {
+      "path": "litsynth/infra_run1/raw/SD8-TP1-01463-transportation_systems/response_format_corrective.json",
+      "sha256": "9440230356beeedbd4919dec2fdf9d53ac91dbfa8a302761cbad51f6e43c0a12",
+      "bytes": 12425
+    }
+  ],
+  "note": "superseded by infra run 2 (agent v5.4, packets v1b); no item enters review. Recorded as relayed in P5_INFRA_IMPACT_DESIGN.md section 22 and now in the repository",
+  "ingested_at": "2026-11-25T00:07:46Z",
+  "ingested_by": "EXECUTOR"
+}

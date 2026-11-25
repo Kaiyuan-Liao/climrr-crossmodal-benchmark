@@ -1,0 +1,61 @@
+{
+  "generator_version": "litsynth_agent v5.4",
+  "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+  "model": "openai/gpt-oss-120b",
+  "endpoint_label": "sophia_vllm",
+  "reasoning_effort": "low",
+  "max_tokens": 16000,
+  "system_prompt_sha256": "1a023c1e98e822f74304801fce5a8b4605f6148c528c3dc4f5e236c5c87c3ade",
+  "corrective_prompt_sha256": "256db051b3ddfa93d893e4573a2e818ecd4623d96ddac0aaebdba932c6e2a01a",
+  "format_corrective_prompt_sha256": "a21eb42a4a61ecf540803ba1b0da19fc80bb4c9c8077089b2d0cf58b8c6f10e8",
+  "items": 8,
+  "deterministic_pass": 6,
+  "deterministic_fail": 2,
+  "fail_reasons_by_kind": {
+    "integrated": 1,
+    "literature_interpretation[1]": 1,
+    "table_pattern": 1
+  },
+  "corrective_retry_used": 0,
+  "format_corrective_used": 6,
+  "format_corrective_pass": 4,
+  "reasoning_effort_not_applied": 0,
+  "finish_reasons": {
+    "stop": 8
+  },
+  "by_level": {
+    "8": 8
+  },
+  "check_version": "synthesis_post_checks v3.5",
+  "hedge_by_strength_flags": 0,
+  "mixed_scope_flags": 0,
+  "question_diversity": {
+    "rule": "opening_trigram",
+    "max_share": 0.3,
+    "n": 8,
+    "pass": false,
+    "largest_share": 0.375,
+    "trigrams": [
+      {
+        "trigram": "what could a",
+        "n": 3,
+        "share": 0.375
+      },
+      {
+        "trigram": "what does a",
+        "n": 3,
+        "share": 0.375
+      },
+      {
+        "trigram": "why does the",
+        "n": 1,
+        "share": 0.125
+      },
+      {
+        "trigram": "why does fire-weather",
+        "n": 1,
+        "share": 0.125
+      }
+    ]
+  }
+}

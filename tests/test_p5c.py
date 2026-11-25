@@ -9,12 +9,10 @@ rebuilt and compared byte for byte.
 from __future__ import annotations
 
 import csv
-import importlib.util
 import io
 import json
 import re
 import shutil
-import sys
 
 import pytest
 import yaml
@@ -31,7 +29,6 @@ from climrr import mentor_sheet_v2b as ms
 from climrr import seeds_infra as si
 from climrr import synthpackets_infra as spi
 from climrr.checksums import sha256_file
-from climrr.paths import REPO_ROOT
 
 MAN = json.loads(gi.MANIFEST_PATH.read_text(encoding="utf-8"))
 ENR = sd.read_jsonl(gi.ENRICHED_PATH)
@@ -233,22 +230,12 @@ def test_schema_v2_rejects_an_impact_literature_statement_escalated():
 # --- D: Alvi sheet -------------------------------------------------------------------------------------------------------
 
 
-def test_alvi_sheet_columns_readme_and_marks():
-    assert ma.HEADER == ms.HEADER + ["Asset class (CISA sector)"] and len(ma.WIDTHS) == 7
-    assert len(ma.README_LINES) == 5 and ma.README_LINES[:3] == ms.README_LINES
-    assert "general" in ma.README_ALVI[0][1] and "asset classes" in ma.README_ALVI[1][1]
+def test_alvi_sheet_superseded_by_p5d():
+    """The P5c sheet design (seventh column, impact marks, --items required) was never run; P5d gave the sheet its inputs and
+    final form (tests/test_p5d.py): seven columns with the asset class fourth, a five-line README, defaults packets v1b and
+    the ingested infra run 2."""
+    assert ma.HEADER[3] == "Asset class (CISA sector)" and len(ma.HEADER) == len(ma.WIDTHS) == 7
+    assert len(ma.README_LINES) == 5 and ma.README_LINES[1] == ms.README_LINES[0]
+    assert ma.PACKETS_DIR == spi.PACKETS_V1B_DIR
     pk = PACKETS["BI-P5-0001"]
-    marks = ma.impact_marks(pk)
-    assert len(marks) == len(pk["checks_input"]["rung8"]["impact_group_ids"])
-    assert any("place-specific: Virginia" in m for m in marks.values()) and all("not yet reviewed" in m for m in marks.values())
     assert ma.asset_cell(pk) == 'Energy Sector (in the item: "energy systems")'
-    assert ma.order(PMAN) == [x["item_id"] for x in SEL["selected"]]
-
-
-def test_alvi_sheet_refuses_without_items(monkeypatch):
-    spec = importlib.util.spec_from_file_location("build_mentor_sheet_p5c", REPO_ROOT / "scripts" / "build_mentor_sheet.py")
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    monkeypatch.setattr(sys, "argv", ["build_mentor_sheet.py", "--audience", "alvi"])
-    with pytest.raises(SystemExit, match="not run until the items exist"):
-        mod.main()

@@ -1,0 +1,1152 @@
+{
+  "schema_version": "benchmark_item_v2a",
+  "item_id": "BI-P5-0008",
+  "use_case_level": 8,
+  "capability_tested": "hazard‑impact reasoning",
+  "system_task": "generate answer",
+  "reasoning_modalities": "Hazard + Text",
+  "key_relationships": "hazard‑to‑infrastructure",
+  "evidence_needed": "driver and impact literature",
+  "desired_output_characteristics": "concise paragraph",
+  "expected_knowledge_level": "specialist_climate_science",
+  "prompt": "What could a projected increase in fire‑weather danger mean for communications systems in California, and why?",
+  "source_independent_answerability": "borderline",
+  "source_independence_note": "A climate scientist could infer the direction and drivers, but the specific magnitude class and state ranking rely on the packet’s data.",
+  "source_leakage_check": {
+    "clmrr_named": false,
+    "row_or_column_named": false,
+    "paper_named": false,
+    "hidden_exact_value_required": false,
+    "according_to_phrase": false,
+    "pass": true,
+    "flags": [],
+    "check_version": "leakage_check v1"
+  },
+  "reference_components": {
+    "table_patterns": [
+      {
+        "acceptance_blocked": false,
+        "acceptance_blocked_by": [],
+        "acceptance_blocked_by_original": [
+          "IC-006",
+          "IC-007",
+          "IC-008",
+          "IC-009",
+          "IC-010"
+        ],
+        "authorization": "inferred_candidate",
+        "cautions": [
+          "C-fire_weather: a fire-danger index, never fire occurrence"
+        ],
+        "computed_value_or_range": {
+          "cell_direction_counts": {
+            "decrease": 108,
+            "increase": 2723,
+            "no_change": 0
+          },
+          "mean_from": "31.366135970286118",
+          "mean_to": "33.611940835838926",
+          "n_cells_empty": 0,
+          "n_cells_used": 2831,
+          "range": {
+            "max": "6.813290120000000",
+            "min": "-0.569743990000000",
+            "over": "cells"
+          },
+          "unit": null,
+          "value": "2.245804468117273",
+          "value_is": "absolute_change",
+          "value_reason": null
+        },
+        "direction": "increase",
+        "family": "fire_weather_index",
+        "geography": "California",
+        "geography_type": "state",
+        "horizon": "mid",
+        "horizon_window": "2045-2054",
+        "metric": "fwi_summer_seasonal_value",
+        "metric_wording": "seasonal value of the Fire Weather Index (FWI)",
+        "pattern_id": "TP1-01463",
+        "pattern_kind": "single",
+        "pattern_robustness": "majority_same_direction",
+        "pattern_support_n": 2831,
+        "provenance": {
+          "code_version": "table_patterns v1 (src/climrr/table_patterns.py sha256 c5948f7e0ef85b73)",
+          "column_sources": {
+            "wildfire_summer_Dmid": {
+              "id": "IC-009",
+              "kind": "inferred_candidate_record",
+              "line": 664,
+              "quote": "Wildfire_summer_Dmid Difference between Mid-Century and Historical"
+            },
+            "wildfire_summer_Hist": {
+              "id": "IC-006",
+              "kind": "inferred_candidate_record",
+              "line": 661,
+              "quote": "Wildfire_summer_hist Seasonal value – Historical"
+            },
+            "wildfire_summer_Midc": {
+              "id": "IC-007",
+              "kind": "inferred_candidate_record",
+              "line": 662,
+              "quote": "Wildfire_summer_midc Seasonal value – Mid-Century RCP 8.5"
+            }
+          },
+          "column_statuses": {
+            "wildfire_summer_Dmid": "inferred_candidate",
+            "wildfire_summer_Hist": "inferred_candidate",
+            "wildfire_summer_Midc": "inferred_candidate"
+          },
+          "columns": [
+            {
+              "column": "wildfire_summer_Hist",
+              "index": 189
+            },
+            {
+              "column": "wildfire_summer_Midc",
+              "index": 190
+            },
+            {
+              "column": "wildfire_summer_Dmid",
+              "index": 192
+            }
+          ],
+          "derivation_rule_id": "DR-TD-003 @ DR-PT-001",
+          "member_cells_sha256": "1b364743863b12af93e342a02318266f15973695ee4a56c8e4936a6bd8fdd6a1",
+          "member_rows": 2831,
+          "row_rule": "State == 'California'",
+          "table_data_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e"
+        },
+        "provisional": true,
+        "provisional_reasons": [
+          "location_inferred_candidate: State label IC-012 (A-G1, A-G3; D-034)",
+          "unweighted_mean: provisional aggregation rule for representation validation"
+        ],
+        "rank": {
+          "of": 49,
+          "order": "descending signed value (DR-PT-004)",
+          "rank": 8,
+          "tied_with": 0
+        },
+        "relative_magnitude": {
+          "class": "large",
+          "definition": "large = upper tercile, by signed value, among the 49 U.S. State labels in the table with a computed value for family=fire_weather_index, metric=fwi_summer_seasonal_value, season=summer, horizon=mid (2045-2054), scenario=RCP8.5, statistic=absolute_change (DR-PT-005); a relative descriptor among states, not an absolute threshold"
+        },
+        "relative_magnitude_skipped_reason": null,
+        "robustness_share": "2723/2831",
+        "robustness_unit": "cell",
+        "scenario": "RCP8.5",
+        "season": "summer",
+        "statistic": "absolute_change",
+        "status": "computed",
+        "working_assumptions": [
+          "WA-FWI-SUMMER",
+          "WA-STATE-LABEL",
+          "WA-UNWEIGHTED-MEAN"
+        ]
+      }
+    ],
+    "literature_mechanisms": [
+      {
+        "statement": "strong winds are a primary driver of fire danger and spread",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-fire_weather_v1-driver-c1-003",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "236175367",
+            "paper_sha256": "3431eb74bad918b0adcd7dbb05f2596066e8a893639c9c2a7cb7abc711d60719",
+            "json_path": "$.discussion",
+            "span_start": 0,
+            "span_end": 499,
+            "verbatim_passage": "This study shows that (i) SAW wind speed plays a key role in area burned, (ii) variation in SAW windspeed outweighs fuel characteristics in explaining area burned, (iii) winds alone are insufficient to explain burning without consideration of human ignitions, (iv) ignition sources have changed markedly in recent decades, and (v) autumn and winter temperature and precipitation are less critical than winds and ignitions, and have substantially different effects on autumn versus winter SAW events.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 236175367",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-236175367-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "255372301",
+            "paper_sha256": "5112779c76f7df5d20606ec467bcee3640e8d69aaa5baaf5721f0d66275018e3",
+            "json_path": "$.results and discussion",
+            "span_start": 1973,
+            "span_end": 2511,
+            "verbatim_passage": "It is seen that higher temperature and stronger wind speed increase the wildfire risks by the factors of 1.94 (i.e., exp(β 2 )) and 2.43 (i.e., exp(β 3 )). Such findings can be well justified as follows: (i) a higher temperature makes the ignition of the underlying fuels more easily (e.g. grasses, shrubs, dead leaves, etc.), (ii) with an increased wind speed, the electrical conductors and surrounding vegetation are more likely to result in arcing, increasing the probability of wildfire ignition (Mitchell, 2013;Vazquez et al., 2022).",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 255372301",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-255372301-03",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "53050065",
+            "paper_sha256": "67d634a0411f24011fc3f356ed0f7bde1f98ec1404e1d9703417a02838c9de38",
+            "json_path": "$.summary",
+            "span_start": 1139,
+            "span_end": 1278,
+            "verbatim_passage": "Common to both events was the occurrence of strong winds that have been shown to be a key determinant in large human-caused wildfires [56].",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 53050065",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-53050065-06",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "14300",
+            "paper_sha256": "d63010c65b1955f330d76d9bf6c51e4114248a3e261af1b5160d40095a5fb594",
+            "json_path": "$.results",
+            "span_start": 1219,
+            "span_end": 1487,
+            "verbatim_passage": "Whereas fire numbers are determined by the presence of fuel, lightning frequency, population density and surface fire intensity, fire spread (and hence area burnt) is driven by wind speed, fire duration and the amount, moisture content and characteristics of the fuel.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 14300",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-14300-05",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "strong winds and low humidity raise fire danger and fire size",
+        "statement_type": "mechanism",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-fire_weather_v1-mechanism-c1-002",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "236175367",
+            "paper_sha256": "3431eb74bad918b0adcd7dbb05f2596066e8a893639c9c2a7cb7abc711d60719",
+            "json_path": "$.of 9",
+            "span_start": 5940,
+            "span_end": 6039,
+            "verbatim_passage": "maximum wind speed was tied to greater area burned by fires in the 1000 to 5000 ha class (Fig. 3B).",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 236175367",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-236175367-03",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "56076970",
+            "paper_sha256": "1152b3b1f8d826cc1bfef8605c7e6a1ef1b456ee06026fae3ddcf1ca1bfde8ab",
+            "json_path": "$.discussion and implications",
+            "span_start": 428,
+            "span_end": 656,
+            "verbatim_passage": "Meteorology was clearly the dominant factor controlling SA fires; the spatial and temporal variability of SA FS was well correlated with meteorological drivers, including RH and wind as modulated by terrain (see also figure S3).",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 56076970",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-56076970-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "89025663",
+            "paper_sha256": "a0574811f014bed1e6067959e5d115270b84663dc7c5d3bcbd3f2a1c6fe1afb4",
+            "json_path": "$.contrasting patterns of sa and non-sa fires",
+            "span_start": 931,
+            "span_end": 1065,
+            "verbatim_passage": "Low relative humidity and strong wind promote ignition and increase the rate of fire spread within dry fuels, especially for SA fires.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 89025663",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-89025663-02",
+            "evidence_role": "cited_candidate"
+          },
+          {
+            "paper_item_id": "53050065",
+            "paper_sha256": "67d634a0411f24011fc3f356ed0f7bde1f98ec1404e1d9703417a02838c9de38",
+            "json_path": "$.meteorological conditions",
+            "span_start": 2900,
+            "span_end": 3043,
+            "verbatim_passage": "The strong winds and adiabatic compression associated with the downslope flow and mixing inhibited radiative cooling and nocturnal RH recovery.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 53050065",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-53050065-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "56076970",
+            "paper_sha256": "1152b3b1f8d826cc1bfef8605c7e6a1ef1b456ee06026fae3ddcf1ca1bfde8ab",
+            "json_path": "$.discussion and implications",
+            "span_start": 6655,
+            "span_end": 6920,
+            "verbatim_passage": "The SA wind events studied here are examples as dry and hot Foehn winds; these winds occur in the leeside of the mountain ranges and are associated with the elevated fire danger in many other parts of the world, including Europe and Australia (Sharples et al 2010).",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 56076970",
+            "is_review_or_synthesis": true,
+            "statement_id": "LS-56076970-06",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "telecommunication system loss due to fire‑weather damage",
+        "statement_type": "impact",
+        "asset_class": "communications",
+        "impact_mechanism": "destruction of telecommunication infrastructure",
+        "impact_outcome": "loss of internet, GPS and GIS services",
+        "hazard_relation": "broader_hazard",
+        "two_hop": false,
+        "impact_fields_source": "members",
+        "evidence_strength": "single_source_supported",
+        "reference_scope": "single_study_observation",
+        "group_id": "LG-infra_fire_weather_index__other_assets-impact-c1-004",
+        "group_strength_run": "single_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "237693112",
+            "paper_sha256": "c9c1030b495612ae58f6d90387f7e1c449b8bfa65a3b0e820bb29c5ba6d6fb7a",
+            "json_path": "$.victorian bushfires",
+            "span_start": 10498,
+            "span_end": 10670,
+            "verbatim_passage": "Also, the bushfires damages may destroy the telecommunication system resulting in loss of internet services, leading to the unavailability of technologies like GPS and GIS.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 237693112",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-237693112-02",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      }
+    ],
+    "literature_caveats": []
+  },
+  "reference_answer": {
+    "table_pattern": "Fire‑weather danger is projected to show a slight increase in California by mid-century under a high-emissions future, representing a larger change than in most states.",
+    "literature_interpretation": "Research on California shows that strong winds are a primary driver of fire danger, and that strong winds and low humidity raise fire danger and fire size. In general, research suggests that conditions that favour wildfire, of which fire‑weather danger is one measure, can destroy communications systems.",
+    "integrated": "Fire‑weather danger is projected to show a slight increase in California by mid-century under a high-emissions future, representing a larger change than in most states. Research on California shows that strong winds are a primary driver of fire danger, and that strong winds and low humidity raise fire danger and fire size. In general, research suggests that conditions that favour wildfire, of which fire‑weather danger is one measure, can destroy communications systems."
+  },
+  "rubric": {
+    "required_points": [
+      "[w=3] Direction: increase",
+      "[w=3] Magnitude class: a slight increase",
+      "[w=3] Ranking: a larger change than in most states",
+      "[w=2] Mechanism: strong winds are a primary driver of fire danger",
+      "[w=2] Mechanism: strong winds and low humidity raise fire danger and fire size"
+    ],
+    "optional_points": [],
+    "acceptable_variants": [
+      "Exact values are not required; any statement consistent with the magnitude class counts."
+    ],
+    "disallowed_claims": [
+      "fire‑weather danger will fail",
+      "communications systems will be at risk",
+      "wildfire",
+      "fires",
+      "burned area"
+    ],
+    "fatal_errors": [
+      "Wrong direction",
+      "Stating the projection as a certainty or forecast",
+      "Treating the modeled historical baseline as an observation",
+      "Reading fire‑weather danger as fire occurrence",
+      "Treating a hazard as a risk"
+    ]
+  },
+  "guardrails": [
+    "A modeled historical baseline is model output for a past period, not an observation.",
+    "A Fire Weather Index is a meteorological fire‑danger index; it is never fire occurrence, ignition, burned area or damage.",
+    "A high-emissions future is one plausible future, not a forecast and not the only plausible future.",
+    "Hazard is not exposure, and exposure is not risk.",
+    "Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.",
+    "Impact statements are general unless a group is marked place_named for the place."
+  ],
+  "c_g_t_s_d_audit": null,
+  "generation": {
+    "generator_version": "litsynth_agent v5.4",
+    "model": "openai/gpt-oss-120b",
+    "prompt_hash": "6f3b8701670f8d6ce2180f73643527caf28b96da280ebab6f4b1056ebfe2d05b",
+    "timestamp": "2026-11-24T23:47:52Z",
+    "inputs_sha256": {
+      "packet": "b43bd1c45b9c9616fe220069fd5eee4bbcefb5799fd10693cc87f16fa9273aef",
+      "system_prompt": "1a023c1e98e822f74304801fce5a8b4605f6148c528c3dc4f5e236c5c87c3ade",
+      "item_seeds_v3": "04602e1bce5bc205ab6ae0d179f866ce894cfc517be62f2039fdc9c393f9d8a5",
+      "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+      "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+      "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+      "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+      "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+      "group_dispositions": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+      "provenance_corrections": "d56cbe5e0c4feaffd8398126953c8437416967b2fbc382d5da907e88081ebd93",
+      "descriptor_rules": "dbfa8fd8a86a9379b4709b998bb33e673dceafd5f8ba7d199d55ff672d4c282d",
+      "plain_language": "60598527bf21a9dbc5a68e31cb60ec76d75b95d5ede7411181c323f56832b140",
+      "resolutions": "d86e1cd4e92ab51562ec251c98652d135280a52642012f6c94f3e2d02595869a",
+      "nca_map": "3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41",
+      "nca_regions_disposition": "a0c390a80634a8e4a74693e47828a9912ddea8f8151784d57c82f816e3bb1ae9",
+      "group_dispositions_fire": "94a88f5d3228f3fdc4cf68a585475bb0cbc08b6c8d2ffe95430c8cf029ed907a",
+      "item_seeds_infra_v1a": "0bd723a092c02eff84bb00e3b733baba1396787cdd8b5991b97b296c2037ea2a",
+      "pilot_selection_infra_v1a": "316a93f9d197d35756ef0c81a7a1e9f683978f59ce512615d93f0963134f9212",
+      "groups_infra_run1": "f61bf4f557c0f5fbdfec2779fc578b01e84bdc6edfca80c4b633d25f841045ce",
+      "groups_enriched_infra_run1": "1e5aa4fb5902bc598c5977dd231d9b1b1c029fdad98076651cb0b2d7b0913eb1",
+      "statements_infra_run1": "869b0592e72ec22b7617a3fbe6ae3005df762b4817f7609e41c96a8559cbca4b",
+      "independence_infra_run1": "b0a2fa3f3bd9998597c4681100586abf555ce295283984f102222030bd2fb602",
+      "group_dispositions_infra_v1": "9b94e028bc571d9d84e6714ef1264bf2e087ea405d6561bfcdbd6d333c601bef",
+      "groups_dispositioned_v1": "d92cd95ff9dcc669a4f19355d22ac556c8211a587bc7155b5fb6fea42ff091ce",
+      "item_schema_v2a": "deca317cfdf11c9aa9074b68b7305c3b8ea7922ddf45a0542bc316901400d2d8",
+      "question_forms": "520aafa0804b5308be7e9e59b8316d9fbe0d8b60b335da4a0414ed0a17ab283e",
+      "asset_short_forms_v1": "de28eaa2d65759d7c09c2e95e8388b17f477f7c0f6d21aa72bcc3681055c444d"
+    }
+  },
+  "review": {
+    "status": "human_review",
+    "history": [
+      {
+        "event": "deterministic_pass",
+        "reasons": [],
+        "check_version": "synthesis_post_checks v3.5",
+        "checks": {
+          "numbers_untraced": [],
+          "number_words_untraced": [],
+          "exact_values_in_graded_text": [],
+          "prompt_leakage": {
+            "clmrr_named": false,
+            "row_or_column_named": false,
+            "paper_named": false,
+            "hidden_exact_value_required": false,
+            "according_to_phrase": false,
+            "pass": true,
+            "flags": [],
+            "check_version": "leakage_check v1"
+          },
+          "schema_errors": [],
+          "texts_traced_to_literature": [
+            "literature_interpretation",
+            "literature_interpretation",
+            "rubric.required_points",
+            "rubric.required_points"
+          ],
+          "rubric_points_without_source_ids": 0,
+          "n_table_sentences": 1,
+          "n_literature_sentences": 2,
+          "hedge_by_strength": [],
+          "fire_word_report": [
+            {
+              "field": "rubric.disallowed_claims",
+              "word": "wildfire",
+              "kind": "forbidden_word_in_wrong_answer_list"
+            },
+            {
+              "field": "rubric.disallowed_claims",
+              "word": "fires",
+              "kind": "forbidden_word_in_wrong_answer_list"
+            },
+            {
+              "field": "rubric.disallowed_claims",
+              "word": "burned area",
+              "kind": "forbidden_word_in_wrong_answer_list"
+            },
+            {
+              "field": "prompt",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "table_pattern",
+              "word": "Fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "literature_interpretation",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "literature_interpretation",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "integrated",
+              "word": "Fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "integrated",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "integrated",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.required_points",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.disallowed_claims",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.fatal_errors",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.fatal_errors",
+              "word": "fire",
+              "kind": "fire_alone"
+            }
+          ],
+          "context_driver_report": [],
+          "regional_contrast_report": [],
+          "mixed_scope_report": [],
+          "scope_clause_required": false,
+          "scope_openers": 2,
+          "rung8_report": {
+            "cited_place_named_impact_group": false,
+            "impact_group_ids": [
+              "LG-infra_fire_weather_index__other_assets-impact-c1-004"
+            ],
+            "cited_two_hop_group_ids": [],
+            "bridge_clause_count": 0,
+            "answer_shape": "rung8_v2",
+            "budget": {
+              "table_sentences": 1,
+              "driver_claims": 2,
+              "impact_claims": 1,
+              "integrated_sentences": 3,
+              "limits": {
+                "table_sentences": 1,
+                "driver_claims_max": 2,
+                "impact_claims_min": 2,
+                "impact_claims_max": 3,
+                "impact_claims_min_here": 1,
+                "integrated_sentences_max": 3
+              },
+              "within": true,
+              "enforced": true
+            },
+            "broader_hazard_phrase_count": {
+              "literature_interpretation": 1,
+              "integrated": 1
+            },
+            "bridge_clause_sentence": null,
+            "bridge_clause_second_sentence": null
+          }
+        },
+        "reference_answer_tagged": {
+          "table_pattern": [
+            {
+              "sentence": "Fire‑weather danger is projected to show a slight increase in California by mid-century under a high-emissions future, representing a larger change than in most states.",
+              "pattern_ids": [
+                "TP1-01463"
+              ]
+            }
+          ],
+          "literature_interpretation": [
+            {
+              "sentence": "Research on California shows that strong winds are a primary driver of fire danger, and that strong winds and low humidity raise fire danger and fire size.",
+              "group_ids": [
+                "LG-fire_weather_v1-driver-c1-003",
+                "LG-fire_weather_v1-mechanism-c1-002"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "In general, research suggests that conditions that favour wildfire, of which fire‑weather danger is one measure, can destroy communications systems.",
+              "group_ids": [
+                "LG-infra_fire_weather_index__other_assets-impact-c1-004"
+              ],
+              "hedged": true
+            }
+          ],
+          "integrated": "Fire‑weather danger is projected to show a slight increase in California by mid-century under a high-emissions future, representing a larger change than in most states. Research on California shows that strong winds are a primary driver of fire danger, and that strong winds and low humidity raise fire danger and fire size. In general, research suggests that conditions that favour wildfire, of which fire‑weather danger is one measure, can destroy communications systems.",
+          "rubric_required_weights": [
+            {
+              "point": "Direction: increase",
+              "weight": 3
+            },
+            {
+              "point": "Magnitude class: a slight increase",
+              "weight": 3
+            },
+            {
+              "point": "Ranking: a larger change than in most states",
+              "weight": 3
+            },
+            {
+              "point": "Mechanism: strong winds are a primary driver of fire danger",
+              "weight": 2
+            },
+            {
+              "point": "Mechanism: strong winds and low humidity raise fire danger and fire size",
+              "weight": 2
+            }
+          ],
+          "rubric_points": [
+            {
+              "field": "required_points",
+              "point": "Direction: increase",
+              "source_ids": [
+                "TP1-01463"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Magnitude class: a slight increase",
+              "source_ids": [
+                "TP1-01463"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Ranking: a larger change than in most states",
+              "source_ids": [
+                "TP1-01463"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Mechanism: strong winds are a primary driver of fire danger",
+              "source_ids": [
+                "LG-fire_weather_v1-driver-c1-003"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Mechanism: strong winds and low humidity raise fire danger and fire size",
+              "source_ids": [
+                "LG-fire_weather_v1-mechanism-c1-002"
+              ]
+            }
+          ]
+        },
+        "seed_id": "SD8-TP1-01463-communications",
+        "packet_id": "PK-SD8-TP1-01463-communications",
+        "working_assumptions_relied_on": [
+          {
+            "id": "WA-FWI-SUMMER",
+            "resolution": "R-004",
+            "status": "owner_authorized_working_assumption",
+            "covers": [
+              "IC-006",
+              "IC-007",
+              "IC-008",
+              "IC-009",
+              "IC-010"
+            ]
+          },
+          {
+            "id": "WA-STATE-LABEL",
+            "resolution": "R-005",
+            "status": "owner_authorized_working_assumption",
+            "covers": [
+              "IC-012"
+            ]
+          },
+          {
+            "id": "WA-UNWEIGHTED-MEAN",
+            "resolution": "R-008",
+            "status": "owner_authorized_working_assumption",
+            "covers": [
+              "unweighted_cell_mean"
+            ]
+          }
+        ],
+        "fire_groups_unreviewed": false,
+        "generator_version": "litsynth_agent v5.4",
+        "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+        "model": "openai/gpt-oss-120b",
+        "endpoint_label": "sophia_vllm",
+        "temperature": 0,
+        "reasoning_effort": "low",
+        "max_tokens": 16000,
+        "reasoning_effort_applied": true,
+        "system_prompt_sha256": "1a023c1e98e822f74304801fce5a8b4605f6148c528c3dc4f5e236c5c87c3ade",
+        "corrective_prompt_sha256": "256db051b3ddfa93d893e4573a2e818ecd4623d96ddac0aaebdba932c6e2a01a",
+        "prompt_hash": "6f3b8701670f8d6ce2180f73643527caf28b96da280ebab6f4b1056ebfe2d05b",
+        "packet_sha256": "b43bd1c45b9c9616fe220069fd5eee4bbcefb5799fd10693cc87f16fa9273aef",
+        "source_commit": "bf699700ab45ee9f3b0f5715515c1b7b42a7ba66",
+        "generation_timestamp": "2026-11-24T23:47:52Z",
+        "model_seconds": 22.9,
+        "model_attempts": 2,
+        "corrective_retry_used": false,
+        "turns": [
+          {
+            "turn": 1,
+            "finish_reason": "stop",
+            "content_chars": 4072,
+            "reasoning_chars": 3042,
+            "http_attempts": 1,
+            "model_seconds": 13.3
+          },
+          {
+            "turn": 2,
+            "finish_reason": "stop",
+            "content_chars": 4164,
+            "reasoning_chars": 1221,
+            "http_attempts": 1,
+            "model_seconds": 9.6
+          }
+        ],
+        "first_turn": null,
+        "corrective_error": null,
+        "corrective_turn_used": true,
+        "corrective_class": "format",
+        "first_check": {
+          "event": "deterministic_fail",
+          "reasons": [
+            "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a slight increase'",
+            "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a slight increase'"
+          ],
+          "check_version": "synthesis_post_checks v3.5",
+          "checks": {
+            "numbers_untraced": [],
+            "number_words_untraced": [],
+            "exact_values_in_graded_text": [],
+            "prompt_leakage": {
+              "clmrr_named": false,
+              "row_or_column_named": false,
+              "paper_named": false,
+              "hidden_exact_value_required": false,
+              "according_to_phrase": false,
+              "pass": true,
+              "flags": [],
+              "check_version": "leakage_check v1"
+            },
+            "schema_errors": [],
+            "texts_traced_to_literature": [
+              "literature_interpretation",
+              "literature_interpretation",
+              "rubric.required_points",
+              "rubric.required_points"
+            ],
+            "rubric_points_without_source_ids": 0,
+            "n_table_sentences": 1,
+            "n_literature_sentences": 2,
+            "hedge_by_strength": [],
+            "fire_word_report": [
+              {
+                "field": "rubric.disallowed_claims",
+                "word": "wildfire",
+                "kind": "forbidden_word_in_wrong_answer_list"
+              },
+              {
+                "field": "rubric.disallowed_claims",
+                "word": "fires",
+                "kind": "forbidden_word_in_wrong_answer_list"
+              },
+              {
+                "field": "rubric.disallowed_claims",
+                "word": "burned area",
+                "kind": "forbidden_word_in_wrong_answer_list"
+              },
+              {
+                "field": "prompt",
+                "word": "fire",
+                "kind": "fire_alone"
+              },
+              {
+                "field": "table_pattern",
+                "word": "Fire",
+                "kind": "fire_alone"
+              },
+              {
+                "field": "literature_interpretation",
+                "word": "fire",
+                "kind": "fire_alone"
+              },
+              {
+                "field": "literature_interpretation",
+                "word": "fire",
+                "kind": "fire_alone"
+              },
+              {
+                "field": "integrated",
+                "word": "Fire",
+                "kind": "fire_alone"
+              },
+              {
+                "field": "integrated",
+                "word": "fire",
+                "kind": "fire_alone"
+              },
+              {
+                "field": "integrated",
+                "word": "fire",
+                "kind": "fire_alone"
+              },
+              {
+                "field": "rubric.required_points",
+                "word": "fire",
+                "kind": "fire_alone"
+              },
+              {
+                "field": "rubric.disallowed_claims",
+                "word": "fire",
+                "kind": "fire_alone"
+              },
+              {
+                "field": "rubric.fatal_errors",
+                "word": "fire",
+                "kind": "fire_alone"
+              },
+              {
+                "field": "rubric.fatal_errors",
+                "word": "fire",
+                "kind": "fire_alone"
+              }
+            ],
+            "context_driver_report": [],
+            "regional_contrast_report": [],
+            "mixed_scope_report": [],
+            "scope_clause_required": false,
+            "scope_openers": 2,
+            "rung8_report": {
+              "cited_place_named_impact_group": false,
+              "impact_group_ids": [
+                "LG-infra_fire_weather_index__other_assets-impact-c1-004"
+              ],
+              "cited_two_hop_group_ids": [],
+              "bridge_clause_count": 0,
+              "answer_shape": "rung8_v2",
+              "budget": {
+                "table_sentences": 1,
+                "driver_claims": 2,
+                "impact_claims": 1,
+                "integrated_sentences": 3,
+                "limits": {
+                  "table_sentences": 1,
+                  "driver_claims_max": 2,
+                  "impact_claims_min": 2,
+                  "impact_claims_max": 3,
+                  "impact_claims_min_here": 1,
+                  "integrated_sentences_max": 3
+                },
+                "within": true,
+                "enforced": true
+              },
+              "broader_hazard_phrase_count": {
+                "literature_interpretation": 1,
+                "integrated": 1
+              },
+              "bridge_clause_sentence": null,
+              "bridge_clause_second_sentence": null
+            }
+          },
+          "reference_answer_tagged": {
+            "table_pattern": [
+              {
+                "sentence": "Fire‑weather danger is projected to increase a slight increase in California by mid-century under a high-emissions future, representing a larger change than in most states.",
+                "pattern_ids": [
+                  "TP1-01463"
+                ]
+              }
+            ],
+            "literature_interpretation": [
+              {
+                "sentence": "Research on California shows that strong winds are a primary driver of fire danger, and that strong winds and low humidity raise fire danger and fire size.",
+                "group_ids": [
+                  "LG-fire_weather_v1-driver-c1-003",
+                  "LG-fire_weather_v1-mechanism-c1-002"
+                ],
+                "hedged": false
+              },
+              {
+                "sentence": "In general, research suggests that conditions that favour wildfire, of which fire‑weather danger is one measure, can destroy communications systems.",
+                "group_ids": [
+                  "LG-infra_fire_weather_index__other_assets-impact-c1-004"
+                ],
+                "hedged": true
+              }
+            ],
+            "integrated": "Fire‑weather danger is projected to increase a slight increase in California by mid-century under a high-emissions future, representing a larger change than in most states. Research on California shows that strong winds are a primary driver of fire danger, and that strong winds and low humidity raise fire danger and fire size. In general, research suggests that conditions that favour wildfire, of which fire‑weather danger is one measure, can destroy communications systems.",
+            "rubric_required_weights": [
+              {
+                "point": "Direction: increase",
+                "weight": 3
+              },
+              {
+                "point": "Magnitude class: a slight increase",
+                "weight": 3
+              },
+              {
+                "point": "Ranking: a larger change than in most states",
+                "weight": 3
+              },
+              {
+                "point": "Mechanism: strong winds are a primary driver of fire danger",
+                "weight": 2
+              },
+              {
+                "point": "Mechanism: strong winds and low humidity raise fire danger and fire size",
+                "weight": 2
+              }
+            ],
+            "rubric_points": [
+              {
+                "field": "required_points",
+                "point": "Direction: increase",
+                "source_ids": [
+                  "TP1-01463"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Magnitude class: a slight increase",
+                "source_ids": [
+                  "TP1-01463"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Ranking: a larger change than in most states",
+                "source_ids": [
+                  "TP1-01463"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Mechanism: strong winds are a primary driver of fire danger",
+                "source_ids": [
+                  "LG-fire_weather_v1-driver-c1-003"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "Mechanism: strong winds and low humidity raise fire danger and fire size",
+                "source_ids": [
+                  "LG-fire_weather_v1-mechanism-c1-002"
+                ]
+              }
+            ]
+          },
+          "raw_response": "{\n  \"prompt\": \"What could a projected increase in fire‑weather danger mean for communications systems in California, and why?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"Fire‑weather danger is projected to increase a slight increase in California by mid-century under a high-emissions future, representing a larger change than in most states.\",\n        \"pattern_ids\": [\"TP1-01463\"]\n      }\n    ],\n    \"literature_interpretation\": [\n      {\n        \"sentence\": \"Research on California shows that strong winds are a primary driver of fire danger, and that strong winds and low humidity raise fire danger and fire size.\",\n        \"group_ids\": [\"LG-fire_weather_v1-driver-c1-003\", \"LG-fire_weather_v1-mechanism-c1-002\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research suggests that conditions that favour wildfire, of which fire‑weather danger is one measure, can destroy communications systems.\",\n        \"group_ids\": [\"LG-infra_fire_weather_index__other_assets-impact-c1-004\"],\n        \"hedged\": true\n      }\n    ],\n    \"integrated\": \"Fire‑weather danger is projected to increase a slight increase in California by mid-century under a high-emissions future, representing a larger change than in most states. Research on California shows that strong winds are a primary driver of fire danger, and that strong winds and low humidity raise fire danger and fire size. In general, research suggests that conditions that favour wildfire, of which fire‑weather danger is one measure, can destroy communications systems.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"Direction: increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-01463\"]\n      },\n      {\n        \"point\": \"Magnitude class: a slight increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-01463\"]\n      },\n      {\n        \"point\": \"Ranking: a larger change than in most states\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-01463\"]\n      },\n      {\n        \"point\": \"Mechanism: strong winds are a primary driver of fire danger\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-fire_weather_v1-driver-c1-003\"]\n      },\n      {\n        \"point\": \"Mechanism: strong winds and low humidity raise fire danger and fire size\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-fire_weather_v1-mechanism-c1-002\"]\n      }\n    ],\n    \"acceptable_variants\": [],\n    \"optional_points\": [],\n    \"disallowed_claims\": [\n      \"fire‑weather danger will fail\",\n      \"communications systems will be at risk\",\n      \"wildfire\",\n      \"fires\",\n      \"burned area\"\n    ],\n    \"fatal_errors\": [\n      \"Wrong direction\",\n      \"Stating the projection as a certainty or forecast\",\n      \"Treating the modeled historical baseline as an observation\",\n      \"Reading fire‑weather danger as fire occurrence\",\n      \"Treating a hazard as a risk\"\n    ]\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"A Fire Weather Index is a meteorological fire‑danger index; it is never fire occurrence, ignition, burned area or damage.\",\n    \"A high-emissions future is one plausible future, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\",\n    \"Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.\",\n    \"Impact statements are general unless a group is marked place_named for the place.\"\n  ],\n  \"source_independent_answerability\": \"borderline\",\n  \"source_independence_note\": \"A climate scientist could guess the direction and general drivers, but the specific magnitude class and ranking require the packet's data.\",\n  \"capability_tested\": \"hazard‑impact reasoning\",\n  \"system_task\": \"generate answer\",\n  \"key_relationships\": \"hazard‑to‑infrastructure\",\n  \"evidence_needed\": \"driver and impact literature\",\n  \"desired_output_characteristics\": \"concise paragraph\",\n  \"expected_knowledge_level\": \"specialist_climate_science\"\n}",
+          "raw_response_chars": 4072,
+          "raw_reasoning": null,
+          "raw_reasoning_chars": null,
+          "content_fallback": false,
+          "finish_reason": "stop",
+          "raw_max_chars": 20000
+        },
+        "finish_reason": "stop",
+        "content_chars": 4164,
+        "reasoning_chars": 1221,
+        "raw_response": "{\n  \"prompt\": \"What could a projected increase in fire‑weather danger mean for communications systems in California, and why?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"Fire‑weather danger is projected to show a slight increase in California by mid-century under a high-emissions future, representing a larger change than in most states.\",\n        \"pattern_ids\": [\"TP1-01463\"]\n      }\n    ],\n    \"literature_interpretation\": [\n      {\n        \"sentence\": \"Research on California shows that strong winds are a primary driver of fire danger, and that strong winds and low humidity raise fire danger and fire size.\",\n        \"group_ids\": [\"LG-fire_weather_v1-driver-c1-003\", \"LG-fire_weather_v1-mechanism-c1-002\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research suggests that conditions that favour wildfire, of which fire‑weather danger is one measure, can destroy communications systems.\",\n        \"group_ids\": [\"LG-infra_fire_weather_index__other_assets-impact-c1-004\"],\n        \"hedged\": true\n      }\n    ],\n    \"integrated\": \"Fire‑weather danger is projected to show a slight increase in California by mid-century under a high-emissions future, representing a larger change than in most states. Research on California shows that strong winds are a primary driver of fire danger, and that strong winds and low humidity raise fire danger and fire size. In general, research suggests that conditions that favour wildfire, of which fire‑weather danger is one measure, can destroy communications systems.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"Direction: increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-01463\"]\n      },\n      {\n        \"point\": \"Magnitude class: a slight increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-01463\"]\n      },\n      {\n        \"point\": \"Ranking: a larger change than in most states\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-01463\"]\n      },\n      {\n        \"point\": \"Mechanism: strong winds are a primary driver of fire danger\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-fire_weather_v1-driver-c1-003\"]\n      },\n      {\n        \"point\": \"Mechanism: strong winds and low humidity raise fire danger and fire size\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-fire_weather_v1-mechanism-c1-002\"]\n      }\n    ],\n    \"acceptable_variants\": [\n      \"Exact values are not required; any statement consistent with the magnitude class counts.\"\n    ],\n    \"optional_points\": [],\n    \"disallowed_claims\": [\n      \"fire‑weather danger will fail\",\n      \"communications systems will be at risk\",\n      \"wildfire\",\n      \"fires\",\n      \"burned area\"\n    ],\n    \"fatal_errors\": [\n      \"Wrong direction\",\n      \"Stating the projection as a certainty or forecast\",\n      \"Treating the modeled historical baseline as an observation\",\n      \"Reading fire‑weather danger as fire occurrence\",\n      \"Treating a hazard as a risk\"\n    ]\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"A Fire Weather Index is a meteorological fire‑danger index; it is never fire occurrence, ignition, burned area or damage.\",\n    \"A high-emissions future is one plausible future, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\",\n    \"Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.\",\n    \"Impact statements are general unless a group is marked place_named for the place.\"\n  ],\n  \"source_independent_answerability\": \"borderline\",\n  \"source_independence_note\": \"A climate scientist could infer the direction and drivers, but the specific magnitude class and state ranking rely on the packet’s data.\",\n  \"capability_tested\": \"hazard‑impact reasoning\",\n  \"system_task\": \"generate answer\",\n  \"key_relationships\": \"hazard‑to‑infrastructure\",\n  \"evidence_needed\": \"driver and impact literature\",\n  \"desired_output_characteristics\": \"concise paragraph\",\n  \"expected_knowledge_level\": \"specialist_climate_science\"\n}",
+        "raw_response_chars": 4164,
+        "raw_reasoning": null,
+        "raw_reasoning_chars": null,
+        "content_fallback": false,
+        "raw_max_chars": 20000,
+        "format_corrective_prompt_sha256": "eeaa2fd6d14e52ab8d9ee5eaec10b54a44a483824faa2af8e23d588118a04bfd"
+      },
+      {
+        "event": "polish",
+        "status": "polish_rejected",
+        "pre_polish": {
+          "prompt": "What could a projected increase in fire‑weather danger mean for communications systems in California, and why?",
+          "answer": "Fire‑weather danger is projected to show a slight increase in California by mid-century under a high-emissions future, representing a larger change than in most states. Research on California shows that strong winds are a primary driver of fire danger, and that strong winds and low humidity raise fire danger and fire size. In general, research suggests that conditions that favour wildfire, of which fire‑weather danger is one measure, can destroy communications systems."
+        },
+        "rewrite": {
+          "prompt": "What could a projected increase in fire‑weather danger mean for communications systems in California, and why?",
+          "answer": "Fire‑weather danger is projected to show a slight increase in California by mid-century under a high-emissions future, representing a larger change than in most states. Strong winds are a primary driver of fire danger in California. Strong winds and low humidity raise fire danger and fire size. In general, research suggests that conditions that favour wildfire, of which fire‑weather danger is one measure, can destroy communications systems."
+        },
+        "reasons": [
+          "answer: hedges differ (original ['show', 'shows', 'suggests'], polished ['show', 'suggests'])"
+        ],
+        "check_version": "polish_checks v2",
+        "checks": {
+          "prompt": {
+            "numbers": {
+              "original": [],
+              "polished": []
+            },
+            "places": {
+              "original": [
+                "California"
+              ],
+              "polished": [
+                "California"
+              ]
+            },
+            "hedges": {
+              "original": [],
+              "polished": []
+            },
+            "new_source_words": [],
+            "new_leakage_flags": [],
+            "length_ratio": 1.0,
+            "groups_recognised": {
+              "LG-infra_fire_weather_index__other_assets-impact-c1-004": {
+                "original": [
+                  "system"
+                ],
+                "polished": [
+                  "system"
+                ]
+              }
+            },
+            "descriptor_phrases": {
+              "original": {
+                "quantity: fire_weather_index": [
+                  "fire-weather danger"
+                ]
+              },
+              "polished": {
+                "quantity: fire_weather_index": [
+                  "fire-weather danger"
+                ]
+              }
+            }
+          },
+          "answer": {
+            "numbers": {
+              "original": [],
+              "polished": []
+            },
+            "places": {
+              "original": [
+                "California"
+              ],
+              "polished": [
+                "California"
+              ]
+            },
+            "hedges": {
+              "original": [
+                "show",
+                "shows",
+                "suggests"
+              ],
+              "polished": [
+                "show",
+                "suggests"
+              ]
+            },
+            "new_source_words": [],
+            "new_leakage_flags": [],
+            "length_ratio": 0.939,
+            "groups_recognised": {
+              "LG-fire_weather_v1-driver-c1-003": {
+                "original": [
+                  "wind",
+                  "driver"
+                ],
+                "polished": [
+                  "wind",
+                  "driver"
+                ]
+              },
+              "LG-fire_weather_v1-mechanism-c1-002": {
+                "original": [
+                  "wind",
+                  "humidity",
+                  "siz"
+                ],
+                "polished": [
+                  "wind",
+                  "humidity",
+                  "siz"
+                ]
+              },
+              "LG-infra_fire_weather_index__other_assets-impact-c1-004": {
+                "original": [
+                  "system"
+                ],
+                "polished": [
+                  "system"
+                ]
+              }
+            },
+            "descriptor_phrases": {
+              "original": {
+                "magnitude: a slight increase": [
+                  "a slight increase"
+                ],
+                "comparison with other states: large": [
+                  "a larger change than in most states"
+                ],
+                "scenario: RCP8.5": [
+                  "under a high-emissions future"
+                ],
+                "horizon: mid": [
+                  "by mid-century"
+                ],
+                "quantity: fire_weather_index": [
+                  "fire-weather danger"
+                ]
+              },
+              "polished": {
+                "magnitude: a slight increase": [
+                  "a slight increase"
+                ],
+                "comparison with other states: large": [
+                  "a larger change than in most states"
+                ],
+                "scenario: RCP8.5": [
+                  "under a high-emissions future"
+                ],
+                "horizon: mid": [
+                  "by mid-century"
+                ],
+                "quantity: fire_weather_index": [
+                  "fire-weather danger"
+                ]
+              }
+            }
+          }
+        },
+        "generator_version": "litpolish_agent v1.1",
+        "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+        "model": "openai/gpt-oss-120b",
+        "endpoint_label": "sophia_vllm",
+        "temperature": 0,
+        "reasoning_effort": "low",
+        "max_tokens": 16000,
+        "reasoning_effort_applied": true,
+        "system_prompt_sha256": "2dbbce7f345fdcdeccd4661c22f5c22d87e6c4bcaa070856b59e6234093f0a18",
+        "prompt_hash": "943bcaab8bd8f2a64b508a12f3558873411979c5ececcfe86332c6bfebe7dfc1",
+        "item_sha256": "1e3fdc7c4eabbf7998e740f6d24edcaace54abaeb249a58c2dabadb1ced18a2a",
+        "source_commit": "bf699700ab45ee9f3b0f5715515c1b7b42a7ba66",
+        "timestamp": "2026-11-24T23:49:33Z",
+        "model_seconds": 2.5,
+        "model_attempts": 1,
+        "corrective_retry_used": false,
+        "turns": [
+          {
+            "turn": 1,
+            "finish_reason": "stop",
+            "content_chars": 588,
+            "reasoning_chars": 338,
+            "http_attempts": 1,
+            "model_seconds": 2.5
+          }
+        ],
+        "finish_reason": "stop",
+        "content_chars": 588,
+        "reasoning_chars": 338,
+        "raw_response": "{\n  \"prompt\": \"What could a projected increase in fire‑weather danger mean for communications systems in California, and why?\",\n  \"answer\": \"Fire‑weather danger is projected to show a slight increase in California by mid-century under a high-emissions future, representing a larger change than in most states. Strong winds are a primary driver of fire danger in California. Strong winds and low humidity raise fire danger and fire size. In general, research suggests that conditions that favour wildfire, of which fire‑weather danger is one measure, can destroy communications systems.\"\n}",
+        "raw_response_chars": 588,
+        "raw_reasoning": null,
+        "raw_reasoning_chars": null,
+        "content_fallback": false,
+        "raw_max_chars": 20000
+      },
+      {
+        "event": "human_review",
+        "from_status": "deterministic_pass",
+        "decision": "D-033",
+        "display_rule": "D-079",
+        "at": "2026-11-25T00:07:46Z",
+        "by": "EXECUTOR (scripts/ingest_litsynth_infra_run2.py)",
+        "display_source": "original",
+        "display_recheck": {
+          "check_version": "synthesis_post_checks v3.5",
+          "pass": false,
+          "reasons": [
+            "integrated: rung 8 answer shape (D-075a): at most 3 sentences, no more than the reference sentences (found 4)"
+          ],
+          "on": "polished text",
+          "polish_status": "polish_rejected"
+        },
+        "display_text": {
+          "prompt": "What could a projected increase in fire‑weather danger mean for communications systems in California, and why?",
+          "answer": "Fire‑weather danger is projected to show a slight increase in California by mid-century under a high-emissions future, representing a larger change than in most states. Research on California shows that strong winds are a primary driver of fire danger, and that strong winds and low humidity raise fire danger and fire size. In general, research suggests that conditions that favour wildfire, of which fire‑weather danger is one measure, can destroy communications systems."
+        },
+        "note": "entered human review (D-033 lifecycle): infra synthesis run 2 (agent v5.4, packets v1b) and polish infra run 2 (agent v1.1, checks v2); the impact sample set (D-080); display text by D-079 (polished only if the polish passed and post-checks v3.5 pass on the polished text)"
+      }
+    ],
+    "kaiyuan_disposition": null,
+    "mentor_disposition": null,
+    "final_frozen": null
+  }
+}

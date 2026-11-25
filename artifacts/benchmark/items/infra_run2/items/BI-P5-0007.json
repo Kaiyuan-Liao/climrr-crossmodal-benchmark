@@ -1,0 +1,926 @@
+{
+  "schema_version": "benchmark_item_v2a",
+  "item_id": "BI-P5-0007",
+  "use_case_level": 8,
+  "capability_tested": "hazard‑impact linkage",
+  "system_task": "generate answer",
+  "reasoning_modalities": "Hazard + Text",
+  "key_relationships": "hazard → asset impact",
+  "evidence_needed": "multi‑source driver studies, single‑source impact study",
+  "desired_output_characteristics": "concise, sourced, hedged appropriately",
+  "expected_knowledge_level": "general_climate_science",
+  "prompt": "What does a projected increase in fire-weather danger in California by mid-century mean for emergency services, and why?",
+  "source_independent_answerability": "borderline",
+  "source_independence_note": "A climate scientist could infer the direction and general mechanisms, but the specific projected magnitude and state ranking require the packet data.",
+  "source_leakage_check": {
+    "clmrr_named": false,
+    "row_or_column_named": false,
+    "paper_named": false,
+    "hidden_exact_value_required": false,
+    "according_to_phrase": false,
+    "pass": true,
+    "flags": [],
+    "check_version": "leakage_check v1"
+  },
+  "reference_components": {
+    "table_patterns": [
+      {
+        "acceptance_blocked": false,
+        "acceptance_blocked_by": [],
+        "acceptance_blocked_by_original": [
+          "IC-006",
+          "IC-007",
+          "IC-008",
+          "IC-009",
+          "IC-010"
+        ],
+        "authorization": "inferred_candidate",
+        "cautions": [
+          "C-fire_weather: a fire-danger index, never fire occurrence"
+        ],
+        "computed_value_or_range": {
+          "cell_direction_counts": {
+            "decrease": 108,
+            "increase": 2723,
+            "no_change": 0
+          },
+          "mean_from": "31.366135970286118",
+          "mean_to": "33.611940835838926",
+          "n_cells_empty": 0,
+          "n_cells_used": 2831,
+          "range": {
+            "max": "6.813290120000000",
+            "min": "-0.569743990000000",
+            "over": "cells"
+          },
+          "unit": null,
+          "value": "2.245804468117273",
+          "value_is": "absolute_change",
+          "value_reason": null
+        },
+        "direction": "increase",
+        "family": "fire_weather_index",
+        "geography": "California",
+        "geography_type": "state",
+        "horizon": "mid",
+        "horizon_window": "2045-2054",
+        "metric": "fwi_summer_seasonal_value",
+        "metric_wording": "seasonal value of the Fire Weather Index (FWI)",
+        "pattern_id": "TP1-01463",
+        "pattern_kind": "single",
+        "pattern_robustness": "majority_same_direction",
+        "pattern_support_n": 2831,
+        "provenance": {
+          "code_version": "table_patterns v1 (src/climrr/table_patterns.py sha256 c5948f7e0ef85b73)",
+          "column_sources": {
+            "wildfire_summer_Dmid": {
+              "id": "IC-009",
+              "kind": "inferred_candidate_record",
+              "line": 664,
+              "quote": "Wildfire_summer_Dmid Difference between Mid-Century and Historical"
+            },
+            "wildfire_summer_Hist": {
+              "id": "IC-006",
+              "kind": "inferred_candidate_record",
+              "line": 661,
+              "quote": "Wildfire_summer_hist Seasonal value – Historical"
+            },
+            "wildfire_summer_Midc": {
+              "id": "IC-007",
+              "kind": "inferred_candidate_record",
+              "line": 662,
+              "quote": "Wildfire_summer_midc Seasonal value – Mid-Century RCP 8.5"
+            }
+          },
+          "column_statuses": {
+            "wildfire_summer_Dmid": "inferred_candidate",
+            "wildfire_summer_Hist": "inferred_candidate",
+            "wildfire_summer_Midc": "inferred_candidate"
+          },
+          "columns": [
+            {
+              "column": "wildfire_summer_Hist",
+              "index": 189
+            },
+            {
+              "column": "wildfire_summer_Midc",
+              "index": 190
+            },
+            {
+              "column": "wildfire_summer_Dmid",
+              "index": 192
+            }
+          ],
+          "derivation_rule_id": "DR-TD-003 @ DR-PT-001",
+          "member_cells_sha256": "1b364743863b12af93e342a02318266f15973695ee4a56c8e4936a6bd8fdd6a1",
+          "member_rows": 2831,
+          "row_rule": "State == 'California'",
+          "table_data_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e"
+        },
+        "provisional": true,
+        "provisional_reasons": [
+          "location_inferred_candidate: State label IC-012 (A-G1, A-G3; D-034)",
+          "unweighted_mean: provisional aggregation rule for representation validation"
+        ],
+        "rank": {
+          "of": 49,
+          "order": "descending signed value (DR-PT-004)",
+          "rank": 8,
+          "tied_with": 0
+        },
+        "relative_magnitude": {
+          "class": "large",
+          "definition": "large = upper tercile, by signed value, among the 49 U.S. State labels in the table with a computed value for family=fire_weather_index, metric=fwi_summer_seasonal_value, season=summer, horizon=mid (2045-2054), scenario=RCP8.5, statistic=absolute_change (DR-PT-005); a relative descriptor among states, not an absolute threshold"
+        },
+        "relative_magnitude_skipped_reason": null,
+        "robustness_share": "2723/2831",
+        "robustness_unit": "cell",
+        "scenario": "RCP8.5",
+        "season": "summer",
+        "statistic": "absolute_change",
+        "status": "computed",
+        "working_assumptions": [
+          "WA-FWI-SUMMER",
+          "WA-STATE-LABEL",
+          "WA-UNWEIGHTED-MEAN"
+        ]
+      }
+    ],
+    "literature_mechanisms": [
+      {
+        "statement": "strong winds are a primary driver of fire danger and spread",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-fire_weather_v1-driver-c1-003",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "236175367",
+            "paper_sha256": "3431eb74bad918b0adcd7dbb05f2596066e8a893639c9c2a7cb7abc711d60719",
+            "json_path": "$.discussion",
+            "span_start": 0,
+            "span_end": 499,
+            "verbatim_passage": "This study shows that (i) SAW wind speed plays a key role in area burned, (ii) variation in SAW windspeed outweighs fuel characteristics in explaining area burned, (iii) winds alone are insufficient to explain burning without consideration of human ignitions, (iv) ignition sources have changed markedly in recent decades, and (v) autumn and winter temperature and precipitation are less critical than winds and ignitions, and have substantially different effects on autumn versus winter SAW events.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 236175367",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-236175367-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "255372301",
+            "paper_sha256": "5112779c76f7df5d20606ec467bcee3640e8d69aaa5baaf5721f0d66275018e3",
+            "json_path": "$.results and discussion",
+            "span_start": 1973,
+            "span_end": 2511,
+            "verbatim_passage": "It is seen that higher temperature and stronger wind speed increase the wildfire risks by the factors of 1.94 (i.e., exp(β 2 )) and 2.43 (i.e., exp(β 3 )). Such findings can be well justified as follows: (i) a higher temperature makes the ignition of the underlying fuels more easily (e.g. grasses, shrubs, dead leaves, etc.), (ii) with an increased wind speed, the electrical conductors and surrounding vegetation are more likely to result in arcing, increasing the probability of wildfire ignition (Mitchell, 2013;Vazquez et al., 2022).",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 255372301",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-255372301-03",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "53050065",
+            "paper_sha256": "67d634a0411f24011fc3f356ed0f7bde1f98ec1404e1d9703417a02838c9de38",
+            "json_path": "$.summary",
+            "span_start": 1139,
+            "span_end": 1278,
+            "verbatim_passage": "Common to both events was the occurrence of strong winds that have been shown to be a key determinant in large human-caused wildfires [56].",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 53050065",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-53050065-06",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "14300",
+            "paper_sha256": "d63010c65b1955f330d76d9bf6c51e4114248a3e261af1b5160d40095a5fb594",
+            "json_path": "$.results",
+            "span_start": 1219,
+            "span_end": 1487,
+            "verbatim_passage": "Whereas fire numbers are determined by the presence of fuel, lightning frequency, population density and surface fire intensity, fire spread (and hence area burnt) is driven by wind speed, fire duration and the amount, moisture content and characteristics of the fuel.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 14300",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-14300-05",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "humidity and vapor pressure deficit affect fire risk",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-fire_weather_v1-driver-c1-002",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "255372301",
+            "paper_sha256": "5112779c76f7df5d20606ec467bcee3640e8d69aaa5baaf5721f0d66275018e3",
+            "json_path": "$.results and discussion",
+            "span_start": 2631,
+            "span_end": 2994,
+            "verbatim_passage": "Both the NDVI and the SPFH have negative impacts on wildfire risks, while SPFH has a relatively weaker effect compared with that of NDVI. Note that, a higher NDVI indicates healthier vegetation with more water conditions and fewer potential fuels that can be ignited. Similarly, a high SPFH attaches potential fuels with more moisture, reducing the wildfire risk.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 255372301",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-255372301-04",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "247649715",
+            "paper_sha256": "04aff65e7d558903a3dcfbfdb96dbd7f47fbeb81bacc385b2c44217be4bf0b0a",
+            "json_path": "$.abstract",
+            "span_start": 1387,
+            "span_end": 1558,
+            "verbatim_passage": "Additionally, among the individual climate variables that comprise the FWI, relative humidity and temperature are the most influential factors that affect the observed BA.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 247649715",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-247649715-02",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "247649715",
+            "paper_sha256": "04aff65e7d558903a3dcfbfdb96dbd7f47fbeb81bacc385b2c44217be4bf0b0a",
+            "json_path": "$.discussion",
+            "span_start": 1821,
+            "span_end": 2159,
+            "verbatim_passage": "Globally, in the case of forest BA anomaly, the most highly associated climate variable is found to be relative humidity, while in the case of the non-forest BA anomaly, temperature and relative humidity are found to be most highly associated for most of the regions, without, however, exhibiting any clear spatial or latitudinal pattern.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 247649715",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-247649715-06",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "Higher numbers of fire‑danger days lead to substantially higher daily costs for standby firefighting equipment and personnel.",
+        "statement_type": "impact",
+        "asset_class": "emergency_services",
+        "impact_mechanism": "more fire‑danger days increase standby requirements",
+        "impact_outcome": "daily standby costs rise dramatically",
+        "hazard_relation": "governed_term",
+        "two_hop": false,
+        "impact_fields_source": "members",
+        "evidence_strength": "single_source_supported",
+        "reference_scope": "single_study_observation",
+        "group_id": "LG-infra_fire_weather_index__other_assets-impact-c1-012",
+        "group_strength_run": "single_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "6254910",
+            "paper_sha256": "ce0d61e3c0f8d490dec53aed8161edd82fd5c697b33d910b4b97e7aed03e69b7",
+            "json_path": "$.effect of increased fuel load on fire management costs",
+            "span_start": 0,
+            "span_end": 209,
+            "verbatim_passage": "The cost per day of equipment that were required to be 'on stand-by' in readiness for fighting wildfires had increased by 30 times from 2007 to 2010 ($375 to $11,442; Table 3, NT Government, unpublished data).",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 6254910",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-6254910-03",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      }
+    ],
+    "literature_caveats": []
+  },
+  "reference_answer": {
+    "table_pattern": "Fire‑weather danger in California is projected to show a slight increase by mid-century under a high-emissions future, a larger change than in most states.",
+    "literature_interpretation": "Research on California shows that strong winds are a primary driver of fire‑weather danger. In general, research shows that humidity and vapor pressure deficit affect fire risk. In general, research suggests that fire‑weather danger can increase daily standby costs for emergency services.",
+    "integrated": "Fire‑weather danger in California is projected to show a slight increase by mid-century under a high-emissions future. This is a larger change than in most states. Research on California shows that strong winds are a primary driver of fire‑weather danger. Research shows that humidity and vapor pressure deficit affect fire risk. Research suggests that fire‑weather danger can increase daily standby costs for emergency services."
+  },
+  "rubric": {
+    "required_points": [
+      "[w=1] direction: increase",
+      "[w=1] magnitude class: a slight increase",
+      "[w=1] ranking: a larger change than in most states",
+      "[w=2] mechanism: strong winds are a primary driver of fire‑weather danger",
+      "[w=2] mechanism: humidity and vapor pressure deficit affect fire risk"
+    ],
+    "optional_points": [
+      "impact: fire‑weather danger can increase daily standby costs for emergency services"
+    ],
+    "acceptable_variants": [
+      "increase slightly",
+      "slightly higher",
+      "a small rise",
+      "rise slightly",
+      "a larger change than in most states"
+    ],
+    "disallowed_claims": [
+      "fire‑weather danger will fail",
+      "emergency services are at risk",
+      "wildfire",
+      "fires",
+      "burned area"
+    ],
+    "fatal_errors": [
+      "wrong direction",
+      "stating the projection as a certainty or a forecast",
+      "treating the modeled historical baseline as an observation",
+      "reading fire‑weather danger as fire occurrence",
+      "treating a hazard as a risk"
+    ]
+  },
+  "guardrails": [
+    "A modeled historical baseline is model output for a past period, not an observation.",
+    "A Fire Weather Index is a meteorological fire-danger index; it is never fire occurrence, ignition, burned area or damage.",
+    "A high-emissions future is one plausible future, not a forecast and not the only plausible future.",
+    "Hazard is not exposure, and exposure is not risk.",
+    "Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.",
+    "Impact statements are general unless a group is marked place_named for the place."
+  ],
+  "c_g_t_s_d_audit": null,
+  "generation": {
+    "generator_version": "litsynth_agent v5.4",
+    "model": "openai/gpt-oss-120b",
+    "prompt_hash": "57b2b9683ec6b710c2cfbf5343331d2c0ccf8f996901d54695310285839b911d",
+    "timestamp": "2026-11-24T23:48:20Z",
+    "inputs_sha256": {
+      "packet": "9f88f3cdd55e6cf10b7cbd86f9dd8d4c1f3c37e0f7f2bce95618f8ff7bc87a56",
+      "system_prompt": "1a023c1e98e822f74304801fce5a8b4605f6148c528c3dc4f5e236c5c87c3ade",
+      "item_seeds_v3": "04602e1bce5bc205ab6ae0d179f866ce894cfc517be62f2039fdc9c393f9d8a5",
+      "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+      "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+      "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+      "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+      "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+      "group_dispositions": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+      "provenance_corrections": "d56cbe5e0c4feaffd8398126953c8437416967b2fbc382d5da907e88081ebd93",
+      "descriptor_rules": "dbfa8fd8a86a9379b4709b998bb33e673dceafd5f8ba7d199d55ff672d4c282d",
+      "plain_language": "60598527bf21a9dbc5a68e31cb60ec76d75b95d5ede7411181c323f56832b140",
+      "resolutions": "d86e1cd4e92ab51562ec251c98652d135280a52642012f6c94f3e2d02595869a",
+      "nca_map": "3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41",
+      "nca_regions_disposition": "a0c390a80634a8e4a74693e47828a9912ddea8f8151784d57c82f816e3bb1ae9",
+      "group_dispositions_fire": "94a88f5d3228f3fdc4cf68a585475bb0cbc08b6c8d2ffe95430c8cf029ed907a",
+      "item_seeds_infra_v1a": "0bd723a092c02eff84bb00e3b733baba1396787cdd8b5991b97b296c2037ea2a",
+      "pilot_selection_infra_v1a": "316a93f9d197d35756ef0c81a7a1e9f683978f59ce512615d93f0963134f9212",
+      "groups_infra_run1": "f61bf4f557c0f5fbdfec2779fc578b01e84bdc6edfca80c4b633d25f841045ce",
+      "groups_enriched_infra_run1": "1e5aa4fb5902bc598c5977dd231d9b1b1c029fdad98076651cb0b2d7b0913eb1",
+      "statements_infra_run1": "869b0592e72ec22b7617a3fbe6ae3005df762b4817f7609e41c96a8559cbca4b",
+      "independence_infra_run1": "b0a2fa3f3bd9998597c4681100586abf555ce295283984f102222030bd2fb602",
+      "group_dispositions_infra_v1": "9b94e028bc571d9d84e6714ef1264bf2e087ea405d6561bfcdbd6d333c601bef",
+      "groups_dispositioned_v1": "d92cd95ff9dcc669a4f19355d22ac556c8211a587bc7155b5fb6fea42ff091ce",
+      "item_schema_v2a": "deca317cfdf11c9aa9074b68b7305c3b8ea7922ddf45a0542bc316901400d2d8",
+      "question_forms": "520aafa0804b5308be7e9e59b8316d9fbe0d8b60b335da4a0414ed0a17ab283e",
+      "asset_short_forms_v1": "de28eaa2d65759d7c09c2e95e8388b17f477f7c0f6d21aa72bcc3681055c444d"
+    }
+  },
+  "review": {
+    "status": "human_review",
+    "history": [
+      {
+        "event": "deterministic_pass",
+        "reasons": [],
+        "check_version": "synthesis_post_checks v3.5",
+        "checks": {
+          "numbers_untraced": [],
+          "number_words_untraced": [],
+          "exact_values_in_graded_text": [],
+          "prompt_leakage": {
+            "clmrr_named": false,
+            "row_or_column_named": false,
+            "paper_named": false,
+            "hidden_exact_value_required": false,
+            "according_to_phrase": false,
+            "pass": true,
+            "flags": [],
+            "check_version": "leakage_check v1"
+          },
+          "schema_errors": [],
+          "texts_traced_to_literature": [
+            "literature_interpretation",
+            "literature_interpretation",
+            "literature_interpretation",
+            "rubric.required_points",
+            "rubric.required_points",
+            "rubric.optional_points"
+          ],
+          "rubric_points_without_source_ids": 0,
+          "n_table_sentences": 1,
+          "n_literature_sentences": 3,
+          "hedge_by_strength": [],
+          "fire_word_report": [
+            {
+              "field": "rubric.disallowed_claims",
+              "word": "wildfire",
+              "kind": "forbidden_word_in_wrong_answer_list"
+            },
+            {
+              "field": "rubric.disallowed_claims",
+              "word": "fires",
+              "kind": "forbidden_word_in_wrong_answer_list"
+            },
+            {
+              "field": "rubric.disallowed_claims",
+              "word": "burned area",
+              "kind": "forbidden_word_in_wrong_answer_list"
+            },
+            {
+              "field": "table_pattern",
+              "word": "Fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "literature_interpretation",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "literature_interpretation",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "literature_interpretation",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "integrated",
+              "word": "Fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "integrated",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "integrated",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "integrated",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.required_points",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.required_points",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.optional_points",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.disallowed_claims",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.fatal_errors",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.fatal_errors",
+              "word": "fire",
+              "kind": "fire_alone"
+            }
+          ],
+          "context_driver_report": [],
+          "regional_contrast_report": [],
+          "mixed_scope_report": [],
+          "scope_clause_required": false,
+          "scope_openers": 3,
+          "rung8_report": {
+            "cited_place_named_impact_group": false,
+            "impact_group_ids": [
+              "LG-infra_fire_weather_index__other_assets-impact-c1-012"
+            ],
+            "cited_two_hop_group_ids": [],
+            "bridge_clause_count": 0,
+            "answer_shape": "rung8_v2",
+            "budget": {
+              "table_sentences": 1,
+              "driver_claims": 2,
+              "impact_claims": 1,
+              "integrated_sentences": 4,
+              "limits": {
+                "table_sentences": 1,
+                "driver_claims_max": 2,
+                "impact_claims_min": 2,
+                "impact_claims_max": 3,
+                "impact_claims_min_here": 1,
+                "integrated_sentences_max": 4
+              },
+              "within": true,
+              "enforced": true
+            },
+            "broader_hazard_phrase_count": {
+              "literature_interpretation": 0,
+              "integrated": 0
+            },
+            "bridge_clause_sentence": null,
+            "bridge_clause_second_sentence": null
+          }
+        },
+        "reference_answer_tagged": {
+          "table_pattern": [
+            {
+              "sentence": "Fire‑weather danger in California is projected to show a slight increase by mid-century under a high-emissions future, a larger change than in most states.",
+              "pattern_ids": [
+                "TP1-01463"
+              ]
+            }
+          ],
+          "literature_interpretation": [
+            {
+              "sentence": "Research on California shows that strong winds are a primary driver of fire‑weather danger.",
+              "group_ids": [
+                "LG-fire_weather_v1-driver-c1-003"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "In general, research shows that humidity and vapor pressure deficit affect fire risk.",
+              "group_ids": [
+                "LG-fire_weather_v1-driver-c1-002"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "In general, research suggests that fire‑weather danger can increase daily standby costs for emergency services.",
+              "group_ids": [
+                "LG-infra_fire_weather_index__other_assets-impact-c1-012"
+              ],
+              "hedged": true
+            }
+          ],
+          "integrated": "Fire‑weather danger in California is projected to show a slight increase by mid-century under a high-emissions future, a larger change than in most states. Research on California shows that strong winds are a primary driver of fire‑weather danger. In general, research shows that humidity and vapor pressure deficit affect fire risk. In general, research suggests that fire‑weather danger can increase daily standby costs for emergency services.",
+          "rubric_required_weights": [
+            {
+              "point": "direction: increase",
+              "weight": 1
+            },
+            {
+              "point": "magnitude class: a slight increase",
+              "weight": 1
+            },
+            {
+              "point": "ranking: a larger change than in most states",
+              "weight": 1
+            },
+            {
+              "point": "mechanism: strong winds are a primary driver of fire‑weather danger",
+              "weight": 2
+            },
+            {
+              "point": "mechanism: humidity and vapor pressure deficit affect fire risk",
+              "weight": 2
+            }
+          ],
+          "rubric_points": [
+            {
+              "field": "required_points",
+              "point": "direction: increase",
+              "source_ids": [
+                "TP1-01463"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "magnitude class: a slight increase",
+              "source_ids": [
+                "TP1-01463"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "ranking: a larger change than in most states",
+              "source_ids": [
+                "TP1-01463"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "mechanism: strong winds are a primary driver of fire‑weather danger",
+              "source_ids": [
+                "LG-fire_weather_v1-driver-c1-003"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "mechanism: humidity and vapor pressure deficit affect fire risk",
+              "source_ids": [
+                "LG-fire_weather_v1-driver-c1-002"
+              ]
+            },
+            {
+              "field": "optional_points",
+              "point": "impact: fire‑weather danger can increase daily standby costs for emergency services",
+              "source_ids": [
+                "LG-infra_fire_weather_index__other_assets-impact-c1-012"
+              ]
+            }
+          ]
+        },
+        "seed_id": "SD8-TP1-01463-emergency_services",
+        "packet_id": "PK-SD8-TP1-01463-emergency_services",
+        "working_assumptions_relied_on": [
+          {
+            "id": "WA-FWI-SUMMER",
+            "resolution": "R-004",
+            "status": "owner_authorized_working_assumption",
+            "covers": [
+              "IC-006",
+              "IC-007",
+              "IC-008",
+              "IC-009",
+              "IC-010"
+            ]
+          },
+          {
+            "id": "WA-STATE-LABEL",
+            "resolution": "R-005",
+            "status": "owner_authorized_working_assumption",
+            "covers": [
+              "IC-012"
+            ]
+          },
+          {
+            "id": "WA-UNWEIGHTED-MEAN",
+            "resolution": "R-008",
+            "status": "owner_authorized_working_assumption",
+            "covers": [
+              "unweighted_cell_mean"
+            ]
+          }
+        ],
+        "fire_groups_unreviewed": false,
+        "generator_version": "litsynth_agent v5.4",
+        "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+        "model": "openai/gpt-oss-120b",
+        "endpoint_label": "sophia_vllm",
+        "temperature": 0,
+        "reasoning_effort": "low",
+        "max_tokens": 16000,
+        "reasoning_effort_applied": true,
+        "system_prompt_sha256": "1a023c1e98e822f74304801fce5a8b4605f6148c528c3dc4f5e236c5c87c3ade",
+        "corrective_prompt_sha256": "256db051b3ddfa93d893e4573a2e818ecd4623d96ddac0aaebdba932c6e2a01a",
+        "prompt_hash": "57b2b9683ec6b710c2cfbf5343331d2c0ccf8f996901d54695310285839b911d",
+        "packet_sha256": "9f88f3cdd55e6cf10b7cbd86f9dd8d4c1f3c37e0f7f2bce95618f8ff7bc87a56",
+        "source_commit": "bf699700ab45ee9f3b0f5715515c1b7b42a7ba66",
+        "generation_timestamp": "2026-11-24T23:48:20Z",
+        "model_seconds": 12.9,
+        "model_attempts": 1,
+        "corrective_retry_used": false,
+        "turns": [
+          {
+            "turn": 1,
+            "finish_reason": "stop",
+            "content_chars": 4496,
+            "reasoning_chars": 3420,
+            "http_attempts": 1,
+            "model_seconds": 12.9
+          }
+        ],
+        "first_turn": null,
+        "corrective_error": null,
+        "corrective_turn_used": false,
+        "corrective_class": null,
+        "first_check": null,
+        "finish_reason": "stop",
+        "content_chars": 4496,
+        "reasoning_chars": 3420,
+        "raw_response": "{\n  \"prompt\": \"What does a projected increase in fire-weather danger in California by mid-century mean for emergency services, and why?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"Fire‑weather danger in California is projected to show a slight increase by mid-century under a high-emissions future, a larger change than in most states.\",\n        \"pattern_ids\": [\"TP1-01463\"]\n      }\n    ],\n    \"literature_interpretation\": [\n      {\n        \"sentence\": \"Research on California shows that strong winds are a primary driver of fire‑weather danger.\",\n        \"group_ids\": [\"LG-fire_weather_v1-driver-c1-003\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research shows that humidity and vapor pressure deficit affect fire risk.\",\n        \"group_ids\": [\"LG-fire_weather_v1-driver-c1-002\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research suggests that fire‑weather danger can increase daily standby costs for emergency services.\",\n        \"group_ids\": [\"LG-infra_fire_weather_index__other_assets-impact-c1-012\"],\n        \"hedged\": true\n      }\n    ],\n    \"integrated\": \"Fire‑weather danger in California is projected to show a slight increase by mid-century under a high-emissions future, a larger change than in most states. Research on California shows that strong winds are a primary driver of fire‑weather danger. In general, research shows that humidity and vapor pressure deficit affect fire risk. In general, research suggests that fire‑weather danger can increase daily standby costs for emergency services.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"direction: increase\",\n        \"weight\": 1,\n        \"source_ids\": [\"TP1-01463\"]\n      },\n      {\n        \"point\": \"magnitude class: a slight increase\",\n        \"weight\": 1,\n        \"source_ids\": [\"TP1-01463\"]\n      },\n      {\n        \"point\": \"ranking: a larger change than in most states\",\n        \"weight\": 1,\n        \"source_ids\": [\"TP1-01463\"]\n      },\n      {\n        \"point\": \"mechanism: strong winds are a primary driver of fire‑weather danger\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-fire_weather_v1-driver-c1-003\"]\n      },\n      {\n        \"point\": \"mechanism: humidity and vapor pressure deficit affect fire risk\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-fire_weather_v1-driver-c1-002\"]\n      }\n    ],\n    \"acceptable_variants\": [\n      \"increase slightly\",\n      \"slightly higher\",\n      \"a small rise\",\n      \"rise slightly\",\n      \"a larger change than in most states\"\n    ],\n    \"optional_points\": [\n      {\n        \"point\": \"impact: fire‑weather danger can increase daily standby costs for emergency services\",\n        \"source_ids\": [\"LG-infra_fire_weather_index__other_assets-impact-c1-012\"]\n      }\n    ],\n    \"disallowed_claims\": [\n      \"fire‑weather danger will fail\",\n      \"emergency services are at risk\",\n      \"wildfire\",\n      \"fires\",\n      \"burned area\"\n    ],\n    \"fatal_errors\": [\n      \"wrong direction\",\n      \"stating the projection as a certainty or a forecast\",\n      \"treating the modeled historical baseline as an observation\",\n      \"reading fire‑weather danger as fire occurrence\",\n      \"treating a hazard as a risk\"\n    ]\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"A Fire Weather Index is a meteorological fire-danger index; it is never fire occurrence, ignition, burned area or damage.\",\n    \"A high-emissions future is one plausible future, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\",\n    \"Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.\",\n    \"Impact statements are general unless a group is marked place_named for the place.\"\n  ],\n  \"source_independent_answerability\": \"borderline\",\n  \"source_independence_note\": \"A climate scientist could infer the direction and general mechanisms, but the specific projected magnitude and state ranking require the packet data.\",\n  \"capability_tested\": \"hazard‑impact linkage\",\n  \"system_task\": \"generate answer\",\n  \"key_relationships\": \"hazard → asset impact\",\n  \"evidence_needed\": \"multi‑source driver studies, single‑source impact study\",\n  \"desired_output_characteristics\": \"concise, sourced, hedged appropriately\",\n  \"expected_knowledge_level\": \"general_climate_science\"\n}",
+        "raw_response_chars": 4496,
+        "raw_reasoning": null,
+        "raw_reasoning_chars": null,
+        "content_fallback": false,
+        "raw_max_chars": 20000
+      },
+      {
+        "event": "polish",
+        "status": "polished",
+        "pre_polish": {
+          "prompt": "What does a projected increase in fire-weather danger in California by mid-century mean for emergency services, and why?",
+          "answer": "Fire‑weather danger in California is projected to show a slight increase by mid-century under a high-emissions future, a larger change than in most states. Research on California shows that strong winds are a primary driver of fire‑weather danger. In general, research shows that humidity and vapor pressure deficit affect fire risk. In general, research suggests that fire‑weather danger can increase daily standby costs for emergency services."
+        },
+        "rewrite": {
+          "prompt": "What does a projected increase in fire-weather danger in California by mid-century mean for emergency services, and why?",
+          "answer": "Fire‑weather danger in California is projected to show a slight increase by mid-century under a high-emissions future. This is a larger change than in most states. Research on California shows that strong winds are a primary driver of fire‑weather danger. Research shows that humidity and vapor pressure deficit affect fire risk. Research suggests that fire‑weather danger can increase daily standby costs for emergency services."
+        },
+        "reasons": [],
+        "check_version": "polish_checks v2",
+        "checks": {
+          "prompt": {
+            "numbers": {
+              "original": [],
+              "polished": []
+            },
+            "places": {
+              "original": [
+                "California"
+              ],
+              "polished": [
+                "California"
+              ]
+            },
+            "hedges": {
+              "original": [],
+              "polished": []
+            },
+            "new_source_words": [],
+            "new_leakage_flags": [],
+            "length_ratio": 1.0,
+            "groups_recognised": {},
+            "descriptor_phrases": {
+              "original": {
+                "horizon: mid": [
+                  "by mid-century"
+                ],
+                "quantity: fire_weather_index": [
+                  "fire-weather danger"
+                ]
+              },
+              "polished": {
+                "horizon: mid": [
+                  "by mid-century"
+                ],
+                "quantity: fire_weather_index": [
+                  "fire-weather danger"
+                ]
+              }
+            }
+          },
+          "answer": {
+            "numbers": {
+              "original": [],
+              "polished": []
+            },
+            "places": {
+              "original": [
+                "California"
+              ],
+              "polished": [
+                "California"
+              ]
+            },
+            "hedges": {
+              "original": [
+                "show",
+                "shows",
+                "suggests"
+              ],
+              "polished": [
+                "show",
+                "shows",
+                "suggests"
+              ]
+            },
+            "new_source_words": [],
+            "new_leakage_flags": [],
+            "length_ratio": 0.964,
+            "groups_recognised": {
+              "LG-fire_weather_v1-driver-c1-003": {
+                "original": [
+                  "wind",
+                  "driver"
+                ],
+                "polished": [
+                  "wind",
+                  "driver"
+                ]
+              },
+              "LG-fire_weather_v1-driver-c1-002": {
+                "original": [
+                  "humidity",
+                  "vapor",
+                  "pressur",
+                  "deficit",
+                  "vapor pressur deficit"
+                ],
+                "polished": [
+                  "humidity",
+                  "vapor",
+                  "pressur",
+                  "deficit",
+                  "vapor pressur deficit"
+                ]
+              },
+              "LG-infra_fire_weather_index__other_assets-impact-c1-012": {
+                "original": [
+                  "daily",
+                  "cost",
+                  "standby"
+                ],
+                "polished": [
+                  "daily",
+                  "cost",
+                  "standby"
+                ]
+              }
+            },
+            "descriptor_phrases": {
+              "original": {
+                "magnitude: a slight increase": [
+                  "a slight increase"
+                ],
+                "comparison with other states: large": [
+                  "a larger change than in most states"
+                ],
+                "scenario: RCP8.5": [
+                  "under a high-emissions future"
+                ],
+                "horizon: mid": [
+                  "by mid-century"
+                ],
+                "quantity: fire_weather_index": [
+                  "fire-weather danger"
+                ]
+              },
+              "polished": {
+                "magnitude: a slight increase": [
+                  "a slight increase"
+                ],
+                "comparison with other states: large": [
+                  "a larger change than in most states"
+                ],
+                "scenario: RCP8.5": [
+                  "under a high-emissions future"
+                ],
+                "horizon: mid": [
+                  "by mid-century"
+                ],
+                "quantity: fire_weather_index": [
+                  "fire-weather danger"
+                ]
+              }
+            }
+          }
+        },
+        "generator_version": "litpolish_agent v1.1",
+        "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+        "model": "openai/gpt-oss-120b",
+        "endpoint_label": "sophia_vllm",
+        "temperature": 0,
+        "reasoning_effort": "low",
+        "max_tokens": 16000,
+        "reasoning_effort_applied": true,
+        "system_prompt_sha256": "2dbbce7f345fdcdeccd4661c22f5c22d87e6c4bcaa070856b59e6234093f0a18",
+        "prompt_hash": "7218882a1c29bf72c1ec40554e2fc8c19b3f6a556af22674e7b17a51a05f0888",
+        "item_sha256": "8f6e45fa51d862bf9d5cee37e14142e791ce92b9f45aeeddea449feb4d3dfa71",
+        "source_commit": "bf699700ab45ee9f3b0f5715515c1b7b42a7ba66",
+        "timestamp": "2026-11-24T23:50:27Z",
+        "model_seconds": 48.5,
+        "model_attempts": 1,
+        "corrective_retry_used": false,
+        "turns": [
+          {
+            "turn": 1,
+            "finish_reason": "stop",
+            "content_chars": 583,
+            "reasoning_chars": 1362,
+            "http_attempts": 1,
+            "model_seconds": 48.5
+          }
+        ],
+        "finish_reason": "stop",
+        "content_chars": 583,
+        "reasoning_chars": 1362,
+        "raw_response": "{\n  \"prompt\": \"What does a projected increase in fire-weather danger in California by mid-century mean for emergency services, and why?\",\n  \"answer\": \"Fire‑weather danger in California is projected to show a slight increase by mid-century under a high-emissions future. This is a larger change than in most states. Research on California shows that strong winds are a primary driver of fire‑weather danger. Research shows that humidity and vapor pressure deficit affect fire risk. Research suggests that fire‑weather danger can increase daily standby costs for emergency services.\"\n}",
+        "raw_response_chars": 583,
+        "raw_reasoning": null,
+        "raw_reasoning_chars": null,
+        "content_fallback": false,
+        "raw_max_chars": 20000
+      },
+      {
+        "event": "human_review",
+        "from_status": "deterministic_pass",
+        "decision": "D-033",
+        "display_rule": "D-079",
+        "at": "2026-11-25T00:07:46Z",
+        "by": "EXECUTOR (scripts/ingest_litsynth_infra_run2.py)",
+        "display_source": "original",
+        "display_recheck": {
+          "check_version": "synthesis_post_checks v3.5",
+          "pass": false,
+          "reasons": [
+            "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that humidity and vapor pressure deficit affe'",
+            "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research suggests that fire‑weather danger can increase dail'",
+            "integrated: rung 8 answer shape (D-075a): at most 4 sentences, no more than the reference sentences (found 5)"
+          ],
+          "on": "polished text",
+          "polish_status": "polished"
+        },
+        "display_text": {
+          "prompt": "What does a projected increase in fire-weather danger in California by mid-century mean for emergency services, and why?",
+          "answer": "Fire‑weather danger in California is projected to show a slight increase by mid-century under a high-emissions future, a larger change than in most states. Research on California shows that strong winds are a primary driver of fire‑weather danger. In general, research shows that humidity and vapor pressure deficit affect fire risk. In general, research suggests that fire‑weather danger can increase daily standby costs for emergency services."
+        },
+        "note": "entered human review (D-033 lifecycle): infra synthesis run 2 (agent v5.4, packets v1b) and polish infra run 2 (agent v1.1, checks v2); the impact sample set (D-080); display text by D-079 (polished only if the polish passed and post-checks v3.5 pass on the polished text)"
+      }
+    ],
+    "kaiyuan_disposition": null,
+    "mentor_disposition": null,
+    "final_frozen": null
+  }
+}

@@ -1,0 +1,1190 @@
+{
+  "schema_version": "benchmark_item_v2a",
+  "item_id": "BI-P5-0002",
+  "use_case_level": 8,
+  "capability_tested": "hazard‑impact reasoning",
+  "system_task": "integrated answer generation",
+  "reasoning_modalities": "Hazard + Text",
+  "key_relationships": "hazard‑impact‑asset",
+  "evidence_needed": "multi‑source driver and impact studies",
+  "desired_output_characteristics": "concise integrated paragraph",
+  "expected_knowledge_level": "general_climate_science",
+  "prompt": "What could a projected increase in dangerous heat-index days mean for transportation systems in Arizona, and why?",
+  "source_independent_answerability": "yes",
+  "source_independence_note": "A climate scientist can answer the direction, moderate size, and general impacts on transportation systems without the packet.",
+  "source_leakage_check": {
+    "clmrr_named": false,
+    "row_or_column_named": false,
+    "paper_named": false,
+    "hidden_exact_value_required": false,
+    "according_to_phrase": false,
+    "pass": true,
+    "flags": [],
+    "check_version": "leakage_check v1"
+  },
+  "reference_components": {
+    "table_patterns": [
+      {
+        "acceptance_blocked": false,
+        "acceptance_blocked_by": [],
+        "authorization": "verified",
+        "cautions": [],
+        "computed_value_or_range": {
+          "cell_direction_counts": {
+            "decrease": 0,
+            "increase": 1976,
+            "no_change": 31
+          },
+          "mean_from": "13.932170738594918",
+          "mean_to": "24.203371542481315",
+          "n_cells_empty": 0,
+          "n_cells_used": 2007,
+          "range": {
+            "max": "27.133333200000003",
+            "min": "0.000000000000000",
+            "over": "cells"
+          },
+          "unit": "days",
+          "value": "10.271200803886398",
+          "value_is": "absolute_change",
+          "value_reason": null
+        },
+        "direction": "increase",
+        "family": "heat_index",
+        "geography": "Arizona",
+        "geography_type": "state",
+        "horizon": "mid",
+        "horizon_window": "2045-2054",
+        "metric": "heatindex_days_above_95F",
+        "metric_wording": "number of days with daily max heat index above 95 F",
+        "pattern_id": "TP1-00069",
+        "pattern_kind": "single",
+        "pattern_robustness": "majority_same_direction",
+        "pattern_support_n": 2007,
+        "provenance": {
+          "code_version": "table_patterns v1 (src/climrr/table_patterns.py sha256 c5948f7e0ef85b73)",
+          "column_sources": {
+            "heatindex_HIS_Day95": {
+              "kind": "dictionary_line",
+              "line": 679,
+              "quote": "heatindex_HIS_Day95 Number of Summer days with daily max heat index above 95 F -- Historical"
+            },
+            "heatindex_M85_Day95": {
+              "kind": "dictionary_line",
+              "line": 685,
+              "quote": "heatindex_M85_Day95 Number of Summer days with daily max heat index above 95 F -- Mid-Century RCP8.5"
+            }
+          },
+          "column_statuses": {
+            "heatindex_HIS_Day95": "verified_from_dictionary",
+            "heatindex_M85_Day95": "verified_from_dictionary"
+          },
+          "columns": [
+            {
+              "column": "heatindex_HIS_Day95",
+              "index": 240
+            },
+            {
+              "column": "heatindex_M85_Day95",
+              "index": 246
+            }
+          ],
+          "derivation_rule_id": "DR-TD-003 @ DR-PT-001",
+          "member_cells_sha256": "eac237b78fe2430548583c866d57d5a5b0da52a7ea8e1397e7ad9400e8bee700",
+          "member_rows": 2007,
+          "row_rule": "State == 'Arizona'",
+          "table_data_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e"
+        },
+        "provisional": true,
+        "provisional_reasons": [
+          "location_inferred_candidate: State label IC-012 (A-G1, A-G3; D-034)",
+          "unweighted_mean: provisional aggregation rule for representation validation"
+        ],
+        "rank": {
+          "of": 49,
+          "order": "descending signed value (DR-PT-004)",
+          "rank": 23,
+          "tied_with": 0
+        },
+        "relative_magnitude": {
+          "class": "moderate",
+          "definition": "moderate = middle tercile, by signed value, among the 49 U.S. State labels in the table with a computed value for family=heat_index, metric=heatindex_days_above_95F, season=summer, horizon=mid (2045-2054), scenario=RCP8.5, statistic=absolute_change (DR-PT-005); a relative descriptor among states, not an absolute threshold"
+        },
+        "relative_magnitude_skipped_reason": null,
+        "robustness_share": "1976/2007",
+        "robustness_unit": "cell",
+        "scenario": "RCP8.5",
+        "season": "summer",
+        "statistic": "absolute_change",
+        "status": "computed",
+        "working_assumptions": [
+          "WA-STATE-LABEL",
+          "WA-UNWEIGHTED-MEAN"
+        ]
+      }
+    ],
+    "literature_mechanisms": [
+      {
+        "statement": "Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-extreme_heat_v1-driver-c1-008",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "199098498",
+            "paper_sha256": "945df7b916b7dd75924142fbb7d1542afa08cb36da06df37f135849d9ad15218",
+            "json_path": "$.late century results",
+            "span_start": 4602,
+            "span_end": 5001,
+            "verbatim_passage": "However, recent work examining changes in the frequency of different types of extreme heat days (considering both temperature and humidity) in CMIP5 projections after using a multivariate quantile mapping approach similar to the MACA methodology finds that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat (Schoof et al 2019).",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 199098498",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-199098498-04",
+            "evidence_role": "cited_candidate"
+          },
+          {
+            "paper_item_id": "158091651",
+            "paper_sha256": "a62d4b52adcff6beb97df02ca10902942356fbe8834ada0474e227f40556486d",
+            "json_path": "$.abstract",
+            "span_start": 829,
+            "span_end": 1077,
+            "verbatim_passage": "Land-atmosphere feedbacks appear to be a stronger factor for heat wave maintenance at southern latitudes, but the NCEP model seems to misrepresent those feedbacks, particularly over the Southwest United States, leading to poor skill in that region.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 158091651",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-158091651-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "5838629",
+            "paper_sha256": "e11032fb59db4250a8562dfba97e961feee24186a931f6ec3d037270405f4606",
+            "json_path": "$.results",
+            "span_start": 1155,
+            "span_end": 1343,
+            "verbatim_passage": "Air mass stagnation events, which increase O3 production and will increase in frequency as weather conditions favorable to heat waves increase (CCSP 2008), are another important indicator.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 5838629",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-5838629-03",
+            "evidence_role": "cited_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "global warming increases heatwave frequency and intensity",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-extreme_heat_v1-driver-c2-001",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "14006228",
+            "paper_sha256": "802cc7b80c67735e86e9740ca72bba6361cedf5d9a330ab2236ea6a901115d8d",
+            "json_path": "$.discussion",
+            "span_start": 4074,
+            "span_end": 4177,
+            "verbatim_passage": "As global warming continues, the frequency, intensity and duration of heatwaves are likely to increase.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 14006228",
+            "is_review_or_synthesis": true,
+            "statement_id": "LS-14006228-04",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "221504407",
+            "paper_sha256": "a3342e14fcd6c45de5a3831eddc22fc5dac739f8aebc5a920e41f9dcb546467e",
+            "json_path": "$.conclusion",
+            "span_start": 0,
+            "span_end": 220,
+            "verbatim_passage": "The occurrence of heat events is expected to increase due to the worsening effects of anthropogenic global warming [60]. This will be seen in both higher mean annual temperatures and in the frequency of heat shocks [37].",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 221504407",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-221504407-03",
+            "evidence_role": "cited_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "pavement structural degradation from heat",
+        "statement_type": "impact",
+        "asset_class": "transportation_systems",
+        "impact_mechanism": "higher pavement temperature increases vibration magnitude; higher temperatures degrade material performance; causes thermal cracking and rutting; causes permanent deformation of the pavement surface; elevated atmospheric heat increases surface temperature fluctuations; high temperatures reduce asphalt viscosity causing the material to flow under load; high temperatures reduce the bond strength at the waterproof‑adhesive‑pavement interface; temperature spikes increase pavement material deformation; greater temperature variability raises thermal stress in asphalt; higher temperatures increase vegetation growth and water evaporation, impairing drainage",
+        "impact_outcome": "more pavement distress points are detected; increased vulnerability and potential failure of pavements and tracks; reduces pavement service life; reduces smoothness and shortens service life; greater temperature variability in the upper pavement layers; permanent rutting and deformation of the pavement surface; shear fatigue life of the bridge deck pavement is sharply shortened; accelerated permanent deformation; increased thermal cracking; greater road distress and higher maintenance requirements",
+        "hazard_relation": "broader_hazard",
+        "two_hop": false,
+        "impact_fields_source": "members",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-001",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "269406624",
+            "paper_sha256": "3a33226cce41a2fcb5df303d204ffe9c9c28789904db59ef4d8657c7bfb6de3b",
+            "json_path": "$.bepam",
+            "span_start": 1757,
+            "span_end": 2047,
+            "verbatim_passage": "It shows that the number of identified POIs, which signify pavement distress, varies with changes in pavement temperature.The data exhibit a strong correlation between pavement temperature and the frequency of POIs, with an 83% R-squared value for road section 1 and 70% for road section 2.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 269406624",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-269406624-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "158185209",
+            "paper_sha256": "0e7f5e483dc97957535f2a6bf2c947994642b11d65dc151bf1b37f0103b6c300",
+            "json_path": "$.temperature",
+            "span_start": 122,
+            "span_end": 508,
+            "verbatim_passage": "The increase in temperatures causes a greater vulnerability of common road pavements (with surface layer composed of asphalt concrete) and rail (track), increases the energy demand to operate buses, especially for auxiliaries [17], which is perceived by the fleets managers as one more items in the overall lists of operational costs [18,19], and worsens the public's living conditions.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 158185209",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-158185209-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "214326018",
+            "paper_sha256": "e8b4c3937ac28315835f639998b9cbba4b847efb818cf8cc726898832cafc071",
+            "json_path": "$.the temperature effect",
+            "span_start": 409,
+            "span_end": 555,
+            "verbatim_passage": "This table shows a temperature rise in the summer months that have critical impacts on the pavement and its structural and functional performance.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 214326018",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-214326018-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "221665613",
+            "paper_sha256": "618f418cfca53ef0f2f3f66fba9e2a6b7c0bc0ced0776fddd327300f4fa08052",
+            "json_path": "$.high temperature",
+            "span_start": 0,
+            "span_end": 499,
+            "verbatim_passage": "High temperatures have a significant impact on the service life of asphalt pavements and are often the basis of determining the design of the pavement mixture and section. Asphalt becomes a plastomer that deforms under high-temperature conditions, and its shape cannot be completely recovered. Hence, asphalt pavements are prone to permanent deformation under the influence of repeated loading [24], and high temperatures are one of the main causes of the permanent deformation of asphalt pavements.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 221665613",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-221665613-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "226335422",
+            "paper_sha256": "e06d5e552b8fb199d0d5762117f0350a202fe699dcecf9cd18f8f29a8fa5ab3d",
+            "json_path": "$.conclusion",
+            "span_start": 1049,
+            "span_end": 1293,
+            "verbatim_passage": "During the high temperature period, the eastern observation area fluctuates between 20 and 60°C. As the depth increases, the temperature variation range gradually decreases, and within 0-10cm, the temperature variation change decreases greatly.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 226335422",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-226335422-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "229433013",
+            "paper_sha256": "a6a14811bf085ac04348a0b0e0978049c60075f8234a7322b47b443bd9347c90",
+            "json_path": "$.conclusion",
+            "span_start": 694,
+            "span_end": 918,
+            "verbatim_passage": "Such severe loading in combination with high temperatures in the area due to the warm tropical environment exacerbate the situation and can cause the asphalt to begin to flow, hence making rutting and deformation inevitable.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 229433013",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-229433013-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "231654622",
+            "paper_sha256": "0675213491654e99bbae6dac7fdceb5df96e308c3d8063ddbd91faa9e452209f",
+            "json_path": "$.conclusion",
+            "span_start": 442,
+            "span_end": 867,
+            "verbatim_passage": "When the temperature reaches 50°C, the interlaminar shear fatigue life of the pavement structure decreases sharply. Taking 25°C as the boundary, the change rate of the shear fatigue life with temperature can be divided into two stages. At −10°C to 25°C, the shear fatigue lives at different temperatures have little differences. In contrast, when the temperature is higher than 25°C, the shear fatigue life decreases sharply.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 231654622",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-231654622-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "213951900",
+            "paper_sha256": "dc7c25520f9c4f5327a296d1db7388114ee449c54afdf4837f4774fe4fc8628d",
+            "json_path": "$.temperature",
+            "span_start": 1760,
+            "span_end": 1907,
+            "verbatim_passage": "In extreme cases, when temperature has significant daily/hourly increases, accelerated development of permanent deformation can be expected [3,16].",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 213951900",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-213951900-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "213951900",
+            "paper_sha256": "dc7c25520f9c4f5327a296d1db7388114ee449c54afdf4837f4774fe4fc8628d",
+            "json_path": "$.temperature",
+            "span_start": 1908,
+            "span_end": 2065,
+            "verbatim_passage": "Increases in the temperature ranges due to climate change can increase thermal stresses in asphalt layers, and more thermal cracking can be expected [17,18].",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 213951900",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-213951900-02",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "257991205",
+            "paper_sha256": "ad0ab1cdf13ae9d8e2443e417b89b98977bc2f434177781d24d12e04e3c00160",
+            "json_path": "$.methodology",
+            "span_start": 934,
+            "span_end": 1182,
+            "verbatim_passage": "Other indications of possible problems observed included the accumulation of sand and debris (due to wind and flooding) and excessive vegetation caused by increased rainfall and high temperatures, leading to sight distance and passability problems.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 257991205",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-257991205-01",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "heat‑driven vegetation fires threaten railway corridors",
+        "statement_type": "impact",
+        "asset_class": "transportation_systems",
+        "impact_mechanism": "increased fire risk from vegetation",
+        "impact_outcome": "need to stop or redirect train traffic",
+        "hazard_relation": "broader_hazard",
+        "two_hop": true,
+        "impact_fields_source": "members",
+        "evidence_strength": "single_source_supported",
+        "reference_scope": "single_study_observation",
+        "group_id": "LG-infra_heat_index__transportation_systems-impact-c1-007",
+        "group_strength_run": "single_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "237251104",
+            "paper_sha256": "f4acfc38d573487b9ba90ed0822d02c3cdc117f5092f05efc8ec4ddbf3057f29",
+            "json_path": "$.climate change impact on swedish railways infrastructure",
+            "span_start": 1978,
+            "span_end": 2089,
+            "verbatim_passage": "Heat and drought also increase the risk of vegetation fires and thus also the need to stop or redirect traffic.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 237251104",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-237251104-02",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      }
+    ],
+    "literature_caveats": []
+  },
+  "reference_answer": {
+    "table_pattern": "Dangerous heat-index days are projected to increase moderately in Arizona, a moderate increase, by mid-century under a high-emissions future.",
+    "literature_interpretation": "Research on the United States shows, including work on the Southwest, that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heat‑wave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems. In general, research, including work on Arizona, shows that such heat increases pavement distress, reducing the performance of transportation systems. In general, research suggests that when wildfires occur, they increase fire risk to roads and rail. These are general drivers of dangerous heat-index days, not findings specific to Arizona.",
+    "integrated": "Dangerous heat-index days are projected to increase moderately in Arizona, a moderate increase, by mid-century under a high-emissions future. Research on the United States shows, including work on the Southwest, that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heat‑wave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems. In general, research shows that such heat increases pavement distress, reducing the performance of transportation systems. In general, research suggests that when wildfires occur, they increase fire risk to roads and rail. These are general drivers of dangerous heat-index days, not findings specific to Arizona."
+  },
+  "rubric": {
+    "required_points": [
+      "[w=3] increase",
+      "[w=3] a moderate increase",
+      "[w=2] large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat",
+      "[w=2] global warming increases heat‑wave frequency and intensity",
+      "[w=2] extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems",
+      "[w=2] such heat increases pavement distress, reducing the performance of transportation systems",
+      "[w=1] when wildfires occur, they increase fire risk to roads and rail"
+    ],
+    "optional_points": [],
+    "acceptable_variants": [],
+    "disallowed_claims": [
+      "will fail",
+      "at risk",
+      "vulnerable",
+      "risk"
+    ],
+    "fatal_errors": [
+      "wrong direction",
+      "stating the projection as a certainty",
+      "treating the modeled historical baseline as an observation",
+      "reading fire-weather danger as fire occurrence",
+      "treating a hazard as a risk"
+    ]
+  },
+  "guardrails": [
+    "A modeled historical baseline is model output for a past period, not an observation.",
+    "A Fire Weather Index is a meteorological fire-danger index; it is never fire occurrence, ignition, burned area or damage.",
+    "A high-emissions future is one plausible future, not a forecast and not the only plausible future.",
+    "Hazard is not exposure, and exposure is not risk.",
+    "Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.",
+    "Impact statements are general unless a group is marked place_named for the place."
+  ],
+  "c_g_t_s_d_audit": null,
+  "generation": {
+    "generator_version": "litsynth_agent v5.4",
+    "model": "openai/gpt-oss-120b",
+    "prompt_hash": "a600e32e28632f5eb7bc392fa59a51347eb18f9b5c8da85882084e8a2ab15986",
+    "timestamp": "2026-11-24T23:54:12Z",
+    "inputs_sha256": {
+      "packet": "8bd43e0f45ff11ef4bd973f6e46899003c2cb09d0f8e5e430228d63b9119e192",
+      "system_prompt": "1a023c1e98e822f74304801fce5a8b4605f6148c528c3dc4f5e236c5c87c3ade",
+      "item_seeds_v3": "04602e1bce5bc205ab6ae0d179f866ce894cfc517be62f2039fdc9c393f9d8a5",
+      "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+      "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+      "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+      "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+      "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+      "group_dispositions": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+      "provenance_corrections": "d56cbe5e0c4feaffd8398126953c8437416967b2fbc382d5da907e88081ebd93",
+      "descriptor_rules": "dbfa8fd8a86a9379b4709b998bb33e673dceafd5f8ba7d199d55ff672d4c282d",
+      "plain_language": "60598527bf21a9dbc5a68e31cb60ec76d75b95d5ede7411181c323f56832b140",
+      "resolutions": "d86e1cd4e92ab51562ec251c98652d135280a52642012f6c94f3e2d02595869a",
+      "nca_map": "3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41",
+      "nca_regions_disposition": "a0c390a80634a8e4a74693e47828a9912ddea8f8151784d57c82f816e3bb1ae9",
+      "group_dispositions_fire": "94a88f5d3228f3fdc4cf68a585475bb0cbc08b6c8d2ffe95430c8cf029ed907a",
+      "item_seeds_infra_v1a": "0bd723a092c02eff84bb00e3b733baba1396787cdd8b5991b97b296c2037ea2a",
+      "pilot_selection_infra_v1a": "316a93f9d197d35756ef0c81a7a1e9f683978f59ce512615d93f0963134f9212",
+      "groups_infra_run1": "f61bf4f557c0f5fbdfec2779fc578b01e84bdc6edfca80c4b633d25f841045ce",
+      "groups_enriched_infra_run1": "1e5aa4fb5902bc598c5977dd231d9b1b1c029fdad98076651cb0b2d7b0913eb1",
+      "statements_infra_run1": "869b0592e72ec22b7617a3fbe6ae3005df762b4817f7609e41c96a8559cbca4b",
+      "independence_infra_run1": "b0a2fa3f3bd9998597c4681100586abf555ce295283984f102222030bd2fb602",
+      "group_dispositions_infra_v1": "9b94e028bc571d9d84e6714ef1264bf2e087ea405d6561bfcdbd6d333c601bef",
+      "groups_dispositioned_v1": "d92cd95ff9dcc669a4f19355d22ac556c8211a587bc7155b5fb6fea42ff091ce",
+      "item_schema_v2a": "deca317cfdf11c9aa9074b68b7305c3b8ea7922ddf45a0542bc316901400d2d8",
+      "question_forms": "520aafa0804b5308be7e9e59b8316d9fbe0d8b60b335da4a0414ed0a17ab283e",
+      "asset_short_forms_v1": "de28eaa2d65759d7c09c2e95e8388b17f477f7c0f6d21aa72bcc3681055c444d"
+    }
+  },
+  "review": {
+    "status": "human_review",
+    "history": [
+      {
+        "event": "deterministic_pass",
+        "reasons": [],
+        "check_version": "synthesis_post_checks v3.5",
+        "checks": {
+          "numbers_untraced": [],
+          "number_words_untraced": [],
+          "exact_values_in_graded_text": [],
+          "prompt_leakage": {
+            "clmrr_named": false,
+            "row_or_column_named": false,
+            "paper_named": false,
+            "hidden_exact_value_required": false,
+            "according_to_phrase": false,
+            "pass": true,
+            "flags": [],
+            "check_version": "leakage_check v1"
+          },
+          "schema_errors": [],
+          "texts_traced_to_literature": [
+            "literature_interpretation",
+            "literature_interpretation",
+            "literature_interpretation",
+            "literature_interpretation",
+            "literature_interpretation",
+            "rubric.required_points",
+            "rubric.required_points",
+            "rubric.required_points",
+            "rubric.required_points",
+            "rubric.required_points"
+          ],
+          "rubric_points_without_source_ids": 0,
+          "n_table_sentences": 1,
+          "n_literature_sentences": 6,
+          "hedge_by_strength": [],
+          "context_driver_report": [],
+          "regional_contrast_report": [],
+          "mixed_scope_report": [],
+          "scope_clause_required": true,
+          "scope_openers": 5,
+          "rung8_report": {
+            "cited_place_named_impact_group": true,
+            "impact_group_ids": [
+              "LG-infra_heat_index__other_assets-impact-c1-003",
+              "LG-infra_heat_index__other_assets-impact-c1-004",
+              "LG-infra_heat_index__transportation_systems-impact-c1-001",
+              "LG-infra_heat_index__transportation_systems-impact-c1-002",
+              "LG-infra_heat_index__transportation_systems-impact-c1-003",
+              "LG-infra_heat_index__transportation_systems-impact-c1-007",
+              "LG-infra_heat_index__transportation_systems-impact-c1-009",
+              "LG-infra_heat_index__transportation_systems-impact-c1-010"
+            ],
+            "cited_two_hop_group_ids": [
+              "LG-infra_heat_index__transportation_systems-impact-c1-007"
+            ],
+            "bridge_clause_count": 0,
+            "answer_shape": "rung8_v2",
+            "budget": {
+              "table_sentences": 1,
+              "driver_claims": 2,
+              "impact_claims": 3,
+              "integrated_sentences": 7,
+              "limits": {
+                "table_sentences": 1,
+                "driver_claims_max": 2,
+                "impact_claims_min": 2,
+                "impact_claims_max": 3,
+                "impact_claims_min_here": 2,
+                "integrated_sentences_max": 7
+              },
+              "within": true,
+              "enforced": true
+            },
+            "broader_hazard_phrase_count": {
+              "literature_interpretation": 1,
+              "integrated": 1
+            },
+            "bridge_clause_sentence": null,
+            "bridge_clause_second_sentence": null
+          }
+        },
+        "reference_answer_tagged": {
+          "table_pattern": [
+            {
+              "sentence": "Dangerous heat-index days are projected to increase moderately in Arizona, a moderate increase, by mid-century under a high-emissions future.",
+              "pattern_ids": [
+                "TP1-00069"
+              ]
+            }
+          ],
+          "literature_interpretation": [
+            {
+              "sentence": "Research on the United States shows, including work on the Southwest, that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat.",
+              "group_ids": [
+                "LG-extreme_heat_v1-driver-c1-008"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "In general, research shows that global warming increases heat‑wave frequency and intensity.",
+              "group_ids": [
+                "LG-extreme_heat_v1-driver-c2-001"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems.",
+              "group_ids": [
+                "LG-infra_heat_index__transportation_systems-impact-c1-001"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "In general, research, including work on Arizona, shows that such heat increases pavement distress, reducing the performance of transportation systems.",
+              "group_ids": [
+                "LG-infra_heat_index__transportation_systems-impact-c1-001"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "In general, research suggests that when wildfires occur, they increase fire risk to roads and rail.",
+              "group_ids": [
+                "LG-infra_heat_index__transportation_systems-impact-c1-007"
+              ],
+              "hedged": true
+            },
+            {
+              "sentence": "These are general drivers of dangerous heat-index days, not findings specific to Arizona.",
+              "group_ids": [],
+              "hedged": false
+            }
+          ],
+          "integrated": "Dangerous heat-index days are projected to increase moderately in Arizona, a moderate increase, by mid-century under a high-emissions future. Research on the United States shows, including work on the Southwest, that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heat‑wave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems. In general, research, including work on Arizona, shows that such heat increases pavement distress, reducing the performance of transportation systems. In general, research suggests that when wildfires occur, they increase fire risk to roads and rail. These are general drivers of dangerous heat-index days, not findings specific to Arizona.",
+          "rubric_required_weights": [
+            {
+              "point": "increase",
+              "weight": 3
+            },
+            {
+              "point": "a moderate increase",
+              "weight": 3
+            },
+            {
+              "point": "large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat",
+              "weight": 2
+            },
+            {
+              "point": "global warming increases heat‑wave frequency and intensity",
+              "weight": 2
+            },
+            {
+              "point": "extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems",
+              "weight": 2
+            },
+            {
+              "point": "such heat increases pavement distress, reducing the performance of transportation systems",
+              "weight": 2
+            },
+            {
+              "point": "when wildfires occur, they increase fire risk to roads and rail",
+              "weight": 1
+            }
+          ],
+          "rubric_points": [
+            {
+              "field": "required_points",
+              "point": "increase",
+              "source_ids": [
+                "TP1-00069"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "a moderate increase",
+              "source_ids": [
+                "TP1-00069"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat",
+              "source_ids": [
+                "LG-extreme_heat_v1-driver-c1-008"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "global warming increases heat‑wave frequency and intensity",
+              "source_ids": [
+                "LG-extreme_heat_v1-driver-c2-001"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems",
+              "source_ids": [
+                "LG-infra_heat_index__transportation_systems-impact-c1-001"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "such heat increases pavement distress, reducing the performance of transportation systems",
+              "source_ids": [
+                "LG-infra_heat_index__transportation_systems-impact-c1-001"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "when wildfires occur, they increase fire risk to roads and rail",
+              "source_ids": [
+                "LG-infra_heat_index__transportation_systems-impact-c1-007"
+              ]
+            }
+          ]
+        },
+        "seed_id": "SD8-TP1-00069-transportation_systems",
+        "packet_id": "PK-SD8-TP1-00069-transportation_systems",
+        "working_assumptions_relied_on": [
+          {
+            "id": "WA-STATE-LABEL",
+            "resolution": "R-005",
+            "status": "owner_authorized_working_assumption",
+            "covers": [
+              "IC-012"
+            ]
+          },
+          {
+            "id": "WA-UNWEIGHTED-MEAN",
+            "resolution": "R-008",
+            "status": "owner_authorized_working_assumption",
+            "covers": [
+              "unweighted_cell_mean"
+            ]
+          }
+        ],
+        "fire_groups_unreviewed": false,
+        "generator_version": "litsynth_agent v5.4",
+        "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+        "model": "openai/gpt-oss-120b",
+        "endpoint_label": "sophia_vllm",
+        "temperature": 0,
+        "reasoning_effort": "low",
+        "max_tokens": 16000,
+        "reasoning_effort_applied": true,
+        "system_prompt_sha256": "1a023c1e98e822f74304801fce5a8b4605f6148c528c3dc4f5e236c5c87c3ade",
+        "corrective_prompt_sha256": "256db051b3ddfa93d893e4573a2e818ecd4623d96ddac0aaebdba932c6e2a01a",
+        "prompt_hash": "a600e32e28632f5eb7bc392fa59a51347eb18f9b5c8da85882084e8a2ab15986",
+        "packet_sha256": "8bd43e0f45ff11ef4bd973f6e46899003c2cb09d0f8e5e430228d63b9119e192",
+        "source_commit": "bf699700ab45ee9f3b0f5715515c1b7b42a7ba66",
+        "generation_timestamp": "2026-11-24T23:54:12Z",
+        "model_seconds": 50.0,
+        "model_attempts": 2,
+        "corrective_retry_used": false,
+        "turns": [
+          {
+            "turn": 1,
+            "finish_reason": "stop",
+            "content_chars": 5979,
+            "reasoning_chars": 4196,
+            "http_attempts": 1,
+            "model_seconds": 30.3
+          },
+          {
+            "turn": 2,
+            "finish_reason": "stop",
+            "content_chars": 5769,
+            "reasoning_chars": 3078,
+            "http_attempts": 1,
+            "model_seconds": 19.7
+          }
+        ],
+        "first_turn": null,
+        "corrective_error": null,
+        "corrective_turn_used": true,
+        "corrective_class": "format",
+        "first_check": {
+          "event": "deterministic_fail",
+          "reasons": [
+            "literature_interpretation[3]: rung 8 impact sentence (D-075): must begin with 'In general, research shows that' or 'In general, research has shown that' or 'In general, research, including work on Arizona, shows that' or 'In general, research, including work on Arizona, has shown that'"
+          ],
+          "check_version": "synthesis_post_checks v3.5",
+          "checks": {
+            "numbers_untraced": [],
+            "number_words_untraced": [],
+            "exact_values_in_graded_text": [],
+            "prompt_leakage": {
+              "clmrr_named": false,
+              "row_or_column_named": false,
+              "paper_named": false,
+              "hidden_exact_value_required": false,
+              "according_to_phrase": false,
+              "pass": true,
+              "flags": [],
+              "check_version": "leakage_check v1"
+            },
+            "schema_errors": [],
+            "texts_traced_to_literature": [
+              "literature_interpretation",
+              "literature_interpretation",
+              "literature_interpretation",
+              "literature_interpretation",
+              "literature_interpretation",
+              "rubric.required_points",
+              "rubric.required_points",
+              "rubric.required_points",
+              "rubric.required_points",
+              "rubric.required_points"
+            ],
+            "rubric_points_without_source_ids": 0,
+            "n_table_sentences": 1,
+            "n_literature_sentences": 6,
+            "hedge_by_strength": [],
+            "context_driver_report": [],
+            "regional_contrast_report": [],
+            "mixed_scope_report": [],
+            "scope_clause_required": true,
+            "scope_openers": 5,
+            "rung8_report": {
+              "cited_place_named_impact_group": true,
+              "impact_group_ids": [
+                "LG-infra_heat_index__other_assets-impact-c1-003",
+                "LG-infra_heat_index__other_assets-impact-c1-004",
+                "LG-infra_heat_index__transportation_systems-impact-c1-001",
+                "LG-infra_heat_index__transportation_systems-impact-c1-002",
+                "LG-infra_heat_index__transportation_systems-impact-c1-003",
+                "LG-infra_heat_index__transportation_systems-impact-c1-007",
+                "LG-infra_heat_index__transportation_systems-impact-c1-009",
+                "LG-infra_heat_index__transportation_systems-impact-c1-010"
+              ],
+              "cited_two_hop_group_ids": [
+                "LG-infra_heat_index__transportation_systems-impact-c1-007"
+              ],
+              "bridge_clause_count": 0,
+              "answer_shape": "rung8_v2",
+              "budget": {
+                "table_sentences": 1,
+                "driver_claims": 2,
+                "impact_claims": 3,
+                "integrated_sentences": 7,
+                "limits": {
+                  "table_sentences": 1,
+                  "driver_claims_max": 2,
+                  "impact_claims_min": 2,
+                  "impact_claims_max": 3,
+                  "impact_claims_min_here": 2,
+                  "integrated_sentences_max": 7
+                },
+                "within": true,
+                "enforced": true
+              },
+              "broader_hazard_phrase_count": {
+                "literature_interpretation": 1,
+                "integrated": 1
+              },
+              "bridge_clause_sentence": null,
+              "bridge_clause_second_sentence": null
+            }
+          },
+          "reference_answer_tagged": {
+            "table_pattern": [
+              {
+                "sentence": "Dangerous heat-index days are projected to increase moderately in Arizona, from about 14 to about 24 days a summer, by mid-century under a high-emissions future.",
+                "pattern_ids": [
+                  "TP1-00069"
+                ]
+              }
+            ],
+            "literature_interpretation": [
+              {
+                "sentence": "Research on the United States shows, including work on the Southwest, that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat.",
+                "group_ids": [
+                  "LG-extreme_heat_v1-driver-c1-008"
+                ],
+                "hedged": false
+              },
+              {
+                "sentence": "In general, research shows that global warming increases heat‑wave frequency and intensity.",
+                "group_ids": [
+                  "LG-extreme_heat_v1-driver-c2-001"
+                ],
+                "hedged": false
+              },
+              {
+                "sentence": "In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems.",
+                "group_ids": [
+                  "LG-infra_heat_index__transportation_systems-impact-c1-001"
+                ],
+                "hedged": false
+              },
+              {
+                "sentence": "In general, research shows, including work on Arizona, that such heat increases pavement distress, reducing the performance of transportation systems.",
+                "group_ids": [
+                  "LG-infra_heat_index__transportation_systems-impact-c1-001"
+                ],
+                "hedged": false
+              },
+              {
+                "sentence": "In general, research suggests that when wildfires occur, they increase fire risk to roads and rail.",
+                "group_ids": [
+                  "LG-infra_heat_index__transportation_systems-impact-c1-007"
+                ],
+                "hedged": true
+              },
+              {
+                "sentence": "These are general drivers of dangerous heat-index days, not findings specific to Arizona.",
+                "group_ids": [],
+                "hedged": false
+              }
+            ],
+            "integrated": "Dangerous heat-index days are projected to increase moderately in Arizona, from about 14 to about 24 days a summer, by mid-century under a high-emissions future. Research on the United States shows, including work on the Southwest, that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heat‑wave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems. In general, research shows, including work on Arizona, that such heat increases pavement distress, reducing the performance of transportation systems. In general, research suggests that when wildfires occur, they increase fire risk to roads and rail. These are general drivers of dangerous heat-index days, not findings specific to Arizona.",
+            "rubric_required_weights": [
+              {
+                "point": "increase",
+                "weight": 3
+              },
+              {
+                "point": "a moderate increase",
+                "weight": 3
+              },
+              {
+                "point": "large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat",
+                "weight": 2
+              },
+              {
+                "point": "global warming increases heat‑wave frequency and intensity",
+                "weight": 2
+              },
+              {
+                "point": "extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems",
+                "weight": 2
+              },
+              {
+                "point": "such heat increases pavement distress, reducing the performance of transportation systems",
+                "weight": 2
+              },
+              {
+                "point": "when wildfires occur, they increase fire risk to roads and rail",
+                "weight": 1
+              }
+            ],
+            "rubric_points": [
+              {
+                "field": "required_points",
+                "point": "increase",
+                "source_ids": [
+                  "TP1-00069"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "a moderate increase",
+                "source_ids": [
+                  "TP1-00069"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat",
+                "source_ids": [
+                  "LG-extreme_heat_v1-driver-c1-008"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "global warming increases heat‑wave frequency and intensity",
+                "source_ids": [
+                  "LG-extreme_heat_v1-driver-c2-001"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems",
+                "source_ids": [
+                  "LG-infra_heat_index__transportation_systems-impact-c1-001"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "such heat increases pavement distress, reducing the performance of transportation systems",
+                "source_ids": [
+                  "LG-infra_heat_index__transportation_systems-impact-c1-001"
+                ]
+              },
+              {
+                "field": "required_points",
+                "point": "when wildfires occur, they increase fire risk to roads and rail",
+                "source_ids": [
+                  "LG-infra_heat_index__transportation_systems-impact-c1-007"
+                ]
+              },
+              {
+                "field": "optional_points",
+                "point": "from about 14 to about 24 days a summer",
+                "source_ids": [
+                  "TP1-00069"
+                ]
+              }
+            ]
+          },
+          "raw_response": "{\n  \"prompt\": \"What could a projected increase in dangerous heat-index days mean for transportation systems in Arizona, and why?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"Dangerous heat-index days are projected to increase moderately in Arizona, from about 14 to about 24 days a summer, by mid-century under a high-emissions future.\",\n        \"pattern_ids\": [\"TP1-00069\"]\n      }\n    ],\n    \"literature_interpretation\": [\n      {\n        \"sentence\": \"Research on the United States shows, including work on the Southwest, that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research shows that global warming increases heat‑wave frequency and intensity.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c2-001\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems.\",\n        \"group_ids\": [\"LG-infra_heat_index__transportation_systems-impact-c1-001\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research shows, including work on Arizona, that such heat increases pavement distress, reducing the performance of transportation systems.\",\n        \"group_ids\": [\"LG-infra_heat_index__transportation_systems-impact-c1-001\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research suggests that when wildfires occur, they increase fire risk to roads and rail.\",\n        \"group_ids\": [\"LG-infra_heat_index__transportation_systems-impact-c1-007\"],\n        \"hedged\": true\n      },\n      {\n        \"sentence\": \"These are general drivers of dangerous heat-index days, not findings specific to Arizona.\",\n        \"group_ids\": [],\n        \"hedged\": false\n      }\n    ],\n    \"integrated\": \"Dangerous heat-index days are projected to increase moderately in Arizona, from about 14 to about 24 days a summer, by mid-century under a high-emissions future. Research on the United States shows, including work on the Southwest, that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heat‑wave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems. In general, research shows, including work on Arizona, that such heat increases pavement distress, reducing the performance of transportation systems. In general, research suggests that when wildfires occur, they increase fire risk to roads and rail. These are general drivers of dangerous heat-index days, not findings specific to Arizona.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00069\"]\n      },\n      {\n        \"point\": \"a moderate increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00069\"]\n      },\n      {\n        \"point\": \"large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"]\n      },\n      {\n        \"point\": \"global warming increases heat‑wave frequency and intensity\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c2-001\"]\n      },\n      {\n        \"point\": \"extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-infra_heat_index__transportation_systems-impact-c1-001\"]\n      },\n      {\n        \"point\": \"such heat increases pavement distress, reducing the performance of transportation systems\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-infra_heat_index__transportation_systems-impact-c1-001\"]\n      },\n      {\n        \"point\": \"when wildfires occur, they increase fire risk to roads and rail\",\n        \"weight\": 1,\n        \"source_ids\": [\"LG-infra_heat_index__transportation_systems-impact-c1-007\"]\n      }\n    ],\n    \"acceptable_variants\": [],\n    \"optional_points\": [\n      {\n        \"point\": \"from about 14 to about 24 days a summer\",\n        \"source_ids\": [\"TP1-00069\"]\n      }\n    ],\n    \"disallowed_claims\": [\n      \"will fail\",\n      \"at risk\",\n      \"vulnerable\",\n      \"risk\"\n    ],\n    \"fatal_errors\": [\n      \"wrong direction\",\n      \"stating the projection as a certainty\",\n      \"treating the modeled historical baseline as an observation\",\n      \"reading fire-weather danger as fire occurrence\",\n      \"treating a hazard as a risk\"\n    ]\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"A Fire Weather Index is a meteorological fire-danger index; it is never fire occurrence, ignition, burned area or damage.\",\n    \"A high-emissions future is one plausible future, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\",\n    \"Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.\",\n    \"Impact statements are general unless a group is marked place_named for the place.\"\n  ],\n  \"source_independent_answerability\": \"yes\",\n  \"source_independence_note\": \"A climate scientist can infer the direction, moderate size, and general impacts of more dangerous heat-index days on transportation systems without consulting the specific packet.\",\n  \"capability_tested\": \"hazard‑impact reasoning\",\n  \"system_task\": \"integrated answer generation\",\n  \"key_relationships\": \"hazard‑impact‑asset\",\n  \"evidence_needed\": \"multi‑source driver and impact studies\",\n  \"desired_output_characteristics\": \"concise integrated paragraph\",\n  \"expected_knowledge_level\": \"general_climate_science\"\n}",
+          "raw_response_chars": 5979,
+          "raw_reasoning": null,
+          "raw_reasoning_chars": null,
+          "content_fallback": false,
+          "finish_reason": "stop",
+          "raw_max_chars": 20000
+        },
+        "finish_reason": "stop",
+        "content_chars": 5769,
+        "reasoning_chars": 3078,
+        "raw_response": "{\n  \"prompt\": \"What could a projected increase in dangerous heat-index days mean for transportation systems in Arizona, and why?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"Dangerous heat-index days are projected to increase moderately in Arizona, a moderate increase, by mid-century under a high-emissions future.\",\n        \"pattern_ids\": [\"TP1-00069\"]\n      }\n    ],\n    \"literature_interpretation\": [\n      {\n        \"sentence\": \"Research on the United States shows, including work on the Southwest, that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research shows that global warming increases heat‑wave frequency and intensity.\",\n        \"group_ids\": [\"LG-extreme_heat_v1-driver-c2-001\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems.\",\n        \"group_ids\": [\"LG-infra_heat_index__transportation_systems-impact-c1-001\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research, including work on Arizona, shows that such heat increases pavement distress, reducing the performance of transportation systems.\",\n        \"group_ids\": [\"LG-infra_heat_index__transportation_systems-impact-c1-001\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research suggests that when wildfires occur, they increase fire risk to roads and rail.\",\n        \"group_ids\": [\"LG-infra_heat_index__transportation_systems-impact-c1-007\"],\n        \"hedged\": true\n      },\n      {\n        \"sentence\": \"These are general drivers of dangerous heat-index days, not findings specific to Arizona.\",\n        \"group_ids\": [],\n        \"hedged\": false\n      }\n    ],\n    \"integrated\": \"Dangerous heat-index days are projected to increase moderately in Arizona, a moderate increase, by mid-century under a high-emissions future. Research on the United States shows, including work on the Southwest, that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heat‑wave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems. In general, research, including work on Arizona, shows that such heat increases pavement distress, reducing the performance of transportation systems. In general, research suggests that when wildfires occur, they increase fire risk to roads and rail. These are general drivers of dangerous heat-index days, not findings specific to Arizona.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00069\"]\n      },\n      {\n        \"point\": \"a moderate increase\",\n        \"weight\": 3,\n        \"source_ids\": [\"TP1-00069\"]\n      },\n      {\n        \"point\": \"large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c1-008\"]\n      },\n      {\n        \"point\": \"global warming increases heat‑wave frequency and intensity\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-extreme_heat_v1-driver-c2-001\"]\n      },\n      {\n        \"point\": \"extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-infra_heat_index__transportation_systems-impact-c1-001\"]\n      },\n      {\n        \"point\": \"such heat increases pavement distress, reducing the performance of transportation systems\",\n        \"weight\": 2,\n        \"source_ids\": [\"LG-infra_heat_index__transportation_systems-impact-c1-001\"]\n      },\n      {\n        \"point\": \"when wildfires occur, they increase fire risk to roads and rail\",\n        \"weight\": 1,\n        \"source_ids\": [\"LG-infra_heat_index__transportation_systems-impact-c1-007\"]\n      }\n    ],\n    \"acceptable_variants\": [],\n    \"optional_points\": [],\n    \"disallowed_claims\": [\n      \"will fail\",\n      \"at risk\",\n      \"vulnerable\",\n      \"risk\"\n    ],\n    \"fatal_errors\": [\n      \"wrong direction\",\n      \"stating the projection as a certainty\",\n      \"treating the modeled historical baseline as an observation\",\n      \"reading fire-weather danger as fire occurrence\",\n      \"treating a hazard as a risk\"\n    ]\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"A Fire Weather Index is a meteorological fire-danger index; it is never fire occurrence, ignition, burned area or damage.\",\n    \"A high-emissions future is one plausible future, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\",\n    \"Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.\",\n    \"Impact statements are general unless a group is marked place_named for the place.\"\n  ],\n  \"source_independent_answerability\": \"yes\",\n  \"source_independence_note\": \"A climate scientist can answer the direction, moderate size, and general impacts on transportation systems without the packet.\",\n  \"capability_tested\": \"hazard‑impact reasoning\",\n  \"system_task\": \"integrated answer generation\",\n  \"key_relationships\": \"hazard‑impact‑asset\",\n  \"evidence_needed\": \"multi‑source driver and impact studies\",\n  \"desired_output_characteristics\": \"concise integrated paragraph\",\n  \"expected_knowledge_level\": \"general_climate_science\"\n}",
+        "raw_response_chars": 5769,
+        "raw_reasoning": null,
+        "raw_reasoning_chars": null,
+        "content_fallback": false,
+        "raw_max_chars": 20000,
+        "format_corrective_prompt_sha256": "f6e020f48ca4767cd16a48dc8548850d7e841e80b8a33daec01f9bc368fcd91a"
+      },
+      {
+        "event": "polish",
+        "status": "polished",
+        "pre_polish": {
+          "prompt": "What could a projected increase in dangerous heat-index days mean for transportation systems in Arizona, and why?",
+          "answer": "Dangerous heat-index days are projected to increase moderately in Arizona, a moderate increase, by mid-century under a high-emissions future. Research on the United States shows, including work on the Southwest, that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heat‑wave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems. In general, research, including work on Arizona, shows that such heat increases pavement distress, reducing the performance of transportation systems. In general, research suggests that when wildfires occur, they increase fire risk to roads and rail. These are general drivers of dangerous heat-index days, not findings specific to Arizona."
+        },
+        "rewrite": {
+          "prompt": "What could a projected increase in dangerous heat-index days mean for transportation systems in Arizona, and why?",
+          "answer": "Dangerous heat-index days are projected to increase moderately in Arizona, a moderate increase, by mid-century under a high-emissions future. Research on the United States shows, including work on the Southwest, that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heat‑wave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems. In general, research shows that such heat increases pavement distress, reducing the performance of transportation systems. In general, research suggests that when wildfires occur, they increase fire risk to roads and rail. These are general drivers of dangerous heat-index days, not findings specific to Arizona."
+        },
+        "reasons": [],
+        "check_version": "polish_checks v2",
+        "checks": {
+          "prompt": {
+            "numbers": {
+              "original": [],
+              "polished": []
+            },
+            "places": {
+              "original": [
+                "Arizona"
+              ],
+              "polished": [
+                "Arizona"
+              ]
+            },
+            "hedges": {
+              "original": [],
+              "polished": []
+            },
+            "new_source_words": [],
+            "new_leakage_flags": [],
+            "length_ratio": 1.0,
+            "groups_recognised": {},
+            "descriptor_phrases": {
+              "original": {
+                "quantity: heat_index": [
+                  "dangerous heat-index days"
+                ]
+              },
+              "polished": {
+                "quantity: heat_index": [
+                  "dangerous heat-index days"
+                ]
+              }
+            }
+          },
+          "answer": {
+            "numbers": {
+              "original": [],
+              "polished": []
+            },
+            "places": {
+              "original": [
+                "Arizona",
+                "Southwest",
+                "United States"
+              ],
+              "polished": [
+                "Arizona",
+                "Southwest",
+                "United States"
+              ]
+            },
+            "hedges": {
+              "original": [
+                "shows",
+                "suggests"
+              ],
+              "polished": [
+                "shows",
+                "suggests"
+              ]
+            },
+            "new_source_words": [],
+            "new_leakage_flags": [],
+            "length_ratio": 0.968,
+            "groups_recognised": {
+              "LG-extreme_heat_v1-driver-c1-008": {
+                "original": [
+                  "larg",
+                  "scal",
+                  "warm",
+                  "land",
+                  "atmospher",
+                  "feedback",
+                  "land atmospher feedback"
+                ],
+                "polished": [
+                  "larg",
+                  "scal",
+                  "warm",
+                  "land",
+                  "atmospher",
+                  "feedback",
+                  "land atmospher feedback"
+                ]
+              },
+              "LG-extreme_heat_v1-driver-c2-001": {
+                "original": [
+                  "global",
+                  "warm",
+                  "frequency",
+                  "intensity",
+                  "global warm"
+                ],
+                "polished": [
+                  "global",
+                  "warm",
+                  "frequency",
+                  "intensity",
+                  "global warm"
+                ]
+              },
+              "LG-infra_heat_index__transportation_systems-impact-c1-001": {
+                "original": [
+                  "pavement"
+                ],
+                "polished": [
+                  "pavement"
+                ]
+              }
+            },
+            "descriptor_phrases": {
+              "original": {
+                "magnitude: a moderate increase": [
+                  "a moderate increase",
+                  "increase moderately"
+                ],
+                "scenario: RCP8.5": [
+                  "under a high-emissions future"
+                ],
+                "horizon: mid": [
+                  "by mid-century"
+                ],
+                "quantity: heat_index": [
+                  "dangerous heat-index days"
+                ]
+              },
+              "polished": {
+                "magnitude: a moderate increase": [
+                  "a moderate increase",
+                  "increase moderately"
+                ],
+                "scenario: RCP8.5": [
+                  "under a high-emissions future"
+                ],
+                "horizon: mid": [
+                  "by mid-century"
+                ],
+                "quantity: heat_index": [
+                  "dangerous heat-index days"
+                ]
+              }
+            }
+          }
+        },
+        "generator_version": "litpolish_agent v1.1",
+        "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+        "model": "openai/gpt-oss-120b",
+        "endpoint_label": "sophia_vllm",
+        "temperature": 0,
+        "reasoning_effort": "low",
+        "max_tokens": 16000,
+        "reasoning_effort_applied": true,
+        "system_prompt_sha256": "2dbbce7f345fdcdeccd4661c22f5c22d87e6c4bcaa070856b59e6234093f0a18",
+        "prompt_hash": "9676f5e3ac31c6e3c6d5dfe55a1d9c0565aea36d9d9c7a21c5185a0b0bbe5e46",
+        "item_sha256": "da71fa8c9a07fdb201d59ac7d7b24d1e47e4daa6e08a371241ea3682e3654b48",
+        "source_commit": "bf699700ab45ee9f3b0f5715515c1b7b42a7ba66",
+        "timestamp": "2026-11-24T23:57:27Z",
+        "model_seconds": 4.7,
+        "model_attempts": 1,
+        "corrective_retry_used": false,
+        "turns": [
+          {
+            "turn": 1,
+            "finish_reason": "stop",
+            "content_chars": 985,
+            "reasoning_chars": 1630,
+            "http_attempts": 1,
+            "model_seconds": 4.7
+          }
+        ],
+        "finish_reason": "stop",
+        "content_chars": 985,
+        "reasoning_chars": 1630,
+        "raw_response": "{\n  \"prompt\": \"What could a projected increase in dangerous heat-index days mean for transportation systems in Arizona, and why?\",\n  \"answer\": \"Dangerous heat-index days are projected to increase moderately in Arizona, a moderate increase, by mid-century under a high-emissions future. Research on the United States shows, including work on the Southwest, that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heat‑wave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems. In general, research shows that such heat increases pavement distress, reducing the performance of transportation systems. In general, research suggests that when wildfires occur, they increase fire risk to roads and rail. These are general drivers of dangerous heat-index days, not findings specific to Arizona.\"\n}",
+        "raw_response_chars": 985,
+        "raw_reasoning": null,
+        "raw_reasoning_chars": null,
+        "content_fallback": false,
+        "raw_max_chars": 20000
+      },
+      {
+        "event": "human_review",
+        "from_status": "deterministic_pass",
+        "decision": "D-033",
+        "display_rule": "D-079",
+        "at": "2026-11-25T00:07:46Z",
+        "by": "EXECUTOR (scripts/ingest_litsynth_infra_run2.py)",
+        "display_source": "polished",
+        "display_recheck": {
+          "check_version": "synthesis_post_checks v3.5",
+          "pass": true,
+          "reasons": [],
+          "on": "polished text",
+          "polish_status": "polished"
+        },
+        "display_text": {
+          "prompt": "What could a projected increase in dangerous heat-index days mean for transportation systems in Arizona, and why?",
+          "answer": "Dangerous heat-index days are projected to increase moderately in Arizona, a moderate increase, by mid-century under a high-emissions future. Research on the United States shows, including work on the Southwest, that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heat‑wave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems. In general, research shows that such heat increases pavement distress, reducing the performance of transportation systems. In general, research suggests that when wildfires occur, they increase fire risk to roads and rail. These are general drivers of dangerous heat-index days, not findings specific to Arizona."
+        },
+        "note": "entered human review (D-033 lifecycle): infra synthesis run 2 (agent v5.4, packets v1b) and polish infra run 2 (agent v1.1, checks v2); the impact sample set (D-080); display text by D-079 (polished only if the polish passed and post-checks v3.5 pass on the polished text)"
+      }
+    ],
+    "kaiyuan_disposition": null,
+    "mentor_disposition": null,
+    "final_frozen": null
+  }
+}

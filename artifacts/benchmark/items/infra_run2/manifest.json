@@ -1,0 +1,1230 @@
+{
+  "run": "infra_run2",
+  "diagnostic_id": "litsynth_infra_run2",
+  "decision": "D-080",
+  "display_rule": "D-079",
+  "work_package": "P5d",
+  "tarball": {
+    "name": "infra_synth_runs12_evidence.tar.gz",
+    "sha256": "1ab289297f0ba606c147f97eb0b1d5758991598b7e78216ef5fb3ca80a4d33f7"
+  },
+  "generator": {
+    "version": "litsynth_agent v5.4",
+    "agent_path": "scripts/litcollect/litsynth_agent.py",
+    "agent_sha256": "9f0f8900fe9f2d3f65a2baf2e7bd2c91998cb9c3d024d0d2d65e114e6d8611ed",
+    "system_prompt_sha256": "1a023c1e98e822f74304801fce5a8b4605f6148c528c3dc4f5e236c5c87c3ade",
+    "corrective_template_sha256": "256db051b3ddfa93d893e4573a2e818ecd4623d96ddac0aaebdba932c6e2a01a",
+    "format_corrective_template_sha256": "a21eb42a4a61ecf540803ba1b0da19fc80bb4c9c8077089b2d0cf58b8c6f10e8"
+  },
+  "endpoint": {
+    "endpoint_label": "sophia_vllm",
+    "model": "openai/gpt-oss-120b",
+    "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1"
+  },
+  "budget": {
+    "reasoning_effort": "low",
+    "max_tokens": 16000,
+    "temperature": 0
+  },
+  "source_commit": "bf699700ab45ee9f3b0f5715515c1b7b42a7ba66",
+  "packets": {
+    "version": "synthpackets infra v1b",
+    "path": "artifacts/benchmark/synth_packets_infra_v1b",
+    "at_commit": "bf699700ab45ee9f3b0f5715515c1b7b42a7ba66",
+    "manifest_sha256": "b4cbbdb308ab90b5cd68a761009d88431315099aa9bb31acb9bd496061736a3e"
+  },
+  "counts": {
+    "items": 8,
+    "deterministic_pass": 6,
+    "deterministic_fail": 2,
+    "corrective_retry_used": 0,
+    "format_corrective_used": 6,
+    "format_corrective_pass": 4,
+    "first_pass": 5,
+    "redraws": 3,
+    "superseded_attempts": 3,
+    "restarts": 3
+  },
+  "items": [
+    {
+      "item_id": "BI-P5-0001",
+      "seed_id": "SD8-TP1-00111-energy",
+      "status": "deterministic_pass",
+      "packet_sha256": "5ee73ad5c1618606faea44383a586a92d6525a9e8de438cd2dc9573e6904a025",
+      "corrective_turn_used": true
+    },
+    {
+      "item_id": "BI-P5-0002",
+      "seed_id": "SD8-TP1-00069-transportation_systems",
+      "status": "deterministic_pass",
+      "packet_sha256": "8bd43e0f45ff11ef4bd973f6e46899003c2cb09d0f8e5e430228d63b9119e192",
+      "corrective_turn_used": true
+    },
+    {
+      "item_id": "BI-P5-0003",
+      "seed_id": "SD8-TP1-00071-water_and_wastewater",
+      "status": "rejected_pre_review",
+      "packet_sha256": "4c6e3847b8f1983a45c1529b1aad51c0b43a3c85c9fe587416e3dce7bb772b5c",
+      "corrective_turn_used": true
+    },
+    {
+      "item_id": "BI-P5-0004",
+      "seed_id": "SD8-TP1-00071-healthcare_and_public_health",
+      "status": "deterministic_pass",
+      "packet_sha256": "f304a5f1bd21355ef17c7786c32d39bd8fa7bdb9738462400320f52af1632c93",
+      "corrective_turn_used": true
+    },
+    {
+      "item_id": "BI-P5-0005",
+      "seed_id": "SD8-TP1-01463-energy",
+      "status": "rejected_pre_review",
+      "packet_sha256": "bf3c9aea49532108680b1c3c449624555e6625f9e836fff3c2e1679bbe675b3a",
+      "corrective_turn_used": true
+    },
+    {
+      "item_id": "BI-P5-0006",
+      "seed_id": "SD8-TP1-01463-transportation_systems",
+      "status": "deterministic_pass",
+      "packet_sha256": "a688d1d6efde36da6c57e62fcd2d42f12c8ee9b1303bb079640811d021557817",
+      "corrective_turn_used": false
+    },
+    {
+      "item_id": "BI-P5-0007",
+      "seed_id": "SD8-TP1-01463-emergency_services",
+      "status": "deterministic_pass",
+      "packet_sha256": "9f88f3cdd55e6cf10b7cbd86f9dd8d4c1f3c37e0f7f2bce95618f8ff7bc87a56",
+      "corrective_turn_used": false
+    },
+    {
+      "item_id": "BI-P5-0008",
+      "seed_id": "SD8-TP1-01463-communications",
+      "status": "deterministic_pass",
+      "packet_sha256": "b43bd1c45b9c9616fe220069fd5eee4bbcefb5799fd10693cc87f16fa9273aef",
+      "corrective_turn_used": true
+    }
+  ],
+  "format_corrective_items": [
+    "BI-P5-0001",
+    "BI-P5-0002",
+    "BI-P5-0003",
+    "BI-P5-0004",
+    "BI-P5-0005",
+    "BI-P5-0008"
+  ],
+  "rung8_reports": {
+    "BI-P5-0002": {
+      "budget": {
+        "driver_claims": 2,
+        "enforced": true,
+        "impact_claims": 3,
+        "integrated_sentences": 7,
+        "limits": {
+          "driver_claims_max": 2,
+          "impact_claims_max": 3,
+          "impact_claims_min": 2,
+          "impact_claims_min_here": 2,
+          "integrated_sentences_max": 7,
+          "table_sentences": 1
+        },
+        "table_sentences": 1,
+        "within": true
+      },
+      "scope_openers": 5
+    },
+    "BI-P5-0004": {
+      "budget": {
+        "driver_claims": 2,
+        "enforced": true,
+        "impact_claims": 2,
+        "integrated_sentences": 6,
+        "limits": {
+          "driver_claims_max": 2,
+          "impact_claims_max": 3,
+          "impact_claims_min": 2,
+          "impact_claims_min_here": 2,
+          "integrated_sentences_max": 6,
+          "table_sentences": 1
+        },
+        "table_sentences": 1,
+        "within": true
+      },
+      "scope_openers": 4
+    },
+    "BI-P5-0003": {
+      "budget": {
+        "driver_claims": 2,
+        "enforced": true,
+        "impact_claims": 2,
+        "integrated_sentences": 6,
+        "limits": {
+          "driver_claims_max": 2,
+          "impact_claims_max": 3,
+          "impact_claims_min": 2,
+          "impact_claims_min_here": 2,
+          "integrated_sentences_max": 6,
+          "table_sentences": 1
+        },
+        "table_sentences": 1,
+        "within": true
+      },
+      "scope_openers": 4
+    },
+    "BI-P5-0001": {
+      "budget": {
+        "driver_claims": 2,
+        "enforced": true,
+        "impact_claims": 3,
+        "integrated_sentences": 7,
+        "limits": {
+          "driver_claims_max": 2,
+          "impact_claims_max": 3,
+          "impact_claims_min": 2,
+          "impact_claims_min_here": 2,
+          "integrated_sentences_max": 7,
+          "table_sentences": 1
+        },
+        "table_sentences": 1,
+        "within": true
+      },
+      "scope_openers": 5
+    },
+    "BI-P5-0008": {
+      "budget": {
+        "driver_claims": 2,
+        "enforced": true,
+        "impact_claims": 1,
+        "integrated_sentences": 3,
+        "limits": {
+          "driver_claims_max": 2,
+          "impact_claims_max": 3,
+          "impact_claims_min": 2,
+          "impact_claims_min_here": 1,
+          "integrated_sentences_max": 3,
+          "table_sentences": 1
+        },
+        "table_sentences": 1,
+        "within": true
+      },
+      "scope_openers": 2
+    },
+    "BI-P5-0007": {
+      "budget": {
+        "driver_claims": 2,
+        "enforced": true,
+        "impact_claims": 1,
+        "integrated_sentences": 4,
+        "limits": {
+          "driver_claims_max": 2,
+          "impact_claims_max": 3,
+          "impact_claims_min": 2,
+          "impact_claims_min_here": 1,
+          "integrated_sentences_max": 4,
+          "table_sentences": 1
+        },
+        "table_sentences": 1,
+        "within": true
+      },
+      "scope_openers": 3
+    },
+    "BI-P5-0005": {
+      "budget": {
+        "driver_claims": 2,
+        "enforced": true,
+        "impact_claims": 2,
+        "integrated_sentences": 5,
+        "limits": {
+          "driver_claims_max": 2,
+          "impact_claims_max": 3,
+          "impact_claims_min": 2,
+          "impact_claims_min_here": 2,
+          "integrated_sentences_max": 5,
+          "table_sentences": 1
+        },
+        "table_sentences": 1,
+        "within": true
+      },
+      "scope_openers": 3
+    },
+    "BI-P5-0006": {
+      "budget": {
+        "driver_claims": 2,
+        "enforced": true,
+        "impact_claims": 3,
+        "integrated_sentences": 6,
+        "limits": {
+          "driver_claims_max": 2,
+          "impact_claims_max": 3,
+          "impact_claims_min": 2,
+          "impact_claims_min_here": 2,
+          "integrated_sentences_max": 6,
+          "table_sentences": 1
+        },
+        "table_sentences": 1,
+        "within": true
+      },
+      "scope_openers": 4
+    }
+  },
+  "log": {
+    "start_utc": "2026-11-24T23:45:11Z",
+    "restart_utc": [
+      "2026-11-24T23:53:42Z",
+      "2026-11-24T23:54:37Z",
+      "2026-11-24T23:55:28Z"
+    ],
+    "end_utc": "2026-11-24T23:55:58Z",
+    "done": [
+      "items=8 pass=5 fail=3",
+      "items=6 pass=6 fail=0",
+      "items=7 pass=6 fail=1",
+      "items=8 pass=6 fail=2"
+    ],
+    "format_corrective_lines": 8,
+    "restarts": [
+      {
+        "start_utc": "2026-11-24T23:53:42Z",
+        "made": 1,
+        "seed_id": "SD8-TP1-00069-transportation_systems",
+        "item_id": "BI-P5-0002",
+        "status": "deterministic_pass"
+      },
+      {
+        "start_utc": "2026-11-24T23:54:37Z",
+        "made": 1,
+        "seed_id": "SD8-TP1-00071-water_and_wastewater",
+        "item_id": "BI-P5-0003",
+        "status": "rejected_pre_review"
+      },
+      {
+        "start_utc": "2026-11-24T23:55:28Z",
+        "made": 1,
+        "seed_id": "SD8-TP1-01463-energy",
+        "item_id": "BI-P5-0005",
+        "status": "rejected_pre_review"
+      }
+    ],
+    "reading": "the first start made all eight items (5 pass); the three rejected item files were moved to attempt1/ and each seed was drawn again by its own restart"
+  },
+  "items_sha256": "ce23c904520b67b0fbed9f4182cdc34feae0cc6ad9f8b96c259a0ce8327c4b2b",
+  "summary_sha256": "f65373dab6389c58467852419ee08920fcd14f44f5dd9f5234eac42b72e06ec7",
+  "question_diversity": {
+    "rule": "opening_trigram",
+    "max_share": 0.3,
+    "n": 8,
+    "pass": false,
+    "largest_share": 0.375,
+    "trigrams": [
+      {
+        "trigram": "what could a",
+        "n": 3,
+        "share": 0.375
+      },
+      {
+        "trigram": "what does a",
+        "n": 3,
+        "share": 0.375
+      },
+      {
+        "trigram": "why does the",
+        "n": 1,
+        "share": 0.125
+      },
+      {
+        "trigram": "why does fire-weather",
+        "n": 1,
+        "share": 0.125
+      }
+    ]
+  },
+  "superseded_attempts": [
+    {
+      "role": "superseded_attempt",
+      "item_id": "BI-P5-0002",
+      "seed_id": "SD8-TP1-00069-transportation_systems",
+      "delivered_as": "litsynth/infra_run2/attempt1/SD8-TP1-00069-transportation_systems.json",
+      "path": "superseded/BI-P5-0002_attempt1.json",
+      "sha256": "1b798519440a96a4415498a5b052d23c603a579ee94f88cba3c4e764275135d3",
+      "status": "rejected_pre_review",
+      "reasons": [
+        "literature_interpretation: rung 8 answer shape (D-075a): at most 2 driver claims, the strongest (found 3)"
+      ],
+      "superseded_by": {
+        "path": "items/BI-P5-0002.json",
+        "sha256": "4edcd9b901a570a103cd12a2034f430f224f4c1ed02fa76bf6b2d7fa7f94d740",
+        "status": "human_review"
+      }
+    },
+    {
+      "role": "superseded_attempt",
+      "item_id": "BI-P5-0003",
+      "seed_id": "SD8-TP1-00071-water_and_wastewater",
+      "delivered_as": "litsynth/infra_run2/attempt1/SD8-TP1-00071-water_and_wastewater.json",
+      "path": "superseded/BI-P5-0003_attempt1.json",
+      "sha256": "1a657a691b614475f29be623dbdfb75544482e661db7e0fb092c144a90beba45",
+      "status": "rejected_pre_review",
+      "reasons": [
+        "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+        "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'"
+      ],
+      "superseded_by": {
+        "path": "items/BI-P5-0003.json",
+        "sha256": "608e56731544bf6d22a44a4b50460fdb01d9bfbc5757925dad9035f51b6170d0",
+        "status": "rejected_pre_review"
+      }
+    },
+    {
+      "role": "superseded_attempt",
+      "item_id": "BI-P5-0005",
+      "seed_id": "SD8-TP1-01463-energy",
+      "delivered_as": "litsynth/infra_run2/attempt1/SD8-TP1-01463-energy.json",
+      "path": "superseded/BI-P5-0005_attempt1.json",
+      "sha256": "efb33fe0524a6e2f5624e3e76cd68034f5a8e5f467f8372ace7e26a17d9161d9",
+      "status": "rejected_pre_review",
+      "reasons": [
+        "rubric.optional_points: fire-weather wording (an FWI is never fire occurrence): 'wildfires' in graded text",
+        "rubric.optional_points: fire-weather wording (an FWI is never fire occurrence): 'wildfire' in graded text",
+        "literature_interpretation[2]: two-hop wording (D-073c): a sentence citing a two-hop group must say 'when wildfires occur', 'wildfires can' or 'raise the chance of ignition'"
+      ],
+      "superseded_by": {
+        "path": "items/BI-P5-0005.json",
+        "sha256": "8fec7d95f9995dff09944ac141c7229653e30dfda51fdf4e1349c5649cc32e83",
+        "status": "rejected_pre_review"
+      }
+    }
+  ],
+  "rejected_pre_review": {
+    "BI-P5-0003": {
+      "redraws": 2,
+      "reasons": [
+        "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+        "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'"
+      ],
+      "reading": "doubled magnitude phrase ('increase a moderate increase'), on both attempts"
+    },
+    "BI-P5-0005": {
+      "redraws": 2,
+      "reasons": [
+        "literature_interpretation[1]: two-hop wording (D-073c): a sentence citing a two-hop group must say 'when wildfires occur', 'wildfires can' or 'raise the chance of ignition'"
+      ],
+      "reading": "a sentence citing a two-hop group without its two-hop marker (second attempt)"
+    }
+  },
+  "checks_reproduced": true,
+  "checks": {
+    "checks_reproduced": true,
+    "check_version": "synthesis_post_checks v3.5",
+    "items": [
+      {
+        "item_id": "BI-P5-0002",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": [
+          "literature_interpretation[3]: rung 8 impact sentence (D-075): must begin with 'In general, research shows that' or 'In general, research has shown that' or 'In general, research, including work on Arizona, shows that' or 'In general, research, including work on Arizona, has shown that'"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0004",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": [
+          "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+          "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+          "literature_interpretation[3]: rung 8 answer shape (D-075a): must name the asset class 'healthcare and public health systems' or a short form ('hospitals and emergency services', 'hospitals')"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0003",
+        "pass": false,
+        "reasons": [
+          "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+          "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'"
+        ],
+        "first_check_reasons": [
+          "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+          "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0001",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": [
+          "literature_interpretation: closing clause (D-069) missing as the last entry: 'These are general drivers of dangerous heat-index days, not findings specific to Virginia.'",
+          "integrated: closing clause (D-069) missing at the end: 'These are general drivers of dangerous heat-index days, not findings specific to Virginia.'"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0008",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": [
+          "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a slight increase'",
+          "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a slight increase'"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0007",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": null
+      },
+      {
+        "item_id": "BI-P5-0005",
+        "pass": false,
+        "reasons": [
+          "literature_interpretation[1]: two-hop wording (D-073c): a sentence citing a two-hop group must say 'when wildfires occur', 'wildfires can' or 'raise the chance of ignition'"
+        ],
+        "first_check_reasons": [
+          "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a slight increase'",
+          "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a slight increase'",
+          "literature_interpretation[0]: scope phrase (D-069): the sentence must begin with 'Research on California shows' or 'Research on California has shown'",
+          "literature_interpretation[1]: two-hop wording (D-073c): a sentence citing a two-hop group must say 'when wildfires occur', 'wildfires can' or 'raise the chance of ignition'"
+        ]
+      },
+      {
+        "item_id": "BI-P5-0006",
+        "pass": true,
+        "reasons": [],
+        "first_check_reasons": null
+      }
+    ],
+    "superseded_attempts": {
+      "BI-P5-0002": {
+        "item_id": "BI-P5-0002",
+        "pass": false,
+        "reasons": [
+          "literature_interpretation: rung 8 answer shape (D-075a): at most 2 driver claims, the strongest (found 3)"
+        ],
+        "first_check_reasons": [
+          "literature_interpretation[2]: rung 8 impact sentence (D-075): must begin with 'In general, research shows that' or 'In general, research has shown that' or 'In general, research, including work on Arizona, shows that' or 'In general, research, including work on Arizona, has shown that'",
+          "literature_interpretation: rung 8 answer shape (D-075a): at most 2 driver claims, the strongest (found 3)"
+        ]
+      },
+      "BI-P5-0003": {
+        "item_id": "BI-P5-0003",
+        "pass": false,
+        "reasons": [
+          "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+          "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'"
+        ],
+        "first_check_reasons": [
+          "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+          "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'"
+        ]
+      },
+      "BI-P5-0005": {
+        "item_id": "BI-P5-0005",
+        "pass": false,
+        "reasons": [
+          "rubric.optional_points: fire-weather wording (an FWI is never fire occurrence): 'wildfires' in graded text",
+          "rubric.optional_points: fire-weather wording (an FWI is never fire occurrence): 'wildfire' in graded text",
+          "literature_interpretation[2]: two-hop wording (D-073c): a sentence citing a two-hop group must say 'when wildfires occur', 'wildfires can' or 'raise the chance of ignition'"
+        ],
+        "first_check_reasons": null
+      }
+    },
+    "run1": {
+      "check_version": "synthesis_post_checks v3.4",
+      "items": [
+        {
+          "item_id": "BI-P5-0002",
+          "pass": false,
+          "reasons": [
+            "literature_interpretation[4]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on Arizona, shows' or 'In general, research, including work on Arizona, has shown'",
+            "literature_interpretation[4]: rung 8 impact sentence (D-075): must begin with 'In general, research shows that' or 'In general, research has shown that' or 'In general, research, including work on Arizona, shows that' or 'In general, research, including work on Arizona, has shown that'",
+            "literature_interpretation[4]: rung 8 impact sentence (D-075): must name the broader hazard 'extreme heat, of which dangerous heat-index days are one measure'"
+          ],
+          "first_check_reasons": [
+            "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+            "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+            "literature_interpretation[4]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on Arizona, shows' or 'In general, research, including work on Arizona, has shown'",
+            "literature_interpretation[4]: rung 8 impact sentence (D-075): must begin with 'In general, research shows that' or 'In general, research has shown that' or 'In general, research, including work on Arizona, shows that' or 'In general, research, including work on Arizona, has shown that'",
+            "literature_interpretation[4]: rung 8 impact sentence (D-075): must name the broader hazard 'extreme heat, of which dangerous heat-index days are one measure'"
+          ]
+        },
+        {
+          "item_id": "BI-P5-0004",
+          "pass": false,
+          "reasons": [
+            "literature_interpretation[4]: rung 8 impact sentence (D-075): must name the asset class 'healthcare and public health systems'"
+          ],
+          "first_check_reasons": [
+            "literature_interpretation[4]: rung 8 impact sentence (D-075): must name the asset class 'healthcare and public health systems'"
+          ]
+        },
+        {
+          "item_id": "BI-P5-0003",
+          "pass": true,
+          "reasons": [],
+          "first_check_reasons": [
+            "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+            "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'"
+          ]
+        },
+        {
+          "item_id": "BI-P5-0001",
+          "pass": true,
+          "reasons": [],
+          "first_check_reasons": [
+            "literature_interpretation[3]: rung 8 impact sentence (D-075): must begin with 'In general, research shows that' or 'In general, research has shown that' or 'In general, research, including work on Virginia, shows that' or 'In general, research, including work on Virginia, has shown that'",
+            "literature_interpretation[3]: rung 8 impact sentence (D-075): must name the asset class 'energy systems'",
+            "literature_interpretation[4]: rung 8 impact sentence (D-075): must name the asset class 'energy systems'",
+            "literature_interpretation[5]: rung 8 impact sentence (D-075): must name the asset class 'energy systems'",
+            "literature_interpretation[6]: rung 8 impact sentence (D-075): must name the asset class 'energy systems'"
+          ]
+        },
+        {
+          "item_id": "BI-P5-0008",
+          "pass": false,
+          "reasons": [
+            "literature_interpretation[3]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'"
+          ],
+          "first_check_reasons": [
+            "rubric.disallowed_claims: generality (D-060/D-062): 'one study' in graded text",
+            "rubric.disallowed_claims: generality (D-060/D-062): 'a single study' in graded text",
+            "literature_interpretation[3]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'"
+          ]
+        },
+        {
+          "item_id": "BI-P5-0007",
+          "pass": false,
+          "reasons": [
+            "literature_interpretation[1]: scope phrase (D-069): the sentence must begin with 'Research on California shows' or 'Research on California has shown'",
+            "literature_interpretation[3]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'"
+          ],
+          "first_check_reasons": [
+            "literature_interpretation[2]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'",
+            "literature_interpretation[3]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'"
+          ]
+        },
+        {
+          "item_id": "BI-P5-0005",
+          "pass": false,
+          "reasons": [
+            "integrated: sentence starts with a lower-case letter: 'fire‑weather danger describes '",
+            "integrated: bridge clause (D-073c): must contain 'fire-weather danger describes conditions that favour wildfire; it is not fire occurrence' exactly once (found 0)"
+          ],
+          "first_check_reasons": [
+            "literature_interpretation[7]: two-hop wording (D-073c): a sentence citing a two-hop group must say 'when wildfires occur', 'wildfires can' or 'raise the chance of ignition'",
+            "integrated: bridge clause (D-073c): must contain 'fire-weather danger describes conditions that favour wildfire; it is not fire occurrence' exactly once (found 0)"
+          ]
+        },
+        {
+          "item_id": "BI-P5-0006",
+          "pass": false,
+          "reasons": [
+            "integrated: sentence starts with a lower-case letter: 'fire‑weather danger describes '",
+            "literature_interpretation[2]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'",
+            "literature_interpretation[3]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'",
+            "literature_interpretation[7]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'",
+            "literature_interpretation[8]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'",
+            "integrated: bridge clause (D-073c): must contain 'fire-weather danger describes conditions that favour wildfire; it is not fire occurrence' exactly once (found 0)"
+          ],
+          "first_check_reasons": [
+            "integrated: sentence starts with a lower-case letter: 'fire‑weather danger describes '",
+            "literature_interpretation[2]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'",
+            "literature_interpretation[3]: scope phrase (D-069): the sentence must begin with 'In general, research shows' or 'In general, research has shown' or 'In general, research, including work on California, shows' or 'In general, research, including work on California, has shown'",
+            "literature_interpretation[4]: scope phrase (D-069): the sentence must begin with 'Research on California suggests'",
+            "literature_interpretation[5]: scope phrase (D-069): the sentence must begin with 'In general, research suggests'",
+            "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research suggests that a warmer atmosphere increases vapor p'",
+            "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research suggests that climate change increases extreme fire'",
+            "literature_interpretation[7]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'",
+            "literature_interpretation[8]: rung 8 impact sentence (D-075): must name the broader hazard 'conditions that favour wildfire, of which fire-weather danger is one measure'",
+            "integrated: bridge clause (D-073c): must contain 'fire-weather danger describes conditions that favour wildfire; it is not fire occurrence' exactly once (found 0)"
+          ]
+        }
+      ]
+    }
+  },
+  "item_schema": {
+    "path": "data/metadata/benchmark/item_schema_v2a.json",
+    "sha256": "deca317cfdf11c9aa9074b68b7305c3b8ea7922ddf45a0542bc316901400d2d8"
+  },
+  "lifecycle": {
+    "status": "human_review",
+    "items": [
+      "BI-P5-0001",
+      "BI-P5-0002",
+      "BI-P5-0004",
+      "BI-P5-0006",
+      "BI-P5-0007",
+      "BI-P5-0008"
+    ],
+    "from": "deterministic_pass",
+    "rule": "D-033",
+    "kaiyuan_disposition": null,
+    "mentor_disposition": null,
+    "final_frozen": null,
+    "rejected_pre_review": [
+      "BI-P5-0003",
+      "BI-P5-0005"
+    ],
+    "note": "items/<item_id>.json: for the six, the polish-run record (run-2 item + its polish event; the text is the rewrite where the polish status is polished) + human_review, whose event records display_source, display_recheck and display_text (D-079); for BI-P5-0003 and 0005 the run-2 item as delivered; items.jsonl is the run's file, byte-identical (pre-polish text)"
+  },
+  "display_rule_d079": {
+    "rule": "display text = the polished text only if the polish passed and post-checks v3.5, re-run on the polished prompt and answer against the v1b packet, pass; otherwise the original",
+    "display_source": {
+      "BI-P5-0001": "original",
+      "BI-P5-0002": "polished",
+      "BI-P5-0004": "original",
+      "BI-P5-0006": "original",
+      "BI-P5-0007": "original",
+      "BI-P5-0008": "original"
+    },
+    "display_recheck": {
+      "BI-P5-0001": {
+        "check_version": "synthesis_post_checks v3.5",
+        "pass": false,
+        "reasons": [
+          "integrated: closing clause (D-069) missing at the end: 'These are general drivers of dangerous heat-index days, not findings specific to Virginia.'",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that large-scale warming and land–atmosphere '",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that global warming increases heatwave freque'",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that extreme heat can reduce generation outpu'",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that such heat raises electricity demand and '",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that when wildfires occur, they increase igni'"
+        ],
+        "on": "polished text",
+        "polish_status": "polish_rejected"
+      },
+      "BI-P5-0002": {
+        "check_version": "synthesis_post_checks v3.5",
+        "pass": true,
+        "reasons": [],
+        "on": "polished text",
+        "polish_status": "polished"
+      },
+      "BI-P5-0004": {
+        "check_version": "synthesis_post_checks v3.5",
+        "pass": false,
+        "reasons": [
+          "integrated: rung 8 answer shape (D-075a): at most 6 sentences, no more than the reference sentences (found 8)"
+        ],
+        "on": "polished text",
+        "polish_status": "polished"
+      },
+      "BI-P5-0006": {
+        "check_version": "synthesis_post_checks v3.5",
+        "pass": false,
+        "reasons": [
+          "integrated: rung 8 answer shape (D-075a): at most 6 sentences, no more than the reference sentences (found 8)"
+        ],
+        "on": "polished text",
+        "polish_status": "polished"
+      },
+      "BI-P5-0007": {
+        "check_version": "synthesis_post_checks v3.5",
+        "pass": false,
+        "reasons": [
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that humidity and vapor pressure deficit affe'",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research suggests that fire‑weather danger can increase dail'",
+          "integrated: rung 8 answer shape (D-075a): at most 4 sentences, no more than the reference sentences (found 5)"
+        ],
+        "on": "polished text",
+        "polish_status": "polished"
+      },
+      "BI-P5-0008": {
+        "check_version": "synthesis_post_checks v3.5",
+        "pass": false,
+        "reasons": [
+          "integrated: rung 8 answer shape (D-075a): at most 3 sentences, no more than the reference sentences (found 4)"
+        ],
+        "on": "polished text",
+        "polish_status": "polish_rejected"
+      }
+    }
+  },
+  "run1_regression": [
+    {
+      "item_id": "BI-P5-0001",
+      "check_version": "synthesis_post_checks v3.5",
+      "packets": "v1a",
+      "pass": true,
+      "reasons": [],
+      "budget": {
+        "table_sentences": 1,
+        "driver_claims": 3,
+        "impact_claims": 5,
+        "integrated_sentences": 9,
+        "limits": {
+          "table_sentences": 1,
+          "driver_claims_max": 2,
+          "impact_claims_min": 2,
+          "impact_claims_max": 3,
+          "impact_claims_min_here": 2,
+          "integrated_sentences_max": 9
+        },
+        "within": false,
+        "enforced": false
+      }
+    },
+    {
+      "item_id": "BI-P5-0003",
+      "check_version": "synthesis_post_checks v3.5",
+      "packets": "v1a",
+      "pass": true,
+      "reasons": [],
+      "budget": {
+        "table_sentences": 1,
+        "driver_claims": 3,
+        "impact_claims": 1,
+        "integrated_sentences": 6,
+        "limits": {
+          "table_sentences": 1,
+          "driver_claims_max": 2,
+          "impact_claims_min": 2,
+          "impact_claims_max": 3,
+          "impact_claims_min_here": 2,
+          "integrated_sentences_max": 6
+        },
+        "within": false,
+        "enforced": false
+      }
+    }
+  ],
+  "polish": {
+    "run": "polish/infra_run2",
+    "manifest": "../../polish/infra_run2/manifest.json"
+  },
+  "superseded_run": {
+    "run": "infra_run1",
+    "manifest": "../infra_run1/manifest.json"
+  },
+  "files": [
+    {
+      "path": "items.jsonl",
+      "sha256": "ce23c904520b67b0fbed9f4182cdc34feae0cc6ad9f8b96c259a0ce8327c4b2b",
+      "bytes": 335527
+    },
+    {
+      "path": "summary.json",
+      "sha256": "f65373dab6389c58467852419ee08920fcd14f44f5dd9f5234eac42b72e06ec7",
+      "bytes": 1580
+    },
+    {
+      "path": "agent.log",
+      "sha256": "e9d87a1dc02cc6d483ed6db11c61a33215929d909e9b5ee37f98147dc8e9e7a0",
+      "bytes": 3324
+    },
+    {
+      "path": "superseded/BI-P5-0002_attempt1.json",
+      "sha256": "1b798519440a96a4415498a5b052d23c603a579ee94f88cba3c4e764275135d3",
+      "bytes": 63902
+    },
+    {
+      "path": "superseded/BI-P5-0003_attempt1.json",
+      "sha256": "1a657a691b614475f29be623dbdfb75544482e661db7e0fb092c144a90beba45",
+      "bytes": 49861
+    },
+    {
+      "path": "superseded/BI-P5-0005_attempt1.json",
+      "sha256": "efb33fe0524a6e2f5624e3e76cd68034f5a8e5f467f8372ace7e26a17d9161d9",
+      "bytes": 45654
+    }
+  ],
+  "items_ingested": [
+    {
+      "item_id": "BI-P5-0001",
+      "seed_id": "SD8-TP1-00111-energy",
+      "path": "items/BI-P5-0001.json",
+      "sha256": "8745a9dec430cd2dddb524d5a6f0a77dda00b496b30e9a23979759c53ea258db",
+      "status": "human_review",
+      "history": [
+        "deterministic_pass",
+        "polish",
+        "human_review"
+      ],
+      "schema_valid": true,
+      "consistency_errors": [],
+      "display_source": "original",
+      "display_recheck": {
+        "check_version": "synthesis_post_checks v3.5",
+        "pass": false,
+        "reasons": [
+          "integrated: closing clause (D-069) missing at the end: 'These are general drivers of dangerous heat-index days, not findings specific to Virginia.'",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that large-scale warming and land–atmosphere '",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that global warming increases heatwave freque'",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that extreme heat can reduce generation outpu'",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that such heat raises electricity demand and '",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that when wildfires occur, they increase igni'"
+        ],
+        "on": "polished text",
+        "polish_status": "polish_rejected"
+      }
+    },
+    {
+      "item_id": "BI-P5-0002",
+      "seed_id": "SD8-TP1-00069-transportation_systems",
+      "path": "items/BI-P5-0002.json",
+      "sha256": "4edcd9b901a570a103cd12a2034f430f224f4c1ed02fa76bf6b2d7fa7f94d740",
+      "status": "human_review",
+      "history": [
+        "deterministic_pass",
+        "polish",
+        "human_review"
+      ],
+      "schema_valid": true,
+      "consistency_errors": [],
+      "display_source": "polished",
+      "display_recheck": {
+        "check_version": "synthesis_post_checks v3.5",
+        "pass": true,
+        "reasons": [],
+        "on": "polished text",
+        "polish_status": "polished"
+      }
+    },
+    {
+      "item_id": "BI-P5-0003",
+      "seed_id": "SD8-TP1-00071-water_and_wastewater",
+      "path": "items/BI-P5-0003.json",
+      "sha256": "608e56731544bf6d22a44a4b50460fdb01d9bfbc5757925dad9035f51b6170d0",
+      "status": "rejected_pre_review",
+      "history": [
+        "deterministic_fail"
+      ],
+      "schema_valid": true,
+      "consistency_errors": [],
+      "redraws": 2,
+      "reasons": [
+        "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+        "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'"
+      ],
+      "reading": "doubled magnitude phrase ('increase a moderate increase'), on both attempts",
+      "attempts": [
+        {
+          "attempt": 1,
+          "path": "superseded/BI-P5-0003_attempt1.json",
+          "reasons": [
+            "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+            "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'"
+          ]
+        },
+        {
+          "attempt": 2,
+          "path": "items/BI-P5-0003.json",
+          "reasons": [
+            "table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'",
+            "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'"
+          ]
+        }
+      ]
+    },
+    {
+      "item_id": "BI-P5-0004",
+      "seed_id": "SD8-TP1-00071-healthcare_and_public_health",
+      "path": "items/BI-P5-0004.json",
+      "sha256": "b7c76da053efb32c698d733379e5d0bc77cc056264004e0f95ede4ab9afe1a68",
+      "status": "human_review",
+      "history": [
+        "deterministic_pass",
+        "polish",
+        "human_review"
+      ],
+      "schema_valid": true,
+      "consistency_errors": [],
+      "display_source": "original",
+      "display_recheck": {
+        "check_version": "synthesis_post_checks v3.5",
+        "pass": false,
+        "reasons": [
+          "integrated: rung 8 answer shape (D-075a): at most 6 sentences, no more than the reference sentences (found 8)"
+        ],
+        "on": "polished text",
+        "polish_status": "polished"
+      }
+    },
+    {
+      "item_id": "BI-P5-0005",
+      "seed_id": "SD8-TP1-01463-energy",
+      "path": "items/BI-P5-0005.json",
+      "sha256": "8fec7d95f9995dff09944ac141c7229653e30dfda51fdf4e1349c5649cc32e83",
+      "status": "rejected_pre_review",
+      "history": [
+        "deterministic_fail"
+      ],
+      "schema_valid": true,
+      "consistency_errors": [],
+      "redraws": 2,
+      "reasons": [
+        "literature_interpretation[1]: two-hop wording (D-073c): a sentence citing a two-hop group must say 'when wildfires occur', 'wildfires can' or 'raise the chance of ignition'"
+      ],
+      "reading": "a sentence citing a two-hop group without its two-hop marker (second attempt)",
+      "attempts": [
+        {
+          "attempt": 1,
+          "path": "superseded/BI-P5-0005_attempt1.json",
+          "reasons": [
+            "rubric.optional_points: fire-weather wording (an FWI is never fire occurrence): 'wildfires' in graded text",
+            "rubric.optional_points: fire-weather wording (an FWI is never fire occurrence): 'wildfire' in graded text",
+            "literature_interpretation[2]: two-hop wording (D-073c): a sentence citing a two-hop group must say 'when wildfires occur', 'wildfires can' or 'raise the chance of ignition'"
+          ]
+        },
+        {
+          "attempt": 2,
+          "path": "items/BI-P5-0005.json",
+          "reasons": [
+            "literature_interpretation[1]: two-hop wording (D-073c): a sentence citing a two-hop group must say 'when wildfires occur', 'wildfires can' or 'raise the chance of ignition'"
+          ]
+        }
+      ]
+    },
+    {
+      "item_id": "BI-P5-0006",
+      "seed_id": "SD8-TP1-01463-transportation_systems",
+      "path": "items/BI-P5-0006.json",
+      "sha256": "889e15d1a660e33bcfbeffdecee9f50b9bf1b6a49d0b98417b3e77592d81d575",
+      "status": "human_review",
+      "history": [
+        "deterministic_pass",
+        "polish",
+        "human_review"
+      ],
+      "schema_valid": true,
+      "consistency_errors": [],
+      "display_source": "original",
+      "display_recheck": {
+        "check_version": "synthesis_post_checks v3.5",
+        "pass": false,
+        "reasons": [
+          "integrated: rung 8 answer shape (D-075a): at most 6 sentences, no more than the reference sentences (found 8)"
+        ],
+        "on": "polished text",
+        "polish_status": "polished"
+      }
+    },
+    {
+      "item_id": "BI-P5-0007",
+      "seed_id": "SD8-TP1-01463-emergency_services",
+      "path": "items/BI-P5-0007.json",
+      "sha256": "a7d5cae7be1172702269eba2f714a14a348cef450fc5e5b0babc59e1686d9e68",
+      "status": "human_review",
+      "history": [
+        "deterministic_pass",
+        "polish",
+        "human_review"
+      ],
+      "schema_valid": true,
+      "consistency_errors": [],
+      "display_source": "original",
+      "display_recheck": {
+        "check_version": "synthesis_post_checks v3.5",
+        "pass": false,
+        "reasons": [
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that humidity and vapor pressure deficit affe'",
+          "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research suggests that fire‑weather danger can increase dail'",
+          "integrated: rung 8 answer shape (D-075a): at most 4 sentences, no more than the reference sentences (found 5)"
+        ],
+        "on": "polished text",
+        "polish_status": "polished"
+      }
+    },
+    {
+      "item_id": "BI-P5-0008",
+      "seed_id": "SD8-TP1-01463-communications",
+      "path": "items/BI-P5-0008.json",
+      "sha256": "b797044c467aec1a8ca39faf1813b2eccad3d7d11ed2209751ce691aee073b75",
+      "status": "human_review",
+      "history": [
+        "deterministic_pass",
+        "polish",
+        "human_review"
+      ],
+      "schema_valid": true,
+      "consistency_errors": [],
+      "display_source": "original",
+      "display_recheck": {
+        "check_version": "synthesis_post_checks v3.5",
+        "pass": false,
+        "reasons": [
+          "integrated: rung 8 answer shape (D-075a): at most 3 sentences, no more than the reference sentences (found 4)"
+        ],
+        "on": "polished text",
+        "polish_status": "polish_rejected"
+      }
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": "litsynth/infra_run2/items/SD8-TP1-00069-transportation_systems.json",
+      "sha256": "da71fa8c9a07fdb201d59ac7d7b24d1e47e4daa6e08a371241ea3682e3654b48",
+      "bytes": 62240
+    },
+    {
+      "path": "litsynth/infra_run2/items/SD8-TP1-00071-healthcare_and_public_health.json",
+      "sha256": "ba0d4719b174571364869750f5fe7860e9c2f962434b3745ed4c4dd7a0d0b78b",
+      "bytes": 52695
+    },
+    {
+      "path": "litsynth/infra_run2/items/SD8-TP1-00071-water_and_wastewater.json",
+      "sha256": "2047952b2b179f2c7c41f01233f946868cea09cf7a2f0e174db5b3c164a4d82a",
+      "bytes": 55174
+    },
+    {
+      "path": "litsynth/infra_run2/items/SD8-TP1-00111-energy.json",
+      "sha256": "b06d2704fbc004654d33a5b3d09119938d8228d3aa058423558aef2818d70695",
+      "bytes": 61269
+    },
+    {
+      "path": "litsynth/infra_run2/items/SD8-TP1-01463-communications.json",
+      "sha256": "1e3fdc7c4eabbf7998e740f6d24edcaace54abaeb249a58c2dabadb1ced18a2a",
+      "bytes": 49371
+    },
+    {
+      "path": "litsynth/infra_run2/items/SD8-TP1-01463-emergency_services.json",
+      "sha256": "8f6e45fa51d862bf9d5cee37e14142e791ce92b9f45aeeddea449feb4d3dfa71",
+      "bytes": 36260
+    },
+    {
+      "path": "litsynth/infra_run2/items/SD8-TP1-01463-energy.json",
+      "sha256": "ee657643bc2a4ba6934218742caed0aac32054be6969ec879fb3cbada9f5e63b",
+      "bytes": 55939
+    },
+    {
+      "path": "litsynth/infra_run2/items/SD8-TP1-01463-transportation_systems.json",
+      "sha256": "7f322a47c9deb12d7669275250d218ceb5dff104232715cd3eb1984230d68af2",
+      "bytes": 41991
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00069-transportation_systems/prompt_format_corrective.txt",
+      "sha256": "f6e020f48ca4767cd16a48dc8548850d7e841e80b8a33daec01f9bc368fcd91a",
+      "bytes": 3573
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00069-transportation_systems/prompt_user.txt",
+      "sha256": "c5d4c2bc373974ee44d8c67a1a4b0fba3459f7eaa81d9c8ddf1fea56b851f414",
+      "bytes": 40058
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00069-transportation_systems/response.json",
+      "sha256": "ad46129eda4a12e6d4faa72ae6b6886651682cad37d8aacee0b9851cea486902",
+      "bytes": 11680
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00069-transportation_systems/response_format_corrective.json",
+      "sha256": "d298bdcf7efbaed175e9b8055cb506eab296147a384254080dbd9b4cb3df5da8",
+      "bytes": 10326
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00071-healthcare_and_public_health/prompt_format_corrective.txt",
+      "sha256": "308163206beed0a8072656033d9edeebaaf2d6d2025706a1f47b5ed372e14e4d",
+      "bytes": 3652
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00071-healthcare_and_public_health/prompt_user.txt",
+      "sha256": "b37ac60246a797815244393c8a817ee5e8b13010ef7186e98a7100cb8b71f47f",
+      "bytes": 26882
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00071-healthcare_and_public_health/response.json",
+      "sha256": "43a989ad4867e8dcd2f010310de45ca954f0863fa5186ceffc2a488ec6a48f74",
+      "bytes": 11028
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00071-healthcare_and_public_health/response_format_corrective.json",
+      "sha256": "0377e6bc94222d6f9d6e640c8bda5e38869b2a63dba3c2082f586a320123055f",
+      "bytes": 8919
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00071-water_and_wastewater/prompt_format_corrective.txt",
+      "sha256": "2caec25e2b790bd98b3d26402e7edc492049309401a7e52f4ff7610fdee2747b",
+      "bytes": 3459
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00071-water_and_wastewater/prompt_user.txt",
+      "sha256": "630f5eba6d0608c9af2f61fb9d0dc6f8d3be457a772ed4cd7b1085201df65f1d",
+      "bytes": 25632
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00071-water_and_wastewater/response.json",
+      "sha256": "8b1323140b6472ac14e51c4c85b1bb45bd9ad3657cca4b37159e4acbf2c4ce95",
+      "bytes": 12020
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00071-water_and_wastewater/response_format_corrective.json",
+      "sha256": "9309e50ba4e601832e7dc7ea9625550d1e03ea074bc96389ccf4fae030353e6d",
+      "bytes": 9069
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00111-energy/prompt_format_corrective.txt",
+      "sha256": "6ad5f2b1b297ca03072a8e7e6b71051351919b948f13ed667d2626c4590daefd",
+      "bytes": 3606
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00111-energy/prompt_user.txt",
+      "sha256": "dc0ad79d64f7be1ca56403ed3a56ec9f661d45a40c52250d7ece25c7482a2992",
+      "bytes": 44754
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00111-energy/response.json",
+      "sha256": "947f72af4ea2260f4e7193e46590578522cd2691746b6a8ccbc93a41132cdb9a",
+      "bytes": 11525
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-00111-energy/response_format_corrective.json",
+      "sha256": "e6d1b14ef3546a0ca48982f89ef531410090acbfc86d9860d7a496266e98e265",
+      "bytes": 8778
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-01463-communications/prompt_format_corrective.txt",
+      "sha256": "eeaa2fd6d14e52ab8d9ee5eaec10b54a44a483824faa2af8e23d588118a04bfd",
+      "bytes": 3455
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-01463-communications/prompt_user.txt",
+      "sha256": "c75c41d9fae0ef6b7507f2d2284c70d157f1450ae8a61159d7d4fe5ccb0a5abf",
+      "bytes": 25846
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-01463-communications/response.json",
+      "sha256": "8dc1ff34f221233f723ba91cc3b9d5c1f62300758d15ffbd4576a98cde91f8f4",
+      "bytes": 8494
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-01463-communications/response_format_corrective.json",
+      "sha256": "6409c9be28223e2503d20664eff44cbdc0f370c69801748c9235e6dec22c7067",
+      "bytes": 6756
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-01463-emergency_services/prompt_user.txt",
+      "sha256": "9d27b9cf572737321362617f41cab9aa54d70eaaf7d1fbc54477ba9430869ef4",
+      "bytes": 25965
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-01463-emergency_services/response.json",
+      "sha256": "e2f383530df0f17d4d23d5d0e7e6fd240470d0b622ad57d4ae0642866af2c217",
+      "bytes": 9362
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-01463-energy/prompt_format_corrective.txt",
+      "sha256": "06e76412e3e531b665b633e0f512de5eabd0aaa165471db7e6ac90f1888c35a3",
+      "bytes": 3782
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-01463-energy/prompt_user.txt",
+      "sha256": "ab26ce74298a1b70819962346babebad3b166996ed3669fd7c63f3a98f79c863",
+      "bytes": 37808
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-01463-energy/response.json",
+      "sha256": "436b5ab6f65f0ca1d884e99265697a08bb8dd691f7a85c85acf34e08165d209a",
+      "bytes": 9586
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-01463-energy/response_format_corrective.json",
+      "sha256": "1c425c847b69703258071e6905061f6022d64fa2a19f70789188f8d5e7a41622",
+      "bytes": 8138
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-01463-transportation_systems/prompt_user.txt",
+      "sha256": "5f9379cf3d712d141f90a7637bcf21d5ee1c57181bc37a74f3a0c3ce8b6223eb",
+      "bytes": 30255
+    },
+    {
+      "path": "litsynth/infra_run2/raw/SD8-TP1-01463-transportation_systems/response.json",
+      "sha256": "51a6bf59323e3d016e55bbac033ef1e3a8eebc49ab806d546e444f90dc5bafec",
+      "bytes": 11212
+    }
+  ],
+  "ingested_at": "2026-11-25T00:07:46Z",
+  "ingested_by": "EXECUTOR"
+}

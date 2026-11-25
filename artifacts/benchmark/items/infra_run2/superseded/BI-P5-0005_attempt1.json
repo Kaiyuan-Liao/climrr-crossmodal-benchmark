@@ -1,0 +1,820 @@
+{
+  "schema_version": "benchmark_item_v2a",
+  "item_id": "BI-P5-0005",
+  "use_case_level": 8,
+  "capability_tested": "hazard‑impact reasoning",
+  "system_task": "generate answer",
+  "reasoning_modalities": "Hazard + Text",
+  "key_relationships": "hazard‑driver‑impact",
+  "evidence_needed": "multi‑source driver and impact studies",
+  "desired_output_characteristics": "concise integrated paragraph",
+  "expected_knowledge_level": "specialist_climate_science",
+  "prompt": "What could a projected increase in fire‑weather danger mean for energy systems in California, and why?",
+  "source_independent_answerability": "borderline",
+  "source_independence_note": "A climate scientist could infer the direction and general drivers of fire‑weather danger, but the specific projected magnitude and asset‑impact pathways rely on the packet's modeled data and cited literature.",
+  "source_leakage_check": {
+    "clmrr_named": false,
+    "row_or_column_named": false,
+    "paper_named": false,
+    "hidden_exact_value_required": false,
+    "according_to_phrase": false,
+    "pass": true,
+    "flags": [],
+    "check_version": "leakage_check v1"
+  },
+  "reference_components": {
+    "table_patterns": [
+      {
+        "acceptance_blocked": false,
+        "acceptance_blocked_by": [],
+        "acceptance_blocked_by_original": [
+          "IC-006",
+          "IC-007",
+          "IC-008",
+          "IC-009",
+          "IC-010"
+        ],
+        "authorization": "inferred_candidate",
+        "cautions": [
+          "C-fire_weather: a fire-danger index, never fire occurrence"
+        ],
+        "computed_value_or_range": {
+          "cell_direction_counts": {
+            "decrease": 108,
+            "increase": 2723,
+            "no_change": 0
+          },
+          "mean_from": "31.366135970286118",
+          "mean_to": "33.611940835838926",
+          "n_cells_empty": 0,
+          "n_cells_used": 2831,
+          "range": {
+            "max": "6.813290120000000",
+            "min": "-0.569743990000000",
+            "over": "cells"
+          },
+          "unit": null,
+          "value": "2.245804468117273",
+          "value_is": "absolute_change",
+          "value_reason": null
+        },
+        "direction": "increase",
+        "family": "fire_weather_index",
+        "geography": "California",
+        "geography_type": "state",
+        "horizon": "mid",
+        "horizon_window": "2045-2054",
+        "metric": "fwi_summer_seasonal_value",
+        "metric_wording": "seasonal value of the Fire Weather Index (FWI)",
+        "pattern_id": "TP1-01463",
+        "pattern_kind": "single",
+        "pattern_robustness": "majority_same_direction",
+        "pattern_support_n": 2831,
+        "provenance": {
+          "code_version": "table_patterns v1 (src/climrr/table_patterns.py sha256 c5948f7e0ef85b73)",
+          "column_sources": {
+            "wildfire_summer_Dmid": {
+              "id": "IC-009",
+              "kind": "inferred_candidate_record",
+              "line": 664,
+              "quote": "Wildfire_summer_Dmid Difference between Mid-Century and Historical"
+            },
+            "wildfire_summer_Hist": {
+              "id": "IC-006",
+              "kind": "inferred_candidate_record",
+              "line": 661,
+              "quote": "Wildfire_summer_hist Seasonal value – Historical"
+            },
+            "wildfire_summer_Midc": {
+              "id": "IC-007",
+              "kind": "inferred_candidate_record",
+              "line": 662,
+              "quote": "Wildfire_summer_midc Seasonal value – Mid-Century RCP 8.5"
+            }
+          },
+          "column_statuses": {
+            "wildfire_summer_Dmid": "inferred_candidate",
+            "wildfire_summer_Hist": "inferred_candidate",
+            "wildfire_summer_Midc": "inferred_candidate"
+          },
+          "columns": [
+            {
+              "column": "wildfire_summer_Hist",
+              "index": 189
+            },
+            {
+              "column": "wildfire_summer_Midc",
+              "index": 190
+            },
+            {
+              "column": "wildfire_summer_Dmid",
+              "index": 192
+            }
+          ],
+          "derivation_rule_id": "DR-TD-003 @ DR-PT-001",
+          "member_cells_sha256": "1b364743863b12af93e342a02318266f15973695ee4a56c8e4936a6bd8fdd6a1",
+          "member_rows": 2831,
+          "row_rule": "State == 'California'",
+          "table_data_sha256": "e87ac2cd0f345bc067e7a2ddbaa55f0336fb71e9c34f5f640d12da2aad3bf43e"
+        },
+        "provisional": true,
+        "provisional_reasons": [
+          "location_inferred_candidate: State label IC-012 (A-G1, A-G3; D-034)",
+          "unweighted_mean: provisional aggregation rule for representation validation"
+        ],
+        "rank": {
+          "of": 49,
+          "order": "descending signed value (DR-PT-004)",
+          "rank": 8,
+          "tied_with": 0
+        },
+        "relative_magnitude": {
+          "class": "large",
+          "definition": "large = upper tercile, by signed value, among the 49 U.S. State labels in the table with a computed value for family=fire_weather_index, metric=fwi_summer_seasonal_value, season=summer, horizon=mid (2045-2054), scenario=RCP8.5, statistic=absolute_change (DR-PT-005); a relative descriptor among states, not an absolute threshold"
+        },
+        "relative_magnitude_skipped_reason": null,
+        "robustness_share": "2723/2831",
+        "robustness_unit": "cell",
+        "scenario": "RCP8.5",
+        "season": "summer",
+        "statistic": "absolute_change",
+        "status": "computed",
+        "working_assumptions": [
+          "WA-FWI-SUMMER",
+          "WA-STATE-LABEL",
+          "WA-UNWEIGHTED-MEAN"
+        ]
+      }
+    ],
+    "literature_mechanisms": [
+      {
+        "statement": "strong winds are a primary driver of fire danger and spread",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-fire_weather_v1-driver-c1-003",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "236175367",
+            "paper_sha256": "3431eb74bad918b0adcd7dbb05f2596066e8a893639c9c2a7cb7abc711d60719",
+            "json_path": "$.discussion",
+            "span_start": 0,
+            "span_end": 499,
+            "verbatim_passage": "This study shows that (i) SAW wind speed plays a key role in area burned, (ii) variation in SAW windspeed outweighs fuel characteristics in explaining area burned, (iii) winds alone are insufficient to explain burning without consideration of human ignitions, (iv) ignition sources have changed markedly in recent decades, and (v) autumn and winter temperature and precipitation are less critical than winds and ignitions, and have substantially different effects on autumn versus winter SAW events.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 236175367",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-236175367-01",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "255372301",
+            "paper_sha256": "5112779c76f7df5d20606ec467bcee3640e8d69aaa5baaf5721f0d66275018e3",
+            "json_path": "$.results and discussion",
+            "span_start": 1973,
+            "span_end": 2511,
+            "verbatim_passage": "It is seen that higher temperature and stronger wind speed increase the wildfire risks by the factors of 1.94 (i.e., exp(β 2 )) and 2.43 (i.e., exp(β 3 )). Such findings can be well justified as follows: (i) a higher temperature makes the ignition of the underlying fuels more easily (e.g. grasses, shrubs, dead leaves, etc.), (ii) with an increased wind speed, the electrical conductors and surrounding vegetation are more likely to result in arcing, increasing the probability of wildfire ignition (Mitchell, 2013;Vazquez et al., 2022).",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 255372301",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-255372301-03",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "53050065",
+            "paper_sha256": "67d634a0411f24011fc3f356ed0f7bde1f98ec1404e1d9703417a02838c9de38",
+            "json_path": "$.summary",
+            "span_start": 1139,
+            "span_end": 1278,
+            "verbatim_passage": "Common to both events was the occurrence of strong winds that have been shown to be a key determinant in large human-caused wildfires [56].",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 53050065",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-53050065-06",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "14300",
+            "paper_sha256": "d63010c65b1955f330d76d9bf6c51e4114248a3e261af1b5160d40095a5fb594",
+            "json_path": "$.results",
+            "span_start": 1219,
+            "span_end": 1487,
+            "verbatim_passage": "Whereas fire numbers are determined by the presence of fuel, lightning frequency, population density and surface fire intensity, fire spread (and hence area burnt) is driven by wind speed, fire duration and the amount, moisture content and characteristics of the fuel.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 14300",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-14300-05",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "humidity and vapor pressure deficit affect fire risk",
+        "statement_type": "driver",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-fire_weather_v1-driver-c1-002",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "255372301",
+            "paper_sha256": "5112779c76f7df5d20606ec467bcee3640e8d69aaa5baaf5721f0d66275018e3",
+            "json_path": "$.results and discussion",
+            "span_start": 2631,
+            "span_end": 2994,
+            "verbatim_passage": "Both the NDVI and the SPFH have negative impacts on wildfire risks, while SPFH has a relatively weaker effect compared with that of NDVI. Note that, a higher NDVI indicates healthier vegetation with more water conditions and fewer potential fuels that can be ignited. Similarly, a high SPFH attaches potential fuels with more moisture, reducing the wildfire risk.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 255372301",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-255372301-04",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "247649715",
+            "paper_sha256": "04aff65e7d558903a3dcfbfdb96dbd7f47fbeb81bacc385b2c44217be4bf0b0a",
+            "json_path": "$.abstract",
+            "span_start": 1387,
+            "span_end": 1558,
+            "verbatim_passage": "Additionally, among the individual climate variables that comprise the FWI, relative humidity and temperature are the most influential factors that affect the observed BA.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 247649715",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-247649715-02",
+            "evidence_role": "core_candidate"
+          },
+          {
+            "paper_item_id": "247649715",
+            "paper_sha256": "04aff65e7d558903a3dcfbfdb96dbd7f47fbeb81bacc385b2c44217be4bf0b0a",
+            "json_path": "$.discussion",
+            "span_start": 1821,
+            "span_end": 2159,
+            "verbatim_passage": "Globally, in the case of forest BA anomaly, the most highly associated climate variable is found to be relative humidity, while in the case of the non-forest BA anomaly, temperature and relative humidity are found to be most highly associated for most of the regions, without, however, exhibiting any clear spatial or latitudinal pattern.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 247649715",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS-247649715-06",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "transmission line insulation reduction causing trips and outages",
+        "statement_type": "impact",
+        "asset_class": "energy",
+        "impact_mechanism": "reduces insulation between ground and the line; high temperatures and soot reduce air insulation",
+        "impact_outcome": "causes line trips and power outages; increased likelihood of breakdowns and tripping failures",
+        "hazard_relation": "broader_hazard",
+        "two_hop": true,
+        "impact_fields_source": "members",
+        "evidence_strength": "multi_source_supported",
+        "reference_scope": "regional_climate_expectation",
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-001",
+        "group_strength_run": "multi_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "221709315",
+            "paper_sha256": "94c74edbd28781cd9982b37e0fce3b6bb443f9367b9b66fc87d52de1ade4f507",
+            "json_path": "$.overview of wildfires near electrical transmission lines",
+            "span_start": 486,
+            "span_end": 698,
+            "verbatim_passage": "When a wildfire occurs near electrical transmission line, the insulation between ground and electrical transmission line decreases sharply, which causes an electrical transmission line trip and power outage [31].",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 221709315",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-221709315-01",
+            "evidence_role": "cited_candidate"
+          },
+          {
+            "paper_item_id": "246491629",
+            "paper_sha256": "c8e9c5b24489125e7c459553b1f3a336f8dca1a9557a277436eb9852bbfa0dde",
+            "json_path": "$.introduction",
+            "span_start": 418,
+            "span_end": 645,
+            "verbatim_passage": "Once a wildfire is ignited near a transmission line, the burning of vegetation produces high temperatures and a high concentration of soot cover, which causes the dramatic decrease of air insulation under the transmission line.",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 246491629",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-246491629-01",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "increased wildfire activity extends transmission line exposure length",
+        "statement_type": "impact",
+        "asset_class": "energy",
+        "impact_mechanism": "fire perimeters intersect powerlines",
+        "impact_outcome": "increased length of powerlines exposed to fire",
+        "hazard_relation": "broader_hazard",
+        "two_hop": true,
+        "impact_fields_source": "members",
+        "evidence_strength": "single_source_supported",
+        "reference_scope": "single_study_observation",
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-005",
+        "group_strength_run": "single_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "259716408",
+            "paper_sha256": "707775ccbebbed3a4d5caa28a4c419086036e40728f2c2e1448fe68a57e0d43e",
+            "json_path": "$.increasing road and powerline exposure to large fires",
+            "span_start": 611,
+            "span_end": 735,
+            "verbatim_passage": "Powerline exposure increased at a rate of 20 km yr −1 (s.e.15) in the CONUS, a growth of 70% in the past 20 years (Fig. 3b).",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 259716408",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-259716408-02",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      },
+      {
+        "statement": "wildfire smoke reduces solar PV power output on military bases",
+        "statement_type": "impact",
+        "asset_class": "energy",
+        "impact_mechanism": "smoke reduces solar panel irradiance",
+        "impact_outcome": "decreases solar power generation",
+        "hazard_relation": "broader_hazard",
+        "two_hop": true,
+        "impact_fields_source": "members",
+        "evidence_strength": "single_source_supported",
+        "reference_scope": "single_study_observation",
+        "group_id": "LG-infra_fire_weather_index__energy-impact-c1-010",
+        "group_strength_run": "single_source_supported",
+        "supports": [
+          {
+            "paper_item_id": "264178918",
+            "paper_sha256": "751d8f7d140243abfd67e094ee6e60247d216f38eec94e44bbf93df66c1f976d",
+            "json_path": "$.b. interrelationship between systems",
+            "span_start": 1398,
+            "span_end": 1512,
+            "verbatim_passage": "More dust and smoke from fire negatively impact the generation of energy from solar panels on the base [58], [59].",
+            "independence_note": "DR-LIT-IND-1 v2 (D-046): canonical paper 264178918",
+            "is_review_or_synthesis": false,
+            "statement_id": "LS3-264178918-02",
+            "evidence_role": "core_candidate"
+          }
+        ]
+      }
+    ],
+    "literature_caveats": []
+  },
+  "reference_answer": {
+    "table_pattern": "In California, fire‑weather danger is projected to show a slight increase, a larger change than in most states, by mid‑century under a high‑emissions future.",
+    "literature_interpretation": "Research on California shows that strong winds are a primary driver of fire danger and spread. In general, research shows that humidity and vapor‑pressure‑deficit affect fire risk. In general, research shows that conditions that favour wildfire, of which fire‑weather danger is one measure, can reduce insulation between ground and the line and cause line trips and power outages in energy systems. Research on the United States suggests that when wildfires occur, they increase the length of powerlines exposed to fire, affecting energy systems. Research on the United States suggests that wildfires can reduce solar panel irradiance, decreasing power generation from energy systems.",
+    "integrated": "In California, fire‑weather danger is projected to show a slight increase, a larger change than in most states, by mid‑century under a high‑emissions future. Fire‑weather danger describes conditions that favour wildfire; it is not fire occurrence. Research on California shows that strong winds are a primary driver of fire danger and spread. In general, research shows that humidity and vapor‑pressure‑deficit affect fire risk. In general, research shows that conditions that favour wildfire, of which fire‑weather danger is one measure, can reduce insulation between ground and the line and cause line trips and power outages in energy systems. Research on the United States suggests that when wildfires occur, they increase the length of powerlines exposed to fire, affecting energy systems. Research on the United States suggests that wildfires can reduce solar panel irradiance, decreasing power generation from energy systems."
+  },
+  "rubric": {
+    "required_points": [
+      "[w=2] Direction: increase",
+      "[w=2] Magnitude class: a slight increase",
+      "[w=2] Ranking: a larger change than in most states",
+      "[w=3] Driver mechanism: strong winds drive fire danger",
+      "[w=3] Driver mechanism: humidity and vapor‑pressure‑deficit affect fire risk",
+      "[w=3] Impact mechanism: fire‑weather conditions reduce insulation and cause line trips and outages in energy systems"
+    ],
+    "optional_points": [
+      "Impact mechanism: wildfires increase power‑line exposure length",
+      "Impact mechanism: wildfire smoke reduces solar generation"
+    ],
+    "acceptable_variants": [
+      "Direction may be stated as 'projected to increase'.",
+      "Magnitude may be phrased as 'increase slightly' or 'slightly higher'.",
+      "Ranking may be phrased as 'a larger change than in most states'."
+    ],
+    "disallowed_claims": [
+      "Fire‑weather danger will cause assets to fail.",
+      "The projected change is certain.",
+      "Fire‑weather danger is a risk."
+    ],
+    "fatal_errors": [
+      "Wrong direction of change.",
+      "Stating the projection as a forecast for a specific asset.",
+      "Treating fire‑weather danger as fire occurrence."
+    ]
+  },
+  "guardrails": [
+    "A modeled historical baseline is model output for a past period, not an observation.",
+    "A Fire Weather Index is a meteorological fire‑danger index; it is never fire occurrence, ignition, burned area or damage.",
+    "A high‑emissions future is one plausible future, not a forecast and not the only plausible future.",
+    "Hazard is not exposure, and exposure is not risk.",
+    "Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.",
+    "Impact statements are general unless a group is marked place_named for the place."
+  ],
+  "c_g_t_s_d_audit": null,
+  "generation": {
+    "generator_version": "litsynth_agent v5.4",
+    "model": "openai/gpt-oss-120b",
+    "prompt_hash": "d23bb02ad3aa3f63592e99290c8edeaa13831a32b44010acbee47e5f31de8c03",
+    "timestamp": "2026-11-24T23:48:43Z",
+    "inputs_sha256": {
+      "packet": "bf3c9aea49532108680b1c3c449624555e6625f9e836fff3c2e1679bbe675b3a",
+      "system_prompt": "1a023c1e98e822f74304801fce5a8b4605f6148c528c3dc4f5e236c5c87c3ade",
+      "item_seeds_v3": "04602e1bce5bc205ab6ae0d179f866ce894cfc517be62f2039fdc9c393f9d8a5",
+      "groups": "924a7b0d386541c698c9f4c9ba8d83e7fee41da240a0534a9fe31d6ab519a70a",
+      "statements_ingested": "b775301cbd3387f2228f07830fded009d9111d0ce635624123bc45a9f458eb81",
+      "independence_v2": "6b66417e16e3b6f38932214b1584a261ce36704d4c32dc7fb3bfcd46e6c5a34d",
+      "clusters_v1b": "76f5e10c941a5f1c55b3d00ecd5ac2a0e8cd4617344ca4cc911971c3e5c85354",
+      "exclusions": "41bb50b7083297d412ad749088fc5ef5345000867e468088650b11621b2dce8f",
+      "group_dispositions": "af291d37fbe46a2e7979c09b4e23e00c2f12d05166371f253a75eb848d3d9cfd",
+      "provenance_corrections": "d56cbe5e0c4feaffd8398126953c8437416967b2fbc382d5da907e88081ebd93",
+      "descriptor_rules": "dbfa8fd8a86a9379b4709b998bb33e673dceafd5f8ba7d199d55ff672d4c282d",
+      "plain_language": "60598527bf21a9dbc5a68e31cb60ec76d75b95d5ede7411181c323f56832b140",
+      "resolutions": "d86e1cd4e92ab51562ec251c98652d135280a52642012f6c94f3e2d02595869a",
+      "nca_map": "3141b12201cd5a8d25789182688e69ed3792f4fa56ca667994247c82bf949a41",
+      "nca_regions_disposition": "a0c390a80634a8e4a74693e47828a9912ddea8f8151784d57c82f816e3bb1ae9",
+      "group_dispositions_fire": "94a88f5d3228f3fdc4cf68a585475bb0cbc08b6c8d2ffe95430c8cf029ed907a",
+      "item_seeds_infra_v1a": "0bd723a092c02eff84bb00e3b733baba1396787cdd8b5991b97b296c2037ea2a",
+      "pilot_selection_infra_v1a": "316a93f9d197d35756ef0c81a7a1e9f683978f59ce512615d93f0963134f9212",
+      "groups_infra_run1": "f61bf4f557c0f5fbdfec2779fc578b01e84bdc6edfca80c4b633d25f841045ce",
+      "groups_enriched_infra_run1": "1e5aa4fb5902bc598c5977dd231d9b1b1c029fdad98076651cb0b2d7b0913eb1",
+      "statements_infra_run1": "869b0592e72ec22b7617a3fbe6ae3005df762b4817f7609e41c96a8559cbca4b",
+      "independence_infra_run1": "b0a2fa3f3bd9998597c4681100586abf555ce295283984f102222030bd2fb602",
+      "group_dispositions_infra_v1": "9b94e028bc571d9d84e6714ef1264bf2e087ea405d6561bfcdbd6d333c601bef",
+      "groups_dispositioned_v1": "d92cd95ff9dcc669a4f19355d22ac556c8211a587bc7155b5fb6fea42ff091ce",
+      "item_schema_v2a": "deca317cfdf11c9aa9074b68b7305c3b8ea7922ddf45a0542bc316901400d2d8",
+      "question_forms": "520aafa0804b5308be7e9e59b8316d9fbe0d8b60b335da4a0414ed0a17ab283e",
+      "asset_short_forms_v1": "de28eaa2d65759d7c09c2e95e8388b17f477f7c0f6d21aa72bcc3681055c444d"
+    }
+  },
+  "review": {
+    "status": "rejected_pre_review",
+    "history": [
+      {
+        "event": "deterministic_fail",
+        "reasons": [
+          "rubric.optional_points: fire-weather wording (an FWI is never fire occurrence): 'wildfires' in graded text",
+          "rubric.optional_points: fire-weather wording (an FWI is never fire occurrence): 'wildfire' in graded text",
+          "literature_interpretation[2]: two-hop wording (D-073c): a sentence citing a two-hop group must say 'when wildfires occur', 'wildfires can' or 'raise the chance of ignition'"
+        ],
+        "check_version": "synthesis_post_checks v3.5",
+        "checks": {
+          "numbers_untraced": [],
+          "number_words_untraced": [],
+          "exact_values_in_graded_text": [],
+          "prompt_leakage": {
+            "clmrr_named": false,
+            "row_or_column_named": false,
+            "paper_named": false,
+            "hidden_exact_value_required": false,
+            "according_to_phrase": false,
+            "pass": true,
+            "flags": [],
+            "check_version": "leakage_check v1"
+          },
+          "schema_errors": [],
+          "texts_traced_to_literature": [
+            "literature_interpretation",
+            "literature_interpretation",
+            "literature_interpretation",
+            "literature_interpretation",
+            "literature_interpretation",
+            "rubric.required_points",
+            "rubric.required_points",
+            "rubric.required_points",
+            "rubric.optional_points",
+            "rubric.optional_points"
+          ],
+          "rubric_points_without_source_ids": 0,
+          "n_table_sentences": 1,
+          "n_literature_sentences": 5,
+          "hedge_by_strength": [],
+          "fire_word_report": [
+            {
+              "field": "prompt",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "table_pattern",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "literature_interpretation",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "literature_interpretation",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "literature_interpretation",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "integrated",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "integrated",
+              "word": "Fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "integrated",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "integrated",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "integrated",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "integrated",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.required_points",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.required_points",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.disallowed_claims",
+              "word": "Fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.disallowed_claims",
+              "word": "Fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.fatal_errors",
+              "word": "fire",
+              "kind": "fire_alone"
+            },
+            {
+              "field": "rubric.fatal_errors",
+              "word": "fire",
+              "kind": "fire_alone"
+            }
+          ],
+          "context_driver_report": [],
+          "regional_contrast_report": [],
+          "mixed_scope_report": [],
+          "scope_clause_required": false,
+          "scope_openers": 5,
+          "rung8_report": {
+            "cited_place_named_impact_group": false,
+            "impact_group_ids": [
+              "LG-infra_fire_weather_index__energy-impact-c1-001",
+              "LG-infra_fire_weather_index__energy-impact-c1-002",
+              "LG-infra_fire_weather_index__energy-impact-c1-003",
+              "LG-infra_fire_weather_index__energy-impact-c1-004",
+              "LG-infra_fire_weather_index__energy-impact-c1-005",
+              "LG-infra_fire_weather_index__energy-impact-c1-010",
+              "LG-infra_fire_weather_index__energy-impact-c1-013",
+              "LG-infra_fire_weather_index__energy-impact-c1-014"
+            ],
+            "cited_two_hop_group_ids": [
+              "LG-infra_fire_weather_index__energy-impact-c1-001",
+              "LG-infra_fire_weather_index__energy-impact-c1-005",
+              "LG-infra_fire_weather_index__energy-impact-c1-010"
+            ],
+            "bridge_clause_count": 1,
+            "answer_shape": "rung8_v2",
+            "budget": {
+              "table_sentences": 1,
+              "driver_claims": 2,
+              "impact_claims": 3,
+              "integrated_sentences": 7,
+              "limits": {
+                "table_sentences": 1,
+                "driver_claims_max": 2,
+                "impact_claims_min": 2,
+                "impact_claims_max": 3,
+                "impact_claims_min_here": 2,
+                "integrated_sentences_max": 7
+              },
+              "within": true,
+              "enforced": true
+            },
+            "broader_hazard_phrase_count": {
+              "literature_interpretation": 1,
+              "integrated": 1
+            },
+            "bridge_clause_sentence": 2,
+            "bridge_clause_second_sentence": true
+          }
+        },
+        "reference_answer_tagged": {
+          "table_pattern": [
+            {
+              "sentence": "In California, fire‑weather danger is projected to show a slight increase, a larger change than in most states, by mid‑century under a high‑emissions future.",
+              "pattern_ids": [
+                "TP1-01463"
+              ]
+            }
+          ],
+          "literature_interpretation": [
+            {
+              "sentence": "Research on California shows that strong winds are a primary driver of fire danger and spread.",
+              "group_ids": [
+                "LG-fire_weather_v1-driver-c1-003"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "In general, research shows that humidity and vapor‑pressure‑deficit affect fire risk.",
+              "group_ids": [
+                "LG-fire_weather_v1-driver-c1-002"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "In general, research shows that conditions that favour wildfire, of which fire‑weather danger is one measure, can reduce insulation between ground and the line and cause line trips and power outages in energy systems.",
+              "group_ids": [
+                "LG-infra_fire_weather_index__energy-impact-c1-001"
+              ],
+              "hedged": false
+            },
+            {
+              "sentence": "Research on the United States suggests that when wildfires occur, they increase the length of powerlines exposed to fire, affecting energy systems.",
+              "group_ids": [
+                "LG-infra_fire_weather_index__energy-impact-c1-005"
+              ],
+              "hedged": true
+            },
+            {
+              "sentence": "Research on the United States suggests that wildfires can reduce solar panel irradiance, decreasing power generation from energy systems.",
+              "group_ids": [
+                "LG-infra_fire_weather_index__energy-impact-c1-010"
+              ],
+              "hedged": true
+            }
+          ],
+          "integrated": "In California, fire‑weather danger is projected to show a slight increase, a larger change than in most states, by mid‑century under a high‑emissions future. Fire‑weather danger describes conditions that favour wildfire; it is not fire occurrence. Research on California shows that strong winds are a primary driver of fire danger and spread. In general, research shows that humidity and vapor‑pressure‑deficit affect fire risk. In general, research shows that conditions that favour wildfire, of which fire‑weather danger is one measure, can reduce insulation between ground and the line and cause line trips and power outages in energy systems. Research on the United States suggests that when wildfires occur, they increase the length of powerlines exposed to fire, affecting energy systems. Research on the United States suggests that wildfires can reduce solar panel irradiance, decreasing power generation from energy systems.",
+          "rubric_required_weights": [
+            {
+              "point": "Direction: increase",
+              "weight": 2
+            },
+            {
+              "point": "Magnitude class: a slight increase",
+              "weight": 2
+            },
+            {
+              "point": "Ranking: a larger change than in most states",
+              "weight": 2
+            },
+            {
+              "point": "Driver mechanism: strong winds drive fire danger",
+              "weight": 3
+            },
+            {
+              "point": "Driver mechanism: humidity and vapor‑pressure‑deficit affect fire risk",
+              "weight": 3
+            },
+            {
+              "point": "Impact mechanism: fire‑weather conditions reduce insulation and cause line trips and outages in energy systems",
+              "weight": 3
+            }
+          ],
+          "rubric_points": [
+            {
+              "field": "required_points",
+              "point": "Direction: increase",
+              "source_ids": [
+                "TP1-01463"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Magnitude class: a slight increase",
+              "source_ids": [
+                "TP1-01463"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Ranking: a larger change than in most states",
+              "source_ids": [
+                "TP1-01463"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Driver mechanism: strong winds drive fire danger",
+              "source_ids": [
+                "LG-fire_weather_v1-driver-c1-003"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Driver mechanism: humidity and vapor‑pressure‑deficit affect fire risk",
+              "source_ids": [
+                "LG-fire_weather_v1-driver-c1-002"
+              ]
+            },
+            {
+              "field": "required_points",
+              "point": "Impact mechanism: fire‑weather conditions reduce insulation and cause line trips and outages in energy systems",
+              "source_ids": [
+                "LG-infra_fire_weather_index__energy-impact-c1-001"
+              ]
+            },
+            {
+              "field": "optional_points",
+              "point": "Impact mechanism: wildfires increase power‑line exposure length",
+              "source_ids": [
+                "LG-infra_fire_weather_index__energy-impact-c1-005"
+              ]
+            },
+            {
+              "field": "optional_points",
+              "point": "Impact mechanism: wildfire smoke reduces solar generation",
+              "source_ids": [
+                "LG-infra_fire_weather_index__energy-impact-c1-010"
+              ]
+            }
+          ]
+        },
+        "seed_id": "SD8-TP1-01463-energy",
+        "packet_id": "PK-SD8-TP1-01463-energy",
+        "working_assumptions_relied_on": [
+          {
+            "id": "WA-FWI-SUMMER",
+            "resolution": "R-004",
+            "status": "owner_authorized_working_assumption",
+            "covers": [
+              "IC-006",
+              "IC-007",
+              "IC-008",
+              "IC-009",
+              "IC-010"
+            ]
+          },
+          {
+            "id": "WA-STATE-LABEL",
+            "resolution": "R-005",
+            "status": "owner_authorized_working_assumption",
+            "covers": [
+              "IC-012"
+            ]
+          },
+          {
+            "id": "WA-UNWEIGHTED-MEAN",
+            "resolution": "R-008",
+            "status": "owner_authorized_working_assumption",
+            "covers": [
+              "unweighted_cell_mean"
+            ]
+          }
+        ],
+        "fire_groups_unreviewed": false,
+        "generator_version": "litsynth_agent v5.4",
+        "base_url": "https://inference-api.alcf.anl.gov/resource_server/sophia/vllm/v1",
+        "model": "openai/gpt-oss-120b",
+        "endpoint_label": "sophia_vllm",
+        "temperature": 0,
+        "reasoning_effort": "low",
+        "max_tokens": 16000,
+        "reasoning_effort_applied": true,
+        "system_prompt_sha256": "1a023c1e98e822f74304801fce5a8b4605f6148c528c3dc4f5e236c5c87c3ade",
+        "corrective_prompt_sha256": "256db051b3ddfa93d893e4573a2e818ecd4623d96ddac0aaebdba932c6e2a01a",
+        "prompt_hash": "d23bb02ad3aa3f63592e99290c8edeaa13831a32b44010acbee47e5f31de8c03",
+        "packet_sha256": "bf3c9aea49532108680b1c3c449624555e6625f9e836fff3c2e1679bbe675b3a",
+        "source_commit": "bf699700ab45ee9f3b0f5715515c1b7b42a7ba66",
+        "generation_timestamp": "2026-11-24T23:48:43Z",
+        "model_seconds": 16.9,
+        "model_attempts": 1,
+        "corrective_retry_used": false,
+        "turns": [
+          {
+            "turn": 1,
+            "finish_reason": "stop",
+            "content_chars": 6041,
+            "reasoning_chars": 3561,
+            "http_attempts": 1,
+            "model_seconds": 16.9
+          }
+        ],
+        "first_turn": null,
+        "corrective_error": null,
+        "corrective_turn_used": false,
+        "corrective_class": null,
+        "first_check": null,
+        "finish_reason": "stop",
+        "content_chars": 6041,
+        "reasoning_chars": 3561,
+        "raw_response": "{\n  \"prompt\": \"What could a projected increase in fire‑weather danger mean for energy systems in California, and why?\",\n  \"reference_answer\": {\n    \"table_pattern\": [\n      {\n        \"sentence\": \"In California, fire‑weather danger is projected to show a slight increase, a larger change than in most states, by mid‑century under a high‑emissions future.\",\n        \"pattern_ids\": [\"TP1-01463\"]\n      }\n    ],\n    \"literature_interpretation\": [\n      {\n        \"sentence\": \"Research on California shows that strong winds are a primary driver of fire danger and spread.\",\n        \"group_ids\": [\"LG-fire_weather_v1-driver-c1-003\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research shows that humidity and vapor‑pressure‑deficit affect fire risk.\",\n        \"group_ids\": [\"LG-fire_weather_v1-driver-c1-002\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"In general, research shows that conditions that favour wildfire, of which fire‑weather danger is one measure, can reduce insulation between ground and the line and cause line trips and power outages in energy systems.\",\n        \"group_ids\": [\"LG-infra_fire_weather_index__energy-impact-c1-001\"],\n        \"hedged\": false\n      },\n      {\n        \"sentence\": \"Research on the United States suggests that when wildfires occur, they increase the length of powerlines exposed to fire, affecting energy systems.\",\n        \"group_ids\": [\"LG-infra_fire_weather_index__energy-impact-c1-005\"],\n        \"hedged\": true\n      },\n      {\n        \"sentence\": \"Research on the United States suggests that wildfires can reduce solar panel irradiance, decreasing power generation from energy systems.\",\n        \"group_ids\": [\"LG-infra_fire_weather_index__energy-impact-c1-010\"],\n        \"hedged\": true\n      }\n    ],\n    \"integrated\": \"In California, fire‑weather danger is projected to show a slight increase, a larger change than in most states, by mid‑century under a high‑emissions future. Fire‑weather danger describes conditions that favour wildfire; it is not fire occurrence. Research on California shows that strong winds are a primary driver of fire danger and spread. In general, research shows that humidity and vapor‑pressure‑deficit affect fire risk. In general, research shows that conditions that favour wildfire, of which fire‑weather danger is one measure, can reduce insulation between ground and the line and cause line trips and power outages in energy systems. Research on the United States suggests that when wildfires occur, they increase the length of powerlines exposed to fire, affecting energy systems. Research on the United States suggests that wildfires can reduce solar panel irradiance, decreasing power generation from energy systems.\"\n  },\n  \"rubric\": {\n    \"required_points\": [\n      {\n        \"point\": \"Direction: increase\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-01463\"]\n      },\n      {\n        \"point\": \"Magnitude class: a slight increase\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-01463\"]\n      },\n      {\n        \"point\": \"Ranking: a larger change than in most states\",\n        \"weight\": 2,\n        \"source_ids\": [\"TP1-01463\"]\n      },\n      {\n        \"point\": \"Driver mechanism: strong winds drive fire danger\",\n        \"weight\": 3,\n        \"source_ids\": [\"LG-fire_weather_v1-driver-c1-003\"]\n      },\n      {\n        \"point\": \"Driver mechanism: humidity and vapor‑pressure‑deficit affect fire risk\",\n        \"weight\": 3,\n        \"source_ids\": [\"LG-fire_weather_v1-driver-c1-002\"]\n      },\n      {\n        \"point\": \"Impact mechanism: fire‑weather conditions reduce insulation and cause line trips and outages in energy systems\",\n        \"weight\": 3,\n        \"source_ids\": [\"LG-infra_fire_weather_index__energy-impact-c1-001\"]\n      }\n    ],\n    \"acceptable_variants\": [\n      \"Direction may be stated as 'projected to increase'.\",\n      \"Magnitude may be phrased as 'increase slightly' or 'slightly higher'.\",\n      \"Ranking may be phrased as 'a larger change than in most states'.\"\n    ],\n    \"optional_points\": [\n      {\n        \"point\": \"Impact mechanism: wildfires increase power‑line exposure length\",\n        \"source_ids\": [\"LG-infra_fire_weather_index__energy-impact-c1-005\"]\n      },\n      {\n        \"point\": \"Impact mechanism: wildfire smoke reduces solar generation\",\n        \"source_ids\": [\"LG-infra_fire_weather_index__energy-impact-c1-010\"]\n      }\n    ],\n    \"disallowed_claims\": [\n      \"Fire‑weather danger will cause assets to fail.\",\n      \"The projected change is certain.\",\n      \"Fire‑weather danger is a risk.\"\n    ],\n    \"fatal_errors\": [\n      \"Wrong direction of change.\",\n      \"Stating the projection as a forecast for a specific asset.\",\n      \"Treating fire‑weather danger as fire occurrence.\"\n    ]\n  },\n  \"guardrails\": [\n    \"A modeled historical baseline is model output for a past period, not an observation.\",\n    \"A Fire Weather Index is a meteorological fire‑danger index; it is never fire occurrence, ignition, burned area or damage.\",\n    \"A high‑emissions future is one plausible future, not a forecast and not the only plausible future.\",\n    \"Hazard is not exposure, and exposure is not risk.\",\n    \"Research on an asset class describes what such conditions can do to that kind of asset; it is not a forecast for a particular asset at the place.\",\n    \"Impact statements are general unless a group is marked place_named for the place.\"\n  ],\n  \"source_independent_answerability\": \"borderline\",\n  \"source_independence_note\": \"A climate scientist could infer the direction and general drivers of fire‑weather danger, but the specific projected magnitude and asset‑impact pathways rely on the packet's modeled data and cited literature.\",\n  \"capability_tested\": \"hazard‑impact reasoning\",\n  \"system_task\": \"generate answer\",\n  \"key_relationships\": \"hazard‑driver‑impact\",\n  \"evidence_needed\": \"multi‑source driver and impact studies\",\n  \"desired_output_characteristics\": \"concise integrated paragraph\",\n  \"expected_knowledge_level\": \"specialist_climate_science\"\n}",
+        "raw_response_chars": 6041,
+        "raw_reasoning": null,
+        "raw_reasoning_chars": null,
+        "content_fallback": false,
+        "raw_max_chars": 20000
+      }
+    ],
+    "kaiyuan_disposition": null,
+    "mentor_disposition": null,
+    "final_frozen": null
+  }
+}

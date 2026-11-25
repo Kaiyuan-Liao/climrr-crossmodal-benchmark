@@ -1,0 +1,39 @@
+# COORDINATOR display edits v1 to the six infra sample items (work package P5d, section B, COORDINATOR 2026-11-24).
+# Applied to the display text after the D-079 rule (artifacts/benchmark/items/infra_run2/items/<item_id>.json, human_review
+# event `display_text`), for the Alvi sample sheet ALVI_SAMPLE_ITEMS_2026-11-25. Texts verbatim from the work package.
+# `all_items` edits are applied to every item whose display text contains the phrase (the report records where each was
+# applied and where the phrase is absent); `items` edits must match exactly once. `delete_sentence` removes the sentence and
+# the space before it. Display only: the generated text (infra synthesis run 2) and the polished text (polish infra run 2)
+# are untouched and stay in the items; no item is modified, accepted or frozen. Checks on every edited text (leakage v2.3,
+# post-checks v3.5 against the v1b packet): P5_display_edits_v1_checks.json.
+edits_version: P5 display edits v1
+edit_origin: coordinator_edit
+by: COORDINATOR
+date: "2026-11-24"
+applies_after: D-079
+all_items:
+  - id: closing_clause
+    reason: "closing clause reworded (the work package: 'All six')"
+    find_regex: "These are general drivers of [^,.]+, not findings specific to (?P<place>[A-Z][A-Za-z ]+)\\."
+    replace: "These are general research findings, not findings specific to {place}."
+  - id: us_southwest_opener
+    reason: "clause order in the scope opener"
+    find: "Research on the United States shows, including work on the Southwest, that"
+    replace: "Research on the United States, including work on the Southwest, shows that"
+items:
+  - item_id: BI-P5-0001
+    label: Virginia, energy
+    edits:
+      - find: "In general, research shows that when wildfires occur, they increase ignition risk to energy systems."
+        replace: "In general, research shows that extreme heat and wind raise the chance of ignitions near power lines."
+  - item_id: BI-P5-0002
+    label: Arizona, transportation
+    edits:
+      - find: "projected to increase moderately in Arizona, a moderate increase, by mid-century"
+        replace: "projected to increase moderately in Arizona by mid-century"
+      - delete_sentence: "In general, research suggests that when wildfires occur, they increase fire risk to roads and rail."
+  - item_id: BI-P5-0007
+    label: California, emergency services
+    edits:
+      - find: "In general, research shows that humidity and vapor pressure deficit affect fire risk."
+        replace: "In general, research shows that drier air, with a higher vapor-pressure deficit, raises fire danger."

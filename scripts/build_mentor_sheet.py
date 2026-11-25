@@ -11,13 +11,16 @@ edits `artifacts/benchmark/review/P3_display_edits_v1.yaml` override five displa
 and their checks (leakage v2.3, post-checks v3.1) are written to `P3_display_edits_v1_checks.json`; `--no-edits` rebuilds v1. (Until P3c this script built the P3a draft from packets v4
 and raw run directories, `mentor_sheet_v2.py`; that version is held by its bytes at `f6f7543`.)
 
-`--audience alvi` (work package P5c, part D; not run until the rung-8 items exist): the sample sheet for Alvi from the rung-8
-packets (`synth_packets_infra_v1/`) and the ingested rung-8 synthesis run (`--items`, required): the same six columns plus
-`Asset class (CISA sector)`, the README's three lines plus two for Alvi; `ALVI_SAMPLE_ITEMS_P5.{md,xlsx}`. Rules:
-`src/climrr/mentor_sheet_alvi.py`. No display edits on this sheet.
+`--audience alvi` (work package P5c, part D; run in P5d, 2026-11-25): the sample sheet for Alvi from the rung-8 packets v1b
+(`synth_packets_infra_v1b/`) and the ingested infra synthesis run 2 (`artifacts/benchmark/items/infra_run2/`; both defaults):
+six rows in the work package's order; columns `#`, `Question`, `Answer`, `Asset class (CISA sector)`, `Table side`, `Paper
+side`, `Original passages`; README of five lines; `ALVI_SAMPLE_ITEMS_2026-11-25.{md,xlsx}`. The display text is the D-079 text
+with the COORDINATOR display edits `P5_display_edits_v1.yaml` applied (`--no-edits`: without them); their checks (leakage v2.3,
+post-checks v3.5) go to `P5_display_edits_v1_checks.json`, and the notes for Kaiyuan to `ALVI_SAMPLE_ITEMS_2026-11-25_notes.md`.
+Rules: `src/climrr/mentor_sheet_alvi.py`.
 
     python scripts/build_mentor_sheet.py [--packets <dir>] [--items <ingested run dir>] [--edits <yaml> | --no-edits]
-    python scripts/build_mentor_sheet.py --audience alvi --items <ingested rung-8 run dir>
+    python scripts/build_mentor_sheet.py --audience alvi [--no-edits]
 """
 
 from __future__ import annotations
@@ -33,7 +36,6 @@ sys.path.insert(0, str(REPO_ROOT / "src"))
 from climrr import litsynth_run5 as s5  # noqa: E402
 from climrr import mentor_sheet_alvi as ma  # noqa: E402
 from climrr import mentor_sheet_v2b as ms  # noqa: E402
-from climrr import synthpackets_infra as spi  # noqa: E402
 from climrr import synthpackets_v4 as v4  # noqa: E402
 from climrr.checksums import sha256_file  # noqa: E402
 from climrr.paths import repo_relative  # noqa: E402
@@ -42,21 +44,30 @@ from climrr.xlsxlite import write_xlsx  # noqa: E402
 
 
 def main_alvi(a) -> int:
-    """P5c part D: the sample sheet for Alvi (rung-8 items)."""
-    if a.items is None:
-        raise SystemExit("--audience alvi needs --items <ingested rung-8 synthesis run dir> (not run until the items exist)")
-    packets_dir = a.packets or spi.PACKETS_DIR
+    """P5d part C: the sample sheet for Alvi (six rung-8 items, D-079 display text + COORDINATOR edits) and Kaiyuan's notes."""
+    packets_dir, items_dir = a.packets or ma.PACKETS_DIR, a.items or ma.ITEMS_DIR
     out_md, out_xlsx = a.out_md or ma.MD_PATH, a.out_xlsx or ma.XLSX_PATH
-    man, rs = ma.build(packets_dir, a.items)
+    edits_path = None if a.no_edits else (a.edits if a.edits != ms.EDITS_PATH else ma.EDITS_PATH)
+    checks_path = a.out_checks if a.out_checks != ms.EDITS_CHECKS_PATH else ma.EDITS_CHECKS_PATH
+    man, rs, disp, packets, items, run = ma.build(packets_dir, items_dir, edits_path)
     write_xlsx(out_xlsx, ma.sheets(rs))
     out_md.write_text(ma.render_md(rs), encoding="utf-8")
-    result = {"audience": "alvi", "rows": len(rs) - 1, "order": ma.order(man), "md_sha256": sha256_file(out_md),
-              "xlsx_sha256": sha256_file(out_xlsx)}
+    result = {"audience": "alvi", "rows": len(rs) - 1, "order": ma.order(), "display_source": ma.display_sources(disp),
+              "md_sha256": sha256_file(out_md), "xlsx_sha256": sha256_file(out_xlsx)}
+    if edits_path:
+        checks = ma.edited_text_checks(items, packets, disp, edits_path)
+        checks_path.write_text(json.dumps(checks, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        ma.NOTES_PATH.write_text(ma.render_notes(rs, disp, packets, items, run, checks), encoding="utf-8")
+        result.update(edits_sha256=sha256_file(edits_path), checks_sha256=sha256_file(checks_path),
+                      leakage_failures=checks["leakage_failures"], post_check_failures=checks["failures"],
+                      items_failing=checks["items_failing"],
+                      failures_with_closing_clause_reverted=checks["failures_with_closing_clause_reverted"],
+                      notes_sha256=sha256_file(ma.NOTES_PATH))
     rec = write_run_record(
         "build_mentor_sheet_alvi", result_summary=result, passed=True, data_path=packets_dir / "manifest.json", output_path=out_md,
         config_snapshot={"audience": "alvi", "packets_manifest_sha256": sha256_file(packets_dir / "manifest.json"),
-                         "items_manifest_sha256": sha256_file(a.items / "manifest.json"), "items_dir": repo_relative(a.items),
-                         "sheet": ma.SHEET_ID, "model_calls": 0},
+                         "items_manifest_sha256": sha256_file(items_dir / "manifest.json"), "items_dir": repo_relative(items_dir),
+                         "sheet": ma.SHEET_ID, "edits": repo_relative(edits_path) if edits_path else None, "model_calls": 0},
     )
     print(json.dumps(result, indent=2, ensure_ascii=False))
     print(f"run record: {repo_relative(rec)}")
@@ -66,10 +77,10 @@ def main_alvi(a) -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--audience", choices=("mentor", "alvi"), default="mentor",
-                    help="mentor: the 2026-11-19 sheet (default); alvi: the rung-8 sample sheet (P5c)")
-    ap.add_argument("--packets", type=Path, default=None, help="default: synth_packets_v4b (mentor), synth_packets_infra_v1 (alvi)")
+                    help="mentor: the 2026-11-19 sheet (default); alvi: the rung-8 sample sheet (P5d, 2026-11-25)")
+    ap.add_argument("--packets", type=Path, default=None, help="default: synth_packets_v4b (mentor), synth_packets_infra_v1b (alvi)")
     ap.add_argument("--items", type=Path, default=None, help="ingested synthesis run directory (manifest.json, items/); "
-                                                              "default run 5 (mentor), required for alvi")
+                                                              "default run 5 (mentor), infra_run2 (alvi)")
     ap.add_argument("--out-md", type=Path, default=None)
     ap.add_argument("--out-xlsx", type=Path, default=None)
     ap.add_argument("--edits", type=Path, default=ms.EDITS_PATH, help="COORDINATOR display edits (sheet v2)")

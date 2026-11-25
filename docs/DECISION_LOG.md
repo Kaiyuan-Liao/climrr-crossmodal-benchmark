@@ -3806,3 +3806,42 @@ code emits, and the next GUIDANCE packet still chooses.
   `scripts/build_synth_packets_infra.py`, `src/climrr/p5c2.py`, `data/metadata/benchmark/asset_short_forms_v1.yaml`,
   `data/manifest.json`, `artifacts/benchmark/synth_packets_infra_v1b/`, `tests/test_litsynth_v54.py`, `tests/test_p5c_hotfix.py`,
   `docs/P5_INFRA_IMPACT_DESIGN.md` §22 -- §24.
+
+## D-079 --- Display text: polished only if post-checks pass on it
+
+- **Date:** 2026-11-24.
+- **Status:** **decided** (COORDINATOR, work package P5d).
+- **Context.** D-068 showed the polished text wherever the polish passed. Polish checks v2 test invariance (numbers, places,
+  hedges, descriptors), not the rung-8 rules: in polish infra run 2 three of four passing rewrites split sentences past the
+  answer-shape budget or dropped the "In general," scope opener.
+- **Decision.** The display text is the polished text **only if** it passes post-checks v3.5 re-run on the polished text;
+  otherwise the original. `display_source` and the re-check result are recorded per item.
+- **Recorded (EXECUTOR).** `litsynth_infra_run2.display_decision` / `display_text`: polished only when the polish status is
+  `polished` **and** the re-check (the polished question and answer against the item's v1b packet; tagged sentences and rubric
+  the run's) passes; the `human_review` event carries `display_source`, `display_recheck` (run on the rewrite whatever the polish
+  status) and `display_text`. Infra run 2: BI-P5-0002 polished; 0001, 0004, 0006, 0007, 0008 original (`P5_INFRA_IMPACT_DESIGN.md`
+  §26). The COORDINATOR display edits apply after this rule.
+- **For confirmation:** (a) a polish-rejected rewrite is re-checked and recorded but never shown (both conditions); (b) the re-check
+  replaces only the question and the integrated answer (the tagged sentences are not re-derived from the rewrite).
+- **Affected files:** `src/climrr/litsynth_infra_run2.py`, `artifacts/benchmark/items/infra_run2/`, `tests/test_p5d.py`,
+  `docs/P5_INFRA_IMPACT_DESIGN.md` §26.
+
+## D-080 --- Infra run 2 accepted as the impact sample set
+
+- **Date:** 2026-11-24.
+- **Status:** **decided** (COORDINATOR, work package P5d).
+- **Decision.** Infra synthesis run 2 (agent v5.4, packets v1b, source `bf69970`) with polish infra run 2 is the impact sample set:
+  the six passing items (BI-P5-0001, 0002, 0004, 0006, 0007, 0008) enter human review and go to Alvi on the sample sheet of
+  2026-11-25; BI-P5-0003 and 0005 are `rejected_pre_review` after a second attempt (`redraws: 2`) and are not redrawn again. Infra
+  run 1 (v5.3, packets v1a) and its polish run are superseded evidence.
+- **Recorded (EXECUTOR).** Ingest `scripts/ingest_litsynth_infra_run2.py` (tarball `1ab28929…3f7`; items.jsonl `ce23c904…4b2b`;
+  polish summary `4e66b248…c0d`); all checks reproduced; the run-1 passing items pinned as the regression fixture (pass v3.5 on
+  v1a, budget reported). COORDINATOR display edits `P5_display_edits_v1.yaml`: leakage v2.3 0 failures; post-checks v3.5 3
+  failures, each only the reworded closing clause (0 with it put back) --- escalated (report section 72). Nothing accepted, nothing
+  frozen.
+- **Affected files:** `src/climrr/litsynth_infra_run2.py`, `scripts/ingest_litsynth_infra_run2.py`, `artifacts/benchmark/items/infra_run1/`,
+  `artifacts/benchmark/items/infra_run2/`, `artifacts/benchmark/polish/infra_run1/`, `artifacts/benchmark/polish/infra_run2/`,
+  `src/climrr/mentor_sheet_alvi.py`, `scripts/build_mentor_sheet.py`, `artifacts/benchmark/review/P5_display_edits_v1.yaml`,
+  `artifacts/benchmark/review/P5_display_edits_v1_checks.json`, `artifacts/benchmark/review/ALVI_SAMPLE_ITEMS_2026-11-25.md`,
+  `artifacts/benchmark/review/ALVI_SAMPLE_ITEMS_2026-11-25_notes.md`, `tests/test_p5d.py`, `tests/test_p5c.py`,
+  `docs/P5_INFRA_IMPACT_DESIGN.md` §25 -- §28.

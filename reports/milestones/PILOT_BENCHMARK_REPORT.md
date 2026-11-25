@@ -1743,3 +1743,58 @@ No model call. Design: `P5_INFRA_IMPACT_DESIGN.md` §22 -- §24.
 - **For the COORDINATOR (carried).** Polish v1.1's checks still do not protect the bridge clause or the two-hop phrases (section 68
   (1)); with shape v2 they also do not protect the once-only broader-hazard phrase or the short forms.
 - **Readings for confirmation:** D-075a (a) -- (j).
+
+## 71. P5d: infra synthesis runs 1 -- 2 and polish ingested, D-079, display edits, Alvi sheet (2026-11-25; D-079, D-080)
+
+No model call. Design: `P5_INFRA_IMPACT_DESIGN.md` §25 -- §28.
+
+- **Tarball.** `infra_synth_runs12_evidence.tar.gz` SHA-256 `1ab289297f0ba606c147f97eb0b1d5758991598b7e78216ef5fb3ca80a4d33f7`:
+  matches. Stated hashes match: run-2 `items.jsonl` `ce23c904520b67b0fbed9f4182cdc34feae0cc6ad9f8b96c259a0ce8327c4b2b`, polish run-2
+  `summary.json` `4e66b248b4c3b6937db0531aecafe1d95e5ff710c934d600884d467d732ccc0d`; packets v1b manifest `b4cbbdb3…36a3e`; prompt
+  `1a023c1e…c3ade`; source commit `bf69970`. The four logs equal their `reports/` copies.
+- **Ingest** (`scripts/ingest_litsynth_infra_run2.py`, `src/climrr/litsynth_infra_run2.py`): every stated fact re-derived;
+  synthesis reproduced (run 2: 8 items + 3 superseded attempts, agent v5.4, v3.5, packets v1b; run 1: 8 items, agent v5.3, v3.4,
+  packets v1a, first turns included); polish reproduced (runs 2 and 1, v1.1, checks v2). Outputs: `artifacts/benchmark/items/infra_run2/`
+  (6 `human_review`, 2 `rejected_pre_review` with `redraws: 2`; `superseded/` the three first attempts),
+  `artifacts/benchmark/polish/infra_run2/`, and the superseded `items/infra_run1/`, `polish/infra_run1/`.
+- **Run history.** Run 2 first start 5/8; 0002, 0003, 0005 redrawn once each -> 0002 passed; 0003 (doubled magnitude phrase, both
+  draws) and 0005 (a sentence citing a two-hop group without its marker) rejected. Polish run 2: 4 polished, 2 rejected (0001
+  places, 0008 hedges).
+- **Regression fixture.** Run-1 BI-P5-0001 and 0003 (pinned in `items/infra_run1/items.jsonl`) pass post-checks v3.5 on their v1a
+  packets, budget reported (`within: false`, `enforced: false`); replaces the synthetic stand-in of section 69.
+- **D-079 per item** (display source; v3.5 re-check of the polished text): 0001 original (polish rejected; re-check fails: closing
+  clause and five unscoped "Research shows" openers); **0002 polished (re-check pass)**; 0004 original (8 sentences, budget 6); 0006
+  original (8 / 6); 0007 original ("In general," dropped twice; 5 / 4); 0008 original (polish rejected; 4 / 3).
+- **COORDINATOR display edits** (`P5_display_edits_v1.yaml`, applied after D-079): closing clause reworded in 0001, 0002, 0004 (the
+  only items with one); U.S. opener reordered in 0002 (absent elsewhere: 0004 already had that order); 0001 two-hop sentence
+  replaced; 0002 doubled magnitude removed and the roads-and-rail sentence deleted (its group stays on the sheet, marked); 0007
+  humidity sentence replaced. 0006, 0008 unchanged. **Checks:** leakage v2.3 **0**; post-checks v3.5 **3 failures** (0001, 0002,
+  0004), every reason the closing clause (packet `general_clause` mismatch, and "research" in the new clause trips the D-069
+  paragraph-opener rule); **0** with the clause put back (`P5_display_edits_v1_checks.json`).
+- **Alvi sheet.** `scripts/build_mentor_sheet.py --audience alvi` -> `ALVI_SAMPLE_ITEMS_2026-11-25.xlsx` (gitignored) and `.md`
+  (tracked), six rows in the work package's order; columns as specified (asset class fourth; Table side + place-named impact
+  evidence; Paper side impact first, "via wildfire occurrence" on two-hop groups); README five lines. Notes for Kaiyuan
+  `ALVI_SAMPLE_ITEMS_2026-11-25_notes.md`. `mentor_sheet_alvi` rewritten for P5d (the P5c design never ran); `tests/test_p5c.py`'s two
+  sheet tests replaced by one pointing at the P5d layout.
+- **Tests** `tests/test_p5d.py` (16): manifests pin every file; lifecycle; superseded attempts and run 1; D-079 reproduced per item
+  and a polished display without a passing re-check refused; the regression fixture; edits as written, an unmatched item edit refused;
+  the checks report; the sheet and notes rebuilt byte-identically; no rejected item on the sheet.
+
+## 72. P5d: gate, escalations, readings for confirmation (2026-11-25)
+
+- **Gate.** `pytest` **1,794 passed, 2 skipped**; scanner 0 hits. Build and evidence run records: `docs/PROJECT_STATE.md`.
+- **Escalation (for the COORDINATOR): the reworded closing clause fails post-checks v3.5.** "These are general research findings,
+  not findings specific to <Place>." differs from the packets' pinned `general_clause` and names "research", which the D-069 rule
+  for paragraph sentences catches. The sheet carries the edit as instructed; the checks file reports the failures. To make it pass:
+  a post-checks bump (accept the clause wording; exempt the clause from the paragraph-opener rule) and, for future runs, the packets'
+  `general_clause` --- a decision, not made here.
+- **Reading (for confirmation): "All six" for the closing clause = where one exists.** BI-P5-0006, 0007, 0008 have no clause (they
+  cite a California-specific driver group; D-069 fails a clause there). None added. If the COORDINATOR wants the disclaimer on the
+  fire items too, the D-069 rule needs a change first.
+- **Readings (for confirmation):** D-079 (a), (b); `redraws: 2` recorded as the work package wrote it, meaning two generations of
+  the seed in run 2 (the manifest lists both attempts); the Paper side keeps a group whose only sentence an edit deleted, marked
+  "not in the displayed answer" (BI-P5-0002); "place-named impact evidence" is the packet's field, with the count of cited impact
+  groups whose papers name the state; the run recorded source commit `bf69970` while section 70's command named `ca6f56f`
+  (`bf69970` is evidence-only on top; agent v5.4 verified at `bf69970`).
+- **For the COORDINATOR (carried):** polish v1.1's checks protect neither the bridge clause, the two-hop phrases, the once-only
+  broader-hazard phrase nor the sentence budget; D-079 now catches the last at display time.

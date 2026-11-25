@@ -586,3 +586,74 @@ wildfires occur, they <impact>", never "that that". (5) The "this implies more e
 
 Polaris (Kaiyuan): synthesis `infra_run2` over the eight v1b packets (agent v5.4) and the polish `litpolish/infra_run2`, at the
 pushed build commit; then ingest -> the Alvi sheet. Commands: the report, section 70, and `docs/PROJECT_STATE.md`.
+
+## 25. Synthesis runs 1 -- 2 and polish ingested (work package P5d, part A; D-080)
+
+One tarball, `infra_synth_runs12_evidence.tar.gz` (`1ab28929…3f7`, verified), ingested by `scripts/ingest_litsynth_infra_run2.py`
+(`src/climrr/litsynth_infra_run2.py`): every stated fact re-derived from the delivered files; every item and superseded attempt
+re-assembled from its raw response by the pinned agent and re-checked (run 2: v5.4 at `bf69970`, post-checks v3.5, packets v1b
+`b4cbbdb3…a3e`; run 1: v5.3 at `b860658`, v3.4, packets v1a `829d80cf…5bf2`); every rewrite re-extracted by polish v1.1 and
+re-checked (checks v2). All equal to the recorded results (`checks_reproduced`). Run 2 ran at source commit `bf69970` (the
+evidence-only commit on top of the build `ca6f56f`; agent bytes verified there).
+
+- **Run 2 (`items/infra_run2/`; D-080, the impact sample set).** First start: 5 of 8 pass; BI-P5-0002 (three driver claims, above
+  the budget), 0003 (doubled magnitude phrase) and 0005 (FWI wording in a rubric point; a two-hop sentence without its marker) rejected,
+  moved to `attempt1/`, and each redrawn by its own restart: 0002 passed, 0003 and 0005 were rejected again. **6 pass** (0001, 0002,
+  0004, 0006, 0007, 0008) -> `human_review`; **0003, 0005 -> `rejected_pre_review`, `redraws: 2`** (the work package's count; two
+  generations of each seed in run 2, both rejected). The three first attempts are `superseded_attempt`s
+  (`items/infra_run2/superseded/`). Format corrective used 6, passed 4; leakage flags 0; question diversity (opening trigram)
+  largest share 0.375 (report, as in run 1).
+- **Polish run 2 (`polish/infra_run2/`).** Two starts (before and after the 0002 redraw): 4 polished (0002, 0004, 0006, 0007), 2
+  rejected (0001 places "United States" lost; 0008 hedge "shows" lost); 0003 and 0005 skipped.
+- **Run 1 (`items/infra_run1/`, `polish/infra_run1/`; superseded).** Now in the repository: 2 pass (0001, 0003), 6 rejected, as
+  relayed in §22; polish run 1 polished 0003, rejected 0001.
+- **Regression fixture.** The two run-1 passing items, pinned in `items/infra_run1/items.jsonl`, pass post-checks v3.5 against their
+  v1a packets with the budget reported (`within: false`, `enforced: false`) --- the check the v5.4 package made on synthetic items
+  (`tests/test_p5d.py`; manifest `run1_regression`).
+
+## 26. Display text: D-079 and the COORDINATOR display edits (P5d, parts A -- B)
+
+**D-079 (decided).** Display text = the polished text **only if** the polish passed **and** post-checks v3.5, re-run on the
+polished question and answer against the item's v1b packet, pass; otherwise the original. Each item's `human_review` event records
+`display_source`, `display_recheck` and `display_text`.
+
+| item | polish | v3.5 on the polished text | display |
+| --- | --- | --- | --- |
+| BI-P5-0001 | rejected (places) | fail: closing clause dropped; five "Research shows" openers without scope | original |
+| BI-P5-0002 | polished | pass | **polished** |
+| BI-P5-0004 | polished | fail: 8 sentences, budget 6 (sentences split) | original |
+| BI-P5-0006 | polished | fail: 8 sentences, budget 6 | original |
+| BI-P5-0007 | polished | fail: "In general," dropped from two openers; 5 sentences, budget 4 | original |
+| BI-P5-0008 | rejected (hedges) | fail: 4 sentences, budget 3 | original |
+
+**COORDINATOR display edits** (`artifacts/benchmark/review/P5_display_edits_v1.yaml`, `coordinator_edit`; applied after D-079 by
+`mentor_sheet_alvi`; generated and polished texts kept in the items): the closing clause reworded to "These are general research
+findings, not findings specific to <Place>." where the item has one (0001, 0002, 0004); the U.S. opener reordered (0002); 0001's
+two-hop sentence replaced ("extreme heat and wind raise the chance of ignitions near power lines"); 0002's doubled magnitude removed
+and its two-hop roads-and-rail sentence deleted (the group stays on the sheet, marked as no longer in the displayed answer); 0007's
+humidity sentence replaced ("drier air, with a higher vapor-pressure deficit, raises fire danger"). 0006 and 0008: no edit applies.
+
+**Checks on the edited texts** (`P5_display_edits_v1_checks.json`): leakage v2.3 **0 failures**; post-checks v3.5 **3 failures**
+(0001, 0002, 0004), each only the closing clause: v3.5 compares it with the packet's pinned `general_clause` ("These are general
+drivers of <quantity>, …"), and the new wording names "research", so the D-069 rule for paragraph sentences naming research also
+catches it. With only the clause put back, **0 failures**. Escalated (report section 72): accept the wording in a post-checks bump
+(the packets' `general_clause` and the scope rule's exemption), or keep the generated clause.
+
+**"All six" read as "where a closing clause exists".** 0006, 0007, 0008 have none: they cite a California-specific driver group,
+and D-069 (post-checks v3.2+) fails a closing clause there. None was added; for the COORDINATOR.
+
+## 27. The two dropped cells (P5d)
+
+- **BI-P5-0003 (water and wastewater x heat, California):** both draws wrote "increase a moderate increase" (DR-DESC-1 v4 doubled
+  magnitude), in the table sentence and in the paragraph; format class, the corrective turn did not fix it.
+- **BI-P5-0005 (energy x fire weather, California):** the first draw used "wildfire(s)" in a rubric point and a two-hop sentence
+  without its marker; the second kept the two-hop fault: `literature_interpretation[1]` cites the two-hop group
+  `LG-infra_fire_weather_index__energy-impact-c1-001` but is written as a direct sentence ("In general, research shows that
+  conditions that favour wildfire, … can increase exposure of energy systems to fire perimeters, …") without "when wildfires
+  occur" / "wildfires can" / "raise the chance of ignition".
+- Neither enters review. The sheet carries six items (three heat, three fire weather; four California, one Virginia, one Arizona).
+
+## 28. Next
+
+The Alvi sample sheet (`ALVI_SAMPLE_ITEMS_2026-11-25.{xlsx,md}`; notes for Kaiyuan `…_notes.md`) goes to Alvi. After both reviews
+(the mentor's of the 2026-11-19 sample, Alvi's of this one): the GUIDANCE packet P2 -- P5 and the merge, and the P6 scale-up plan.
