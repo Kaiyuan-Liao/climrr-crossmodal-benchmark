@@ -23,7 +23,7 @@ PMAN = json.loads(ir.POLISH_MANIFEST_PATH.read_text(encoding="utf-8"))
 MAN1 = json.loads(ir.MANIFEST1_PATH.read_text(encoding="utf-8"))
 PMAN1 = json.loads(ir.POLISH_MANIFEST1_PATH.read_text(encoding="utf-8"))
 ITEMS = {x["item_id"]: json.loads((ir.ART / x["path"]).read_text(encoding="utf-8")) for x in MAN["items_ingested"]}
-SHEET_MD_SHA256 = "abf1adc5c7d758f9013574cdaeb7e4165dc28ab0cc325e22bb87e59bd3324465"   # P5d hotfix (closing clause as generated)
+SHEET_MD_SHA256 = "454ba2cb81c96b77005cbb4f6587a3f7ce6c07592081f16c9ce5d3b73a586d46"   # P5d hotfix 2 (passages capped, README line)
 DISPLAY = {"BI-P5-0001": "original", "BI-P5-0002": "polished", "BI-P5-0004": "original", "BI-P5-0006": "original",
            "BI-P5-0007": "original", "BI-P5-0008": "original"}
 
@@ -165,7 +165,9 @@ def test_sheet_rebuilds_byte_identical_and_layout():
     assert ma.render_notes(rs, disp, packets, items, run, chk) == ma.NOTES_PATH.read_text(encoding="utf-8")
     assert rs[0] == ["#", "Question", "Answer", "Asset class (CISA sector)", "Table side", "Paper side", "Original passages"]
     assert [r[0].split("\n")[1] for r in rs[1:]] == ["BI-P5-0001", "BI-P5-0002", "BI-P5-0004", "BI-P5-0006", "BI-P5-0007", "BI-P5-0008"]
-    assert len(ma.README_LINES) == 5 and "not findings specific to California" in ma.README_LINES[4][1]
+    assert len(ma.README_LINES) == 6 and "not findings specific to California" in ma.README_LINES[5][1]
+    assert ma.README_LINES[4][1] == ("Claim groups are formed by an agent and checked by a reviewer at the claim level; individual "
+                                     "member passages are still under review.")
     for r in rs[1:]:
         side = r[5].split("\n")
         kinds = [ln.split(",")[0] for ln in side]
@@ -179,3 +181,40 @@ def test_alvi_sheet_shows_no_rejected_item():
     _, rs, *_ = _sheet()
     text = "\n".join("\n".join(r) for r in rs)
     assert "BI-P5-0003" not in text and "BI-P5-0005" not in text
+
+
+# --- P5d hotfix 2: Original passages capped -------------------------------------------------------------------------------
+
+
+def test_passages_capped_and_ranked():
+    _, rs, disp, packets, items, _ = _sheet()
+    n_cut = 0
+    for r in rs[1:]:
+        iid = r[0].split("\n")[1]
+        pk = packets[iid]
+        blocks = r[6].split("\n[")
+        groups = ma.cited(items[iid], pk)
+        assert len(blocks) == len(groups)
+        for x, block in zip(groups, blocks):
+            lines = [ln for ln in block.split("\n")[1:]]
+            members = x["group"]["members"]
+            shown = [ln for ln in lines if ln.startswith("  paper ")]
+            assert len(shown) == min(len(members), ma.MAX_PASSAGES)
+            ranked = sorted(members, key=lambda m: ma.member_rank(m, pk["state"]))
+            assert shown == [f"  paper {m['paper_item_id']}, " + ln.split(", ", 1)[1] for m, ln in zip(ranked, shown)]
+            for m, ln in zip(ranked, shown):
+                assert m["verbatim_passage"] in ln
+            more = len(members) - ma.MAX_PASSAGES
+            assert (lines[-1] == f"  ({more} more in provenance)") == (more > 0)
+            n_cut += more > 0
+    assert n_cut == 7
+    # place-named first within a passage type: the Phoenix, Arizona member leads BI-P5-0002's pavement group
+    g = next(x["group"] for x in ma.cited(items["BI-P5-0002"], packets["BI-P5-0002"]) if len(x["group"]["members"]) == 10)
+    assert ma.shown_members(g, "Arizona")[0][0]["region"] == "Phoenix, Arizona"
+
+
+def test_member_rank_order():
+    ms_ = [{"passage_type": t, "region": r, "statement_id": s} for t, r, s in
+           [("background", "California", "a"), ("cited_finding", "Texas", "b"), ("own_finding", "global", "c"),
+            ("own_finding", "southern California", "d"), ("review_synthesis", "global", "e"), ("other", "California", "f")]]
+    assert [m["statement_id"] for m in sorted(ms_, key=lambda m: ma.member_rank(m, "California"))] == ["d", "c", "e", "b", "a", "f"]

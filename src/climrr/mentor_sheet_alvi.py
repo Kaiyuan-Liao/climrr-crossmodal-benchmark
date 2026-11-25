@@ -15,9 +15,11 @@ item in the work package's order (`ORDER`). Columns, exactly:
 - `Paper side` --- per cited group, impact groups first, then drivers: "Impact, research shows (N papers): <label>" or
   "research suggests (1 paper)" by the group's strength (D-062); a two-hop group marked "--- via wildfire occurrence"
   (D-073c); an impact group whose papers name the item's state marked "[place-named: <State>]";
-- `Original passages` --- per cited group, in the same order, every member passage verbatim with paper id and section.
+- `Original passages` --- per cited group, in the same order, member passages verbatim with paper id and section: at most
+  `MAX_PASSAGES` (4) per group, ranked by passage type (own_finding, review_synthesis, cited_finding, background), then
+  place-named members first (`names_place`), then statement id; "(N more in provenance)" when cut (P5d hotfix 2).
 
-README of five lines (`README_LINES`). The Markdown copy has the same content. `render_notes`: the notes for Kaiyuan (what each
+README of six lines (P5d hotfix 2 adds the claim-group line) (`README_LINES`). The Markdown copy has the same content. `render_notes`: the notes for Kaiyuan (what each
 item rests on, the two dropped cells and why, run history). `edited_text_checks`: leakage v2.3 and post-checks v3.5 on every
 edited text (report only). No model call; no item modified.
 """
@@ -53,6 +55,9 @@ ORDER = [("BI-P5-0001", "energy / heat (Virginia)"), ("BI-P5-0002", "transportat
          ("BI-P5-0007", "emergency services / fire weather (California)"), ("BI-P5-0008", "communications / fire weather (California)")]
 HEADER = ["#", "Question", "Answer", "Asset class (CISA sector)", "Table side", "Paper side", "Original passages"]
 WIDTHS = [12, 45, 60, 32, 60, 55, 80]
+#: P5d hotfix 2: at most this many member passages per group in `Original passages`, ranked by `member_rank`.
+MAX_PASSAGES = 4
+PASSAGE_TYPE_ORDER = ("own_finding", "review_synthesis", "cited_finding", "background")
 HEDGE = {"multi_source_supported": "research shows", "review_supported": "research shows",
          "single_source_supported": "research suggests"}
 README_LINES = [
@@ -67,6 +72,9 @@ README_LINES = [
      "'Table side' are where the answer comes from; the model is not expected to give them."],
     ["'Research suggests'",
      "Marks a finding from one paper in our literature corpus ('research shows': two or more papers)."],
+    ["Claim groups and passages",
+     "Claim groups are formed by an agent and checked by a reviewer at the claim level; individual member passages are still under "
+     "review."],
     ["Our three questions for you",
      "(1) Are these the hazard -> infrastructure questions and answers scientists want? (2) Which asset classes and which "
      "impact types matter most? (3) Is the general-evidence wording (\"not findings specific to California\") acceptable, or "
@@ -192,6 +200,25 @@ def table_side(item: dict, packet: dict) -> str:
     return ms.table_side(packet) + "\n" + place_named_cell(item, packet)
 
 
+def names_place(member: dict, state: str) -> bool:
+    """P5d hotfix 2 (EXECUTOR reading): a member is place-named when its recorded `region` names the item's state as a whole
+    word ("Phoenix, Arizona", "southern California")."""
+    return bool(re.search(rf"\b{re.escape(state)}\b", member.get("region") or "", re.I))
+
+
+def member_rank(member: dict, state: str) -> tuple:
+    """Passage type (own_finding, review_synthesis, cited_finding, background, then any other), place-named first, statement id."""
+    pt = member.get("passage_type")
+    return (PASSAGE_TYPE_ORDER.index(pt) if pt in PASSAGE_TYPE_ORDER else len(PASSAGE_TYPE_ORDER),
+            0 if names_place(member, state) else 1, member["statement_id"])
+
+
+def shown_members(group: dict, state: str) -> tuple[list[dict], int]:
+    """(the members shown, how many more are in provenance)."""
+    ranked = sorted(group["members"], key=lambda m: member_rank(m, state))
+    return ranked[:MAX_PASSAGES], max(0, len(ranked) - MAX_PASSAGES)
+
+
 def paper_cells(item: dict, packet: dict, removed: list[str] = ()) -> tuple[str, str]:
     """`removed`: groups whose only sentence a COORDINATOR edit deleted from the displayed answer (marked, still listed)."""
     side, passages = [], []
@@ -205,10 +232,14 @@ def paper_cells(item: dict, packet: dict, removed: list[str] = ()) -> tuple[str,
         side.append(f"{'Impact' if x['impact'] else 'Driver'}, {HEDGE[g['strength_in_packet']]} ({n} paper{'s' if n != 1 else ''})"
                     f"{note}: {label}{hop}{place}{gone}")
         passages.append(f"[{label}]")
-        for m in g["members"]:
+        for m in g["members"]:                                     # every member checked, shown or not
             sup = next((y for y in s["supports"] if y["statement_id"] == m["statement_id"]), None)
             _check(sup is None or sup["verbatim_passage"] == m["verbatim_passage"], f"{m['statement_id']}: passage differs from the item")
+        shown, more = shown_members(g, packet["state"])
+        for m in shown:
             passages.append(f"  paper {m['paper_item_id']}, {ms._section(m['json_path'])}: \"{m['verbatim_passage']}\"")
+        if more:
+            passages.append(f"  ({more} more in provenance)")
     return "\n".join(side), "\n".join(passages)
 
 

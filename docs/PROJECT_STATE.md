@@ -32,6 +32,8 @@ session reasoning correctly from out-of-date facts and repeating them.
   (2026-11-25):** closing-clause rewording removed (generated clause stays; wording deferred to prompt v5.5, D-079); leakage v2.3
   and post-checks v3.5 on all six display texts: 0 failures; sheet `.md` `abf1adc5…4465`; build `d27392e`, evidence run record
   `reports/runs/20261125T002405Z_local_build_mentor_sheet_alvi` at that clean tree (`git_dirty: false`), outputs byte-identical.
+- **Hotfix 2 (2026-11-25):** `Original passages` capped at 4 per group (passage type, place-named, statement id; "(N more in
+  provenance)"); README line on claim groups; sheet `.md` `454ba2cb…6d46`; display texts unchanged.
 - **Alvi sheet (C):** `scripts/build_mentor_sheet.py --audience alvi` (`src/climrr/mentor_sheet_alvi.py`, rewritten for P5d);
   `artifacts/benchmark/review/ALVI_SAMPLE_ITEMS_2026-11-25.xlsx` (gitignored), `.md`, `_notes.md`.
 - **Docs (D):** `P5_INFRA_IMPACT_DESIGN.md` §25 -- §28; `DECISION_LOG.md` D-079, D-080; `MENTOR_BRIEF.md`; report sections 71 -- 72.

@@ -8,6 +8,7 @@
 - **The question is all the model sees.** The model under test gets only the Question: no table, no paper, no data.
 - **Grading is at pattern level.** Direction and rough size of the hazard change, the drivers, and the kind of impact on the asset class. The values in 'Table side' are where the answer comes from; the model is not expected to give them.
 - **'Research suggests'.** Marks a finding from one paper in our literature corpus ('research shows': two or more papers).
+- **Claim groups and passages.** Claim groups are formed by an agent and checked by a reviewer at the claim level; individual member passages are still under review.
 - **Our three questions for you.** (1) Are these the hazard -> infrastructure questions and answers scientists want? (2) Which asset classes and which impact types matter most? (3) Is the general-evidence wording ("not findings specific to California") acceptable, or should items be restricted to evidence that names the place?
 
 ## 1 · BI-P5-0001
@@ -51,19 +52,15 @@ Energy Sector (in the item: "energy systems")
 ### Original passages
 
 - [thermal power plant output reduction]
-    - paper 132959901, ii. mitigation plan by the utility company: "In a warming climate the power station input water temperature may become too high and thus reduce the generation efficiency when electric demand is at its peak."
     - paper 257463109, test case 2: "The 2012 heat wave exerted impact on all three ncSFE time series, albeit moderately. Changing once-through systems to cooling towers reduced power production slightly relative to Baseline, a limited decrement that reflected the small increase in power consumption to pump water between the condenser and cooling towers. In contrast, the Fixed-CF scenario decreased electricity production even more, indicating the importance of fuel mix on total power production."
     - paper 257463109, test case 2: "The climate extreme alone plus the two climate-technology scenarios all generated negative impacts on overall regional power production, with the coal fuel scenario showing the lowest potential production and, as with Approach A, an approximate 10% penalty. The bars on the right side of Figure 4C are the Δ values showing that in our example electricity production was reduced under all scenarios but by less than 5%."
+    - paper 132959901, ii. mitigation plan by the utility company: "In a warming climate the power station input water temperature may become too high and thus reduce the generation efficiency when electric demand is at its peak."
 - [extreme heat increases electricity demand and stresses power supply]
     - paper 169368231, introduction: "In July and August of 2016, electric power consumption was the highest ever due to the heat wave in Korea."
-    - paper 209454109, conclusion: "Increasing frequency and intensity of heat waves.-Increase in average temperature."
-    - paper 225158620, results and discussion: "The largest number of emergency shutdowns occurs from April to August, followed by a gradual decrease. This may occur due to more difficult operating conditions of the grids caused by heat, as well as increased load on the electric network, e.g. due to the use of air conditioners."
-    - paper 239192122, martha and mary: "The Jones are experiencing the fourth week of a brutal heatwave that has swept across the UK with temperatures reaching as high as 43C. The family has a portable air conditioning unit -a much more common sight over the last decade -but they avoid using it because of how much energy it consumes."
-    - paper 256804611, main estimates: "The results show that there is a non-linear (U-shaped) relationship between AC sales and temperature, with more ACs being sold for high-or low-temperature bins (compared with mild-temperature bins)."
-    - paper 203641904, a. physical threats: "Heatwaves can cause an abrupt rise in air-conditioning loads, and if generation cannot match the demand, site-wide outages or load-shedding can happen;"
-    - paper 244576100, system interdependencies and relationships to system threats and restoration strategies: "Climate change threats can vary in duration, spanning from days to months to years, and in impact, causing short-term power outages as in the case of heatwaves or long-term water and power supply shortages as in the case of droughts."
-    - paper 55454018, heat wave scenario in pakistan: "Electricity was failed in many areas and without working fans, airconditioners or water pumps, increase losses of life [20]."
     - paper 199326805, bushfires and extreme heat: "Extreme fire weather days are characterised by strong gusty winds and high temperatures."
+    - paper 203641904, a. physical threats: "Heatwaves can cause an abrupt rise in air-conditioning loads, and if generation cannot match the demand, site-wide outages or load-shedding can happen;"
+    - paper 209454109, conclusion: "Increasing frequency and intensity of heat waves.-Increase in average temperature."
+    - (5 more in provenance)
 - [wildfire risk to power transmission lines]
     - paper 249431725, vi. conclusion and future work: "We find that weather and vegetation features are among the most important predictors of ignition events on distribution circuits and wire down events on transmission lines."
     - paper 255372301, results and discussion: "It is seen that higher temperature and stronger wind speed increase the wildfire risks by the factors of 1.94 (i.e., exp(β 2 )) and 2.43 (i.e., exp(β 3 ))."
@@ -72,9 +69,9 @@ Energy Sector (in the item: "energy systems")
     - paper 5838629, results: "Air mass stagnation events, which increase O3 production and will increase in frequency as weather conditions favorable to heat waves increase (CCSP 2008), are another important indicator."
 - [global warming increases heatwave frequency and intensity]
     - paper 14006228, discussion: "As global warming continues, the frequency, intensity and duration of heatwaves are likely to increase."
-    - paper 235602877, abstract: "With climate change, heat waves have become more frequent and intense."
     - paper 221504407, conclusion: "The occurrence of heat events is expected to increase due to the worsening effects of anthropogenic global warming [60]. This will be seen in both higher mean annual temperatures and in the frequency of heat shocks [37]."
     - paper 199381463, introduction: "Climate change has resulted in a significant rise in the global mean temperature and it is predicted to get worse [23]. This means more extreme heat events and heat exposure for people working in agriculture in the hot climates."
+    - paper 235602877, abstract: "With climate change, heat waves have become more frequent and intense."
 
 
 ## 2 · BI-P5-0002
@@ -119,25 +116,20 @@ Transportation Systems Sector (in the item: "transportation systems")
 - [pavement structural degradation from heat]
     - paper 269406624, bepam: "It shows that the number of identified POIs, which signify pavement distress, varies with changes in pavement temperature.The data exhibit a strong correlation between pavement temperature and the frequency of POIs, with an 83% R-squared value for road section 1 and 70% for road section 2."
     - paper 158185209, temperature: "The increase in temperatures causes a greater vulnerability of common road pavements (with surface layer composed of asphalt concrete) and rail (track), increases the energy demand to operate buses, especially for auxiliaries [17], which is perceived by the fleets managers as one more items in the overall lists of operational costs [18,19], and worsens the public's living conditions."
-    - paper 214326018, the temperature effect: "This table shows a temperature rise in the summer months that have critical impacts on the pavement and its structural and functional performance."
-    - paper 221665613, high temperature: "High temperatures have a significant impact on the service life of asphalt pavements and are often the basis of determining the design of the pavement mixture and section. Asphalt becomes a plastomer that deforms under high-temperature conditions, and its shape cannot be completely recovered. Hence, asphalt pavements are prone to permanent deformation under the influence of repeated loading [24], and high temperatures are one of the main causes of the permanent deformation of asphalt pavements."
-    - paper 226335422, conclusion: "During the high temperature period, the eastern observation area fluctuates between 20 and 60°C. As the depth increases, the temperature variation range gradually decreases, and within 0-10cm, the temperature variation change decreases greatly."
-    - paper 229433013, conclusion: "Such severe loading in combination with high temperatures in the area due to the warm tropical environment exacerbate the situation and can cause the asphalt to begin to flow, hence making rutting and deformation inevitable."
-    - paper 231654622, conclusion: "When the temperature reaches 50°C, the interlaminar shear fatigue life of the pavement structure decreases sharply. Taking 25°C as the boundary, the change rate of the shear fatigue life with temperature can be divided into two stages. At −10°C to 25°C, the shear fatigue lives at different temperatures have little differences. In contrast, when the temperature is higher than 25°C, the shear fatigue life decreases sharply."
     - paper 213951900, temperature: "In extreme cases, when temperature has significant daily/hourly increases, accelerated development of permanent deformation can be expected [3,16]."
     - paper 213951900, temperature: "Increases in the temperature ranges due to climate change can increase thermal stresses in asphalt layers, and more thermal cracking can be expected [17,18]."
-    - paper 257991205, methodology: "Other indications of possible problems observed included the accumulation of sand and debris (due to wind and flooding) and excessive vegetation caused by increased rainfall and high temperatures, leading to sight distance and passability problems."
+    - (6 more in provenance)
 - [heat‑driven vegetation fires threaten railway corridors]
     - paper 237251104, climate change impact on swedish railways infrastructure: "Heat and drought also increase the risk of vegetation fires and thus also the need to stop or redirect traffic."
 - [Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat]
-    - paper 199098498, late century results: "However, recent work examining changes in the frequency of different types of extreme heat days (considering both temperature and humidity) in CMIP5 projections after using a multivariate quantile mapping approach similar to the MACA methodology finds that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat (Schoof et al 2019)."
     - paper 158091651, abstract: "Land-atmosphere feedbacks appear to be a stronger factor for heat wave maintenance at southern latitudes, but the NCEP model seems to misrepresent those feedbacks, particularly over the Southwest United States, leading to poor skill in that region."
+    - paper 199098498, late century results: "However, recent work examining changes in the frequency of different types of extreme heat days (considering both temperature and humidity) in CMIP5 projections after using a multivariate quantile mapping approach similar to the MACA methodology finds that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat (Schoof et al 2019)."
     - paper 5838629, results: "Air mass stagnation events, which increase O3 production and will increase in frequency as weather conditions favorable to heat waves increase (CCSP 2008), are another important indicator."
 - [global warming increases heatwave frequency and intensity]
     - paper 14006228, discussion: "As global warming continues, the frequency, intensity and duration of heatwaves are likely to increase."
-    - paper 235602877, abstract: "With climate change, heat waves have become more frequent and intense."
     - paper 221504407, conclusion: "The occurrence of heat events is expected to increase due to the worsening effects of anthropogenic global warming [60]. This will be seen in both higher mean annual temperatures and in the frequency of heat shocks [37]."
     - paper 199381463, introduction: "Climate change has resulted in a significant rise in the global mean temperature and it is predicted to get worse [23]. This means more extreme heat events and heat exposure for people working in agriculture in the hot climates."
+    - paper 235602877, abstract: "With climate change, heat waves have become more frequent and intense."
 
 
 ## 3 · BI-P5-0004
@@ -184,15 +176,15 @@ Healthcare and Public Health Sector (in the item: "healthcare and public health 
 - [Heatwaves can damage critical public health infrastructure and impede health system functioning.]
     - paper 53113505, climate-related shocks and stresses: "Examples of shocks include environmental, climatic, or other types of events, such as floods, high winds, landslides, heatwaves or droughts, that can impact health, damage critical public health infrastructure, and impede health system functioning."
 - [Large-scale warming and land–atmosphere feedbacks drive increases in extreme heat]
-    - paper 52215224, introduction: "For example, parallels can currently be seen in California, where the occurrence of droughts and intense heat waves has increased [7]."
-    - paper 199098498, late century results: "However, recent work examining changes in the frequency of different types of extreme heat days (considering both temperature and humidity) in CMIP5 projections after using a multivariate quantile mapping approach similar to the MACA methodology finds that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat (Schoof et al 2019)."
     - paper 158091651, abstract: "Land-atmosphere feedbacks appear to be a stronger factor for heat wave maintenance at southern latitudes, but the NCEP model seems to misrepresent those feedbacks, particularly over the Southwest United States, leading to poor skill in that region."
+    - paper 199098498, late century results: "However, recent work examining changes in the frequency of different types of extreme heat days (considering both temperature and humidity) in CMIP5 projections after using a multivariate quantile mapping approach similar to the MACA methodology finds that large-scale warming, rather than changes in regional circulation, is the primary driver of future changes in extreme heat (Schoof et al 2019)."
     - paper 5838629, results: "Air mass stagnation events, which increase O3 production and will increase in frequency as weather conditions favorable to heat waves increase (CCSP 2008), are another important indicator."
+    - paper 52215224, introduction: "For example, parallels can currently be seen in California, where the occurrence of droughts and intense heat waves has increased [7]."
 - [global warming increases heatwave frequency and intensity]
     - paper 14006228, discussion: "As global warming continues, the frequency, intensity and duration of heatwaves are likely to increase."
-    - paper 235602877, abstract: "With climate change, heat waves have become more frequent and intense."
     - paper 221504407, conclusion: "The occurrence of heat events is expected to increase due to the worsening effects of anthropogenic global warming [60]. This will be seen in both higher mean annual temperatures and in the frequency of heat shocks [37]."
     - paper 199381463, introduction: "Climate change has resulted in a significant rise in the global mean temperature and it is predicted to get worse [23]. This means more extreme heat events and heat exposure for people working in agriculture in the hot climates."
+    - paper 235602877, abstract: "With climate change, heat waves have become more frequent and intense."
 
 
 ## 4 · BI-P5-0006
@@ -245,15 +237,14 @@ Transportation Systems Sector (in the item: "transportation systems")
     - paper 236175367, discussion: "This study shows that (i) SAW wind speed plays a key role in area burned, (ii) variation in SAW windspeed outweighs fuel characteristics in explaining area burned, (iii) winds alone are insufficient to explain burning without consideration of human ignitions, (iv) ignition sources have changed markedly in recent decades, and (v) autumn and winter temperature and precipitation are less critical than winds and ignitions, and have substantially different effects on autumn versus winter SAW events."
     - paper 255372301, results and discussion: "It is seen that higher temperature and stronger wind speed increase the wildfire risks by the factors of 1.94 (i.e., exp(β 2 )) and 2.43 (i.e., exp(β 3 )). Such findings can be well justified as follows: (i) a higher temperature makes the ignition of the underlying fuels more easily (e.g. grasses, shrubs, dead leaves, etc.), (ii) with an increased wind speed, the electrical conductors and surrounding vegetation are more likely to result in arcing, increasing the probability of wildfire ignition (Mitchell, 2013;Vazquez et al., 2022)."
     - paper 53050065, summary: "Common to both events was the occurrence of strong winds that have been shown to be a key determinant in large human-caused wildfires [56]."
-    - paper 999274, background: "It has been shown that the largest and longest duration wildfires in southern California are often accompanied by Santa Ana winds [2], a seasonal weather phenomenon affecting southern California from Los Angeles to San Diego that typically occurs from September to April [3,4]."
     - paper 14300, results: "Whereas fire numbers are determined by the presence of fuel, lightning frequency, population density and surface fire intensity, fire spread (and hence area burnt) is driven by wind speed, fire duration and the amount, moisture content and characteristics of the fuel."
+    - (1 more in provenance)
 - [strong winds and low humidity raise fire danger and fire size]
     - paper 236175367, of 9: "maximum wind speed was tied to greater area burned by fires in the 1000 to 5000 ha class (Fig. 3B)."
-    - paper 56076970, discussion and implications: "Meteorology was clearly the dominant factor controlling SA fires; the spatial and temporal variability of SA FS was well correlated with meteorological drivers, including RH and wind as modulated by terrain (see also figure S3)."
-    - paper 89025663, contrasting patterns of sa and non-sa fires: "Low relative humidity and strong wind promote ignition and increase the rate of fire spread within dry fuels, especially for SA fires."
-    - paper 253201868, introduction: "While wildfres cannot strictly be defned as meteorological hazards in the same way as droughts, foods and storms, fre danger is greater during periods of high temperature, minimal precipitation, low relative humidity and strong winds."
     - paper 53050065, meteorological conditions: "The strong winds and adiabatic compression associated with the downslope flow and mixing inhibited radiative cooling and nocturnal RH recovery."
+    - paper 56076970, discussion and implications: "Meteorology was clearly the dominant factor controlling SA fires; the spatial and temporal variability of SA FS was well correlated with meteorological drivers, including RH and wind as modulated by terrain (see also figure S3)."
     - paper 56076970, discussion and implications: "The SA wind events studied here are examples as dry and hot Foehn winds; these winds occur in the leeside of the mountain ranges and are associated with the elevated fire danger in many other parts of the world, including Europe and Australia (Sharples et al 2010)."
+    - (2 more in provenance)
 
 
 ## 5 · BI-P5-0007
@@ -300,8 +291,8 @@ Emergency Services Sector (in the item: "emergency services")
     - paper 236175367, discussion: "This study shows that (i) SAW wind speed plays a key role in area burned, (ii) variation in SAW windspeed outweighs fuel characteristics in explaining area burned, (iii) winds alone are insufficient to explain burning without consideration of human ignitions, (iv) ignition sources have changed markedly in recent decades, and (v) autumn and winter temperature and precipitation are less critical than winds and ignitions, and have substantially different effects on autumn versus winter SAW events."
     - paper 255372301, results and discussion: "It is seen that higher temperature and stronger wind speed increase the wildfire risks by the factors of 1.94 (i.e., exp(β 2 )) and 2.43 (i.e., exp(β 3 )). Such findings can be well justified as follows: (i) a higher temperature makes the ignition of the underlying fuels more easily (e.g. grasses, shrubs, dead leaves, etc.), (ii) with an increased wind speed, the electrical conductors and surrounding vegetation are more likely to result in arcing, increasing the probability of wildfire ignition (Mitchell, 2013;Vazquez et al., 2022)."
     - paper 53050065, summary: "Common to both events was the occurrence of strong winds that have been shown to be a key determinant in large human-caused wildfires [56]."
-    - paper 999274, background: "It has been shown that the largest and longest duration wildfires in southern California are often accompanied by Santa Ana winds [2], a seasonal weather phenomenon affecting southern California from Los Angeles to San Diego that typically occurs from September to April [3,4]."
     - paper 14300, results: "Whereas fire numbers are determined by the presence of fuel, lightning frequency, population density and surface fire intensity, fire spread (and hence area burnt) is driven by wind speed, fire duration and the amount, moisture content and characteristics of the fuel."
+    - (1 more in provenance)
 - [humidity and vapor pressure deficit affect fire risk]
     - paper 255372301, results and discussion: "Both the NDVI and the SPFH have negative impacts on wildfire risks, while SPFH has a relatively weaker effect compared with that of NDVI. Note that, a higher NDVI indicates healthier vegetation with more water conditions and fewer potential fuels that can be ignited. Similarly, a high SPFH attaches potential fuels with more moisture, reducing the wildfire risk."
     - paper 247649715, abstract: "Additionally, among the individual climate variables that comprise the FWI, relative humidity and temperature are the most influential factors that affect the observed BA."
@@ -352,12 +343,11 @@ Communications Sector (in the item: "communications systems")
     - paper 236175367, discussion: "This study shows that (i) SAW wind speed plays a key role in area burned, (ii) variation in SAW windspeed outweighs fuel characteristics in explaining area burned, (iii) winds alone are insufficient to explain burning without consideration of human ignitions, (iv) ignition sources have changed markedly in recent decades, and (v) autumn and winter temperature and precipitation are less critical than winds and ignitions, and have substantially different effects on autumn versus winter SAW events."
     - paper 255372301, results and discussion: "It is seen that higher temperature and stronger wind speed increase the wildfire risks by the factors of 1.94 (i.e., exp(β 2 )) and 2.43 (i.e., exp(β 3 )). Such findings can be well justified as follows: (i) a higher temperature makes the ignition of the underlying fuels more easily (e.g. grasses, shrubs, dead leaves, etc.), (ii) with an increased wind speed, the electrical conductors and surrounding vegetation are more likely to result in arcing, increasing the probability of wildfire ignition (Mitchell, 2013;Vazquez et al., 2022)."
     - paper 53050065, summary: "Common to both events was the occurrence of strong winds that have been shown to be a key determinant in large human-caused wildfires [56]."
-    - paper 999274, background: "It has been shown that the largest and longest duration wildfires in southern California are often accompanied by Santa Ana winds [2], a seasonal weather phenomenon affecting southern California from Los Angeles to San Diego that typically occurs from September to April [3,4]."
     - paper 14300, results: "Whereas fire numbers are determined by the presence of fuel, lightning frequency, population density and surface fire intensity, fire spread (and hence area burnt) is driven by wind speed, fire duration and the amount, moisture content and characteristics of the fuel."
+    - (1 more in provenance)
 - [strong winds and low humidity raise fire danger and fire size]
     - paper 236175367, of 9: "maximum wind speed was tied to greater area burned by fires in the 1000 to 5000 ha class (Fig. 3B)."
-    - paper 56076970, discussion and implications: "Meteorology was clearly the dominant factor controlling SA fires; the spatial and temporal variability of SA FS was well correlated with meteorological drivers, including RH and wind as modulated by terrain (see also figure S3)."
-    - paper 89025663, contrasting patterns of sa and non-sa fires: "Low relative humidity and strong wind promote ignition and increase the rate of fire spread within dry fuels, especially for SA fires."
-    - paper 253201868, introduction: "While wildfres cannot strictly be defned as meteorological hazards in the same way as droughts, foods and storms, fre danger is greater during periods of high temperature, minimal precipitation, low relative humidity and strong winds."
     - paper 53050065, meteorological conditions: "The strong winds and adiabatic compression associated with the downslope flow and mixing inhibited radiative cooling and nocturnal RH recovery."
+    - paper 56076970, discussion and implications: "Meteorology was clearly the dominant factor controlling SA fires; the spatial and temporal variability of SA FS was well correlated with meteorological drivers, including RH and wind as modulated by terrain (see also figure S3)."
     - paper 56076970, discussion and implications: "The SA wind events studied here are examples as dry and hot Foehn winds; these winds occur in the leeside of the mountain ranges and are associated with the elevated fire danger in many other parts of the world, including Europe and Australia (Sharples et al 2010)."
+    - (2 more in provenance)

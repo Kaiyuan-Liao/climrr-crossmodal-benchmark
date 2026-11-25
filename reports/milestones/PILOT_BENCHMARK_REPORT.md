@@ -1812,3 +1812,13 @@ diagnostic removed with the clause edit). **Leakage v2.3: 0 failures; post-check
 v5.5 ("These are general findings about <hazard phrase>, not findings specific to <Place>", pinned clause and opener rule updated
 together). Section 72's escalation and the "All six" reading are closed. Gate: build `d27392e`, `pytest` 1,794 passed, 2 skipped; scanner 0 hits;
 evidence run record `reports/runs/20261125T002405Z_local_build_mentor_sheet_alvi` at the clean build tree, outputs byte-identical.
+
+## 74. P5d hotfix 2: Original passages capped, README line (2026-11-25)
+
+Sheet only; no model call; display texts, checks and notes unchanged. `Original passages` shows at most **4 passages per group**,
+ranked by passage type (own_finding, review_synthesis, cited_finding, background; any other after), then place-named members first,
+then statement id; "(N more in provenance)" when cut (7 groups cut on the sheet). **EXECUTOR reading (for confirmation):** a member
+is place-named when its recorded `region` names the item's state as a whole word ("Phoenix, Arizona", "southern California").
+README gains a sixth line: "Claim groups are formed by an agent and checked by a reviewer at the claim level; individual member
+passages are still under review." Every member passage is still checked against the item, shown or not.
+Sheet `.md` `454ba2cb81c96b77005cbb4f6587a3f7ce6c07592081f16c9ce5d3b73a586d46`. Gate: `docs/PROJECT_STATE.md`.

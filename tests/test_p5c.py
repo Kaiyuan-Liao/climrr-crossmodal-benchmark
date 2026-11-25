@@ -232,10 +232,10 @@ def test_schema_v2_rejects_an_impact_literature_statement_escalated():
 
 def test_alvi_sheet_superseded_by_p5d():
     """The P5c sheet design (seventh column, impact marks, --items required) was never run; P5d gave the sheet its inputs and
-    final form (tests/test_p5d.py): seven columns with the asset class fourth, a five-line README, defaults packets v1b and
+    final form (tests/test_p5d.py): seven columns with the asset class fourth, a six-line README (P5d hotfix 2), defaults packets v1b and
     the ingested infra run 2."""
     assert ma.HEADER[3] == "Asset class (CISA sector)" and len(ma.HEADER) == len(ma.WIDTHS) == 7
-    assert len(ma.README_LINES) == 5 and ma.README_LINES[1] == ms.README_LINES[0]
+    assert len(ma.README_LINES) == 6 and ma.README_LINES[1] == ms.README_LINES[0]
     assert ma.PACKETS_DIR == spi.PACKETS_V1B_DIR
     pk = PACKETS["BI-P5-0001"]
     assert ma.asset_cell(pk) == 'Energy Sector (in the item: "energy systems")'
