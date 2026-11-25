@@ -1782,7 +1782,10 @@ No model call. Design: `P5_INFRA_IMPACT_DESIGN.md` §25 -- §28.
 
 ## 72. P5d: gate, escalations, readings for confirmation (2026-11-25)
 
-- **Gate.** `pytest` **1,794 passed, 2 skipped**; scanner 0 hits. Build and evidence run records: `docs/PROJECT_STATE.md`.
+- **Gate.** Build `2b2334f`: `pytest` **1,794 passed, 2 skipped**; scanner 0 hits. Evidence run records at the clean build
+  tree, tracked outputs byte-identical: `reports/runs/20261125T001736Z_local_ingest_litsynth_infra_run2`,
+  `reports/runs/20261125T001737Z_local_build_mentor_sheet_alvi` (`git_dirty: false`). Sheet `.md` SHA-256
+  `0bf132b41e6b2ff0de5e9d16fb821b64a95c65fe75d42b7a018d5bcd90dab2fe`.
 - **Escalation (for the COORDINATOR): the reworded closing clause fails post-checks v3.5.** "These are general research findings,
   not findings specific to <Place>." differs from the packets' pinned `general_clause` and names "research", which the D-069 rule
   for paragraph sentences catches. The sheet carries the edit as instructed; the checks file reports the failures. To make it pass:

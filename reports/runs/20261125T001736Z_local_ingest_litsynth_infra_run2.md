@@ -1,0 +1,44 @@
+# Run record: 20261125T001736Z_local_ingest_litsynth_infra_run2
+
+- **Result**: PASS
+- **UTC timestamp**: 2026-11-25T00:17:36.998426+00:00
+- **Git commit**: `2b2334f9e78d519a18775d0d5d5e261ad7465382`
+- **Working tree dirty (tracked files)**: False
+- **Untracked files present**: 0
+- **Hostname**: ryous-MacBook-Pro-2.local
+- **Location**: local
+- **Python**: 3.11.16 (macOS-15.3-arm64-arm-64bit)
+- **pip freeze SHA-256**: `d9af804d5018f7022ae9f4db0bb83a8d57104d2ff6ff5676d912d896f952bf51`
+- **Pinned libraries (D-007)**: `pandas==3.0.5`, `numpy==2.4.6`, `pypdf==6.18.0`, `pyyaml==6.0.3`, `pytest==9.1.1`, `pypdfium2==5.13.0`
+- **Data path (repo-relative)**: `infra_synth_runs12_evidence.tar.gz`
+- **Data SHA-256**: `1ab289297f0ba606c147f97eb0b1d5758991598b7e78216ef5fb3ca80a4d33f7`
+- **Output path**: `artifacts/benchmark/items/infra_run2`
+
+## Config snapshot
+
+```json
+{
+  "source": "infra_synth_runs12_evidence.tar.gz (extracted)",
+  "source_tarball_sha256": "1ab289297f0ba606c147f97eb0b1d5758991598b7e78216ef5fb3ca80a4d33f7",
+  "packets": "synthpackets infra v1b at bf699700ab45ee9f3b0f5715515c1b7b42a7ba66; run 1: v1a at b860658873bd4d80ae9500587e23b18d4778c387",
+  "synthesis_check_version": "synthesis_post_checks v3.5",
+  "display_rule": "D-079",
+  "polish_check_version": "polish_checks v2",
+  "run_executed_on": "Polaris; this record is the local ingest, not the runs",
+  "model_calls": 0
+}
+```
+
+## Result summary
+
+- `manifest_sha256`: 77be2faee83575cfaa69754676d1749ee56d8adde4e8373fb6d5183c9f996fbf
+- `polish_manifest_sha256`: af0ef94522a1020ae446c01e0ea4de059107dfa0f5e970513293ce618cc7e7e4
+- `run1_manifest_sha256`: 510a2d847c100b352777f1c78a43ee05d306a096cf0f016c0abdfe3a04dc6c7a
+- `run1_polish_manifest_sha256`: 5e5a11c5e8fcfb2f0a31afda83d224b0879a10c5338ce92d0858d41b266be109
+- `files_copied_this_run`: 0
+- `counts`: {'items': 8, 'deterministic_pass': 6, 'deterministic_fail': 2, 'corrective_retry_used': 0, 'format_corrective_used': 6, 'format_corrective_pass': 4, 'first_pass': 5, 'redraws': 3, 'superseded_attempts': 3, 'restarts': 3}
+- `polish_counts`: {'items': 6, 'polished': 4, 'polish_rejected': 2, 'polish_parse_failed': 0, 'reasons_by_kind': {'hedges': 1, 'places': 1}, 'skipped_not_deterministic_pass': ['BI-P5-0003', 'BI-P5-0005']}
+- `checks_reproduced`: {'synthesis': True, 'polish': True}
+- `items`: [{'item_id': 'BI-P5-0001', 'sha256': '8745a9dec430cd2dddb524d5a6f0a77dda00b496b30e9a23979759c53ea258db', 'status': 'human_review', 'display_source': 'original', 'display_recheck': {'check_version': 'synthesis_post_checks v3.5', 'pass': False, 'reasons': ["integrated: closing clause (D-069) missing at the end: 'These are general drivers of dangerous heat-index days, not findings specific to Virginia.'", "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that large-scale warming and land–atmosphere '", "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that global warming increases heatwave freque'", "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that extreme heat can reduce generation outpu'", "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that such heat raises electricity demand and '", "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that when wildfires occur, they increase igni'"], 'on': 'polished text', 'polish_status': 'polish_rejected'}}, {'item_id': 'BI-P5-0002', 'sha256': '4edcd9b901a570a103cd12a2034f430f224f4c1ed02fa76bf6b2d7fa7f94d740', 'status': 'human_review', 'display_source': 'polished', 'display_recheck': {'check_version': 'synthesis_post_checks v3.5', 'pass': True, 'reasons': [], 'on': 'polished text', 'polish_status': 'polished'}}, {'item_id': 'BI-P5-0003', 'sha256': '608e56731544bf6d22a44a4b50460fdb01d9bfbc5757925dad9035f51b6170d0', 'status': 'rejected_pre_review', 'redraws': 2}, {'item_id': 'BI-P5-0004', 'sha256': 'b7c76da053efb32c698d733379e5d0bc77cc056264004e0f95ede4ab9afe1a68', 'status': 'human_review', 'display_source': 'original', 'display_recheck': {'check_version': 'synthesis_post_checks v3.5', 'pass': False, 'reasons': ['integrated: rung 8 answer shape (D-075a): at most 6 sentences, no more than the reference sentences (found 8)'], 'on': 'polished text', 'polish_status': 'polished'}}, {'item_id': 'BI-P5-0005', 'sha256': '8fec7d95f9995dff09944ac141c7229653e30dfda51fdf4e1349c5649cc32e83', 'status': 'rejected_pre_review', 'redraws': 2}, {'item_id': 'BI-P5-0006', 'sha256': '889e15d1a660e33bcfbeffdecee9f50b9bf1b6a49d0b98417b3e77592d81d575', 'status': 'human_review', 'display_source': 'original', 'display_recheck': {'check_version': 'synthesis_post_checks v3.5', 'pass': False, 'reasons': ['integrated: rung 8 answer shape (D-075a): at most 6 sentences, no more than the reference sentences (found 8)'], 'on': 'polished text', 'polish_status': 'polished'}}, {'item_id': 'BI-P5-0007', 'sha256': 'a7d5cae7be1172702269eba2f714a14a348cef450fc5e5b0babc59e1686d9e68', 'status': 'human_review', 'display_source': 'original', 'display_recheck': {'check_version': 'synthesis_post_checks v3.5', 'pass': False, 'reasons': ["integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research shows that humidity and vapor pressure deficit affe'", "integrated: scope phrase (D-069): a sentence naming research must begin with one of the cited scope phrases: 'Research suggests that fire‑weather danger can increase dail'", 'integrated: rung 8 answer shape (D-075a): at most 4 sentences, no more than the reference sentences (found 5)'], 'on': 'polished text', 'polish_status': 'polished'}}, {'item_id': 'BI-P5-0008', 'sha256': 'b797044c467aec1a8ca39faf1813b2eccad3d7d11ed2209751ce691aee073b75', 'status': 'human_review', 'display_source': 'original', 'display_recheck': {'check_version': 'synthesis_post_checks v3.5', 'pass': False, 'reasons': ['integrated: rung 8 answer shape (D-075a): at most 3 sentences, no more than the reference sentences (found 4)'], 'on': 'polished text', 'polish_status': 'polish_rejected'}}]
+- `superseded_attempts`: {'BI-P5-0002': ['literature_interpretation: rung 8 answer shape (D-075a): at most 2 driver claims, the strongest (found 3)'], 'BI-P5-0003': ["table_pattern: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'", "integrated: doubled magnitude phrase (DR-DESC-1 v4): 'increase a moderate increase'"], 'BI-P5-0005': ["rubric.optional_points: fire-weather wording (an FWI is never fire occurrence): 'wildfires' in graded text", "rubric.optional_points: fire-weather wording (an FWI is never fire occurrence): 'wildfire' in graded text", "literature_interpretation[2]: two-hop wording (D-073c): a sentence citing a two-hop group must say 'when wildfires occur', 'wildfires can' or 'raise the chance of ignition'"]}
+- `run1_regression`: [{'item_id': 'BI-P5-0001', 'pass': True, 'reasons': [], 'budget_within': False, 'budget_enforced': False}, {'item_id': 'BI-P5-0003', 'pass': True, 'reasons': [], 'budget_within': False, 'budget_enforced': False}]
