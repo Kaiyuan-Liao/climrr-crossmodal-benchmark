@@ -1810,4 +1810,5 @@ diagnostic removed with the clause edit). **Leakage v2.3: 0 failures; post-check
 0004, 0006, 0008 unedited). Sheet rebuilt: `ALVI_SAMPLE_ITEMS_2026-11-25.md`
 `abf1adc5c7d758f9013574cdaeb7e4165dc28ab0cc325e22bb87e59bd3324465`; `.xlsx` rebuilt (gitignored). D-079 logs the deferral to prompt
 v5.5 ("These are general findings about <hazard phrase>, not findings specific to <Place>", pinned clause and opener rule updated
-together). Section 72's escalation and the "All six" reading are closed. Gate and evidence record: `docs/PROJECT_STATE.md`.
+together). Section 72's escalation and the "All six" reading are closed. Gate: build `d27392e`, `pytest` 1,794 passed, 2 skipped; scanner 0 hits;
+evidence run record `reports/runs/20261125T002405Z_local_build_mentor_sheet_alvi` at the clean build tree, outputs byte-identical.
