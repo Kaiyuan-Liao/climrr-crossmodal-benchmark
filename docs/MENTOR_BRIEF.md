@@ -27,7 +27,7 @@ Last updated: 2026-11-25   Next: **Thursday --- your reaction to the seven heat 
 > | --- | --- | --- |
 > | T-1 | The seven heat / fire-weather samples (sheet of 2026-11-19): what you want? which fire-weather item reads right? | Mentor |
 > | T-2 | The six impact samples: are these the hazard -> infrastructure QAs scientists want? which asset classes and impact types matter most? | Alvi |
-> | T-3 | Is the general-evidence wording ("These are general research findings, not findings specific to California.") acceptable, or should items use only evidence that names the place? (Four of the six rest on general evidence only.) | Alvi, mentor |
+> | T-3 | Is the general-evidence wording ("These are general drivers of dangerous heat-index days, not findings specific to California.") acceptable, or should items use only evidence that names the place? (Four of the six rest on general evidence only.) | Alvi, mentor |
 > | T-4 | Knowledge-graph note: KG-1 (locality level), KG-2 (minimum evidence for an edge), KG-3 (vocabulary owner; ~30-item pilot)? | Mentor, Alvi |
 >
 > **After both reviews:** the GUIDANCE packet for P2 -- P5 and the merge; then the P6 scale-up plan.

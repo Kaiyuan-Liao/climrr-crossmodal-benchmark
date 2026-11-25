@@ -61,7 +61,6 @@ def main_alvi(a) -> int:
         result.update(edits_sha256=sha256_file(edits_path), checks_sha256=sha256_file(checks_path),
                       leakage_failures=checks["leakage_failures"], post_check_failures=checks["failures"],
                       items_failing=checks["items_failing"],
-                      failures_with_closing_clause_reverted=checks["failures_with_closing_clause_reverted"],
                       notes_sha256=sha256_file(ma.NOTES_PATH))
     rec = write_run_record(
         "build_mentor_sheet_alvi", result_summary=result, passed=True, data_path=packets_dir / "manifest.json", output_path=out_md,

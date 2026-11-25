@@ -657,3 +657,12 @@ and D-069 (post-checks v3.2+) fails a closing clause there. None was added; for 
 
 The Alvi sample sheet (`ALVI_SAMPLE_ITEMS_2026-11-25.{xlsx,md}`; notes for Kaiyuan `…_notes.md`) goes to Alvi. After both reviews
 (the mentor's of the 2026-11-19 sample, Alvi's of this one): the GUIDANCE packet P2 -- P5 and the merge, and the P6 scale-up plan.
+
+## 29. P5d hotfix: closing clause as generated (COORDINATOR 2026-11-25; D-079)
+
+The closing-clause rewording (§26) is removed from `P5_display_edits_v1.yaml`; BI-P5-0001, 0002, 0004 keep the generated clause
+("These are general drivers of dangerous heat-index days, not findings specific to <Place>."). The other edits stay (0002 opener,
+magnitude, roads-and-rail sentence; 0001 ignition sentence; 0007 humidity sentence); 0004 now carries no edit (display: original).
+Leakage v2.3 and post-checks v3.5 on **all six** display texts: **0 failures**. The wording change is deferred to prompt v5.5 ("These
+are general findings about <hazard phrase>, not findings specific to <Place>"), with the packets' pinned clause and the opener rule
+updated together. The §26 escalation and the "All six" reading are closed by this.

@@ -23,7 +23,7 @@ PMAN = json.loads(ir.POLISH_MANIFEST_PATH.read_text(encoding="utf-8"))
 MAN1 = json.loads(ir.MANIFEST1_PATH.read_text(encoding="utf-8"))
 PMAN1 = json.loads(ir.POLISH_MANIFEST1_PATH.read_text(encoding="utf-8"))
 ITEMS = {x["item_id"]: json.loads((ir.ART / x["path"]).read_text(encoding="utf-8")) for x in MAN["items_ingested"]}
-SHEET_MD_SHA256 = "0bf132b41e6b2ff0de5e9d16fb821b64a95c65fe75d42b7a018d5bcd90dab2fe"
+SHEET_MD_SHA256 = "abf1adc5c7d758f9013574cdaeb7e4165dc28ab0cc325e22bb87e59bd3324465"   # P5d hotfix (closing clause as generated)
 DISPLAY = {"BI-P5-0001": "original", "BI-P5-0002": "polished", "BI-P5-0004": "original", "BI-P5-0006": "original",
            "BI-P5-0007": "original", "BI-P5-0008": "original"}
 
@@ -119,16 +119,17 @@ def _sheet():
 def test_edits_applied_as_written():
     _, rs, disp, *_ = _sheet()
     a = {iid: d["answer"] for iid, d in disp.items()}
-    for iid in ("BI-P5-0001", "BI-P5-0002", "BI-P5-0004"):
-        assert a[iid].endswith("These are general research findings, not findings specific to "
-                               + {"BI-P5-0001": "Virginia", "BI-P5-0002": "Arizona", "BI-P5-0004": "California"}[iid] + ".")
-        assert "general drivers of" not in a[iid]
+    # P5d hotfix: the closing clause stays as generated (rewording deferred to prompt v5.5, D-079)
+    for iid, place in (("BI-P5-0001", "Virginia"), ("BI-P5-0002", "Arizona"), ("BI-P5-0004", "California")):
+        assert a[iid].endswith(f"These are general drivers of dangerous heat-index days, not findings specific to {place}.")
+        assert "general research findings" not in a[iid]
+    assert not any(op["id"] == "closing_clause" for op in ma.load_edits()["all_items"])
     assert "Research on the United States, including work on the Southwest, shows that" in a["BI-P5-0002"]
     assert "shows, including" not in a["BI-P5-0002"] and "a moderate increase," not in a["BI-P5-0002"]
     assert "roads and rail" not in a["BI-P5-0002"] and "when wildfires occur" not in a["BI-P5-0002"]
     assert "extreme heat and wind raise the chance of ignitions near power lines." in a["BI-P5-0001"]
     assert "drier air, with a higher vapor-pressure deficit, raises fire danger." in a["BI-P5-0007"]
-    assert disp["BI-P5-0006"]["display_source"] == disp["BI-P5-0008"]["display_source"] == "original"
+    assert disp["BI-P5-0004"]["display_source"] == disp["BI-P5-0006"]["display_source"] == disp["BI-P5-0008"]["display_source"] == "original"
     assert disp["BI-P5-0006"]["answer"] == disp["BI-P5-0006"]["base_answer"]
     assert disp["BI-P5-0002"]["groups_removed"] == ["LG-infra_heat_index__transportation_systems-impact-c1-007"]
     # the generated and polished texts are untouched in the items
@@ -146,11 +147,11 @@ def test_edited_text_checks_report():
     _, _, disp, packets, items, _ = _sheet()
     chk = ma.edited_text_checks(items, packets, disp)
     assert chk == json.loads(ma.EDITS_CHECKS_PATH.read_text(encoding="utf-8"))
-    assert chk["leakage_failures"] == 0 and chk["not_edited"] == ["BI-P5-0006", "BI-P5-0008"]
-    # the only v3.5 failures are the closing-clause wording; with it put back, none
-    assert chk["items_failing"] == ["BI-P5-0001", "BI-P5-0002", "BI-P5-0004"] and chk["failures_with_closing_clause_reverted"] == 0
-    for x in chk["items"]:
-        assert all("closing clause" in r or "These are general research findings" in r for r in x["post_checks_v3_5"]["reasons"])
+    assert chk["not_edited"] == ["BI-P5-0004", "BI-P5-0006", "BI-P5-0008"]
+    # P5d hotfix: all six display texts checked; 0 failures
+    assert [x["item_id"] for x in chk["items"]] == ma.order()
+    assert chk["leakage_failures"] == chk["failures"] == 0 and chk["items_failing"] == []
+    assert all(x["post_checks_v3_5"]["pass"] and not x["leakage_v2_3"]["prompt"] and not x["leakage_v2_3"]["answer"] for x in chk["items"])
 
 
 # --- C: the sheet ------------------------------------------------------------------------------------------------------

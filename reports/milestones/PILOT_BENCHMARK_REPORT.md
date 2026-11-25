@@ -1801,3 +1801,13 @@ No model call. Design: `P5_INFRA_IMPACT_DESIGN.md` §25 -- §28.
   (`bf69970` is evidence-only on top; agent v5.4 verified at `bf69970`).
 - **For the COORDINATOR (carried):** polish v1.1's checks protect neither the bridge clause, the two-hop phrases, the once-only
   broader-hazard phrase nor the sentence budget; D-079 now catches the last at display time.
+
+## 73. P5d hotfix: closing clause as generated (2026-11-25; D-079)
+
+No model call. The closing-clause rewording is removed from `P5_display_edits_v1.yaml` (the generated clause stays on BI-P5-0001,
+0002, 0004); the other edits are kept. `edited_text_checks` now covers all six display texts (edited or not; the clause-reverted
+diagnostic removed with the clause edit). **Leakage v2.3: 0 failures; post-checks v3.5: 0 failures** (0001, 0002, 0007 edited;
+0004, 0006, 0008 unedited). Sheet rebuilt: `ALVI_SAMPLE_ITEMS_2026-11-25.md`
+`abf1adc5c7d758f9013574cdaeb7e4165dc28ab0cc325e22bb87e59bd3324465`; `.xlsx` rebuilt (gitignored). D-079 logs the deferral to prompt
+v5.5 ("These are general findings about <hazard phrase>, not findings specific to <Place>", pinned clause and opener rule updated
+together). Section 72's escalation and the "All six" reading are closed. Gate and evidence record: `docs/PROJECT_STATE.md`.

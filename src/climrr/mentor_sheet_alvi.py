@@ -270,42 +270,29 @@ def build(packets_dir: Path = PACKETS_DIR, items_dir: Path = ITEMS_DIR, edits_pa
 
 
 def edited_text_checks(items: dict, packets: dict, disp: dict, edits_path: Path = EDITS_PATH, columns: list[str] | None = None) -> dict:
-    """Per edited item, on its sheet text: leakage v2.3 (question, answer) and post-checks v3.5 against its v1b packet (the
-    tagged sentences and rubric are the run's, which passed). Where the closing-clause edit applied, a diagnostic run with
-    only the closing clause put back to the packet's wording isolates what the clause edit alone causes. Report only."""
+    """Per sample item (P5d hotfix: all six display texts, edited or not), on its sheet text: leakage v2.3 (question, answer) and post-checks v3.5 against its v1b packet (the
+    tagged sentences and rubric are the run's, which passed). Report only. (The P5d closing-clause diagnostic went with the
+    clause edit in the P5d hotfix.)"""
     cols = columns if columns is not None else bi.column_names()
     out = []
     for iid in order():
         d = disp[iid]
-        if d["display_source"] != EDIT_ORIGIN:
-            continue
         pk = packets[iid]
         lk = mx.edited_text_flags({"item_id": iid, "edited_prompt": d["prompt"], "edited_reference_integrated": d["answer"]}, cols)
         pc = ir.recheck(items[iid], {"prompt": d["prompt"], "answer": d["answer"]}, pk, cols)
-        rec = {"item_id": iid, "base_source": d["base_source"], "edits_applied": [e["edit"] for e in d["edits"] if e["applied"]],
+        rec = {"item_id": iid, "edited": d["display_source"] == EDIT_ORIGIN, "base_source": d["base_source"], "edits_applied": [e["edit"] for e in d["edits"] if e["applied"]],
                "edits_absent": [e["edit"] for e in d["edits"] if not e["applied"]], "display_answer": d["answer"],
                "leakage_v2_3": {"prompt": lk["prompt"], "answer": lk["reference_integrated"]},
                "post_checks_v3_5": {"pass": pc["pass"], "reasons": pc["reasons"]}}
-        clause = next((e for e in d["edits"] if e["edit"] == "closing_clause" and e["applied"]), None)
-        if clause:
-            back = d["answer"].replace(clause["new"], clause["old"])
-            pb = ir.recheck(items[iid], {"prompt": d["prompt"], "answer": back}, pk, cols)
-            rec["post_checks_v3_5_closing_clause_reverted"] = {"pass": pb["pass"], "reasons": pb["reasons"],
-                                                               "packet_general_clause": pk["checks_input"]["scope"]["general_clause"]}
         out.append(rec)
     fails = [x["item_id"] for x in out if x["leakage_v2_3"]["prompt"] or x["leakage_v2_3"]["answer"] or not x["post_checks_v3_5"]["pass"]]
     lk_fails = [x["item_id"] for x in out if x["leakage_v2_3"]["prompt"] or x["leakage_v2_3"]["answer"]]
-    rev_fails = [x["item_id"] for x in out if not x.get("post_checks_v3_5_closing_clause_reverted", x["post_checks_v3_5"])["pass"]]
     return {"version": "P5 display edits v1 checks", "edits_sha256": sha256_file(edits_path),
             "leakage_check_version": bi.SYNTH_CHECK_VERSION_V23, "post_check_version": bi.SYNTH_CHECK_VERSION_V35,
             "report_only": True, "items_modified": 0, "items": out,
             "not_edited": [iid for iid in order() if disp[iid]["display_source"] != EDIT_ORIGIN],
             "failures": len(fails), "items_failing": fails, "leakage_failures": len(lk_fails),
-            "failures_with_closing_clause_reverted": len(rev_fails),
-            "reading": ("post-checks v3.5 compare the closing clause with the packet's pinned general_clause ('These are general "
-                        "drivers of <quantity>, not findings specific to <Place>.'), and the new wording names 'research', so the "
-                        "D-069 scope-opener rule for paragraph sentences also catches it; with only the clause put back, the "
-                        "count is failures_with_closing_clause_reverted")}
+            "closing_clause": "the generated clause (the rewording is deferred to prompt v5.5, D-079)"}
 
 
 # --- notes for Kaiyuan ---------------------------------------------------------------------------------------------
@@ -327,12 +314,7 @@ def render_notes(rs: list[list], disp: dict, packets: dict, items: dict, run: di
            "opener; 0001 and 0008 were polish-rejected.",
            f"- **COORDINATOR display edits** (`{EDITS_PATH.name}`): leakage v2.3 failures {checks['leakage_failures']}; post-checks "
            f"v3.5 failures {checks['failures']} ({', '.join(checks['items_failing']) or 'none'}), "
-           f"{checks['failures_with_closing_clause_reverted']} with only the closing clause put back (`{EDITS_CHECKS_PATH.name}`). "
-           "The closing-clause edit ('All six') applies where the clause exists: "
-           f"{', '.join(i for i in order() if any(e['edit'] == 'closing_clause' and e['applied'] for e in disp[i]['edits']))}; "
-           f"{', '.join(i for i in order() if not any(e['edit'] == 'closing_clause' and e['applied'] for e in disp[i]['edits']))} "
-           "carry none (D-069: they cite a California-specific driver group, and post-checks v3.5 fail a clause there), so none "
-           "was added --- for the COORDINATOR.",
+           "the closing clauses stay as generated (the rewording is deferred to prompt v5.5, D-079).",
            "", "## The two dropped cells", ""]
     for iid, r in sorted(run["rejected_pre_review"].items()):
         pk_ = json.loads((PACKETS_DIR / f"PK-{ir.SUPERSEDED[iid]['seed_id']}.json").read_text(encoding="utf-8"))

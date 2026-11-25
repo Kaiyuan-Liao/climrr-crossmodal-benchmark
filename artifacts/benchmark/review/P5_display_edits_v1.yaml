@@ -6,16 +6,15 @@
 # the space before it. Display only: the generated text (infra synthesis run 2) and the polished text (polish infra run 2)
 # are untouched and stay in the items; no item is modified, accepted or frozen. Checks on every edited text (leakage v2.3,
 # post-checks v3.5 against the v1b packet): P5_display_edits_v1_checks.json.
+# P5d hotfix (COORDINATOR 2026-11-25): the closing-clause rewording ("These are general research findings, not findings
+# specific to <Place>.") is removed --- it failed post-checks v3.5 (the packets' pinned general_clause and the D-069 paragraph-
+# opener rule); the generated clause stays. The wording change is deferred to prompt v5.5 (DECISION_LOG D-079).
 edits_version: P5 display edits v1
 edit_origin: coordinator_edit
 by: COORDINATOR
 date: "2026-11-24"
 applies_after: D-079
 all_items:
-  - id: closing_clause
-    reason: "closing clause reworded (the work package: 'All six')"
-    find_regex: "These are general drivers of [^,.]+, not findings specific to (?P<place>[A-Z][A-Za-z ]+)\\."
-    replace: "These are general research findings, not findings specific to {place}."
   - id: us_southwest_opener
     reason: "clause order in the scope opener"
     find: "Research on the United States shows, including work on the Southwest, that"

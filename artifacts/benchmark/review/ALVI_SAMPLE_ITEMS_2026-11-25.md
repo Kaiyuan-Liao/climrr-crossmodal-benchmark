@@ -18,7 +18,7 @@ What does a projected increase in dangerous heat-index days in Virginia by mid-c
 
 ### Answer
 
-In Virginia, dangerous heat-index days in summer are projected to increase more than tripling, from about 4 to about 16 days a summer, by mid-century under a high-emissions future. Research on the United States shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can reduce generation output of energy systems. In general, research shows that such heat raises electricity demand and stresses energy systems. In general, research shows that extreme heat and wind raise the chance of ignitions near power lines. These are general research findings, not findings specific to Virginia.
+In Virginia, dangerous heat-index days in summer are projected to increase more than tripling, from about 4 to about 16 days a summer, by mid-century under a high-emissions future. Research on the United States shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can reduce generation output of energy systems. In general, research shows that such heat raises electricity demand and stresses energy systems. In general, research shows that extreme heat and wind raise the chance of ignitions near power lines. These are general drivers of dangerous heat-index days, not findings specific to Virginia.
 
 ### Asset class (CISA sector)
 
@@ -85,7 +85,7 @@ What could a projected increase in dangerous heat-index days mean for transporta
 
 ### Answer
 
-Dangerous heat-index days are projected to increase moderately in Arizona by mid-century under a high-emissions future. Research on the United States, including work on the Southwest, shows that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heat‑wave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems. In general, research shows that such heat increases pavement distress, reducing the performance of transportation systems. These are general research findings, not findings specific to Arizona.
+Dangerous heat-index days are projected to increase moderately in Arizona by mid-century under a high-emissions future. Research on the United States, including work on the Southwest, shows that large-scale warming and land‑atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heat‑wave frequency and intensity. In general, research shows that extreme heat, of which dangerous heat-index days are one measure, can degrade transportation systems. In general, research shows that such heat increases pavement distress, reducing the performance of transportation systems. These are general drivers of dangerous heat-index days, not findings specific to Arizona.
 
 ### Asset class (CISA sector)
 
@@ -148,7 +148,7 @@ What does a projected increase in dangerous heat-index days in California by mid
 
 ### Answer
 
-Dangerous heat-index days in California are projected to show a moderate increase by mid-century under a high-emissions future. Research on the United States, including work on the Southwest, shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services, straining healthcare and public health systems. In general, research suggests that such heat can damage critical public health infrastructure, impeding healthcare and public health systems. These are general research findings, not findings specific to California.
+Dangerous heat-index days in California are projected to show a moderate increase by mid-century under a high-emissions future. Research on the United States, including work on the Southwest, shows that large-scale warming and land–atmosphere feedbacks drive increases in extreme heat. In general, research shows that global warming increases heatwave frequency and intensity. In general, research suggests that extreme heat, of which dangerous heat-index days are one measure, can increase demand for emergency and hospital services, straining healthcare and public health systems. In general, research suggests that such heat can damage critical public health infrastructure, impeding healthcare and public health systems. These are general drivers of dangerous heat-index days, not findings specific to California.
 
 ### Asset class (CISA sector)
 

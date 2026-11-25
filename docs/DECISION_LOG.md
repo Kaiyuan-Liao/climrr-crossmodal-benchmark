@@ -3825,6 +3825,13 @@ code emits, and the next GUIDANCE packet still chooses.
   replaces only the question and the integrated answer (the tagged sentences are not re-derived from the rewrite).
 - **Affected files:** `src/climrr/litsynth_infra_run2.py`, `artifacts/benchmark/items/infra_run2/`, `tests/test_p5d.py`,
   `docs/P5_INFRA_IMPACT_DESIGN.md` §26.
+- **P5d hotfix (COORDINATOR 2026-11-25): closing-clause wording deferred.** The display edit rewording the closing clause ("These
+  are general research findings, not findings specific to <Place>.") is removed from `P5_display_edits_v1.yaml`: it failed
+  post-checks v3.5 (the packets' pinned `general_clause` and the D-069 paragraph-opener rule, the new wording naming "research").
+  The generated clause stays on BI-P5-0001, 0002, 0004. **The wording change is deferred to prompt v5.5:** "These are general
+  findings about <hazard phrase>, not findings specific to <Place>", with the pinned clause (packets) and the opener rule
+  (post-checks) updated together. The other display edits are kept; leakage v2.3 and post-checks v3.5 on all six display texts: 0
+  failures (`P5_display_edits_v1_checks.json`).
 
 ## D-080 --- Infra run 2 accepted as the impact sample set
 
